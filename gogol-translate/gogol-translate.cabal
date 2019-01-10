@@ -1,6 +1,6 @@
 name:                  gogol-translate
 version:               0.3.0
-synopsis:              Google Translate SDK.
+synopsis:              Google Cloud Translation SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -14,7 +14,8 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    Translates text from one language to another.
+    The Google Cloud Translation API lets websites and programs integrate
+    with Google Translate programmatically.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -33,9 +34,11 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Resource.Language.Detections.List
+          Network.Google.Resource.Language.Detections.Detect
+        , Network.Google.Resource.Language.Detections.List
         , Network.Google.Resource.Language.Languages.List
         , Network.Google.Resource.Language.Translations.List
+        , Network.Google.Resource.Language.Translations.Translate
         , Network.Google.Translate
         , Network.Google.Translate.Types
 

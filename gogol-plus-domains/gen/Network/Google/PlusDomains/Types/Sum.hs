@@ -16,7 +16,7 @@
 --
 module Network.Google.PlusDomains.Types.Sum where
 
-import           Network.Google.Prelude
+import           Network.Google.Prelude hiding (Bytes)
 
 data MediaInsertCollection
     = Cloud

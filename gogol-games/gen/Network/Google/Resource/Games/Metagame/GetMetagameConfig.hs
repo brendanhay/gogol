@@ -32,8 +32,6 @@ module Network.Google.Resource.Games.Metagame.GetMetagameConfig
     , metagameGetMetagameConfig
     , MetagameGetMetagameConfig
 
-    -- * Request Lenses
-    , mgmcConsistencyToken
     ) where
 
 import           Network.Google.Games.Types
@@ -45,45 +43,29 @@ type MetagameGetMetagameConfigResource =
      "games" :>
        "v1" :>
          "metagameConfig" :>
-           QueryParam "consistencyToken" (Textual Int64) :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] MetagameConfig
+           QueryParam "alt" AltJSON :>
+             Get '[JSON] MetagameConfig
 
 -- | Return the metagame configuration data for the calling application.
 --
 -- /See:/ 'metagameGetMetagameConfig' smart constructor.
-newtype MetagameGetMetagameConfig = MetagameGetMetagameConfig'
-    { _mgmcConsistencyToken :: Maybe (Textual Int64)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+data MetagameGetMetagameConfig =
+    MetagameGetMetagameConfig'
+    deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MetagameGetMetagameConfig' with the minimum fields required to make a request.
 --
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'mgmcConsistencyToken'
 metagameGetMetagameConfig
     :: MetagameGetMetagameConfig
-metagameGetMetagameConfig =
-    MetagameGetMetagameConfig'
-    { _mgmcConsistencyToken = Nothing
-    }
-
--- | The last-seen mutation timestamp.
-mgmcConsistencyToken :: Lens' MetagameGetMetagameConfig (Maybe Int64)
-mgmcConsistencyToken
-  = lens _mgmcConsistencyToken
-      (\ s a -> s{_mgmcConsistencyToken = a})
-      . mapping _Coerce
+metagameGetMetagameConfig = MetagameGetMetagameConfig'
 
 instance GoogleRequest MetagameGetMetagameConfig
          where
         type Rs MetagameGetMetagameConfig = MetagameConfig
         type Scopes MetagameGetMetagameConfig =
-             '["https://www.googleapis.com/auth/games",
-               "https://www.googleapis.com/auth/plus.login"]
-        requestClient MetagameGetMetagameConfig'{..}
-          = go _mgmcConsistencyToken (Just AltJSON)
-              gamesService
+             '["https://www.googleapis.com/auth/games"]
+        requestClient MetagameGetMetagameConfig'{}
+          = go (Just AltJSON) gamesService
           where go
                   = buildClient
                       (Proxy :: Proxy MetagameGetMetagameConfigResource)

@@ -16,7 +16,7 @@
 --
 module Network.Google.Plus.Types.Sum where
 
-import           Network.Google.Prelude
+import           Network.Google.Prelude hiding (Bytes)
 
 -- | The collection of people to list.
 data PeopleListByActivityCollection

@@ -70,7 +70,7 @@ domainsList pDlCustomer_ =
     { _dlCustomer = pDlCustomer_
     }
 
--- | Immutable id of the Google Apps account.
+-- | Immutable ID of the G Suite account.
 dlCustomer :: Lens' DomainsList Text
 dlCustomer
   = lens _dlCustomer (\ s a -> s{_dlCustomer = a})

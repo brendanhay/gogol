@@ -43,6 +43,9 @@ library
         , Network.Google.Resource.Reseller.Customers.Insert
         , Network.Google.Resource.Reseller.Customers.Patch
         , Network.Google.Resource.Reseller.Customers.Update
+        , Network.Google.Resource.Reseller.Resellernotify.Getwatchdetails
+        , Network.Google.Resource.Reseller.Resellernotify.Register
+        , Network.Google.Resource.Reseller.Resellernotify.Unregister
         , Network.Google.Resource.Reseller.Subscriptions.Activate
         , Network.Google.Resource.Reseller.Subscriptions.ChangePlan
         , Network.Google.Resource.Reseller.Subscriptions.ChangeRenewalSettings

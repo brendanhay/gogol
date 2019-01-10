@@ -77,7 +77,7 @@ groupsAliasesDelete pGadGroupKey_ pGadAlias_ =
     , _gadAlias = pGadAlias_
     }
 
--- | Email or immutable Id of the group
+-- | Email or immutable ID of the group
 gadGroupKey :: Lens' GroupsAliasesDelete Text
 gadGroupKey
   = lens _gadGroupKey (\ s a -> s{_gadGroupKey = a})

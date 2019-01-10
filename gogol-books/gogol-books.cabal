@@ -42,6 +42,9 @@ library
         , Network.Google.Resource.Books.CloudLoading.DeleteBook
         , Network.Google.Resource.Books.CloudLoading.UpdateBook
         , Network.Google.Resource.Books.Dictionary.ListOfflineMetadata
+        , Network.Google.Resource.Books.Familysharing.GetFamilyInfo
+        , Network.Google.Resource.Books.Familysharing.Share
+        , Network.Google.Resource.Books.Familysharing.Unshare
         , Network.Google.Resource.Books.Layers.AnnotationData.Get
         , Network.Google.Resource.Books.Layers.AnnotationData.List
         , Network.Google.Resource.Books.Layers.Get

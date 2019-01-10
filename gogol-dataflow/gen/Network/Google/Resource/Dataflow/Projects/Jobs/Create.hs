@@ -22,7 +22,7 @@
 --
 -- Creates a Cloud Dataflow job.
 --
--- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @dataflow.projects.jobs.create@.
+-- /See:/ <https://cloud.google.com/dataflow Dataflow API Reference> for @dataflow.projects.jobs.create@.
 module Network.Google.Resource.Dataflow.Projects.Jobs.Create
     (
     -- * REST Resource
@@ -36,11 +36,9 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.Create
     , pjcXgafv
     , pjcUploadProtocol
     , pjcLocation
-    , pjcPp
     , pjcAccessToken
     , pjcUploadType
     , pjcPayload
-    , pjcBearerToken
     , pjcView
     , pjcProjectId
     , pjcReplaceJobId
@@ -57,31 +55,27 @@ type ProjectsJobsCreateResource =
        "projects" :>
          Capture "projectId" Text :>
            "jobs" :>
-             QueryParam "$.xgafv" Text :>
+             QueryParam "$.xgafv" Xgafv :>
                QueryParam "upload_protocol" Text :>
                  QueryParam "location" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "view" Text :>
-                             QueryParam "replaceJobId" Text :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" AltJSON :>
-                                   ReqBody '[JSON] Job :> Post '[JSON] Job
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "view" Text :>
+                         QueryParam "replaceJobId" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] Job :> Post '[JSON] Job
 
 -- | Creates a Cloud Dataflow job.
 --
 -- /See:/ 'projectsJobsCreate' smart constructor.
 data ProjectsJobsCreate = ProjectsJobsCreate'
-    { _pjcXgafv          :: !(Maybe Text)
+    { _pjcXgafv          :: !(Maybe Xgafv)
     , _pjcUploadProtocol :: !(Maybe Text)
     , _pjcLocation       :: !(Maybe Text)
-    , _pjcPp             :: !Bool
     , _pjcAccessToken    :: !(Maybe Text)
     , _pjcUploadType     :: !(Maybe Text)
     , _pjcPayload        :: !Job
-    , _pjcBearerToken    :: !(Maybe Text)
     , _pjcView           :: !(Maybe Text)
     , _pjcProjectId      :: !Text
     , _pjcReplaceJobId   :: !(Maybe Text)
@@ -98,15 +92,11 @@ data ProjectsJobsCreate = ProjectsJobsCreate'
 --
 -- * 'pjcLocation'
 --
--- * 'pjcPp'
---
 -- * 'pjcAccessToken'
 --
 -- * 'pjcUploadType'
 --
 -- * 'pjcPayload'
---
--- * 'pjcBearerToken'
 --
 -- * 'pjcView'
 --
@@ -124,11 +114,9 @@ projectsJobsCreate pPjcPayload_ pPjcProjectId_ =
     { _pjcXgafv = Nothing
     , _pjcUploadProtocol = Nothing
     , _pjcLocation = Nothing
-    , _pjcPp = True
     , _pjcAccessToken = Nothing
     , _pjcUploadType = Nothing
     , _pjcPayload = pPjcPayload_
-    , _pjcBearerToken = Nothing
     , _pjcView = Nothing
     , _pjcProjectId = pPjcProjectId_
     , _pjcReplaceJobId = Nothing
@@ -136,7 +124,7 @@ projectsJobsCreate pPjcPayload_ pPjcProjectId_ =
     }
 
 -- | V1 error format.
-pjcXgafv :: Lens' ProjectsJobsCreate (Maybe Text)
+pjcXgafv :: Lens' ProjectsJobsCreate (Maybe Xgafv)
 pjcXgafv = lens _pjcXgafv (\ s a -> s{_pjcXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -149,10 +137,6 @@ pjcUploadProtocol
 pjcLocation :: Lens' ProjectsJobsCreate (Maybe Text)
 pjcLocation
   = lens _pjcLocation (\ s a -> s{_pjcLocation = a})
-
--- | Pretty-print response.
-pjcPp :: Lens' ProjectsJobsCreate Bool
-pjcPp = lens _pjcPp (\ s a -> s{_pjcPp = a})
 
 -- | OAuth access token.
 pjcAccessToken :: Lens' ProjectsJobsCreate (Maybe Text)
@@ -170,12 +154,6 @@ pjcUploadType
 pjcPayload :: Lens' ProjectsJobsCreate Job
 pjcPayload
   = lens _pjcPayload (\ s a -> s{_pjcPayload = a})
-
--- | OAuth bearer token.
-pjcBearerToken :: Lens' ProjectsJobsCreate (Maybe Text)
-pjcBearerToken
-  = lens _pjcBearerToken
-      (\ s a -> s{_pjcBearerToken = a})
 
 -- | The level of information requested in response.
 pjcView :: Lens' ProjectsJobsCreate (Maybe Text)
@@ -201,14 +179,14 @@ instance GoogleRequest ProjectsJobsCreate where
         type Rs ProjectsJobsCreate = Job
         type Scopes ProjectsJobsCreate =
              '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly",
                "https://www.googleapis.com/auth/userinfo.email"]
         requestClient ProjectsJobsCreate'{..}
           = go _pjcProjectId _pjcXgafv _pjcUploadProtocol
               _pjcLocation
-              (Just _pjcPp)
               _pjcAccessToken
               _pjcUploadType
-              _pjcBearerToken
               _pjcView
               _pjcReplaceJobId
               _pjcCallback

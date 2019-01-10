@@ -22,9 +22,8 @@
 --
 -- Creates a sink that exports specified log entries to a destination. The
 -- export of newly-ingested log entries begins immediately, unless the
--- current time is outside the sink\'s start and end times or the sink\'s
--- writer_identity is not permitted to write to the destination. A sink can
--- export log entries only from the resource owning the sink.
+-- sink\'s writer_identity is not permitted to write to the destination. A
+-- sink can export log entries only from the resource owning the sink.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.organizations.sinks.create@.
 module Network.Google.Resource.Logging.Organizations.Sinks.Create
@@ -41,11 +40,9 @@ module Network.Google.Resource.Logging.Organizations.Sinks.Create
     , oscXgafv
     , oscUniqueWriterIdentity
     , oscUploadProtocol
-    , oscPp
     , oscAccessToken
     , oscUploadType
     , oscPayload
-    , oscBearerToken
     , oscCallback
     ) where
 
@@ -61,19 +58,16 @@ type OrganizationsSinksCreateResource =
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "uniqueWriterIdentity" Bool :>
                QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "callback" Text :>
-                           QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] LogSink :> Post '[JSON] LogSink
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] LogSink :> Post '[JSON] LogSink
 
 -- | Creates a sink that exports specified log entries to a destination. The
 -- export of newly-ingested log entries begins immediately, unless the
--- current time is outside the sink\'s start and end times or the sink\'s
--- writer_identity is not permitted to write to the destination. A sink can
--- export log entries only from the resource owning the sink.
+-- sink\'s writer_identity is not permitted to write to the destination. A
+-- sink can export log entries only from the resource owning the sink.
 --
 -- /See:/ 'organizationsSinksCreate' smart constructor.
 data OrganizationsSinksCreate = OrganizationsSinksCreate'
@@ -81,11 +75,9 @@ data OrganizationsSinksCreate = OrganizationsSinksCreate'
     , _oscXgafv                :: !(Maybe Xgafv)
     , _oscUniqueWriterIdentity :: !(Maybe Bool)
     , _oscUploadProtocol       :: !(Maybe Text)
-    , _oscPp                   :: !Bool
     , _oscAccessToken          :: !(Maybe Text)
     , _oscUploadType           :: !(Maybe Text)
     , _oscPayload              :: !LogSink
-    , _oscBearerToken          :: !(Maybe Text)
     , _oscCallback             :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -101,15 +93,11 @@ data OrganizationsSinksCreate = OrganizationsSinksCreate'
 --
 -- * 'oscUploadProtocol'
 --
--- * 'oscPp'
---
 -- * 'oscAccessToken'
 --
 -- * 'oscUploadType'
 --
 -- * 'oscPayload'
---
--- * 'oscBearerToken'
 --
 -- * 'oscCallback'
 organizationsSinksCreate
@@ -122,16 +110,15 @@ organizationsSinksCreate pOscParent_ pOscPayload_ =
     , _oscXgafv = Nothing
     , _oscUniqueWriterIdentity = Nothing
     , _oscUploadProtocol = Nothing
-    , _oscPp = True
     , _oscAccessToken = Nothing
     , _oscUploadType = Nothing
     , _oscPayload = pOscPayload_
-    , _oscBearerToken = Nothing
     , _oscCallback = Nothing
     }
 
 -- | Required. The resource in which to create the sink:
 -- \"projects\/[PROJECT_ID]\" \"organizations\/[ORGANIZATION_ID]\"
+-- \"billingAccounts\/[BILLING_ACCOUNT_ID]\" \"folders\/[FOLDER_ID]\"
 -- Examples: \"projects\/my-logging-project\",
 -- \"organizations\/123456789\".
 oscParent :: Lens' OrganizationsSinksCreate Text
@@ -145,7 +132,7 @@ oscXgafv = lens _oscXgafv (\ s a -> s{_oscXgafv = a})
 -- | Optional. Determines the kind of IAM identity returned as
 -- writer_identity in the new sink. If this value is omitted or set to
 -- false, and if the sink\'s parent is a project, then the value returned
--- as writer_identity is cloud-logs\'google.com, the same identity used
+-- as writer_identity is the same group or service account used by Logging
 -- before the addition of writer identities to this API. The sink\'s
 -- destination must be in the same project as the sink itself.If this field
 -- is set to true, or if the sink is owned by a non-project resource such
@@ -162,10 +149,6 @@ oscUploadProtocol :: Lens' OrganizationsSinksCreate (Maybe Text)
 oscUploadProtocol
   = lens _oscUploadProtocol
       (\ s a -> s{_oscUploadProtocol = a})
-
--- | Pretty-print response.
-oscPp :: Lens' OrganizationsSinksCreate Bool
-oscPp = lens _oscPp (\ s a -> s{_oscPp = a})
 
 -- | OAuth access token.
 oscAccessToken :: Lens' OrganizationsSinksCreate (Maybe Text)
@@ -184,12 +167,6 @@ oscPayload :: Lens' OrganizationsSinksCreate LogSink
 oscPayload
   = lens _oscPayload (\ s a -> s{_oscPayload = a})
 
--- | OAuth bearer token.
-oscBearerToken :: Lens' OrganizationsSinksCreate (Maybe Text)
-oscBearerToken
-  = lens _oscBearerToken
-      (\ s a -> s{_oscBearerToken = a})
-
 -- | JSONP
 oscCallback :: Lens' OrganizationsSinksCreate (Maybe Text)
 oscCallback
@@ -203,10 +180,8 @@ instance GoogleRequest OrganizationsSinksCreate where
         requestClient OrganizationsSinksCreate'{..}
           = go _oscParent _oscXgafv _oscUniqueWriterIdentity
               _oscUploadProtocol
-              (Just _oscPp)
               _oscAccessToken
               _oscUploadType
-              _oscBearerToken
               _oscCallback
               (Just AltJSON)
               _oscPayload

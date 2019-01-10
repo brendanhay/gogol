@@ -16,41 +16,41 @@
 --
 module Network.Google.ResourceManager.Types.Sum where
 
-import           Network.Google.Prelude
+import           Network.Google.Prelude hiding (Bytes)
 
--- | The organization\'s current lifecycle state. Assigned by the server.
--- \'OutputOnly
-data OrganizationLifecycleState
+-- | Output only. The lifecycle state of the folder. Updates to the
+-- lifecycle_state must be performed via DeleteFolder and UndeleteFolder.
+data FolderLifecycleState
     = LifecycleStateUnspecified
       -- ^ @LIFECYCLE_STATE_UNSPECIFIED@
-      -- Unspecified state. This is only useful for distinguishing unset values.
+      -- Unspecified state.
     | Active
       -- ^ @ACTIVE@
       -- The normal and active state.
     | DeleteRequested
       -- ^ @DELETE_REQUESTED@
-      -- The organization has been marked for deletion by the user.
+      -- The folder has been marked for deletion by the user.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
-instance Hashable OrganizationLifecycleState
+instance Hashable FolderLifecycleState
 
-instance FromHttpApiData OrganizationLifecycleState where
+instance FromHttpApiData FolderLifecycleState where
     parseQueryParam = \case
         "LIFECYCLE_STATE_UNSPECIFIED" -> Right LifecycleStateUnspecified
         "ACTIVE" -> Right Active
         "DELETE_REQUESTED" -> Right DeleteRequested
-        x -> Left ("Unable to parse OrganizationLifecycleState from: " <> x)
+        x -> Left ("Unable to parse FolderLifecycleState from: " <> x)
 
-instance ToHttpApiData OrganizationLifecycleState where
+instance ToHttpApiData FolderLifecycleState where
     toQueryParam = \case
         LifecycleStateUnspecified -> "LIFECYCLE_STATE_UNSPECIFIED"
         Active -> "ACTIVE"
         DeleteRequested -> "DELETE_REQUESTED"
 
-instance FromJSON OrganizationLifecycleState where
-    parseJSON = parseJSONText "OrganizationLifecycleState"
+instance FromJSON FolderLifecycleState where
+    parseJSON = parseJSONText "FolderLifecycleState"
 
-instance ToJSON OrganizationLifecycleState where
+instance ToJSON FolderLifecycleState where
     toJSON = toJSONText
 
 -- | The type of operation error experienced.
@@ -58,8 +58,8 @@ data FolderOperationErrorErrorMessageId
     = ErrorTypeUnspecified
       -- ^ @ERROR_TYPE_UNSPECIFIED@
       -- The error type was unrecognized or unspecified.
-    | FolderHeightViolation
-      -- ^ @FOLDER_HEIGHT_VIOLATION@
+    | ActiveFolderHeightViolation
+      -- ^ @ACTIVE_FOLDER_HEIGHT_VIOLATION@
       -- The attempted action would violate the max folder depth constraint.
     | MaxChildFoldersViolation
       -- ^ @MAX_CHILD_FOLDERS_VIOLATION@
@@ -68,21 +68,25 @@ data FolderOperationErrorErrorMessageId
       -- ^ @FOLDER_NAME_UNIQUENESS_VIOLATION@
       -- The attempted action would violate the locally-unique folder
       -- display_name constraint.
-    | ResourceDeleted
-      -- ^ @RESOURCE_DELETED@
+    | ResourceDeletedViolation
+      -- ^ @RESOURCE_DELETED_VIOLATION@
       -- The resource being moved has been deleted.
-    | ParentDeleted
-      -- ^ @PARENT_DELETED@
+    | ParentDeletedViolation
+      -- ^ @PARENT_DELETED_VIOLATION@
       -- The resource a folder was being added to has been deleted.
-    | CycleIntroducedError
-      -- ^ @CYCLE_INTRODUCED_ERROR@
+    | CycleIntroducedViolation
+      -- ^ @CYCLE_INTRODUCED_VIOLATION@
       -- The attempted action would introduce cycle in resource path.
-    | FolderAlreadyBeingMoved
-      -- ^ @FOLDER_ALREADY_BEING_MOVED@
+    | FolderBeingMovedViolation
+      -- ^ @FOLDER_BEING_MOVED_VIOLATION@
       -- The attempted action would move a folder that is already being moved.
-    | FolderToDeleteNonEmpty
-      -- ^ @FOLDER_TO_DELETE_NON_EMPTY@
+    | FolderToDeleteNonEmptyViolation
+      -- ^ @FOLDER_TO_DELETE_NON_EMPTY_VIOLATION@
       -- The folder the caller is trying to delete contains active resources.
+    | DeletedFolderHeightViolation
+      -- ^ @DELETED_FOLDER_HEIGHT_VIOLATION@
+      -- The attempted action would violate the max deleted folder depth
+      -- constraint.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FolderOperationErrorErrorMessageId
@@ -90,27 +94,29 @@ instance Hashable FolderOperationErrorErrorMessageId
 instance FromHttpApiData FolderOperationErrorErrorMessageId where
     parseQueryParam = \case
         "ERROR_TYPE_UNSPECIFIED" -> Right ErrorTypeUnspecified
-        "FOLDER_HEIGHT_VIOLATION" -> Right FolderHeightViolation
+        "ACTIVE_FOLDER_HEIGHT_VIOLATION" -> Right ActiveFolderHeightViolation
         "MAX_CHILD_FOLDERS_VIOLATION" -> Right MaxChildFoldersViolation
         "FOLDER_NAME_UNIQUENESS_VIOLATION" -> Right FolderNameUniquenessViolation
-        "RESOURCE_DELETED" -> Right ResourceDeleted
-        "PARENT_DELETED" -> Right ParentDeleted
-        "CYCLE_INTRODUCED_ERROR" -> Right CycleIntroducedError
-        "FOLDER_ALREADY_BEING_MOVED" -> Right FolderAlreadyBeingMoved
-        "FOLDER_TO_DELETE_NON_EMPTY" -> Right FolderToDeleteNonEmpty
+        "RESOURCE_DELETED_VIOLATION" -> Right ResourceDeletedViolation
+        "PARENT_DELETED_VIOLATION" -> Right ParentDeletedViolation
+        "CYCLE_INTRODUCED_VIOLATION" -> Right CycleIntroducedViolation
+        "FOLDER_BEING_MOVED_VIOLATION" -> Right FolderBeingMovedViolation
+        "FOLDER_TO_DELETE_NON_EMPTY_VIOLATION" -> Right FolderToDeleteNonEmptyViolation
+        "DELETED_FOLDER_HEIGHT_VIOLATION" -> Right DeletedFolderHeightViolation
         x -> Left ("Unable to parse FolderOperationErrorErrorMessageId from: " <> x)
 
 instance ToHttpApiData FolderOperationErrorErrorMessageId where
     toQueryParam = \case
         ErrorTypeUnspecified -> "ERROR_TYPE_UNSPECIFIED"
-        FolderHeightViolation -> "FOLDER_HEIGHT_VIOLATION"
+        ActiveFolderHeightViolation -> "ACTIVE_FOLDER_HEIGHT_VIOLATION"
         MaxChildFoldersViolation -> "MAX_CHILD_FOLDERS_VIOLATION"
         FolderNameUniquenessViolation -> "FOLDER_NAME_UNIQUENESS_VIOLATION"
-        ResourceDeleted -> "RESOURCE_DELETED"
-        ParentDeleted -> "PARENT_DELETED"
-        CycleIntroducedError -> "CYCLE_INTRODUCED_ERROR"
-        FolderAlreadyBeingMoved -> "FOLDER_ALREADY_BEING_MOVED"
-        FolderToDeleteNonEmpty -> "FOLDER_TO_DELETE_NON_EMPTY"
+        ResourceDeletedViolation -> "RESOURCE_DELETED_VIOLATION"
+        ParentDeletedViolation -> "PARENT_DELETED_VIOLATION"
+        CycleIntroducedViolation -> "CYCLE_INTRODUCED_VIOLATION"
+        FolderBeingMovedViolation -> "FOLDER_BEING_MOVED_VIOLATION"
+        FolderToDeleteNonEmptyViolation -> "FOLDER_TO_DELETE_NON_EMPTY_VIOLATION"
+        DeletedFolderHeightViolation -> "DELETED_FOLDER_HEIGHT_VIOLATION"
 
 instance FromJSON FolderOperationErrorErrorMessageId where
     parseJSON = parseJSONText "FolderOperationErrorErrorMessageId"
@@ -152,46 +158,43 @@ instance FromJSON FolderOperationOperationType where
 instance ToJSON FolderOperationOperationType where
     toJSON = toJSONText
 
--- | The Project lifecycle state. Read-only.
-data ProjectLifecycleState
-    = PLSLifecycleStateUnspecified
-      -- ^ @LIFECYCLE_STATE_UNSPECIFIED@
-      -- Unspecified state. This is only used\/useful for distinguishing unset
-      -- values.
-    | PLSActive
-      -- ^ @ACTIVE@
-      -- The normal and active state.
-    | PLSDeleteRequested
-      -- ^ @DELETE_REQUESTED@
-      -- The project has been marked for deletion by the user (by invoking
-      -- DeleteProject) or by the system (Google Cloud Platform). This can
-      -- generally be reversed by invoking UndeleteProject.
-    | PLSDeleteInProgress
-      -- ^ @DELETE_IN_PROGRESS@
-      -- This lifecycle state is no longer used and not returned by the API.
+-- | The log type that this config enables.
+data AuditLogConfigLogType
+    = LogTypeUnspecified
+      -- ^ @LOG_TYPE_UNSPECIFIED@
+      -- Default case. Should never be this.
+    | AdminRead
+      -- ^ @ADMIN_READ@
+      -- Admin reads. Example: CloudIAM getIamPolicy
+    | DataWrite
+      -- ^ @DATA_WRITE@
+      -- Data writes. Example: CloudSQL Users create
+    | DataRead
+      -- ^ @DATA_READ@
+      -- Data reads. Example: CloudSQL Users list
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
-instance Hashable ProjectLifecycleState
+instance Hashable AuditLogConfigLogType
 
-instance FromHttpApiData ProjectLifecycleState where
+instance FromHttpApiData AuditLogConfigLogType where
     parseQueryParam = \case
-        "LIFECYCLE_STATE_UNSPECIFIED" -> Right PLSLifecycleStateUnspecified
-        "ACTIVE" -> Right PLSActive
-        "DELETE_REQUESTED" -> Right PLSDeleteRequested
-        "DELETE_IN_PROGRESS" -> Right PLSDeleteInProgress
-        x -> Left ("Unable to parse ProjectLifecycleState from: " <> x)
+        "LOG_TYPE_UNSPECIFIED" -> Right LogTypeUnspecified
+        "ADMIN_READ" -> Right AdminRead
+        "DATA_WRITE" -> Right DataWrite
+        "DATA_READ" -> Right DataRead
+        x -> Left ("Unable to parse AuditLogConfigLogType from: " <> x)
 
-instance ToHttpApiData ProjectLifecycleState where
+instance ToHttpApiData AuditLogConfigLogType where
     toQueryParam = \case
-        PLSLifecycleStateUnspecified -> "LIFECYCLE_STATE_UNSPECIFIED"
-        PLSActive -> "ACTIVE"
-        PLSDeleteRequested -> "DELETE_REQUESTED"
-        PLSDeleteInProgress -> "DELETE_IN_PROGRESS"
+        LogTypeUnspecified -> "LOG_TYPE_UNSPECIFIED"
+        AdminRead -> "ADMIN_READ"
+        DataWrite -> "DATA_WRITE"
+        DataRead -> "DATA_READ"
 
-instance FromJSON ProjectLifecycleState where
-    parseJSON = parseJSONText "ProjectLifecycleState"
+instance FromJSON AuditLogConfigLogType where
+    parseJSON = parseJSONText "AuditLogConfigLogType"
 
-instance ToJSON ProjectLifecycleState where
+instance ToJSON AuditLogConfigLogType where
     toJSON = toJSONText
 
 -- | V1 error format.

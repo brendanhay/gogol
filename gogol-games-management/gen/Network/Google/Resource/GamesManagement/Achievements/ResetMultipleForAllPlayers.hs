@@ -84,8 +84,7 @@ instance GoogleRequest
          AchievementsResetMultipleForAllPlayers where
         type Rs AchievementsResetMultipleForAllPlayers = ()
         type Scopes AchievementsResetMultipleForAllPlayers =
-             '["https://www.googleapis.com/auth/games",
-               "https://www.googleapis.com/auth/plus.login"]
+             '["https://www.googleapis.com/auth/games"]
         requestClient
           AchievementsResetMultipleForAllPlayers'{..}
           = go (Just AltJSON) _armfapPayload

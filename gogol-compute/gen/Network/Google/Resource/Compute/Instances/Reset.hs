@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Performs a hard reset on the instance.
+-- Performs a reset on the instance. For more information, see Resetting an
+-- instance.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instances.reset@.
 module Network.Google.Resource.Compute.Instances.Reset
@@ -33,6 +34,7 @@ module Network.Google.Resource.Compute.Instances.Reset
     , InstancesReset
 
     -- * Request Lenses
+    , irRequestId
     , irProject
     , irZone
     , irInstance
@@ -53,20 +55,25 @@ type InstancesResetResource =
                  "instances" :>
                    Capture "instance" Text :>
                      "reset" :>
-                       QueryParam "alt" AltJSON :> Post '[JSON] Operation
+                       QueryParam "requestId" Text :>
+                         QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
--- | Performs a hard reset on the instance.
+-- | Performs a reset on the instance. For more information, see Resetting an
+-- instance.
 --
 -- /See:/ 'instancesReset' smart constructor.
 data InstancesReset = InstancesReset'
-    { _irProject  :: !Text
-    , _irZone     :: !Text
-    , _irInstance :: !Text
+    { _irRequestId :: !(Maybe Text)
+    , _irProject   :: !Text
+    , _irZone      :: !Text
+    , _irInstance  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesReset' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'irRequestId'
 --
 -- * 'irProject'
 --
@@ -80,10 +87,25 @@ instancesReset
     -> InstancesReset
 instancesReset pIrProject_ pIrZone_ pIrInstance_ =
     InstancesReset'
-    { _irProject = pIrProject_
+    { _irRequestId = Nothing
+    , _irProject = pIrProject_
     , _irZone = pIrZone_
     , _irInstance = pIrInstance_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+irRequestId :: Lens' InstancesReset (Maybe Text)
+irRequestId
+  = lens _irRequestId (\ s a -> s{_irRequestId = a})
 
 -- | Project ID for this request.
 irProject :: Lens' InstancesReset Text
@@ -105,7 +127,8 @@ instance GoogleRequest InstancesReset where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient InstancesReset'{..}
-          = go _irProject _irZone _irInstance (Just AltJSON)
+          = go _irProject _irZone _irInstance _irRequestId
+              (Just AltJSON)
               computeService
           where go
                   = buildClient (Proxy :: Proxy InstancesResetResource)

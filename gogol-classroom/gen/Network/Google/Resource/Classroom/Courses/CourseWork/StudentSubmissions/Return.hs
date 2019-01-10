@@ -48,12 +48,10 @@ module Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.R
     -- * Request Lenses
     , ccwssrXgafv
     , ccwssrUploadProtocol
-    , ccwssrPp
     , ccwssrCourseId
     , ccwssrAccessToken
     , ccwssrUploadType
     , ccwssrPayload
-    , ccwssrBearerToken
     , ccwssrId
     , ccwssrCallback
     , ccwssrCourseWorkId
@@ -73,17 +71,14 @@ type CoursesCourseWorkStudentSubmissionsReturnResource
              Capture "courseWorkId" Text :>
                "studentSubmissions" :>
                  CaptureMode "id" "return" Text :>
-                   QueryParam "$.xgafv" Text :>
+                   QueryParam "$.xgafv" Xgafv :>
                      QueryParam "upload_protocol" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "access_token" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "bearer_token" Text :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" AltJSON :>
-                                   ReqBody '[JSON]
-                                     ReturnStudentSubmissionRequest
-                                     :> Post '[JSON] Empty
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] ReturnStudentSubmissionRequest :>
+                                 Post '[JSON] Empty
 
 -- | Returns a student submission. Returning a student submission transfers
 -- ownership of attached Drive files to the student and may also update the
@@ -102,14 +97,12 @@ type CoursesCourseWorkStudentSubmissionsReturnResource
 --
 -- /See:/ 'coursesCourseWorkStudentSubmissionsReturn' smart constructor.
 data CoursesCourseWorkStudentSubmissionsReturn = CoursesCourseWorkStudentSubmissionsReturn'
-    { _ccwssrXgafv          :: !(Maybe Text)
+    { _ccwssrXgafv          :: !(Maybe Xgafv)
     , _ccwssrUploadProtocol :: !(Maybe Text)
-    , _ccwssrPp             :: !Bool
     , _ccwssrCourseId       :: !Text
     , _ccwssrAccessToken    :: !(Maybe Text)
     , _ccwssrUploadType     :: !(Maybe Text)
     , _ccwssrPayload        :: !ReturnStudentSubmissionRequest
-    , _ccwssrBearerToken    :: !(Maybe Text)
     , _ccwssrId             :: !Text
     , _ccwssrCallback       :: !(Maybe Text)
     , _ccwssrCourseWorkId   :: !Text
@@ -123,8 +116,6 @@ data CoursesCourseWorkStudentSubmissionsReturn = CoursesCourseWorkStudentSubmiss
 --
 -- * 'ccwssrUploadProtocol'
 --
--- * 'ccwssrPp'
---
 -- * 'ccwssrCourseId'
 --
 -- * 'ccwssrAccessToken'
@@ -132,8 +123,6 @@ data CoursesCourseWorkStudentSubmissionsReturn = CoursesCourseWorkStudentSubmiss
 -- * 'ccwssrUploadType'
 --
 -- * 'ccwssrPayload'
---
--- * 'ccwssrBearerToken'
 --
 -- * 'ccwssrId'
 --
@@ -150,19 +139,17 @@ coursesCourseWorkStudentSubmissionsReturn pCcwssrCourseId_ pCcwssrPayload_ pCcws
     CoursesCourseWorkStudentSubmissionsReturn'
     { _ccwssrXgafv = Nothing
     , _ccwssrUploadProtocol = Nothing
-    , _ccwssrPp = True
     , _ccwssrCourseId = pCcwssrCourseId_
     , _ccwssrAccessToken = Nothing
     , _ccwssrUploadType = Nothing
     , _ccwssrPayload = pCcwssrPayload_
-    , _ccwssrBearerToken = Nothing
     , _ccwssrId = pCcwssrId_
     , _ccwssrCallback = Nothing
     , _ccwssrCourseWorkId = pCcwssrCourseWorkId_
     }
 
 -- | V1 error format.
-ccwssrXgafv :: Lens' CoursesCourseWorkStudentSubmissionsReturn (Maybe Text)
+ccwssrXgafv :: Lens' CoursesCourseWorkStudentSubmissionsReturn (Maybe Xgafv)
 ccwssrXgafv
   = lens _ccwssrXgafv (\ s a -> s{_ccwssrXgafv = a})
 
@@ -171,10 +158,6 @@ ccwssrUploadProtocol :: Lens' CoursesCourseWorkStudentSubmissionsReturn (Maybe T
 ccwssrUploadProtocol
   = lens _ccwssrUploadProtocol
       (\ s a -> s{_ccwssrUploadProtocol = a})
-
--- | Pretty-print response.
-ccwssrPp :: Lens' CoursesCourseWorkStudentSubmissionsReturn Bool
-ccwssrPp = lens _ccwssrPp (\ s a -> s{_ccwssrPp = a})
 
 -- | Identifier of the course. This identifier can be either the
 -- Classroom-assigned identifier or an alias.
@@ -200,12 +183,6 @@ ccwssrPayload :: Lens' CoursesCourseWorkStudentSubmissionsReturn ReturnStudentSu
 ccwssrPayload
   = lens _ccwssrPayload
       (\ s a -> s{_ccwssrPayload = a})
-
--- | OAuth bearer token.
-ccwssrBearerToken :: Lens' CoursesCourseWorkStudentSubmissionsReturn (Maybe Text)
-ccwssrBearerToken
-  = lens _ccwssrBearerToken
-      (\ s a -> s{_ccwssrBearerToken = a})
 
 -- | Identifier of the student submission.
 ccwssrId :: Lens' CoursesCourseWorkStudentSubmissionsReturn Text
@@ -235,10 +212,8 @@ instance GoogleRequest
           = go _ccwssrCourseId _ccwssrCourseWorkId _ccwssrId
               _ccwssrXgafv
               _ccwssrUploadProtocol
-              (Just _ccwssrPp)
               _ccwssrAccessToken
               _ccwssrUploadType
-              _ccwssrBearerToken
               _ccwssrCallback
               (Just AltJSON)
               _ccwssrPayload

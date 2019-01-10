@@ -16,7 +16,7 @@
 -- Provides reliable, many-to-many, asynchronous messaging between
 -- applications.
 --
--- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference>
+-- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference>
 module Network.Google.PubSub
     (
     -- * Service Configuration
@@ -31,8 +31,23 @@ module Network.Google.PubSub
 
     -- * Resources
 
+    -- ** pubsub.projects.snapshots.create
+    , module Network.Google.Resource.PubSub.Projects.Snapshots.Create
+
+    -- ** pubsub.projects.snapshots.delete
+    , module Network.Google.Resource.PubSub.Projects.Snapshots.Delete
+
+    -- ** pubsub.projects.snapshots.get
+    , module Network.Google.Resource.PubSub.Projects.Snapshots.Get
+
     -- ** pubsub.projects.snapshots.getIamPolicy
     , module Network.Google.Resource.PubSub.Projects.Snapshots.GetIAMPolicy
+
+    -- ** pubsub.projects.snapshots.list
+    , module Network.Google.Resource.PubSub.Projects.Snapshots.List
+
+    -- ** pubsub.projects.snapshots.patch
+    , module Network.Google.Resource.PubSub.Projects.Snapshots.Patch
 
     -- ** pubsub.projects.snapshots.setIamPolicy
     , module Network.Google.Resource.PubSub.Projects.Snapshots.SetIAMPolicy
@@ -64,8 +79,14 @@ module Network.Google.PubSub
     -- ** pubsub.projects.subscriptions.modifyPushConfig
     , module Network.Google.Resource.PubSub.Projects.Subscriptions.ModifyPushConfig
 
+    -- ** pubsub.projects.subscriptions.patch
+    , module Network.Google.Resource.PubSub.Projects.Subscriptions.Patch
+
     -- ** pubsub.projects.subscriptions.pull
     , module Network.Google.Resource.PubSub.Projects.Subscriptions.Pull
+
+    -- ** pubsub.projects.subscriptions.seek
+    , module Network.Google.Resource.PubSub.Projects.Subscriptions.Seek
 
     -- ** pubsub.projects.subscriptions.setIamPolicy
     , module Network.Google.Resource.PubSub.Projects.Subscriptions.SetIAMPolicy
@@ -88,11 +109,17 @@ module Network.Google.PubSub
     -- ** pubsub.projects.topics.list
     , module Network.Google.Resource.PubSub.Projects.Topics.List
 
+    -- ** pubsub.projects.topics.patch
+    , module Network.Google.Resource.PubSub.Projects.Topics.Patch
+
     -- ** pubsub.projects.topics.publish
     , module Network.Google.Resource.PubSub.Projects.Topics.Publish
 
     -- ** pubsub.projects.topics.setIamPolicy
     , module Network.Google.Resource.PubSub.Projects.Topics.SetIAMPolicy
+
+    -- ** pubsub.projects.topics.snapshots.list
+    , module Network.Google.Resource.PubSub.Projects.Topics.Snapshots.List
 
     -- ** pubsub.projects.topics.subscriptions.list
     , module Network.Google.Resource.PubSub.Projects.Topics.Subscriptions.List
@@ -113,6 +140,28 @@ module Network.Google.PubSub
     , receivedMessage
     , rmAckId
     , rmMessage
+
+    -- ** Snapshot
+    , Snapshot
+    , snapshot
+    , sTopic
+    , sName
+    , sLabels
+    , sExpireTime
+
+    -- ** ListTopicSnapshotsResponse
+    , ListTopicSnapshotsResponse
+    , listTopicSnapshotsResponse
+    , ltsrNextPageToken
+    , ltsrSnapshots
+
+    -- ** Expr
+    , Expr
+    , expr
+    , eLocation
+    , eExpression
+    , eTitle
+    , eDescription
 
     -- ** ModifyAckDeadlineRequest
     , ModifyAckDeadlineRequest
@@ -140,8 +189,8 @@ module Network.Google.PubSub
     -- ** ListTopicSubscriptionsResponse
     , ListTopicSubscriptionsResponse
     , listTopicSubscriptionsResponse
-    , ltsrNextPageToken
-    , ltsrSubscriptions
+    , lNextPageToken
+    , lSubscriptions
 
     -- ** ListTopicsResponse
     , ListTopicsResponse
@@ -154,15 +203,50 @@ module Network.Google.PubSub
     , pullResponse
     , prReceivedMessages
 
+    -- ** ListSnapshotsResponse
+    , ListSnapshotsResponse
+    , listSnapshotsResponse
+    , lsrNextPageToken
+    , lsrSnapshots
+
     -- ** SetIAMPolicyRequest
     , SetIAMPolicyRequest
     , setIAMPolicyRequest
     , siprPolicy
 
+    -- ** CreateSnapshotRequest
+    , CreateSnapshotRequest
+    , createSnapshotRequest
+    , csrLabels
+    , csrSubscription
+
+    -- ** SeekRequest
+    , SeekRequest
+    , seekRequest
+    , srSnapshot
+    , srTime
+
     -- ** Topic
     , Topic
     , topic
     , tName
+    , tLabels
+
+    -- ** TopicLabels
+    , TopicLabels
+    , topicLabels
+    , tlAddtional
+
+    -- ** CreateSnapshotRequestLabels
+    , CreateSnapshotRequestLabels
+    , createSnapshotRequestLabels
+    , csrlAddtional
+
+    -- ** UpdateSnapshotRequest
+    , UpdateSnapshotRequest
+    , updateSnapshotRequest
+    , usrSnapshot
+    , usrUpdateMask
 
     -- ** PullRequest
     , PullRequest
@@ -205,6 +289,15 @@ module Network.Google.PubSub
     , pVersion
     , pBindings
 
+    -- ** SeekResponse
+    , SeekResponse
+    , seekResponse
+
+    -- ** ExpirationPolicy
+    , ExpirationPolicy
+    , expirationPolicy
+    , epTtl
+
     -- ** PushConfigAttributes
     , PushConfigAttributes
     , pushConfigAttributes
@@ -213,22 +306,49 @@ module Network.Google.PubSub
     -- ** Subscription
     , Subscription
     , subscription
-    , sPushConfig
-    , sTopic
-    , sName
-    , sAckDeadlineSeconds
+    , subPushConfig
+    , subMessageRetentionDuration
+    , subTopic
+    , subName
+    , subLabels
+    , subRetainAckedMessages
+    , subAckDeadlineSeconds
+    , subExpirationPolicy
+
+    -- ** UpdateSubscriptionRequest
+    , UpdateSubscriptionRequest
+    , updateSubscriptionRequest
+    , uUpdateMask
+    , uSubscription
+
+    -- ** SubscriptionLabels
+    , SubscriptionLabels
+    , subscriptionLabels
+    , slAddtional
+
+    -- ** SnapshotLabels
+    , SnapshotLabels
+    , snapshotLabels
+    , sAddtional
 
     -- ** ListSubscriptionsResponse
     , ListSubscriptionsResponse
     , listSubscriptionsResponse
-    , lsrNextPageToken
-    , lsrSubscriptions
+    , lisNextPageToken
+    , lisSubscriptions
 
     -- ** Binding
     , Binding
     , binding
     , bMembers
     , bRole
+    , bCondition
+
+    -- ** UpdateTopicRequest
+    , UpdateTopicRequest
+    , updateTopicRequest
+    , utrUpdateMask
+    , utrTopic
 
     -- ** AcknowledgeRequest
     , AcknowledgeRequest
@@ -238,7 +358,12 @@ module Network.Google.PubSub
 
 import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
+import           Network.Google.Resource.PubSub.Projects.Snapshots.Create
+import           Network.Google.Resource.PubSub.Projects.Snapshots.Delete
+import           Network.Google.Resource.PubSub.Projects.Snapshots.Get
 import           Network.Google.Resource.PubSub.Projects.Snapshots.GetIAMPolicy
+import           Network.Google.Resource.PubSub.Projects.Snapshots.List
+import           Network.Google.Resource.PubSub.Projects.Snapshots.Patch
 import           Network.Google.Resource.PubSub.Projects.Snapshots.SetIAMPolicy
 import           Network.Google.Resource.PubSub.Projects.Snapshots.TestIAMPermissions
 import           Network.Google.Resource.PubSub.Projects.Subscriptions.Acknowledge
@@ -249,7 +374,9 @@ import           Network.Google.Resource.PubSub.Projects.Subscriptions.GetIAMPol
 import           Network.Google.Resource.PubSub.Projects.Subscriptions.List
 import           Network.Google.Resource.PubSub.Projects.Subscriptions.ModifyAckDeadline
 import           Network.Google.Resource.PubSub.Projects.Subscriptions.ModifyPushConfig
+import           Network.Google.Resource.PubSub.Projects.Subscriptions.Patch
 import           Network.Google.Resource.PubSub.Projects.Subscriptions.Pull
+import           Network.Google.Resource.PubSub.Projects.Subscriptions.Seek
 import           Network.Google.Resource.PubSub.Projects.Subscriptions.SetIAMPolicy
 import           Network.Google.Resource.PubSub.Projects.Subscriptions.TestIAMPermissions
 import           Network.Google.Resource.PubSub.Projects.Topics.Create
@@ -257,8 +384,10 @@ import           Network.Google.Resource.PubSub.Projects.Topics.Delete
 import           Network.Google.Resource.PubSub.Projects.Topics.Get
 import           Network.Google.Resource.PubSub.Projects.Topics.GetIAMPolicy
 import           Network.Google.Resource.PubSub.Projects.Topics.List
+import           Network.Google.Resource.PubSub.Projects.Topics.Patch
 import           Network.Google.Resource.PubSub.Projects.Topics.Publish
 import           Network.Google.Resource.PubSub.Projects.Topics.SetIAMPolicy
+import           Network.Google.Resource.PubSub.Projects.Topics.Snapshots.List
 import           Network.Google.Resource.PubSub.Projects.Topics.Subscriptions.List
 import           Network.Google.Resource.PubSub.Projects.Topics.TestIAMPermissions
 
@@ -266,28 +395,37 @@ import           Network.Google.Resource.PubSub.Projects.Topics.TestIAMPermissio
 TODO
 -}
 
--- | Represents the entirety of the methods and resources available for the Google Cloud Pub/Sub API service.
+-- | Represents the entirety of the methods and resources available for the Cloud Pub/Sub API service.
 type PubSubAPI =
-     ProjectsTopicsSubscriptionsListResource :<|>
-       ProjectsTopicsListResource
+     ProjectsTopicsSnapshotsListResource :<|>
+       ProjectsTopicsSubscriptionsListResource
+       :<|> ProjectsTopicsListResource
        :<|> ProjectsTopicsGetIAMPolicyResource
+       :<|> ProjectsTopicsPatchResource
        :<|> ProjectsTopicsGetResource
        :<|> ProjectsTopicsCreateResource
        :<|> ProjectsTopicsSetIAMPolicyResource
        :<|> ProjectsTopicsTestIAMPermissionsResource
        :<|> ProjectsTopicsDeleteResource
        :<|> ProjectsTopicsPublishResource
+       :<|> ProjectsSnapshotsListResource
        :<|> ProjectsSnapshotsGetIAMPolicyResource
+       :<|> ProjectsSnapshotsPatchResource
+       :<|> ProjectsSnapshotsGetResource
+       :<|> ProjectsSnapshotsCreateResource
        :<|> ProjectsSnapshotsSetIAMPolicyResource
        :<|> ProjectsSnapshotsTestIAMPermissionsResource
+       :<|> ProjectsSnapshotsDeleteResource
        :<|> ProjectsSubscriptionsListResource
        :<|> ProjectsSubscriptionsAcknowledgeResource
        :<|> ProjectsSubscriptionsGetIAMPolicyResource
        :<|> ProjectsSubscriptionsModifyAckDeadlineResource
+       :<|> ProjectsSubscriptionsPatchResource
        :<|> ProjectsSubscriptionsGetResource
        :<|> ProjectsSubscriptionsModifyPushConfigResource
        :<|> ProjectsSubscriptionsCreateResource
        :<|> ProjectsSubscriptionsSetIAMPolicyResource
        :<|> ProjectsSubscriptionsPullResource
+       :<|> ProjectsSubscriptionsSeekResource
        :<|> ProjectsSubscriptionsTestIAMPermissionsResource
        :<|> ProjectsSubscriptionsDeleteResource

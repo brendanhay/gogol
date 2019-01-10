@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'CountriesGet' request conforms to.
 type CountriesGetResource =
      "dfareporting" :>
-       "v2.7" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "countries" :>

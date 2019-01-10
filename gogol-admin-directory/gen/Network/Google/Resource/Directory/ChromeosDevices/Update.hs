@@ -99,13 +99,13 @@ cduPayload :: Lens' ChromeosDevicesUpdate ChromeOSDevice
 cduPayload
   = lens _cduPayload (\ s a -> s{_cduPayload = a})
 
--- | Immutable id of the Google Apps account
+-- | Immutable ID of the G Suite account
 cduCustomerId :: Lens' ChromeosDevicesUpdate Text
 cduCustomerId
   = lens _cduCustomerId
       (\ s a -> s{_cduCustomerId = a})
 
--- | Immutable id of Chrome OS Device
+-- | Immutable ID of Chrome OS Device
 cduDeviceId :: Lens' ChromeosDevicesUpdate Text
 cduDeviceId
   = lens _cduDeviceId (\ s a -> s{_cduDeviceId = a})

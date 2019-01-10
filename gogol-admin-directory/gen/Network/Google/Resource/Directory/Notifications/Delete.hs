@@ -77,8 +77,8 @@ notificationsDelete pNdCustomer_ pNdNotificationId_ =
     , _ndNotificationId = pNdNotificationId_
     }
 
--- | The unique ID for the customer\'s Google account. The customerId is also
--- returned as part of the Users resource.
+-- | The unique ID for the customer\'s G Suite account. The customerId is
+-- also returned as part of the Users resource.
 ndCustomer :: Lens' NotificationsDelete Text
 ndCustomer
   = lens _ndCustomer (\ s a -> s{_ndCustomer = a})

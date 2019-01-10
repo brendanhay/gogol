@@ -33,7 +33,6 @@ module Network.Google.Resource.Games.Scores.SubmitMultiple
     , ScoresSubmitMultiple
 
     -- * Request Lenses
-    , ssmConsistencyToken
     , ssmPayload
     , ssmLanguage
     ) where
@@ -48,26 +47,22 @@ type ScoresSubmitMultipleResource =
        "v1" :>
          "leaderboards" :>
            "scores" :>
-             QueryParam "consistencyToken" (Textual Int64) :>
-               QueryParam "language" Text :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] PlayerScoreSubmissionList :>
-                     Post '[JSON] PlayerScoreListResponse
+             QueryParam "language" Text :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] PlayerScoreSubmissionList :>
+                   Post '[JSON] PlayerScoreListResponse
 
 -- | Submits multiple scores to leaderboards.
 --
 -- /See:/ 'scoresSubmitMultiple' smart constructor.
 data ScoresSubmitMultiple = ScoresSubmitMultiple'
-    { _ssmConsistencyToken :: !(Maybe (Textual Int64))
-    , _ssmPayload          :: !PlayerScoreSubmissionList
-    , _ssmLanguage         :: !(Maybe Text)
+    { _ssmPayload  :: !PlayerScoreSubmissionList
+    , _ssmLanguage :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScoresSubmitMultiple' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'ssmConsistencyToken'
 --
 -- * 'ssmPayload'
 --
@@ -77,17 +72,9 @@ scoresSubmitMultiple
     -> ScoresSubmitMultiple
 scoresSubmitMultiple pSsmPayload_ =
     ScoresSubmitMultiple'
-    { _ssmConsistencyToken = Nothing
-    , _ssmPayload = pSsmPayload_
+    { _ssmPayload = pSsmPayload_
     , _ssmLanguage = Nothing
     }
-
--- | The last-seen mutation timestamp.
-ssmConsistencyToken :: Lens' ScoresSubmitMultiple (Maybe Int64)
-ssmConsistencyToken
-  = lens _ssmConsistencyToken
-      (\ s a -> s{_ssmConsistencyToken = a})
-      . mapping _Coerce
 
 -- | Multipart request metadata.
 ssmPayload :: Lens' ScoresSubmitMultiple PlayerScoreSubmissionList
@@ -103,11 +90,9 @@ instance GoogleRequest ScoresSubmitMultiple where
         type Rs ScoresSubmitMultiple =
              PlayerScoreListResponse
         type Scopes ScoresSubmitMultiple =
-             '["https://www.googleapis.com/auth/games",
-               "https://www.googleapis.com/auth/plus.login"]
+             '["https://www.googleapis.com/auth/games"]
         requestClient ScoresSubmitMultiple'{..}
-          = go _ssmConsistencyToken _ssmLanguage (Just AltJSON)
-              _ssmPayload
+          = go _ssmLanguage (Just AltJSON) _ssmPayload
               gamesService
           where go
                   = buildClient

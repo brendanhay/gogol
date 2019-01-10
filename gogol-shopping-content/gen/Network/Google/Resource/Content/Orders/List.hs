@@ -20,8 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the orders in your Merchant Center account. This method can only
--- be called for non-multi-client accounts.
+-- Lists the orders in your Merchant Center account.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.list@.
 module Network.Google.Resource.Content.Orders.List
@@ -34,14 +33,14 @@ module Network.Google.Resource.Content.Orders.List
     , OrdersList
 
     -- * Request Lenses
-    , olPlacedDateEnd
-    , olMerchantId
-    , olOrderBy
-    , olAcknowledged
-    , olStatuses
-    , olPageToken
-    , olPlacedDateStart
-    , olMaxResults
+    , ollPlacedDateEnd
+    , ollMerchantId
+    , ollOrderBy
+    , ollAcknowledged
+    , ollStatuses
+    , ollPageToken
+    , ollPlacedDateStart
+    , ollMaxResults
     ) where
 
 import           Network.Google.Prelude
@@ -51,7 +50,7 @@ import           Network.Google.ShoppingContent.Types
 -- 'OrdersList' request conforms to.
 type OrdersListResource =
      "content" :>
-       "v2" :>
+       "v2.1" :>
          Capture "merchantId" (Textual Word64) :>
            "orders" :>
              QueryParam "placedDateEnd" Text :>
@@ -64,66 +63,67 @@ type OrdersListResource =
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] OrdersListResponse
 
--- | Lists the orders in your Merchant Center account. This method can only
--- be called for non-multi-client accounts.
+-- | Lists the orders in your Merchant Center account.
 --
 -- /See:/ 'ordersList' smart constructor.
 data OrdersList = OrdersList'
-    { _olPlacedDateEnd   :: !(Maybe Text)
-    , _olMerchantId      :: !(Textual Word64)
-    , _olOrderBy         :: !(Maybe OrdersListOrderBy)
-    , _olAcknowledged    :: !(Maybe Bool)
-    , _olStatuses        :: !(Maybe [OrdersListStatuses])
-    , _olPageToken       :: !(Maybe Text)
-    , _olPlacedDateStart :: !(Maybe Text)
-    , _olMaxResults      :: !(Maybe (Textual Word32))
+    { _ollPlacedDateEnd   :: !(Maybe Text)
+    , _ollMerchantId      :: !(Textual Word64)
+    , _ollOrderBy         :: !(Maybe OrdersListOrderBy)
+    , _ollAcknowledged    :: !(Maybe Bool)
+    , _ollStatuses        :: !(Maybe [OrdersListStatuses])
+    , _ollPageToken       :: !(Maybe Text)
+    , _ollPlacedDateStart :: !(Maybe Text)
+    , _ollMaxResults      :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'olPlacedDateEnd'
+-- * 'ollPlacedDateEnd'
 --
--- * 'olMerchantId'
+-- * 'ollMerchantId'
 --
--- * 'olOrderBy'
+-- * 'ollOrderBy'
 --
--- * 'olAcknowledged'
+-- * 'ollAcknowledged'
 --
--- * 'olStatuses'
+-- * 'ollStatuses'
 --
--- * 'olPageToken'
+-- * 'ollPageToken'
 --
--- * 'olPlacedDateStart'
+-- * 'ollPlacedDateStart'
 --
--- * 'olMaxResults'
+-- * 'ollMaxResults'
 ordersList
-    :: Word64 -- ^ 'olMerchantId'
+    :: Word64 -- ^ 'ollMerchantId'
     -> OrdersList
-ordersList pOlMerchantId_ =
+ordersList pOllMerchantId_ =
     OrdersList'
-    { _olPlacedDateEnd = Nothing
-    , _olMerchantId = _Coerce # pOlMerchantId_
-    , _olOrderBy = Nothing
-    , _olAcknowledged = Nothing
-    , _olStatuses = Nothing
-    , _olPageToken = Nothing
-    , _olPlacedDateStart = Nothing
-    , _olMaxResults = Nothing
+    { _ollPlacedDateEnd = Nothing
+    , _ollMerchantId = _Coerce # pOllMerchantId_
+    , _ollOrderBy = Nothing
+    , _ollAcknowledged = Nothing
+    , _ollStatuses = Nothing
+    , _ollPageToken = Nothing
+    , _ollPlacedDateStart = Nothing
+    , _ollMaxResults = Nothing
     }
 
 -- | Obtains orders placed before this date (exclusively), in ISO 8601
 -- format.
-olPlacedDateEnd :: Lens' OrdersList (Maybe Text)
-olPlacedDateEnd
-  = lens _olPlacedDateEnd
-      (\ s a -> s{_olPlacedDateEnd = a})
+ollPlacedDateEnd :: Lens' OrdersList (Maybe Text)
+ollPlacedDateEnd
+  = lens _ollPlacedDateEnd
+      (\ s a -> s{_ollPlacedDateEnd = a})
 
--- | The ID of the managing account.
-olMerchantId :: Lens' OrdersList Word64
-olMerchantId
-  = lens _olMerchantId (\ s a -> s{_olMerchantId = a})
+-- | The ID of the account that manages the order. This cannot be a
+-- multi-client account.
+ollMerchantId :: Lens' OrdersList Word64
+ollMerchantId
+  = lens _ollMerchantId
+      (\ s a -> s{_ollMerchantId = a})
       . _Coerce
 
 -- | The ordering of the returned list. The only supported value are
@@ -132,49 +132,50 @@ olMerchantId
 -- placement date, from oldest to most recent. \"placedDate asc\" stands
 -- for listing orders by placement date, from most recent to oldest. In
 -- future releases we\'ll support other sorting criteria.
-olOrderBy :: Lens' OrdersList (Maybe OrdersListOrderBy)
-olOrderBy
-  = lens _olOrderBy (\ s a -> s{_olOrderBy = a})
+ollOrderBy :: Lens' OrdersList (Maybe OrdersListOrderBy)
+ollOrderBy
+  = lens _ollOrderBy (\ s a -> s{_ollOrderBy = a})
 
 -- | Obtains orders that match the acknowledgement status. When set to true,
 -- obtains orders that have been acknowledged. When false, obtains orders
 -- that have not been acknowledged. We recommend using this filter set to
 -- false, in conjunction with the acknowledge call, such that only
 -- un-acknowledged orders are returned.
-olAcknowledged :: Lens' OrdersList (Maybe Bool)
-olAcknowledged
-  = lens _olAcknowledged
-      (\ s a -> s{_olAcknowledged = a})
+ollAcknowledged :: Lens' OrdersList (Maybe Bool)
+ollAcknowledged
+  = lens _ollAcknowledged
+      (\ s a -> s{_ollAcknowledged = a})
 
 -- | Obtains orders that match any of the specified statuses. Multiple values
 -- can be specified with comma separation. Additionally, please note that
 -- active is a shortcut for pendingShipment and partiallyShipped, and
 -- completed is a shortcut for shipped , partiallyDelivered, delivered,
 -- partiallyReturned, returned, and canceled.
-olStatuses :: Lens' OrdersList [OrdersListStatuses]
-olStatuses
-  = lens _olStatuses (\ s a -> s{_olStatuses = a}) .
+ollStatuses :: Lens' OrdersList [OrdersListStatuses]
+ollStatuses
+  = lens _ollStatuses (\ s a -> s{_ollStatuses = a}) .
       _Default
       . _Coerce
 
 -- | The token returned by the previous request.
-olPageToken :: Lens' OrdersList (Maybe Text)
-olPageToken
-  = lens _olPageToken (\ s a -> s{_olPageToken = a})
+ollPageToken :: Lens' OrdersList (Maybe Text)
+ollPageToken
+  = lens _ollPageToken (\ s a -> s{_ollPageToken = a})
 
 -- | Obtains orders placed after this date (inclusively), in ISO 8601 format.
-olPlacedDateStart :: Lens' OrdersList (Maybe Text)
-olPlacedDateStart
-  = lens _olPlacedDateStart
-      (\ s a -> s{_olPlacedDateStart = a})
+ollPlacedDateStart :: Lens' OrdersList (Maybe Text)
+ollPlacedDateStart
+  = lens _ollPlacedDateStart
+      (\ s a -> s{_ollPlacedDateStart = a})
 
 -- | The maximum number of orders to return in the response, used for paging.
 -- The default value is 25 orders per page, and the maximum allowed value
 -- is 250 orders per page. Known issue: All List calls will return all
 -- Orders without limit regardless of the value of this field.
-olMaxResults :: Lens' OrdersList (Maybe Word32)
-olMaxResults
-  = lens _olMaxResults (\ s a -> s{_olMaxResults = a})
+ollMaxResults :: Lens' OrdersList (Maybe Word32)
+ollMaxResults
+  = lens _ollMaxResults
+      (\ s a -> s{_ollMaxResults = a})
       . mapping _Coerce
 
 instance GoogleRequest OrdersList where
@@ -182,12 +183,12 @@ instance GoogleRequest OrdersList where
         type Scopes OrdersList =
              '["https://www.googleapis.com/auth/content"]
         requestClient OrdersList'{..}
-          = go _olMerchantId _olPlacedDateEnd _olOrderBy
-              _olAcknowledged
-              (_olStatuses ^. _Default)
-              _olPageToken
-              _olPlacedDateStart
-              _olMaxResults
+          = go _ollMerchantId _ollPlacedDateEnd _ollOrderBy
+              _ollAcknowledged
+              (_ollStatuses ^. _Default)
+              _ollPageToken
+              _ollPlacedDateStart
+              _ollMaxResults
               (Just AltJSON)
               shoppingContentService
           where go

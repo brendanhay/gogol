@@ -34,6 +34,7 @@ module Network.Google.Resource.Storage.BucketAccessControls.List
 
     -- * Request Lenses
     , baclBucket
+    , baclUserProject
     ) where
 
 import           Network.Google.Prelude
@@ -47,14 +48,16 @@ type BucketAccessControlsListResource =
          "b" :>
            Capture "bucket" Text :>
              "acl" :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] BucketAccessControls
+               QueryParam "userProject" Text :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] BucketAccessControls
 
 -- | Retrieves ACL entries on the specified bucket.
 --
 -- /See:/ 'bucketAccessControlsList' smart constructor.
-newtype BucketAccessControlsList = BucketAccessControlsList'
-    { _baclBucket :: Text
+data BucketAccessControlsList = BucketAccessControlsList'
+    { _baclBucket      :: !Text
+    , _baclUserProject :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketAccessControlsList' with the minimum fields required to make a request.
@@ -62,18 +65,28 @@ newtype BucketAccessControlsList = BucketAccessControlsList'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'baclBucket'
+--
+-- * 'baclUserProject'
 bucketAccessControlsList
     :: Text -- ^ 'baclBucket'
     -> BucketAccessControlsList
 bucketAccessControlsList pBaclBucket_ =
     BucketAccessControlsList'
     { _baclBucket = pBaclBucket_
+    , _baclUserProject = Nothing
     }
 
 -- | Name of a bucket.
 baclBucket :: Lens' BucketAccessControlsList Text
 baclBucket
   = lens _baclBucket (\ s a -> s{_baclBucket = a})
+
+-- | The project to be billed for this request. Required for Requester Pays
+-- buckets.
+baclUserProject :: Lens' BucketAccessControlsList (Maybe Text)
+baclUserProject
+  = lens _baclUserProject
+      (\ s a -> s{_baclUserProject = a})
 
 instance GoogleRequest BucketAccessControlsList where
         type Rs BucketAccessControlsList =
@@ -82,7 +95,8 @@ instance GoogleRequest BucketAccessControlsList where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/devstorage.full_control"]
         requestClient BucketAccessControlsList'{..}
-          = go _baclBucket (Just AltJSON) storageService
+          = go _baclBucket _baclUserProject (Just AltJSON)
+              storageService
           where go
                   = buildClient
                       (Proxy :: Proxy BucketAccessControlsListResource)

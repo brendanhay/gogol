@@ -16,7 +16,7 @@
 --
 module Network.Google.ShoppingContent.Types.Sum where
 
-import           Network.Google.Prelude
+import           Network.Google.Prelude hiding (Bytes)
 
 -- | The name of the template to retrieve.
 data OrdersGettestOrdertemplateTemplateName
@@ -150,4 +150,31 @@ instance FromJSON OrdersListStatuses where
     parseJSON = parseJSONText "OrdersListStatuses"
 
 instance ToJSON OrdersListStatuses where
+    toJSON = toJSONText
+
+-- | Return the results in the specified order.
+data OrderreturnsListOrderBy
+    = ReturnCreationTimeAsc
+      -- ^ @returnCreationTimeAsc@
+    | ReturnCreationTimeDesc
+      -- ^ @returnCreationTimeDesc@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable OrderreturnsListOrderBy
+
+instance FromHttpApiData OrderreturnsListOrderBy where
+    parseQueryParam = \case
+        "returnCreationTimeAsc" -> Right ReturnCreationTimeAsc
+        "returnCreationTimeDesc" -> Right ReturnCreationTimeDesc
+        x -> Left ("Unable to parse OrderreturnsListOrderBy from: " <> x)
+
+instance ToHttpApiData OrderreturnsListOrderBy where
+    toQueryParam = \case
+        ReturnCreationTimeAsc -> "returnCreationTimeAsc"
+        ReturnCreationTimeDesc -> "returnCreationTimeDesc"
+
+instance FromJSON OrderreturnsListOrderBy where
+    parseJSON = parseJSONText "OrderreturnsListOrderBy"
+
+instance ToJSON OrderreturnsListOrderBy where
     toJSON = toJSONText

@@ -33,6 +33,7 @@ module Network.Google.Resource.Compute.TargetSSLProxies.SetProxyHeader
     , TargetSSLProxiesSetProxyHeader
 
     -- * Request Lenses
+    , tspsphRequestId
     , tspsphProject
     , tspsphPayload
     , tspsphTargetSSLProxy
@@ -52,15 +53,17 @@ type TargetSSLProxiesSetProxyHeaderResource =
                "targetSslProxies" :>
                  Capture "targetSslProxy" Text :>
                    "setProxyHeader" :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] TargetSSLProxiesSetProxyHeaderRequest
-                         :> Post '[JSON] Operation
+                     QueryParam "requestId" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] TargetSSLProxiesSetProxyHeaderRequest
+                           :> Post '[JSON] Operation
 
 -- | Changes the ProxyHeaderType for TargetSslProxy.
 --
 -- /See:/ 'targetSSLProxiesSetProxyHeader' smart constructor.
 data TargetSSLProxiesSetProxyHeader = TargetSSLProxiesSetProxyHeader'
-    { _tspsphProject        :: !Text
+    { _tspsphRequestId      :: !(Maybe Text)
+    , _tspsphProject        :: !Text
     , _tspsphPayload        :: !TargetSSLProxiesSetProxyHeaderRequest
     , _tspsphTargetSSLProxy :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -68,6 +71,8 @@ data TargetSSLProxiesSetProxyHeader = TargetSSLProxiesSetProxyHeader'
 -- | Creates a value of 'TargetSSLProxiesSetProxyHeader' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tspsphRequestId'
 --
 -- * 'tspsphProject'
 --
@@ -81,10 +86,26 @@ targetSSLProxiesSetProxyHeader
     -> TargetSSLProxiesSetProxyHeader
 targetSSLProxiesSetProxyHeader pTspsphProject_ pTspsphPayload_ pTspsphTargetSSLProxy_ =
     TargetSSLProxiesSetProxyHeader'
-    { _tspsphProject = pTspsphProject_
+    { _tspsphRequestId = Nothing
+    , _tspsphProject = pTspsphProject_
     , _tspsphPayload = pTspsphPayload_
     , _tspsphTargetSSLProxy = pTspsphTargetSSLProxy_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+tspsphRequestId :: Lens' TargetSSLProxiesSetProxyHeader (Maybe Text)
+tspsphRequestId
+  = lens _tspsphRequestId
+      (\ s a -> s{_tspsphRequestId = a})
 
 -- | Project ID for this request.
 tspsphProject :: Lens' TargetSSLProxiesSetProxyHeader Text
@@ -112,6 +133,7 @@ instance GoogleRequest TargetSSLProxiesSetProxyHeader
                "https://www.googleapis.com/auth/compute"]
         requestClient TargetSSLProxiesSetProxyHeader'{..}
           = go _tspsphProject _tspsphTargetSSLProxy
+              _tspsphRequestId
               (Just AltJSON)
               _tspsphPayload
               computeService

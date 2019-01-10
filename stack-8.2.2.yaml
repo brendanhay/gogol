@@ -13,7 +13,7 @@ packages:
   - core
   - gogol
   - examples
-  # GENERATED
+# GENERATED
   - gogol-abusiveexperiencereport
   - gogol-acceleratedmobilepageurl
   - gogol-accesscontextmanager

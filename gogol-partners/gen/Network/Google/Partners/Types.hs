@@ -37,6 +37,25 @@ module Network.Google.Partners.Types
     , edValues
     , edKey
 
+    -- * OfferCustomerOfferType
+    , OfferCustomerOfferType (..)
+
+    -- * HistoricalOffer
+    , HistoricalOffer
+    , historicalOffer
+    , hoCreationTime
+    , hoClientId
+    , hoStatus
+    , hoClientEmail
+    , hoAdwordsURL
+    , hoLastModifiedTime
+    , hoSenderName
+    , hoOfferCode
+    , hoOfferCountryCode
+    , hoOfferType
+    , hoClientName
+    , hoExpirationTime
+
     -- * RequestMetadata
     , RequestMetadata
     , requestMetadata
@@ -46,9 +65,13 @@ module Network.Google.Partners.Types
     , rmUserOverrides
     , rmPartnersSessionId
 
+    -- * LeadType
+    , LeadType (..)
+
     -- * CertificationStatus
     , CertificationStatus
     , certificationStatus
+    , csUserCount
     , csIsCertified
     , csType
     , csExamStatuses
@@ -59,6 +82,27 @@ module Network.Google.Partners.Types
     , diServiceURL
     , diServerTraceInfo
     , diServerInfo
+
+    -- * AvailableOfferOfferLevel
+    , AvailableOfferOfferLevel (..)
+
+    -- * OptIns
+    , OptIns
+    , optIns
+    , oiPhoneContact
+    , oiPhysicalMail
+    , oiPerformanceSuggestions
+    , oiSpecialOffers
+    , oiMarketComm
+
+    -- * LogUserEventRequestEventAction
+    , LogUserEventRequestEventAction (..)
+
+    -- * AnalyticsDataPoint
+    , AnalyticsDataPoint
+    , analyticsDataPoint
+    , adpEventCount
+    , adpEventLocations
 
     -- * GetCompanyResponse
     , GetCompanyResponse
@@ -71,8 +115,19 @@ module Network.Google.Partners.Types
     , publicProFile
     , ppfURL
     , ppfDisplayImageURL
+    , ppfProFileImage
     , ppfDisplayName
     , ppfId
+
+    -- * ExamStatus
+    , ExamStatus
+    , examStatus
+    , esPassed
+    , esExpiration
+    , esWarning
+    , esLastPassed
+    , esTaken
+    , esExamType
 
     -- * CertificationExamStatus
     , CertificationExamStatus
@@ -84,13 +139,35 @@ module Network.Google.Partners.Types
     , Location
     , location
     , lLatLng
+    , lLanguageCode
+    , lSortingCode
+    , lRegionCode
+    , lAddressLine
+    , lDependentLocality
+    , lPostalCode
     , lAddress
+    , lLocality
+    , lAdministrativeArea
+
+    -- * Empty
+    , Empty
+    , empty
 
     -- * TrafficSource
     , TrafficSource
     , trafficSource
     , tsTrafficSubId
     , tsTrafficSourceId
+
+    -- * ListOffersHistoryResponse
+    , ListOffersHistoryResponse
+    , listOffersHistoryResponse
+    , lohrNextPageToken
+    , lohrShowingEntireCompany
+    , lohrResponseMetadata
+    , lohrCanShowEntireCompany
+    , lohrTotalResults
+    , lohrOffers
 
     -- * Money
     , Money
@@ -106,11 +183,29 @@ module Network.Google.Partners.Types
     , lcrResponseMetadata
     , lcrCompanies
 
+    -- * Certification
+    , Certification
+    , certification
+    , cLastAchieved
+    , cExpiration
+    , cWarning
+    , cCertificationType
+    , cAchieved
+
     -- * RecaptchaChallenge
     , RecaptchaChallenge
     , recaptchaChallenge
     , rcResponse
     , rcId
+
+    -- * HistoricalOfferStatus
+    , HistoricalOfferStatus (..)
+
+    -- * CompanyProFileStatus
+    , CompanyProFileStatus (..)
+
+    -- * CompanyBadgeTier
+    , CompanyBadgeTier (..)
 
     -- * CreateLeadResponse
     , CreateLeadResponse
@@ -124,6 +219,17 @@ module Network.Google.Partners.Types
     , userOverrides
     , uoIPAddress
     , uoUserId
+
+    -- * Analytics
+    , Analytics
+    , analytics
+    , aProFileViews
+    , aEventDate
+    , aSearchViews
+    , aContacts
+
+    -- * CompanyRelationBadgeTier
+    , CompanyRelationBadgeTier (..)
 
     -- * ResponseMetadata
     , ResponseMetadata
@@ -146,35 +252,172 @@ module Network.Google.Partners.Types
     , lciCountryCodes
     , lciDisplayName
 
+    -- * CompanyRelationState
+    , CompanyRelationState (..)
+
+    -- * CountryOfferInfoOfferType
+    , CountryOfferInfoOfferType (..)
+
+    -- * RankType
+    , RankType (..)
+
+    -- * SpecializationStatusBadgeSpecializationState
+    , SpecializationStatusBadgeSpecializationState (..)
+
+    -- * AvailableOfferOfferType
+    , AvailableOfferOfferType (..)
+
+    -- * AvailableOffer
+    , AvailableOffer
+    , availableOffer
+    , aoShowSpecialOfferCopy
+    , aoQualifiedCustomer
+    , aoTerms
+    , aoQualifiedCustomersComplete
+    , aoMaxAccountAge
+    , aoName
+    , aoCountryOfferInfos
+    , aoId
+    , aoOfferType
+    , aoOfferLevel
+    , aoDescription
+    , aoAvailable
+
+    -- * SpecializationStatusBadgeSpecialization
+    , SpecializationStatusBadgeSpecialization (..)
+
     -- * LogMessageRequestClientInfo
     , LogMessageRequestClientInfo
     , logMessageRequestClientInfo
     , lmrciAddtional
 
+    -- * CompanyRelation
+    , CompanyRelation
+    , companyRelation
+    , crCreationTime
+    , crState
+    , crBadgeTier
+    , crCompanyId
+    , crPrimaryAddress
+    , crLogoURL
+    , crCompanyAdmin
+    , crWebsite
+    , crAddress
+    , crPrimaryCountryCode
+    , crName
+    , crPhoneNumber
+    , crManagerAccount
+    , crIsPending
+    , crInternalCompanyId
+    , crSpecializationStatus
+    , crSegment
+    , crPrimaryLanguageCode
+    , crResolvedTimestamp
+
+    -- * User
+    , User
+    , user
+    , uCertificationStatus
+    , uPublicProFile
+    , uCompanyVerificationEmail
+    , uExamStatus
+    , uPrimaryEmails
+    , uProFile
+    , uAfaInfoShared
+    , uCompany
+    , uInternalId
+    , uId
+    , uAvailableAdwordsManagerAccounts
+    , uLastAccessTime
+
+    -- * LogUserEventRequestEventCategory
+    , LogUserEventRequestEventCategory (..)
+
+    -- * Date
+    , Date
+    , date
+    , dDay
+    , dYear
+    , dMonth
+
     -- * Lead
     , Lead
     , lead
-    , lGivenName
-    , lEmail
-    , lFamilyName
-    , lPhoneNumber
-    , lMinMonthlyBudget
-    , lId
-    , lComments
-    , lWebsiteURL
-    , lType
-    , lGpsMotivations
+    , leaGivenName
+    , leaEmail
+    , leaLanguageCode
+    , leaState
+    , leaMarketingOptIn
+    , leaAdwordsCustomerId
+    , leaFamilyName
+    , leaPhoneNumber
+    , leaMinMonthlyBudget
+    , leaId
+    , leaComments
+    , leaWebsiteURL
+    , leaType
+    , leaGpsMotivations
+    , leaCreateTime
+
+    -- * AdWordsManagerAccountInfo
+    , AdWordsManagerAccountInfo
+    , adWordsManagerAccountInfo
+    , awmaiCustomerName
+    , awmaiId
 
     -- * LogMessageResponse
     , LogMessageResponse
     , logMessageResponse
     , lmrResponseMetadata
 
+    -- * HistoricalOfferOfferType
+    , HistoricalOfferOfferType (..)
+
+    -- * CertificationStatusType
+    , CertificationStatusType (..)
+
+    -- * CreateLeadResponseRecaptchaStatus
+    , CreateLeadResponseRecaptchaStatus (..)
+
+    -- * OfferCustomer
+    , OfferCustomer
+    , offerCustomer
+    , ocCreationTime
+    , ocAdwordsURL
+    , ocGetYAmount
+    , ocName
+    , ocCountryCode
+    , ocOfferType
+    , ocSpendXAmount
+    , ocExternalCid
+    , ocEligibilityDaysLeft
+
+    -- * ExamStatusExamType
+    , ExamStatusExamType (..)
+
+    -- * GetPartnersStatusResponse
+    , GetPartnersStatusResponse
+    , getPartnersStatusResponse
+    , gpsrResponseMetadata
+
+    -- * ListAnalyticsResponse
+    , ListAnalyticsResponse
+    , listAnalyticsResponse
+    , larNextPageToken
+    , larAnalytics
+    , larResponseMetadata
+    , larAnalyticsSummary
+
     -- * Company
     , Company
     , company
+    , cCompanyTypes
+    , cAutoApprovalEmailDomains
+    , cProFileStatus
+    , cBadgeTier
     , cPublicProFile
     , cOriginalMinMonthlyBudget
+    , cAdditionalWebsites
     , cIndustries
     , cConvertedMinMonthlyBudget
     , cName
@@ -183,13 +426,60 @@ module Network.Google.Partners.Types
     , cRanks
     , cId
     , cWebsiteURL
+    , cSpecializationStatus
+    , cPrimaryAdwordsManagerAccountId
+    , cBadgeAuthorityInAwn
+    , cPrimaryLanguageCode
     , cLocations
     , cServices
+    , cPrimaryLocation
+
+    -- * ListOffersResponseNoOfferReason
+    , ListOffersResponseNoOfferReason (..)
 
     -- * LogUserEventResponse
     , LogUserEventResponse
     , logUserEventResponse
     , luerResponseMetadata
+
+    -- * ListOffersResponse
+    , ListOffersResponse
+    , listOffersResponse
+    , lorAvailableOffers
+    , lorNoOfferReason
+    , lorResponseMetadata
+
+    -- * Xgafv
+    , Xgafv (..)
+
+    -- * UserProFile
+    , UserProFile
+    , userProFile
+    , upfGivenName
+    , upfMarkets
+    , upfChannels
+    , upfEmailOptIns
+    , upfJobFunctions
+    , upfAddress
+    , upfPrimaryCountryCode
+    , upfFamilyName
+    , upfLanguages
+    , upfIndustries
+    , upfMigrateToAfa
+    , upfPhoneNumber
+    , upfEmailAddress
+    , upfAdwordsManagerAccount
+    , upfProFilePublic
+
+    -- * AnalyticsSummary
+    , AnalyticsSummary
+    , analyticsSummary
+    , asContactsCount
+    , asProFileViewsCount
+    , asSearchViewsCount
+
+    -- * CertificationExamStatusType
+    , CertificationExamStatusType (..)
 
     -- * LogUserEventRequest
     , LogUserEventRequest
@@ -202,11 +492,48 @@ module Network.Google.Partners.Types
     , luerEventDatas
     , luerEventAction
 
+    -- * LogMessageRequestLevel
+    , LogMessageRequestLevel (..)
+
+    -- * CertificationCertificationType
+    , CertificationCertificationType (..)
+
+    -- * EventDataKey
+    , EventDataKey (..)
+
+    -- * SpecializationStatus
+    , SpecializationStatus
+    , specializationStatus
+    , ssBadgeSpecialization
+    , ssBadgeSpecializationState
+
+    -- * LeadState
+    , LeadState (..)
+
     -- * Rank
     , Rank
     , rank
     , rValue
     , rType
+
+    -- * LogUserEventRequestEventScope
+    , LogUserEventRequestEventScope (..)
+
+    -- * ListLeadsResponse
+    , ListLeadsResponse
+    , listLeadsResponse
+    , llrLeads
+    , llrNextPageToken
+    , llrResponseMetadata
+    , llrTotalSize
+
+    -- * CountryOfferInfo
+    , CountryOfferInfo
+    , countryOfferInfo
+    , coiGetYAmount
+    , coiOfferCountryCode
+    , coiOfferType
+    , coiSpendXAmount
 
     -- * CreateLeadRequest
     , CreateLeadRequest

@@ -23,14 +23,34 @@ module Network.Google.Script.Types
     , mailGoogleComScope
     , m8FeedsScope
     , adminDirectoryUserScope
+    , scriptProjectsScope
     , userInfoEmailScope
+    , scriptMetricsScope
     , formsCurrentOnlyScope
+    , scriptDeploymentsScope
     , driveScope
     , adminDirectoryGroupScope
+    , scriptProjectsReadOnlyScope
     , calendarFeedsScope
     , formsScope
     , spreadsheetsScope
+    , scriptDeploymentsReadOnlyScope
     , groupsScope
+    , scriptProcessesScope
+    , documentsScope
+
+    -- * GoogleAppsScriptTypeFunctionSet
+    , GoogleAppsScriptTypeFunctionSet
+    , googleAppsScriptTypeFunctionSet
+    , gastfsValues
+
+    -- * GoogleAppsScriptTypeExecutionAPIConfig
+    , GoogleAppsScriptTypeExecutionAPIConfig
+    , googleAppsScriptTypeExecutionAPIConfig
+    , gasteacAccess
+
+    -- * GoogleAppsScriptTypeProcessProcessType
+    , GoogleAppsScriptTypeProcessProcessType (..)
 
     -- * Status
     , Status
@@ -39,14 +59,83 @@ module Network.Google.Script.Types
     , sCode
     , sMessage
 
+    -- * GoogleAppsScriptTypeProcessUserAccessLevel
+    , GoogleAppsScriptTypeProcessUserAccessLevel (..)
+
+    -- * Metrics
+    , Metrics
+    , metrics
+    , mActiveUsers
+    , mFailedExecutions
+    , mTotalExecutions
+
+    -- * GoogleAppsScriptTypeProcess
+    , GoogleAppsScriptTypeProcess
+    , googleAppsScriptTypeProcess
+    , gastpProcessStatus
+    , gastpStartTime
+    , gastpProjectName
+    , gastpFunctionName
+    , gastpUserAccessLevel
+    , gastpProcessType
+    , gastpExecutingUser
+    , gastpDuration
+
+    -- * GoogleAppsScriptTypeWebAppConfigExecuteAs
+    , GoogleAppsScriptTypeWebAppConfigExecuteAs (..)
+
+    -- * Project
+    , Project
+    , project
+    , pCreator
+    , pLastModifyUser
+    , pUpdateTime
+    , pScriptId
+    , pTitle
+    , pParentId
+    , pCreateTime
+
     -- * Operation
     , Operation
     , operation
     , oDone
     , oError
     , oResponse
-    , oName
-    , oMetadata
+
+    -- * ListUserProcessesResponse
+    , ListUserProcessesResponse
+    , listUserProcessesResponse
+    , luprNextPageToken
+    , luprProcesses
+
+    -- * Empty
+    , Empty
+    , empty
+
+    -- * GoogleAppsScriptTypeUser
+    , GoogleAppsScriptTypeUser
+    , googleAppsScriptTypeUser
+    , gastuEmail
+    , gastuPhotoURL
+    , gastuDomain
+    , gastuName
+
+    -- * EntryPoint
+    , EntryPoint
+    , entryPoint
+    , epExecutionAPI
+    , epAddOn
+    , epEntryPointType
+    , epWebApp
+
+    -- * ListVersionsResponse
+    , ListVersionsResponse
+    , listVersionsResponse
+    , lvrNextPageToken
+    , lvrVersions
+
+    -- * GoogleAppsScriptTypeExecutionAPIConfigAccess
+    , GoogleAppsScriptTypeExecutionAPIConfigAccess (..)
 
     -- * ExecutionRequest
     , ExecutionRequest
@@ -56,16 +145,68 @@ module Network.Google.Script.Types
     , erDevMode
     , erParameters
 
+    -- * ListScriptProcessesResponse
+    , ListScriptProcessesResponse
+    , listScriptProcessesResponse
+    , lsprNextPageToken
+    , lsprProcesses
+
     -- * StatusDetailsItem
     , StatusDetailsItem
     , statusDetailsItem
     , sdiAddtional
+
+    -- * FileType
+    , FileType (..)
 
     -- * ScriptStackTraceElement
     , ScriptStackTraceElement
     , scriptStackTraceElement
     , ssteFunction
     , ssteLineNumber
+
+    -- * Content
+    , Content
+    , content
+    , cScriptId
+    , cFiles
+
+    -- * GoogleAppsScriptTypeAddOnEntryPointAddOnType
+    , GoogleAppsScriptTypeAddOnEntryPointAddOnType (..)
+
+    -- * MetricsValue
+    , MetricsValue
+    , metricsValue
+    , mvStartTime
+    , mvValue
+    , mvEndTime
+
+    -- * GoogleAppsScriptTypeAddOnEntryPoint
+    , GoogleAppsScriptTypeAddOnEntryPoint
+    , googleAppsScriptTypeAddOnEntryPoint
+    , gastaoepPostInstallTipURL
+    , gastaoepAddOnType
+    , gastaoepReportIssueURL
+    , gastaoepHelpURL
+    , gastaoepTitle
+    , gastaoepDescription
+
+    -- * GoogleAppsScriptTypeWebAppConfig
+    , GoogleAppsScriptTypeWebAppConfig
+    , googleAppsScriptTypeWebAppConfig
+    , gastwacAccess
+    , gastwacExecuteAs
+
+    -- * Version
+    , Version
+    , version
+    , vVersionNumber
+    , vScriptId
+    , vDescription
+    , vCreateTime
+
+    -- * Xgafv
+    , Xgafv (..)
 
     -- * ExecutionError
     , ExecutionError
@@ -74,10 +215,61 @@ module Network.Google.Script.Types
     , eeErrorType
     , eeErrorMessage
 
-    -- * OperationMetadata
-    , OperationMetadata
-    , operationMetadata
-    , omAddtional
+    -- * GoogleAppsScriptTypeWebAppEntryPoint
+    , GoogleAppsScriptTypeWebAppEntryPoint
+    , googleAppsScriptTypeWebAppEntryPoint
+    , gastwaepEntryPointConfig
+    , gastwaepURL
+
+    -- * EntryPointEntryPointType
+    , EntryPointEntryPointType (..)
+
+    -- * CreateProjectRequest
+    , CreateProjectRequest
+    , createProjectRequest
+    , cprTitle
+    , cprParentId
+
+    -- * GoogleAppsScriptTypeProcessProcessStatus
+    , GoogleAppsScriptTypeProcessProcessStatus (..)
+
+    -- * DeploymentConfig
+    , DeploymentConfig
+    , deploymentConfig
+    , dcVersionNumber
+    , dcScriptId
+    , dcManifestFileName
+    , dcDescription
+
+    -- * GoogleAppsScriptTypeWebAppConfigAccess
+    , GoogleAppsScriptTypeWebAppConfigAccess (..)
+
+    -- * ListDeploymentsResponse
+    , ListDeploymentsResponse
+    , listDeploymentsResponse
+    , ldrNextPageToken
+    , ldrDeployments
+
+    -- * GoogleAppsScriptTypeFunction
+    , GoogleAppsScriptTypeFunction
+    , googleAppsScriptTypeFunction
+    , gastfName
+
+    -- * File
+    , File
+    , file
+    , fFunctionSet
+    , fLastModifyUser
+    , fUpdateTime
+    , fName
+    , fSource
+    , fType
+    , fCreateTime
+
+    -- * GoogleAppsScriptTypeExecutionAPIEntryPoint
+    , GoogleAppsScriptTypeExecutionAPIEntryPoint
+    , googleAppsScriptTypeExecutionAPIEntryPoint
+    , gasteaepEntryPointConfig
 
     -- * OperationResponse
     , OperationResponse
@@ -87,25 +279,37 @@ module Network.Google.Script.Types
     -- * ExecutionResponse
     , ExecutionResponse
     , executionResponse
-    , erStatus
     , erResult
+
+    -- * Deployment
+    , Deployment
+    , deployment
+    , dDeploymentId
+    , dUpdateTime
+    , dEntryPoints
+    , dDeploymentConfig
+
+    -- * UpdateDeploymentRequest
+    , UpdateDeploymentRequest
+    , updateDeploymentRequest
+    , udrDeploymentConfig
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.Script.Types.Product
 import           Network.Google.Script.Types.Sum
 
--- | Default request referring to version 'v1' of the Google Apps Script Execution API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v1' of the Apps Script API. This contains the host and root path used as a starting point for constructing service requests.
 scriptService :: ServiceConfig
 scriptService
   = defaultService (ServiceId "script:v1")
       "script.googleapis.com"
 
--- | View and manage your mail
+-- | Read, compose, send, and permanently delete all your email from Gmail
 mailGoogleComScope :: Proxy '["https://mail.google.com/"]
 mailGoogleComScope = Proxy;
 
--- | Manage your contacts
+-- | See, edit, download, and permanently delete your contacts
 m8FeedsScope :: Proxy '["https://www.google.com/m8/feeds"]
 m8FeedsScope = Proxy;
 
@@ -113,15 +317,27 @@ m8FeedsScope = Proxy;
 adminDirectoryUserScope :: Proxy '["https://www.googleapis.com/auth/admin.directory.user"]
 adminDirectoryUserScope = Proxy;
 
+-- | Create and update Google Apps Script projects
+scriptProjectsScope :: Proxy '["https://www.googleapis.com/auth/script.projects"]
+scriptProjectsScope = Proxy;
+
 -- | View your email address
 userInfoEmailScope :: Proxy '["https://www.googleapis.com/auth/userinfo.email"]
 userInfoEmailScope = Proxy;
+
+-- | View Google Apps Script project\'s metrics
+scriptMetricsScope :: Proxy '["https://www.googleapis.com/auth/script.metrics"]
+scriptMetricsScope = Proxy;
 
 -- | View and manage forms that this application has been installed in
 formsCurrentOnlyScope :: Proxy '["https://www.googleapis.com/auth/forms.currentonly"]
 formsCurrentOnlyScope = Proxy;
 
--- | View and manage the files in your Google Drive
+-- | Create and update Google Apps Script deployments
+scriptDeploymentsScope :: Proxy '["https://www.googleapis.com/auth/script.deployments"]
+scriptDeploymentsScope = Proxy;
+
+-- | See, edit, create, and delete all of your Google Drive files
 driveScope :: Proxy '["https://www.googleapis.com/auth/drive"]
 driveScope = Proxy;
 
@@ -129,7 +345,12 @@ driveScope = Proxy;
 adminDirectoryGroupScope :: Proxy '["https://www.googleapis.com/auth/admin.directory.group"]
 adminDirectoryGroupScope = Proxy;
 
--- | Manage your calendars
+-- | View Google Apps Script projects
+scriptProjectsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/script.projects.readonly"]
+scriptProjectsReadOnlyScope = Proxy;
+
+-- | See, edit, share, and permanently delete all the calendars you can
+-- access using Google Calendar
 calendarFeedsScope :: Proxy '["https://www.google.com/calendar/feeds"]
 calendarFeedsScope = Proxy;
 
@@ -137,10 +358,22 @@ calendarFeedsScope = Proxy;
 formsScope :: Proxy '["https://www.googleapis.com/auth/forms"]
 formsScope = Proxy;
 
--- | View and manage your spreadsheets in Google Drive
+-- | See, edit, create, and delete your spreadsheets in Google Drive
 spreadsheetsScope :: Proxy '["https://www.googleapis.com/auth/spreadsheets"]
 spreadsheetsScope = Proxy;
+
+-- | View Google Apps Script deployments
+scriptDeploymentsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/script.deployments.readonly"]
+scriptDeploymentsReadOnlyScope = Proxy;
 
 -- | View and manage your Google Groups
 groupsScope :: Proxy '["https://www.googleapis.com/auth/groups"]
 groupsScope = Proxy;
+
+-- | View Google Apps Script processes
+scriptProcessesScope :: Proxy '["https://www.googleapis.com/auth/script.processes"]
+scriptProcessesScope = Proxy;
+
+-- | View and manage your Google Docs documents
+documentsScope :: Proxy '["https://www.googleapis.com/auth/documents"]
+documentsScope = Proxy;

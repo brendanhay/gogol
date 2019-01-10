@@ -22,7 +22,7 @@
 --
 -- Lists databases in the specified Cloud SQL instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.databases.list@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.databases.list@.
 module Network.Google.Resource.SQL.Databases.List
     (
     -- * REST Resource
@@ -78,7 +78,7 @@ databasesList pDlProject_ pDlInstance_ =
     , _dlInstance = pDlInstance_
     }
 
--- | Project ID of the project for which to list Cloud SQL instances.
+-- | Project ID of the project that contains the instance.
 dlProject :: Lens' DatabasesList Text
 dlProject
   = lens _dlProject (\ s a -> s{_dlProject = a})

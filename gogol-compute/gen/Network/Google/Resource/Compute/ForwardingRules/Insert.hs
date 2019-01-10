@@ -34,6 +34,7 @@ module Network.Google.Resource.Compute.ForwardingRules.Insert
     , ForwardingRulesInsert
 
     -- * Request Lenses
+    , friRequestId
     , friProject
     , friPayload
     , friRegion
@@ -52,23 +53,27 @@ type ForwardingRulesInsertResource =
              "regions" :>
                Capture "region" Text :>
                  "forwardingRules" :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] ForwardingRule :>
-                       Post '[JSON] Operation
+                   QueryParam "requestId" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] ForwardingRule :>
+                         Post '[JSON] Operation
 
 -- | Creates a ForwardingRule resource in the specified project and region
 -- using the data included in the request.
 --
 -- /See:/ 'forwardingRulesInsert' smart constructor.
 data ForwardingRulesInsert = ForwardingRulesInsert'
-    { _friProject :: !Text
-    , _friPayload :: !ForwardingRule
-    , _friRegion  :: !Text
+    { _friRequestId :: !(Maybe Text)
+    , _friProject   :: !Text
+    , _friPayload   :: !ForwardingRule
+    , _friRegion    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ForwardingRulesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'friRequestId'
 --
 -- * 'friProject'
 --
@@ -82,10 +87,25 @@ forwardingRulesInsert
     -> ForwardingRulesInsert
 forwardingRulesInsert pFriProject_ pFriPayload_ pFriRegion_ =
     ForwardingRulesInsert'
-    { _friProject = pFriProject_
+    { _friRequestId = Nothing
+    , _friProject = pFriProject_
     , _friPayload = pFriPayload_
     , _friRegion = pFriRegion_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+friRequestId :: Lens' ForwardingRulesInsert (Maybe Text)
+friRequestId
+  = lens _friRequestId (\ s a -> s{_friRequestId = a})
 
 -- | Project ID for this request.
 friProject :: Lens' ForwardingRulesInsert Text
@@ -108,7 +128,8 @@ instance GoogleRequest ForwardingRulesInsert where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient ForwardingRulesInsert'{..}
-          = go _friProject _friRegion (Just AltJSON)
+          = go _friProject _friRegion _friRequestId
+              (Just AltJSON)
               _friPayload
               computeService
           where go

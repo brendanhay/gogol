@@ -13,10 +13,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates and configures Cloud SQL instances, which provide fully-managed
--- MySQL databases.
+-- Creates and manages Cloud SQL instances, which provide fully managed
+-- MySQL or PostgreSQL databases.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference>
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference>
 module Network.Google.SQLAdmin
     (
     -- * Service Configuration
@@ -64,11 +64,17 @@ module Network.Google.SQLAdmin
     -- ** sql.flags.list
     , module Network.Google.Resource.SQL.Flags.List
 
+    -- ** sql.instances.addServerCa
+    , module Network.Google.Resource.SQL.Instances.AddServerCa
+
     -- ** sql.instances.clone
     , module Network.Google.Resource.SQL.Instances.Clone
 
     -- ** sql.instances.delete
     , module Network.Google.Resource.SQL.Instances.Delete
+
+    -- ** sql.instances.demoteMaster
+    , module Network.Google.Resource.SQL.Instances.DemoteMaster
 
     -- ** sql.instances.export
     , module Network.Google.Resource.SQL.Instances.Export
@@ -88,6 +94,9 @@ module Network.Google.SQLAdmin
     -- ** sql.instances.list
     , module Network.Google.Resource.SQL.Instances.List
 
+    -- ** sql.instances.listServerCas
+    , module Network.Google.Resource.SQL.Instances.ListServerCas
+
     -- ** sql.instances.patch
     , module Network.Google.Resource.SQL.Instances.Patch
 
@@ -102,6 +111,9 @@ module Network.Google.SQLAdmin
 
     -- ** sql.instances.restoreBackup
     , module Network.Google.Resource.SQL.Instances.RestoreBackup
+
+    -- ** sql.instances.rotateServerCa
+    , module Network.Google.Resource.SQL.Instances.RotateServerCa
 
     -- ** sql.instances.startReplica
     , module Network.Google.Resource.SQL.Instances.StartReplica
@@ -153,6 +165,16 @@ module Network.Google.SQLAdmin
 
     -- * Types
 
+    -- ** DemoteMasterMySQLReplicaConfiguration
+    , DemoteMasterMySQLReplicaConfiguration
+    , demoteMasterMySQLReplicaConfiguration
+    , dmmsqlrcKind
+    , dmmsqlrcClientKey
+    , dmmsqlrcUsername
+    , dmmsqlrcClientCertificate
+    , dmmsqlrcCaCertificate
+    , dmmsqlrcPassword
+
     -- ** SSLCert
     , SSLCert
     , sslCert
@@ -177,6 +199,18 @@ module Network.Google.SQLAdmin
     , instancesExportRequest
     , ierExportContext
 
+    -- ** InstancesListServerCasResponse
+    , InstancesListServerCasResponse
+    , instancesListServerCasResponse
+    , ilscrKind
+    , ilscrCerts
+    , ilscrActiveVersion
+
+    -- ** ExportContextSQLExportOptionsMysqlExportOptions
+    , ExportContextSQLExportOptionsMysqlExportOptions
+    , exportContextSQLExportOptionsMysqlExportOptions
+    , ecsqleomeoMasterData
+
     -- ** OnPremisesConfiguration
     , OnPremisesConfiguration
     , onPremisesConfiguration
@@ -190,6 +224,12 @@ module Network.Google.SQLAdmin
     , olrKind
     , olrItems
 
+    -- ** APIWarning
+    , APIWarning
+    , apiWarning
+    , awCode
+    , awMessage
+
     -- ** ImportContext
     , ImportContext
     , importContext
@@ -198,6 +238,7 @@ module Network.Google.SQLAdmin
     , icCSVImportOptions
     , icURI
     , icFileType
+    , icImportUser
 
     -- ** Operation
     , Operation
@@ -232,12 +273,20 @@ module Network.Google.SQLAdmin
     , sIPConfiguration
     , sMaintenanceWindow
     , sDatabaseReplicationEnabled
+    , sUserLabels
     , sTier
     , sDatabaseFlags
     , sDataDiskType
     , sCrashSafeReplicationEnabled
     , sLocationPreference
     , sBackupConfiguration
+    , sAvailabilityType
+    , sStorageAutoResizeLimit
+
+    -- ** InstancesRotateServerCaRequest
+    , InstancesRotateServerCaRequest
+    , instancesRotateServerCaRequest
+    , irscrRotateServerCaContext
 
     -- ** IPMApping
     , IPMApping
@@ -320,6 +369,7 @@ module Network.Google.SQLAdmin
     , IPConfiguration
     , ipConfiguration
     , icAuthorizedNetworks
+    , icPrivateNetwork
     , icRequireSSL
     , icIPv4Enabled
 
@@ -336,6 +386,12 @@ module Network.Google.SQLAdmin
     , importContextCSVImportOptions
     , iccioColumns
     , iccioTable
+
+    -- ** RotateServerCaContext
+    , RotateServerCaContext
+    , rotateServerCaContext
+    , rsccNextVersion
+    , rsccKind
 
     -- ** ExportContextCSVExportOptions
     , ExportContextCSVExportOptions
@@ -359,6 +415,7 @@ module Network.Google.SQLAdmin
     , datBackendType
     , datMaxDiskSize
     , datOnPremisesConfiguration
+    , datGceZone
     , datEtag
     , datState
     , datIPv6Address
@@ -384,6 +441,7 @@ module Network.Google.SQLAdmin
     -- ** CloneContext
     , CloneContext
     , cloneContext
+    , ccPitrTimestampMs
     , ccDestinationInstanceName
     , ccBinLogCoordinates
     , ccKind
@@ -470,6 +528,11 @@ module Network.Google.SQLAdmin
     , instancesRestoreBackupRequest
     , irbrRestoreBackupContext
 
+    -- ** InstancesDemoteMasterRequest
+    , InstancesDemoteMasterRequest
+    , instancesDemoteMasterRequest
+    , idmrDemoteMasterContext
+
     -- ** BackupRunsListResponse
     , BackupRunsListResponse
     , backupRunsListResponse
@@ -522,10 +585,18 @@ module Network.Google.SQLAdmin
     , ilrNextPageToken
     , ilrKind
     , ilrItems
+    , ilrWarnings
+
+    -- ** DemoteMasterConfiguration
+    , DemoteMasterConfiguration
+    , demoteMasterConfiguration
+    , dmcKind
+    , dmcMysqlReplicaConfiguration
 
     -- ** BackupConfiguration
     , BackupConfiguration
     , backupConfiguration
+    , bcReplicationLogArchivingEnabled
     , bcEnabled
     , bcStartTime
     , bcKind
@@ -558,6 +629,7 @@ module Network.Google.SQLAdmin
     , ExportContextSQLExportOptions
     , exportContextSQLExportOptions
     , ecsqleoSchemaOnly
+    , ecsqleoMysqlExportOptions
     , ecsqleoTables
 
     -- ** RestoreBackupContext
@@ -566,6 +638,19 @@ module Network.Google.SQLAdmin
     , rbcInstanceId
     , rbcBackupRunId
     , rbcKind
+
+    -- ** DemoteMasterContext
+    , DemoteMasterContext
+    , demoteMasterContext
+    , demVerifyGtidConsistency
+    , demKind
+    , demMasterInstanceName
+    , demReplicaConfiguration
+
+    -- ** SettingsUserLabels
+    , SettingsUserLabels
+    , settingsUserLabels
+    , sulAddtional
     ) where
 
 import           Network.Google.Prelude
@@ -580,19 +665,23 @@ import           Network.Google.Resource.SQL.Databases.List
 import           Network.Google.Resource.SQL.Databases.Patch
 import           Network.Google.Resource.SQL.Databases.Update
 import           Network.Google.Resource.SQL.Flags.List
+import           Network.Google.Resource.SQL.Instances.AddServerCa
 import           Network.Google.Resource.SQL.Instances.Clone
 import           Network.Google.Resource.SQL.Instances.Delete
+import           Network.Google.Resource.SQL.Instances.DemoteMaster
 import           Network.Google.Resource.SQL.Instances.Export
 import           Network.Google.Resource.SQL.Instances.Failover
 import           Network.Google.Resource.SQL.Instances.Get
 import           Network.Google.Resource.SQL.Instances.Import
 import           Network.Google.Resource.SQL.Instances.Insert
 import           Network.Google.Resource.SQL.Instances.List
+import           Network.Google.Resource.SQL.Instances.ListServerCas
 import           Network.Google.Resource.SQL.Instances.Patch
 import           Network.Google.Resource.SQL.Instances.PromoteReplica
 import           Network.Google.Resource.SQL.Instances.ResetSSLConfig
 import           Network.Google.Resource.SQL.Instances.Restart
 import           Network.Google.Resource.SQL.Instances.RestoreBackup
+import           Network.Google.Resource.SQL.Instances.RotateServerCa
 import           Network.Google.Resource.SQL.Instances.StartReplica
 import           Network.Google.Resource.SQL.Instances.StopReplica
 import           Network.Google.Resource.SQL.Instances.TruncateLog
@@ -615,7 +704,7 @@ import           Network.Google.SQLAdmin.Types
 TODO
 -}
 
--- | Represents the entirety of the methods and resources available for the Cloud SQL Administration API service.
+-- | Represents the entirety of the methods and resources available for the Cloud SQL Admin API service.
 type SQLAdminAPI =
      FlagsListResource :<|> UsersInsertResource :<|>
        UsersListResource
@@ -637,8 +726,11 @@ type SQLAdminAPI =
        :<|> InstancesStartReplicaResource
        :<|> InstancesCloneResource
        :<|> InstancesPatchResource
+       :<|> InstancesDemoteMasterResource
        :<|> InstancesGetResource
+       :<|> InstancesListServerCasResource
        :<|> InstancesRestoreBackupResource
+       :<|> InstancesAddServerCaResource
        :<|> InstancesFailoverResource
        :<|> InstancesRestartResource
        :<|> InstancesTruncateLogResource
@@ -646,6 +738,7 @@ type SQLAdminAPI =
        :<|> InstancesStopReplicaResource
        :<|> InstancesResetSSLConfigResource
        :<|> InstancesPromoteReplicaResource
+       :<|> InstancesRotateServerCaResource
        :<|> InstancesDeleteResource
        :<|> InstancesUpdateResource
        :<|> OperationsListResource

@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Cancels a requested build in progress.
+-- Cancels a build in progress.
 --
--- /See:/ <https://cloud.google.com/container-builder/docs/ Google Cloud Container Builder API Reference> for @cloudbuild.projects.builds.cancel@.
+-- /See:/ <https://cloud.google.com/cloud-build/docs/ Cloud Build API Reference> for @cloudbuild.projects.builds.cancel@.
 module Network.Google.Resource.Cloudbuild.Projects.Builds.Cancel
     (
     -- * REST Resource
@@ -35,11 +35,9 @@ module Network.Google.Resource.Cloudbuild.Projects.Builds.Cancel
     -- * Request Lenses
     , pbcXgafv
     , pbcUploadProtocol
-    , pbcPp
     , pbcAccessToken
     , pbcUploadType
     , pbcPayload
-    , pbcBearerToken
     , pbcId
     , pbcProjectId
     , pbcCallback
@@ -58,26 +56,22 @@ type ProjectsBuildsCancelResource =
              CaptureMode "id" "cancel" Text :>
                QueryParam "$.xgafv" Xgafv :>
                  QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :>
-                               ReqBody '[JSON] CancelBuildRequest :>
-                                 Post '[JSON] Build
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] CancelBuildRequest :>
+                             Post '[JSON] Build
 
--- | Cancels a requested build in progress.
+-- | Cancels a build in progress.
 --
 -- /See:/ 'projectsBuildsCancel' smart constructor.
 data ProjectsBuildsCancel = ProjectsBuildsCancel'
     { _pbcXgafv          :: !(Maybe Xgafv)
     , _pbcUploadProtocol :: !(Maybe Text)
-    , _pbcPp             :: !Bool
     , _pbcAccessToken    :: !(Maybe Text)
     , _pbcUploadType     :: !(Maybe Text)
     , _pbcPayload        :: !CancelBuildRequest
-    , _pbcBearerToken    :: !(Maybe Text)
     , _pbcId             :: !Text
     , _pbcProjectId      :: !Text
     , _pbcCallback       :: !(Maybe Text)
@@ -91,15 +85,11 @@ data ProjectsBuildsCancel = ProjectsBuildsCancel'
 --
 -- * 'pbcUploadProtocol'
 --
--- * 'pbcPp'
---
 -- * 'pbcAccessToken'
 --
 -- * 'pbcUploadType'
 --
 -- * 'pbcPayload'
---
--- * 'pbcBearerToken'
 --
 -- * 'pbcId'
 --
@@ -115,11 +105,9 @@ projectsBuildsCancel pPbcPayload_ pPbcId_ pPbcProjectId_ =
     ProjectsBuildsCancel'
     { _pbcXgafv = Nothing
     , _pbcUploadProtocol = Nothing
-    , _pbcPp = True
     , _pbcAccessToken = Nothing
     , _pbcUploadType = Nothing
     , _pbcPayload = pPbcPayload_
-    , _pbcBearerToken = Nothing
     , _pbcId = pPbcId_
     , _pbcProjectId = pPbcProjectId_
     , _pbcCallback = Nothing
@@ -134,10 +122,6 @@ pbcUploadProtocol :: Lens' ProjectsBuildsCancel (Maybe Text)
 pbcUploadProtocol
   = lens _pbcUploadProtocol
       (\ s a -> s{_pbcUploadProtocol = a})
-
--- | Pretty-print response.
-pbcPp :: Lens' ProjectsBuildsCancel Bool
-pbcPp = lens _pbcPp (\ s a -> s{_pbcPp = a})
 
 -- | OAuth access token.
 pbcAccessToken :: Lens' ProjectsBuildsCancel (Maybe Text)
@@ -155,12 +139,6 @@ pbcUploadType
 pbcPayload :: Lens' ProjectsBuildsCancel CancelBuildRequest
 pbcPayload
   = lens _pbcPayload (\ s a -> s{_pbcPayload = a})
-
--- | OAuth bearer token.
-pbcBearerToken :: Lens' ProjectsBuildsCancel (Maybe Text)
-pbcBearerToken
-  = lens _pbcBearerToken
-      (\ s a -> s{_pbcBearerToken = a})
 
 -- | ID of the build.
 pbcId :: Lens' ProjectsBuildsCancel Text
@@ -183,10 +161,8 @@ instance GoogleRequest ProjectsBuildsCancel where
         requestClient ProjectsBuildsCancel'{..}
           = go _pbcProjectId _pbcId _pbcXgafv
               _pbcUploadProtocol
-              (Just _pbcPp)
               _pbcAccessToken
               _pbcUploadType
-              _pbcBearerToken
               _pbcCallback
               (Just AltJSON)
               _pbcPayload

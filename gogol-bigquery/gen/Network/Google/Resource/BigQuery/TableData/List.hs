@@ -37,6 +37,7 @@ module Network.Google.Resource.BigQuery.TableData.List
     , tDataSetId
     , tPageToken
     , tProjectId
+    , tSelectedFields
     , tTableId
     , tStartIndex
     , tMaxResults
@@ -58,22 +59,24 @@ type TableDataListResource =
                    Capture "tableId" Text :>
                      "data" :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "startIndex" (Textual Word64) :>
-                           QueryParam "maxResults" (Textual Word32) :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] TableDataList
+                         QueryParam "selectedFields" Text :>
+                           QueryParam "startIndex" (Textual Word64) :>
+                             QueryParam "maxResults" (Textual Word32) :>
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] TableDataList
 
 -- | Retrieves table data from a specified set of rows. Requires the READER
 -- dataset role.
 --
 -- /See:/ 'tableDataList'' smart constructor.
 data TableDataList' = TableDataList''
-    { _tDataSetId  :: !Text
-    , _tPageToken  :: !(Maybe Text)
-    , _tProjectId  :: !Text
-    , _tTableId    :: !Text
-    , _tStartIndex :: !(Maybe (Textual Word64))
-    , _tMaxResults :: !(Maybe (Textual Word32))
+    { _tDataSetId      :: !Text
+    , _tPageToken      :: !(Maybe Text)
+    , _tProjectId      :: !Text
+    , _tSelectedFields :: !(Maybe Text)
+    , _tTableId        :: !Text
+    , _tStartIndex     :: !(Maybe (Textual Word64))
+    , _tMaxResults     :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableDataList'' with the minimum fields required to make a request.
@@ -85,6 +88,8 @@ data TableDataList' = TableDataList''
 -- * 'tPageToken'
 --
 -- * 'tProjectId'
+--
+-- * 'tSelectedFields'
 --
 -- * 'tTableId'
 --
@@ -101,6 +106,7 @@ tableDataList' pTDataSetId_ pTProjectId_ pTTableId_ =
     { _tDataSetId = pTDataSetId_
     , _tPageToken = Nothing
     , _tProjectId = pTProjectId_
+    , _tSelectedFields = Nothing
     , _tTableId = pTTableId_
     , _tStartIndex = Nothing
     , _tMaxResults = Nothing
@@ -122,6 +128,13 @@ tPageToken
 tProjectId :: Lens' TableDataList' Text
 tProjectId
   = lens _tProjectId (\ s a -> s{_tProjectId = a})
+
+-- | List of fields to return (comma-separated). If unspecified, all fields
+-- are returned
+tSelectedFields :: Lens' TableDataList' (Maybe Text)
+tSelectedFields
+  = lens _tSelectedFields
+      (\ s a -> s{_tSelectedFields = a})
 
 -- | Table ID of the table to read
 tTableId :: Lens' TableDataList' Text
@@ -147,6 +160,7 @@ instance GoogleRequest TableDataList' where
                "https://www.googleapis.com/auth/cloud-platform.read-only"]
         requestClient TableDataList''{..}
           = go _tProjectId _tDataSetId _tTableId _tPageToken
+              _tSelectedFields
               _tStartIndex
               _tMaxResults
               (Just AltJSON)

@@ -20,10 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a Cloud SQL instance as a clone of the source instance. The API
--- is not ready for Second Generation instances yet.
+-- Creates a Cloud SQL instance as a clone of the source instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.instances.clone@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.instances.clone@.
 module Network.Google.Resource.SQL.Instances.Clone
     (
     -- * REST Resource
@@ -56,8 +55,7 @@ type InstancesCloneResource =
                      ReqBody '[JSON] InstancesCloneRequest :>
                        Post '[JSON] Operation
 
--- | Creates a Cloud SQL instance as a clone of the source instance. The API
--- is not ready for Second Generation instances yet.
+-- | Creates a Cloud SQL instance as a clone of the source instance.
 --
 -- /See:/ 'instancesClone' smart constructor.
 data InstancesClone = InstancesClone'

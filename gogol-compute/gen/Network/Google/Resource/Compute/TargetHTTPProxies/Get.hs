@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified TargetHttpProxy resource. Get a list of available
+-- Returns the specified TargetHttpProxy resource. Gets a list of available
 -- target HTTP proxies by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetHttpProxies.get@.
@@ -54,7 +54,7 @@ type TargetHTTPProxiesGetResource =
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] TargetHTTPProxy
 
--- | Returns the specified TargetHttpProxy resource. Get a list of available
+-- | Returns the specified TargetHttpProxy resource. Gets a list of available
 -- target HTTP proxies by making a list() request.
 --
 -- /See:/ 'targetHTTPProxiesGet' smart constructor.

@@ -22,7 +22,7 @@
 --
 -- Begins a new transaction.
 --
--- /See:/ <https://cloud.google.com/datastore/ Google Cloud Datastore API Reference> for @datastore.projects.beginTransaction@.
+-- /See:/ <https://cloud.google.com/datastore/ Cloud Datastore API Reference> for @datastore.projects.beginTransaction@.
 module Network.Google.Resource.Datastore.Projects.BeginTransaction
     (
     -- * REST Resource
@@ -35,11 +35,9 @@ module Network.Google.Resource.Datastore.Projects.BeginTransaction
     -- * Request Lenses
     , pbtXgafv
     , pbtUploadProtocol
-    , pbtPp
     , pbtAccessToken
     , pbtUploadType
     , pbtPayload
-    , pbtBearerToken
     , pbtProjectId
     , pbtCallback
     ) where
@@ -55,14 +53,12 @@ type ProjectsBeginTransactionResource =
          CaptureMode "projectId" "beginTransaction" Text :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] BeginTransactionRequest :>
-                             Post '[JSON] BeginTransactionResponse
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] BeginTransactionRequest :>
+                         Post '[JSON] BeginTransactionResponse
 
 -- | Begins a new transaction.
 --
@@ -70,11 +66,9 @@ type ProjectsBeginTransactionResource =
 data ProjectsBeginTransaction = ProjectsBeginTransaction'
     { _pbtXgafv          :: !(Maybe Xgafv)
     , _pbtUploadProtocol :: !(Maybe Text)
-    , _pbtPp             :: !Bool
     , _pbtAccessToken    :: !(Maybe Text)
     , _pbtUploadType     :: !(Maybe Text)
     , _pbtPayload        :: !BeginTransactionRequest
-    , _pbtBearerToken    :: !(Maybe Text)
     , _pbtProjectId      :: !Text
     , _pbtCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -87,15 +81,11 @@ data ProjectsBeginTransaction = ProjectsBeginTransaction'
 --
 -- * 'pbtUploadProtocol'
 --
--- * 'pbtPp'
---
 -- * 'pbtAccessToken'
 --
 -- * 'pbtUploadType'
 --
 -- * 'pbtPayload'
---
--- * 'pbtBearerToken'
 --
 -- * 'pbtProjectId'
 --
@@ -108,11 +98,9 @@ projectsBeginTransaction pPbtPayload_ pPbtProjectId_ =
     ProjectsBeginTransaction'
     { _pbtXgafv = Nothing
     , _pbtUploadProtocol = Nothing
-    , _pbtPp = True
     , _pbtAccessToken = Nothing
     , _pbtUploadType = Nothing
     , _pbtPayload = pPbtPayload_
-    , _pbtBearerToken = Nothing
     , _pbtProjectId = pPbtProjectId_
     , _pbtCallback = Nothing
     }
@@ -126,10 +114,6 @@ pbtUploadProtocol :: Lens' ProjectsBeginTransaction (Maybe Text)
 pbtUploadProtocol
   = lens _pbtUploadProtocol
       (\ s a -> s{_pbtUploadProtocol = a})
-
--- | Pretty-print response.
-pbtPp :: Lens' ProjectsBeginTransaction Bool
-pbtPp = lens _pbtPp (\ s a -> s{_pbtPp = a})
 
 -- | OAuth access token.
 pbtAccessToken :: Lens' ProjectsBeginTransaction (Maybe Text)
@@ -147,12 +131,6 @@ pbtUploadType
 pbtPayload :: Lens' ProjectsBeginTransaction BeginTransactionRequest
 pbtPayload
   = lens _pbtPayload (\ s a -> s{_pbtPayload = a})
-
--- | OAuth bearer token.
-pbtBearerToken :: Lens' ProjectsBeginTransaction (Maybe Text)
-pbtBearerToken
-  = lens _pbtBearerToken
-      (\ s a -> s{_pbtBearerToken = a})
 
 -- | The ID of the project against which to make the request.
 pbtProjectId :: Lens' ProjectsBeginTransaction Text
@@ -172,10 +150,8 @@ instance GoogleRequest ProjectsBeginTransaction where
                "https://www.googleapis.com/auth/datastore"]
         requestClient ProjectsBeginTransaction'{..}
           = go _pbtProjectId _pbtXgafv _pbtUploadProtocol
-              (Just _pbtPp)
               _pbtAccessToken
               _pbtUploadType
-              _pbtBearerToken
               _pbtCallback
               (Just AltJSON)
               _pbtPayload

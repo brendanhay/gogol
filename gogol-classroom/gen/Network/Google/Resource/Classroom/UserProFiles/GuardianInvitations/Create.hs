@@ -59,11 +59,9 @@ module Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.Create
     , upfgicStudentId
     , upfgicXgafv
     , upfgicUploadProtocol
-    , upfgicPp
     , upfgicAccessToken
     , upfgicUploadType
     , upfgicPayload
-    , upfgicBearerToken
     , upfgicCallback
     ) where
 
@@ -77,16 +75,14 @@ type UserProFilesGuardianInvitationsCreateResource =
        "userProfiles" :>
          Capture "studentId" Text :>
            "guardianInvitations" :>
-             QueryParam "$.xgafv" Text :>
+             QueryParam "$.xgafv" Xgafv :>
                QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "callback" Text :>
-                           QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] GuardianInvitation :>
-                               Post '[JSON] GuardianInvitation
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] GuardianInvitation :>
+                           Post '[JSON] GuardianInvitation
 
 -- | Creates a guardian invitation, and sends an email to the guardian asking
 -- them to confirm that they are the student\'s guardian. Once the guardian
@@ -116,13 +112,11 @@ type UserProFilesGuardianInvitationsCreateResource =
 -- /See:/ 'userProFilesGuardianInvitationsCreate' smart constructor.
 data UserProFilesGuardianInvitationsCreate = UserProFilesGuardianInvitationsCreate'
     { _upfgicStudentId      :: !Text
-    , _upfgicXgafv          :: !(Maybe Text)
+    , _upfgicXgafv          :: !(Maybe Xgafv)
     , _upfgicUploadProtocol :: !(Maybe Text)
-    , _upfgicPp             :: !Bool
     , _upfgicAccessToken    :: !(Maybe Text)
     , _upfgicUploadType     :: !(Maybe Text)
     , _upfgicPayload        :: !GuardianInvitation
-    , _upfgicBearerToken    :: !(Maybe Text)
     , _upfgicCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -136,15 +130,11 @@ data UserProFilesGuardianInvitationsCreate = UserProFilesGuardianInvitationsCrea
 --
 -- * 'upfgicUploadProtocol'
 --
--- * 'upfgicPp'
---
 -- * 'upfgicAccessToken'
 --
 -- * 'upfgicUploadType'
 --
 -- * 'upfgicPayload'
---
--- * 'upfgicBearerToken'
 --
 -- * 'upfgicCallback'
 userProFilesGuardianInvitationsCreate
@@ -156,11 +146,9 @@ userProFilesGuardianInvitationsCreate pUpfgicStudentId_ pUpfgicPayload_ =
     { _upfgicStudentId = pUpfgicStudentId_
     , _upfgicXgafv = Nothing
     , _upfgicUploadProtocol = Nothing
-    , _upfgicPp = True
     , _upfgicAccessToken = Nothing
     , _upfgicUploadType = Nothing
     , _upfgicPayload = pUpfgicPayload_
-    , _upfgicBearerToken = Nothing
     , _upfgicCallback = Nothing
     }
 
@@ -171,7 +159,7 @@ upfgicStudentId
       (\ s a -> s{_upfgicStudentId = a})
 
 -- | V1 error format.
-upfgicXgafv :: Lens' UserProFilesGuardianInvitationsCreate (Maybe Text)
+upfgicXgafv :: Lens' UserProFilesGuardianInvitationsCreate (Maybe Xgafv)
 upfgicXgafv
   = lens _upfgicXgafv (\ s a -> s{_upfgicXgafv = a})
 
@@ -180,10 +168,6 @@ upfgicUploadProtocol :: Lens' UserProFilesGuardianInvitationsCreate (Maybe Text)
 upfgicUploadProtocol
   = lens _upfgicUploadProtocol
       (\ s a -> s{_upfgicUploadProtocol = a})
-
--- | Pretty-print response.
-upfgicPp :: Lens' UserProFilesGuardianInvitationsCreate Bool
-upfgicPp = lens _upfgicPp (\ s a -> s{_upfgicPp = a})
 
 -- | OAuth access token.
 upfgicAccessToken :: Lens' UserProFilesGuardianInvitationsCreate (Maybe Text)
@@ -203,12 +187,6 @@ upfgicPayload
   = lens _upfgicPayload
       (\ s a -> s{_upfgicPayload = a})
 
--- | OAuth bearer token.
-upfgicBearerToken :: Lens' UserProFilesGuardianInvitationsCreate (Maybe Text)
-upfgicBearerToken
-  = lens _upfgicBearerToken
-      (\ s a -> s{_upfgicBearerToken = a})
-
 -- | JSONP
 upfgicCallback :: Lens' UserProFilesGuardianInvitationsCreate (Maybe Text)
 upfgicCallback
@@ -220,15 +198,13 @@ instance GoogleRequest
         type Rs UserProFilesGuardianInvitationsCreate =
              GuardianInvitation
         type Scopes UserProFilesGuardianInvitationsCreate =
-             '[]
+             '["https://www.googleapis.com/auth/classroom.guardianlinks.students"]
         requestClient
           UserProFilesGuardianInvitationsCreate'{..}
           = go _upfgicStudentId _upfgicXgafv
               _upfgicUploadProtocol
-              (Just _upfgicPp)
               _upfgicAccessToken
               _upfgicUploadType
-              _upfgicBearerToken
               _upfgicCallback
               (Just AltJSON)
               _upfgicPayload

@@ -22,7 +22,7 @@
 --
 -- Creates a transfer job that runs periodically.
 --
--- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @storagetransfer.transferJobs.create@.
+-- /See:/ <https://cloud.google.com/storage/transfer Storage Transfer API Reference> for @storagetransfer.transferJobs.create@.
 module Network.Google.Resource.StorageTransfer.TransferJobs.Create
     (
     -- * REST Resource
@@ -35,11 +35,9 @@ module Network.Google.Resource.StorageTransfer.TransferJobs.Create
     -- * Request Lenses
     , tjcXgafv
     , tjcUploadProtocol
-    , tjcPp
     , tjcAccessToken
     , tjcUploadType
     , tjcPayload
-    , tjcBearerToken
     , tjcCallback
     ) where
 
@@ -51,28 +49,24 @@ import           Network.Google.StorageTransfer.Types
 type TransferJobsCreateResource =
      "v1" :>
        "transferJobs" :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] TransferJob :>
-                           Post '[JSON] TransferJob
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] TransferJob :>
+                       Post '[JSON] TransferJob
 
 -- | Creates a transfer job that runs periodically.
 --
 -- /See:/ 'transferJobsCreate' smart constructor.
 data TransferJobsCreate = TransferJobsCreate'
-    { _tjcXgafv          :: !(Maybe Text)
+    { _tjcXgafv          :: !(Maybe Xgafv)
     , _tjcUploadProtocol :: !(Maybe Text)
-    , _tjcPp             :: !Bool
     , _tjcAccessToken    :: !(Maybe Text)
     , _tjcUploadType     :: !(Maybe Text)
     , _tjcPayload        :: !TransferJob
-    , _tjcBearerToken    :: !(Maybe Text)
     , _tjcCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -84,15 +78,11 @@ data TransferJobsCreate = TransferJobsCreate'
 --
 -- * 'tjcUploadProtocol'
 --
--- * 'tjcPp'
---
 -- * 'tjcAccessToken'
 --
 -- * 'tjcUploadType'
 --
 -- * 'tjcPayload'
---
--- * 'tjcBearerToken'
 --
 -- * 'tjcCallback'
 transferJobsCreate
@@ -102,16 +92,14 @@ transferJobsCreate pTjcPayload_ =
     TransferJobsCreate'
     { _tjcXgafv = Nothing
     , _tjcUploadProtocol = Nothing
-    , _tjcPp = True
     , _tjcAccessToken = Nothing
     , _tjcUploadType = Nothing
     , _tjcPayload = pTjcPayload_
-    , _tjcBearerToken = Nothing
     , _tjcCallback = Nothing
     }
 
 -- | V1 error format.
-tjcXgafv :: Lens' TransferJobsCreate (Maybe Text)
+tjcXgafv :: Lens' TransferJobsCreate (Maybe Xgafv)
 tjcXgafv = lens _tjcXgafv (\ s a -> s{_tjcXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -119,10 +107,6 @@ tjcUploadProtocol :: Lens' TransferJobsCreate (Maybe Text)
 tjcUploadProtocol
   = lens _tjcUploadProtocol
       (\ s a -> s{_tjcUploadProtocol = a})
-
--- | Pretty-print response.
-tjcPp :: Lens' TransferJobsCreate Bool
-tjcPp = lens _tjcPp (\ s a -> s{_tjcPp = a})
 
 -- | OAuth access token.
 tjcAccessToken :: Lens' TransferJobsCreate (Maybe Text)
@@ -141,12 +125,6 @@ tjcPayload :: Lens' TransferJobsCreate TransferJob
 tjcPayload
   = lens _tjcPayload (\ s a -> s{_tjcPayload = a})
 
--- | OAuth bearer token.
-tjcBearerToken :: Lens' TransferJobsCreate (Maybe Text)
-tjcBearerToken
-  = lens _tjcBearerToken
-      (\ s a -> s{_tjcBearerToken = a})
-
 -- | JSONP
 tjcCallback :: Lens' TransferJobsCreate (Maybe Text)
 tjcCallback
@@ -157,10 +135,8 @@ instance GoogleRequest TransferJobsCreate where
         type Scopes TransferJobsCreate =
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient TransferJobsCreate'{..}
-          = go _tjcXgafv _tjcUploadProtocol (Just _tjcPp)
-              _tjcAccessToken
+          = go _tjcXgafv _tjcUploadProtocol _tjcAccessToken
               _tjcUploadType
-              _tjcBearerToken
               _tjcCallback
               (Just AltJSON)
               _tjcPayload

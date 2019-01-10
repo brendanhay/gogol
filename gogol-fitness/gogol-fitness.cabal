@@ -38,6 +38,7 @@ library
         , Network.Google.Fitness.Types
         , Network.Google.Resource.Fitness.Users.DataSet.Aggregate
         , Network.Google.Resource.Fitness.Users.DataSources.Create
+        , Network.Google.Resource.Fitness.Users.DataSources.DataPointChanges.List
         , Network.Google.Resource.Fitness.Users.DataSources.DataSets.Delete
         , Network.Google.Resource.Fitness.Users.DataSources.DataSets.Get
         , Network.Google.Resource.Fitness.Users.DataSources.DataSets.Patch

@@ -26,13 +26,13 @@
 -- to reduce API traffic. Limiting aggregation to 5 seconds is to reduce
 -- data loss during client crashes. Clients should carefully choose the
 -- aggregation time window to avoid data loss risk more than 0.01% for
--- business and compliance reasons. NOTE: the \`ReportRequest\` has the
--- size limit of 1MB. This method requires the
+-- business and compliance reasons. NOTE: the ReportRequest has the size
+-- limit of 1MB. This method requires the
 -- \`servicemanagement.services.report\` permission on the specified
 -- service. For more information, see [Google Cloud
 -- IAM](https:\/\/cloud.google.com\/iam).
 --
--- /See:/ <https://cloud.google.com/service-control/ Google Service Control API Reference> for @servicecontrol.services.report@.
+-- /See:/ <https://cloud.google.com/service-control/ Service Control API Reference> for @servicecontrol.services.report@.
 module Network.Google.Resource.ServiceControl.Services.Report
     (
     -- * REST Resource
@@ -45,11 +45,9 @@ module Network.Google.Resource.ServiceControl.Services.Report
     -- * Request Lenses
     , srXgafv
     , srUploadProtocol
-    , srPp
     , srAccessToken
     , srUploadType
     , srPayload
-    , srBearerToken
     , srServiceName
     , srCallback
     ) where
@@ -65,14 +63,12 @@ type ServicesReportResource =
          CaptureMode "serviceName" "report" Text :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] ReportRequest :>
-                             Post '[JSON] ReportResponse
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] ReportRequest :>
+                         Post '[JSON] ReportResponse
 
 -- | Reports operation results to Google Service Control, such as logs and
 -- metrics. It should be called after an operation is completed. If
@@ -80,8 +76,8 @@ type ServicesReportResource =
 -- to reduce API traffic. Limiting aggregation to 5 seconds is to reduce
 -- data loss during client crashes. Clients should carefully choose the
 -- aggregation time window to avoid data loss risk more than 0.01% for
--- business and compliance reasons. NOTE: the \`ReportRequest\` has the
--- size limit of 1MB. This method requires the
+-- business and compliance reasons. NOTE: the ReportRequest has the size
+-- limit of 1MB. This method requires the
 -- \`servicemanagement.services.report\` permission on the specified
 -- service. For more information, see [Google Cloud
 -- IAM](https:\/\/cloud.google.com\/iam).
@@ -90,11 +86,9 @@ type ServicesReportResource =
 data ServicesReport = ServicesReport'
     { _srXgafv          :: !(Maybe Xgafv)
     , _srUploadProtocol :: !(Maybe Text)
-    , _srPp             :: !Bool
     , _srAccessToken    :: !(Maybe Text)
     , _srUploadType     :: !(Maybe Text)
     , _srPayload        :: !ReportRequest
-    , _srBearerToken    :: !(Maybe Text)
     , _srServiceName    :: !Text
     , _srCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -107,15 +101,11 @@ data ServicesReport = ServicesReport'
 --
 -- * 'srUploadProtocol'
 --
--- * 'srPp'
---
 -- * 'srAccessToken'
 --
 -- * 'srUploadType'
 --
 -- * 'srPayload'
---
--- * 'srBearerToken'
 --
 -- * 'srServiceName'
 --
@@ -128,11 +118,9 @@ servicesReport pSrPayload_ pSrServiceName_ =
     ServicesReport'
     { _srXgafv = Nothing
     , _srUploadProtocol = Nothing
-    , _srPp = True
     , _srAccessToken = Nothing
     , _srUploadType = Nothing
     , _srPayload = pSrPayload_
-    , _srBearerToken = Nothing
     , _srServiceName = pSrServiceName_
     , _srCallback = Nothing
     }
@@ -146,10 +134,6 @@ srUploadProtocol :: Lens' ServicesReport (Maybe Text)
 srUploadProtocol
   = lens _srUploadProtocol
       (\ s a -> s{_srUploadProtocol = a})
-
--- | Pretty-print response.
-srPp :: Lens' ServicesReport Bool
-srPp = lens _srPp (\ s a -> s{_srPp = a})
 
 -- | OAuth access token.
 srAccessToken :: Lens' ServicesReport (Maybe Text)
@@ -167,15 +151,10 @@ srPayload :: Lens' ServicesReport ReportRequest
 srPayload
   = lens _srPayload (\ s a -> s{_srPayload = a})
 
--- | OAuth bearer token.
-srBearerToken :: Lens' ServicesReport (Maybe Text)
-srBearerToken
-  = lens _srBearerToken
-      (\ s a -> s{_srBearerToken = a})
-
 -- | The service name as specified in its service configuration. For example,
--- \`\"pubsub.googleapis.com\"\`. See google.api.Service for the definition
--- of a service name.
+-- \`\"pubsub.googleapis.com\"\`. See
+-- [google.api.Service](https:\/\/cloud.google.com\/service-management\/reference\/rpc\/google.api#google.api.Service)
+-- for the definition of a service name.
 srServiceName :: Lens' ServicesReport Text
 srServiceName
   = lens _srServiceName
@@ -193,10 +172,8 @@ instance GoogleRequest ServicesReport where
                "https://www.googleapis.com/auth/servicecontrol"]
         requestClient ServicesReport'{..}
           = go _srServiceName _srXgafv _srUploadProtocol
-              (Just _srPp)
               _srAccessToken
               _srUploadType
-              _srBearerToken
               _srCallback
               (Just AltJSON)
               _srPayload

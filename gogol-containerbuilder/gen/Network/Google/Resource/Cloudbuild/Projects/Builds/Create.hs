@@ -20,12 +20,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Starts a build with the specified configuration. The long-running
--- Operation returned by this method will include the ID of the build,
--- which can be passed to GetBuild to determine its status (e.g., success
--- or failure).
+-- Starts a build with the specified configuration. This method returns a
+-- long-running \`Operation\`, which includes the build ID. Pass the build
+-- ID to \`GetBuild\` to determine the build status (such as \`SUCCESS\` or
+-- \`FAILURE\`).
 --
--- /See:/ <https://cloud.google.com/container-builder/docs/ Google Cloud Container Builder API Reference> for @cloudbuild.projects.builds.create@.
+-- /See:/ <https://cloud.google.com/cloud-build/docs/ Cloud Build API Reference> for @cloudbuild.projects.builds.create@.
 module Network.Google.Resource.Cloudbuild.Projects.Builds.Create
     (
     -- * REST Resource
@@ -38,11 +38,9 @@ module Network.Google.Resource.Cloudbuild.Projects.Builds.Create
     -- * Request Lenses
     , pXgafv
     , pUploadProtocol
-    , pPp
     , pAccessToken
     , pUploadType
     , pPayload
-    , pBearerToken
     , pProjectId
     , pCallback
     ) where
@@ -59,28 +57,24 @@ type ProjectsBuildsCreateResource =
            "builds" :>
              QueryParam "$.xgafv" Xgafv :>
                QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "callback" Text :>
-                           QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] Build :> Post '[JSON] Operation
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Build :> Post '[JSON] Operation
 
--- | Starts a build with the specified configuration. The long-running
--- Operation returned by this method will include the ID of the build,
--- which can be passed to GetBuild to determine its status (e.g., success
--- or failure).
+-- | Starts a build with the specified configuration. This method returns a
+-- long-running \`Operation\`, which includes the build ID. Pass the build
+-- ID to \`GetBuild\` to determine the build status (such as \`SUCCESS\` or
+-- \`FAILURE\`).
 --
 -- /See:/ 'projectsBuildsCreate' smart constructor.
 data ProjectsBuildsCreate = ProjectsBuildsCreate'
     { _pXgafv          :: !(Maybe Xgafv)
     , _pUploadProtocol :: !(Maybe Text)
-    , _pPp             :: !Bool
     , _pAccessToken    :: !(Maybe Text)
     , _pUploadType     :: !(Maybe Text)
     , _pPayload        :: !Build
-    , _pBearerToken    :: !(Maybe Text)
     , _pProjectId      :: !Text
     , _pCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -93,15 +87,11 @@ data ProjectsBuildsCreate = ProjectsBuildsCreate'
 --
 -- * 'pUploadProtocol'
 --
--- * 'pPp'
---
 -- * 'pAccessToken'
 --
 -- * 'pUploadType'
 --
 -- * 'pPayload'
---
--- * 'pBearerToken'
 --
 -- * 'pProjectId'
 --
@@ -114,11 +104,9 @@ projectsBuildsCreate pPPayload_ pPProjectId_ =
     ProjectsBuildsCreate'
     { _pXgafv = Nothing
     , _pUploadProtocol = Nothing
-    , _pPp = True
     , _pAccessToken = Nothing
     , _pUploadType = Nothing
     , _pPayload = pPPayload_
-    , _pBearerToken = Nothing
     , _pProjectId = pPProjectId_
     , _pCallback = Nothing
     }
@@ -133,10 +121,6 @@ pUploadProtocol
   = lens _pUploadProtocol
       (\ s a -> s{_pUploadProtocol = a})
 
--- | Pretty-print response.
-pPp :: Lens' ProjectsBuildsCreate Bool
-pPp = lens _pPp (\ s a -> s{_pPp = a})
-
 -- | OAuth access token.
 pAccessToken :: Lens' ProjectsBuildsCreate (Maybe Text)
 pAccessToken
@@ -150,11 +134,6 @@ pUploadType
 -- | Multipart request metadata.
 pPayload :: Lens' ProjectsBuildsCreate Build
 pPayload = lens _pPayload (\ s a -> s{_pPayload = a})
-
--- | OAuth bearer token.
-pBearerToken :: Lens' ProjectsBuildsCreate (Maybe Text)
-pBearerToken
-  = lens _pBearerToken (\ s a -> s{_pBearerToken = a})
 
 -- | ID of the project.
 pProjectId :: Lens' ProjectsBuildsCreate Text
@@ -171,10 +150,9 @@ instance GoogleRequest ProjectsBuildsCreate where
         type Scopes ProjectsBuildsCreate =
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsBuildsCreate'{..}
-          = go _pProjectId _pXgafv _pUploadProtocol (Just _pPp)
+          = go _pProjectId _pXgafv _pUploadProtocol
               _pAccessToken
               _pUploadType
-              _pBearerToken
               _pCallback
               (Just AltJSON)
               _pPayload

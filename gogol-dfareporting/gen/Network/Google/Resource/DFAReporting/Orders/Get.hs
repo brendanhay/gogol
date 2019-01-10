@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'OrdersGet' request conforms to.
 type OrdersGetResource =
      "dfareporting" :>
-       "v2.7" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "projects" :>

@@ -16,7 +16,7 @@
 --
 module Network.Google.AdSenseHost.Types.Sum where
 
-import           Network.Google.Prelude
+import           Network.Google.Prelude hiding (Bytes)
 
 -- | Products to associate with the user.
 data AssociationSessionsStartProductCode

@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'AccountUserProFilesInsert' request conforms to.
 type AccountUserProFilesInsertResource =
      "dfareporting" :>
-       "v2.7" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "accountUserProfiles" :>

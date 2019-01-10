@@ -35,12 +35,10 @@ module Network.Google.Resource.YouTubeReporting.Jobs.List
     -- * Request Lenses
     , jlXgafv
     , jlUploadProtocol
-    , jlPp
     , jlAccessToken
     , jlUploadType
     , jlIncludeSystemManaged
     , jlOnBehalfOfContentOwner
-    , jlBearerToken
     , jlPageToken
     , jlPageSize
     , jlCallback
@@ -56,17 +54,15 @@ type JobsListResource =
        "jobs" :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "includeSystemManaged" Bool :>
-                     QueryParam "onBehalfOfContentOwner" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "pageSize" (Textual Int32) :>
-                             QueryParam "callback" Text :>
-                               QueryParam "alt" AltJSON :>
-                                 Get '[JSON] ListJobsResponse
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "includeSystemManaged" Bool :>
+                   QueryParam "onBehalfOfContentOwner" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "pageSize" (Textual Int32) :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] ListJobsResponse
 
 -- | Lists jobs.
 --
@@ -74,12 +70,10 @@ type JobsListResource =
 data JobsList = JobsList'
     { _jlXgafv                  :: !(Maybe Xgafv)
     , _jlUploadProtocol         :: !(Maybe Text)
-    , _jlPp                     :: !Bool
     , _jlAccessToken            :: !(Maybe Text)
     , _jlUploadType             :: !(Maybe Text)
     , _jlIncludeSystemManaged   :: !(Maybe Bool)
     , _jlOnBehalfOfContentOwner :: !(Maybe Text)
-    , _jlBearerToken            :: !(Maybe Text)
     , _jlPageToken              :: !(Maybe Text)
     , _jlPageSize               :: !(Maybe (Textual Int32))
     , _jlCallback               :: !(Maybe Text)
@@ -93,8 +87,6 @@ data JobsList = JobsList'
 --
 -- * 'jlUploadProtocol'
 --
--- * 'jlPp'
---
 -- * 'jlAccessToken'
 --
 -- * 'jlUploadType'
@@ -102,8 +94,6 @@ data JobsList = JobsList'
 -- * 'jlIncludeSystemManaged'
 --
 -- * 'jlOnBehalfOfContentOwner'
---
--- * 'jlBearerToken'
 --
 -- * 'jlPageToken'
 --
@@ -116,12 +106,10 @@ jobsList =
     JobsList'
     { _jlXgafv = Nothing
     , _jlUploadProtocol = Nothing
-    , _jlPp = True
     , _jlAccessToken = Nothing
     , _jlUploadType = Nothing
     , _jlIncludeSystemManaged = Nothing
     , _jlOnBehalfOfContentOwner = Nothing
-    , _jlBearerToken = Nothing
     , _jlPageToken = Nothing
     , _jlPageSize = Nothing
     , _jlCallback = Nothing
@@ -136,10 +124,6 @@ jlUploadProtocol :: Lens' JobsList (Maybe Text)
 jlUploadProtocol
   = lens _jlUploadProtocol
       (\ s a -> s{_jlUploadProtocol = a})
-
--- | Pretty-print response.
-jlPp :: Lens' JobsList Bool
-jlPp = lens _jlPp (\ s a -> s{_jlPp = a})
 
 -- | OAuth access token.
 jlAccessToken :: Lens' JobsList (Maybe Text)
@@ -167,12 +151,6 @@ jlOnBehalfOfContentOwner
   = lens _jlOnBehalfOfContentOwner
       (\ s a -> s{_jlOnBehalfOfContentOwner = a})
 
--- | OAuth bearer token.
-jlBearerToken :: Lens' JobsList (Maybe Text)
-jlBearerToken
-  = lens _jlBearerToken
-      (\ s a -> s{_jlBearerToken = a})
-
 -- | A token identifying a page of results the server should return.
 -- Typically, this is the value of ListReportTypesResponse.next_page_token
 -- returned in response to the previous call to the \`ListJobs\` method.
@@ -198,12 +176,10 @@ instance GoogleRequest JobsList where
              '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
                "https://www.googleapis.com/auth/yt-analytics.readonly"]
         requestClient JobsList'{..}
-          = go _jlXgafv _jlUploadProtocol (Just _jlPp)
-              _jlAccessToken
+          = go _jlXgafv _jlUploadProtocol _jlAccessToken
               _jlUploadType
               _jlIncludeSystemManaged
               _jlOnBehalfOfContentOwner
-              _jlBearerToken
               _jlPageToken
               _jlPageSize
               _jlCallback

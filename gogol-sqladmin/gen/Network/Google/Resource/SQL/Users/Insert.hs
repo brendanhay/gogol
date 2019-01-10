@@ -22,7 +22,7 @@
 --
 -- Creates a new user in a Cloud SQL instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.users.insert@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.users.insert@.
 module Network.Google.Resource.SQL.Users.Insert
     (
     -- * REST Resource

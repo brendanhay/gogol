@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Get information about a location.
+-- Gets information about a location.
 --
--- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ Google App Engine Admin API Reference> for @appengine.apps.locations.get@.
+-- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ App Engine Admin API Reference> for @appengine.apps.locations.get@.
 module Network.Google.Resource.AppEngine.Apps.Locations.Get
     (
     -- * REST Resource
@@ -35,10 +35,8 @@ module Network.Google.Resource.AppEngine.Apps.Locations.Get
     -- * Request Lenses
     , algXgafv
     , algUploadProtocol
-    , algPp
     , algAccessToken
     , algUploadType
-    , algBearerToken
     , algAppsId
     , algLocationsId
     , algCallback
@@ -55,25 +53,21 @@ type AppsLocationsGetResource =
          Capture "appsId" Text :>
            "locations" :>
              Capture "locationsId" Text :>
-               QueryParam "$.xgafv" Text :>
+               QueryParam "$.xgafv" Xgafv :>
                  QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :> Get '[JSON] Location
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] Location
 
--- | Get information about a location.
+-- | Gets information about a location.
 --
 -- /See:/ 'appsLocationsGet' smart constructor.
 data AppsLocationsGet = AppsLocationsGet'
-    { _algXgafv          :: !(Maybe Text)
+    { _algXgafv          :: !(Maybe Xgafv)
     , _algUploadProtocol :: !(Maybe Text)
-    , _algPp             :: !Bool
     , _algAccessToken    :: !(Maybe Text)
     , _algUploadType     :: !(Maybe Text)
-    , _algBearerToken    :: !(Maybe Text)
     , _algAppsId         :: !Text
     , _algLocationsId    :: !Text
     , _algCallback       :: !(Maybe Text)
@@ -87,13 +81,9 @@ data AppsLocationsGet = AppsLocationsGet'
 --
 -- * 'algUploadProtocol'
 --
--- * 'algPp'
---
 -- * 'algAccessToken'
 --
 -- * 'algUploadType'
---
--- * 'algBearerToken'
 --
 -- * 'algAppsId'
 --
@@ -108,17 +98,15 @@ appsLocationsGet pAlgAppsId_ pAlgLocationsId_ =
     AppsLocationsGet'
     { _algXgafv = Nothing
     , _algUploadProtocol = Nothing
-    , _algPp = True
     , _algAccessToken = Nothing
     , _algUploadType = Nothing
-    , _algBearerToken = Nothing
     , _algAppsId = pAlgAppsId_
     , _algLocationsId = pAlgLocationsId_
     , _algCallback = Nothing
     }
 
 -- | V1 error format.
-algXgafv :: Lens' AppsLocationsGet (Maybe Text)
+algXgafv :: Lens' AppsLocationsGet (Maybe Xgafv)
 algXgafv = lens _algXgafv (\ s a -> s{_algXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -126,10 +114,6 @@ algUploadProtocol :: Lens' AppsLocationsGet (Maybe Text)
 algUploadProtocol
   = lens _algUploadProtocol
       (\ s a -> s{_algUploadProtocol = a})
-
--- | Pretty-print response.
-algPp :: Lens' AppsLocationsGet Bool
-algPp = lens _algPp (\ s a -> s{_algPp = a})
 
 -- | OAuth access token.
 algAccessToken :: Lens' AppsLocationsGet (Maybe Text)
@@ -142,12 +126,6 @@ algUploadType :: Lens' AppsLocationsGet (Maybe Text)
 algUploadType
   = lens _algUploadType
       (\ s a -> s{_algUploadType = a})
-
--- | OAuth bearer token.
-algBearerToken :: Lens' AppsLocationsGet (Maybe Text)
-algBearerToken
-  = lens _algBearerToken
-      (\ s a -> s{_algBearerToken = a})
 
 -- | Part of \`name\`. Resource name for the location.
 algAppsId :: Lens' AppsLocationsGet Text
@@ -174,10 +152,8 @@ instance GoogleRequest AppsLocationsGet where
         requestClient AppsLocationsGet'{..}
           = go _algAppsId _algLocationsId _algXgafv
               _algUploadProtocol
-              (Just _algPp)
               _algAccessToken
               _algUploadType
-              _algBearerToken
               _algCallback
               (Just AltJSON)
               appEngineService

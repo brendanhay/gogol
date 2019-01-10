@@ -20,9 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the jobs in the project.
+-- Lists the jobs in the project. If there are no jobs that match the
+-- request parameters, the list request returns an empty response body: {}.
 --
--- /See:/ <https://cloud.google.com/ml/ Google Cloud Machine Learning Reference> for @ml.projects.jobs.list@.
+-- /See:/ <https://cloud.google.com/ml/ Cloud Machine Learning Engine Reference> for @ml.projects.jobs.list@.
 module Network.Google.Resource.Ml.Projects.Jobs.List
     (
     -- * REST Resource
@@ -36,10 +37,8 @@ module Network.Google.Resource.Ml.Projects.Jobs.List
     , pjlParent
     , pjlXgafv
     , pjlUploadProtocol
-    , pjlPp
     , pjlAccessToken
     , pjlUploadType
-    , pjlBearerToken
     , pjlFilter
     , pjlPageToken
     , pjlPageSize
@@ -52,34 +51,30 @@ import           Network.Google.Prelude
 -- | A resource alias for @ml.projects.jobs.list@ method which the
 -- 'ProjectsJobsList' request conforms to.
 type ProjectsJobsListResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "parent" Text :>
          "jobs" :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "filter" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "pageSize" (Textual Int32) :>
-                             QueryParam "callback" Text :>
-                               QueryParam "alt" AltJSON :>
-                                 Get '[JSON]
-                                   GoogleCloudMlV1beta1__ListJobsResponse
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "pageSize" (Textual Int32) :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] GoogleCloudMlV1__ListJobsResponse
 
--- | Lists the jobs in the project.
+-- | Lists the jobs in the project. If there are no jobs that match the
+-- request parameters, the list request returns an empty response body: {}.
 --
 -- /See:/ 'projectsJobsList' smart constructor.
 data ProjectsJobsList = ProjectsJobsList'
     { _pjlParent         :: !Text
     , _pjlXgafv          :: !(Maybe Xgafv)
     , _pjlUploadProtocol :: !(Maybe Text)
-    , _pjlPp             :: !Bool
     , _pjlAccessToken    :: !(Maybe Text)
     , _pjlUploadType     :: !(Maybe Text)
-    , _pjlBearerToken    :: !(Maybe Text)
     , _pjlFilter         :: !(Maybe Text)
     , _pjlPageToken      :: !(Maybe Text)
     , _pjlPageSize       :: !(Maybe (Textual Int32))
@@ -96,13 +91,9 @@ data ProjectsJobsList = ProjectsJobsList'
 --
 -- * 'pjlUploadProtocol'
 --
--- * 'pjlPp'
---
 -- * 'pjlAccessToken'
 --
 -- * 'pjlUploadType'
---
--- * 'pjlBearerToken'
 --
 -- * 'pjlFilter'
 --
@@ -119,18 +110,15 @@ projectsJobsList pPjlParent_ =
     { _pjlParent = pPjlParent_
     , _pjlXgafv = Nothing
     , _pjlUploadProtocol = Nothing
-    , _pjlPp = True
     , _pjlAccessToken = Nothing
     , _pjlUploadType = Nothing
-    , _pjlBearerToken = Nothing
     , _pjlFilter = Nothing
     , _pjlPageToken = Nothing
     , _pjlPageSize = Nothing
     , _pjlCallback = Nothing
     }
 
--- | Required. The name of the project for which to list jobs. Authorization:
--- requires \`Viewer\` role on the specified project.
+-- | Required. The name of the project for which to list jobs.
 pjlParent :: Lens' ProjectsJobsList Text
 pjlParent
   = lens _pjlParent (\ s a -> s{_pjlParent = a})
@@ -145,10 +133,6 @@ pjlUploadProtocol
   = lens _pjlUploadProtocol
       (\ s a -> s{_pjlUploadProtocol = a})
 
--- | Pretty-print response.
-pjlPp :: Lens' ProjectsJobsList Bool
-pjlPp = lens _pjlPp (\ s a -> s{_pjlPp = a})
-
 -- | OAuth access token.
 pjlAccessToken :: Lens' ProjectsJobsList (Maybe Text)
 pjlAccessToken
@@ -161,13 +145,18 @@ pjlUploadType
   = lens _pjlUploadType
       (\ s a -> s{_pjlUploadType = a})
 
--- | OAuth bearer token.
-pjlBearerToken :: Lens' ProjectsJobsList (Maybe Text)
-pjlBearerToken
-  = lens _pjlBearerToken
-      (\ s a -> s{_pjlBearerToken = a})
-
--- | Optional. Specifies the subset of jobs to retrieve.
+-- | Optional. Specifies the subset of jobs to retrieve. You can filter on
+-- the value of one or more attributes of the job object. For example,
+-- retrieve jobs with a job identifier that starts with \'census\':
+--
+-- 'gcloud ml-engine jobs list --filter=\'jobId:census*\''
+--
+-- List all failed jobs with names that start with \'rnn\':
+--
+-- 'gcloud ml-engine jobs list --filter=\'jobId:rnn* AND state:FAILED\''
+--
+-- For more examples, see the guide to
+-- </ml-engine/docs/tensorflow/monitor-training monitoring jobs>.
 pjlFilter :: Lens' ProjectsJobsList (Maybe Text)
 pjlFilter
   = lens _pjlFilter (\ s a -> s{_pjlFilter = a})
@@ -195,15 +184,13 @@ pjlCallback
 
 instance GoogleRequest ProjectsJobsList where
         type Rs ProjectsJobsList =
-             GoogleCloudMlV1beta1__ListJobsResponse
+             GoogleCloudMlV1__ListJobsResponse
         type Scopes ProjectsJobsList =
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsJobsList'{..}
           = go _pjlParent _pjlXgafv _pjlUploadProtocol
-              (Just _pjlPp)
               _pjlAccessToken
               _pjlUploadType
-              _pjlBearerToken
               _pjlFilter
               _pjlPageToken
               _pjlPageSize

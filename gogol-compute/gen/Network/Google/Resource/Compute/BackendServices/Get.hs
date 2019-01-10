@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified BackendService resource. Get a list of available
--- backend services by making a list() request.
+-- Returns the specified BackendService resource. Gets a list of available
+-- backend services.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.backendServices.get@.
 module Network.Google.Resource.Compute.BackendServices.Get
@@ -54,8 +54,8 @@ type BackendServicesGetResource =
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] BackendService
 
--- | Returns the specified BackendService resource. Get a list of available
--- backend services by making a list() request.
+-- | Returns the specified BackendService resource. Gets a list of available
+-- backend services.
 --
 -- /See:/ 'backendServicesGet' smart constructor.
 data BackendServicesGet = BackendServicesGet'

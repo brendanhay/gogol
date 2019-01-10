@@ -16,7 +16,7 @@
 --
 module Network.Google.Fitness.Types.Sum where
 
-import           Network.Google.Prelude
+import           Network.Google.Prelude hiding (Bytes)
 
 -- | The type of a bucket signifies how the data aggregation is performed in
 -- the bucket.

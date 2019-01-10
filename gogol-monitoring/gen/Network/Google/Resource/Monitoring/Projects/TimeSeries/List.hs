@@ -38,11 +38,9 @@ module Network.Google.Resource.Monitoring.Projects.TimeSeries.List
     , ptslXgafv
     , ptslUploadProtocol
     , ptslOrderBy
-    , ptslPp
     , ptslAccessToken
     , ptslUploadType
     , ptslAggregationPerSeriesAligner
-    , ptslBearerToken
     , ptslName
     , ptslAggregationGroupByFields
     , ptslView
@@ -68,29 +66,22 @@ type ProjectsTimeSeriesListResource =
              QueryParam "$.xgafv" Xgafv :>
                QueryParam "upload_protocol" Text :>
                  QueryParam "orderBy" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "aggregation.perSeriesAligner" Text :>
-                           QueryParam "bearer_token" Text :>
-                             QueryParams "aggregation.groupByFields" Text :>
-                               QueryParam "view" Text :>
-                                 QueryParam "aggregation.crossSeriesReducer"
-                                   Text
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "aggregation.perSeriesAligner" Text :>
+                         QueryParams "aggregation.groupByFields" Text :>
+                           QueryParam "view" Text :>
+                             QueryParam "aggregation.crossSeriesReducer" Text :>
+                               QueryParam "filter" Text :>
+                                 QueryParam "aggregation.alignmentPeriod"
+                                   GDuration
                                    :>
-                                   QueryParam "filter" Text :>
-                                     QueryParam "aggregation.alignmentPeriod"
-                                       Duration
-                                       :>
-                                       QueryParam "pageToken" Text :>
-                                         QueryParam "interval.endTime" DateTime'
-                                           :>
-                                           QueryParam "pageSize" (Textual Int32)
-                                             :>
-                                             QueryParam "callback" Text :>
-                                               QueryParam "alt" AltJSON :>
-                                                 Get '[JSON]
-                                                   ListTimeSeriesResponse
+                                   QueryParam "pageToken" Text :>
+                                     QueryParam "interval.endTime" DateTime' :>
+                                       QueryParam "pageSize" (Textual Int32) :>
+                                         QueryParam "callback" Text :>
+                                           QueryParam "alt" AltJSON :>
+                                             Get '[JSON] ListTimeSeriesResponse
 
 -- | Lists time series that match a filter. This method does not require a
 -- Stackdriver account.
@@ -101,17 +92,15 @@ data ProjectsTimeSeriesList = ProjectsTimeSeriesList'
     , _ptslXgafv                         :: !(Maybe Xgafv)
     , _ptslUploadProtocol                :: !(Maybe Text)
     , _ptslOrderBy                       :: !(Maybe Text)
-    , _ptslPp                            :: !Bool
     , _ptslAccessToken                   :: !(Maybe Text)
     , _ptslUploadType                    :: !(Maybe Text)
     , _ptslAggregationPerSeriesAligner   :: !(Maybe Text)
-    , _ptslBearerToken                   :: !(Maybe Text)
     , _ptslName                          :: !Text
     , _ptslAggregationGroupByFields      :: !(Maybe [Text])
     , _ptslView                          :: !(Maybe Text)
     , _ptslAggregationCrossSeriesReducer :: !(Maybe Text)
     , _ptslFilter                        :: !(Maybe Text)
-    , _ptslAggregationAlignmentPeriod    :: !(Maybe Duration)
+    , _ptslAggregationAlignmentPeriod    :: !(Maybe GDuration)
     , _ptslPageToken                     :: !(Maybe Text)
     , _ptslIntervalEndTime               :: !(Maybe DateTime')
     , _ptslPageSize                      :: !(Maybe (Textual Int32))
@@ -130,15 +119,11 @@ data ProjectsTimeSeriesList = ProjectsTimeSeriesList'
 --
 -- * 'ptslOrderBy'
 --
--- * 'ptslPp'
---
 -- * 'ptslAccessToken'
 --
 -- * 'ptslUploadType'
 --
 -- * 'ptslAggregationPerSeriesAligner'
---
--- * 'ptslBearerToken'
 --
 -- * 'ptslName'
 --
@@ -168,11 +153,9 @@ projectsTimeSeriesList pPtslName_ =
     , _ptslXgafv = Nothing
     , _ptslUploadProtocol = Nothing
     , _ptslOrderBy = Nothing
-    , _ptslPp = True
     , _ptslAccessToken = Nothing
     , _ptslUploadType = Nothing
     , _ptslAggregationPerSeriesAligner = Nothing
-    , _ptslBearerToken = Nothing
     , _ptslName = pPtslName_
     , _ptslAggregationGroupByFields = Nothing
     , _ptslView = Nothing
@@ -205,16 +188,11 @@ ptslUploadProtocol
   = lens _ptslUploadProtocol
       (\ s a -> s{_ptslUploadProtocol = a})
 
--- | Specifies the order in which the points of the time series should be
--- returned. By default, results are not ordered. Currently, this field
--- must be left blank.
+-- | Unsupported: must be left blank. The points in each time series are
+-- returned in reverse time order.
 ptslOrderBy :: Lens' ProjectsTimeSeriesList (Maybe Text)
 ptslOrderBy
   = lens _ptslOrderBy (\ s a -> s{_ptslOrderBy = a})
-
--- | Pretty-print response.
-ptslPp :: Lens' ProjectsTimeSeriesList Bool
-ptslPp = lens _ptslPp (\ s a -> s{_ptslPp = a})
 
 -- | OAuth access token.
 ptslAccessToken :: Lens' ProjectsTimeSeriesList (Maybe Text)
@@ -240,12 +218,6 @@ ptslAggregationPerSeriesAligner :: Lens' ProjectsTimeSeriesList (Maybe Text)
 ptslAggregationPerSeriesAligner
   = lens _ptslAggregationPerSeriesAligner
       (\ s a -> s{_ptslAggregationPerSeriesAligner = a})
-
--- | OAuth bearer token.
-ptslBearerToken :: Lens' ProjectsTimeSeriesList (Maybe Text)
-ptslBearerToken
-  = lens _ptslBearerToken
-      (\ s a -> s{_ptslBearerToken = a})
 
 -- | The project on which to execute the request. The format is
 -- \"projects\/{project_id_or_number}\".
@@ -308,7 +280,7 @@ ptslAggregationAlignmentPeriod :: Lens' ProjectsTimeSeriesList (Maybe Scientific
 ptslAggregationAlignmentPeriod
   = lens _ptslAggregationAlignmentPeriod
       (\ s a -> s{_ptslAggregationAlignmentPeriod = a})
-      . mapping _Duration
+      . mapping _GDuration
 
 -- | If this field is not empty then it must contain the nextPageToken value
 -- returned by a previous call to this method. Using this field causes the
@@ -325,10 +297,11 @@ ptslIntervalEndTime
       (\ s a -> s{_ptslIntervalEndTime = a})
       . mapping _DateTime
 
--- | A positive number that is the maximum number of results to return. When
--- view field sets to FULL, it limits the number of Points server will
--- return; if view field is HEADERS, it limits the number of TimeSeries
--- server will return.
+-- | A positive number that is the maximum number of results to return. If
+-- page_size is empty or more than 100,000 results, the effective page_size
+-- is 100,000 results. If view is set to FULL, this is the maximum number
+-- of Points returned. If view is set to HEADERS, this is the maximum
+-- number of TimeSeries returned.
 ptslPageSize :: Lens' ProjectsTimeSeriesList (Maybe Int32)
 ptslPageSize
   = lens _ptslPageSize (\ s a -> s{_ptslPageSize = a})
@@ -350,11 +323,9 @@ instance GoogleRequest ProjectsTimeSeriesList where
           = go _ptslName _ptslIntervalStartTime _ptslXgafv
               _ptslUploadProtocol
               _ptslOrderBy
-              (Just _ptslPp)
               _ptslAccessToken
               _ptslUploadType
               _ptslAggregationPerSeriesAligner
-              _ptslBearerToken
               (_ptslAggregationGroupByFields ^. _Default)
               _ptslView
               _ptslAggregationCrossSeriesReducer

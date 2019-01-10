@@ -22,17 +22,99 @@ module Network.Google.Manufacturers.Types
     -- * OAuth Scopes
     , manufacturercenterScope
 
+    -- * DestinationStatusStatus
+    , DestinationStatusStatus (..)
+
+    -- * IssueResolution
+    , IssueResolution (..)
+
+    -- * Image
+    , Image
+    , image
+    , iStatus
+    , iImageURL
+    , iType
+
+    -- * FeatureDescription
+    , FeatureDescription
+    , featureDescription
+    , fdImage
+    , fdText
+    , fdHeadline
+
+    -- * ProductDetail
+    , ProductDetail
+    , productDetail
+    , pdAttributeValue
+    , pdAttributeName
+    , pdSectionName
+
+    -- * Empty
+    , Empty
+    , empty
+
+    -- * DestinationStatus
+    , DestinationStatus
+    , destinationStatus
+    , dsDestination
+    , dsStatus
+
+    -- * ImageStatus
+    , ImageStatus (..)
+
+    -- * Count
+    , Count
+    , count
+    , cValue
+    , cUnit
+
+    -- * Capacity
+    , Capacity
+    , capacity
+    , capValue
+    , capUnit
+
+    -- * ImageType
+    , ImageType (..)
+
     -- * Attributes
     , Attributes
     , attributes
     , aProductName
+    , aScent
+    , aImageLink
+    , aFeatureDescription
+    , aProductDetail
     , aProductLine
+    , aColor
+    , aSize
+    , aFlavor
+    , aPattern
+    , aSizeSystem
+    , aMaterial
+    , aFormat
     , aProductType
+    , aCount
+    , aDisclosureDate
     , aBrand
+    , aAdditionalImageLink
+    , aExcludedDestination
+    , aVideoLink
+    , aCapacity
     , aGtin
+    , aAgeGroup
+    , aIncludedDestination
+    , aGender
+    , aSuggestedRetailPrice
+    , aItemGroupId
+    , aTargetClientId
+    , aSizeType
+    , aReleaseDate
     , aTitle
     , aMpn
     , aProductPageURL
+    , aDescription
+    , aTheme
 
     -- * Xgafv
     , Xgafv (..)
@@ -40,27 +122,35 @@ module Network.Google.Manufacturers.Types
     -- * IssueSeverity
     , IssueSeverity (..)
 
+    -- * Price
+    , Price
+    , price
+    , pAmount
+    , pCurrency
+
     -- * Product
     , Product
     , product
     , pParent
-    , pManuallyDeletedAttributes
+    , pDestinationStatuses
     , pTargetCountry
-    , pManuallyProvidedAttributes
     , pName
+    , pAttributes
     , pIssues
-    , pUploadedAttributes
     , pContentLanguage
-    , pFinalAttributes
     , pProductId
 
     -- * Issue
     , Issue
     , issue
-    , iAttribute
-    , iSeverity
-    , iType
-    , iDescription
+    , issAttribute
+    , issDestination
+    , issSeverity
+    , issResolution
+    , issTitle
+    , issType
+    , issTimestamp
+    , issDescription
 
     -- * ListProductsResponse
     , ListProductsResponse

@@ -34,7 +34,6 @@ module Network.Google.Resource.Games.Metagame.ListCategoriesByPlayer
     , MetagameListCategoriesByPlayer
 
     -- * Request Lenses
-    , mlcbpConsistencyToken
     , mlcbpCollection
     , mlcbpLanguage
     , mlcbpPageToken
@@ -56,31 +55,27 @@ type MetagameListCategoriesByPlayerResource =
                Capture "collection"
                  MetagameListCategoriesByPlayerCollection
                  :>
-                 QueryParam "consistencyToken" (Textual Int64) :>
-                   QueryParam "language" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" (Textual Int32) :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] CategoryListResponse
+                 QueryParam "language" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" (Textual Int32) :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] CategoryListResponse
 
 -- | List play data aggregated per category for the player corresponding to
 -- playerId.
 --
 -- /See:/ 'metagameListCategoriesByPlayer' smart constructor.
 data MetagameListCategoriesByPlayer = MetagameListCategoriesByPlayer'
-    { _mlcbpConsistencyToken :: !(Maybe (Textual Int64))
-    , _mlcbpCollection       :: !MetagameListCategoriesByPlayerCollection
-    , _mlcbpLanguage         :: !(Maybe Text)
-    , _mlcbpPageToken        :: !(Maybe Text)
-    , _mlcbpPlayerId         :: !Text
-    , _mlcbpMaxResults       :: !(Maybe (Textual Int32))
+    { _mlcbpCollection :: !MetagameListCategoriesByPlayerCollection
+    , _mlcbpLanguage   :: !(Maybe Text)
+    , _mlcbpPageToken  :: !(Maybe Text)
+    , _mlcbpPlayerId   :: !Text
+    , _mlcbpMaxResults :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MetagameListCategoriesByPlayer' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'mlcbpConsistencyToken'
 --
 -- * 'mlcbpCollection'
 --
@@ -97,20 +92,12 @@ metagameListCategoriesByPlayer
     -> MetagameListCategoriesByPlayer
 metagameListCategoriesByPlayer pMlcbpCollection_ pMlcbpPlayerId_ =
     MetagameListCategoriesByPlayer'
-    { _mlcbpConsistencyToken = Nothing
-    , _mlcbpCollection = pMlcbpCollection_
+    { _mlcbpCollection = pMlcbpCollection_
     , _mlcbpLanguage = Nothing
     , _mlcbpPageToken = Nothing
     , _mlcbpPlayerId = pMlcbpPlayerId_
     , _mlcbpMaxResults = Nothing
     }
-
--- | The last-seen mutation timestamp.
-mlcbpConsistencyToken :: Lens' MetagameListCategoriesByPlayer (Maybe Int64)
-mlcbpConsistencyToken
-  = lens _mlcbpConsistencyToken
-      (\ s a -> s{_mlcbpConsistencyToken = a})
-      . mapping _Coerce
 
 -- | The collection of categories for which data will be returned.
 mlcbpCollection :: Lens' MetagameListCategoriesByPlayer MetagameListCategoriesByPlayerCollection
@@ -151,12 +138,9 @@ instance GoogleRequest MetagameListCategoriesByPlayer
         type Rs MetagameListCategoriesByPlayer =
              CategoryListResponse
         type Scopes MetagameListCategoriesByPlayer =
-             '["https://www.googleapis.com/auth/games",
-               "https://www.googleapis.com/auth/plus.login"]
+             '["https://www.googleapis.com/auth/games"]
         requestClient MetagameListCategoriesByPlayer'{..}
-          = go _mlcbpPlayerId _mlcbpCollection
-              _mlcbpConsistencyToken
-              _mlcbpLanguage
+          = go _mlcbpPlayerId _mlcbpCollection _mlcbpLanguage
               _mlcbpPageToken
               _mlcbpMaxResults
               (Just AltJSON)

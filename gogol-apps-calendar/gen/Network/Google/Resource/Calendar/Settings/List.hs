@@ -109,7 +109,8 @@ instance GoogleRequest SettingsList where
         type Rs SettingsList = Settings
         type Scopes SettingsList =
              '["https://www.googleapis.com/auth/calendar",
-               "https://www.googleapis.com/auth/calendar.readonly"]
+               "https://www.googleapis.com/auth/calendar.readonly",
+               "https://www.googleapis.com/auth/calendar.settings.readonly"]
         requestClient SettingsList'{..}
           = go _slSyncToken _slPageToken _slMaxResults
               (Just AltJSON)

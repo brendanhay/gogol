@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Cloud SQL Administration.
+A client library for the Google Cloud SQL Admin.
 
 
 ## Contribute

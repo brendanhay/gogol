@@ -24,7 +24,7 @@
 -- tokenization along with part of speech tags, dependency trees, and other
 -- properties.
 --
--- /See:/ <https://cloud.google.com/natural-language/ Google Cloud Natural Language API Reference> for @language.documents.analyzeSyntax@.
+-- /See:/ <https://cloud.google.com/natural-language/ Cloud Natural Language API Reference> for @language.documents.analyzeSyntax@.
 module Network.Google.Resource.Language.Documents.AnalyzeSyntax
     (
     -- * REST Resource
@@ -37,11 +37,9 @@ module Network.Google.Resource.Language.Documents.AnalyzeSyntax
     -- * Request Lenses
     , dXgafv
     , dUploadProtocol
-    , dPp
     , dAccessToken
     , dUploadType
     , dPayload
-    , dBearerToken
     , dCallback
     ) where
 
@@ -55,14 +53,12 @@ type DocumentsAnalyzeSyntaxResource =
        "documents:analyzeSyntax" :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] AnalyzeSyntaxRequest :>
-                           Post '[JSON] AnalyzeSyntaxResponse
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] AnalyzeSyntaxRequest :>
+                       Post '[JSON] AnalyzeSyntaxResponse
 
 -- | Analyzes the syntax of the text and provides sentence boundaries and
 -- tokenization along with part of speech tags, dependency trees, and other
@@ -72,11 +68,9 @@ type DocumentsAnalyzeSyntaxResource =
 data DocumentsAnalyzeSyntax = DocumentsAnalyzeSyntax'
     { _dXgafv          :: !(Maybe Xgafv)
     , _dUploadProtocol :: !(Maybe Text)
-    , _dPp             :: !Bool
     , _dAccessToken    :: !(Maybe Text)
     , _dUploadType     :: !(Maybe Text)
     , _dPayload        :: !AnalyzeSyntaxRequest
-    , _dBearerToken    :: !(Maybe Text)
     , _dCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -88,15 +82,11 @@ data DocumentsAnalyzeSyntax = DocumentsAnalyzeSyntax'
 --
 -- * 'dUploadProtocol'
 --
--- * 'dPp'
---
 -- * 'dAccessToken'
 --
 -- * 'dUploadType'
 --
 -- * 'dPayload'
---
--- * 'dBearerToken'
 --
 -- * 'dCallback'
 documentsAnalyzeSyntax
@@ -106,11 +96,9 @@ documentsAnalyzeSyntax pDPayload_ =
     DocumentsAnalyzeSyntax'
     { _dXgafv = Nothing
     , _dUploadProtocol = Nothing
-    , _dPp = True
     , _dAccessToken = Nothing
     , _dUploadType = Nothing
     , _dPayload = pDPayload_
-    , _dBearerToken = Nothing
     , _dCallback = Nothing
     }
 
@@ -123,10 +111,6 @@ dUploadProtocol :: Lens' DocumentsAnalyzeSyntax (Maybe Text)
 dUploadProtocol
   = lens _dUploadProtocol
       (\ s a -> s{_dUploadProtocol = a})
-
--- | Pretty-print response.
-dPp :: Lens' DocumentsAnalyzeSyntax Bool
-dPp = lens _dPp (\ s a -> s{_dPp = a})
 
 -- | OAuth access token.
 dAccessToken :: Lens' DocumentsAnalyzeSyntax (Maybe Text)
@@ -142,11 +126,6 @@ dUploadType
 dPayload :: Lens' DocumentsAnalyzeSyntax AnalyzeSyntaxRequest
 dPayload = lens _dPayload (\ s a -> s{_dPayload = a})
 
--- | OAuth bearer token.
-dBearerToken :: Lens' DocumentsAnalyzeSyntax (Maybe Text)
-dBearerToken
-  = lens _dBearerToken (\ s a -> s{_dBearerToken = a})
-
 -- | JSONP
 dCallback :: Lens' DocumentsAnalyzeSyntax (Maybe Text)
 dCallback
@@ -156,12 +135,11 @@ instance GoogleRequest DocumentsAnalyzeSyntax where
         type Rs DocumentsAnalyzeSyntax =
              AnalyzeSyntaxResponse
         type Scopes DocumentsAnalyzeSyntax =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-language",
+               "https://www.googleapis.com/auth/cloud-platform"]
         requestClient DocumentsAnalyzeSyntax'{..}
-          = go _dXgafv _dUploadProtocol (Just _dPp)
-              _dAccessToken
+          = go _dXgafv _dUploadProtocol _dAccessToken
               _dUploadType
-              _dBearerToken
               _dCallback
               (Just AltJSON)
               _dPayload

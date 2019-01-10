@@ -83,7 +83,7 @@ upuPayload :: Lens' UsersPhotosUpdate UserPhoto
 upuPayload
   = lens _upuPayload (\ s a -> s{_upuPayload = a})
 
--- | Email or immutable Id of the user
+-- | Email or immutable ID of the user
 upuUserKey :: Lens' UsersPhotosUpdate Text
 upuUserKey
   = lens _upuUserKey (\ s a -> s{_upuUserKey = a})

@@ -34,6 +34,7 @@ module Network.Google.Resource.Gmail.Users.History.List
     , UsersHistoryList
 
     -- * Request Lenses
+    , uhlHistoryTypes
     , uhlUserId
     , uhlStartHistoryId
     , uhlPageToken
@@ -52,19 +53,23 @@ type UsersHistoryListResource =
          "users" :>
            Capture "userId" Text :>
              "history" :>
-               QueryParam "startHistoryId" (Textual Word64) :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "labelId" Text :>
-                     QueryParam "maxResults" (Textual Word32) :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] ListHistoryResponse
+               QueryParams "historyTypes"
+                 UsersHistoryListHistoryTypes
+                 :>
+                 QueryParam "startHistoryId" (Textual Word64) :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "labelId" Text :>
+                       QueryParam "maxResults" (Textual Word32) :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] ListHistoryResponse
 
 -- | Lists the history of all changes to the given mailbox. History results
 -- are returned in chronological order (increasing historyId).
 --
 -- /See:/ 'usersHistoryList' smart constructor.
 data UsersHistoryList = UsersHistoryList'
-    { _uhlUserId         :: !Text
+    { _uhlHistoryTypes   :: !(Maybe [UsersHistoryListHistoryTypes])
+    , _uhlUserId         :: !Text
     , _uhlStartHistoryId :: !(Maybe (Textual Word64))
     , _uhlPageToken      :: !(Maybe Text)
     , _uhlLabelId        :: !(Maybe Text)
@@ -74,6 +79,8 @@ data UsersHistoryList = UsersHistoryList'
 -- | Creates a value of 'UsersHistoryList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'uhlHistoryTypes'
 --
 -- * 'uhlUserId'
 --
@@ -88,12 +95,21 @@ usersHistoryList
     :: UsersHistoryList
 usersHistoryList =
     UsersHistoryList'
-    { _uhlUserId = "me"
+    { _uhlHistoryTypes = Nothing
+    , _uhlUserId = "me"
     , _uhlStartHistoryId = Nothing
     , _uhlPageToken = Nothing
     , _uhlLabelId = Nothing
     , _uhlMaxResults = 100
     }
+
+-- | History types to be returned by the function
+uhlHistoryTypes :: Lens' UsersHistoryList [UsersHistoryListHistoryTypes]
+uhlHistoryTypes
+  = lens _uhlHistoryTypes
+      (\ s a -> s{_uhlHistoryTypes = a})
+      . _Default
+      . _Coerce
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
@@ -143,7 +159,9 @@ instance GoogleRequest UsersHistoryList where
                "https://www.googleapis.com/auth/gmail.modify",
                "https://www.googleapis.com/auth/gmail.readonly"]
         requestClient UsersHistoryList'{..}
-          = go _uhlUserId _uhlStartHistoryId _uhlPageToken
+          = go _uhlUserId (_uhlHistoryTypes ^. _Default)
+              _uhlStartHistoryId
+              _uhlPageToken
               _uhlLabelId
               (Just _uhlMaxResults)
               (Just AltJSON)

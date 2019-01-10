@@ -16,7 +16,7 @@
 --
 module Network.Google.Language.Types.Sum where
 
-import           Network.Google.Prelude
+import           Network.Google.Prelude hiding (Bytes)
 
 -- | The grammatical properness.
 data PartOfSpeechProper
@@ -220,6 +220,52 @@ instance FromJSON AnalyzeSyntaxRequestEncodingType where
     parseJSON = parseJSONText "AnalyzeSyntaxRequestEncodingType"
 
 instance ToJSON AnalyzeSyntaxRequestEncodingType where
+    toJSON = toJSONText
+
+-- | The encoding type used by the API to calculate offsets.
+data AnalyzeEntitySentimentRequestEncodingType
+    = AESRETNone
+      -- ^ @NONE@
+      -- If \`EncodingType\` is not specified, encoding-dependent information
+      -- (such as \`begin_offset\`) will be set at \`-1\`.
+    | AESRETUTF8
+      -- ^ @UTF8@
+      -- Encoding-dependent information (such as \`begin_offset\`) is calculated
+      -- based on the UTF-8 encoding of the input. C++ and Go are examples of
+      -- languages that use this encoding natively.
+    | AESRETUTF16
+      -- ^ @UTF16@
+      -- Encoding-dependent information (such as \`begin_offset\`) is calculated
+      -- based on the UTF-16 encoding of the input. Java and Javascript are
+      -- examples of languages that use this encoding natively.
+    | AESRETUTF32
+      -- ^ @UTF32@
+      -- Encoding-dependent information (such as \`begin_offset\`) is calculated
+      -- based on the UTF-32 encoding of the input. Python is an example of a
+      -- language that uses this encoding natively.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable AnalyzeEntitySentimentRequestEncodingType
+
+instance FromHttpApiData AnalyzeEntitySentimentRequestEncodingType where
+    parseQueryParam = \case
+        "NONE" -> Right AESRETNone
+        "UTF8" -> Right AESRETUTF8
+        "UTF16" -> Right AESRETUTF16
+        "UTF32" -> Right AESRETUTF32
+        x -> Left ("Unable to parse AnalyzeEntitySentimentRequestEncodingType from: " <> x)
+
+instance ToHttpApiData AnalyzeEntitySentimentRequestEncodingType where
+    toQueryParam = \case
+        AESRETNone -> "NONE"
+        AESRETUTF8 -> "UTF8"
+        AESRETUTF16 -> "UTF16"
+        AESRETUTF32 -> "UTF32"
+
+instance FromJSON AnalyzeEntitySentimentRequestEncodingType where
+    parseJSON = parseJSONText "AnalyzeEntitySentimentRequestEncodingType"
+
+instance ToJSON AnalyzeEntitySentimentRequestEncodingType where
     toJSON = toJSONText
 
 -- | The parse label for the token.
@@ -455,6 +501,24 @@ data DependencyEdgeLabel
     | DELDislocated
       -- ^ @DISLOCATED@
       -- Dislocated relation (for fronted\/topicalized elements)
+    | DELAsp
+      -- ^ @ASP@
+      -- Aspect marker
+    | DELGmod
+      -- ^ @GMOD@
+      -- Genitive modifier
+    | DELGobj
+      -- ^ @GOBJ@
+      -- Genitive object
+    | DELInfmod
+      -- ^ @INFMOD@
+      -- Infinitival modifier
+    | DELMes
+      -- ^ @MES@
+      -- Measure
+    | DELNcomp
+      -- ^ @NCOMP@
+      -- Nominal complement of a noun
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DependencyEdgeLabel
@@ -538,6 +602,12 @@ instance FromHttpApiData DependencyEdgeLabel where
         "NUMC" -> Right DELNumc
         "COP" -> Right DELCop
         "DISLOCATED" -> Right DELDislocated
+        "ASP" -> Right DELAsp
+        "GMOD" -> Right DELGmod
+        "GOBJ" -> Right DELGobj
+        "INFMOD" -> Right DELInfmod
+        "MES" -> Right DELMes
+        "NCOMP" -> Right DELNcomp
         x -> Left ("Unable to parse DependencyEdgeLabel from: " <> x)
 
 instance ToHttpApiData DependencyEdgeLabel where
@@ -619,6 +689,12 @@ instance ToHttpApiData DependencyEdgeLabel where
         DELNumc -> "NUMC"
         DELCop -> "COP"
         DELDislocated -> "DISLOCATED"
+        DELAsp -> "ASP"
+        DELGmod -> "GMOD"
+        DELGobj -> "GOBJ"
+        DELInfmod -> "INFMOD"
+        DELMes -> "MES"
+        DELNcomp -> "NCOMP"
 
 instance FromJSON DependencyEdgeLabel where
     parseJSON = parseJSONText "DependencyEdgeLabel"

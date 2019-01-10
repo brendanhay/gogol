@@ -77,7 +77,8 @@ sdPayload
 
 instance GoogleRequest SdfDownload where
         type Rs SdfDownload = DownloadResponse
-        type Scopes SdfDownload = '[]
+        type Scopes SdfDownload =
+             '["https://www.googleapis.com/auth/doubleclickbidmanager"]
         requestClient SdfDownload'{..}
           = go (Just AltJSON) _sdPayload doubleClickBidsService
           where go

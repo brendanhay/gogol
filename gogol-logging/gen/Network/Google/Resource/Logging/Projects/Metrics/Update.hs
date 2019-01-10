@@ -35,12 +35,10 @@ module Network.Google.Resource.Logging.Projects.Metrics.Update
     -- * Request Lenses
     , pmuXgafv
     , pmuUploadProtocol
-    , pmuPp
     , pmuAccessToken
     , pmuMetricName
     , pmuUploadType
     , pmuPayload
-    , pmuBearerToken
     , pmuCallback
     ) where
 
@@ -54,13 +52,11 @@ type ProjectsMetricsUpdateResource =
        Capture "metricName" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] LogMetric :> Put '[JSON] LogMetric
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] LogMetric :> Put '[JSON] LogMetric
 
 -- | Creates or updates a logs-based metric.
 --
@@ -68,12 +64,10 @@ type ProjectsMetricsUpdateResource =
 data ProjectsMetricsUpdate = ProjectsMetricsUpdate'
     { _pmuXgafv          :: !(Maybe Xgafv)
     , _pmuUploadProtocol :: !(Maybe Text)
-    , _pmuPp             :: !Bool
     , _pmuAccessToken    :: !(Maybe Text)
     , _pmuMetricName     :: !Text
     , _pmuUploadType     :: !(Maybe Text)
     , _pmuPayload        :: !LogMetric
-    , _pmuBearerToken    :: !(Maybe Text)
     , _pmuCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -85,8 +79,6 @@ data ProjectsMetricsUpdate = ProjectsMetricsUpdate'
 --
 -- * 'pmuUploadProtocol'
 --
--- * 'pmuPp'
---
 -- * 'pmuAccessToken'
 --
 -- * 'pmuMetricName'
@@ -94,8 +86,6 @@ data ProjectsMetricsUpdate = ProjectsMetricsUpdate'
 -- * 'pmuUploadType'
 --
 -- * 'pmuPayload'
---
--- * 'pmuBearerToken'
 --
 -- * 'pmuCallback'
 projectsMetricsUpdate
@@ -106,12 +96,10 @@ projectsMetricsUpdate pPmuMetricName_ pPmuPayload_ =
     ProjectsMetricsUpdate'
     { _pmuXgafv = Nothing
     , _pmuUploadProtocol = Nothing
-    , _pmuPp = True
     , _pmuAccessToken = Nothing
     , _pmuMetricName = pPmuMetricName_
     , _pmuUploadType = Nothing
     , _pmuPayload = pPmuPayload_
-    , _pmuBearerToken = Nothing
     , _pmuCallback = Nothing
     }
 
@@ -124,10 +112,6 @@ pmuUploadProtocol :: Lens' ProjectsMetricsUpdate (Maybe Text)
 pmuUploadProtocol
   = lens _pmuUploadProtocol
       (\ s a -> s{_pmuUploadProtocol = a})
-
--- | Pretty-print response.
-pmuPp :: Lens' ProjectsMetricsUpdate Bool
-pmuPp = lens _pmuPp (\ s a -> s{_pmuPp = a})
 
 -- | OAuth access token.
 pmuAccessToken :: Lens' ProjectsMetricsUpdate (Maybe Text)
@@ -156,12 +140,6 @@ pmuPayload :: Lens' ProjectsMetricsUpdate LogMetric
 pmuPayload
   = lens _pmuPayload (\ s a -> s{_pmuPayload = a})
 
--- | OAuth bearer token.
-pmuBearerToken :: Lens' ProjectsMetricsUpdate (Maybe Text)
-pmuBearerToken
-  = lens _pmuBearerToken
-      (\ s a -> s{_pmuBearerToken = a})
-
 -- | JSONP
 pmuCallback :: Lens' ProjectsMetricsUpdate (Maybe Text)
 pmuCallback
@@ -175,10 +153,8 @@ instance GoogleRequest ProjectsMetricsUpdate where
                "https://www.googleapis.com/auth/logging.write"]
         requestClient ProjectsMetricsUpdate'{..}
           = go _pmuMetricName _pmuXgafv _pmuUploadProtocol
-              (Just _pmuPp)
               _pmuAccessToken
               _pmuUploadType
-              _pmuBearerToken
               _pmuCallback
               (Just AltJSON)
               _pmuPayload

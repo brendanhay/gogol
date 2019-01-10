@@ -36,6 +36,7 @@ module Network.Google.Resource.Books.MyLibrary.Annotations.Insert
     , mlaiCountry
     , mlaiPayload
     , mlaiShowOnlySummaryInResponse
+    , mlaiAnnotationId
     , mlaiSource
     ) where
 
@@ -51,9 +52,10 @@ type MyLibraryAnnotationsInsertResource =
            "annotations" :>
              QueryParam "country" Text :>
                QueryParam "showOnlySummaryInResponse" Bool :>
-                 QueryParam "source" Text :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] Annotation :> Post '[JSON] Annotation
+                 QueryParam "annotationId" Text :>
+                   QueryParam "source" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Annotation :> Post '[JSON] Annotation
 
 -- | Inserts a new annotation.
 --
@@ -62,6 +64,7 @@ data MyLibraryAnnotationsInsert = MyLibraryAnnotationsInsert'
     { _mlaiCountry                   :: !(Maybe Text)
     , _mlaiPayload                   :: !Annotation
     , _mlaiShowOnlySummaryInResponse :: !(Maybe Bool)
+    , _mlaiAnnotationId              :: !(Maybe Text)
     , _mlaiSource                    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -75,6 +78,8 @@ data MyLibraryAnnotationsInsert = MyLibraryAnnotationsInsert'
 --
 -- * 'mlaiShowOnlySummaryInResponse'
 --
+-- * 'mlaiAnnotationId'
+--
 -- * 'mlaiSource'
 myLibraryAnnotationsInsert
     :: Annotation -- ^ 'mlaiPayload'
@@ -84,6 +89,7 @@ myLibraryAnnotationsInsert pMlaiPayload_ =
     { _mlaiCountry = Nothing
     , _mlaiPayload = pMlaiPayload_
     , _mlaiShowOnlySummaryInResponse = Nothing
+    , _mlaiAnnotationId = Nothing
     , _mlaiSource = Nothing
     }
 
@@ -104,6 +110,12 @@ mlaiShowOnlySummaryInResponse
   = lens _mlaiShowOnlySummaryInResponse
       (\ s a -> s{_mlaiShowOnlySummaryInResponse = a})
 
+-- | The ID for the annotation to insert.
+mlaiAnnotationId :: Lens' MyLibraryAnnotationsInsert (Maybe Text)
+mlaiAnnotationId
+  = lens _mlaiAnnotationId
+      (\ s a -> s{_mlaiAnnotationId = a})
+
 -- | String to identify the originator of this request.
 mlaiSource :: Lens' MyLibraryAnnotationsInsert (Maybe Text)
 mlaiSource
@@ -116,6 +128,7 @@ instance GoogleRequest MyLibraryAnnotationsInsert
              '["https://www.googleapis.com/auth/books"]
         requestClient MyLibraryAnnotationsInsert'{..}
           = go _mlaiCountry _mlaiShowOnlySummaryInResponse
+              _mlaiAnnotationId
               _mlaiSource
               (Just AltJSON)
               _mlaiPayload

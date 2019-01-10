@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'CreativeFieldValuesUpdate' request conforms to.
 type CreativeFieldValuesUpdateResource =
      "dfareporting" :>
-       "v2.7" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeFields" :>

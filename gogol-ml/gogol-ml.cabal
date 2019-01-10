@@ -1,6 +1,6 @@
 name:                  gogol-ml
 version:               0.3.0
-synopsis:              Google Cloud Machine Learning SDK.
+synopsis:              Google Cloud Machine Learning Engine SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -19,7 +19,7 @@ description:
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
     .
-    This library is compatible with version @v1beta1@
+    This library is compatible with version @v1@
     of the API.
 
 source-repository head
@@ -39,15 +39,26 @@ library
         , Network.Google.Resource.Ml.Projects.Jobs.Cancel
         , Network.Google.Resource.Ml.Projects.Jobs.Create
         , Network.Google.Resource.Ml.Projects.Jobs.Get
+        , Network.Google.Resource.Ml.Projects.Jobs.GetIAMPolicy
         , Network.Google.Resource.Ml.Projects.Jobs.List
+        , Network.Google.Resource.Ml.Projects.Jobs.Patch
+        , Network.Google.Resource.Ml.Projects.Jobs.SetIAMPolicy
+        , Network.Google.Resource.Ml.Projects.Jobs.TestIAMPermissions
+        , Network.Google.Resource.Ml.Projects.Locations.Get
+        , Network.Google.Resource.Ml.Projects.Locations.List
         , Network.Google.Resource.Ml.Projects.Models.Create
         , Network.Google.Resource.Ml.Projects.Models.Delete
         , Network.Google.Resource.Ml.Projects.Models.Get
+        , Network.Google.Resource.Ml.Projects.Models.GetIAMPolicy
         , Network.Google.Resource.Ml.Projects.Models.List
+        , Network.Google.Resource.Ml.Projects.Models.Patch
+        , Network.Google.Resource.Ml.Projects.Models.SetIAMPolicy
+        , Network.Google.Resource.Ml.Projects.Models.TestIAMPermissions
         , Network.Google.Resource.Ml.Projects.Models.Versions.Create
         , Network.Google.Resource.Ml.Projects.Models.Versions.Delete
         , Network.Google.Resource.Ml.Projects.Models.Versions.Get
         , Network.Google.Resource.Ml.Projects.Models.Versions.List
+        , Network.Google.Resource.Ml.Projects.Models.Versions.Patch
         , Network.Google.Resource.Ml.Projects.Models.Versions.SetDefault
         , Network.Google.Resource.Ml.Projects.Operations.Cancel
         , Network.Google.Resource.Ml.Projects.Operations.Delete

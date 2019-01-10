@@ -81,7 +81,7 @@ rolesGet pRgRoleId_ pRgCustomer_ =
 rgRoleId :: Lens' RolesGet Text
 rgRoleId = lens _rgRoleId (\ s a -> s{_rgRoleId = a})
 
--- | Immutable ID of the Google Apps account.
+-- | Immutable ID of the G Suite account.
 rgCustomer :: Lens' RolesGet Text
 rgCustomer
   = lens _rgCustomer (\ s a -> s{_rgCustomer = a})

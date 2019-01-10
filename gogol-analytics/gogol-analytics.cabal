@@ -44,6 +44,7 @@ library
         , Network.Google.Resource.Analytics.Management.AccountUserLinks.List
         , Network.Google.Resource.Analytics.Management.AccountUserLinks.Update
         , Network.Google.Resource.Analytics.Management.Accounts.List
+        , Network.Google.Resource.Analytics.Management.ClientId.HashClientId
         , Network.Google.Resource.Analytics.Management.CustomDataSources.List
         , Network.Google.Resource.Analytics.Management.CustomDimensions.Get
         , Network.Google.Resource.Analytics.Management.CustomDimensions.Insert
@@ -88,6 +89,7 @@ library
         , Network.Google.Resource.Analytics.Management.ProFiles.List
         , Network.Google.Resource.Analytics.Management.ProFiles.Patch
         , Network.Google.Resource.Analytics.Management.ProFiles.Update
+        , Network.Google.Resource.Analytics.Management.RemarketingAudience.Delete
         , Network.Google.Resource.Analytics.Management.RemarketingAudience.Get
         , Network.Google.Resource.Analytics.Management.RemarketingAudience.Insert
         , Network.Google.Resource.Analytics.Management.RemarketingAudience.List
@@ -119,6 +121,8 @@ library
         , Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Update
         , Network.Google.Resource.Analytics.Metadata.Columns.List
         , Network.Google.Resource.Analytics.Provisioning.CreateAccountTicket
+        , Network.Google.Resource.Analytics.Provisioning.CreateAccountTree
+        , Network.Google.Resource.Analytics.UserDeletion.UserDeletionRequest.Upsert
 
     other-modules:
           Network.Google.Analytics.Types.Product

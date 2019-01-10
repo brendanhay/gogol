@@ -34,6 +34,7 @@ module Network.Google.Resource.Compute.HTTPSHealthChecks.Update
     , HTTPSHealthChecksUpdate
 
     -- * Request Lenses
+    , hhcuRequestId
     , hhcuProject
     , hhcuPayload
     , hhcuHTTPSHealthCheck
@@ -52,16 +53,18 @@ type HTTPSHealthChecksUpdateResource =
              "global" :>
                "httpsHealthChecks" :>
                  Capture "httpsHealthCheck" Text :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] HTTPSHealthCheck :>
-                       Put '[JSON] Operation
+                   QueryParam "requestId" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] HTTPSHealthCheck :>
+                         Put '[JSON] Operation
 
 -- | Updates a HttpsHealthCheck resource in the specified project using the
 -- data included in the request.
 --
 -- /See:/ 'httpsHealthChecksUpdate' smart constructor.
 data HTTPSHealthChecksUpdate = HTTPSHealthChecksUpdate'
-    { _hhcuProject          :: !Text
+    { _hhcuRequestId        :: !(Maybe Text)
+    , _hhcuProject          :: !Text
     , _hhcuPayload          :: !HTTPSHealthCheck
     , _hhcuHTTPSHealthCheck :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -69,6 +72,8 @@ data HTTPSHealthChecksUpdate = HTTPSHealthChecksUpdate'
 -- | Creates a value of 'HTTPSHealthChecksUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'hhcuRequestId'
 --
 -- * 'hhcuProject'
 --
@@ -82,10 +87,26 @@ httpsHealthChecksUpdate
     -> HTTPSHealthChecksUpdate
 httpsHealthChecksUpdate pHhcuProject_ pHhcuPayload_ pHhcuHTTPSHealthCheck_ =
     HTTPSHealthChecksUpdate'
-    { _hhcuProject = pHhcuProject_
+    { _hhcuRequestId = Nothing
+    , _hhcuProject = pHhcuProject_
     , _hhcuPayload = pHhcuPayload_
     , _hhcuHTTPSHealthCheck = pHhcuHTTPSHealthCheck_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+hhcuRequestId :: Lens' HTTPSHealthChecksUpdate (Maybe Text)
+hhcuRequestId
+  = lens _hhcuRequestId
+      (\ s a -> s{_hhcuRequestId = a})
 
 -- | Project ID for this request.
 hhcuProject :: Lens' HTTPSHealthChecksUpdate Text
@@ -110,6 +131,7 @@ instance GoogleRequest HTTPSHealthChecksUpdate where
                "https://www.googleapis.com/auth/compute"]
         requestClient HTTPSHealthChecksUpdate'{..}
           = go _hhcuProject _hhcuHTTPSHealthCheck
+              _hhcuRequestId
               (Just AltJSON)
               _hhcuPayload
               computeService

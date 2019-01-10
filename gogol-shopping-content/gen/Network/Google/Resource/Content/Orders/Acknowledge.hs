@@ -20,8 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Marks an order as acknowledged. This method can only be called for
--- non-multi-client accounts.
+-- Marks an order as acknowledged.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.acknowledge@.
 module Network.Google.Resource.Content.Orders.Acknowledge
@@ -46,7 +45,7 @@ import           Network.Google.ShoppingContent.Types
 -- 'OrdersAcknowledge' request conforms to.
 type OrdersAcknowledgeResource =
      "content" :>
-       "v2" :>
+       "v2.1" :>
          Capture "merchantId" (Textual Word64) :>
            "orders" :>
              Capture "orderId" Text :>
@@ -55,8 +54,7 @@ type OrdersAcknowledgeResource =
                    ReqBody '[JSON] OrdersAcknowledgeRequest :>
                      Post '[JSON] OrdersAcknowledgeResponse
 
--- | Marks an order as acknowledged. This method can only be called for
--- non-multi-client accounts.
+-- | Marks an order as acknowledged.
 --
 -- /See:/ 'ordersAcknowledge' smart constructor.
 data OrdersAcknowledge = OrdersAcknowledge'
@@ -86,7 +84,8 @@ ordersAcknowledge pOaMerchantId_ pOaPayload_ pOaOrderId_ =
     , _oaOrderId = pOaOrderId_
     }
 
--- | The ID of the managing account.
+-- | The ID of the account that manages the order. This cannot be a
+-- multi-client account.
 oaMerchantId :: Lens' OrdersAcknowledge Word64
 oaMerchantId
   = lens _oaMerchantId (\ s a -> s{_oaMerchantId = a})

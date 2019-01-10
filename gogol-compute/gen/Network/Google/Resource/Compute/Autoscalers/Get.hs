@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified autoscaler resource. Get a list of available
+-- Returns the specified autoscaler resource. Gets a list of available
 -- autoscalers by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.autoscalers.get@.
@@ -55,7 +55,7 @@ type AutoscalersGetResource =
                    Capture "autoscaler" Text :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Autoscaler
 
--- | Returns the specified autoscaler resource. Get a list of available
+-- | Returns the specified autoscaler resource. Gets a list of available
 -- autoscalers by making a list() request.
 --
 -- /See:/ 'autoscalersGet' smart constructor.

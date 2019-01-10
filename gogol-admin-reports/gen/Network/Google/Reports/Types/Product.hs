@@ -896,6 +896,7 @@ data UsageReportEntity = UsageReportEntity'
     , _ureCustomerId :: !(Maybe Text)
     , _ureUserEmail  :: !(Maybe Text)
     , _ureType       :: !(Maybe Text)
+    , _ureEntityId   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsageReportEntity' with the minimum fields required to make a request.
@@ -909,6 +910,8 @@ data UsageReportEntity = UsageReportEntity'
 -- * 'ureUserEmail'
 --
 -- * 'ureType'
+--
+-- * 'ureEntityId'
 usageReportEntity
     :: UsageReportEntity
 usageReportEntity =
@@ -917,6 +920,7 @@ usageReportEntity =
     , _ureCustomerId = Nothing
     , _ureUserEmail = Nothing
     , _ureType = Nothing
+    , _ureEntityId = Nothing
     }
 
 -- | Obfuscated user id for the record.
@@ -930,14 +934,20 @@ ureCustomerId
   = lens _ureCustomerId
       (\ s a -> s{_ureCustomerId = a})
 
--- | user\'s email.
+-- | user\'s email. Only relevant if entity.type = \"USER\"
 ureUserEmail :: Lens' UsageReportEntity (Maybe Text)
 ureUserEmail
   = lens _ureUserEmail (\ s a -> s{_ureUserEmail = a})
 
--- | The type of item, can be a customer or user.
+-- | The type of item, can be customer, user, or entity (aka. object).
 ureType :: Lens' UsageReportEntity (Maybe Text)
 ureType = lens _ureType (\ s a -> s{_ureType = a})
+
+-- | Object key. Only relevant if entity.type = \"OBJECT\" Note:
+-- external-facing name of report is \"Entities\" rather than \"Objects\".
+ureEntityId :: Lens' UsageReportEntity (Maybe Text)
+ureEntityId
+  = lens _ureEntityId (\ s a -> s{_ureEntityId = a})
 
 instance FromJSON UsageReportEntity where
         parseJSON
@@ -946,7 +956,8 @@ instance FromJSON UsageReportEntity where
                  UsageReportEntity' <$>
                    (o .:? "profileId") <*> (o .:? "customerId") <*>
                      (o .:? "userEmail")
-                     <*> (o .:? "type"))
+                     <*> (o .:? "type")
+                     <*> (o .:? "entityId"))
 
 instance ToJSON UsageReportEntity where
         toJSON UsageReportEntity'{..}
@@ -955,7 +966,8 @@ instance ToJSON UsageReportEntity where
                  [("profileId" .=) <$> _ureProFileId,
                   ("customerId" .=) <$> _ureCustomerId,
                   ("userEmail" .=) <$> _ureUserEmail,
-                  ("type" .=) <$> _ureType])
+                  ("type" .=) <$> _ureType,
+                  ("entityId" .=) <$> _ureEntityId])
 
 --
 -- /See:/ 'activityEventsItemParametersItem' smart constructor.

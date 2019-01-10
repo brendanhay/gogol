@@ -36,11 +36,9 @@ module Network.Google.Resource.Monitoring.Projects.MetricDescriptors.Create
     -- * Request Lenses
     , pmdcXgafv
     , pmdcUploadProtocol
-    , pmdcPp
     , pmdcAccessToken
     , pmdcUploadType
     , pmdcPayload
-    , pmdcBearerToken
     , pmdcName
     , pmdcCallback
     ) where
@@ -56,14 +54,12 @@ type ProjectsMetricDescriptorsCreateResource =
          "metricDescriptors" :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] MetricDescriptor :>
-                             Post '[JSON] MetricDescriptor
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] MetricDescriptor :>
+                         Post '[JSON] MetricDescriptor
 
 -- | Creates a new metric descriptor. User-created metric descriptors define
 -- custom metrics.
@@ -72,11 +68,9 @@ type ProjectsMetricDescriptorsCreateResource =
 data ProjectsMetricDescriptorsCreate = ProjectsMetricDescriptorsCreate'
     { _pmdcXgafv          :: !(Maybe Xgafv)
     , _pmdcUploadProtocol :: !(Maybe Text)
-    , _pmdcPp             :: !Bool
     , _pmdcAccessToken    :: !(Maybe Text)
     , _pmdcUploadType     :: !(Maybe Text)
     , _pmdcPayload        :: !MetricDescriptor
-    , _pmdcBearerToken    :: !(Maybe Text)
     , _pmdcName           :: !Text
     , _pmdcCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -89,15 +83,11 @@ data ProjectsMetricDescriptorsCreate = ProjectsMetricDescriptorsCreate'
 --
 -- * 'pmdcUploadProtocol'
 --
--- * 'pmdcPp'
---
 -- * 'pmdcAccessToken'
 --
 -- * 'pmdcUploadType'
 --
 -- * 'pmdcPayload'
---
--- * 'pmdcBearerToken'
 --
 -- * 'pmdcName'
 --
@@ -110,11 +100,9 @@ projectsMetricDescriptorsCreate pPmdcPayload_ pPmdcName_ =
     ProjectsMetricDescriptorsCreate'
     { _pmdcXgafv = Nothing
     , _pmdcUploadProtocol = Nothing
-    , _pmdcPp = True
     , _pmdcAccessToken = Nothing
     , _pmdcUploadType = Nothing
     , _pmdcPayload = pPmdcPayload_
-    , _pmdcBearerToken = Nothing
     , _pmdcName = pPmdcName_
     , _pmdcCallback = Nothing
     }
@@ -129,10 +117,6 @@ pmdcUploadProtocol :: Lens' ProjectsMetricDescriptorsCreate (Maybe Text)
 pmdcUploadProtocol
   = lens _pmdcUploadProtocol
       (\ s a -> s{_pmdcUploadProtocol = a})
-
--- | Pretty-print response.
-pmdcPp :: Lens' ProjectsMetricDescriptorsCreate Bool
-pmdcPp = lens _pmdcPp (\ s a -> s{_pmdcPp = a})
 
 -- | OAuth access token.
 pmdcAccessToken :: Lens' ProjectsMetricDescriptorsCreate (Maybe Text)
@@ -150,12 +134,6 @@ pmdcUploadType
 pmdcPayload :: Lens' ProjectsMetricDescriptorsCreate MetricDescriptor
 pmdcPayload
   = lens _pmdcPayload (\ s a -> s{_pmdcPayload = a})
-
--- | OAuth bearer token.
-pmdcBearerToken :: Lens' ProjectsMetricDescriptorsCreate (Maybe Text)
-pmdcBearerToken
-  = lens _pmdcBearerToken
-      (\ s a -> s{_pmdcBearerToken = a})
 
 -- | The project on which to execute the request. The format is
 -- \"projects\/{project_id_or_number}\".
@@ -177,10 +155,8 @@ instance GoogleRequest
                "https://www.googleapis.com/auth/monitoring.write"]
         requestClient ProjectsMetricDescriptorsCreate'{..}
           = go _pmdcName _pmdcXgafv _pmdcUploadProtocol
-              (Just _pmdcPp)
               _pmdcAccessToken
               _pmdcUploadType
-              _pmdcBearerToken
               _pmdcCallback
               (Just AltJSON)
               _pmdcPayload

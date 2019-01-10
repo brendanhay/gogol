@@ -65,7 +65,7 @@ type AccountsOrdersListResource =
            "orders" :>
              QueryParams "status" Text :>
                QueryParams "pphNames" Text :>
-                 QueryParam "$.xgafv" Text :>
+                 QueryParam "$.xgafv" Xgafv :>
                    QueryParams "studioNames" Text :>
                      QueryParams "videoIds" Text :>
                        QueryParam "upload_protocol" Text :>
@@ -89,7 +89,7 @@ type AccountsOrdersListResource =
 data AccountsOrdersList = AccountsOrdersList'
     { _aolStatus         :: !(Maybe [Text])
     , _aolPphNames       :: !(Maybe [Text])
-    , _aolXgafv          :: !(Maybe Text)
+    , _aolXgafv          :: !(Maybe Xgafv)
     , _aolStudioNames    :: !(Maybe [Text])
     , _aolVideoIds       :: !(Maybe [Text])
     , _aolUploadProtocol :: !(Maybe Text)
@@ -178,7 +178,7 @@ aolPphNames
       . _Coerce
 
 -- | V1 error format.
-aolXgafv :: Lens' AccountsOrdersList (Maybe Text)
+aolXgafv :: Lens' AccountsOrdersList (Maybe Xgafv)
 aolXgafv = lens _aolXgafv (\ s a -> s{_aolXgafv = a})
 
 -- | See _List methods rules_ for info about this field.

@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'MobileCarriersList' request conforms to.
 type MobileCarriersListResource =
      "dfareporting" :>
-       "v2.7" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "mobileCarriers" :>

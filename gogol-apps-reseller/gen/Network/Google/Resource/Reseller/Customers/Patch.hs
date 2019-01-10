@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Update a customer resource if one it exists and is owned by the
--- reseller. This method supports patch semantics.
+-- Update a customer account\'s settings. This method supports patch
+-- semantics.
 --
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @reseller.customers.patch@.
 module Network.Google.Resource.Reseller.Customers.Patch
@@ -52,8 +52,8 @@ type CustomersPatchResource =
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] Customer :> Patch '[JSON] Customer
 
--- | Update a customer resource if one it exists and is owned by the
--- reseller. This method supports patch semantics.
+-- | Update a customer account\'s settings. This method supports patch
+-- semantics.
 --
 -- /See:/ 'customersPatch' smart constructor.
 data CustomersPatch = CustomersPatch'
@@ -83,7 +83,10 @@ cpPayload :: Lens' CustomersPatch Customer
 cpPayload
   = lens _cpPayload (\ s a -> s{_cpPayload = a})
 
--- | Id of the Customer
+-- | Either the customer\'s primary domain name or the customer\'s unique
+-- identifier. If using the domain name, we do not recommend using a
+-- customerId as a key for persistent data. If the domain name for a
+-- customerId is changed, the Google system automatically updates.
 cpCustomerId :: Lens' CustomersPatch Text
 cpCustomerId
   = lens _cpCustomerId (\ s a -> s{_cpCustomerId = a})

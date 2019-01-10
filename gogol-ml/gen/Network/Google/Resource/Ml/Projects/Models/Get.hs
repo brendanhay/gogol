@@ -24,7 +24,7 @@
 -- set), and the default version (if at least one version of the model has
 -- been deployed).
 --
--- /See:/ <https://cloud.google.com/ml/ Google Cloud Machine Learning Reference> for @ml.projects.models.get@.
+-- /See:/ <https://cloud.google.com/ml/ Cloud Machine Learning Engine Reference> for @ml.projects.models.get@.
 module Network.Google.Resource.Ml.Projects.Models.Get
     (
     -- * REST Resource
@@ -37,10 +37,8 @@ module Network.Google.Resource.Ml.Projects.Models.Get
     -- * Request Lenses
     , pmgXgafv
     , pmgUploadProtocol
-    , pmgPp
     , pmgAccessToken
     , pmgUploadType
-    , pmgBearerToken
     , pmgName
     , pmgCallback
     ) where
@@ -51,17 +49,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @ml.projects.models.get@ method which the
 -- 'ProjectsModelsGet' request conforms to.
 type ProjectsModelsGetResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] GoogleCloudMlV1beta1__Model
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] GoogleCloudMlV1__Model
 
 -- | Gets information about a model, including its name, the description (if
 -- set), and the default version (if at least one version of the model has
@@ -71,10 +67,8 @@ type ProjectsModelsGetResource =
 data ProjectsModelsGet = ProjectsModelsGet'
     { _pmgXgafv          :: !(Maybe Xgafv)
     , _pmgUploadProtocol :: !(Maybe Text)
-    , _pmgPp             :: !Bool
     , _pmgAccessToken    :: !(Maybe Text)
     , _pmgUploadType     :: !(Maybe Text)
-    , _pmgBearerToken    :: !(Maybe Text)
     , _pmgName           :: !Text
     , _pmgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -87,13 +81,9 @@ data ProjectsModelsGet = ProjectsModelsGet'
 --
 -- * 'pmgUploadProtocol'
 --
--- * 'pmgPp'
---
 -- * 'pmgAccessToken'
 --
 -- * 'pmgUploadType'
---
--- * 'pmgBearerToken'
 --
 -- * 'pmgName'
 --
@@ -105,10 +95,8 @@ projectsModelsGet pPmgName_ =
     ProjectsModelsGet'
     { _pmgXgafv = Nothing
     , _pmgUploadProtocol = Nothing
-    , _pmgPp = True
     , _pmgAccessToken = Nothing
     , _pmgUploadType = Nothing
-    , _pmgBearerToken = Nothing
     , _pmgName = pPmgName_
     , _pmgCallback = Nothing
     }
@@ -123,10 +111,6 @@ pmgUploadProtocol
   = lens _pmgUploadProtocol
       (\ s a -> s{_pmgUploadProtocol = a})
 
--- | Pretty-print response.
-pmgPp :: Lens' ProjectsModelsGet Bool
-pmgPp = lens _pmgPp (\ s a -> s{_pmgPp = a})
-
 -- | OAuth access token.
 pmgAccessToken :: Lens' ProjectsModelsGet (Maybe Text)
 pmgAccessToken
@@ -139,14 +123,7 @@ pmgUploadType
   = lens _pmgUploadType
       (\ s a -> s{_pmgUploadType = a})
 
--- | OAuth bearer token.
-pmgBearerToken :: Lens' ProjectsModelsGet (Maybe Text)
-pmgBearerToken
-  = lens _pmgBearerToken
-      (\ s a -> s{_pmgBearerToken = a})
-
--- | Required. The name of the model. Authorization: requires \`Viewer\` role
--- on the parent project.
+-- | Required. The name of the model.
 pmgName :: Lens' ProjectsModelsGet Text
 pmgName = lens _pmgName (\ s a -> s{_pmgName = a})
 
@@ -156,16 +133,13 @@ pmgCallback
   = lens _pmgCallback (\ s a -> s{_pmgCallback = a})
 
 instance GoogleRequest ProjectsModelsGet where
-        type Rs ProjectsModelsGet =
-             GoogleCloudMlV1beta1__Model
+        type Rs ProjectsModelsGet = GoogleCloudMlV1__Model
         type Scopes ProjectsModelsGet =
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsModelsGet'{..}
           = go _pmgName _pmgXgafv _pmgUploadProtocol
-              (Just _pmgPp)
               _pmgAccessToken
               _pmgUploadType
-              _pmgBearerToken
               _pmgCallback
               (Just AltJSON)
               machineLearningService

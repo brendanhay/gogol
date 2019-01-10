@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'VideoFormatsGet' request conforms to.
 type VideoFormatsGetResource =
      "dfareporting" :>
-       "v2.7" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "videoFormats" :>

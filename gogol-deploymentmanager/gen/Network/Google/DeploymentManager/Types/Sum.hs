@@ -16,7 +16,7 @@
 --
 module Network.Google.DeploymentManager.Types.Sum where
 
-import           Network.Google.Prelude
+import           Network.Google.Prelude hiding (Bytes)
 
 -- | Sets the policy to use for creating new resources.
 data DeploymentsUpdateCreatePolicy
@@ -151,4 +151,31 @@ instance FromJSON DeploymentsPatchCreatePolicy where
     parseJSON = parseJSONText "DeploymentsPatchCreatePolicy"
 
 instance ToJSON DeploymentsPatchCreatePolicy where
+    toJSON = toJSONText
+
+-- | Sets the policy to use for creating new resources.
+data DeploymentsInsertCreatePolicy
+    = DICPAcquire
+      -- ^ @ACQUIRE@
+    | DICPCreateOrAcquire
+      -- ^ @CREATE_OR_ACQUIRE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable DeploymentsInsertCreatePolicy
+
+instance FromHttpApiData DeploymentsInsertCreatePolicy where
+    parseQueryParam = \case
+        "ACQUIRE" -> Right DICPAcquire
+        "CREATE_OR_ACQUIRE" -> Right DICPCreateOrAcquire
+        x -> Left ("Unable to parse DeploymentsInsertCreatePolicy from: " <> x)
+
+instance ToHttpApiData DeploymentsInsertCreatePolicy where
+    toQueryParam = \case
+        DICPAcquire -> "ACQUIRE"
+        DICPCreateOrAcquire -> "CREATE_OR_ACQUIRE"
+
+instance FromJSON DeploymentsInsertCreatePolicy where
+    parseJSON = parseJSONText "DeploymentsInsertCreatePolicy"
+
+instance ToJSON DeploymentsInsertCreatePolicy where
     toJSON = toJSONText

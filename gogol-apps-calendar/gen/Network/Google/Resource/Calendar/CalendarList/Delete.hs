@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes an entry on the user\'s calendar list.
+-- Removes a calendar from the user\'s calendar list.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.calendarList.delete@.
 module Network.Google.Resource.Calendar.CalendarList.Delete
@@ -50,7 +50,7 @@ type CalendarListDeleteResource =
                Capture "calendarId" Text :>
                  QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
--- | Deletes an entry on the user\'s calendar list.
+-- | Removes a calendar from the user\'s calendar list.
 --
 -- /See:/ 'calendarListDelete' smart constructor.
 newtype CalendarListDelete = CalendarListDelete'

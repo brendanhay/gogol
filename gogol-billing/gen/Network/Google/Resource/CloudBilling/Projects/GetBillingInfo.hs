@@ -25,7 +25,7 @@
 -- project](https:\/\/cloud.google.com\/docs\/permissions-overview#h.bgs0oxofvnoo
 -- ).
 --
--- /See:/ <https://cloud.google.com/billing/ Google Cloud Billing API Reference> for @cloudbilling.projects.getBillingInfo@.
+-- /See:/ <https://cloud.google.com/billing/ Cloud Billing API Reference> for @cloudbilling.projects.getBillingInfo@.
 module Network.Google.Resource.CloudBilling.Projects.GetBillingInfo
     (
     -- * REST Resource
@@ -38,10 +38,8 @@ module Network.Google.Resource.CloudBilling.Projects.GetBillingInfo
     -- * Request Lenses
     , pgbiXgafv
     , pgbiUploadProtocol
-    , pgbiPp
     , pgbiAccessToken
     , pgbiUploadType
-    , pgbiBearerToken
     , pgbiName
     , pgbiCallback
     ) where
@@ -55,15 +53,13 @@ type ProjectsGetBillingInfoResource =
      "v1" :>
        Capture "name" Text :>
          "billingInfo" :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] ProjectBillingInfo
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] ProjectBillingInfo
 
 -- | Gets the billing information for a project. The current authenticated
 -- user must have [permission to view the
@@ -72,12 +68,10 @@ type ProjectsGetBillingInfoResource =
 --
 -- /See:/ 'projectsGetBillingInfo' smart constructor.
 data ProjectsGetBillingInfo = ProjectsGetBillingInfo'
-    { _pgbiXgafv          :: !(Maybe Text)
+    { _pgbiXgafv          :: !(Maybe Xgafv)
     , _pgbiUploadProtocol :: !(Maybe Text)
-    , _pgbiPp             :: !Bool
     , _pgbiAccessToken    :: !(Maybe Text)
     , _pgbiUploadType     :: !(Maybe Text)
-    , _pgbiBearerToken    :: !(Maybe Text)
     , _pgbiName           :: !Text
     , _pgbiCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -90,13 +84,9 @@ data ProjectsGetBillingInfo = ProjectsGetBillingInfo'
 --
 -- * 'pgbiUploadProtocol'
 --
--- * 'pgbiPp'
---
 -- * 'pgbiAccessToken'
 --
 -- * 'pgbiUploadType'
---
--- * 'pgbiBearerToken'
 --
 -- * 'pgbiName'
 --
@@ -108,16 +98,14 @@ projectsGetBillingInfo pPgbiName_ =
     ProjectsGetBillingInfo'
     { _pgbiXgafv = Nothing
     , _pgbiUploadProtocol = Nothing
-    , _pgbiPp = True
     , _pgbiAccessToken = Nothing
     , _pgbiUploadType = Nothing
-    , _pgbiBearerToken = Nothing
     , _pgbiName = pPgbiName_
     , _pgbiCallback = Nothing
     }
 
 -- | V1 error format.
-pgbiXgafv :: Lens' ProjectsGetBillingInfo (Maybe Text)
+pgbiXgafv :: Lens' ProjectsGetBillingInfo (Maybe Xgafv)
 pgbiXgafv
   = lens _pgbiXgafv (\ s a -> s{_pgbiXgafv = a})
 
@@ -126,10 +114,6 @@ pgbiUploadProtocol :: Lens' ProjectsGetBillingInfo (Maybe Text)
 pgbiUploadProtocol
   = lens _pgbiUploadProtocol
       (\ s a -> s{_pgbiUploadProtocol = a})
-
--- | Pretty-print response.
-pgbiPp :: Lens' ProjectsGetBillingInfo Bool
-pgbiPp = lens _pgbiPp (\ s a -> s{_pgbiPp = a})
 
 -- | OAuth access token.
 pgbiAccessToken :: Lens' ProjectsGetBillingInfo (Maybe Text)
@@ -142,12 +126,6 @@ pgbiUploadType :: Lens' ProjectsGetBillingInfo (Maybe Text)
 pgbiUploadType
   = lens _pgbiUploadType
       (\ s a -> s{_pgbiUploadType = a})
-
--- | OAuth bearer token.
-pgbiBearerToken :: Lens' ProjectsGetBillingInfo (Maybe Text)
-pgbiBearerToken
-  = lens _pgbiBearerToken
-      (\ s a -> s{_pgbiBearerToken = a})
 
 -- | The resource name of the project for which billing information is
 -- retrieved. For example, \`projects\/tokyo-rain-123\`.
@@ -165,10 +143,8 @@ instance GoogleRequest ProjectsGetBillingInfo where
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsGetBillingInfo'{..}
           = go _pgbiName _pgbiXgafv _pgbiUploadProtocol
-              (Just _pgbiPp)
               _pgbiAccessToken
               _pgbiUploadType
-              _pgbiBearerToken
               _pgbiCallback
               (Just AltJSON)
               billingService

@@ -88,7 +88,8 @@ qrqPayload
 
 instance GoogleRequest QueriesRunQuery where
         type Rs QueriesRunQuery = ()
-        type Scopes QueriesRunQuery = '[]
+        type Scopes QueriesRunQuery =
+             '["https://www.googleapis.com/auth/doubleclickbidmanager"]
         requestClient QueriesRunQuery'{..}
           = go _qrqQueryId (Just AltJSON) _qrqPayload
               doubleClickBidsService

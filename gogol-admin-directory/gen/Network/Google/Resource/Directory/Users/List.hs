@@ -172,8 +172,8 @@ ulSortOrder :: Lens' UsersList (Maybe UsersListSortOrder)
 ulSortOrder
   = lens _ulSortOrder (\ s a -> s{_ulSortOrder = a})
 
--- | Immutable id of the Google Apps account. In case of multi-domain, to
--- fetch all users for a customer, fill this field instead of domain.
+-- | Immutable ID of the G Suite account. In case of multi-domain, to fetch
+-- all users for a customer, fill this field instead of domain.
 ulCustomer :: Lens' UsersList (Maybe Text)
 ulCustomer
   = lens _ulCustomer (\ s a -> s{_ulCustomer = a})

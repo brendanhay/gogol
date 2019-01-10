@@ -93,7 +93,7 @@ rpPayload
 rpRoleId :: Lens' RolesPatch Text
 rpRoleId = lens _rpRoleId (\ s a -> s{_rpRoleId = a})
 
--- | Immutable ID of the Google Apps account.
+-- | Immutable ID of the G Suite account.
 rpCustomer :: Lens' RolesPatch Text
 rpCustomer
   = lens _rpCustomer (\ s a -> s{_rpCustomer = a})

@@ -16,7 +16,7 @@
 -- Transfers data from external data sources to a Google Cloud Storage
 -- bucket or between Google Cloud Storage buckets.
 --
--- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference>
+-- /See:/ <https://cloud.google.com/storage/transfer Storage Transfer API Reference>
 module Network.Google.StorageTransfer
     (
     -- * Service Configuration
@@ -29,9 +29,6 @@ module Network.Google.StorageTransfer
     , StorageTransferAPI
 
     -- * Resources
-
-    -- ** storagetransfer.getGoogleServiceAccount
-    , module Network.Google.Resource.StorageTransfer.GetGoogleServiceAccount
 
     -- ** storagetransfer.googleServiceAccounts.get
     , module Network.Google.Resource.StorageTransfer.GoogleServiceAccounts.Get
@@ -87,6 +84,9 @@ module Network.Google.StorageTransfer
     , listOperationsResponse
     , lorNextPageToken
     , lorOperations
+
+    -- ** TransferOperationStatus
+    , TransferOperationStatus (..)
 
     -- ** Schedule
     , Schedule
@@ -182,11 +182,17 @@ module Network.Google.StorageTransfer
     , gcsData
     , gdBucketName
 
+    -- ** Xgafv
+    , Xgafv (..)
+
     -- ** AwsS3Data
     , AwsS3Data
     , awsS3Data
     , asdBucketName
     , asdAwsAccessKey
+
+    -- ** TransferJobStatus
+    , TransferJobStatus (..)
 
     -- ** HTTPData
     , HTTPData
@@ -262,10 +268,12 @@ module Network.Google.StorageTransfer
     , awsAccessKey
     , aakSecretAccessKey
     , aakAccessKeyId
+
+    -- ** ErrorSummaryErrorCode
+    , ErrorSummaryErrorCode (..)
     ) where
 
 import           Network.Google.Prelude
-import           Network.Google.Resource.StorageTransfer.GetGoogleServiceAccount
 import           Network.Google.Resource.StorageTransfer.GoogleServiceAccounts.Get
 import           Network.Google.Resource.StorageTransfer.TransferJobs.Create
 import           Network.Google.Resource.StorageTransfer.TransferJobs.Get
@@ -283,13 +291,12 @@ import           Network.Google.StorageTransfer.Types
 TODO
 -}
 
--- | Represents the entirety of the methods and resources available for the Google Storage Transfer API service.
+-- | Represents the entirety of the methods and resources available for the Storage Transfer API service.
 type StorageTransferAPI =
      TransferJobsListResource :<|>
        TransferJobsPatchResource
        :<|> TransferJobsGetResource
        :<|> TransferJobsCreateResource
-       :<|> GetGoogleServiceAccountResource
        :<|> TransferOperationsListResource
        :<|> TransferOperationsGetResource
        :<|> TransferOperationsPauseResource

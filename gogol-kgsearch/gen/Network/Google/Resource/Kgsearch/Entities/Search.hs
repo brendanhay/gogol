@@ -38,14 +38,12 @@ module Network.Google.Resource.Kgsearch.Entities.Search
     , esXgafv
     , esUploadProtocol
     , esPrefix
-    , esPp
     , esAccessToken
     , esUploadType
     , esTypes
     , esIds
     , esLanguages
     , esIndent
-    , esBearerToken
     , esQuery
     , esLimit
     , esCallback
@@ -62,19 +60,17 @@ type EntitiesSearchResource =
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "prefix" Bool :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParams "types" Text :>
-                       QueryParams "ids" Text :>
-                         QueryParams "languages" Text :>
-                           QueryParam "indent" Bool :>
-                             QueryParam "bearer_token" Text :>
-                               QueryParam "query" Text :>
-                                 QueryParam "limit" (Textual Int32) :>
-                                   QueryParam "callback" Text :>
-                                     QueryParam "alt" AltJSON :>
-                                       Get '[JSON] SearchResponse
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParams "types" Text :>
+                     QueryParams "ids" Text :>
+                       QueryParams "languages" Text :>
+                         QueryParam "indent" Bool :>
+                           QueryParam "query" Text :>
+                             QueryParam "limit" (Textual Int32) :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON] SearchResponse
 
 -- | Searches Knowledge Graph for entities that match the constraints. A list
 -- of matched entities will be returned in response, which will be in
@@ -85,14 +81,12 @@ data EntitiesSearch = EntitiesSearch'
     { _esXgafv          :: !(Maybe Xgafv)
     , _esUploadProtocol :: !(Maybe Text)
     , _esPrefix         :: !(Maybe Bool)
-    , _esPp             :: !Bool
     , _esAccessToken    :: !(Maybe Text)
     , _esUploadType     :: !(Maybe Text)
     , _esTypes          :: !(Maybe [Text])
     , _esIds            :: !(Maybe [Text])
     , _esLanguages      :: !(Maybe [Text])
     , _esIndent         :: !(Maybe Bool)
-    , _esBearerToken    :: !(Maybe Text)
     , _esQuery          :: !(Maybe Text)
     , _esLimit          :: !(Maybe (Textual Int32))
     , _esCallback       :: !(Maybe Text)
@@ -108,8 +102,6 @@ data EntitiesSearch = EntitiesSearch'
 --
 -- * 'esPrefix'
 --
--- * 'esPp'
---
 -- * 'esAccessToken'
 --
 -- * 'esUploadType'
@@ -121,8 +113,6 @@ data EntitiesSearch = EntitiesSearch'
 -- * 'esLanguages'
 --
 -- * 'esIndent'
---
--- * 'esBearerToken'
 --
 -- * 'esQuery'
 --
@@ -136,14 +126,12 @@ entitiesSearch =
     { _esXgafv = Nothing
     , _esUploadProtocol = Nothing
     , _esPrefix = Nothing
-    , _esPp = True
     , _esAccessToken = Nothing
     , _esUploadType = Nothing
     , _esTypes = Nothing
     , _esIds = Nothing
     , _esLanguages = Nothing
     , _esIndent = Nothing
-    , _esBearerToken = Nothing
     , _esQuery = Nothing
     , _esLimit = Nothing
     , _esCallback = Nothing
@@ -162,10 +150,6 @@ esUploadProtocol
 -- | Enables prefix match against names and aliases of entities
 esPrefix :: Lens' EntitiesSearch (Maybe Bool)
 esPrefix = lens _esPrefix (\ s a -> s{_esPrefix = a})
-
--- | Pretty-print response.
-esPp :: Lens' EntitiesSearch Bool
-esPp = lens _esPp (\ s a -> s{_esPp = a})
 
 -- | OAuth access token.
 esAccessToken :: Lens' EntitiesSearch (Maybe Text)
@@ -206,12 +190,6 @@ esLanguages
 esIndent :: Lens' EntitiesSearch (Maybe Bool)
 esIndent = lens _esIndent (\ s a -> s{_esIndent = a})
 
--- | OAuth bearer token.
-esBearerToken :: Lens' EntitiesSearch (Maybe Text)
-esBearerToken
-  = lens _esBearerToken
-      (\ s a -> s{_esBearerToken = a})
-
 -- | The literal query string for search.
 esQuery :: Lens' EntitiesSearch (Maybe Text)
 esQuery = lens _esQuery (\ s a -> s{_esQuery = a})
@@ -232,14 +210,12 @@ instance GoogleRequest EntitiesSearch where
         type Scopes EntitiesSearch = '[]
         requestClient EntitiesSearch'{..}
           = go _esXgafv _esUploadProtocol _esPrefix
-              (Just _esPp)
               _esAccessToken
               _esUploadType
               (_esTypes ^. _Default)
               (_esIds ^. _Default)
               (_esLanguages ^. _Default)
               _esIndent
-              _esBearerToken
               _esQuery
               _esLimit
               _esCallback

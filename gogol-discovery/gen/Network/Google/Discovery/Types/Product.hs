@@ -959,7 +959,7 @@ data RestDescription = RestDescription'
     , _rdOwnerName                 :: !(Maybe Text)
     , _rdResources                 :: !(Maybe RestDescriptionResources)
     , _rdOwnerDomain               :: !(Maybe Text)
-    , _rdBatchPath                 :: !Text
+    , _rdBatchPath                 :: !(Maybe Text)
     , _rdMethods                   :: !(Maybe RestDescriptionMethods)
     , _rdName                      :: !(Maybe Text)
     , _rdPackagePath               :: !(Maybe Text)
@@ -1058,7 +1058,7 @@ restDescription =
     , _rdOwnerName = Nothing
     , _rdResources = Nothing
     , _rdOwnerDomain = Nothing
-    , _rdBatchPath = "batch"
+    , _rdBatchPath = Nothing
     , _rdMethods = Nothing
     , _rdName = Nothing
     , _rdPackagePath = Nothing
@@ -1145,7 +1145,7 @@ rdOwnerDomain
       (\ s a -> s{_rdOwnerDomain = a})
 
 -- | The path for REST batch requests.
-rdBatchPath :: Lens' RestDescription Text
+rdBatchPath :: Lens' RestDescription (Maybe Text)
 rdBatchPath
   = lens _rdBatchPath (\ s a -> s{_rdBatchPath = a})
 
@@ -1253,7 +1253,7 @@ instance FromJSON RestDescription where
                      <*> (o .:? "ownerName")
                      <*> (o .:? "resources")
                      <*> (o .:? "ownerDomain")
-                     <*> (o .:? "batchPath" .!= "batch")
+                     <*> (o .:? "batchPath")
                      <*> (o .:? "methods")
                      <*> (o .:? "name")
                      <*> (o .:? "packagePath")
@@ -1288,7 +1288,7 @@ instance ToJSON RestDescription where
                   ("ownerName" .=) <$> _rdOwnerName,
                   ("resources" .=) <$> _rdResources,
                   ("ownerDomain" .=) <$> _rdOwnerDomain,
-                  Just ("batchPath" .= _rdBatchPath),
+                  ("batchPath" .=) <$> _rdBatchPath,
                   ("methods" .=) <$> _rdMethods,
                   ("name" .=) <$> _rdName,
                   ("packagePath" .=) <$> _rdPackagePath,

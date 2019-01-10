@@ -36,10 +36,8 @@ module Network.Google.Resource.Logging.BillingAccounts.Sinks.List
     , baslParent
     , baslXgafv
     , baslUploadProtocol
-    , baslPp
     , baslAccessToken
     , baslUploadType
-    , baslBearerToken
     , baslPageToken
     , baslPageSize
     , baslCallback
@@ -56,15 +54,13 @@ type BillingAccountsSinksListResource =
          "sinks" :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" (Textual Int32) :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] ListSinksResponse
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "pageSize" (Textual Int32) :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] ListSinksResponse
 
 -- | Lists sinks.
 --
@@ -73,10 +69,8 @@ data BillingAccountsSinksList = BillingAccountsSinksList'
     { _baslParent         :: !Text
     , _baslXgafv          :: !(Maybe Xgafv)
     , _baslUploadProtocol :: !(Maybe Text)
-    , _baslPp             :: !Bool
     , _baslAccessToken    :: !(Maybe Text)
     , _baslUploadType     :: !(Maybe Text)
-    , _baslBearerToken    :: !(Maybe Text)
     , _baslPageToken      :: !(Maybe Text)
     , _baslPageSize       :: !(Maybe (Textual Int32))
     , _baslCallback       :: !(Maybe Text)
@@ -92,13 +86,9 @@ data BillingAccountsSinksList = BillingAccountsSinksList'
 --
 -- * 'baslUploadProtocol'
 --
--- * 'baslPp'
---
 -- * 'baslAccessToken'
 --
 -- * 'baslUploadType'
---
--- * 'baslBearerToken'
 --
 -- * 'baslPageToken'
 --
@@ -113,17 +103,16 @@ billingAccountsSinksList pBaslParent_ =
     { _baslParent = pBaslParent_
     , _baslXgafv = Nothing
     , _baslUploadProtocol = Nothing
-    , _baslPp = True
     , _baslAccessToken = Nothing
     , _baslUploadType = Nothing
-    , _baslBearerToken = Nothing
     , _baslPageToken = Nothing
     , _baslPageSize = Nothing
     , _baslCallback = Nothing
     }
 
--- | Required. The parent resource whose sinks are to be listed. Examples:
--- \"projects\/my-logging-project\", \"organizations\/123456789\".
+-- | Required. The parent resource whose sinks are to be listed:
+-- \"projects\/[PROJECT_ID]\" \"organizations\/[ORGANIZATION_ID]\"
+-- \"billingAccounts\/[BILLING_ACCOUNT_ID]\" \"folders\/[FOLDER_ID]\"
 baslParent :: Lens' BillingAccountsSinksList Text
 baslParent
   = lens _baslParent (\ s a -> s{_baslParent = a})
@@ -139,10 +128,6 @@ baslUploadProtocol
   = lens _baslUploadProtocol
       (\ s a -> s{_baslUploadProtocol = a})
 
--- | Pretty-print response.
-baslPp :: Lens' BillingAccountsSinksList Bool
-baslPp = lens _baslPp (\ s a -> s{_baslPp = a})
-
 -- | OAuth access token.
 baslAccessToken :: Lens' BillingAccountsSinksList (Maybe Text)
 baslAccessToken
@@ -154,12 +139,6 @@ baslUploadType :: Lens' BillingAccountsSinksList (Maybe Text)
 baslUploadType
   = lens _baslUploadType
       (\ s a -> s{_baslUploadType = a})
-
--- | OAuth bearer token.
-baslBearerToken :: Lens' BillingAccountsSinksList (Maybe Text)
-baslBearerToken
-  = lens _baslBearerToken
-      (\ s a -> s{_baslBearerToken = a})
 
 -- | Optional. If present, then retrieve the next batch of results from the
 -- preceding call to this method. pageToken must be the value of
@@ -192,10 +171,8 @@ instance GoogleRequest BillingAccountsSinksList where
                "https://www.googleapis.com/auth/logging.read"]
         requestClient BillingAccountsSinksList'{..}
           = go _baslParent _baslXgafv _baslUploadProtocol
-              (Just _baslPp)
               _baslAccessToken
               _baslUploadType
-              _baslBearerToken
               _baslPageToken
               _baslPageSize
               _baslCallback

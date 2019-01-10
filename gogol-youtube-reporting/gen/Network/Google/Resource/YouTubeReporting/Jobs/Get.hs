@@ -36,11 +36,9 @@ module Network.Google.Resource.YouTubeReporting.Jobs.Get
     , jgXgafv
     , jgJobId
     , jgUploadProtocol
-    , jgPp
     , jgAccessToken
     , jgUploadType
     , jgOnBehalfOfContentOwner
-    , jgBearerToken
     , jgCallback
     ) where
 
@@ -55,13 +53,11 @@ type JobsGetResource =
          Capture "jobId" Text :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "onBehalfOfContentOwner" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "callback" Text :>
-                           QueryParam "alt" AltJSON :> Get '[JSON] Job
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "onBehalfOfContentOwner" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] Job
 
 -- | Gets a job.
 --
@@ -70,11 +66,9 @@ data JobsGet = JobsGet'
     { _jgXgafv                  :: !(Maybe Xgafv)
     , _jgJobId                  :: !Text
     , _jgUploadProtocol         :: !(Maybe Text)
-    , _jgPp                     :: !Bool
     , _jgAccessToken            :: !(Maybe Text)
     , _jgUploadType             :: !(Maybe Text)
     , _jgOnBehalfOfContentOwner :: !(Maybe Text)
-    , _jgBearerToken            :: !(Maybe Text)
     , _jgCallback               :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -88,15 +82,11 @@ data JobsGet = JobsGet'
 --
 -- * 'jgUploadProtocol'
 --
--- * 'jgPp'
---
 -- * 'jgAccessToken'
 --
 -- * 'jgUploadType'
 --
 -- * 'jgOnBehalfOfContentOwner'
---
--- * 'jgBearerToken'
 --
 -- * 'jgCallback'
 jobsGet
@@ -107,11 +97,9 @@ jobsGet pJgJobId_ =
     { _jgXgafv = Nothing
     , _jgJobId = pJgJobId_
     , _jgUploadProtocol = Nothing
-    , _jgPp = True
     , _jgAccessToken = Nothing
     , _jgUploadType = Nothing
     , _jgOnBehalfOfContentOwner = Nothing
-    , _jgBearerToken = Nothing
     , _jgCallback = Nothing
     }
 
@@ -128,10 +116,6 @@ jgUploadProtocol :: Lens' JobsGet (Maybe Text)
 jgUploadProtocol
   = lens _jgUploadProtocol
       (\ s a -> s{_jgUploadProtocol = a})
-
--- | Pretty-print response.
-jgPp :: Lens' JobsGet Bool
-jgPp = lens _jgPp (\ s a -> s{_jgPp = a})
 
 -- | OAuth access token.
 jgAccessToken :: Lens' JobsGet (Maybe Text)
@@ -151,12 +135,6 @@ jgOnBehalfOfContentOwner
   = lens _jgOnBehalfOfContentOwner
       (\ s a -> s{_jgOnBehalfOfContentOwner = a})
 
--- | OAuth bearer token.
-jgBearerToken :: Lens' JobsGet (Maybe Text)
-jgBearerToken
-  = lens _jgBearerToken
-      (\ s a -> s{_jgBearerToken = a})
-
 -- | JSONP
 jgCallback :: Lens' JobsGet (Maybe Text)
 jgCallback
@@ -168,11 +146,10 @@ instance GoogleRequest JobsGet where
              '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
                "https://www.googleapis.com/auth/yt-analytics.readonly"]
         requestClient JobsGet'{..}
-          = go _jgJobId _jgXgafv _jgUploadProtocol (Just _jgPp)
+          = go _jgJobId _jgXgafv _jgUploadProtocol
               _jgAccessToken
               _jgUploadType
               _jgOnBehalfOfContentOwner
-              _jgBearerToken
               _jgCallback
               (Just AltJSON)
               youTubeReportingService

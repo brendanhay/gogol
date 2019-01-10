@@ -16,9 +16,10 @@
 --
 module Network.Google.PageSpeed.Types.Sum where
 
-import           Network.Google.Prelude
+import           Network.Google.Prelude hiding (Bytes)
 
--- | The analysis strategy to use
+-- | The analysis strategy (desktop or mobile) to use, and desktop is the
+-- default
 data PagespeedAPIRunPagespeedStrategy
     = Desktop
       -- ^ @desktop@
@@ -45,4 +46,44 @@ instance FromJSON PagespeedAPIRunPagespeedStrategy where
     parseJSON = parseJSONText "PagespeedAPIRunPagespeedStrategy"
 
 instance ToJSON PagespeedAPIRunPagespeedStrategy where
+    toJSON = toJSONText
+
+-- | A Lighthouse category to run; if none are given, only Performance
+-- category will be run
+data PagespeedAPIRunPagespeedCategory
+    = Accessibility
+      -- ^ @accessibility@
+    | BestPractices
+      -- ^ @best-practices@
+    | Performance
+      -- ^ @performance@
+    | Pwa
+      -- ^ @pwa@
+    | Seo
+      -- ^ @seo@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable PagespeedAPIRunPagespeedCategory
+
+instance FromHttpApiData PagespeedAPIRunPagespeedCategory where
+    parseQueryParam = \case
+        "accessibility" -> Right Accessibility
+        "best-practices" -> Right BestPractices
+        "performance" -> Right Performance
+        "pwa" -> Right Pwa
+        "seo" -> Right Seo
+        x -> Left ("Unable to parse PagespeedAPIRunPagespeedCategory from: " <> x)
+
+instance ToHttpApiData PagespeedAPIRunPagespeedCategory where
+    toQueryParam = \case
+        Accessibility -> "accessibility"
+        BestPractices -> "best-practices"
+        Performance -> "performance"
+        Pwa -> "pwa"
+        Seo -> "seo"
+
+instance FromJSON PagespeedAPIRunPagespeedCategory where
+    parseJSON = parseJSONText "PagespeedAPIRunPagespeedCategory"
+
+instance ToJSON PagespeedAPIRunPagespeedCategory where
     toJSON = toJSONText

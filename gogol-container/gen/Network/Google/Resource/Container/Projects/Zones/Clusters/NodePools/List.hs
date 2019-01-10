@@ -22,7 +22,7 @@
 --
 -- Lists the node pools for a cluster.
 --
--- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @container.projects.zones.clusters.nodePools.list@.
+-- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.zones.clusters.nodePools.list@.
 module Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.List
     (
     -- * REST Resource
@@ -33,13 +33,12 @@ module Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.List
     , ProjectsZonesClustersNodePoolsList
 
     -- * Request Lenses
+    , pzcnplParent
     , pzcnplXgafv
     , pzcnplUploadProtocol
-    , pzcnplPp
     , pzcnplAccessToken
     , pzcnplUploadType
     , pzcnplZone
-    , pzcnplBearerToken
     , pzcnplClusterId
     , pzcnplProjectId
     , pzcnplCallback
@@ -59,27 +58,25 @@ type ProjectsZonesClustersNodePoolsListResource =
                "clusters" :>
                  Capture "clusterId" Text :>
                    "nodePools" :>
-                     QueryParam "$.xgafv" Text :>
-                       QueryParam "upload_protocol" Text :>
-                         QueryParam "pp" Bool :>
+                     QueryParam "parent" Text :>
+                       QueryParam "$.xgafv" Xgafv :>
+                         QueryParam "upload_protocol" Text :>
                            QueryParam "access_token" Text :>
                              QueryParam "uploadType" Text :>
-                               QueryParam "bearer_token" Text :>
-                                 QueryParam "callback" Text :>
-                                   QueryParam "alt" AltJSON :>
-                                     Get '[JSON] ListNodePoolsResponse
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON] ListNodePoolsResponse
 
 -- | Lists the node pools for a cluster.
 --
 -- /See:/ 'projectsZonesClustersNodePoolsList' smart constructor.
 data ProjectsZonesClustersNodePoolsList = ProjectsZonesClustersNodePoolsList'
-    { _pzcnplXgafv          :: !(Maybe Text)
+    { _pzcnplParent         :: !(Maybe Text)
+    , _pzcnplXgafv          :: !(Maybe Xgafv)
     , _pzcnplUploadProtocol :: !(Maybe Text)
-    , _pzcnplPp             :: !Bool
     , _pzcnplAccessToken    :: !(Maybe Text)
     , _pzcnplUploadType     :: !(Maybe Text)
     , _pzcnplZone           :: !Text
-    , _pzcnplBearerToken    :: !(Maybe Text)
     , _pzcnplClusterId      :: !Text
     , _pzcnplProjectId      :: !Text
     , _pzcnplCallback       :: !(Maybe Text)
@@ -89,19 +86,17 @@ data ProjectsZonesClustersNodePoolsList = ProjectsZonesClustersNodePoolsList'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'pzcnplParent'
+--
 -- * 'pzcnplXgafv'
 --
 -- * 'pzcnplUploadProtocol'
---
--- * 'pzcnplPp'
 --
 -- * 'pzcnplAccessToken'
 --
 -- * 'pzcnplUploadType'
 --
 -- * 'pzcnplZone'
---
--- * 'pzcnplBearerToken'
 --
 -- * 'pzcnplClusterId'
 --
@@ -115,20 +110,26 @@ projectsZonesClustersNodePoolsList
     -> ProjectsZonesClustersNodePoolsList
 projectsZonesClustersNodePoolsList pPzcnplZone_ pPzcnplClusterId_ pPzcnplProjectId_ =
     ProjectsZonesClustersNodePoolsList'
-    { _pzcnplXgafv = Nothing
+    { _pzcnplParent = Nothing
+    , _pzcnplXgafv = Nothing
     , _pzcnplUploadProtocol = Nothing
-    , _pzcnplPp = True
     , _pzcnplAccessToken = Nothing
     , _pzcnplUploadType = Nothing
     , _pzcnplZone = pPzcnplZone_
-    , _pzcnplBearerToken = Nothing
     , _pzcnplClusterId = pPzcnplClusterId_
     , _pzcnplProjectId = pPzcnplProjectId_
     , _pzcnplCallback = Nothing
     }
 
+-- | The parent (project, location, cluster id) where the node pools will be
+-- listed. Specified in the format
+-- \'projects\/*\/locations\/*\/clusters\/*\'.
+pzcnplParent :: Lens' ProjectsZonesClustersNodePoolsList (Maybe Text)
+pzcnplParent
+  = lens _pzcnplParent (\ s a -> s{_pzcnplParent = a})
+
 -- | V1 error format.
-pzcnplXgafv :: Lens' ProjectsZonesClustersNodePoolsList (Maybe Text)
+pzcnplXgafv :: Lens' ProjectsZonesClustersNodePoolsList (Maybe Xgafv)
 pzcnplXgafv
   = lens _pzcnplXgafv (\ s a -> s{_pzcnplXgafv = a})
 
@@ -137,10 +138,6 @@ pzcnplUploadProtocol :: Lens' ProjectsZonesClustersNodePoolsList (Maybe Text)
 pzcnplUploadProtocol
   = lens _pzcnplUploadProtocol
       (\ s a -> s{_pzcnplUploadProtocol = a})
-
--- | Pretty-print response.
-pzcnplPp :: Lens' ProjectsZonesClustersNodePoolsList Bool
-pzcnplPp = lens _pzcnplPp (\ s a -> s{_pzcnplPp = a})
 
 -- | OAuth access token.
 pzcnplAccessToken :: Lens' ProjectsZonesClustersNodePoolsList (Maybe Text)
@@ -154,26 +151,23 @@ pzcnplUploadType
   = lens _pzcnplUploadType
       (\ s a -> s{_pzcnplUploadType = a})
 
--- | The name of the Google Compute Engine
+-- | Deprecated. The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
+-- This field has been deprecated and replaced by the parent field.
 pzcnplZone :: Lens' ProjectsZonesClustersNodePoolsList Text
 pzcnplZone
   = lens _pzcnplZone (\ s a -> s{_pzcnplZone = a})
 
--- | OAuth bearer token.
-pzcnplBearerToken :: Lens' ProjectsZonesClustersNodePoolsList (Maybe Text)
-pzcnplBearerToken
-  = lens _pzcnplBearerToken
-      (\ s a -> s{_pzcnplBearerToken = a})
-
--- | The name of the cluster.
+-- | Deprecated. The name of the cluster. This field has been deprecated and
+-- replaced by the parent field.
 pzcnplClusterId :: Lens' ProjectsZonesClustersNodePoolsList Text
 pzcnplClusterId
   = lens _pzcnplClusterId
       (\ s a -> s{_pzcnplClusterId = a})
 
--- | The Google Developers Console [project ID or project
+-- | Deprecated. The Google Developers Console [project ID or project
 -- number](https:\/\/developers.google.com\/console\/help\/new\/#projectnumber).
+-- This field has been deprecated and replaced by the parent field.
 pzcnplProjectId :: Lens' ProjectsZonesClustersNodePoolsList Text
 pzcnplProjectId
   = lens _pzcnplProjectId
@@ -193,12 +187,11 @@ instance GoogleRequest
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsZonesClustersNodePoolsList'{..}
           = go _pzcnplProjectId _pzcnplZone _pzcnplClusterId
+              _pzcnplParent
               _pzcnplXgafv
               _pzcnplUploadProtocol
-              (Just _pzcnplPp)
               _pzcnplAccessToken
               _pzcnplUploadType
-              _pzcnplBearerToken
               _pzcnplCallback
               (Just AltJSON)
               containerService

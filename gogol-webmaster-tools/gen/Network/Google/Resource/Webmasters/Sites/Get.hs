@@ -69,7 +69,9 @@ sitesGet pSitSiteURL_ =
     }
 
 -- | The URI of the property as defined in Search Console. Examples:
--- http:\/\/www.example.com\/ or android-app:\/\/com.example\/
+-- http:\/\/www.example.com\/ or android-app:\/\/com.example\/ Note: for
+-- property-sets, use the URI that starts with sc-set: which is used in
+-- Search Console URLs.
 sitSiteURL :: Lens' SitesGet Text
 sitSiteURL
   = lens _sitSiteURL (\ s a -> s{_sitSiteURL = a})

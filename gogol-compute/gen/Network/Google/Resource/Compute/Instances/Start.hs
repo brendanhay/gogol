@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Starts an instance that was stopped using the using the instances().stop
--- method. For more information, see Restart an instance.
+-- Starts an instance that was stopped using the instances().stop method.
+-- For more information, see Restart an instance.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instances.start@.
 module Network.Google.Resource.Compute.Instances.Start
@@ -34,9 +34,10 @@ module Network.Google.Resource.Compute.Instances.Start
     , InstancesStart
 
     -- * Request Lenses
-    , insProject
-    , insZone
-    , insInstance
+    , insnRequestId
+    , insnProject
+    , insnZone
+    , insnInstance
     ) where
 
 import           Network.Google.Compute.Types
@@ -54,52 +55,72 @@ type InstancesStartResource =
                  "instances" :>
                    Capture "instance" Text :>
                      "start" :>
-                       QueryParam "alt" AltJSON :> Post '[JSON] Operation
+                       QueryParam "requestId" Text :>
+                         QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
--- | Starts an instance that was stopped using the using the instances().stop
--- method. For more information, see Restart an instance.
+-- | Starts an instance that was stopped using the instances().stop method.
+-- For more information, see Restart an instance.
 --
 -- /See:/ 'instancesStart' smart constructor.
 data InstancesStart = InstancesStart'
-    { _insProject  :: !Text
-    , _insZone     :: !Text
-    , _insInstance :: !Text
+    { _insnRequestId :: !(Maybe Text)
+    , _insnProject   :: !Text
+    , _insnZone      :: !Text
+    , _insnInstance  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesStart' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'insProject'
+-- * 'insnRequestId'
 --
--- * 'insZone'
+-- * 'insnProject'
 --
--- * 'insInstance'
+-- * 'insnZone'
+--
+-- * 'insnInstance'
 instancesStart
-    :: Text -- ^ 'insProject'
-    -> Text -- ^ 'insZone'
-    -> Text -- ^ 'insInstance'
+    :: Text -- ^ 'insnProject'
+    -> Text -- ^ 'insnZone'
+    -> Text -- ^ 'insnInstance'
     -> InstancesStart
-instancesStart pInsProject_ pInsZone_ pInsInstance_ =
+instancesStart pInsnProject_ pInsnZone_ pInsnInstance_ =
     InstancesStart'
-    { _insProject = pInsProject_
-    , _insZone = pInsZone_
-    , _insInstance = pInsInstance_
+    { _insnRequestId = Nothing
+    , _insnProject = pInsnProject_
+    , _insnZone = pInsnZone_
+    , _insnInstance = pInsnInstance_
     }
 
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+insnRequestId :: Lens' InstancesStart (Maybe Text)
+insnRequestId
+  = lens _insnRequestId
+      (\ s a -> s{_insnRequestId = a})
+
 -- | Project ID for this request.
-insProject :: Lens' InstancesStart Text
-insProject
-  = lens _insProject (\ s a -> s{_insProject = a})
+insnProject :: Lens' InstancesStart Text
+insnProject
+  = lens _insnProject (\ s a -> s{_insnProject = a})
 
 -- | The name of the zone for this request.
-insZone :: Lens' InstancesStart Text
-insZone = lens _insZone (\ s a -> s{_insZone = a})
+insnZone :: Lens' InstancesStart Text
+insnZone = lens _insnZone (\ s a -> s{_insnZone = a})
 
 -- | Name of the instance resource to start.
-insInstance :: Lens' InstancesStart Text
-insInstance
-  = lens _insInstance (\ s a -> s{_insInstance = a})
+insnInstance :: Lens' InstancesStart Text
+insnInstance
+  = lens _insnInstance (\ s a -> s{_insnInstance = a})
 
 instance GoogleRequest InstancesStart where
         type Rs InstancesStart = Operation
@@ -107,7 +128,9 @@ instance GoogleRequest InstancesStart where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient InstancesStart'{..}
-          = go _insProject _insZone _insInstance (Just AltJSON)
+          = go _insnProject _insnZone _insnInstance
+              _insnRequestId
+              (Just AltJSON)
               computeService
           where go
                   = buildClient (Proxy :: Proxy InstancesStartResource)

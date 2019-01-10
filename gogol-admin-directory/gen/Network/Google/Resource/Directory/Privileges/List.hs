@@ -72,7 +72,7 @@ privilegesList pPlCustomer_ =
     { _plCustomer = pPlCustomer_
     }
 
--- | Immutable ID of the Google Apps account.
+-- | Immutable ID of the G Suite account.
 plCustomer :: Lens' PrivilegesList Text
 plCustomer
   = lens _plCustomer (\ s a -> s{_plCustomer = a})

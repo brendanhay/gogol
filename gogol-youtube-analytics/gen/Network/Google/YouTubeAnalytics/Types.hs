@@ -40,6 +40,24 @@ module Network.Google.YouTubeAnalytics.Types
     , gKind
     , gContentDetails
     , gId
+    , gErrors
+
+    -- * ListGroupsResponse
+    , ListGroupsResponse
+    , listGroupsResponse
+    , lgrEtag
+    , lgrNextPageToken
+    , lgrKind
+    , lgrItems
+    , lgrErrors
+
+    -- * ListGroupItemsResponse
+    , ListGroupItemsResponse
+    , listGroupItemsResponse
+    , lgirEtag
+    , lgirKind
+    , lgirItems
+    , lgirErrors
 
     -- * GroupItemResource
     , GroupItemResource
@@ -47,19 +65,8 @@ module Network.Google.YouTubeAnalytics.Types
     , girKind
     , girId
 
-    -- * ResultTableColumnHeadersItem
-    , ResultTableColumnHeadersItem
-    , resultTableColumnHeadersItem
-    , rtchiColumnType
-    , rtchiName
-    , rtchiDataType
-
-    -- * ResultTable
-    , ResultTable
-    , resultTable
-    , rtKind
-    , rtRows
-    , rtColumnHeaders
+    -- * Xgafv
+    , Xgafv (..)
 
     -- * GroupSnippet
     , GroupSnippet
@@ -75,32 +82,62 @@ module Network.Google.YouTubeAnalytics.Types
     , giResource
     , giGroupId
     , giId
+    , giErrors
 
-    -- * GroupItemListResponse
-    , GroupItemListResponse
-    , groupItemListResponse
-    , gilrEtag
-    , gilrKind
-    , gilrItems
+    -- * Errors
+    , Errors
+    , errors
+    , eRequestId
+    , eError
+    , eCode
 
-    -- * GroupListResponse
-    , GroupListResponse
-    , groupListResponse
-    , glrEtag
-    , glrNextPageToken
-    , glrKind
-    , glrItems
+    -- * ErrorProtoLocationType
+    , ErrorProtoLocationType (..)
+
+    -- * ErrorsCode
+    , ErrorsCode (..)
+
+    -- * ResultTableColumnHeader
+    , ResultTableColumnHeader
+    , resultTableColumnHeader
+    , rtchColumnType
+    , rtchName
+    , rtchDataType
+
+    -- * ErrorProto
+    , ErrorProto
+    , errorProto
+    , epDebugInfo
+    , epLocation
+    , epDomain
+    , epArgument
+    , epExternalErrorMessage
+    , epCode
+    , epLocationType
+
+    -- * EmptyResponse
+    , EmptyResponse
+    , emptyResponse
+    , erErrors
+
+    -- * QueryResponse
+    , QueryResponse
+    , queryResponse
+    , qrKind
+    , qrRows
+    , qrColumnHeaders
+    , qrErrors
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.YouTubeAnalytics.Types.Product
 import           Network.Google.YouTubeAnalytics.Types.Sum
 
--- | Default request referring to version 'v1' of the YouTube Analytics API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v2' of the YouTube Analytics API. This contains the host and root path used as a starting point for constructing service requests.
 youTubeAnalyticsService :: ServiceConfig
 youTubeAnalyticsService
-  = defaultService (ServiceId "youtubeAnalytics:v1")
-      "www.googleapis.com"
+  = defaultService (ServiceId "youtubeAnalytics:v2")
+      "youtubeanalytics.googleapis.com"
 
 -- | Manage your YouTube account
 youTubeScope :: Proxy '["https://www.googleapis.com/auth/youtube"]

@@ -20,10 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Finds named entities (currently finds proper names) in the text, entity
--- types, salience, mentions for each entity, and other properties.
+-- Finds named entities (currently proper names and common nouns) in the
+-- text along with entity types, salience, mentions for each entity, and
+-- other properties.
 --
--- /See:/ <https://cloud.google.com/natural-language/ Google Cloud Natural Language API Reference> for @language.documents.analyzeEntities@.
+-- /See:/ <https://cloud.google.com/natural-language/ Cloud Natural Language API Reference> for @language.documents.analyzeEntities@.
 module Network.Google.Resource.Language.Documents.AnalyzeEntities
     (
     -- * REST Resource
@@ -36,11 +37,9 @@ module Network.Google.Resource.Language.Documents.AnalyzeEntities
     -- * Request Lenses
     , daeXgafv
     , daeUploadProtocol
-    , daePp
     , daeAccessToken
     , daeUploadType
     , daePayload
-    , daeBearerToken
     , daeCallback
     ) where
 
@@ -54,27 +53,24 @@ type DocumentsAnalyzeEntitiesResource =
        "documents:analyzeEntities" :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] AnalyzeEntitiesRequest :>
-                           Post '[JSON] AnalyzeEntitiesResponse
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] AnalyzeEntitiesRequest :>
+                       Post '[JSON] AnalyzeEntitiesResponse
 
--- | Finds named entities (currently finds proper names) in the text, entity
--- types, salience, mentions for each entity, and other properties.
+-- | Finds named entities (currently proper names and common nouns) in the
+-- text along with entity types, salience, mentions for each entity, and
+-- other properties.
 --
 -- /See:/ 'documentsAnalyzeEntities' smart constructor.
 data DocumentsAnalyzeEntities = DocumentsAnalyzeEntities'
     { _daeXgafv          :: !(Maybe Xgafv)
     , _daeUploadProtocol :: !(Maybe Text)
-    , _daePp             :: !Bool
     , _daeAccessToken    :: !(Maybe Text)
     , _daeUploadType     :: !(Maybe Text)
     , _daePayload        :: !AnalyzeEntitiesRequest
-    , _daeBearerToken    :: !(Maybe Text)
     , _daeCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -86,15 +82,11 @@ data DocumentsAnalyzeEntities = DocumentsAnalyzeEntities'
 --
 -- * 'daeUploadProtocol'
 --
--- * 'daePp'
---
 -- * 'daeAccessToken'
 --
 -- * 'daeUploadType'
 --
 -- * 'daePayload'
---
--- * 'daeBearerToken'
 --
 -- * 'daeCallback'
 documentsAnalyzeEntities
@@ -104,11 +96,9 @@ documentsAnalyzeEntities pDaePayload_ =
     DocumentsAnalyzeEntities'
     { _daeXgafv = Nothing
     , _daeUploadProtocol = Nothing
-    , _daePp = True
     , _daeAccessToken = Nothing
     , _daeUploadType = Nothing
     , _daePayload = pDaePayload_
-    , _daeBearerToken = Nothing
     , _daeCallback = Nothing
     }
 
@@ -121,10 +111,6 @@ daeUploadProtocol :: Lens' DocumentsAnalyzeEntities (Maybe Text)
 daeUploadProtocol
   = lens _daeUploadProtocol
       (\ s a -> s{_daeUploadProtocol = a})
-
--- | Pretty-print response.
-daePp :: Lens' DocumentsAnalyzeEntities Bool
-daePp = lens _daePp (\ s a -> s{_daePp = a})
 
 -- | OAuth access token.
 daeAccessToken :: Lens' DocumentsAnalyzeEntities (Maybe Text)
@@ -143,12 +129,6 @@ daePayload :: Lens' DocumentsAnalyzeEntities AnalyzeEntitiesRequest
 daePayload
   = lens _daePayload (\ s a -> s{_daePayload = a})
 
--- | OAuth bearer token.
-daeBearerToken :: Lens' DocumentsAnalyzeEntities (Maybe Text)
-daeBearerToken
-  = lens _daeBearerToken
-      (\ s a -> s{_daeBearerToken = a})
-
 -- | JSONP
 daeCallback :: Lens' DocumentsAnalyzeEntities (Maybe Text)
 daeCallback
@@ -158,12 +138,11 @@ instance GoogleRequest DocumentsAnalyzeEntities where
         type Rs DocumentsAnalyzeEntities =
              AnalyzeEntitiesResponse
         type Scopes DocumentsAnalyzeEntities =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-language",
+               "https://www.googleapis.com/auth/cloud-platform"]
         requestClient DocumentsAnalyzeEntities'{..}
-          = go _daeXgafv _daeUploadProtocol (Just _daePp)
-              _daeAccessToken
+          = go _daeXgafv _daeUploadProtocol _daeAccessToken
               _daeUploadType
-              _daeBearerToken
               _daeCallback
               (Just AltJSON)
               _daePayload

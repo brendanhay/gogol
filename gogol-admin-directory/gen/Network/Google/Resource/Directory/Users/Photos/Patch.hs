@@ -83,7 +83,7 @@ uppPayload :: Lens' UsersPhotosPatch UserPhoto
 uppPayload
   = lens _uppPayload (\ s a -> s{_uppPayload = a})
 
--- | Email or immutable Id of the user
+-- | Email or immutable ID of the user
 uppUserKey :: Lens' UsersPhotosPatch Text
 uppUserKey
   = lens _uppUserKey (\ s a -> s{_uppUserKey = a})

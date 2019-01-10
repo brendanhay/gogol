@@ -22,7 +22,6 @@ module Network.Google.GamesManagement
       gamesManagementService
 
     -- * OAuth Scopes
-    , plusLoginScope
     , gamesScope
 
     -- * API Declaration

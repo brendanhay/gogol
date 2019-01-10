@@ -20,11 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns information about a previously requested build. The Build that
--- is returned includes its status (e.g., success or failure, or
--- in-progress), and timing information.
+-- Returns information about a previously requested build. The \`Build\`
+-- that is returned includes its status (such as \`SUCCESS\`, \`FAILURE\`,
+-- or \`WORKING\`), and timing information.
 --
--- /See:/ <https://cloud.google.com/container-builder/docs/ Google Cloud Container Builder API Reference> for @cloudbuild.projects.builds.get@.
+-- /See:/ <https://cloud.google.com/cloud-build/docs/ Cloud Build API Reference> for @cloudbuild.projects.builds.get@.
 module Network.Google.Resource.Cloudbuild.Projects.Builds.Get
     (
     -- * REST Resource
@@ -37,10 +37,8 @@ module Network.Google.Resource.Cloudbuild.Projects.Builds.Get
     -- * Request Lenses
     , pbgXgafv
     , pbgUploadProtocol
-    , pbgPp
     , pbgAccessToken
     , pbgUploadType
-    , pbgBearerToken
     , pbgId
     , pbgProjectId
     , pbgCallback
@@ -59,25 +57,21 @@ type ProjectsBuildsGetResource =
              Capture "id" Text :>
                QueryParam "$.xgafv" Xgafv :>
                  QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :> Get '[JSON] Build
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] Build
 
--- | Returns information about a previously requested build. The Build that
--- is returned includes its status (e.g., success or failure, or
--- in-progress), and timing information.
+-- | Returns information about a previously requested build. The \`Build\`
+-- that is returned includes its status (such as \`SUCCESS\`, \`FAILURE\`,
+-- or \`WORKING\`), and timing information.
 --
 -- /See:/ 'projectsBuildsGet' smart constructor.
 data ProjectsBuildsGet = ProjectsBuildsGet'
     { _pbgXgafv          :: !(Maybe Xgafv)
     , _pbgUploadProtocol :: !(Maybe Text)
-    , _pbgPp             :: !Bool
     , _pbgAccessToken    :: !(Maybe Text)
     , _pbgUploadType     :: !(Maybe Text)
-    , _pbgBearerToken    :: !(Maybe Text)
     , _pbgId             :: !Text
     , _pbgProjectId      :: !Text
     , _pbgCallback       :: !(Maybe Text)
@@ -91,13 +85,9 @@ data ProjectsBuildsGet = ProjectsBuildsGet'
 --
 -- * 'pbgUploadProtocol'
 --
--- * 'pbgPp'
---
 -- * 'pbgAccessToken'
 --
 -- * 'pbgUploadType'
---
--- * 'pbgBearerToken'
 --
 -- * 'pbgId'
 --
@@ -112,10 +102,8 @@ projectsBuildsGet pPbgId_ pPbgProjectId_ =
     ProjectsBuildsGet'
     { _pbgXgafv = Nothing
     , _pbgUploadProtocol = Nothing
-    , _pbgPp = True
     , _pbgAccessToken = Nothing
     , _pbgUploadType = Nothing
-    , _pbgBearerToken = Nothing
     , _pbgId = pPbgId_
     , _pbgProjectId = pPbgProjectId_
     , _pbgCallback = Nothing
@@ -131,10 +119,6 @@ pbgUploadProtocol
   = lens _pbgUploadProtocol
       (\ s a -> s{_pbgUploadProtocol = a})
 
--- | Pretty-print response.
-pbgPp :: Lens' ProjectsBuildsGet Bool
-pbgPp = lens _pbgPp (\ s a -> s{_pbgPp = a})
-
 -- | OAuth access token.
 pbgAccessToken :: Lens' ProjectsBuildsGet (Maybe Text)
 pbgAccessToken
@@ -146,12 +130,6 @@ pbgUploadType :: Lens' ProjectsBuildsGet (Maybe Text)
 pbgUploadType
   = lens _pbgUploadType
       (\ s a -> s{_pbgUploadType = a})
-
--- | OAuth bearer token.
-pbgBearerToken :: Lens' ProjectsBuildsGet (Maybe Text)
-pbgBearerToken
-  = lens _pbgBearerToken
-      (\ s a -> s{_pbgBearerToken = a})
 
 -- | ID of the build.
 pbgId :: Lens' ProjectsBuildsGet Text
@@ -174,10 +152,8 @@ instance GoogleRequest ProjectsBuildsGet where
         requestClient ProjectsBuildsGet'{..}
           = go _pbgProjectId _pbgId _pbgXgafv
               _pbgUploadProtocol
-              (Just _pbgPp)
               _pbgAccessToken
               _pbgUploadType
-              _pbgBearerToken
               _pbgCallback
               (Just AltJSON)
               containerBuilderService

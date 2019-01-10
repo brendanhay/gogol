@@ -2017,8 +2017,10 @@ instance ToJSON URLChannel where
 --
 -- /See:/ 'adCode' smart constructor.
 data AdCode = AdCode'
-    { _addKind   :: !Text
-    , _addAdCode :: !(Maybe Text)
+    { _addKind    :: !Text
+    , _addAmpHead :: !(Maybe Text)
+    , _addAmpBody :: !(Maybe Text)
+    , _addAdCode  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdCode' with the minimum fields required to make a request.
@@ -2027,12 +2029,18 @@ data AdCode = AdCode'
 --
 -- * 'addKind'
 --
+-- * 'addAmpHead'
+--
+-- * 'addAmpBody'
+--
 -- * 'addAdCode'
 adCode
     :: AdCode
 adCode =
     AdCode'
     { _addKind = "adsense#adCode"
+    , _addAmpHead = Nothing
+    , _addAmpBody = Nothing
     , _addAdCode = Nothing
     }
 
@@ -2040,7 +2048,17 @@ adCode =
 addKind :: Lens' AdCode Text
 addKind = lens _addKind (\ s a -> s{_addKind = a})
 
--- | The ad code snippet.
+-- | The AMP Auto ad code snippet that goes in the head of an AMP page.
+addAmpHead :: Lens' AdCode (Maybe Text)
+addAmpHead
+  = lens _addAmpHead (\ s a -> s{_addAmpHead = a})
+
+-- | The AMP Auto ad code snippet that goes in the body of an AMP page.
+addAmpBody :: Lens' AdCode (Maybe Text)
+addAmpBody
+  = lens _addAmpBody (\ s a -> s{_addAmpBody = a})
+
+-- | The Auto ad code snippet. The ad code snippet.
 addAdCode :: Lens' AdCode (Maybe Text)
 addAdCode
   = lens _addAdCode (\ s a -> s{_addAdCode = a})
@@ -2051,13 +2069,17 @@ instance FromJSON AdCode where
               (\ o ->
                  AdCode' <$>
                    (o .:? "kind" .!= "adsense#adCode") <*>
-                     (o .:? "adCode"))
+                     (o .:? "ampHead")
+                     <*> (o .:? "ampBody")
+                     <*> (o .:? "adCode"))
 
 instance ToJSON AdCode where
         toJSON AdCode'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _addKind),
+                  ("ampHead" .=) <$> _addAmpHead,
+                  ("ampBody" .=) <$> _addAmpBody,
                   ("adCode" .=) <$> _addAdCode])
 
 --

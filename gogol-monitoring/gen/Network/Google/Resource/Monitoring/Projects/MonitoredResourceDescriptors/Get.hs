@@ -36,10 +36,8 @@ module Network.Google.Resource.Monitoring.Projects.MonitoredResourceDescriptors.
     -- * Request Lenses
     , pmrdgXgafv
     , pmrdgUploadProtocol
-    , pmrdgPp
     , pmrdgAccessToken
     , pmrdgUploadType
-    , pmrdgBearerToken
     , pmrdgName
     , pmrdgCallback
     ) where
@@ -55,13 +53,11 @@ type ProjectsMonitoredResourceDescriptorsGetResource
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] MonitoredResourceDescriptor
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] MonitoredResourceDescriptor
 
 -- | Gets a single monitored resource descriptor. This method does not
 -- require a Stackdriver account.
@@ -70,10 +66,8 @@ type ProjectsMonitoredResourceDescriptorsGetResource
 data ProjectsMonitoredResourceDescriptorsGet = ProjectsMonitoredResourceDescriptorsGet'
     { _pmrdgXgafv          :: !(Maybe Xgafv)
     , _pmrdgUploadProtocol :: !(Maybe Text)
-    , _pmrdgPp             :: !Bool
     , _pmrdgAccessToken    :: !(Maybe Text)
     , _pmrdgUploadType     :: !(Maybe Text)
-    , _pmrdgBearerToken    :: !(Maybe Text)
     , _pmrdgName           :: !Text
     , _pmrdgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -86,13 +80,9 @@ data ProjectsMonitoredResourceDescriptorsGet = ProjectsMonitoredResourceDescript
 --
 -- * 'pmrdgUploadProtocol'
 --
--- * 'pmrdgPp'
---
 -- * 'pmrdgAccessToken'
 --
 -- * 'pmrdgUploadType'
---
--- * 'pmrdgBearerToken'
 --
 -- * 'pmrdgName'
 --
@@ -104,10 +94,8 @@ projectsMonitoredResourceDescriptorsGet pPmrdgName_ =
     ProjectsMonitoredResourceDescriptorsGet'
     { _pmrdgXgafv = Nothing
     , _pmrdgUploadProtocol = Nothing
-    , _pmrdgPp = True
     , _pmrdgAccessToken = Nothing
     , _pmrdgUploadType = Nothing
-    , _pmrdgBearerToken = Nothing
     , _pmrdgName = pPmrdgName_
     , _pmrdgCallback = Nothing
     }
@@ -123,10 +111,6 @@ pmrdgUploadProtocol
   = lens _pmrdgUploadProtocol
       (\ s a -> s{_pmrdgUploadProtocol = a})
 
--- | Pretty-print response.
-pmrdgPp :: Lens' ProjectsMonitoredResourceDescriptorsGet Bool
-pmrdgPp = lens _pmrdgPp (\ s a -> s{_pmrdgPp = a})
-
 -- | OAuth access token.
 pmrdgAccessToken :: Lens' ProjectsMonitoredResourceDescriptorsGet (Maybe Text)
 pmrdgAccessToken
@@ -138,12 +122,6 @@ pmrdgUploadType :: Lens' ProjectsMonitoredResourceDescriptorsGet (Maybe Text)
 pmrdgUploadType
   = lens _pmrdgUploadType
       (\ s a -> s{_pmrdgUploadType = a})
-
--- | OAuth bearer token.
-pmrdgBearerToken :: Lens' ProjectsMonitoredResourceDescriptorsGet (Maybe Text)
-pmrdgBearerToken
-  = lens _pmrdgBearerToken
-      (\ s a -> s{_pmrdgBearerToken = a})
 
 -- | The monitored resource descriptor to get. The format is
 -- \"projects\/{project_id_or_number}\/monitoredResourceDescriptors\/{resource_type}\".
@@ -170,10 +148,8 @@ instance GoogleRequest
         requestClient
           ProjectsMonitoredResourceDescriptorsGet'{..}
           = go _pmrdgName _pmrdgXgafv _pmrdgUploadProtocol
-              (Just _pmrdgPp)
               _pmrdgAccessToken
               _pmrdgUploadType
-              _pmrdgBearerToken
               _pmrdgCallback
               (Just AltJSON)
               monitoringService

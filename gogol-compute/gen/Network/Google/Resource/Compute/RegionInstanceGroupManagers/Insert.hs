@@ -21,12 +21,12 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Creates a managed instance group using the information that you specify
--- in the request. After the group is created, it schedules an action to
--- create instances in the group using the specified instance template.
--- This operation is marked as DONE when the group is created even if the
--- instances in the group have not yet been created. You must separately
--- verify the status of the individual instances with the
--- listmanagedinstances method.
+-- in the request. After the group is created, instances in the group are
+-- created using the specified instance template. This operation is marked
+-- as DONE when the group is created even if the instances in the group
+-- have not yet been created. You must separately verify the status of the
+-- individual instances with the listmanagedinstances method. A regional
+-- managed instance group can contain up to 2000 instances.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.regionInstanceGroupManagers.insert@.
 module Network.Google.Resource.Compute.RegionInstanceGroupManagers.Insert
@@ -39,6 +39,7 @@ module Network.Google.Resource.Compute.RegionInstanceGroupManagers.Insert
     , RegionInstanceGroupManagersInsert
 
     -- * Request Lenses
+    , rigmiRequestId
     , rigmiProject
     , rigmiPayload
     , rigmiRegion
@@ -57,28 +58,32 @@ type RegionInstanceGroupManagersInsertResource =
              "regions" :>
                Capture "region" Text :>
                  "instanceGroupManagers" :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] InstanceGroupManager :>
-                       Post '[JSON] Operation
+                   QueryParam "requestId" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] InstanceGroupManager :>
+                         Post '[JSON] Operation
 
 -- | Creates a managed instance group using the information that you specify
--- in the request. After the group is created, it schedules an action to
--- create instances in the group using the specified instance template.
--- This operation is marked as DONE when the group is created even if the
--- instances in the group have not yet been created. You must separately
--- verify the status of the individual instances with the
--- listmanagedinstances method.
+-- in the request. After the group is created, instances in the group are
+-- created using the specified instance template. This operation is marked
+-- as DONE when the group is created even if the instances in the group
+-- have not yet been created. You must separately verify the status of the
+-- individual instances with the listmanagedinstances method. A regional
+-- managed instance group can contain up to 2000 instances.
 --
 -- /See:/ 'regionInstanceGroupManagersInsert' smart constructor.
 data RegionInstanceGroupManagersInsert = RegionInstanceGroupManagersInsert'
-    { _rigmiProject :: !Text
-    , _rigmiPayload :: !InstanceGroupManager
-    , _rigmiRegion  :: !Text
+    { _rigmiRequestId :: !(Maybe Text)
+    , _rigmiProject   :: !Text
+    , _rigmiPayload   :: !InstanceGroupManager
+    , _rigmiRegion    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RegionInstanceGroupManagersInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rigmiRequestId'
 --
 -- * 'rigmiProject'
 --
@@ -92,10 +97,26 @@ regionInstanceGroupManagersInsert
     -> RegionInstanceGroupManagersInsert
 regionInstanceGroupManagersInsert pRigmiProject_ pRigmiPayload_ pRigmiRegion_ =
     RegionInstanceGroupManagersInsert'
-    { _rigmiProject = pRigmiProject_
+    { _rigmiRequestId = Nothing
+    , _rigmiProject = pRigmiProject_
     , _rigmiPayload = pRigmiPayload_
     , _rigmiRegion = pRigmiRegion_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+rigmiRequestId :: Lens' RegionInstanceGroupManagersInsert (Maybe Text)
+rigmiRequestId
+  = lens _rigmiRequestId
+      (\ s a -> s{_rigmiRequestId = a})
 
 -- | Project ID for this request.
 rigmiProject :: Lens' RegionInstanceGroupManagersInsert Text
@@ -119,7 +140,8 @@ instance GoogleRequest
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient RegionInstanceGroupManagersInsert'{..}
-          = go _rigmiProject _rigmiRegion (Just AltJSON)
+          = go _rigmiProject _rigmiRegion _rigmiRequestId
+              (Just AltJSON)
               _rigmiPayload
               computeService
           where go

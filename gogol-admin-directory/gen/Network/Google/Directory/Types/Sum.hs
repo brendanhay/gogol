@@ -16,7 +16,7 @@
 --
 module Network.Google.Directory.Types.Sum where
 
-import           Network.Google.Prelude
+import           Network.Google.Prelude hiding (Bytes)
 
 -- | Event on which subscription is intended (if subscribing)
 data UsersListEvent
@@ -257,7 +257,7 @@ instance ToJSON UsersListViewType where
 data OrgUnitsListType
     = All
       -- ^ @all@
-      -- All sub-organization units.
+      -- All sub-organizational units.
     | Children
       -- ^ @children@
       -- Immediate children only (default).
@@ -344,6 +344,30 @@ instance FromJSON UsersListOrderBy where
     parseJSON = parseJSONText "UsersListOrderBy"
 
 instance ToJSON UsersListOrderBy where
+    toJSON = toJSONText
+
+-- | Column to use for sorting results
+data GroupsListOrderBy
+    = GLOBEmail
+      -- ^ @email@
+      -- Email of the group.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GroupsListOrderBy
+
+instance FromHttpApiData GroupsListOrderBy where
+    parseQueryParam = \case
+        "email" -> Right GLOBEmail
+        x -> Left ("Unable to parse GroupsListOrderBy from: " <> x)
+
+instance ToHttpApiData GroupsListOrderBy where
+    toQueryParam = \case
+        GLOBEmail -> "email"
+
+instance FromJSON GroupsListOrderBy where
+    parseJSON = parseJSONText "GroupsListOrderBy"
+
+instance ToJSON GroupsListOrderBy where
     toJSON = toJSONText
 
 -- | Whether to fetch the ADMIN_VIEW or DOMAIN_PUBLIC view of the user.
@@ -584,6 +608,36 @@ instance FromJSON UsersWatchSortOrder where
     parseJSON = parseJSONText "UsersWatchSortOrder"
 
 instance ToJSON UsersWatchSortOrder where
+    toJSON = toJSONText
+
+-- | Whether to return results in ascending or descending order. Only of use
+-- when orderBy is also used
+data GroupsListSortOrder
+    = GLSOAscending
+      -- ^ @ASCENDING@
+      -- Ascending order.
+    | GLSODescending
+      -- ^ @DESCENDING@
+      -- Descending order.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GroupsListSortOrder
+
+instance FromHttpApiData GroupsListSortOrder where
+    parseQueryParam = \case
+        "ASCENDING" -> Right GLSOAscending
+        "DESCENDING" -> Right GLSODescending
+        x -> Left ("Unable to parse GroupsListSortOrder from: " <> x)
+
+instance ToHttpApiData GroupsListSortOrder where
+    toQueryParam = \case
+        GLSOAscending -> "ASCENDING"
+        GLSODescending -> "DESCENDING"
+
+instance FromJSON GroupsListSortOrder where
+    parseJSON = parseJSONText "GroupsListSortOrder"
+
+instance ToJSON GroupsListSortOrder where
     toJSON = toJSONText
 
 -- | What subset of fields to fetch for this user.

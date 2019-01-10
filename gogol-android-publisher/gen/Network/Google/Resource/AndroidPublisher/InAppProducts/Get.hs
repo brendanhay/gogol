@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'InAppProductsGet' request conforms to.
 type InAppProductsGetResource =
      "androidpublisher" :>
-       "v2" :>
+       "v3" :>
          "applications" :>
            Capture "packageName" Text :>
              "inappproducts" :>

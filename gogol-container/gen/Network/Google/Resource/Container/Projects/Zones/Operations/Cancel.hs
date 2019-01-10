@@ -22,7 +22,7 @@
 --
 -- Cancels the specified operation.
 --
--- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @container.projects.zones.operations.cancel@.
+-- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.zones.operations.cancel@.
 module Network.Google.Resource.Container.Projects.Zones.Operations.Cancel
     (
     -- * REST Resource
@@ -35,12 +35,10 @@ module Network.Google.Resource.Container.Projects.Zones.Operations.Cancel
     -- * Request Lenses
     , pzocXgafv
     , pzocUploadProtocol
-    , pzocPp
     , pzocAccessToken
     , pzocUploadType
     , pzocZone
     , pzocPayload
-    , pzocBearerToken
     , pzocProjectId
     , pzocOperationId
     , pzocCallback
@@ -59,29 +57,25 @@ type ProjectsZonesOperationsCancelResource =
              Capture "zone" Text :>
                "operations" :>
                  CaptureMode "operationId" "cancel" Text :>
-                   QueryParam "$.xgafv" Text :>
+                   QueryParam "$.xgafv" Xgafv :>
                      QueryParam "upload_protocol" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "access_token" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "bearer_token" Text :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" AltJSON :>
-                                   ReqBody '[JSON] CancelOperationRequest :>
-                                     Post '[JSON] Empty
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] CancelOperationRequest :>
+                                 Post '[JSON] Empty
 
 -- | Cancels the specified operation.
 --
 -- /See:/ 'projectsZonesOperationsCancel' smart constructor.
 data ProjectsZonesOperationsCancel = ProjectsZonesOperationsCancel'
-    { _pzocXgafv          :: !(Maybe Text)
+    { _pzocXgafv          :: !(Maybe Xgafv)
     , _pzocUploadProtocol :: !(Maybe Text)
-    , _pzocPp             :: !Bool
     , _pzocAccessToken    :: !(Maybe Text)
     , _pzocUploadType     :: !(Maybe Text)
     , _pzocZone           :: !Text
     , _pzocPayload        :: !CancelOperationRequest
-    , _pzocBearerToken    :: !(Maybe Text)
     , _pzocProjectId      :: !Text
     , _pzocOperationId    :: !Text
     , _pzocCallback       :: !(Maybe Text)
@@ -95,8 +89,6 @@ data ProjectsZonesOperationsCancel = ProjectsZonesOperationsCancel'
 --
 -- * 'pzocUploadProtocol'
 --
--- * 'pzocPp'
---
 -- * 'pzocAccessToken'
 --
 -- * 'pzocUploadType'
@@ -104,8 +96,6 @@ data ProjectsZonesOperationsCancel = ProjectsZonesOperationsCancel'
 -- * 'pzocZone'
 --
 -- * 'pzocPayload'
---
--- * 'pzocBearerToken'
 --
 -- * 'pzocProjectId'
 --
@@ -122,19 +112,17 @@ projectsZonesOperationsCancel pPzocZone_ pPzocPayload_ pPzocProjectId_ pPzocOper
     ProjectsZonesOperationsCancel'
     { _pzocXgafv = Nothing
     , _pzocUploadProtocol = Nothing
-    , _pzocPp = True
     , _pzocAccessToken = Nothing
     , _pzocUploadType = Nothing
     , _pzocZone = pPzocZone_
     , _pzocPayload = pPzocPayload_
-    , _pzocBearerToken = Nothing
     , _pzocProjectId = pPzocProjectId_
     , _pzocOperationId = pPzocOperationId_
     , _pzocCallback = Nothing
     }
 
 -- | V1 error format.
-pzocXgafv :: Lens' ProjectsZonesOperationsCancel (Maybe Text)
+pzocXgafv :: Lens' ProjectsZonesOperationsCancel (Maybe Xgafv)
 pzocXgafv
   = lens _pzocXgafv (\ s a -> s{_pzocXgafv = a})
 
@@ -143,10 +131,6 @@ pzocUploadProtocol :: Lens' ProjectsZonesOperationsCancel (Maybe Text)
 pzocUploadProtocol
   = lens _pzocUploadProtocol
       (\ s a -> s{_pzocUploadProtocol = a})
-
--- | Pretty-print response.
-pzocPp :: Lens' ProjectsZonesOperationsCancel Bool
-pzocPp = lens _pzocPp (\ s a -> s{_pzocPp = a})
 
 -- | OAuth access token.
 pzocAccessToken :: Lens' ProjectsZonesOperationsCancel (Maybe Text)
@@ -160,8 +144,9 @@ pzocUploadType
   = lens _pzocUploadType
       (\ s a -> s{_pzocUploadType = a})
 
--- | The name of the Google Compute Engine
+-- | Deprecated. The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) in which the operation resides.
+-- This field has been deprecated and replaced by the name field.
 pzocZone :: Lens' ProjectsZonesOperationsCancel Text
 pzocZone = lens _pzocZone (\ s a -> s{_pzocZone = a})
 
@@ -170,20 +155,16 @@ pzocPayload :: Lens' ProjectsZonesOperationsCancel CancelOperationRequest
 pzocPayload
   = lens _pzocPayload (\ s a -> s{_pzocPayload = a})
 
--- | OAuth bearer token.
-pzocBearerToken :: Lens' ProjectsZonesOperationsCancel (Maybe Text)
-pzocBearerToken
-  = lens _pzocBearerToken
-      (\ s a -> s{_pzocBearerToken = a})
-
--- | The Google Developers Console [project ID or project
--- number](https:\/\/support.google.com\/cloud\/answer\/6158840).
+-- | Deprecated. The Google Developers Console [project ID or project
+-- number](https:\/\/support.google.com\/cloud\/answer\/6158840). This
+-- field has been deprecated and replaced by the name field.
 pzocProjectId :: Lens' ProjectsZonesOperationsCancel Text
 pzocProjectId
   = lens _pzocProjectId
       (\ s a -> s{_pzocProjectId = a})
 
--- | The server-assigned \`name\` of the operation.
+-- | Deprecated. The server-assigned \`name\` of the operation. This field
+-- has been deprecated and replaced by the name field.
 pzocOperationId :: Lens' ProjectsZonesOperationsCancel Text
 pzocOperationId
   = lens _pzocOperationId
@@ -203,10 +184,8 @@ instance GoogleRequest ProjectsZonesOperationsCancel
           = go _pzocProjectId _pzocZone _pzocOperationId
               _pzocXgafv
               _pzocUploadProtocol
-              (Just _pzocPp)
               _pzocAccessToken
               _pzocUploadType
-              _pzocBearerToken
               _pzocCallback
               (Just AltJSON)
               _pzocPayload

@@ -35,10 +35,8 @@ module Network.Google.Resource.Monitoring.Projects.Groups.Delete
     -- * Request Lenses
     , pgdXgafv
     , pgdUploadProtocol
-    , pgdPp
     , pgdAccessToken
     , pgdUploadType
-    , pgdBearerToken
     , pgdName
     , pgdCallback
     ) where
@@ -53,12 +51,10 @@ type ProjectsGroupsDeleteResource =
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :> Delete '[JSON] Empty
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
 -- | Deletes an existing group.
 --
@@ -66,10 +62,8 @@ type ProjectsGroupsDeleteResource =
 data ProjectsGroupsDelete = ProjectsGroupsDelete'
     { _pgdXgafv          :: !(Maybe Xgafv)
     , _pgdUploadProtocol :: !(Maybe Text)
-    , _pgdPp             :: !Bool
     , _pgdAccessToken    :: !(Maybe Text)
     , _pgdUploadType     :: !(Maybe Text)
-    , _pgdBearerToken    :: !(Maybe Text)
     , _pgdName           :: !Text
     , _pgdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -82,13 +76,9 @@ data ProjectsGroupsDelete = ProjectsGroupsDelete'
 --
 -- * 'pgdUploadProtocol'
 --
--- * 'pgdPp'
---
 -- * 'pgdAccessToken'
 --
 -- * 'pgdUploadType'
---
--- * 'pgdBearerToken'
 --
 -- * 'pgdName'
 --
@@ -100,10 +90,8 @@ projectsGroupsDelete pPgdName_ =
     ProjectsGroupsDelete'
     { _pgdXgafv = Nothing
     , _pgdUploadProtocol = Nothing
-    , _pgdPp = True
     , _pgdAccessToken = Nothing
     , _pgdUploadType = Nothing
-    , _pgdBearerToken = Nothing
     , _pgdName = pPgdName_
     , _pgdCallback = Nothing
     }
@@ -118,10 +106,6 @@ pgdUploadProtocol
   = lens _pgdUploadProtocol
       (\ s a -> s{_pgdUploadProtocol = a})
 
--- | Pretty-print response.
-pgdPp :: Lens' ProjectsGroupsDelete Bool
-pgdPp = lens _pgdPp (\ s a -> s{_pgdPp = a})
-
 -- | OAuth access token.
 pgdAccessToken :: Lens' ProjectsGroupsDelete (Maybe Text)
 pgdAccessToken
@@ -133,12 +117,6 @@ pgdUploadType :: Lens' ProjectsGroupsDelete (Maybe Text)
 pgdUploadType
   = lens _pgdUploadType
       (\ s a -> s{_pgdUploadType = a})
-
--- | OAuth bearer token.
-pgdBearerToken :: Lens' ProjectsGroupsDelete (Maybe Text)
-pgdBearerToken
-  = lens _pgdBearerToken
-      (\ s a -> s{_pgdBearerToken = a})
 
 -- | The group to delete. The format is
 -- \"projects\/{project_id_or_number}\/groups\/{group_id}\".
@@ -157,10 +135,8 @@ instance GoogleRequest ProjectsGroupsDelete where
                "https://www.googleapis.com/auth/monitoring"]
         requestClient ProjectsGroupsDelete'{..}
           = go _pgdName _pgdXgafv _pgdUploadProtocol
-              (Just _pgdPp)
               _pgdAccessToken
               _pgdUploadType
-              _pgdBearerToken
               _pgdCallback
               (Just AltJSON)
               monitoringService

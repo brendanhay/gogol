@@ -21,11 +21,9 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Deletes all client certificates and generates a new server SSL
--- certificate for the instance. The changes will not take effect until the
--- instance is restarted. Existing instances without a server certificate
--- will need to call this once to set a server certificate.
+-- certificate for the instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.instances.resetSslConfig@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.instances.resetSslConfig@.
 module Network.Google.Resource.SQL.Instances.ResetSSLConfig
     (
     -- * REST Resource
@@ -56,9 +54,7 @@ type InstancesResetSSLConfigResource =
                    QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | Deletes all client certificates and generates a new server SSL
--- certificate for the instance. The changes will not take effect until the
--- instance is restarted. Existing instances without a server certificate
--- will need to call this once to set a server certificate.
+-- certificate for the instance.
 --
 -- /See:/ 'instancesResetSSLConfig' smart constructor.
 data InstancesResetSSLConfig = InstancesResetSSLConfig'

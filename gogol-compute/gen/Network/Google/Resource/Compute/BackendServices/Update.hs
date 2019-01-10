@@ -36,6 +36,7 @@ module Network.Google.Resource.Compute.BackendServices.Update
     , BackendServicesUpdate
 
     -- * Request Lenses
+    , bsuRequestId
     , bsuProject
     , bsuPayload
     , bsuBackendService
@@ -54,9 +55,10 @@ type BackendServicesUpdateResource =
              "global" :>
                "backendServices" :>
                  Capture "backendService" Text :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] BackendService :>
-                       Put '[JSON] Operation
+                   QueryParam "requestId" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] BackendService :>
+                         Put '[JSON] Operation
 
 -- | Updates the specified BackendService resource with the data included in
 -- the request. There are several restrictions and guidelines to keep in
@@ -65,7 +67,8 @@ type BackendServicesUpdateResource =
 --
 -- /See:/ 'backendServicesUpdate' smart constructor.
 data BackendServicesUpdate = BackendServicesUpdate'
-    { _bsuProject        :: !Text
+    { _bsuRequestId      :: !(Maybe Text)
+    , _bsuProject        :: !Text
     , _bsuPayload        :: !BackendService
     , _bsuBackendService :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,6 +76,8 @@ data BackendServicesUpdate = BackendServicesUpdate'
 -- | Creates a value of 'BackendServicesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bsuRequestId'
 --
 -- * 'bsuProject'
 --
@@ -86,10 +91,25 @@ backendServicesUpdate
     -> BackendServicesUpdate
 backendServicesUpdate pBsuProject_ pBsuPayload_ pBsuBackendService_ =
     BackendServicesUpdate'
-    { _bsuProject = pBsuProject_
+    { _bsuRequestId = Nothing
+    , _bsuProject = pBsuProject_
     , _bsuPayload = pBsuPayload_
     , _bsuBackendService = pBsuBackendService_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+bsuRequestId :: Lens' BackendServicesUpdate (Maybe Text)
+bsuRequestId
+  = lens _bsuRequestId (\ s a -> s{_bsuRequestId = a})
 
 -- | Project ID for this request.
 bsuProject :: Lens' BackendServicesUpdate Text
@@ -113,7 +133,8 @@ instance GoogleRequest BackendServicesUpdate where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient BackendServicesUpdate'{..}
-          = go _bsuProject _bsuBackendService (Just AltJSON)
+          = go _bsuProject _bsuBackendService _bsuRequestId
+              (Just AltJSON)
               _bsuPayload
               computeService
           where go

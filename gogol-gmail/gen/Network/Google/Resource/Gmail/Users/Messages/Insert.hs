@@ -118,8 +118,7 @@ uUserId :: Lens' UsersMessagesInsert Text
 uUserId = lens _uUserId (\ s a -> s{_uUserId = a})
 
 -- | Mark the email as permanently deleted (not TRASH) and only visible in
--- Google Apps Vault to a Vault administrator. Only used for Google Apps
--- for Work accounts.
+-- Google Vault to a Vault administrator. Only used for G Suite accounts.
 uDeleted :: Lens' UsersMessagesInsert Bool
 uDeleted = lens _uDeleted (\ s a -> s{_uDeleted = a})
 

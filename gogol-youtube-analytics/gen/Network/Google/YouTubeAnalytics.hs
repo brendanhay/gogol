@@ -15,7 +15,7 @@
 --
 -- Retrieves your YouTube Analytics data.
 --
--- /See:/ <http://developers.google.com/youtube/analytics/ YouTube Analytics API Reference>
+-- /See:/ <https://developers.google.com/youtube/analytics YouTube Analytics API Reference>
 module Network.Google.YouTubeAnalytics
     (
     -- * Service Configuration
@@ -73,6 +73,24 @@ module Network.Google.YouTubeAnalytics
     , gKind
     , gContentDetails
     , gId
+    , gErrors
+
+    -- ** ListGroupsResponse
+    , ListGroupsResponse
+    , listGroupsResponse
+    , lgrEtag
+    , lgrNextPageToken
+    , lgrKind
+    , lgrItems
+    , lgrErrors
+
+    -- ** ListGroupItemsResponse
+    , ListGroupItemsResponse
+    , listGroupItemsResponse
+    , lgirEtag
+    , lgirKind
+    , lgirItems
+    , lgirErrors
 
     -- ** GroupItemResource
     , GroupItemResource
@@ -80,19 +98,8 @@ module Network.Google.YouTubeAnalytics
     , girKind
     , girId
 
-    -- ** ResultTableColumnHeadersItem
-    , ResultTableColumnHeadersItem
-    , resultTableColumnHeadersItem
-    , rtchiColumnType
-    , rtchiName
-    , rtchiDataType
-
-    -- ** ResultTable
-    , ResultTable
-    , resultTable
-    , rtKind
-    , rtRows
-    , rtColumnHeaders
+    -- ** Xgafv
+    , Xgafv (..)
 
     -- ** GroupSnippet
     , GroupSnippet
@@ -108,21 +115,51 @@ module Network.Google.YouTubeAnalytics
     , giResource
     , giGroupId
     , giId
+    , giErrors
 
-    -- ** GroupItemListResponse
-    , GroupItemListResponse
-    , groupItemListResponse
-    , gilrEtag
-    , gilrKind
-    , gilrItems
+    -- ** Errors
+    , Errors
+    , errors
+    , eRequestId
+    , eError
+    , eCode
 
-    -- ** GroupListResponse
-    , GroupListResponse
-    , groupListResponse
-    , glrEtag
-    , glrNextPageToken
-    , glrKind
-    , glrItems
+    -- ** ErrorProtoLocationType
+    , ErrorProtoLocationType (..)
+
+    -- ** ErrorsCode
+    , ErrorsCode (..)
+
+    -- ** ResultTableColumnHeader
+    , ResultTableColumnHeader
+    , resultTableColumnHeader
+    , rtchColumnType
+    , rtchName
+    , rtchDataType
+
+    -- ** ErrorProto
+    , ErrorProto
+    , errorProto
+    , epDebugInfo
+    , epLocation
+    , epDomain
+    , epArgument
+    , epExternalErrorMessage
+    , epCode
+    , epLocationType
+
+    -- ** EmptyResponse
+    , EmptyResponse
+    , emptyResponse
+    , erErrors
+
+    -- ** QueryResponse
+    , QueryResponse
+    , queryResponse
+    , qrKind
+    , qrRows
+    , qrColumnHeaders
+    , qrErrors
     ) where
 
 import           Network.Google.Prelude

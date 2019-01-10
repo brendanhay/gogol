@@ -33,7 +33,9 @@ module Network.Google.Resource.Directory.Resources.Calendars.List
     , ResourcesCalendarsList
 
     -- * Request Lenses
+    , rclOrderBy
     , rclCustomer
+    , rclQuery
     , rclPageToken
     , rclMaxResults
     ) where
@@ -51,16 +53,20 @@ type ResourcesCalendarsListResource =
              Capture "customer" Text :>
                "resources" :>
                  "calendars" :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (Textual Int32) :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] CalendarResources
+                   QueryParam "orderBy" Text :>
+                     QueryParam "query" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "maxResults" (Textual Int32) :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] CalendarResources
 
 -- | Retrieves a list of calendar resources for an account.
 --
 -- /See:/ 'resourcesCalendarsList' smart constructor.
 data ResourcesCalendarsList = ResourcesCalendarsList'
-    { _rclCustomer   :: !Text
+    { _rclOrderBy    :: !(Maybe Text)
+    , _rclCustomer   :: !Text
+    , _rclQuery      :: !(Maybe Text)
     , _rclPageToken  :: !(Maybe Text)
     , _rclMaxResults :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -69,7 +75,11 @@ data ResourcesCalendarsList = ResourcesCalendarsList'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'rclOrderBy'
+--
 -- * 'rclCustomer'
+--
+-- * 'rclQuery'
 --
 -- * 'rclPageToken'
 --
@@ -79,17 +89,40 @@ resourcesCalendarsList
     -> ResourcesCalendarsList
 resourcesCalendarsList pRclCustomer_ =
     ResourcesCalendarsList'
-    { _rclCustomer = pRclCustomer_
+    { _rclOrderBy = Nothing
+    , _rclCustomer = pRclCustomer_
+    , _rclQuery = Nothing
     , _rclPageToken = Nothing
     , _rclMaxResults = Nothing
     }
 
--- | The unique ID for the customer\'s Google account. As an account
+-- | Field(s) to sort results by in either ascending or descending order.
+-- Supported fields include resourceId, resourceName, capacity, buildingId,
+-- and floorName. If no order is specified, defaults to ascending. Should
+-- be of the form \"field [asc|desc], field [asc|desc], ...\". For example
+-- buildingId, capacity desc would return results sorted first by
+-- buildingId in ascending order then by capacity in descending order.
+rclOrderBy :: Lens' ResourcesCalendarsList (Maybe Text)
+rclOrderBy
+  = lens _rclOrderBy (\ s a -> s{_rclOrderBy = a})
+
+-- | The unique ID for the customer\'s G Suite account. As an account
 -- administrator, you can also use the my_customer alias to represent your
 -- account\'s customer ID.
 rclCustomer :: Lens' ResourcesCalendarsList Text
 rclCustomer
   = lens _rclCustomer (\ s a -> s{_rclCustomer = a})
+
+-- | String query used to filter results. Should be of the form \"field
+-- operator value\" where field can be any of supported fields and
+-- operators can be any of supported operations. Operators include \'=\'
+-- for exact match and \':\' for prefix match or HAS match where
+-- applicable. For prefix match, the value should always be followed by a
+-- *. Supported fields include generatedResourceName, name, buildingId,
+-- featureInstances.feature.name. For example buildingId=US-NYC-9TH AND
+-- featureInstances.feature.name:Phone.
+rclQuery :: Lens' ResourcesCalendarsList (Maybe Text)
+rclQuery = lens _rclQuery (\ s a -> s{_rclQuery = a})
 
 -- | Token to specify the next page in the list.
 rclPageToken :: Lens' ResourcesCalendarsList (Maybe Text)
@@ -109,7 +142,8 @@ instance GoogleRequest ResourcesCalendarsList where
              '["https://www.googleapis.com/auth/admin.directory.resource.calendar",
                "https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly"]
         requestClient ResourcesCalendarsList'{..}
-          = go _rclCustomer _rclPageToken _rclMaxResults
+          = go _rclCustomer _rclOrderBy _rclQuery _rclPageToken
+              _rclMaxResults
               (Just AltJSON)
               directoryService
           where go

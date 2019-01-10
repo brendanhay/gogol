@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 -- 'ReportsList' request conforms to.
 type ReportsListResource =
      "dfareporting" :>
-       "v2.7" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "reports" :>
@@ -68,7 +68,7 @@ data ReportsList = ReportsList'
     , _rlScope      :: !ReportsListScope
     , _rlPageToken  :: !(Maybe Text)
     , _rlSortField  :: !ReportsListSortField
-    , _rlMaxResults :: !(Maybe (Textual Int32))
+    , _rlMaxResults :: !(Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsList' with the minimum fields required to make a request.
@@ -96,7 +96,7 @@ reportsList pRlProFileId_ =
     , _rlScope = Mine
     , _rlPageToken = Nothing
     , _rlSortField = RLSFLastModifiedTime
-    , _rlMaxResults = Nothing
+    , _rlMaxResults = 10
     }
 
 -- | The DFA user profile ID.
@@ -105,12 +105,12 @@ rlProFileId
   = lens _rlProFileId (\ s a -> s{_rlProFileId = a}) .
       _Coerce
 
--- | Order of sorted results, default is \'DESCENDING\'.
+-- | Order of sorted results.
 rlSortOrder :: Lens' ReportsList ReportsListSortOrder
 rlSortOrder
   = lens _rlSortOrder (\ s a -> s{_rlSortOrder = a})
 
--- | The scope that defines which results are returned, default is \'MINE\'.
+-- | The scope that defines which results are returned.
 rlScope :: Lens' ReportsList ReportsListScope
 rlScope = lens _rlScope (\ s a -> s{_rlScope = a})
 
@@ -125,10 +125,10 @@ rlSortField
   = lens _rlSortField (\ s a -> s{_rlSortField = a})
 
 -- | Maximum number of results to return.
-rlMaxResults :: Lens' ReportsList (Maybe Int32)
+rlMaxResults :: Lens' ReportsList Int32
 rlMaxResults
   = lens _rlMaxResults (\ s a -> s{_rlMaxResults = a})
-      . mapping _Coerce
+      . _Coerce
 
 instance GoogleRequest ReportsList where
         type Rs ReportsList = ReportList
@@ -138,7 +138,7 @@ instance GoogleRequest ReportsList where
           = go _rlProFileId (Just _rlSortOrder) (Just _rlScope)
               _rlPageToken
               (Just _rlSortField)
-              _rlMaxResults
+              (Just _rlMaxResults)
               (Just AltJSON)
               dFAReportingService
           where go

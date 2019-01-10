@@ -71,7 +71,7 @@ usersPhotosDelete pUpdUserKey_ =
     { _updUserKey = pUpdUserKey_
     }
 
--- | Email or immutable Id of the user
+-- | Email or immutable ID of the user
 updUserKey :: Lens' UsersPhotosDelete Text
 updUserKey
   = lens _updUserKey (\ s a -> s{_updUserKey = a})

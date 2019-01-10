@@ -55,6 +55,59 @@ instance ToJSON BatchDeleteMessagesRequest where
         toJSON BatchDeleteMessagesRequest'{..}
           = object (catMaybes [("ids" .=) <$> _bdmrIds])
 
+-- | Settings for a delegate. Delegates can read, send, and delete messages,
+-- as well as view and add contacts, for the delegator\'s account. See
+-- \"Set up mail delegation\" for more information about delegates.
+--
+-- /See:/ 'delegate' smart constructor.
+data Delegate = Delegate'
+    { _dVerificationStatus :: !(Maybe DelegateVerificationStatus)
+    , _dDelegateEmail      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Delegate' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dVerificationStatus'
+--
+-- * 'dDelegateEmail'
+delegate
+    :: Delegate
+delegate =
+    Delegate'
+    { _dVerificationStatus = Nothing
+    , _dDelegateEmail = Nothing
+    }
+
+-- | Indicates whether this address has been verified and can act as a
+-- delegate for the account. Read-only.
+dVerificationStatus :: Lens' Delegate (Maybe DelegateVerificationStatus)
+dVerificationStatus
+  = lens _dVerificationStatus
+      (\ s a -> s{_dVerificationStatus = a})
+
+-- | The email address of the delegate.
+dDelegateEmail :: Lens' Delegate (Maybe Text)
+dDelegateEmail
+  = lens _dDelegateEmail
+      (\ s a -> s{_dDelegateEmail = a})
+
+instance FromJSON Delegate where
+        parseJSON
+          = withObject "Delegate"
+              (\ o ->
+                 Delegate' <$>
+                   (o .:? "verificationStatus") <*>
+                     (o .:? "delegateEmail"))
+
+instance ToJSON Delegate where
+        toJSON Delegate'{..}
+          = object
+              (catMaybes
+                 [("verificationStatus" .=) <$> _dVerificationStatus,
+                  ("delegateEmail" .=) <$> _dDelegateEmail])
+
 --
 -- /See:/ 'modifyThreadRequest' smart constructor.
 data ModifyThreadRequest = ModifyThreadRequest'
@@ -396,6 +449,111 @@ instance ToJSON History where
                   ("messagesAdded" .=) <$> _hMessagesAdded,
                   ("labelsAdded" .=) <$> _hLabelsAdded,
                   ("id" .=) <$> _hId, ("messages" .=) <$> _hMessages])
+
+-- | Response for the ListDelegates method.
+--
+-- /See:/ 'listDelegatesResponse' smart constructor.
+newtype ListDelegatesResponse = ListDelegatesResponse'
+    { _ldrDelegates :: Maybe [Delegate]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListDelegatesResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ldrDelegates'
+listDelegatesResponse
+    :: ListDelegatesResponse
+listDelegatesResponse =
+    ListDelegatesResponse'
+    { _ldrDelegates = Nothing
+    }
+
+-- | List of the user\'s delegates (with any verification status).
+ldrDelegates :: Lens' ListDelegatesResponse [Delegate]
+ldrDelegates
+  = lens _ldrDelegates (\ s a -> s{_ldrDelegates = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListDelegatesResponse where
+        parseJSON
+          = withObject "ListDelegatesResponse"
+              (\ o ->
+                 ListDelegatesResponse' <$>
+                   (o .:? "delegates" .!= mempty))
+
+instance ToJSON ListDelegatesResponse where
+        toJSON ListDelegatesResponse'{..}
+          = object
+              (catMaybes [("delegates" .=) <$> _ldrDelegates])
+
+--
+-- /See:/ 'labelColor' smart constructor.
+data LabelColor = LabelColor'
+    { _lcBackgRoundColor :: !(Maybe Text)
+    , _lcTextColor       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LabelColor' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lcBackgRoundColor'
+--
+-- * 'lcTextColor'
+labelColor
+    :: LabelColor
+labelColor =
+    LabelColor'
+    { _lcBackgRoundColor = Nothing
+    , _lcTextColor = Nothing
+    }
+
+-- | The background color represented as hex string #RRGGBB (ex #000000).
+-- This field is required in order to set the color of a label. Only the
+-- following predefined set of color values are allowed: #000000, #434343,
+-- #666666, #999999, #cccccc, #efefef, #f3f3f3, #ffffff, #fb4c2f, #ffad47,
+-- #fad165, #16a766, #43d692, #4a86e8, #a479e2, #f691b3, #f6c5be, #ffe6c7,
+-- #fef1d1, #b9e4d0, #c6f3de, #c9daf8, #e4d7f5, #fcdee8, #efa093, #ffd6a2,
+-- #fce8b3, #89d3b2, #a0eac9, #a4c2f4, #d0bcf1, #fbc8d9, #e66550, #ffbc6b,
+-- #fcda83, #44b984, #68dfa9, #6d9eeb, #b694e8, #f7a7c0, #cc3a21, #eaa041,
+-- #f2c960, #149e60, #3dc789, #3c78d8, #8e63ce, #e07798, #ac2b16, #cf8933,
+-- #d5ae49, #0b804b, #2a9c68, #285bac, #653e9b, #b65775, #822111, #a46a21,
+-- #aa8831, #076239, #1a764d, #1c4587, #41236d, #83334c
+lcBackgRoundColor :: Lens' LabelColor (Maybe Text)
+lcBackgRoundColor
+  = lens _lcBackgRoundColor
+      (\ s a -> s{_lcBackgRoundColor = a})
+
+-- | The text color of the label, represented as hex string. This field is
+-- required in order to set the color of a label. Only the following
+-- predefined set of color values are allowed: #000000, #434343, #666666,
+-- #999999, #cccccc, #efefef, #f3f3f3, #ffffff, #fb4c2f, #ffad47, #fad165,
+-- #16a766, #43d692, #4a86e8, #a479e2, #f691b3, #f6c5be, #ffe6c7, #fef1d1,
+-- #b9e4d0, #c6f3de, #c9daf8, #e4d7f5, #fcdee8, #efa093, #ffd6a2, #fce8b3,
+-- #89d3b2, #a0eac9, #a4c2f4, #d0bcf1, #fbc8d9, #e66550, #ffbc6b, #fcda83,
+-- #44b984, #68dfa9, #6d9eeb, #b694e8, #f7a7c0, #cc3a21, #eaa041, #f2c960,
+-- #149e60, #3dc789, #3c78d8, #8e63ce, #e07798, #ac2b16, #cf8933, #d5ae49,
+-- #0b804b, #2a9c68, #285bac, #653e9b, #b65775, #822111, #a46a21, #aa8831,
+-- #076239, #1a764d, #1c4587, #41236d, #83334c
+lcTextColor :: Lens' LabelColor (Maybe Text)
+lcTextColor
+  = lens _lcTextColor (\ s a -> s{_lcTextColor = a})
+
+instance FromJSON LabelColor where
+        parseJSON
+          = withObject "LabelColor"
+              (\ o ->
+                 LabelColor' <$>
+                   (o .:? "backgroundColor") <*> (o .:? "textColor"))
+
+instance ToJSON LabelColor where
+        toJSON LabelColor'{..}
+          = object
+              (catMaybes
+                 [("backgroundColor" .=) <$> _lcBackgRoundColor,
+                  ("textColor" .=) <$> _lcTextColor])
 
 -- | Message matching criteria.
 --
@@ -801,7 +959,9 @@ saSendAsEmail
 -- | A name that appears in the \"From:\" header for mail sent using this
 -- alias. For custom \"from\" addresses, when this is empty, Gmail will
 -- populate the \"From:\" header with the name that is used for the primary
--- address associated with the account.
+-- address associated with the account. If the admin has disabled the
+-- ability for users to update their name format, requests to update this
+-- field for the primary login will silently fail.
 saDisplayName :: Lens' SendAs (Maybe Text)
 saDisplayName
   = lens _saDisplayName
@@ -1172,8 +1332,8 @@ vsResponseBodyPlainText
       (\ s a -> s{_vsResponseBodyPlainText = a})
 
 -- | Flag that determines whether responses are sent to recipients who are
--- outside of the user\'s domain. This feature is only available for Google
--- Apps users.
+-- outside of the user\'s domain. This feature is only available for G
+-- Suite users.
 vsRestrictToDomain :: Lens' VacationSettings (Maybe Bool)
 vsRestrictToDomain
   = lens _vsRestrictToDomain
@@ -2002,6 +2162,44 @@ instance ToJSON ImapSettings where
                   ("autoExpunge" .=) <$> _isAutoExpunge,
                   ("maxFolderSize" .=) <$> _isMaxFolderSize])
 
+--
+-- /See:/ 'listSmimeInfoResponse' smart constructor.
+newtype ListSmimeInfoResponse = ListSmimeInfoResponse'
+    { _lsirSmimeInfo :: Maybe [SmimeInfo]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListSmimeInfoResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lsirSmimeInfo'
+listSmimeInfoResponse
+    :: ListSmimeInfoResponse
+listSmimeInfoResponse =
+    ListSmimeInfoResponse'
+    { _lsirSmimeInfo = Nothing
+    }
+
+-- | List of SmimeInfo.
+lsirSmimeInfo :: Lens' ListSmimeInfoResponse [SmimeInfo]
+lsirSmimeInfo
+  = lens _lsirSmimeInfo
+      (\ s a -> s{_lsirSmimeInfo = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListSmimeInfoResponse where
+        parseJSON
+          = withObject "ListSmimeInfoResponse"
+              (\ o ->
+                 ListSmimeInfoResponse' <$>
+                   (o .:? "smimeInfo" .!= mempty))
+
+instance ToJSON ListSmimeInfoResponse where
+        toJSON ListSmimeInfoResponse'{..}
+          = object
+              (catMaybes [("smimeInfo" .=) <$> _lsirSmimeInfo])
+
 -- | An email message.
 --
 -- /See:/ 'message' smart constructor.
@@ -2328,6 +2526,7 @@ data Label = Label'
     { _lThreadsUnread         :: !(Maybe (Textual Int32))
     , _lMessageListVisibility :: !(Maybe LabelMessageListVisibility)
     , _lMessagesTotal         :: !(Maybe (Textual Int32))
+    , _lColor                 :: !(Maybe LabelColor)
     , _lMessagesUnread        :: !(Maybe (Textual Int32))
     , _lName                  :: !(Maybe Text)
     , _lThreadsTotal          :: !(Maybe (Textual Int32))
@@ -2345,6 +2544,8 @@ data Label = Label'
 -- * 'lMessageListVisibility'
 --
 -- * 'lMessagesTotal'
+--
+-- * 'lColor'
 --
 -- * 'lMessagesUnread'
 --
@@ -2364,6 +2565,7 @@ label =
     { _lThreadsUnread = Nothing
     , _lMessageListVisibility = Nothing
     , _lMessagesTotal = Nothing
+    , _lColor = Nothing
     , _lMessagesUnread = Nothing
     , _lName = Nothing
     , _lThreadsTotal = Nothing
@@ -2392,6 +2594,11 @@ lMessagesTotal
   = lens _lMessagesTotal
       (\ s a -> s{_lMessagesTotal = a})
       . mapping _Coerce
+
+-- | The color to assign to the label. Color is only available for labels
+-- that have their type set to user.
+lColor :: Lens' Label (Maybe LabelColor)
+lColor = lens _lColor (\ s a -> s{_lColor = a})
 
 -- | The number of unread messages with the label.
 lMessagesUnread :: Lens' Label (Maybe Int32)
@@ -2441,6 +2648,7 @@ instance FromJSON Label where
                    (o .:? "threadsUnread") <*>
                      (o .:? "messageListVisibility")
                      <*> (o .:? "messagesTotal")
+                     <*> (o .:? "color")
                      <*> (o .:? "messagesUnread")
                      <*> (o .:? "name")
                      <*> (o .:? "threadsTotal")
@@ -2456,11 +2664,122 @@ instance ToJSON Label where
                   ("messageListVisibility" .=) <$>
                     _lMessageListVisibility,
                   ("messagesTotal" .=) <$> _lMessagesTotal,
+                  ("color" .=) <$> _lColor,
                   ("messagesUnread" .=) <$> _lMessagesUnread,
                   ("name" .=) <$> _lName,
                   ("threadsTotal" .=) <$> _lThreadsTotal,
                   ("labelListVisibility" .=) <$> _lLabelListVisibility,
                   ("id" .=) <$> _lId, ("type" .=) <$> _lType])
+
+-- | An S\/MIME email config.
+--
+-- /See:/ 'smimeInfo' smart constructor.
+data SmimeInfo = SmimeInfo'
+    { _siPem                  :: !(Maybe Text)
+    , _siExpiration           :: !(Maybe (Textual Int64))
+    , _siEncryptedKeyPassword :: !(Maybe Text)
+    , _siId                   :: !(Maybe Text)
+    , _siPkcs12               :: !(Maybe Bytes)
+    , _siIssuerCn             :: !(Maybe Text)
+    , _siIsDefault            :: !(Maybe Bool)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SmimeInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'siPem'
+--
+-- * 'siExpiration'
+--
+-- * 'siEncryptedKeyPassword'
+--
+-- * 'siId'
+--
+-- * 'siPkcs12'
+--
+-- * 'siIssuerCn'
+--
+-- * 'siIsDefault'
+smimeInfo
+    :: SmimeInfo
+smimeInfo =
+    SmimeInfo'
+    { _siPem = Nothing
+    , _siExpiration = Nothing
+    , _siEncryptedKeyPassword = Nothing
+    , _siId = Nothing
+    , _siPkcs12 = Nothing
+    , _siIssuerCn = Nothing
+    , _siIsDefault = Nothing
+    }
+
+-- | PEM formatted X509 concatenated certificate string (standard base64
+-- encoding). Format used for returning key, which includes public key as
+-- well as certificate chain (not private key).
+siPem :: Lens' SmimeInfo (Maybe Text)
+siPem = lens _siPem (\ s a -> s{_siPem = a})
+
+-- | When the certificate expires (in milliseconds since epoch).
+siExpiration :: Lens' SmimeInfo (Maybe Int64)
+siExpiration
+  = lens _siExpiration (\ s a -> s{_siExpiration = a})
+      . mapping _Coerce
+
+-- | Encrypted key password, when key is encrypted.
+siEncryptedKeyPassword :: Lens' SmimeInfo (Maybe Text)
+siEncryptedKeyPassword
+  = lens _siEncryptedKeyPassword
+      (\ s a -> s{_siEncryptedKeyPassword = a})
+
+-- | The immutable ID for the SmimeInfo.
+siId :: Lens' SmimeInfo (Maybe Text)
+siId = lens _siId (\ s a -> s{_siId = a})
+
+-- | PKCS#12 format containing a single private\/public key pair and
+-- certificate chain. This format is only accepted from client for creating
+-- a new SmimeInfo and is never returned, because the private key is not
+-- intended to be exported. PKCS#12 may be encrypted, in which case
+-- encryptedKeyPassword should be set appropriately.
+siPkcs12 :: Lens' SmimeInfo (Maybe ByteString)
+siPkcs12
+  = lens _siPkcs12 (\ s a -> s{_siPkcs12 = a}) .
+      mapping _Bytes
+
+-- | The S\/MIME certificate issuer\'s common name.
+siIssuerCn :: Lens' SmimeInfo (Maybe Text)
+siIssuerCn
+  = lens _siIssuerCn (\ s a -> s{_siIssuerCn = a})
+
+-- | Whether this SmimeInfo is the default one for this user\'s send-as
+-- address.
+siIsDefault :: Lens' SmimeInfo (Maybe Bool)
+siIsDefault
+  = lens _siIsDefault (\ s a -> s{_siIsDefault = a})
+
+instance FromJSON SmimeInfo where
+        parseJSON
+          = withObject "SmimeInfo"
+              (\ o ->
+                 SmimeInfo' <$>
+                   (o .:? "pem") <*> (o .:? "expiration") <*>
+                     (o .:? "encryptedKeyPassword")
+                     <*> (o .:? "id")
+                     <*> (o .:? "pkcs12")
+                     <*> (o .:? "issuerCn")
+                     <*> (o .:? "isDefault"))
+
+instance ToJSON SmimeInfo where
+        toJSON SmimeInfo'{..}
+          = object
+              (catMaybes
+                 [("pem" .=) <$> _siPem,
+                  ("expiration" .=) <$> _siExpiration,
+                  ("encryptedKeyPassword" .=) <$>
+                    _siEncryptedKeyPassword,
+                  ("id" .=) <$> _siId, ("pkcs12" .=) <$> _siPkcs12,
+                  ("issuerCn" .=) <$> _siIssuerCn,
+                  ("isDefault" .=) <$> _siIsDefault])
 
 --
 -- /See:/ 'listMessagesResponse' smart constructor.

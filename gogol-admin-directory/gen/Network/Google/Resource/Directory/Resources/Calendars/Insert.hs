@@ -84,7 +84,7 @@ rciPayload :: Lens' ResourcesCalendarsInsert CalendarResource
 rciPayload
   = lens _rciPayload (\ s a -> s{_rciPayload = a})
 
--- | The unique ID for the customer\'s Google account. As an account
+-- | The unique ID for the customer\'s G Suite account. As an account
 -- administrator, you can also use the my_customer alias to represent your
 -- account\'s customer ID.
 rciCustomer :: Lens' ResourcesCalendarsInsert Text

@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'CreativeFieldsInsert' request conforms to.
 type CreativeFieldsInsertResource =
      "dfareporting" :>
-       "v2.7" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeFields" :>

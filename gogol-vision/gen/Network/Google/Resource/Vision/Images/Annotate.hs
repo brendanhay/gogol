@@ -22,7 +22,7 @@
 --
 -- Run image detection and annotation for a batch of images.
 --
--- /See:/ <https://cloud.google.com/vision/ Google Cloud Vision API Reference> for @vision.images.annotate@.
+-- /See:/ <https://cloud.google.com/vision/ Cloud Vision API Reference> for @vision.images.annotate@.
 module Network.Google.Resource.Vision.Images.Annotate
     (
     -- * REST Resource
@@ -35,11 +35,9 @@ module Network.Google.Resource.Vision.Images.Annotate
     -- * Request Lenses
     , iaXgafv
     , iaUploadProtocol
-    , iaPp
     , iaAccessToken
     , iaUploadType
     , iaPayload
-    , iaBearerToken
     , iaCallback
     ) where
 
@@ -49,18 +47,19 @@ import           Network.Google.Vision.Types
 -- | A resource alias for @vision.images.annotate@ method which the
 -- 'ImagesAnnotate' request conforms to.
 type ImagesAnnotateResource =
-     "v1" :>
+     "v1p2beta1" :>
        "images:annotate" :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] BatchAnnotateImagesRequest :>
-                           Post '[JSON] BatchAnnotateImagesResponse
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON]
+                       GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest
+                       :>
+                       Post '[JSON]
+                         GoogleCloudVisionV1p2beta1BatchAnnotateImagesResponse
 
 -- | Run image detection and annotation for a batch of images.
 --
@@ -68,11 +67,9 @@ type ImagesAnnotateResource =
 data ImagesAnnotate = ImagesAnnotate'
     { _iaXgafv          :: !(Maybe Xgafv)
     , _iaUploadProtocol :: !(Maybe Text)
-    , _iaPp             :: !Bool
     , _iaAccessToken    :: !(Maybe Text)
     , _iaUploadType     :: !(Maybe Text)
-    , _iaPayload        :: !BatchAnnotateImagesRequest
-    , _iaBearerToken    :: !(Maybe Text)
+    , _iaPayload        :: !GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest
     , _iaCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -84,29 +81,23 @@ data ImagesAnnotate = ImagesAnnotate'
 --
 -- * 'iaUploadProtocol'
 --
--- * 'iaPp'
---
 -- * 'iaAccessToken'
 --
 -- * 'iaUploadType'
 --
 -- * 'iaPayload'
 --
--- * 'iaBearerToken'
---
 -- * 'iaCallback'
 imagesAnnotate
-    :: BatchAnnotateImagesRequest -- ^ 'iaPayload'
+    :: GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest -- ^ 'iaPayload'
     -> ImagesAnnotate
 imagesAnnotate pIaPayload_ =
     ImagesAnnotate'
     { _iaXgafv = Nothing
     , _iaUploadProtocol = Nothing
-    , _iaPp = True
     , _iaAccessToken = Nothing
     , _iaUploadType = Nothing
     , _iaPayload = pIaPayload_
-    , _iaBearerToken = Nothing
     , _iaCallback = Nothing
     }
 
@@ -120,10 +111,6 @@ iaUploadProtocol
   = lens _iaUploadProtocol
       (\ s a -> s{_iaUploadProtocol = a})
 
--- | Pretty-print response.
-iaPp :: Lens' ImagesAnnotate Bool
-iaPp = lens _iaPp (\ s a -> s{_iaPp = a})
-
 -- | OAuth access token.
 iaAccessToken :: Lens' ImagesAnnotate (Maybe Text)
 iaAccessToken
@@ -136,15 +123,9 @@ iaUploadType
   = lens _iaUploadType (\ s a -> s{_iaUploadType = a})
 
 -- | Multipart request metadata.
-iaPayload :: Lens' ImagesAnnotate BatchAnnotateImagesRequest
+iaPayload :: Lens' ImagesAnnotate GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest
 iaPayload
   = lens _iaPayload (\ s a -> s{_iaPayload = a})
-
--- | OAuth bearer token.
-iaBearerToken :: Lens' ImagesAnnotate (Maybe Text)
-iaBearerToken
-  = lens _iaBearerToken
-      (\ s a -> s{_iaBearerToken = a})
 
 -- | JSONP
 iaCallback :: Lens' ImagesAnnotate (Maybe Text)
@@ -152,14 +133,14 @@ iaCallback
   = lens _iaCallback (\ s a -> s{_iaCallback = a})
 
 instance GoogleRequest ImagesAnnotate where
-        type Rs ImagesAnnotate = BatchAnnotateImagesResponse
+        type Rs ImagesAnnotate =
+             GoogleCloudVisionV1p2beta1BatchAnnotateImagesResponse
         type Scopes ImagesAnnotate =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-vision"]
         requestClient ImagesAnnotate'{..}
-          = go _iaXgafv _iaUploadProtocol (Just _iaPp)
-              _iaAccessToken
+          = go _iaXgafv _iaUploadProtocol _iaAccessToken
               _iaUploadType
-              _iaBearerToken
               _iaCallback
               (Just AltJSON)
               _iaPayload

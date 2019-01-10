@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'PlacementsGeneratetags' request conforms to.
 type PlacementsGeneratetagsResource =
      "dfareporting" :>
-       "v2.7" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placements" :>
@@ -91,7 +91,8 @@ placementsGeneratetags pPgsProFileId_ =
     , _pgsPlacementIds = Nothing
     }
 
--- | Tag formats to generate for these placements.
+-- | Tag formats to generate for these placements. Note:
+-- PLACEMENT_TAG_STANDARD can only be generated for 1x1 placements.
 pgsTagFormats :: Lens' PlacementsGeneratetags [PlacementsGeneratetagsTagFormats]
 pgsTagFormats
   = lens _pgsTagFormats

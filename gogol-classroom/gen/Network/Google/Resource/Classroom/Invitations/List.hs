@@ -39,12 +39,10 @@ module Network.Google.Resource.Classroom.Invitations.List
     -- * Request Lenses
     , ilXgafv
     , ilUploadProtocol
-    , ilPp
     , ilCourseId
     , ilAccessToken
     , ilUploadType
     , ilUserId
-    , ilBearerToken
     , ilPageToken
     , ilPageSize
     , ilCallback
@@ -58,19 +56,17 @@ import           Network.Google.Prelude
 type InvitationsListResource =
      "v1" :>
        "invitations" :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "courseId" Text :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "userId" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "pageSize" (Textual Int32) :>
-                             QueryParam "callback" Text :>
-                               QueryParam "alt" AltJSON :>
-                                 Get '[JSON] ListInvitationsResponse
+             QueryParam "courseId" Text :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "userId" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "pageSize" (Textual Int32) :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] ListInvitationsResponse
 
 -- | Returns a list of invitations that the requesting user is permitted to
 -- view, restricted to those that match the list request. *Note:* At least
@@ -80,14 +76,12 @@ type InvitationsListResource =
 --
 -- /See:/ 'invitationsList' smart constructor.
 data InvitationsList = InvitationsList'
-    { _ilXgafv          :: !(Maybe Text)
+    { _ilXgafv          :: !(Maybe Xgafv)
     , _ilUploadProtocol :: !(Maybe Text)
-    , _ilPp             :: !Bool
     , _ilCourseId       :: !(Maybe Text)
     , _ilAccessToken    :: !(Maybe Text)
     , _ilUploadType     :: !(Maybe Text)
     , _ilUserId         :: !(Maybe Text)
-    , _ilBearerToken    :: !(Maybe Text)
     , _ilPageToken      :: !(Maybe Text)
     , _ilPageSize       :: !(Maybe (Textual Int32))
     , _ilCallback       :: !(Maybe Text)
@@ -101,8 +95,6 @@ data InvitationsList = InvitationsList'
 --
 -- * 'ilUploadProtocol'
 --
--- * 'ilPp'
---
 -- * 'ilCourseId'
 --
 -- * 'ilAccessToken'
@@ -110,8 +102,6 @@ data InvitationsList = InvitationsList'
 -- * 'ilUploadType'
 --
 -- * 'ilUserId'
---
--- * 'ilBearerToken'
 --
 -- * 'ilPageToken'
 --
@@ -124,19 +114,17 @@ invitationsList =
     InvitationsList'
     { _ilXgafv = Nothing
     , _ilUploadProtocol = Nothing
-    , _ilPp = True
     , _ilCourseId = Nothing
     , _ilAccessToken = Nothing
     , _ilUploadType = Nothing
     , _ilUserId = Nothing
-    , _ilBearerToken = Nothing
     , _ilPageToken = Nothing
     , _ilPageSize = Nothing
     , _ilCallback = Nothing
     }
 
 -- | V1 error format.
-ilXgafv :: Lens' InvitationsList (Maybe Text)
+ilXgafv :: Lens' InvitationsList (Maybe Xgafv)
 ilXgafv = lens _ilXgafv (\ s a -> s{_ilXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -144,10 +132,6 @@ ilUploadProtocol :: Lens' InvitationsList (Maybe Text)
 ilUploadProtocol
   = lens _ilUploadProtocol
       (\ s a -> s{_ilUploadProtocol = a})
-
--- | Pretty-print response.
-ilPp :: Lens' InvitationsList Bool
-ilPp = lens _ilPp (\ s a -> s{_ilPp = a})
 
 -- | Restricts returned invitations to those for a course with the specified
 -- identifier.
@@ -172,12 +156,6 @@ ilUploadType
 -- indicating the requesting user
 ilUserId :: Lens' InvitationsList (Maybe Text)
 ilUserId = lens _ilUserId (\ s a -> s{_ilUserId = a})
-
--- | OAuth bearer token.
-ilBearerToken :: Lens' InvitationsList (Maybe Text)
-ilBearerToken
-  = lens _ilBearerToken
-      (\ s a -> s{_ilBearerToken = a})
 
 -- | nextPageToken value returned from a previous list call, indicating that
 -- the subsequent page of results should be returned. The list request must
@@ -204,12 +182,10 @@ instance GoogleRequest InvitationsList where
              '["https://www.googleapis.com/auth/classroom.rosters",
                "https://www.googleapis.com/auth/classroom.rosters.readonly"]
         requestClient InvitationsList'{..}
-          = go _ilXgafv _ilUploadProtocol (Just _ilPp)
-              _ilCourseId
+          = go _ilXgafv _ilUploadProtocol _ilCourseId
               _ilAccessToken
               _ilUploadType
               _ilUserId
-              _ilBearerToken
               _ilPageToken
               _ilPageSize
               _ilCallback

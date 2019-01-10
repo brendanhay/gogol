@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'DirectorySitesInsert' request conforms to.
 type DirectorySitesInsertResource =
      "dfareporting" :>
-       "v2.7" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "directorySites" :>

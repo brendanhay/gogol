@@ -78,13 +78,13 @@ mobileDevicesDelete pMddResourceId_ pMddCustomerId_ =
     , _mddCustomerId = pMddCustomerId_
     }
 
--- | Immutable id of Mobile Device
+-- | Immutable ID of Mobile Device
 mddResourceId :: Lens' MobileDevicesDelete Text
 mddResourceId
   = lens _mddResourceId
       (\ s a -> s{_mddResourceId = a})
 
--- | Immutable id of the Google Apps account
+-- | Immutable ID of the G Suite account
 mddCustomerId :: Lens' MobileDevicesDelete Text
 mddCustomerId
   = lens _mddCustomerId

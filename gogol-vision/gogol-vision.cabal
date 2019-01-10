@@ -21,7 +21,7 @@ description:
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
     .
-    This library is compatible with version @v1@
+    This library is compatible with version @v1p2beta1@
     of the API.
 
 source-repository head
@@ -35,7 +35,8 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Resource.Vision.Images.Annotate
+          Network.Google.Resource.Vision.Files.AsyncBatchAnnotate
+        , Network.Google.Resource.Vision.Images.Annotate
         , Network.Google.Vision
         , Network.Google.Vision.Types
 

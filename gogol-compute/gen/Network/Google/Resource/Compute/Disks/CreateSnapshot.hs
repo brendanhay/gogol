@@ -33,6 +33,8 @@ module Network.Google.Resource.Compute.Disks.CreateSnapshot
     , DisksCreateSnapshot
 
     -- * Request Lenses
+    , dcsGuestFlush
+    , dcsRequestId
     , dcsProject
     , dcsDisk
     , dcsZone
@@ -54,22 +56,30 @@ type DisksCreateSnapshotResource =
                  "disks" :>
                    Capture "disk" Text :>
                      "createSnapshot" :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Snapshot :> Post '[JSON] Operation
+                       QueryParam "guestFlush" Bool :>
+                         QueryParam "requestId" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Snapshot :> Post '[JSON] Operation
 
 -- | Creates a snapshot of a specified persistent disk.
 --
 -- /See:/ 'disksCreateSnapshot' smart constructor.
 data DisksCreateSnapshot = DisksCreateSnapshot'
-    { _dcsProject :: !Text
-    , _dcsDisk    :: !Text
-    , _dcsZone    :: !Text
-    , _dcsPayload :: !Snapshot
+    { _dcsGuestFlush :: !(Maybe Bool)
+    , _dcsRequestId  :: !(Maybe Text)
+    , _dcsProject    :: !Text
+    , _dcsDisk       :: !Text
+    , _dcsZone       :: !Text
+    , _dcsPayload    :: !Snapshot
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DisksCreateSnapshot' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dcsGuestFlush'
+--
+-- * 'dcsRequestId'
 --
 -- * 'dcsProject'
 --
@@ -86,11 +96,32 @@ disksCreateSnapshot
     -> DisksCreateSnapshot
 disksCreateSnapshot pDcsProject_ pDcsDisk_ pDcsZone_ pDcsPayload_ =
     DisksCreateSnapshot'
-    { _dcsProject = pDcsProject_
+    { _dcsGuestFlush = Nothing
+    , _dcsRequestId = Nothing
+    , _dcsProject = pDcsProject_
     , _dcsDisk = pDcsDisk_
     , _dcsZone = pDcsZone_
     , _dcsPayload = pDcsPayload_
     }
+
+dcsGuestFlush :: Lens' DisksCreateSnapshot (Maybe Bool)
+dcsGuestFlush
+  = lens _dcsGuestFlush
+      (\ s a -> s{_dcsGuestFlush = a})
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+dcsRequestId :: Lens' DisksCreateSnapshot (Maybe Text)
+dcsRequestId
+  = lens _dcsRequestId (\ s a -> s{_dcsRequestId = a})
 
 -- | Project ID for this request.
 dcsProject :: Lens' DisksCreateSnapshot Text
@@ -116,7 +147,9 @@ instance GoogleRequest DisksCreateSnapshot where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient DisksCreateSnapshot'{..}
-          = go _dcsProject _dcsZone _dcsDisk (Just AltJSON)
+          = go _dcsProject _dcsZone _dcsDisk _dcsGuestFlush
+              _dcsRequestId
+              (Just AltJSON)
               _dcsPayload
               computeService
           where go

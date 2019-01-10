@@ -35,6 +35,7 @@ module Network.Google.Resource.Storage.DefaultObjectAccessControls.List
     -- * Request Lenses
     , doaclIfMetagenerationMatch
     , doaclBucket
+    , doaclUserProject
     , doaclIfMetagenerationNotMatch
     ) where
 
@@ -50,10 +51,11 @@ type DefaultObjectAccessControlsListResource =
            Capture "bucket" Text :>
              "defaultObjectAcl" :>
                QueryParam "ifMetagenerationMatch" (Textual Int64) :>
-                 QueryParam "ifMetagenerationNotMatch" (Textual Int64)
-                   :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] ObjectAccessControls
+                 QueryParam "userProject" Text :>
+                   QueryParam "ifMetagenerationNotMatch" (Textual Int64)
+                     :>
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] ObjectAccessControls
 
 -- | Retrieves default object ACL entries on the specified bucket.
 --
@@ -61,6 +63,7 @@ type DefaultObjectAccessControlsListResource =
 data DefaultObjectAccessControlsList = DefaultObjectAccessControlsList'
     { _doaclIfMetagenerationMatch    :: !(Maybe (Textual Int64))
     , _doaclBucket                   :: !Text
+    , _doaclUserProject              :: !(Maybe Text)
     , _doaclIfMetagenerationNotMatch :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -72,6 +75,8 @@ data DefaultObjectAccessControlsList = DefaultObjectAccessControlsList'
 --
 -- * 'doaclBucket'
 --
+-- * 'doaclUserProject'
+--
 -- * 'doaclIfMetagenerationNotMatch'
 defaultObjectAccessControlsList
     :: Text -- ^ 'doaclBucket'
@@ -80,6 +85,7 @@ defaultObjectAccessControlsList pDoaclBucket_ =
     DefaultObjectAccessControlsList'
     { _doaclIfMetagenerationMatch = Nothing
     , _doaclBucket = pDoaclBucket_
+    , _doaclUserProject = Nothing
     , _doaclIfMetagenerationNotMatch = Nothing
     }
 
@@ -95,6 +101,13 @@ doaclIfMetagenerationMatch
 doaclBucket :: Lens' DefaultObjectAccessControlsList Text
 doaclBucket
   = lens _doaclBucket (\ s a -> s{_doaclBucket = a})
+
+-- | The project to be billed for this request. Required for Requester Pays
+-- buckets.
+doaclUserProject :: Lens' DefaultObjectAccessControlsList (Maybe Text)
+doaclUserProject
+  = lens _doaclUserProject
+      (\ s a -> s{_doaclUserProject = a})
 
 -- | If present, only return default ACL listing if the bucket\'s current
 -- metageneration does not match the given value.
@@ -113,6 +126,7 @@ instance GoogleRequest
                "https://www.googleapis.com/auth/devstorage.full_control"]
         requestClient DefaultObjectAccessControlsList'{..}
           = go _doaclBucket _doaclIfMetagenerationMatch
+              _doaclUserProject
               _doaclIfMetagenerationNotMatch
               (Just AltJSON)
               storageService

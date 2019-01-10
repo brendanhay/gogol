@@ -86,13 +86,13 @@ membersPatch pMpMemberKey_ pMpGroupKey_ pMpPayload_ =
     , _mpPayload = pMpPayload_
     }
 
--- | Email or immutable Id of the user. If Id, it should match with id of
+-- | Email or immutable ID of the user. If ID, it should match with id of
 -- member object
 mpMemberKey :: Lens' MembersPatch Text
 mpMemberKey
   = lens _mpMemberKey (\ s a -> s{_mpMemberKey = a})
 
--- | Email or immutable Id of the group. If Id, it should match with id of
+-- | Email or immutable ID of the group. If ID, it should match with id of
 -- group object
 mpGroupKey :: Lens' MembersPatch Text
 mpGroupKey

@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'EditsExpansionFilesUpload' request conforms to.
 type EditsExpansionFilesUploadResource =
      "androidpublisher" :>
-       "v2" :>
+       "v3" :>
          "applications" :>
            Capture "packageName" Text :>
              "edits" :>
@@ -62,7 +62,7 @@ type EditsExpansionFilesUploadResource =
        :<|>
        "upload" :>
          "androidpublisher" :>
-           "v2" :>
+           "v3" :>
              "applications" :>
                Capture "packageName" Text :>
                  "edits" :>

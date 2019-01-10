@@ -33,6 +33,7 @@ module Network.Google.Resource.Compute.TargetPools.RemoveInstance
     , TargetPoolsRemoveInstance
 
     -- * Request Lenses
+    , tpriRequestId
     , tpriProject
     , tpriTargetPool
     , tpriPayload
@@ -54,15 +55,17 @@ type TargetPoolsRemoveInstanceResource =
                  "targetPools" :>
                    Capture "targetPool" Text :>
                      "removeInstance" :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] TargetPoolsRemoveInstanceRequest :>
-                           Post '[JSON] Operation
+                       QueryParam "requestId" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] TargetPoolsRemoveInstanceRequest :>
+                             Post '[JSON] Operation
 
 -- | Removes instance URL from a target pool.
 --
 -- /See:/ 'targetPoolsRemoveInstance' smart constructor.
 data TargetPoolsRemoveInstance = TargetPoolsRemoveInstance'
-    { _tpriProject    :: !Text
+    { _tpriRequestId  :: !(Maybe Text)
+    , _tpriProject    :: !Text
     , _tpriTargetPool :: !Text
     , _tpriPayload    :: !TargetPoolsRemoveInstanceRequest
     , _tpriRegion     :: !Text
@@ -71,6 +74,8 @@ data TargetPoolsRemoveInstance = TargetPoolsRemoveInstance'
 -- | Creates a value of 'TargetPoolsRemoveInstance' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tpriRequestId'
 --
 -- * 'tpriProject'
 --
@@ -87,11 +92,27 @@ targetPoolsRemoveInstance
     -> TargetPoolsRemoveInstance
 targetPoolsRemoveInstance pTpriProject_ pTpriTargetPool_ pTpriPayload_ pTpriRegion_ =
     TargetPoolsRemoveInstance'
-    { _tpriProject = pTpriProject_
+    { _tpriRequestId = Nothing
+    , _tpriProject = pTpriProject_
     , _tpriTargetPool = pTpriTargetPool_
     , _tpriPayload = pTpriPayload_
     , _tpriRegion = pTpriRegion_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+tpriRequestId :: Lens' TargetPoolsRemoveInstance (Maybe Text)
+tpriRequestId
+  = lens _tpriRequestId
+      (\ s a -> s{_tpriRequestId = a})
 
 -- | Project ID for this request.
 tpriProject :: Lens' TargetPoolsRemoveInstance Text
@@ -122,6 +143,7 @@ instance GoogleRequest TargetPoolsRemoveInstance
                "https://www.googleapis.com/auth/compute"]
         requestClient TargetPoolsRemoveInstance'{..}
           = go _tpriProject _tpriRegion _tpriTargetPool
+              _tpriRequestId
               (Just AltJSON)
               _tpriPayload
               computeService

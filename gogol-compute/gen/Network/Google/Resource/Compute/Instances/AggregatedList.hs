@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves aggregated list of instances.
+-- Retrieves aggregated list of all of the instances in your project across
+-- all regions and zones.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instances.aggregatedList@.
 module Network.Google.Resource.Compute.Instances.AggregatedList
@@ -33,11 +34,11 @@ module Network.Google.Resource.Compute.Instances.AggregatedList
     , InstancesAggregatedList
 
     -- * Request Lenses
-    , ialOrderBy
-    , ialProject
-    , ialFilter
-    , ialPageToken
-    , ialMaxResults
+    , ialaOrderBy
+    , ialaProject
+    , ialaFilter
+    , ialaPageToken
+    , ialaMaxResults
     ) where
 
 import           Network.Google.Compute.Types
@@ -59,40 +60,41 @@ type InstancesAggregatedListResource =
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] InstanceAggregatedList
 
--- | Retrieves aggregated list of instances.
+-- | Retrieves aggregated list of all of the instances in your project across
+-- all regions and zones.
 --
 -- /See:/ 'instancesAggregatedList' smart constructor.
 data InstancesAggregatedList = InstancesAggregatedList'
-    { _ialOrderBy    :: !(Maybe Text)
-    , _ialProject    :: !Text
-    , _ialFilter     :: !(Maybe Text)
-    , _ialPageToken  :: !(Maybe Text)
-    , _ialMaxResults :: !(Textual Word32)
+    { _ialaOrderBy    :: !(Maybe Text)
+    , _ialaProject    :: !Text
+    , _ialaFilter     :: !(Maybe Text)
+    , _ialaPageToken  :: !(Maybe Text)
+    , _ialaMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ialOrderBy'
+-- * 'ialaOrderBy'
 --
--- * 'ialProject'
+-- * 'ialaProject'
 --
--- * 'ialFilter'
+-- * 'ialaFilter'
 --
--- * 'ialPageToken'
+-- * 'ialaPageToken'
 --
--- * 'ialMaxResults'
+-- * 'ialaMaxResults'
 instancesAggregatedList
-    :: Text -- ^ 'ialProject'
+    :: Text -- ^ 'ialaProject'
     -> InstancesAggregatedList
-instancesAggregatedList pIalProject_ =
+instancesAggregatedList pIalaProject_ =
     InstancesAggregatedList'
-    { _ialOrderBy = Nothing
-    , _ialProject = pIalProject_
-    , _ialFilter = Nothing
-    , _ialPageToken = Nothing
-    , _ialMaxResults = 500
+    { _ialaOrderBy = Nothing
+    , _ialaProject = pIalaProject_
+    , _ialaFilter = Nothing
+    , _ialaPageToken = Nothing
+    , _ialaMaxResults = 500
     }
 
 -- | Sorts list results by a certain order. By default, results are returned
@@ -103,53 +105,51 @@ instancesAggregatedList pIalProject_ =
 -- first). Use this to sort resources like operations so that the newest
 -- operation is returned first. Currently, only sorting by name or
 -- creationTimestamp desc is supported.
-ialOrderBy :: Lens' InstancesAggregatedList (Maybe Text)
-ialOrderBy
-  = lens _ialOrderBy (\ s a -> s{_ialOrderBy = a})
+ialaOrderBy :: Lens' InstancesAggregatedList (Maybe Text)
+ialaOrderBy
+  = lens _ialaOrderBy (\ s a -> s{_ialaOrderBy = a})
 
 -- | Project ID for this request.
-ialProject :: Lens' InstancesAggregatedList Text
-ialProject
-  = lens _ialProject (\ s a -> s{_ialProject = a})
+ialaProject :: Lens' InstancesAggregatedList Text
+ialaProject
+  = lens _ialaProject (\ s a -> s{_ialaProject = a})
 
--- | Sets a filter expression for filtering listed resources, in the form
--- filter={expression}. Your {expression} must be in the format: field_name
--- comparison_string literal_string. The field_name is the name of the
--- field you want to compare. Only atomic field types are supported
--- (string, number, boolean). The comparison_string must be either eq
--- (equals) or ne (not equals). The literal_string is the string value to
--- filter to. The literal value must be valid for the type of field you are
--- filtering by (string, number, boolean). For string fields, the literal
--- value is interpreted as a regular expression using RE2 syntax. The
--- literal value must match the entire field. For example, to filter for
--- instances that do not have a name of example-instance, you would use
--- filter=name ne example-instance. You can filter on nested fields. For
--- example, you could filter on instances that have set the
--- scheduling.automaticRestart field to true. Use filtering on nested
--- fields to take advantage of labels to organize and search for results
--- based on label values. To filter on multiple expressions, provide each
--- separate expression within parentheses. For example,
--- (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple
--- expressions are treated as AND expressions, meaning that resources must
--- match all expressions to pass the filters.
-ialFilter :: Lens' InstancesAggregatedList (Maybe Text)
-ialFilter
-  = lens _ialFilter (\ s a -> s{_ialFilter = a})
+-- | A filter expression that filters resources listed in the response. The
+-- expression must specify the field name, a comparison operator, and the
+-- value that you want to use for filtering. The value must be a string, a
+-- number, or a boolean. The comparison operator must be either =, !=, >,
+-- or \<. For example, if you are filtering Compute Engine instances, you
+-- can exclude instances named example-instance by specifying name !=
+-- example-instance. You can also filter nested fields. For example, you
+-- could specify scheduling.automaticRestart = false to include instances
+-- only if they are not scheduled for automatic restarts. You can use
+-- filtering on nested fields to filter based on resource labels. To filter
+-- on multiple expressions, provide each separate expression within
+-- parentheses. For example, (scheduling.automaticRestart = true)
+-- (cpuPlatform = \"Intel Skylake\"). By default, each expression is an AND
+-- expression. However, you can include AND and OR expressions explicitly.
+-- For example, (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel
+-- Broadwell\") AND (scheduling.automaticRestart = true).
+ialaFilter :: Lens' InstancesAggregatedList (Maybe Text)
+ialaFilter
+  = lens _ialaFilter (\ s a -> s{_ialaFilter = a})
 
 -- | Specifies a page token to use. Set pageToken to the nextPageToken
 -- returned by a previous list request to get the next page of results.
-ialPageToken :: Lens' InstancesAggregatedList (Maybe Text)
-ialPageToken
-  = lens _ialPageToken (\ s a -> s{_ialPageToken = a})
+ialaPageToken :: Lens' InstancesAggregatedList (Maybe Text)
+ialaPageToken
+  = lens _ialaPageToken
+      (\ s a -> s{_ialaPageToken = a})
 
 -- | The maximum number of results per page that should be returned. If the
 -- number of available results is larger than maxResults, Compute Engine
 -- returns a nextPageToken that can be used to get the next page of results
--- in subsequent list requests.
-ialMaxResults :: Lens' InstancesAggregatedList Word32
-ialMaxResults
-  = lens _ialMaxResults
-      (\ s a -> s{_ialMaxResults = a})
+-- in subsequent list requests. Acceptable values are 0 to 500, inclusive.
+-- (Default: 500)
+ialaMaxResults :: Lens' InstancesAggregatedList Word32
+ialaMaxResults
+  = lens _ialaMaxResults
+      (\ s a -> s{_ialaMaxResults = a})
       . _Coerce
 
 instance GoogleRequest InstancesAggregatedList where
@@ -160,8 +160,9 @@ instance GoogleRequest InstancesAggregatedList where
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient InstancesAggregatedList'{..}
-          = go _ialProject _ialOrderBy _ialFilter _ialPageToken
-              (Just _ialMaxResults)
+          = go _ialaProject _ialaOrderBy _ialaFilter
+              _ialaPageToken
+              (Just _ialaMaxResults)
               (Just AltJSON)
               computeService
           where go

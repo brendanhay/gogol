@@ -81,7 +81,7 @@ upPayload :: Lens' UsersPatch User
 upPayload
   = lens _upPayload (\ s a -> s{_upPayload = a})
 
--- | Email or immutable Id of the user. If Id, it should match with id of
+-- | Email or immutable ID of the user. If ID, it should match with id of
 -- user object
 upUserKey :: Lens' UsersPatch Text
 upUserKey

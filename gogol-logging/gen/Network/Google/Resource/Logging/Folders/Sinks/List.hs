@@ -36,10 +36,8 @@ module Network.Google.Resource.Logging.Folders.Sinks.List
     , fslParent
     , fslXgafv
     , fslUploadProtocol
-    , fslPp
     , fslAccessToken
     , fslUploadType
-    , fslBearerToken
     , fslPageToken
     , fslPageSize
     , fslCallback
@@ -56,15 +54,13 @@ type FoldersSinksListResource =
          "sinks" :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" (Textual Int32) :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] ListSinksResponse
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "pageSize" (Textual Int32) :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] ListSinksResponse
 
 -- | Lists sinks.
 --
@@ -73,10 +69,8 @@ data FoldersSinksList = FoldersSinksList'
     { _fslParent         :: !Text
     , _fslXgafv          :: !(Maybe Xgafv)
     , _fslUploadProtocol :: !(Maybe Text)
-    , _fslPp             :: !Bool
     , _fslAccessToken    :: !(Maybe Text)
     , _fslUploadType     :: !(Maybe Text)
-    , _fslBearerToken    :: !(Maybe Text)
     , _fslPageToken      :: !(Maybe Text)
     , _fslPageSize       :: !(Maybe (Textual Int32))
     , _fslCallback       :: !(Maybe Text)
@@ -92,13 +86,9 @@ data FoldersSinksList = FoldersSinksList'
 --
 -- * 'fslUploadProtocol'
 --
--- * 'fslPp'
---
 -- * 'fslAccessToken'
 --
 -- * 'fslUploadType'
---
--- * 'fslBearerToken'
 --
 -- * 'fslPageToken'
 --
@@ -113,17 +103,16 @@ foldersSinksList pFslParent_ =
     { _fslParent = pFslParent_
     , _fslXgafv = Nothing
     , _fslUploadProtocol = Nothing
-    , _fslPp = True
     , _fslAccessToken = Nothing
     , _fslUploadType = Nothing
-    , _fslBearerToken = Nothing
     , _fslPageToken = Nothing
     , _fslPageSize = Nothing
     , _fslCallback = Nothing
     }
 
--- | Required. The parent resource whose sinks are to be listed. Examples:
--- \"projects\/my-logging-project\", \"organizations\/123456789\".
+-- | Required. The parent resource whose sinks are to be listed:
+-- \"projects\/[PROJECT_ID]\" \"organizations\/[ORGANIZATION_ID]\"
+-- \"billingAccounts\/[BILLING_ACCOUNT_ID]\" \"folders\/[FOLDER_ID]\"
 fslParent :: Lens' FoldersSinksList Text
 fslParent
   = lens _fslParent (\ s a -> s{_fslParent = a})
@@ -138,10 +127,6 @@ fslUploadProtocol
   = lens _fslUploadProtocol
       (\ s a -> s{_fslUploadProtocol = a})
 
--- | Pretty-print response.
-fslPp :: Lens' FoldersSinksList Bool
-fslPp = lens _fslPp (\ s a -> s{_fslPp = a})
-
 -- | OAuth access token.
 fslAccessToken :: Lens' FoldersSinksList (Maybe Text)
 fslAccessToken
@@ -153,12 +138,6 @@ fslUploadType :: Lens' FoldersSinksList (Maybe Text)
 fslUploadType
   = lens _fslUploadType
       (\ s a -> s{_fslUploadType = a})
-
--- | OAuth bearer token.
-fslBearerToken :: Lens' FoldersSinksList (Maybe Text)
-fslBearerToken
-  = lens _fslBearerToken
-      (\ s a -> s{_fslBearerToken = a})
 
 -- | Optional. If present, then retrieve the next batch of results from the
 -- preceding call to this method. pageToken must be the value of
@@ -190,10 +169,8 @@ instance GoogleRequest FoldersSinksList where
                "https://www.googleapis.com/auth/logging.read"]
         requestClient FoldersSinksList'{..}
           = go _fslParent _fslXgafv _fslUploadProtocol
-              (Just _fslPp)
               _fslAccessToken
               _fslUploadType
-              _fslBearerToken
               _fslPageToken
               _fslPageSize
               _fslCallback

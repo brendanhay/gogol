@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Update an existing ManagedZone. This method supports patch semantics.
+-- Apply a partial update to an existing ManagedZone.
 --
 -- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @dns.managedZones.patch@.
 module Network.Google.Resource.DNS.ManagedZones.Patch
@@ -56,7 +56,7 @@ type ManagedZonesPatchResource =
                      ReqBody '[JSON] ManagedZone :>
                        Patch '[JSON] Operation
 
--- | Update an existing ManagedZone. This method supports patch semantics.
+-- | Apply a partial update to an existing ManagedZone.
 --
 -- /See:/ 'managedZonesPatch' smart constructor.
 data ManagedZonesPatch = ManagedZonesPatch'

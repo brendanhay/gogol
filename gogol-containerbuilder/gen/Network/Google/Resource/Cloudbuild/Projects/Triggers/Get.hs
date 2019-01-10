@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets information about a BuildTrigger. This API is experimental.
+-- Returns information about a \`BuildTrigger\`. This API is experimental.
 --
--- /See:/ <https://cloud.google.com/container-builder/docs/ Google Cloud Container Builder API Reference> for @cloudbuild.projects.triggers.get@.
+-- /See:/ <https://cloud.google.com/cloud-build/docs/ Cloud Build API Reference> for @cloudbuild.projects.triggers.get@.
 module Network.Google.Resource.Cloudbuild.Projects.Triggers.Get
     (
     -- * REST Resource
@@ -36,10 +36,8 @@ module Network.Google.Resource.Cloudbuild.Projects.Triggers.Get
     , ptgXgafv
     , ptgUploadProtocol
     , ptgTriggerId
-    , ptgPp
     , ptgAccessToken
     , ptgUploadType
-    , ptgBearerToken
     , ptgProjectId
     , ptgCallback
     ) where
@@ -57,25 +55,20 @@ type ProjectsTriggersGetResource =
              Capture "triggerId" Text :>
                QueryParam "$.xgafv" Xgafv :>
                  QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] BuildTrigger
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] BuildTrigger
 
--- | Gets information about a BuildTrigger. This API is experimental.
+-- | Returns information about a \`BuildTrigger\`. This API is experimental.
 --
 -- /See:/ 'projectsTriggersGet' smart constructor.
 data ProjectsTriggersGet = ProjectsTriggersGet'
     { _ptgXgafv          :: !(Maybe Xgafv)
     , _ptgUploadProtocol :: !(Maybe Text)
     , _ptgTriggerId      :: !Text
-    , _ptgPp             :: !Bool
     , _ptgAccessToken    :: !(Maybe Text)
     , _ptgUploadType     :: !(Maybe Text)
-    , _ptgBearerToken    :: !(Maybe Text)
     , _ptgProjectId      :: !Text
     , _ptgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -90,13 +83,9 @@ data ProjectsTriggersGet = ProjectsTriggersGet'
 --
 -- * 'ptgTriggerId'
 --
--- * 'ptgPp'
---
 -- * 'ptgAccessToken'
 --
 -- * 'ptgUploadType'
---
--- * 'ptgBearerToken'
 --
 -- * 'ptgProjectId'
 --
@@ -110,10 +99,8 @@ projectsTriggersGet pPtgTriggerId_ pPtgProjectId_ =
     { _ptgXgafv = Nothing
     , _ptgUploadProtocol = Nothing
     , _ptgTriggerId = pPtgTriggerId_
-    , _ptgPp = True
     , _ptgAccessToken = Nothing
     , _ptgUploadType = Nothing
-    , _ptgBearerToken = Nothing
     , _ptgProjectId = pPtgProjectId_
     , _ptgCallback = Nothing
     }
@@ -128,14 +115,10 @@ ptgUploadProtocol
   = lens _ptgUploadProtocol
       (\ s a -> s{_ptgUploadProtocol = a})
 
--- | ID of the BuildTrigger to get.
+-- | ID of the \`BuildTrigger\` to get.
 ptgTriggerId :: Lens' ProjectsTriggersGet Text
 ptgTriggerId
   = lens _ptgTriggerId (\ s a -> s{_ptgTriggerId = a})
-
--- | Pretty-print response.
-ptgPp :: Lens' ProjectsTriggersGet Bool
-ptgPp = lens _ptgPp (\ s a -> s{_ptgPp = a})
 
 -- | OAuth access token.
 ptgAccessToken :: Lens' ProjectsTriggersGet (Maybe Text)
@@ -148,12 +131,6 @@ ptgUploadType :: Lens' ProjectsTriggersGet (Maybe Text)
 ptgUploadType
   = lens _ptgUploadType
       (\ s a -> s{_ptgUploadType = a})
-
--- | OAuth bearer token.
-ptgBearerToken :: Lens' ProjectsTriggersGet (Maybe Text)
-ptgBearerToken
-  = lens _ptgBearerToken
-      (\ s a -> s{_ptgBearerToken = a})
 
 -- | ID of the project that owns the trigger.
 ptgProjectId :: Lens' ProjectsTriggersGet Text
@@ -172,10 +149,8 @@ instance GoogleRequest ProjectsTriggersGet where
         requestClient ProjectsTriggersGet'{..}
           = go _ptgProjectId _ptgTriggerId _ptgXgafv
               _ptgUploadProtocol
-              (Just _ptgPp)
               _ptgAccessToken
               _ptgUploadType
-              _ptgBearerToken
               _ptgCallback
               (Just AltJSON)
               containerBuilderService

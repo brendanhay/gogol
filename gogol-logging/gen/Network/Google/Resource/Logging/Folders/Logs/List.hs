@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the logs in projects or organizations. Only logs that have entries
--- are listed.
+-- Lists the logs in projects, organizations, folders, or billing accounts.
+-- Only logs that have entries are listed.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.folders.logs.list@.
 module Network.Google.Resource.Logging.Folders.Logs.List
@@ -37,10 +37,8 @@ module Network.Google.Resource.Logging.Folders.Logs.List
     , fllParent
     , fllXgafv
     , fllUploadProtocol
-    , fllPp
     , fllAccessToken
     , fllUploadType
-    , fllBearerToken
     , fllPageToken
     , fllPageSize
     , fllCallback
@@ -57,28 +55,24 @@ type FoldersLogsListResource =
          "logs" :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" (Textual Int32) :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] ListLogsResponse
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "pageSize" (Textual Int32) :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] ListLogsResponse
 
--- | Lists the logs in projects or organizations. Only logs that have entries
--- are listed.
+-- | Lists the logs in projects, organizations, folders, or billing accounts.
+-- Only logs that have entries are listed.
 --
 -- /See:/ 'foldersLogsList' smart constructor.
 data FoldersLogsList = FoldersLogsList'
     { _fllParent         :: !Text
     , _fllXgafv          :: !(Maybe Xgafv)
     , _fllUploadProtocol :: !(Maybe Text)
-    , _fllPp             :: !Bool
     , _fllAccessToken    :: !(Maybe Text)
     , _fllUploadType     :: !(Maybe Text)
-    , _fllBearerToken    :: !(Maybe Text)
     , _fllPageToken      :: !(Maybe Text)
     , _fllPageSize       :: !(Maybe (Textual Int32))
     , _fllCallback       :: !(Maybe Text)
@@ -94,13 +88,9 @@ data FoldersLogsList = FoldersLogsList'
 --
 -- * 'fllUploadProtocol'
 --
--- * 'fllPp'
---
 -- * 'fllAccessToken'
 --
 -- * 'fllUploadType'
---
--- * 'fllBearerToken'
 --
 -- * 'fllPageToken'
 --
@@ -115,10 +105,8 @@ foldersLogsList pFllParent_ =
     { _fllParent = pFllParent_
     , _fllXgafv = Nothing
     , _fllUploadProtocol = Nothing
-    , _fllPp = True
     , _fllAccessToken = Nothing
     , _fllUploadType = Nothing
-    , _fllBearerToken = Nothing
     , _fllPageToken = Nothing
     , _fllPageSize = Nothing
     , _fllCallback = Nothing
@@ -126,6 +114,7 @@ foldersLogsList pFllParent_ =
 
 -- | Required. The resource name that owns the logs:
 -- \"projects\/[PROJECT_ID]\" \"organizations\/[ORGANIZATION_ID]\"
+-- \"billingAccounts\/[BILLING_ACCOUNT_ID]\" \"folders\/[FOLDER_ID]\"
 fllParent :: Lens' FoldersLogsList Text
 fllParent
   = lens _fllParent (\ s a -> s{_fllParent = a})
@@ -140,10 +129,6 @@ fllUploadProtocol
   = lens _fllUploadProtocol
       (\ s a -> s{_fllUploadProtocol = a})
 
--- | Pretty-print response.
-fllPp :: Lens' FoldersLogsList Bool
-fllPp = lens _fllPp (\ s a -> s{_fllPp = a})
-
 -- | OAuth access token.
 fllAccessToken :: Lens' FoldersLogsList (Maybe Text)
 fllAccessToken
@@ -155,12 +140,6 @@ fllUploadType :: Lens' FoldersLogsList (Maybe Text)
 fllUploadType
   = lens _fllUploadType
       (\ s a -> s{_fllUploadType = a})
-
--- | OAuth bearer token.
-fllBearerToken :: Lens' FoldersLogsList (Maybe Text)
-fllBearerToken
-  = lens _fllBearerToken
-      (\ s a -> s{_fllBearerToken = a})
 
 -- | Optional. If present, then retrieve the next batch of results from the
 -- preceding call to this method. pageToken must be the value of
@@ -192,10 +171,8 @@ instance GoogleRequest FoldersLogsList where
                "https://www.googleapis.com/auth/logging.read"]
         requestClient FoldersLogsList'{..}
           = go _fllParent _fllXgafv _fllUploadProtocol
-              (Just _fllPp)
               _fllAccessToken
               _fllUploadType
-              _fllBearerToken
               _fllPageToken
               _fllPageSize
               _fllCallback

@@ -90,7 +90,7 @@ nuPayload :: Lens' NotificationsUpdate Notification
 nuPayload
   = lens _nuPayload (\ s a -> s{_nuPayload = a})
 
--- | The unique ID for the customer\'s Google account.
+-- | The unique ID for the customer\'s G Suite account.
 nuCustomer :: Lens' NotificationsUpdate Text
 nuCustomer
   = lens _nuCustomer (\ s a -> s{_nuCustomer = a})

@@ -23,7 +23,7 @@
 -- Sets the access control policy on the specified resource. Replaces any
 -- existing policy.
 --
--- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.snapshots.setIamPolicy@.
+-- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference> for @pubsub.projects.snapshots.setIamPolicy@.
 module Network.Google.Resource.PubSub.Projects.Snapshots.SetIAMPolicy
     (
     -- * REST Resource
@@ -36,11 +36,9 @@ module Network.Google.Resource.PubSub.Projects.Snapshots.SetIAMPolicy
     -- * Request Lenses
     , pssiampXgafv
     , pssiampUploadProtocol
-    , pssiampPp
     , pssiampAccessToken
     , pssiampUploadType
     , pssiampPayload
-    , pssiampBearerToken
     , pssiampResource
     , pssiampCallback
     ) where
@@ -55,14 +53,12 @@ type ProjectsSnapshotsSetIAMPolicyResource =
        CaptureMode "resource" "setIamPolicy" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] SetIAMPolicyRequest :>
-                           Post '[JSON] Policy
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] SetIAMPolicyRequest :>
+                       Post '[JSON] Policy
 
 -- | Sets the access control policy on the specified resource. Replaces any
 -- existing policy.
@@ -71,11 +67,9 @@ type ProjectsSnapshotsSetIAMPolicyResource =
 data ProjectsSnapshotsSetIAMPolicy = ProjectsSnapshotsSetIAMPolicy'
     { _pssiampXgafv          :: !(Maybe Xgafv)
     , _pssiampUploadProtocol :: !(Maybe Text)
-    , _pssiampPp             :: !Bool
     , _pssiampAccessToken    :: !(Maybe Text)
     , _pssiampUploadType     :: !(Maybe Text)
     , _pssiampPayload        :: !SetIAMPolicyRequest
-    , _pssiampBearerToken    :: !(Maybe Text)
     , _pssiampResource       :: !Text
     , _pssiampCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -88,15 +82,11 @@ data ProjectsSnapshotsSetIAMPolicy = ProjectsSnapshotsSetIAMPolicy'
 --
 -- * 'pssiampUploadProtocol'
 --
--- * 'pssiampPp'
---
 -- * 'pssiampAccessToken'
 --
 -- * 'pssiampUploadType'
 --
 -- * 'pssiampPayload'
---
--- * 'pssiampBearerToken'
 --
 -- * 'pssiampResource'
 --
@@ -109,11 +99,9 @@ projectsSnapshotsSetIAMPolicy pPssiampPayload_ pPssiampResource_ =
     ProjectsSnapshotsSetIAMPolicy'
     { _pssiampXgafv = Nothing
     , _pssiampUploadProtocol = Nothing
-    , _pssiampPp = True
     , _pssiampAccessToken = Nothing
     , _pssiampUploadType = Nothing
     , _pssiampPayload = pPssiampPayload_
-    , _pssiampBearerToken = Nothing
     , _pssiampResource = pPssiampResource_
     , _pssiampCallback = Nothing
     }
@@ -128,11 +116,6 @@ pssiampUploadProtocol :: Lens' ProjectsSnapshotsSetIAMPolicy (Maybe Text)
 pssiampUploadProtocol
   = lens _pssiampUploadProtocol
       (\ s a -> s{_pssiampUploadProtocol = a})
-
--- | Pretty-print response.
-pssiampPp :: Lens' ProjectsSnapshotsSetIAMPolicy Bool
-pssiampPp
-  = lens _pssiampPp (\ s a -> s{_pssiampPp = a})
 
 -- | OAuth access token.
 pssiampAccessToken :: Lens' ProjectsSnapshotsSetIAMPolicy (Maybe Text)
@@ -152,15 +135,8 @@ pssiampPayload
   = lens _pssiampPayload
       (\ s a -> s{_pssiampPayload = a})
 
--- | OAuth bearer token.
-pssiampBearerToken :: Lens' ProjectsSnapshotsSetIAMPolicy (Maybe Text)
-pssiampBearerToken
-  = lens _pssiampBearerToken
-      (\ s a -> s{_pssiampBearerToken = a})
-
--- | REQUIRED: The resource for which the policy is being specified.
--- \`resource\` is usually specified as a path. For example, a Project
--- resource is specified as \`projects\/{project}\`.
+-- | REQUIRED: The resource for which the policy is being specified. See the
+-- operation documentation for the appropriate value for this field.
 pssiampResource :: Lens' ProjectsSnapshotsSetIAMPolicy Text
 pssiampResource
   = lens _pssiampResource
@@ -181,10 +157,8 @@ instance GoogleRequest ProjectsSnapshotsSetIAMPolicy
         requestClient ProjectsSnapshotsSetIAMPolicy'{..}
           = go _pssiampResource _pssiampXgafv
               _pssiampUploadProtocol
-              (Just _pssiampPp)
               _pssiampAccessToken
               _pssiampUploadType
-              _pssiampBearerToken
               _pssiampCallback
               (Just AltJSON)
               _pssiampPayload

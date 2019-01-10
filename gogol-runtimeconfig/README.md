@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Cloud RuntimeConfig.
+A client library for the Google Cloud Runtime Configuration.
 
 
 ## Contribute

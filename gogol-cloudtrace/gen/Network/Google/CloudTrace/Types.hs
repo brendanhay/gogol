@@ -21,65 +21,164 @@ module Network.Google.CloudTrace.Types
 
     -- * OAuth Scopes
     , traceAppendScope
-    , traceReadOnlyScope
     , cloudPlatformScope
+
+    -- * Span
+    , Span
+    , span
+    , sStatus
+    , sStartTime
+    , sChildSpanCount
+    , sSameProcessAsParentSpan
+    , sName
+    , sStackTrace
+    , sAttributes
+    , sEndTime
+    , sTimeEvents
+    , sDisplayName
+    , sParentSpanId
+    , sLinks
+    , sSpanId
+
+    -- * TruncatableString
+    , TruncatableString
+    , truncatableString
+    , tsValue
+    , tsTruncatedByteCount
+
+    -- * Status
+    , Status
+    , status
+    , sDetails
+    , sCode
+    , sMessage
+
+    -- * AttributesAttributeMap
+    , AttributesAttributeMap
+    , attributesAttributeMap
+    , aamAddtional
+
+    -- * Annotation
+    , Annotation
+    , annotation
+    , aAttributes
+    , aDescription
+
+    -- * AttributeValue
+    , AttributeValue
+    , attributeValue
+    , avBoolValue
+    , avIntValue
+    , avStringValue
+
+    -- * MessageEvent
+    , MessageEvent
+    , messageEvent
+    , meId
+    , meUncompressedSizeBytes
+    , meType
+    , meCompressedSizeBytes
 
     -- * Empty
     , Empty
     , empty
 
-    -- * TraceSpanLabels
-    , TraceSpanLabels
-    , traceSpanLabels
-    , tslAddtional
+    -- * Link
+    , Link
+    , link
+    , lTraceId
+    , lAttributes
+    , lType
+    , lSpanId
 
-    -- * Traces
-    , Traces
-    , traces
-    , tTraces
+    -- * StatusDetailsItem
+    , StatusDetailsItem
+    , statusDetailsItem
+    , sdiAddtional
 
-    -- * TraceSpan
-    , TraceSpan
-    , traceSpan
-    , tsStartTime
-    , tsKind
-    , tsName
-    , tsEndTime
-    , tsLabels
-    , tsParentSpanId
-    , tsSpanId
+    -- * StackTrace
+    , StackTrace
+    , stackTrace
+    , stStackTraceHashId
+    , stStackFrames
 
-    -- * ListTracesResponse
-    , ListTracesResponse
-    , listTracesResponse
-    , ltrNextPageToken
-    , ltrTraces
+    -- * BatchWriteSpansRequest
+    , BatchWriteSpansRequest
+    , batchWriteSpansRequest
+    , bwsrSpans
 
-    -- * Trace
-    , Trace
-    , trace
-    , tTraceId
-    , tSpans
-    , tProjectId
+    -- * MessageEventType
+    , MessageEventType (..)
+
+    -- * Attributes
+    , Attributes
+    , attributes
+    , aDroppedAttributesCount
+    , aAttributeMap
+
+    -- * Module
+    , Module
+    , module'
+    , mBuildId
+    , mModule
+
+    -- * TimeEvents
+    , TimeEvents
+    , timeEvents
+    , teDroppedMessageEventsCount
+    , teDroppedAnnotationsCount
+    , teTimeEvent
+
+    -- * Xgafv
+    , Xgafv (..)
+
+    -- * StackFrames
+    , StackFrames
+    , stackFrames
+    , sfDroppedFramesCount
+    , sfFrame
+
+    -- * LinkType
+    , LinkType (..)
+
+    -- * StackFrame
+    , StackFrame
+    , stackFrame
+    , sfLoadModule
+    , sfOriginalFunctionName
+    , sfLineNumber
+    , sfSourceVersion
+    , sfFunctionName
+    , sfColumnNumber
+    , sfFileName
+
+    -- * Links
+    , Links
+    , links
+    , lDroppedLinksCount
+    , lLink
+
+    -- * TimeEvent
+    , TimeEvent
+    , timeEvent
+    , teMessageEvent
+    , teAnnotation
+    , teTime
     ) where
 
 import           Network.Google.CloudTrace.Types.Product
 import           Network.Google.CloudTrace.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v1' of the Google Cloud Trace API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v2' of the Stackdriver Trace API. This contains the host and root path used as a starting point for constructing service requests.
 cloudTraceService :: ServiceConfig
 cloudTraceService
-  = defaultService (ServiceId "cloudtrace:v1")
+  = defaultService (ServiceId "cloudtrace:v2")
       "cloudtrace.googleapis.com"
 
 -- | Write Trace data for a project or application
 traceAppendScope :: Proxy '["https://www.googleapis.com/auth/trace.append"]
 traceAppendScope = Proxy;
-
--- | Read Trace data for a project or application
-traceReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/trace.readonly"]
-traceReadOnlyScope = Proxy;
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]

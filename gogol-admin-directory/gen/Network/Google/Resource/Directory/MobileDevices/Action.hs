@@ -86,7 +86,7 @@ mobileDevicesAction pMdaResourceId_ pMdaPayload_ pMdaCustomerId_ =
     , _mdaCustomerId = pMdaCustomerId_
     }
 
--- | Immutable id of Mobile Device
+-- | Immutable ID of Mobile Device
 mdaResourceId :: Lens' MobileDevicesAction Text
 mdaResourceId
   = lens _mdaResourceId
@@ -97,7 +97,7 @@ mdaPayload :: Lens' MobileDevicesAction MobileDeviceAction
 mdaPayload
   = lens _mdaPayload (\ s a -> s{_mdaPayload = a})
 
--- | Immutable id of the Google Apps account
+-- | Immutable ID of the G Suite account
 mdaCustomerId :: Lens' MobileDevicesAction Text
 mdaCustomerId
   = lens _mdaCustomerId

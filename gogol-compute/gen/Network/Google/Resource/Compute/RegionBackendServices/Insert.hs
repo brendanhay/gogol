@@ -36,6 +36,7 @@ module Network.Google.Resource.Compute.RegionBackendServices.Insert
     , RegionBackendServicesInsert
 
     -- * Request Lenses
+    , rbsiRequestId
     , rbsiProject
     , rbsiPayload
     , rbsiRegion
@@ -54,9 +55,10 @@ type RegionBackendServicesInsertResource =
              "regions" :>
                Capture "region" Text :>
                  "backendServices" :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] BackendService :>
-                       Post '[JSON] Operation
+                   QueryParam "requestId" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] BackendService :>
+                         Post '[JSON] Operation
 
 -- | Creates a regional BackendService resource in the specified project
 -- using the data included in the request. There are several restrictions
@@ -65,14 +67,17 @@ type RegionBackendServicesInsertResource =
 --
 -- /See:/ 'regionBackendServicesInsert' smart constructor.
 data RegionBackendServicesInsert = RegionBackendServicesInsert'
-    { _rbsiProject :: !Text
-    , _rbsiPayload :: !BackendService
-    , _rbsiRegion  :: !Text
+    { _rbsiRequestId :: !(Maybe Text)
+    , _rbsiProject   :: !Text
+    , _rbsiPayload   :: !BackendService
+    , _rbsiRegion    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RegionBackendServicesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rbsiRequestId'
 --
 -- * 'rbsiProject'
 --
@@ -86,10 +91,26 @@ regionBackendServicesInsert
     -> RegionBackendServicesInsert
 regionBackendServicesInsert pRbsiProject_ pRbsiPayload_ pRbsiRegion_ =
     RegionBackendServicesInsert'
-    { _rbsiProject = pRbsiProject_
+    { _rbsiRequestId = Nothing
+    , _rbsiProject = pRbsiProject_
     , _rbsiPayload = pRbsiPayload_
     , _rbsiRegion = pRbsiRegion_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+rbsiRequestId :: Lens' RegionBackendServicesInsert (Maybe Text)
+rbsiRequestId
+  = lens _rbsiRequestId
+      (\ s a -> s{_rbsiRequestId = a})
 
 -- | Project ID for this request.
 rbsiProject :: Lens' RegionBackendServicesInsert Text
@@ -113,7 +134,8 @@ instance GoogleRequest RegionBackendServicesInsert
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient RegionBackendServicesInsert'{..}
-          = go _rbsiProject _rbsiRegion (Just AltJSON)
+          = go _rbsiProject _rbsiRegion _rbsiRequestId
+              (Just AltJSON)
               _rbsiPayload
               computeService
           where go

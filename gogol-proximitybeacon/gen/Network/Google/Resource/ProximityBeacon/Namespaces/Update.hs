@@ -23,7 +23,7 @@
 -- Updates the information about the specified namespace. Only the
 -- namespace visibility can be updated.
 --
--- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @proximitybeacon.namespaces.update@.
+-- /See:/ <https://developers.google.com/beacons/proximity/ Proximity Beacon API Reference> for @proximitybeacon.namespaces.update@.
 module Network.Google.Resource.ProximityBeacon.Namespaces.Update
     (
     -- * REST Resource
@@ -36,12 +36,10 @@ module Network.Google.Resource.ProximityBeacon.Namespaces.Update
     -- * Request Lenses
     , nuXgafv
     , nuUploadProtocol
-    , nuPp
     , nuAccessToken
     , nuUploadType
     , nuPayload
     , nuNamespaceName
-    , nuBearerToken
     , nuProjectId
     , nuCallback
     ) where
@@ -54,30 +52,26 @@ import           Network.Google.ProximityBeacon.Types
 type NamespacesUpdateResource =
      "v1beta1" :>
        Capture "namespaceName" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "projectId" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Namespace :> Put '[JSON] Namespace
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "projectId" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Namespace :> Put '[JSON] Namespace
 
 -- | Updates the information about the specified namespace. Only the
 -- namespace visibility can be updated.
 --
 -- /See:/ 'namespacesUpdate' smart constructor.
 data NamespacesUpdate = NamespacesUpdate'
-    { _nuXgafv          :: !(Maybe Text)
+    { _nuXgafv          :: !(Maybe Xgafv)
     , _nuUploadProtocol :: !(Maybe Text)
-    , _nuPp             :: !Bool
     , _nuAccessToken    :: !(Maybe Text)
     , _nuUploadType     :: !(Maybe Text)
     , _nuPayload        :: !Namespace
     , _nuNamespaceName  :: !Text
-    , _nuBearerToken    :: !(Maybe Text)
     , _nuProjectId      :: !(Maybe Text)
     , _nuCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -90,8 +84,6 @@ data NamespacesUpdate = NamespacesUpdate'
 --
 -- * 'nuUploadProtocol'
 --
--- * 'nuPp'
---
 -- * 'nuAccessToken'
 --
 -- * 'nuUploadType'
@@ -99,8 +91,6 @@ data NamespacesUpdate = NamespacesUpdate'
 -- * 'nuPayload'
 --
 -- * 'nuNamespaceName'
---
--- * 'nuBearerToken'
 --
 -- * 'nuProjectId'
 --
@@ -113,18 +103,16 @@ namespacesUpdate pNuPayload_ pNuNamespaceName_ =
     NamespacesUpdate'
     { _nuXgafv = Nothing
     , _nuUploadProtocol = Nothing
-    , _nuPp = True
     , _nuAccessToken = Nothing
     , _nuUploadType = Nothing
     , _nuPayload = pNuPayload_
     , _nuNamespaceName = pNuNamespaceName_
-    , _nuBearerToken = Nothing
     , _nuProjectId = Nothing
     , _nuCallback = Nothing
     }
 
 -- | V1 error format.
-nuXgafv :: Lens' NamespacesUpdate (Maybe Text)
+nuXgafv :: Lens' NamespacesUpdate (Maybe Xgafv)
 nuXgafv = lens _nuXgafv (\ s a -> s{_nuXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -132,10 +120,6 @@ nuUploadProtocol :: Lens' NamespacesUpdate (Maybe Text)
 nuUploadProtocol
   = lens _nuUploadProtocol
       (\ s a -> s{_nuUploadProtocol = a})
-
--- | Pretty-print response.
-nuPp :: Lens' NamespacesUpdate Bool
-nuPp = lens _nuPp (\ s a -> s{_nuPp = a})
 
 -- | OAuth access token.
 nuAccessToken :: Lens' NamespacesUpdate (Maybe Text)
@@ -154,17 +138,11 @@ nuPayload
   = lens _nuPayload (\ s a -> s{_nuPayload = a})
 
 -- | Resource name of this namespace. Namespaces names have the format:
--- namespaces\/namespace.
+-- 'namespaces\/namespace'.
 nuNamespaceName :: Lens' NamespacesUpdate Text
 nuNamespaceName
   = lens _nuNamespaceName
       (\ s a -> s{_nuNamespaceName = a})
-
--- | OAuth bearer token.
-nuBearerToken :: Lens' NamespacesUpdate (Maybe Text)
-nuBearerToken
-  = lens _nuBearerToken
-      (\ s a -> s{_nuBearerToken = a})
 
 -- | The project id of the namespace to update. If the project id is not
 -- specified then the project making the request is used. The project id
@@ -184,10 +162,8 @@ instance GoogleRequest NamespacesUpdate where
              '["https://www.googleapis.com/auth/userlocation.beacon.registry"]
         requestClient NamespacesUpdate'{..}
           = go _nuNamespaceName _nuXgafv _nuUploadProtocol
-              (Just _nuPp)
               _nuAccessToken
               _nuUploadType
-              _nuBearerToken
               _nuProjectId
               _nuCallback
               (Just AltJSON)

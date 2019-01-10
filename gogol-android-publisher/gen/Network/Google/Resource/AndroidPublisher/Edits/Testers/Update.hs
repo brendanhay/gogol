@@ -44,20 +44,20 @@ import           Network.Google.Prelude
 -- 'EditsTestersUpdate' request conforms to.
 type EditsTestersUpdateResource =
      "androidpublisher" :>
-       "v2" :>
+       "v3" :>
          "applications" :>
            Capture "packageName" Text :>
              "edits" :>
                Capture "editId" Text :>
                  "testers" :>
-                   Capture "track" EditsTestersUpdateTrack :>
+                   Capture "track" Text :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Testers :> Put '[JSON] Testers
 
 --
 -- /See:/ 'editsTestersUpdate' smart constructor.
 data EditsTestersUpdate = EditsTestersUpdate'
-    { _etutTrack       :: !EditsTestersUpdateTrack
+    { _etutTrack       :: !Text
     , _etutPackageName :: !Text
     , _etutPayload     :: !Testers
     , _etutEditId      :: !Text
@@ -75,7 +75,7 @@ data EditsTestersUpdate = EditsTestersUpdate'
 --
 -- * 'etutEditId'
 editsTestersUpdate
-    :: EditsTestersUpdateTrack -- ^ 'etutTrack'
+    :: Text -- ^ 'etutTrack'
     -> Text -- ^ 'etutPackageName'
     -> Testers -- ^ 'etutPayload'
     -> Text -- ^ 'etutEditId'
@@ -88,7 +88,9 @@ editsTestersUpdate pEtutTrack_ pEtutPackageName_ pEtutPayload_ pEtutEditId_ =
     , _etutEditId = pEtutEditId_
     }
 
-etutTrack :: Lens' EditsTestersUpdate EditsTestersUpdateTrack
+-- | The track to read or modify. Acceptable values are: \"alpha\", \"beta\",
+-- \"production\", \"rollout\" or \"internal\".
+etutTrack :: Lens' EditsTestersUpdate Text
 etutTrack
   = lens _etutTrack (\ s a -> s{_etutTrack = a})
 

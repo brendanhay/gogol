@@ -14,8 +14,8 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    Fetches reports for the administrators of Google Apps customers about
-    the usage, collaboration, security, and risk for their users.
+    Fetches reports for the administrators of G Suite customers about the
+    usage, collaboration, security, and risk for their users.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -40,6 +40,7 @@ library
         , Network.Google.Resource.Reports.Activities.List
         , Network.Google.Resource.Reports.Activities.Watch
         , Network.Google.Resource.Reports.CustomerUsageReports.Get
+        , Network.Google.Resource.Reports.EntityUsageReports.Get
         , Network.Google.Resource.Reports.UserUsageReport.Get
 
     other-modules:

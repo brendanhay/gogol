@@ -21,7 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Deletes the specified send-as alias. Revokes any verification that may
--- have been required for using it.
+-- have been required for using it. This method is only available to
+-- service account clients that have been delegated domain-wide authority.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @gmail.users.settings.sendAs.delete@.
 module Network.Google.Resource.Gmail.Users.Settings.SendAs.Delete
@@ -54,7 +55,8 @@ type UsersSettingsSendAsDeleteResource =
                    QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes the specified send-as alias. Revokes any verification that may
--- have been required for using it.
+-- have been required for using it. This method is only available to
+-- service account clients that have been delegated domain-wide authority.
 --
 -- /See:/ 'usersSettingsSendAsDelete' smart constructor.
 data UsersSettingsSendAsDelete = UsersSettingsSendAsDelete'

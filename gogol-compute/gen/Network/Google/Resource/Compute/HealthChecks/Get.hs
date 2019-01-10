@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified HealthCheck resource. Get a list of available
+-- Returns the specified HealthCheck resource. Gets a list of available
 -- health checks by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.healthChecks.get@.
@@ -53,7 +53,7 @@ type HealthChecksGetResource =
                  Capture "healthCheck" Text :>
                    QueryParam "alt" AltJSON :> Get '[JSON] HealthCheck
 
--- | Returns the specified HealthCheck resource. Get a list of available
+-- | Returns the specified HealthCheck resource. Gets a list of available
 -- health checks by making a list() request.
 --
 -- /See:/ 'healthChecksGet' smart constructor.

@@ -21,7 +21,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Lists the shipping settings of the sub-accounts in your Merchant Center
--- account. This method can only be called for multi-client accounts.
+-- account.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.shippingsettings.list@.
 module Network.Google.Resource.Content.ShippingSettings.List
@@ -46,7 +46,7 @@ import           Network.Google.ShoppingContent.Types
 -- 'ShippingSettingsList' request conforms to.
 type ShippingSettingsListResource =
      "content" :>
-       "v2" :>
+       "v2.1" :>
          Capture "merchantId" (Textual Word64) :>
            "shippingsettings" :>
              QueryParam "pageToken" Text :>
@@ -55,7 +55,7 @@ type ShippingSettingsListResource =
                    Get '[JSON] ShippingSettingsListResponse
 
 -- | Lists the shipping settings of the sub-accounts in your Merchant Center
--- account. This method can only be called for multi-client accounts.
+-- account.
 --
 -- /See:/ 'shippingSettingsList' smart constructor.
 data ShippingSettingsList = ShippingSettingsList'
@@ -83,7 +83,7 @@ shippingSettingsList pSslMerchantId_ =
     , _sslMaxResults = Nothing
     }
 
--- | The ID of the managing account.
+-- | The ID of the managing account. This must be a multi-client account.
 sslMerchantId :: Lens' ShippingSettingsList Word64
 sslMerchantId
   = lens _sslMerchantId

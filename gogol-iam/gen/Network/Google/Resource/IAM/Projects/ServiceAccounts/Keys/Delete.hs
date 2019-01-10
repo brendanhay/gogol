@@ -22,7 +22,7 @@
 --
 -- Deletes a ServiceAccountKey.
 --
--- /See:/ <https://cloud.google.com/iam/ Google Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.keys.delete@.
+-- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.keys.delete@.
 module Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Delete
     (
     -- * REST Resource
@@ -35,10 +35,8 @@ module Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Delete
     -- * Request Lenses
     , psakdXgafv
     , psakdUploadProtocol
-    , psakdPp
     , psakdAccessToken
     , psakdUploadType
-    , psakdBearerToken
     , psakdName
     , psakdCallback
     ) where
@@ -51,25 +49,21 @@ import           Network.Google.Prelude
 type ProjectsServiceAccountsKeysDeleteResource =
      "v1" :>
        Capture "name" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :> Delete '[JSON] Empty
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
 -- | Deletes a ServiceAccountKey.
 --
 -- /See:/ 'projectsServiceAccountsKeysDelete' smart constructor.
 data ProjectsServiceAccountsKeysDelete = ProjectsServiceAccountsKeysDelete'
-    { _psakdXgafv          :: !(Maybe Text)
+    { _psakdXgafv          :: !(Maybe Xgafv)
     , _psakdUploadProtocol :: !(Maybe Text)
-    , _psakdPp             :: !Bool
     , _psakdAccessToken    :: !(Maybe Text)
     , _psakdUploadType     :: !(Maybe Text)
-    , _psakdBearerToken    :: !(Maybe Text)
     , _psakdName           :: !Text
     , _psakdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -82,13 +76,9 @@ data ProjectsServiceAccountsKeysDelete = ProjectsServiceAccountsKeysDelete'
 --
 -- * 'psakdUploadProtocol'
 --
--- * 'psakdPp'
---
 -- * 'psakdAccessToken'
 --
 -- * 'psakdUploadType'
---
--- * 'psakdBearerToken'
 --
 -- * 'psakdName'
 --
@@ -100,16 +90,14 @@ projectsServiceAccountsKeysDelete pPsakdName_ =
     ProjectsServiceAccountsKeysDelete'
     { _psakdXgafv = Nothing
     , _psakdUploadProtocol = Nothing
-    , _psakdPp = True
     , _psakdAccessToken = Nothing
     , _psakdUploadType = Nothing
-    , _psakdBearerToken = Nothing
     , _psakdName = pPsakdName_
     , _psakdCallback = Nothing
     }
 
 -- | V1 error format.
-psakdXgafv :: Lens' ProjectsServiceAccountsKeysDelete (Maybe Text)
+psakdXgafv :: Lens' ProjectsServiceAccountsKeysDelete (Maybe Xgafv)
 psakdXgafv
   = lens _psakdXgafv (\ s a -> s{_psakdXgafv = a})
 
@@ -118,10 +106,6 @@ psakdUploadProtocol :: Lens' ProjectsServiceAccountsKeysDelete (Maybe Text)
 psakdUploadProtocol
   = lens _psakdUploadProtocol
       (\ s a -> s{_psakdUploadProtocol = a})
-
--- | Pretty-print response.
-psakdPp :: Lens' ProjectsServiceAccountsKeysDelete Bool
-psakdPp = lens _psakdPp (\ s a -> s{_psakdPp = a})
 
 -- | OAuth access token.
 psakdAccessToken :: Lens' ProjectsServiceAccountsKeysDelete (Maybe Text)
@@ -135,17 +119,11 @@ psakdUploadType
   = lens _psakdUploadType
       (\ s a -> s{_psakdUploadType = a})
 
--- | OAuth bearer token.
-psakdBearerToken :: Lens' ProjectsServiceAccountsKeysDelete (Maybe Text)
-psakdBearerToken
-  = lens _psakdBearerToken
-      (\ s a -> s{_psakdBearerToken = a})
-
 -- | The resource name of the service account key in the following format:
--- \`projects\/{project}\/serviceAccounts\/{account}\/keys\/{key}\`. Using
--- \`-\` as a wildcard for the project will infer the project from the
--- account. The \`account\` value can be the \`email\` address or the
--- \`unique_id\` of the service account.
+-- \`projects\/{PROJECT_ID}\/serviceAccounts\/{ACCOUNT}\/keys\/{key}\`.
+-- Using \`-\` as a wildcard for the \`PROJECT_ID\` will infer the project
+-- from the account. The \`ACCOUNT\` value can be the \`email\` address or
+-- the \`unique_id\` of the service account.
 psakdName :: Lens' ProjectsServiceAccountsKeysDelete Text
 psakdName
   = lens _psakdName (\ s a -> s{_psakdName = a})
@@ -163,10 +141,8 @@ instance GoogleRequest
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsServiceAccountsKeysDelete'{..}
           = go _psakdName _psakdXgafv _psakdUploadProtocol
-              (Just _psakdPp)
               _psakdAccessToken
               _psakdUploadType
-              _psakdBearerToken
               _psakdCallback
               (Just AltJSON)
               iAMService

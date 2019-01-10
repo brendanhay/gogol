@@ -46,6 +46,13 @@ module Network.Google.Storage.Types
     -- * ObjectsComposeDestinationPredefinedACL
     , ObjectsComposeDestinationPredefinedACL (..)
 
+    -- * BucketRetentionPolicy
+    , BucketRetentionPolicy
+    , bucketRetentionPolicy
+    , brpRetentionPeriod
+    , brpEffectiveTime
+    , brpIsLocked
+
     -- * BucketsInsertPredefinedACL
     , BucketsInsertPredefinedACL (..)
 
@@ -55,6 +62,24 @@ module Network.Google.Storage.Types
     , bNextPageToken
     , bKind
     , bItems
+
+    -- * BucketBilling
+    , BucketBilling
+    , bucketBilling
+    , bbRequesterPays
+
+    -- * Notification
+    , Notification
+    , notification
+    , nEtag
+    , nObjectNamePrefix
+    , nPayloadFormat
+    , nEventTypes
+    , nKind
+    , nTopic
+    , nSelfLink
+    , nId
+    , nCustomAttributes
 
     -- * BucketLogging
     , BucketLogging
@@ -77,6 +102,7 @@ module Network.Google.Storage.Types
     , blricIsLive
     , blricNumNewerVersions
     , blricMatchesStorageClass
+    , blricMatchesPattern
     , blricCreatedBefore
 
     -- * ObjectsRewriteDestinationPredefinedACL
@@ -86,6 +112,11 @@ module Network.Google.Storage.Types
     , BucketLifecycle
     , bucketLifecycle
     , blRule
+
+    -- * BucketLabels
+    , BucketLabels
+    , bucketLabels
+    , blAddtional
 
     -- * Channel
     , Channel
@@ -135,23 +166,29 @@ module Network.Google.Storage.Types
     , bucket
     , bucEtag
     , bucLocation
+    , bucIAMConfiguration
     , bucKind
     , bucWebsite
     , bucProjectNumber
     , bucLifecycle
     , bucOwner
+    , bucRetentionPolicy
     , bucSelfLink
     , bucName
+    , bucEncryption
     , bucStorageClass
     , bucVersioning
     , bucCORS
     , bucTimeCreated
     , bucId
+    , bucLabels
     , bucUpdated
     , bucDefaultObjectACL
+    , bucBilling
     , bucMetageneration
     , bucLogging
     , bucACL
+    , bucDefaultEventBasedHold
 
     -- * BucketsGetProjection
     , BucketsGetProjection (..)
@@ -172,6 +209,11 @@ module Network.Google.Storage.Types
     , bucketAccessControls
     , bacKind
     , bacItems
+
+    -- * BucketEncryption
+    , BucketEncryption
+    , bucketEncryption
+    , beDefaultKmsKeyName
 
     -- * BucketsUpdateProjection
     , BucketsUpdateProjection (..)
@@ -194,6 +236,12 @@ module Network.Google.Storage.Types
 
     -- * BucketsUpdatePredefinedACL
     , BucketsUpdatePredefinedACL (..)
+
+    -- * ServiceAccount
+    , ServiceAccount
+    , serviceAccount
+    , saKind
+    , saEmailAddress
 
     -- * ObjectsCopyDestinationPredefinedACL
     , ObjectsCopyDestinationPredefinedACL (..)
@@ -222,6 +270,13 @@ module Network.Google.Storage.Types
     , channelParams
     , cpAddtional
 
+    -- * PolicyBindingsItem
+    , PolicyBindingsItem
+    , policyBindingsItem
+    , pbiMembers
+    , pbiRole
+    , pbiCondition
+
     -- * BucketsListProjection
     , BucketsListProjection (..)
 
@@ -231,8 +286,10 @@ module Network.Google.Storage.Types
     -- * Object
     , Object
     , object'
+    , objTemporaryHold
     , objEtag
     , objTimeStorageClassUpdated
+    , objRetentionExpirationTime
     , objSize
     , objKind
     , objTimeDeleted
@@ -246,9 +303,11 @@ module Network.Google.Storage.Types
     , objName
     , objStorageClass
     , objContentEncoding
+    , objEventBasedHold
     , objMetadata
     , objTimeCreated
     , objId
+    , objKmsKeyName
     , objUpdated
     , objContentLanguage
     , objCacheControl
@@ -312,6 +371,25 @@ module Network.Google.Storage.Types
     -- * BucketsPatchPredefinedDefaultObjectACL
     , BucketsPatchPredefinedDefaultObjectACL (..)
 
+    -- * TestIAMPermissionsResponse
+    , TestIAMPermissionsResponse
+    , testIAMPermissionsResponse
+    , tiprKind
+    , tiprPermissions
+
+    -- * Policy
+    , Policy
+    , policy
+    , pEtag
+    , pResourceId
+    , pKind
+    , pBindings
+
+    -- * BucketIAMConfiguration
+    , BucketIAMConfiguration
+    , bucketIAMConfiguration
+    , bicBucketPolicyOnly
+
     -- * BucketsPatchPredefinedACL
     , BucketsPatchPredefinedACL (..)
 
@@ -332,8 +410,25 @@ module Network.Google.Storage.Types
     , oacaGeneration
     , oacaEntityId
 
+    -- * Notifications
+    , Notifications
+    , notifications
+    , notKind
+    , notItems
+
+    -- * NotificationCustom_attributes
+    , NotificationCustom_attributes
+    , notificationCustom_attributes
+    , ncAddtional
+
     -- * ObjectsCopyProjection
     , ObjectsCopyProjection (..)
+
+    -- * BucketIAMConfigurationBucketPolicyOnly
+    , BucketIAMConfigurationBucketPolicyOnly
+    , bucketIAMConfigurationBucketPolicyOnly
+    , bicbpoLockedTime
+    , bicbpoEnabled
 
     -- * RewriteResponse
     , RewriteResponse

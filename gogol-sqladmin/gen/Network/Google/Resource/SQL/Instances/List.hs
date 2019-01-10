@@ -23,7 +23,7 @@
 -- Lists instances under a given project in the alphabetical order of the
 -- instance name.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.instances.list@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.instances.list@.
 module Network.Google.Resource.SQL.Instances.List
     (
     -- * REST Resource
@@ -35,6 +35,7 @@ module Network.Google.Resource.SQL.Instances.List
 
     -- * Request Lenses
     , ilProject
+    , ilFilter
     , ilPageToken
     , ilMaxResults
     ) where
@@ -50,10 +51,11 @@ type InstancesListResource =
          "projects" :>
            Capture "project" Text :>
              "instances" :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" (Textual Word32) :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] InstancesListResponse
+               QueryParam "filter" Text :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "maxResults" (Textual Word32) :>
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] InstancesListResponse
 
 -- | Lists instances under a given project in the alphabetical order of the
 -- instance name.
@@ -61,6 +63,7 @@ type InstancesListResource =
 -- /See:/ 'instancesList' smart constructor.
 data InstancesList = InstancesList'
     { _ilProject    :: !Text
+    , _ilFilter     :: !(Maybe Text)
     , _ilPageToken  :: !(Maybe Text)
     , _ilMaxResults :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,6 +74,8 @@ data InstancesList = InstancesList'
 --
 -- * 'ilProject'
 --
+-- * 'ilFilter'
+--
 -- * 'ilPageToken'
 --
 -- * 'ilMaxResults'
@@ -80,6 +85,7 @@ instancesList
 instancesList pIlProject_ =
     InstancesList'
     { _ilProject = pIlProject_
+    , _ilFilter = Nothing
     , _ilPageToken = Nothing
     , _ilMaxResults = Nothing
     }
@@ -88,6 +94,11 @@ instancesList pIlProject_ =
 ilProject :: Lens' InstancesList Text
 ilProject
   = lens _ilProject (\ s a -> s{_ilProject = a})
+
+-- | An expression for filtering the results of the request, such as by name
+-- or label.
+ilFilter :: Lens' InstancesList (Maybe Text)
+ilFilter = lens _ilFilter (\ s a -> s{_ilFilter = a})
 
 -- | A previously-returned page token representing part of the larger set of
 -- results to view.
@@ -107,7 +118,7 @@ instance GoogleRequest InstancesList where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient InstancesList'{..}
-          = go _ilProject _ilPageToken _ilMaxResults
+          = go _ilProject _ilFilter _ilPageToken _ilMaxResults
               (Just AltJSON)
               sQLAdminService
           where go

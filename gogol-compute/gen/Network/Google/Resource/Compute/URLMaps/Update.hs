@@ -34,6 +34,7 @@ module Network.Google.Resource.Compute.URLMaps.Update
     , URLMapsUpdate
 
     -- * Request Lenses
+    , umuRequestId
     , umuURLMap
     , umuProject
     , umuPayload
@@ -52,22 +53,26 @@ type URLMapsUpdateResource =
              "global" :>
                "urlMaps" :>
                  Capture "urlMap" Text :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] URLMap :> Put '[JSON] Operation
+                   QueryParam "requestId" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] URLMap :> Put '[JSON] Operation
 
 -- | Updates the specified UrlMap resource with the data included in the
 -- request.
 --
 -- /See:/ 'urlMapsUpdate' smart constructor.
 data URLMapsUpdate = URLMapsUpdate'
-    { _umuURLMap  :: !Text
-    , _umuProject :: !Text
-    , _umuPayload :: !URLMap
+    { _umuRequestId :: !(Maybe Text)
+    , _umuURLMap    :: !Text
+    , _umuProject   :: !Text
+    , _umuPayload   :: !URLMap
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLMapsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'umuRequestId'
 --
 -- * 'umuURLMap'
 --
@@ -81,10 +86,25 @@ urlMapsUpdate
     -> URLMapsUpdate
 urlMapsUpdate pUmuURLMap_ pUmuProject_ pUmuPayload_ =
     URLMapsUpdate'
-    { _umuURLMap = pUmuURLMap_
+    { _umuRequestId = Nothing
+    , _umuURLMap = pUmuURLMap_
     , _umuProject = pUmuProject_
     , _umuPayload = pUmuPayload_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+umuRequestId :: Lens' URLMapsUpdate (Maybe Text)
+umuRequestId
+  = lens _umuRequestId (\ s a -> s{_umuRequestId = a})
 
 -- | Name of the UrlMap resource to update.
 umuURLMap :: Lens' URLMapsUpdate Text
@@ -107,7 +127,8 @@ instance GoogleRequest URLMapsUpdate where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient URLMapsUpdate'{..}
-          = go _umuProject _umuURLMap (Just AltJSON)
+          = go _umuProject _umuURLMap _umuRequestId
+              (Just AltJSON)
               _umuPayload
               computeService
           where go

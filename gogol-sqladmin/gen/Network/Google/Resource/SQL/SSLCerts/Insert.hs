@@ -24,7 +24,7 @@
 -- server certificate authority. The new certificate will not be usable
 -- until the instance is restarted.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.sslCerts.insert@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.sslCerts.insert@.
 module Network.Google.Resource.SQL.SSLCerts.Insert
     (
     -- * REST Resource
@@ -89,8 +89,7 @@ sslCertsInsert pSciProject_ pSciPayload_ pSciInstance_ =
     , _sciInstance = pSciInstance_
     }
 
--- | Project ID of the project to which the newly created Cloud SQL instances
--- should belong.
+-- | Project ID of the project that contains the instance.
 sciProject :: Lens' SSLCertsInsert Text
 sciProject
   = lens _sciProject (\ s a -> s{_sciProject = a})

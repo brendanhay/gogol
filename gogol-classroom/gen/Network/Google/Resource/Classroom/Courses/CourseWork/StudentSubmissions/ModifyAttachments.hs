@@ -46,12 +46,10 @@ module Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.M
     -- * Request Lenses
     , ccwssmaXgafv
     , ccwssmaUploadProtocol
-    , ccwssmaPp
     , ccwssmaCourseId
     , ccwssmaAccessToken
     , ccwssmaUploadType
     , ccwssmaPayload
-    , ccwssmaBearerToken
     , ccwssmaId
     , ccwssmaCallback
     , ccwssmaCourseWorkId
@@ -71,16 +69,14 @@ type CoursesCourseWorkStudentSubmissionsModifyAttachmentsResource
              Capture "courseWorkId" Text :>
                "studentSubmissions" :>
                  CaptureMode "id" "modifyAttachments" Text :>
-                   QueryParam "$.xgafv" Text :>
+                   QueryParam "$.xgafv" Xgafv :>
                      QueryParam "upload_protocol" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "access_token" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "bearer_token" Text :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" AltJSON :>
-                                   ReqBody '[JSON] ModifyAttachmentsRequest :>
-                                     Post '[JSON] StudentSubmission
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] ModifyAttachmentsRequest :>
+                                 Post '[JSON] StudentSubmission
 
 -- | Modifies attachments of student submission. Attachments may only be
 -- added to student submissions belonging to course work objects with a
@@ -97,14 +93,12 @@ type CoursesCourseWorkStudentSubmissionsModifyAttachmentsResource
 --
 -- /See:/ 'coursesCourseWorkStudentSubmissionsModifyAttachments' smart constructor.
 data CoursesCourseWorkStudentSubmissionsModifyAttachments = CoursesCourseWorkStudentSubmissionsModifyAttachments'
-    { _ccwssmaXgafv          :: !(Maybe Text)
+    { _ccwssmaXgafv          :: !(Maybe Xgafv)
     , _ccwssmaUploadProtocol :: !(Maybe Text)
-    , _ccwssmaPp             :: !Bool
     , _ccwssmaCourseId       :: !Text
     , _ccwssmaAccessToken    :: !(Maybe Text)
     , _ccwssmaUploadType     :: !(Maybe Text)
     , _ccwssmaPayload        :: !ModifyAttachmentsRequest
-    , _ccwssmaBearerToken    :: !(Maybe Text)
     , _ccwssmaId             :: !Text
     , _ccwssmaCallback       :: !(Maybe Text)
     , _ccwssmaCourseWorkId   :: !Text
@@ -118,8 +112,6 @@ data CoursesCourseWorkStudentSubmissionsModifyAttachments = CoursesCourseWorkStu
 --
 -- * 'ccwssmaUploadProtocol'
 --
--- * 'ccwssmaPp'
---
 -- * 'ccwssmaCourseId'
 --
 -- * 'ccwssmaAccessToken'
@@ -127,8 +119,6 @@ data CoursesCourseWorkStudentSubmissionsModifyAttachments = CoursesCourseWorkStu
 -- * 'ccwssmaUploadType'
 --
 -- * 'ccwssmaPayload'
---
--- * 'ccwssmaBearerToken'
 --
 -- * 'ccwssmaId'
 --
@@ -145,19 +135,17 @@ coursesCourseWorkStudentSubmissionsModifyAttachments pCcwssmaCourseId_ pCcwssmaP
     CoursesCourseWorkStudentSubmissionsModifyAttachments'
     { _ccwssmaXgafv = Nothing
     , _ccwssmaUploadProtocol = Nothing
-    , _ccwssmaPp = True
     , _ccwssmaCourseId = pCcwssmaCourseId_
     , _ccwssmaAccessToken = Nothing
     , _ccwssmaUploadType = Nothing
     , _ccwssmaPayload = pCcwssmaPayload_
-    , _ccwssmaBearerToken = Nothing
     , _ccwssmaId = pCcwssmaId_
     , _ccwssmaCallback = Nothing
     , _ccwssmaCourseWorkId = pCcwssmaCourseWorkId_
     }
 
 -- | V1 error format.
-ccwssmaXgafv :: Lens' CoursesCourseWorkStudentSubmissionsModifyAttachments (Maybe Text)
+ccwssmaXgafv :: Lens' CoursesCourseWorkStudentSubmissionsModifyAttachments (Maybe Xgafv)
 ccwssmaXgafv
   = lens _ccwssmaXgafv (\ s a -> s{_ccwssmaXgafv = a})
 
@@ -166,11 +154,6 @@ ccwssmaUploadProtocol :: Lens' CoursesCourseWorkStudentSubmissionsModifyAttachme
 ccwssmaUploadProtocol
   = lens _ccwssmaUploadProtocol
       (\ s a -> s{_ccwssmaUploadProtocol = a})
-
--- | Pretty-print response.
-ccwssmaPp :: Lens' CoursesCourseWorkStudentSubmissionsModifyAttachments Bool
-ccwssmaPp
-  = lens _ccwssmaPp (\ s a -> s{_ccwssmaPp = a})
 
 -- | Identifier of the course. This identifier can be either the
 -- Classroom-assigned identifier or an alias.
@@ -196,12 +179,6 @@ ccwssmaPayload :: Lens' CoursesCourseWorkStudentSubmissionsModifyAttachments Mod
 ccwssmaPayload
   = lens _ccwssmaPayload
       (\ s a -> s{_ccwssmaPayload = a})
-
--- | OAuth bearer token.
-ccwssmaBearerToken :: Lens' CoursesCourseWorkStudentSubmissionsModifyAttachments (Maybe Text)
-ccwssmaBearerToken
-  = lens _ccwssmaBearerToken
-      (\ s a -> s{_ccwssmaBearerToken = a})
 
 -- | Identifier of the student submission.
 ccwssmaId :: Lens' CoursesCourseWorkStudentSubmissionsModifyAttachments Text
@@ -236,10 +213,8 @@ instance GoogleRequest
           = go _ccwssmaCourseId _ccwssmaCourseWorkId _ccwssmaId
               _ccwssmaXgafv
               _ccwssmaUploadProtocol
-              (Just _ccwssmaPp)
               _ccwssmaAccessToken
               _ccwssmaUploadType
-              _ccwssmaBearerToken
               _ccwssmaCallback
               (Just AltJSON)
               _ccwssmaPayload

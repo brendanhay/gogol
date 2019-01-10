@@ -22,7 +22,7 @@
 --
 -- Deletes a node pool from a cluster.
 --
--- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @container.projects.zones.clusters.nodePools.delete@.
+-- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.zones.clusters.nodePools.delete@.
 module Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.Delete
     (
     -- * REST Resource
@@ -35,12 +35,11 @@ module Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.Delet
     -- * Request Lenses
     , pzcnpdXgafv
     , pzcnpdUploadProtocol
-    , pzcnpdPp
     , pzcnpdAccessToken
     , pzcnpdUploadType
     , pzcnpdZone
     , pzcnpdNodePoolId
-    , pzcnpdBearerToken
+    , pzcnpdName
     , pzcnpdClusterId
     , pzcnpdProjectId
     , pzcnpdCallback
@@ -61,28 +60,26 @@ type ProjectsZonesClustersNodePoolsDeleteResource =
                  Capture "clusterId" Text :>
                    "nodePools" :>
                      Capture "nodePoolId" Text :>
-                       QueryParam "$.xgafv" Text :>
+                       QueryParam "$.xgafv" Xgafv :>
                          QueryParam "upload_protocol" Text :>
-                           QueryParam "pp" Bool :>
-                             QueryParam "access_token" Text :>
-                               QueryParam "uploadType" Text :>
-                                 QueryParam "bearer_token" Text :>
-                                   QueryParam "callback" Text :>
-                                     QueryParam "alt" AltJSON :>
-                                       Delete '[JSON] Operation
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "name" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" AltJSON :>
+                                     Delete '[JSON] Operation
 
 -- | Deletes a node pool from a cluster.
 --
 -- /See:/ 'projectsZonesClustersNodePoolsDelete' smart constructor.
 data ProjectsZonesClustersNodePoolsDelete = ProjectsZonesClustersNodePoolsDelete'
-    { _pzcnpdXgafv          :: !(Maybe Text)
+    { _pzcnpdXgafv          :: !(Maybe Xgafv)
     , _pzcnpdUploadProtocol :: !(Maybe Text)
-    , _pzcnpdPp             :: !Bool
     , _pzcnpdAccessToken    :: !(Maybe Text)
     , _pzcnpdUploadType     :: !(Maybe Text)
     , _pzcnpdZone           :: !Text
     , _pzcnpdNodePoolId     :: !Text
-    , _pzcnpdBearerToken    :: !(Maybe Text)
+    , _pzcnpdName           :: !(Maybe Text)
     , _pzcnpdClusterId      :: !Text
     , _pzcnpdProjectId      :: !Text
     , _pzcnpdCallback       :: !(Maybe Text)
@@ -96,8 +93,6 @@ data ProjectsZonesClustersNodePoolsDelete = ProjectsZonesClustersNodePoolsDelete
 --
 -- * 'pzcnpdUploadProtocol'
 --
--- * 'pzcnpdPp'
---
 -- * 'pzcnpdAccessToken'
 --
 -- * 'pzcnpdUploadType'
@@ -106,7 +101,7 @@ data ProjectsZonesClustersNodePoolsDelete = ProjectsZonesClustersNodePoolsDelete
 --
 -- * 'pzcnpdNodePoolId'
 --
--- * 'pzcnpdBearerToken'
+-- * 'pzcnpdName'
 --
 -- * 'pzcnpdClusterId'
 --
@@ -123,19 +118,18 @@ projectsZonesClustersNodePoolsDelete pPzcnpdZone_ pPzcnpdNodePoolId_ pPzcnpdClus
     ProjectsZonesClustersNodePoolsDelete'
     { _pzcnpdXgafv = Nothing
     , _pzcnpdUploadProtocol = Nothing
-    , _pzcnpdPp = True
     , _pzcnpdAccessToken = Nothing
     , _pzcnpdUploadType = Nothing
     , _pzcnpdZone = pPzcnpdZone_
     , _pzcnpdNodePoolId = pPzcnpdNodePoolId_
-    , _pzcnpdBearerToken = Nothing
+    , _pzcnpdName = Nothing
     , _pzcnpdClusterId = pPzcnpdClusterId_
     , _pzcnpdProjectId = pPzcnpdProjectId_
     , _pzcnpdCallback = Nothing
     }
 
 -- | V1 error format.
-pzcnpdXgafv :: Lens' ProjectsZonesClustersNodePoolsDelete (Maybe Text)
+pzcnpdXgafv :: Lens' ProjectsZonesClustersNodePoolsDelete (Maybe Xgafv)
 pzcnpdXgafv
   = lens _pzcnpdXgafv (\ s a -> s{_pzcnpdXgafv = a})
 
@@ -144,10 +138,6 @@ pzcnpdUploadProtocol :: Lens' ProjectsZonesClustersNodePoolsDelete (Maybe Text)
 pzcnpdUploadProtocol
   = lens _pzcnpdUploadProtocol
       (\ s a -> s{_pzcnpdUploadProtocol = a})
-
--- | Pretty-print response.
-pzcnpdPp :: Lens' ProjectsZonesClustersNodePoolsDelete Bool
-pzcnpdPp = lens _pzcnpdPp (\ s a -> s{_pzcnpdPp = a})
 
 -- | OAuth access token.
 pzcnpdAccessToken :: Lens' ProjectsZonesClustersNodePoolsDelete (Maybe Text)
@@ -161,32 +151,37 @@ pzcnpdUploadType
   = lens _pzcnpdUploadType
       (\ s a -> s{_pzcnpdUploadType = a})
 
--- | The name of the Google Compute Engine
+-- | Deprecated. The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
+-- This field has been deprecated and replaced by the name field.
 pzcnpdZone :: Lens' ProjectsZonesClustersNodePoolsDelete Text
 pzcnpdZone
   = lens _pzcnpdZone (\ s a -> s{_pzcnpdZone = a})
 
--- | The name of the node pool to delete.
+-- | Deprecated. The name of the node pool to delete. This field has been
+-- deprecated and replaced by the name field.
 pzcnpdNodePoolId :: Lens' ProjectsZonesClustersNodePoolsDelete Text
 pzcnpdNodePoolId
   = lens _pzcnpdNodePoolId
       (\ s a -> s{_pzcnpdNodePoolId = a})
 
--- | OAuth bearer token.
-pzcnpdBearerToken :: Lens' ProjectsZonesClustersNodePoolsDelete (Maybe Text)
-pzcnpdBearerToken
-  = lens _pzcnpdBearerToken
-      (\ s a -> s{_pzcnpdBearerToken = a})
+-- | The name (project, location, cluster, node pool id) of the node pool to
+-- delete. Specified in the format
+-- \'projects\/*\/locations\/*\/clusters\/*\/nodePools\/*\'.
+pzcnpdName :: Lens' ProjectsZonesClustersNodePoolsDelete (Maybe Text)
+pzcnpdName
+  = lens _pzcnpdName (\ s a -> s{_pzcnpdName = a})
 
--- | The name of the cluster.
+-- | Deprecated. The name of the cluster. This field has been deprecated and
+-- replaced by the name field.
 pzcnpdClusterId :: Lens' ProjectsZonesClustersNodePoolsDelete Text
 pzcnpdClusterId
   = lens _pzcnpdClusterId
       (\ s a -> s{_pzcnpdClusterId = a})
 
--- | The Google Developers Console [project ID or project
+-- | Deprecated. The Google Developers Console [project ID or project
 -- number](https:\/\/developers.google.com\/console\/help\/new\/#projectnumber).
+-- This field has been deprecated and replaced by the name field.
 pzcnpdProjectId :: Lens' ProjectsZonesClustersNodePoolsDelete Text
 pzcnpdProjectId
   = lens _pzcnpdProjectId
@@ -210,10 +205,9 @@ instance GoogleRequest
               _pzcnpdNodePoolId
               _pzcnpdXgafv
               _pzcnpdUploadProtocol
-              (Just _pzcnpdPp)
               _pzcnpdAccessToken
               _pzcnpdUploadType
-              _pzcnpdBearerToken
+              _pzcnpdName
               _pzcnpdCallback
               (Just AltJSON)
               containerService

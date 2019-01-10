@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Cloud Machine Learning.
+A client library for the Google Cloud Machine Learning Engine.
 
 
 ## Contribute

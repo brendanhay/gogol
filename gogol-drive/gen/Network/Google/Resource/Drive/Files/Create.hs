@@ -38,6 +38,7 @@ module Network.Google.Resource.Drive.Files.Create
     , fcOCRLanguage
     , fcKeepRevisionForever
     , fcIgnoreDefaultVisibility
+    , fcSupportsTeamDrives
     ) where
 
 import           Network.Google.Drive.Types
@@ -53,8 +54,9 @@ type FilesCreateResource =
              QueryParam "ocrLanguage" Text :>
                QueryParam "keepRevisionForever" Bool :>
                  QueryParam "ignoreDefaultVisibility" Bool :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] File :> Post '[JSON] File
+                   QueryParam "supportsTeamDrives" Bool :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] File :> Post '[JSON] File
        :<|>
        "upload" :>
          "drive" :>
@@ -64,9 +66,10 @@ type FilesCreateResource =
                  QueryParam "ocrLanguage" Text :>
                    QueryParam "keepRevisionForever" Bool :>
                      QueryParam "ignoreDefaultVisibility" Bool :>
-                       QueryParam "alt" AltJSON :>
-                         QueryParam "uploadType" Multipart :>
-                           MultipartRelated '[JSON] File :> Post '[JSON] File
+                       QueryParam "supportsTeamDrives" Bool :>
+                         QueryParam "alt" AltJSON :>
+                           QueryParam "uploadType" Multipart :>
+                             MultipartRelated '[JSON] File :> Post '[JSON] File
 
 -- | Creates a new file.
 --
@@ -77,6 +80,7 @@ data FilesCreate = FilesCreate'
     , _fcOCRLanguage               :: !(Maybe Text)
     , _fcKeepRevisionForever       :: !Bool
     , _fcIgnoreDefaultVisibility   :: !Bool
+    , _fcSupportsTeamDrives        :: !Bool
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesCreate' with the minimum fields required to make a request.
@@ -92,6 +96,8 @@ data FilesCreate = FilesCreate'
 -- * 'fcKeepRevisionForever'
 --
 -- * 'fcIgnoreDefaultVisibility'
+--
+-- * 'fcSupportsTeamDrives'
 filesCreate
     :: File -- ^ 'fcPayload'
     -> FilesCreate
@@ -102,6 +108,7 @@ filesCreate pFcPayload_ =
     , _fcOCRLanguage = Nothing
     , _fcKeepRevisionForever = False
     , _fcIgnoreDefaultVisibility = False
+    , _fcSupportsTeamDrives = False
     }
 
 -- | Multipart request metadata.
@@ -138,6 +145,12 @@ fcIgnoreDefaultVisibility
   = lens _fcIgnoreDefaultVisibility
       (\ s a -> s{_fcIgnoreDefaultVisibility = a})
 
+-- | Whether the requesting application supports Team Drives.
+fcSupportsTeamDrives :: Lens' FilesCreate Bool
+fcSupportsTeamDrives
+  = lens _fcSupportsTeamDrives
+      (\ s a -> s{_fcSupportsTeamDrives = a})
+
 instance GoogleRequest FilesCreate where
         type Rs FilesCreate = File
         type Scopes FilesCreate =
@@ -149,6 +162,7 @@ instance GoogleRequest FilesCreate where
               _fcOCRLanguage
               (Just _fcKeepRevisionForever)
               (Just _fcIgnoreDefaultVisibility)
+              (Just _fcSupportsTeamDrives)
               (Just AltJSON)
               _fcPayload
               driveService
@@ -166,6 +180,7 @@ instance GoogleRequest (MediaUpload FilesCreate)
               _fcOCRLanguage
               (Just _fcKeepRevisionForever)
               (Just _fcIgnoreDefaultVisibility)
+              (Just _fcSupportsTeamDrives)
               (Just AltJSON)
               (Just Multipart)
               _fcPayload

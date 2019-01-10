@@ -33,7 +33,6 @@ module Network.Google.Resource.Games.Events.ListDefinitions
     , EventsListDefinitions
 
     -- * Request Lenses
-    , eldConsistencyToken
     , eldLanguage
     , eldPageToken
     , eldMaxResults
@@ -48,28 +47,24 @@ type EventsListDefinitionsResource =
      "games" :>
        "v1" :>
          "eventDefinitions" :>
-           QueryParam "consistencyToken" (Textual Int64) :>
-             QueryParam "language" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" (Textual Int32) :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] EventDefinitionListResponse
+           QueryParam "language" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" (Textual Int32) :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] EventDefinitionListResponse
 
 -- | Returns a list of the event definitions in this application.
 --
 -- /See:/ 'eventsListDefinitions' smart constructor.
 data EventsListDefinitions = EventsListDefinitions'
-    { _eldConsistencyToken :: !(Maybe (Textual Int64))
-    , _eldLanguage         :: !(Maybe Text)
-    , _eldPageToken        :: !(Maybe Text)
-    , _eldMaxResults       :: !(Maybe (Textual Int32))
+    { _eldLanguage   :: !(Maybe Text)
+    , _eldPageToken  :: !(Maybe Text)
+    , _eldMaxResults :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsListDefinitions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'eldConsistencyToken'
 --
 -- * 'eldLanguage'
 --
@@ -80,18 +75,10 @@ eventsListDefinitions
     :: EventsListDefinitions
 eventsListDefinitions =
     EventsListDefinitions'
-    { _eldConsistencyToken = Nothing
-    , _eldLanguage = Nothing
+    { _eldLanguage = Nothing
     , _eldPageToken = Nothing
     , _eldMaxResults = Nothing
     }
-
--- | The last-seen mutation timestamp.
-eldConsistencyToken :: Lens' EventsListDefinitions (Maybe Int64)
-eldConsistencyToken
-  = lens _eldConsistencyToken
-      (\ s a -> s{_eldConsistencyToken = a})
-      . mapping _Coerce
 
 -- | The preferred language to use for strings returned by this method.
 eldLanguage :: Lens' EventsListDefinitions (Maybe Text)
@@ -116,11 +103,9 @@ instance GoogleRequest EventsListDefinitions where
         type Rs EventsListDefinitions =
              EventDefinitionListResponse
         type Scopes EventsListDefinitions =
-             '["https://www.googleapis.com/auth/games",
-               "https://www.googleapis.com/auth/plus.login"]
+             '["https://www.googleapis.com/auth/games"]
         requestClient EventsListDefinitions'{..}
-          = go _eldConsistencyToken _eldLanguage _eldPageToken
-              _eldMaxResults
+          = go _eldLanguage _eldPageToken _eldMaxResults
               (Just AltJSON)
               gamesService
           where go

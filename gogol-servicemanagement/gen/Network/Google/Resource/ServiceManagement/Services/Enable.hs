@@ -20,11 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Enable a managed service for a project with default setting. Operation
--- google.rpc.Status errors may contain a google.rpc.PreconditionFailure
--- error detail.
+-- Enables a service for a project, so it can be used for the project. See
+-- [Cloud Auth Guide](https:\/\/cloud.google.com\/docs\/authentication) for
+-- more information. Operation
 --
--- /See:/ <https://cloud.google.com/service-management/ Google Service Management API Reference> for @servicemanagement.services.enable@.
+-- /See:/ <https://cloud.google.com/service-management/ Service Management API Reference> for @servicemanagement.services.enable@.
 module Network.Google.Resource.ServiceManagement.Services.Enable
     (
     -- * REST Resource
@@ -37,11 +37,9 @@ module Network.Google.Resource.ServiceManagement.Services.Enable
     -- * Request Lenses
     , seXgafv
     , seUploadProtocol
-    , sePp
     , seAccessToken
     , seUploadType
     , sePayload
-    , seBearerToken
     , seServiceName
     , seCallback
     ) where
@@ -57,28 +55,24 @@ type ServicesEnableResource =
          CaptureMode "serviceName" "enable" Text :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] EnableServiceRequest :>
-                             Post '[JSON] Operation
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] EnableServiceRequest :>
+                         Post '[JSON] Operation
 
--- | Enable a managed service for a project with default setting. Operation
--- google.rpc.Status errors may contain a google.rpc.PreconditionFailure
--- error detail.
+-- | Enables a service for a project, so it can be used for the project. See
+-- [Cloud Auth Guide](https:\/\/cloud.google.com\/docs\/authentication) for
+-- more information. Operation
 --
 -- /See:/ 'servicesEnable' smart constructor.
 data ServicesEnable = ServicesEnable'
     { _seXgafv          :: !(Maybe Xgafv)
     , _seUploadProtocol :: !(Maybe Text)
-    , _sePp             :: !Bool
     , _seAccessToken    :: !(Maybe Text)
     , _seUploadType     :: !(Maybe Text)
     , _sePayload        :: !EnableServiceRequest
-    , _seBearerToken    :: !(Maybe Text)
     , _seServiceName    :: !Text
     , _seCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -91,15 +85,11 @@ data ServicesEnable = ServicesEnable'
 --
 -- * 'seUploadProtocol'
 --
--- * 'sePp'
---
 -- * 'seAccessToken'
 --
 -- * 'seUploadType'
 --
 -- * 'sePayload'
---
--- * 'seBearerToken'
 --
 -- * 'seServiceName'
 --
@@ -112,11 +102,9 @@ servicesEnable pSePayload_ pSeServiceName_ =
     ServicesEnable'
     { _seXgafv = Nothing
     , _seUploadProtocol = Nothing
-    , _sePp = True
     , _seAccessToken = Nothing
     , _seUploadType = Nothing
     , _sePayload = pSePayload_
-    , _seBearerToken = Nothing
     , _seServiceName = pSeServiceName_
     , _seCallback = Nothing
     }
@@ -130,10 +118,6 @@ seUploadProtocol :: Lens' ServicesEnable (Maybe Text)
 seUploadProtocol
   = lens _seUploadProtocol
       (\ s a -> s{_seUploadProtocol = a})
-
--- | Pretty-print response.
-sePp :: Lens' ServicesEnable Bool
-sePp = lens _sePp (\ s a -> s{_sePp = a})
 
 -- | OAuth access token.
 seAccessToken :: Lens' ServicesEnable (Maybe Text)
@@ -150,12 +134,6 @@ seUploadType
 sePayload :: Lens' ServicesEnable EnableServiceRequest
 sePayload
   = lens _sePayload (\ s a -> s{_sePayload = a})
-
--- | OAuth bearer token.
-seBearerToken :: Lens' ServicesEnable (Maybe Text)
-seBearerToken
-  = lens _seBearerToken
-      (\ s a -> s{_seBearerToken = a})
 
 -- | Name of the service to enable. Specifying an unknown service name will
 -- cause the request to fail.
@@ -176,10 +154,8 @@ instance GoogleRequest ServicesEnable where
                "https://www.googleapis.com/auth/service.management"]
         requestClient ServicesEnable'{..}
           = go _seServiceName _seXgafv _seUploadProtocol
-              (Just _sePp)
               _seAccessToken
               _seUploadType
-              _seBearerToken
               _seCallback
               (Just AltJSON)
               _sePayload

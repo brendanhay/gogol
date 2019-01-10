@@ -31,8 +31,15 @@ module Network.Google.ProximityBeacon.Types
     -- * AttachmentInfo
     , AttachmentInfo
     , attachmentInfo
+    , aiMaxDistanceMeters
     , aiData
     , aiNamespacedType
+
+    -- * BeaconExpectedStability
+    , BeaconExpectedStability (..)
+
+    -- * NamespaceServingVisibility
+    , NamespaceServingVisibility (..)
 
     -- * BeaconProperties
     , BeaconProperties
@@ -70,6 +77,9 @@ module Network.Google.ProximityBeacon.Types
     , eirInitialEid
     , eirServiceEcdhPublicKey
 
+    -- * AdvertisedIdType
+    , AdvertisedIdType (..)
+
     -- * ListNamespacesResponse
     , ListNamespacesResponse
     , listNamespacesResponse
@@ -85,17 +95,17 @@ module Network.Google.ProximityBeacon.Types
     -- * Beacon
     , Beacon
     , beacon
-    , bLatLng
-    , bStatus
-    , bBeaconName
-    , bEphemeralIdRegistration
-    , bIndoorLevel
-    , bExpectedStability
-    , bProvisioningKey
-    , bDescription
-    , bPlaceId
-    , bAdvertisedId
-    , bProperties
+    , beaLatLng
+    , beaStatus
+    , beaBeaconName
+    , beaEphemeralIdRegistration
+    , beaIndoorLevel
+    , beaExpectedStability
+    , beaProvisioningKey
+    , beaDescription
+    , beaPlaceId
+    , beaAdvertisedId
+    , beaProperties
 
     -- * Diagnostics
     , Diagnostics
@@ -121,6 +131,9 @@ module Network.Google.ProximityBeacon.Types
     , eirpMaxRotationPeriodExponent
     , eirpServiceEcdhPublicKey
 
+    -- * Xgafv
+    , Xgafv (..)
+
     -- * BeaconInfo
     , BeaconInfo
     , beaconInfo
@@ -138,6 +151,8 @@ module Network.Google.ProximityBeacon.Types
     -- * BeaconAttachment
     , BeaconAttachment
     , beaconAttachment
+    , baMaxDistanceMeters
+    , baCreationTimeMs
     , baData
     , baAttachmentName
     , baNamespacedType
@@ -147,6 +162,9 @@ module Network.Google.ProximityBeacon.Types
     , listDiagnosticsResponse
     , ldrNextPageToken
     , ldrDiagnostics
+
+    -- * BeaconStatus
+    , BeaconStatus (..)
 
     -- * AdvertisedId
     , AdvertisedId
@@ -171,7 +189,7 @@ import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types.Product
 import           Network.Google.ProximityBeacon.Types.Sum
 
--- | Default request referring to version 'v1beta1' of the Google Proximity Beacon API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v1beta1' of the Proximity Beacon API. This contains the host and root path used as a starting point for constructing service requests.
 proximityBeaconService :: ServiceConfig
 proximityBeaconService
   = defaultService

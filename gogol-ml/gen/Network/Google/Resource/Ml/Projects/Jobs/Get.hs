@@ -22,7 +22,7 @@
 --
 -- Describes a job.
 --
--- /See:/ <https://cloud.google.com/ml/ Google Cloud Machine Learning Reference> for @ml.projects.jobs.get@.
+-- /See:/ <https://cloud.google.com/ml/ Cloud Machine Learning Engine Reference> for @ml.projects.jobs.get@.
 module Network.Google.Resource.Ml.Projects.Jobs.Get
     (
     -- * REST Resource
@@ -35,10 +35,8 @@ module Network.Google.Resource.Ml.Projects.Jobs.Get
     -- * Request Lenses
     , pjgXgafv
     , pjgUploadProtocol
-    , pjgPp
     , pjgAccessToken
     , pjgUploadType
-    , pjgBearerToken
     , pjgName
     , pjgCallback
     ) where
@@ -49,17 +47,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @ml.projects.jobs.get@ method which the
 -- 'ProjectsJobsGet' request conforms to.
 type ProjectsJobsGetResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] GoogleCloudMlV1beta1__Job
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] GoogleCloudMlV1__Job
 
 -- | Describes a job.
 --
@@ -67,10 +63,8 @@ type ProjectsJobsGetResource =
 data ProjectsJobsGet = ProjectsJobsGet'
     { _pjgXgafv          :: !(Maybe Xgafv)
     , _pjgUploadProtocol :: !(Maybe Text)
-    , _pjgPp             :: !Bool
     , _pjgAccessToken    :: !(Maybe Text)
     , _pjgUploadType     :: !(Maybe Text)
-    , _pjgBearerToken    :: !(Maybe Text)
     , _pjgName           :: !Text
     , _pjgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -83,13 +77,9 @@ data ProjectsJobsGet = ProjectsJobsGet'
 --
 -- * 'pjgUploadProtocol'
 --
--- * 'pjgPp'
---
 -- * 'pjgAccessToken'
 --
 -- * 'pjgUploadType'
---
--- * 'pjgBearerToken'
 --
 -- * 'pjgName'
 --
@@ -101,10 +91,8 @@ projectsJobsGet pPjgName_ =
     ProjectsJobsGet'
     { _pjgXgafv = Nothing
     , _pjgUploadProtocol = Nothing
-    , _pjgPp = True
     , _pjgAccessToken = Nothing
     , _pjgUploadType = Nothing
-    , _pjgBearerToken = Nothing
     , _pjgName = pPjgName_
     , _pjgCallback = Nothing
     }
@@ -119,10 +107,6 @@ pjgUploadProtocol
   = lens _pjgUploadProtocol
       (\ s a -> s{_pjgUploadProtocol = a})
 
--- | Pretty-print response.
-pjgPp :: Lens' ProjectsJobsGet Bool
-pjgPp = lens _pjgPp (\ s a -> s{_pjgPp = a})
-
 -- | OAuth access token.
 pjgAccessToken :: Lens' ProjectsJobsGet (Maybe Text)
 pjgAccessToken
@@ -135,14 +119,7 @@ pjgUploadType
   = lens _pjgUploadType
       (\ s a -> s{_pjgUploadType = a})
 
--- | OAuth bearer token.
-pjgBearerToken :: Lens' ProjectsJobsGet (Maybe Text)
-pjgBearerToken
-  = lens _pjgBearerToken
-      (\ s a -> s{_pjgBearerToken = a})
-
--- | Required. The name of the job to get the description of. Authorization:
--- requires \`Viewer\` role on the parent project.
+-- | Required. The name of the job to get the description of.
 pjgName :: Lens' ProjectsJobsGet Text
 pjgName = lens _pjgName (\ s a -> s{_pjgName = a})
 
@@ -152,15 +129,13 @@ pjgCallback
   = lens _pjgCallback (\ s a -> s{_pjgCallback = a})
 
 instance GoogleRequest ProjectsJobsGet where
-        type Rs ProjectsJobsGet = GoogleCloudMlV1beta1__Job
+        type Rs ProjectsJobsGet = GoogleCloudMlV1__Job
         type Scopes ProjectsJobsGet =
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsJobsGet'{..}
           = go _pjgName _pjgXgafv _pjgUploadProtocol
-              (Just _pjgPp)
               _pjgAccessToken
               _pjgUploadType
-              _pjgBearerToken
               _pjgCallback
               (Just AltJSON)
               machineLearningService

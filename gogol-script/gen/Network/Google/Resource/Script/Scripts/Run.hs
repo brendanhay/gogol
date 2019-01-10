@@ -20,16 +20,20 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Runs a function in an Apps Script project that has been deployed for use
--- with the Apps Script Execution API. This method requires authorization
--- with an OAuth 2.0 token that includes at least one of the scopes listed
--- in the [Authentication](#authentication) section; script projects that
--- do not require authorization cannot be executed through this API. To
--- find the correct scopes to include in the authentication token, open the
--- project in the script editor, then select **File > Project properties**
--- and click the **Scopes** tab.
+-- Runs a function in an Apps Script project. The script project must be
+-- deployed for use with the Apps Script API and the calling application
+-- must share the same Cloud Platform project. This method requires
+-- authorization with an OAuth 2.0 token that includes at least one of the
+-- scopes listed in the [Authorization](#authorization) section; script
+-- projects that do not require authorization cannot be executed through
+-- this API. To find the correct scopes to include in the authentication
+-- token, open the project in the script editor, then select **File >
+-- Project properties** and click the **Scopes** tab. The error \`403,
+-- PERMISSION_DENIED: The caller does not have permission\` indicates that
+-- the Cloud Platform project used to authorize the request is not the same
+-- as the one used by the script.
 --
--- /See:/ <https://developers.google.com/apps-script/execution/rest/v1/scripts/run Google Apps Script Execution API Reference> for @script.scripts.run@.
+-- /See:/ <https://developers.google.com/apps-script/api/ Apps Script API Reference> for @script.scripts.run@.
 module Network.Google.Resource.Script.Scripts.Run
     (
     -- * REST Resource
@@ -42,11 +46,9 @@ module Network.Google.Resource.Script.Scripts.Run
     -- * Request Lenses
     , srXgafv
     , srUploadProtocol
-    , srPp
     , srAccessToken
     , srUploadType
     , srPayload
-    , srBearerToken
     , srScriptId
     , srCallback
     ) where
@@ -60,35 +62,35 @@ type ScriptsRunResource =
      "v1" :>
        "scripts" :>
          CaptureMode "scriptId" "run" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] ExecutionRequest :>
-                             Post '[JSON] Operation
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] ExecutionRequest :>
+                         Post '[JSON] Operation
 
--- | Runs a function in an Apps Script project that has been deployed for use
--- with the Apps Script Execution API. This method requires authorization
--- with an OAuth 2.0 token that includes at least one of the scopes listed
--- in the [Authentication](#authentication) section; script projects that
--- do not require authorization cannot be executed through this API. To
--- find the correct scopes to include in the authentication token, open the
--- project in the script editor, then select **File > Project properties**
--- and click the **Scopes** tab.
+-- | Runs a function in an Apps Script project. The script project must be
+-- deployed for use with the Apps Script API and the calling application
+-- must share the same Cloud Platform project. This method requires
+-- authorization with an OAuth 2.0 token that includes at least one of the
+-- scopes listed in the [Authorization](#authorization) section; script
+-- projects that do not require authorization cannot be executed through
+-- this API. To find the correct scopes to include in the authentication
+-- token, open the project in the script editor, then select **File >
+-- Project properties** and click the **Scopes** tab. The error \`403,
+-- PERMISSION_DENIED: The caller does not have permission\` indicates that
+-- the Cloud Platform project used to authorize the request is not the same
+-- as the one used by the script.
 --
 -- /See:/ 'scriptsRun' smart constructor.
 data ScriptsRun = ScriptsRun'
-    { _srXgafv          :: !(Maybe Text)
+    { _srXgafv          :: !(Maybe Xgafv)
     , _srUploadProtocol :: !(Maybe Text)
-    , _srPp             :: !Bool
     , _srAccessToken    :: !(Maybe Text)
     , _srUploadType     :: !(Maybe Text)
     , _srPayload        :: !ExecutionRequest
-    , _srBearerToken    :: !(Maybe Text)
     , _srScriptId       :: !Text
     , _srCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -101,15 +103,11 @@ data ScriptsRun = ScriptsRun'
 --
 -- * 'srUploadProtocol'
 --
--- * 'srPp'
---
 -- * 'srAccessToken'
 --
 -- * 'srUploadType'
 --
 -- * 'srPayload'
---
--- * 'srBearerToken'
 --
 -- * 'srScriptId'
 --
@@ -122,17 +120,15 @@ scriptsRun pSrPayload_ pSrScriptId_ =
     ScriptsRun'
     { _srXgafv = Nothing
     , _srUploadProtocol = Nothing
-    , _srPp = True
     , _srAccessToken = Nothing
     , _srUploadType = Nothing
     , _srPayload = pSrPayload_
-    , _srBearerToken = Nothing
     , _srScriptId = pSrScriptId_
     , _srCallback = Nothing
     }
 
 -- | V1 error format.
-srXgafv :: Lens' ScriptsRun (Maybe Text)
+srXgafv :: Lens' ScriptsRun (Maybe Xgafv)
 srXgafv = lens _srXgafv (\ s a -> s{_srXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -140,10 +136,6 @@ srUploadProtocol :: Lens' ScriptsRun (Maybe Text)
 srUploadProtocol
   = lens _srUploadProtocol
       (\ s a -> s{_srUploadProtocol = a})
-
--- | Pretty-print response.
-srPp :: Lens' ScriptsRun Bool
-srPp = lens _srPp (\ s a -> s{_srPp = a})
 
 -- | OAuth access token.
 srAccessToken :: Lens' ScriptsRun (Maybe Text)
@@ -161,14 +153,8 @@ srPayload :: Lens' ScriptsRun ExecutionRequest
 srPayload
   = lens _srPayload (\ s a -> s{_srPayload = a})
 
--- | OAuth bearer token.
-srBearerToken :: Lens' ScriptsRun (Maybe Text)
-srBearerToken
-  = lens _srBearerToken
-      (\ s a -> s{_srBearerToken = a})
-
--- | The project key of the script to be executed. To find the project key,
--- open the project in the script editor, then select **File > Project
+-- | The script ID of the script to be executed. To find the script ID, open
+-- the project in the script editor and select **File > Project
 -- properties**.
 srScriptId :: Lens' ScriptsRun Text
 srScriptId
@@ -187,6 +173,7 @@ instance GoogleRequest ScriptsRun where
                "https://www.google.com/m8/feeds",
                "https://www.googleapis.com/auth/admin.directory.group",
                "https://www.googleapis.com/auth/admin.directory.user",
+               "https://www.googleapis.com/auth/documents",
                "https://www.googleapis.com/auth/drive",
                "https://www.googleapis.com/auth/forms",
                "https://www.googleapis.com/auth/forms.currentonly",
@@ -195,10 +182,8 @@ instance GoogleRequest ScriptsRun where
                "https://www.googleapis.com/auth/userinfo.email"]
         requestClient ScriptsRun'{..}
           = go _srScriptId _srXgafv _srUploadProtocol
-              (Just _srPp)
               _srAccessToken
               _srUploadType
-              _srBearerToken
               _srCallback
               (Just AltJSON)
               _srPayload

@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Starts an instance that was stopped using the using the instances().stop
--- method. For more information, see Restart an instance.
+-- Starts an instance that was stopped using the instances().stop method.
+-- For more information, see Restart an instance.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instances.startWithEncryptionKey@.
 module Network.Google.Resource.Compute.Instances.StartWithEncryptionKey
@@ -34,6 +34,7 @@ module Network.Google.Resource.Compute.Instances.StartWithEncryptionKey
     , InstancesStartWithEncryptionKey
 
     -- * Request Lenses
+    , iswekRequestId
     , iswekProject
     , iswekZone
     , iswekPayload
@@ -55,25 +56,29 @@ type InstancesStartWithEncryptionKeyResource =
                  "instances" :>
                    Capture "instance" Text :>
                      "startWithEncryptionKey" :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON]
-                           InstancesStartWithEncryptionKeyRequest
-                           :> Post '[JSON] Operation
+                       QueryParam "requestId" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON]
+                             InstancesStartWithEncryptionKeyRequest
+                             :> Post '[JSON] Operation
 
--- | Starts an instance that was stopped using the using the instances().stop
--- method. For more information, see Restart an instance.
+-- | Starts an instance that was stopped using the instances().stop method.
+-- For more information, see Restart an instance.
 --
 -- /See:/ 'instancesStartWithEncryptionKey' smart constructor.
 data InstancesStartWithEncryptionKey = InstancesStartWithEncryptionKey'
-    { _iswekProject  :: !Text
-    , _iswekZone     :: !Text
-    , _iswekPayload  :: !InstancesStartWithEncryptionKeyRequest
-    , _iswekInstance :: !Text
+    { _iswekRequestId :: !(Maybe Text)
+    , _iswekProject   :: !Text
+    , _iswekZone      :: !Text
+    , _iswekPayload   :: !InstancesStartWithEncryptionKeyRequest
+    , _iswekInstance  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesStartWithEncryptionKey' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'iswekRequestId'
 --
 -- * 'iswekProject'
 --
@@ -90,11 +95,27 @@ instancesStartWithEncryptionKey
     -> InstancesStartWithEncryptionKey
 instancesStartWithEncryptionKey pIswekProject_ pIswekZone_ pIswekPayload_ pIswekInstance_ =
     InstancesStartWithEncryptionKey'
-    { _iswekProject = pIswekProject_
+    { _iswekRequestId = Nothing
+    , _iswekProject = pIswekProject_
     , _iswekZone = pIswekZone_
     , _iswekPayload = pIswekPayload_
     , _iswekInstance = pIswekInstance_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+iswekRequestId :: Lens' InstancesStartWithEncryptionKey (Maybe Text)
+iswekRequestId
+  = lens _iswekRequestId
+      (\ s a -> s{_iswekRequestId = a})
 
 -- | Project ID for this request.
 iswekProject :: Lens' InstancesStartWithEncryptionKey Text
@@ -125,6 +146,7 @@ instance GoogleRequest
                "https://www.googleapis.com/auth/compute"]
         requestClient InstancesStartWithEncryptionKey'{..}
           = go _iswekProject _iswekZone _iswekInstance
+              _iswekRequestId
               (Just AltJSON)
               _iswekPayload
               computeService

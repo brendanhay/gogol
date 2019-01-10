@@ -23,9 +23,11 @@
 -- Creates a new service configuration (version) for a managed service.
 -- This method only stores the service configuration. To roll out the
 -- service configuration to backend systems please call
--- CreateServiceRollout.
+-- CreateServiceRollout. Only the 100 most recent service configurations
+-- and ones referenced by existing rollouts are kept for each service. The
+-- rest will be deleted eventually.
 --
--- /See:/ <https://cloud.google.com/service-management/ Google Service Management API Reference> for @servicemanagement.services.configs.create@.
+-- /See:/ <https://cloud.google.com/service-management/ Service Management API Reference> for @servicemanagement.services.configs.create@.
 module Network.Google.Resource.ServiceManagement.Services.Configs.Create
     (
     -- * REST Resource
@@ -38,11 +40,9 @@ module Network.Google.Resource.ServiceManagement.Services.Configs.Create
     -- * Request Lenses
     , sccXgafv
     , sccUploadProtocol
-    , sccPp
     , sccAccessToken
     , sccUploadType
     , sccPayload
-    , sccBearerToken
     , sccServiceName
     , sccCallback
     ) where
@@ -59,28 +59,26 @@ type ServicesConfigsCreateResource =
            "configs" :>
              QueryParam "$.xgafv" Xgafv :>
                QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "callback" Text :>
-                           QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] Service :> Post '[JSON] Service
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Service :> Post '[JSON] Service
 
 -- | Creates a new service configuration (version) for a managed service.
 -- This method only stores the service configuration. To roll out the
 -- service configuration to backend systems please call
--- CreateServiceRollout.
+-- CreateServiceRollout. Only the 100 most recent service configurations
+-- and ones referenced by existing rollouts are kept for each service. The
+-- rest will be deleted eventually.
 --
 -- /See:/ 'servicesConfigsCreate' smart constructor.
 data ServicesConfigsCreate = ServicesConfigsCreate'
     { _sccXgafv          :: !(Maybe Xgafv)
     , _sccUploadProtocol :: !(Maybe Text)
-    , _sccPp             :: !Bool
     , _sccAccessToken    :: !(Maybe Text)
     , _sccUploadType     :: !(Maybe Text)
     , _sccPayload        :: !Service
-    , _sccBearerToken    :: !(Maybe Text)
     , _sccServiceName    :: !Text
     , _sccCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -93,15 +91,11 @@ data ServicesConfigsCreate = ServicesConfigsCreate'
 --
 -- * 'sccUploadProtocol'
 --
--- * 'sccPp'
---
 -- * 'sccAccessToken'
 --
 -- * 'sccUploadType'
 --
 -- * 'sccPayload'
---
--- * 'sccBearerToken'
 --
 -- * 'sccServiceName'
 --
@@ -114,11 +108,9 @@ servicesConfigsCreate pSccPayload_ pSccServiceName_ =
     ServicesConfigsCreate'
     { _sccXgafv = Nothing
     , _sccUploadProtocol = Nothing
-    , _sccPp = True
     , _sccAccessToken = Nothing
     , _sccUploadType = Nothing
     , _sccPayload = pSccPayload_
-    , _sccBearerToken = Nothing
     , _sccServiceName = pSccServiceName_
     , _sccCallback = Nothing
     }
@@ -132,10 +124,6 @@ sccUploadProtocol :: Lens' ServicesConfigsCreate (Maybe Text)
 sccUploadProtocol
   = lens _sccUploadProtocol
       (\ s a -> s{_sccUploadProtocol = a})
-
--- | Pretty-print response.
-sccPp :: Lens' ServicesConfigsCreate Bool
-sccPp = lens _sccPp (\ s a -> s{_sccPp = a})
 
 -- | OAuth access token.
 sccAccessToken :: Lens' ServicesConfigsCreate (Maybe Text)
@@ -153,12 +141,6 @@ sccUploadType
 sccPayload :: Lens' ServicesConfigsCreate Service
 sccPayload
   = lens _sccPayload (\ s a -> s{_sccPayload = a})
-
--- | OAuth bearer token.
-sccBearerToken :: Lens' ServicesConfigsCreate (Maybe Text)
-sccBearerToken
-  = lens _sccBearerToken
-      (\ s a -> s{_sccBearerToken = a})
 
 -- | The name of the service. See the
 -- [overview](\/service-management\/overview) for naming requirements. For
@@ -180,10 +162,8 @@ instance GoogleRequest ServicesConfigsCreate where
                "https://www.googleapis.com/auth/service.management"]
         requestClient ServicesConfigsCreate'{..}
           = go _sccServiceName _sccXgafv _sccUploadProtocol
-              (Just _sccPp)
               _sccAccessToken
               _sccUploadType
-              _sccBearerToken
               _sccCallback
               (Just AltJSON)
               _sccPayload

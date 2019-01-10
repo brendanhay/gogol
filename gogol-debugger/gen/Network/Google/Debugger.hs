@@ -16,7 +16,7 @@
 -- Examines the call stack and variables of a running application without
 -- stopping or slowing it down.
 --
--- /See:/ <http://cloud.google.com/debugger Stackdriver Debugger API Reference>
+-- /See:/ <https://cloud.google.com/debugger Stackdriver Debugger API Reference>
 module Network.Google.Debugger
     (
     -- * Service Configuration
@@ -214,6 +214,7 @@ module Network.Google.Debugger
     , sourceLocation
     , slPath
     , slLine
+    , slColumn
 
     -- ** StackFrame
     , StackFrame

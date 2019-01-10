@@ -46,12 +46,10 @@ module Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.L
     , ccwsslXgafv
     , ccwsslLate
     , ccwsslUploadProtocol
-    , ccwsslPp
     , ccwsslCourseId
     , ccwsslAccessToken
     , ccwsslUploadType
     , ccwsslUserId
-    , ccwsslBearerToken
     , ccwsslPageToken
     , ccwsslPageSize
     , ccwsslCallback
@@ -72,20 +70,18 @@ type CoursesCourseWorkStudentSubmissionsListResource
              Capture "courseWorkId" Text :>
                "studentSubmissions" :>
                  QueryParams "states" Text :>
-                   QueryParam "$.xgafv" Text :>
+                   QueryParam "$.xgafv" Xgafv :>
                      QueryParam "late" Text :>
                        QueryParam "upload_protocol" Text :>
-                         QueryParam "pp" Bool :>
-                           QueryParam "access_token" Text :>
-                             QueryParam "uploadType" Text :>
-                               QueryParam "userId" Text :>
-                                 QueryParam "bearer_token" Text :>
-                                   QueryParam "pageToken" Text :>
-                                     QueryParam "pageSize" (Textual Int32) :>
-                                       QueryParam "callback" Text :>
-                                         QueryParam "alt" AltJSON :>
-                                           Get '[JSON]
-                                             ListStudentSubmissionsResponse
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "userId" Text :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "pageSize" (Textual Int32) :>
+                                   QueryParam "callback" Text :>
+                                     QueryParam "alt" AltJSON :>
+                                       Get '[JSON]
+                                         ListStudentSubmissionsResponse
 
 -- | Returns a list of student submissions that the requester is permitted to
 -- view, factoring in the OAuth scopes of the request. \`-\` may be
@@ -101,15 +97,13 @@ type CoursesCourseWorkStudentSubmissionsListResource
 -- /See:/ 'coursesCourseWorkStudentSubmissionsList' smart constructor.
 data CoursesCourseWorkStudentSubmissionsList = CoursesCourseWorkStudentSubmissionsList'
     { _ccwsslStates         :: !(Maybe [Text])
-    , _ccwsslXgafv          :: !(Maybe Text)
+    , _ccwsslXgafv          :: !(Maybe Xgafv)
     , _ccwsslLate           :: !(Maybe Text)
     , _ccwsslUploadProtocol :: !(Maybe Text)
-    , _ccwsslPp             :: !Bool
     , _ccwsslCourseId       :: !Text
     , _ccwsslAccessToken    :: !(Maybe Text)
     , _ccwsslUploadType     :: !(Maybe Text)
     , _ccwsslUserId         :: !(Maybe Text)
-    , _ccwsslBearerToken    :: !(Maybe Text)
     , _ccwsslPageToken      :: !(Maybe Text)
     , _ccwsslPageSize       :: !(Maybe (Textual Int32))
     , _ccwsslCallback       :: !(Maybe Text)
@@ -128,8 +122,6 @@ data CoursesCourseWorkStudentSubmissionsList = CoursesCourseWorkStudentSubmissio
 --
 -- * 'ccwsslUploadProtocol'
 --
--- * 'ccwsslPp'
---
 -- * 'ccwsslCourseId'
 --
 -- * 'ccwsslAccessToken'
@@ -137,8 +129,6 @@ data CoursesCourseWorkStudentSubmissionsList = CoursesCourseWorkStudentSubmissio
 -- * 'ccwsslUploadType'
 --
 -- * 'ccwsslUserId'
---
--- * 'ccwsslBearerToken'
 --
 -- * 'ccwsslPageToken'
 --
@@ -157,12 +147,10 @@ coursesCourseWorkStudentSubmissionsList pCcwsslCourseId_ pCcwsslCourseWorkId_ =
     , _ccwsslXgafv = Nothing
     , _ccwsslLate = Nothing
     , _ccwsslUploadProtocol = Nothing
-    , _ccwsslPp = True
     , _ccwsslCourseId = pCcwsslCourseId_
     , _ccwsslAccessToken = Nothing
     , _ccwsslUploadType = Nothing
     , _ccwsslUserId = Nothing
-    , _ccwsslBearerToken = Nothing
     , _ccwsslPageToken = Nothing
     , _ccwsslPageSize = Nothing
     , _ccwsslCallback = Nothing
@@ -178,7 +166,7 @@ ccwsslStates
       . _Coerce
 
 -- | V1 error format.
-ccwsslXgafv :: Lens' CoursesCourseWorkStudentSubmissionsList (Maybe Text)
+ccwsslXgafv :: Lens' CoursesCourseWorkStudentSubmissionsList (Maybe Xgafv)
 ccwsslXgafv
   = lens _ccwsslXgafv (\ s a -> s{_ccwsslXgafv = a})
 
@@ -194,10 +182,6 @@ ccwsslUploadProtocol :: Lens' CoursesCourseWorkStudentSubmissionsList (Maybe Tex
 ccwsslUploadProtocol
   = lens _ccwsslUploadProtocol
       (\ s a -> s{_ccwsslUploadProtocol = a})
-
--- | Pretty-print response.
-ccwsslPp :: Lens' CoursesCourseWorkStudentSubmissionsList Bool
-ccwsslPp = lens _ccwsslPp (\ s a -> s{_ccwsslPp = a})
 
 -- | Identifier of the course. This identifier can be either the
 -- Classroom-assigned identifier or an alias.
@@ -227,12 +211,6 @@ ccwsslUserId :: Lens' CoursesCourseWorkStudentSubmissionsList (Maybe Text)
 ccwsslUserId
   = lens _ccwsslUserId (\ s a -> s{_ccwsslUserId = a})
 
--- | OAuth bearer token.
-ccwsslBearerToken :: Lens' CoursesCourseWorkStudentSubmissionsList (Maybe Text)
-ccwsslBearerToken
-  = lens _ccwsslBearerToken
-      (\ s a -> s{_ccwsslBearerToken = a})
-
 -- | nextPageToken value returned from a previous list call, indicating that
 -- the subsequent page of results should be returned. The list request must
 -- be otherwise identical to the one that resulted in this token.
@@ -256,7 +234,7 @@ ccwsslCallback
   = lens _ccwsslCallback
       (\ s a -> s{_ccwsslCallback = a})
 
--- | Identifer of the student work to request. This may be set to the string
+-- | Identifier of the student work to request. This may be set to the string
 -- literal \`\"-\"\` to request student work for all course work in the
 -- specified course.
 ccwsslCourseWorkId :: Lens' CoursesCourseWorkStudentSubmissionsList Text
@@ -282,11 +260,9 @@ instance GoogleRequest
               _ccwsslXgafv
               _ccwsslLate
               _ccwsslUploadProtocol
-              (Just _ccwsslPp)
               _ccwsslAccessToken
               _ccwsslUploadType
               _ccwsslUserId
-              _ccwsslBearerToken
               _ccwsslPageToken
               _ccwsslPageSize
               _ccwsslCallback

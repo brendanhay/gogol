@@ -22,9 +22,12 @@
 --
 -- Returns permissions that a caller has on the specified resource. If the
 -- resource does not exist, this will return an empty set of permissions,
--- not a NOT_FOUND error.
+-- not a NOT_FOUND error. Note: This operation is designed to be used for
+-- building permission-aware UIs and command-line tools, not for
+-- authorization checking. This operation may \"fail open\" without
+-- warning.
 --
--- /See:/ <https://cloud.google.com/service-management/ Google Service Management API Reference> for @servicemanagement.services.testIamPermissions@.
+-- /See:/ <https://cloud.google.com/service-management/ Service Management API Reference> for @servicemanagement.services.testIamPermissions@.
 module Network.Google.Resource.ServiceManagement.Services.TestIAMPermissions
     (
     -- * REST Resource
@@ -37,11 +40,9 @@ module Network.Google.Resource.ServiceManagement.Services.TestIAMPermissions
     -- * Request Lenses
     , stipXgafv
     , stipUploadProtocol
-    , stipPp
     , stipAccessToken
     , stipUploadType
     , stipPayload
-    , stipBearerToken
     , stipResource
     , stipCallback
     ) where
@@ -56,28 +57,27 @@ type ServicesTestIAMPermissionsResource =
        CaptureMode "resource" "testIamPermissions" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] TestIAMPermissionsRequest :>
-                           Post '[JSON] TestIAMPermissionsResponse
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] TestIAMPermissionsRequest :>
+                       Post '[JSON] TestIAMPermissionsResponse
 
 -- | Returns permissions that a caller has on the specified resource. If the
 -- resource does not exist, this will return an empty set of permissions,
--- not a NOT_FOUND error.
+-- not a NOT_FOUND error. Note: This operation is designed to be used for
+-- building permission-aware UIs and command-line tools, not for
+-- authorization checking. This operation may \"fail open\" without
+-- warning.
 --
 -- /See:/ 'servicesTestIAMPermissions' smart constructor.
 data ServicesTestIAMPermissions = ServicesTestIAMPermissions'
     { _stipXgafv          :: !(Maybe Xgafv)
     , _stipUploadProtocol :: !(Maybe Text)
-    , _stipPp             :: !Bool
     , _stipAccessToken    :: !(Maybe Text)
     , _stipUploadType     :: !(Maybe Text)
     , _stipPayload        :: !TestIAMPermissionsRequest
-    , _stipBearerToken    :: !(Maybe Text)
     , _stipResource       :: !Text
     , _stipCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -90,15 +90,11 @@ data ServicesTestIAMPermissions = ServicesTestIAMPermissions'
 --
 -- * 'stipUploadProtocol'
 --
--- * 'stipPp'
---
 -- * 'stipAccessToken'
 --
 -- * 'stipUploadType'
 --
 -- * 'stipPayload'
---
--- * 'stipBearerToken'
 --
 -- * 'stipResource'
 --
@@ -111,11 +107,9 @@ servicesTestIAMPermissions pStipPayload_ pStipResource_ =
     ServicesTestIAMPermissions'
     { _stipXgafv = Nothing
     , _stipUploadProtocol = Nothing
-    , _stipPp = True
     , _stipAccessToken = Nothing
     , _stipUploadType = Nothing
     , _stipPayload = pStipPayload_
-    , _stipBearerToken = Nothing
     , _stipResource = pStipResource_
     , _stipCallback = Nothing
     }
@@ -130,10 +124,6 @@ stipUploadProtocol :: Lens' ServicesTestIAMPermissions (Maybe Text)
 stipUploadProtocol
   = lens _stipUploadProtocol
       (\ s a -> s{_stipUploadProtocol = a})
-
--- | Pretty-print response.
-stipPp :: Lens' ServicesTestIAMPermissions Bool
-stipPp = lens _stipPp (\ s a -> s{_stipPp = a})
 
 -- | OAuth access token.
 stipAccessToken :: Lens' ServicesTestIAMPermissions (Maybe Text)
@@ -152,15 +142,9 @@ stipPayload :: Lens' ServicesTestIAMPermissions TestIAMPermissionsRequest
 stipPayload
   = lens _stipPayload (\ s a -> s{_stipPayload = a})
 
--- | OAuth bearer token.
-stipBearerToken :: Lens' ServicesTestIAMPermissions (Maybe Text)
-stipBearerToken
-  = lens _stipBearerToken
-      (\ s a -> s{_stipBearerToken = a})
-
 -- | REQUIRED: The resource for which the policy detail is being requested.
--- \`resource\` is usually specified as a path. For example, a Project
--- resource is specified as \`projects\/{project}\`.
+-- See the operation documentation for the appropriate value for this
+-- field.
 stipResource :: Lens' ServicesTestIAMPermissions Text
 stipResource
   = lens _stipResource (\ s a -> s{_stipResource = a})
@@ -176,13 +160,13 @@ instance GoogleRequest ServicesTestIAMPermissions
              TestIAMPermissionsResponse
         type Scopes ServicesTestIAMPermissions =
              '["https://www.googleapis.com/auth/cloud-platform",
-               "https://www.googleapis.com/auth/service.management"]
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/service.management",
+               "https://www.googleapis.com/auth/service.management.readonly"]
         requestClient ServicesTestIAMPermissions'{..}
           = go _stipResource _stipXgafv _stipUploadProtocol
-              (Just _stipPp)
               _stipAccessToken
               _stipUploadType
-              _stipBearerToken
               _stipCallback
               (Just AltJSON)
               _stipPayload

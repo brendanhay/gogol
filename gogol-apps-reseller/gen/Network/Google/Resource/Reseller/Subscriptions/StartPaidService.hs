@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Starts paid service of a trial subscription
+-- Immediately move a 30-day free trial subscription to a paid service
+-- subscription.
 --
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @reseller.subscriptions.startPaidService@.
 module Network.Google.Resource.Reseller.Subscriptions.StartPaidService
@@ -53,7 +54,8 @@ type SubscriptionsStartPaidServiceResource =
                    "startPaidService" :>
                      QueryParam "alt" AltJSON :> Post '[JSON] Subscription
 
--- | Starts paid service of a trial subscription
+-- | Immediately move a 30-day free trial subscription to a paid service
+-- subscription.
 --
 -- /See:/ 'subscriptionsStartPaidService' smart constructor.
 data SubscriptionsStartPaidService = SubscriptionsStartPaidService'
@@ -78,13 +80,20 @@ subscriptionsStartPaidService pSspsCustomerId_ pSspsSubscriptionId_ =
     , _sspsSubscriptionId = pSspsSubscriptionId_
     }
 
--- | Id of the Customer
+-- | Either the customer\'s primary domain name or the customer\'s unique
+-- identifier. If using the domain name, we do not recommend using a
+-- customerId as a key for persistent data. If the domain name for a
+-- customerId is changed, the Google system automatically updates.
 sspsCustomerId :: Lens' SubscriptionsStartPaidService Text
 sspsCustomerId
   = lens _sspsCustomerId
       (\ s a -> s{_sspsCustomerId = a})
 
--- | Id of the subscription, which is unique for a customer
+-- | This is a required property. The subscriptionId is the subscription
+-- identifier and is unique for each customer. Since a subscriptionId
+-- changes when a subscription is updated, we recommend to not use this ID
+-- as a key for persistent data. And the subscriptionId can be found using
+-- the retrieve all reseller subscriptions method.
 sspsSubscriptionId :: Lens' SubscriptionsStartPaidService Text
 sspsSubscriptionId
   = lens _sspsSubscriptionId

@@ -40,12 +40,10 @@ module Network.Google.Resource.Classroom.Courses.Teachers.Delete
     -- * Request Lenses
     , ctdXgafv
     , ctdUploadProtocol
-    , ctdPp
     , ctdCourseId
     , ctdAccessToken
     , ctdUploadType
     , ctdUserId
-    , ctdBearerToken
     , ctdCallback
     ) where
 
@@ -60,14 +58,12 @@ type CoursesTeachersDeleteResource =
          Capture "courseId" Text :>
            "teachers" :>
              Capture "userId" Text :>
-               QueryParam "$.xgafv" Text :>
+               QueryParam "$.xgafv" Xgafv :>
                  QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :> Delete '[JSON] Empty
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
 -- | Deletes a teacher of a course. This method returns the following error
 -- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
@@ -78,14 +74,12 @@ type CoursesTeachersDeleteResource =
 --
 -- /See:/ 'coursesTeachersDelete' smart constructor.
 data CoursesTeachersDelete = CoursesTeachersDelete'
-    { _ctdXgafv          :: !(Maybe Text)
+    { _ctdXgafv          :: !(Maybe Xgafv)
     , _ctdUploadProtocol :: !(Maybe Text)
-    , _ctdPp             :: !Bool
     , _ctdCourseId       :: !Text
     , _ctdAccessToken    :: !(Maybe Text)
     , _ctdUploadType     :: !(Maybe Text)
     , _ctdUserId         :: !Text
-    , _ctdBearerToken    :: !(Maybe Text)
     , _ctdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -97,8 +91,6 @@ data CoursesTeachersDelete = CoursesTeachersDelete'
 --
 -- * 'ctdUploadProtocol'
 --
--- * 'ctdPp'
---
 -- * 'ctdCourseId'
 --
 -- * 'ctdAccessToken'
@@ -106,8 +98,6 @@ data CoursesTeachersDelete = CoursesTeachersDelete'
 -- * 'ctdUploadType'
 --
 -- * 'ctdUserId'
---
--- * 'ctdBearerToken'
 --
 -- * 'ctdCallback'
 coursesTeachersDelete
@@ -118,17 +108,15 @@ coursesTeachersDelete pCtdCourseId_ pCtdUserId_ =
     CoursesTeachersDelete'
     { _ctdXgafv = Nothing
     , _ctdUploadProtocol = Nothing
-    , _ctdPp = True
     , _ctdCourseId = pCtdCourseId_
     , _ctdAccessToken = Nothing
     , _ctdUploadType = Nothing
     , _ctdUserId = pCtdUserId_
-    , _ctdBearerToken = Nothing
     , _ctdCallback = Nothing
     }
 
 -- | V1 error format.
-ctdXgafv :: Lens' CoursesTeachersDelete (Maybe Text)
+ctdXgafv :: Lens' CoursesTeachersDelete (Maybe Xgafv)
 ctdXgafv = lens _ctdXgafv (\ s a -> s{_ctdXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -136,10 +124,6 @@ ctdUploadProtocol :: Lens' CoursesTeachersDelete (Maybe Text)
 ctdUploadProtocol
   = lens _ctdUploadProtocol
       (\ s a -> s{_ctdUploadProtocol = a})
-
--- | Pretty-print response.
-ctdPp :: Lens' CoursesTeachersDelete Bool
-ctdPp = lens _ctdPp (\ s a -> s{_ctdPp = a})
 
 -- | Identifier of the course. This identifier can be either the
 -- Classroom-assigned identifier or an alias.
@@ -166,12 +150,6 @@ ctdUserId :: Lens' CoursesTeachersDelete Text
 ctdUserId
   = lens _ctdUserId (\ s a -> s{_ctdUserId = a})
 
--- | OAuth bearer token.
-ctdBearerToken :: Lens' CoursesTeachersDelete (Maybe Text)
-ctdBearerToken
-  = lens _ctdBearerToken
-      (\ s a -> s{_ctdBearerToken = a})
-
 -- | JSONP
 ctdCallback :: Lens' CoursesTeachersDelete (Maybe Text)
 ctdCallback
@@ -184,10 +162,8 @@ instance GoogleRequest CoursesTeachersDelete where
         requestClient CoursesTeachersDelete'{..}
           = go _ctdCourseId _ctdUserId _ctdXgafv
               _ctdUploadProtocol
-              (Just _ctdPp)
               _ctdAccessToken
               _ctdUploadType
-              _ctdBearerToken
               _ctdCallback
               (Just AltJSON)
               classroomService

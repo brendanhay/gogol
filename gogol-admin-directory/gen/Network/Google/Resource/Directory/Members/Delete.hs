@@ -77,12 +77,12 @@ membersDelete pMdMemberKey_ pMdGroupKey_ =
     , _mdGroupKey = pMdGroupKey_
     }
 
--- | Email or immutable Id of the member
+-- | Email or immutable ID of the member
 mdMemberKey :: Lens' MembersDelete Text
 mdMemberKey
   = lens _mdMemberKey (\ s a -> s{_mdMemberKey = a})
 
--- | Email or immutable Id of the group
+-- | Email or immutable ID of the group
 mdGroupKey :: Lens' MembersDelete Text
 mdGroupKey
   = lens _mdGroupKey (\ s a -> s{_mdGroupKey = a})

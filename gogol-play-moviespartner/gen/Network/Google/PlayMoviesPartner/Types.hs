@@ -22,6 +22,15 @@ module Network.Google.PlayMoviesPartner.Types
     -- * OAuth Scopes
     , playmoviesPartnerReadOnlyScope
 
+    -- * AvailWorkType
+    , AvailWorkType (..)
+
+    -- * OrderStatus
+    , OrderStatus (..)
+
+    -- * AvailFormatProFile
+    , AvailFormatProFile (..)
+
     -- * Avail
     , Avail
     , avail
@@ -59,6 +68,9 @@ module Network.Google.PlayMoviesPartner.Types
     , aSeasonAltId
     , aTitleInternalAlias
 
+    -- * OrderType
+    , OrderType (..)
+
     -- * ListAvailsResponse
     , ListAvailsResponse
     , listAvailsResponse
@@ -66,12 +78,27 @@ module Network.Google.PlayMoviesPartner.Types
     , larAvails
     , larTotalSize
 
+    -- * StoreInfoType
+    , StoreInfoType (..)
+
     -- * ListOrdersResponse
     , ListOrdersResponse
     , listOrdersResponse
     , lorNextPageToken
     , lorTotalSize
     , lorOrders
+
+    -- * Xgafv
+    , Xgafv (..)
+
+    -- * OrderNormalizedPriority
+    , OrderNormalizedPriority (..)
+
+    -- * AvailLicenseType
+    , AvailLicenseType (..)
+
+    -- * OrderStatusDetail
+    , OrderStatusDetail (..)
 
     -- * ListStoreInfosResponse
     , ListStoreInfosResponse

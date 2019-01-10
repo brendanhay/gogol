@@ -24,10 +24,12 @@
 -- based on user-supplied configuration source files (for example: OpenAPI
 -- Specification). This method stores the source configurations as well as
 -- the generated service configuration. To rollout the service
--- configuration to other services, please call CreateServiceRollout.
--- Operation
+-- configuration to other services, please call CreateServiceRollout. Only
+-- the 100 most recent configuration sources and ones referenced by
+-- existing service configurtions are kept for each service. The rest will
+-- be deleted eventually. Operation
 --
--- /See:/ <https://cloud.google.com/service-management/ Google Service Management API Reference> for @servicemanagement.services.configs.submit@.
+-- /See:/ <https://cloud.google.com/service-management/ Service Management API Reference> for @servicemanagement.services.configs.submit@.
 module Network.Google.Resource.ServiceManagement.Services.Configs.Submit
     (
     -- * REST Resource
@@ -40,11 +42,9 @@ module Network.Google.Resource.ServiceManagement.Services.Configs.Submit
     -- * Request Lenses
     , scsXgafv
     , scsUploadProtocol
-    , scsPp
     , scsAccessToken
     , scsUploadType
     , scsPayload
-    , scsBearerToken
     , scsServiceName
     , scsCallback
     ) where
@@ -61,31 +61,29 @@ type ServicesConfigsSubmitResource =
            "configs:submit" :>
              QueryParam "$.xgafv" Xgafv :>
                QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "callback" Text :>
-                           QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] SubmitConfigSourceRequest :>
-                               Post '[JSON] Operation
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] SubmitConfigSourceRequest :>
+                           Post '[JSON] Operation
 
 -- | Creates a new service configuration (version) for a managed service
 -- based on user-supplied configuration source files (for example: OpenAPI
 -- Specification). This method stores the source configurations as well as
 -- the generated service configuration. To rollout the service
--- configuration to other services, please call CreateServiceRollout.
--- Operation
+-- configuration to other services, please call CreateServiceRollout. Only
+-- the 100 most recent configuration sources and ones referenced by
+-- existing service configurtions are kept for each service. The rest will
+-- be deleted eventually. Operation
 --
 -- /See:/ 'servicesConfigsSubmit' smart constructor.
 data ServicesConfigsSubmit = ServicesConfigsSubmit'
     { _scsXgafv          :: !(Maybe Xgafv)
     , _scsUploadProtocol :: !(Maybe Text)
-    , _scsPp             :: !Bool
     , _scsAccessToken    :: !(Maybe Text)
     , _scsUploadType     :: !(Maybe Text)
     , _scsPayload        :: !SubmitConfigSourceRequest
-    , _scsBearerToken    :: !(Maybe Text)
     , _scsServiceName    :: !Text
     , _scsCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -98,15 +96,11 @@ data ServicesConfigsSubmit = ServicesConfigsSubmit'
 --
 -- * 'scsUploadProtocol'
 --
--- * 'scsPp'
---
 -- * 'scsAccessToken'
 --
 -- * 'scsUploadType'
 --
 -- * 'scsPayload'
---
--- * 'scsBearerToken'
 --
 -- * 'scsServiceName'
 --
@@ -119,11 +113,9 @@ servicesConfigsSubmit pScsPayload_ pScsServiceName_ =
     ServicesConfigsSubmit'
     { _scsXgafv = Nothing
     , _scsUploadProtocol = Nothing
-    , _scsPp = True
     , _scsAccessToken = Nothing
     , _scsUploadType = Nothing
     , _scsPayload = pScsPayload_
-    , _scsBearerToken = Nothing
     , _scsServiceName = pScsServiceName_
     , _scsCallback = Nothing
     }
@@ -137,10 +129,6 @@ scsUploadProtocol :: Lens' ServicesConfigsSubmit (Maybe Text)
 scsUploadProtocol
   = lens _scsUploadProtocol
       (\ s a -> s{_scsUploadProtocol = a})
-
--- | Pretty-print response.
-scsPp :: Lens' ServicesConfigsSubmit Bool
-scsPp = lens _scsPp (\ s a -> s{_scsPp = a})
 
 -- | OAuth access token.
 scsAccessToken :: Lens' ServicesConfigsSubmit (Maybe Text)
@@ -158,12 +146,6 @@ scsUploadType
 scsPayload :: Lens' ServicesConfigsSubmit SubmitConfigSourceRequest
 scsPayload
   = lens _scsPayload (\ s a -> s{_scsPayload = a})
-
--- | OAuth bearer token.
-scsBearerToken :: Lens' ServicesConfigsSubmit (Maybe Text)
-scsBearerToken
-  = lens _scsBearerToken
-      (\ s a -> s{_scsBearerToken = a})
 
 -- | The name of the service. See the
 -- [overview](\/service-management\/overview) for naming requirements. For
@@ -185,10 +167,8 @@ instance GoogleRequest ServicesConfigsSubmit where
                "https://www.googleapis.com/auth/service.management"]
         requestClient ServicesConfigsSubmit'{..}
           = go _scsServiceName _scsXgafv _scsUploadProtocol
-              (Just _scsPp)
               _scsAccessToken
               _scsUploadType
-              _scsBearerToken
               _scsCallback
               (Just AltJSON)
               _scsPayload

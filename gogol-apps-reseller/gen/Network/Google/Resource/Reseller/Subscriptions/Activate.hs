@@ -78,12 +78,19 @@ subscriptionsActivate pSaCustomerId_ pSaSubscriptionId_ =
     , _saSubscriptionId = pSaSubscriptionId_
     }
 
--- | Id of the Customer
+-- | Either the customer\'s primary domain name or the customer\'s unique
+-- identifier. If using the domain name, we do not recommend using a
+-- customerId as a key for persistent data. If the domain name for a
+-- customerId is changed, the Google system automatically updates.
 saCustomerId :: Lens' SubscriptionsActivate Text
 saCustomerId
   = lens _saCustomerId (\ s a -> s{_saCustomerId = a})
 
--- | Id of the subscription, which is unique for a customer
+-- | This is a required property. The subscriptionId is the subscription
+-- identifier and is unique for each customer. Since a subscriptionId
+-- changes when a subscription is updated, we recommend to not use this ID
+-- as a key for persistent data. And the subscriptionId can be found using
+-- the retrieve all reseller subscriptions method.
 saSubscriptionId :: Lens' SubscriptionsActivate Text
 saSubscriptionId
   = lens _saSubscriptionId

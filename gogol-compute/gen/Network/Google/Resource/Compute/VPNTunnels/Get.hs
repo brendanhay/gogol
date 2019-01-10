@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified VpnTunnel resource. Get a list of available VPN
+-- Returns the specified VpnTunnel resource. Gets a list of available VPN
 -- tunnels by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.vpnTunnels.get@.
@@ -55,7 +55,7 @@ type VPNTunnelsGetResource =
                    Capture "vpnTunnel" Text :>
                      QueryParam "alt" AltJSON :> Get '[JSON] VPNTunnel
 
--- | Returns the specified VpnTunnel resource. Get a list of available VPN
+-- | Returns the specified VpnTunnel resource. Gets a list of available VPN
 -- tunnels by making a list() request.
 --
 -- /See:/ 'vpnTunnelsGet' smart constructor.

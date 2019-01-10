@@ -36,6 +36,7 @@ module Network.Google.Resource.BigQuery.Jobs.Get
 
     -- * Request Lenses
     , jgJobId
+    , jgLocation
     , jgProjectId
     ) where
 
@@ -51,7 +52,8 @@ type JobsGetResource =
            Capture "projectId" Text :>
              "jobs" :>
                Capture "jobId" Text :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] Job
+                 QueryParam "location" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Job
 
 -- | Returns information about a specific job. Job information is available
 -- for a six month period after creation. Requires that you\'re the person
@@ -60,6 +62,7 @@ type JobsGetResource =
 -- /See:/ 'jobsGet' smart constructor.
 data JobsGet = JobsGet'
     { _jgJobId     :: !Text
+    , _jgLocation  :: !(Maybe Text)
     , _jgProjectId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -69,6 +72,8 @@ data JobsGet = JobsGet'
 --
 -- * 'jgJobId'
 --
+-- * 'jgLocation'
+--
 -- * 'jgProjectId'
 jobsGet
     :: Text -- ^ 'jgJobId'
@@ -77,12 +82,20 @@ jobsGet
 jobsGet pJgJobId_ pJgProjectId_ =
     JobsGet'
     { _jgJobId = pJgJobId_
+    , _jgLocation = Nothing
     , _jgProjectId = pJgProjectId_
     }
 
 -- | [Required] Job ID of the requested job
 jgJobId :: Lens' JobsGet Text
 jgJobId = lens _jgJobId (\ s a -> s{_jgJobId = a})
+
+-- | The geographic location of the job. Required except for US and EU. See
+-- details at
+-- https:\/\/cloud.google.com\/bigquery\/docs\/locations#specifying_your_location.
+jgLocation :: Lens' JobsGet (Maybe Text)
+jgLocation
+  = lens _jgLocation (\ s a -> s{_jgLocation = a})
 
 -- | [Required] Project ID of the requested job
 jgProjectId :: Lens' JobsGet Text
@@ -96,7 +109,7 @@ instance GoogleRequest JobsGet where
                "https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/cloud-platform.read-only"]
         requestClient JobsGet'{..}
-          = go _jgProjectId _jgJobId (Just AltJSON)
+          = go _jgProjectId _jgJobId _jgLocation (Just AltJSON)
               bigQueryService
           where go
                   = buildClient (Proxy :: Proxy JobsGetResource) mempty

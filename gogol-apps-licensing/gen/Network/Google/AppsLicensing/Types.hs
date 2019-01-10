@@ -38,7 +38,9 @@ module Network.Google.AppsLicensing.Types
     -- * LicenseAssignment
     , LicenseAssignment
     , licenseAssignment
+    , laProductName
     , laEtags
+    , laSKUName
     , laKind
     , laSKUId
     , laUserId
@@ -56,6 +58,6 @@ appsLicensingService
   = defaultService (ServiceId "licensing:v1")
       "www.googleapis.com"
 
--- | View and manage Google Apps licenses for your domain
+-- | View and manage G Suite licenses for your domain
 appsLicensingScope :: Proxy '["https://www.googleapis.com/auth/apps.licensing"]
 appsLicensingScope = Proxy;

@@ -22,7 +22,7 @@
 --
 -- Lists transfer jobs.
 --
--- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @storagetransfer.transferJobs.list@.
+-- /See:/ <https://cloud.google.com/storage/transfer Storage Transfer API Reference> for @storagetransfer.transferJobs.list@.
 module Network.Google.Resource.StorageTransfer.TransferJobs.List
     (
     -- * REST Resource
@@ -35,10 +35,8 @@ module Network.Google.Resource.StorageTransfer.TransferJobs.List
     -- * Request Lenses
     , tjlXgafv
     , tjlUploadProtocol
-    , tjlPp
     , tjlAccessToken
     , tjlUploadType
-    , tjlBearerToken
     , tjlFilter
     , tjlPageToken
     , tjlPageSize
@@ -53,29 +51,25 @@ import           Network.Google.StorageTransfer.Types
 type TransferJobsListResource =
      "v1" :>
        "transferJobs" :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "filter" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" (Textual Int32) :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] ListTransferJobsResponse
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "filter" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "pageSize" (Textual Int32) :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] ListTransferJobsResponse
 
 -- | Lists transfer jobs.
 --
 -- /See:/ 'transferJobsList' smart constructor.
 data TransferJobsList = TransferJobsList'
-    { _tjlXgafv          :: !(Maybe Text)
+    { _tjlXgafv          :: !(Maybe Xgafv)
     , _tjlUploadProtocol :: !(Maybe Text)
-    , _tjlPp             :: !Bool
     , _tjlAccessToken    :: !(Maybe Text)
     , _tjlUploadType     :: !(Maybe Text)
-    , _tjlBearerToken    :: !(Maybe Text)
     , _tjlFilter         :: !(Maybe Text)
     , _tjlPageToken      :: !(Maybe Text)
     , _tjlPageSize       :: !(Maybe (Textual Int32))
@@ -90,13 +84,9 @@ data TransferJobsList = TransferJobsList'
 --
 -- * 'tjlUploadProtocol'
 --
--- * 'tjlPp'
---
 -- * 'tjlAccessToken'
 --
 -- * 'tjlUploadType'
---
--- * 'tjlBearerToken'
 --
 -- * 'tjlFilter'
 --
@@ -111,10 +101,8 @@ transferJobsList =
     TransferJobsList'
     { _tjlXgafv = Nothing
     , _tjlUploadProtocol = Nothing
-    , _tjlPp = True
     , _tjlAccessToken = Nothing
     , _tjlUploadType = Nothing
-    , _tjlBearerToken = Nothing
     , _tjlFilter = Nothing
     , _tjlPageToken = Nothing
     , _tjlPageSize = Nothing
@@ -122,7 +110,7 @@ transferJobsList =
     }
 
 -- | V1 error format.
-tjlXgafv :: Lens' TransferJobsList (Maybe Text)
+tjlXgafv :: Lens' TransferJobsList (Maybe Xgafv)
 tjlXgafv = lens _tjlXgafv (\ s a -> s{_tjlXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -130,10 +118,6 @@ tjlUploadProtocol :: Lens' TransferJobsList (Maybe Text)
 tjlUploadProtocol
   = lens _tjlUploadProtocol
       (\ s a -> s{_tjlUploadProtocol = a})
-
--- | Pretty-print response.
-tjlPp :: Lens' TransferJobsList Bool
-tjlPp = lens _tjlPp (\ s a -> s{_tjlPp = a})
 
 -- | OAuth access token.
 tjlAccessToken :: Lens' TransferJobsList (Maybe Text)
@@ -147,20 +131,14 @@ tjlUploadType
   = lens _tjlUploadType
       (\ s a -> s{_tjlUploadType = a})
 
--- | OAuth bearer token.
-tjlBearerToken :: Lens' TransferJobsList (Maybe Text)
-tjlBearerToken
-  = lens _tjlBearerToken
-      (\ s a -> s{_tjlBearerToken = a})
-
 -- | A list of query parameters specified as JSON text in the form of
--- {\"\`project_id\`\":\"my_project_id\",
--- \"\`job_names\`\":[\"jobid1\",\"jobid2\",...],
--- \"\`job_statuses\`\":[\"status1\",\"status2\",...]}. Since \`job_names\`
--- and \`job_statuses\` support multiple values, their values must be
--- specified with array notation. \`project_id\` is required. \`job_names\`
--- and \`job_statuses\` are optional. The valid values for \`job_statuses\`
--- are case-insensitive: \`ENABLED\`, \`DISABLED\`, and \`DELETED\`.
+-- {\"project_id\":\"my_project_id\",
+-- \"job_names\":[\"jobid1\",\"jobid2\",...],
+-- \"job_statuses\":[\"status1\",\"status2\",...]}. Since \`job_names\` and
+-- \`job_statuses\` support multiple values, their values must be specified
+-- with array notation. \`project_id\` is required. \`job_names\` and
+-- \`job_statuses\` are optional. The valid values for \`job_statuses\` are
+-- case-insensitive: \`ENABLED\`, \`DISABLED\`, and \`DELETED\`.
 tjlFilter :: Lens' TransferJobsList (Maybe Text)
 tjlFilter
   = lens _tjlFilter (\ s a -> s{_tjlFilter = a})
@@ -186,10 +164,8 @@ instance GoogleRequest TransferJobsList where
         type Scopes TransferJobsList =
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient TransferJobsList'{..}
-          = go _tjlXgafv _tjlUploadProtocol (Just _tjlPp)
-              _tjlAccessToken
+          = go _tjlXgafv _tjlUploadProtocol _tjlAccessToken
               _tjlUploadType
-              _tjlBearerToken
               _tjlFilter
               _tjlPageToken
               _tjlPageSize

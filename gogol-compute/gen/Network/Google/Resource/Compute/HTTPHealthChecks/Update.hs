@@ -34,6 +34,7 @@ module Network.Google.Resource.Compute.HTTPHealthChecks.Update
     , HTTPHealthChecksUpdate
 
     -- * Request Lenses
+    , httphcuRequestId
     , httphcuProject
     , httphcuPayload
     , httphcuHTTPHealthCheck
@@ -52,16 +53,18 @@ type HTTPHealthChecksUpdateResource =
              "global" :>
                "httpHealthChecks" :>
                  Capture "httpHealthCheck" Text :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] HTTPHealthCheck :>
-                       Put '[JSON] Operation
+                   QueryParam "requestId" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] HTTPHealthCheck :>
+                         Put '[JSON] Operation
 
 -- | Updates a HttpHealthCheck resource in the specified project using the
 -- data included in the request.
 --
 -- /See:/ 'hTTPHealthChecksUpdate' smart constructor.
 data HTTPHealthChecksUpdate = HTTPHealthChecksUpdate'
-    { _httphcuProject         :: !Text
+    { _httphcuRequestId       :: !(Maybe Text)
+    , _httphcuProject         :: !Text
     , _httphcuPayload         :: !HTTPHealthCheck
     , _httphcuHTTPHealthCheck :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -69,6 +72,8 @@ data HTTPHealthChecksUpdate = HTTPHealthChecksUpdate'
 -- | Creates a value of 'HTTPHealthChecksUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'httphcuRequestId'
 --
 -- * 'httphcuProject'
 --
@@ -82,10 +87,26 @@ hTTPHealthChecksUpdate
     -> HTTPHealthChecksUpdate
 hTTPHealthChecksUpdate pHttphcuProject_ pHttphcuPayload_ pHttphcuHTTPHealthCheck_ =
     HTTPHealthChecksUpdate'
-    { _httphcuProject = pHttphcuProject_
+    { _httphcuRequestId = Nothing
+    , _httphcuProject = pHttphcuProject_
     , _httphcuPayload = pHttphcuPayload_
     , _httphcuHTTPHealthCheck = pHttphcuHTTPHealthCheck_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+httphcuRequestId :: Lens' HTTPHealthChecksUpdate (Maybe Text)
+httphcuRequestId
+  = lens _httphcuRequestId
+      (\ s a -> s{_httphcuRequestId = a})
 
 -- | Project ID for this request.
 httphcuProject :: Lens' HTTPHealthChecksUpdate Text
@@ -112,6 +133,7 @@ instance GoogleRequest HTTPHealthChecksUpdate where
                "https://www.googleapis.com/auth/compute"]
         requestClient HTTPHealthChecksUpdate'{..}
           = go _httphcuProject _httphcuHTTPHealthCheck
+              _httphcuRequestId
               (Just AltJSON)
               _httphcuPayload
               computeService

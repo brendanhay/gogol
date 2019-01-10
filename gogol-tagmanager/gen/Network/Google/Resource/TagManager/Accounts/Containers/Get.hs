@@ -22,7 +22,7 @@
 --
 -- Gets a Container.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.containers.get@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v2/ Tag Manager API Reference> for @tagmanager.accounts.containers.get@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Get
     (
     -- * REST Resource
@@ -33,8 +33,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Get
     , AccountsContainersGet
 
     -- * Request Lenses
-    , acgContainerId
-    , acgAccountId
+    , acgPath
     ) where
 
 import           Network.Google.Prelude
@@ -44,48 +43,34 @@ import           Network.Google.TagManager.Types
 -- 'AccountsContainersGet' request conforms to.
 type AccountsContainersGetResource =
      "tagmanager" :>
-       "v1" :>
-         "accounts" :>
-           Capture "accountId" Text :>
-             "containers" :>
-               Capture "containerId" Text :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] Container
+       "v2" :>
+         Capture "path" Text :>
+           QueryParam "alt" AltJSON :> Get '[JSON] Container
 
 -- | Gets a Container.
 --
 -- /See:/ 'accountsContainersGet' smart constructor.
-data AccountsContainersGet = AccountsContainersGet'
-    { _acgContainerId :: !Text
-    , _acgAccountId   :: !Text
+newtype AccountsContainersGet = AccountsContainersGet'
+    { _acgPath :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acgContainerId'
---
--- * 'acgAccountId'
+-- * 'acgPath'
 accountsContainersGet
-    :: Text -- ^ 'acgContainerId'
-    -> Text -- ^ 'acgAccountId'
+    :: Text -- ^ 'acgPath'
     -> AccountsContainersGet
-accountsContainersGet pAcgContainerId_ pAcgAccountId_ =
+accountsContainersGet pAcgPath_ =
     AccountsContainersGet'
-    { _acgContainerId = pAcgContainerId_
-    , _acgAccountId = pAcgAccountId_
+    { _acgPath = pAcgPath_
     }
 
--- | The GTM Container ID.
-acgContainerId :: Lens' AccountsContainersGet Text
-acgContainerId
-  = lens _acgContainerId
-      (\ s a -> s{_acgContainerId = a})
-
--- | The GTM Account ID.
-acgAccountId :: Lens' AccountsContainersGet Text
-acgAccountId
-  = lens _acgAccountId (\ s a -> s{_acgAccountId = a})
+-- | GTM Container\'s API relative path. Example:
+-- accounts\/{account_id}\/containers\/{container_id}
+acgPath :: Lens' AccountsContainersGet Text
+acgPath = lens _acgPath (\ s a -> s{_acgPath = a})
 
 instance GoogleRequest AccountsContainersGet where
         type Rs AccountsContainersGet = Container
@@ -93,8 +78,7 @@ instance GoogleRequest AccountsContainersGet where
              '["https://www.googleapis.com/auth/tagmanager.edit.containers",
                "https://www.googleapis.com/auth/tagmanager.readonly"]
         requestClient AccountsContainersGet'{..}
-          = go _acgAccountId _acgContainerId (Just AltJSON)
-              tagManagerService
+          = go _acgPath (Just AltJSON) tagManagerService
           where go
                   = buildClient
                       (Proxy :: Proxy AccountsContainersGetResource)

@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Cloud Container Builder.
+A client library for the Google Cloud Build.
 
 
 ## Contribute

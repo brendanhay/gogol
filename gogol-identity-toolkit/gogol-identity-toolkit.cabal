@@ -38,12 +38,14 @@ library
         , Network.Google.Resource.IdentityToolkit.RelyingParty.CreateAuthURI
         , Network.Google.Resource.IdentityToolkit.RelyingParty.DeleteAccount
         , Network.Google.Resource.IdentityToolkit.RelyingParty.DownloadAccount
+        , Network.Google.Resource.IdentityToolkit.RelyingParty.EmailLinkSignin
         , Network.Google.Resource.IdentityToolkit.RelyingParty.GetAccountInfo
         , Network.Google.Resource.IdentityToolkit.RelyingParty.GetOOBConfirmationCode
         , Network.Google.Resource.IdentityToolkit.RelyingParty.GetProjectConfig
         , Network.Google.Resource.IdentityToolkit.RelyingParty.GetPublicKeys
         , Network.Google.Resource.IdentityToolkit.RelyingParty.GetRecaptchaParam
         , Network.Google.Resource.IdentityToolkit.RelyingParty.ResetPassword
+        , Network.Google.Resource.IdentityToolkit.RelyingParty.SendVerificationCode
         , Network.Google.Resource.IdentityToolkit.RelyingParty.SetAccountInfo
         , Network.Google.Resource.IdentityToolkit.RelyingParty.SetProjectConfig
         , Network.Google.Resource.IdentityToolkit.RelyingParty.SignOutUser
@@ -52,6 +54,7 @@ library
         , Network.Google.Resource.IdentityToolkit.RelyingParty.VerifyAssertion
         , Network.Google.Resource.IdentityToolkit.RelyingParty.VerifyCustomToken
         , Network.Google.Resource.IdentityToolkit.RelyingParty.VerifyPassword
+        , Network.Google.Resource.IdentityToolkit.RelyingParty.VerifyPhoneNumber
 
     other-modules:
           Network.Google.IdentityToolkit.Types.Product

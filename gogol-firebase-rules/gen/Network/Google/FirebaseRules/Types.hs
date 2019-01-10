@@ -31,9 +31,39 @@ module Network.Google.FirebaseRules.Types
     , spColumn
     , spFileName
 
+    -- * TestCase
+    , TestCase
+    , testCase
+    , tcResource
+    , tcExpectation
+    , tcFunctionMocks
+    , tcRequest
+
+    -- * VisitedExpression
+    , VisitedExpression
+    , visitedExpression
+    , veSourcePosition
+    , veValue
+
     -- * Empty
     , Empty
     , empty
+
+    -- * FunctionMock
+    , FunctionMock
+    , functionMock
+    , fmArgs
+    , fmFunction
+    , fmResult
+
+    -- * TestResultState
+    , TestResultState (..)
+
+    -- * FunctionCall
+    , FunctionCall
+    , functionCall
+    , fcArgs
+    , fcFunction
 
     -- * ListReleasesResponse
     , ListReleasesResponse
@@ -41,9 +71,16 @@ module Network.Google.FirebaseRules.Types
     , lrrNextPageToken
     , lrrReleases
 
+    -- * Result
+    , Result
+    , result
+    , rValue
+    , rUndefined
+
     -- * TestRulesetResponse
     , TestRulesetResponse
     , testRulesetResponse
+    , trrTestResults
     , trrIssues
 
     -- * Release
@@ -54,12 +91,37 @@ module Network.Google.FirebaseRules.Types
     , rName
     , rCreateTime
 
+    -- * Arg
+    , Arg
+    , arg
+    , aAnyValue
+    , aExactValue
+
     -- * Ruleset
     , Ruleset
     , ruleset
     , rulName
     , rulSource
     , rulCreateTime
+
+    -- * GetReleaseExecutableResponse
+    , GetReleaseExecutableResponse
+    , getReleaseExecutableResponse
+    , grerExecutable
+    , grerRulesetName
+    , grerUpdateTime
+    , grerSyncTime
+    , grerExecutableVersion
+    , grerLanguage
+
+    -- * TestResult
+    , TestResult
+    , testResult
+    , trState
+    , trFunctionCalls
+    , trVisitedExpressions
+    , trErrorPosition
+    , trDebugMessages
 
     -- * Xgafv
     , Xgafv (..)
@@ -72,10 +134,19 @@ module Network.Google.FirebaseRules.Types
     , source
     , sFiles
 
+    -- * TestCaseExpectation
+    , TestCaseExpectation (..)
+
+    -- * TestSuite
+    , TestSuite
+    , testSuite
+    , tsTestCases
+
     -- * TestRulesetRequest
     , TestRulesetRequest
     , testRulesetRequest
     , trrSource
+    , trrTestSuite
 
     -- * File
     , File
@@ -83,6 +154,12 @@ module Network.Google.FirebaseRules.Types
     , fFingerprint
     , fContent
     , fName
+
+    -- * GetReleaseExecutableResponseExecutableVersion
+    , GetReleaseExecutableResponseExecutableVersion (..)
+
+    -- * GetReleaseExecutableResponseLanguage
+    , GetReleaseExecutableResponseLanguage (..)
 
     -- * ListRulesetsResponse
     , ListRulesetsResponse
@@ -96,6 +173,12 @@ module Network.Google.FirebaseRules.Types
     , iSourcePosition
     , iSeverity
     , iDescription
+
+    -- * UpdateReleaseRequest
+    , UpdateReleaseRequest
+    , updateReleaseRequest
+    , urrUpdateMask
+    , urrRelease
     ) where
 
 import           Network.Google.FirebaseRules.Types.Product

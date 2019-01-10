@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the logs in projects or organizations. Only logs that have entries
--- are listed.
+-- Lists the logs in projects, organizations, folders, or billing accounts.
+-- Only logs that have entries are listed.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.organizations.logs.list@.
 module Network.Google.Resource.Logging.Organizations.Logs.List
@@ -37,10 +37,8 @@ module Network.Google.Resource.Logging.Organizations.Logs.List
     , ollParent
     , ollXgafv
     , ollUploadProtocol
-    , ollPp
     , ollAccessToken
     , ollUploadType
-    , ollBearerToken
     , ollPageToken
     , ollPageSize
     , ollCallback
@@ -57,28 +55,24 @@ type OrganizationsLogsListResource =
          "logs" :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" (Textual Int32) :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] ListLogsResponse
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "pageSize" (Textual Int32) :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] ListLogsResponse
 
--- | Lists the logs in projects or organizations. Only logs that have entries
--- are listed.
+-- | Lists the logs in projects, organizations, folders, or billing accounts.
+-- Only logs that have entries are listed.
 --
 -- /See:/ 'organizationsLogsList' smart constructor.
 data OrganizationsLogsList = OrganizationsLogsList'
     { _ollParent         :: !Text
     , _ollXgafv          :: !(Maybe Xgafv)
     , _ollUploadProtocol :: !(Maybe Text)
-    , _ollPp             :: !Bool
     , _ollAccessToken    :: !(Maybe Text)
     , _ollUploadType     :: !(Maybe Text)
-    , _ollBearerToken    :: !(Maybe Text)
     , _ollPageToken      :: !(Maybe Text)
     , _ollPageSize       :: !(Maybe (Textual Int32))
     , _ollCallback       :: !(Maybe Text)
@@ -94,13 +88,9 @@ data OrganizationsLogsList = OrganizationsLogsList'
 --
 -- * 'ollUploadProtocol'
 --
--- * 'ollPp'
---
 -- * 'ollAccessToken'
 --
 -- * 'ollUploadType'
---
--- * 'ollBearerToken'
 --
 -- * 'ollPageToken'
 --
@@ -115,10 +105,8 @@ organizationsLogsList pOllParent_ =
     { _ollParent = pOllParent_
     , _ollXgafv = Nothing
     , _ollUploadProtocol = Nothing
-    , _ollPp = True
     , _ollAccessToken = Nothing
     , _ollUploadType = Nothing
-    , _ollBearerToken = Nothing
     , _ollPageToken = Nothing
     , _ollPageSize = Nothing
     , _ollCallback = Nothing
@@ -126,6 +114,7 @@ organizationsLogsList pOllParent_ =
 
 -- | Required. The resource name that owns the logs:
 -- \"projects\/[PROJECT_ID]\" \"organizations\/[ORGANIZATION_ID]\"
+-- \"billingAccounts\/[BILLING_ACCOUNT_ID]\" \"folders\/[FOLDER_ID]\"
 ollParent :: Lens' OrganizationsLogsList Text
 ollParent
   = lens _ollParent (\ s a -> s{_ollParent = a})
@@ -140,10 +129,6 @@ ollUploadProtocol
   = lens _ollUploadProtocol
       (\ s a -> s{_ollUploadProtocol = a})
 
--- | Pretty-print response.
-ollPp :: Lens' OrganizationsLogsList Bool
-ollPp = lens _ollPp (\ s a -> s{_ollPp = a})
-
 -- | OAuth access token.
 ollAccessToken :: Lens' OrganizationsLogsList (Maybe Text)
 ollAccessToken
@@ -155,12 +140,6 @@ ollUploadType :: Lens' OrganizationsLogsList (Maybe Text)
 ollUploadType
   = lens _ollUploadType
       (\ s a -> s{_ollUploadType = a})
-
--- | OAuth bearer token.
-ollBearerToken :: Lens' OrganizationsLogsList (Maybe Text)
-ollBearerToken
-  = lens _ollBearerToken
-      (\ s a -> s{_ollBearerToken = a})
 
 -- | Optional. If present, then retrieve the next batch of results from the
 -- preceding call to this method. pageToken must be the value of
@@ -192,10 +171,8 @@ instance GoogleRequest OrganizationsLogsList where
                "https://www.googleapis.com/auth/logging.read"]
         requestClient OrganizationsLogsList'{..}
           = go _ollParent _ollXgafv _ollUploadProtocol
-              (Just _ollPp)
               _ollAccessToken
               _ollUploadType
-              _ollBearerToken
               _ollPageToken
               _ollPageSize
               _ollCallback

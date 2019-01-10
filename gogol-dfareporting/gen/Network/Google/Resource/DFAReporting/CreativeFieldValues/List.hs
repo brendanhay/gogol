@@ -51,7 +51,7 @@ import           Network.Google.Prelude
 -- 'CreativeFieldValuesList' request conforms to.
 type CreativeFieldValuesListResource =
      "dfareporting" :>
-       "v2.7" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeFields" :>
@@ -79,10 +79,10 @@ data CreativeFieldValuesList = CreativeFieldValuesList'
     , _cfvlSearchString    :: !(Maybe Text)
     , _cfvlIds             :: !(Maybe [Textual Int64])
     , _cfvlProFileId       :: !(Textual Int64)
-    , _cfvlSortOrder       :: !(Maybe CreativeFieldValuesListSortOrder)
+    , _cfvlSortOrder       :: !CreativeFieldValuesListSortOrder
     , _cfvlPageToken       :: !(Maybe Text)
-    , _cfvlSortField       :: !(Maybe CreativeFieldValuesListSortField)
-    , _cfvlMaxResults      :: !(Maybe (Textual Int32))
+    , _cfvlSortField       :: !CreativeFieldValuesListSortField
+    , _cfvlMaxResults      :: !(Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldValuesList' with the minimum fields required to make a request.
@@ -114,10 +114,10 @@ creativeFieldValuesList pCfvlCreativeFieldId_ pCfvlProFileId_ =
     , _cfvlSearchString = Nothing
     , _cfvlIds = Nothing
     , _cfvlProFileId = _Coerce # pCfvlProFileId_
-    , _cfvlSortOrder = Nothing
+    , _cfvlSortOrder = CFVLSOAscending
     , _cfvlPageToken = Nothing
-    , _cfvlSortField = Nothing
-    , _cfvlMaxResults = Nothing
+    , _cfvlSortField = CFVLSFID
+    , _cfvlMaxResults = 1000
     }
 
 -- | Creative field ID for this creative field value.
@@ -147,8 +147,8 @@ cfvlProFileId
       (\ s a -> s{_cfvlProFileId = a})
       . _Coerce
 
--- | Order of sorted results, default is ASCENDING.
-cfvlSortOrder :: Lens' CreativeFieldValuesList (Maybe CreativeFieldValuesListSortOrder)
+-- | Order of sorted results.
+cfvlSortOrder :: Lens' CreativeFieldValuesList CreativeFieldValuesListSortOrder
 cfvlSortOrder
   = lens _cfvlSortOrder
       (\ s a -> s{_cfvlSortOrder = a})
@@ -160,17 +160,17 @@ cfvlPageToken
       (\ s a -> s{_cfvlPageToken = a})
 
 -- | Field by which to sort the list.
-cfvlSortField :: Lens' CreativeFieldValuesList (Maybe CreativeFieldValuesListSortField)
+cfvlSortField :: Lens' CreativeFieldValuesList CreativeFieldValuesListSortField
 cfvlSortField
   = lens _cfvlSortField
       (\ s a -> s{_cfvlSortField = a})
 
 -- | Maximum number of results to return.
-cfvlMaxResults :: Lens' CreativeFieldValuesList (Maybe Int32)
+cfvlMaxResults :: Lens' CreativeFieldValuesList Int32
 cfvlMaxResults
   = lens _cfvlMaxResults
       (\ s a -> s{_cfvlMaxResults = a})
-      . mapping _Coerce
+      . _Coerce
 
 instance GoogleRequest CreativeFieldValuesList where
         type Rs CreativeFieldValuesList =
@@ -181,10 +181,10 @@ instance GoogleRequest CreativeFieldValuesList where
           = go _cfvlProFileId _cfvlCreativeFieldId
               _cfvlSearchString
               (_cfvlIds ^. _Default)
-              _cfvlSortOrder
+              (Just _cfvlSortOrder)
               _cfvlPageToken
-              _cfvlSortField
-              _cfvlMaxResults
+              (Just _cfvlSortField)
+              (Just _cfvlMaxResults)
               (Just AltJSON)
               dFAReportingService
           where go

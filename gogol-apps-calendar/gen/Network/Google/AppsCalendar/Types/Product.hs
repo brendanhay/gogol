@@ -24,6 +24,7 @@ import           Network.Google.Prelude
 -- /See:/ 'calendarListEntry' smart constructor.
 data CalendarListEntry = CalendarListEntry'
     { _cleSummary              :: !(Maybe Text)
+    , _cleConferenceProperties :: !(Maybe ConferenceProperties)
     , _cleEtag                 :: !(Maybe Text)
     , _cleLocation             :: !(Maybe Text)
     , _cleKind                 :: !Text
@@ -48,6 +49,8 @@ data CalendarListEntry = CalendarListEntry'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cleSummary'
+--
+-- * 'cleConferenceProperties'
 --
 -- * 'cleEtag'
 --
@@ -87,6 +90,7 @@ calendarListEntry
 calendarListEntry =
     CalendarListEntry'
     { _cleSummary = Nothing
+    , _cleConferenceProperties = Nothing
     , _cleEtag = Nothing
     , _cleLocation = Nothing
     , _cleKind = "calendar#calendarListEntry"
@@ -110,6 +114,13 @@ calendarListEntry =
 cleSummary :: Lens' CalendarListEntry (Maybe Text)
 cleSummary
   = lens _cleSummary (\ s a -> s{_cleSummary = a})
+
+-- | Conferencing properties for this calendar, for example what types of
+-- conferences are allowed.
+cleConferenceProperties :: Lens' CalendarListEntry (Maybe ConferenceProperties)
+cleConferenceProperties
+  = lens _cleConferenceProperties
+      (\ s a -> s{_cleConferenceProperties = a})
 
 -- | ETag of the resource.
 cleEtag :: Lens' CalendarListEntry (Maybe Text)
@@ -232,8 +243,9 @@ instance FromJSON CalendarListEntry where
           = withObject "CalendarListEntry"
               (\ o ->
                  CalendarListEntry' <$>
-                   (o .:? "summary") <*> (o .:? "etag") <*>
-                     (o .:? "location")
+                   (o .:? "summary") <*> (o .:? "conferenceProperties")
+                     <*> (o .:? "etag")
+                     <*> (o .:? "location")
                      <*> (o .:? "kind" .!= "calendar#calendarListEntry")
                      <*> (o .:? "notificationSettings")
                      <*> (o .:? "backgroundColor")
@@ -255,6 +267,8 @@ instance ToJSON CalendarListEntry where
           = object
               (catMaybes
                  [("summary" .=) <$> _cleSummary,
+                  ("conferenceProperties" .=) <$>
+                    _cleConferenceProperties,
                   ("etag" .=) <$> _cleEtag,
                   ("location" .=) <$> _cleLocation,
                   Just ("kind" .= _cleKind),
@@ -272,6 +286,42 @@ instance ToJSON CalendarListEntry where
                   ("colorId" .=) <$> _cleColorId,
                   ("timeZone" .=) <$> _cleTimeZone,
                   ("description" .=) <$> _cleDescription])
+
+--
+-- /See:/ 'conferenceParameters' smart constructor.
+newtype ConferenceParameters = ConferenceParameters'
+    { _cpAddOnParameters :: Maybe ConferenceParametersAddOnParameters
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ConferenceParameters' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cpAddOnParameters'
+conferenceParameters
+    :: ConferenceParameters
+conferenceParameters =
+    ConferenceParameters'
+    { _cpAddOnParameters = Nothing
+    }
+
+-- | Additional add-on specific data.
+cpAddOnParameters :: Lens' ConferenceParameters (Maybe ConferenceParametersAddOnParameters)
+cpAddOnParameters
+  = lens _cpAddOnParameters
+      (\ s a -> s{_cpAddOnParameters = a})
+
+instance FromJSON ConferenceParameters where
+        parseJSON
+          = withObject "ConferenceParameters"
+              (\ o ->
+                 ConferenceParameters' <$> (o .:? "addOnParameters"))
+
+instance ToJSON ConferenceParameters where
+        toJSON ConferenceParameters'{..}
+          = object
+              (catMaybes
+                 [("addOnParameters" .=) <$> _cpAddOnParameters])
 
 --
 -- /See:/ 'event' smart constructor.
@@ -294,6 +344,7 @@ data Event = Event'
     , _eStart                   :: !(Maybe EventDateTime)
     , _ePrivateCopy             :: !Bool
     , _eEndTimeUnspecified      :: !Bool
+    , _eConferenceData          :: !(Maybe ConferenceData)
     , _eExtendedProperties      :: !(Maybe EventExtendedProperties)
     , _eVisibility              :: !Text
     , _eGuestsCanInviteOthers   :: !Bool
@@ -355,6 +406,8 @@ data Event = Event'
 --
 -- * 'eEndTimeUnspecified'
 --
+-- * 'eConferenceData'
+--
 -- * 'eExtendedProperties'
 --
 -- * 'eVisibility'
@@ -414,6 +467,7 @@ event =
     , _eStart = Nothing
     , _ePrivateCopy = False
     , _eEndTimeUnspecified = False
+    , _eConferenceData = Nothing
     , _eExtendedProperties = Nothing
     , _eVisibility = "default"
     , _eGuestsCanInviteOthers = True
@@ -441,7 +495,9 @@ eSummary = lens _eSummary (\ s a -> s{_eSummary = a})
 
 -- | For an instance of a recurring event, this is the time at which this
 -- event would start according to the recurrence data in the recurring
--- event identified by recurringEventId. Immutable.
+-- event identified by recurringEventId. It uniquely identifies the
+-- instance within the recurring event series even if the instance was
+-- moved to a different time. Immutable.
 eOriginalStartTime :: Lens' Event (Maybe EventDateTime)
 eOriginalStartTime
   = lens _eOriginalStartTime
@@ -454,7 +510,28 @@ eCreator = lens _eCreator (\ s a -> s{_eCreator = a})
 -- | Status of the event. Optional. Possible values are: - \"confirmed\" -
 -- The event is confirmed. This is the default status. - \"tentative\" -
 -- The event is tentatively confirmed. - \"cancelled\" - The event is
--- cancelled.
+-- cancelled (deleted). The list method returns cancelled events only on
+-- incremental sync (when syncToken or updatedMin are specified) or if the
+-- showDeleted flag is set to true. The get method always returns them. A
+-- cancelled status represents two different states depending on the event
+-- type: - Cancelled exceptions of an uncancelled recurring event indicate
+-- that this instance should no longer be presented to the user. Clients
+-- should store these events for the lifetime of the parent recurring
+-- event. Cancelled exceptions are only guaranteed to have values for the
+-- id, recurringEventId and originalStartTime fields populated. The other
+-- fields might be empty. - All other cancelled events represent deleted
+-- events. Clients should remove their locally synced copies. Such
+-- cancelled events will eventually disappear, so do not rely on them being
+-- available indefinitely. Deleted events are only guaranteed to have the
+-- id field populated. On the organizer\'s calendar, cancelled events
+-- continue to expose event details (summary, location, etc.) so that they
+-- can be restored (undeleted). Similarly, the events to which the user was
+-- invited and that they manually removed continue to provide details.
+-- However, incremental sync requests with showDeleted set to false will
+-- not return these details. If an event changes its organizer (for example
+-- via the move operation) and the original organizer is not on the
+-- attendee list, it will leave behind a cancelled event where only the id
+-- field is guaranteed to be populated.
 eStatus :: Lens' Event (Maybe Text)
 eStatus = lens _eStatus (\ s a -> s{_eStatus = a})
 
@@ -514,9 +591,11 @@ eCreated
       mapping _DateTime
 
 -- | Whether the event blocks time on the calendar. Optional. Possible values
--- are: - \"opaque\" - The event blocks time on the calendar. This is the
--- default value. - \"transparent\" - The event does not block time on the
--- calendar.
+-- are: - \"opaque\" - Default value. The event does block time on the
+-- calendar. This is equivalent to setting Show me as to Busy in the
+-- Calendar UI. - \"transparent\" - The event does not block time on the
+-- calendar. This is equivalent to setting Show me as to Available in the
+-- Calendar UI.
 eTransparency :: Lens' Event Text
 eTransparency
   = lens _eTransparency
@@ -548,6 +627,16 @@ eEndTimeUnspecified :: Lens' Event Bool
 eEndTimeUnspecified
   = lens _eEndTimeUnspecified
       (\ s a -> s{_eEndTimeUnspecified = a})
+
+-- | The conference-related information, such as details of a Hangouts Meet
+-- conference. To create new conference details use the createRequest
+-- field. To persist your changes, remember to set the
+-- conferenceDataVersion request parameter to 1 for all event modification
+-- requests.
+eConferenceData :: Lens' Event (Maybe ConferenceData)
+eConferenceData
+  = lens _eConferenceData
+      (\ s a -> s{_eConferenceData = a})
 
 -- | Extended properties of the event.
 eExtendedProperties :: Lens' Event (Maybe EventExtendedProperties)
@@ -713,6 +802,7 @@ instance FromJSON Event where
                      <*> (o .:? "start")
                      <*> (o .:? "privateCopy" .!= False)
                      <*> (o .:? "endTimeUnspecified" .!= False)
+                     <*> (o .:? "conferenceData")
                      <*> (o .:? "extendedProperties")
                      <*> (o .:? "visibility" .!= "default")
                      <*> (o .:? "guestsCanInviteOthers" .!= True)
@@ -755,6 +845,7 @@ instance ToJSON Event where
                   ("start" .=) <$> _eStart,
                   Just ("privateCopy" .= _ePrivateCopy),
                   Just ("endTimeUnspecified" .= _eEndTimeUnspecified),
+                  ("conferenceData" .=) <$> _eConferenceData,
                   ("extendedProperties" .=) <$> _eExtendedProperties,
                   Just ("visibility" .= _eVisibility),
                   Just
@@ -818,6 +909,103 @@ instance ToJSON CalendarListEntryNotificationSettings
           = object
               (catMaybes
                  [("notifications" .=) <$> _clensNotifications])
+
+--
+-- /See:/ 'conferenceProperties' smart constructor.
+newtype ConferenceProperties = ConferenceProperties'
+    { _cpAllowedConferenceSolutionTypes :: Maybe [Text]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ConferenceProperties' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cpAllowedConferenceSolutionTypes'
+conferenceProperties
+    :: ConferenceProperties
+conferenceProperties =
+    ConferenceProperties'
+    { _cpAllowedConferenceSolutionTypes = Nothing
+    }
+
+-- | The types of conference solutions that are supported for this calendar.
+-- The possible values are: - \"eventHangout\" - \"eventNamedHangout\" -
+-- \"hangoutsMeet\" Optional.
+cpAllowedConferenceSolutionTypes :: Lens' ConferenceProperties [Text]
+cpAllowedConferenceSolutionTypes
+  = lens _cpAllowedConferenceSolutionTypes
+      (\ s a -> s{_cpAllowedConferenceSolutionTypes = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ConferenceProperties where
+        parseJSON
+          = withObject "ConferenceProperties"
+              (\ o ->
+                 ConferenceProperties' <$>
+                   (o .:? "allowedConferenceSolutionTypes" .!= mempty))
+
+instance ToJSON ConferenceProperties where
+        toJSON ConferenceProperties'{..}
+          = object
+              (catMaybes
+                 [("allowedConferenceSolutionTypes" .=) <$>
+                    _cpAllowedConferenceSolutionTypes])
+
+--
+-- /See:/ 'conferenceSolution' smart constructor.
+data ConferenceSolution = ConferenceSolution'
+    { _csIconURI :: !(Maybe Text)
+    , _csKey     :: !(Maybe ConferenceSolutionKey)
+    , _csName    :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ConferenceSolution' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'csIconURI'
+--
+-- * 'csKey'
+--
+-- * 'csName'
+conferenceSolution
+    :: ConferenceSolution
+conferenceSolution =
+    ConferenceSolution'
+    { _csIconURI = Nothing
+    , _csKey = Nothing
+    , _csName = Nothing
+    }
+
+-- | The user-visible icon for this solution.
+csIconURI :: Lens' ConferenceSolution (Maybe Text)
+csIconURI
+  = lens _csIconURI (\ s a -> s{_csIconURI = a})
+
+-- | The key which can uniquely identify the conference solution for this
+-- event.
+csKey :: Lens' ConferenceSolution (Maybe ConferenceSolutionKey)
+csKey = lens _csKey (\ s a -> s{_csKey = a})
+
+-- | The user-visible name of this solution. Not localized.
+csName :: Lens' ConferenceSolution (Maybe Text)
+csName = lens _csName (\ s a -> s{_csName = a})
+
+instance FromJSON ConferenceSolution where
+        parseJSON
+          = withObject "ConferenceSolution"
+              (\ o ->
+                 ConferenceSolution' <$>
+                   (o .:? "iconUri") <*> (o .:? "key") <*>
+                     (o .:? "name"))
+
+instance ToJSON ConferenceSolution where
+        toJSON ConferenceSolution'{..}
+          = object
+              (catMaybes
+                 [("iconUri" .=) <$> _csIconURI,
+                  ("key" .=) <$> _csKey, ("name" .=) <$> _csName])
 
 -- | The scope of the rule.
 --
@@ -1053,7 +1241,7 @@ eventAttachment =
 
 -- | URL link to the attachment. For adding Google Drive file attachments use
 -- the same format as in alternateLink property of the Files resource in
--- the Drive API.
+-- the Drive API. Required when adding an attachment.
 eaFileURL :: Lens' EventAttachment (Maybe Text)
 eaFileURL
   = lens _eaFileURL (\ s a -> s{_eaFileURL = a})
@@ -1096,6 +1284,182 @@ instance ToJSON EventAttachment where
                   ("mimeType" .=) <$> _eaMimeType,
                   ("title" .=) <$> _eaTitle,
                   ("fileId" .=) <$> _eaFileId])
+
+--
+-- /See:/ 'entryPoint' smart constructor.
+data EntryPoint = EntryPoint'
+    { _epPasscode           :: !(Maybe Text)
+    , _epRegionCode         :: !(Maybe Text)
+    , _epURI                :: !(Maybe Text)
+    , _epMeetingCode        :: !(Maybe Text)
+    , _epPassword           :: !(Maybe Text)
+    , _epPin                :: !(Maybe Text)
+    , _epEntryPointFeatures :: !(Maybe [Text])
+    , _epEntryPointType     :: !(Maybe Text)
+    , _epLabel              :: !(Maybe Text)
+    , _epAccessCode         :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'EntryPoint' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'epPasscode'
+--
+-- * 'epRegionCode'
+--
+-- * 'epURI'
+--
+-- * 'epMeetingCode'
+--
+-- * 'epPassword'
+--
+-- * 'epPin'
+--
+-- * 'epEntryPointFeatures'
+--
+-- * 'epEntryPointType'
+--
+-- * 'epLabel'
+--
+-- * 'epAccessCode'
+entryPoint
+    :: EntryPoint
+entryPoint =
+    EntryPoint'
+    { _epPasscode = Nothing
+    , _epRegionCode = Nothing
+    , _epURI = Nothing
+    , _epMeetingCode = Nothing
+    , _epPassword = Nothing
+    , _epPin = Nothing
+    , _epEntryPointFeatures = Nothing
+    , _epEntryPointType = Nothing
+    , _epLabel = Nothing
+    , _epAccessCode = Nothing
+    }
+
+-- | The passcode to access the conference. The maximum length is 128
+-- characters. When creating new conference data, populate only the subset
+-- of {meetingCode, accessCode, passcode, password, pin} fields that match
+-- the terminology that the conference provider uses. Only the populated
+-- fields should be displayed.
+epPasscode :: Lens' EntryPoint (Maybe Text)
+epPasscode
+  = lens _epPasscode (\ s a -> s{_epPasscode = a})
+
+-- | The CLDR\/ISO 3166 region code for the country associated with this
+-- phone access. Example: \"SE\" for Sweden. Calendar backend will populate
+-- this field only for EntryPointType.PHONE.
+epRegionCode :: Lens' EntryPoint (Maybe Text)
+epRegionCode
+  = lens _epRegionCode (\ s a -> s{_epRegionCode = a})
+
+-- | The URI of the entry point. The maximum length is 1300 characters.
+-- Format: - for video, http: or https: schema is required. - for phone,
+-- tel: schema is required. The URI should include the entire dial sequence
+-- (e.g., tel:+12345678900,,,123456789;1234). - for sip, sip: schema is
+-- required, e.g., sip:12345678\'myprovider.com. - for more, http: or
+-- https: schema is required.
+epURI :: Lens' EntryPoint (Maybe Text)
+epURI = lens _epURI (\ s a -> s{_epURI = a})
+
+-- | The meeting code to access the conference. The maximum length is 128
+-- characters. When creating new conference data, populate only the subset
+-- of {meetingCode, accessCode, passcode, password, pin} fields that match
+-- the terminology that the conference provider uses. Only the populated
+-- fields should be displayed. Optional.
+epMeetingCode :: Lens' EntryPoint (Maybe Text)
+epMeetingCode
+  = lens _epMeetingCode
+      (\ s a -> s{_epMeetingCode = a})
+
+-- | The password to access the conference. The maximum length is 128
+-- characters. When creating new conference data, populate only the subset
+-- of {meetingCode, accessCode, passcode, password, pin} fields that match
+-- the terminology that the conference provider uses. Only the populated
+-- fields should be displayed. Optional.
+epPassword :: Lens' EntryPoint (Maybe Text)
+epPassword
+  = lens _epPassword (\ s a -> s{_epPassword = a})
+
+-- | The PIN to access the conference. The maximum length is 128 characters.
+-- When creating new conference data, populate only the subset of
+-- {meetingCode, accessCode, passcode, password, pin} fields that match the
+-- terminology that the conference provider uses. Only the populated fields
+-- should be displayed. Optional.
+epPin :: Lens' EntryPoint (Maybe Text)
+epPin = lens _epPin (\ s a -> s{_epPin = a})
+
+-- | Features of the entry point, such as being toll or toll-free. One entry
+-- point can have multiple features. However, toll and toll-free cannot be
+-- both set on the same entry point.
+epEntryPointFeatures :: Lens' EntryPoint [Text]
+epEntryPointFeatures
+  = lens _epEntryPointFeatures
+      (\ s a -> s{_epEntryPointFeatures = a})
+      . _Default
+      . _Coerce
+
+-- | The type of the conference entry point. Possible values are: - \"video\"
+-- - joining a conference over HTTP. A conference can have zero or one
+-- video entry point. - \"phone\" - joining a conference by dialing a phone
+-- number. A conference can have zero or more phone entry points. - \"sip\"
+-- - joining a conference over SIP. A conference can have zero or one sip
+-- entry point. - \"more\" - further conference joining instructions, for
+-- example additional phone numbers. A conference can have zero or one more
+-- entry point. A conference with only a more entry point is not a valid
+-- conference.
+epEntryPointType :: Lens' EntryPoint (Maybe Text)
+epEntryPointType
+  = lens _epEntryPointType
+      (\ s a -> s{_epEntryPointType = a})
+
+-- | The label for the URI. Visible to end users. Not localized. The maximum
+-- length is 512 characters. Examples: - for video:
+-- meet.google.com\/aaa-bbbb-ccc - for phone: +1 123 268 2601 - for sip:
+-- 12345678\'altostrat.com - for more: should not be filled Optional.
+epLabel :: Lens' EntryPoint (Maybe Text)
+epLabel = lens _epLabel (\ s a -> s{_epLabel = a})
+
+-- | The access code to access the conference. The maximum length is 128
+-- characters. When creating new conference data, populate only the subset
+-- of {meetingCode, accessCode, passcode, password, pin} fields that match
+-- the terminology that the conference provider uses. Only the populated
+-- fields should be displayed. Optional.
+epAccessCode :: Lens' EntryPoint (Maybe Text)
+epAccessCode
+  = lens _epAccessCode (\ s a -> s{_epAccessCode = a})
+
+instance FromJSON EntryPoint where
+        parseJSON
+          = withObject "EntryPoint"
+              (\ o ->
+                 EntryPoint' <$>
+                   (o .:? "passcode") <*> (o .:? "regionCode") <*>
+                     (o .:? "uri")
+                     <*> (o .:? "meetingCode")
+                     <*> (o .:? "password")
+                     <*> (o .:? "pin")
+                     <*> (o .:? "entryPointFeatures" .!= mempty)
+                     <*> (o .:? "entryPointType")
+                     <*> (o .:? "label")
+                     <*> (o .:? "accessCode"))
+
+instance ToJSON EntryPoint where
+        toJSON EntryPoint'{..}
+          = object
+              (catMaybes
+                 [("passcode" .=) <$> _epPasscode,
+                  ("regionCode" .=) <$> _epRegionCode,
+                  ("uri" .=) <$> _epURI,
+                  ("meetingCode" .=) <$> _epMeetingCode,
+                  ("password" .=) <$> _epPassword,
+                  ("pin" .=) <$> _epPin,
+                  ("entryPointFeatures" .=) <$> _epEntryPointFeatures,
+                  ("entryPointType" .=) <$> _epEntryPointType,
+                  ("label" .=) <$> _epLabel,
+                  ("accessCode" .=) <$> _epAccessCode])
 
 --
 -- /See:/ 'timePeriod' smart constructor.
@@ -1143,6 +1507,43 @@ instance ToJSON TimePeriod where
               (catMaybes
                  [("start" .=) <$> _tpStart, ("end" .=) <$> _tpEnd])
 
+--
+-- /See:/ 'conferenceSolutionKey' smart constructor.
+newtype ConferenceSolutionKey = ConferenceSolutionKey'
+    { _cskType :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ConferenceSolutionKey' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cskType'
+conferenceSolutionKey
+    :: ConferenceSolutionKey
+conferenceSolutionKey =
+    ConferenceSolutionKey'
+    { _cskType = Nothing
+    }
+
+-- | The conference solution type. If a client encounters an unfamiliar or
+-- empty type, it should still be able to display the entry points.
+-- However, it should disallow modifications. The possible values are: -
+-- \"eventHangout\" for Hangouts for consumers
+-- (http:\/\/hangouts.google.com) - \"eventNamedHangout\" for classic
+-- Hangouts for G Suite users (http:\/\/hangouts.google.com) -
+-- \"hangoutsMeet\" for Hangouts Meet (http:\/\/meet.google.com)
+cskType :: Lens' ConferenceSolutionKey (Maybe Text)
+cskType = lens _cskType (\ s a -> s{_cskType = a})
+
+instance FromJSON ConferenceSolutionKey where
+        parseJSON
+          = withObject "ConferenceSolutionKey"
+              (\ o -> ConferenceSolutionKey' <$> (o .:? "type"))
+
+instance ToJSON ConferenceSolutionKey where
+        toJSON ConferenceSolutionKey'{..}
+          = object (catMaybes [("type" .=) <$> _cskType])
+
 -- | The creator of the event. Read-only.
 --
 -- /See:/ 'eventCreator' smart constructor.
@@ -1189,7 +1590,7 @@ ecDisplayName
   = lens _ecDisplayName
       (\ s a -> s{_ecDisplayName = a})
 
--- | The creator\'s Profile ID, if available. It corresponds to theid field
+-- | The creator\'s Profile ID, if available. It corresponds to the id field
 -- in the People collection of the Google+ API
 ecId :: Lens' EventCreator (Maybe Text)
 ecId = lens _ecId (\ s a -> s{_ecId = a})
@@ -1440,6 +1841,45 @@ instance ToJSON Channel where
                   ("type" .=) <$> _cType])
 
 --
+-- /See:/ 'conferenceRequestStatus' smart constructor.
+newtype ConferenceRequestStatus = ConferenceRequestStatus'
+    { _crsStatusCode :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ConferenceRequestStatus' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'crsStatusCode'
+conferenceRequestStatus
+    :: ConferenceRequestStatus
+conferenceRequestStatus =
+    ConferenceRequestStatus'
+    { _crsStatusCode = Nothing
+    }
+
+-- | The current status of the conference create request. Read-only. The
+-- possible values are: - \"pending\": the conference create request is
+-- still being processed. - \"success\": the conference create request
+-- succeeded, the entry points are populated. - \"failure\": the conference
+-- create request failed, there are no entry points.
+crsStatusCode :: Lens' ConferenceRequestStatus (Maybe Text)
+crsStatusCode
+  = lens _crsStatusCode
+      (\ s a -> s{_crsStatusCode = a})
+
+instance FromJSON ConferenceRequestStatus where
+        parseJSON
+          = withObject "ConferenceRequestStatus"
+              (\ o ->
+                 ConferenceRequestStatus' <$> (o .:? "statusCode"))
+
+instance ToJSON ConferenceRequestStatus where
+        toJSON ConferenceRequestStatus'{..}
+          = object
+              (catMaybes [("statusCode" .=) <$> _crsStatusCode])
+
+--
 -- /See:/ 'freeBusyCalendar' smart constructor.
 data FreeBusyCalendar = FreeBusyCalendar'
     { _fbcBusy   :: !(Maybe [TimePeriod])
@@ -1489,6 +1929,131 @@ instance ToJSON FreeBusyCalendar where
               (catMaybes
                  [("busy" .=) <$> _fbcBusy,
                   ("errors" .=) <$> _fbcErrors])
+
+--
+-- /See:/ 'conferenceData' smart constructor.
+data ConferenceData = ConferenceData'
+    { _cdSignature          :: !(Maybe Text)
+    , _cdConferenceSolution :: !(Maybe ConferenceSolution)
+    , _cdCreateRequest      :: !(Maybe CreateConferenceRequest)
+    , _cdConferenceId       :: !(Maybe Text)
+    , _cdParameters         :: !(Maybe ConferenceParameters)
+    , _cdNotes              :: !(Maybe Text)
+    , _cdEntryPoints        :: !(Maybe [EntryPoint])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ConferenceData' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cdSignature'
+--
+-- * 'cdConferenceSolution'
+--
+-- * 'cdCreateRequest'
+--
+-- * 'cdConferenceId'
+--
+-- * 'cdParameters'
+--
+-- * 'cdNotes'
+--
+-- * 'cdEntryPoints'
+conferenceData
+    :: ConferenceData
+conferenceData =
+    ConferenceData'
+    { _cdSignature = Nothing
+    , _cdConferenceSolution = Nothing
+    , _cdCreateRequest = Nothing
+    , _cdConferenceId = Nothing
+    , _cdParameters = Nothing
+    , _cdNotes = Nothing
+    , _cdEntryPoints = Nothing
+    }
+
+-- | The signature of the conference data. Genereated on server side. Must be
+-- preserved while copying the conference data between events, otherwise
+-- the conference data will not be copied. Unset for a conference with a
+-- failed create request. Optional for a conference with a pending create
+-- request.
+cdSignature :: Lens' ConferenceData (Maybe Text)
+cdSignature
+  = lens _cdSignature (\ s a -> s{_cdSignature = a})
+
+-- | The conference solution, such as Hangouts or Hangouts Meet. Unset for a
+-- conference with a failed create request. Either conferenceSolution and
+-- at least one entryPoint, or createRequest is required.
+cdConferenceSolution :: Lens' ConferenceData (Maybe ConferenceSolution)
+cdConferenceSolution
+  = lens _cdConferenceSolution
+      (\ s a -> s{_cdConferenceSolution = a})
+
+-- | A request to generate a new conference and attach it to the event. The
+-- data is generated asynchronously. To see whether the data is present
+-- check the status field. Either conferenceSolution and at least one
+-- entryPoint, or createRequest is required.
+cdCreateRequest :: Lens' ConferenceData (Maybe CreateConferenceRequest)
+cdCreateRequest
+  = lens _cdCreateRequest
+      (\ s a -> s{_cdCreateRequest = a})
+
+-- | The ID of the conference. Can be used by developers to keep track of
+-- conferences, should not be displayed to users. Values for solution
+-- types: - \"eventHangout\": unset. - \"eventNamedHangout\": the name of
+-- the Hangout. - \"hangoutsMeet\": the 10-letter meeting code, for example
+-- \"aaa-bbbb-ccc\". Optional.
+cdConferenceId :: Lens' ConferenceData (Maybe Text)
+cdConferenceId
+  = lens _cdConferenceId
+      (\ s a -> s{_cdConferenceId = a})
+
+-- | Additional properties related to a conference. An example would be a
+-- solution-specific setting for enabling video streaming.
+cdParameters :: Lens' ConferenceData (Maybe ConferenceParameters)
+cdParameters
+  = lens _cdParameters (\ s a -> s{_cdParameters = a})
+
+-- | Additional notes (such as instructions from the domain administrator,
+-- legal notices) to display to the user. Can contain HTML. The maximum
+-- length is 2048 characters. Optional.
+cdNotes :: Lens' ConferenceData (Maybe Text)
+cdNotes = lens _cdNotes (\ s a -> s{_cdNotes = a})
+
+-- | Information about individual conference entry points, such as URLs or
+-- phone numbers. All of them must belong to the same conference. Either
+-- conferenceSolution and at least one entryPoint, or createRequest is
+-- required.
+cdEntryPoints :: Lens' ConferenceData [EntryPoint]
+cdEntryPoints
+  = lens _cdEntryPoints
+      (\ s a -> s{_cdEntryPoints = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ConferenceData where
+        parseJSON
+          = withObject "ConferenceData"
+              (\ o ->
+                 ConferenceData' <$>
+                   (o .:? "signature") <*> (o .:? "conferenceSolution")
+                     <*> (o .:? "createRequest")
+                     <*> (o .:? "conferenceId")
+                     <*> (o .:? "parameters")
+                     <*> (o .:? "notes")
+                     <*> (o .:? "entryPoints" .!= mempty))
+
+instance ToJSON ConferenceData where
+        toJSON ConferenceData'{..}
+          = object
+              (catMaybes
+                 [("signature" .=) <$> _cdSignature,
+                  ("conferenceSolution" .=) <$> _cdConferenceSolution,
+                  ("createRequest" .=) <$> _cdCreateRequest,
+                  ("conferenceId" .=) <$> _cdConferenceId,
+                  ("parameters" .=) <$> _cdParameters,
+                  ("notes" .=) <$> _cdNotes,
+                  ("entryPoints" .=) <$> _cdEntryPoints])
 
 --
 -- /See:/ 'setting' smart constructor.
@@ -1681,6 +2246,44 @@ instance ToJSON ColorsCalendar where
         toJSON = toJSON . _ccAddtional
 
 --
+-- /See:/ 'conferenceParametersAddOnParametersParameters' smart constructor.
+newtype ConferenceParametersAddOnParametersParameters = ConferenceParametersAddOnParametersParameters'
+    { _cpaoppAddtional :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ConferenceParametersAddOnParametersParameters' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cpaoppAddtional'
+conferenceParametersAddOnParametersParameters
+    :: HashMap Text Text -- ^ 'cpaoppAddtional'
+    -> ConferenceParametersAddOnParametersParameters
+conferenceParametersAddOnParametersParameters pCpaoppAddtional_ =
+    ConferenceParametersAddOnParametersParameters'
+    { _cpaoppAddtional = _Coerce # pCpaoppAddtional_
+    }
+
+cpaoppAddtional :: Lens' ConferenceParametersAddOnParametersParameters (HashMap Text Text)
+cpaoppAddtional
+  = lens _cpaoppAddtional
+      (\ s a -> s{_cpaoppAddtional = a})
+      . _Coerce
+
+instance FromJSON
+         ConferenceParametersAddOnParametersParameters where
+        parseJSON
+          = withObject
+              "ConferenceParametersAddOnParametersParameters"
+              (\ o ->
+                 ConferenceParametersAddOnParametersParameters' <$>
+                   (parseJSONObject o))
+
+instance ToJSON
+         ConferenceParametersAddOnParametersParameters where
+        toJSON = toJSON . _cpaoppAddtional
+
+--
 -- /See:/ 'calendarNotification' smart constructor.
 data CalendarNotification = CalendarNotification'
     { _cnMethod :: !(Maybe Text)
@@ -1703,10 +2306,13 @@ calendarNotification =
     }
 
 -- | The method used to deliver the notification. Possible values are: -
--- \"email\" - Reminders are sent via email. - \"sms\" - Reminders are sent
--- via SMS. This value is read-only and is ignored on inserts and updates.
--- SMS reminders are only available for Google Apps for Work, Education,
--- and Government customers.
+-- \"email\" - Notifications are sent via email. - \"sms\" - Deprecated.
+-- Once this feature is shutdown, the API will no longer return
+-- notifications using this method. Any newly added SMS notifications will
+-- be ignored. See Google Calendar SMS notifications to be removed for more
+-- information. Notifications are sent via SMS. This value is read-only and
+-- is ignored on inserts and updates. SMS notifications are only available
+-- for G Suite customers. Required when adding a notification.
 cnMethod :: Lens' CalendarNotification (Maybe Text)
 cnMethod = lens _cnMethod (\ s a -> s{_cnMethod = a})
 
@@ -1714,9 +2320,9 @@ cnMethod = lens _cnMethod (\ s a -> s{_cnMethod = a})
 -- Notification sent when a new event is put on the calendar. -
 -- \"eventChange\" - Notification sent when an event is changed. -
 -- \"eventCancellation\" - Notification sent when an event is cancelled. -
--- \"eventResponse\" - Notification sent when an event is changed. -
--- \"agenda\" - An agenda with the events of the day (sent out in the
--- morning).
+-- \"eventResponse\" - Notification sent when an attendee responds to the
+-- event invitation. - \"agenda\" - An agenda with the events of the day
+-- (sent out in the morning). Required when adding a notification.
 cnType :: Lens' CalendarNotification (Maybe Text)
 cnType = lens _cnType (\ s a -> s{_cnType = a})
 
@@ -2031,7 +2637,7 @@ eventAttendee =
 
 -- | The attendee\'s email address, if available. This field must be present
 -- when adding an attendee. It must be a valid email address as per
--- RFC5322.
+-- RFC5322. Required when adding an attendee.
 eaEmail :: Lens' EventAttendee (Maybe Text)
 eaEmail = lens _eaEmail (\ s a -> s{_eaEmail = a})
 
@@ -2050,7 +2656,9 @@ eaResponseStatus
 eaSelf :: Lens' EventAttendee Bool
 eaSelf = lens _eaSelf (\ s a -> s{_eaSelf = a})
 
--- | Whether the attendee is a resource. Read-only. The default is False.
+-- | Whether the attendee is a resource. Can only be set when the attendee is
+-- added to the event for the first time. Subsequent modifications are
+-- ignored. Optional. The default is False.
 eaResource :: Lens' EventAttendee Bool
 eaResource
   = lens _eaResource (\ s a -> s{_eaResource = a})
@@ -2068,7 +2676,7 @@ eaDisplayName
   = lens _eaDisplayName
       (\ s a -> s{_eaDisplayName = a})
 
--- | The attendee\'s Profile ID, if available. It corresponds to theid field
+-- | The attendee\'s Profile ID, if available. It corresponds to the id field
 -- in the People collection of the Google+ API
 eaId :: Lens' EventAttendee (Maybe Text)
 eaId = lens _eaId (\ s a -> s{_eaId = a})
@@ -2121,13 +2729,14 @@ instance ToJSON EventAttendee where
 --
 -- /See:/ 'calendar' smart constructor.
 data Calendar = Calendar'
-    { _calSummary     :: !(Maybe Text)
-    , _calEtag        :: !(Maybe Text)
-    , _calLocation    :: !(Maybe Text)
-    , _calKind        :: !Text
-    , _calId          :: !(Maybe Text)
-    , _calTimeZone    :: !(Maybe Text)
-    , _calDescription :: !(Maybe Text)
+    { _calSummary              :: !(Maybe Text)
+    , _calConferenceProperties :: !(Maybe ConferenceProperties)
+    , _calEtag                 :: !(Maybe Text)
+    , _calLocation             :: !(Maybe Text)
+    , _calKind                 :: !Text
+    , _calId                   :: !(Maybe Text)
+    , _calTimeZone             :: !(Maybe Text)
+    , _calDescription          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Calendar' with the minimum fields required to make a request.
@@ -2135,6 +2744,8 @@ data Calendar = Calendar'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'calSummary'
+--
+-- * 'calConferenceProperties'
 --
 -- * 'calEtag'
 --
@@ -2152,6 +2763,7 @@ calendar
 calendar =
     Calendar'
     { _calSummary = Nothing
+    , _calConferenceProperties = Nothing
     , _calEtag = Nothing
     , _calLocation = Nothing
     , _calKind = "calendar#calendar"
@@ -2164,6 +2776,13 @@ calendar =
 calSummary :: Lens' Calendar (Maybe Text)
 calSummary
   = lens _calSummary (\ s a -> s{_calSummary = a})
+
+-- | Conferencing properties for this calendar, for example what types of
+-- conferences are allowed.
+calConferenceProperties :: Lens' Calendar (Maybe ConferenceProperties)
+calConferenceProperties
+  = lens _calConferenceProperties
+      (\ s a -> s{_calConferenceProperties = a})
 
 -- | ETag of the resource.
 calEtag :: Lens' Calendar (Maybe Text)
@@ -2200,8 +2819,9 @@ instance FromJSON Calendar where
           = withObject "Calendar"
               (\ o ->
                  Calendar' <$>
-                   (o .:? "summary") <*> (o .:? "etag") <*>
-                     (o .:? "location")
+                   (o .:? "summary") <*> (o .:? "conferenceProperties")
+                     <*> (o .:? "etag")
+                     <*> (o .:? "location")
                      <*> (o .:? "kind" .!= "calendar#calendar")
                      <*> (o .:? "id")
                      <*> (o .:? "timeZone")
@@ -2212,6 +2832,8 @@ instance ToJSON Calendar where
           = object
               (catMaybes
                  [("summary" .=) <$> _calSummary,
+                  ("conferenceProperties" .=) <$>
+                    _calConferenceProperties,
                   ("etag" .=) <$> _calEtag,
                   ("location" .=) <$> _calLocation,
                   Just ("kind" .= _calKind), ("id" .=) <$> _calId,
@@ -2321,15 +2943,19 @@ eventReminder =
     }
 
 -- | The method used by this reminder. Possible values are: - \"email\" -
--- Reminders are sent via email. - \"sms\" - Reminders are sent via SMS.
--- These are only available for Google Apps for Work, Education, and
--- Government customers. Requests to set SMS reminders for other account
--- types are ignored. - \"popup\" - Reminders are sent via a UI popup.
+-- Reminders are sent via email. - \"sms\" - Deprecated. Once this feature
+-- is shutdown, the API will no longer return reminders using this method.
+-- Any newly added SMS reminders will be ignored. See Google Calendar SMS
+-- notifications to be removed for more information. Reminders are sent via
+-- SMS. These are only available for G Suite customers. Requests to set SMS
+-- reminders for other account types are ignored. - \"popup\" - Reminders
+-- are sent via a UI popup. Required when adding a reminder.
 erMethod :: Lens' EventReminder (Maybe Text)
 erMethod = lens _erMethod (\ s a -> s{_erMethod = a})
 
 -- | Number of minutes before the start of the event when the reminder should
 -- trigger. Valid values are between 0 and 40320 (4 weeks in minutes).
+-- Required when adding a reminder.
 erMinutes :: Lens' EventReminder (Maybe Int32)
 erMinutes
   = lens _erMinutes (\ s a -> s{_erMinutes = a}) .
@@ -2513,8 +3139,8 @@ eoDisplayName
   = lens _eoDisplayName
       (\ s a -> s{_eoDisplayName = a})
 
--- | The organizer\'s Profile ID, if available. It corresponds to theid field
--- in the People collection of the Google+ API
+-- | The organizer\'s Profile ID, if available. It corresponds to the id
+-- field in the People collection of the Google+ API
 eoId :: Lens' EventOrganizer (Maybe Text)
 eoId = lens _eoId (\ s a -> s{_eoId = a})
 
@@ -2807,14 +3433,14 @@ freeBusyRequest =
     }
 
 -- | Maximal number of calendars for which FreeBusy information is to be
--- provided. Optional.
+-- provided. Optional. Maximum value is 50.
 fCalendarExpansionMax :: Lens' FreeBusyRequest (Maybe Int32)
 fCalendarExpansionMax
   = lens _fCalendarExpansionMax
       (\ s a -> s{_fCalendarExpansionMax = a})
       . mapping _Coerce
 
--- | The start of the interval for the query.
+-- | The start of the interval for the query formatted as per RFC3339.
 fTimeMin :: Lens' FreeBusyRequest (Maybe UTCTime)
 fTimeMin
   = lens _fTimeMin (\ s a -> s{_fTimeMin = a}) .
@@ -2827,8 +3453,8 @@ fItems
       _Coerce
 
 -- | Maximal number of calendar identifiers to be provided for a single
--- group. Optional. An error will be returned for a group with more members
--- than this value.
+-- group. Optional. An error is returned for a group with more members than
+-- this value. Maximum value is 100.
 fGroupExpansionMax :: Lens' FreeBusyRequest (Maybe Int32)
 fGroupExpansionMax
   = lens _fGroupExpansionMax
@@ -2840,7 +3466,7 @@ fTimeZone :: Lens' FreeBusyRequest Text
 fTimeZone
   = lens _fTimeZone (\ s a -> s{_fTimeZone = a})
 
--- | The end of the interval for the query.
+-- | The end of the interval for the query formatted as per RFC3339.
 fTimeMax :: Lens' FreeBusyRequest (Maybe UTCTime)
 fTimeMax
   = lens _fTimeMax (\ s a -> s{_fTimeMax = a}) .
@@ -2949,6 +3575,67 @@ instance ToJSON ACLRule where
                  [("etag" .=) <$> _arEtag, Just ("kind" .= _arKind),
                   ("role" .=) <$> _arRole, ("scope" .=) <$> _arScope,
                   ("id" .=) <$> _arId])
+
+--
+-- /See:/ 'createConferenceRequest' smart constructor.
+data CreateConferenceRequest = CreateConferenceRequest'
+    { _ccrStatus                :: !(Maybe ConferenceRequestStatus)
+    , _ccrRequestId             :: !(Maybe Text)
+    , _ccrConferenceSolutionKey :: !(Maybe ConferenceSolutionKey)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CreateConferenceRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ccrStatus'
+--
+-- * 'ccrRequestId'
+--
+-- * 'ccrConferenceSolutionKey'
+createConferenceRequest
+    :: CreateConferenceRequest
+createConferenceRequest =
+    CreateConferenceRequest'
+    { _ccrStatus = Nothing
+    , _ccrRequestId = Nothing
+    , _ccrConferenceSolutionKey = Nothing
+    }
+
+-- | The status of the conference create request.
+ccrStatus :: Lens' CreateConferenceRequest (Maybe ConferenceRequestStatus)
+ccrStatus
+  = lens _ccrStatus (\ s a -> s{_ccrStatus = a})
+
+-- | The client-generated unique ID for this request. Clients should
+-- regenerate this ID for every new request. If an ID provided is the same
+-- as for the previous request, the request is ignored.
+ccrRequestId :: Lens' CreateConferenceRequest (Maybe Text)
+ccrRequestId
+  = lens _ccrRequestId (\ s a -> s{_ccrRequestId = a})
+
+-- | The conference solution, such as Hangouts or Hangouts Meet.
+ccrConferenceSolutionKey :: Lens' CreateConferenceRequest (Maybe ConferenceSolutionKey)
+ccrConferenceSolutionKey
+  = lens _ccrConferenceSolutionKey
+      (\ s a -> s{_ccrConferenceSolutionKey = a})
+
+instance FromJSON CreateConferenceRequest where
+        parseJSON
+          = withObject "CreateConferenceRequest"
+              (\ o ->
+                 CreateConferenceRequest' <$>
+                   (o .:? "status") <*> (o .:? "requestId") <*>
+                     (o .:? "conferenceSolutionKey"))
+
+instance ToJSON CreateConferenceRequest where
+        toJSON CreateConferenceRequest'{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _ccrStatus,
+                  ("requestId" .=) <$> _ccrRequestId,
+                  ("conferenceSolutionKey" .=) <$>
+                    _ccrConferenceSolutionKey])
 
 -- | Properties that are shared between copies of the event on other
 -- attendees\' calendars.
@@ -3229,6 +3916,43 @@ instance ToJSON FreeBusyGroup where
               (catMaybes
                  [("calendars" .=) <$> _fbgCalendars,
                   ("errors" .=) <$> _fbgErrors])
+
+--
+-- /See:/ 'conferenceParametersAddOnParameters' smart constructor.
+newtype ConferenceParametersAddOnParameters = ConferenceParametersAddOnParameters'
+    { _cpaopParameters :: Maybe ConferenceParametersAddOnParametersParameters
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ConferenceParametersAddOnParameters' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cpaopParameters'
+conferenceParametersAddOnParameters
+    :: ConferenceParametersAddOnParameters
+conferenceParametersAddOnParameters =
+    ConferenceParametersAddOnParameters'
+    { _cpaopParameters = Nothing
+    }
+
+cpaopParameters :: Lens' ConferenceParametersAddOnParameters (Maybe ConferenceParametersAddOnParametersParameters)
+cpaopParameters
+  = lens _cpaopParameters
+      (\ s a -> s{_cpaopParameters = a})
+
+instance FromJSON ConferenceParametersAddOnParameters
+         where
+        parseJSON
+          = withObject "ConferenceParametersAddOnParameters"
+              (\ o ->
+                 ConferenceParametersAddOnParameters' <$>
+                   (o .:? "parameters"))
+
+instance ToJSON ConferenceParametersAddOnParameters
+         where
+        toJSON ConferenceParametersAddOnParameters'{..}
+          = object
+              (catMaybes [("parameters" .=) <$> _cpaopParameters])
 
 -- | Source from which the event was created. For example, a web page, an
 -- email message or any document identifiable by an URL with HTTP or HTTPS

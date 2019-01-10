@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Resizes the specified persistent disk.
+-- Resizes the specified persistent disk. You can only increase the size of
+-- the disk.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.disks.resize@.
 module Network.Google.Resource.Compute.Disks.Resize
@@ -33,6 +34,7 @@ module Network.Google.Resource.Compute.Disks.Resize
     , DisksResize
 
     -- * Request Lenses
+    , drRequestId
     , drProject
     , drDisk
     , drZone
@@ -54,23 +56,28 @@ type DisksResizeResource =
                  "disks" :>
                    Capture "disk" Text :>
                      "resize" :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] DisksResizeRequest :>
-                           Post '[JSON] Operation
+                       QueryParam "requestId" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] DisksResizeRequest :>
+                             Post '[JSON] Operation
 
--- | Resizes the specified persistent disk.
+-- | Resizes the specified persistent disk. You can only increase the size of
+-- the disk.
 --
 -- /See:/ 'disksResize' smart constructor.
 data DisksResize = DisksResize'
-    { _drProject :: !Text
-    , _drDisk    :: !Text
-    , _drZone    :: !Text
-    , _drPayload :: !DisksResizeRequest
+    { _drRequestId :: !(Maybe Text)
+    , _drProject   :: !Text
+    , _drDisk      :: !Text
+    , _drZone      :: !Text
+    , _drPayload   :: !DisksResizeRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DisksResize' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'drRequestId'
 --
 -- * 'drProject'
 --
@@ -87,11 +94,26 @@ disksResize
     -> DisksResize
 disksResize pDrProject_ pDrDisk_ pDrZone_ pDrPayload_ =
     DisksResize'
-    { _drProject = pDrProject_
+    { _drRequestId = Nothing
+    , _drProject = pDrProject_
     , _drDisk = pDrDisk_
     , _drZone = pDrZone_
     , _drPayload = pDrPayload_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+drRequestId :: Lens' DisksResize (Maybe Text)
+drRequestId
+  = lens _drRequestId (\ s a -> s{_drRequestId = a})
 
 -- | Project ID for this request.
 drProject :: Lens' DisksResize Text
@@ -117,7 +139,8 @@ instance GoogleRequest DisksResize where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient DisksResize'{..}
-          = go _drProject _drZone _drDisk (Just AltJSON)
+          = go _drProject _drZone _drDisk _drRequestId
+              (Just AltJSON)
               _drPayload
               computeService
           where go

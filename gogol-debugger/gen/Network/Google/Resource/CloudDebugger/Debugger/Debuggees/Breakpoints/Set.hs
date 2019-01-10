@@ -22,7 +22,7 @@
 --
 -- Sets the breakpoint to the debuggee.
 --
--- /See:/ <http://cloud.google.com/debugger Stackdriver Debugger API Reference> for @clouddebugger.debugger.debuggees.breakpoints.set@.
+-- /See:/ <https://cloud.google.com/debugger Stackdriver Debugger API Reference> for @clouddebugger.debugger.debuggees.breakpoints.set@.
 module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Set
     (
     -- * REST Resource
@@ -35,11 +35,9 @@ module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Set
     -- * Request Lenses
     , ddbsXgafv
     , ddbsUploadProtocol
-    , ddbsPp
     , ddbsAccessToken
     , ddbsUploadType
     , ddbsPayload
-    , ddbsBearerToken
     , ddbsDebuggeeId
     , ddbsClientVersion
     , ddbsCallback
@@ -59,15 +57,13 @@ type DebuggerDebuggeesBreakpointsSetResource =
                "set" :>
                  QueryParam "$.xgafv" Xgafv :>
                    QueryParam "upload_protocol" Text :>
-                     QueryParam "pp" Bool :>
-                       QueryParam "access_token" Text :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "bearer_token" Text :>
-                             QueryParam "clientVersion" Text :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" AltJSON :>
-                                   ReqBody '[JSON] Breakpoint :>
-                                     Post '[JSON] SetBreakpointResponse
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "clientVersion" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] Breakpoint :>
+                                 Post '[JSON] SetBreakpointResponse
 
 -- | Sets the breakpoint to the debuggee.
 --
@@ -75,11 +71,9 @@ type DebuggerDebuggeesBreakpointsSetResource =
 data DebuggerDebuggeesBreakpointsSet = DebuggerDebuggeesBreakpointsSet'
     { _ddbsXgafv          :: !(Maybe Xgafv)
     , _ddbsUploadProtocol :: !(Maybe Text)
-    , _ddbsPp             :: !Bool
     , _ddbsAccessToken    :: !(Maybe Text)
     , _ddbsUploadType     :: !(Maybe Text)
     , _ddbsPayload        :: !Breakpoint
-    , _ddbsBearerToken    :: !(Maybe Text)
     , _ddbsDebuggeeId     :: !Text
     , _ddbsClientVersion  :: !(Maybe Text)
     , _ddbsCallback       :: !(Maybe Text)
@@ -93,15 +87,11 @@ data DebuggerDebuggeesBreakpointsSet = DebuggerDebuggeesBreakpointsSet'
 --
 -- * 'ddbsUploadProtocol'
 --
--- * 'ddbsPp'
---
 -- * 'ddbsAccessToken'
 --
 -- * 'ddbsUploadType'
 --
 -- * 'ddbsPayload'
---
--- * 'ddbsBearerToken'
 --
 -- * 'ddbsDebuggeeId'
 --
@@ -116,11 +106,9 @@ debuggerDebuggeesBreakpointsSet pDdbsPayload_ pDdbsDebuggeeId_ =
     DebuggerDebuggeesBreakpointsSet'
     { _ddbsXgafv = Nothing
     , _ddbsUploadProtocol = Nothing
-    , _ddbsPp = True
     , _ddbsAccessToken = Nothing
     , _ddbsUploadType = Nothing
     , _ddbsPayload = pDdbsPayload_
-    , _ddbsBearerToken = Nothing
     , _ddbsDebuggeeId = pDdbsDebuggeeId_
     , _ddbsClientVersion = Nothing
     , _ddbsCallback = Nothing
@@ -136,10 +124,6 @@ ddbsUploadProtocol :: Lens' DebuggerDebuggeesBreakpointsSet (Maybe Text)
 ddbsUploadProtocol
   = lens _ddbsUploadProtocol
       (\ s a -> s{_ddbsUploadProtocol = a})
-
--- | Pretty-print response.
-ddbsPp :: Lens' DebuggerDebuggeesBreakpointsSet Bool
-ddbsPp = lens _ddbsPp (\ s a -> s{_ddbsPp = a})
 
 -- | OAuth access token.
 ddbsAccessToken :: Lens' DebuggerDebuggeesBreakpointsSet (Maybe Text)
@@ -158,19 +142,13 @@ ddbsPayload :: Lens' DebuggerDebuggeesBreakpointsSet Breakpoint
 ddbsPayload
   = lens _ddbsPayload (\ s a -> s{_ddbsPayload = a})
 
--- | OAuth bearer token.
-ddbsBearerToken :: Lens' DebuggerDebuggeesBreakpointsSet (Maybe Text)
-ddbsBearerToken
-  = lens _ddbsBearerToken
-      (\ s a -> s{_ddbsBearerToken = a})
-
 -- | ID of the debuggee where the breakpoint is to be set.
 ddbsDebuggeeId :: Lens' DebuggerDebuggeesBreakpointsSet Text
 ddbsDebuggeeId
   = lens _ddbsDebuggeeId
       (\ s a -> s{_ddbsDebuggeeId = a})
 
--- | The client version making the call. Following: \`domain\/type\/version\`
+-- | The client version making the call. Schema: \`domain\/type\/version\`
 -- (e.g., \`google.com\/intellij\/v1\`).
 ddbsClientVersion :: Lens' DebuggerDebuggeesBreakpointsSet (Maybe Text)
 ddbsClientVersion
@@ -191,10 +169,8 @@ instance GoogleRequest
                "https://www.googleapis.com/auth/cloud_debugger"]
         requestClient DebuggerDebuggeesBreakpointsSet'{..}
           = go _ddbsDebuggeeId _ddbsXgafv _ddbsUploadProtocol
-              (Just _ddbsPp)
               _ddbsAccessToken
               _ddbsUploadType
-              _ddbsBearerToken
               _ddbsClientVersion
               _ddbsCallback
               (Just AltJSON)

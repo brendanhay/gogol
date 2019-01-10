@@ -83,7 +83,7 @@ dadDomainAliasName
   = lens _dadDomainAliasName
       (\ s a -> s{_dadDomainAliasName = a})
 
--- | Immutable id of the Google Apps account.
+-- | Immutable ID of the G Suite account.
 dadCustomer :: Lens' DomainAliasesDelete Text
 dadCustomer
   = lens _dadCustomer (\ s a -> s{_dadCustomer = a})

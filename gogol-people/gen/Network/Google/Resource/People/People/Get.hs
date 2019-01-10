@@ -20,10 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Provides information about a person resource for a resource name. Use
+-- Provides information about a person by specifying a resource name. Use
 -- \`people\/me\` to indicate the authenticated user.
+-- The request throws a 400 error if \'personFields\' is not specified.
 --
--- /See:/ <https://developers.google.com/people/ Google People API Reference> for @people.people.get@.
+-- /See:/ <https://developers.google.com/people/ People API Reference> for @people.people.get@.
 module Network.Google.Resource.People.People.Get
     (
     -- * REST Resource
@@ -38,10 +39,9 @@ module Network.Google.Resource.People.People.Get
     , pgUploadProtocol
     , pgResourceName
     , pgRequestMaskIncludeField
-    , pgPp
     , pgAccessToken
     , pgUploadType
-    , pgBearerToken
+    , pgPersonFields
     , pgCallback
     ) where
 
@@ -53,29 +53,28 @@ import           Network.Google.Prelude
 type PeopleGetResource =
      "v1" :>
        Capture "resourceName" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "requestMask.includeField" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] Person
+             QueryParam "requestMask.includeField" GFieldMask :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "personFields" GFieldMask :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] Person
 
--- | Provides information about a person resource for a resource name. Use
+-- | Provides information about a person by specifying a resource name. Use
 -- \`people\/me\` to indicate the authenticated user.
+-- The request throws a 400 error if \'personFields\' is not specified.
 --
 -- /See:/ 'peopleGet' smart constructor.
 data PeopleGet = PeopleGet'
-    { _pgXgafv                   :: !(Maybe Text)
+    { _pgXgafv                   :: !(Maybe Xgafv)
     , _pgUploadProtocol          :: !(Maybe Text)
     , _pgResourceName            :: !Text
-    , _pgRequestMaskIncludeField :: !(Maybe Text)
-    , _pgPp                      :: !Bool
+    , _pgRequestMaskIncludeField :: !(Maybe GFieldMask)
     , _pgAccessToken             :: !(Maybe Text)
     , _pgUploadType              :: !(Maybe Text)
-    , _pgBearerToken             :: !(Maybe Text)
+    , _pgPersonFields            :: !(Maybe GFieldMask)
     , _pgCallback                :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -91,13 +90,11 @@ data PeopleGet = PeopleGet'
 --
 -- * 'pgRequestMaskIncludeField'
 --
--- * 'pgPp'
---
 -- * 'pgAccessToken'
 --
 -- * 'pgUploadType'
 --
--- * 'pgBearerToken'
+-- * 'pgPersonFields'
 --
 -- * 'pgCallback'
 peopleGet
@@ -109,15 +106,14 @@ peopleGet pPgResourceName_ =
     , _pgUploadProtocol = Nothing
     , _pgResourceName = pPgResourceName_
     , _pgRequestMaskIncludeField = Nothing
-    , _pgPp = True
     , _pgAccessToken = Nothing
     , _pgUploadType = Nothing
-    , _pgBearerToken = Nothing
+    , _pgPersonFields = Nothing
     , _pgCallback = Nothing
     }
 
 -- | V1 error format.
-pgXgafv :: Lens' PeopleGet (Maybe Text)
+pgXgafv :: Lens' PeopleGet (Maybe Xgafv)
 pgXgafv = lens _pgXgafv (\ s a -> s{_pgXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -128,25 +124,22 @@ pgUploadProtocol
 
 -- | The resource name of the person to provide information about. - To get
 -- information about the authenticated user, specify \`people\/me\`. - To
--- get information about any user, specify the resource name that
--- identifies the user, such as the resource names returned by
+-- get information about a google account, specify \`people\/\`account_id.
+-- - To get information about a contact, specify the resource name that
+-- identifies the contact as returned by
 -- [\`people.connections.list\`](\/people\/api\/rest\/v1\/people.connections\/list).
 pgResourceName :: Lens' PeopleGet Text
 pgResourceName
   = lens _pgResourceName
       (\ s a -> s{_pgResourceName = a})
 
--- | Comma-separated list of fields to be included in the response. Omitting
--- this field will include all fields. Each path should start with
--- \`person.\`: for example, \`person.names\` or \`person.photos\`.
-pgRequestMaskIncludeField :: Lens' PeopleGet (Maybe Text)
+-- | **Required.** Comma-separated list of person fields to be included in
+-- the response. Each path should start with \`person.\`: for example,
+-- \`person.names\` or \`person.photos\`.
+pgRequestMaskIncludeField :: Lens' PeopleGet (Maybe GFieldMask)
 pgRequestMaskIncludeField
   = lens _pgRequestMaskIncludeField
       (\ s a -> s{_pgRequestMaskIncludeField = a})
-
--- | Pretty-print response.
-pgPp :: Lens' PeopleGet Bool
-pgPp = lens _pgPp (\ s a -> s{_pgPp = a})
 
 -- | OAuth access token.
 pgAccessToken :: Lens' PeopleGet (Maybe Text)
@@ -159,11 +152,18 @@ pgUploadType :: Lens' PeopleGet (Maybe Text)
 pgUploadType
   = lens _pgUploadType (\ s a -> s{_pgUploadType = a})
 
--- | OAuth bearer token.
-pgBearerToken :: Lens' PeopleGet (Maybe Text)
-pgBearerToken
-  = lens _pgBearerToken
-      (\ s a -> s{_pgBearerToken = a})
+-- | **Required.** A field mask to restrict which fields on the person are
+-- returned. Multiple fields can be specified by separating them with
+-- commas. Valid values are: * addresses * ageRanges * biographies *
+-- birthdays * braggingRights * coverPhotos * emailAddresses * events *
+-- genders * imClients * interests * locales * memberships * metadata *
+-- names * nicknames * occupations * organizations * phoneNumbers * photos
+-- * relations * relationshipInterests * relationshipStatuses * residences
+-- * sipAddresses * skills * taglines * urls * userDefined
+pgPersonFields :: Lens' PeopleGet (Maybe GFieldMask)
+pgPersonFields
+  = lens _pgPersonFields
+      (\ s a -> s{_pgPersonFields = a})
 
 -- | JSONP
 pgCallback :: Lens' PeopleGet (Maybe Text)
@@ -185,10 +185,9 @@ instance GoogleRequest PeopleGet where
         requestClient PeopleGet'{..}
           = go _pgResourceName _pgXgafv _pgUploadProtocol
               _pgRequestMaskIncludeField
-              (Just _pgPp)
               _pgAccessToken
               _pgUploadType
-              _pgBearerToken
+              _pgPersonFields
               _pgCallback
               (Just AltJSON)
               peopleService

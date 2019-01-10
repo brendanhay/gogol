@@ -22,7 +22,7 @@
 --
 -- Gets breakpoint information.
 --
--- /See:/ <http://cloud.google.com/debugger Stackdriver Debugger API Reference> for @clouddebugger.debugger.debuggees.breakpoints.get@.
+-- /See:/ <https://cloud.google.com/debugger Stackdriver Debugger API Reference> for @clouddebugger.debugger.debuggees.breakpoints.get@.
 module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Get
     (
     -- * REST Resource
@@ -35,11 +35,9 @@ module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Get
     -- * Request Lenses
     , ddbgXgafv
     , ddbgUploadProtocol
-    , ddbgPp
     , ddbgAccessToken
     , ddbgUploadType
     , ddbgBreakpointId
-    , ddbgBearerToken
     , ddbgDebuggeeId
     , ddbgClientVersion
     , ddbgCallback
@@ -59,14 +57,12 @@ type DebuggerDebuggeesBreakpointsGetResource =
                Capture "breakpointId" Text :>
                  QueryParam "$.xgafv" Xgafv :>
                    QueryParam "upload_protocol" Text :>
-                     QueryParam "pp" Bool :>
-                       QueryParam "access_token" Text :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "bearer_token" Text :>
-                             QueryParam "clientVersion" Text :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" AltJSON :>
-                                   Get '[JSON] GetBreakpointResponse
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "clientVersion" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] GetBreakpointResponse
 
 -- | Gets breakpoint information.
 --
@@ -74,11 +70,9 @@ type DebuggerDebuggeesBreakpointsGetResource =
 data DebuggerDebuggeesBreakpointsGet = DebuggerDebuggeesBreakpointsGet'
     { _ddbgXgafv          :: !(Maybe Xgafv)
     , _ddbgUploadProtocol :: !(Maybe Text)
-    , _ddbgPp             :: !Bool
     , _ddbgAccessToken    :: !(Maybe Text)
     , _ddbgUploadType     :: !(Maybe Text)
     , _ddbgBreakpointId   :: !Text
-    , _ddbgBearerToken    :: !(Maybe Text)
     , _ddbgDebuggeeId     :: !Text
     , _ddbgClientVersion  :: !(Maybe Text)
     , _ddbgCallback       :: !(Maybe Text)
@@ -92,15 +86,11 @@ data DebuggerDebuggeesBreakpointsGet = DebuggerDebuggeesBreakpointsGet'
 --
 -- * 'ddbgUploadProtocol'
 --
--- * 'ddbgPp'
---
 -- * 'ddbgAccessToken'
 --
 -- * 'ddbgUploadType'
 --
 -- * 'ddbgBreakpointId'
---
--- * 'ddbgBearerToken'
 --
 -- * 'ddbgDebuggeeId'
 --
@@ -115,11 +105,9 @@ debuggerDebuggeesBreakpointsGet pDdbgBreakpointId_ pDdbgDebuggeeId_ =
     DebuggerDebuggeesBreakpointsGet'
     { _ddbgXgafv = Nothing
     , _ddbgUploadProtocol = Nothing
-    , _ddbgPp = True
     , _ddbgAccessToken = Nothing
     , _ddbgUploadType = Nothing
     , _ddbgBreakpointId = pDdbgBreakpointId_
-    , _ddbgBearerToken = Nothing
     , _ddbgDebuggeeId = pDdbgDebuggeeId_
     , _ddbgClientVersion = Nothing
     , _ddbgCallback = Nothing
@@ -135,10 +123,6 @@ ddbgUploadProtocol :: Lens' DebuggerDebuggeesBreakpointsGet (Maybe Text)
 ddbgUploadProtocol
   = lens _ddbgUploadProtocol
       (\ s a -> s{_ddbgUploadProtocol = a})
-
--- | Pretty-print response.
-ddbgPp :: Lens' DebuggerDebuggeesBreakpointsGet Bool
-ddbgPp = lens _ddbgPp (\ s a -> s{_ddbgPp = a})
 
 -- | OAuth access token.
 ddbgAccessToken :: Lens' DebuggerDebuggeesBreakpointsGet (Maybe Text)
@@ -158,19 +142,13 @@ ddbgBreakpointId
   = lens _ddbgBreakpointId
       (\ s a -> s{_ddbgBreakpointId = a})
 
--- | OAuth bearer token.
-ddbgBearerToken :: Lens' DebuggerDebuggeesBreakpointsGet (Maybe Text)
-ddbgBearerToken
-  = lens _ddbgBearerToken
-      (\ s a -> s{_ddbgBearerToken = a})
-
 -- | ID of the debuggee whose breakpoint to get.
 ddbgDebuggeeId :: Lens' DebuggerDebuggeesBreakpointsGet Text
 ddbgDebuggeeId
   = lens _ddbgDebuggeeId
       (\ s a -> s{_ddbgDebuggeeId = a})
 
--- | The client version making the call. Following: \`domain\/type\/version\`
+-- | The client version making the call. Schema: \`domain\/type\/version\`
 -- (e.g., \`google.com\/intellij\/v1\`).
 ddbgClientVersion :: Lens' DebuggerDebuggeesBreakpointsGet (Maybe Text)
 ddbgClientVersion
@@ -192,10 +170,8 @@ instance GoogleRequest
         requestClient DebuggerDebuggeesBreakpointsGet'{..}
           = go _ddbgDebuggeeId _ddbgBreakpointId _ddbgXgafv
               _ddbgUploadProtocol
-              (Just _ddbgPp)
               _ddbgAccessToken
               _ddbgUploadType
-              _ddbgBearerToken
               _ddbgClientVersion
               _ddbgCallback
               (Just AltJSON)

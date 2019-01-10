@@ -20,8 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves a product from your Merchant Center account. This method can
--- only be called for non-multi-client accounts.
+-- Retrieves a product from your Merchant Center account.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.products.get@.
 module Network.Google.Resource.Content.Products.Get
@@ -45,14 +44,13 @@ import           Network.Google.ShoppingContent.Types
 -- 'ProductsGet' request conforms to.
 type ProductsGetResource =
      "content" :>
-       "v2" :>
+       "v2.1" :>
          Capture "merchantId" (Textual Word64) :>
            "products" :>
              Capture "productId" Text :>
                QueryParam "alt" AltJSON :> Get '[JSON] Product
 
--- | Retrieves a product from your Merchant Center account. This method can
--- only be called for non-multi-client accounts.
+-- | Retrieves a product from your Merchant Center account.
 --
 -- /See:/ 'productsGet' smart constructor.
 data ProductsGet = ProductsGet'
@@ -77,14 +75,15 @@ productsGet pPggMerchantId_ pPggProductId_ =
     , _pggProductId = pPggProductId_
     }
 
--- | The ID of the managing account.
+-- | The ID of the account that contains the product. This account cannot be
+-- a multi-client account.
 pggMerchantId :: Lens' ProductsGet Word64
 pggMerchantId
   = lens _pggMerchantId
       (\ s a -> s{_pggMerchantId = a})
       . _Coerce
 
--- | The ID of the product.
+-- | The REST id of the product.
 pggProductId :: Lens' ProductsGet Text
 pggProductId
   = lens _pggProductId (\ s a -> s{_pggProductId = a})

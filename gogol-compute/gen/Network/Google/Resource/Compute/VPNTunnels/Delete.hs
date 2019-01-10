@@ -33,6 +33,7 @@ module Network.Google.Resource.Compute.VPNTunnels.Delete
     , VPNTunnelsDelete
 
     -- * Request Lenses
+    , vtdRequestId
     , vtdProject
     , vtdVPNTunnel
     , vtdRegion
@@ -52,13 +53,15 @@ type VPNTunnelsDeleteResource =
                Capture "region" Text :>
                  "vpnTunnels" :>
                    Capture "vpnTunnel" Text :>
-                     QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+                     QueryParam "requestId" Text :>
+                       QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified VpnTunnel resource.
 --
 -- /See:/ 'vpnTunnelsDelete' smart constructor.
 data VPNTunnelsDelete = VPNTunnelsDelete'
-    { _vtdProject   :: !Text
+    { _vtdRequestId :: !(Maybe Text)
+    , _vtdProject   :: !Text
     , _vtdVPNTunnel :: !Text
     , _vtdRegion    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -66,6 +69,8 @@ data VPNTunnelsDelete = VPNTunnelsDelete'
 -- | Creates a value of 'VPNTunnelsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vtdRequestId'
 --
 -- * 'vtdProject'
 --
@@ -79,10 +84,25 @@ vpnTunnelsDelete
     -> VPNTunnelsDelete
 vpnTunnelsDelete pVtdProject_ pVtdVPNTunnel_ pVtdRegion_ =
     VPNTunnelsDelete'
-    { _vtdProject = pVtdProject_
+    { _vtdRequestId = Nothing
+    , _vtdProject = pVtdProject_
     , _vtdVPNTunnel = pVtdVPNTunnel_
     , _vtdRegion = pVtdRegion_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+vtdRequestId :: Lens' VPNTunnelsDelete (Maybe Text)
+vtdRequestId
+  = lens _vtdRequestId (\ s a -> s{_vtdRequestId = a})
 
 -- | Project ID for this request.
 vtdProject :: Lens' VPNTunnelsDelete Text
@@ -106,6 +126,7 @@ instance GoogleRequest VPNTunnelsDelete where
                "https://www.googleapis.com/auth/compute"]
         requestClient VPNTunnelsDelete'{..}
           = go _vtdProject _vtdRegion _vtdVPNTunnel
+              _vtdRequestId
               (Just AltJSON)
               computeService
           where go

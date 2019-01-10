@@ -22,11 +22,16 @@
 --
 -- Lists operations that match the specified filter in the request. If the
 -- server doesn\'t support this method, it returns \`UNIMPLEMENTED\`. NOTE:
--- the \`name\` binding below allows API services to override the binding
--- to use different resource name schemes, such as
--- \`users\/*\/operations\`.
+-- the \`name\` binding allows API services to override the binding to use
+-- different resource name schemes, such as \`users\/*\/operations\`. To
+-- override the binding, API services can add a binding such as
+-- \`\"\/v1\/{name=users\/*}\/operations\"\` to their service
+-- configuration. For backwards compatibility, the default name includes
+-- the operations collection id, however overriding users must ensure the
+-- name binding is the parent resource, without the operations collection
+-- id.
 --
--- /See:/ <https://cloud.google.com/deployment-manager/runtime-configurator/ Google Cloud RuntimeConfig API Reference> for @runtimeconfig.operations.list@.
+-- /See:/ <https://cloud.google.com/deployment-manager/runtime-configurator/ Cloud Runtime Configuration API Reference> for @runtimeconfig.operations.list@.
 module Network.Google.Resource.RuntimeConfig.Operations.List
     (
     -- * REST Resource
@@ -39,10 +44,8 @@ module Network.Google.Resource.RuntimeConfig.Operations.List
     -- * Request Lenses
     , olXgafv
     , olUploadProtocol
-    , olPp
     , olAccessToken
     , olUploadType
-    , olBearerToken
     , olName
     , olFilter
     , olPageToken
@@ -60,31 +63,32 @@ type OperationsListResource =
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "filter" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" (Textual Int32) :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] ListOperationsResponse
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "filter" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "pageSize" (Textual Int32) :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] ListOperationsResponse
 
 -- | Lists operations that match the specified filter in the request. If the
 -- server doesn\'t support this method, it returns \`UNIMPLEMENTED\`. NOTE:
--- the \`name\` binding below allows API services to override the binding
--- to use different resource name schemes, such as
--- \`users\/*\/operations\`.
+-- the \`name\` binding allows API services to override the binding to use
+-- different resource name schemes, such as \`users\/*\/operations\`. To
+-- override the binding, API services can add a binding such as
+-- \`\"\/v1\/{name=users\/*}\/operations\"\` to their service
+-- configuration. For backwards compatibility, the default name includes
+-- the operations collection id, however overriding users must ensure the
+-- name binding is the parent resource, without the operations collection
+-- id.
 --
 -- /See:/ 'operationsList' smart constructor.
 data OperationsList = OperationsList'
     { _olXgafv          :: !(Maybe Xgafv)
     , _olUploadProtocol :: !(Maybe Text)
-    , _olPp             :: !Bool
     , _olAccessToken    :: !(Maybe Text)
     , _olUploadType     :: !(Maybe Text)
-    , _olBearerToken    :: !(Maybe Text)
     , _olName           :: !Text
     , _olFilter         :: !(Maybe Text)
     , _olPageToken      :: !(Maybe Text)
@@ -100,13 +104,9 @@ data OperationsList = OperationsList'
 --
 -- * 'olUploadProtocol'
 --
--- * 'olPp'
---
 -- * 'olAccessToken'
 --
 -- * 'olUploadType'
---
--- * 'olBearerToken'
 --
 -- * 'olName'
 --
@@ -124,10 +124,8 @@ operationsList pOlName_ =
     OperationsList'
     { _olXgafv = Nothing
     , _olUploadProtocol = Nothing
-    , _olPp = True
     , _olAccessToken = Nothing
     , _olUploadType = Nothing
-    , _olBearerToken = Nothing
     , _olName = pOlName_
     , _olFilter = Nothing
     , _olPageToken = Nothing
@@ -145,10 +143,6 @@ olUploadProtocol
   = lens _olUploadProtocol
       (\ s a -> s{_olUploadProtocol = a})
 
--- | Pretty-print response.
-olPp :: Lens' OperationsList Bool
-olPp = lens _olPp (\ s a -> s{_olPp = a})
-
 -- | OAuth access token.
 olAccessToken :: Lens' OperationsList (Maybe Text)
 olAccessToken
@@ -160,13 +154,7 @@ olUploadType :: Lens' OperationsList (Maybe Text)
 olUploadType
   = lens _olUploadType (\ s a -> s{_olUploadType = a})
 
--- | OAuth bearer token.
-olBearerToken :: Lens' OperationsList (Maybe Text)
-olBearerToken
-  = lens _olBearerToken
-      (\ s a -> s{_olBearerToken = a})
-
--- | The name of the operation collection.
+-- | The name of the operation\'s parent resource.
 olName :: Lens' OperationsList Text
 olName = lens _olName (\ s a -> s{_olName = a})
 
@@ -196,10 +184,9 @@ instance GoogleRequest OperationsList where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/cloudruntimeconfig"]
         requestClient OperationsList'{..}
-          = go _olName _olXgafv _olUploadProtocol (Just _olPp)
+          = go _olName _olXgafv _olUploadProtocol
               _olAccessToken
               _olUploadType
-              _olBearerToken
               _olFilter
               _olPageToken
               _olPageSize

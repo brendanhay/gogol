@@ -26,7 +26,7 @@
 -- automatically set as the default. You must make any subsequent changes
 -- to the default version setting manually using this method.
 --
--- /See:/ <https://cloud.google.com/ml/ Google Cloud Machine Learning Reference> for @ml.projects.models.versions.setDefault@.
+-- /See:/ <https://cloud.google.com/ml/ Cloud Machine Learning Engine Reference> for @ml.projects.models.versions.setDefault@.
 module Network.Google.Resource.Ml.Projects.Models.Versions.SetDefault
     (
     -- * REST Resource
@@ -39,11 +39,9 @@ module Network.Google.Resource.Ml.Projects.Models.Versions.SetDefault
     -- * Request Lenses
     , pmvsdXgafv
     , pmvsdUploadProtocol
-    , pmvsdPp
     , pmvsdAccessToken
     , pmvsdUploadType
     , pmvsdPayload
-    , pmvsdBearerToken
     , pmvsdName
     , pmvsdCallback
     ) where
@@ -54,19 +52,17 @@ import           Network.Google.Prelude
 -- | A resource alias for @ml.projects.models.versions.setDefault@ method which the
 -- 'ProjectsModelsVersionsSetDefault' request conforms to.
 type ProjectsModelsVersionsSetDefaultResource =
-     "v1beta1" :>
+     "v1" :>
        CaptureMode "name" "setDefault" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON]
-                           GoogleCloudMlV1beta1__SetDefaultVersionRequest
-                           :> Post '[JSON] GoogleCloudMlV1beta1__Version
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON]
+                       GoogleCloudMlV1__SetDefaultVersionRequest
+                       :> Post '[JSON] GoogleCloudMlV1__Version
 
 -- | Designates a version to be the default for the model. The default
 -- version is used for prediction requests made against the model that
@@ -78,11 +74,9 @@ type ProjectsModelsVersionsSetDefaultResource =
 data ProjectsModelsVersionsSetDefault = ProjectsModelsVersionsSetDefault'
     { _pmvsdXgafv          :: !(Maybe Xgafv)
     , _pmvsdUploadProtocol :: !(Maybe Text)
-    , _pmvsdPp             :: !Bool
     , _pmvsdAccessToken    :: !(Maybe Text)
     , _pmvsdUploadType     :: !(Maybe Text)
-    , _pmvsdPayload        :: !GoogleCloudMlV1beta1__SetDefaultVersionRequest
-    , _pmvsdBearerToken    :: !(Maybe Text)
+    , _pmvsdPayload        :: !GoogleCloudMlV1__SetDefaultVersionRequest
     , _pmvsdName           :: !Text
     , _pmvsdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -95,32 +89,26 @@ data ProjectsModelsVersionsSetDefault = ProjectsModelsVersionsSetDefault'
 --
 -- * 'pmvsdUploadProtocol'
 --
--- * 'pmvsdPp'
---
 -- * 'pmvsdAccessToken'
 --
 -- * 'pmvsdUploadType'
 --
 -- * 'pmvsdPayload'
 --
--- * 'pmvsdBearerToken'
---
 -- * 'pmvsdName'
 --
 -- * 'pmvsdCallback'
 projectsModelsVersionsSetDefault
-    :: GoogleCloudMlV1beta1__SetDefaultVersionRequest -- ^ 'pmvsdPayload'
+    :: GoogleCloudMlV1__SetDefaultVersionRequest -- ^ 'pmvsdPayload'
     -> Text -- ^ 'pmvsdName'
     -> ProjectsModelsVersionsSetDefault
 projectsModelsVersionsSetDefault pPmvsdPayload_ pPmvsdName_ =
     ProjectsModelsVersionsSetDefault'
     { _pmvsdXgafv = Nothing
     , _pmvsdUploadProtocol = Nothing
-    , _pmvsdPp = True
     , _pmvsdAccessToken = Nothing
     , _pmvsdUploadType = Nothing
     , _pmvsdPayload = pPmvsdPayload_
-    , _pmvsdBearerToken = Nothing
     , _pmvsdName = pPmvsdName_
     , _pmvsdCallback = Nothing
     }
@@ -136,10 +124,6 @@ pmvsdUploadProtocol
   = lens _pmvsdUploadProtocol
       (\ s a -> s{_pmvsdUploadProtocol = a})
 
--- | Pretty-print response.
-pmvsdPp :: Lens' ProjectsModelsVersionsSetDefault Bool
-pmvsdPp = lens _pmvsdPp (\ s a -> s{_pmvsdPp = a})
-
 -- | OAuth access token.
 pmvsdAccessToken :: Lens' ProjectsModelsVersionsSetDefault (Maybe Text)
 pmvsdAccessToken
@@ -153,20 +137,13 @@ pmvsdUploadType
       (\ s a -> s{_pmvsdUploadType = a})
 
 -- | Multipart request metadata.
-pmvsdPayload :: Lens' ProjectsModelsVersionsSetDefault GoogleCloudMlV1beta1__SetDefaultVersionRequest
+pmvsdPayload :: Lens' ProjectsModelsVersionsSetDefault GoogleCloudMlV1__SetDefaultVersionRequest
 pmvsdPayload
   = lens _pmvsdPayload (\ s a -> s{_pmvsdPayload = a})
 
--- | OAuth bearer token.
-pmvsdBearerToken :: Lens' ProjectsModelsVersionsSetDefault (Maybe Text)
-pmvsdBearerToken
-  = lens _pmvsdBearerToken
-      (\ s a -> s{_pmvsdBearerToken = a})
-
 -- | Required. The name of the version to make the default for the model. You
 -- can get the names of all the versions of a model by calling
--- [projects.models.versions.list](\/ml\/reference\/rest\/v1beta1\/projects.models.versions\/list).
--- Authorization: requires \`Editor\` role on the parent project.
+-- [projects.models.versions.list](\/ml-engine\/reference\/rest\/v1\/projects.models.versions\/list).
 pmvsdName :: Lens' ProjectsModelsVersionsSetDefault Text
 pmvsdName
   = lens _pmvsdName (\ s a -> s{_pmvsdName = a})
@@ -180,15 +157,13 @@ pmvsdCallback
 instance GoogleRequest
          ProjectsModelsVersionsSetDefault where
         type Rs ProjectsModelsVersionsSetDefault =
-             GoogleCloudMlV1beta1__Version
+             GoogleCloudMlV1__Version
         type Scopes ProjectsModelsVersionsSetDefault =
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsModelsVersionsSetDefault'{..}
           = go _pmvsdName _pmvsdXgafv _pmvsdUploadProtocol
-              (Just _pmvsdPp)
               _pmvsdAccessToken
               _pmvsdUploadType
-              _pmvsdBearerToken
               _pmvsdCallback
               (Just AltJSON)
               _pmvsdPayload

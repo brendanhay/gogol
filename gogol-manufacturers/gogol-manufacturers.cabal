@@ -35,8 +35,10 @@ library
     exposed-modules:
           Network.Google.Manufacturers
         , Network.Google.Manufacturers.Types
+        , Network.Google.Resource.Manufacturers.Accounts.Products.Delete
         , Network.Google.Resource.Manufacturers.Accounts.Products.Get
         , Network.Google.Resource.Manufacturers.Accounts.Products.List
+        , Network.Google.Resource.Manufacturers.Accounts.Products.Update
 
     other-modules:
           Network.Google.Manufacturers.Types.Product

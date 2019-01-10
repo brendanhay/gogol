@@ -20,8 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the sub-accounts in your Merchant Center account. This method can
--- only be called for multi-client accounts.
+-- Lists the sub-accounts in your Merchant Center account.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.accounts.list@.
 module Network.Google.Resource.Content.Accounts.List
@@ -34,9 +33,9 @@ module Network.Google.Resource.Content.Accounts.List
     , AccountsList
 
     -- * Request Lenses
-    , alMerchantId
-    , alPageToken
-    , alMaxResults
+    , allMerchantId
+    , allPageToken
+    , allMaxResults
     ) where
 
 import           Network.Google.Prelude
@@ -46,7 +45,7 @@ import           Network.Google.ShoppingContent.Types
 -- 'AccountsList' request conforms to.
 type AccountsListResource =
      "content" :>
-       "v2" :>
+       "v2.1" :>
          Capture "merchantId" (Textual Word64) :>
            "accounts" :>
              QueryParam "pageToken" Text :>
@@ -54,51 +53,52 @@ type AccountsListResource =
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] AccountsListResponse
 
--- | Lists the sub-accounts in your Merchant Center account. This method can
--- only be called for multi-client accounts.
+-- | Lists the sub-accounts in your Merchant Center account.
 --
 -- /See:/ 'accountsList' smart constructor.
 data AccountsList = AccountsList'
-    { _alMerchantId :: !(Textual Word64)
-    , _alPageToken  :: !(Maybe Text)
-    , _alMaxResults :: !(Maybe (Textual Word32))
+    { _allMerchantId :: !(Textual Word64)
+    , _allPageToken  :: !(Maybe Text)
+    , _allMaxResults :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'alMerchantId'
+-- * 'allMerchantId'
 --
--- * 'alPageToken'
+-- * 'allPageToken'
 --
--- * 'alMaxResults'
+-- * 'allMaxResults'
 accountsList
-    :: Word64 -- ^ 'alMerchantId'
+    :: Word64 -- ^ 'allMerchantId'
     -> AccountsList
-accountsList pAlMerchantId_ =
+accountsList pAllMerchantId_ =
     AccountsList'
-    { _alMerchantId = _Coerce # pAlMerchantId_
-    , _alPageToken = Nothing
-    , _alMaxResults = Nothing
+    { _allMerchantId = _Coerce # pAllMerchantId_
+    , _allPageToken = Nothing
+    , _allMaxResults = Nothing
     }
 
--- | The ID of the managing account.
-alMerchantId :: Lens' AccountsList Word64
-alMerchantId
-  = lens _alMerchantId (\ s a -> s{_alMerchantId = a})
+-- | The ID of the managing account. This must be a multi-client account.
+allMerchantId :: Lens' AccountsList Word64
+allMerchantId
+  = lens _allMerchantId
+      (\ s a -> s{_allMerchantId = a})
       . _Coerce
 
 -- | The token returned by the previous request.
-alPageToken :: Lens' AccountsList (Maybe Text)
-alPageToken
-  = lens _alPageToken (\ s a -> s{_alPageToken = a})
+allPageToken :: Lens' AccountsList (Maybe Text)
+allPageToken
+  = lens _allPageToken (\ s a -> s{_allPageToken = a})
 
 -- | The maximum number of accounts to return in the response, used for
 -- paging.
-alMaxResults :: Lens' AccountsList (Maybe Word32)
-alMaxResults
-  = lens _alMaxResults (\ s a -> s{_alMaxResults = a})
+allMaxResults :: Lens' AccountsList (Maybe Word32)
+allMaxResults
+  = lens _allMaxResults
+      (\ s a -> s{_allMaxResults = a})
       . mapping _Coerce
 
 instance GoogleRequest AccountsList where
@@ -106,7 +106,7 @@ instance GoogleRequest AccountsList where
         type Scopes AccountsList =
              '["https://www.googleapis.com/auth/content"]
         requestClient AccountsList'{..}
-          = go _alMerchantId _alPageToken _alMaxResults
+          = go _allMerchantId _allPageToken _allMaxResults
               (Just AltJSON)
               shoppingContentService
           where go

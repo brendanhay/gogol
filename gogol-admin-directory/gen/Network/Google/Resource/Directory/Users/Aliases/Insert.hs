@@ -82,7 +82,7 @@ uaiPayload :: Lens' UsersAliasesInsert Alias
 uaiPayload
   = lens _uaiPayload (\ s a -> s{_uaiPayload = a})
 
--- | Email or immutable Id of the user
+-- | Email or immutable ID of the user
 uaiUserKey :: Lens' UsersAliasesInsert Text
 uaiUserKey
   = lens _uaiUserKey (\ s a -> s{_uaiUserKey = a})

@@ -16,7 +16,7 @@
 --
 module Network.Google.Storage.Types.Sum where
 
-import           Network.Google.Prelude
+import           Network.Google.Prelude hiding (Bytes)
 
 -- | Set of properties to return. Defaults to noAcl, unless the object
 -- resource specifies the acl property, when it defaults to full.

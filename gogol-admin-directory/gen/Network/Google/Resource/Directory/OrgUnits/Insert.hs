@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Add Organization Unit
+-- Add organizational unit
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.orgunits.insert@.
 module Network.Google.Resource.Directory.OrgUnits.Insert
@@ -52,7 +52,7 @@ type OrgUnitsInsertResource =
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] OrgUnit :> Post '[JSON] OrgUnit
 
--- | Add Organization Unit
+-- | Add organizational unit
 --
 -- /See:/ 'orgUnitsInsert' smart constructor.
 data OrgUnitsInsert = OrgUnitsInsert'
@@ -82,7 +82,7 @@ ouiPayload :: Lens' OrgUnitsInsert OrgUnit
 ouiPayload
   = lens _ouiPayload (\ s a -> s{_ouiPayload = a})
 
--- | Immutable id of the Google Apps account
+-- | Immutable ID of the G Suite account
 ouiCustomerId :: Lens' OrgUnitsInsert Text
 ouiCustomerId
   = lens _ouiCustomerId

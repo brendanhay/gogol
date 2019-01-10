@@ -35,10 +35,8 @@ module Network.Google.Resource.Logging.Organizations.Sinks.Get
     -- * Request Lenses
     , osgXgafv
     , osgUploadProtocol
-    , osgPp
     , osgAccessToken
     , osgUploadType
-    , osgBearerToken
     , osgSinkName
     , osgCallback
     ) where
@@ -53,12 +51,10 @@ type OrganizationsSinksGetResource =
        Capture "sinkName" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] LogSink
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] LogSink
 
 -- | Gets a sink.
 --
@@ -66,10 +62,8 @@ type OrganizationsSinksGetResource =
 data OrganizationsSinksGet = OrganizationsSinksGet'
     { _osgXgafv          :: !(Maybe Xgafv)
     , _osgUploadProtocol :: !(Maybe Text)
-    , _osgPp             :: !Bool
     , _osgAccessToken    :: !(Maybe Text)
     , _osgUploadType     :: !(Maybe Text)
-    , _osgBearerToken    :: !(Maybe Text)
     , _osgSinkName       :: !Text
     , _osgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -82,13 +76,9 @@ data OrganizationsSinksGet = OrganizationsSinksGet'
 --
 -- * 'osgUploadProtocol'
 --
--- * 'osgPp'
---
 -- * 'osgAccessToken'
 --
 -- * 'osgUploadType'
---
--- * 'osgBearerToken'
 --
 -- * 'osgSinkName'
 --
@@ -100,10 +90,8 @@ organizationsSinksGet pOsgSinkName_ =
     OrganizationsSinksGet'
     { _osgXgafv = Nothing
     , _osgUploadProtocol = Nothing
-    , _osgPp = True
     , _osgAccessToken = Nothing
     , _osgUploadType = Nothing
-    , _osgBearerToken = Nothing
     , _osgSinkName = pOsgSinkName_
     , _osgCallback = Nothing
     }
@@ -118,10 +106,6 @@ osgUploadProtocol
   = lens _osgUploadProtocol
       (\ s a -> s{_osgUploadProtocol = a})
 
--- | Pretty-print response.
-osgPp :: Lens' OrganizationsSinksGet Bool
-osgPp = lens _osgPp (\ s a -> s{_osgPp = a})
-
 -- | OAuth access token.
 osgAccessToken :: Lens' OrganizationsSinksGet (Maybe Text)
 osgAccessToken
@@ -134,15 +118,11 @@ osgUploadType
   = lens _osgUploadType
       (\ s a -> s{_osgUploadType = a})
 
--- | OAuth bearer token.
-osgBearerToken :: Lens' OrganizationsSinksGet (Maybe Text)
-osgBearerToken
-  = lens _osgBearerToken
-      (\ s a -> s{_osgBearerToken = a})
-
--- | Required. The parent resource name of the sink:
+-- | Required. The resource name of the sink:
 -- \"projects\/[PROJECT_ID]\/sinks\/[SINK_ID]\"
--- \"organizations\/[ORGANIZATION_ID]\/sinks\/[SINK_ID]\" Example:
+-- \"organizations\/[ORGANIZATION_ID]\/sinks\/[SINK_ID]\"
+-- \"billingAccounts\/[BILLING_ACCOUNT_ID]\/sinks\/[SINK_ID]\"
+-- \"folders\/[FOLDER_ID]\/sinks\/[SINK_ID]\" Example:
 -- \"projects\/my-project-id\/sinks\/my-sink-id\".
 osgSinkName :: Lens' OrganizationsSinksGet Text
 osgSinkName
@@ -162,10 +142,8 @@ instance GoogleRequest OrganizationsSinksGet where
                "https://www.googleapis.com/auth/logging.read"]
         requestClient OrganizationsSinksGet'{..}
           = go _osgSinkName _osgXgafv _osgUploadProtocol
-              (Just _osgPp)
               _osgAccessToken
               _osgUploadType
-              _osgBearerToken
               _osgCallback
               (Just AltJSON)
               loggingService

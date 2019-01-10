@@ -82,7 +82,7 @@ diPayload :: Lens' DomainsInsert Domains
 diPayload
   = lens _diPayload (\ s a -> s{_diPayload = a})
 
--- | Immutable id of the Google Apps account.
+-- | Immutable ID of the G Suite account.
 diCustomer :: Lens' DomainsInsert Text
 diCustomer
   = lens _diCustomer (\ s a -> s{_diCustomer = a})

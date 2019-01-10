@@ -28,7 +28,7 @@
 -- from a signed-in user with **viewer**, **Is owner** or **Can edit**
 -- permissions in the Google Developers Console project.
 --
--- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @proximitybeacon.namespaces.list@.
+-- /See:/ <https://developers.google.com/beacons/proximity/ Proximity Beacon API Reference> for @proximitybeacon.namespaces.list@.
 module Network.Google.Resource.ProximityBeacon.Namespaces.List
     (
     -- * REST Resource
@@ -41,10 +41,8 @@ module Network.Google.Resource.ProximityBeacon.Namespaces.List
     -- * Request Lenses
     , nlXgafv
     , nlUploadProtocol
-    , nlPp
     , nlAccessToken
     , nlUploadType
-    , nlBearerToken
     , nlProjectId
     , nlCallback
     ) where
@@ -57,16 +55,14 @@ import           Network.Google.ProximityBeacon.Types
 type NamespacesListResource =
      "v1beta1" :>
        "namespaces" :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "projectId" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] ListNamespacesResponse
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "projectId" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] ListNamespacesResponse
 
 -- | Lists all attachment namespaces owned by your Google Developers Console
 -- project. Attachment data associated with a beacon must include a
@@ -78,12 +74,10 @@ type NamespacesListResource =
 --
 -- /See:/ 'namespacesList' smart constructor.
 data NamespacesList = NamespacesList'
-    { _nlXgafv          :: !(Maybe Text)
+    { _nlXgafv          :: !(Maybe Xgafv)
     , _nlUploadProtocol :: !(Maybe Text)
-    , _nlPp             :: !Bool
     , _nlAccessToken    :: !(Maybe Text)
     , _nlUploadType     :: !(Maybe Text)
-    , _nlBearerToken    :: !(Maybe Text)
     , _nlProjectId      :: !(Maybe Text)
     , _nlCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -96,13 +90,9 @@ data NamespacesList = NamespacesList'
 --
 -- * 'nlUploadProtocol'
 --
--- * 'nlPp'
---
 -- * 'nlAccessToken'
 --
 -- * 'nlUploadType'
---
--- * 'nlBearerToken'
 --
 -- * 'nlProjectId'
 --
@@ -113,16 +103,14 @@ namespacesList =
     NamespacesList'
     { _nlXgafv = Nothing
     , _nlUploadProtocol = Nothing
-    , _nlPp = True
     , _nlAccessToken = Nothing
     , _nlUploadType = Nothing
-    , _nlBearerToken = Nothing
     , _nlProjectId = Nothing
     , _nlCallback = Nothing
     }
 
 -- | V1 error format.
-nlXgafv :: Lens' NamespacesList (Maybe Text)
+nlXgafv :: Lens' NamespacesList (Maybe Xgafv)
 nlXgafv = lens _nlXgafv (\ s a -> s{_nlXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -130,10 +118,6 @@ nlUploadProtocol :: Lens' NamespacesList (Maybe Text)
 nlUploadProtocol
   = lens _nlUploadProtocol
       (\ s a -> s{_nlUploadProtocol = a})
-
--- | Pretty-print response.
-nlPp :: Lens' NamespacesList Bool
-nlPp = lens _nlPp (\ s a -> s{_nlPp = a})
 
 -- | OAuth access token.
 nlAccessToken :: Lens' NamespacesList (Maybe Text)
@@ -145,12 +129,6 @@ nlAccessToken
 nlUploadType :: Lens' NamespacesList (Maybe Text)
 nlUploadType
   = lens _nlUploadType (\ s a -> s{_nlUploadType = a})
-
--- | OAuth bearer token.
-nlBearerToken :: Lens' NamespacesList (Maybe Text)
-nlBearerToken
-  = lens _nlBearerToken
-      (\ s a -> s{_nlBearerToken = a})
 
 -- | The project id to list namespaces under. Optional.
 nlProjectId :: Lens' NamespacesList (Maybe Text)
@@ -167,10 +145,8 @@ instance GoogleRequest NamespacesList where
         type Scopes NamespacesList =
              '["https://www.googleapis.com/auth/userlocation.beacon.registry"]
         requestClient NamespacesList'{..}
-          = go _nlXgafv _nlUploadProtocol (Just _nlPp)
-              _nlAccessToken
+          = go _nlXgafv _nlUploadProtocol _nlAccessToken
               _nlUploadType
-              _nlBearerToken
               _nlProjectId
               _nlCallback
               (Just AltJSON)

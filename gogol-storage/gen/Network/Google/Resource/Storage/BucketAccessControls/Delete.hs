@@ -35,6 +35,7 @@ module Network.Google.Resource.Storage.BucketAccessControls.Delete
 
     -- * Request Lenses
     , bacdBucket
+    , bacdUserProject
     , bacdEntity
     ) where
 
@@ -50,15 +51,17 @@ type BucketAccessControlsDeleteResource =
            Capture "bucket" Text :>
              "acl" :>
                Capture "entity" Text :>
-                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
+                 QueryParam "userProject" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Permanently deletes the ACL entry for the specified entity on the
 -- specified bucket.
 --
 -- /See:/ 'bucketAccessControlsDelete' smart constructor.
 data BucketAccessControlsDelete = BucketAccessControlsDelete'
-    { _bacdBucket :: !Text
-    , _bacdEntity :: !Text
+    { _bacdBucket      :: !Text
+    , _bacdUserProject :: !(Maybe Text)
+    , _bacdEntity      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketAccessControlsDelete' with the minimum fields required to make a request.
@@ -66,6 +69,8 @@ data BucketAccessControlsDelete = BucketAccessControlsDelete'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'bacdBucket'
+--
+-- * 'bacdUserProject'
 --
 -- * 'bacdEntity'
 bucketAccessControlsDelete
@@ -75,6 +80,7 @@ bucketAccessControlsDelete
 bucketAccessControlsDelete pBacdBucket_ pBacdEntity_ =
     BucketAccessControlsDelete'
     { _bacdBucket = pBacdBucket_
+    , _bacdUserProject = Nothing
     , _bacdEntity = pBacdEntity_
     }
 
@@ -82,6 +88,13 @@ bucketAccessControlsDelete pBacdBucket_ pBacdEntity_ =
 bacdBucket :: Lens' BucketAccessControlsDelete Text
 bacdBucket
   = lens _bacdBucket (\ s a -> s{_bacdBucket = a})
+
+-- | The project to be billed for this request. Required for Requester Pays
+-- buckets.
+bacdUserProject :: Lens' BucketAccessControlsDelete (Maybe Text)
+bacdUserProject
+  = lens _bacdUserProject
+      (\ s a -> s{_bacdUserProject = a})
 
 -- | The entity holding the permission. Can be user-userId,
 -- user-emailAddress, group-groupId, group-emailAddress, allUsers, or
@@ -97,7 +110,8 @@ instance GoogleRequest BucketAccessControlsDelete
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/devstorage.full_control"]
         requestClient BucketAccessControlsDelete'{..}
-          = go _bacdBucket _bacdEntity (Just AltJSON)
+          = go _bacdBucket _bacdEntity _bacdUserProject
+              (Just AltJSON)
               storageService
           where go
                   = buildClient

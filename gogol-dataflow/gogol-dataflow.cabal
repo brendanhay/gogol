@@ -35,6 +35,7 @@ library
     exposed-modules:
           Network.Google.Dataflow
         , Network.Google.Dataflow.Types
+        , Network.Google.Resource.Dataflow.Projects.Jobs.Aggregated
         , Network.Google.Resource.Dataflow.Projects.Jobs.Create
         , Network.Google.Resource.Dataflow.Projects.Jobs.Debug.GetConfig
         , Network.Google.Resource.Dataflow.Projects.Jobs.Debug.SendCapture
@@ -42,18 +43,28 @@ library
         , Network.Google.Resource.Dataflow.Projects.Jobs.GetMetrics
         , Network.Google.Resource.Dataflow.Projects.Jobs.List
         , Network.Google.Resource.Dataflow.Projects.Jobs.Messages.List
+        , Network.Google.Resource.Dataflow.Projects.Jobs.Snapshot
         , Network.Google.Resource.Dataflow.Projects.Jobs.Update
         , Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.Lease
         , Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.ReportStatus
         , Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Create
+        , Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Debug.GetConfig
+        , Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Debug.SendCapture
         , Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Get
         , Network.Google.Resource.Dataflow.Projects.Locations.Jobs.GetMetrics
         , Network.Google.Resource.Dataflow.Projects.Locations.Jobs.List
         , Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Messages.List
+        , Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Snapshot
         , Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Update
         , Network.Google.Resource.Dataflow.Projects.Locations.Jobs.WorkItems.Lease
         , Network.Google.Resource.Dataflow.Projects.Locations.Jobs.WorkItems.ReportStatus
+        , Network.Google.Resource.Dataflow.Projects.Locations.Templates.Create
+        , Network.Google.Resource.Dataflow.Projects.Locations.Templates.Get
+        , Network.Google.Resource.Dataflow.Projects.Locations.Templates.Launch
+        , Network.Google.Resource.Dataflow.Projects.Locations.WorkerMessages
         , Network.Google.Resource.Dataflow.Projects.Templates.Create
+        , Network.Google.Resource.Dataflow.Projects.Templates.Get
+        , Network.Google.Resource.Dataflow.Projects.Templates.Launch
         , Network.Google.Resource.Dataflow.Projects.WorkerMessages
 
     other-modules:

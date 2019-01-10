@@ -16,7 +16,7 @@
 --
 module Network.Google.Debugger.Types.Sum where
 
-import           Network.Google.Prelude
+import           Network.Google.Prelude hiding (Bytes)
 
 -- | Reference to which the message applies.
 data StatusMessageRefersTo

@@ -42,11 +42,9 @@ module Network.Google.Resource.Classroom.Courses.Create
     -- * Request Lenses
     , ccXgafv
     , ccUploadProtocol
-    , ccPp
     , ccAccessToken
     , ccUploadType
     , ccPayload
-    , ccBearerToken
     , ccCallback
     ) where
 
@@ -58,15 +56,13 @@ import           Network.Google.Prelude
 type CoursesCreateResource =
      "v1" :>
        "courses" :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Course :> Post '[JSON] Course
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Course :> Post '[JSON] Course
 
 -- | Creates a course. The user specified in \`ownerId\` is the owner of the
 -- created course and added as a teacher. This method returns the following
@@ -79,13 +75,11 @@ type CoursesCreateResource =
 --
 -- /See:/ 'coursesCreate' smart constructor.
 data CoursesCreate = CoursesCreate'
-    { _ccXgafv          :: !(Maybe Text)
+    { _ccXgafv          :: !(Maybe Xgafv)
     , _ccUploadProtocol :: !(Maybe Text)
-    , _ccPp             :: !Bool
     , _ccAccessToken    :: !(Maybe Text)
     , _ccUploadType     :: !(Maybe Text)
     , _ccPayload        :: !Course
-    , _ccBearerToken    :: !(Maybe Text)
     , _ccCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -97,15 +91,11 @@ data CoursesCreate = CoursesCreate'
 --
 -- * 'ccUploadProtocol'
 --
--- * 'ccPp'
---
 -- * 'ccAccessToken'
 --
 -- * 'ccUploadType'
 --
 -- * 'ccPayload'
---
--- * 'ccBearerToken'
 --
 -- * 'ccCallback'
 coursesCreate
@@ -115,16 +105,14 @@ coursesCreate pCcPayload_ =
     CoursesCreate'
     { _ccXgafv = Nothing
     , _ccUploadProtocol = Nothing
-    , _ccPp = True
     , _ccAccessToken = Nothing
     , _ccUploadType = Nothing
     , _ccPayload = pCcPayload_
-    , _ccBearerToken = Nothing
     , _ccCallback = Nothing
     }
 
 -- | V1 error format.
-ccXgafv :: Lens' CoursesCreate (Maybe Text)
+ccXgafv :: Lens' CoursesCreate (Maybe Xgafv)
 ccXgafv = lens _ccXgafv (\ s a -> s{_ccXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -132,10 +120,6 @@ ccUploadProtocol :: Lens' CoursesCreate (Maybe Text)
 ccUploadProtocol
   = lens _ccUploadProtocol
       (\ s a -> s{_ccUploadProtocol = a})
-
--- | Pretty-print response.
-ccPp :: Lens' CoursesCreate Bool
-ccPp = lens _ccPp (\ s a -> s{_ccPp = a})
 
 -- | OAuth access token.
 ccAccessToken :: Lens' CoursesCreate (Maybe Text)
@@ -153,12 +137,6 @@ ccPayload :: Lens' CoursesCreate Course
 ccPayload
   = lens _ccPayload (\ s a -> s{_ccPayload = a})
 
--- | OAuth bearer token.
-ccBearerToken :: Lens' CoursesCreate (Maybe Text)
-ccBearerToken
-  = lens _ccBearerToken
-      (\ s a -> s{_ccBearerToken = a})
-
 -- | JSONP
 ccCallback :: Lens' CoursesCreate (Maybe Text)
 ccCallback
@@ -169,10 +147,8 @@ instance GoogleRequest CoursesCreate where
         type Scopes CoursesCreate =
              '["https://www.googleapis.com/auth/classroom.courses"]
         requestClient CoursesCreate'{..}
-          = go _ccXgafv _ccUploadProtocol (Just _ccPp)
-              _ccAccessToken
+          = go _ccXgafv _ccUploadProtocol _ccAccessToken
               _ccUploadType
-              _ccBearerToken
               _ccCallback
               (Just AltJSON)
               _ccPayload

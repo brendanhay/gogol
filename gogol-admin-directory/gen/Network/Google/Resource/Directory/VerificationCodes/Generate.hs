@@ -71,7 +71,7 @@ verificationCodesGenerate pVcgUserKey_ =
     { _vcgUserKey = pVcgUserKey_
     }
 
--- | Email or immutable Id of the user
+-- | Email or immutable ID of the user
 vcgUserKey :: Lens' VerificationCodesGenerate Text
 vcgUserKey
   = lens _vcgUserKey (\ s a -> s{_vcgUserKey = a})

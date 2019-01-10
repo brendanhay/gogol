@@ -35,8 +35,10 @@ module Network.Google.Resource.Drive.Permissions.Update
     -- * Request Lenses
     , puPayload
     , puRemoveExpiration
+    , puUseDomainAdminAccess
     , puTransferOwnership
     , puFileId
+    , puSupportsTeamDrives
     , puPermissionId
     ) where
 
@@ -53,20 +55,24 @@ type PermissionsUpdateResource =
              "permissions" :>
                Capture "permissionId" Text :>
                  QueryParam "removeExpiration" Bool :>
-                   QueryParam "transferOwnership" Bool :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] Permission :>
-                         Patch '[JSON] Permission
+                   QueryParam "useDomainAdminAccess" Bool :>
+                     QueryParam "transferOwnership" Bool :>
+                       QueryParam "supportsTeamDrives" Bool :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Permission :>
+                             Patch '[JSON] Permission
 
 -- | Updates a permission with patch semantics.
 --
 -- /See:/ 'permissionsUpdate' smart constructor.
 data PermissionsUpdate = PermissionsUpdate'
-    { _puPayload           :: !Permission
-    , _puRemoveExpiration  :: !Bool
-    , _puTransferOwnership :: !Bool
-    , _puFileId            :: !Text
-    , _puPermissionId      :: !Text
+    { _puPayload              :: !Permission
+    , _puRemoveExpiration     :: !Bool
+    , _puUseDomainAdminAccess :: !Bool
+    , _puTransferOwnership    :: !Bool
+    , _puFileId               :: !Text
+    , _puSupportsTeamDrives   :: !Bool
+    , _puPermissionId         :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PermissionsUpdate' with the minimum fields required to make a request.
@@ -77,9 +83,13 @@ data PermissionsUpdate = PermissionsUpdate'
 --
 -- * 'puRemoveExpiration'
 --
+-- * 'puUseDomainAdminAccess'
+--
 -- * 'puTransferOwnership'
 --
 -- * 'puFileId'
+--
+-- * 'puSupportsTeamDrives'
 --
 -- * 'puPermissionId'
 permissionsUpdate
@@ -91,8 +101,10 @@ permissionsUpdate pPuPayload_ pPuFileId_ pPuPermissionId_ =
     PermissionsUpdate'
     { _puPayload = pPuPayload_
     , _puRemoveExpiration = False
+    , _puUseDomainAdminAccess = False
     , _puTransferOwnership = False
     , _puFileId = pPuFileId_
+    , _puSupportsTeamDrives = False
     , _puPermissionId = pPuPermissionId_
     }
 
@@ -107,6 +119,14 @@ puRemoveExpiration
   = lens _puRemoveExpiration
       (\ s a -> s{_puRemoveExpiration = a})
 
+-- | Issue the request as a domain administrator; if set to true, then the
+-- requester will be granted access if they are an administrator of the
+-- domain to which the item belongs.
+puUseDomainAdminAccess :: Lens' PermissionsUpdate Bool
+puUseDomainAdminAccess
+  = lens _puUseDomainAdminAccess
+      (\ s a -> s{_puUseDomainAdminAccess = a})
+
 -- | Whether to transfer ownership to the specified user and downgrade the
 -- current owner to a writer. This parameter is required as an
 -- acknowledgement of the side effect.
@@ -115,9 +135,15 @@ puTransferOwnership
   = lens _puTransferOwnership
       (\ s a -> s{_puTransferOwnership = a})
 
--- | The ID of the file.
+-- | The ID of the file or Team Drive.
 puFileId :: Lens' PermissionsUpdate Text
 puFileId = lens _puFileId (\ s a -> s{_puFileId = a})
+
+-- | Whether the requesting application supports Team Drives.
+puSupportsTeamDrives :: Lens' PermissionsUpdate Bool
+puSupportsTeamDrives
+  = lens _puSupportsTeamDrives
+      (\ s a -> s{_puSupportsTeamDrives = a})
 
 -- | The ID of the permission.
 puPermissionId :: Lens' PermissionsUpdate Text
@@ -133,7 +159,9 @@ instance GoogleRequest PermissionsUpdate where
         requestClient PermissionsUpdate'{..}
           = go _puFileId _puPermissionId
               (Just _puRemoveExpiration)
+              (Just _puUseDomainAdminAccess)
               (Just _puTransferOwnership)
+              (Just _puSupportsTeamDrives)
               (Just AltJSON)
               _puPayload
               driveService

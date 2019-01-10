@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'PurchasesSubscriptionsRefund' request conforms to.
 type PurchasesSubscriptionsRefundResource =
      "androidpublisher" :>
-       "v2" :>
+       "v3" :>
          "applications" :>
            Capture "packageName" Text :>
              "purchases" :>

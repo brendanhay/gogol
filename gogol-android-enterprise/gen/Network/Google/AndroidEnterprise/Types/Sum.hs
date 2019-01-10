@@ -16,7 +16,7 @@
 --
 module Network.Google.AndroidEnterprise.Types.Sum where
 
-import           Network.Google.Prelude
+import           Network.Google.Prelude hiding (Bytes)
 
 -- | The request mode for pulling notifications. Specifying
 -- waitForNotifications will cause the request to block and wait until one

@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 -- 'EditsImagesDelete' request conforms to.
 type EditsImagesDeleteResource =
      "androidpublisher" :>
-       "v2" :>
+       "v3" :>
          "applications" :>
            Capture "packageName" Text :>
              "edits" :>

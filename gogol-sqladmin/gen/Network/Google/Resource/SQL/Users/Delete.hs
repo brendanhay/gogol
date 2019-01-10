@@ -22,7 +22,7 @@
 --
 -- Deletes a user from a Cloud SQL instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.users.delete@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.users.delete@.
 module Network.Google.Resource.SQL.Users.Delete
     (
     -- * REST Resource

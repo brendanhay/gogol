@@ -34,6 +34,7 @@ module Network.Google.Resource.Compute.Firewalls.Insert
     , FirewallsInsert
 
     -- * Request Lenses
+    , fiRequestId
     , fiProject
     , fiPayload
     ) where
@@ -50,21 +51,25 @@ type FirewallsInsertResource =
            Capture "project" Text :>
              "global" :>
                "firewalls" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] Firewall :> Post '[JSON] Operation
+                 QueryParam "requestId" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Firewall :> Post '[JSON] Operation
 
 -- | Creates a firewall rule in the specified project using the data included
 -- in the request.
 --
 -- /See:/ 'firewallsInsert' smart constructor.
 data FirewallsInsert = FirewallsInsert'
-    { _fiProject :: !Text
-    , _fiPayload :: !Firewall
+    { _fiRequestId :: !(Maybe Text)
+    , _fiProject   :: !Text
+    , _fiPayload   :: !Firewall
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FirewallsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'fiRequestId'
 --
 -- * 'fiProject'
 --
@@ -75,9 +80,24 @@ firewallsInsert
     -> FirewallsInsert
 firewallsInsert pFiProject_ pFiPayload_ =
     FirewallsInsert'
-    { _fiProject = pFiProject_
+    { _fiRequestId = Nothing
+    , _fiProject = pFiProject_
     , _fiPayload = pFiPayload_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+fiRequestId :: Lens' FirewallsInsert (Maybe Text)
+fiRequestId
+  = lens _fiRequestId (\ s a -> s{_fiRequestId = a})
 
 -- | Project ID for this request.
 fiProject :: Lens' FirewallsInsert Text
@@ -95,7 +115,8 @@ instance GoogleRequest FirewallsInsert where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient FirewallsInsert'{..}
-          = go _fiProject (Just AltJSON) _fiPayload
+          = go _fiProject _fiRequestId (Just AltJSON)
+              _fiPayload
               computeService
           where go
                   = buildClient

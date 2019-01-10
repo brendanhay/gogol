@@ -14,8 +14,8 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    Lets advertisers search certified companies and create contact leads
-    with them, and also audits the usage of clients.
+    Searches certified companies and creates contact leads with them, and
+    also audits the usage of clients.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -36,12 +36,23 @@ library
     exposed-modules:
           Network.Google.Partners
         , Network.Google.Partners.Types
+        , Network.Google.Resource.Partners.Analytics.List
         , Network.Google.Resource.Partners.ClientMessages.Log
         , Network.Google.Resource.Partners.Companies.Get
         , Network.Google.Resource.Partners.Companies.Leads.Create
         , Network.Google.Resource.Partners.Companies.List
+        , Network.Google.Resource.Partners.GetPartnersstatus
+        , Network.Google.Resource.Partners.Leads.List
+        , Network.Google.Resource.Partners.Offers.History.List
+        , Network.Google.Resource.Partners.Offers.List
+        , Network.Google.Resource.Partners.UpdateCompanies
+        , Network.Google.Resource.Partners.UpdateLeads
         , Network.Google.Resource.Partners.UserEvents.Log
         , Network.Google.Resource.Partners.UserStates.List
+        , Network.Google.Resource.Partners.Users.CreateCompanyRelation
+        , Network.Google.Resource.Partners.Users.DeleteCompanyRelation
+        , Network.Google.Resource.Partners.Users.Get
+        , Network.Google.Resource.Partners.Users.UpdateProFile
 
     other-modules:
           Network.Google.Partners.Types.Product

@@ -104,7 +104,7 @@ ugProjection :: Lens' UsersGet UsersGetProjection
 ugProjection
   = lens _ugProjection (\ s a -> s{_ugProjection = a})
 
--- | Email or immutable Id of the user
+-- | Email or immutable ID of the user
 ugUserKey :: Lens' UsersGet Text
 ugUserKey
   = lens _ugUserKey (\ s a -> s{_ugUserKey = a})

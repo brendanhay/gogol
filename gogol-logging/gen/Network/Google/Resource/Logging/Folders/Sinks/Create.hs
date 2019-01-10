@@ -22,9 +22,8 @@
 --
 -- Creates a sink that exports specified log entries to a destination. The
 -- export of newly-ingested log entries begins immediately, unless the
--- current time is outside the sink\'s start and end times or the sink\'s
--- writer_identity is not permitted to write to the destination. A sink can
--- export log entries only from the resource owning the sink.
+-- sink\'s writer_identity is not permitted to write to the destination. A
+-- sink can export log entries only from the resource owning the sink.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.folders.sinks.create@.
 module Network.Google.Resource.Logging.Folders.Sinks.Create
@@ -41,11 +40,9 @@ module Network.Google.Resource.Logging.Folders.Sinks.Create
     , fscXgafv
     , fscUniqueWriterIdentity
     , fscUploadProtocol
-    , fscPp
     , fscAccessToken
     , fscUploadType
     , fscPayload
-    , fscBearerToken
     , fscCallback
     ) where
 
@@ -61,19 +58,16 @@ type FoldersSinksCreateResource =
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "uniqueWriterIdentity" Bool :>
                QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "callback" Text :>
-                           QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] LogSink :> Post '[JSON] LogSink
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] LogSink :> Post '[JSON] LogSink
 
 -- | Creates a sink that exports specified log entries to a destination. The
 -- export of newly-ingested log entries begins immediately, unless the
--- current time is outside the sink\'s start and end times or the sink\'s
--- writer_identity is not permitted to write to the destination. A sink can
--- export log entries only from the resource owning the sink.
+-- sink\'s writer_identity is not permitted to write to the destination. A
+-- sink can export log entries only from the resource owning the sink.
 --
 -- /See:/ 'foldersSinksCreate' smart constructor.
 data FoldersSinksCreate = FoldersSinksCreate'
@@ -81,11 +75,9 @@ data FoldersSinksCreate = FoldersSinksCreate'
     , _fscXgafv                :: !(Maybe Xgafv)
     , _fscUniqueWriterIdentity :: !(Maybe Bool)
     , _fscUploadProtocol       :: !(Maybe Text)
-    , _fscPp                   :: !Bool
     , _fscAccessToken          :: !(Maybe Text)
     , _fscUploadType           :: !(Maybe Text)
     , _fscPayload              :: !LogSink
-    , _fscBearerToken          :: !(Maybe Text)
     , _fscCallback             :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -101,15 +93,11 @@ data FoldersSinksCreate = FoldersSinksCreate'
 --
 -- * 'fscUploadProtocol'
 --
--- * 'fscPp'
---
 -- * 'fscAccessToken'
 --
 -- * 'fscUploadType'
 --
 -- * 'fscPayload'
---
--- * 'fscBearerToken'
 --
 -- * 'fscCallback'
 foldersSinksCreate
@@ -122,16 +110,15 @@ foldersSinksCreate pFscParent_ pFscPayload_ =
     , _fscXgafv = Nothing
     , _fscUniqueWriterIdentity = Nothing
     , _fscUploadProtocol = Nothing
-    , _fscPp = True
     , _fscAccessToken = Nothing
     , _fscUploadType = Nothing
     , _fscPayload = pFscPayload_
-    , _fscBearerToken = Nothing
     , _fscCallback = Nothing
     }
 
 -- | Required. The resource in which to create the sink:
 -- \"projects\/[PROJECT_ID]\" \"organizations\/[ORGANIZATION_ID]\"
+-- \"billingAccounts\/[BILLING_ACCOUNT_ID]\" \"folders\/[FOLDER_ID]\"
 -- Examples: \"projects\/my-logging-project\",
 -- \"organizations\/123456789\".
 fscParent :: Lens' FoldersSinksCreate Text
@@ -145,7 +132,7 @@ fscXgafv = lens _fscXgafv (\ s a -> s{_fscXgafv = a})
 -- | Optional. Determines the kind of IAM identity returned as
 -- writer_identity in the new sink. If this value is omitted or set to
 -- false, and if the sink\'s parent is a project, then the value returned
--- as writer_identity is cloud-logs\'google.com, the same identity used
+-- as writer_identity is the same group or service account used by Logging
 -- before the addition of writer identities to this API. The sink\'s
 -- destination must be in the same project as the sink itself.If this field
 -- is set to true, or if the sink is owned by a non-project resource such
@@ -162,10 +149,6 @@ fscUploadProtocol :: Lens' FoldersSinksCreate (Maybe Text)
 fscUploadProtocol
   = lens _fscUploadProtocol
       (\ s a -> s{_fscUploadProtocol = a})
-
--- | Pretty-print response.
-fscPp :: Lens' FoldersSinksCreate Bool
-fscPp = lens _fscPp (\ s a -> s{_fscPp = a})
 
 -- | OAuth access token.
 fscAccessToken :: Lens' FoldersSinksCreate (Maybe Text)
@@ -184,12 +167,6 @@ fscPayload :: Lens' FoldersSinksCreate LogSink
 fscPayload
   = lens _fscPayload (\ s a -> s{_fscPayload = a})
 
--- | OAuth bearer token.
-fscBearerToken :: Lens' FoldersSinksCreate (Maybe Text)
-fscBearerToken
-  = lens _fscBearerToken
-      (\ s a -> s{_fscBearerToken = a})
-
 -- | JSONP
 fscCallback :: Lens' FoldersSinksCreate (Maybe Text)
 fscCallback
@@ -203,10 +180,8 @@ instance GoogleRequest FoldersSinksCreate where
         requestClient FoldersSinksCreate'{..}
           = go _fscParent _fscXgafv _fscUniqueWriterIdentity
               _fscUploadProtocol
-              (Just _fscPp)
               _fscAccessToken
               _fscUploadType
-              _fscBearerToken
               _fscCallback
               (Just AltJSON)
               _fscPayload

@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 -- 'CampaignCreativeAssociationsInsert' request conforms to.
 type CampaignCreativeAssociationsInsertResource =
      "dfareporting" :>
-       "v2.7" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "campaigns" :>

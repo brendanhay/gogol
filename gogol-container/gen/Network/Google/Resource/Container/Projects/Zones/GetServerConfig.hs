@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns configuration info about the Container Engine service.
+-- Returns configuration info about the Kubernetes Engine service.
 --
--- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @container.projects.zones.getServerconfig@.
+-- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.zones.getServerconfig@.
 module Network.Google.Resource.Container.Projects.Zones.GetServerConfig
     (
     -- * REST Resource
@@ -35,11 +35,10 @@ module Network.Google.Resource.Container.Projects.Zones.GetServerConfig
     -- * Request Lenses
     , pzgscXgafv
     , pzgscUploadProtocol
-    , pzgscPp
     , pzgscAccessToken
     , pzgscUploadType
     , pzgscZone
-    , pzgscBearerToken
+    , pzgscName
     , pzgscProjectId
     , pzgscCallback
     ) where
@@ -56,27 +55,25 @@ type ProjectsZonesGetServerConfigResource =
            "zones" :>
              Capture "zone" Text :>
                "serverconfig" :>
-                 QueryParam "$.xgafv" Text :>
+                 QueryParam "$.xgafv" Xgafv :>
                    QueryParam "upload_protocol" Text :>
-                     QueryParam "pp" Bool :>
-                       QueryParam "access_token" Text :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "bearer_token" Text :>
-                             QueryParam "callback" Text :>
-                               QueryParam "alt" AltJSON :>
-                                 Get '[JSON] ServerConfig
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "name" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] ServerConfig
 
--- | Returns configuration info about the Container Engine service.
+-- | Returns configuration info about the Kubernetes Engine service.
 --
 -- /See:/ 'projectsZonesGetServerConfig' smart constructor.
 data ProjectsZonesGetServerConfig = ProjectsZonesGetServerConfig'
-    { _pzgscXgafv          :: !(Maybe Text)
+    { _pzgscXgafv          :: !(Maybe Xgafv)
     , _pzgscUploadProtocol :: !(Maybe Text)
-    , _pzgscPp             :: !Bool
     , _pzgscAccessToken    :: !(Maybe Text)
     , _pzgscUploadType     :: !(Maybe Text)
     , _pzgscZone           :: !Text
-    , _pzgscBearerToken    :: !(Maybe Text)
+    , _pzgscName           :: !(Maybe Text)
     , _pzgscProjectId      :: !Text
     , _pzgscCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -89,15 +86,13 @@ data ProjectsZonesGetServerConfig = ProjectsZonesGetServerConfig'
 --
 -- * 'pzgscUploadProtocol'
 --
--- * 'pzgscPp'
---
 -- * 'pzgscAccessToken'
 --
 -- * 'pzgscUploadType'
 --
 -- * 'pzgscZone'
 --
--- * 'pzgscBearerToken'
+-- * 'pzgscName'
 --
 -- * 'pzgscProjectId'
 --
@@ -110,17 +105,16 @@ projectsZonesGetServerConfig pPzgscZone_ pPzgscProjectId_ =
     ProjectsZonesGetServerConfig'
     { _pzgscXgafv = Nothing
     , _pzgscUploadProtocol = Nothing
-    , _pzgscPp = True
     , _pzgscAccessToken = Nothing
     , _pzgscUploadType = Nothing
     , _pzgscZone = pPzgscZone_
-    , _pzgscBearerToken = Nothing
+    , _pzgscName = Nothing
     , _pzgscProjectId = pPzgscProjectId_
     , _pzgscCallback = Nothing
     }
 
 -- | V1 error format.
-pzgscXgafv :: Lens' ProjectsZonesGetServerConfig (Maybe Text)
+pzgscXgafv :: Lens' ProjectsZonesGetServerConfig (Maybe Xgafv)
 pzgscXgafv
   = lens _pzgscXgafv (\ s a -> s{_pzgscXgafv = a})
 
@@ -129,10 +123,6 @@ pzgscUploadProtocol :: Lens' ProjectsZonesGetServerConfig (Maybe Text)
 pzgscUploadProtocol
   = lens _pzgscUploadProtocol
       (\ s a -> s{_pzgscUploadProtocol = a})
-
--- | Pretty-print response.
-pzgscPp :: Lens' ProjectsZonesGetServerConfig Bool
-pzgscPp = lens _pzgscPp (\ s a -> s{_pzgscPp = a})
 
 -- | OAuth access token.
 pzgscAccessToken :: Lens' ProjectsZonesGetServerConfig (Maybe Text)
@@ -146,20 +136,22 @@ pzgscUploadType
   = lens _pzgscUploadType
       (\ s a -> s{_pzgscUploadType = a})
 
--- | The name of the Google Compute Engine
--- [zone](\/compute\/docs\/zones#available) to return operations for.
+-- | Deprecated. The name of the Google Compute Engine
+-- [zone](\/compute\/docs\/zones#available) to return operations for. This
+-- field has been deprecated and replaced by the name field.
 pzgscZone :: Lens' ProjectsZonesGetServerConfig Text
 pzgscZone
   = lens _pzgscZone (\ s a -> s{_pzgscZone = a})
 
--- | OAuth bearer token.
-pzgscBearerToken :: Lens' ProjectsZonesGetServerConfig (Maybe Text)
-pzgscBearerToken
-  = lens _pzgscBearerToken
-      (\ s a -> s{_pzgscBearerToken = a})
+-- | The name (project and location) of the server config to get Specified in
+-- the format \'projects\/*\/locations\/*\'.
+pzgscName :: Lens' ProjectsZonesGetServerConfig (Maybe Text)
+pzgscName
+  = lens _pzgscName (\ s a -> s{_pzgscName = a})
 
--- | The Google Developers Console [project ID or project
--- number](https:\/\/support.google.com\/cloud\/answer\/6158840).
+-- | Deprecated. The Google Developers Console [project ID or project
+-- number](https:\/\/support.google.com\/cloud\/answer\/6158840). This
+-- field has been deprecated and replaced by the name field.
 pzgscProjectId :: Lens' ProjectsZonesGetServerConfig Text
 pzgscProjectId
   = lens _pzgscProjectId
@@ -179,10 +171,9 @@ instance GoogleRequest ProjectsZonesGetServerConfig
         requestClient ProjectsZonesGetServerConfig'{..}
           = go _pzgscProjectId _pzgscZone _pzgscXgafv
               _pzgscUploadProtocol
-              (Just _pzgscPp)
               _pzgscAccessToken
               _pzgscUploadType
-              _pzgscBearerToken
+              _pzgscName
               _pzgscCallback
               (Just AltJSON)
               containerService

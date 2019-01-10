@@ -20,12 +20,16 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Schedules a group action to recreate the specified instances in the
--- managed instance group. The instances are deleted and recreated using
--- the current instance template for the managed instance group. This
--- operation is marked as DONE when the action is scheduled even if the
--- instances have not yet been recreated. You must separately verify the
--- status of the recreating action with the listmanagedinstances method.
+-- Flags the specified instances in the managed instance group to be
+-- immediately recreated. The instances are deleted and recreated using the
+-- current instance template for the managed instance group. This operation
+-- is marked as DONE when the flag is set even if the instances have not
+-- yet been recreated. You must separately verify the status of the
+-- recreating action with the listmanagedinstances method. If the group is
+-- part of a backend service that has enabled connection draining, it can
+-- take up to 60 seconds after the connection draining duration has elapsed
+-- before the VM instance is removed or deleted. You can specify a maximum
+-- of 1000 instances with this method per request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceGroupManagers.recreateInstances@.
 module Network.Google.Resource.Compute.InstanceGroupManagers.RecreateInstances
@@ -38,6 +42,7 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.RecreateInstances
     , InstanceGroupManagersRecreateInstances
 
     -- * Request Lenses
+    , igmriRequestId
     , igmriProject
     , igmriInstanceGroupManager
     , igmriZone
@@ -59,21 +64,27 @@ type InstanceGroupManagersRecreateInstancesResource =
                  "instanceGroupManagers" :>
                    Capture "instanceGroupManager" Text :>
                      "recreateInstances" :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON]
-                           InstanceGroupManagersRecreateInstancesRequest
-                           :> Post '[JSON] Operation
+                       QueryParam "requestId" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON]
+                             InstanceGroupManagersRecreateInstancesRequest
+                             :> Post '[JSON] Operation
 
--- | Schedules a group action to recreate the specified instances in the
--- managed instance group. The instances are deleted and recreated using
--- the current instance template for the managed instance group. This
--- operation is marked as DONE when the action is scheduled even if the
--- instances have not yet been recreated. You must separately verify the
--- status of the recreating action with the listmanagedinstances method.
+-- | Flags the specified instances in the managed instance group to be
+-- immediately recreated. The instances are deleted and recreated using the
+-- current instance template for the managed instance group. This operation
+-- is marked as DONE when the flag is set even if the instances have not
+-- yet been recreated. You must separately verify the status of the
+-- recreating action with the listmanagedinstances method. If the group is
+-- part of a backend service that has enabled connection draining, it can
+-- take up to 60 seconds after the connection draining duration has elapsed
+-- before the VM instance is removed or deleted. You can specify a maximum
+-- of 1000 instances with this method per request.
 --
 -- /See:/ 'instanceGroupManagersRecreateInstances' smart constructor.
 data InstanceGroupManagersRecreateInstances = InstanceGroupManagersRecreateInstances'
-    { _igmriProject              :: !Text
+    { _igmriRequestId            :: !(Maybe Text)
+    , _igmriProject              :: !Text
     , _igmriInstanceGroupManager :: !Text
     , _igmriZone                 :: !Text
     , _igmriPayload              :: !InstanceGroupManagersRecreateInstancesRequest
@@ -82,6 +93,8 @@ data InstanceGroupManagersRecreateInstances = InstanceGroupManagersRecreateInsta
 -- | Creates a value of 'InstanceGroupManagersRecreateInstances' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'igmriRequestId'
 --
 -- * 'igmriProject'
 --
@@ -98,11 +111,27 @@ instanceGroupManagersRecreateInstances
     -> InstanceGroupManagersRecreateInstances
 instanceGroupManagersRecreateInstances pIgmriProject_ pIgmriInstanceGroupManager_ pIgmriZone_ pIgmriPayload_ =
     InstanceGroupManagersRecreateInstances'
-    { _igmriProject = pIgmriProject_
+    { _igmriRequestId = Nothing
+    , _igmriProject = pIgmriProject_
     , _igmriInstanceGroupManager = pIgmriInstanceGroupManager_
     , _igmriZone = pIgmriZone_
     , _igmriPayload = pIgmriPayload_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+igmriRequestId :: Lens' InstanceGroupManagersRecreateInstances (Maybe Text)
+igmriRequestId
+  = lens _igmriRequestId
+      (\ s a -> s{_igmriRequestId = a})
 
 -- | Project ID for this request.
 igmriProject :: Lens' InstanceGroupManagersRecreateInstances Text
@@ -136,6 +165,7 @@ instance GoogleRequest
           InstanceGroupManagersRecreateInstances'{..}
           = go _igmriProject _igmriZone
               _igmriInstanceGroupManager
+              _igmriRequestId
               (Just AltJSON)
               _igmriPayload
               computeService

@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'TargetingTemplatesGet' request conforms to.
 type TargetingTemplatesGetResource =
      "dfareporting" :>
-       "v2.7" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "targetingTemplates" :>

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- List of all entitlements for the specified user. Only the ID is set.
+-- Lists all entitlements for the specified user. Only the ID is set.
 --
 -- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.entitlements.list@.
 module Network.Google.Resource.AndroidEnterprise.Entitlements.List
@@ -53,7 +53,7 @@ type EntitlementsListResource =
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] EntitlementsListResponse
 
--- | List of all entitlements for the specified user. Only the ID is set.
+-- | Lists all entitlements for the specified user. Only the ID is set.
 --
 -- /See:/ 'entitlementsList' smart constructor.
 data EntitlementsList = EntitlementsList'

@@ -90,7 +90,7 @@ npPayload :: Lens' NotificationsPatch Notification
 npPayload
   = lens _npPayload (\ s a -> s{_npPayload = a})
 
--- | The unique ID for the customer\'s Google account.
+-- | The unique ID for the customer\'s G Suite account.
 npCustomer :: Lens' NotificationsPatch Text
 npCustomer
   = lens _npCustomer (\ s a -> s{_npCustomer = a})

@@ -35,12 +35,10 @@ module Network.Google.Resource.Slides.Presentations.Pages.Get
     -- * Request Lenses
     , ppgXgafv
     , ppgUploadProtocol
-    , ppgPp
     , ppgAccessToken
     , ppgPageObjectId
     , ppgUploadType
     , ppgPresentationId
-    , ppgBearerToken
     , ppgCallback
     ) where
 
@@ -57,12 +55,10 @@ type PresentationsPagesGetResource =
              Capture "pageObjectId" Text :>
                QueryParam "$.xgafv" Xgafv :>
                  QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :> Get '[JSON] Page
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] Page
 
 -- | Gets the latest version of the specified page in the presentation.
 --
@@ -70,12 +66,10 @@ type PresentationsPagesGetResource =
 data PresentationsPagesGet = PresentationsPagesGet'
     { _ppgXgafv          :: !(Maybe Xgafv)
     , _ppgUploadProtocol :: !(Maybe Text)
-    , _ppgPp             :: !Bool
     , _ppgAccessToken    :: !(Maybe Text)
     , _ppgPageObjectId   :: !Text
     , _ppgUploadType     :: !(Maybe Text)
     , _ppgPresentationId :: !Text
-    , _ppgBearerToken    :: !(Maybe Text)
     , _ppgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -87,8 +81,6 @@ data PresentationsPagesGet = PresentationsPagesGet'
 --
 -- * 'ppgUploadProtocol'
 --
--- * 'ppgPp'
---
 -- * 'ppgAccessToken'
 --
 -- * 'ppgPageObjectId'
@@ -96,8 +88,6 @@ data PresentationsPagesGet = PresentationsPagesGet'
 -- * 'ppgUploadType'
 --
 -- * 'ppgPresentationId'
---
--- * 'ppgBearerToken'
 --
 -- * 'ppgCallback'
 presentationsPagesGet
@@ -108,12 +98,10 @@ presentationsPagesGet pPpgPageObjectId_ pPpgPresentationId_ =
     PresentationsPagesGet'
     { _ppgXgafv = Nothing
     , _ppgUploadProtocol = Nothing
-    , _ppgPp = True
     , _ppgAccessToken = Nothing
     , _ppgPageObjectId = pPpgPageObjectId_
     , _ppgUploadType = Nothing
     , _ppgPresentationId = pPpgPresentationId_
-    , _ppgBearerToken = Nothing
     , _ppgCallback = Nothing
     }
 
@@ -126,10 +114,6 @@ ppgUploadProtocol :: Lens' PresentationsPagesGet (Maybe Text)
 ppgUploadProtocol
   = lens _ppgUploadProtocol
       (\ s a -> s{_ppgUploadProtocol = a})
-
--- | Pretty-print response.
-ppgPp :: Lens' PresentationsPagesGet Bool
-ppgPp = lens _ppgPp (\ s a -> s{_ppgPp = a})
 
 -- | OAuth access token.
 ppgAccessToken :: Lens' PresentationsPagesGet (Maybe Text)
@@ -155,12 +139,6 @@ ppgPresentationId
   = lens _ppgPresentationId
       (\ s a -> s{_ppgPresentationId = a})
 
--- | OAuth bearer token.
-ppgBearerToken :: Lens' PresentationsPagesGet (Maybe Text)
-ppgBearerToken
-  = lens _ppgBearerToken
-      (\ s a -> s{_ppgBearerToken = a})
-
 -- | JSONP
 ppgCallback :: Lens' PresentationsPagesGet (Maybe Text)
 ppgCallback
@@ -170,16 +148,15 @@ instance GoogleRequest PresentationsPagesGet where
         type Rs PresentationsPagesGet = Page
         type Scopes PresentationsPagesGet =
              '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file",
                "https://www.googleapis.com/auth/drive.readonly",
                "https://www.googleapis.com/auth/presentations",
                "https://www.googleapis.com/auth/presentations.readonly"]
         requestClient PresentationsPagesGet'{..}
           = go _ppgPresentationId _ppgPageObjectId _ppgXgafv
               _ppgUploadProtocol
-              (Just _ppgPp)
               _ppgAccessToken
               _ppgUploadType
-              _ppgBearerToken
               _ppgCallback
               (Just AltJSON)
               slidesService

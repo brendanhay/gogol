@@ -16,7 +16,7 @@
 -- Enables client applications to check web resources (most commonly URLs)
 -- against Google-generated lists of unsafe web resources.
 --
--- /See:/ <https://developers.google.com/safe-browsing/ Safe Browsing APIs Reference>
+-- /See:/ <https://developers.google.com/safe-browsing/ Safe Browsing API Reference>
 module Network.Google.SafeBrowsing
     (
     -- * Service Configuration
@@ -27,8 +27,17 @@ module Network.Google.SafeBrowsing
 
     -- * Resources
 
+    -- ** safebrowsing.encodedFullHashes.get
+    , module Network.Google.Resource.SafeBrowsing.EncodedFullHashes.Get
+
+    -- ** safebrowsing.encodedUpdates.get
+    , module Network.Google.Resource.SafeBrowsing.EncodedUpdates.Get
+
     -- ** safebrowsing.fullHashes.find
     , module Network.Google.Resource.SafeBrowsing.FullHashes.Find
+
+    -- ** safebrowsing.threatHits.create
+    , module Network.Google.Resource.SafeBrowsing.ThreatHits.Create
 
     -- ** safebrowsing.threatListUpdates.fetch
     , module Network.Google.Resource.SafeBrowsing.ThreatListUpdates.Fetch
@@ -41,10 +50,28 @@ module Network.Google.SafeBrowsing
 
     -- * Types
 
+    -- ** ListUpdateRequestThreatType
+    , ListUpdateRequestThreatType (..)
+
+    -- ** ListUpdateResponsePlatformType
+    , ListUpdateResponsePlatformType (..)
+
     -- ** ThreatEntryMetadata
     , ThreatEntryMetadata
     , threatEntryMetadata
     , temEntries
+
+    -- ** UserInfo
+    , UserInfo
+    , userInfo
+    , uiRegionCode
+    , uiUserId
+
+    -- ** ThreatMatchThreatEntryType
+    , ThreatMatchThreatEntryType (..)
+
+    -- ** ThreatMatchPlatformType
+    , ThreatMatchPlatformType (..)
 
     -- ** Checksum
     , Checksum
@@ -56,6 +83,19 @@ module Network.Google.SafeBrowsing
     , findThreatMatchesResponse
     , ftmrMatches
 
+    -- ** ThreatListDescriptorThreatEntryType
+    , ThreatListDescriptorThreatEntryType (..)
+
+    -- ** Empty
+    , Empty
+    , empty
+
+    -- ** ListUpdateRequestPlatformType
+    , ListUpdateRequestPlatformType (..)
+
+    -- ** ThreatListDescriptorPlatformType
+    , ThreatListDescriptorPlatformType (..)
+
     -- ** ThreatInfo
     , ThreatInfo
     , threatInfo
@@ -63,6 +103,22 @@ module Network.Google.SafeBrowsing
     , tiThreatTypes
     , tiPlatformTypes
     , tiThreatEntryTypes
+
+    -- ** ListUpdateResponseResponseType
+    , ListUpdateResponseResponseType (..)
+
+    -- ** ThreatSourceType
+    , ThreatSourceType (..)
+
+    -- ** ThreatHit
+    , ThreatHit
+    , threatHit
+    , thUserInfo
+    , thThreatType
+    , thResources
+    , thEntry
+    , thClientInfo
+    , thPlatformType
 
     -- ** FetchThreatListUpdatesRequest
     , FetchThreatListUpdatesRequest
@@ -74,13 +130,22 @@ module Network.Google.SafeBrowsing
     , FindFullHashesRequest
     , findFullHashesRequest
     , ffhrThreatInfo
+    , ffhrAPIClient
     , ffhrClientStates
     , ffhrClient
+
+    -- ** ThreatMatchThreatType
+    , ThreatMatchThreatType (..)
+
+    -- ** ThreatEntrySetCompressionType
+    , ThreatEntrySetCompressionType (..)
 
     -- ** Constraints
     , Constraints
     , constraints
     , cMaxUpdateEntries
+    , cDeviceLocation
+    , cLanguage
     , cRegion
     , cSupportedCompressions
     , cMaxDatabaseEntries
@@ -97,6 +162,12 @@ module Network.Google.SafeBrowsing
     , ListThreatListsResponse
     , listThreatListsResponse
     , ltlrThreatLists
+
+    -- ** ThreatListDescriptorThreatType
+    , ThreatListDescriptorThreatType (..)
+
+    -- ** ThreatHitPlatformType
+    , ThreatHitPlatformType (..)
 
     -- ** ThreatListDescriptor
     , ThreatListDescriptor
@@ -117,6 +188,9 @@ module Network.Google.SafeBrowsing
     , ftmrThreatInfo
     , ftmrClient
 
+    -- ** Xgafv
+    , Xgafv (..)
+
     -- ** ListUpdateRequest
     , ListUpdateRequest
     , listUpdateRequest
@@ -125,6 +199,9 @@ module Network.Google.SafeBrowsing
     , lurConstraints
     , lurThreatType
     , lurPlatformType
+
+    -- ** ListUpdateResponseThreatEntryType
+    , ListUpdateResponseThreatEntryType (..)
 
     -- ** ThreatEntry
     , ThreatEntry
@@ -142,6 +219,12 @@ module Network.Google.SafeBrowsing
     , tmPlatformType
     , tmCacheDuration
     , tmThreat
+
+    -- ** ThreatHitThreatType
+    , ThreatHitThreatType (..)
+
+    -- ** ListUpdateRequestThreatEntryType
+    , ListUpdateRequestThreatEntryType (..)
 
     -- ** RawHashes
     , RawHashes
@@ -175,6 +258,17 @@ module Network.Google.SafeBrowsing
     , rawIndices
     , riIndices
 
+    -- ** ThreatSource
+    , ThreatSource
+    , threatSource
+    , tsRemoteIP
+    , tsURL
+    , tsReferrer
+    , tsType
+
+    -- ** ListUpdateResponseThreatType
+    , ListUpdateResponseThreatType (..)
+
     -- ** FindFullHashesResponse
     , FindFullHashesResponse
     , findFullHashesResponse
@@ -196,7 +290,10 @@ module Network.Google.SafeBrowsing
     ) where
 
 import           Network.Google.Prelude
+import           Network.Google.Resource.SafeBrowsing.EncodedFullHashes.Get
+import           Network.Google.Resource.SafeBrowsing.EncodedUpdates.Get
 import           Network.Google.Resource.SafeBrowsing.FullHashes.Find
+import           Network.Google.Resource.SafeBrowsing.ThreatHits.Create
 import           Network.Google.Resource.SafeBrowsing.ThreatLists.List
 import           Network.Google.Resource.SafeBrowsing.ThreatListUpdates.Fetch
 import           Network.Google.Resource.SafeBrowsing.ThreatMatches.Find
@@ -206,8 +303,11 @@ import           Network.Google.SafeBrowsing.Types
 TODO
 -}
 
--- | Represents the entirety of the methods and resources available for the Safe Browsing APIs service.
+-- | Represents the entirety of the methods and resources available for the Safe Browsing API service.
 type SafeBrowsingAPI =
-     FullHashesFindResource :<|> ThreatMatchesFindResource
+     FullHashesFindResource :<|> EncodedUpdatesGetResource
+       :<|> ThreatHitsCreateResource
+       :<|> ThreatMatchesFindResource
        :<|> ThreatListUpdatesFetchResource
        :<|> ThreatListsListResource
+       :<|> EncodedFullHashesGetResource

@@ -14,7 +14,7 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    Provisions and manages App Engine applications.
+    Provisions and manages developers\' App Engine applications.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -35,7 +35,24 @@ library
     exposed-modules:
           Network.Google.AppEngine
         , Network.Google.AppEngine.Types
+        , Network.Google.Resource.AppEngine.Apps.AuthorizedCertificates.Create
+        , Network.Google.Resource.AppEngine.Apps.AuthorizedCertificates.Delete
+        , Network.Google.Resource.AppEngine.Apps.AuthorizedCertificates.Get
+        , Network.Google.Resource.AppEngine.Apps.AuthorizedCertificates.List
+        , Network.Google.Resource.AppEngine.Apps.AuthorizedCertificates.Patch
+        , Network.Google.Resource.AppEngine.Apps.AuthorizedDomains.List
         , Network.Google.Resource.AppEngine.Apps.Create
+        , Network.Google.Resource.AppEngine.Apps.DomainMAppings.Create
+        , Network.Google.Resource.AppEngine.Apps.DomainMAppings.Delete
+        , Network.Google.Resource.AppEngine.Apps.DomainMAppings.Get
+        , Network.Google.Resource.AppEngine.Apps.DomainMAppings.List
+        , Network.Google.Resource.AppEngine.Apps.DomainMAppings.Patch
+        , Network.Google.Resource.AppEngine.Apps.Firewall.IngressRules.BatchUpdate
+        , Network.Google.Resource.AppEngine.Apps.Firewall.IngressRules.Create
+        , Network.Google.Resource.AppEngine.Apps.Firewall.IngressRules.Delete
+        , Network.Google.Resource.AppEngine.Apps.Firewall.IngressRules.Get
+        , Network.Google.Resource.AppEngine.Apps.Firewall.IngressRules.List
+        , Network.Google.Resource.AppEngine.Apps.Firewall.IngressRules.Patch
         , Network.Google.Resource.AppEngine.Apps.Get
         , Network.Google.Resource.AppEngine.Apps.Locations.Get
         , Network.Google.Resource.AppEngine.Apps.Locations.List

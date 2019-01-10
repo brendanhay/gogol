@@ -20,7 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves a list of sizes, possibly filtered.
+-- Retrieves a list of sizes, possibly filtered. Retrieved sizes are
+-- globally unique and may include values not currently in use by your
+-- account. Due to this, the list of sizes returned by this method may
+-- differ from the list seen in the Trafficking UI.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.sizes.list@.
 module Network.Google.Resource.DFAReporting.Sizes.List
@@ -47,7 +50,7 @@ import           Network.Google.Prelude
 -- 'SizesList' request conforms to.
 type SizesListResource =
      "dfareporting" :>
-       "v2.7" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "sizes" :>
@@ -58,7 +61,10 @@ type SizesListResource =
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] SizesListResponse
 
--- | Retrieves a list of sizes, possibly filtered.
+-- | Retrieves a list of sizes, possibly filtered. Retrieved sizes are
+-- globally unique and may include values not currently in use by your
+-- account. Due to this, the list of sizes returned by this method may
+-- differ from the list seen in the Trafficking UI.
 --
 -- /See:/ 'sizesList' smart constructor.
 data SizesList = SizesList'

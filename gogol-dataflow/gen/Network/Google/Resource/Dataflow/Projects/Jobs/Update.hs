@@ -22,7 +22,7 @@
 --
 -- Updates the state of an existing Cloud Dataflow job.
 --
--- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @dataflow.projects.jobs.update@.
+-- /See:/ <https://cloud.google.com/dataflow Dataflow API Reference> for @dataflow.projects.jobs.update@.
 module Network.Google.Resource.Dataflow.Projects.Jobs.Update
     (
     -- * REST Resource
@@ -37,11 +37,9 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.Update
     , pjuJobId
     , pjuUploadProtocol
     , pjuLocation
-    , pjuPp
     , pjuAccessToken
     , pjuUploadType
     , pjuPayload
-    , pjuBearerToken
     , pjuProjectId
     , pjuCallback
     ) where
@@ -57,30 +55,26 @@ type ProjectsJobsUpdateResource =
          Capture "projectId" Text :>
            "jobs" :>
              Capture "jobId" Text :>
-               QueryParam "$.xgafv" Text :>
+               QueryParam "$.xgafv" Xgafv :>
                  QueryParam "upload_protocol" Text :>
                    QueryParam "location" Text :>
-                     QueryParam "pp" Bool :>
-                       QueryParam "access_token" Text :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "bearer_token" Text :>
-                             QueryParam "callback" Text :>
-                               QueryParam "alt" AltJSON :>
-                                 ReqBody '[JSON] Job :> Put '[JSON] Job
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Job :> Put '[JSON] Job
 
 -- | Updates the state of an existing Cloud Dataflow job.
 --
 -- /See:/ 'projectsJobsUpdate' smart constructor.
 data ProjectsJobsUpdate = ProjectsJobsUpdate'
-    { _pjuXgafv          :: !(Maybe Text)
+    { _pjuXgafv          :: !(Maybe Xgafv)
     , _pjuJobId          :: !Text
     , _pjuUploadProtocol :: !(Maybe Text)
     , _pjuLocation       :: !(Maybe Text)
-    , _pjuPp             :: !Bool
     , _pjuAccessToken    :: !(Maybe Text)
     , _pjuUploadType     :: !(Maybe Text)
     , _pjuPayload        :: !Job
-    , _pjuBearerToken    :: !(Maybe Text)
     , _pjuProjectId      :: !Text
     , _pjuCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -97,15 +91,11 @@ data ProjectsJobsUpdate = ProjectsJobsUpdate'
 --
 -- * 'pjuLocation'
 --
--- * 'pjuPp'
---
 -- * 'pjuAccessToken'
 --
 -- * 'pjuUploadType'
 --
 -- * 'pjuPayload'
---
--- * 'pjuBearerToken'
 --
 -- * 'pjuProjectId'
 --
@@ -121,17 +111,15 @@ projectsJobsUpdate pPjuJobId_ pPjuPayload_ pPjuProjectId_ =
     , _pjuJobId = pPjuJobId_
     , _pjuUploadProtocol = Nothing
     , _pjuLocation = Nothing
-    , _pjuPp = True
     , _pjuAccessToken = Nothing
     , _pjuUploadType = Nothing
     , _pjuPayload = pPjuPayload_
-    , _pjuBearerToken = Nothing
     , _pjuProjectId = pPjuProjectId_
     , _pjuCallback = Nothing
     }
 
 -- | V1 error format.
-pjuXgafv :: Lens' ProjectsJobsUpdate (Maybe Text)
+pjuXgafv :: Lens' ProjectsJobsUpdate (Maybe Xgafv)
 pjuXgafv = lens _pjuXgafv (\ s a -> s{_pjuXgafv = a})
 
 -- | The job ID.
@@ -148,10 +136,6 @@ pjuUploadProtocol
 pjuLocation :: Lens' ProjectsJobsUpdate (Maybe Text)
 pjuLocation
   = lens _pjuLocation (\ s a -> s{_pjuLocation = a})
-
--- | Pretty-print response.
-pjuPp :: Lens' ProjectsJobsUpdate Bool
-pjuPp = lens _pjuPp (\ s a -> s{_pjuPp = a})
 
 -- | OAuth access token.
 pjuAccessToken :: Lens' ProjectsJobsUpdate (Maybe Text)
@@ -170,12 +154,6 @@ pjuPayload :: Lens' ProjectsJobsUpdate Job
 pjuPayload
   = lens _pjuPayload (\ s a -> s{_pjuPayload = a})
 
--- | OAuth bearer token.
-pjuBearerToken :: Lens' ProjectsJobsUpdate (Maybe Text)
-pjuBearerToken
-  = lens _pjuBearerToken
-      (\ s a -> s{_pjuBearerToken = a})
-
 -- | The ID of the Cloud Platform project that the job belongs to.
 pjuProjectId :: Lens' ProjectsJobsUpdate Text
 pjuProjectId
@@ -190,15 +168,15 @@ instance GoogleRequest ProjectsJobsUpdate where
         type Rs ProjectsJobsUpdate = Job
         type Scopes ProjectsJobsUpdate =
              '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly",
                "https://www.googleapis.com/auth/userinfo.email"]
         requestClient ProjectsJobsUpdate'{..}
           = go _pjuProjectId _pjuJobId _pjuXgafv
               _pjuUploadProtocol
               _pjuLocation
-              (Just _pjuPp)
               _pjuAccessToken
               _pjuUploadType
-              _pjuBearerToken
               _pjuCallback
               (Just AltJSON)
               _pjuPayload

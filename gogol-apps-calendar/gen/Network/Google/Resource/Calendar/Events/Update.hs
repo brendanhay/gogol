@@ -33,11 +33,13 @@ module Network.Google.Resource.Calendar.Events.Update
     , EventsUpdate
 
     -- * Request Lenses
+    , euConferenceDataVersion
     , euCalendarId
     , euPayload
     , euMaxAttendees
     , euSendNotifications
     , euSupportsAttachments
+    , euSendUpdates
     , euAlwaysIncludeEmail
     , euEventId
     ) where
@@ -54,29 +56,35 @@ type EventsUpdateResource =
            Capture "calendarId" Text :>
              "events" :>
                Capture "eventId" Text :>
-                 QueryParam "maxAttendees" (Textual Int32) :>
-                   QueryParam "sendNotifications" Bool :>
-                     QueryParam "supportsAttachments" Bool :>
-                       QueryParam "alwaysIncludeEmail" Bool :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Event :> Put '[JSON] Event
+                 QueryParam "conferenceDataVersion" (Textual Int32) :>
+                   QueryParam "maxAttendees" (Textual Int32) :>
+                     QueryParam "sendNotifications" Bool :>
+                       QueryParam "supportsAttachments" Bool :>
+                         QueryParam "sendUpdates" EventsUpdateSendUpdates :>
+                           QueryParam "alwaysIncludeEmail" Bool :>
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] Event :> Put '[JSON] Event
 
 -- | Updates an event.
 --
 -- /See:/ 'eventsUpdate' smart constructor.
 data EventsUpdate = EventsUpdate'
-    { _euCalendarId          :: !Text
-    , _euPayload             :: !Event
-    , _euMaxAttendees        :: !(Maybe (Textual Int32))
-    , _euSendNotifications   :: !(Maybe Bool)
-    , _euSupportsAttachments :: !(Maybe Bool)
-    , _euAlwaysIncludeEmail  :: !(Maybe Bool)
-    , _euEventId             :: !Text
+    { _euConferenceDataVersion :: !(Maybe (Textual Int32))
+    , _euCalendarId            :: !Text
+    , _euPayload               :: !Event
+    , _euMaxAttendees          :: !(Maybe (Textual Int32))
+    , _euSendNotifications     :: !(Maybe Bool)
+    , _euSupportsAttachments   :: !(Maybe Bool)
+    , _euSendUpdates           :: !(Maybe EventsUpdateSendUpdates)
+    , _euAlwaysIncludeEmail    :: !(Maybe Bool)
+    , _euEventId               :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'euConferenceDataVersion'
 --
 -- * 'euCalendarId'
 --
@@ -88,6 +96,8 @@ data EventsUpdate = EventsUpdate'
 --
 -- * 'euSupportsAttachments'
 --
+-- * 'euSendUpdates'
+--
 -- * 'euAlwaysIncludeEmail'
 --
 -- * 'euEventId'
@@ -98,14 +108,27 @@ eventsUpdate
     -> EventsUpdate
 eventsUpdate pEuCalendarId_ pEuPayload_ pEuEventId_ =
     EventsUpdate'
-    { _euCalendarId = pEuCalendarId_
+    { _euConferenceDataVersion = Nothing
+    , _euCalendarId = pEuCalendarId_
     , _euPayload = pEuPayload_
     , _euMaxAttendees = Nothing
     , _euSendNotifications = Nothing
     , _euSupportsAttachments = Nothing
+    , _euSendUpdates = Nothing
     , _euAlwaysIncludeEmail = Nothing
     , _euEventId = pEuEventId_
     }
+
+-- | Version number of conference data supported by the API client. Version 0
+-- assumes no conference data support and ignores conference data in the
+-- event\'s body. Version 1 enables support for copying of ConferenceData
+-- as well as for creating new conferences using the createRequest field of
+-- conferenceData. The default is 0.
+euConferenceDataVersion :: Lens' EventsUpdate (Maybe Int32)
+euConferenceDataVersion
+  = lens _euConferenceDataVersion
+      (\ s a -> s{_euConferenceDataVersion = a})
+      . mapping _Coerce
 
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently
@@ -128,8 +151,10 @@ euMaxAttendees
       (\ s a -> s{_euMaxAttendees = a})
       . mapping _Coerce
 
--- | Whether to send notifications about the event update (e.g. attendee\'s
--- responses, title changes, etc.). Optional. The default is False.
+-- | Deprecated. Please use sendUpdates instead. Whether to send
+-- notifications about the event update (for example, description changes,
+-- etc.). Note that some emails might still be sent even if you set the
+-- value to false. The default is false.
 euSendNotifications :: Lens' EventsUpdate (Maybe Bool)
 euSendNotifications
   = lens _euSendNotifications
@@ -141,6 +166,13 @@ euSupportsAttachments :: Lens' EventsUpdate (Maybe Bool)
 euSupportsAttachments
   = lens _euSupportsAttachments
       (\ s a -> s{_euSupportsAttachments = a})
+
+-- | Guests who should receive notifications about the event update (for
+-- example, title changes, etc.).
+euSendUpdates :: Lens' EventsUpdate (Maybe EventsUpdateSendUpdates)
+euSendUpdates
+  = lens _euSendUpdates
+      (\ s a -> s{_euSendUpdates = a})
 
 -- | Whether to always include a value in the email field for the organizer,
 -- creator and attendees, even if no real email is available (i.e. a
@@ -161,11 +193,15 @@ euEventId
 instance GoogleRequest EventsUpdate where
         type Rs EventsUpdate = Event
         type Scopes EventsUpdate =
-             '["https://www.googleapis.com/auth/calendar"]
+             '["https://www.googleapis.com/auth/calendar",
+               "https://www.googleapis.com/auth/calendar.events"]
         requestClient EventsUpdate'{..}
-          = go _euCalendarId _euEventId _euMaxAttendees
+          = go _euCalendarId _euEventId
+              _euConferenceDataVersion
+              _euMaxAttendees
               _euSendNotifications
               _euSupportsAttachments
+              _euSendUpdates
               _euAlwaysIncludeEmail
               (Just AltJSON)
               _euPayload

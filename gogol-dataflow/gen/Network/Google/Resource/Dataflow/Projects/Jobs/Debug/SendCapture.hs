@@ -22,7 +22,7 @@
 --
 -- Send encoded debug capture data for component.
 --
--- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @dataflow.projects.jobs.debug.sendCapture@.
+-- /See:/ <https://cloud.google.com/dataflow Dataflow API Reference> for @dataflow.projects.jobs.debug.sendCapture@.
 module Network.Google.Resource.Dataflow.Projects.Jobs.Debug.SendCapture
     (
     -- * REST Resource
@@ -36,11 +36,9 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.Debug.SendCapture
     , pjdscXgafv
     , pjdscJobId
     , pjdscUploadProtocol
-    , pjdscPp
     , pjdscAccessToken
     , pjdscUploadType
     , pjdscPayload
-    , pjdscBearerToken
     , pjdscProjectId
     , pjdscCallback
     ) where
@@ -58,29 +56,25 @@ type ProjectsJobsDebugSendCaptureResource =
              Capture "jobId" Text :>
                "debug" :>
                  "sendCapture" :>
-                   QueryParam "$.xgafv" Text :>
+                   QueryParam "$.xgafv" Xgafv :>
                      QueryParam "upload_protocol" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "access_token" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "bearer_token" Text :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" AltJSON :>
-                                   ReqBody '[JSON] SendDebugCaptureRequest :>
-                                     Post '[JSON] SendDebugCaptureResponse
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] SendDebugCaptureRequest :>
+                                 Post '[JSON] SendDebugCaptureResponse
 
 -- | Send encoded debug capture data for component.
 --
 -- /See:/ 'projectsJobsDebugSendCapture' smart constructor.
 data ProjectsJobsDebugSendCapture = ProjectsJobsDebugSendCapture'
-    { _pjdscXgafv          :: !(Maybe Text)
+    { _pjdscXgafv          :: !(Maybe Xgafv)
     , _pjdscJobId          :: !Text
     , _pjdscUploadProtocol :: !(Maybe Text)
-    , _pjdscPp             :: !Bool
     , _pjdscAccessToken    :: !(Maybe Text)
     , _pjdscUploadType     :: !(Maybe Text)
     , _pjdscPayload        :: !SendDebugCaptureRequest
-    , _pjdscBearerToken    :: !(Maybe Text)
     , _pjdscProjectId      :: !Text
     , _pjdscCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -95,15 +89,11 @@ data ProjectsJobsDebugSendCapture = ProjectsJobsDebugSendCapture'
 --
 -- * 'pjdscUploadProtocol'
 --
--- * 'pjdscPp'
---
 -- * 'pjdscAccessToken'
 --
 -- * 'pjdscUploadType'
 --
 -- * 'pjdscPayload'
---
--- * 'pjdscBearerToken'
 --
 -- * 'pjdscProjectId'
 --
@@ -118,17 +108,15 @@ projectsJobsDebugSendCapture pPjdscJobId_ pPjdscPayload_ pPjdscProjectId_ =
     { _pjdscXgafv = Nothing
     , _pjdscJobId = pPjdscJobId_
     , _pjdscUploadProtocol = Nothing
-    , _pjdscPp = True
     , _pjdscAccessToken = Nothing
     , _pjdscUploadType = Nothing
     , _pjdscPayload = pPjdscPayload_
-    , _pjdscBearerToken = Nothing
     , _pjdscProjectId = pPjdscProjectId_
     , _pjdscCallback = Nothing
     }
 
 -- | V1 error format.
-pjdscXgafv :: Lens' ProjectsJobsDebugSendCapture (Maybe Text)
+pjdscXgafv :: Lens' ProjectsJobsDebugSendCapture (Maybe Xgafv)
 pjdscXgafv
   = lens _pjdscXgafv (\ s a -> s{_pjdscXgafv = a})
 
@@ -142,10 +130,6 @@ pjdscUploadProtocol :: Lens' ProjectsJobsDebugSendCapture (Maybe Text)
 pjdscUploadProtocol
   = lens _pjdscUploadProtocol
       (\ s a -> s{_pjdscUploadProtocol = a})
-
--- | Pretty-print response.
-pjdscPp :: Lens' ProjectsJobsDebugSendCapture Bool
-pjdscPp = lens _pjdscPp (\ s a -> s{_pjdscPp = a})
 
 -- | OAuth access token.
 pjdscAccessToken :: Lens' ProjectsJobsDebugSendCapture (Maybe Text)
@@ -163,12 +147,6 @@ pjdscUploadType
 pjdscPayload :: Lens' ProjectsJobsDebugSendCapture SendDebugCaptureRequest
 pjdscPayload
   = lens _pjdscPayload (\ s a -> s{_pjdscPayload = a})
-
--- | OAuth bearer token.
-pjdscBearerToken :: Lens' ProjectsJobsDebugSendCapture (Maybe Text)
-pjdscBearerToken
-  = lens _pjdscBearerToken
-      (\ s a -> s{_pjdscBearerToken = a})
 
 -- | The project id.
 pjdscProjectId :: Lens' ProjectsJobsDebugSendCapture Text
@@ -188,14 +166,14 @@ instance GoogleRequest ProjectsJobsDebugSendCapture
              SendDebugCaptureResponse
         type Scopes ProjectsJobsDebugSendCapture =
              '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly",
                "https://www.googleapis.com/auth/userinfo.email"]
         requestClient ProjectsJobsDebugSendCapture'{..}
           = go _pjdscProjectId _pjdscJobId _pjdscXgafv
               _pjdscUploadProtocol
-              (Just _pjdscPp)
               _pjdscAccessToken
               _pjdscUploadType
-              _pjdscBearerToken
               _pjdscCallback
               (Just AltJSON)
               _pjdscPayload

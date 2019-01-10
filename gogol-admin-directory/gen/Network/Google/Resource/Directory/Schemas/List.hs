@@ -70,7 +70,7 @@ schemasList pSlCustomerId_ =
     { _slCustomerId = pSlCustomerId_
     }
 
--- | Immutable id of the Google Apps account
+-- | Immutable ID of the G Suite account
 slCustomerId :: Lens' SchemasList Text
 slCustomerId
   = lens _slCustomerId (\ s a -> s{_slCustomerId = a})

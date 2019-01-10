@@ -20,6 +20,7 @@ module Network.Google.Language.Types
       languageService
 
     -- * OAuth Scopes
+    , cloudLanguageScope
     , cloudPlatformScope
 
     -- * AnalyzeSyntaxRequest
@@ -33,6 +34,11 @@ module Network.Google.Language.Types
     , dependencyEdge
     , deHeadTokenIndex
     , deLabel
+
+    -- * ClassifyTextRequest
+    , ClassifyTextRequest
+    , classifyTextRequest
+    , ctrDocument
 
     -- * Status
     , Status
@@ -58,6 +64,9 @@ module Network.Google.Language.Types
 
     -- * AnalyzeSyntaxRequestEncodingType
     , AnalyzeSyntaxRequestEncodingType (..)
+
+    -- * AnalyzeEntitySentimentRequestEncodingType
+    , AnalyzeEntitySentimentRequestEncodingType (..)
 
     -- * DependencyEdgeLabel
     , DependencyEdgeLabel (..)
@@ -87,6 +96,12 @@ module Network.Google.Language.Types
     , statusDetailsItem
     , sdiAddtional
 
+    -- * ClassificationCategory
+    , ClassificationCategory
+    , classificationCategory
+    , ccConfidence
+    , ccName
+
     -- * AnnotateTextRequest
     , AnnotateTextRequest
     , annotateTextRequest
@@ -97,6 +112,7 @@ module Network.Google.Language.Types
     -- * EntityMention
     , EntityMention
     , entityMention
+    , emSentiment
     , emText
     , emType
 
@@ -106,12 +122,19 @@ module Network.Google.Language.Types
     , tsBeginOffSet
     , tsContent
 
+    -- * AnalyzeEntitySentimentRequest
+    , AnalyzeEntitySentimentRequest
+    , analyzeEntitySentimentRequest
+    , aesrEncodingType
+    , aesrDocument
+
     -- * AnnotateTextResponse
     , AnnotateTextResponse
     , annotateTextResponse
     , atrEntities
     , atrTokens
     , atrDocumentSentiment
+    , atrCategories
     , atrSentences
     , atrLanguage
 
@@ -123,6 +146,8 @@ module Network.Google.Language.Types
     , features
     , fExtractSyntax
     , fExtractDocumentSentiment
+    , fClassifyText
+    , fExtractEntitySentiment
     , fExtractEntities
 
     -- * Document
@@ -179,11 +204,18 @@ module Network.Google.Language.Types
     -- * Entity
     , Entity
     , entity
+    , eSentiment
     , eName
     , eSalience
     , eMetadata
     , eType
     , eMentions
+
+    -- * AnalyzeEntitySentimentResponse
+    , AnalyzeEntitySentimentResponse
+    , analyzeEntitySentimentResponse
+    , aesrEntities
+    , aesrLanguage
 
     -- * AnalyzeSyntaxResponse
     , AnalyzeSyntaxResponse
@@ -199,6 +231,11 @@ module Network.Google.Language.Types
 
     -- * PartOfSpeechAspect
     , PartOfSpeechAspect (..)
+
+    -- * ClassifyTextResponse
+    , ClassifyTextResponse
+    , classifyTextResponse
+    , ctrCategories
 
     -- * PartOfSpeech
     , PartOfSpeech
@@ -239,11 +276,16 @@ import           Network.Google.Language.Types.Product
 import           Network.Google.Language.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v1' of the Google Cloud Natural Language API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v1' of the Cloud Natural Language API. This contains the host and root path used as a starting point for constructing service requests.
 languageService :: ServiceConfig
 languageService
   = defaultService (ServiceId "language:v1")
       "language.googleapis.com"
+
+-- | Apply machine learning models to reveal the structure and meaning of
+-- text
+cloudLanguageScope :: Proxy '["https://www.googleapis.com/auth/cloud-language"]
+cloudLanguageScope = Proxy;
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]

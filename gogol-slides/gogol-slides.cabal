@@ -14,7 +14,7 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    An API for creating and editing Google Slides presentations.
+    Reads and writes Google Slides presentations.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -37,6 +37,7 @@ library
         , Network.Google.Resource.Slides.Presentations.Create
         , Network.Google.Resource.Slides.Presentations.Get
         , Network.Google.Resource.Slides.Presentations.Pages.Get
+        , Network.Google.Resource.Slides.Presentations.Pages.GetThumbnail
         , Network.Google.Slides
         , Network.Google.Slides.Types
 

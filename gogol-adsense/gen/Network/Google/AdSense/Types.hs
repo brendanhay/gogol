@@ -251,6 +251,8 @@ module Network.Google.AdSense.Types
     , AdCode
     , adCode
     , addKind
+    , addAmpHead
+    , addAmpBody
     , addAdCode
 
     -- * AdsenseReportsGenerateResponse

@@ -20,8 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the specified UrlMap resource with the data included in the
--- request. This method supports patch semantics.
+-- Patches the specified UrlMap resource with the data included in the
+-- request. This method supports PATCH semantics and uses the JSON merge
+-- patch format and processing rules.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.urlMaps.patch@.
 module Network.Google.Resource.Compute.URLMaps.Patch
@@ -34,6 +35,7 @@ module Network.Google.Resource.Compute.URLMaps.Patch
     , URLMapsPatch
 
     -- * Request Lenses
+    , umpRequestId
     , umpURLMap
     , umpProject
     , umpPayload
@@ -52,22 +54,27 @@ type URLMapsPatchResource =
              "global" :>
                "urlMaps" :>
                  Capture "urlMap" Text :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] URLMap :> Patch '[JSON] Operation
+                   QueryParam "requestId" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] URLMap :> Patch '[JSON] Operation
 
--- | Updates the specified UrlMap resource with the data included in the
--- request. This method supports patch semantics.
+-- | Patches the specified UrlMap resource with the data included in the
+-- request. This method supports PATCH semantics and uses the JSON merge
+-- patch format and processing rules.
 --
 -- /See:/ 'urlMapsPatch' smart constructor.
 data URLMapsPatch = URLMapsPatch'
-    { _umpURLMap  :: !Text
-    , _umpProject :: !Text
-    , _umpPayload :: !URLMap
+    { _umpRequestId :: !(Maybe Text)
+    , _umpURLMap    :: !Text
+    , _umpProject   :: !Text
+    , _umpPayload   :: !URLMap
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLMapsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'umpRequestId'
 --
 -- * 'umpURLMap'
 --
@@ -81,12 +88,27 @@ urlMapsPatch
     -> URLMapsPatch
 urlMapsPatch pUmpURLMap_ pUmpProject_ pUmpPayload_ =
     URLMapsPatch'
-    { _umpURLMap = pUmpURLMap_
+    { _umpRequestId = Nothing
+    , _umpURLMap = pUmpURLMap_
     , _umpProject = pUmpProject_
     , _umpPayload = pUmpPayload_
     }
 
--- | Name of the UrlMap resource to update.
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+umpRequestId :: Lens' URLMapsPatch (Maybe Text)
+umpRequestId
+  = lens _umpRequestId (\ s a -> s{_umpRequestId = a})
+
+-- | Name of the UrlMap resource to patch.
 umpURLMap :: Lens' URLMapsPatch Text
 umpURLMap
   = lens _umpURLMap (\ s a -> s{_umpURLMap = a})
@@ -107,7 +129,8 @@ instance GoogleRequest URLMapsPatch where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient URLMapsPatch'{..}
-          = go _umpProject _umpURLMap (Just AltJSON)
+          = go _umpProject _umpURLMap _umpRequestId
+              (Just AltJSON)
               _umpPayload
               computeService
           where go

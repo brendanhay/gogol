@@ -23,7 +23,7 @@
 -- Commits a transaction, optionally creating, deleting or modifying some
 -- entities.
 --
--- /See:/ <https://cloud.google.com/datastore/ Google Cloud Datastore API Reference> for @datastore.projects.commit@.
+-- /See:/ <https://cloud.google.com/datastore/ Cloud Datastore API Reference> for @datastore.projects.commit@.
 module Network.Google.Resource.Datastore.Projects.Commit
     (
     -- * REST Resource
@@ -36,11 +36,9 @@ module Network.Google.Resource.Datastore.Projects.Commit
     -- * Request Lenses
     , pcXgafv
     , pcUploadProtocol
-    , pcPp
     , pcAccessToken
     , pcUploadType
     , pcPayload
-    , pcBearerToken
     , pcProjectId
     , pcCallback
     ) where
@@ -56,14 +54,12 @@ type ProjectsCommitResource =
          CaptureMode "projectId" "commit" Text :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] CommitRequest :>
-                             Post '[JSON] CommitResponse
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] CommitRequest :>
+                         Post '[JSON] CommitResponse
 
 -- | Commits a transaction, optionally creating, deleting or modifying some
 -- entities.
@@ -72,11 +68,9 @@ type ProjectsCommitResource =
 data ProjectsCommit = ProjectsCommit'
     { _pcXgafv          :: !(Maybe Xgafv)
     , _pcUploadProtocol :: !(Maybe Text)
-    , _pcPp             :: !Bool
     , _pcAccessToken    :: !(Maybe Text)
     , _pcUploadType     :: !(Maybe Text)
     , _pcPayload        :: !CommitRequest
-    , _pcBearerToken    :: !(Maybe Text)
     , _pcProjectId      :: !Text
     , _pcCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -89,15 +83,11 @@ data ProjectsCommit = ProjectsCommit'
 --
 -- * 'pcUploadProtocol'
 --
--- * 'pcPp'
---
 -- * 'pcAccessToken'
 --
 -- * 'pcUploadType'
 --
 -- * 'pcPayload'
---
--- * 'pcBearerToken'
 --
 -- * 'pcProjectId'
 --
@@ -110,11 +100,9 @@ projectsCommit pPcPayload_ pPcProjectId_ =
     ProjectsCommit'
     { _pcXgafv = Nothing
     , _pcUploadProtocol = Nothing
-    , _pcPp = True
     , _pcAccessToken = Nothing
     , _pcUploadType = Nothing
     , _pcPayload = pPcPayload_
-    , _pcBearerToken = Nothing
     , _pcProjectId = pPcProjectId_
     , _pcCallback = Nothing
     }
@@ -128,10 +116,6 @@ pcUploadProtocol :: Lens' ProjectsCommit (Maybe Text)
 pcUploadProtocol
   = lens _pcUploadProtocol
       (\ s a -> s{_pcUploadProtocol = a})
-
--- | Pretty-print response.
-pcPp :: Lens' ProjectsCommit Bool
-pcPp = lens _pcPp (\ s a -> s{_pcPp = a})
 
 -- | OAuth access token.
 pcAccessToken :: Lens' ProjectsCommit (Maybe Text)
@@ -148,12 +132,6 @@ pcUploadType
 pcPayload :: Lens' ProjectsCommit CommitRequest
 pcPayload
   = lens _pcPayload (\ s a -> s{_pcPayload = a})
-
--- | OAuth bearer token.
-pcBearerToken :: Lens' ProjectsCommit (Maybe Text)
-pcBearerToken
-  = lens _pcBearerToken
-      (\ s a -> s{_pcBearerToken = a})
 
 -- | The ID of the project against which to make the request.
 pcProjectId :: Lens' ProjectsCommit Text
@@ -172,10 +150,8 @@ instance GoogleRequest ProjectsCommit where
                "https://www.googleapis.com/auth/datastore"]
         requestClient ProjectsCommit'{..}
           = go _pcProjectId _pcXgafv _pcUploadProtocol
-              (Just _pcPp)
               _pcAccessToken
               _pcUploadType
-              _pcBearerToken
               _pcCallback
               (Just AltJSON)
               _pcPayload

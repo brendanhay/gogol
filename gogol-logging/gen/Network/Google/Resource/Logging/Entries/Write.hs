@@ -20,8 +20,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Writes log entries to Stackdriver Logging. All log entries are written
--- by this method.
+-- Writes log entries to Logging. This API method is the only way to send
+-- log entries to Logging. This method is used, directly or indirectly, by
+-- the Logging agent (fluentd) and all logging libraries configured to use
+-- Logging. A single request may contain log entries for a maximum of 1000
+-- different resources (projects, organizations, billing accounts or
+-- folders)
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.entries.write@.
 module Network.Google.Resource.Logging.Entries.Write
@@ -36,11 +40,9 @@ module Network.Google.Resource.Logging.Entries.Write
     -- * Request Lenses
     , ewXgafv
     , ewUploadProtocol
-    , ewPp
     , ewAccessToken
     , ewUploadType
     , ewPayload
-    , ewBearerToken
     , ewCallback
     ) where
 
@@ -54,27 +56,27 @@ type EntriesWriteResource =
        "entries:write" :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] WriteLogEntriesRequest :>
-                           Post '[JSON] WriteLogEntriesResponse
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] WriteLogEntriesRequest :>
+                       Post '[JSON] WriteLogEntriesResponse
 
--- | Writes log entries to Stackdriver Logging. All log entries are written
--- by this method.
+-- | Writes log entries to Logging. This API method is the only way to send
+-- log entries to Logging. This method is used, directly or indirectly, by
+-- the Logging agent (fluentd) and all logging libraries configured to use
+-- Logging. A single request may contain log entries for a maximum of 1000
+-- different resources (projects, organizations, billing accounts or
+-- folders)
 --
 -- /See:/ 'entriesWrite' smart constructor.
 data EntriesWrite = EntriesWrite'
     { _ewXgafv          :: !(Maybe Xgafv)
     , _ewUploadProtocol :: !(Maybe Text)
-    , _ewPp             :: !Bool
     , _ewAccessToken    :: !(Maybe Text)
     , _ewUploadType     :: !(Maybe Text)
     , _ewPayload        :: !WriteLogEntriesRequest
-    , _ewBearerToken    :: !(Maybe Text)
     , _ewCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -86,15 +88,11 @@ data EntriesWrite = EntriesWrite'
 --
 -- * 'ewUploadProtocol'
 --
--- * 'ewPp'
---
 -- * 'ewAccessToken'
 --
 -- * 'ewUploadType'
 --
 -- * 'ewPayload'
---
--- * 'ewBearerToken'
 --
 -- * 'ewCallback'
 entriesWrite
@@ -104,11 +102,9 @@ entriesWrite pEwPayload_ =
     EntriesWrite'
     { _ewXgafv = Nothing
     , _ewUploadProtocol = Nothing
-    , _ewPp = True
     , _ewAccessToken = Nothing
     , _ewUploadType = Nothing
     , _ewPayload = pEwPayload_
-    , _ewBearerToken = Nothing
     , _ewCallback = Nothing
     }
 
@@ -121,10 +117,6 @@ ewUploadProtocol :: Lens' EntriesWrite (Maybe Text)
 ewUploadProtocol
   = lens _ewUploadProtocol
       (\ s a -> s{_ewUploadProtocol = a})
-
--- | Pretty-print response.
-ewPp :: Lens' EntriesWrite Bool
-ewPp = lens _ewPp (\ s a -> s{_ewPp = a})
 
 -- | OAuth access token.
 ewAccessToken :: Lens' EntriesWrite (Maybe Text)
@@ -142,12 +134,6 @@ ewPayload :: Lens' EntriesWrite WriteLogEntriesRequest
 ewPayload
   = lens _ewPayload (\ s a -> s{_ewPayload = a})
 
--- | OAuth bearer token.
-ewBearerToken :: Lens' EntriesWrite (Maybe Text)
-ewBearerToken
-  = lens _ewBearerToken
-      (\ s a -> s{_ewBearerToken = a})
-
 -- | JSONP
 ewCallback :: Lens' EntriesWrite (Maybe Text)
 ewCallback
@@ -160,10 +146,8 @@ instance GoogleRequest EntriesWrite where
                "https://www.googleapis.com/auth/logging.admin",
                "https://www.googleapis.com/auth/logging.write"]
         requestClient EntriesWrite'{..}
-          = go _ewXgafv _ewUploadProtocol (Just _ewPp)
-              _ewAccessToken
+          = go _ewXgafv _ewUploadProtocol _ewAccessToken
               _ewUploadType
-              _ewBearerToken
               _ewCallback
               (Just AltJSON)
               _ewPayload

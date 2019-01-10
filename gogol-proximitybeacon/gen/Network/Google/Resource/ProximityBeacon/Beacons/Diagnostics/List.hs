@@ -28,7 +28,7 @@
 -- from a signed-in user with **viewer**, **Is owner** or **Can edit**
 -- permissions in the Google Developers Console project.
 --
--- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @proximitybeacon.beacons.diagnostics.list@.
+-- /See:/ <https://developers.google.com/beacons/proximity/ Proximity Beacon API Reference> for @proximitybeacon.beacons.diagnostics.list@.
 module Network.Google.Resource.ProximityBeacon.Beacons.Diagnostics.List
     (
     -- * REST Resource
@@ -41,11 +41,9 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Diagnostics.List
     -- * Request Lenses
     , bdlXgafv
     , bdlUploadProtocol
-    , bdlPp
     , bdlAccessToken
     , bdlBeaconName
     , bdlUploadType
-    , bdlBearerToken
     , bdlPageToken
     , bdlProjectId
     , bdlPageSize
@@ -62,19 +60,17 @@ type BeaconsDiagnosticsListResource =
      "v1beta1" :>
        Capture "beaconName" Text :>
          "diagnostics" :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "projectId" Text :>
-                           QueryParam "pageSize" (Textual Int32) :>
-                             QueryParam "alertFilter" Text :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" AltJSON :>
-                                   Get '[JSON] ListDiagnosticsResponse
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "projectId" Text :>
+                       QueryParam "pageSize" (Textual Int32) :>
+                         QueryParam "alertFilter" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] ListDiagnosticsResponse
 
 -- | List the diagnostics for a single beacon. You can also list diagnostics
 -- for all the beacons owned by your Google Developers Console project by
@@ -86,13 +82,11 @@ type BeaconsDiagnosticsListResource =
 --
 -- /See:/ 'beaconsDiagnosticsList' smart constructor.
 data BeaconsDiagnosticsList = BeaconsDiagnosticsList'
-    { _bdlXgafv          :: !(Maybe Text)
+    { _bdlXgafv          :: !(Maybe Xgafv)
     , _bdlUploadProtocol :: !(Maybe Text)
-    , _bdlPp             :: !Bool
     , _bdlAccessToken    :: !(Maybe Text)
     , _bdlBeaconName     :: !Text
     , _bdlUploadType     :: !(Maybe Text)
-    , _bdlBearerToken    :: !(Maybe Text)
     , _bdlPageToken      :: !(Maybe Text)
     , _bdlProjectId      :: !(Maybe Text)
     , _bdlPageSize       :: !(Maybe (Textual Int32))
@@ -108,15 +102,11 @@ data BeaconsDiagnosticsList = BeaconsDiagnosticsList'
 --
 -- * 'bdlUploadProtocol'
 --
--- * 'bdlPp'
---
 -- * 'bdlAccessToken'
 --
 -- * 'bdlBeaconName'
 --
 -- * 'bdlUploadType'
---
--- * 'bdlBearerToken'
 --
 -- * 'bdlPageToken'
 --
@@ -134,11 +124,9 @@ beaconsDiagnosticsList pBdlBeaconName_ =
     BeaconsDiagnosticsList'
     { _bdlXgafv = Nothing
     , _bdlUploadProtocol = Nothing
-    , _bdlPp = True
     , _bdlAccessToken = Nothing
     , _bdlBeaconName = pBdlBeaconName_
     , _bdlUploadType = Nothing
-    , _bdlBearerToken = Nothing
     , _bdlPageToken = Nothing
     , _bdlProjectId = Nothing
     , _bdlPageSize = Nothing
@@ -147,7 +135,7 @@ beaconsDiagnosticsList pBdlBeaconName_ =
     }
 
 -- | V1 error format.
-bdlXgafv :: Lens' BeaconsDiagnosticsList (Maybe Text)
+bdlXgafv :: Lens' BeaconsDiagnosticsList (Maybe Xgafv)
 bdlXgafv = lens _bdlXgafv (\ s a -> s{_bdlXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -155,10 +143,6 @@ bdlUploadProtocol :: Lens' BeaconsDiagnosticsList (Maybe Text)
 bdlUploadProtocol
   = lens _bdlUploadProtocol
       (\ s a -> s{_bdlUploadProtocol = a})
-
--- | Pretty-print response.
-bdlPp :: Lens' BeaconsDiagnosticsList Bool
-bdlPp = lens _bdlPp (\ s a -> s{_bdlPp = a})
 
 -- | OAuth access token.
 bdlAccessToken :: Lens' BeaconsDiagnosticsList (Maybe Text)
@@ -177,12 +161,6 @@ bdlUploadType :: Lens' BeaconsDiagnosticsList (Maybe Text)
 bdlUploadType
   = lens _bdlUploadType
       (\ s a -> s{_bdlUploadType = a})
-
--- | OAuth bearer token.
-bdlBearerToken :: Lens' BeaconsDiagnosticsList (Maybe Text)
-bdlBearerToken
-  = lens _bdlBearerToken
-      (\ s a -> s{_bdlBearerToken = a})
 
 -- | Requests results that occur after the \`page_token\`, obtained from the
 -- response to a previous request. Optional.
@@ -223,10 +201,8 @@ instance GoogleRequest BeaconsDiagnosticsList where
              '["https://www.googleapis.com/auth/userlocation.beacon.registry"]
         requestClient BeaconsDiagnosticsList'{..}
           = go _bdlBeaconName _bdlXgafv _bdlUploadProtocol
-              (Just _bdlPp)
               _bdlAccessToken
               _bdlUploadType
-              _bdlBearerToken
               _bdlPageToken
               _bdlProjectId
               _bdlPageSize

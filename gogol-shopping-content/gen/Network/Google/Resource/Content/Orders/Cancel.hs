@@ -20,8 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Cancels all line items in an order. This method can only be called for
--- non-multi-client accounts.
+-- Cancels all line items in an order, making a full refund.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.cancel@.
 module Network.Google.Resource.Content.Orders.Cancel
@@ -34,9 +33,9 @@ module Network.Google.Resource.Content.Orders.Cancel
     , OrdersCancel
 
     -- * Request Lenses
-    , occMerchantId
-    , occPayload
-    , occOrderId
+    , o2MerchantId
+    , o2Payload
+    , o2OrderId
     ) where
 
 import           Network.Google.Prelude
@@ -46,7 +45,7 @@ import           Network.Google.ShoppingContent.Types
 -- 'OrdersCancel' request conforms to.
 type OrdersCancelResource =
      "content" :>
-       "v2" :>
+       "v2.1" :>
          Capture "merchantId" (Textual Word64) :>
            "orders" :>
              Capture "orderId" Text :>
@@ -55,61 +54,60 @@ type OrdersCancelResource =
                    ReqBody '[JSON] OrdersCancelRequest :>
                      Post '[JSON] OrdersCancelResponse
 
--- | Cancels all line items in an order. This method can only be called for
--- non-multi-client accounts.
+-- | Cancels all line items in an order, making a full refund.
 --
 -- /See:/ 'ordersCancel' smart constructor.
 data OrdersCancel = OrdersCancel'
-    { _occMerchantId :: !(Textual Word64)
-    , _occPayload    :: !OrdersCancelRequest
-    , _occOrderId    :: !Text
+    { _o2MerchantId :: !(Textual Word64)
+    , _o2Payload    :: !OrdersCancelRequest
+    , _o2OrderId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersCancel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'occMerchantId'
+-- * 'o2MerchantId'
 --
--- * 'occPayload'
+-- * 'o2Payload'
 --
--- * 'occOrderId'
+-- * 'o2OrderId'
 ordersCancel
-    :: Word64 -- ^ 'occMerchantId'
-    -> OrdersCancelRequest -- ^ 'occPayload'
-    -> Text -- ^ 'occOrderId'
+    :: Word64 -- ^ 'o2MerchantId'
+    -> OrdersCancelRequest -- ^ 'o2Payload'
+    -> Text -- ^ 'o2OrderId'
     -> OrdersCancel
-ordersCancel pOccMerchantId_ pOccPayload_ pOccOrderId_ =
+ordersCancel pO2MerchantId_ pO2Payload_ pO2OrderId_ =
     OrdersCancel'
-    { _occMerchantId = _Coerce # pOccMerchantId_
-    , _occPayload = pOccPayload_
-    , _occOrderId = pOccOrderId_
+    { _o2MerchantId = _Coerce # pO2MerchantId_
+    , _o2Payload = pO2Payload_
+    , _o2OrderId = pO2OrderId_
     }
 
--- | The ID of the managing account.
-occMerchantId :: Lens' OrdersCancel Word64
-occMerchantId
-  = lens _occMerchantId
-      (\ s a -> s{_occMerchantId = a})
+-- | The ID of the account that manages the order. This cannot be a
+-- multi-client account.
+o2MerchantId :: Lens' OrdersCancel Word64
+o2MerchantId
+  = lens _o2MerchantId (\ s a -> s{_o2MerchantId = a})
       . _Coerce
 
 -- | Multipart request metadata.
-occPayload :: Lens' OrdersCancel OrdersCancelRequest
-occPayload
-  = lens _occPayload (\ s a -> s{_occPayload = a})
+o2Payload :: Lens' OrdersCancel OrdersCancelRequest
+o2Payload
+  = lens _o2Payload (\ s a -> s{_o2Payload = a})
 
 -- | The ID of the order to cancel.
-occOrderId :: Lens' OrdersCancel Text
-occOrderId
-  = lens _occOrderId (\ s a -> s{_occOrderId = a})
+o2OrderId :: Lens' OrdersCancel Text
+o2OrderId
+  = lens _o2OrderId (\ s a -> s{_o2OrderId = a})
 
 instance GoogleRequest OrdersCancel where
         type Rs OrdersCancel = OrdersCancelResponse
         type Scopes OrdersCancel =
              '["https://www.googleapis.com/auth/content"]
         requestClient OrdersCancel'{..}
-          = go _occMerchantId _occOrderId (Just AltJSON)
-              _occPayload
+          = go _o2MerchantId _o2OrderId (Just AltJSON)
+              _o2Payload
               shoppingContentService
           where go
                   = buildClient (Proxy :: Proxy OrdersCancelResource)

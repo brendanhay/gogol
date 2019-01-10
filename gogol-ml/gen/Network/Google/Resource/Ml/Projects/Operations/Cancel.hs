@@ -30,7 +30,7 @@
 -- instead, it becomes an operation with an Operation.error value with a
 -- google.rpc.Status.code of 1, corresponding to \`Code.CANCELLED\`.
 --
--- /See:/ <https://cloud.google.com/ml/ Google Cloud Machine Learning Reference> for @ml.projects.operations.cancel@.
+-- /See:/ <https://cloud.google.com/ml/ Cloud Machine Learning Engine Reference> for @ml.projects.operations.cancel@.
 module Network.Google.Resource.Ml.Projects.Operations.Cancel
     (
     -- * REST Resource
@@ -43,10 +43,8 @@ module Network.Google.Resource.Ml.Projects.Operations.Cancel
     -- * Request Lenses
     , pocXgafv
     , pocUploadProtocol
-    , pocPp
     , pocAccessToken
     , pocUploadType
-    , pocBearerToken
     , pocName
     , pocCallback
     ) where
@@ -57,17 +55,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @ml.projects.operations.cancel@ method which the
 -- 'ProjectsOperationsCancel' request conforms to.
 type ProjectsOperationsCancelResource =
-     "v1beta1" :>
+     "v1" :>
        CaptureMode "name" "cancel" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         Post '[JSON] GoogleProtobuf__Empty
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     Post '[JSON] GoogleProtobuf__Empty
 
 -- | Starts asynchronous cancellation on a long-running operation. The server
 -- makes a best effort to cancel the operation, but success is not
@@ -83,10 +79,8 @@ type ProjectsOperationsCancelResource =
 data ProjectsOperationsCancel = ProjectsOperationsCancel'
     { _pocXgafv          :: !(Maybe Xgafv)
     , _pocUploadProtocol :: !(Maybe Text)
-    , _pocPp             :: !Bool
     , _pocAccessToken    :: !(Maybe Text)
     , _pocUploadType     :: !(Maybe Text)
-    , _pocBearerToken    :: !(Maybe Text)
     , _pocName           :: !Text
     , _pocCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -99,13 +93,9 @@ data ProjectsOperationsCancel = ProjectsOperationsCancel'
 --
 -- * 'pocUploadProtocol'
 --
--- * 'pocPp'
---
 -- * 'pocAccessToken'
 --
 -- * 'pocUploadType'
---
--- * 'pocBearerToken'
 --
 -- * 'pocName'
 --
@@ -117,10 +107,8 @@ projectsOperationsCancel pPocName_ =
     ProjectsOperationsCancel'
     { _pocXgafv = Nothing
     , _pocUploadProtocol = Nothing
-    , _pocPp = True
     , _pocAccessToken = Nothing
     , _pocUploadType = Nothing
-    , _pocBearerToken = Nothing
     , _pocName = pPocName_
     , _pocCallback = Nothing
     }
@@ -135,10 +123,6 @@ pocUploadProtocol
   = lens _pocUploadProtocol
       (\ s a -> s{_pocUploadProtocol = a})
 
--- | Pretty-print response.
-pocPp :: Lens' ProjectsOperationsCancel Bool
-pocPp = lens _pocPp (\ s a -> s{_pocPp = a})
-
 -- | OAuth access token.
 pocAccessToken :: Lens' ProjectsOperationsCancel (Maybe Text)
 pocAccessToken
@@ -150,12 +134,6 @@ pocUploadType :: Lens' ProjectsOperationsCancel (Maybe Text)
 pocUploadType
   = lens _pocUploadType
       (\ s a -> s{_pocUploadType = a})
-
--- | OAuth bearer token.
-pocBearerToken :: Lens' ProjectsOperationsCancel (Maybe Text)
-pocBearerToken
-  = lens _pocBearerToken
-      (\ s a -> s{_pocBearerToken = a})
 
 -- | The name of the operation resource to be cancelled.
 pocName :: Lens' ProjectsOperationsCancel Text
@@ -173,10 +151,8 @@ instance GoogleRequest ProjectsOperationsCancel where
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsOperationsCancel'{..}
           = go _pocName _pocXgafv _pocUploadProtocol
-              (Just _pocPp)
               _pocAccessToken
               _pocUploadType
-              _pocBearerToken
               _pocCallback
               (Just AltJSON)
               machineLearningService

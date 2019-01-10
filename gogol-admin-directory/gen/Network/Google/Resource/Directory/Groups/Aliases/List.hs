@@ -70,7 +70,7 @@ groupsAliasesList pGalGroupKey_ =
     { _galGroupKey = pGalGroupKey_
     }
 
--- | Email or immutable Id of the group
+-- | Email or immutable ID of the group
 galGroupKey :: Lens' GroupsAliasesList Text
 galGroupKey
   = lens _galGroupKey (\ s a -> s{_galGroupKey = a})

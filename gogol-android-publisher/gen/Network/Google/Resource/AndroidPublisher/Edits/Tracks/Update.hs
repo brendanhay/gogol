@@ -48,13 +48,13 @@ import           Network.Google.Prelude
 -- 'EditsTracksUpdate' request conforms to.
 type EditsTracksUpdateResource =
      "androidpublisher" :>
-       "v2" :>
+       "v3" :>
          "applications" :>
            Capture "packageName" Text :>
              "edits" :>
                Capture "editId" Text :>
                  "tracks" :>
-                   Capture "track" EditsTracksUpdateTrack :>
+                   Capture "track" Text :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Track :> Put '[JSON] Track
 
@@ -64,7 +64,7 @@ type EditsTracksUpdateResource =
 --
 -- /See:/ 'editsTracksUpdate' smart constructor.
 data EditsTracksUpdate = EditsTracksUpdate'
-    { _etuTrack       :: !EditsTracksUpdateTrack
+    { _etuTrack       :: !Text
     , _etuPackageName :: !Text
     , _etuPayload     :: !Track
     , _etuEditId      :: !Text
@@ -82,7 +82,7 @@ data EditsTracksUpdate = EditsTracksUpdate'
 --
 -- * 'etuEditId'
 editsTracksUpdate
-    :: EditsTracksUpdateTrack -- ^ 'etuTrack'
+    :: Text -- ^ 'etuTrack'
     -> Text -- ^ 'etuPackageName'
     -> Track -- ^ 'etuPayload'
     -> Text -- ^ 'etuEditId'
@@ -95,8 +95,8 @@ editsTracksUpdate pEtuTrack_ pEtuPackageName_ pEtuPayload_ pEtuEditId_ =
     , _etuEditId = pEtuEditId_
     }
 
--- | The track type to read or modify.
-etuTrack :: Lens' EditsTracksUpdate EditsTracksUpdateTrack
+-- | The track to read or modify.
+etuTrack :: Lens' EditsTracksUpdate Text
 etuTrack = lens _etuTrack (\ s a -> s{_etuTrack = a})
 
 -- | Unique identifier for the Android app that is being updated; for

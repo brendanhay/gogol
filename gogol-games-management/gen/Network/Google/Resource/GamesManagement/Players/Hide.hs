@@ -96,8 +96,7 @@ phPlayerId
 instance GoogleRequest PlayersHide where
         type Rs PlayersHide = ()
         type Scopes PlayersHide =
-             '["https://www.googleapis.com/auth/games",
-               "https://www.googleapis.com/auth/plus.login"]
+             '["https://www.googleapis.com/auth/games"]
         requestClient PlayersHide'{..}
           = go _phApplicationId _phPlayerId (Just AltJSON)
               gamesManagementService

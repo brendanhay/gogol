@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified ForwardingRule resource. Get a list of available
--- forwarding rules by making a list() request.
+-- Returns the specified GlobalForwardingRule resource. Gets a list of
+-- available forwarding rules by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.globalForwardingRules.get@.
 module Network.Google.Resource.Compute.GlobalForwardingRules.Get
@@ -54,8 +54,8 @@ type GlobalForwardingRulesGetResource =
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] ForwardingRule
 
--- | Returns the specified ForwardingRule resource. Get a list of available
--- forwarding rules by making a list() request.
+-- | Returns the specified GlobalForwardingRule resource. Gets a list of
+-- available forwarding rules by making a list() request.
 --
 -- /See:/ 'globalForwardingRulesGet' smart constructor.
 data GlobalForwardingRulesGet = GlobalForwardingRulesGet'

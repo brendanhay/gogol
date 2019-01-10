@@ -43,10 +43,8 @@ module Network.Google.Resource.Classroom.Invitations.Accept
     -- * Request Lenses
     , iaXgafv
     , iaUploadProtocol
-    , iaPp
     , iaAccessToken
     , iaUploadType
-    , iaBearerToken
     , iaId
     , iaCallback
     ) where
@@ -60,14 +58,12 @@ type InvitationsAcceptResource =
      "v1" :>
        "invitations" :>
          CaptureMode "id" "accept" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :> Post '[JSON] Empty
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :> Post '[JSON] Empty
 
 -- | Accepts an invitation, removing it and adding the invited user to the
 -- teachers or students (as appropriate) of the specified course. Only the
@@ -81,12 +77,10 @@ type InvitationsAcceptResource =
 --
 -- /See:/ 'invitationsAccept' smart constructor.
 data InvitationsAccept = InvitationsAccept'
-    { _iaXgafv          :: !(Maybe Text)
+    { _iaXgafv          :: !(Maybe Xgafv)
     , _iaUploadProtocol :: !(Maybe Text)
-    , _iaPp             :: !Bool
     , _iaAccessToken    :: !(Maybe Text)
     , _iaUploadType     :: !(Maybe Text)
-    , _iaBearerToken    :: !(Maybe Text)
     , _iaId             :: !Text
     , _iaCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -99,13 +93,9 @@ data InvitationsAccept = InvitationsAccept'
 --
 -- * 'iaUploadProtocol'
 --
--- * 'iaPp'
---
 -- * 'iaAccessToken'
 --
 -- * 'iaUploadType'
---
--- * 'iaBearerToken'
 --
 -- * 'iaId'
 --
@@ -117,16 +107,14 @@ invitationsAccept pIaId_ =
     InvitationsAccept'
     { _iaXgafv = Nothing
     , _iaUploadProtocol = Nothing
-    , _iaPp = True
     , _iaAccessToken = Nothing
     , _iaUploadType = Nothing
-    , _iaBearerToken = Nothing
     , _iaId = pIaId_
     , _iaCallback = Nothing
     }
 
 -- | V1 error format.
-iaXgafv :: Lens' InvitationsAccept (Maybe Text)
+iaXgafv :: Lens' InvitationsAccept (Maybe Xgafv)
 iaXgafv = lens _iaXgafv (\ s a -> s{_iaXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -134,10 +122,6 @@ iaUploadProtocol :: Lens' InvitationsAccept (Maybe Text)
 iaUploadProtocol
   = lens _iaUploadProtocol
       (\ s a -> s{_iaUploadProtocol = a})
-
--- | Pretty-print response.
-iaPp :: Lens' InvitationsAccept Bool
-iaPp = lens _iaPp (\ s a -> s{_iaPp = a})
 
 -- | OAuth access token.
 iaAccessToken :: Lens' InvitationsAccept (Maybe Text)
@@ -149,12 +133,6 @@ iaAccessToken
 iaUploadType :: Lens' InvitationsAccept (Maybe Text)
 iaUploadType
   = lens _iaUploadType (\ s a -> s{_iaUploadType = a})
-
--- | OAuth bearer token.
-iaBearerToken :: Lens' InvitationsAccept (Maybe Text)
-iaBearerToken
-  = lens _iaBearerToken
-      (\ s a -> s{_iaBearerToken = a})
 
 -- | Identifier of the invitation to accept.
 iaId :: Lens' InvitationsAccept Text
@@ -170,10 +148,8 @@ instance GoogleRequest InvitationsAccept where
         type Scopes InvitationsAccept =
              '["https://www.googleapis.com/auth/classroom.rosters"]
         requestClient InvitationsAccept'{..}
-          = go _iaId _iaXgafv _iaUploadProtocol (Just _iaPp)
-              _iaAccessToken
+          = go _iaId _iaXgafv _iaUploadProtocol _iaAccessToken
               _iaUploadType
-              _iaBearerToken
               _iaCallback
               (Just AltJSON)
               classroomService

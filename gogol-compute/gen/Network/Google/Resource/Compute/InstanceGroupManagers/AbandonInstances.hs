@@ -20,15 +20,19 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Schedules a group action to remove the specified instances from the
--- managed instance group. Abandoning an instance does not delete the
--- instance, but it does remove the instance from any target pools that are
--- applied by the managed instance group. This method reduces the
--- targetSize of the managed instance group by the number of instances that
--- you abandon. This operation is marked as DONE when the action is
--- scheduled even if the instances have not yet been removed from the
--- group. You must separately verify the status of the abandoning action
--- with the listmanagedinstances method.
+-- Flags the specified instances to be removed from the managed instance
+-- group. Abandoning an instance does not delete the instance, but it does
+-- remove the instance from any target pools that are applied by the
+-- managed instance group. This method reduces the targetSize of the
+-- managed instance group by the number of instances that you abandon. This
+-- operation is marked as DONE when the action is scheduled even if the
+-- instances have not yet been removed from the group. You must separately
+-- verify the status of the abandoning action with the listmanagedinstances
+-- method. If the group is part of a backend service that has enabled
+-- connection draining, it can take up to 60 seconds after the connection
+-- draining duration has elapsed before the VM instance is removed or
+-- deleted. You can specify a maximum of 1000 instances with this method
+-- per request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceGroupManagers.abandonInstances@.
 module Network.Google.Resource.Compute.InstanceGroupManagers.AbandonInstances
@@ -41,6 +45,7 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.AbandonInstances
     , InstanceGroupManagersAbandonInstances
 
     -- * Request Lenses
+    , igmaiRequestId
     , igmaiProject
     , igmaiInstanceGroupManager
     , igmaiZone
@@ -62,24 +67,30 @@ type InstanceGroupManagersAbandonInstancesResource =
                  "instanceGroupManagers" :>
                    Capture "instanceGroupManager" Text :>
                      "abandonInstances" :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON]
-                           InstanceGroupManagersAbandonInstancesRequest
-                           :> Post '[JSON] Operation
+                       QueryParam "requestId" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON]
+                             InstanceGroupManagersAbandonInstancesRequest
+                             :> Post '[JSON] Operation
 
--- | Schedules a group action to remove the specified instances from the
--- managed instance group. Abandoning an instance does not delete the
--- instance, but it does remove the instance from any target pools that are
--- applied by the managed instance group. This method reduces the
--- targetSize of the managed instance group by the number of instances that
--- you abandon. This operation is marked as DONE when the action is
--- scheduled even if the instances have not yet been removed from the
--- group. You must separately verify the status of the abandoning action
--- with the listmanagedinstances method.
+-- | Flags the specified instances to be removed from the managed instance
+-- group. Abandoning an instance does not delete the instance, but it does
+-- remove the instance from any target pools that are applied by the
+-- managed instance group. This method reduces the targetSize of the
+-- managed instance group by the number of instances that you abandon. This
+-- operation is marked as DONE when the action is scheduled even if the
+-- instances have not yet been removed from the group. You must separately
+-- verify the status of the abandoning action with the listmanagedinstances
+-- method. If the group is part of a backend service that has enabled
+-- connection draining, it can take up to 60 seconds after the connection
+-- draining duration has elapsed before the VM instance is removed or
+-- deleted. You can specify a maximum of 1000 instances with this method
+-- per request.
 --
 -- /See:/ 'instanceGroupManagersAbandonInstances' smart constructor.
 data InstanceGroupManagersAbandonInstances = InstanceGroupManagersAbandonInstances'
-    { _igmaiProject              :: !Text
+    { _igmaiRequestId            :: !(Maybe Text)
+    , _igmaiProject              :: !Text
     , _igmaiInstanceGroupManager :: !Text
     , _igmaiZone                 :: !Text
     , _igmaiPayload              :: !InstanceGroupManagersAbandonInstancesRequest
@@ -88,6 +99,8 @@ data InstanceGroupManagersAbandonInstances = InstanceGroupManagersAbandonInstanc
 -- | Creates a value of 'InstanceGroupManagersAbandonInstances' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'igmaiRequestId'
 --
 -- * 'igmaiProject'
 --
@@ -104,11 +117,27 @@ instanceGroupManagersAbandonInstances
     -> InstanceGroupManagersAbandonInstances
 instanceGroupManagersAbandonInstances pIgmaiProject_ pIgmaiInstanceGroupManager_ pIgmaiZone_ pIgmaiPayload_ =
     InstanceGroupManagersAbandonInstances'
-    { _igmaiProject = pIgmaiProject_
+    { _igmaiRequestId = Nothing
+    , _igmaiProject = pIgmaiProject_
     , _igmaiInstanceGroupManager = pIgmaiInstanceGroupManager_
     , _igmaiZone = pIgmaiZone_
     , _igmaiPayload = pIgmaiPayload_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+igmaiRequestId :: Lens' InstanceGroupManagersAbandonInstances (Maybe Text)
+igmaiRequestId
+  = lens _igmaiRequestId
+      (\ s a -> s{_igmaiRequestId = a})
 
 -- | Project ID for this request.
 igmaiProject :: Lens' InstanceGroupManagersAbandonInstances Text
@@ -142,6 +171,7 @@ instance GoogleRequest
           InstanceGroupManagersAbandonInstances'{..}
           = go _igmaiProject _igmaiZone
               _igmaiInstanceGroupManager
+              _igmaiRequestId
               (Just AltJSON)
               _igmaiPayload
               computeService

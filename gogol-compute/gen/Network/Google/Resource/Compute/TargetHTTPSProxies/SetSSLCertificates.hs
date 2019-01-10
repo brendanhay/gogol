@@ -33,6 +33,7 @@ module Network.Google.Resource.Compute.TargetHTTPSProxies.SetSSLCertificates
     , TargetHTTPSProxiesSetSSLCertificates
 
     -- * Request Lenses
+    , thpsscRequestId
     , thpsscProject
     , thpsscPayload
     , thpsscTargetHTTPSProxy
@@ -51,16 +52,18 @@ type TargetHTTPSProxiesSetSSLCertificatesResource =
              "targetHttpsProxies" :>
                Capture "targetHttpsProxy" Text :>
                  "setSslCertificates" :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON]
-                       TargetHTTPSProxiesSetSSLCertificatesRequest
-                       :> Post '[JSON] Operation
+                   QueryParam "requestId" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON]
+                         TargetHTTPSProxiesSetSSLCertificatesRequest
+                         :> Post '[JSON] Operation
 
 -- | Replaces SslCertificates for TargetHttpsProxy.
 --
 -- /See:/ 'targetHTTPSProxiesSetSSLCertificates' smart constructor.
 data TargetHTTPSProxiesSetSSLCertificates = TargetHTTPSProxiesSetSSLCertificates'
-    { _thpsscProject          :: !Text
+    { _thpsscRequestId        :: !(Maybe Text)
+    , _thpsscProject          :: !Text
     , _thpsscPayload          :: !TargetHTTPSProxiesSetSSLCertificatesRequest
     , _thpsscTargetHTTPSProxy :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -68,6 +71,8 @@ data TargetHTTPSProxiesSetSSLCertificates = TargetHTTPSProxiesSetSSLCertificates
 -- | Creates a value of 'TargetHTTPSProxiesSetSSLCertificates' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'thpsscRequestId'
 --
 -- * 'thpsscProject'
 --
@@ -81,10 +86,26 @@ targetHTTPSProxiesSetSSLCertificates
     -> TargetHTTPSProxiesSetSSLCertificates
 targetHTTPSProxiesSetSSLCertificates pThpsscProject_ pThpsscPayload_ pThpsscTargetHTTPSProxy_ =
     TargetHTTPSProxiesSetSSLCertificates'
-    { _thpsscProject = pThpsscProject_
+    { _thpsscRequestId = Nothing
+    , _thpsscProject = pThpsscProject_
     , _thpsscPayload = pThpsscPayload_
     , _thpsscTargetHTTPSProxy = pThpsscTargetHTTPSProxy_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+thpsscRequestId :: Lens' TargetHTTPSProxiesSetSSLCertificates (Maybe Text)
+thpsscRequestId
+  = lens _thpsscRequestId
+      (\ s a -> s{_thpsscRequestId = a})
 
 -- | Project ID for this request.
 thpsscProject :: Lens' TargetHTTPSProxiesSetSSLCertificates Text
@@ -115,6 +136,7 @@ instance GoogleRequest
         requestClient
           TargetHTTPSProxiesSetSSLCertificates'{..}
           = go _thpsscProject _thpsscTargetHTTPSProxy
+              _thpsscRequestId
               (Just AltJSON)
               _thpsscPayload
               computeService

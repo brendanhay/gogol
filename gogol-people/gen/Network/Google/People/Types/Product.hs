@@ -20,18 +20,94 @@ module Network.Google.People.Types.Product where
 import           Network.Google.People.Types.Sum
 import           Network.Google.Prelude
 
--- | A person\'s photo. A picture shown next to the person\'s name to help
--- others recognize the person.
+-- | A person\'s SIP address. Session Initial Protocol addresses are used for
+-- VoIP communications to make voice or video calls over the internet.
+--
+-- /See:/ 'sipAddress' smart constructor.
+data SipAddress = SipAddress'
+    { _saValue         :: !(Maybe Text)
+    , _saMetadata      :: !(Maybe FieldMetadata)
+    , _saType          :: !(Maybe Text)
+    , _saFormattedType :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SipAddress' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'saValue'
+--
+-- * 'saMetadata'
+--
+-- * 'saType'
+--
+-- * 'saFormattedType'
+sipAddress
+    :: SipAddress
+sipAddress =
+    SipAddress'
+    { _saValue = Nothing
+    , _saMetadata = Nothing
+    , _saType = Nothing
+    , _saFormattedType = Nothing
+    }
+
+-- | The SIP address in the [RFC 3261
+-- 19.1](https:\/\/tools.ietf.org\/html\/rfc3261#section-19.1) SIP URI
+-- format.
+saValue :: Lens' SipAddress (Maybe Text)
+saValue = lens _saValue (\ s a -> s{_saValue = a})
+
+-- | Metadata about the SIP address.
+saMetadata :: Lens' SipAddress (Maybe FieldMetadata)
+saMetadata
+  = lens _saMetadata (\ s a -> s{_saMetadata = a})
+
+-- | The type of the SIP address. The type can be custom or or one of these
+-- predefined values: * \`home\` * \`work\` * \`mobile\` * \`other\`
+saType :: Lens' SipAddress (Maybe Text)
+saType = lens _saType (\ s a -> s{_saType = a})
+
+-- | The read-only type of the SIP address translated and formatted in the
+-- viewer\'s account locale or the \`Accept-Language\` HTTP header locale.
+saFormattedType :: Lens' SipAddress (Maybe Text)
+saFormattedType
+  = lens _saFormattedType
+      (\ s a -> s{_saFormattedType = a})
+
+instance FromJSON SipAddress where
+        parseJSON
+          = withObject "SipAddress"
+              (\ o ->
+                 SipAddress' <$>
+                   (o .:? "value") <*> (o .:? "metadata") <*>
+                     (o .:? "type")
+                     <*> (o .:? "formattedType"))
+
+instance ToJSON SipAddress where
+        toJSON SipAddress'{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _saValue,
+                  ("metadata" .=) <$> _saMetadata,
+                  ("type" .=) <$> _saType,
+                  ("formattedType" .=) <$> _saFormattedType])
+
+-- | A person\'s read-only photo. A picture shown next to the person\'s name
+-- to help others recognize the person.
 --
 -- /See:/ 'photo' smart constructor.
 data Photo = Photo'
-    { _pURL      :: !(Maybe Text)
+    { _pDefault  :: !(Maybe Bool)
+    , _pURL      :: !(Maybe Text)
     , _pMetadata :: !(Maybe FieldMetadata)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Photo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pDefault'
 --
 -- * 'pURL'
 --
@@ -40,11 +116,19 @@ photo
     :: Photo
 photo =
     Photo'
-    { _pURL = Nothing
+    { _pDefault = Nothing
+    , _pURL = Nothing
     , _pMetadata = Nothing
     }
 
--- | The URL of the photo.
+-- | True if the photo is a default photo; false if the photo is a
+-- user-provided photo.
+pDefault :: Lens' Photo (Maybe Bool)
+pDefault = lens _pDefault (\ s a -> s{_pDefault = a})
+
+-- | The URL of the photo. You can change the desired size by appending a
+-- query parameter \`sz=\`size at the end of the url. Example:
+-- \`https:\/\/lh3.googleusercontent.com\/-T_wVWLlmg7w\/AAAAAAAAAAI\/AAAAAAAABa8\/00gzXvDBYqw\/s100\/photo.jpg?sz=50\`
 pURL :: Lens' Photo (Maybe Text)
 pURL = lens _pURL (\ s a -> s{_pURL = a})
 
@@ -57,13 +141,15 @@ instance FromJSON Photo where
         parseJSON
           = withObject "Photo"
               (\ o ->
-                 Photo' <$> (o .:? "url") <*> (o .:? "metadata"))
+                 Photo' <$>
+                   (o .:? "default") <*> (o .:? "url") <*>
+                     (o .:? "metadata"))
 
 instance ToJSON Photo where
         toJSON Photo'{..}
           = object
               (catMaybes
-                 [("url" .=) <$> _pURL,
+                 [("default" .=) <$> _pDefault, ("url" .=) <$> _pURL,
                   ("metadata" .=) <$> _pMetadata])
 
 -- | An event related to the person.
@@ -106,9 +192,8 @@ eMetadata :: Lens' Event (Maybe FieldMetadata)
 eMetadata
   = lens _eMetadata (\ s a -> s{_eMetadata = a})
 
--- | The type of the event. The type can be custom or predefined. Possible
--- values include, but are not limited to, the following: * \`anniversary\`
--- * \`other\`
+-- | The type of the event. The type can be custom or one of these predefined
+-- values: * \`anniversary\` * \`other\`
 eType :: Lens' Event (Maybe Text)
 eType = lens _eType (\ s a -> s{_eType = a})
 
@@ -140,28 +225,43 @@ instance ToJSON Event where
 --
 -- /See:/ 'listConnectionsResponse' smart constructor.
 data ListConnectionsResponse = ListConnectionsResponse'
-    { _lcrNextPageToken :: !(Maybe Text)
+    { _lcrTotalItems    :: !(Maybe (Textual Int32))
+    , _lcrNextPageToken :: !(Maybe Text)
     , _lcrConnections   :: !(Maybe [Person])
     , _lcrNextSyncToken :: !(Maybe Text)
+    , _lcrTotalPeople   :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListConnectionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'lcrTotalItems'
+--
 -- * 'lcrNextPageToken'
 --
 -- * 'lcrConnections'
 --
 -- * 'lcrNextSyncToken'
+--
+-- * 'lcrTotalPeople'
 listConnectionsResponse
     :: ListConnectionsResponse
 listConnectionsResponse =
     ListConnectionsResponse'
-    { _lcrNextPageToken = Nothing
+    { _lcrTotalItems = Nothing
+    , _lcrNextPageToken = Nothing
     , _lcrConnections = Nothing
     , _lcrNextSyncToken = Nothing
+    , _lcrTotalPeople = Nothing
     }
+
+-- | The total number of items in the list without pagination.
+lcrTotalItems :: Lens' ListConnectionsResponse (Maybe Int32)
+lcrTotalItems
+  = lens _lcrTotalItems
+      (\ s a -> s{_lcrTotalItems = a})
+      . mapping _Coerce
 
 -- | The token that can be used to retrieve the next page of results.
 lcrNextPageToken :: Lens' ListConnectionsResponse (Maybe Text)
@@ -183,22 +283,401 @@ lcrNextSyncToken
   = lens _lcrNextSyncToken
       (\ s a -> s{_lcrNextSyncToken = a})
 
+-- | **DEPRECATED** (Please use totalItems) The total number of people in the
+-- list without pagination.
+lcrTotalPeople :: Lens' ListConnectionsResponse (Maybe Int32)
+lcrTotalPeople
+  = lens _lcrTotalPeople
+      (\ s a -> s{_lcrTotalPeople = a})
+      . mapping _Coerce
+
 instance FromJSON ListConnectionsResponse where
         parseJSON
           = withObject "ListConnectionsResponse"
               (\ o ->
                  ListConnectionsResponse' <$>
-                   (o .:? "nextPageToken") <*>
+                   (o .:? "totalItems") <*> (o .:? "nextPageToken") <*>
                      (o .:? "connections" .!= mempty)
-                     <*> (o .:? "nextSyncToken"))
+                     <*> (o .:? "nextSyncToken")
+                     <*> (o .:? "totalPeople"))
 
 instance ToJSON ListConnectionsResponse where
         toJSON ListConnectionsResponse'{..}
           = object
               (catMaybes
-                 [("nextPageToken" .=) <$> _lcrNextPageToken,
+                 [("totalItems" .=) <$> _lcrTotalItems,
+                  ("nextPageToken" .=) <$> _lcrNextPageToken,
                   ("connections" .=) <$> _lcrConnections,
-                  ("nextSyncToken" .=) <$> _lcrNextSyncToken])
+                  ("nextSyncToken" .=) <$> _lcrNextSyncToken,
+                  ("totalPeople" .=) <$> _lcrTotalPeople])
+
+-- | The \`Status\` type defines a logical error model that is suitable for
+-- different programming environments, including REST APIs and RPC APIs. It
+-- is used by [gRPC](https:\/\/github.com\/grpc). The error model is
+-- designed to be: - Simple to use and understand for most users - Flexible
+-- enough to meet unexpected needs # Overview The \`Status\` message
+-- contains three pieces of data: error code, error message, and error
+-- details. The error code should be an enum value of google.rpc.Code, but
+-- it may accept additional error codes if needed. The error message should
+-- be a developer-facing English message that helps developers *understand*
+-- and *resolve* the error. If a localized user-facing error message is
+-- needed, put the localized message in the error details or localize it in
+-- the client. The optional error details may contain arbitrary information
+-- about the error. There is a predefined set of error detail types in the
+-- package \`google.rpc\` that can be used for common error conditions. #
+-- Language mapping The \`Status\` message is the logical representation of
+-- the error model, but it is not necessarily the actual wire format. When
+-- the \`Status\` message is exposed in different client libraries and
+-- different wire protocols, it can be mapped differently. For example, it
+-- will likely be mapped to some exceptions in Java, but more likely mapped
+-- to some error codes in C. # Other uses The error model and the
+-- \`Status\` message can be used in a variety of environments, either with
+-- or without APIs, to provide a consistent developer experience across
+-- different environments. Example uses of this error model include: -
+-- Partial errors. If a service needs to return partial errors to the
+-- client, it may embed the \`Status\` in the normal response to indicate
+-- the partial errors. - Workflow errors. A typical workflow has multiple
+-- steps. Each step may have a \`Status\` message for error reporting. -
+-- Batch operations. If a client uses batch request and batch response, the
+-- \`Status\` message should be used directly inside batch response, one
+-- for each error sub-response. - Asynchronous operations. If an API call
+-- embeds asynchronous operation results in its response, the status of
+-- those operations should be represented directly using the \`Status\`
+-- message. - Logging. If some API errors are stored in logs, the message
+-- \`Status\` could be used directly after any stripping needed for
+-- security\/privacy reasons.
+--
+-- /See:/ 'status' smart constructor.
+data Status = Status'
+    { _sDetails :: !(Maybe [StatusDetailsItem])
+    , _sCode    :: !(Maybe (Textual Int32))
+    , _sMessage :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Status' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sDetails'
+--
+-- * 'sCode'
+--
+-- * 'sMessage'
+status
+    :: Status
+status =
+    Status'
+    { _sDetails = Nothing
+    , _sCode = Nothing
+    , _sMessage = Nothing
+    }
+
+-- | A list of messages that carry the error details. There is a common set
+-- of message types for APIs to use.
+sDetails :: Lens' Status [StatusDetailsItem]
+sDetails
+  = lens _sDetails (\ s a -> s{_sDetails = a}) .
+      _Default
+      . _Coerce
+
+-- | The status code, which should be an enum value of google.rpc.Code.
+sCode :: Lens' Status (Maybe Int32)
+sCode
+  = lens _sCode (\ s a -> s{_sCode = a}) .
+      mapping _Coerce
+
+-- | A developer-facing error message, which should be in English. Any
+-- user-facing error message should be localized and sent in the
+-- google.rpc.Status.details field, or localized by the client.
+sMessage :: Lens' Status (Maybe Text)
+sMessage = lens _sMessage (\ s a -> s{_sMessage = a})
+
+instance FromJSON Status where
+        parseJSON
+          = withObject "Status"
+              (\ o ->
+                 Status' <$>
+                   (o .:? "details" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON Status where
+        toJSON Status'{..}
+          = object
+              (catMaybes
+                 [("details" .=) <$> _sDetails,
+                  ("code" .=) <$> _sCode,
+                  ("message" .=) <$> _sMessage])
+
+-- | The response for a specific contact group.
+--
+-- /See:/ 'contactGroupResponse' smart constructor.
+data ContactGroupResponse = ContactGroupResponse'
+    { _cgrStatus                :: !(Maybe Status)
+    , _cgrContactGroup          :: !(Maybe ContactGroup)
+    , _cgrRequestedResourceName :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ContactGroupResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cgrStatus'
+--
+-- * 'cgrContactGroup'
+--
+-- * 'cgrRequestedResourceName'
+contactGroupResponse
+    :: ContactGroupResponse
+contactGroupResponse =
+    ContactGroupResponse'
+    { _cgrStatus = Nothing
+    , _cgrContactGroup = Nothing
+    , _cgrRequestedResourceName = Nothing
+    }
+
+-- | The status of the response.
+cgrStatus :: Lens' ContactGroupResponse (Maybe Status)
+cgrStatus
+  = lens _cgrStatus (\ s a -> s{_cgrStatus = a})
+
+-- | The contact group.
+cgrContactGroup :: Lens' ContactGroupResponse (Maybe ContactGroup)
+cgrContactGroup
+  = lens _cgrContactGroup
+      (\ s a -> s{_cgrContactGroup = a})
+
+-- | The original requested resource name.
+cgrRequestedResourceName :: Lens' ContactGroupResponse (Maybe Text)
+cgrRequestedResourceName
+  = lens _cgrRequestedResourceName
+      (\ s a -> s{_cgrRequestedResourceName = a})
+
+instance FromJSON ContactGroupResponse where
+        parseJSON
+          = withObject "ContactGroupResponse"
+              (\ o ->
+                 ContactGroupResponse' <$>
+                   (o .:? "status") <*> (o .:? "contactGroup") <*>
+                     (o .:? "requestedResourceName"))
+
+instance ToJSON ContactGroupResponse where
+        toJSON ContactGroupResponse'{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _cgrStatus,
+                  ("contactGroup" .=) <$> _cgrContactGroup,
+                  ("requestedResourceName" .=) <$>
+                    _cgrRequestedResourceName])
+
+-- | A contact group.
+--
+-- /See:/ 'contactGroup' smart constructor.
+data ContactGroup = ContactGroup'
+    { _cgEtag                :: !(Maybe Text)
+    , _cgResourceName        :: !(Maybe Text)
+    , _cgMemberResourceNames :: !(Maybe [Text])
+    , _cgFormattedName       :: !(Maybe Text)
+    , _cgName                :: !(Maybe Text)
+    , _cgGroupType           :: !(Maybe ContactGroupGroupType)
+    , _cgMetadata            :: !(Maybe ContactGroupMetadata)
+    , _cgMemberCount         :: !(Maybe (Textual Int32))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ContactGroup' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cgEtag'
+--
+-- * 'cgResourceName'
+--
+-- * 'cgMemberResourceNames'
+--
+-- * 'cgFormattedName'
+--
+-- * 'cgName'
+--
+-- * 'cgGroupType'
+--
+-- * 'cgMetadata'
+--
+-- * 'cgMemberCount'
+contactGroup
+    :: ContactGroup
+contactGroup =
+    ContactGroup'
+    { _cgEtag = Nothing
+    , _cgResourceName = Nothing
+    , _cgMemberResourceNames = Nothing
+    , _cgFormattedName = Nothing
+    , _cgName = Nothing
+    , _cgGroupType = Nothing
+    , _cgMetadata = Nothing
+    , _cgMemberCount = Nothing
+    }
+
+-- | The [HTTP entity tag](https:\/\/en.wikipedia.org\/wiki\/HTTP_ETag) of
+-- the resource. Used for web cache validation.
+cgEtag :: Lens' ContactGroup (Maybe Text)
+cgEtag = lens _cgEtag (\ s a -> s{_cgEtag = a})
+
+-- | The resource name for the contact group, assigned by the server. An
+-- ASCII string, in the form of \`contactGroups\/\`contact_group_id.
+cgResourceName :: Lens' ContactGroup (Maybe Text)
+cgResourceName
+  = lens _cgResourceName
+      (\ s a -> s{_cgResourceName = a})
+
+-- | The list of contact person resource names that are members of the
+-- contact group. The field is not populated for LIST requests and can only
+-- be updated through the
+-- [ModifyContactGroupMembers](\/people\/api\/rest\/v1\/contactgroups\/members\/modify).
+cgMemberResourceNames :: Lens' ContactGroup [Text]
+cgMemberResourceNames
+  = lens _cgMemberResourceNames
+      (\ s a -> s{_cgMemberResourceNames = a})
+      . _Default
+      . _Coerce
+
+-- | The read-only name translated and formatted in the viewer\'s account
+-- locale or the \`Accept-Language\` HTTP header locale for system groups
+-- names. Group names set by the owner are the same as name.
+cgFormattedName :: Lens' ContactGroup (Maybe Text)
+cgFormattedName
+  = lens _cgFormattedName
+      (\ s a -> s{_cgFormattedName = a})
+
+-- | The contact group name set by the group owner or a system provided name
+-- for system groups.
+cgName :: Lens' ContactGroup (Maybe Text)
+cgName = lens _cgName (\ s a -> s{_cgName = a})
+
+-- | The read-only contact group type.
+cgGroupType :: Lens' ContactGroup (Maybe ContactGroupGroupType)
+cgGroupType
+  = lens _cgGroupType (\ s a -> s{_cgGroupType = a})
+
+-- | Metadata about the contact group.
+cgMetadata :: Lens' ContactGroup (Maybe ContactGroupMetadata)
+cgMetadata
+  = lens _cgMetadata (\ s a -> s{_cgMetadata = a})
+
+-- | The total number of contacts in the group irrespective of max members in
+-- specified in the request.
+cgMemberCount :: Lens' ContactGroup (Maybe Int32)
+cgMemberCount
+  = lens _cgMemberCount
+      (\ s a -> s{_cgMemberCount = a})
+      . mapping _Coerce
+
+instance FromJSON ContactGroup where
+        parseJSON
+          = withObject "ContactGroup"
+              (\ o ->
+                 ContactGroup' <$>
+                   (o .:? "etag") <*> (o .:? "resourceName") <*>
+                     (o .:? "memberResourceNames" .!= mempty)
+                     <*> (o .:? "formattedName")
+                     <*> (o .:? "name")
+                     <*> (o .:? "groupType")
+                     <*> (o .:? "metadata")
+                     <*> (o .:? "memberCount"))
+
+instance ToJSON ContactGroup where
+        toJSON ContactGroup'{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _cgEtag,
+                  ("resourceName" .=) <$> _cgResourceName,
+                  ("memberResourceNames" .=) <$>
+                    _cgMemberResourceNames,
+                  ("formattedName" .=) <$> _cgFormattedName,
+                  ("name" .=) <$> _cgName,
+                  ("groupType" .=) <$> _cgGroupType,
+                  ("metadata" .=) <$> _cgMetadata,
+                  ("memberCount" .=) <$> _cgMemberCount])
+
+-- | The response to a modify contact group members request.
+--
+-- /See:/ 'modifyContactGroupMembersResponse' smart constructor.
+newtype ModifyContactGroupMembersResponse = ModifyContactGroupMembersResponse'
+    { _mcgmrNotFoundResourceNames :: Maybe [Text]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ModifyContactGroupMembersResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mcgmrNotFoundResourceNames'
+modifyContactGroupMembersResponse
+    :: ModifyContactGroupMembersResponse
+modifyContactGroupMembersResponse =
+    ModifyContactGroupMembersResponse'
+    { _mcgmrNotFoundResourceNames = Nothing
+    }
+
+-- | The contact people resource names that were not found.
+mcgmrNotFoundResourceNames :: Lens' ModifyContactGroupMembersResponse [Text]
+mcgmrNotFoundResourceNames
+  = lens _mcgmrNotFoundResourceNames
+      (\ s a -> s{_mcgmrNotFoundResourceNames = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ModifyContactGroupMembersResponse
+         where
+        parseJSON
+          = withObject "ModifyContactGroupMembersResponse"
+              (\ o ->
+                 ModifyContactGroupMembersResponse' <$>
+                   (o .:? "notFoundResourceNames" .!= mempty))
+
+instance ToJSON ModifyContactGroupMembersResponse
+         where
+        toJSON ModifyContactGroupMembersResponse'{..}
+          = object
+              (catMaybes
+                 [("notFoundResourceNames" .=) <$>
+                    _mcgmrNotFoundResourceNames])
+
+-- | A request to update an existing user contact group. All updated fields
+-- will be replaced.
+--
+-- /See:/ 'updateContactGroupRequest' smart constructor.
+newtype UpdateContactGroupRequest = UpdateContactGroupRequest'
+    { _ucgrContactGroup :: Maybe ContactGroup
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UpdateContactGroupRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ucgrContactGroup'
+updateContactGroupRequest
+    :: UpdateContactGroupRequest
+updateContactGroupRequest =
+    UpdateContactGroupRequest'
+    { _ucgrContactGroup = Nothing
+    }
+
+-- | The contact group to update.
+ucgrContactGroup :: Lens' UpdateContactGroupRequest (Maybe ContactGroup)
+ucgrContactGroup
+  = lens _ucgrContactGroup
+      (\ s a -> s{_ucgrContactGroup = a})
+
+instance FromJSON UpdateContactGroupRequest where
+        parseJSON
+          = withObject "UpdateContactGroupRequest"
+              (\ o ->
+                 UpdateContactGroupRequest' <$>
+                   (o .:? "contactGroup"))
+
+instance ToJSON UpdateContactGroupRequest where
+        toJSON UpdateContactGroupRequest'{..}
+          = object
+              (catMaybes
+                 [("contactGroup" .=) <$> _ucgrContactGroup])
 
 -- | A Google Apps Domain membership.
 --
@@ -237,7 +716,7 @@ instance ToJSON DomainMembership where
               (catMaybes
                  [("inViewerDomain" .=) <$> _dmInViewerDomain])
 
--- | The kind of relationship the person is looking for.
+-- | A person\'s read-only relationship interest .
 --
 -- /See:/ 'relationshipInterest' smart constructor.
 data RelationshipInterest = RelationshipInterest'
@@ -265,9 +744,8 @@ relationshipInterest =
     }
 
 -- | The kind of relationship the person is looking for. The value can be
--- custom or predefined. Possible values include, but are not limited to,
--- the following values: * \`friend\` * \`date\` * \`relationship\` *
--- \`networking\`
+-- custom or one of these predefined values: * \`friend\` * \`date\` *
+-- \`relationship\` * \`networking\`
 riValue :: Lens' RelationshipInterest (Maybe Text)
 riValue = lens _riValue (\ s a -> s{_riValue = a})
 
@@ -346,7 +824,7 @@ instance ToJSON BraggingRights where
                  [("value" .=) <$> _brValue,
                   ("metadata" .=) <$> _brMetadata])
 
--- | A person\'s membership in a group.
+-- | A person\'s read-only membership in a group.
 --
 -- /See:/ 'membership' smart constructor.
 data Membership = Membership'
@@ -409,8 +887,7 @@ instance ToJSON Membership where
                   ("metadata" .=) <$> _mMetadata])
 
 -- | Information about a person merged from various data sources such as the
--- authenticated user\'s contacts and profile data. Fields other than IDs,
--- metadata, and group memberships are user-edited. Most fields can have
+-- authenticated user\'s contacts and profile data. Most fields can have
 -- multiple items. The items in a field have no guaranteed order, but each
 -- non-empty field is guaranteed to have exactly one field with
 -- \`metadata.primary\` set to true.
@@ -418,7 +895,7 @@ instance ToJSON Membership where
 -- /See:/ 'person' smart constructor.
 data Person = Person'
     { _perEmailAddresses        :: !(Maybe [EmailAddress])
-    , _perAgeRange              :: !(Maybe Text)
+    , _perAgeRange              :: !(Maybe PersonAgeRange)
     , _perEtag                  :: !(Maybe Text)
     , _perResidences            :: !(Maybe [Residence])
     , _perBiographies           :: !(Maybe [Biography])
@@ -429,6 +906,7 @@ data Person = Person'
     , _perRelations             :: !(Maybe [Relation])
     , _perURLs                  :: !(Maybe [URL])
     , _perAddresses             :: !(Maybe [Address])
+    , _perUserDefined           :: !(Maybe [UserDefined])
     , _perNicknames             :: !(Maybe [Nickname])
     , _perRelationshipStatuses  :: !(Maybe [RelationshipStatus])
     , _perImClients             :: !(Maybe [ImClient])
@@ -437,9 +915,11 @@ data Person = Person'
     , _perNames                 :: !(Maybe [Name])
     , _perGenders               :: !(Maybe [Gender])
     , _perPhotos                :: !(Maybe [Photo])
+    , _perAgeRanges             :: !(Maybe [AgeRangeType])
     , _perEvents                :: !(Maybe [Event])
     , _perCoverPhotos           :: !(Maybe [CoverPhoto])
     , _perSkills                :: !(Maybe [Skill])
+    , _perSipAddresses          :: !(Maybe [SipAddress])
     , _perMetadata              :: !(Maybe PersonMetadata)
     , _perInterests             :: !(Maybe [Interest])
     , _perOrganizations         :: !(Maybe [Organization])
@@ -476,6 +956,8 @@ data Person = Person'
 --
 -- * 'perAddresses'
 --
+-- * 'perUserDefined'
+--
 -- * 'perNicknames'
 --
 -- * 'perRelationshipStatuses'
@@ -492,11 +974,15 @@ data Person = Person'
 --
 -- * 'perPhotos'
 --
+-- * 'perAgeRanges'
+--
 -- * 'perEvents'
 --
 -- * 'perCoverPhotos'
 --
 -- * 'perSkills'
+--
+-- * 'perSipAddresses'
 --
 -- * 'perMetadata'
 --
@@ -525,6 +1011,7 @@ person =
     , _perRelations = Nothing
     , _perURLs = Nothing
     , _perAddresses = Nothing
+    , _perUserDefined = Nothing
     , _perNicknames = Nothing
     , _perRelationshipStatuses = Nothing
     , _perImClients = Nothing
@@ -533,9 +1020,11 @@ person =
     , _perNames = Nothing
     , _perGenders = Nothing
     , _perPhotos = Nothing
+    , _perAgeRanges = Nothing
     , _perEvents = Nothing
     , _perCoverPhotos = Nothing
     , _perSkills = Nothing
+    , _perSipAddresses = Nothing
     , _perMetadata = Nothing
     , _perInterests = Nothing
     , _perOrganizations = Nothing
@@ -552,8 +1041,9 @@ perEmailAddresses
       . _Default
       . _Coerce
 
--- | The person\'s age range.
-perAgeRange :: Lens' Person (Maybe Text)
+-- | **DEPRECATED** (Please use \`person.ageRanges\` instead)** The person\'s
+-- read-only age range.
+perAgeRange :: Lens' Person (Maybe PersonAgeRange)
 perAgeRange
   = lens _perAgeRange (\ s a -> s{_perAgeRange = a})
 
@@ -578,7 +1068,7 @@ perBiographies
       . _Default
       . _Coerce
 
--- | The person\'s taglines.
+-- | The person\'s read-only taglines.
 perTaglines :: Lens' Person [Tagline]
 perTaglines
   = lens _perTaglines (\ s a -> s{_perTaglines = a}) .
@@ -601,8 +1091,8 @@ perBirthdays
       . _Coerce
 
 -- | The resource name for the person, assigned by the server. An ASCII
--- string with a max length of 27 characters. Always starts with
--- \`people\/\`.
+-- string with a max length of 27 characters, in the form of
+-- \`people\/\`person_id.
 perResourceName :: Lens' Person (Maybe Text)
 perResourceName
   = lens _perResourceName
@@ -628,6 +1118,14 @@ perAddresses
       . _Default
       . _Coerce
 
+-- | The person\'s user defined data.
+perUserDefined :: Lens' Person [UserDefined]
+perUserDefined
+  = lens _perUserDefined
+      (\ s a -> s{_perUserDefined = a})
+      . _Default
+      . _Coerce
+
 -- | The person\'s nicknames.
 perNicknames :: Lens' Person [Nickname]
 perNicknames
@@ -635,7 +1133,7 @@ perNicknames
       . _Default
       . _Coerce
 
--- | The person\'s relationship statuses.
+-- | The person\'s read-only relationship statuses.
 perRelationshipStatuses :: Lens' Person [RelationshipStatus]
 perRelationshipStatuses
   = lens _perRelationshipStatuses
@@ -680,11 +1178,18 @@ perGenders
       _Default
       . _Coerce
 
--- | The person\'s photos.
+-- | The person\'s read-only photos.
 perPhotos :: Lens' Person [Photo]
 perPhotos
   = lens _perPhotos (\ s a -> s{_perPhotos = a}) .
       _Default
+      . _Coerce
+
+-- | The person\'s read-only age ranges.
+perAgeRanges :: Lens' Person [AgeRangeType]
+perAgeRanges
+  = lens _perAgeRanges (\ s a -> s{_perAgeRanges = a})
+      . _Default
       . _Coerce
 
 -- | The person\'s events.
@@ -694,7 +1199,7 @@ perEvents
       _Default
       . _Coerce
 
--- | The person\'s cover photos.
+-- | The person\'s read-only cover photos.
 perCoverPhotos :: Lens' Person [CoverPhoto]
 perCoverPhotos
   = lens _perCoverPhotos
@@ -709,7 +1214,15 @@ perSkills
       _Default
       . _Coerce
 
--- | Metadata about the person.
+-- | The person\'s SIP addresses.
+perSipAddresses :: Lens' Person [SipAddress]
+perSipAddresses
+  = lens _perSipAddresses
+      (\ s a -> s{_perSipAddresses = a})
+      . _Default
+      . _Coerce
+
+-- | Read-only metadata about the person.
 perMetadata :: Lens' Person (Maybe PersonMetadata)
 perMetadata
   = lens _perMetadata (\ s a -> s{_perMetadata = a})
@@ -736,7 +1249,7 @@ perLocales
       _Default
       . _Coerce
 
--- | The person\'s group memberships.
+-- | The person\'s read-only group memberships.
 perMemberships :: Lens' Person [Membership]
 perMemberships
   = lens _perMemberships
@@ -744,7 +1257,7 @@ perMemberships
       . _Default
       . _Coerce
 
--- | The kind of relationship the person is looking for.
+-- | The person\'s read-only relationship interests.
 perRelationshipInterests :: Lens' Person [RelationshipInterest]
 perRelationshipInterests
   = lens _perRelationshipInterests
@@ -769,6 +1282,7 @@ instance FromJSON Person where
                      <*> (o .:? "relations" .!= mempty)
                      <*> (o .:? "urls" .!= mempty)
                      <*> (o .:? "addresses" .!= mempty)
+                     <*> (o .:? "userDefined" .!= mempty)
                      <*> (o .:? "nicknames" .!= mempty)
                      <*> (o .:? "relationshipStatuses" .!= mempty)
                      <*> (o .:? "imClients" .!= mempty)
@@ -777,9 +1291,11 @@ instance FromJSON Person where
                      <*> (o .:? "names" .!= mempty)
                      <*> (o .:? "genders" .!= mempty)
                      <*> (o .:? "photos" .!= mempty)
+                     <*> (o .:? "ageRanges" .!= mempty)
                      <*> (o .:? "events" .!= mempty)
                      <*> (o .:? "coverPhotos" .!= mempty)
                      <*> (o .:? "skills" .!= mempty)
+                     <*> (o .:? "sipAddresses" .!= mempty)
                      <*> (o .:? "metadata")
                      <*> (o .:? "interests" .!= mempty)
                      <*> (o .:? "organizations" .!= mempty)
@@ -803,6 +1319,7 @@ instance ToJSON Person where
                   ("relations" .=) <$> _perRelations,
                   ("urls" .=) <$> _perURLs,
                   ("addresses" .=) <$> _perAddresses,
+                  ("userDefined" .=) <$> _perUserDefined,
                   ("nicknames" .=) <$> _perNicknames,
                   ("relationshipStatuses" .=) <$>
                     _perRelationshipStatuses,
@@ -812,9 +1329,11 @@ instance ToJSON Person where
                   ("names" .=) <$> _perNames,
                   ("genders" .=) <$> _perGenders,
                   ("photos" .=) <$> _perPhotos,
+                  ("ageRanges" .=) <$> _perAgeRanges,
                   ("events" .=) <$> _perEvents,
                   ("coverPhotos" .=) <$> _perCoverPhotos,
                   ("skills" .=) <$> _perSkills,
+                  ("sipAddresses" .=) <$> _perSipAddresses,
                   ("metadata" .=) <$> _perMetadata,
                   ("interests" .=) <$> _perInterests,
                   ("organizations" .=) <$> _perOrganizations,
@@ -822,6 +1341,107 @@ instance ToJSON Person where
                   ("memberships" .=) <$> _perMemberships,
                   ("relationshipInterests" .=) <$>
                     _perRelationshipInterests])
+
+-- | A generic empty message that you can re-use to avoid defining duplicated
+-- empty messages in your APIs. A typical example is to use it as the
+-- request or the response type of an API method. For instance: service Foo
+-- { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The
+-- JSON representation for \`Empty\` is empty JSON object \`{}\`.
+--
+-- /See:/ 'empty' smart constructor.
+data Empty =
+    Empty'
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Empty' with the minimum fields required to make a request.
+--
+empty
+    :: Empty
+empty = Empty'
+
+instance FromJSON Empty where
+        parseJSON = withObject "Empty" (\ o -> pure Empty')
+
+instance ToJSON Empty where
+        toJSON = const emptyObject
+
+-- | The response to a list contact groups request.
+--
+-- /See:/ 'listContactGroupsResponse' smart constructor.
+data ListContactGroupsResponse = ListContactGroupsResponse'
+    { _lcgrContactGroups :: !(Maybe [ContactGroup])
+    , _lcgrTotalItems    :: !(Maybe (Textual Int32))
+    , _lcgrNextPageToken :: !(Maybe Text)
+    , _lcgrNextSyncToken :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListContactGroupsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lcgrContactGroups'
+--
+-- * 'lcgrTotalItems'
+--
+-- * 'lcgrNextPageToken'
+--
+-- * 'lcgrNextSyncToken'
+listContactGroupsResponse
+    :: ListContactGroupsResponse
+listContactGroupsResponse =
+    ListContactGroupsResponse'
+    { _lcgrContactGroups = Nothing
+    , _lcgrTotalItems = Nothing
+    , _lcgrNextPageToken = Nothing
+    , _lcgrNextSyncToken = Nothing
+    }
+
+-- | The list of contact groups. Members of the contact groups are not
+-- populated.
+lcgrContactGroups :: Lens' ListContactGroupsResponse [ContactGroup]
+lcgrContactGroups
+  = lens _lcgrContactGroups
+      (\ s a -> s{_lcgrContactGroups = a})
+      . _Default
+      . _Coerce
+
+-- | The total number of items in the list without pagination.
+lcgrTotalItems :: Lens' ListContactGroupsResponse (Maybe Int32)
+lcgrTotalItems
+  = lens _lcgrTotalItems
+      (\ s a -> s{_lcgrTotalItems = a})
+      . mapping _Coerce
+
+-- | The token that can be used to retrieve the next page of results.
+lcgrNextPageToken :: Lens' ListContactGroupsResponse (Maybe Text)
+lcgrNextPageToken
+  = lens _lcgrNextPageToken
+      (\ s a -> s{_lcgrNextPageToken = a})
+
+-- | The token that can be used to retrieve changes since the last request.
+lcgrNextSyncToken :: Lens' ListContactGroupsResponse (Maybe Text)
+lcgrNextSyncToken
+  = lens _lcgrNextSyncToken
+      (\ s a -> s{_lcgrNextSyncToken = a})
+
+instance FromJSON ListContactGroupsResponse where
+        parseJSON
+          = withObject "ListContactGroupsResponse"
+              (\ o ->
+                 ListContactGroupsResponse' <$>
+                   (o .:? "contactGroups" .!= mempty) <*>
+                     (o .:? "totalItems")
+                     <*> (o .:? "nextPageToken")
+                     <*> (o .:? "nextSyncToken"))
+
+instance ToJSON ListContactGroupsResponse where
+        toJSON ListContactGroupsResponse'{..}
+          = object
+              (catMaybes
+                 [("contactGroups" .=) <$> _lcgrContactGroups,
+                  ("totalItems" .=) <$> _lcgrTotalItems,
+                  ("nextPageToken" .=) <$> _lcgrNextPageToken,
+                  ("nextSyncToken" .=) <$> _lcgrNextSyncToken])
 
 -- | A Google contact group membership.
 --
@@ -843,9 +1463,8 @@ contactGroupMembership =
     }
 
 -- | The contact group ID for the contact group membership. The contact group
--- ID can be custom or predefined. Possible values include, but are not
--- limited to, the following: * \`myContacts\` * \`starred\` * A numerical
--- ID for user-created groups.
+-- ID can be custom or one of these predefined values: * \`myContacts\` *
+-- \`starred\` * A numerical ID for user-created groups.
 cgmContactGroupId :: Lens' ContactGroupMembership (Maybe Text)
 cgmContactGroupId
   = lens _cgmContactGroupId
@@ -862,6 +1481,61 @@ instance ToJSON ContactGroupMembership where
           = object
               (catMaybes
                  [("contactGroupId" .=) <$> _cgmContactGroupId])
+
+-- | Arbitrary user data that is populated by the end users.
+--
+-- /See:/ 'userDefined' smart constructor.
+data UserDefined = UserDefined'
+    { _udValue    :: !(Maybe Text)
+    , _udKey      :: !(Maybe Text)
+    , _udMetadata :: !(Maybe FieldMetadata)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UserDefined' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'udValue'
+--
+-- * 'udKey'
+--
+-- * 'udMetadata'
+userDefined
+    :: UserDefined
+userDefined =
+    UserDefined'
+    { _udValue = Nothing
+    , _udKey = Nothing
+    , _udMetadata = Nothing
+    }
+
+-- | The end user specified value of the user defined data.
+udValue :: Lens' UserDefined (Maybe Text)
+udValue = lens _udValue (\ s a -> s{_udValue = a})
+
+-- | The end user specified key of the user defined data.
+udKey :: Lens' UserDefined (Maybe Text)
+udKey = lens _udKey (\ s a -> s{_udKey = a})
+
+-- | Metadata about the user defined data.
+udMetadata :: Lens' UserDefined (Maybe FieldMetadata)
+udMetadata
+  = lens _udMetadata (\ s a -> s{_udMetadata = a})
+
+instance FromJSON UserDefined where
+        parseJSON
+          = withObject "UserDefined"
+              (\ o ->
+                 UserDefined' <$>
+                   (o .:? "value") <*> (o .:? "key") <*>
+                     (o .:? "metadata"))
+
+instance ToJSON UserDefined where
+        toJSON UserDefined'{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _udValue, ("key" .=) <$> _udKey,
+                  ("metadata" .=) <$> _udMetadata])
 
 -- | A person\'s locale preference.
 --
@@ -909,7 +1583,7 @@ instance ToJSON Locale where
                  [("value" .=) <$> _lValue,
                   ("metadata" .=) <$> _lMetadata])
 
--- | A person\'s relationship status.
+-- | A person\'s read-only relationship status.
 --
 -- /See:/ 'relationshipStatus' smart constructor.
 data RelationshipStatus = RelationshipStatus'
@@ -936,11 +1610,10 @@ relationshipStatus =
     , _rsFormattedValue = Nothing
     }
 
--- | The relationship status. The value can be custom or predefined. Possible
--- values include, but are not limited to, the following: * \`single\` *
--- \`inARelationship\` * \`engaged\` * \`married\` * \`itsComplicated\` *
--- \`openRelationship\` * \`widowed\` * \`inDomesticPartnership\` *
--- \`inCivilUnion\`
+-- | The relationship status. The value can be custom or one of these
+-- predefined values: * \`single\` * \`inARelationship\` * \`engaged\` *
+-- \`married\` * \`itsComplicated\` * \`openRelationship\` * \`widowed\` *
+-- \`inDomesticPartnership\` * \`inCivilUnion\`
 rsValue :: Lens' RelationshipStatus (Maybe Text)
 rsValue = lens _rsValue (\ s a -> s{_rsValue = a})
 
@@ -1013,10 +1686,9 @@ uMetadata :: Lens' URL (Maybe FieldMetadata)
 uMetadata
   = lens _uMetadata (\ s a -> s{_uMetadata = a})
 
--- | The type of the URL. The type can be custom or predefined. Possible
--- values include, but are not limited to, the following: * \`home\` *
--- \`work\` * \`blog\` * \`profile\` * \`homePage\` * \`ftp\` *
--- \`reservations\` * \`appInstallPage\`: website for a Google+
+-- | The type of the URL. The type can be custom or one of these predefined
+-- values: * \`home\` * \`work\` * \`blog\` * \`profile\` * \`homePage\` *
+-- \`ftp\` * \`reservations\` * \`appInstallPage\`: website for a Google+
 -- application. * \`other\`
 uType :: Lens' URL (Maybe Text)
 uType = lens _uType (\ s a -> s{_uType = a})
@@ -1045,6 +1717,39 @@ instance ToJSON URL where
                   ("metadata" .=) <$> _uMetadata,
                   ("type" .=) <$> _uType,
                   ("formattedType" .=) <$> _uFormattedType])
+
+--
+-- /See:/ 'statusDetailsItem' smart constructor.
+newtype StatusDetailsItem = StatusDetailsItem'
+    { _sdiAddtional :: HashMap Text JSONValue
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sdiAddtional'
+statusDetailsItem
+    :: HashMap Text JSONValue -- ^ 'sdiAddtional'
+    -> StatusDetailsItem
+statusDetailsItem pSdiAddtional_ =
+    StatusDetailsItem'
+    { _sdiAddtional = _Coerce # pSdiAddtional_
+    }
+
+-- | Properties of the object. Contains field \'type with type URL.
+sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
+sdiAddtional
+  = lens _sdiAddtional (\ s a -> s{_sdiAddtional = a})
+      . _Coerce
+
+instance FromJSON StatusDetailsItem where
+        parseJSON
+          = withObject "StatusDetailsItem"
+              (\ o -> StatusDetailsItem' <$> (parseJSONObject o))
+
+instance ToJSON StatusDetailsItem where
+        toJSON = toJSON . _sdiAddtional
 
 -- | A person\'s physical address. May be a P.O. box or street address. All
 -- fields are optional.
@@ -1150,8 +1855,8 @@ aCountryCode :: Lens' Address (Maybe Text)
 aCountryCode
   = lens _aCountryCode (\ s a -> s{_aCountryCode = a})
 
--- | The read-only value of the address formatted in the viewer\'s account
--- locale or the \`Accept-Language\` HTTP header locale.
+-- | The unstructured value of the address. If this is not set by the user it
+-- will be automatically constructed from structured values.
 aFormattedValue :: Lens' Address (Maybe Text)
 aFormattedValue
   = lens _aFormattedValue
@@ -1161,9 +1866,8 @@ aFormattedValue
 aRegion :: Lens' Address (Maybe Text)
 aRegion = lens _aRegion (\ s a -> s{_aRegion = a})
 
--- | The type of the address. The type can be custom or predefined. Possible
--- values include, but are not limited to, the following: * \`home\` *
--- \`work\` * \`other\`
+-- | The type of the address. The type can be custom or one of these
+-- predefined values: * \`home\` * \`work\` * \`other\`
 aType :: Lens' Address (Maybe Text)
 aType = lens _aType (\ s a -> s{_aType = a})
 
@@ -1207,6 +1911,57 @@ instance ToJSON Address where
                   ("region" .=) <$> _aRegion, ("type" .=) <$> _aType,
                   ("formattedType" .=) <$> _aFormattedType])
 
+-- | The read-only metadata about a profile.
+--
+-- /See:/ 'proFileMetadata' smart constructor.
+data ProFileMetadata = ProFileMetadata'
+    { _pfmObjectType :: !(Maybe ProFileMetadataObjectType)
+    , _pfmUserTypes  :: !(Maybe [Text])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ProFileMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pfmObjectType'
+--
+-- * 'pfmUserTypes'
+proFileMetadata
+    :: ProFileMetadata
+proFileMetadata =
+    ProFileMetadata'
+    { _pfmObjectType = Nothing
+    , _pfmUserTypes = Nothing
+    }
+
+-- | The profile object type.
+pfmObjectType :: Lens' ProFileMetadata (Maybe ProFileMetadataObjectType)
+pfmObjectType
+  = lens _pfmObjectType
+      (\ s a -> s{_pfmObjectType = a})
+
+-- | The user types.
+pfmUserTypes :: Lens' ProFileMetadata [Text]
+pfmUserTypes
+  = lens _pfmUserTypes (\ s a -> s{_pfmUserTypes = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ProFileMetadata where
+        parseJSON
+          = withObject "ProFileMetadata"
+              (\ o ->
+                 ProFileMetadata' <$>
+                   (o .:? "objectType") <*>
+                     (o .:? "userTypes" .!= mempty))
+
+instance ToJSON ProFileMetadata where
+        toJSON ProFileMetadata'{..}
+          = object
+              (catMaybes
+                 [("objectType" .=) <$> _pfmObjectType,
+                  ("userTypes" .=) <$> _pfmUserTypes])
+
 -- | A person\'s relation to another person.
 --
 -- /See:/ 'relation' smart constructor.
@@ -1248,11 +2003,10 @@ rMetadata
   = lens _rMetadata (\ s a -> s{_rMetadata = a})
 
 -- | The person\'s relation to the other person. The type can be custom or
--- predefined. Possible values include, but are not limited to, the
--- following values: * \`spouse\` * \`child\` * \`mother\` * \`father\` *
--- \`parent\` * \`brother\` * \`sister\` * \`friend\` * \`relative\` *
--- \`domesticPartner\` * \`manager\` * \`assistant\` * \`referredBy\` *
--- \`partner\`
+-- one of these predefined values: * \`spouse\` * \`child\` * \`mother\` *
+-- \`father\` * \`parent\` * \`brother\` * \`sister\` * \`friend\` *
+-- \`relative\` * \`domesticPartner\` * \`manager\` * \`assistant\` *
+-- \`referredBy\` * \`partner\`
 rType :: Lens' Relation (Maybe Text)
 rType = lens _rType (\ s a -> s{_rType = a})
 
@@ -1410,7 +2164,8 @@ date =
     }
 
 -- | Day of month. Must be from 1 to 31 and valid for the year and month, or
--- 0 if specifying a year\/month where the day is not significant.
+-- 0 if specifying a year by itself or a year and month where the day is
+-- not significant.
 dDay :: Lens' Date (Maybe Int32)
 dDay
   = lens _dDay (\ s a -> s{_dDay = a}) .
@@ -1423,7 +2178,8 @@ dYear
   = lens _dYear (\ s a -> s{_dYear = a}) .
       mapping _Coerce
 
--- | Month of year. Must be from 1 to 12.
+-- | Month of year. Must be from 1 to 12, or 0 if specifying a year without a
+-- month and day.
 dMonth :: Lens' Date (Maybe Int32)
 dMonth
   = lens _dMonth (\ s a -> s{_dMonth = a}) .
@@ -1443,7 +2199,7 @@ instance ToJSON Date where
                  [("day" .=) <$> _dDay, ("year" .=) <$> _dYear,
                   ("month" .=) <$> _dMonth])
 
--- | A brief one-line description of the person.
+-- | A read-only brief one-line description of the person.
 --
 -- /See:/ 'tagline' smart constructor.
 data Tagline = Tagline'
@@ -1546,6 +2302,53 @@ instance ToJSON Residence where
                   ("current" .=) <$> _resCurrent,
                   ("metadata" .=) <$> _resMetadata])
 
+-- | A person\'s age range.
+--
+-- /See:/ 'ageRangeType' smart constructor.
+data AgeRangeType = AgeRangeType'
+    { _artAgeRange :: !(Maybe AgeRangeTypeAgeRange)
+    , _artMetadata :: !(Maybe FieldMetadata)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AgeRangeType' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'artAgeRange'
+--
+-- * 'artMetadata'
+ageRangeType
+    :: AgeRangeType
+ageRangeType =
+    AgeRangeType'
+    { _artAgeRange = Nothing
+    , _artMetadata = Nothing
+    }
+
+-- | The age range.
+artAgeRange :: Lens' AgeRangeType (Maybe AgeRangeTypeAgeRange)
+artAgeRange
+  = lens _artAgeRange (\ s a -> s{_artAgeRange = a})
+
+-- | Metadata about the age range.
+artMetadata :: Lens' AgeRangeType (Maybe FieldMetadata)
+artMetadata
+  = lens _artMetadata (\ s a -> s{_artMetadata = a})
+
+instance FromJSON AgeRangeType where
+        parseJSON
+          = withObject "AgeRangeType"
+              (\ o ->
+                 AgeRangeType' <$>
+                   (o .:? "ageRange") <*> (o .:? "metadata"))
+
+instance ToJSON AgeRangeType where
+        toJSON AgeRangeType'{..}
+          = object
+              (catMaybes
+                 [("ageRange" .=) <$> _artAgeRange,
+                  ("metadata" .=) <$> _artMetadata])
+
 -- | A person\'s gender.
 --
 -- /See:/ 'gender' smart constructor.
@@ -1573,9 +2376,8 @@ gender =
     , _gFormattedValue = Nothing
     }
 
--- | The gender for the person. The gender can be custom or predefined.
--- Possible values include, but are not limited to, the following: *
--- \`male\` * \`female\` * \`other\` * \`unknown\`
+-- | The gender for the person. The gender can be custom or one of these
+-- predefined values: * \`male\` * \`female\` * \`other\` * \`unknown\`
 gValue :: Lens' Gender (Maybe Text)
 gValue = lens _gValue (\ s a -> s{_gValue = a})
 
@@ -1621,8 +2423,10 @@ data Name = Name'
     , _nFamilyName              :: !(Maybe Text)
     , _nMetadata                :: !(Maybe FieldMetadata)
     , _nDisplayName             :: !(Maybe Text)
+    , _nDisplayNameLastFirst    :: !(Maybe Text)
     , _nPhoneticGivenName       :: !(Maybe Text)
     , _nHonorificSuffix         :: !(Maybe Text)
+    , _nPhoneticFullName        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Name' with the minimum fields required to make a request.
@@ -1649,9 +2453,13 @@ data Name = Name'
 --
 -- * 'nDisplayName'
 --
+-- * 'nDisplayNameLastFirst'
+--
 -- * 'nPhoneticGivenName'
 --
 -- * 'nHonorificSuffix'
+--
+-- * 'nPhoneticFullName'
 name
     :: Name
 name =
@@ -1666,8 +2474,10 @@ name =
     , _nFamilyName = Nothing
     , _nMetadata = Nothing
     , _nDisplayName = Nothing
+    , _nDisplayNameLastFirst = Nothing
     , _nPhoneticGivenName = Nothing
     , _nHonorificSuffix = Nothing
+    , _nPhoneticFullName = Nothing
     }
 
 -- | The given name.
@@ -1720,11 +2530,19 @@ nMetadata :: Lens' Name (Maybe FieldMetadata)
 nMetadata
   = lens _nMetadata (\ s a -> s{_nMetadata = a})
 
--- | The display name formatted according to the locale specified by the
--- viewer\'s account or the Accept-Language HTTP header.
+-- | The read-only display name formatted according to the locale specified
+-- by the viewer\'s account or the \`Accept-Language\` HTTP header.
 nDisplayName :: Lens' Name (Maybe Text)
 nDisplayName
   = lens _nDisplayName (\ s a -> s{_nDisplayName = a})
+
+-- | The read-only display name with the last name first formatted according
+-- to the locale specified by the viewer\'s account or the
+-- \`Accept-Language\` HTTP header.
+nDisplayNameLastFirst :: Lens' Name (Maybe Text)
+nDisplayNameLastFirst
+  = lens _nDisplayNameLastFirst
+      (\ s a -> s{_nDisplayNameLastFirst = a})
 
 -- | The given name spelled as it sounds.
 nPhoneticGivenName :: Lens' Name (Maybe Text)
@@ -1737,6 +2555,12 @@ nHonorificSuffix :: Lens' Name (Maybe Text)
 nHonorificSuffix
   = lens _nHonorificSuffix
       (\ s a -> s{_nHonorificSuffix = a})
+
+-- | The full name spelled as it sounds.
+nPhoneticFullName :: Lens' Name (Maybe Text)
+nPhoneticFullName
+  = lens _nPhoneticFullName
+      (\ s a -> s{_nPhoneticFullName = a})
 
 instance FromJSON Name where
         parseJSON
@@ -1753,8 +2577,10 @@ instance FromJSON Name where
                      <*> (o .:? "familyName")
                      <*> (o .:? "metadata")
                      <*> (o .:? "displayName")
+                     <*> (o .:? "displayNameLastFirst")
                      <*> (o .:? "phoneticGivenName")
-                     <*> (o .:? "honorificSuffix"))
+                     <*> (o .:? "honorificSuffix")
+                     <*> (o .:? "phoneticFullName"))
 
 instance ToJSON Name where
         toJSON Name'{..}
@@ -1772,8 +2598,11 @@ instance ToJSON Name where
                   ("familyName" .=) <$> _nFamilyName,
                   ("metadata" .=) <$> _nMetadata,
                   ("displayName" .=) <$> _nDisplayName,
+                  ("displayNameLastFirst" .=) <$>
+                    _nDisplayNameLastFirst,
                   ("phoneticGivenName" .=) <$> _nPhoneticGivenName,
-                  ("honorificSuffix" .=) <$> _nHonorificSuffix])
+                  ("honorificSuffix" .=) <$> _nHonorificSuffix,
+                  ("phoneticFullName" .=) <$> _nPhoneticFullName])
 
 -- | Metadata about a field.
 --
@@ -1887,17 +2716,15 @@ pnMetadata :: Lens' PhoneNumber (Maybe FieldMetadata)
 pnMetadata
   = lens _pnMetadata (\ s a -> s{_pnMetadata = a})
 
--- | The type of the phone number. The type can be custom or predefined.
--- Possible values include, but are not limited to, the following: *
--- \`home\` * \`work\` * \`mobile\` * \`homeFax\` * \`workFax\` *
--- \`otherFax\` * \`pager\` * \`workMobile\` * \`workPager\` * \`main\` *
--- \`googleVoice\` * \`other\`
+-- | The type of the phone number. The type can be custom or one of these
+-- predefined values: * \`home\` * \`work\` * \`mobile\` * \`homeFax\` *
+-- \`workFax\` * \`otherFax\` * \`pager\` * \`workMobile\` * \`workPager\`
+-- * \`main\` * \`googleVoice\` * \`other\`
 pnType :: Lens' PhoneNumber (Maybe Text)
 pnType = lens _pnType (\ s a -> s{_pnType = a})
 
 -- | The read-only type of the phone number translated and formatted in the
--- viewer\'s account locale or the the \`Accept-Language\` HTTP header
--- locale.
+-- viewer\'s account locale or the \`Accept-Language\` HTTP header locale.
 pnFormattedType :: Lens' PhoneNumber (Maybe Text)
 pnFormattedType
   = lens _pnFormattedType
@@ -1975,6 +2802,7 @@ instance ToJSON Occupation where
 data EmailAddress = EmailAddress'
     { _eaValue         :: !(Maybe Text)
     , _eaMetadata      :: !(Maybe FieldMetadata)
+    , _eaDisplayName   :: !(Maybe Text)
     , _eaType          :: !(Maybe Text)
     , _eaFormattedType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1987,6 +2815,8 @@ data EmailAddress = EmailAddress'
 --
 -- * 'eaMetadata'
 --
+-- * 'eaDisplayName'
+--
 -- * 'eaType'
 --
 -- * 'eaFormattedType'
@@ -1996,6 +2826,7 @@ emailAddress =
     EmailAddress'
     { _eaValue = Nothing
     , _eaMetadata = Nothing
+    , _eaDisplayName = Nothing
     , _eaType = Nothing
     , _eaFormattedType = Nothing
     }
@@ -2009,9 +2840,14 @@ eaMetadata :: Lens' EmailAddress (Maybe FieldMetadata)
 eaMetadata
   = lens _eaMetadata (\ s a -> s{_eaMetadata = a})
 
--- | The type of the email address. The type can be custom or predefined.
--- Possible values include, but are not limited to, the following: *
--- \`home\` * \`work\` * \`other\`
+-- | The display name of the email.
+eaDisplayName :: Lens' EmailAddress (Maybe Text)
+eaDisplayName
+  = lens _eaDisplayName
+      (\ s a -> s{_eaDisplayName = a})
+
+-- | The type of the email address. The type can be custom or one of these
+-- predefined values: * \`home\` * \`work\` * \`other\`
 eaType :: Lens' EmailAddress (Maybe Text)
 eaType = lens _eaType (\ s a -> s{_eaType = a})
 
@@ -2028,7 +2864,8 @@ instance FromJSON EmailAddress where
               (\ o ->
                  EmailAddress' <$>
                    (o .:? "value") <*> (o .:? "metadata") <*>
-                     (o .:? "type")
+                     (o .:? "displayName")
+                     <*> (o .:? "type")
                      <*> (o .:? "formattedType"))
 
 instance ToJSON EmailAddress where
@@ -2037,20 +2874,181 @@ instance ToJSON EmailAddress where
               (catMaybes
                  [("value" .=) <$> _eaValue,
                   ("metadata" .=) <$> _eaMetadata,
+                  ("displayName" .=) <$> _eaDisplayName,
                   ("type" .=) <$> _eaType,
                   ("formattedType" .=) <$> _eaFormattedType])
+
+-- | A request to create a new contact group.
+--
+-- /See:/ 'createContactGroupRequest' smart constructor.
+newtype CreateContactGroupRequest = CreateContactGroupRequest'
+    { _ccgrContactGroup :: Maybe ContactGroup
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CreateContactGroupRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ccgrContactGroup'
+createContactGroupRequest
+    :: CreateContactGroupRequest
+createContactGroupRequest =
+    CreateContactGroupRequest'
+    { _ccgrContactGroup = Nothing
+    }
+
+-- | The contact group to create.
+ccgrContactGroup :: Lens' CreateContactGroupRequest (Maybe ContactGroup)
+ccgrContactGroup
+  = lens _ccgrContactGroup
+      (\ s a -> s{_ccgrContactGroup = a})
+
+instance FromJSON CreateContactGroupRequest where
+        parseJSON
+          = withObject "CreateContactGroupRequest"
+              (\ o ->
+                 CreateContactGroupRequest' <$>
+                   (o .:? "contactGroup"))
+
+instance ToJSON CreateContactGroupRequest where
+        toJSON CreateContactGroupRequest'{..}
+          = object
+              (catMaybes
+                 [("contactGroup" .=) <$> _ccgrContactGroup])
+
+-- | The read-only metadata about a contact group.
+--
+-- /See:/ 'contactGroupMetadata' smart constructor.
+data ContactGroupMetadata = ContactGroupMetadata'
+    { _cgmUpdateTime :: !(Maybe DateTime')
+    , _cgmDeleted    :: !(Maybe Bool)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ContactGroupMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cgmUpdateTime'
+--
+-- * 'cgmDeleted'
+contactGroupMetadata
+    :: ContactGroupMetadata
+contactGroupMetadata =
+    ContactGroupMetadata'
+    { _cgmUpdateTime = Nothing
+    , _cgmDeleted = Nothing
+    }
+
+-- | The time the group was last updated.
+cgmUpdateTime :: Lens' ContactGroupMetadata (Maybe UTCTime)
+cgmUpdateTime
+  = lens _cgmUpdateTime
+      (\ s a -> s{_cgmUpdateTime = a})
+      . mapping _DateTime
+
+-- | True if the contact group resource has been deleted. Populated only for
+-- [\`ListContactGroups\`](\/people\/api\/rest\/v1\/contactgroups\/list)
+-- requests that include a sync token.
+cgmDeleted :: Lens' ContactGroupMetadata (Maybe Bool)
+cgmDeleted
+  = lens _cgmDeleted (\ s a -> s{_cgmDeleted = a})
+
+instance FromJSON ContactGroupMetadata where
+        parseJSON
+          = withObject "ContactGroupMetadata"
+              (\ o ->
+                 ContactGroupMetadata' <$>
+                   (o .:? "updateTime") <*> (o .:? "deleted"))
+
+instance ToJSON ContactGroupMetadata where
+        toJSON ContactGroupMetadata'{..}
+          = object
+              (catMaybes
+                 [("updateTime" .=) <$> _cgmUpdateTime,
+                  ("deleted" .=) <$> _cgmDeleted])
+
+-- | A request to modify an existing contact group\'s members. Contacts can
+-- be removed from any group but they can only be added to a user group or
+-- myContacts or starred system groups.
+--
+-- /See:/ 'modifyContactGroupMembersRequest' smart constructor.
+data ModifyContactGroupMembersRequest = ModifyContactGroupMembersRequest'
+    { _mcgmrResourceNamesToAdd    :: !(Maybe [Text])
+    , _mcgmrResourceNamesToRemove :: !(Maybe [Text])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ModifyContactGroupMembersRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mcgmrResourceNamesToAdd'
+--
+-- * 'mcgmrResourceNamesToRemove'
+modifyContactGroupMembersRequest
+    :: ModifyContactGroupMembersRequest
+modifyContactGroupMembersRequest =
+    ModifyContactGroupMembersRequest'
+    { _mcgmrResourceNamesToAdd = Nothing
+    , _mcgmrResourceNamesToRemove = Nothing
+    }
+
+-- | The resource names of the contact people to add in the form of in the
+-- form \`people\/\`person_id.
+mcgmrResourceNamesToAdd :: Lens' ModifyContactGroupMembersRequest [Text]
+mcgmrResourceNamesToAdd
+  = lens _mcgmrResourceNamesToAdd
+      (\ s a -> s{_mcgmrResourceNamesToAdd = a})
+      . _Default
+      . _Coerce
+
+-- | The resource names of the contact people to remove in the form of in the
+-- form of \`people\/\`person_id.
+mcgmrResourceNamesToRemove :: Lens' ModifyContactGroupMembersRequest [Text]
+mcgmrResourceNamesToRemove
+  = lens _mcgmrResourceNamesToRemove
+      (\ s a -> s{_mcgmrResourceNamesToRemove = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ModifyContactGroupMembersRequest
+         where
+        parseJSON
+          = withObject "ModifyContactGroupMembersRequest"
+              (\ o ->
+                 ModifyContactGroupMembersRequest' <$>
+                   (o .:? "resourceNamesToAdd" .!= mempty) <*>
+                     (o .:? "resourceNamesToRemove" .!= mempty))
+
+instance ToJSON ModifyContactGroupMembersRequest
+         where
+        toJSON ModifyContactGroupMembersRequest'{..}
+          = object
+              (catMaybes
+                 [("resourceNamesToAdd" .=) <$>
+                    _mcgmrResourceNamesToAdd,
+                  ("resourceNamesToRemove" .=) <$>
+                    _mcgmrResourceNamesToRemove])
 
 -- | The source of a field.
 --
 -- /See:/ 'source' smart constructor.
 data Source = Source'
-    { _sId   :: !(Maybe Text)
-    , _sType :: !(Maybe Text)
+    { _sEtag            :: !(Maybe Text)
+    , _sProFileMetadata :: !(Maybe ProFileMetadata)
+    , _sUpdateTime      :: !(Maybe DateTime')
+    , _sId              :: !(Maybe Text)
+    , _sType            :: !(Maybe SourceType)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Source' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sEtag'
+--
+-- * 'sProFileMetadata'
+--
+-- * 'sUpdateTime'
 --
 -- * 'sId'
 --
@@ -2059,28 +3057,59 @@ source
     :: Source
 source =
     Source'
-    { _sId = Nothing
+    { _sEtag = Nothing
+    , _sProFileMetadata = Nothing
+    , _sUpdateTime = Nothing
+    , _sId = Nothing
     , _sType = Nothing
     }
 
--- | A unique identifier within the source type generated by the server.
+-- | **Only populated in \`person.metadata.sources\`.** The [HTTP entity
+-- tag](https:\/\/en.wikipedia.org\/wiki\/HTTP_ETag) of the source. Used
+-- for web cache validation.
+sEtag :: Lens' Source (Maybe Text)
+sEtag = lens _sEtag (\ s a -> s{_sEtag = a})
+
+-- | **Only populated in \`person.metadata.sources\`.** Metadata about a
+-- source of type PROFILE.
+sProFileMetadata :: Lens' Source (Maybe ProFileMetadata)
+sProFileMetadata
+  = lens _sProFileMetadata
+      (\ s a -> s{_sProFileMetadata = a})
+
+-- | **Only populated in \`person.metadata.sources\`.** Last update timestamp
+-- of this source.
+sUpdateTime :: Lens' Source (Maybe UTCTime)
+sUpdateTime
+  = lens _sUpdateTime (\ s a -> s{_sUpdateTime = a}) .
+      mapping _DateTime
+
+-- | The unique identifier within the source type generated by the server.
 sId :: Lens' Source (Maybe Text)
 sId = lens _sId (\ s a -> s{_sId = a})
 
 -- | The source type.
-sType :: Lens' Source (Maybe Text)
+sType :: Lens' Source (Maybe SourceType)
 sType = lens _sType (\ s a -> s{_sType = a})
 
 instance FromJSON Source where
         parseJSON
           = withObject "Source"
-              (\ o -> Source' <$> (o .:? "id") <*> (o .:? "type"))
+              (\ o ->
+                 Source' <$>
+                   (o .:? "etag") <*> (o .:? "profileMetadata") <*>
+                     (o .:? "updateTime")
+                     <*> (o .:? "id")
+                     <*> (o .:? "type"))
 
 instance ToJSON Source where
         toJSON Source'{..}
           = object
               (catMaybes
-                 [("id" .=) <$> _sId, ("type" .=) <$> _sType])
+                 [("etag" .=) <$> _sEtag,
+                  ("profileMetadata" .=) <$> _sProFileMetadata,
+                  ("updateTime" .=) <$> _sUpdateTime,
+                  ("id" .=) <$> _sId, ("type" .=) <$> _sType])
 
 -- | A person\'s instant messaging client.
 --
@@ -2133,10 +3162,9 @@ icUsername :: Lens' ImClient (Maybe Text)
 icUsername
   = lens _icUsername (\ s a -> s{_icUsername = a})
 
--- | The protocol of the IM client. The protocol can be custom or predefined.
--- Possible values include, but are not limited to, the following: *
--- \`aim\` * \`msn\` * \`yahoo\` * \`skype\` * \`qq\` * \`googleTalk\` *
--- \`icq\` * \`jabber\` * \`netMeeting\`
+-- | The protocol of the IM client. The protocol can be custom or one of
+-- these predefined values: * \`aim\` * \`msn\` * \`yahoo\` * \`skype\` *
+-- \`qq\` * \`googleTalk\` * \`icq\` * \`jabber\` * \`netMeeting\`
 icProtocol :: Lens' ImClient (Maybe Text)
 icProtocol
   = lens _icProtocol (\ s a -> s{_icProtocol = a})
@@ -2146,9 +3174,8 @@ icMetadata :: Lens' ImClient (Maybe FieldMetadata)
 icMetadata
   = lens _icMetadata (\ s a -> s{_icMetadata = a})
 
--- | The type of the IM client. The type can be custom or predefined.
--- Possible values include, but are not limited to, the following: *
--- \`home\` * \`work\` * \`other\`
+-- | The type of the IM client. The type can be custom or one of these
+-- predefined values: * \`home\` * \`work\` * \`other\`
 icType :: Lens' ImClient (Maybe Text)
 icType = lens _icType (\ s a -> s{_icType = a})
 
@@ -2181,14 +3208,54 @@ instance ToJSON ImClient where
                   ("type" .=) <$> _icType,
                   ("formattedType" .=) <$> _icFormattedType])
 
--- | Metadata about a person.
+-- | The response to a batch get contact groups request.
+--
+-- /See:/ 'batchGetContactGroupsResponse' smart constructor.
+newtype BatchGetContactGroupsResponse = BatchGetContactGroupsResponse'
+    { _bgcgrResponses :: Maybe [ContactGroupResponse]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BatchGetContactGroupsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bgcgrResponses'
+batchGetContactGroupsResponse
+    :: BatchGetContactGroupsResponse
+batchGetContactGroupsResponse =
+    BatchGetContactGroupsResponse'
+    { _bgcgrResponses = Nothing
+    }
+
+-- | The list of responses for each requested contact group resource.
+bgcgrResponses :: Lens' BatchGetContactGroupsResponse [ContactGroupResponse]
+bgcgrResponses
+  = lens _bgcgrResponses
+      (\ s a -> s{_bgcgrResponses = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON BatchGetContactGroupsResponse where
+        parseJSON
+          = withObject "BatchGetContactGroupsResponse"
+              (\ o ->
+                 BatchGetContactGroupsResponse' <$>
+                   (o .:? "responses" .!= mempty))
+
+instance ToJSON BatchGetContactGroupsResponse where
+        toJSON BatchGetContactGroupsResponse'{..}
+          = object
+              (catMaybes [("responses" .=) <$> _bgcgrResponses])
+
+-- | The read-only metadata about a person.
 --
 -- /See:/ 'personMetadata' smart constructor.
 data PersonMetadata = PersonMetadata'
-    { _pmPreviousResourceNames :: !(Maybe [Text])
-    , _pmObjectType            :: !(Maybe Text)
-    , _pmSources               :: !(Maybe [Source])
-    , _pmDeleted               :: !(Maybe Bool)
+    { _pmPreviousResourceNames     :: !(Maybe [Text])
+    , _pmObjectType                :: !(Maybe PersonMetadataObjectType)
+    , _pmSources                   :: !(Maybe [Source])
+    , _pmLinkedPeopleResourceNames :: !(Maybe [Text])
+    , _pmDeleted                   :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PersonMetadata' with the minimum fields required to make a request.
@@ -2201,6 +3268,8 @@ data PersonMetadata = PersonMetadata'
 --
 -- * 'pmSources'
 --
+-- * 'pmLinkedPeopleResourceNames'
+--
 -- * 'pmDeleted'
 personMetadata
     :: PersonMetadata
@@ -2209,6 +3278,7 @@ personMetadata =
     { _pmPreviousResourceNames = Nothing
     , _pmObjectType = Nothing
     , _pmSources = Nothing
+    , _pmLinkedPeopleResourceNames = Nothing
     , _pmDeleted = Nothing
     }
 
@@ -2224,8 +3294,10 @@ pmPreviousResourceNames
       . _Default
       . _Coerce
 
--- | The type of the person object.
-pmObjectType :: Lens' PersonMetadata (Maybe Text)
+-- | **DEPRECATED** (Please use
+-- \`person.metadata.sources.profileMetadata.objectType\` instead) The type
+-- of the person object.
+pmObjectType :: Lens' PersonMetadata (Maybe PersonMetadataObjectType)
 pmObjectType
   = lens _pmObjectType (\ s a -> s{_pmObjectType = a})
 
@@ -2234,6 +3306,14 @@ pmSources :: Lens' PersonMetadata [Source]
 pmSources
   = lens _pmSources (\ s a -> s{_pmSources = a}) .
       _Default
+      . _Coerce
+
+-- | Resource names of people linked to this resource.
+pmLinkedPeopleResourceNames :: Lens' PersonMetadata [Text]
+pmLinkedPeopleResourceNames
+  = lens _pmLinkedPeopleResourceNames
+      (\ s a -> s{_pmLinkedPeopleResourceNames = a})
+      . _Default
       . _Coerce
 
 -- | True if the person resource has been deleted. Populated only for
@@ -2251,6 +3331,7 @@ instance FromJSON PersonMetadata where
                    (o .:? "previousResourceNames" .!= mempty) <*>
                      (o .:? "objectType")
                      <*> (o .:? "sources" .!= mempty)
+                     <*> (o .:? "linkedPeopleResourceNames" .!= mempty)
                      <*> (o .:? "deleted"))
 
 instance ToJSON PersonMetadata where
@@ -2261,6 +3342,8 @@ instance ToJSON PersonMetadata where
                     _pmPreviousResourceNames,
                   ("objectType" .=) <$> _pmObjectType,
                   ("sources" .=) <$> _pmSources,
+                  ("linkedPeopleResourceNames" .=) <$>
+                    _pmLinkedPeopleResourceNames,
                   ("deleted" .=) <$> _pmDeleted])
 
 -- | A person\'s nickname.
@@ -2269,7 +3352,7 @@ instance ToJSON PersonMetadata where
 data Nickname = Nickname'
     { _nicValue    :: !(Maybe Text)
     , _nicMetadata :: !(Maybe FieldMetadata)
-    , _nicType     :: !(Maybe Text)
+    , _nicType     :: !(Maybe NicknameType)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Nickname' with the minimum fields required to make a request.
@@ -2300,7 +3383,7 @@ nicMetadata
   = lens _nicMetadata (\ s a -> s{_nicMetadata = a})
 
 -- | The type of the nickname.
-nicType :: Lens' Nickname (Maybe Text)
+nicType :: Lens' Nickname (Maybe NicknameType)
 nicType = lens _nicType (\ s a -> s{_nicType = a})
 
 instance FromJSON Nickname where
@@ -2455,9 +3538,8 @@ orgPhoneticName
 orgTitle :: Lens' Organization (Maybe Text)
 orgTitle = lens _orgTitle (\ s a -> s{_orgTitle = a})
 
--- | The type of the organization. The type can be custom or predefined.
--- Possible values include, but are not limited to, the following: *
--- \`work\` * \`school\`
+-- | The type of the organization. The type can be custom or one of these
+-- predefined values: * \`work\` * \`school\`
 orgType :: Lens' Organization (Maybe Text)
 orgType = lens _orgType (\ s a -> s{_orgType = a})
 
@@ -2554,7 +3636,8 @@ instance ToJSON Interest where
 --
 -- /See:/ 'personResponse' smart constructor.
 data PersonResponse = PersonResponse'
-    { _prRequestedResourceName :: !(Maybe Text)
+    { _prStatus                :: !(Maybe Status)
+    , _prRequestedResourceName :: !(Maybe Text)
     , _prPerson                :: !(Maybe Person)
     , _prHTTPStatusCode        :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2562,6 +3645,8 @@ data PersonResponse = PersonResponse'
 -- | Creates a value of 'PersonResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'prStatus'
 --
 -- * 'prRequestedResourceName'
 --
@@ -2572,10 +3657,15 @@ personResponse
     :: PersonResponse
 personResponse =
     PersonResponse'
-    { _prRequestedResourceName = Nothing
+    { _prStatus = Nothing
+    , _prRequestedResourceName = Nothing
     , _prPerson = Nothing
     , _prHTTPStatusCode = Nothing
     }
+
+-- | The status of the response.
+prStatus :: Lens' PersonResponse (Maybe Status)
+prStatus = lens _prStatus (\ s a -> s{_prStatus = a})
 
 -- | The original requested resource name. May be different than the resource
 -- name on the returned person. The resource name can change when adding or
@@ -2590,8 +3680,8 @@ prRequestedResourceName
 prPerson :: Lens' PersonResponse (Maybe Person)
 prPerson = lens _prPerson (\ s a -> s{_prPerson = a})
 
--- | [HTTP 1.1 status
--- code](http:\/\/www.w3.org\/Protocols\/rfc2616\/rfc2616-sec10.html).
+-- | **DEPRECATED** (Please use status instead) [HTTP 1.1 status code]
+-- (http:\/\/www.w3.org\/Protocols\/rfc2616\/rfc2616-sec10.html).
 prHTTPStatusCode :: Lens' PersonResponse (Maybe Int32)
 prHTTPStatusCode
   = lens _prHTTPStatusCode
@@ -2603,14 +3693,16 @@ instance FromJSON PersonResponse where
           = withObject "PersonResponse"
               (\ o ->
                  PersonResponse' <$>
-                   (o .:? "requestedResourceName") <*> (o .:? "person")
+                   (o .:? "status") <*> (o .:? "requestedResourceName")
+                     <*> (o .:? "person")
                      <*> (o .:? "httpStatusCode"))
 
 instance ToJSON PersonResponse where
         toJSON PersonResponse'{..}
           = object
               (catMaybes
-                 [("requestedResourceName" .=) <$>
+                 [("status" .=) <$> _prStatus,
+                  ("requestedResourceName" .=) <$>
                     _prRequestedResourceName,
                   ("person" .=) <$> _prPerson,
                   ("httpStatusCode" .=) <$> _prHTTPStatusCode])
@@ -2664,8 +3756,9 @@ instance ToJSON Skill where
 --
 -- /See:/ 'biography' smart constructor.
 data Biography = Biography'
-    { _bioValue    :: !(Maybe Text)
-    , _bioMetadata :: !(Maybe FieldMetadata)
+    { _bioValue       :: !(Maybe Text)
+    , _bioMetadata    :: !(Maybe FieldMetadata)
+    , _bioContentType :: !(Maybe BiographyContentType)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Biography' with the minimum fields required to make a request.
@@ -2675,12 +3768,15 @@ data Biography = Biography'
 -- * 'bioValue'
 --
 -- * 'bioMetadata'
+--
+-- * 'bioContentType'
 biography
     :: Biography
 biography =
     Biography'
     { _bioValue = Nothing
     , _bioMetadata = Nothing
+    , _bioContentType = Nothing
     }
 
 -- | The short biography.
@@ -2692,22 +3788,30 @@ bioMetadata :: Lens' Biography (Maybe FieldMetadata)
 bioMetadata
   = lens _bioMetadata (\ s a -> s{_bioMetadata = a})
 
+-- | The content type of the biography.
+bioContentType :: Lens' Biography (Maybe BiographyContentType)
+bioContentType
+  = lens _bioContentType
+      (\ s a -> s{_bioContentType = a})
+
 instance FromJSON Biography where
         parseJSON
           = withObject "Biography"
               (\ o ->
                  Biography' <$>
-                   (o .:? "value") <*> (o .:? "metadata"))
+                   (o .:? "value") <*> (o .:? "metadata") <*>
+                     (o .:? "contentType"))
 
 instance ToJSON Biography where
         toJSON Biography'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _bioValue,
-                  ("metadata" .=) <$> _bioMetadata])
+                  ("metadata" .=) <$> _bioMetadata,
+                  ("contentType" .=) <$> _bioContentType])
 
--- | A person\'s cover photo. A large image shown on the person\'s profile
--- page that represents who they are or what they care about.
+-- | A person\'s read-only cover photo. A large image shown on the person\'s
+-- profile page that represents who they are or what they care about.
 --
 -- /See:/ 'coverPhoto' smart constructor.
 data CoverPhoto = CoverPhoto'

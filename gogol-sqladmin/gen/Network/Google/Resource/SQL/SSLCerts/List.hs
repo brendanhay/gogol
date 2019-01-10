@@ -22,7 +22,7 @@
 --
 -- Lists all of the current SSL certificates for the instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.sslCerts.list@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.sslCerts.list@.
 module Network.Google.Resource.SQL.SSLCerts.List
     (
     -- * REST Resource
@@ -78,7 +78,7 @@ sslCertsList pSclProject_ pSclInstance_ =
     , _sclInstance = pSclInstance_
     }
 
--- | Project ID of the project for which to list Cloud SQL instances.
+-- | Project ID of the project that contains the instance.
 sclProject :: Lens' SSLCertsList Text
 sclProject
   = lens _sclProject (\ s a -> s{_sclProject = a})

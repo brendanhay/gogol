@@ -33,7 +33,6 @@ module Network.Google.Resource.Games.AchievementDefinitions.List
     , AchievementDefinitionsList
 
     -- * Request Lenses
-    , adlConsistencyToken
     , adlLanguage
     , adlPageToken
     , adlMaxResults
@@ -48,28 +47,24 @@ type AchievementDefinitionsListResource =
      "games" :>
        "v1" :>
          "achievements" :>
-           QueryParam "consistencyToken" (Textual Int64) :>
-             QueryParam "language" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" (Textual Int32) :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] AchievementDefinitionsListResponse
+           QueryParam "language" Text :>
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" (Textual Int32) :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] AchievementDefinitionsListResponse
 
 -- | Lists all the achievement definitions for your application.
 --
 -- /See:/ 'achievementDefinitionsList' smart constructor.
 data AchievementDefinitionsList = AchievementDefinitionsList'
-    { _adlConsistencyToken :: !(Maybe (Textual Int64))
-    , _adlLanguage         :: !(Maybe Text)
-    , _adlPageToken        :: !(Maybe Text)
-    , _adlMaxResults       :: !(Maybe (Textual Int32))
+    { _adlLanguage   :: !(Maybe Text)
+    , _adlPageToken  :: !(Maybe Text)
+    , _adlMaxResults :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementDefinitionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'adlConsistencyToken'
 --
 -- * 'adlLanguage'
 --
@@ -80,18 +75,10 @@ achievementDefinitionsList
     :: AchievementDefinitionsList
 achievementDefinitionsList =
     AchievementDefinitionsList'
-    { _adlConsistencyToken = Nothing
-    , _adlLanguage = Nothing
+    { _adlLanguage = Nothing
     , _adlPageToken = Nothing
     , _adlMaxResults = Nothing
     }
-
--- | The last-seen mutation timestamp.
-adlConsistencyToken :: Lens' AchievementDefinitionsList (Maybe Int64)
-adlConsistencyToken
-  = lens _adlConsistencyToken
-      (\ s a -> s{_adlConsistencyToken = a})
-      . mapping _Coerce
 
 -- | The preferred language to use for strings returned by this method.
 adlLanguage :: Lens' AchievementDefinitionsList (Maybe Text)
@@ -117,11 +104,9 @@ instance GoogleRequest AchievementDefinitionsList
         type Rs AchievementDefinitionsList =
              AchievementDefinitionsListResponse
         type Scopes AchievementDefinitionsList =
-             '["https://www.googleapis.com/auth/games",
-               "https://www.googleapis.com/auth/plus.login"]
+             '["https://www.googleapis.com/auth/games"]
         requestClient AchievementDefinitionsList'{..}
-          = go _adlConsistencyToken _adlLanguage _adlPageToken
-              _adlMaxResults
+          = go _adlLanguage _adlPageToken _adlMaxResults
               (Just AltJSON)
               gamesService
           where go

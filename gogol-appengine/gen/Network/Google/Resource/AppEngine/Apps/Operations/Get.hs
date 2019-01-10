@@ -24,7 +24,7 @@
 -- method to poll the operation result at intervals as recommended by the
 -- API service.
 --
--- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ Google App Engine Admin API Reference> for @appengine.apps.operations.get@.
+-- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ App Engine Admin API Reference> for @appengine.apps.operations.get@.
 module Network.Google.Resource.AppEngine.Apps.Operations.Get
     (
     -- * REST Resource
@@ -37,10 +37,8 @@ module Network.Google.Resource.AppEngine.Apps.Operations.Get
     -- * Request Lenses
     , aogXgafv
     , aogUploadProtocol
-    , aogPp
     , aogAccessToken
     , aogUploadType
-    , aogBearerToken
     , aogAppsId
     , aogOperationsId
     , aogCallback
@@ -57,14 +55,12 @@ type AppsOperationsGetResource =
          Capture "appsId" Text :>
            "operations" :>
              Capture "operationsId" Text :>
-               QueryParam "$.xgafv" Text :>
+               QueryParam "$.xgafv" Xgafv :>
                  QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :> Get '[JSON] Operation
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] Operation
 
 -- | Gets the latest state of a long-running operation. Clients can use this
 -- method to poll the operation result at intervals as recommended by the
@@ -72,12 +68,10 @@ type AppsOperationsGetResource =
 --
 -- /See:/ 'appsOperationsGet' smart constructor.
 data AppsOperationsGet = AppsOperationsGet'
-    { _aogXgafv          :: !(Maybe Text)
+    { _aogXgafv          :: !(Maybe Xgafv)
     , _aogUploadProtocol :: !(Maybe Text)
-    , _aogPp             :: !Bool
     , _aogAccessToken    :: !(Maybe Text)
     , _aogUploadType     :: !(Maybe Text)
-    , _aogBearerToken    :: !(Maybe Text)
     , _aogAppsId         :: !Text
     , _aogOperationsId   :: !Text
     , _aogCallback       :: !(Maybe Text)
@@ -91,13 +85,9 @@ data AppsOperationsGet = AppsOperationsGet'
 --
 -- * 'aogUploadProtocol'
 --
--- * 'aogPp'
---
 -- * 'aogAccessToken'
 --
 -- * 'aogUploadType'
---
--- * 'aogBearerToken'
 --
 -- * 'aogAppsId'
 --
@@ -112,17 +102,15 @@ appsOperationsGet pAogAppsId_ pAogOperationsId_ =
     AppsOperationsGet'
     { _aogXgafv = Nothing
     , _aogUploadProtocol = Nothing
-    , _aogPp = True
     , _aogAccessToken = Nothing
     , _aogUploadType = Nothing
-    , _aogBearerToken = Nothing
     , _aogAppsId = pAogAppsId_
     , _aogOperationsId = pAogOperationsId_
     , _aogCallback = Nothing
     }
 
 -- | V1 error format.
-aogXgafv :: Lens' AppsOperationsGet (Maybe Text)
+aogXgafv :: Lens' AppsOperationsGet (Maybe Xgafv)
 aogXgafv = lens _aogXgafv (\ s a -> s{_aogXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -130,10 +118,6 @@ aogUploadProtocol :: Lens' AppsOperationsGet (Maybe Text)
 aogUploadProtocol
   = lens _aogUploadProtocol
       (\ s a -> s{_aogUploadProtocol = a})
-
--- | Pretty-print response.
-aogPp :: Lens' AppsOperationsGet Bool
-aogPp = lens _aogPp (\ s a -> s{_aogPp = a})
 
 -- | OAuth access token.
 aogAccessToken :: Lens' AppsOperationsGet (Maybe Text)
@@ -146,12 +130,6 @@ aogUploadType :: Lens' AppsOperationsGet (Maybe Text)
 aogUploadType
   = lens _aogUploadType
       (\ s a -> s{_aogUploadType = a})
-
--- | OAuth bearer token.
-aogBearerToken :: Lens' AppsOperationsGet (Maybe Text)
-aogBearerToken
-  = lens _aogBearerToken
-      (\ s a -> s{_aogBearerToken = a})
 
 -- | Part of \`name\`. The name of the operation resource.
 aogAppsId :: Lens' AppsOperationsGet Text
@@ -178,10 +156,8 @@ instance GoogleRequest AppsOperationsGet where
         requestClient AppsOperationsGet'{..}
           = go _aogAppsId _aogOperationsId _aogXgafv
               _aogUploadProtocol
-              (Just _aogPp)
               _aogAccessToken
               _aogUploadType
-              _aogBearerToken
               _aogCallback
               (Just AltJSON)
               appEngineService

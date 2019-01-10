@@ -79,7 +79,7 @@ resourcesCalendarsGet pRcgCustomer_ pRcgCalendarResourceId_ =
     , _rcgCalendarResourceId = pRcgCalendarResourceId_
     }
 
--- | The unique ID for the customer\'s Google account. As an account
+-- | The unique ID for the customer\'s G Suite account. As an account
 -- administrator, you can also use the my_customer alias to represent your
 -- account\'s customer ID.
 rcgCustomer :: Lens' ResourcesCalendarsGet Text

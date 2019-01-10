@@ -13,8 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Firebase Dynamic Links API enables third party developers to
--- programmatically create and manage Dynamic Links.
+-- Programmatically creates and manages Firebase Dynamic Links.
 --
 -- /See:/ <https://firebase.google.com/docs/dynamic-links/ Firebase Dynamic Links API Reference>
 module Network.Google.FirebaseDynamicLinks
@@ -30,21 +29,58 @@ module Network.Google.FirebaseDynamicLinks
 
     -- * Resources
 
+    -- ** firebasedynamiclinks.getLinkStats
+    , module Network.Google.Resource.FirebaseDynamicLinks.GetLinkStats
+
+    -- ** firebasedynamiclinks.installAttribution
+    , module Network.Google.Resource.FirebaseDynamicLinks.InstallAttribution
+
+    -- ** firebasedynamiclinks.managedShortLinks.create
+    , module Network.Google.Resource.FirebaseDynamicLinks.ManagedShortLinks.Create
+
+    -- ** firebasedynamiclinks.reopenAttribution
+    , module Network.Google.Resource.FirebaseDynamicLinks.ReopenAttribution
+
     -- ** firebasedynamiclinks.shortLinks.create
     , module Network.Google.Resource.FirebaseDynamicLinks.ShortLinks.Create
 
     -- * Types
 
+    -- ** NavigationInfo
+    , NavigationInfo
+    , navigationInfo
+    , niEnableForcedRedirect
+
+    -- ** DesktopInfo
+    , DesktopInfo
+    , desktopInfo
+    , diDesktopFallbackLink
+
+    -- ** DynamicLinkEventStatPlatform
+    , DynamicLinkEventStatPlatform (..)
+
     -- ** Suffix
     , Suffix
     , suffix
+    , sCustomSuffix
     , sOption
 
     -- ** DynamicLinkWarning
     , DynamicLinkWarning
     , dynamicLinkWarning
     , dlwWarningCode
+    , dlwWarningDocumentLink
     , dlwWarningMessage
+
+    -- ** ManagedShortLink
+    , ManagedShortLink
+    , managedShortLink
+    , mslCreationTime
+    , mslLink
+    , mslVisibility
+    , mslLinkName
+    , mslFlaggedAttribute
+    , mslInfo
 
     -- ** CreateShortDynamicLinkRequest
     , CreateShortDynamicLinkRequest
@@ -52,6 +88,7 @@ module Network.Google.FirebaseDynamicLinks
     , csdlrLongDynamicLink
     , csdlrSuffix
     , csdlrDynamicLinkInfo
+    , csdlrSdkVersion
 
     -- ** SocialMetaTagInfo
     , SocialMetaTagInfo
@@ -67,12 +104,20 @@ module Network.Google.FirebaseDynamicLinks
     , csdlrWarning
     , csdlrShortLink
 
+    -- ** DynamicLinkEventStat
+    , DynamicLinkEventStat
+    , dynamicLinkEventStat
+    , dlesEvent
+    , dlesPlatform
+    , dlesCount
+
     -- ** IosInfo
     , IosInfo
     , iosInfo
     , iiIosBundleId
     , iiIosIPadBundleId
     , iiIosAppStoreId
+    , iiIosMinimumVersion
     , iiIosIPadFallbackLink
     , iiIosCustomScheme
     , iiIosFallbackLink
@@ -80,18 +125,70 @@ module Network.Google.FirebaseDynamicLinks
     -- ** DynamicLinkInfo
     , DynamicLinkInfo
     , dynamicLinkInfo
+    , dliNavigationInfo
+    , dliDesktopInfo
     , dliSocialMetaTagInfo
     , dliDynamicLinkDomain
     , dliLink
     , dliIosInfo
+    , dliDomainURIPrefix
     , dliAndroidInfo
     , dliAnalyticsInfo
+
+    -- ** GetIosPostInstallAttributionRequestVisualStyle
+    , GetIosPostInstallAttributionRequestVisualStyle (..)
+
+    -- ** DynamicLinkStats
+    , DynamicLinkStats
+    , dynamicLinkStats
+    , dlsLinkEventStats
 
     -- ** SuffixOption
     , SuffixOption (..)
 
+    -- ** DynamicLinkEventStatEvent
+    , DynamicLinkEventStatEvent (..)
+
+    -- ** CreateManagedShortLinkRequest
+    , CreateManagedShortLinkRequest
+    , createManagedShortLinkRequest
+    , cmslrLongDynamicLink
+    , cmslrSuffix
+    , cmslrDynamicLinkInfo
+    , cmslrSdkVersion
+    , cmslrName
+
+    -- ** GetIosReopenAttributionResponse
+    , GetIosReopenAttributionResponse
+    , getIosReopenAttributionResponse
+    , girarIosMinAppVersion
+    , girarDeepLink
+    , girarResolvedLink
+    , girarUtmMedium
+    , girarInvitationId
+    , girarUtmCampaign
+    , girarUtmSource
+
+    -- ** GetIosPostInstallAttributionResponseRequestIPVersion
+    , GetIosPostInstallAttributionResponseRequestIPVersion (..)
+
+    -- ** GetIosPostInstallAttributionRequest
+    , GetIosPostInstallAttributionRequest
+    , getIosPostInstallAttributionRequest
+    , gipiarIosVersion
+    , gipiarUniqueMatchLinkToCheck
+    , gipiarAppInstallationTime
+    , gipiarDevice
+    , gipiarSdkVersion
+    , gipiarBundleId
+    , gipiarRetrievalMethod
+    , gipiarVisualStyle
+
     -- ** Xgafv
     , Xgafv (..)
+
+    -- ** GetIosPostInstallAttributionResponseAttributionConfidence
+    , GetIosPostInstallAttributionResponseAttributionConfidence (..)
 
     -- ** AndroidInfo
     , AndroidInfo
@@ -118,6 +215,38 @@ module Network.Google.FirebaseDynamicLinks
     , itcaPt
     , itcaCt
 
+    -- ** GetIosPostInstallAttributionResponse
+    , GetIosPostInstallAttributionResponse
+    , getIosPostInstallAttributionResponse
+    , gipiarDeepLink
+    , gipiarRequestIPVersion
+    , gipiarAppMinimumVersion
+    , gipiarAttributionConfidence
+    , gipiarExternalBrowserDestinationLink
+    , gipiarResolvedLink
+    , gipiarRequestedLink
+    , gipiarUtmMedium
+    , gipiarFallbackLink
+    , gipiarInvitationId
+    , gipiarIsStrongMatchExecutable
+    , gipiarUtmCampaign
+    , gipiarMatchMessage
+    , gipiarUtmSource
+
+    -- ** CreateManagedShortLinkResponse
+    , CreateManagedShortLinkResponse
+    , createManagedShortLinkResponse
+    , cmslrManagedShortLink
+    , cmslrPreviewLink
+    , cmslrWarning
+
+    -- ** GetIosReopenAttributionRequest
+    , GetIosReopenAttributionRequest
+    , getIosReopenAttributionRequest
+    , girarRequestedLink
+    , girarSdkVersion
+    , girarBundleId
+
     -- ** GooglePlayAnalytics
     , GooglePlayAnalytics
     , googlePlayAnalytics
@@ -127,10 +256,31 @@ module Network.Google.FirebaseDynamicLinks
     , gpaUtmCampaign
     , gpaGclid
     , gpaUtmSource
+
+    -- ** GetIosPostInstallAttributionRequestRetrievalMethod
+    , GetIosPostInstallAttributionRequestRetrievalMethod (..)
+
+    -- ** DeviceInfo
+    , DeviceInfo
+    , deviceInfo
+    , diLanguageCodeFromWebview
+    , diScreenResolutionWidth
+    , diLanguageCode
+    , diDeviceModelName
+    , diScreenResolutionHeight
+    , diLanguageCodeRaw
+    , diTimezone
+
+    -- ** ManagedShortLinkVisibility
+    , ManagedShortLinkVisibility (..)
     ) where
 
 import           Network.Google.FirebaseDynamicLinks.Types
 import           Network.Google.Prelude
+import           Network.Google.Resource.FirebaseDynamicLinks.GetLinkStats
+import           Network.Google.Resource.FirebaseDynamicLinks.InstallAttribution
+import           Network.Google.Resource.FirebaseDynamicLinks.ManagedShortLinks.Create
+import           Network.Google.Resource.FirebaseDynamicLinks.ReopenAttribution
 import           Network.Google.Resource.FirebaseDynamicLinks.ShortLinks.Create
 
 {- $resources
@@ -139,4 +289,8 @@ TODO
 
 -- | Represents the entirety of the methods and resources available for the Firebase Dynamic Links API service.
 type FirebaseDynamicLinksAPI =
-     ShortLinksCreateResource
+     ManagedShortLinksCreateResource :<|>
+       InstallAttributionResource
+       :<|> GetLinkStatsResource
+       :<|> ReopenAttributionResource
+       :<|> ShortLinksCreateResource

@@ -27,7 +27,7 @@
 -- continuously through the call regardless of changes to the
 -- \`PushConfig\`.
 --
--- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.modifyPushConfig@.
+-- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.modifyPushConfig@.
 module Network.Google.Resource.PubSub.Projects.Subscriptions.ModifyPushConfig
     (
     -- * REST Resource
@@ -40,11 +40,9 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.ModifyPushConfig
     -- * Request Lenses
     , psmpcXgafv
     , psmpcUploadProtocol
-    , psmpcPp
     , psmpcAccessToken
     , psmpcUploadType
     , psmpcPayload
-    , psmpcBearerToken
     , psmpcSubscription
     , psmpcCallback
     ) where
@@ -59,14 +57,12 @@ type ProjectsSubscriptionsModifyPushConfigResource =
        CaptureMode "subscription" "modifyPushConfig" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] ModifyPushConfigRequest :>
-                           Post '[JSON] Empty
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] ModifyPushConfigRequest :>
+                       Post '[JSON] Empty
 
 -- | Modifies the \`PushConfig\` for a specified subscription. This may be
 -- used to change a push subscription to a pull one (signified by an empty
@@ -79,11 +75,9 @@ type ProjectsSubscriptionsModifyPushConfigResource =
 data ProjectsSubscriptionsModifyPushConfig = ProjectsSubscriptionsModifyPushConfig'
     { _psmpcXgafv          :: !(Maybe Xgafv)
     , _psmpcUploadProtocol :: !(Maybe Text)
-    , _psmpcPp             :: !Bool
     , _psmpcAccessToken    :: !(Maybe Text)
     , _psmpcUploadType     :: !(Maybe Text)
     , _psmpcPayload        :: !ModifyPushConfigRequest
-    , _psmpcBearerToken    :: !(Maybe Text)
     , _psmpcSubscription   :: !Text
     , _psmpcCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -96,15 +90,11 @@ data ProjectsSubscriptionsModifyPushConfig = ProjectsSubscriptionsModifyPushConf
 --
 -- * 'psmpcUploadProtocol'
 --
--- * 'psmpcPp'
---
 -- * 'psmpcAccessToken'
 --
 -- * 'psmpcUploadType'
 --
 -- * 'psmpcPayload'
---
--- * 'psmpcBearerToken'
 --
 -- * 'psmpcSubscription'
 --
@@ -117,11 +107,9 @@ projectsSubscriptionsModifyPushConfig pPsmpcPayload_ pPsmpcSubscription_ =
     ProjectsSubscriptionsModifyPushConfig'
     { _psmpcXgafv = Nothing
     , _psmpcUploadProtocol = Nothing
-    , _psmpcPp = True
     , _psmpcAccessToken = Nothing
     , _psmpcUploadType = Nothing
     , _psmpcPayload = pPsmpcPayload_
-    , _psmpcBearerToken = Nothing
     , _psmpcSubscription = pPsmpcSubscription_
     , _psmpcCallback = Nothing
     }
@@ -136,10 +124,6 @@ psmpcUploadProtocol :: Lens' ProjectsSubscriptionsModifyPushConfig (Maybe Text)
 psmpcUploadProtocol
   = lens _psmpcUploadProtocol
       (\ s a -> s{_psmpcUploadProtocol = a})
-
--- | Pretty-print response.
-psmpcPp :: Lens' ProjectsSubscriptionsModifyPushConfig Bool
-psmpcPp = lens _psmpcPp (\ s a -> s{_psmpcPp = a})
 
 -- | OAuth access token.
 psmpcAccessToken :: Lens' ProjectsSubscriptionsModifyPushConfig (Maybe Text)
@@ -157,12 +141,6 @@ psmpcUploadType
 psmpcPayload :: Lens' ProjectsSubscriptionsModifyPushConfig ModifyPushConfigRequest
 psmpcPayload
   = lens _psmpcPayload (\ s a -> s{_psmpcPayload = a})
-
--- | OAuth bearer token.
-psmpcBearerToken :: Lens' ProjectsSubscriptionsModifyPushConfig (Maybe Text)
-psmpcBearerToken
-  = lens _psmpcBearerToken
-      (\ s a -> s{_psmpcBearerToken = a})
 
 -- | The name of the subscription. Format is
 -- \`projects\/{project}\/subscriptions\/{sub}\`.
@@ -187,10 +165,8 @@ instance GoogleRequest
           ProjectsSubscriptionsModifyPushConfig'{..}
           = go _psmpcSubscription _psmpcXgafv
               _psmpcUploadProtocol
-              (Just _psmpcPp)
               _psmpcAccessToken
               _psmpcUploadType
-              _psmpcBearerToken
               _psmpcCallback
               (Just AltJSON)
               _psmpcPayload

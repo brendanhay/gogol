@@ -36,10 +36,14 @@ library
 
     exposed-modules:
           Network.Google.Resource.ServiceManagement.Operations.Get
+        , Network.Google.Resource.ServiceManagement.Operations.List
         , Network.Google.Resource.ServiceManagement.Services.Configs.Create
         , Network.Google.Resource.ServiceManagement.Services.Configs.Get
         , Network.Google.Resource.ServiceManagement.Services.Configs.List
         , Network.Google.Resource.ServiceManagement.Services.Configs.Submit
+        , Network.Google.Resource.ServiceManagement.Services.Consumers.GetIAMPolicy
+        , Network.Google.Resource.ServiceManagement.Services.Consumers.SetIAMPolicy
+        , Network.Google.Resource.ServiceManagement.Services.Consumers.TestIAMPermissions
         , Network.Google.Resource.ServiceManagement.Services.Create
         , Network.Google.Resource.ServiceManagement.Services.Delete
         , Network.Google.Resource.ServiceManagement.Services.Disable

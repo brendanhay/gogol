@@ -76,7 +76,7 @@ groupsUpdate pGuGroupKey_ pGuPayload_ =
     , _guPayload = pGuPayload_
     }
 
--- | Email or immutable Id of the group. If Id, it should match with id of
+-- | Email or immutable ID of the group. If ID, it should match with id of
 -- group object
 guGroupKey :: Lens' GroupsUpdate Text
 guGroupKey

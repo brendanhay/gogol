@@ -22,7 +22,7 @@
 --
 -- Gets a service configuration (version) for a managed service.
 --
--- /See:/ <https://cloud.google.com/service-management/ Google Service Management API Reference> for @servicemanagement.services.configs.get@.
+-- /See:/ <https://cloud.google.com/service-management/ Service Management API Reference> for @servicemanagement.services.configs.get@.
 module Network.Google.Resource.ServiceManagement.Services.Configs.Get
     (
     -- * REST Resource
@@ -35,12 +35,11 @@ module Network.Google.Resource.ServiceManagement.Services.Configs.Get
     -- * Request Lenses
     , scgXgafv
     , scgUploadProtocol
-    , scgPp
     , scgAccessToken
     , scgUploadType
-    , scgBearerToken
     , scgConfigId
     , scgServiceName
+    , scgView
     , scgCallback
     ) where
 
@@ -57,12 +56,11 @@ type ServicesConfigsGetResource =
              Capture "configId" Text :>
                QueryParam "$.xgafv" Xgafv :>
                  QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :> Get '[JSON] Service
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "view" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :> Get '[JSON] Service
 
 -- | Gets a service configuration (version) for a managed service.
 --
@@ -70,12 +68,11 @@ type ServicesConfigsGetResource =
 data ServicesConfigsGet = ServicesConfigsGet'
     { _scgXgafv          :: !(Maybe Xgafv)
     , _scgUploadProtocol :: !(Maybe Text)
-    , _scgPp             :: !Bool
     , _scgAccessToken    :: !(Maybe Text)
     , _scgUploadType     :: !(Maybe Text)
-    , _scgBearerToken    :: !(Maybe Text)
     , _scgConfigId       :: !Text
     , _scgServiceName    :: !Text
+    , _scgView           :: !(Maybe Text)
     , _scgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -87,17 +84,15 @@ data ServicesConfigsGet = ServicesConfigsGet'
 --
 -- * 'scgUploadProtocol'
 --
--- * 'scgPp'
---
 -- * 'scgAccessToken'
 --
 -- * 'scgUploadType'
 --
--- * 'scgBearerToken'
---
 -- * 'scgConfigId'
 --
 -- * 'scgServiceName'
+--
+-- * 'scgView'
 --
 -- * 'scgCallback'
 servicesConfigsGet
@@ -108,12 +103,11 @@ servicesConfigsGet pScgConfigId_ pScgServiceName_ =
     ServicesConfigsGet'
     { _scgXgafv = Nothing
     , _scgUploadProtocol = Nothing
-    , _scgPp = True
     , _scgAccessToken = Nothing
     , _scgUploadType = Nothing
-    , _scgBearerToken = Nothing
     , _scgConfigId = pScgConfigId_
     , _scgServiceName = pScgServiceName_
+    , _scgView = Nothing
     , _scgCallback = Nothing
     }
 
@@ -127,10 +121,6 @@ scgUploadProtocol
   = lens _scgUploadProtocol
       (\ s a -> s{_scgUploadProtocol = a})
 
--- | Pretty-print response.
-scgPp :: Lens' ServicesConfigsGet Bool
-scgPp = lens _scgPp (\ s a -> s{_scgPp = a})
-
 -- | OAuth access token.
 scgAccessToken :: Lens' ServicesConfigsGet (Maybe Text)
 scgAccessToken
@@ -143,13 +133,8 @@ scgUploadType
   = lens _scgUploadType
       (\ s a -> s{_scgUploadType = a})
 
--- | OAuth bearer token.
-scgBearerToken :: Lens' ServicesConfigsGet (Maybe Text)
-scgBearerToken
-  = lens _scgBearerToken
-      (\ s a -> s{_scgBearerToken = a})
-
--- | The id of the service configuration resource.
+-- | The id of the service configuration resource. This field must be
+-- specified for the server to return all fields, including \`SourceInfo\`.
 scgConfigId :: Lens' ServicesConfigsGet Text
 scgConfigId
   = lens _scgConfigId (\ s a -> s{_scgConfigId = a})
@@ -161,6 +146,11 @@ scgServiceName :: Lens' ServicesConfigsGet Text
 scgServiceName
   = lens _scgServiceName
       (\ s a -> s{_scgServiceName = a})
+
+-- | Specifies which parts of the Service Config should be returned in the
+-- response.
+scgView :: Lens' ServicesConfigsGet (Maybe Text)
+scgView = lens _scgView (\ s a -> s{_scgView = a})
 
 -- | JSONP
 scgCallback :: Lens' ServicesConfigsGet (Maybe Text)
@@ -177,10 +167,9 @@ instance GoogleRequest ServicesConfigsGet where
         requestClient ServicesConfigsGet'{..}
           = go _scgServiceName _scgConfigId _scgXgafv
               _scgUploadProtocol
-              (Just _scgPp)
               _scgAccessToken
               _scgUploadType
-              _scgBearerToken
+              _scgView
               _scgCallback
               (Just AltJSON)
               serviceManagementService

@@ -76,7 +76,7 @@ domainAliasesList pDalCustomer_ =
     , _dalParentDomainName = Nothing
     }
 
--- | Immutable id of the Google Apps account.
+-- | Immutable ID of the G Suite account.
 dalCustomer :: Lens' DomainAliasesList Text
 dalCustomer
   = lens _dalCustomer (\ s a -> s{_dalCustomer = a})

@@ -20,6 +20,59 @@ module Network.Google.ResourceManager.Types.Product where
 import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types.Sum
 
+-- | The ListFolders response message.
+--
+-- /See:/ 'listFoldersResponse' smart constructor.
+data ListFoldersResponse = ListFoldersResponse'
+    { _lfrNextPageToken :: !(Maybe Text)
+    , _lfrFolders       :: !(Maybe [Folder])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListFoldersResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lfrNextPageToken'
+--
+-- * 'lfrFolders'
+listFoldersResponse
+    :: ListFoldersResponse
+listFoldersResponse =
+    ListFoldersResponse'
+    { _lfrNextPageToken = Nothing
+    , _lfrFolders = Nothing
+    }
+
+-- | A pagination token returned from a previous call to \`ListFolders\` that
+-- indicates from where listing should continue. This field is optional.
+lfrNextPageToken :: Lens' ListFoldersResponse (Maybe Text)
+lfrNextPageToken
+  = lens _lfrNextPageToken
+      (\ s a -> s{_lfrNextPageToken = a})
+
+-- | A possibly paginated list of Folders that are direct descendants of the
+-- specified parent resource.
+lfrFolders :: Lens' ListFoldersResponse [Folder]
+lfrFolders
+  = lens _lfrFolders (\ s a -> s{_lfrFolders = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ListFoldersResponse where
+        parseJSON
+          = withObject "ListFoldersResponse"
+              (\ o ->
+                 ListFoldersResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "folders" .!= mempty))
+
+instance ToJSON ListFoldersResponse where
+        toJSON ListFoldersResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lfrNextPageToken,
+                  ("folders" .=) <$> _lfrFolders])
+
 -- | The \`Status\` type defines a logical error model that is suitable for
 -- different programming environments, including REST APIs and RPC APIs. It
 -- is used by [gRPC](https:\/\/github.com\/grpc). The error model is
@@ -33,7 +86,7 @@ import           Network.Google.ResourceManager.Types.Sum
 -- needed, put the localized message in the error details or localize it in
 -- the client. The optional error details may contain arbitrary information
 -- about the error. There is a predefined set of error detail types in the
--- package \`google.rpc\` which can be used for common error conditions. #
+-- package \`google.rpc\` that can be used for common error conditions. #
 -- Language mapping The \`Status\` message is the logical representation of
 -- the error model, but it is not necessarily the actual wire format. When
 -- the \`Status\` message is exposed in different client libraries and
@@ -46,15 +99,15 @@ import           Network.Google.ResourceManager.Types.Sum
 -- Partial errors. If a service needs to return partial errors to the
 -- client, it may embed the \`Status\` in the normal response to indicate
 -- the partial errors. - Workflow errors. A typical workflow has multiple
--- steps. Each step may have a \`Status\` message for error reporting
--- purpose. - Batch operations. If a client uses batch request and batch
--- response, the \`Status\` message should be used directly inside batch
--- response, one for each error sub-response. - Asynchronous operations. If
--- an API call embeds asynchronous operation results in its response, the
--- status of those operations should be represented directly using the
--- \`Status\` message. - Logging. If some API errors are stored in logs,
--- the message \`Status\` could be used directly after any stripping needed
--- for security\/privacy reasons.
+-- steps. Each step may have a \`Status\` message for error reporting. -
+-- Batch operations. If a client uses batch request and batch response, the
+-- \`Status\` message should be used directly inside batch response, one
+-- for each error sub-response. - Asynchronous operations. If an API call
+-- embeds asynchronous operation results in its response, the status of
+-- those operations should be represented directly using the \`Status\`
+-- message. - Logging. If some API errors are stored in logs, the message
+-- \`Status\` could be used directly after any stripping needed for
+-- security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
 data Status = Status'
@@ -81,8 +134,8 @@ status =
     , _sMessage = Nothing
     }
 
--- | A list of messages that carry the error details. There will be a common
--- set of message types for APIs to use.
+-- | A list of messages that carry the error details. There is a common set
+-- of message types for APIs to use.
 sDetails :: Lens' Status [StatusDetailsItem]
 sDetails
   = lens _sDetails (\ s a -> s{_sDetails = a}) .
@@ -117,184 +170,150 @@ instance ToJSON Status where
                   ("code" .=) <$> _sCode,
                   ("message" .=) <$> _sMessage])
 
--- | The request sent to the \`SearchOrganizations\` method.
+-- | Specifies the audit configuration for a service. The configuration
+-- determines which permission types are logged, and what identities, if
+-- any, are exempted from logging. An AuditConfig must have one or more
+-- AuditLogConfigs. If there are AuditConfigs for both \`allServices\` and
+-- a specific service, the union of the two AuditConfigs is used for that
+-- service: the log_types specified in each AuditConfig are enabled, and
+-- the exempted_members in each AuditLogConfig are exempted. Example Policy
+-- with multiple AuditConfigs: { \"audit_configs\": [ { \"service\":
+-- \"allServices\" \"audit_log_configs\": [ { \"log_type\": \"DATA_READ\",
+-- \"exempted_members\": [ \"user:foo\'gmail.com\" ] }, { \"log_type\":
+-- \"DATA_WRITE\", }, { \"log_type\": \"ADMIN_READ\", } ] }, { \"service\":
+-- \"fooservice.googleapis.com\" \"audit_log_configs\": [ { \"log_type\":
+-- \"DATA_READ\", }, { \"log_type\": \"DATA_WRITE\", \"exempted_members\":
+-- [ \"user:bar\'gmail.com\" ] } ] } ] } For fooservice, this policy
+-- enables DATA_READ, DATA_WRITE and ADMIN_READ logging. It also exempts
+-- foo\'gmail.com from DATA_READ logging, and bar\'gmail.com from
+-- DATA_WRITE logging.
 --
--- /See:/ 'searchOrganizationsRequest' smart constructor.
-data SearchOrganizationsRequest = SearchOrganizationsRequest'
-    { _sorFilter    :: !(Maybe Text)
-    , _sorPageToken :: !(Maybe Text)
-    , _sorPageSize  :: !(Maybe (Textual Int32))
+-- /See:/ 'auditConfig' smart constructor.
+data AuditConfig = AuditConfig'
+    { _acService         :: !(Maybe Text)
+    , _acAuditLogConfigs :: !(Maybe [AuditLogConfig])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SearchOrganizationsRequest' with the minimum fields required to make a request.
+-- | Creates a value of 'AuditConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sorFilter'
+-- * 'acService'
 --
--- * 'sorPageToken'
---
--- * 'sorPageSize'
-searchOrganizationsRequest
-    :: SearchOrganizationsRequest
-searchOrganizationsRequest =
-    SearchOrganizationsRequest'
-    { _sorFilter = Nothing
-    , _sorPageToken = Nothing
-    , _sorPageSize = Nothing
+-- * 'acAuditLogConfigs'
+auditConfig
+    :: AuditConfig
+auditConfig =
+    AuditConfig'
+    { _acService = Nothing
+    , _acAuditLogConfigs = Nothing
     }
 
--- | An optional query string used to filter the Organizations to return in
--- the response. Filter rules are case-insensitive. Organizations may be
--- filtered by \`owner.directoryCustomerId\` or by \`domain\`, where the
--- domain is a Google for Work domain, for example: |Filter|Description|
--- |------|-----------| |owner.directorycustomerid:123456789|Organizations
--- with \`owner.directory_customer_id\` equal to \`123456789\`.|
--- |domain:google.com|Organizations corresponding to the domain
--- \`google.com\`.| This field is optional.
-sorFilter :: Lens' SearchOrganizationsRequest (Maybe Text)
-sorFilter
-  = lens _sorFilter (\ s a -> s{_sorFilter = a})
+-- | Specifies a service that will be enabled for audit logging. For example,
+-- \`storage.googleapis.com\`, \`cloudsql.googleapis.com\`. \`allServices\`
+-- is a special value that covers all services.
+acService :: Lens' AuditConfig (Maybe Text)
+acService
+  = lens _acService (\ s a -> s{_acService = a})
 
--- | A pagination token returned from a previous call to
--- \`SearchOrganizations\` that indicates from where listing should
--- continue. This field is optional.
-sorPageToken :: Lens' SearchOrganizationsRequest (Maybe Text)
-sorPageToken
-  = lens _sorPageToken (\ s a -> s{_sorPageToken = a})
-
--- | The maximum number of Organizations to return in the response. This
--- field is optional.
-sorPageSize :: Lens' SearchOrganizationsRequest (Maybe Int32)
-sorPageSize
-  = lens _sorPageSize (\ s a -> s{_sorPageSize = a}) .
-      mapping _Coerce
-
-instance FromJSON SearchOrganizationsRequest where
-        parseJSON
-          = withObject "SearchOrganizationsRequest"
-              (\ o ->
-                 SearchOrganizationsRequest' <$>
-                   (o .:? "filter") <*> (o .:? "pageToken") <*>
-                     (o .:? "pageSize"))
-
-instance ToJSON SearchOrganizationsRequest where
-        toJSON SearchOrganizationsRequest'{..}
-          = object
-              (catMaybes
-                 [("filter" .=) <$> _sorFilter,
-                  ("pageToken" .=) <$> _sorPageToken,
-                  ("pageSize" .=) <$> _sorPageSize])
-
--- | A container to reference an id for any resource type. A \`resource\` in
--- Google Cloud Platform is a generic term for something you (a developer)
--- may want to interact with through one of our API\'s. Some examples are
--- an AppEngine app, a Compute Engine instance, a Cloud SQL database, and
--- so on.
---
--- /See:/ 'resourceId' smart constructor.
-data ResourceId = ResourceId'
-    { _riId   :: !(Maybe Text)
-    , _riType :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ResourceId' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'riId'
---
--- * 'riType'
-resourceId
-    :: ResourceId
-resourceId =
-    ResourceId'
-    { _riId = Nothing
-    , _riType = Nothing
-    }
-
--- | Required field for the type-specific id. This should correspond to the
--- id used in the type-specific API\'s.
-riId :: Lens' ResourceId (Maybe Text)
-riId = lens _riId (\ s a -> s{_riId = a})
-
--- | Required field representing the resource type this id is for. At
--- present, the only valid type is \"organization\".
-riType :: Lens' ResourceId (Maybe Text)
-riType = lens _riType (\ s a -> s{_riType = a})
-
-instance FromJSON ResourceId where
-        parseJSON
-          = withObject "ResourceId"
-              (\ o ->
-                 ResourceId' <$> (o .:? "id") <*> (o .:? "type"))
-
-instance ToJSON ResourceId where
-        toJSON ResourceId'{..}
-          = object
-              (catMaybes
-                 [("id" .=) <$> _riId, ("type" .=) <$> _riType])
-
--- | A page of the response received from the ListProjects method. A
--- paginated response where more pages are available has
--- \`next_page_token\` set. This token can be used in a subsequent request
--- to retrieve the next request page.
---
--- /See:/ 'listProjectsResponse' smart constructor.
-data ListProjectsResponse = ListProjectsResponse'
-    { _lprNextPageToken :: !(Maybe Text)
-    , _lprProjects      :: !(Maybe [Project])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ListProjectsResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lprNextPageToken'
---
--- * 'lprProjects'
-listProjectsResponse
-    :: ListProjectsResponse
-listProjectsResponse =
-    ListProjectsResponse'
-    { _lprNextPageToken = Nothing
-    , _lprProjects = Nothing
-    }
-
--- | Pagination token. If the result set is too large to fit in a single
--- response, this token is returned. It encodes the position of the current
--- result cursor. Feeding this value into a new list request with the
--- \`page_token\` parameter gives the next page of the results. When
--- \`next_page_token\` is not filled in, there is no next page and the list
--- returned is the last page in the result set. Pagination tokens have a
--- limited lifetime.
-lprNextPageToken :: Lens' ListProjectsResponse (Maybe Text)
-lprNextPageToken
-  = lens _lprNextPageToken
-      (\ s a -> s{_lprNextPageToken = a})
-
--- | The list of Projects that matched the list filter. This list can be
--- paginated.
-lprProjects :: Lens' ListProjectsResponse [Project]
-lprProjects
-  = lens _lprProjects (\ s a -> s{_lprProjects = a}) .
-      _Default
+-- | The configuration for logging of each type of permission.
+acAuditLogConfigs :: Lens' AuditConfig [AuditLogConfig]
+acAuditLogConfigs
+  = lens _acAuditLogConfigs
+      (\ s a -> s{_acAuditLogConfigs = a})
+      . _Default
       . _Coerce
 
-instance FromJSON ListProjectsResponse where
+instance FromJSON AuditConfig where
         parseJSON
-          = withObject "ListProjectsResponse"
+          = withObject "AuditConfig"
               (\ o ->
-                 ListProjectsResponse' <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "projects" .!= mempty))
+                 AuditConfig' <$>
+                   (o .:? "service") <*>
+                     (o .:? "auditLogConfigs" .!= mempty))
 
-instance ToJSON ListProjectsResponse where
-        toJSON ListProjectsResponse'{..}
+instance ToJSON AuditConfig where
+        toJSON AuditConfig'{..}
           = object
               (catMaybes
-                 [("nextPageToken" .=) <$> _lprNextPageToken,
-                  ("projects" .=) <$> _lprProjects])
+                 [("service" .=) <$> _acService,
+                  ("auditLogConfigs" .=) <$> _acAuditLogConfigs])
+
+-- | Represents an expression text. Example: title: \"User account presence\"
+-- description: \"Determines whether the request has a user account\"
+-- expression: \"size(request.user) > 0\"
+--
+-- /See:/ 'expr' smart constructor.
+data Expr = Expr'
+    { _eLocation    :: !(Maybe Text)
+    , _eExpression  :: !(Maybe Text)
+    , _eTitle       :: !(Maybe Text)
+    , _eDescription :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Expr' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eLocation'
+--
+-- * 'eExpression'
+--
+-- * 'eTitle'
+--
+-- * 'eDescription'
+expr
+    :: Expr
+expr =
+    Expr'
+    { _eLocation = Nothing
+    , _eExpression = Nothing
+    , _eTitle = Nothing
+    , _eDescription = Nothing
+    }
+
+-- | An optional string indicating the location of the expression for error
+-- reporting, e.g. a file name and a position in the file.
+eLocation :: Lens' Expr (Maybe Text)
+eLocation
+  = lens _eLocation (\ s a -> s{_eLocation = a})
+
+-- | Textual representation of an expression in Common Expression Language
+-- syntax. The application context of the containing message determines
+-- which well-known feature set of CEL is supported.
+eExpression :: Lens' Expr (Maybe Text)
+eExpression
+  = lens _eExpression (\ s a -> s{_eExpression = a})
+
+-- | An optional title for the expression, i.e. a short string describing its
+-- purpose. This can be used e.g. in UIs which allow to enter the
+-- expression.
+eTitle :: Lens' Expr (Maybe Text)
+eTitle = lens _eTitle (\ s a -> s{_eTitle = a})
+
+-- | An optional description of the expression. This is a longer text which
+-- describes the expression, e.g. when hovered over it in a UI.
+eDescription :: Lens' Expr (Maybe Text)
+eDescription
+  = lens _eDescription (\ s a -> s{_eDescription = a})
+
+instance FromJSON Expr where
+        parseJSON
+          = withObject "Expr"
+              (\ o ->
+                 Expr' <$>
+                   (o .:? "location") <*> (o .:? "expression") <*>
+                     (o .:? "title")
+                     <*> (o .:? "description"))
+
+instance ToJSON Expr where
+        toJSON Expr'{..}
+          = object
+              (catMaybes
+                 [("location" .=) <$> _eLocation,
+                  ("expression" .=) <$> _eExpression,
+                  ("title" .=) <$> _eTitle,
+                  ("description" .=) <$> _eDescription])
 
 -- | Request message for \`GetIamPolicy\` method.
 --
@@ -317,169 +336,101 @@ instance FromJSON GetIAMPolicyRequest where
 instance ToJSON GetIAMPolicyRequest where
         toJSON = const emptyObject
 
--- | The entity that owns an Organization. The lifetime of the Organization
--- and all of its descendants are bound to the \`OrganizationOwner\`. If
--- the \`OrganizationOwner\` is deleted, the Organization and all its
--- descendants will be deleted.
+-- | The request message for searching folders.
 --
--- /See:/ 'organizationOwner' smart constructor.
-newtype OrganizationOwner = OrganizationOwner'
-    { _ooDirectoryCustomerId :: Maybe Text
+-- /See:/ 'searchFoldersRequest' smart constructor.
+data SearchFoldersRequest = SearchFoldersRequest'
+    { _sfrQuery     :: !(Maybe Text)
+    , _sfrPageToken :: !(Maybe Text)
+    , _sfrPageSize  :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrganizationOwner' with the minimum fields required to make a request.
+-- | Creates a value of 'SearchFoldersRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ooDirectoryCustomerId'
-organizationOwner
-    :: OrganizationOwner
-organizationOwner =
-    OrganizationOwner'
-    { _ooDirectoryCustomerId = Nothing
+-- * 'sfrQuery'
+--
+-- * 'sfrPageToken'
+--
+-- * 'sfrPageSize'
+searchFoldersRequest
+    :: SearchFoldersRequest
+searchFoldersRequest =
+    SearchFoldersRequest'
+    { _sfrQuery = Nothing
+    , _sfrPageToken = Nothing
+    , _sfrPageSize = Nothing
     }
 
--- | The Google for Work customer id used in the Directory API.
-ooDirectoryCustomerId :: Lens' OrganizationOwner (Maybe Text)
-ooDirectoryCustomerId
-  = lens _ooDirectoryCustomerId
-      (\ s a -> s{_ooDirectoryCustomerId = a})
+-- | Search criteria used to select the Folders to return. If no search
+-- criteria is specified then all accessible folders will be returned.
+-- Query expressions can be used to restrict results based upon
+-- displayName, lifecycleState and parent, where the operators \`=\`,
+-- \`NOT\`, \`AND\` and \`OR\` can be used along with the suffix wildcard
+-- symbol \`*\`. The displayName field in a query expression should use
+-- escaped quotes for values that include whitespace to prevent unexpected
+-- behavior. Some example queries are: |Query | Description| |----- |
+-- -----------| |displayName=Test* | Folders whose display name starts with
+-- \"Test\".| |lifecycleState=ACTIVE | Folders whose lifecycleState is
+-- ACTIVE.| |parent=folders\/123 | Folders whose parent is
+-- \"folders\/123\".| |parent=folders\/123 AND lifecycleState=ACTIVE |
+-- Active folders whose parent is \"folders\/123\".|
+-- |displayName=\\\\\"Test String\\\\\"|Folders whose display name includes
+-- both \"Test\" and \"String\".|
+sfrQuery :: Lens' SearchFoldersRequest (Maybe Text)
+sfrQuery = lens _sfrQuery (\ s a -> s{_sfrQuery = a})
 
-instance FromJSON OrganizationOwner where
+-- | A pagination token returned from a previous call to \`SearchFolders\`
+-- that indicates from where search should continue. This field is
+-- optional.
+sfrPageToken :: Lens' SearchFoldersRequest (Maybe Text)
+sfrPageToken
+  = lens _sfrPageToken (\ s a -> s{_sfrPageToken = a})
+
+-- | The maximum number of folders to return in the response. This field is
+-- optional.
+sfrPageSize :: Lens' SearchFoldersRequest (Maybe Int32)
+sfrPageSize
+  = lens _sfrPageSize (\ s a -> s{_sfrPageSize = a}) .
+      mapping _Coerce
+
+instance FromJSON SearchFoldersRequest where
         parseJSON
-          = withObject "OrganizationOwner"
+          = withObject "SearchFoldersRequest"
               (\ o ->
-                 OrganizationOwner' <$> (o .:? "directoryCustomerId"))
+                 SearchFoldersRequest' <$>
+                   (o .:? "query") <*> (o .:? "pageToken") <*>
+                     (o .:? "pageSize"))
 
-instance ToJSON OrganizationOwner where
-        toJSON OrganizationOwner'{..}
+instance ToJSON SearchFoldersRequest where
+        toJSON SearchFoldersRequest'{..}
           = object
               (catMaybes
-                 [("directoryCustomerId" .=) <$>
-                    _ooDirectoryCustomerId])
+                 [("query" .=) <$> _sfrQuery,
+                  ("pageToken" .=) <$> _sfrPageToken,
+                  ("pageSize" .=) <$> _sfrPageSize])
 
--- | A Project is a high-level Google Cloud Platform entity. It is a
--- container for ACLs, APIs, AppEngine Apps, VMs, and other Google Cloud
--- Platform resources.
+-- | The UndeleteFolder request message.
 --
--- /See:/ 'project' smart constructor.
-data Project = Project'
-    { _pParent         :: !(Maybe ResourceId)
-    , _pProjectNumber  :: !(Maybe (Textual Int64))
-    , _pName           :: !(Maybe Text)
-    , _pLabels         :: !(Maybe ProjectLabels)
-    , _pProjectId      :: !(Maybe Text)
-    , _pLifecycleState :: !(Maybe ProjectLifecycleState)
-    , _pCreateTime     :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
+-- /See:/ 'undeleteFolderRequest' smart constructor.
+data UndeleteFolderRequest =
+    UndeleteFolderRequest'
+    deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Project' with the minimum fields required to make a request.
+-- | Creates a value of 'UndeleteFolderRequest' with the minimum fields required to make a request.
 --
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'pParent'
---
--- * 'pProjectNumber'
---
--- * 'pName'
---
--- * 'pLabels'
---
--- * 'pProjectId'
---
--- * 'pLifecycleState'
---
--- * 'pCreateTime'
-project
-    :: Project
-project =
-    Project'
-    { _pParent = Nothing
-    , _pProjectNumber = Nothing
-    , _pName = Nothing
-    , _pLabels = Nothing
-    , _pProjectId = Nothing
-    , _pLifecycleState = Nothing
-    , _pCreateTime = Nothing
-    }
+undeleteFolderRequest
+    :: UndeleteFolderRequest
+undeleteFolderRequest = UndeleteFolderRequest'
 
--- | An optional reference to a parent Resource. The only supported parent
--- type is \"organization\". Once set, the parent cannot be modified. The
--- \`parent\` can be set on creation or using the \`UpdateProject\` method;
--- the end user must have the \`resourcemanager.projects.create\`
--- permission on the parent. Read-write.
-pParent :: Lens' Project (Maybe ResourceId)
-pParent = lens _pParent (\ s a -> s{_pParent = a})
-
--- | The number uniquely identifying the project. Example: '415104041262'
--- Read-only.
-pProjectNumber :: Lens' Project (Maybe Int64)
-pProjectNumber
-  = lens _pProjectNumber
-      (\ s a -> s{_pProjectNumber = a})
-      . mapping _Coerce
-
--- | The user-assigned display name of the Project. It must be 4 to 30
--- characters. Allowed characters are: lowercase and uppercase letters,
--- numbers, hyphen, single-quote, double-quote, space, and exclamation
--- point. Example: 'My Project' Read-write.
-pName :: Lens' Project (Maybe Text)
-pName = lens _pName (\ s a -> s{_pName = a})
-
--- | The labels associated with this Project. Label keys must be between 1
--- and 63 characters long and must conform to the following regular
--- expression: \\[a-z\\](\\[-a-z0-9\\]*\\[a-z0-9\\])?. Label values must be
--- between 0 and 63 characters long and must conform to the regular
--- expression (\\[a-z\\](\\[-a-z0-9\\]*\\[a-z0-9\\])?)?. No more than 256
--- labels can be associated with a given resource. Clients should store
--- labels in a representation such as JSON that does not depend on specific
--- characters being disallowed. Example: '\"environment\" : \"dev\"'
--- Read-write.
-pLabels :: Lens' Project (Maybe ProjectLabels)
-pLabels = lens _pLabels (\ s a -> s{_pLabels = a})
-
--- | The unique, user-assigned ID of the Project. It must be 6 to 30
--- lowercase letters, digits, or hyphens. It must start with a letter.
--- Trailing hyphens are prohibited. Example: 'tokyo-rain-123' Read-only
--- after creation.
-pProjectId :: Lens' Project (Maybe Text)
-pProjectId
-  = lens _pProjectId (\ s a -> s{_pProjectId = a})
-
--- | The Project lifecycle state. Read-only.
-pLifecycleState :: Lens' Project (Maybe ProjectLifecycleState)
-pLifecycleState
-  = lens _pLifecycleState
-      (\ s a -> s{_pLifecycleState = a})
-
--- | Creation time. Read-only.
-pCreateTime :: Lens' Project (Maybe UTCTime)
-pCreateTime
-  = lens _pCreateTime (\ s a -> s{_pCreateTime = a}) .
-      mapping _DateTime
-
-instance FromJSON Project where
+instance FromJSON UndeleteFolderRequest where
         parseJSON
-          = withObject "Project"
-              (\ o ->
-                 Project' <$>
-                   (o .:? "parent") <*> (o .:? "projectNumber") <*>
-                     (o .:? "name")
-                     <*> (o .:? "labels")
-                     <*> (o .:? "projectId")
-                     <*> (o .:? "lifecycleState")
-                     <*> (o .:? "createTime"))
+          = withObject "UndeleteFolderRequest"
+              (\ o -> pure UndeleteFolderRequest')
 
-instance ToJSON Project where
-        toJSON Project'{..}
-          = object
-              (catMaybes
-                 [("parent" .=) <$> _pParent,
-                  ("projectNumber" .=) <$> _pProjectNumber,
-                  ("name" .=) <$> _pName, ("labels" .=) <$> _pLabels,
-                  ("projectId" .=) <$> _pProjectId,
-                  ("lifecycleState" .=) <$> _pLifecycleState,
-                  ("createTime" .=) <$> _pCreateTime])
+instance ToJSON UndeleteFolderRequest where
+        toJSON = const emptyObject
 
 -- | This resource represents a long-running operation that is the result of
 -- a network API call.
@@ -518,7 +469,7 @@ operation =
     }
 
 -- | If the value is \`false\`, it means the operation is still in progress.
--- If true, the operation is completed, and either \`error\` or
+-- If \`true\`, the operation is completed, and either \`error\` or
 -- \`response\` is available.
 oDone :: Lens' Operation (Maybe Bool)
 oDone = lens _oDone (\ s a -> s{_oDone = a})
@@ -572,28 +523,59 @@ instance ToJSON Operation where
                   ("name" .=) <$> _oName,
                   ("metadata" .=) <$> _oMetadata])
 
--- | A generic empty message that you can re-use to avoid defining duplicated
--- empty messages in your APIs. A typical example is to use it as the
--- request or the response type of an API method. For instance: service Foo
--- { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The
--- JSON representation for \`Empty\` is empty JSON object \`{}\`.
+-- | The response message for searching folders.
 --
--- /See:/ 'empty' smart constructor.
-data Empty =
-    Empty'
-    deriving (Eq,Show,Data,Typeable,Generic)
+-- /See:/ 'searchFoldersResponse' smart constructor.
+data SearchFoldersResponse = SearchFoldersResponse'
+    { _sfrNextPageToken :: !(Maybe Text)
+    , _sfrFolders       :: !(Maybe [Folder])
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Empty' with the minimum fields required to make a request.
+-- | Creates a value of 'SearchFoldersResponse' with the minimum fields required to make a request.
 --
-empty
-    :: Empty
-empty = Empty'
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sfrNextPageToken'
+--
+-- * 'sfrFolders'
+searchFoldersResponse
+    :: SearchFoldersResponse
+searchFoldersResponse =
+    SearchFoldersResponse'
+    { _sfrNextPageToken = Nothing
+    , _sfrFolders = Nothing
+    }
 
-instance FromJSON Empty where
-        parseJSON = withObject "Empty" (\ o -> pure Empty')
+-- | A pagination token returned from a previous call to \`SearchFolders\`
+-- that indicates from where searching should continue. This field is
+-- optional.
+sfrNextPageToken :: Lens' SearchFoldersResponse (Maybe Text)
+sfrNextPageToken
+  = lens _sfrNextPageToken
+      (\ s a -> s{_sfrNextPageToken = a})
 
-instance ToJSON Empty where
-        toJSON = const emptyObject
+-- | A possibly paginated folder search results. the specified parent
+-- resource.
+sfrFolders :: Lens' SearchFoldersResponse [Folder]
+sfrFolders
+  = lens _sfrFolders (\ s a -> s{_sfrFolders = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON SearchFoldersResponse where
+        parseJSON
+          = withObject "SearchFoldersResponse"
+              (\ o ->
+                 SearchFoldersResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "folders" .!= mempty))
+
+instance ToJSON SearchFoldersResponse where
+        toJSON SearchFoldersResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _sfrNextPageToken,
+                  ("folders" .=) <$> _sfrFolders])
 
 -- | A status object which is used as the \`metadata\` field for the
 -- Operation returned by CreateProject. It provides insight for when
@@ -728,24 +710,126 @@ instance ToJSON FolderOperationError where
               (catMaybes
                  [("errorMessageId" .=) <$> _foeErrorMessageId])
 
+-- | A Folder in an Organization\'s resource hierarchy, used to organize that
+-- Organization\'s resources.
+--
+-- /See:/ 'folder' smart constructor.
+data Folder = Folder'
+    { _fParent         :: !(Maybe Text)
+    , _fName           :: !(Maybe Text)
+    , _fDisplayName    :: !(Maybe Text)
+    , _fLifecycleState :: !(Maybe FolderLifecycleState)
+    , _fCreateTime     :: !(Maybe DateTime')
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Folder' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'fParent'
+--
+-- * 'fName'
+--
+-- * 'fDisplayName'
+--
+-- * 'fLifecycleState'
+--
+-- * 'fCreateTime'
+folder
+    :: Folder
+folder =
+    Folder'
+    { _fParent = Nothing
+    , _fName = Nothing
+    , _fDisplayName = Nothing
+    , _fLifecycleState = Nothing
+    , _fCreateTime = Nothing
+    }
+
+-- | The Folder’s parent\'s resource name. Updates to the folder\'s parent
+-- must be performed via MoveFolder.
+fParent :: Lens' Folder (Maybe Text)
+fParent = lens _fParent (\ s a -> s{_fParent = a})
+
+-- | Output only. The resource name of the Folder. Its format is
+-- \`folders\/{folder_id}\`, for example: \"folders\/1234\".
+fName :: Lens' Folder (Maybe Text)
+fName = lens _fName (\ s a -> s{_fName = a})
+
+-- | The folder’s display name. A folder’s display name must be unique
+-- amongst its siblings, e.g. no two folders with the same parent can share
+-- the same display name. The display name must start and end with a letter
+-- or digit, may contain letters, digits, spaces, hyphens and underscores
+-- and can be no longer than 30 characters. This is captured by the regular
+-- expression: [\\p{L}\\p{N}]([\\p{L}\\p{N}_- ]{0,28}[\\p{L}\\p{N}])?.
+fDisplayName :: Lens' Folder (Maybe Text)
+fDisplayName
+  = lens _fDisplayName (\ s a -> s{_fDisplayName = a})
+
+-- | Output only. The lifecycle state of the folder. Updates to the
+-- lifecycle_state must be performed via DeleteFolder and UndeleteFolder.
+fLifecycleState :: Lens' Folder (Maybe FolderLifecycleState)
+fLifecycleState
+  = lens _fLifecycleState
+      (\ s a -> s{_fLifecycleState = a})
+
+-- | Output only. Timestamp when the Folder was created. Assigned by the
+-- server.
+fCreateTime :: Lens' Folder (Maybe UTCTime)
+fCreateTime
+  = lens _fCreateTime (\ s a -> s{_fCreateTime = a}) .
+      mapping _DateTime
+
+instance FromJSON Folder where
+        parseJSON
+          = withObject "Folder"
+              (\ o ->
+                 Folder' <$>
+                   (o .:? "parent") <*> (o .:? "name") <*>
+                     (o .:? "displayName")
+                     <*> (o .:? "lifecycleState")
+                     <*> (o .:? "createTime"))
+
+instance ToJSON Folder where
+        toJSON Folder'{..}
+          = object
+              (catMaybes
+                 [("parent" .=) <$> _fParent, ("name" .=) <$> _fName,
+                  ("displayName" .=) <$> _fDisplayName,
+                  ("lifecycleState" .=) <$> _fLifecycleState,
+                  ("createTime" .=) <$> _fCreateTime])
+
 -- | Request message for \`SetIamPolicy\` method.
 --
 -- /See:/ 'setIAMPolicyRequest' smart constructor.
-newtype SetIAMPolicyRequest = SetIAMPolicyRequest'
-    { _siprPolicy :: Maybe Policy
+data SetIAMPolicyRequest = SetIAMPolicyRequest'
+    { _siprUpdateMask :: !(Maybe GFieldMask)
+    , _siprPolicy     :: !(Maybe Policy)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SetIAMPolicyRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'siprUpdateMask'
+--
 -- * 'siprPolicy'
 setIAMPolicyRequest
     :: SetIAMPolicyRequest
 setIAMPolicyRequest =
     SetIAMPolicyRequest'
-    { _siprPolicy = Nothing
+    { _siprUpdateMask = Nothing
+    , _siprPolicy = Nothing
     }
+
+-- | OPTIONAL: A FieldMask specifying which fields of the policy to modify.
+-- Only the fields in the mask will be modified. If no mask is provided,
+-- the following default mask is used: paths: \"bindings, etag\" This field
+-- is only used by Cloud IAM.
+siprUpdateMask :: Lens' SetIAMPolicyRequest (Maybe GFieldMask)
+siprUpdateMask
+  = lens _siprUpdateMask
+      (\ s a -> s{_siprUpdateMask = a})
 
 -- | REQUIRED: The complete policy to be applied to the \`resource\`. The
 -- size of the policy is limited to a few 10s of KB. An empty policy is a
@@ -758,11 +842,16 @@ siprPolicy
 instance FromJSON SetIAMPolicyRequest where
         parseJSON
           = withObject "SetIAMPolicyRequest"
-              (\ o -> SetIAMPolicyRequest' <$> (o .:? "policy"))
+              (\ o ->
+                 SetIAMPolicyRequest' <$>
+                   (o .:? "updateMask") <*> (o .:? "policy"))
 
 instance ToJSON SetIAMPolicyRequest where
         toJSON SetIAMPolicyRequest'{..}
-          = object (catMaybes [("policy" .=) <$> _siprPolicy])
+          = object
+              (catMaybes
+                 [("updateMask" .=) <$> _siprUpdateMask,
+                  ("policy" .=) <$> _siprPolicy])
 
 -- | Request message for \`TestIamPermissions\` method.
 --
@@ -805,124 +894,6 @@ instance ToJSON TestIAMPermissionsRequest where
         toJSON TestIAMPermissionsRequest'{..}
           = object
               (catMaybes [("permissions" .=) <$> _tiprPermissions])
-
--- | The request sent to the GetAncestry method.
---
--- /See:/ 'getAncestryRequest' smart constructor.
-data GetAncestryRequest =
-    GetAncestryRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'GetAncestryRequest' with the minimum fields required to make a request.
---
-getAncestryRequest
-    :: GetAncestryRequest
-getAncestryRequest = GetAncestryRequest'
-
-instance FromJSON GetAncestryRequest where
-        parseJSON
-          = withObject "GetAncestryRequest"
-              (\ o -> pure GetAncestryRequest')
-
-instance ToJSON GetAncestryRequest where
-        toJSON = const emptyObject
-
--- | The response returned from the \`SearchOrganizations\` method.
---
--- /See:/ 'searchOrganizationsResponse' smart constructor.
-data SearchOrganizationsResponse = SearchOrganizationsResponse'
-    { _sorNextPageToken :: !(Maybe Text)
-    , _sorOrganizations :: !(Maybe [Organization])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'SearchOrganizationsResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'sorNextPageToken'
---
--- * 'sorOrganizations'
-searchOrganizationsResponse
-    :: SearchOrganizationsResponse
-searchOrganizationsResponse =
-    SearchOrganizationsResponse'
-    { _sorNextPageToken = Nothing
-    , _sorOrganizations = Nothing
-    }
-
--- | A pagination token to be used to retrieve the next page of results. If
--- the result is too large to fit within the page size specified in the
--- request, this field will be set with a token that can be used to fetch
--- the next page of results. If this field is empty, it indicates that this
--- response contains the last page of results.
-sorNextPageToken :: Lens' SearchOrganizationsResponse (Maybe Text)
-sorNextPageToken
-  = lens _sorNextPageToken
-      (\ s a -> s{_sorNextPageToken = a})
-
--- | The list of Organizations that matched the search query, possibly
--- paginated.
-sorOrganizations :: Lens' SearchOrganizationsResponse [Organization]
-sorOrganizations
-  = lens _sorOrganizations
-      (\ s a -> s{_sorOrganizations = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON SearchOrganizationsResponse where
-        parseJSON
-          = withObject "SearchOrganizationsResponse"
-              (\ o ->
-                 SearchOrganizationsResponse' <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "organizations" .!= mempty))
-
-instance ToJSON SearchOrganizationsResponse where
-        toJSON SearchOrganizationsResponse'{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _sorNextPageToken,
-                  ("organizations" .=) <$> _sorOrganizations])
-
--- | Response from the GetAncestry method.
---
--- /See:/ 'getAncestryResponse' smart constructor.
-newtype GetAncestryResponse = GetAncestryResponse'
-    { _garAncestor :: Maybe [Ancestor]
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'GetAncestryResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'garAncestor'
-getAncestryResponse
-    :: GetAncestryResponse
-getAncestryResponse =
-    GetAncestryResponse'
-    { _garAncestor = Nothing
-    }
-
--- | Ancestors are ordered from bottom to top of the resource hierarchy. The
--- first ancestor is the project itself, followed by the project\'s parent,
--- etc.
-garAncestor :: Lens' GetAncestryResponse [Ancestor]
-garAncestor
-  = lens _garAncestor (\ s a -> s{_garAncestor = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON GetAncestryResponse where
-        parseJSON
-          = withObject "GetAncestryResponse"
-              (\ o ->
-                 GetAncestryResponse' <$>
-                   (o .:? "ancestor" .!= mempty))
-
-instance ToJSON GetAncestryResponse where
-        toJSON GetAncestryResponse'{..}
-          = object
-              (catMaybes [("ancestor" .=) <$> _garAncestor])
 
 -- | Response message for \`TestIamPermissions\` method.
 --
@@ -967,28 +938,35 @@ instance ToJSON TestIAMPermissionsResponse where
 
 -- | Defines an Identity and Access Management (IAM) policy. It is used to
 -- specify access control policies for Cloud Platform resources. A
--- \`Policy\` consists of a list of \`bindings\`. A \`Binding\` binds a
+-- \`Policy\` consists of a list of \`bindings\`. A \`binding\` binds a
 -- list of \`members\` to a \`role\`, where the members can be user
 -- accounts, Google groups, Google domains, and service accounts. A
--- \`role\` is a named list of permissions defined by IAM. **Example** {
--- \"bindings\": [ { \"role\": \"roles\/owner\", \"members\": [
+-- \`role\` is a named list of permissions defined by IAM. **JSON Example**
+-- { \"bindings\": [ { \"role\": \"roles\/owner\", \"members\": [
 -- \"user:mike\'example.com\", \"group:admins\'example.com\",
 -- \"domain:google.com\",
--- \"serviceAccount:my-other-app\'appspot.gserviceaccount.com\", ] }, {
+-- \"serviceAccount:my-other-app\'appspot.gserviceaccount.com\" ] }, {
 -- \"role\": \"roles\/viewer\", \"members\": [\"user:sean\'example.com\"] }
--- ] } For a description of IAM and its features, see the [IAM developer\'s
--- guide](https:\/\/cloud.google.com\/iam).
+-- ] } **YAML Example** bindings: - members: - user:mike\'example.com -
+-- group:admins\'example.com - domain:google.com -
+-- serviceAccount:my-other-app\'appspot.gserviceaccount.com role:
+-- roles\/owner - members: - user:sean\'example.com role: roles\/viewer For
+-- a description of IAM and its features, see the [IAM developer\'s
+-- guide](https:\/\/cloud.google.com\/iam\/docs).
 --
 -- /See:/ 'policy' smart constructor.
 data Policy = Policy'
-    { _pEtag     :: !(Maybe Bytes)
-    , _pVersion  :: !(Maybe (Textual Int32))
-    , _pBindings :: !(Maybe [Binding])
+    { _pAuditConfigs :: !(Maybe [AuditConfig])
+    , _pEtag         :: !(Maybe Bytes)
+    , _pVersion      :: !(Maybe (Textual Int32))
+    , _pBindings     :: !(Maybe [Binding])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pAuditConfigs'
 --
 -- * 'pEtag'
 --
@@ -999,10 +977,19 @@ policy
     :: Policy
 policy =
     Policy'
-    { _pEtag = Nothing
+    { _pAuditConfigs = Nothing
+    , _pEtag = Nothing
     , _pVersion = Nothing
     , _pBindings = Nothing
     }
+
+-- | Specifies cloud audit logging configuration for this policy.
+pAuditConfigs :: Lens' Policy [AuditConfig]
+pAuditConfigs
+  = lens _pAuditConfigs
+      (\ s a -> s{_pAuditConfigs = a})
+      . _Default
+      . _Coerce
 
 -- | \`etag\` is used for optimistic concurrency control as a way to help
 -- prevent simultaneous updates of a policy from overwriting each other. It
@@ -1018,14 +1005,13 @@ pEtag
   = lens _pEtag (\ s a -> s{_pEtag = a}) .
       mapping _Bytes
 
--- | Version of the \`Policy\`. The default version is 0.
+-- | Deprecated.
 pVersion :: Lens' Policy (Maybe Int32)
 pVersion
   = lens _pVersion (\ s a -> s{_pVersion = a}) .
       mapping _Coerce
 
--- | Associates a list of \`members\` to a \`role\`. Multiple \`bindings\`
--- must not be specified for the same \`role\`. \`bindings\` with no
+-- | Associates a list of \`members\` to a \`role\`. \`bindings\` with no
 -- members will result in an error.
 pBindings :: Lens' Policy [Binding]
 pBindings
@@ -1038,57 +1024,17 @@ instance FromJSON Policy where
           = withObject "Policy"
               (\ o ->
                  Policy' <$>
-                   (o .:? "etag") <*> (o .:? "version") <*>
-                     (o .:? "bindings" .!= mempty))
+                   (o .:? "auditConfigs" .!= mempty) <*> (o .:? "etag")
+                     <*> (o .:? "version")
+                     <*> (o .:? "bindings" .!= mempty))
 
 instance ToJSON Policy where
         toJSON Policy'{..}
           = object
               (catMaybes
-                 [("etag" .=) <$> _pEtag,
-                  ("version" .=) <$> _pVersion,
+                 [("auditConfigs" .=) <$> _pAuditConfigs,
+                  ("etag" .=) <$> _pEtag, ("version" .=) <$> _pVersion,
                   ("bindings" .=) <$> _pBindings])
-
--- | The labels associated with this Project. Label keys must be between 1
--- and 63 characters long and must conform to the following regular
--- expression: \\[a-z\\](\\[-a-z0-9\\]*\\[a-z0-9\\])?. Label values must be
--- between 0 and 63 characters long and must conform to the regular
--- expression (\\[a-z\\](\\[-a-z0-9\\]*\\[a-z0-9\\])?)?. No more than 256
--- labels can be associated with a given resource. Clients should store
--- labels in a representation such as JSON that does not depend on specific
--- characters being disallowed. Example: '\"environment\" : \"dev\"'
--- Read-write.
---
--- /See:/ 'projectLabels' smart constructor.
-newtype ProjectLabels = ProjectLabels'
-    { _plAddtional :: HashMap Text Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ProjectLabels' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'plAddtional'
-projectLabels
-    :: HashMap Text Text -- ^ 'plAddtional'
-    -> ProjectLabels
-projectLabels pPlAddtional_ =
-    ProjectLabels'
-    { _plAddtional = _Coerce # pPlAddtional_
-    }
-
-plAddtional :: Lens' ProjectLabels (HashMap Text Text)
-plAddtional
-  = lens _plAddtional (\ s a -> s{_plAddtional = a}) .
-      _Coerce
-
-instance FromJSON ProjectLabels where
-        parseJSON
-          = withObject "ProjectLabels"
-              (\ o -> ProjectLabels' <$> (parseJSONObject o))
-
-instance ToJSON ProjectLabels where
-        toJSON = toJSON . _plAddtional
 
 -- | Service-specific metadata associated with the operation. It typically
 -- contains progress information and common metadata such as create time.
@@ -1202,129 +1148,61 @@ instance ToJSON FolderOperation where
                   ("operationType" .=) <$> _foOperationType,
                   ("sourceParent" .=) <$> _foSourceParent])
 
--- | The root node in the resource hierarchy to which a particular entity\'s
--- (e.g., company) resources belong.
+-- | Provides the configuration for logging a type of permissions. Example: {
+-- \"audit_log_configs\": [ { \"log_type\": \"DATA_READ\",
+-- \"exempted_members\": [ \"user:foo\'gmail.com\" ] }, { \"log_type\":
+-- \"DATA_WRITE\", } ] } This enables \'DATA_READ\' and \'DATA_WRITE\'
+-- logging, while exempting foo\'gmail.com from DATA_READ logging.
 --
--- /See:/ 'organization' smart constructor.
-data Organization = Organization'
-    { _orgCreationTime   :: !(Maybe DateTime')
-    , _orgOwner          :: !(Maybe OrganizationOwner)
-    , _orgName           :: !(Maybe Text)
-    , _orgDisplayName    :: !(Maybe Text)
-    , _orgLifecycleState :: !(Maybe OrganizationLifecycleState)
+-- /See:/ 'auditLogConfig' smart constructor.
+data AuditLogConfig = AuditLogConfig'
+    { _alcLogType         :: !(Maybe AuditLogConfigLogType)
+    , _alcExemptedMembers :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Organization' with the minimum fields required to make a request.
+-- | Creates a value of 'AuditLogConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'orgCreationTime'
+-- * 'alcLogType'
 --
--- * 'orgOwner'
---
--- * 'orgName'
---
--- * 'orgDisplayName'
---
--- * 'orgLifecycleState'
-organization
-    :: Organization
-organization =
-    Organization'
-    { _orgCreationTime = Nothing
-    , _orgOwner = Nothing
-    , _orgName = Nothing
-    , _orgDisplayName = Nothing
-    , _orgLifecycleState = Nothing
+-- * 'alcExemptedMembers'
+auditLogConfig
+    :: AuditLogConfig
+auditLogConfig =
+    AuditLogConfig'
+    { _alcLogType = Nothing
+    , _alcExemptedMembers = Nothing
     }
 
--- | Timestamp when the Organization was created. Assigned by the server.
--- \'OutputOnly
-orgCreationTime :: Lens' Organization (Maybe UTCTime)
-orgCreationTime
-  = lens _orgCreationTime
-      (\ s a -> s{_orgCreationTime = a})
-      . mapping _DateTime
+-- | The log type that this config enables.
+alcLogType :: Lens' AuditLogConfig (Maybe AuditLogConfigLogType)
+alcLogType
+  = lens _alcLogType (\ s a -> s{_alcLogType = a})
 
--- | The owner of this Organization. The owner should be specified on
--- creation. Once set, it cannot be changed. This field is required.
-orgOwner :: Lens' Organization (Maybe OrganizationOwner)
-orgOwner = lens _orgOwner (\ s a -> s{_orgOwner = a})
+-- | Specifies the identities that do not cause logging for this type of
+-- permission. Follows the same format of Binding.members.
+alcExemptedMembers :: Lens' AuditLogConfig [Text]
+alcExemptedMembers
+  = lens _alcExemptedMembers
+      (\ s a -> s{_alcExemptedMembers = a})
+      . _Default
+      . _Coerce
 
--- | Output Only. The resource name of the organization. This is the
--- organization\'s relative path in the API. Its format is
--- \"organizations\/[organization_id]\". For example,
--- \"organizations\/1234\".
-orgName :: Lens' Organization (Maybe Text)
-orgName = lens _orgName (\ s a -> s{_orgName = a})
-
--- | A friendly string to be used to refer to the Organization in the UI.
--- Assigned by the server, set to the firm name of the Google For Work
--- customer that owns this organization. \'OutputOnly
-orgDisplayName :: Lens' Organization (Maybe Text)
-orgDisplayName
-  = lens _orgDisplayName
-      (\ s a -> s{_orgDisplayName = a})
-
--- | The organization\'s current lifecycle state. Assigned by the server.
--- \'OutputOnly
-orgLifecycleState :: Lens' Organization (Maybe OrganizationLifecycleState)
-orgLifecycleState
-  = lens _orgLifecycleState
-      (\ s a -> s{_orgLifecycleState = a})
-
-instance FromJSON Organization where
+instance FromJSON AuditLogConfig where
         parseJSON
-          = withObject "Organization"
+          = withObject "AuditLogConfig"
               (\ o ->
-                 Organization' <$>
-                   (o .:? "creationTime") <*> (o .:? "owner") <*>
-                     (o .:? "name")
-                     <*> (o .:? "displayName")
-                     <*> (o .:? "lifecycleState"))
+                 AuditLogConfig' <$>
+                   (o .:? "logType") <*>
+                     (o .:? "exemptedMembers" .!= mempty))
 
-instance ToJSON Organization where
-        toJSON Organization'{..}
+instance ToJSON AuditLogConfig where
+        toJSON AuditLogConfig'{..}
           = object
               (catMaybes
-                 [("creationTime" .=) <$> _orgCreationTime,
-                  ("owner" .=) <$> _orgOwner, ("name" .=) <$> _orgName,
-                  ("displayName" .=) <$> _orgDisplayName,
-                  ("lifecycleState" .=) <$> _orgLifecycleState])
-
--- | Identifying information for a single ancestor of a project.
---
--- /See:/ 'ancestor' smart constructor.
-newtype Ancestor = Ancestor'
-    { _aResourceId :: Maybe ResourceId
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Ancestor' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aResourceId'
-ancestor
-    :: Ancestor
-ancestor =
-    Ancestor'
-    { _aResourceId = Nothing
-    }
-
--- | Resource id of the ancestor.
-aResourceId :: Lens' Ancestor (Maybe ResourceId)
-aResourceId
-  = lens _aResourceId (\ s a -> s{_aResourceId = a})
-
-instance FromJSON Ancestor where
-        parseJSON
-          = withObject "Ancestor"
-              (\ o -> Ancestor' <$> (o .:? "resourceId"))
-
-instance ToJSON Ancestor where
-        toJSON Ancestor'{..}
-          = object
-              (catMaybes [("resourceId" .=) <$> _aResourceId])
+                 [("logType" .=) <$> _alcLogType,
+                  ("exemptedMembers" .=) <$> _alcExemptedMembers])
 
 -- | The normal response of the operation in case of success. If the original
 -- method returns no data on success, such as \`Delete\`, the response is
@@ -1367,33 +1245,52 @@ instance FromJSON OperationResponse where
 instance ToJSON OperationResponse where
         toJSON = toJSON . _orAddtional
 
--- | The request sent to the UndeleteProject method.
+-- | The MoveFolder request message.
 --
--- /See:/ 'undeleteProjectRequest' smart constructor.
-data UndeleteProjectRequest =
-    UndeleteProjectRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+-- /See:/ 'moveFolderRequest' smart constructor.
+newtype MoveFolderRequest = MoveFolderRequest'
+    { _mfrDestinationParent :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UndeleteProjectRequest' with the minimum fields required to make a request.
+-- | Creates a value of 'MoveFolderRequest' with the minimum fields required to make a request.
 --
-undeleteProjectRequest
-    :: UndeleteProjectRequest
-undeleteProjectRequest = UndeleteProjectRequest'
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mfrDestinationParent'
+moveFolderRequest
+    :: MoveFolderRequest
+moveFolderRequest =
+    MoveFolderRequest'
+    { _mfrDestinationParent = Nothing
+    }
 
-instance FromJSON UndeleteProjectRequest where
+-- | The resource name of the Folder or Organization to reparent the folder
+-- under. Must be of the form \`folders\/{folder_id}\` or
+-- \`organizations\/{org_id}\`.
+mfrDestinationParent :: Lens' MoveFolderRequest (Maybe Text)
+mfrDestinationParent
+  = lens _mfrDestinationParent
+      (\ s a -> s{_mfrDestinationParent = a})
+
+instance FromJSON MoveFolderRequest where
         parseJSON
-          = withObject "UndeleteProjectRequest"
-              (\ o -> pure UndeleteProjectRequest')
+          = withObject "MoveFolderRequest"
+              (\ o ->
+                 MoveFolderRequest' <$> (o .:? "destinationParent"))
 
-instance ToJSON UndeleteProjectRequest where
-        toJSON = const emptyObject
+instance ToJSON MoveFolderRequest where
+        toJSON MoveFolderRequest'{..}
+          = object
+              (catMaybes
+                 [("destinationParent" .=) <$> _mfrDestinationParent])
 
 -- | Associates \`members\` with a \`role\`.
 --
 -- /See:/ 'binding' smart constructor.
 data Binding = Binding'
-    { _bMembers :: !(Maybe [Text])
-    , _bRole    :: !(Maybe Text)
+    { _bMembers   :: !(Maybe [Text])
+    , _bRole      :: !(Maybe Text)
+    , _bCondition :: !(Maybe Expr)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Binding' with the minimum fields required to make a request.
@@ -1403,12 +1300,15 @@ data Binding = Binding'
 -- * 'bMembers'
 --
 -- * 'bRole'
+--
+-- * 'bCondition'
 binding
     :: Binding
 binding =
     Binding'
     { _bMembers = Nothing
     , _bRole = Nothing
+    , _bCondition = Nothing
     }
 
 -- | Specifies the identities requesting access for a Cloud Platform
@@ -1418,13 +1318,13 @@ binding =
 -- identifier that represents anyone who is authenticated with a Google
 -- account or a service account. * \`user:{emailid}\`: An email address
 -- that represents a specific Google account. For example,
--- \`alice\'gmail.com\` or \`joe\'example.com\`. *
--- \`serviceAccount:{emailid}\`: An email address that represents a service
--- account. For example, \`my-other-app\'appspot.gserviceaccount.com\`. *
--- \`group:{emailid}\`: An email address that represents a Google group.
--- For example, \`admins\'example.com\`. * \`domain:{domain}\`: A Google
--- Apps domain name that represents all the users of that domain. For
--- example, \`google.com\` or \`example.com\`.
+-- \`alice\'gmail.com\` . * \`serviceAccount:{emailid}\`: An email address
+-- that represents a service account. For example,
+-- \`my-other-app\'appspot.gserviceaccount.com\`. * \`group:{emailid}\`: An
+-- email address that represents a Google group. For example,
+-- \`admins\'example.com\`. * \`domain:{domain}\`: A Google Apps domain
+-- name that represents all the users of that domain. For example,
+-- \`google.com\` or \`example.com\`.
 bMembers :: Lens' Binding [Text]
 bMembers
   = lens _bMembers (\ s a -> s{_bMembers = a}) .
@@ -1432,20 +1332,30 @@ bMembers
       . _Coerce
 
 -- | Role that is assigned to \`members\`. For example, \`roles\/viewer\`,
--- \`roles\/editor\`, or \`roles\/owner\`. Required
+-- \`roles\/editor\`, or \`roles\/owner\`.
 bRole :: Lens' Binding (Maybe Text)
 bRole = lens _bRole (\ s a -> s{_bRole = a})
+
+-- | Unimplemented. The condition that is associated with this binding. NOTE:
+-- an unsatisfied condition will not allow user access via current binding.
+-- Different bindings, including their conditions, are examined
+-- independently.
+bCondition :: Lens' Binding (Maybe Expr)
+bCondition
+  = lens _bCondition (\ s a -> s{_bCondition = a})
 
 instance FromJSON Binding where
         parseJSON
           = withObject "Binding"
               (\ o ->
                  Binding' <$>
-                   (o .:? "members" .!= mempty) <*> (o .:? "role"))
+                   (o .:? "members" .!= mempty) <*> (o .:? "role") <*>
+                     (o .:? "condition"))
 
 instance ToJSON Binding where
         toJSON Binding'{..}
           = object
               (catMaybes
                  [("members" .=) <$> _bMembers,
-                  ("role" .=) <$> _bRole])
+                  ("role" .=) <$> _bRole,
+                  ("condition" .=) <$> _bCondition])

@@ -20,10 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Exports data from a Cloud SQL instance to a Google Cloud Storage bucket
--- as a MySQL dump file.
+-- Exports data from a Cloud SQL instance to a Cloud Storage bucket as a
+-- SQL dump or CSV file.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.instances.export@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.instances.export@.
 module Network.Google.Resource.SQL.Instances.Export
     (
     -- * REST Resource
@@ -56,8 +56,8 @@ type InstancesExportResource =
                      ReqBody '[JSON] InstancesExportRequest :>
                        Post '[JSON] Operation
 
--- | Exports data from a Cloud SQL instance to a Google Cloud Storage bucket
--- as a MySQL dump file.
+-- | Exports data from a Cloud SQL instance to a Cloud Storage bucket as a
+-- SQL dump or CSV file.
 --
 -- /See:/ 'instancesExport' smart constructor.
 data InstancesExport = InstancesExport'

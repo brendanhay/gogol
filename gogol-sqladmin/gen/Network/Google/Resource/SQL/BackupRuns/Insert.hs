@@ -23,7 +23,7 @@
 -- Creates a new backup run on demand. This method is applicable only to
 -- Second Generation instances.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.backupRuns.insert@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.backupRuns.insert@.
 module Network.Google.Resource.SQL.BackupRuns.Insert
     (
     -- * REST Resource

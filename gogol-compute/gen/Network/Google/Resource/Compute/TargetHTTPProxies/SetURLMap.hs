@@ -33,6 +33,7 @@ module Network.Google.Resource.Compute.TargetHTTPProxies.SetURLMap
     , TargetHTTPProxiesSetURLMap
 
     -- * Request Lenses
+    , thttppsumRequestId
     , thttppsumProject
     , thttppsumPayload
     , thttppsumTargetHTTPProxy
@@ -51,15 +52,17 @@ type TargetHTTPProxiesSetURLMapResource =
              "targetHttpProxies" :>
                Capture "targetHttpProxy" Text :>
                  "setUrlMap" :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] URLMapReference :>
-                       Post '[JSON] Operation
+                   QueryParam "requestId" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] URLMapReference :>
+                         Post '[JSON] Operation
 
 -- | Changes the URL map for TargetHttpProxy.
 --
 -- /See:/ 'targetHTTPProxiesSetURLMap' smart constructor.
 data TargetHTTPProxiesSetURLMap = TargetHTTPProxiesSetURLMap'
-    { _thttppsumProject         :: !Text
+    { _thttppsumRequestId       :: !(Maybe Text)
+    , _thttppsumProject         :: !Text
     , _thttppsumPayload         :: !URLMapReference
     , _thttppsumTargetHTTPProxy :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -67,6 +70,8 @@ data TargetHTTPProxiesSetURLMap = TargetHTTPProxiesSetURLMap'
 -- | Creates a value of 'TargetHTTPProxiesSetURLMap' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'thttppsumRequestId'
 --
 -- * 'thttppsumProject'
 --
@@ -80,10 +85,26 @@ targetHTTPProxiesSetURLMap
     -> TargetHTTPProxiesSetURLMap
 targetHTTPProxiesSetURLMap pThttppsumProject_ pThttppsumPayload_ pThttppsumTargetHTTPProxy_ =
     TargetHTTPProxiesSetURLMap'
-    { _thttppsumProject = pThttppsumProject_
+    { _thttppsumRequestId = Nothing
+    , _thttppsumProject = pThttppsumProject_
     , _thttppsumPayload = pThttppsumPayload_
     , _thttppsumTargetHTTPProxy = pThttppsumTargetHTTPProxy_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+thttppsumRequestId :: Lens' TargetHTTPProxiesSetURLMap (Maybe Text)
+thttppsumRequestId
+  = lens _thttppsumRequestId
+      (\ s a -> s{_thttppsumRequestId = a})
 
 -- | Project ID for this request.
 thttppsumProject :: Lens' TargetHTTPProxiesSetURLMap Text
@@ -111,6 +132,7 @@ instance GoogleRequest TargetHTTPProxiesSetURLMap
                "https://www.googleapis.com/auth/compute"]
         requestClient TargetHTTPProxiesSetURLMap'{..}
           = go _thttppsumProject _thttppsumTargetHTTPProxy
+              _thttppsumRequestId
               (Just AltJSON)
               _thttppsumPayload
               computeService

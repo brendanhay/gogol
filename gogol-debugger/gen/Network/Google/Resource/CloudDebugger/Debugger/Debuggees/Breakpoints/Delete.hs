@@ -22,7 +22,7 @@
 --
 -- Deletes the breakpoint from the debuggee.
 --
--- /See:/ <http://cloud.google.com/debugger Stackdriver Debugger API Reference> for @clouddebugger.debugger.debuggees.breakpoints.delete@.
+-- /See:/ <https://cloud.google.com/debugger Stackdriver Debugger API Reference> for @clouddebugger.debugger.debuggees.breakpoints.delete@.
 module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Delete
     (
     -- * REST Resource
@@ -35,11 +35,9 @@ module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Dele
     -- * Request Lenses
     , ddbdXgafv
     , ddbdUploadProtocol
-    , ddbdPp
     , ddbdAccessToken
     , ddbdUploadType
     , ddbdBreakpointId
-    , ddbdBearerToken
     , ddbdDebuggeeId
     , ddbdClientVersion
     , ddbdCallback
@@ -59,14 +57,11 @@ type DebuggerDebuggeesBreakpointsDeleteResource =
                Capture "breakpointId" Text :>
                  QueryParam "$.xgafv" Xgafv :>
                    QueryParam "upload_protocol" Text :>
-                     QueryParam "pp" Bool :>
-                       QueryParam "access_token" Text :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "bearer_token" Text :>
-                             QueryParam "clientVersion" Text :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" AltJSON :>
-                                   Delete '[JSON] Empty
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "clientVersion" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
 -- | Deletes the breakpoint from the debuggee.
 --
@@ -74,11 +69,9 @@ type DebuggerDebuggeesBreakpointsDeleteResource =
 data DebuggerDebuggeesBreakpointsDelete = DebuggerDebuggeesBreakpointsDelete'
     { _ddbdXgafv          :: !(Maybe Xgafv)
     , _ddbdUploadProtocol :: !(Maybe Text)
-    , _ddbdPp             :: !Bool
     , _ddbdAccessToken    :: !(Maybe Text)
     , _ddbdUploadType     :: !(Maybe Text)
     , _ddbdBreakpointId   :: !Text
-    , _ddbdBearerToken    :: !(Maybe Text)
     , _ddbdDebuggeeId     :: !Text
     , _ddbdClientVersion  :: !(Maybe Text)
     , _ddbdCallback       :: !(Maybe Text)
@@ -92,15 +85,11 @@ data DebuggerDebuggeesBreakpointsDelete = DebuggerDebuggeesBreakpointsDelete'
 --
 -- * 'ddbdUploadProtocol'
 --
--- * 'ddbdPp'
---
 -- * 'ddbdAccessToken'
 --
 -- * 'ddbdUploadType'
 --
 -- * 'ddbdBreakpointId'
---
--- * 'ddbdBearerToken'
 --
 -- * 'ddbdDebuggeeId'
 --
@@ -115,11 +104,9 @@ debuggerDebuggeesBreakpointsDelete pDdbdBreakpointId_ pDdbdDebuggeeId_ =
     DebuggerDebuggeesBreakpointsDelete'
     { _ddbdXgafv = Nothing
     , _ddbdUploadProtocol = Nothing
-    , _ddbdPp = True
     , _ddbdAccessToken = Nothing
     , _ddbdUploadType = Nothing
     , _ddbdBreakpointId = pDdbdBreakpointId_
-    , _ddbdBearerToken = Nothing
     , _ddbdDebuggeeId = pDdbdDebuggeeId_
     , _ddbdClientVersion = Nothing
     , _ddbdCallback = Nothing
@@ -135,10 +122,6 @@ ddbdUploadProtocol :: Lens' DebuggerDebuggeesBreakpointsDelete (Maybe Text)
 ddbdUploadProtocol
   = lens _ddbdUploadProtocol
       (\ s a -> s{_ddbdUploadProtocol = a})
-
--- | Pretty-print response.
-ddbdPp :: Lens' DebuggerDebuggeesBreakpointsDelete Bool
-ddbdPp = lens _ddbdPp (\ s a -> s{_ddbdPp = a})
 
 -- | OAuth access token.
 ddbdAccessToken :: Lens' DebuggerDebuggeesBreakpointsDelete (Maybe Text)
@@ -158,19 +141,13 @@ ddbdBreakpointId
   = lens _ddbdBreakpointId
       (\ s a -> s{_ddbdBreakpointId = a})
 
--- | OAuth bearer token.
-ddbdBearerToken :: Lens' DebuggerDebuggeesBreakpointsDelete (Maybe Text)
-ddbdBearerToken
-  = lens _ddbdBearerToken
-      (\ s a -> s{_ddbdBearerToken = a})
-
 -- | ID of the debuggee whose breakpoint to delete.
 ddbdDebuggeeId :: Lens' DebuggerDebuggeesBreakpointsDelete Text
 ddbdDebuggeeId
   = lens _ddbdDebuggeeId
       (\ s a -> s{_ddbdDebuggeeId = a})
 
--- | The client version making the call. Following: \`domain\/type\/version\`
+-- | The client version making the call. Schema: \`domain\/type\/version\`
 -- (e.g., \`google.com\/intellij\/v1\`).
 ddbdClientVersion :: Lens' DebuggerDebuggeesBreakpointsDelete (Maybe Text)
 ddbdClientVersion
@@ -191,10 +168,8 @@ instance GoogleRequest
         requestClient DebuggerDebuggeesBreakpointsDelete'{..}
           = go _ddbdDebuggeeId _ddbdBreakpointId _ddbdXgafv
               _ddbdUploadProtocol
-              (Just _ddbdPp)
               _ddbdAccessToken
               _ddbdUploadType
-              _ddbdBearerToken
               _ddbdClientVersion
               _ddbdCallback
               (Just AltJSON)

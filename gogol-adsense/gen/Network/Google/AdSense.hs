@@ -31,6 +31,9 @@ module Network.Google.AdSense
 
     -- * Resources
 
+    -- ** adsense.accounts.adclients.getAdCode
+    , module Network.Google.Resource.AdSense.Accounts.AdClients.GetAdCode
+
     -- ** adsense.accounts.adclients.list
     , module Network.Google.Resource.AdSense.Accounts.AdClients.List
 
@@ -375,6 +378,8 @@ module Network.Google.AdSense
     , AdCode
     , adCode
     , addKind
+    , addAmpHead
+    , addAmpBody
     , addAdCode
 
     -- ** AdsenseReportsGenerateResponse
@@ -406,6 +411,7 @@ module Network.Google.AdSense
 
 import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
+import           Network.Google.Resource.AdSense.Accounts.AdClients.GetAdCode
 import           Network.Google.Resource.AdSense.Accounts.AdClients.List
 import           Network.Google.Resource.AdSense.Accounts.AdUnits.CustomChannels.List
 import           Network.Google.Resource.AdSense.Accounts.AdUnits.Get
@@ -453,6 +459,7 @@ TODO
 type AdSenseAPI =
      AdClientsListResource :<|>
        AccountsAdClientsListResource
+       :<|> AccountsAdClientsGetAdCodeResource
        :<|> AccountsReportsSavedListResource
        :<|> AccountsReportsSavedGenerateResource
        :<|> AccountsReportsGenerateResource

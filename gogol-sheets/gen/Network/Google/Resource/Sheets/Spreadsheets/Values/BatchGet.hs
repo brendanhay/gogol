@@ -37,12 +37,10 @@ module Network.Google.Resource.Sheets.Spreadsheets.Values.BatchGet
     , svbgXgafv
     , svbgValueRenderOption
     , svbgUploadProtocol
-    , svbgPp
     , svbgAccessToken
     , svbgSpreadsheetId
     , svbgUploadType
     , svbgRanges
-    , svbgBearerToken
     , svbgDateTimeRenderOption
     , svbgMajorDimension
     , svbgCallback
@@ -61,16 +59,14 @@ type SpreadsheetsValuesBatchGetResource =
              QueryParam "$.xgafv" Xgafv :>
                QueryParam "valueRenderOption" Text :>
                  QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParams "ranges" Text :>
-                           QueryParam "bearer_token" Text :>
-                             QueryParam "dateTimeRenderOption" Text :>
-                               QueryParam "majorDimension" Text :>
-                                 QueryParam "callback" Text :>
-                                   QueryParam "alt" AltJSON :>
-                                     Get '[JSON] BatchGetValuesResponse
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParams "ranges" Text :>
+                         QueryParam "dateTimeRenderOption" Text :>
+                           QueryParam "majorDimension" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] BatchGetValuesResponse
 
 -- | Returns one or more ranges of values from a spreadsheet. The caller must
 -- specify the spreadsheet ID and one or more ranges.
@@ -80,12 +76,10 @@ data SpreadsheetsValuesBatchGet = SpreadsheetsValuesBatchGet'
     { _svbgXgafv                :: !(Maybe Xgafv)
     , _svbgValueRenderOption    :: !(Maybe Text)
     , _svbgUploadProtocol       :: !(Maybe Text)
-    , _svbgPp                   :: !Bool
     , _svbgAccessToken          :: !(Maybe Text)
     , _svbgSpreadsheetId        :: !Text
     , _svbgUploadType           :: !(Maybe Text)
     , _svbgRanges               :: !(Maybe [Text])
-    , _svbgBearerToken          :: !(Maybe Text)
     , _svbgDateTimeRenderOption :: !(Maybe Text)
     , _svbgMajorDimension       :: !(Maybe Text)
     , _svbgCallback             :: !(Maybe Text)
@@ -101,8 +95,6 @@ data SpreadsheetsValuesBatchGet = SpreadsheetsValuesBatchGet'
 --
 -- * 'svbgUploadProtocol'
 --
--- * 'svbgPp'
---
 -- * 'svbgAccessToken'
 --
 -- * 'svbgSpreadsheetId'
@@ -110,8 +102,6 @@ data SpreadsheetsValuesBatchGet = SpreadsheetsValuesBatchGet'
 -- * 'svbgUploadType'
 --
 -- * 'svbgRanges'
---
--- * 'svbgBearerToken'
 --
 -- * 'svbgDateTimeRenderOption'
 --
@@ -126,12 +116,10 @@ spreadsheetsValuesBatchGet pSvbgSpreadsheetId_ =
     { _svbgXgafv = Nothing
     , _svbgValueRenderOption = Nothing
     , _svbgUploadProtocol = Nothing
-    , _svbgPp = True
     , _svbgAccessToken = Nothing
     , _svbgSpreadsheetId = pSvbgSpreadsheetId_
     , _svbgUploadType = Nothing
     , _svbgRanges = Nothing
-    , _svbgBearerToken = Nothing
     , _svbgDateTimeRenderOption = Nothing
     , _svbgMajorDimension = Nothing
     , _svbgCallback = Nothing
@@ -154,10 +142,6 @@ svbgUploadProtocol :: Lens' SpreadsheetsValuesBatchGet (Maybe Text)
 svbgUploadProtocol
   = lens _svbgUploadProtocol
       (\ s a -> s{_svbgUploadProtocol = a})
-
--- | Pretty-print response.
-svbgPp :: Lens' SpreadsheetsValuesBatchGet Bool
-svbgPp = lens _svbgPp (\ s a -> s{_svbgPp = a})
 
 -- | OAuth access token.
 svbgAccessToken :: Lens' SpreadsheetsValuesBatchGet (Maybe Text)
@@ -183,12 +167,6 @@ svbgRanges
   = lens _svbgRanges (\ s a -> s{_svbgRanges = a}) .
       _Default
       . _Coerce
-
--- | OAuth bearer token.
-svbgBearerToken :: Lens' SpreadsheetsValuesBatchGet (Maybe Text)
-svbgBearerToken
-  = lens _svbgBearerToken
-      (\ s a -> s{_svbgBearerToken = a})
 
 -- | How dates, times, and durations should be represented in the output.
 -- This is ignored if value_render_option is FORMATTED_VALUE. The default
@@ -219,6 +197,7 @@ instance GoogleRequest SpreadsheetsValuesBatchGet
              BatchGetValuesResponse
         type Scopes SpreadsheetsValuesBatchGet =
              '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file",
                "https://www.googleapis.com/auth/drive.readonly",
                "https://www.googleapis.com/auth/spreadsheets",
                "https://www.googleapis.com/auth/spreadsheets.readonly"]
@@ -226,11 +205,9 @@ instance GoogleRequest SpreadsheetsValuesBatchGet
           = go _svbgSpreadsheetId _svbgXgafv
               _svbgValueRenderOption
               _svbgUploadProtocol
-              (Just _svbgPp)
               _svbgAccessToken
               _svbgUploadType
               (_svbgRanges ^. _Default)
-              _svbgBearerToken
               _svbgDateTimeRenderOption
               _svbgMajorDimension
               _svbgCallback

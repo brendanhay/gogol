@@ -21,8 +21,10 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Updates a send-as alias. If a signature is provided, Gmail will sanitize
--- the HTML before saving it with the alias. This method supports patch
--- semantics.
+-- the HTML before saving it with the alias. Addresses other than the
+-- primary address for the account can only be updated by service account
+-- clients that have been delegated domain-wide authority. This method
+-- supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @gmail.users.settings.sendAs.patch@.
 module Network.Google.Resource.Gmail.Users.Settings.SendAs.Patch
@@ -57,8 +59,10 @@ type UsersSettingsSendAsPatchResource =
                      ReqBody '[JSON] SendAs :> Patch '[JSON] SendAs
 
 -- | Updates a send-as alias. If a signature is provided, Gmail will sanitize
--- the HTML before saving it with the alias. This method supports patch
--- semantics.
+-- the HTML before saving it with the alias. Addresses other than the
+-- primary address for the account can only be updated by service account
+-- clients that have been delegated domain-wide authority. This method
+-- supports patch semantics.
 --
 -- /See:/ 'usersSettingsSendAsPatch' smart constructor.
 data UsersSettingsSendAsPatch = UsersSettingsSendAsPatch'

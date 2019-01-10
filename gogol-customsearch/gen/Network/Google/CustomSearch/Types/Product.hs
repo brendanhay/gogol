@@ -204,7 +204,7 @@ searchURL
 searchURL =
     SearchURL'
     { _suType = "application/json"
-    , _suTemplate = "https://www.googleapis.com/customsearch/v1?q={searchTerms}&num={count?}&start={startIndex?}&lr={language?}&safe={safe?}&cx={cx?}&cref={cref?}&sort={sort?}&filter={filter?}&gl={gl?}&cr={cr?}&googlehost={googleHost?}&c2coff={disableCnTwTranslation?}&hq={hq?}&hl={hl?}&siteSearch={siteSearch?}&siteSearchFilter={siteSearchFilter?}&exactTerms={exactTerms?}&excludeTerms={excludeTerms?}&linkSite={linkSite?}&orTerms={orTerms?}&relatedSite={relatedSite?}&dateRestrict={dateRestrict?}&lowRange={lowRange?}&highRange={highRange?}&searchType={searchType}&fileType={fileType?}&rights={rights?}&imgSize={imgSize?}&imgType={imgType?}&imgColorType={imgColorType?}&imgDominantColor={imgDominantColor?}&alt=json"
+    , _suTemplate = "https://www.googleapis.com/customsearch/v1?q={searchTerms}&num={count?}&start={startIndex?}&lr={language?}&safe={safe?}&cx={cx?}&sort={sort?}&filter={filter?}&gl={gl?}&cr={cr?}&googlehost={googleHost?}&c2coff={disableCnTwTranslation?}&hq={hq?}&hl={hl?}&siteSearch={siteSearch?}&siteSearchFilter={siteSearchFilter?}&exactTerms={exactTerms?}&excludeTerms={excludeTerms?}&linkSite={linkSite?}&orTerms={orTerms?}&relatedSite={relatedSite?}&dateRestrict={dateRestrict?}&lowRange={lowRange?}&highRange={highRange?}&searchType={searchType}&fileType={fileType?}&rights={rights?}&imgSize={imgSize?}&imgType={imgType?}&imgColorType={imgColorType?}&imgDominantColor={imgDominantColor?}&alt=json"
     }
 
 suType :: Lens' SearchURL Text
@@ -221,7 +221,7 @@ instance FromJSON SearchURL where
                  SearchURL' <$>
                    (o .:? "type" .!= "application/json") <*>
                      (o .:? "template" .!=
-                        "https://www.googleapis.com/customsearch/v1?q={searchTerms}&num={count?}&start={startIndex?}&lr={language?}&safe={safe?}&cx={cx?}&cref={cref?}&sort={sort?}&filter={filter?}&gl={gl?}&cr={cr?}&googlehost={googleHost?}&c2coff={disableCnTwTranslation?}&hq={hq?}&hl={hl?}&siteSearch={siteSearch?}&siteSearchFilter={siteSearchFilter?}&exactTerms={exactTerms?}&excludeTerms={excludeTerms?}&linkSite={linkSite?}&orTerms={orTerms?}&relatedSite={relatedSite?}&dateRestrict={dateRestrict?}&lowRange={lowRange?}&highRange={highRange?}&searchType={searchType}&fileType={fileType?}&rights={rights?}&imgSize={imgSize?}&imgType={imgType?}&imgColorType={imgColorType?}&imgDominantColor={imgDominantColor?}&alt=json"))
+                        "https://www.googleapis.com/customsearch/v1?q={searchTerms}&num={count?}&start={startIndex?}&lr={language?}&safe={safe?}&cx={cx?}&sort={sort?}&filter={filter?}&gl={gl?}&cr={cr?}&googlehost={googleHost?}&c2coff={disableCnTwTranslation?}&hq={hq?}&hl={hl?}&siteSearch={siteSearch?}&siteSearchFilter={siteSearchFilter?}&exactTerms={exactTerms?}&excludeTerms={excludeTerms?}&linkSite={linkSite?}&orTerms={orTerms?}&relatedSite={relatedSite?}&dateRestrict={dateRestrict?}&lowRange={lowRange?}&highRange={highRange?}&searchType={searchType}&fileType={fileType?}&rights={rights?}&imgSize={imgSize?}&imgType={imgType?}&imgColorType={imgColorType?}&imgDominantColor={imgDominantColor?}&alt=json"))
 
 instance ToJSON SearchURL where
         toJSON SearchURL'{..}
@@ -726,7 +726,6 @@ data Query = Query'
     , _qDisableCnTwTranslation :: !(Maybe Text)
     , _qRelatedSite            :: !(Maybe Text)
     , _qHl                     :: !(Maybe Text)
-    , _qCref                   :: !(Maybe Text)
     , _qSort                   :: !(Maybe Text)
     , _qLanguage               :: !(Maybe Text)
     , _qSiteSearch             :: !(Maybe Text)
@@ -784,8 +783,6 @@ data Query = Query'
 -- * 'qRelatedSite'
 --
 -- * 'qHl'
---
--- * 'qCref'
 --
 -- * 'qSort'
 --
@@ -846,7 +843,6 @@ query =
     , _qDisableCnTwTranslation = Nothing
     , _qRelatedSite = Nothing
     , _qHl = Nothing
-    , _qCref = Nothing
     , _qSort = Nothing
     , _qLanguage = Nothing
     , _qSiteSearch = Nothing
@@ -937,9 +933,6 @@ qRelatedSite
 
 qHl :: Lens' Query (Maybe Text)
 qHl = lens _qHl (\ s a -> s{_qHl = a})
-
-qCref :: Lens' Query (Maybe Text)
-qCref = lens _qCref (\ s a -> s{_qCref = a})
 
 qSort :: Lens' Query (Maybe Text)
 qSort = lens _qSort (\ s a -> s{_qSort = a})
@@ -1037,7 +1030,6 @@ instance FromJSON Query where
                      <*> (o .:? "disableCnTwTranslation")
                      <*> (o .:? "relatedSite")
                      <*> (o .:? "hl")
-                     <*> (o .:? "cref")
                      <*> (o .:? "sort")
                      <*> (o .:? "language")
                      <*> (o .:? "siteSearch")
@@ -1078,8 +1070,7 @@ instance ToJSON Query where
                   ("disableCnTwTranslation" .=) <$>
                     _qDisableCnTwTranslation,
                   ("relatedSite" .=) <$> _qRelatedSite,
-                  ("hl" .=) <$> _qHl, ("cref" .=) <$> _qCref,
-                  ("sort" .=) <$> _qSort,
+                  ("hl" .=) <$> _qHl, ("sort" .=) <$> _qSort,
                   ("language" .=) <$> _qLanguage,
                   ("siteSearch" .=) <$> _qSiteSearch,
                   ("filter" .=) <$> _qFilter,

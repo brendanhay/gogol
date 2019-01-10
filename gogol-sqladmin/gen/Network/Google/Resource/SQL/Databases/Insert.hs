@@ -23,7 +23,7 @@
 -- Inserts a resource containing information about a database inside a
 -- Cloud SQL instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.databases.insert@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.databases.insert@.
 module Network.Google.Resource.SQL.Databases.Insert
     (
     -- * REST Resource

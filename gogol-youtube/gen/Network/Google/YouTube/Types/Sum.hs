@@ -16,7 +16,7 @@
 --
 module Network.Google.YouTube.Types.Sum where
 
-import           Network.Google.Prelude
+import           Network.Google.Prelude hiding (Bytes)
 
 -- | The video\'s rating from Portugal\'s Comissão de Classificação de
 -- Espect´culos.
@@ -382,6 +382,8 @@ data VideoStatusPrivacyStatus
       -- ^ @public@
     | UnListed
       -- ^ @unlisted@
+    | UnListedNew
+      -- ^ @unlisted_new@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VideoStatusPrivacyStatus
@@ -391,6 +393,7 @@ instance FromHttpApiData VideoStatusPrivacyStatus where
         "private" -> Right Private
         "public" -> Right Public
         "unlisted" -> Right UnListed
+        "unlisted_new" -> Right UnListedNew
         x -> Left ("Unable to parse VideoStatusPrivacyStatus from: " <> x)
 
 instance ToHttpApiData VideoStatusPrivacyStatus where
@@ -398,6 +401,7 @@ instance ToHttpApiData VideoStatusPrivacyStatus where
         Private -> "private"
         Public -> "public"
         UnListed -> "unlisted"
+        UnListedNew -> "unlisted_new"
 
 instance FromJSON VideoStatusPrivacyStatus where
     parseJSON = parseJSONText "VideoStatusPrivacyStatus"
@@ -770,6 +774,8 @@ data LiveBroadcastStatusPrivacyStatus
       -- ^ @public@
     | LBSPSUnListed
       -- ^ @unlisted@
+    | LBSPSUnListedNew
+      -- ^ @unlisted_new@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LiveBroadcastStatusPrivacyStatus
@@ -779,6 +785,7 @@ instance FromHttpApiData LiveBroadcastStatusPrivacyStatus where
         "private" -> Right LBSPSPrivate
         "public" -> Right LBSPSPublic
         "unlisted" -> Right LBSPSUnListed
+        "unlisted_new" -> Right LBSPSUnListedNew
         x -> Left ("Unable to parse LiveBroadcastStatusPrivacyStatus from: " <> x)
 
 instance ToHttpApiData LiveBroadcastStatusPrivacyStatus where
@@ -786,6 +793,7 @@ instance ToHttpApiData LiveBroadcastStatusPrivacyStatus where
         LBSPSPrivate -> "private"
         LBSPSPublic -> "public"
         LBSPSUnListed -> "unlisted"
+        LBSPSUnListedNew -> "unlisted_new"
 
 instance FromJSON LiveBroadcastStatusPrivacyStatus where
     parseJSON = parseJSONText "LiveBroadcastStatusPrivacyStatus"
@@ -925,6 +933,8 @@ data CdnSettingsResolution
       -- ^ @480p@
     | CSR720p
       -- ^ @720p@
+    | CSRVariable
+      -- ^ @variable@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CdnSettingsResolution
@@ -938,6 +948,7 @@ instance FromHttpApiData CdnSettingsResolution where
         "360p" -> Right CSR360p
         "480p" -> Right CSR480p
         "720p" -> Right CSR720p
+        "variable" -> Right CSRVariable
         x -> Left ("Unable to parse CdnSettingsResolution from: " <> x)
 
 instance ToHttpApiData CdnSettingsResolution where
@@ -949,6 +960,7 @@ instance ToHttpApiData CdnSettingsResolution where
         CSR360p -> "360p"
         CSR480p -> "480p"
         CSR720p -> "720p"
+        CSRVariable -> "variable"
 
 instance FromJSON CdnSettingsResolution where
     parseJSON = parseJSONText "CdnSettingsResolution"
@@ -1184,6 +1196,8 @@ data ChannelStatusPrivacyStatus
       -- ^ @public@
     | CSPSUnListed
       -- ^ @unlisted@
+    | CSPSUnListedNew
+      -- ^ @unlisted_new@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ChannelStatusPrivacyStatus
@@ -1193,6 +1207,7 @@ instance FromHttpApiData ChannelStatusPrivacyStatus where
         "private" -> Right CSPSPrivate
         "public" -> Right CSPSPublic
         "unlisted" -> Right CSPSUnListed
+        "unlisted_new" -> Right CSPSUnListedNew
         x -> Left ("Unable to parse ChannelStatusPrivacyStatus from: " <> x)
 
 instance ToHttpApiData ChannelStatusPrivacyStatus where
@@ -1200,6 +1215,7 @@ instance ToHttpApiData ChannelStatusPrivacyStatus where
         CSPSPrivate -> "private"
         CSPSPublic -> "public"
         CSPSUnListed -> "unlisted"
+        CSPSUnListedNew -> "unlisted_new"
 
 instance FromJSON ChannelStatusPrivacyStatus where
     parseJSON = parseJSONText "ChannelStatusPrivacyStatus"
@@ -1700,6 +1716,34 @@ instance FromJSON ContentRatingLsfRating where
 instance ToJSON ContentRatingLsfRating where
     toJSON = toJSONText
 
+-- | The rating system for trailer, DVD, and Ad in the US. See
+-- http:\/\/movielabs.com\/md\/ratings\/v2.3\/html\/US_MPAAT_Ratings.html.
+data ContentRatingMpaatRating
+    = MpaatGb
+      -- ^ @mpaatGb@
+    | MpaatRb
+      -- ^ @mpaatRb@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ContentRatingMpaatRating
+
+instance FromHttpApiData ContentRatingMpaatRating where
+    parseQueryParam = \case
+        "mpaatGb" -> Right MpaatGb
+        "mpaatRb" -> Right MpaatRb
+        x -> Left ("Unable to parse ContentRatingMpaatRating from: " <> x)
+
+instance ToHttpApiData ContentRatingMpaatRating where
+    toQueryParam = \case
+        MpaatGb -> "mpaatGb"
+        MpaatRb -> "mpaatRb"
+
+instance FromJSON ContentRatingMpaatRating where
+    parseJSON = parseJSONText "ContentRatingMpaatRating"
+
+instance ToJSON ContentRatingMpaatRating where
+    toJSON = toJSONText
+
 -- | The type of ban.
 data LiveChatBanSnippetType
     = LCBSTPermanent
@@ -1776,29 +1820,6 @@ instance FromJSON ContentRatingBfvcRating where
     parseJSON = parseJSONText "ContentRatingBfvcRating"
 
 instance ToJSON ContentRatingBfvcRating where
-    toJSON = toJSONText
-
--- | The type of the topic.
-data LiveBroadcastTopicType
-    = VideoGame
-      -- ^ @videoGame@
-      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
-
-instance Hashable LiveBroadcastTopicType
-
-instance FromHttpApiData LiveBroadcastTopicType where
-    parseQueryParam = \case
-        "videoGame" -> Right VideoGame
-        x -> Left ("Unable to parse LiveBroadcastTopicType from: " <> x)
-
-instance ToHttpApiData LiveBroadcastTopicType where
-    toQueryParam = \case
-        VideoGame -> "videoGame"
-
-instance FromJSON LiveBroadcastTopicType where
-    parseJSON = parseJSONText "LiveBroadcastTopicType"
-
-instance ToJSON LiveBroadcastTopicType where
     toJSON = toJSONText
 
 -- | The videoDuration parameter filters video search results based on their
@@ -2583,6 +2604,40 @@ instance FromJSON LiveStreamHealthStatusStatus where
 instance ToJSON LiveStreamHealthStatusStatus where
     toJSON = toJSONText
 
+-- | If both this and enable_low_latency are set, they must match.
+-- LATENCY_NORMAL should match enable_low_latency=false LATENCY_LOW should
+-- match enable_low_latency=true LATENCY_ULTRA_LOW should have
+-- enable_low_latency omitted.
+data LiveBroadcastContentDetailsLatencyPreference
+    = LBCDLPLow
+      -- ^ @low@
+    | LBCDLPNormal
+      -- ^ @normal@
+    | LBCDLPUltraLow
+      -- ^ @ultraLow@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable LiveBroadcastContentDetailsLatencyPreference
+
+instance FromHttpApiData LiveBroadcastContentDetailsLatencyPreference where
+    parseQueryParam = \case
+        "low" -> Right LBCDLPLow
+        "normal" -> Right LBCDLPNormal
+        "ultraLow" -> Right LBCDLPUltraLow
+        x -> Left ("Unable to parse LiveBroadcastContentDetailsLatencyPreference from: " <> x)
+
+instance ToHttpApiData LiveBroadcastContentDetailsLatencyPreference where
+    toQueryParam = \case
+        LBCDLPLow -> "low"
+        LBCDLPNormal -> "normal"
+        LBCDLPUltraLow -> "ultraLow"
+
+instance FromJSON LiveBroadcastContentDetailsLatencyPreference where
+    parseJSON = parseJSONText "LiveBroadcastContentDetailsLatencyPreference"
+
+instance ToJSON LiveBroadcastContentDetailsLatencyPreference where
+    toJSON = toJSONText
+
 data VideoRatingRating
     = VRRDislike
       -- ^ @dislike@
@@ -2624,6 +2679,8 @@ data VideoSuggestionsProcessingWarningsItem
       -- ^ @inconsistentResolution@
     | ProblematicAudioCodec
       -- ^ @problematicAudioCodec@
+    | ProblematicHdrLookupTable
+      -- ^ @problematicHdrLookupTable@
     | ProblematicVideoCodec
       -- ^ @problematicVideoCodec@
     | UnknownAudioCodec
@@ -2632,6 +2689,14 @@ data VideoSuggestionsProcessingWarningsItem
       -- ^ @unknownContainer@
     | UnknownVideoCodec
       -- ^ @unknownVideoCodec@
+    | UnsupportedHdrColorMetadata
+      -- ^ @unsupportedHdrColorMetadata@
+    | UnsupportedHdrPixelFormat
+      -- ^ @unsupportedHdrPixelFormat@
+    | UnsupportedSphericalProjectionType
+      -- ^ @unsupportedSphericalProjectionType@
+    | UnsupportedVrStereoMode
+      -- ^ @unsupportedVrStereoMode@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VideoSuggestionsProcessingWarningsItem
@@ -2641,10 +2706,15 @@ instance FromHttpApiData VideoSuggestionsProcessingWarningsItem where
         "hasEditlist" -> Right HasEditList
         "inconsistentResolution" -> Right InconsistentResolution
         "problematicAudioCodec" -> Right ProblematicAudioCodec
+        "problematicHdrLookupTable" -> Right ProblematicHdrLookupTable
         "problematicVideoCodec" -> Right ProblematicVideoCodec
         "unknownAudioCodec" -> Right UnknownAudioCodec
         "unknownContainer" -> Right UnknownContainer
         "unknownVideoCodec" -> Right UnknownVideoCodec
+        "unsupportedHdrColorMetadata" -> Right UnsupportedHdrColorMetadata
+        "unsupportedHdrPixelFormat" -> Right UnsupportedHdrPixelFormat
+        "unsupportedSphericalProjectionType" -> Right UnsupportedSphericalProjectionType
+        "unsupportedVrStereoMode" -> Right UnsupportedVrStereoMode
         x -> Left ("Unable to parse VideoSuggestionsProcessingWarningsItem from: " <> x)
 
 instance ToHttpApiData VideoSuggestionsProcessingWarningsItem where
@@ -2652,10 +2722,15 @@ instance ToHttpApiData VideoSuggestionsProcessingWarningsItem where
         HasEditList -> "hasEditlist"
         InconsistentResolution -> "inconsistentResolution"
         ProblematicAudioCodec -> "problematicAudioCodec"
+        ProblematicHdrLookupTable -> "problematicHdrLookupTable"
         ProblematicVideoCodec -> "problematicVideoCodec"
         UnknownAudioCodec -> "unknownAudioCodec"
         UnknownContainer -> "unknownContainer"
         UnknownVideoCodec -> "unknownVideoCodec"
+        UnsupportedHdrColorMetadata -> "unsupportedHdrColorMetadata"
+        UnsupportedHdrPixelFormat -> "unsupportedHdrPixelFormat"
+        UnsupportedSphericalProjectionType -> "unsupportedSphericalProjectionType"
+        UnsupportedVrStereoMode -> "unsupportedVrStereoMode"
 
 instance FromJSON VideoSuggestionsProcessingWarningsItem where
     parseJSON = parseJSONText "VideoSuggestionsProcessingWarningsItem"
@@ -3250,6 +3325,8 @@ instance ToJSON VideosRateRating where
 data LiveBroadcastContentDetailsProjection
     = LBCDP360
       -- ^ @360@
+    | LBCDPMesh
+      -- ^ @mesh@
     | LBCDPRectangular
       -- ^ @rectangular@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -3259,12 +3336,14 @@ instance Hashable LiveBroadcastContentDetailsProjection
 instance FromHttpApiData LiveBroadcastContentDetailsProjection where
     parseQueryParam = \case
         "360" -> Right LBCDP360
+        "mesh" -> Right LBCDPMesh
         "rectangular" -> Right LBCDPRectangular
         x -> Left ("Unable to parse LiveBroadcastContentDetailsProjection from: " <> x)
 
 instance ToHttpApiData LiveBroadcastContentDetailsProjection where
     toQueryParam = \case
         LBCDP360 -> "360"
+        LBCDPMesh -> "mesh"
         LBCDPRectangular -> "rectangular"
 
 instance FromJSON LiveBroadcastContentDetailsProjection where
@@ -3687,6 +3766,8 @@ data ContentRatingOflcRating
       -- ^ @oflcRp13@
     | OFLCRP16
       -- ^ @oflcRp16@
+    | OFLCRP18
+      -- ^ @oflcRp18@
     | OflcUnrated
       -- ^ @oflcUnrated@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -3704,6 +3785,7 @@ instance FromHttpApiData ContentRatingOflcRating where
         "oflcR18" -> Right OFLCR18
         "oflcRp13" -> Right OFLCRP13
         "oflcRp16" -> Right OFLCRP16
+        "oflcRp18" -> Right OFLCRP18
         "oflcUnrated" -> Right OflcUnrated
         x -> Left ("Unable to parse ContentRatingOflcRating from: " <> x)
 
@@ -3718,6 +3800,7 @@ instance ToHttpApiData ContentRatingOflcRating where
         OFLCR18 -> "oflcR18"
         OFLCRP13 -> "oflcRp13"
         OFLCRP16 -> "oflcRp16"
+        OFLCRP18 -> "oflcRp18"
         OflcUnrated -> "oflcUnrated"
 
 instance FromJSON ContentRatingOflcRating where
@@ -3907,6 +3990,36 @@ instance FromJSON ContentRatingGrfilmRating where
 instance ToJSON ContentRatingGrfilmRating where
     toJSON = toJSONText
 
+data LiveBroadcastContentDetailsStereoLayout
+    = LeftRight
+      -- ^ @left_right@
+    | Mono
+      -- ^ @mono@
+    | TopBottom
+      -- ^ @top_bottom@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable LiveBroadcastContentDetailsStereoLayout
+
+instance FromHttpApiData LiveBroadcastContentDetailsStereoLayout where
+    parseQueryParam = \case
+        "left_right" -> Right LeftRight
+        "mono" -> Right Mono
+        "top_bottom" -> Right TopBottom
+        x -> Left ("Unable to parse LiveBroadcastContentDetailsStereoLayout from: " <> x)
+
+instance ToHttpApiData LiveBroadcastContentDetailsStereoLayout where
+    toQueryParam = \case
+        LeftRight -> "left_right"
+        Mono -> "mono"
+        TopBottom -> "top_bottom"
+
+instance FromJSON LiveBroadcastContentDetailsStereoLayout where
+    parseJSON = parseJSONText "LiveBroadcastContentDetailsStereoLayout"
+
+instance ToJSON LiveBroadcastContentDetailsStereoLayout where
+    toJSON = toJSONText
+
 -- | The order parameter specifies the order in which the API response should
 -- list comment threads. Valid values are: - time - Comment threads are
 -- ordered by time. This is the default behavior. - relevance - Comment
@@ -3944,6 +4057,8 @@ instance ToJSON CommentThreadsListOrder where
 data ContentRatingIlfilmRating
     = ILFILM12
       -- ^ @ilfilm12@
+    | ILFILM14
+      -- ^ @ilfilm14@
     | ILFILM16
       -- ^ @ilfilm16@
     | ILFILM18
@@ -3959,6 +4074,7 @@ instance Hashable ContentRatingIlfilmRating
 instance FromHttpApiData ContentRatingIlfilmRating where
     parseQueryParam = \case
         "ilfilm12" -> Right ILFILM12
+        "ilfilm14" -> Right ILFILM14
         "ilfilm16" -> Right ILFILM16
         "ilfilm18" -> Right ILFILM18
         "ilfilmAa" -> Right IlfilmAa
@@ -3968,6 +4084,7 @@ instance FromHttpApiData ContentRatingIlfilmRating where
 instance ToHttpApiData ContentRatingIlfilmRating where
     toQueryParam = \case
         ILFILM12 -> "ilfilm12"
+        ILFILM14 -> "ilfilm14"
         ILFILM16 -> "ilfilm16"
         ILFILM18 -> "ilfilm18"
         IlfilmAa -> "ilfilmAa"
@@ -4324,6 +4441,8 @@ data PlayListItemStatusPrivacyStatus
       -- ^ @public@
     | PLISPSUnListed
       -- ^ @unlisted@
+    | PLISPSUnListedNew
+      -- ^ @unlisted_new@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PlayListItemStatusPrivacyStatus
@@ -4333,6 +4452,7 @@ instance FromHttpApiData PlayListItemStatusPrivacyStatus where
         "private" -> Right PLISPSPrivate
         "public" -> Right PLISPSPublic
         "unlisted" -> Right PLISPSUnListed
+        "unlisted_new" -> Right PLISPSUnListedNew
         x -> Left ("Unable to parse PlayListItemStatusPrivacyStatus from: " <> x)
 
 instance ToHttpApiData PlayListItemStatusPrivacyStatus where
@@ -4340,6 +4460,7 @@ instance ToHttpApiData PlayListItemStatusPrivacyStatus where
         PLISPSPrivate -> "private"
         PLISPSPublic -> "public"
         PLISPSUnListed -> "unlisted"
+        PLISPSUnListedNew -> "unlisted_new"
 
 instance FromJSON PlayListItemStatusPrivacyStatus where
     parseJSON = parseJSONText "PlayListItemStatusPrivacyStatus"
@@ -4780,6 +4901,8 @@ data PlayListStatusPrivacyStatus
       -- ^ @public@
     | PLSPSUnListed
       -- ^ @unlisted@
+    | PLSPSUnListedNew
+      -- ^ @unlisted_new@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PlayListStatusPrivacyStatus
@@ -4789,6 +4912,7 @@ instance FromHttpApiData PlayListStatusPrivacyStatus where
         "private" -> Right PLSPSPrivate
         "public" -> Right PLSPSPublic
         "unlisted" -> Right PLSPSUnListed
+        "unlisted_new" -> Right PLSPSUnListedNew
         x -> Left ("Unable to parse PlayListStatusPrivacyStatus from: " <> x)
 
 instance ToHttpApiData PlayListStatusPrivacyStatus where
@@ -4796,6 +4920,7 @@ instance ToHttpApiData PlayListStatusPrivacyStatus where
         PLSPSPrivate -> "private"
         PLSPSPublic -> "public"
         PLSPSUnListed -> "unlisted"
+        PLSPSUnListedNew -> "unlisted_new"
 
 instance FromJSON PlayListStatusPrivacyStatus where
     parseJSON = parseJSONText "PlayListStatusPrivacyStatus"
@@ -4922,32 +5047,40 @@ instance ToJSON ContentRatingEirinRating where
     toJSON = toJSONText
 
 data VideoSuggestionsProcessingHintsItem
-    = NonStreamableMov
+    = HdrVideo
+      -- ^ @hdrVideo@
+    | NonStreamableMov
       -- ^ @nonStreamableMov@
-    | ProcsesingHintSpatialAudio
-      -- ^ @procsesingHintSpatialAudio@
-    | ProcsesingHintSphericalVideo
-      -- ^ @procsesingHintSphericalVideo@
     | SendBestQualityVideo
       -- ^ @sendBestQualityVideo@
+    | SpatialAudio
+      -- ^ @spatialAudio@
+    | SphericalVideo
+      -- ^ @sphericalVideo@
+    | VrVideo
+      -- ^ @vrVideo@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VideoSuggestionsProcessingHintsItem
 
 instance FromHttpApiData VideoSuggestionsProcessingHintsItem where
     parseQueryParam = \case
+        "hdrVideo" -> Right HdrVideo
         "nonStreamableMov" -> Right NonStreamableMov
-        "procsesingHintSpatialAudio" -> Right ProcsesingHintSpatialAudio
-        "procsesingHintSphericalVideo" -> Right ProcsesingHintSphericalVideo
         "sendBestQualityVideo" -> Right SendBestQualityVideo
+        "spatialAudio" -> Right SpatialAudio
+        "sphericalVideo" -> Right SphericalVideo
+        "vrVideo" -> Right VrVideo
         x -> Left ("Unable to parse VideoSuggestionsProcessingHintsItem from: " <> x)
 
 instance ToHttpApiData VideoSuggestionsProcessingHintsItem where
     toQueryParam = \case
+        HdrVideo -> "hdrVideo"
         NonStreamableMov -> "nonStreamableMov"
-        ProcsesingHintSpatialAudio -> "procsesingHintSpatialAudio"
-        ProcsesingHintSphericalVideo -> "procsesingHintSphericalVideo"
         SendBestQualityVideo -> "sendBestQualityVideo"
+        SpatialAudio -> "spatialAudio"
+        SphericalVideo -> "sphericalVideo"
+        VrVideo -> "vrVideo"
 
 instance FromJSON VideoSuggestionsProcessingHintsItem where
     parseJSON = parseJSONText "VideoSuggestionsProcessingHintsItem"
@@ -5234,6 +5367,45 @@ instance FromJSON SearchListEventType where
 instance ToJSON SearchListEventType where
     toJSON = toJSONText
 
+-- | The rating system for MENA countries, a clone of MPAA. It is needed to
+data ContentRatingMenaMpaaRating
+    = MenaMpaaG
+      -- ^ @menaMpaaG@
+    | MenaMpaaPg
+      -- ^ @menaMpaaPg@
+    | MENAMPAAPG13
+      -- ^ @menaMpaaPg13@
+    | MenaMpaaR
+      -- ^ @menaMpaaR@
+    | MenaMpaaUnrated
+      -- ^ @menaMpaaUnrated@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ContentRatingMenaMpaaRating
+
+instance FromHttpApiData ContentRatingMenaMpaaRating where
+    parseQueryParam = \case
+        "menaMpaaG" -> Right MenaMpaaG
+        "menaMpaaPg" -> Right MenaMpaaPg
+        "menaMpaaPg13" -> Right MENAMPAAPG13
+        "menaMpaaR" -> Right MenaMpaaR
+        "menaMpaaUnrated" -> Right MenaMpaaUnrated
+        x -> Left ("Unable to parse ContentRatingMenaMpaaRating from: " <> x)
+
+instance ToHttpApiData ContentRatingMenaMpaaRating where
+    toQueryParam = \case
+        MenaMpaaG -> "menaMpaaG"
+        MenaMpaaPg -> "menaMpaaPg"
+        MENAMPAAPG13 -> "menaMpaaPg13"
+        MenaMpaaR -> "menaMpaaR"
+        MenaMpaaUnrated -> "menaMpaaUnrated"
+
+instance FromJSON ContentRatingMenaMpaaRating where
+    parseJSON = parseJSONText "ContentRatingMenaMpaaRating"
+
+instance ToJSON ContentRatingMenaMpaaRating where
+    toJSON = toJSONText
+
 -- | The reason that the resource is recommended to the user.
 data ActivityContentDetailsRecommendationReason
     = ACDRRUnspecified
@@ -5329,6 +5501,8 @@ data VideoSuggestionsProcessingErrorsItem
       -- ^ @notAVideoFile@
     | ProjectFile
       -- ^ @projectFile@
+    | UnsupportedSpatialAudioLayout
+      -- ^ @unsupportedSpatialAudioLayout@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VideoSuggestionsProcessingErrorsItem
@@ -5341,6 +5515,7 @@ instance FromHttpApiData VideoSuggestionsProcessingErrorsItem where
         "imageFile" -> Right ImageFile
         "notAVideoFile" -> Right NotAVideoFile
         "projectFile" -> Right ProjectFile
+        "unsupportedSpatialAudioLayout" -> Right UnsupportedSpatialAudioLayout
         x -> Left ("Unable to parse VideoSuggestionsProcessingErrorsItem from: " <> x)
 
 instance ToHttpApiData VideoSuggestionsProcessingErrorsItem where
@@ -5351,6 +5526,7 @@ instance ToHttpApiData VideoSuggestionsProcessingErrorsItem where
         ImageFile -> "imageFile"
         NotAVideoFile -> "notAVideoFile"
         ProjectFile -> "projectFile"
+        UnsupportedSpatialAudioLayout -> "unsupportedSpatialAudioLayout"
 
 instance FromJSON VideoSuggestionsProcessingErrorsItem where
     parseJSON = parseJSONText "VideoSuggestionsProcessingErrorsItem"
@@ -5505,6 +5681,8 @@ data CdnSettingsFrameRate
       -- ^ @30fps@
     | CSFR60fps
       -- ^ @60fps@
+    | CSFRVariable
+      -- ^ @variable@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CdnSettingsFrameRate
@@ -5513,12 +5691,14 @@ instance FromHttpApiData CdnSettingsFrameRate where
     parseQueryParam = \case
         "30fps" -> Right CSFR30fps
         "60fps" -> Right CSFR60fps
+        "variable" -> Right CSFRVariable
         x -> Left ("Unable to parse CdnSettingsFrameRate from: " <> x)
 
 instance ToHttpApiData CdnSettingsFrameRate where
     toQueryParam = \case
         CSFR30fps -> "30fps"
         CSFR60fps -> "60fps"
+        CSFRVariable -> "variable"
 
 instance FromJSON CdnSettingsFrameRate where
     parseJSON = parseJSONText "CdnSettingsFrameRate"
@@ -5584,6 +5764,8 @@ data LiveStreamConfigurationIssueType
       -- ^ @videoCodec@
     | VideoCodecMismatch
       -- ^ @videoCodecMismatch@
+    | VideoIngestionFasterThanRealtime
+      -- ^ @videoIngestionFasterThanRealtime@
     | VideoIngestionStarved
       -- ^ @videoIngestionStarved@
     | VideoInterlaceMismatch
@@ -5628,6 +5810,7 @@ instance FromHttpApiData LiveStreamConfigurationIssueType where
         "videoBitrateMismatch" -> Right VideoBitrateMismatch
         "videoCodec" -> Right VideoCodec
         "videoCodecMismatch" -> Right VideoCodecMismatch
+        "videoIngestionFasterThanRealtime" -> Right VideoIngestionFasterThanRealtime
         "videoIngestionStarved" -> Right VideoIngestionStarved
         "videoInterlaceMismatch" -> Right VideoInterlaceMismatch
         "videoProfileMismatch" -> Right VideoProFileMismatch
@@ -5665,6 +5848,7 @@ instance ToHttpApiData LiveStreamConfigurationIssueType where
         VideoBitrateMismatch -> "videoBitrateMismatch"
         VideoCodec -> "videoCodec"
         VideoCodecMismatch -> "videoCodecMismatch"
+        VideoIngestionFasterThanRealtime -> "videoIngestionFasterThanRealtime"
         VideoIngestionStarved -> "videoIngestionStarved"
         VideoInterlaceMismatch -> "videoInterlaceMismatch"
         VideoProFileMismatch -> "videoProfileMismatch"
@@ -6009,6 +6193,8 @@ data LiveChatMessageSnippetType
       -- ^ @sponsorOnlyModeEndedEvent@
     | LCMSTSponsorOnlyModeStartedEvent
       -- ^ @sponsorOnlyModeStartedEvent@
+    | LCMSTSuperChatEvent
+      -- ^ @superChatEvent@
     | LCMSTTextMessageEvent
       -- ^ @textMessageEvent@
     | LCMSTTombstone
@@ -6032,6 +6218,7 @@ instance FromHttpApiData LiveChatMessageSnippetType where
         "pollVotedEvent" -> Right LCMSTPollVotedEvent
         "sponsorOnlyModeEndedEvent" -> Right LCMSTSponsorOnlyModeEndedEvent
         "sponsorOnlyModeStartedEvent" -> Right LCMSTSponsorOnlyModeStartedEvent
+        "superChatEvent" -> Right LCMSTSuperChatEvent
         "textMessageEvent" -> Right LCMSTTextMessageEvent
         "tombstone" -> Right LCMSTTombstone
         "userBannedEvent" -> Right LCMSTUserBannedEvent
@@ -6050,6 +6237,7 @@ instance ToHttpApiData LiveChatMessageSnippetType where
         LCMSTPollVotedEvent -> "pollVotedEvent"
         LCMSTSponsorOnlyModeEndedEvent -> "sponsorOnlyModeEndedEvent"
         LCMSTSponsorOnlyModeStartedEvent -> "sponsorOnlyModeStartedEvent"
+        LCMSTSuperChatEvent -> "superChatEvent"
         LCMSTTextMessageEvent -> "textMessageEvent"
         LCMSTTombstone -> "tombstone"
         LCMSTUserBannedEvent -> "userBannedEvent"

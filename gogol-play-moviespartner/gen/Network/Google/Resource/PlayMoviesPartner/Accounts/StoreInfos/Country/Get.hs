@@ -60,7 +60,7 @@ type AccountsStoreInfosCountryGetResource =
              Capture "videoId" Text :>
                "country" :>
                  Capture "country" Text :>
-                   QueryParam "$.xgafv" Text :>
+                   QueryParam "$.xgafv" Xgafv :>
                      QueryParam "upload_protocol" Text :>
                        QueryParam "pp" Bool :>
                          QueryParam "access_token" Text :>
@@ -76,7 +76,7 @@ type AccountsStoreInfosCountryGetResource =
 --
 -- /See:/ 'accountsStoreInfosCountryGet' smart constructor.
 data AccountsStoreInfosCountryGet = AccountsStoreInfosCountryGet'
-    { _asicgXgafv          :: !(Maybe Text)
+    { _asicgXgafv          :: !(Maybe Xgafv)
     , _asicgUploadProtocol :: !(Maybe Text)
     , _asicgCountry        :: !Text
     , _asicgPp             :: !Bool
@@ -131,7 +131,7 @@ accountsStoreInfosCountryGet pAsicgCountry_ pAsicgVideoId_ pAsicgAccountId_ =
     }
 
 -- | V1 error format.
-asicgXgafv :: Lens' AccountsStoreInfosCountryGet (Maybe Text)
+asicgXgafv :: Lens' AccountsStoreInfosCountryGet (Maybe Xgafv)
 asicgXgafv
   = lens _asicgXgafv (\ s a -> s{_asicgXgafv = a})
 

@@ -47,6 +47,7 @@ library
         , Network.Google.Resource.BigQuery.Jobs.Insert
         , Network.Google.Resource.BigQuery.Jobs.List
         , Network.Google.Resource.BigQuery.Jobs.Query
+        , Network.Google.Resource.BigQuery.Projects.GetServiceAccount
         , Network.Google.Resource.BigQuery.Projects.List
         , Network.Google.Resource.BigQuery.TableData.InsertAll
         , Network.Google.Resource.BigQuery.TableData.List

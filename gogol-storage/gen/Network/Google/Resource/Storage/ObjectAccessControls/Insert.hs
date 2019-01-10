@@ -35,6 +35,7 @@ module Network.Google.Resource.Storage.ObjectAccessControls.Insert
     -- * Request Lenses
     , oaciBucket
     , oaciPayload
+    , oaciUserProject
     , oaciObject
     , oaciGeneration
     ) where
@@ -52,19 +53,21 @@ type ObjectAccessControlsInsertResource =
              "o" :>
                Capture "object" Text :>
                  "acl" :>
-                   QueryParam "generation" (Textual Int64) :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] ObjectAccessControl :>
-                         Post '[JSON] ObjectAccessControl
+                   QueryParam "userProject" Text :>
+                     QueryParam "generation" (Textual Int64) :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] ObjectAccessControl :>
+                           Post '[JSON] ObjectAccessControl
 
 -- | Creates a new ACL entry on the specified object.
 --
 -- /See:/ 'objectAccessControlsInsert' smart constructor.
 data ObjectAccessControlsInsert = ObjectAccessControlsInsert'
-    { _oaciBucket     :: !Text
-    , _oaciPayload    :: !ObjectAccessControl
-    , _oaciObject     :: !Text
-    , _oaciGeneration :: !(Maybe (Textual Int64))
+    { _oaciBucket      :: !Text
+    , _oaciPayload     :: !ObjectAccessControl
+    , _oaciUserProject :: !(Maybe Text)
+    , _oaciObject      :: !Text
+    , _oaciGeneration  :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectAccessControlsInsert' with the minimum fields required to make a request.
@@ -74,6 +77,8 @@ data ObjectAccessControlsInsert = ObjectAccessControlsInsert'
 -- * 'oaciBucket'
 --
 -- * 'oaciPayload'
+--
+-- * 'oaciUserProject'
 --
 -- * 'oaciObject'
 --
@@ -87,6 +92,7 @@ objectAccessControlsInsert pOaciBucket_ pOaciPayload_ pOaciObject_ =
     ObjectAccessControlsInsert'
     { _oaciBucket = pOaciBucket_
     , _oaciPayload = pOaciPayload_
+    , _oaciUserProject = Nothing
     , _oaciObject = pOaciObject_
     , _oaciGeneration = Nothing
     }
@@ -100,6 +106,13 @@ oaciBucket
 oaciPayload :: Lens' ObjectAccessControlsInsert ObjectAccessControl
 oaciPayload
   = lens _oaciPayload (\ s a -> s{_oaciPayload = a})
+
+-- | The project to be billed for this request. Required for Requester Pays
+-- buckets.
+oaciUserProject :: Lens' ObjectAccessControlsInsert (Maybe Text)
+oaciUserProject
+  = lens _oaciUserProject
+      (\ s a -> s{_oaciUserProject = a})
 
 -- | Name of the object. For information about how to URL encode object names
 -- to be path safe, see Encoding URI Path Parts.
@@ -123,7 +136,8 @@ instance GoogleRequest ObjectAccessControlsInsert
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/devstorage.full_control"]
         requestClient ObjectAccessControlsInsert'{..}
-          = go _oaciBucket _oaciObject _oaciGeneration
+          = go _oaciBucket _oaciObject _oaciUserProject
+              _oaciGeneration
               (Just AltJSON)
               _oaciPayload
               storageService

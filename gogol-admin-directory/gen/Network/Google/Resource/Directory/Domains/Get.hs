@@ -77,7 +77,7 @@ domainsGet pDgCustomer_ pDgDomainName_ =
     , _dgDomainName = pDgDomainName_
     }
 
--- | Immutable id of the Google Apps account.
+-- | Immutable ID of the G Suite account.
 dgCustomer :: Lens' DomainsGet Text
 dgCustomer
   = lens _dgCustomer (\ s a -> s{_dgCustomer = a})

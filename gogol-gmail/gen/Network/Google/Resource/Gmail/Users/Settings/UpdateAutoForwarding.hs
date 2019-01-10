@@ -22,7 +22,8 @@
 --
 -- Updates the auto-forwarding setting for the specified account. A
 -- verified forwarding address must be specified when auto-forwarding is
--- enabled.
+-- enabled. This method is only available to service account clients that
+-- have been delegated domain-wide authority.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @gmail.users.settings.updateAutoForwarding@.
 module Network.Google.Resource.Gmail.Users.Settings.UpdateAutoForwarding
@@ -57,7 +58,8 @@ type UsersSettingsUpdateAutoForwardingResource =
 
 -- | Updates the auto-forwarding setting for the specified account. A
 -- verified forwarding address must be specified when auto-forwarding is
--- enabled.
+-- enabled. This method is only available to service account clients that
+-- have been delegated domain-wide authority.
 --
 -- /See:/ 'usersSettingsUpdateAutoForwarding' smart constructor.
 data UsersSettingsUpdateAutoForwarding = UsersSettingsUpdateAutoForwarding'

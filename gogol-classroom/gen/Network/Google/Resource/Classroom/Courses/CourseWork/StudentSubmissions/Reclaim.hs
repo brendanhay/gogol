@@ -22,7 +22,7 @@
 --
 -- Reclaims a student submission on behalf of the student that owns it.
 -- Reclaiming a student submission transfers ownership of attached Drive
--- files to the student and update the submission state. Only the student
+-- files to the student and updates the submission state. Only the student
 -- that owns the requested student submission may call this method, and
 -- only for a student submission that has been turned in. This request must
 -- be made by the Developer Console project of the [OAuth client
@@ -47,17 +47,15 @@ module Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.R
     , CoursesCourseWorkStudentSubmissionsReclaim
 
     -- * Request Lenses
-    , couXgafv
-    , couUploadProtocol
-    , couPp
-    , couCourseId
-    , couAccessToken
-    , couUploadType
-    , couPayload
-    , couBearerToken
-    , couId
-    , couCallback
-    , couCourseWorkId
+    , ccwssrcXgafv
+    , ccwssrcUploadProtocol
+    , ccwssrcCourseId
+    , ccwssrcAccessToken
+    , ccwssrcUploadType
+    , ccwssrcPayload
+    , ccwssrcId
+    , ccwssrcCallback
+    , ccwssrcCourseWorkId
     ) where
 
 import           Network.Google.Classroom.Types
@@ -74,21 +72,18 @@ type CoursesCourseWorkStudentSubmissionsReclaimResource
              Capture "courseWorkId" Text :>
                "studentSubmissions" :>
                  CaptureMode "id" "reclaim" Text :>
-                   QueryParam "$.xgafv" Text :>
+                   QueryParam "$.xgafv" Xgafv :>
                      QueryParam "upload_protocol" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "access_token" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "bearer_token" Text :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" AltJSON :>
-                                   ReqBody '[JSON]
-                                     ReclaimStudentSubmissionRequest
-                                     :> Post '[JSON] Empty
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] ReclaimStudentSubmissionRequest
+                                 :> Post '[JSON] Empty
 
 -- | Reclaims a student submission on behalf of the student that owns it.
 -- Reclaiming a student submission transfers ownership of attached Drive
--- files to the student and update the submission state. Only the student
+-- files to the student and updates the submission state. Only the student
 -- that owns the requested student submission may call this method, and
 -- only for a student submission that has been turned in. This request must
 -- be made by the Developer Console project of the [OAuth client
@@ -104,122 +99,109 @@ type CoursesCourseWorkStudentSubmissionsReclaimResource
 --
 -- /See:/ 'coursesCourseWorkStudentSubmissionsReclaim' smart constructor.
 data CoursesCourseWorkStudentSubmissionsReclaim = CoursesCourseWorkStudentSubmissionsReclaim'
-    { _couXgafv          :: !(Maybe Text)
-    , _couUploadProtocol :: !(Maybe Text)
-    , _couPp             :: !Bool
-    , _couCourseId       :: !Text
-    , _couAccessToken    :: !(Maybe Text)
-    , _couUploadType     :: !(Maybe Text)
-    , _couPayload        :: !ReclaimStudentSubmissionRequest
-    , _couBearerToken    :: !(Maybe Text)
-    , _couId             :: !Text
-    , _couCallback       :: !(Maybe Text)
-    , _couCourseWorkId   :: !Text
+    { _ccwssrcXgafv          :: !(Maybe Xgafv)
+    , _ccwssrcUploadProtocol :: !(Maybe Text)
+    , _ccwssrcCourseId       :: !Text
+    , _ccwssrcAccessToken    :: !(Maybe Text)
+    , _ccwssrcUploadType     :: !(Maybe Text)
+    , _ccwssrcPayload        :: !ReclaimStudentSubmissionRequest
+    , _ccwssrcId             :: !Text
+    , _ccwssrcCallback       :: !(Maybe Text)
+    , _ccwssrcCourseWorkId   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CoursesCourseWorkStudentSubmissionsReclaim' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'couXgafv'
+-- * 'ccwssrcXgafv'
 --
--- * 'couUploadProtocol'
+-- * 'ccwssrcUploadProtocol'
 --
--- * 'couPp'
+-- * 'ccwssrcCourseId'
 --
--- * 'couCourseId'
+-- * 'ccwssrcAccessToken'
 --
--- * 'couAccessToken'
+-- * 'ccwssrcUploadType'
 --
--- * 'couUploadType'
+-- * 'ccwssrcPayload'
 --
--- * 'couPayload'
+-- * 'ccwssrcId'
 --
--- * 'couBearerToken'
+-- * 'ccwssrcCallback'
 --
--- * 'couId'
---
--- * 'couCallback'
---
--- * 'couCourseWorkId'
+-- * 'ccwssrcCourseWorkId'
 coursesCourseWorkStudentSubmissionsReclaim
-    :: Text -- ^ 'couCourseId'
-    -> ReclaimStudentSubmissionRequest -- ^ 'couPayload'
-    -> Text -- ^ 'couId'
-    -> Text -- ^ 'couCourseWorkId'
+    :: Text -- ^ 'ccwssrcCourseId'
+    -> ReclaimStudentSubmissionRequest -- ^ 'ccwssrcPayload'
+    -> Text -- ^ 'ccwssrcId'
+    -> Text -- ^ 'ccwssrcCourseWorkId'
     -> CoursesCourseWorkStudentSubmissionsReclaim
-coursesCourseWorkStudentSubmissionsReclaim pCouCourseId_ pCouPayload_ pCouId_ pCouCourseWorkId_ =
+coursesCourseWorkStudentSubmissionsReclaim pCcwssrcCourseId_ pCcwssrcPayload_ pCcwssrcId_ pCcwssrcCourseWorkId_ =
     CoursesCourseWorkStudentSubmissionsReclaim'
-    { _couXgafv = Nothing
-    , _couUploadProtocol = Nothing
-    , _couPp = True
-    , _couCourseId = pCouCourseId_
-    , _couAccessToken = Nothing
-    , _couUploadType = Nothing
-    , _couPayload = pCouPayload_
-    , _couBearerToken = Nothing
-    , _couId = pCouId_
-    , _couCallback = Nothing
-    , _couCourseWorkId = pCouCourseWorkId_
+    { _ccwssrcXgafv = Nothing
+    , _ccwssrcUploadProtocol = Nothing
+    , _ccwssrcCourseId = pCcwssrcCourseId_
+    , _ccwssrcAccessToken = Nothing
+    , _ccwssrcUploadType = Nothing
+    , _ccwssrcPayload = pCcwssrcPayload_
+    , _ccwssrcId = pCcwssrcId_
+    , _ccwssrcCallback = Nothing
+    , _ccwssrcCourseWorkId = pCcwssrcCourseWorkId_
     }
 
 -- | V1 error format.
-couXgafv :: Lens' CoursesCourseWorkStudentSubmissionsReclaim (Maybe Text)
-couXgafv = lens _couXgafv (\ s a -> s{_couXgafv = a})
+ccwssrcXgafv :: Lens' CoursesCourseWorkStudentSubmissionsReclaim (Maybe Xgafv)
+ccwssrcXgafv
+  = lens _ccwssrcXgafv (\ s a -> s{_ccwssrcXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-couUploadProtocol :: Lens' CoursesCourseWorkStudentSubmissionsReclaim (Maybe Text)
-couUploadProtocol
-  = lens _couUploadProtocol
-      (\ s a -> s{_couUploadProtocol = a})
-
--- | Pretty-print response.
-couPp :: Lens' CoursesCourseWorkStudentSubmissionsReclaim Bool
-couPp = lens _couPp (\ s a -> s{_couPp = a})
+ccwssrcUploadProtocol :: Lens' CoursesCourseWorkStudentSubmissionsReclaim (Maybe Text)
+ccwssrcUploadProtocol
+  = lens _ccwssrcUploadProtocol
+      (\ s a -> s{_ccwssrcUploadProtocol = a})
 
 -- | Identifier of the course. This identifier can be either the
 -- Classroom-assigned identifier or an alias.
-couCourseId :: Lens' CoursesCourseWorkStudentSubmissionsReclaim Text
-couCourseId
-  = lens _couCourseId (\ s a -> s{_couCourseId = a})
+ccwssrcCourseId :: Lens' CoursesCourseWorkStudentSubmissionsReclaim Text
+ccwssrcCourseId
+  = lens _ccwssrcCourseId
+      (\ s a -> s{_ccwssrcCourseId = a})
 
 -- | OAuth access token.
-couAccessToken :: Lens' CoursesCourseWorkStudentSubmissionsReclaim (Maybe Text)
-couAccessToken
-  = lens _couAccessToken
-      (\ s a -> s{_couAccessToken = a})
+ccwssrcAccessToken :: Lens' CoursesCourseWorkStudentSubmissionsReclaim (Maybe Text)
+ccwssrcAccessToken
+  = lens _ccwssrcAccessToken
+      (\ s a -> s{_ccwssrcAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-couUploadType :: Lens' CoursesCourseWorkStudentSubmissionsReclaim (Maybe Text)
-couUploadType
-  = lens _couUploadType
-      (\ s a -> s{_couUploadType = a})
+ccwssrcUploadType :: Lens' CoursesCourseWorkStudentSubmissionsReclaim (Maybe Text)
+ccwssrcUploadType
+  = lens _ccwssrcUploadType
+      (\ s a -> s{_ccwssrcUploadType = a})
 
 -- | Multipart request metadata.
-couPayload :: Lens' CoursesCourseWorkStudentSubmissionsReclaim ReclaimStudentSubmissionRequest
-couPayload
-  = lens _couPayload (\ s a -> s{_couPayload = a})
-
--- | OAuth bearer token.
-couBearerToken :: Lens' CoursesCourseWorkStudentSubmissionsReclaim (Maybe Text)
-couBearerToken
-  = lens _couBearerToken
-      (\ s a -> s{_couBearerToken = a})
+ccwssrcPayload :: Lens' CoursesCourseWorkStudentSubmissionsReclaim ReclaimStudentSubmissionRequest
+ccwssrcPayload
+  = lens _ccwssrcPayload
+      (\ s a -> s{_ccwssrcPayload = a})
 
 -- | Identifier of the student submission.
-couId :: Lens' CoursesCourseWorkStudentSubmissionsReclaim Text
-couId = lens _couId (\ s a -> s{_couId = a})
+ccwssrcId :: Lens' CoursesCourseWorkStudentSubmissionsReclaim Text
+ccwssrcId
+  = lens _ccwssrcId (\ s a -> s{_ccwssrcId = a})
 
 -- | JSONP
-couCallback :: Lens' CoursesCourseWorkStudentSubmissionsReclaim (Maybe Text)
-couCallback
-  = lens _couCallback (\ s a -> s{_couCallback = a})
+ccwssrcCallback :: Lens' CoursesCourseWorkStudentSubmissionsReclaim (Maybe Text)
+ccwssrcCallback
+  = lens _ccwssrcCallback
+      (\ s a -> s{_ccwssrcCallback = a})
 
 -- | Identifier of the course work.
-couCourseWorkId :: Lens' CoursesCourseWorkStudentSubmissionsReclaim Text
-couCourseWorkId
-  = lens _couCourseWorkId
-      (\ s a -> s{_couCourseWorkId = a})
+ccwssrcCourseWorkId :: Lens' CoursesCourseWorkStudentSubmissionsReclaim Text
+ccwssrcCourseWorkId
+  = lens _ccwssrcCourseWorkId
+      (\ s a -> s{_ccwssrcCourseWorkId = a})
 
 instance GoogleRequest
          CoursesCourseWorkStudentSubmissionsReclaim where
@@ -231,15 +213,14 @@ instance GoogleRequest
              '["https://www.googleapis.com/auth/classroom.coursework.me"]
         requestClient
           CoursesCourseWorkStudentSubmissionsReclaim'{..}
-          = go _couCourseId _couCourseWorkId _couId _couXgafv
-              _couUploadProtocol
-              (Just _couPp)
-              _couAccessToken
-              _couUploadType
-              _couBearerToken
-              _couCallback
+          = go _ccwssrcCourseId _ccwssrcCourseWorkId _ccwssrcId
+              _ccwssrcXgafv
+              _ccwssrcUploadProtocol
+              _ccwssrcAccessToken
+              _ccwssrcUploadType
+              _ccwssrcCallback
               (Just AltJSON)
-              _couPayload
+              _ccwssrcPayload
               classroomService
           where go
                   = buildClient

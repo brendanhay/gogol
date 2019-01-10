@@ -20,10 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates an BuildTrigger by its project ID and trigger ID. This API is
+-- Updates a \`BuildTrigger\` by its project ID and trigger ID. This API is
 -- experimental.
 --
--- /See:/ <https://cloud.google.com/container-builder/docs/ Google Cloud Container Builder API Reference> for @cloudbuild.projects.triggers.patch@.
+-- /See:/ <https://cloud.google.com/cloud-build/docs/ Cloud Build API Reference> for @cloudbuild.projects.triggers.patch@.
 module Network.Google.Resource.Cloudbuild.Projects.Triggers.Patch
     (
     -- * REST Resource
@@ -37,11 +37,9 @@ module Network.Google.Resource.Cloudbuild.Projects.Triggers.Patch
     , ptpXgafv
     , ptpUploadProtocol
     , ptpTriggerId
-    , ptpPp
     , ptpAccessToken
     , ptpUploadType
     , ptpPayload
-    , ptpBearerToken
     , ptpProjectId
     , ptpCallback
     ) where
@@ -59,16 +57,14 @@ type ProjectsTriggersPatchResource =
              Capture "triggerId" Text :>
                QueryParam "$.xgafv" Xgafv :>
                  QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :>
-                               ReqBody '[JSON] BuildTrigger :>
-                                 Patch '[JSON] BuildTrigger
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] BuildTrigger :>
+                             Patch '[JSON] BuildTrigger
 
--- | Updates an BuildTrigger by its project ID and trigger ID. This API is
+-- | Updates a \`BuildTrigger\` by its project ID and trigger ID. This API is
 -- experimental.
 --
 -- /See:/ 'projectsTriggersPatch' smart constructor.
@@ -76,11 +72,9 @@ data ProjectsTriggersPatch = ProjectsTriggersPatch'
     { _ptpXgafv          :: !(Maybe Xgafv)
     , _ptpUploadProtocol :: !(Maybe Text)
     , _ptpTriggerId      :: !Text
-    , _ptpPp             :: !Bool
     , _ptpAccessToken    :: !(Maybe Text)
     , _ptpUploadType     :: !(Maybe Text)
     , _ptpPayload        :: !BuildTrigger
-    , _ptpBearerToken    :: !(Maybe Text)
     , _ptpProjectId      :: !Text
     , _ptpCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -95,15 +89,11 @@ data ProjectsTriggersPatch = ProjectsTriggersPatch'
 --
 -- * 'ptpTriggerId'
 --
--- * 'ptpPp'
---
 -- * 'ptpAccessToken'
 --
 -- * 'ptpUploadType'
 --
 -- * 'ptpPayload'
---
--- * 'ptpBearerToken'
 --
 -- * 'ptpProjectId'
 --
@@ -118,11 +108,9 @@ projectsTriggersPatch pPtpTriggerId_ pPtpPayload_ pPtpProjectId_ =
     { _ptpXgafv = Nothing
     , _ptpUploadProtocol = Nothing
     , _ptpTriggerId = pPtpTriggerId_
-    , _ptpPp = True
     , _ptpAccessToken = Nothing
     , _ptpUploadType = Nothing
     , _ptpPayload = pPtpPayload_
-    , _ptpBearerToken = Nothing
     , _ptpProjectId = pPtpProjectId_
     , _ptpCallback = Nothing
     }
@@ -137,14 +125,10 @@ ptpUploadProtocol
   = lens _ptpUploadProtocol
       (\ s a -> s{_ptpUploadProtocol = a})
 
--- | ID of the BuildTrigger to update.
+-- | ID of the \`BuildTrigger\` to update.
 ptpTriggerId :: Lens' ProjectsTriggersPatch Text
 ptpTriggerId
   = lens _ptpTriggerId (\ s a -> s{_ptpTriggerId = a})
-
--- | Pretty-print response.
-ptpPp :: Lens' ProjectsTriggersPatch Bool
-ptpPp = lens _ptpPp (\ s a -> s{_ptpPp = a})
 
 -- | OAuth access token.
 ptpAccessToken :: Lens' ProjectsTriggersPatch (Maybe Text)
@@ -163,12 +147,6 @@ ptpPayload :: Lens' ProjectsTriggersPatch BuildTrigger
 ptpPayload
   = lens _ptpPayload (\ s a -> s{_ptpPayload = a})
 
--- | OAuth bearer token.
-ptpBearerToken :: Lens' ProjectsTriggersPatch (Maybe Text)
-ptpBearerToken
-  = lens _ptpBearerToken
-      (\ s a -> s{_ptpBearerToken = a})
-
 -- | ID of the project that owns the trigger.
 ptpProjectId :: Lens' ProjectsTriggersPatch Text
 ptpProjectId
@@ -186,10 +164,8 @@ instance GoogleRequest ProjectsTriggersPatch where
         requestClient ProjectsTriggersPatch'{..}
           = go _ptpProjectId _ptpTriggerId _ptpXgafv
               _ptpUploadProtocol
-              (Just _ptpPp)
               _ptpAccessToken
               _ptpUploadType
-              _ptpBearerToken
               _ptpCallback
               (Just AltJSON)
               _ptpPayload

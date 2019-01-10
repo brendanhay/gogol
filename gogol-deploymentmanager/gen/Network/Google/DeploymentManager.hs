@@ -110,6 +110,14 @@ module Network.Google.DeploymentManager
     -- ** DeploymentsUpdateCreatePolicy
     , DeploymentsUpdateCreatePolicy (..)
 
+    -- ** Expr
+    , Expr
+    , expr
+    , eLocation
+    , eExpression
+    , eTitle
+    , eDescription
+
     -- ** OperationsListResponse
     , OperationsListResponse
     , operationsListResponse
@@ -189,6 +197,7 @@ module Network.Google.DeploymentManager
     , deploymentUpdate
     , duManifest
     , duLabels
+    , duDescription
 
     -- ** ResourceUpdate
     , ResourceUpdate
@@ -248,6 +257,12 @@ module Network.Google.DeploymentManager
     , deploymentsCancelPreviewRequest
     , dcprFingerprint
 
+    -- ** LogConfigCloudAuditOptions
+    , LogConfigCloudAuditOptions
+    , logConfigCloudAuditOptions
+    , lccaoAuthorizationLoggingOptions
+    , lccaoLogName
+
     -- ** Resource
     , Resource
     , resource
@@ -263,6 +278,11 @@ module Network.Google.DeploymentManager
     , rType
     , rUpdate
     , rProperties
+
+    -- ** LogConfigDataAccessOptions
+    , LogConfigDataAccessOptions
+    , logConfigDataAccessOptions
+    , lcdaoLogMode
 
     -- ** DeploymentUpdateLabelEntry
     , DeploymentUpdateLabelEntry
@@ -287,6 +307,18 @@ module Network.Google.DeploymentManager
     , OperationError
     , operationError
     , oeErrors
+
+    -- ** GlobalSetPolicyRequest
+    , GlobalSetPolicyRequest
+    , globalSetPolicyRequest
+    , gsprEtag
+    , gsprBindings
+    , gsprPolicy
+
+    -- ** AuthorizationLoggingOptions
+    , AuthorizationLoggingOptions
+    , authorizationLoggingOptions
+    , aloPermissionType
 
     -- ** Policy
     , Policy
@@ -368,6 +400,8 @@ module Network.Google.DeploymentManager
     -- ** LogConfig
     , LogConfig
     , logConfig
+    , lcCloudAudit
+    , lcDataAccess
     , lcCounter
 
     -- ** ResourceAccessControl
@@ -393,6 +427,7 @@ module Network.Google.DeploymentManager
     , binding
     , bMembers
     , bRole
+    , bCondition
 
     -- ** Deployment
     , Deployment
@@ -400,6 +435,7 @@ module Network.Google.DeploymentManager
     , dInsertTime
     , dOperation
     , dFingerprint
+    , dUpdateTime
     , dSelfLink
     , dName
     , dManifest
@@ -408,6 +444,9 @@ module Network.Google.DeploymentManager
     , dDescription
     , dUpdate
     , dTarget
+
+    -- ** DeploymentsInsertCreatePolicy
+    , DeploymentsInsertCreatePolicy (..)
     ) where
 
 import           Network.Google.DeploymentManager.Types

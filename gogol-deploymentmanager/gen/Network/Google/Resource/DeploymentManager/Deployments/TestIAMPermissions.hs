@@ -96,7 +96,7 @@ dtipPayload :: Lens' DeploymentsTestIAMPermissions TestPermissionsRequest
 dtipPayload
   = lens _dtipPayload (\ s a -> s{_dtipPayload = a})
 
--- | Name of the resource for this request.
+-- | Name or id of the resource for this request.
 dtipResource :: Lens' DeploymentsTestIAMPermissions Text
 dtipResource
   = lens _dtipResource (\ s a -> s{_dtipResource = a})

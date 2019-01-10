@@ -22,7 +22,7 @@
 --
 -- Deploys code and resource files to a new version.
 --
--- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ Google App Engine Admin API Reference> for @appengine.apps.services.versions.create@.
+-- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ App Engine Admin API Reference> for @appengine.apps.services.versions.create@.
 module Network.Google.Resource.AppEngine.Apps.Services.Versions.Create
     (
     -- * REST Resource
@@ -35,11 +35,9 @@ module Network.Google.Resource.AppEngine.Apps.Services.Versions.Create
     -- * Request Lenses
     , asvcXgafv
     , asvcUploadProtocol
-    , asvcPp
     , asvcAccessToken
     , asvcUploadType
     , asvcPayload
-    , asvcBearerToken
     , asvcAppsId
     , asvcServicesId
     , asvcCallback
@@ -57,28 +55,23 @@ type AppsServicesVersionsCreateResource =
            "services" :>
              Capture "servicesId" Text :>
                "versions" :>
-                 QueryParam "$.xgafv" Text :>
+                 QueryParam "$.xgafv" Xgafv :>
                    QueryParam "upload_protocol" Text :>
-                     QueryParam "pp" Bool :>
-                       QueryParam "access_token" Text :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "bearer_token" Text :>
-                             QueryParam "callback" Text :>
-                               QueryParam "alt" AltJSON :>
-                                 ReqBody '[JSON] Version :>
-                                   Post '[JSON] Operation
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Version :> Post '[JSON] Operation
 
 -- | Deploys code and resource files to a new version.
 --
 -- /See:/ 'appsServicesVersionsCreate' smart constructor.
 data AppsServicesVersionsCreate = AppsServicesVersionsCreate'
-    { _asvcXgafv          :: !(Maybe Text)
+    { _asvcXgafv          :: !(Maybe Xgafv)
     , _asvcUploadProtocol :: !(Maybe Text)
-    , _asvcPp             :: !Bool
     , _asvcAccessToken    :: !(Maybe Text)
     , _asvcUploadType     :: !(Maybe Text)
     , _asvcPayload        :: !Version
-    , _asvcBearerToken    :: !(Maybe Text)
     , _asvcAppsId         :: !Text
     , _asvcServicesId     :: !Text
     , _asvcCallback       :: !(Maybe Text)
@@ -92,15 +85,11 @@ data AppsServicesVersionsCreate = AppsServicesVersionsCreate'
 --
 -- * 'asvcUploadProtocol'
 --
--- * 'asvcPp'
---
 -- * 'asvcAccessToken'
 --
 -- * 'asvcUploadType'
 --
 -- * 'asvcPayload'
---
--- * 'asvcBearerToken'
 --
 -- * 'asvcAppsId'
 --
@@ -116,18 +105,16 @@ appsServicesVersionsCreate pAsvcPayload_ pAsvcAppsId_ pAsvcServicesId_ =
     AppsServicesVersionsCreate'
     { _asvcXgafv = Nothing
     , _asvcUploadProtocol = Nothing
-    , _asvcPp = True
     , _asvcAccessToken = Nothing
     , _asvcUploadType = Nothing
     , _asvcPayload = pAsvcPayload_
-    , _asvcBearerToken = Nothing
     , _asvcAppsId = pAsvcAppsId_
     , _asvcServicesId = pAsvcServicesId_
     , _asvcCallback = Nothing
     }
 
 -- | V1 error format.
-asvcXgafv :: Lens' AppsServicesVersionsCreate (Maybe Text)
+asvcXgafv :: Lens' AppsServicesVersionsCreate (Maybe Xgafv)
 asvcXgafv
   = lens _asvcXgafv (\ s a -> s{_asvcXgafv = a})
 
@@ -136,10 +123,6 @@ asvcUploadProtocol :: Lens' AppsServicesVersionsCreate (Maybe Text)
 asvcUploadProtocol
   = lens _asvcUploadProtocol
       (\ s a -> s{_asvcUploadProtocol = a})
-
--- | Pretty-print response.
-asvcPp :: Lens' AppsServicesVersionsCreate Bool
-asvcPp = lens _asvcPp (\ s a -> s{_asvcPp = a})
 
 -- | OAuth access token.
 asvcAccessToken :: Lens' AppsServicesVersionsCreate (Maybe Text)
@@ -157,12 +140,6 @@ asvcUploadType
 asvcPayload :: Lens' AppsServicesVersionsCreate Version
 asvcPayload
   = lens _asvcPayload (\ s a -> s{_asvcPayload = a})
-
--- | OAuth bearer token.
-asvcBearerToken :: Lens' AppsServicesVersionsCreate (Maybe Text)
-asvcBearerToken
-  = lens _asvcBearerToken
-      (\ s a -> s{_asvcBearerToken = a})
 
 -- | Part of \`parent\`. Name of the parent resource to create this version
 -- under. Example: apps\/myapp\/services\/default.
@@ -189,10 +166,8 @@ instance GoogleRequest AppsServicesVersionsCreate
         requestClient AppsServicesVersionsCreate'{..}
           = go _asvcAppsId _asvcServicesId _asvcXgafv
               _asvcUploadProtocol
-              (Just _asvcPp)
               _asvcAccessToken
               _asvcUploadType
-              _asvcBearerToken
               _asvcCallback
               (Just AltJSON)
               _asvcPayload

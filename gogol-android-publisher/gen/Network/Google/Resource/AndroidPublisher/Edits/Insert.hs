@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'EditsInsert' request conforms to.
 type EditsInsertResource =
      "androidpublisher" :>
-       "v2" :>
+       "v3" :>
          "applications" :>
            Capture "packageName" Text :>
              "edits" :>

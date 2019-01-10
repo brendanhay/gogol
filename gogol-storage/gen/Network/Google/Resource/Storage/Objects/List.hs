@@ -36,6 +36,8 @@ module Network.Google.Resource.Storage.Objects.List
     , olPrefix
     , olBucket
     , olVersions
+    , olUserProject
+    , olIncludeTrailingDelimiter
     , olProjection
     , olPageToken
     , olDelimiter
@@ -55,23 +57,27 @@ type ObjectsListResource =
              "o" :>
                QueryParam "prefix" Text :>
                  QueryParam "versions" Bool :>
-                   QueryParam "projection" ObjectsListProjection :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "delimiter" Text :>
-                         QueryParam "maxResults" (Textual Word32) :>
-                           QueryParam "alt" AltJSON :> Get '[JSON] Objects
+                   QueryParam "userProject" Text :>
+                     QueryParam "includeTrailingDelimiter" Bool :>
+                       QueryParam "projection" ObjectsListProjection :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "delimiter" Text :>
+                             QueryParam "maxResults" (Textual Word32) :>
+                               QueryParam "alt" AltJSON :> Get '[JSON] Objects
 
 -- | Retrieves a list of objects matching the criteria.
 --
 -- /See:/ 'objectsList' smart constructor.
 data ObjectsList = ObjectsList'
-    { _olPrefix     :: !(Maybe Text)
-    , _olBucket     :: !Text
-    , _olVersions   :: !(Maybe Bool)
-    , _olProjection :: !(Maybe ObjectsListProjection)
-    , _olPageToken  :: !(Maybe Text)
-    , _olDelimiter  :: !(Maybe Text)
-    , _olMaxResults :: !(Maybe (Textual Word32))
+    { _olPrefix                   :: !(Maybe Text)
+    , _olBucket                   :: !Text
+    , _olVersions                 :: !(Maybe Bool)
+    , _olUserProject              :: !(Maybe Text)
+    , _olIncludeTrailingDelimiter :: !(Maybe Bool)
+    , _olProjection               :: !(Maybe ObjectsListProjection)
+    , _olPageToken                :: !(Maybe Text)
+    , _olDelimiter                :: !(Maybe Text)
+    , _olMaxResults               :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectsList' with the minimum fields required to make a request.
@@ -83,6 +89,10 @@ data ObjectsList = ObjectsList'
 -- * 'olBucket'
 --
 -- * 'olVersions'
+--
+-- * 'olUserProject'
+--
+-- * 'olIncludeTrailingDelimiter'
 --
 -- * 'olProjection'
 --
@@ -99,10 +109,12 @@ objectsList pOlBucket_ =
     { _olPrefix = Nothing
     , _olBucket = pOlBucket_
     , _olVersions = Nothing
+    , _olUserProject = Nothing
+    , _olIncludeTrailingDelimiter = Nothing
     , _olProjection = Nothing
     , _olPageToken = Nothing
     , _olDelimiter = Nothing
-    , _olMaxResults = Nothing
+    , _olMaxResults = 1000
     }
 
 -- | Filter results to objects whose names begin with this prefix.
@@ -118,6 +130,20 @@ olBucket = lens _olBucket (\ s a -> s{_olBucket = a})
 olVersions :: Lens' ObjectsList (Maybe Bool)
 olVersions
   = lens _olVersions (\ s a -> s{_olVersions = a})
+
+-- | The project to be billed for this request. Required for Requester Pays
+-- buckets.
+olUserProject :: Lens' ObjectsList (Maybe Text)
+olUserProject
+  = lens _olUserProject
+      (\ s a -> s{_olUserProject = a})
+
+-- | If true, objects that end in exactly one instance of delimiter will have
+-- their metadata included in items in addition to prefixes.
+olIncludeTrailingDelimiter :: Lens' ObjectsList (Maybe Bool)
+olIncludeTrailingDelimiter
+  = lens _olIncludeTrailingDelimiter
+      (\ s a -> s{_olIncludeTrailingDelimiter = a})
 
 -- | Set of properties to return. Defaults to noAcl.
 olProjection :: Lens' ObjectsList (Maybe ObjectsListProjection)
@@ -139,13 +165,14 @@ olDelimiter :: Lens' ObjectsList (Maybe Text)
 olDelimiter
   = lens _olDelimiter (\ s a -> s{_olDelimiter = a})
 
--- | Maximum number of items plus prefixes to return. As duplicate prefixes
--- are omitted, fewer total results may be returned than requested. The
--- default value of this parameter is 1,000 items.
-olMaxResults :: Lens' ObjectsList (Maybe Word32)
+-- | Maximum number of items plus prefixes to return in a single page of
+-- responses. As duplicate prefixes are omitted, fewer total results may be
+-- returned than requested. The service will use this parameter or 1,000
+-- items, whichever is smaller.
+olMaxResults :: Lens' ObjectsList Word32
 olMaxResults
   = lens _olMaxResults (\ s a -> s{_olMaxResults = a})
-      . mapping _Coerce
+      . _Coerce
 
 instance GoogleRequest ObjectsList where
         type Rs ObjectsList = Objects
@@ -156,10 +183,12 @@ instance GoogleRequest ObjectsList where
                "https://www.googleapis.com/auth/devstorage.read_only",
                "https://www.googleapis.com/auth/devstorage.read_write"]
         requestClient ObjectsList'{..}
-          = go _olBucket _olPrefix _olVersions _olProjection
+          = go _olBucket _olPrefix _olVersions _olUserProject
+              _olIncludeTrailingDelimiter
+              _olProjection
               _olPageToken
               _olDelimiter
-              _olMaxResults
+              (Just _olMaxResults)
               (Just AltJSON)
               storageService
           where go

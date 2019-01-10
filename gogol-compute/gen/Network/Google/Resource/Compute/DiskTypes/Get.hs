@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified disk type. Get a list of available disk types by
+-- Returns the specified disk type. Gets a list of available disk types by
 -- making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.diskTypes.get@.
@@ -55,7 +55,7 @@ type DiskTypesGetResource =
                    Capture "diskType" Text :>
                      QueryParam "alt" AltJSON :> Get '[JSON] DiskType
 
--- | Returns the specified disk type. Get a list of available disk types by
+-- | Returns the specified disk type. Gets a list of available disk types by
 -- making a list() request.
 --
 -- /See:/ 'diskTypesGet' smart constructor.

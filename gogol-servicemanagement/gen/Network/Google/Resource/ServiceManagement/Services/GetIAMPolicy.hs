@@ -23,7 +23,7 @@
 -- Gets the access control policy for a resource. Returns an empty policy
 -- if the resource exists and does not have a policy set.
 --
--- /See:/ <https://cloud.google.com/service-management/ Google Service Management API Reference> for @servicemanagement.services.getIamPolicy@.
+-- /See:/ <https://cloud.google.com/service-management/ Service Management API Reference> for @servicemanagement.services.getIamPolicy@.
 module Network.Google.Resource.ServiceManagement.Services.GetIAMPolicy
     (
     -- * REST Resource
@@ -36,11 +36,9 @@ module Network.Google.Resource.ServiceManagement.Services.GetIAMPolicy
     -- * Request Lenses
     , sgipXgafv
     , sgipUploadProtocol
-    , sgipPp
     , sgipAccessToken
     , sgipUploadType
     , sgipPayload
-    , sgipBearerToken
     , sgipResource
     , sgipCallback
     ) where
@@ -55,14 +53,12 @@ type ServicesGetIAMPolicyResource =
        CaptureMode "resource" "getIamPolicy" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] GetIAMPolicyRequest :>
-                           Post '[JSON] Policy
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] GetIAMPolicyRequest :>
+                       Post '[JSON] Policy
 
 -- | Gets the access control policy for a resource. Returns an empty policy
 -- if the resource exists and does not have a policy set.
@@ -71,11 +67,9 @@ type ServicesGetIAMPolicyResource =
 data ServicesGetIAMPolicy = ServicesGetIAMPolicy'
     { _sgipXgafv          :: !(Maybe Xgafv)
     , _sgipUploadProtocol :: !(Maybe Text)
-    , _sgipPp             :: !Bool
     , _sgipAccessToken    :: !(Maybe Text)
     , _sgipUploadType     :: !(Maybe Text)
     , _sgipPayload        :: !GetIAMPolicyRequest
-    , _sgipBearerToken    :: !(Maybe Text)
     , _sgipResource       :: !Text
     , _sgipCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -88,15 +82,11 @@ data ServicesGetIAMPolicy = ServicesGetIAMPolicy'
 --
 -- * 'sgipUploadProtocol'
 --
--- * 'sgipPp'
---
 -- * 'sgipAccessToken'
 --
 -- * 'sgipUploadType'
 --
 -- * 'sgipPayload'
---
--- * 'sgipBearerToken'
 --
 -- * 'sgipResource'
 --
@@ -109,11 +99,9 @@ servicesGetIAMPolicy pSgipPayload_ pSgipResource_ =
     ServicesGetIAMPolicy'
     { _sgipXgafv = Nothing
     , _sgipUploadProtocol = Nothing
-    , _sgipPp = True
     , _sgipAccessToken = Nothing
     , _sgipUploadType = Nothing
     , _sgipPayload = pSgipPayload_
-    , _sgipBearerToken = Nothing
     , _sgipResource = pSgipResource_
     , _sgipCallback = Nothing
     }
@@ -128,10 +116,6 @@ sgipUploadProtocol :: Lens' ServicesGetIAMPolicy (Maybe Text)
 sgipUploadProtocol
   = lens _sgipUploadProtocol
       (\ s a -> s{_sgipUploadProtocol = a})
-
--- | Pretty-print response.
-sgipPp :: Lens' ServicesGetIAMPolicy Bool
-sgipPp = lens _sgipPp (\ s a -> s{_sgipPp = a})
 
 -- | OAuth access token.
 sgipAccessToken :: Lens' ServicesGetIAMPolicy (Maybe Text)
@@ -150,15 +134,8 @@ sgipPayload :: Lens' ServicesGetIAMPolicy GetIAMPolicyRequest
 sgipPayload
   = lens _sgipPayload (\ s a -> s{_sgipPayload = a})
 
--- | OAuth bearer token.
-sgipBearerToken :: Lens' ServicesGetIAMPolicy (Maybe Text)
-sgipBearerToken
-  = lens _sgipBearerToken
-      (\ s a -> s{_sgipBearerToken = a})
-
--- | REQUIRED: The resource for which the policy is being requested.
--- \`resource\` is usually specified as a path. For example, a Project
--- resource is specified as \`projects\/{project}\`.
+-- | REQUIRED: The resource for which the policy is being requested. See the
+-- operation documentation for the appropriate value for this field.
 sgipResource :: Lens' ServicesGetIAMPolicy Text
 sgipResource
   = lens _sgipResource (\ s a -> s{_sgipResource = a})
@@ -172,13 +149,13 @@ instance GoogleRequest ServicesGetIAMPolicy where
         type Rs ServicesGetIAMPolicy = Policy
         type Scopes ServicesGetIAMPolicy =
              '["https://www.googleapis.com/auth/cloud-platform",
-               "https://www.googleapis.com/auth/service.management"]
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/service.management",
+               "https://www.googleapis.com/auth/service.management.readonly"]
         requestClient ServicesGetIAMPolicy'{..}
           = go _sgipResource _sgipXgafv _sgipUploadProtocol
-              (Just _sgipPp)
               _sgipAccessToken
               _sgipUploadType
-              _sgipBearerToken
               _sgipCallback
               (Just AltJSON)
               _sgipPayload

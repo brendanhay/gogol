@@ -24,7 +24,7 @@
 -- analyzeSentiment, analyzeEntities, and analyzeSyntax provide in one
 -- call.
 --
--- /See:/ <https://cloud.google.com/natural-language/ Google Cloud Natural Language API Reference> for @language.documents.annotateText@.
+-- /See:/ <https://cloud.google.com/natural-language/ Cloud Natural Language API Reference> for @language.documents.annotateText@.
 module Network.Google.Resource.Language.Documents.AnnotateText
     (
     -- * REST Resource
@@ -37,11 +37,9 @@ module Network.Google.Resource.Language.Documents.AnnotateText
     -- * Request Lenses
     , datXgafv
     , datUploadProtocol
-    , datPp
     , datAccessToken
     , datUploadType
     , datPayload
-    , datBearerToken
     , datCallback
     ) where
 
@@ -55,14 +53,12 @@ type DocumentsAnnotateTextResource =
        "documents:annotateText" :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] AnnotateTextRequest :>
-                           Post '[JSON] AnnotateTextResponse
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] AnnotateTextRequest :>
+                       Post '[JSON] AnnotateTextResponse
 
 -- | A convenience method that provides all the features that
 -- analyzeSentiment, analyzeEntities, and analyzeSyntax provide in one
@@ -72,11 +68,9 @@ type DocumentsAnnotateTextResource =
 data DocumentsAnnotateText = DocumentsAnnotateText'
     { _datXgafv          :: !(Maybe Xgafv)
     , _datUploadProtocol :: !(Maybe Text)
-    , _datPp             :: !Bool
     , _datAccessToken    :: !(Maybe Text)
     , _datUploadType     :: !(Maybe Text)
     , _datPayload        :: !AnnotateTextRequest
-    , _datBearerToken    :: !(Maybe Text)
     , _datCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -88,15 +82,11 @@ data DocumentsAnnotateText = DocumentsAnnotateText'
 --
 -- * 'datUploadProtocol'
 --
--- * 'datPp'
---
 -- * 'datAccessToken'
 --
 -- * 'datUploadType'
 --
 -- * 'datPayload'
---
--- * 'datBearerToken'
 --
 -- * 'datCallback'
 documentsAnnotateText
@@ -106,11 +96,9 @@ documentsAnnotateText pDatPayload_ =
     DocumentsAnnotateText'
     { _datXgafv = Nothing
     , _datUploadProtocol = Nothing
-    , _datPp = True
     , _datAccessToken = Nothing
     , _datUploadType = Nothing
     , _datPayload = pDatPayload_
-    , _datBearerToken = Nothing
     , _datCallback = Nothing
     }
 
@@ -123,10 +111,6 @@ datUploadProtocol :: Lens' DocumentsAnnotateText (Maybe Text)
 datUploadProtocol
   = lens _datUploadProtocol
       (\ s a -> s{_datUploadProtocol = a})
-
--- | Pretty-print response.
-datPp :: Lens' DocumentsAnnotateText Bool
-datPp = lens _datPp (\ s a -> s{_datPp = a})
 
 -- | OAuth access token.
 datAccessToken :: Lens' DocumentsAnnotateText (Maybe Text)
@@ -145,12 +129,6 @@ datPayload :: Lens' DocumentsAnnotateText AnnotateTextRequest
 datPayload
   = lens _datPayload (\ s a -> s{_datPayload = a})
 
--- | OAuth bearer token.
-datBearerToken :: Lens' DocumentsAnnotateText (Maybe Text)
-datBearerToken
-  = lens _datBearerToken
-      (\ s a -> s{_datBearerToken = a})
-
 -- | JSONP
 datCallback :: Lens' DocumentsAnnotateText (Maybe Text)
 datCallback
@@ -159,12 +137,11 @@ datCallback
 instance GoogleRequest DocumentsAnnotateText where
         type Rs DocumentsAnnotateText = AnnotateTextResponse
         type Scopes DocumentsAnnotateText =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-language",
+               "https://www.googleapis.com/auth/cloud-platform"]
         requestClient DocumentsAnnotateText'{..}
-          = go _datXgafv _datUploadProtocol (Just _datPp)
-              _datAccessToken
+          = go _datXgafv _datUploadProtocol _datAccessToken
               _datUploadType
-              _datBearerToken
               _datCallback
               (Just AltJSON)
               _datPayload

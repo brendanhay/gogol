@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates an entry on the user\'s calendar list. This method supports
--- patch semantics.
+-- Updates an existing calendar on the user\'s calendar list. This method
+-- supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.calendarList.patch@.
 module Network.Google.Resource.Calendar.CalendarList.Patch
@@ -56,8 +56,8 @@ type CalendarListPatchResource =
                      ReqBody '[JSON] CalendarListEntry :>
                        Patch '[JSON] CalendarListEntry
 
--- | Updates an entry on the user\'s calendar list. This method supports
--- patch semantics.
+-- | Updates an existing calendar on the user\'s calendar list. This method
+-- supports patch semantics.
 --
 -- /See:/ 'calendarListPatch' smart constructor.
 data CalendarListPatch = CalendarListPatch'

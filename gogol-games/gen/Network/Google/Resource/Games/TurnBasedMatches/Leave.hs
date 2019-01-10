@@ -34,7 +34,6 @@ module Network.Google.Resource.Games.TurnBasedMatches.Leave
     , TurnBasedMatchesLeave
 
     -- * Request Lenses
-    , tbmlConsistencyToken
     , tbmlLanguage
     , tbmlMatchId
     ) where
@@ -50,26 +49,22 @@ type TurnBasedMatchesLeaveResource =
          "turnbasedmatches" :>
            Capture "matchId" Text :>
              "leave" :>
-               QueryParam "consistencyToken" (Textual Int64) :>
-                 QueryParam "language" Text :>
-                   QueryParam "alt" AltJSON :>
-                     Put '[JSON] TurnBasedMatch
+               QueryParam "language" Text :>
+                 QueryParam "alt" AltJSON :>
+                   Put '[JSON] TurnBasedMatch
 
 -- | Leave a turn-based match when it is not the current player\'s turn,
 -- without canceling the match.
 --
 -- /See:/ 'turnBasedMatchesLeave' smart constructor.
 data TurnBasedMatchesLeave = TurnBasedMatchesLeave'
-    { _tbmlConsistencyToken :: !(Maybe (Textual Int64))
-    , _tbmlLanguage         :: !(Maybe Text)
-    , _tbmlMatchId          :: !Text
+    { _tbmlLanguage :: !(Maybe Text)
+    , _tbmlMatchId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchesLeave' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'tbmlConsistencyToken'
 --
 -- * 'tbmlLanguage'
 --
@@ -79,17 +74,9 @@ turnBasedMatchesLeave
     -> TurnBasedMatchesLeave
 turnBasedMatchesLeave pTbmlMatchId_ =
     TurnBasedMatchesLeave'
-    { _tbmlConsistencyToken = Nothing
-    , _tbmlLanguage = Nothing
+    { _tbmlLanguage = Nothing
     , _tbmlMatchId = pTbmlMatchId_
     }
-
--- | The last-seen mutation timestamp.
-tbmlConsistencyToken :: Lens' TurnBasedMatchesLeave (Maybe Int64)
-tbmlConsistencyToken
-  = lens _tbmlConsistencyToken
-      (\ s a -> s{_tbmlConsistencyToken = a})
-      . mapping _Coerce
 
 -- | The preferred language to use for strings returned by this method.
 tbmlLanguage :: Lens' TurnBasedMatchesLeave (Maybe Text)
@@ -104,11 +91,9 @@ tbmlMatchId
 instance GoogleRequest TurnBasedMatchesLeave where
         type Rs TurnBasedMatchesLeave = TurnBasedMatch
         type Scopes TurnBasedMatchesLeave =
-             '["https://www.googleapis.com/auth/games",
-               "https://www.googleapis.com/auth/plus.login"]
+             '["https://www.googleapis.com/auth/games"]
         requestClient TurnBasedMatchesLeave'{..}
-          = go _tbmlMatchId _tbmlConsistencyToken _tbmlLanguage
-              (Just AltJSON)
+          = go _tbmlMatchId _tbmlLanguage (Just AltJSON)
               gamesService
           where go
                   = buildClient

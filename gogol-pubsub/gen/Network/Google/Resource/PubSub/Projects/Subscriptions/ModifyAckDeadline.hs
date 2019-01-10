@@ -26,7 +26,7 @@
 -- processing was interrupted. Note that this does not modify the
 -- subscription-level \`ackDeadlineSeconds\` used for subsequent messages.
 --
--- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.modifyAckDeadline@.
+-- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.modifyAckDeadline@.
 module Network.Google.Resource.PubSub.Projects.Subscriptions.ModifyAckDeadline
     (
     -- * REST Resource
@@ -39,11 +39,9 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.ModifyAckDeadline
     -- * Request Lenses
     , psmadXgafv
     , psmadUploadProtocol
-    , psmadPp
     , psmadAccessToken
     , psmadUploadType
     , psmadPayload
-    , psmadBearerToken
     , psmadSubscription
     , psmadCallback
     ) where
@@ -59,14 +57,12 @@ type ProjectsSubscriptionsModifyAckDeadlineResource =
          :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] ModifyAckDeadlineRequest :>
-                           Post '[JSON] Empty
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] ModifyAckDeadlineRequest :>
+                       Post '[JSON] Empty
 
 -- | Modifies the ack deadline for a specific message. This method is useful
 -- to indicate that more time is needed to process a message by the
@@ -78,11 +74,9 @@ type ProjectsSubscriptionsModifyAckDeadlineResource =
 data ProjectsSubscriptionsModifyAckDeadline = ProjectsSubscriptionsModifyAckDeadline'
     { _psmadXgafv          :: !(Maybe Xgafv)
     , _psmadUploadProtocol :: !(Maybe Text)
-    , _psmadPp             :: !Bool
     , _psmadAccessToken    :: !(Maybe Text)
     , _psmadUploadType     :: !(Maybe Text)
     , _psmadPayload        :: !ModifyAckDeadlineRequest
-    , _psmadBearerToken    :: !(Maybe Text)
     , _psmadSubscription   :: !Text
     , _psmadCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -95,15 +89,11 @@ data ProjectsSubscriptionsModifyAckDeadline = ProjectsSubscriptionsModifyAckDead
 --
 -- * 'psmadUploadProtocol'
 --
--- * 'psmadPp'
---
 -- * 'psmadAccessToken'
 --
 -- * 'psmadUploadType'
 --
 -- * 'psmadPayload'
---
--- * 'psmadBearerToken'
 --
 -- * 'psmadSubscription'
 --
@@ -116,11 +106,9 @@ projectsSubscriptionsModifyAckDeadline pPsmadPayload_ pPsmadSubscription_ =
     ProjectsSubscriptionsModifyAckDeadline'
     { _psmadXgafv = Nothing
     , _psmadUploadProtocol = Nothing
-    , _psmadPp = True
     , _psmadAccessToken = Nothing
     , _psmadUploadType = Nothing
     , _psmadPayload = pPsmadPayload_
-    , _psmadBearerToken = Nothing
     , _psmadSubscription = pPsmadSubscription_
     , _psmadCallback = Nothing
     }
@@ -135,10 +123,6 @@ psmadUploadProtocol :: Lens' ProjectsSubscriptionsModifyAckDeadline (Maybe Text)
 psmadUploadProtocol
   = lens _psmadUploadProtocol
       (\ s a -> s{_psmadUploadProtocol = a})
-
--- | Pretty-print response.
-psmadPp :: Lens' ProjectsSubscriptionsModifyAckDeadline Bool
-psmadPp = lens _psmadPp (\ s a -> s{_psmadPp = a})
 
 -- | OAuth access token.
 psmadAccessToken :: Lens' ProjectsSubscriptionsModifyAckDeadline (Maybe Text)
@@ -156,12 +140,6 @@ psmadUploadType
 psmadPayload :: Lens' ProjectsSubscriptionsModifyAckDeadline ModifyAckDeadlineRequest
 psmadPayload
   = lens _psmadPayload (\ s a -> s{_psmadPayload = a})
-
--- | OAuth bearer token.
-psmadBearerToken :: Lens' ProjectsSubscriptionsModifyAckDeadline (Maybe Text)
-psmadBearerToken
-  = lens _psmadBearerToken
-      (\ s a -> s{_psmadBearerToken = a})
 
 -- | The name of the subscription. Format is
 -- \`projects\/{project}\/subscriptions\/{sub}\`.
@@ -187,10 +165,8 @@ instance GoogleRequest
           ProjectsSubscriptionsModifyAckDeadline'{..}
           = go _psmadSubscription _psmadXgafv
               _psmadUploadProtocol
-              (Just _psmadPp)
               _psmadAccessToken
               _psmadUploadType
-              _psmadBearerToken
               _psmadCallback
               (Just AltJSON)
               _psmadPayload

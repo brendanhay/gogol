@@ -37,6 +37,8 @@ module Network.Google.Resource.Storage.Objects.WatchAll
     , owaBucket
     , owaPayload
     , owaVersions
+    , owaUserProject
+    , owaIncludeTrailingDelimiter
     , owaProjection
     , owaPageToken
     , owaDelimiter
@@ -57,25 +59,30 @@ type ObjectsWatchAllResource =
                "watch" :>
                  QueryParam "prefix" Text :>
                    QueryParam "versions" Bool :>
-                     QueryParam "projection" ObjectsWatchAllProjection :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "delimiter" Text :>
-                           QueryParam "maxResults" (Textual Word32) :>
-                             QueryParam "alt" AltJSON :>
-                               ReqBody '[JSON] Channel :> Post '[JSON] Channel
+                     QueryParam "userProject" Text :>
+                       QueryParam "includeTrailingDelimiter" Bool :>
+                         QueryParam "projection" ObjectsWatchAllProjection :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "delimiter" Text :>
+                               QueryParam "maxResults" (Textual Word32) :>
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] Channel :>
+                                     Post '[JSON] Channel
 
 -- | Watch for changes on all objects in a bucket.
 --
 -- /See:/ 'objectsWatchAll' smart constructor.
 data ObjectsWatchAll = ObjectsWatchAll'
-    { _owaPrefix     :: !(Maybe Text)
-    , _owaBucket     :: !Text
-    , _owaPayload    :: !Channel
-    , _owaVersions   :: !(Maybe Bool)
-    , _owaProjection :: !(Maybe ObjectsWatchAllProjection)
-    , _owaPageToken  :: !(Maybe Text)
-    , _owaDelimiter  :: !(Maybe Text)
-    , _owaMaxResults :: !(Maybe (Textual Word32))
+    { _owaPrefix                   :: !(Maybe Text)
+    , _owaBucket                   :: !Text
+    , _owaPayload                  :: !Channel
+    , _owaVersions                 :: !(Maybe Bool)
+    , _owaUserProject              :: !(Maybe Text)
+    , _owaIncludeTrailingDelimiter :: !(Maybe Bool)
+    , _owaProjection               :: !(Maybe ObjectsWatchAllProjection)
+    , _owaPageToken                :: !(Maybe Text)
+    , _owaDelimiter                :: !(Maybe Text)
+    , _owaMaxResults               :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectsWatchAll' with the minimum fields required to make a request.
@@ -89,6 +96,10 @@ data ObjectsWatchAll = ObjectsWatchAll'
 -- * 'owaPayload'
 --
 -- * 'owaVersions'
+--
+-- * 'owaUserProject'
+--
+-- * 'owaIncludeTrailingDelimiter'
 --
 -- * 'owaProjection'
 --
@@ -107,10 +118,12 @@ objectsWatchAll pOwaBucket_ pOwaPayload_ =
     , _owaBucket = pOwaBucket_
     , _owaPayload = pOwaPayload_
     , _owaVersions = Nothing
+    , _owaUserProject = Nothing
+    , _owaIncludeTrailingDelimiter = Nothing
     , _owaProjection = Nothing
     , _owaPageToken = Nothing
     , _owaDelimiter = Nothing
-    , _owaMaxResults = Nothing
+    , _owaMaxResults = 1000
     }
 
 -- | Filter results to objects whose names begin with this prefix.
@@ -134,6 +147,20 @@ owaVersions :: Lens' ObjectsWatchAll (Maybe Bool)
 owaVersions
   = lens _owaVersions (\ s a -> s{_owaVersions = a})
 
+-- | The project to be billed for this request. Required for Requester Pays
+-- buckets.
+owaUserProject :: Lens' ObjectsWatchAll (Maybe Text)
+owaUserProject
+  = lens _owaUserProject
+      (\ s a -> s{_owaUserProject = a})
+
+-- | If true, objects that end in exactly one instance of delimiter will have
+-- their metadata included in items in addition to prefixes.
+owaIncludeTrailingDelimiter :: Lens' ObjectsWatchAll (Maybe Bool)
+owaIncludeTrailingDelimiter
+  = lens _owaIncludeTrailingDelimiter
+      (\ s a -> s{_owaIncludeTrailingDelimiter = a})
+
 -- | Set of properties to return. Defaults to noAcl.
 owaProjection :: Lens' ObjectsWatchAll (Maybe ObjectsWatchAllProjection)
 owaProjection
@@ -155,14 +182,15 @@ owaDelimiter :: Lens' ObjectsWatchAll (Maybe Text)
 owaDelimiter
   = lens _owaDelimiter (\ s a -> s{_owaDelimiter = a})
 
--- | Maximum number of items plus prefixes to return. As duplicate prefixes
--- are omitted, fewer total results may be returned than requested. The
--- default value of this parameter is 1,000 items.
-owaMaxResults :: Lens' ObjectsWatchAll (Maybe Word32)
+-- | Maximum number of items plus prefixes to return in a single page of
+-- responses. As duplicate prefixes are omitted, fewer total results may be
+-- returned than requested. The service will use this parameter or 1,000
+-- items, whichever is smaller.
+owaMaxResults :: Lens' ObjectsWatchAll Word32
 owaMaxResults
   = lens _owaMaxResults
       (\ s a -> s{_owaMaxResults = a})
-      . mapping _Coerce
+      . _Coerce
 
 instance GoogleRequest ObjectsWatchAll where
         type Rs ObjectsWatchAll = Channel
@@ -174,10 +202,12 @@ instance GoogleRequest ObjectsWatchAll where
                "https://www.googleapis.com/auth/devstorage.read_write"]
         requestClient ObjectsWatchAll'{..}
           = go _owaBucket _owaPrefix _owaVersions
+              _owaUserProject
+              _owaIncludeTrailingDelimiter
               _owaProjection
               _owaPageToken
               _owaDelimiter
-              _owaMaxResults
+              (Just _owaMaxResults)
               (Just AltJSON)
               _owaPayload
               storageService

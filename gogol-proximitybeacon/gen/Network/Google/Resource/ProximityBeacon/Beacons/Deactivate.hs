@@ -29,7 +29,7 @@
 -- from a signed-in user with **Is owner** or **Can edit** permissions in
 -- the Google Developers Console project.
 --
--- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @proximitybeacon.beacons.deactivate@.
+-- /See:/ <https://developers.google.com/beacons/proximity/ Proximity Beacon API Reference> for @proximitybeacon.beacons.deactivate@.
 module Network.Google.Resource.ProximityBeacon.Beacons.Deactivate
     (
     -- * REST Resource
@@ -42,11 +42,9 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Deactivate
     -- * Request Lenses
     , bdXgafv
     , bdUploadProtocol
-    , bdPp
     , bdAccessToken
     , bdBeaconName
     , bdUploadType
-    , bdBearerToken
     , bdProjectId
     , bdCallback
     ) where
@@ -59,15 +57,13 @@ import           Network.Google.ProximityBeacon.Types
 type BeaconsDeactivateResource =
      "v1beta1" :>
        CaptureMode "beaconName" "deactivate" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "projectId" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :> Post '[JSON] Empty
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "projectId" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :> Post '[JSON] Empty
 
 -- | Deactivates a beacon. Once deactivated, the API will not return
 -- information nor attachment data for the beacon when queried via
@@ -80,13 +76,11 @@ type BeaconsDeactivateResource =
 --
 -- /See:/ 'beaconsDeactivate' smart constructor.
 data BeaconsDeactivate = BeaconsDeactivate'
-    { _bdXgafv          :: !(Maybe Text)
+    { _bdXgafv          :: !(Maybe Xgafv)
     , _bdUploadProtocol :: !(Maybe Text)
-    , _bdPp             :: !Bool
     , _bdAccessToken    :: !(Maybe Text)
     , _bdBeaconName     :: !Text
     , _bdUploadType     :: !(Maybe Text)
-    , _bdBearerToken    :: !(Maybe Text)
     , _bdProjectId      :: !(Maybe Text)
     , _bdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -99,15 +93,11 @@ data BeaconsDeactivate = BeaconsDeactivate'
 --
 -- * 'bdUploadProtocol'
 --
--- * 'bdPp'
---
 -- * 'bdAccessToken'
 --
 -- * 'bdBeaconName'
 --
 -- * 'bdUploadType'
---
--- * 'bdBearerToken'
 --
 -- * 'bdProjectId'
 --
@@ -119,17 +109,15 @@ beaconsDeactivate pBdBeaconName_ =
     BeaconsDeactivate'
     { _bdXgafv = Nothing
     , _bdUploadProtocol = Nothing
-    , _bdPp = True
     , _bdAccessToken = Nothing
     , _bdBeaconName = pBdBeaconName_
     , _bdUploadType = Nothing
-    , _bdBearerToken = Nothing
     , _bdProjectId = Nothing
     , _bdCallback = Nothing
     }
 
 -- | V1 error format.
-bdXgafv :: Lens' BeaconsDeactivate (Maybe Text)
+bdXgafv :: Lens' BeaconsDeactivate (Maybe Xgafv)
 bdXgafv = lens _bdXgafv (\ s a -> s{_bdXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -137,10 +125,6 @@ bdUploadProtocol :: Lens' BeaconsDeactivate (Maybe Text)
 bdUploadProtocol
   = lens _bdUploadProtocol
       (\ s a -> s{_bdUploadProtocol = a})
-
--- | Pretty-print response.
-bdPp :: Lens' BeaconsDeactivate Bool
-bdPp = lens _bdPp (\ s a -> s{_bdPp = a})
 
 -- | OAuth access token.
 bdAccessToken :: Lens' BeaconsDeactivate (Maybe Text)
@@ -163,12 +147,6 @@ bdUploadType :: Lens' BeaconsDeactivate (Maybe Text)
 bdUploadType
   = lens _bdUploadType (\ s a -> s{_bdUploadType = a})
 
--- | OAuth bearer token.
-bdBearerToken :: Lens' BeaconsDeactivate (Maybe Text)
-bdBearerToken
-  = lens _bdBearerToken
-      (\ s a -> s{_bdBearerToken = a})
-
 -- | The project id of the beacon to deactivate. If the project id is not
 -- specified then the project making the request is used. The project id
 -- must match the project that owns the beacon. Optional.
@@ -187,10 +165,8 @@ instance GoogleRequest BeaconsDeactivate where
              '["https://www.googleapis.com/auth/userlocation.beacon.registry"]
         requestClient BeaconsDeactivate'{..}
           = go _bdBeaconName _bdXgafv _bdUploadProtocol
-              (Just _bdPp)
               _bdAccessToken
               _bdUploadType
-              _bdBearerToken
               _bdProjectId
               _bdCallback
               (Just AltJSON)

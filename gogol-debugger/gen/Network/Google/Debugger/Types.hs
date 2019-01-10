@@ -180,6 +180,7 @@ module Network.Google.Debugger.Types
     , sourceLocation
     , slPath
     , slLine
+    , slColumn
 
     -- * StackFrame
     , StackFrame
@@ -254,7 +255,7 @@ debuggerService
   = defaultService (ServiceId "clouddebugger:v2")
       "clouddebugger.googleapis.com"
 
--- | Manage cloud debugger
+-- | Use Stackdriver Debugger
 cloudDebuggerScope :: Proxy '["https://www.googleapis.com/auth/cloud_debugger"]
 cloudDebuggerScope = Proxy;
 

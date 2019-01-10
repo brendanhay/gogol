@@ -29,6 +29,17 @@ module Network.Google.AppsReseller.Types
     , stsIsInTrial
     , stsTrialEndTime
 
+    -- * ResellernotifyResource
+    , ResellernotifyResource
+    , resellernotifyResource
+    , rrTopicName
+
+    -- * ResellernotifyGetwatchdetailsResponse
+    , ResellernotifyGetwatchdetailsResponse
+    , resellernotifyGetwatchdetailsResponse
+    , rgrTopicName
+    , rgrServiceAccountEmailAddresses
+
     -- * Address
     , Address
     , address
@@ -108,6 +119,7 @@ module Network.Google.AppsReseller.Types
     , subBillingMethod
     , subStatus
     , subTrialSettings
+    , subSKUName
     , subResourceUiURL
     , subKind
     , subSKUId

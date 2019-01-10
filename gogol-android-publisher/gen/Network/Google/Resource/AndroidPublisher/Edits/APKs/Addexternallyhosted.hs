@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 -- 'EditsAPKsAddexternallyhosted' request conforms to.
 type EditsAPKsAddexternallyhostedResource =
      "androidpublisher" :>
-       "v2" :>
+       "v3" :>
          "applications" :>
            Capture "packageName" Text :>
              "edits" :>

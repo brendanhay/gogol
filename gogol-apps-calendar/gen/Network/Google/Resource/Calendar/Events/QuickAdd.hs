@@ -36,6 +36,7 @@ module Network.Google.Resource.Calendar.Events.QuickAdd
     , eqaCalendarId
     , eqaText
     , eqaSendNotifications
+    , eqaSendUpdates
     ) where
 
 import           Network.Google.AppsCalendar.Types
@@ -52,7 +53,8 @@ type EventsQuickAddResource =
                "quickAdd" :>
                  QueryParam "text" Text :>
                    QueryParam "sendNotifications" Bool :>
-                     QueryParam "alt" AltJSON :> Post '[JSON] Event
+                     QueryParam "sendUpdates" EventsQuickAddSendUpdates :>
+                       QueryParam "alt" AltJSON :> Post '[JSON] Event
 
 -- | Creates an event based on a simple text string.
 --
@@ -61,6 +63,7 @@ data EventsQuickAdd = EventsQuickAdd'
     { _eqaCalendarId        :: !Text
     , _eqaText              :: !Text
     , _eqaSendNotifications :: !(Maybe Bool)
+    , _eqaSendUpdates       :: !(Maybe EventsQuickAddSendUpdates)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsQuickAdd' with the minimum fields required to make a request.
@@ -72,6 +75,8 @@ data EventsQuickAdd = EventsQuickAdd'
 -- * 'eqaText'
 --
 -- * 'eqaSendNotifications'
+--
+-- * 'eqaSendUpdates'
 eventsQuickAdd
     :: Text -- ^ 'eqaCalendarId'
     -> Text -- ^ 'eqaText'
@@ -81,6 +86,7 @@ eventsQuickAdd pEqaCalendarId_ pEqaText_ =
     { _eqaCalendarId = pEqaCalendarId_
     , _eqaText = pEqaText_
     , _eqaSendNotifications = Nothing
+    , _eqaSendUpdates = Nothing
     }
 
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
@@ -95,20 +101,31 @@ eqaCalendarId
 eqaText :: Lens' EventsQuickAdd Text
 eqaText = lens _eqaText (\ s a -> s{_eqaText = a})
 
--- | Whether to send notifications about the creation of the event. Optional.
--- The default is False.
+-- | Deprecated. Please use sendUpdates instead. Whether to send
+-- notifications about the creation of the event. Note that some emails
+-- might still be sent even if you set the value to false. The default is
+-- false.
 eqaSendNotifications :: Lens' EventsQuickAdd (Maybe Bool)
 eqaSendNotifications
   = lens _eqaSendNotifications
       (\ s a -> s{_eqaSendNotifications = a})
 
+-- | Guests who should receive notifications about the creation of the new
+-- event.
+eqaSendUpdates :: Lens' EventsQuickAdd (Maybe EventsQuickAddSendUpdates)
+eqaSendUpdates
+  = lens _eqaSendUpdates
+      (\ s a -> s{_eqaSendUpdates = a})
+
 instance GoogleRequest EventsQuickAdd where
         type Rs EventsQuickAdd = Event
         type Scopes EventsQuickAdd =
-             '["https://www.googleapis.com/auth/calendar"]
+             '["https://www.googleapis.com/auth/calendar",
+               "https://www.googleapis.com/auth/calendar.events"]
         requestClient EventsQuickAdd'{..}
           = go _eqaCalendarId (Just _eqaText)
               _eqaSendNotifications
+              _eqaSendUpdates
               (Just AltJSON)
               appsCalendarService
           where go

@@ -35,6 +35,7 @@ module Network.Google.Resource.Storage.BucketAccessControls.Update
     -- * Request Lenses
     , bacuBucket
     , bacuPayload
+    , bacuUserProject
     , bacuEntity
     ) where
 
@@ -50,17 +51,19 @@ type BucketAccessControlsUpdateResource =
            Capture "bucket" Text :>
              "acl" :>
                Capture "entity" Text :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] BucketAccessControl :>
-                     Put '[JSON] BucketAccessControl
+                 QueryParam "userProject" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] BucketAccessControl :>
+                       Put '[JSON] BucketAccessControl
 
 -- | Updates an ACL entry on the specified bucket.
 --
 -- /See:/ 'bucketAccessControlsUpdate' smart constructor.
 data BucketAccessControlsUpdate = BucketAccessControlsUpdate'
-    { _bacuBucket  :: !Text
-    , _bacuPayload :: !BucketAccessControl
-    , _bacuEntity  :: !Text
+    { _bacuBucket      :: !Text
+    , _bacuPayload     :: !BucketAccessControl
+    , _bacuUserProject :: !(Maybe Text)
+    , _bacuEntity      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketAccessControlsUpdate' with the minimum fields required to make a request.
@@ -70,6 +73,8 @@ data BucketAccessControlsUpdate = BucketAccessControlsUpdate'
 -- * 'bacuBucket'
 --
 -- * 'bacuPayload'
+--
+-- * 'bacuUserProject'
 --
 -- * 'bacuEntity'
 bucketAccessControlsUpdate
@@ -81,6 +86,7 @@ bucketAccessControlsUpdate pBacuBucket_ pBacuPayload_ pBacuEntity_ =
     BucketAccessControlsUpdate'
     { _bacuBucket = pBacuBucket_
     , _bacuPayload = pBacuPayload_
+    , _bacuUserProject = Nothing
     , _bacuEntity = pBacuEntity_
     }
 
@@ -93,6 +99,13 @@ bacuBucket
 bacuPayload :: Lens' BucketAccessControlsUpdate BucketAccessControl
 bacuPayload
   = lens _bacuPayload (\ s a -> s{_bacuPayload = a})
+
+-- | The project to be billed for this request. Required for Requester Pays
+-- buckets.
+bacuUserProject :: Lens' BucketAccessControlsUpdate (Maybe Text)
+bacuUserProject
+  = lens _bacuUserProject
+      (\ s a -> s{_bacuUserProject = a})
 
 -- | The entity holding the permission. Can be user-userId,
 -- user-emailAddress, group-groupId, group-emailAddress, allUsers, or
@@ -109,7 +122,8 @@ instance GoogleRequest BucketAccessControlsUpdate
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/devstorage.full_control"]
         requestClient BucketAccessControlsUpdate'{..}
-          = go _bacuBucket _bacuEntity (Just AltJSON)
+          = go _bacuBucket _bacuEntity _bacuUserProject
+              (Just AltJSON)
               _bacuPayload
               storageService
           where go

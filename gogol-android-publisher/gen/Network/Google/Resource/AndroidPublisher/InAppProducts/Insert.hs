@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'InAppProductsInsert' request conforms to.
 type InAppProductsInsertResource =
      "androidpublisher" :>
-       "v2" :>
+       "v3" :>
          "applications" :>
            Capture "packageName" Text :>
              "inappproducts" :>

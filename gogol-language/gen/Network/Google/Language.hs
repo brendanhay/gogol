@@ -13,17 +13,18 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Google Cloud Natural Language API provides natural language
--- understanding technologies to developers. Examples include sentiment
--- analysis, entity recognition, and text annotations.
+-- Provides natural language understanding technologies, such as sentiment
+-- analysis, entity recognition, entity sentiment analysis, and other text
+-- annotations, to developers.
 --
--- /See:/ <https://cloud.google.com/natural-language/ Google Cloud Natural Language API Reference>
+-- /See:/ <https://cloud.google.com/natural-language/ Cloud Natural Language API Reference>
 module Network.Google.Language
     (
     -- * Service Configuration
       languageService
 
     -- * OAuth Scopes
+    , cloudLanguageScope
     , cloudPlatformScope
 
     -- * API Declaration
@@ -34,6 +35,9 @@ module Network.Google.Language
     -- ** language.documents.analyzeEntities
     , module Network.Google.Resource.Language.Documents.AnalyzeEntities
 
+    -- ** language.documents.analyzeEntitySentiment
+    , module Network.Google.Resource.Language.Documents.AnalyzeEntitySentiment
+
     -- ** language.documents.analyzeSentiment
     , module Network.Google.Resource.Language.Documents.AnalyzeSentiment
 
@@ -42,6 +46,9 @@ module Network.Google.Language
 
     -- ** language.documents.annotateText
     , module Network.Google.Resource.Language.Documents.AnnotateText
+
+    -- ** language.documents.classifyText
+    , module Network.Google.Resource.Language.Documents.ClassifyText
 
     -- * Types
 
@@ -56,6 +63,11 @@ module Network.Google.Language
     , dependencyEdge
     , deHeadTokenIndex
     , deLabel
+
+    -- ** ClassifyTextRequest
+    , ClassifyTextRequest
+    , classifyTextRequest
+    , ctrDocument
 
     -- ** Status
     , Status
@@ -81,6 +93,9 @@ module Network.Google.Language
 
     -- ** AnalyzeSyntaxRequestEncodingType
     , AnalyzeSyntaxRequestEncodingType (..)
+
+    -- ** AnalyzeEntitySentimentRequestEncodingType
+    , AnalyzeEntitySentimentRequestEncodingType (..)
 
     -- ** DependencyEdgeLabel
     , DependencyEdgeLabel (..)
@@ -110,6 +125,12 @@ module Network.Google.Language
     , statusDetailsItem
     , sdiAddtional
 
+    -- ** ClassificationCategory
+    , ClassificationCategory
+    , classificationCategory
+    , ccConfidence
+    , ccName
+
     -- ** AnnotateTextRequest
     , AnnotateTextRequest
     , annotateTextRequest
@@ -120,6 +141,7 @@ module Network.Google.Language
     -- ** EntityMention
     , EntityMention
     , entityMention
+    , emSentiment
     , emText
     , emType
 
@@ -129,12 +151,19 @@ module Network.Google.Language
     , tsBeginOffSet
     , tsContent
 
+    -- ** AnalyzeEntitySentimentRequest
+    , AnalyzeEntitySentimentRequest
+    , analyzeEntitySentimentRequest
+    , aesrEncodingType
+    , aesrDocument
+
     -- ** AnnotateTextResponse
     , AnnotateTextResponse
     , annotateTextResponse
     , atrEntities
     , atrTokens
     , atrDocumentSentiment
+    , atrCategories
     , atrSentences
     , atrLanguage
 
@@ -146,6 +175,8 @@ module Network.Google.Language
     , features
     , fExtractSyntax
     , fExtractDocumentSentiment
+    , fClassifyText
+    , fExtractEntitySentiment
     , fExtractEntities
 
     -- ** Document
@@ -202,11 +233,18 @@ module Network.Google.Language
     -- ** Entity
     , Entity
     , entity
+    , eSentiment
     , eName
     , eSalience
     , eMetadata
     , eType
     , eMentions
+
+    -- ** AnalyzeEntitySentimentResponse
+    , AnalyzeEntitySentimentResponse
+    , analyzeEntitySentimentResponse
+    , aesrEntities
+    , aesrLanguage
 
     -- ** AnalyzeSyntaxResponse
     , AnalyzeSyntaxResponse
@@ -222,6 +260,11 @@ module Network.Google.Language
 
     -- ** PartOfSpeechAspect
     , PartOfSpeechAspect (..)
+
+    -- ** ClassifyTextResponse
+    , ClassifyTextResponse
+    , classifyTextResponse
+    , ctrCategories
 
     -- ** PartOfSpeech
     , PartOfSpeech
@@ -261,17 +304,21 @@ module Network.Google.Language
 import           Network.Google.Language.Types
 import           Network.Google.Prelude
 import           Network.Google.Resource.Language.Documents.AnalyzeEntities
+import           Network.Google.Resource.Language.Documents.AnalyzeEntitySentiment
 import           Network.Google.Resource.Language.Documents.AnalyzeSentiment
 import           Network.Google.Resource.Language.Documents.AnalyzeSyntax
 import           Network.Google.Resource.Language.Documents.AnnotateText
+import           Network.Google.Resource.Language.Documents.ClassifyText
 
 {- $resources
 TODO
 -}
 
--- | Represents the entirety of the methods and resources available for the Google Cloud Natural Language API service.
+-- | Represents the entirety of the methods and resources available for the Cloud Natural Language API service.
 type LanguageAPI =
      DocumentsAnalyzeSyntaxResource :<|>
-       DocumentsAnnotateTextResource
+       DocumentsClassifyTextResource
+       :<|> DocumentsAnnotateTextResource
+       :<|> DocumentsAnalyzeEntitySentimentResource
        :<|> DocumentsAnalyzeSentimentResource
        :<|> DocumentsAnalyzeEntitiesResource

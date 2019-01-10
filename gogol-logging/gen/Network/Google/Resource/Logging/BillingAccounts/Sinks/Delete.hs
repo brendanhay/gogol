@@ -36,10 +36,8 @@ module Network.Google.Resource.Logging.BillingAccounts.Sinks.Delete
     -- * Request Lenses
     , basdXgafv
     , basdUploadProtocol
-    , basdPp
     , basdAccessToken
     , basdUploadType
-    , basdBearerToken
     , basdSinkName
     , basdCallback
     ) where
@@ -54,12 +52,10 @@ type BillingAccountsSinksDeleteResource =
        Capture "sinkName" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :> Delete '[JSON] Empty
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
 -- | Deletes a sink. If the sink has a unique writer_identity, then that
 -- service account is also deleted.
@@ -68,10 +64,8 @@ type BillingAccountsSinksDeleteResource =
 data BillingAccountsSinksDelete = BillingAccountsSinksDelete'
     { _basdXgafv          :: !(Maybe Xgafv)
     , _basdUploadProtocol :: !(Maybe Text)
-    , _basdPp             :: !Bool
     , _basdAccessToken    :: !(Maybe Text)
     , _basdUploadType     :: !(Maybe Text)
-    , _basdBearerToken    :: !(Maybe Text)
     , _basdSinkName       :: !Text
     , _basdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -84,13 +78,9 @@ data BillingAccountsSinksDelete = BillingAccountsSinksDelete'
 --
 -- * 'basdUploadProtocol'
 --
--- * 'basdPp'
---
 -- * 'basdAccessToken'
 --
 -- * 'basdUploadType'
---
--- * 'basdBearerToken'
 --
 -- * 'basdSinkName'
 --
@@ -102,10 +92,8 @@ billingAccountsSinksDelete pBasdSinkName_ =
     BillingAccountsSinksDelete'
     { _basdXgafv = Nothing
     , _basdUploadProtocol = Nothing
-    , _basdPp = True
     , _basdAccessToken = Nothing
     , _basdUploadType = Nothing
-    , _basdBearerToken = Nothing
     , _basdSinkName = pBasdSinkName_
     , _basdCallback = Nothing
     }
@@ -121,10 +109,6 @@ basdUploadProtocol
   = lens _basdUploadProtocol
       (\ s a -> s{_basdUploadProtocol = a})
 
--- | Pretty-print response.
-basdPp :: Lens' BillingAccountsSinksDelete Bool
-basdPp = lens _basdPp (\ s a -> s{_basdPp = a})
-
 -- | OAuth access token.
 basdAccessToken :: Lens' BillingAccountsSinksDelete (Maybe Text)
 basdAccessToken
@@ -137,19 +121,13 @@ basdUploadType
   = lens _basdUploadType
       (\ s a -> s{_basdUploadType = a})
 
--- | OAuth bearer token.
-basdBearerToken :: Lens' BillingAccountsSinksDelete (Maybe Text)
-basdBearerToken
-  = lens _basdBearerToken
-      (\ s a -> s{_basdBearerToken = a})
-
 -- | Required. The full resource name of the sink to delete, including the
 -- parent resource and the sink identifier:
 -- \"projects\/[PROJECT_ID]\/sinks\/[SINK_ID]\"
--- \"organizations\/[ORGANIZATION_ID]\/sinks\/[SINK_ID]\" It is an error if
--- the sink does not exist. Example:
--- \"projects\/my-project-id\/sinks\/my-sink-id\". It is an error if the
--- sink does not exist.
+-- \"organizations\/[ORGANIZATION_ID]\/sinks\/[SINK_ID]\"
+-- \"billingAccounts\/[BILLING_ACCOUNT_ID]\/sinks\/[SINK_ID]\"
+-- \"folders\/[FOLDER_ID]\/sinks\/[SINK_ID]\" Example:
+-- \"projects\/my-project-id\/sinks\/my-sink-id\".
 basdSinkName :: Lens' BillingAccountsSinksDelete Text
 basdSinkName
   = lens _basdSinkName (\ s a -> s{_basdSinkName = a})
@@ -167,10 +145,8 @@ instance GoogleRequest BillingAccountsSinksDelete
                "https://www.googleapis.com/auth/logging.admin"]
         requestClient BillingAccountsSinksDelete'{..}
           = go _basdSinkName _basdXgafv _basdUploadProtocol
-              (Just _basdPp)
               _basdAccessToken
               _basdUploadType
-              _basdBearerToken
               _basdCallback
               (Just AltJSON)
               loggingService

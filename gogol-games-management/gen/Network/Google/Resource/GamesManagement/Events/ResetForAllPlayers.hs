@@ -81,8 +81,7 @@ erfapEventId
 instance GoogleRequest EventsResetForAllPlayers where
         type Rs EventsResetForAllPlayers = ()
         type Scopes EventsResetForAllPlayers =
-             '["https://www.googleapis.com/auth/games",
-               "https://www.googleapis.com/auth/plus.login"]
+             '["https://www.googleapis.com/auth/games"]
         requestClient EventsResetForAllPlayers'{..}
           = go _erfapEventId (Just AltJSON)
               gamesManagementService

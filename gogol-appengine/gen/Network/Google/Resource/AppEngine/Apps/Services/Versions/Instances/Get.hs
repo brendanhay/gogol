@@ -22,7 +22,7 @@
 --
 -- Gets instance information.
 --
--- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ Google App Engine Admin API Reference> for @appengine.apps.services.versions.instances.get@.
+-- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ App Engine Admin API Reference> for @appengine.apps.services.versions.instances.get@.
 module Network.Google.Resource.AppEngine.Apps.Services.Versions.Instances.Get
     (
     -- * REST Resource
@@ -36,11 +36,9 @@ module Network.Google.Resource.AppEngine.Apps.Services.Versions.Instances.Get
     , asvigXgafv
     , asvigInstancesId
     , asvigUploadProtocol
-    , asvigPp
     , asvigAccessToken
     , asvigUploadType
     , asvigVersionsId
-    , asvigBearerToken
     , asvigAppsId
     , asvigServicesId
     , asvigCallback
@@ -61,28 +59,24 @@ type AppsServicesVersionsInstancesGetResource =
                  Capture "versionsId" Text :>
                    "instances" :>
                      Capture "instancesId" Text :>
-                       QueryParam "$.xgafv" Text :>
+                       QueryParam "$.xgafv" Xgafv :>
                          QueryParam "upload_protocol" Text :>
-                           QueryParam "pp" Bool :>
-                             QueryParam "access_token" Text :>
-                               QueryParam "uploadType" Text :>
-                                 QueryParam "bearer_token" Text :>
-                                   QueryParam "callback" Text :>
-                                     QueryParam "alt" AltJSON :>
-                                       Get '[JSON] Instance
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON] Instance
 
 -- | Gets instance information.
 --
 -- /See:/ 'appsServicesVersionsInstancesGet' smart constructor.
 data AppsServicesVersionsInstancesGet = AppsServicesVersionsInstancesGet'
-    { _asvigXgafv          :: !(Maybe Text)
+    { _asvigXgafv          :: !(Maybe Xgafv)
     , _asvigInstancesId    :: !Text
     , _asvigUploadProtocol :: !(Maybe Text)
-    , _asvigPp             :: !Bool
     , _asvigAccessToken    :: !(Maybe Text)
     , _asvigUploadType     :: !(Maybe Text)
     , _asvigVersionsId     :: !Text
-    , _asvigBearerToken    :: !(Maybe Text)
     , _asvigAppsId         :: !Text
     , _asvigServicesId     :: !Text
     , _asvigCallback       :: !(Maybe Text)
@@ -98,15 +92,11 @@ data AppsServicesVersionsInstancesGet = AppsServicesVersionsInstancesGet'
 --
 -- * 'asvigUploadProtocol'
 --
--- * 'asvigPp'
---
 -- * 'asvigAccessToken'
 --
 -- * 'asvigUploadType'
 --
 -- * 'asvigVersionsId'
---
--- * 'asvigBearerToken'
 --
 -- * 'asvigAppsId'
 --
@@ -124,18 +114,16 @@ appsServicesVersionsInstancesGet pAsvigInstancesId_ pAsvigVersionsId_ pAsvigApps
     { _asvigXgafv = Nothing
     , _asvigInstancesId = pAsvigInstancesId_
     , _asvigUploadProtocol = Nothing
-    , _asvigPp = True
     , _asvigAccessToken = Nothing
     , _asvigUploadType = Nothing
     , _asvigVersionsId = pAsvigVersionsId_
-    , _asvigBearerToken = Nothing
     , _asvigAppsId = pAsvigAppsId_
     , _asvigServicesId = pAsvigServicesId_
     , _asvigCallback = Nothing
     }
 
 -- | V1 error format.
-asvigXgafv :: Lens' AppsServicesVersionsInstancesGet (Maybe Text)
+asvigXgafv :: Lens' AppsServicesVersionsInstancesGet (Maybe Xgafv)
 asvigXgafv
   = lens _asvigXgafv (\ s a -> s{_asvigXgafv = a})
 
@@ -150,10 +138,6 @@ asvigUploadProtocol :: Lens' AppsServicesVersionsInstancesGet (Maybe Text)
 asvigUploadProtocol
   = lens _asvigUploadProtocol
       (\ s a -> s{_asvigUploadProtocol = a})
-
--- | Pretty-print response.
-asvigPp :: Lens' AppsServicesVersionsInstancesGet Bool
-asvigPp = lens _asvigPp (\ s a -> s{_asvigPp = a})
 
 -- | OAuth access token.
 asvigAccessToken :: Lens' AppsServicesVersionsInstancesGet (Maybe Text)
@@ -172,12 +156,6 @@ asvigVersionsId :: Lens' AppsServicesVersionsInstancesGet Text
 asvigVersionsId
   = lens _asvigVersionsId
       (\ s a -> s{_asvigVersionsId = a})
-
--- | OAuth bearer token.
-asvigBearerToken :: Lens' AppsServicesVersionsInstancesGet (Maybe Text)
-asvigBearerToken
-  = lens _asvigBearerToken
-      (\ s a -> s{_asvigBearerToken = a})
 
 -- | Part of \`name\`. Name of the resource requested. Example:
 -- apps\/myapp\/services\/default\/versions\/v1\/instances\/instance-1.
@@ -209,10 +187,8 @@ instance GoogleRequest
               _asvigInstancesId
               _asvigXgafv
               _asvigUploadProtocol
-              (Just _asvigPp)
               _asvigAccessToken
               _asvigUploadType
-              _asvigBearerToken
               _asvigCallback
               (Just AltJSON)
               appEngineService

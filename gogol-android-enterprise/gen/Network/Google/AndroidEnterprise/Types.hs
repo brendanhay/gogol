@@ -29,6 +29,7 @@ module Network.Google.AndroidEnterprise.Types
     , glNumProvisioned
     , glNumPurchased
     , glApproval
+    , glPermissions
     , glProductId
     , glAcquisitionKind
 
@@ -53,6 +54,12 @@ module Network.Google.AndroidEnterprise.Types
     , arsrrvType
     , arsrrvValueString
 
+    -- * AdministratorWebTokenSpecPlaySearch
+    , AdministratorWebTokenSpecPlaySearch
+    , administratorWebTokenSpecPlaySearch
+    , awtspsEnabled
+    , awtspsApproveApps
+
     -- * DeviceState
     , DeviceState
     , deviceState
@@ -71,11 +78,22 @@ module Network.Google.AndroidEnterprise.Types
     , tpNextPageToken
     , tpPreviousPageToken
 
+    -- * AdministratorWebTokenSpecWebApps
+    , AdministratorWebTokenSpecWebApps
+    , administratorWebTokenSpecWebApps
+    , awtswaEnabled
+
     -- * ApprovalURLInfo
     , ApprovalURLInfo
     , approvalURLInfo
     , auiApprovalURL
     , auiKind
+
+    -- * ManagedConfigurationsSettingsListResponse
+    , ManagedConfigurationsSettingsListResponse
+    , managedConfigurationsSettingsListResponse
+    , mcslrKind
+    , mcslrManagedConfigurationsSettings
 
     -- * ManagedProperty
     , ManagedProperty
@@ -99,6 +117,7 @@ module Network.Google.AndroidEnterprise.Types
     , managedConfiguration
     , mcManagedProperty
     , mcKind
+    , mcConfigurationVariables
     , mcProductId
 
     -- * StoreCluster
@@ -114,8 +133,19 @@ module Network.Google.AndroidEnterprise.Types
     , AdministratorWebTokenSpec
     , administratorWebTokenSpec
     , awtsParent
+    , awtsPrivateApps
+    , awtsPlaySearch
     , awtsKind
+    , awtsWebApps
     , awtsPermission
+    , awtsStoreBuilder
+
+    -- * ProductVisibility
+    , ProductVisibility
+    , productVisibility
+    , pvTracks
+    , pvTrackIds
+    , pvProductId
 
     -- * Notification
     , Notification
@@ -126,6 +156,7 @@ module Network.Google.AndroidEnterprise.Types
     , nProductAvailabilityChangeEvent
     , nAppUpdateEvent
     , nInstallFailureEvent
+    , nNotificationType
     , nAppRestrictionsSchemaChangeEvent
     , nNewDeviceEvent
     , nTimestampMillis
@@ -166,8 +197,16 @@ module Network.Google.AndroidEnterprise.Types
     , Device
     , device
     , dKind
+    , dPolicy
     , dManagementType
     , dAndroidId
+
+    -- * AutoInstallConstraint
+    , AutoInstallConstraint
+    , autoInstallConstraint
+    , aicChargingStateConstraint
+    , aicDeviceIdleStateConstraint
+    , aicNetworkTypeConstraint
 
     -- * ServiceAccountKey
     , ServiceAccountKey
@@ -196,6 +235,14 @@ module Network.Google.AndroidEnterprise.Types
     , arsrDescription
     , arsrNestedRestriction
 
+    -- * ProductPolicy
+    , ProductPolicy
+    , productPolicy
+    , ppTracks
+    , ppTrackIds
+    , ppAutoInstallPolicy
+    , ppProductId
+
     -- * Administrator
     , Administrator
     , administrator
@@ -207,17 +254,34 @@ module Network.Google.AndroidEnterprise.Types
     , ulrKind
     , ulrUser
 
+    -- * AdministratorWebTokenSpecStoreBuilder
+    , AdministratorWebTokenSpecStoreBuilder
+    , administratorWebTokenSpecStoreBuilder
+    , awtssbEnabled
+
     -- * AuthenticationToken
     , AuthenticationToken
     , authenticationToken
     , atKind
     , atToken
 
+    -- * ManagedConfigurationsSettings
+    , ManagedConfigurationsSettings
+    , managedConfigurationsSettings
+    , mcsLastUpdatedTimestampMillis
+    , mcsManagedProperty
+    , mcsKind
+    , mcsMcmId
+    , mcsName
+
     -- * AppVersion
     , AppVersion
     , appVersion
+    , avTrack
     , avVersionCode
     , avVersionString
+    , avTrackId
+    , avIsProduction
 
     -- * EnterprisesPullNotificationSetRequestMode
     , EnterprisesPullNotificationSetRequestMode (..)
@@ -233,9 +297,16 @@ module Network.Google.AndroidEnterprise.Types
     , gllrGroupLicense
     , gllrKind
 
+    -- * AndroidDevicePolicyConfig
+    , AndroidDevicePolicyConfig
+    , androidDevicePolicyConfig
+    , adpcState
+    , adpcKind
+
     -- * ProductSet
     , ProductSet
     , productSet
+    , psProductVisibility
     , psKind
     , psProductSetBehavior
     , psProductId
@@ -248,10 +319,22 @@ module Network.Google.AndroidEnterprise.Types
     , iInstallState
     , iProductId
 
+    -- * MaintenanceWindow
+    , MaintenanceWindow
+    , maintenanceWindow
+    , mwDurationMs
+    , mwStartTimeAfterMidnightMs
+
     -- * ServiceAccountKeysListResponse
     , ServiceAccountKeysListResponse
     , serviceAccountKeysListResponse
     , saklrServiceAccountKey
+
+    -- * TrackInfo
+    , TrackInfo
+    , trackInfo
+    , tiTrackAlias
+    , tiTrackId
 
     -- * User
     , User
@@ -296,6 +379,13 @@ module Network.Google.AndroidEnterprise.Types
     , saKey
     , saName
 
+    -- * VariableSet
+    , VariableSet
+    , variableSet
+    , vsKind
+    , vsUserValue
+    , vsPlaceholder
+
     -- * AppUpdateEvent
     , AppUpdateEvent
     , appUpdateEvent
@@ -320,6 +410,11 @@ module Network.Google.AndroidEnterprise.Types
     , arsKind
     , arsRestrictions
 
+    -- * WebAppIcon
+    , WebAppIcon
+    , webAppIcon
+    , waiImageData
+
     -- * LocalizedText
     , LocalizedText
     , localizedText
@@ -333,11 +428,22 @@ module Network.Google.AndroidEnterprise.Types
     , utToken
     , utUserId
 
+    -- * AdministratorWebTokenSpecPrivateApps
+    , AdministratorWebTokenSpecPrivateApps
+    , administratorWebTokenSpecPrivateApps
+    , awtspaEnabled
+
     -- * DevicesListResponse
     , DevicesListResponse
     , devicesListResponse
     , dlrKind
     , dlrDevice
+
+    -- * ProductSigningCertificate
+    , ProductSigningCertificate
+    , productSigningCertificate
+    , pscCertificateHashSha256
+    , pscCertificateHashSha1
 
     -- * Enterprise
     , Enterprise
@@ -363,6 +469,13 @@ module Network.Google.AndroidEnterprise.Types
     , mcfulrManagedConfigurationForUser
     , mcfulrKind
 
+    -- * ConfigurationVariables
+    , ConfigurationVariables
+    , configurationVariables
+    , cvKind
+    , cvMcmId
+    , cvVariableSet
+
     -- * StoreLayout
     , StoreLayout
     , storeLayout
@@ -379,8 +492,17 @@ module Network.Google.AndroidEnterprise.Types
     , NewDeviceEvent
     , newDeviceEvent
     , ndeUserId
+    , ndeDpcPackageName
     , ndeDeviceId
     , ndeManagementType
+
+    -- * Policy
+    , Policy
+    , policy
+    , pProductAvailabilityPolicy
+    , pProductPolicy
+    , pMaintenanceWindow
+    , pAutoUpdatePolicy
 
     -- * AdministratorWebToken
     , AdministratorWebToken
@@ -398,17 +520,29 @@ module Network.Google.AndroidEnterprise.Types
     -- * Product
     , Product
     , product
+    , pScreenshotURLs
+    , pLastUpdatedTimestampMillis
     , pSmallIconURL
     , pAuthorName
+    , pAppTracks
     , pKind
     , pWorkDetailsURL
     , pRequiresContainerApp
+    , pCategory
     , pAppVersion
     , pProductPricing
     , pDistributionChannel
+    , pMinAndroidSdkVersion
+    , pAvailableCountries
+    , pAvailableTracks
     , pIconURL
+    , pPermissions
     , pTitle
+    , pSigningCertificate
+    , pContentRating
     , pProductId
+    , pRecentChanges
+    , pDescription
     , pDetailsURL
 
     -- * EntitlementsListResponse
@@ -423,9 +557,9 @@ module Network.Google.AndroidEnterprise.Types
     -- * ProductPermissions
     , ProductPermissions
     , productPermissions
-    , ppKind
-    , ppPermission
-    , ppProductId
+    , ppsKind
+    , ppsPermission
+    , ppsProductId
 
     -- * Permission
     , Permission
@@ -435,10 +569,25 @@ module Network.Google.AndroidEnterprise.Types
     , perDescription
     , perPermissionId
 
+    -- * WebAppsListResponse
+    , WebAppsListResponse
+    , webAppsListResponse
+    , walrKind
+    , walrWebApp
+
     -- * ProductsApproveRequest
     , ProductsApproveRequest
     , productsApproveRequest
     , parApprovalURLInfo
+    , parApprovedPermissions
+
+    -- * AutoInstallPolicy
+    , AutoInstallPolicy
+    , autoInstallPolicy
+    , aipAutoInstallConstraint
+    , aipAutoInstallPriority
+    , aipAutoInstallMode
+    , aipMinimumVersionCode
 
     -- * Entitlement
     , Entitlement
@@ -454,6 +603,17 @@ module Network.Google.AndroidEnterprise.Types
     , plrPageInfo
     , plrKind
     , plrProduct
+
+    -- * WebApp
+    , WebApp
+    , webApp
+    , waWebAppId
+    , waVersionCode
+    , waIcons
+    , waStartURL
+    , waDisplayMode
+    , waIsPublished
+    , waTitle
     ) where
 
 import           Network.Google.AndroidEnterprise.Types.Product

@@ -78,7 +78,8 @@ rlQueryId
 
 instance GoogleRequest ReportsListreports where
         type Rs ReportsListreports = ListReportsResponse
-        type Scopes ReportsListreports = '[]
+        type Scopes ReportsListreports =
+             '["https://www.googleapis.com/auth/doubleclickbidmanager"]
         requestClient ReportsListreports'{..}
           = go _rlQueryId (Just AltJSON) doubleClickBidsService
           where go

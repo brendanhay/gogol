@@ -21,15 +21,15 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Registers the debuggee with the controller service. All agents attached
--- to the same application should call this method with the same request
--- content to get back the same stable \`debuggee_id\`. Agents should call
--- this method again whenever \`google.rpc.Code.NOT_FOUND\` is returned
--- from any controller method. This allows the controller service to
--- disable the agent or recover from any data loss. If the debuggee is
--- disabled by the server, the response will have \`is_disabled\` set to
--- \`true\`.
+-- to the same application must call this method with exactly the same
+-- request content to get back the same stable \`debuggee_id\`. Agents
+-- should call this method again whenever \`google.rpc.Code.NOT_FOUND\` is
+-- returned from any controller method. This protocol allows the controller
+-- service to disable debuggees, recover from data loss, or change the
+-- \`debuggee_id\` format. Agents must handle \`debuggee_id\` value
+-- changing upon re-registration.
 --
--- /See:/ <http://cloud.google.com/debugger Stackdriver Debugger API Reference> for @clouddebugger.controller.debuggees.register@.
+-- /See:/ <https://cloud.google.com/debugger Stackdriver Debugger API Reference> for @clouddebugger.controller.debuggees.register@.
 module Network.Google.Resource.CloudDebugger.Controller.Debuggees.Register
     (
     -- * REST Resource
@@ -42,11 +42,9 @@ module Network.Google.Resource.CloudDebugger.Controller.Debuggees.Register
     -- * Request Lenses
     , cdrXgafv
     , cdrUploadProtocol
-    , cdrPp
     , cdrAccessToken
     , cdrUploadType
     , cdrPayload
-    , cdrBearerToken
     , cdrCallback
     ) where
 
@@ -62,33 +60,29 @@ type ControllerDebuggeesRegisterResource =
            "register" :>
              QueryParam "$.xgafv" Xgafv :>
                QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "callback" Text :>
-                           QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] RegisterDebuggeeRequest :>
-                               Post '[JSON] RegisterDebuggeeResponse
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] RegisterDebuggeeRequest :>
+                           Post '[JSON] RegisterDebuggeeResponse
 
 -- | Registers the debuggee with the controller service. All agents attached
--- to the same application should call this method with the same request
--- content to get back the same stable \`debuggee_id\`. Agents should call
--- this method again whenever \`google.rpc.Code.NOT_FOUND\` is returned
--- from any controller method. This allows the controller service to
--- disable the agent or recover from any data loss. If the debuggee is
--- disabled by the server, the response will have \`is_disabled\` set to
--- \`true\`.
+-- to the same application must call this method with exactly the same
+-- request content to get back the same stable \`debuggee_id\`. Agents
+-- should call this method again whenever \`google.rpc.Code.NOT_FOUND\` is
+-- returned from any controller method. This protocol allows the controller
+-- service to disable debuggees, recover from data loss, or change the
+-- \`debuggee_id\` format. Agents must handle \`debuggee_id\` value
+-- changing upon re-registration.
 --
 -- /See:/ 'controllerDebuggeesRegister' smart constructor.
 data ControllerDebuggeesRegister = ControllerDebuggeesRegister'
     { _cdrXgafv          :: !(Maybe Xgafv)
     , _cdrUploadProtocol :: !(Maybe Text)
-    , _cdrPp             :: !Bool
     , _cdrAccessToken    :: !(Maybe Text)
     , _cdrUploadType     :: !(Maybe Text)
     , _cdrPayload        :: !RegisterDebuggeeRequest
-    , _cdrBearerToken    :: !(Maybe Text)
     , _cdrCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -100,15 +94,11 @@ data ControllerDebuggeesRegister = ControllerDebuggeesRegister'
 --
 -- * 'cdrUploadProtocol'
 --
--- * 'cdrPp'
---
 -- * 'cdrAccessToken'
 --
 -- * 'cdrUploadType'
 --
 -- * 'cdrPayload'
---
--- * 'cdrBearerToken'
 --
 -- * 'cdrCallback'
 controllerDebuggeesRegister
@@ -118,11 +108,9 @@ controllerDebuggeesRegister pCdrPayload_ =
     ControllerDebuggeesRegister'
     { _cdrXgafv = Nothing
     , _cdrUploadProtocol = Nothing
-    , _cdrPp = True
     , _cdrAccessToken = Nothing
     , _cdrUploadType = Nothing
     , _cdrPayload = pCdrPayload_
-    , _cdrBearerToken = Nothing
     , _cdrCallback = Nothing
     }
 
@@ -135,10 +123,6 @@ cdrUploadProtocol :: Lens' ControllerDebuggeesRegister (Maybe Text)
 cdrUploadProtocol
   = lens _cdrUploadProtocol
       (\ s a -> s{_cdrUploadProtocol = a})
-
--- | Pretty-print response.
-cdrPp :: Lens' ControllerDebuggeesRegister Bool
-cdrPp = lens _cdrPp (\ s a -> s{_cdrPp = a})
 
 -- | OAuth access token.
 cdrAccessToken :: Lens' ControllerDebuggeesRegister (Maybe Text)
@@ -157,12 +141,6 @@ cdrPayload :: Lens' ControllerDebuggeesRegister RegisterDebuggeeRequest
 cdrPayload
   = lens _cdrPayload (\ s a -> s{_cdrPayload = a})
 
--- | OAuth bearer token.
-cdrBearerToken :: Lens' ControllerDebuggeesRegister (Maybe Text)
-cdrBearerToken
-  = lens _cdrBearerToken
-      (\ s a -> s{_cdrBearerToken = a})
-
 -- | JSONP
 cdrCallback :: Lens' ControllerDebuggeesRegister (Maybe Text)
 cdrCallback
@@ -176,10 +154,8 @@ instance GoogleRequest ControllerDebuggeesRegister
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/cloud_debugger"]
         requestClient ControllerDebuggeesRegister'{..}
-          = go _cdrXgafv _cdrUploadProtocol (Just _cdrPp)
-              _cdrAccessToken
+          = go _cdrXgafv _cdrUploadProtocol _cdrAccessToken
               _cdrUploadType
-              _cdrBearerToken
               _cdrCallback
               (Just AltJSON)
               _cdrPayload

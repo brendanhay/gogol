@@ -43,6 +43,7 @@ library
         , Network.Google.Resource.ProximityBeacon.Beacons.Attachments.List
         , Network.Google.Resource.ProximityBeacon.Beacons.Deactivate
         , Network.Google.Resource.ProximityBeacon.Beacons.Decommission
+        , Network.Google.Resource.ProximityBeacon.Beacons.Delete
         , Network.Google.Resource.ProximityBeacon.Beacons.Diagnostics.List
         , Network.Google.Resource.ProximityBeacon.Beacons.Get
         , Network.Google.Resource.ProximityBeacon.Beacons.List

@@ -51,7 +51,7 @@ import           Network.Google.Prelude
 -- 'CreativeFieldsList' request conforms to.
 type CreativeFieldsListResource =
      "dfareporting" :>
-       "v2.7" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeFields" :>
@@ -73,11 +73,11 @@ data CreativeFieldsList = CreativeFieldsList'
     { _cflSearchString  :: !(Maybe Text)
     , _cflIds           :: !(Maybe [Textual Int64])
     , _cflProFileId     :: !(Textual Int64)
-    , _cflSortOrder     :: !(Maybe CreativeFieldsListSortOrder)
+    , _cflSortOrder     :: !CreativeFieldsListSortOrder
     , _cflPageToken     :: !(Maybe Text)
-    , _cflSortField     :: !(Maybe CreativeFieldsListSortField)
+    , _cflSortField     :: !CreativeFieldsListSortField
     , _cflAdvertiserIds :: !(Maybe [Textual Int64])
-    , _cflMaxResults    :: !(Maybe (Textual Int32))
+    , _cflMaxResults    :: !(Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldsList' with the minimum fields required to make a request.
@@ -107,11 +107,11 @@ creativeFieldsList pCflProFileId_ =
     { _cflSearchString = Nothing
     , _cflIds = Nothing
     , _cflProFileId = _Coerce # pCflProFileId_
-    , _cflSortOrder = Nothing
+    , _cflSortOrder = CFLSOAscending
     , _cflPageToken = Nothing
-    , _cflSortField = Nothing
+    , _cflSortField = CFLSFID
     , _cflAdvertiserIds = Nothing
-    , _cflMaxResults = Nothing
+    , _cflMaxResults = 1000
     }
 
 -- | Allows searching for creative fields by name or ID. Wildcards (*) are
@@ -139,8 +139,8 @@ cflProFileId
   = lens _cflProFileId (\ s a -> s{_cflProFileId = a})
       . _Coerce
 
--- | Order of sorted results, default is ASCENDING.
-cflSortOrder :: Lens' CreativeFieldsList (Maybe CreativeFieldsListSortOrder)
+-- | Order of sorted results.
+cflSortOrder :: Lens' CreativeFieldsList CreativeFieldsListSortOrder
 cflSortOrder
   = lens _cflSortOrder (\ s a -> s{_cflSortOrder = a})
 
@@ -150,7 +150,7 @@ cflPageToken
   = lens _cflPageToken (\ s a -> s{_cflPageToken = a})
 
 -- | Field by which to sort the list.
-cflSortField :: Lens' CreativeFieldsList (Maybe CreativeFieldsListSortField)
+cflSortField :: Lens' CreativeFieldsList CreativeFieldsListSortField
 cflSortField
   = lens _cflSortField (\ s a -> s{_cflSortField = a})
 
@@ -163,11 +163,11 @@ cflAdvertiserIds
       . _Coerce
 
 -- | Maximum number of results to return.
-cflMaxResults :: Lens' CreativeFieldsList (Maybe Int32)
+cflMaxResults :: Lens' CreativeFieldsList Int32
 cflMaxResults
   = lens _cflMaxResults
       (\ s a -> s{_cflMaxResults = a})
-      . mapping _Coerce
+      . _Coerce
 
 instance GoogleRequest CreativeFieldsList where
         type Rs CreativeFieldsList =
@@ -177,11 +177,11 @@ instance GoogleRequest CreativeFieldsList where
         requestClient CreativeFieldsList'{..}
           = go _cflProFileId _cflSearchString
               (_cflIds ^. _Default)
-              _cflSortOrder
+              (Just _cflSortOrder)
               _cflPageToken
-              _cflSortField
+              (Just _cflSortField)
               (_cflAdvertiserIds ^. _Default)
-              _cflMaxResults
+              (Just _cflMaxResults)
               (Just AltJSON)
               dFAReportingService
           where go

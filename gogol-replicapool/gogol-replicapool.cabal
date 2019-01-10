@@ -1,6 +1,6 @@
 name:                  gogol-replicapool
 version:               0.3.0
-synopsis:              Google Compute Engine Instance Group Manager SDK.
+synopsis:              Google Replica Pool SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -14,13 +14,13 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    [Deprecated. Please use Instance Group Manager in Compute API] Provides
-    groups of homogenous Compute Engine instances.
+    The Replica Pool API allows users to declaratively provision and manage
+    groups of Google Compute Engine instances based on a common template.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
     .
-    This library is compatible with version @v1beta2@
+    This library is compatible with version @v1beta1@
     of the API.
     .
     Labels:
@@ -40,18 +40,16 @@ library
     exposed-modules:
           Network.Google.ReplicaPool
         , Network.Google.ReplicaPool.Types
-        , Network.Google.Resource.ReplicaPool.InstanceGroupManagers.AbandonInstances
-        , Network.Google.Resource.ReplicaPool.InstanceGroupManagers.Delete
-        , Network.Google.Resource.ReplicaPool.InstanceGroupManagers.DeleteInstances
-        , Network.Google.Resource.ReplicaPool.InstanceGroupManagers.Get
-        , Network.Google.Resource.ReplicaPool.InstanceGroupManagers.Insert
-        , Network.Google.Resource.ReplicaPool.InstanceGroupManagers.List
-        , Network.Google.Resource.ReplicaPool.InstanceGroupManagers.RecreateInstances
-        , Network.Google.Resource.ReplicaPool.InstanceGroupManagers.Resize
-        , Network.Google.Resource.ReplicaPool.InstanceGroupManagers.SetInstanceTemplate
-        , Network.Google.Resource.ReplicaPool.InstanceGroupManagers.SetTargetPools
-        , Network.Google.Resource.ReplicaPool.ZoneOperations.Get
-        , Network.Google.Resource.ReplicaPool.ZoneOperations.List
+        , Network.Google.Resource.ReplicaPool.Pools.Delete
+        , Network.Google.Resource.ReplicaPool.Pools.Get
+        , Network.Google.Resource.ReplicaPool.Pools.Insert
+        , Network.Google.Resource.ReplicaPool.Pools.List
+        , Network.Google.Resource.ReplicaPool.Pools.Resize
+        , Network.Google.Resource.ReplicaPool.Pools.Updatetemplate
+        , Network.Google.Resource.ReplicaPool.Replicas.Delete
+        , Network.Google.Resource.ReplicaPool.Replicas.Get
+        , Network.Google.Resource.ReplicaPool.Replicas.List
+        , Network.Google.Resource.ReplicaPool.Replicas.Restart
 
     other-modules:
           Network.Google.ReplicaPool.Types.Product

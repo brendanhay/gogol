@@ -38,10 +38,8 @@ module Network.Google.Resource.Classroom.Invitations.Delete
     -- * Request Lenses
     , idXgafv
     , idUploadProtocol
-    , idPp
     , idAccessToken
     , idUploadType
-    , idBearerToken
     , idId
     , idCallback
     ) where
@@ -55,14 +53,12 @@ type InvitationsDeleteResource =
      "v1" :>
        "invitations" :>
          Capture "id" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :> Delete '[JSON] Empty
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
 -- | Deletes an invitation. This method returns the following error codes: *
 -- \`PERMISSION_DENIED\` if the requesting user is not permitted to delete
@@ -71,12 +67,10 @@ type InvitationsDeleteResource =
 --
 -- /See:/ 'invitationsDelete' smart constructor.
 data InvitationsDelete = InvitationsDelete'
-    { _idXgafv          :: !(Maybe Text)
+    { _idXgafv          :: !(Maybe Xgafv)
     , _idUploadProtocol :: !(Maybe Text)
-    , _idPp             :: !Bool
     , _idAccessToken    :: !(Maybe Text)
     , _idUploadType     :: !(Maybe Text)
-    , _idBearerToken    :: !(Maybe Text)
     , _idId             :: !Text
     , _idCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -89,13 +83,9 @@ data InvitationsDelete = InvitationsDelete'
 --
 -- * 'idUploadProtocol'
 --
--- * 'idPp'
---
 -- * 'idAccessToken'
 --
 -- * 'idUploadType'
---
--- * 'idBearerToken'
 --
 -- * 'idId'
 --
@@ -107,16 +97,14 @@ invitationsDelete pIdId_ =
     InvitationsDelete'
     { _idXgafv = Nothing
     , _idUploadProtocol = Nothing
-    , _idPp = True
     , _idAccessToken = Nothing
     , _idUploadType = Nothing
-    , _idBearerToken = Nothing
     , _idId = pIdId_
     , _idCallback = Nothing
     }
 
 -- | V1 error format.
-idXgafv :: Lens' InvitationsDelete (Maybe Text)
+idXgafv :: Lens' InvitationsDelete (Maybe Xgafv)
 idXgafv = lens _idXgafv (\ s a -> s{_idXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -124,10 +112,6 @@ idUploadProtocol :: Lens' InvitationsDelete (Maybe Text)
 idUploadProtocol
   = lens _idUploadProtocol
       (\ s a -> s{_idUploadProtocol = a})
-
--- | Pretty-print response.
-idPp :: Lens' InvitationsDelete Bool
-idPp = lens _idPp (\ s a -> s{_idPp = a})
 
 -- | OAuth access token.
 idAccessToken :: Lens' InvitationsDelete (Maybe Text)
@@ -139,12 +123,6 @@ idAccessToken
 idUploadType :: Lens' InvitationsDelete (Maybe Text)
 idUploadType
   = lens _idUploadType (\ s a -> s{_idUploadType = a})
-
--- | OAuth bearer token.
-idBearerToken :: Lens' InvitationsDelete (Maybe Text)
-idBearerToken
-  = lens _idBearerToken
-      (\ s a -> s{_idBearerToken = a})
 
 -- | Identifier of the invitation to delete.
 idId :: Lens' InvitationsDelete Text
@@ -160,10 +138,8 @@ instance GoogleRequest InvitationsDelete where
         type Scopes InvitationsDelete =
              '["https://www.googleapis.com/auth/classroom.rosters"]
         requestClient InvitationsDelete'{..}
-          = go _idId _idXgafv _idUploadProtocol (Just _idPp)
-              _idAccessToken
+          = go _idId _idXgafv _idUploadProtocol _idAccessToken
               _idUploadType
-              _idBearerToken
               _idCallback
               (Just AltJSON)
               classroomService

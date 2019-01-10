@@ -33,6 +33,7 @@ module Network.Google.Resource.Compute.TargetHTTPSProxies.Delete
     , TargetHTTPSProxiesDelete
 
     -- * Request Lenses
+    , thpdRequestId
     , thpdProject
     , thpdTargetHTTPSProxy
     ) where
@@ -50,19 +51,23 @@ type TargetHTTPSProxiesDeleteResource =
              "global" :>
                "targetHttpsProxies" :>
                  Capture "targetHttpsProxy" Text :>
-                   QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+                   QueryParam "requestId" Text :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified TargetHttpsProxy resource.
 --
 -- /See:/ 'targetHTTPSProxiesDelete' smart constructor.
 data TargetHTTPSProxiesDelete = TargetHTTPSProxiesDelete'
-    { _thpdProject          :: !Text
+    { _thpdRequestId        :: !(Maybe Text)
+    , _thpdProject          :: !Text
     , _thpdTargetHTTPSProxy :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetHTTPSProxiesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'thpdRequestId'
 --
 -- * 'thpdProject'
 --
@@ -73,9 +78,25 @@ targetHTTPSProxiesDelete
     -> TargetHTTPSProxiesDelete
 targetHTTPSProxiesDelete pThpdProject_ pThpdTargetHTTPSProxy_ =
     TargetHTTPSProxiesDelete'
-    { _thpdProject = pThpdProject_
+    { _thpdRequestId = Nothing
+    , _thpdProject = pThpdProject_
     , _thpdTargetHTTPSProxy = pThpdTargetHTTPSProxy_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+thpdRequestId :: Lens' TargetHTTPSProxiesDelete (Maybe Text)
+thpdRequestId
+  = lens _thpdRequestId
+      (\ s a -> s{_thpdRequestId = a})
 
 -- | Project ID for this request.
 thpdProject :: Lens' TargetHTTPSProxiesDelete Text
@@ -95,6 +116,7 @@ instance GoogleRequest TargetHTTPSProxiesDelete where
                "https://www.googleapis.com/auth/compute"]
         requestClient TargetHTTPSProxiesDelete'{..}
           = go _thpdProject _thpdTargetHTTPSProxy
+              _thpdRequestId
               (Just AltJSON)
               computeService
           where go

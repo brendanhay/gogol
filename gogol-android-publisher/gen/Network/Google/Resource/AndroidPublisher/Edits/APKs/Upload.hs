@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 -- 'EditsAPKsUpload' request conforms to.
 type EditsAPKsUploadResource =
      "androidpublisher" :>
-       "v2" :>
+       "v3" :>
          "applications" :>
            Capture "packageName" Text :>
              "edits" :>
@@ -52,7 +52,7 @@ type EditsAPKsUploadResource =
        :<|>
        "upload" :>
          "androidpublisher" :>
-           "v2" :>
+           "v3" :>
              "applications" :>
                Capture "packageName" Text :>
                  "edits" :>

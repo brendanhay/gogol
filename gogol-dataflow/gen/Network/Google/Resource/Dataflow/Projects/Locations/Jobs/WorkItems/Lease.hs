@@ -22,7 +22,7 @@
 --
 -- Leases a dataflow WorkItem to run.
 --
--- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @dataflow.projects.locations.jobs.workItems.lease@.
+-- /See:/ <https://cloud.google.com/dataflow Dataflow API Reference> for @dataflow.projects.locations.jobs.workItems.lease@.
 module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.WorkItems.Lease
     (
     -- * REST Resource
@@ -37,11 +37,9 @@ module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.WorkItems.Lease
     , pljwilJobId
     , pljwilUploadProtocol
     , pljwilLocation
-    , pljwilPp
     , pljwilAccessToken
     , pljwilUploadType
     , pljwilPayload
-    , pljwilBearerToken
     , pljwilProjectId
     , pljwilCallback
     ) where
@@ -60,30 +58,26 @@ type ProjectsLocationsJobsWorkItemsLeaseResource =
                "jobs" :>
                  Capture "jobId" Text :>
                    "workItems:lease" :>
-                     QueryParam "$.xgafv" Text :>
+                     QueryParam "$.xgafv" Xgafv :>
                        QueryParam "upload_protocol" Text :>
-                         QueryParam "pp" Bool :>
-                           QueryParam "access_token" Text :>
-                             QueryParam "uploadType" Text :>
-                               QueryParam "bearer_token" Text :>
-                                 QueryParam "callback" Text :>
-                                   QueryParam "alt" AltJSON :>
-                                     ReqBody '[JSON] LeaseWorkItemRequest :>
-                                       Post '[JSON] LeaseWorkItemResponse
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] LeaseWorkItemRequest :>
+                                   Post '[JSON] LeaseWorkItemResponse
 
 -- | Leases a dataflow WorkItem to run.
 --
 -- /See:/ 'projectsLocationsJobsWorkItemsLease' smart constructor.
 data ProjectsLocationsJobsWorkItemsLease = ProjectsLocationsJobsWorkItemsLease'
-    { _pljwilXgafv          :: !(Maybe Text)
+    { _pljwilXgafv          :: !(Maybe Xgafv)
     , _pljwilJobId          :: !Text
     , _pljwilUploadProtocol :: !(Maybe Text)
     , _pljwilLocation       :: !Text
-    , _pljwilPp             :: !Bool
     , _pljwilAccessToken    :: !(Maybe Text)
     , _pljwilUploadType     :: !(Maybe Text)
     , _pljwilPayload        :: !LeaseWorkItemRequest
-    , _pljwilBearerToken    :: !(Maybe Text)
     , _pljwilProjectId      :: !Text
     , _pljwilCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -100,15 +94,11 @@ data ProjectsLocationsJobsWorkItemsLease = ProjectsLocationsJobsWorkItemsLease'
 --
 -- * 'pljwilLocation'
 --
--- * 'pljwilPp'
---
 -- * 'pljwilAccessToken'
 --
 -- * 'pljwilUploadType'
 --
 -- * 'pljwilPayload'
---
--- * 'pljwilBearerToken'
 --
 -- * 'pljwilProjectId'
 --
@@ -125,17 +115,15 @@ projectsLocationsJobsWorkItemsLease pPljwilJobId_ pPljwilLocation_ pPljwilPayloa
     , _pljwilJobId = pPljwilJobId_
     , _pljwilUploadProtocol = Nothing
     , _pljwilLocation = pPljwilLocation_
-    , _pljwilPp = True
     , _pljwilAccessToken = Nothing
     , _pljwilUploadType = Nothing
     , _pljwilPayload = pPljwilPayload_
-    , _pljwilBearerToken = Nothing
     , _pljwilProjectId = pPljwilProjectId_
     , _pljwilCallback = Nothing
     }
 
 -- | V1 error format.
-pljwilXgafv :: Lens' ProjectsLocationsJobsWorkItemsLease (Maybe Text)
+pljwilXgafv :: Lens' ProjectsLocationsJobsWorkItemsLease (Maybe Xgafv)
 pljwilXgafv
   = lens _pljwilXgafv (\ s a -> s{_pljwilXgafv = a})
 
@@ -156,10 +144,6 @@ pljwilLocation
   = lens _pljwilLocation
       (\ s a -> s{_pljwilLocation = a})
 
--- | Pretty-print response.
-pljwilPp :: Lens' ProjectsLocationsJobsWorkItemsLease Bool
-pljwilPp = lens _pljwilPp (\ s a -> s{_pljwilPp = a})
-
 -- | OAuth access token.
 pljwilAccessToken :: Lens' ProjectsLocationsJobsWorkItemsLease (Maybe Text)
 pljwilAccessToken
@@ -177,12 +161,6 @@ pljwilPayload :: Lens' ProjectsLocationsJobsWorkItemsLease LeaseWorkItemRequest
 pljwilPayload
   = lens _pljwilPayload
       (\ s a -> s{_pljwilPayload = a})
-
--- | OAuth bearer token.
-pljwilBearerToken :: Lens' ProjectsLocationsJobsWorkItemsLease (Maybe Text)
-pljwilBearerToken
-  = lens _pljwilBearerToken
-      (\ s a -> s{_pljwilBearerToken = a})
 
 -- | Identifies the project this worker belongs to.
 pljwilProjectId :: Lens' ProjectsLocationsJobsWorkItemsLease Text
@@ -202,16 +180,16 @@ instance GoogleRequest
              LeaseWorkItemResponse
         type Scopes ProjectsLocationsJobsWorkItemsLease =
              '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly",
                "https://www.googleapis.com/auth/userinfo.email"]
         requestClient
           ProjectsLocationsJobsWorkItemsLease'{..}
           = go _pljwilProjectId _pljwilLocation _pljwilJobId
               _pljwilXgafv
               _pljwilUploadProtocol
-              (Just _pljwilPp)
               _pljwilAccessToken
               _pljwilUploadType
-              _pljwilBearerToken
               _pljwilCallback
               (Just AltJSON)
               _pljwilPayload

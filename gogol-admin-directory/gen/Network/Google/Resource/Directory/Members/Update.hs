@@ -84,13 +84,13 @@ membersUpdate pMuMemberKey_ pMuGroupKey_ pMuPayload_ =
     , _muPayload = pMuPayload_
     }
 
--- | Email or immutable Id of the user. If Id, it should match with id of
+-- | Email or immutable ID of the user. If ID, it should match with id of
 -- member object
 muMemberKey :: Lens' MembersUpdate Text
 muMemberKey
   = lens _muMemberKey (\ s a -> s{_muMemberKey = a})
 
--- | Email or immutable Id of the group. If Id, it should match with id of
+-- | Email or immutable ID of the group. If ID, it should match with id of
 -- group object
 muGroupKey :: Lens' MembersUpdate Text
 muGroupKey

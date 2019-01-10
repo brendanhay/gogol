@@ -82,7 +82,7 @@ siPayload :: Lens' SchemasInsert Schema
 siPayload
   = lens _siPayload (\ s a -> s{_siPayload = a})
 
--- | Immutable id of the Google Apps account
+-- | Immutable ID of the G Suite account
 siCustomerId :: Lens' SchemasInsert Text
 siCustomerId
   = lens _siCustomerId (\ s a -> s{_siCustomerId = a})

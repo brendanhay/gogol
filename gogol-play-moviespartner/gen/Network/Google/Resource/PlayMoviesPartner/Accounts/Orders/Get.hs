@@ -56,7 +56,7 @@ type AccountsOrdersGetResource =
          Capture "accountId" Text :>
            "orders" :>
              Capture "orderId" Text :>
-               QueryParam "$.xgafv" Text :>
+               QueryParam "$.xgafv" Xgafv :>
                  QueryParam "upload_protocol" Text :>
                    QueryParam "pp" Bool :>
                      QueryParam "access_token" Text :>
@@ -70,7 +70,7 @@ type AccountsOrdersGetResource =
 --
 -- /See:/ 'accountsOrdersGet' smart constructor.
 data AccountsOrdersGet = AccountsOrdersGet'
-    { _aogXgafv          :: !(Maybe Text)
+    { _aogXgafv          :: !(Maybe Xgafv)
     , _aogUploadProtocol :: !(Maybe Text)
     , _aogPp             :: !Bool
     , _aogAccessToken    :: !(Maybe Text)
@@ -120,7 +120,7 @@ accountsOrdersGet pAogAccountId_ pAogOrderId_ =
     }
 
 -- | V1 error format.
-aogXgafv :: Lens' AccountsOrdersGet (Maybe Text)
+aogXgafv :: Lens' AccountsOrdersGet (Maybe Xgafv)
 aogXgafv = lens _aogXgafv (\ s a -> s{_aogXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

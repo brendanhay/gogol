@@ -77,8 +77,8 @@ notificationsGet pNgCustomer_ pNgNotificationId_ =
     , _ngNotificationId = pNgNotificationId_
     }
 
--- | The unique ID for the customer\'s Google account. The customerId is also
--- returned as part of the Users resource.
+-- | The unique ID for the customer\'s G Suite account. The customerId is
+-- also returned as part of the Users resource.
 ngCustomer :: Lens' NotificationsGet Text
 ngCustomer
   = lens _ngCustomer (\ s a -> s{_ngCustomer = a})

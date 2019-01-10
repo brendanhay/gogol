@@ -36,10 +36,8 @@ module Network.Google.Resource.Monitoring.Projects.MetricDescriptors.Get
     -- * Request Lenses
     , pmdgXgafv
     , pmdgUploadProtocol
-    , pmdgPp
     , pmdgAccessToken
     , pmdgUploadType
-    , pmdgBearerToken
     , pmdgName
     , pmdgCallback
     ) where
@@ -54,13 +52,11 @@ type ProjectsMetricDescriptorsGetResource =
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] MetricDescriptor
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] MetricDescriptor
 
 -- | Gets a single metric descriptor. This method does not require a
 -- Stackdriver account.
@@ -69,10 +65,8 @@ type ProjectsMetricDescriptorsGetResource =
 data ProjectsMetricDescriptorsGet = ProjectsMetricDescriptorsGet'
     { _pmdgXgafv          :: !(Maybe Xgafv)
     , _pmdgUploadProtocol :: !(Maybe Text)
-    , _pmdgPp             :: !Bool
     , _pmdgAccessToken    :: !(Maybe Text)
     , _pmdgUploadType     :: !(Maybe Text)
-    , _pmdgBearerToken    :: !(Maybe Text)
     , _pmdgName           :: !Text
     , _pmdgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -85,13 +79,9 @@ data ProjectsMetricDescriptorsGet = ProjectsMetricDescriptorsGet'
 --
 -- * 'pmdgUploadProtocol'
 --
--- * 'pmdgPp'
---
 -- * 'pmdgAccessToken'
 --
 -- * 'pmdgUploadType'
---
--- * 'pmdgBearerToken'
 --
 -- * 'pmdgName'
 --
@@ -103,10 +93,8 @@ projectsMetricDescriptorsGet pPmdgName_ =
     ProjectsMetricDescriptorsGet'
     { _pmdgXgafv = Nothing
     , _pmdgUploadProtocol = Nothing
-    , _pmdgPp = True
     , _pmdgAccessToken = Nothing
     , _pmdgUploadType = Nothing
-    , _pmdgBearerToken = Nothing
     , _pmdgName = pPmdgName_
     , _pmdgCallback = Nothing
     }
@@ -122,10 +110,6 @@ pmdgUploadProtocol
   = lens _pmdgUploadProtocol
       (\ s a -> s{_pmdgUploadProtocol = a})
 
--- | Pretty-print response.
-pmdgPp :: Lens' ProjectsMetricDescriptorsGet Bool
-pmdgPp = lens _pmdgPp (\ s a -> s{_pmdgPp = a})
-
 -- | OAuth access token.
 pmdgAccessToken :: Lens' ProjectsMetricDescriptorsGet (Maybe Text)
 pmdgAccessToken
@@ -137,12 +121,6 @@ pmdgUploadType :: Lens' ProjectsMetricDescriptorsGet (Maybe Text)
 pmdgUploadType
   = lens _pmdgUploadType
       (\ s a -> s{_pmdgUploadType = a})
-
--- | OAuth bearer token.
-pmdgBearerToken :: Lens' ProjectsMetricDescriptorsGet (Maybe Text)
-pmdgBearerToken
-  = lens _pmdgBearerToken
-      (\ s a -> s{_pmdgBearerToken = a})
 
 -- | The metric descriptor on which to execute the request. The format is
 -- \"projects\/{project_id_or_number}\/metricDescriptors\/{metric_id}\". An
@@ -167,10 +145,8 @@ instance GoogleRequest ProjectsMetricDescriptorsGet
                "https://www.googleapis.com/auth/monitoring.write"]
         requestClient ProjectsMetricDescriptorsGet'{..}
           = go _pmdgName _pmdgXgafv _pmdgUploadProtocol
-              (Just _pmdgPp)
               _pmdgAccessToken
               _pmdgUploadType
-              _pmdgBearerToken
               _pmdgCallback
               (Just AltJSON)
               monitoringService

@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'ProjectsGet' request conforms to.
 type ProjectsGetResource =
      "dfareporting" :>
-       "v2.7" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "projects" :>

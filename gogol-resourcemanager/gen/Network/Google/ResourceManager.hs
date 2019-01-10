@@ -13,10 +13,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Google Cloud Resource Manager API provides methods for creating,
--- reading, and updating project metadata.
+-- Creates, reads, and updates metadata for Google Cloud Platform resource
+-- containers.
 --
--- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference>
+-- /See:/ <https://cloud.google.com/resource-manager Cloud Resource Manager API Reference>
 module Network.Google.ResourceManager
     (
     -- * Service Configuration
@@ -31,55 +31,49 @@ module Network.Google.ResourceManager
 
     -- * Resources
 
+    -- ** cloudresourcemanager.folders.create
+    , module Network.Google.Resource.CloudResourceManager.Folders.Create
+
+    -- ** cloudresourcemanager.folders.delete
+    , module Network.Google.Resource.CloudResourceManager.Folders.Delete
+
+    -- ** cloudresourcemanager.folders.get
+    , module Network.Google.Resource.CloudResourceManager.Folders.Get
+
+    -- ** cloudresourcemanager.folders.getIamPolicy
+    , module Network.Google.Resource.CloudResourceManager.Folders.GetIAMPolicy
+
+    -- ** cloudresourcemanager.folders.list
+    , module Network.Google.Resource.CloudResourceManager.Folders.List
+
+    -- ** cloudresourcemanager.folders.move
+    , module Network.Google.Resource.CloudResourceManager.Folders.Move
+
+    -- ** cloudresourcemanager.folders.patch
+    , module Network.Google.Resource.CloudResourceManager.Folders.Patch
+
+    -- ** cloudresourcemanager.folders.search
+    , module Network.Google.Resource.CloudResourceManager.Folders.Search
+
+    -- ** cloudresourcemanager.folders.setIamPolicy
+    , module Network.Google.Resource.CloudResourceManager.Folders.SetIAMPolicy
+
+    -- ** cloudresourcemanager.folders.testIamPermissions
+    , module Network.Google.Resource.CloudResourceManager.Folders.TestIAMPermissions
+
+    -- ** cloudresourcemanager.folders.undelete
+    , module Network.Google.Resource.CloudResourceManager.Folders.Undelete
+
     -- ** cloudresourcemanager.operations.get
     , module Network.Google.Resource.CloudResourceManager.Operations.Get
 
-    -- ** cloudresourcemanager.organizations.get
-    , module Network.Google.Resource.CloudResourceManager.Organizations.Get
-
-    -- ** cloudresourcemanager.organizations.getIamPolicy
-    , module Network.Google.Resource.CloudResourceManager.Organizations.GetIAMPolicy
-
-    -- ** cloudresourcemanager.organizations.search
-    , module Network.Google.Resource.CloudResourceManager.Organizations.Search
-
-    -- ** cloudresourcemanager.organizations.setIamPolicy
-    , module Network.Google.Resource.CloudResourceManager.Organizations.SetIAMPolicy
-
-    -- ** cloudresourcemanager.organizations.testIamPermissions
-    , module Network.Google.Resource.CloudResourceManager.Organizations.TestIAMPermissions
-
-    -- ** cloudresourcemanager.projects.create
-    , module Network.Google.Resource.CloudResourceManager.Projects.Create
-
-    -- ** cloudresourcemanager.projects.delete
-    , module Network.Google.Resource.CloudResourceManager.Projects.Delete
-
-    -- ** cloudresourcemanager.projects.get
-    , module Network.Google.Resource.CloudResourceManager.Projects.Get
-
-    -- ** cloudresourcemanager.projects.getAncestry
-    , module Network.Google.Resource.CloudResourceManager.Projects.GetAncestry
-
-    -- ** cloudresourcemanager.projects.getIamPolicy
-    , module Network.Google.Resource.CloudResourceManager.Projects.GetIAMPolicy
-
-    -- ** cloudresourcemanager.projects.list
-    , module Network.Google.Resource.CloudResourceManager.Projects.List
-
-    -- ** cloudresourcemanager.projects.setIamPolicy
-    , module Network.Google.Resource.CloudResourceManager.Projects.SetIAMPolicy
-
-    -- ** cloudresourcemanager.projects.testIamPermissions
-    , module Network.Google.Resource.CloudResourceManager.Projects.TestIAMPermissions
-
-    -- ** cloudresourcemanager.projects.undelete
-    , module Network.Google.Resource.CloudResourceManager.Projects.Undelete
-
-    -- ** cloudresourcemanager.projects.update
-    , module Network.Google.Resource.CloudResourceManager.Projects.Update
-
     -- * Types
+
+    -- ** ListFoldersResponse
+    , ListFoldersResponse
+    , listFoldersResponse
+    , lfrNextPageToken
+    , lfrFolders
 
     -- ** Status
     , Status
@@ -88,47 +82,37 @@ module Network.Google.ResourceManager
     , sCode
     , sMessage
 
-    -- ** SearchOrganizationsRequest
-    , SearchOrganizationsRequest
-    , searchOrganizationsRequest
-    , sorFilter
-    , sorPageToken
-    , sorPageSize
+    -- ** FolderLifecycleState
+    , FolderLifecycleState (..)
 
-    -- ** ResourceId
-    , ResourceId
-    , resourceId
-    , riId
-    , riType
+    -- ** AuditConfig
+    , AuditConfig
+    , auditConfig
+    , acService
+    , acAuditLogConfigs
 
-    -- ** ListProjectsResponse
-    , ListProjectsResponse
-    , listProjectsResponse
-    , lprNextPageToken
-    , lprProjects
+    -- ** Expr
+    , Expr
+    , expr
+    , eLocation
+    , eExpression
+    , eTitle
+    , eDescription
 
     -- ** GetIAMPolicyRequest
     , GetIAMPolicyRequest
     , getIAMPolicyRequest
 
-    -- ** OrganizationOwner
-    , OrganizationOwner
-    , organizationOwner
-    , ooDirectoryCustomerId
+    -- ** SearchFoldersRequest
+    , SearchFoldersRequest
+    , searchFoldersRequest
+    , sfrQuery
+    , sfrPageToken
+    , sfrPageSize
 
-    -- ** OrganizationLifecycleState
-    , OrganizationLifecycleState (..)
-
-    -- ** Project
-    , Project
-    , project
-    , pParent
-    , pProjectNumber
-    , pName
-    , pLabels
-    , pProjectId
-    , pLifecycleState
-    , pCreateTime
+    -- ** UndeleteFolderRequest
+    , UndeleteFolderRequest
+    , undeleteFolderRequest
 
     -- ** Operation
     , Operation
@@ -139,12 +123,14 @@ module Network.Google.ResourceManager
     , oName
     , oMetadata
 
-    -- ** Empty
-    , Empty
-    , empty
-
     -- ** FolderOperationErrorErrorMessageId
     , FolderOperationErrorErrorMessageId (..)
+
+    -- ** SearchFoldersResponse
+    , SearchFoldersResponse
+    , searchFoldersResponse
+    , sfrNextPageToken
+    , sfrFolders
 
     -- ** ProjectCreationStatus
     , ProjectCreationStatus
@@ -163,16 +149,26 @@ module Network.Google.ResourceManager
     , folderOperationError
     , foeErrorMessageId
 
+    -- ** Folder
+    , Folder
+    , folder
+    , fParent
+    , fName
+    , fDisplayName
+    , fLifecycleState
+    , fCreateTime
+
     -- ** FolderOperationOperationType
     , FolderOperationOperationType (..)
 
     -- ** SetIAMPolicyRequest
     , SetIAMPolicyRequest
     , setIAMPolicyRequest
+    , siprUpdateMask
     , siprPolicy
 
-    -- ** ProjectLifecycleState
-    , ProjectLifecycleState (..)
+    -- ** AuditLogConfigLogType
+    , AuditLogConfigLogType (..)
 
     -- ** Xgafv
     , Xgafv (..)
@@ -182,21 +178,6 @@ module Network.Google.ResourceManager
     , testIAMPermissionsRequest
     , tiprPermissions
 
-    -- ** GetAncestryRequest
-    , GetAncestryRequest
-    , getAncestryRequest
-
-    -- ** SearchOrganizationsResponse
-    , SearchOrganizationsResponse
-    , searchOrganizationsResponse
-    , sorNextPageToken
-    , sorOrganizations
-
-    -- ** GetAncestryResponse
-    , GetAncestryResponse
-    , getAncestryResponse
-    , garAncestor
-
     -- ** TestIAMPermissionsResponse
     , TestIAMPermissionsResponse
     , testIAMPermissionsResponse
@@ -205,14 +186,10 @@ module Network.Google.ResourceManager
     -- ** Policy
     , Policy
     , policy
+    , pAuditConfigs
     , pEtag
     , pVersion
     , pBindings
-
-    -- ** ProjectLabels
-    , ProjectLabels
-    , projectLabels
-    , plAddtional
 
     -- ** OperationMetadata
     , OperationMetadata
@@ -227,74 +204,59 @@ module Network.Google.ResourceManager
     , foOperationType
     , foSourceParent
 
-    -- ** Organization
-    , Organization
-    , organization
-    , orgCreationTime
-    , orgOwner
-    , orgName
-    , orgDisplayName
-    , orgLifecycleState
-
-    -- ** Ancestor
-    , Ancestor
-    , ancestor
-    , aResourceId
+    -- ** AuditLogConfig
+    , AuditLogConfig
+    , auditLogConfig
+    , alcLogType
+    , alcExemptedMembers
 
     -- ** OperationResponse
     , OperationResponse
     , operationResponse
     , orAddtional
 
-    -- ** UndeleteProjectRequest
-    , UndeleteProjectRequest
-    , undeleteProjectRequest
+    -- ** MoveFolderRequest
+    , MoveFolderRequest
+    , moveFolderRequest
+    , mfrDestinationParent
 
     -- ** Binding
     , Binding
     , binding
     , bMembers
     , bRole
+    , bCondition
     ) where
 
 import           Network.Google.Prelude
+import           Network.Google.Resource.CloudResourceManager.Folders.Create
+import           Network.Google.Resource.CloudResourceManager.Folders.Delete
+import           Network.Google.Resource.CloudResourceManager.Folders.Get
+import           Network.Google.Resource.CloudResourceManager.Folders.GetIAMPolicy
+import           Network.Google.Resource.CloudResourceManager.Folders.List
+import           Network.Google.Resource.CloudResourceManager.Folders.Move
+import           Network.Google.Resource.CloudResourceManager.Folders.Patch
+import           Network.Google.Resource.CloudResourceManager.Folders.Search
+import           Network.Google.Resource.CloudResourceManager.Folders.SetIAMPolicy
+import           Network.Google.Resource.CloudResourceManager.Folders.TestIAMPermissions
+import           Network.Google.Resource.CloudResourceManager.Folders.Undelete
 import           Network.Google.Resource.CloudResourceManager.Operations.Get
-import           Network.Google.Resource.CloudResourceManager.Organizations.Get
-import           Network.Google.Resource.CloudResourceManager.Organizations.GetIAMPolicy
-import           Network.Google.Resource.CloudResourceManager.Organizations.Search
-import           Network.Google.Resource.CloudResourceManager.Organizations.SetIAMPolicy
-import           Network.Google.Resource.CloudResourceManager.Organizations.TestIAMPermissions
-import           Network.Google.Resource.CloudResourceManager.Projects.Create
-import           Network.Google.Resource.CloudResourceManager.Projects.Delete
-import           Network.Google.Resource.CloudResourceManager.Projects.Get
-import           Network.Google.Resource.CloudResourceManager.Projects.GetAncestry
-import           Network.Google.Resource.CloudResourceManager.Projects.GetIAMPolicy
-import           Network.Google.Resource.CloudResourceManager.Projects.List
-import           Network.Google.Resource.CloudResourceManager.Projects.SetIAMPolicy
-import           Network.Google.Resource.CloudResourceManager.Projects.TestIAMPermissions
-import           Network.Google.Resource.CloudResourceManager.Projects.Undelete
-import           Network.Google.Resource.CloudResourceManager.Projects.Update
 import           Network.Google.ResourceManager.Types
 
 {- $resources
 TODO
 -}
 
--- | Represents the entirety of the methods and resources available for the Google Cloud Resource Manager API service.
+-- | Represents the entirety of the methods and resources available for the Cloud Resource Manager API service.
 type ResourceManagerAPI =
-     OrganizationsGetIAMPolicyResource :<|>
-       OrganizationsGetResource
-       :<|> OrganizationsSetIAMPolicyResource
-       :<|> OrganizationsTestIAMPermissionsResource
-       :<|> OrganizationsSearchResource
+     FoldersListResource :<|> FoldersUndeleteResource :<|>
+       FoldersGetIAMPolicyResource
+       :<|> FoldersPatchResource
+       :<|> FoldersGetResource
+       :<|> FoldersCreateResource
+       :<|> FoldersSetIAMPolicyResource
+       :<|> FoldersTestIAMPermissionsResource
+       :<|> FoldersSearchResource
+       :<|> FoldersDeleteResource
+       :<|> FoldersMoveResource
        :<|> OperationsGetResource
-       :<|> ProjectsListResource
-       :<|> ProjectsUndeleteResource
-       :<|> ProjectsGetIAMPolicyResource
-       :<|> ProjectsGetResource
-       :<|> ProjectsCreateResource
-       :<|> ProjectsSetIAMPolicyResource
-       :<|> ProjectsTestIAMPermissionsResource
-       :<|> ProjectsGetAncestryResource
-       :<|> ProjectsDeleteResource
-       :<|> ProjectsUpdateResource

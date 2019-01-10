@@ -22,10 +22,15 @@
 --
 -- Lists operations that match the specified filter in the request. If the
 -- server doesn\'t support this method, it returns UNIMPLEMENTED.NOTE: the
--- name binding below allows API services to override the binding to use
--- different resource name schemes, such as users\/*\/operations.
+-- name binding allows API services to override the binding to use
+-- different resource name schemes, such as users\/*\/operations. To
+-- override the binding, API services can add a binding such as
+-- \"\/v1\/{name=users\/*}\/operations\" to their service configuration.
+-- For backwards compatibility, the default name includes the operations
+-- collection id, however overriding users must ensure the name binding is
+-- the parent resource, without the operations collection id.
 --
--- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ Google App Engine Admin API Reference> for @appengine.apps.operations.list@.
+-- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ App Engine Admin API Reference> for @appengine.apps.operations.list@.
 module Network.Google.Resource.AppEngine.Apps.Operations.List
     (
     -- * REST Resource
@@ -38,10 +43,8 @@ module Network.Google.Resource.AppEngine.Apps.Operations.List
     -- * Request Lenses
     , aolXgafv
     , aolUploadProtocol
-    , aolPp
     , aolAccessToken
     , aolUploadType
-    , aolBearerToken
     , aolAppsId
     , aolFilter
     , aolPageToken
@@ -59,32 +62,33 @@ type AppsOperationsListResource =
        "apps" :>
          Capture "appsId" Text :>
            "operations" :>
-             QueryParam "$.xgafv" Text :>
+             QueryParam "$.xgafv" Xgafv :>
                QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "filter" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "pageSize" (Textual Int32) :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" AltJSON :>
-                                   Get '[JSON] ListOperationsResponse
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "filter" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "pageSize" (Textual Int32) :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] ListOperationsResponse
 
 -- | Lists operations that match the specified filter in the request. If the
 -- server doesn\'t support this method, it returns UNIMPLEMENTED.NOTE: the
--- name binding below allows API services to override the binding to use
--- different resource name schemes, such as users\/*\/operations.
+-- name binding allows API services to override the binding to use
+-- different resource name schemes, such as users\/*\/operations. To
+-- override the binding, API services can add a binding such as
+-- \"\/v1\/{name=users\/*}\/operations\" to their service configuration.
+-- For backwards compatibility, the default name includes the operations
+-- collection id, however overriding users must ensure the name binding is
+-- the parent resource, without the operations collection id.
 --
 -- /See:/ 'appsOperationsList' smart constructor.
 data AppsOperationsList = AppsOperationsList'
-    { _aolXgafv          :: !(Maybe Text)
+    { _aolXgafv          :: !(Maybe Xgafv)
     , _aolUploadProtocol :: !(Maybe Text)
-    , _aolPp             :: !Bool
     , _aolAccessToken    :: !(Maybe Text)
     , _aolUploadType     :: !(Maybe Text)
-    , _aolBearerToken    :: !(Maybe Text)
     , _aolAppsId         :: !Text
     , _aolFilter         :: !(Maybe Text)
     , _aolPageToken      :: !(Maybe Text)
@@ -100,13 +104,9 @@ data AppsOperationsList = AppsOperationsList'
 --
 -- * 'aolUploadProtocol'
 --
--- * 'aolPp'
---
 -- * 'aolAccessToken'
 --
 -- * 'aolUploadType'
---
--- * 'aolBearerToken'
 --
 -- * 'aolAppsId'
 --
@@ -124,10 +124,8 @@ appsOperationsList pAolAppsId_ =
     AppsOperationsList'
     { _aolXgafv = Nothing
     , _aolUploadProtocol = Nothing
-    , _aolPp = True
     , _aolAccessToken = Nothing
     , _aolUploadType = Nothing
-    , _aolBearerToken = Nothing
     , _aolAppsId = pAolAppsId_
     , _aolFilter = Nothing
     , _aolPageToken = Nothing
@@ -136,7 +134,7 @@ appsOperationsList pAolAppsId_ =
     }
 
 -- | V1 error format.
-aolXgafv :: Lens' AppsOperationsList (Maybe Text)
+aolXgafv :: Lens' AppsOperationsList (Maybe Xgafv)
 aolXgafv = lens _aolXgafv (\ s a -> s{_aolXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -144,10 +142,6 @@ aolUploadProtocol :: Lens' AppsOperationsList (Maybe Text)
 aolUploadProtocol
   = lens _aolUploadProtocol
       (\ s a -> s{_aolUploadProtocol = a})
-
--- | Pretty-print response.
-aolPp :: Lens' AppsOperationsList Bool
-aolPp = lens _aolPp (\ s a -> s{_aolPp = a})
 
 -- | OAuth access token.
 aolAccessToken :: Lens' AppsOperationsList (Maybe Text)
@@ -161,13 +155,7 @@ aolUploadType
   = lens _aolUploadType
       (\ s a -> s{_aolUploadType = a})
 
--- | OAuth bearer token.
-aolBearerToken :: Lens' AppsOperationsList (Maybe Text)
-aolBearerToken
-  = lens _aolBearerToken
-      (\ s a -> s{_aolBearerToken = a})
-
--- | Part of \`name\`. The name of the operation collection.
+-- | Part of \`name\`. The name of the operation\'s parent resource.
 aolAppsId :: Lens' AppsOperationsList Text
 aolAppsId
   = lens _aolAppsId (\ s a -> s{_aolAppsId = a})
@@ -201,10 +189,8 @@ instance GoogleRequest AppsOperationsList where
                "https://www.googleapis.com/auth/cloud-platform.read-only"]
         requestClient AppsOperationsList'{..}
           = go _aolAppsId _aolXgafv _aolUploadProtocol
-              (Just _aolPp)
               _aolAccessToken
               _aolUploadType
-              _aolBearerToken
               _aolFilter
               _aolPageToken
               _aolPageSize

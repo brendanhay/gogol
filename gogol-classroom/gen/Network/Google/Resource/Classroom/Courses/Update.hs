@@ -39,11 +39,9 @@ module Network.Google.Resource.Classroom.Courses.Update
     -- * Request Lenses
     , cuXgafv
     , cuUploadProtocol
-    , cuPp
     , cuAccessToken
     , cuUploadType
     , cuPayload
-    , cuBearerToken
     , cuId
     , cuCallback
     ) where
@@ -57,15 +55,13 @@ type CoursesUpdateResource =
      "v1" :>
        "courses" :>
          Capture "id" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Course :> Put '[JSON] Course
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Course :> Put '[JSON] Course
 
 -- | Updates a course. This method returns the following error codes: *
 -- \`PERMISSION_DENIED\` if the requesting user is not permitted to modify
@@ -75,13 +71,11 @@ type CoursesUpdateResource =
 --
 -- /See:/ 'coursesUpdate' smart constructor.
 data CoursesUpdate = CoursesUpdate'
-    { _cuXgafv          :: !(Maybe Text)
+    { _cuXgafv          :: !(Maybe Xgafv)
     , _cuUploadProtocol :: !(Maybe Text)
-    , _cuPp             :: !Bool
     , _cuAccessToken    :: !(Maybe Text)
     , _cuUploadType     :: !(Maybe Text)
     , _cuPayload        :: !Course
-    , _cuBearerToken    :: !(Maybe Text)
     , _cuId             :: !Text
     , _cuCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -94,15 +88,11 @@ data CoursesUpdate = CoursesUpdate'
 --
 -- * 'cuUploadProtocol'
 --
--- * 'cuPp'
---
 -- * 'cuAccessToken'
 --
 -- * 'cuUploadType'
 --
 -- * 'cuPayload'
---
--- * 'cuBearerToken'
 --
 -- * 'cuId'
 --
@@ -115,17 +105,15 @@ coursesUpdate pCuPayload_ pCuId_ =
     CoursesUpdate'
     { _cuXgafv = Nothing
     , _cuUploadProtocol = Nothing
-    , _cuPp = True
     , _cuAccessToken = Nothing
     , _cuUploadType = Nothing
     , _cuPayload = pCuPayload_
-    , _cuBearerToken = Nothing
     , _cuId = pCuId_
     , _cuCallback = Nothing
     }
 
 -- | V1 error format.
-cuXgafv :: Lens' CoursesUpdate (Maybe Text)
+cuXgafv :: Lens' CoursesUpdate (Maybe Xgafv)
 cuXgafv = lens _cuXgafv (\ s a -> s{_cuXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -133,10 +121,6 @@ cuUploadProtocol :: Lens' CoursesUpdate (Maybe Text)
 cuUploadProtocol
   = lens _cuUploadProtocol
       (\ s a -> s{_cuUploadProtocol = a})
-
--- | Pretty-print response.
-cuPp :: Lens' CoursesUpdate Bool
-cuPp = lens _cuPp (\ s a -> s{_cuPp = a})
 
 -- | OAuth access token.
 cuAccessToken :: Lens' CoursesUpdate (Maybe Text)
@@ -154,12 +138,6 @@ cuPayload :: Lens' CoursesUpdate Course
 cuPayload
   = lens _cuPayload (\ s a -> s{_cuPayload = a})
 
--- | OAuth bearer token.
-cuBearerToken :: Lens' CoursesUpdate (Maybe Text)
-cuBearerToken
-  = lens _cuBearerToken
-      (\ s a -> s{_cuBearerToken = a})
-
 -- | Identifier of the course to update. This identifier can be either the
 -- Classroom-assigned identifier or an alias.
 cuId :: Lens' CoursesUpdate Text
@@ -175,10 +153,8 @@ instance GoogleRequest CoursesUpdate where
         type Scopes CoursesUpdate =
              '["https://www.googleapis.com/auth/classroom.courses"]
         requestClient CoursesUpdate'{..}
-          = go _cuId _cuXgafv _cuUploadProtocol (Just _cuPp)
-              _cuAccessToken
+          = go _cuId _cuXgafv _cuUploadProtocol _cuAccessToken
               _cuUploadType
-              _cuBearerToken
               _cuCallback
               (Just AltJSON)
               _cuPayload

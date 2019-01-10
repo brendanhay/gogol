@@ -22,7 +22,7 @@
 --
 -- Lists matching topics.
 --
--- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.topics.list@.
+-- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference> for @pubsub.projects.topics.list@.
 module Network.Google.Resource.PubSub.Projects.Topics.List
     (
     -- * REST Resource
@@ -36,10 +36,8 @@ module Network.Google.Resource.PubSub.Projects.Topics.List
     , ptlXgafv
     , ptlUploadProtocol
     , ptlProject
-    , ptlPp
     , ptlAccessToken
     , ptlUploadType
-    , ptlBearerToken
     , ptlPageToken
     , ptlPageSize
     , ptlCallback
@@ -56,15 +54,13 @@ type ProjectsTopicsListResource =
          "topics" :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" (Textual Int32) :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] ListTopicsResponse
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "pageSize" (Textual Int32) :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] ListTopicsResponse
 
 -- | Lists matching topics.
 --
@@ -73,10 +69,8 @@ data ProjectsTopicsList = ProjectsTopicsList'
     { _ptlXgafv          :: !(Maybe Xgafv)
     , _ptlUploadProtocol :: !(Maybe Text)
     , _ptlProject        :: !Text
-    , _ptlPp             :: !Bool
     , _ptlAccessToken    :: !(Maybe Text)
     , _ptlUploadType     :: !(Maybe Text)
-    , _ptlBearerToken    :: !(Maybe Text)
     , _ptlPageToken      :: !(Maybe Text)
     , _ptlPageSize       :: !(Maybe (Textual Int32))
     , _ptlCallback       :: !(Maybe Text)
@@ -92,13 +86,9 @@ data ProjectsTopicsList = ProjectsTopicsList'
 --
 -- * 'ptlProject'
 --
--- * 'ptlPp'
---
 -- * 'ptlAccessToken'
 --
 -- * 'ptlUploadType'
---
--- * 'ptlBearerToken'
 --
 -- * 'ptlPageToken'
 --
@@ -113,10 +103,8 @@ projectsTopicsList pPtlProject_ =
     { _ptlXgafv = Nothing
     , _ptlUploadProtocol = Nothing
     , _ptlProject = pPtlProject_
-    , _ptlPp = True
     , _ptlAccessToken = Nothing
     , _ptlUploadType = Nothing
-    , _ptlBearerToken = Nothing
     , _ptlPageToken = Nothing
     , _ptlPageSize = Nothing
     , _ptlCallback = Nothing
@@ -132,15 +120,11 @@ ptlUploadProtocol
   = lens _ptlUploadProtocol
       (\ s a -> s{_ptlUploadProtocol = a})
 
--- | The name of the cloud project that topics belong to. Format is
--- \`projects\/{project}\`.
+-- | The name of the project in which to list topics. Format is
+-- \`projects\/{project-id}\`.
 ptlProject :: Lens' ProjectsTopicsList Text
 ptlProject
   = lens _ptlProject (\ s a -> s{_ptlProject = a})
-
--- | Pretty-print response.
-ptlPp :: Lens' ProjectsTopicsList Bool
-ptlPp = lens _ptlPp (\ s a -> s{_ptlPp = a})
 
 -- | OAuth access token.
 ptlAccessToken :: Lens' ProjectsTopicsList (Maybe Text)
@@ -153,12 +137,6 @@ ptlUploadType :: Lens' ProjectsTopicsList (Maybe Text)
 ptlUploadType
   = lens _ptlUploadType
       (\ s a -> s{_ptlUploadType = a})
-
--- | OAuth bearer token.
-ptlBearerToken :: Lens' ProjectsTopicsList (Maybe Text)
-ptlBearerToken
-  = lens _ptlBearerToken
-      (\ s a -> s{_ptlBearerToken = a})
 
 -- | The value returned by the last \`ListTopicsResponse\`; indicates that
 -- this is a continuation of a prior \`ListTopics\` call, and that the
@@ -185,10 +163,8 @@ instance GoogleRequest ProjectsTopicsList where
                "https://www.googleapis.com/auth/pubsub"]
         requestClient ProjectsTopicsList'{..}
           = go _ptlProject _ptlXgafv _ptlUploadProtocol
-              (Just _ptlPp)
               _ptlAccessToken
               _ptlUploadType
-              _ptlBearerToken
               _ptlPageToken
               _ptlPageSize
               _ptlCallback

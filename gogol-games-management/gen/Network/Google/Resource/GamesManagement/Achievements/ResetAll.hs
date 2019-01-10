@@ -68,8 +68,7 @@ instance GoogleRequest AchievementsResetAll where
         type Rs AchievementsResetAll =
              AchievementResetAllResponse
         type Scopes AchievementsResetAll =
-             '["https://www.googleapis.com/auth/games",
-               "https://www.googleapis.com/auth/plus.login"]
+             '["https://www.googleapis.com/auth/games"]
         requestClient AchievementsResetAll'{}
           = go (Just AltJSON) gamesManagementService
           where go

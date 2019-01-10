@@ -22,7 +22,7 @@
 --
 -- Queries for entities.
 --
--- /See:/ <https://cloud.google.com/datastore/ Google Cloud Datastore API Reference> for @datastore.projects.runQuery@.
+-- /See:/ <https://cloud.google.com/datastore/ Cloud Datastore API Reference> for @datastore.projects.runQuery@.
 module Network.Google.Resource.Datastore.Projects.RunQuery
     (
     -- * REST Resource
@@ -35,11 +35,9 @@ module Network.Google.Resource.Datastore.Projects.RunQuery
     -- * Request Lenses
     , prqXgafv
     , prqUploadProtocol
-    , prqPp
     , prqAccessToken
     , prqUploadType
     , prqPayload
-    , prqBearerToken
     , prqProjectId
     , prqCallback
     ) where
@@ -55,14 +53,12 @@ type ProjectsRunQueryResource =
          CaptureMode "projectId" "runQuery" Text :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] RunQueryRequest :>
-                             Post '[JSON] RunQueryResponse
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] RunQueryRequest :>
+                         Post '[JSON] RunQueryResponse
 
 -- | Queries for entities.
 --
@@ -70,11 +66,9 @@ type ProjectsRunQueryResource =
 data ProjectsRunQuery = ProjectsRunQuery'
     { _prqXgafv          :: !(Maybe Xgafv)
     , _prqUploadProtocol :: !(Maybe Text)
-    , _prqPp             :: !Bool
     , _prqAccessToken    :: !(Maybe Text)
     , _prqUploadType     :: !(Maybe Text)
     , _prqPayload        :: !RunQueryRequest
-    , _prqBearerToken    :: !(Maybe Text)
     , _prqProjectId      :: !Text
     , _prqCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -87,15 +81,11 @@ data ProjectsRunQuery = ProjectsRunQuery'
 --
 -- * 'prqUploadProtocol'
 --
--- * 'prqPp'
---
 -- * 'prqAccessToken'
 --
 -- * 'prqUploadType'
 --
 -- * 'prqPayload'
---
--- * 'prqBearerToken'
 --
 -- * 'prqProjectId'
 --
@@ -108,11 +98,9 @@ projectsRunQuery pPrqPayload_ pPrqProjectId_ =
     ProjectsRunQuery'
     { _prqXgafv = Nothing
     , _prqUploadProtocol = Nothing
-    , _prqPp = True
     , _prqAccessToken = Nothing
     , _prqUploadType = Nothing
     , _prqPayload = pPrqPayload_
-    , _prqBearerToken = Nothing
     , _prqProjectId = pPrqProjectId_
     , _prqCallback = Nothing
     }
@@ -126,10 +114,6 @@ prqUploadProtocol :: Lens' ProjectsRunQuery (Maybe Text)
 prqUploadProtocol
   = lens _prqUploadProtocol
       (\ s a -> s{_prqUploadProtocol = a})
-
--- | Pretty-print response.
-prqPp :: Lens' ProjectsRunQuery Bool
-prqPp = lens _prqPp (\ s a -> s{_prqPp = a})
 
 -- | OAuth access token.
 prqAccessToken :: Lens' ProjectsRunQuery (Maybe Text)
@@ -148,12 +132,6 @@ prqPayload :: Lens' ProjectsRunQuery RunQueryRequest
 prqPayload
   = lens _prqPayload (\ s a -> s{_prqPayload = a})
 
--- | OAuth bearer token.
-prqBearerToken :: Lens' ProjectsRunQuery (Maybe Text)
-prqBearerToken
-  = lens _prqBearerToken
-      (\ s a -> s{_prqBearerToken = a})
-
 -- | The ID of the project against which to make the request.
 prqProjectId :: Lens' ProjectsRunQuery Text
 prqProjectId
@@ -171,10 +149,8 @@ instance GoogleRequest ProjectsRunQuery where
                "https://www.googleapis.com/auth/datastore"]
         requestClient ProjectsRunQuery'{..}
           = go _prqProjectId _prqXgafv _prqUploadProtocol
-              (Just _prqPp)
               _prqAccessToken
               _prqUploadType
-              _prqBearerToken
               _prqCallback
               (Just AltJSON)
               _prqPayload

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns a list of reviews.
+-- Returns a list of reviews. Only reviews from last week will be returned.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.reviews.list@.
 module Network.Google.Resource.AndroidPublisher.Reviews.List
@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 -- 'ReviewsList' request conforms to.
 type ReviewsListResource =
      "androidpublisher" :>
-       "v2" :>
+       "v3" :>
          "applications" :>
            Capture "packageName" Text :>
              "reviews" :>
@@ -58,7 +58,7 @@ type ReviewsListResource =
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] ReviewsListResponse
 
--- | Returns a list of reviews.
+-- | Returns a list of reviews. Only reviews from last week will be returned.
 --
 -- /See:/ 'reviewsList' smart constructor.
 data ReviewsList = ReviewsList'

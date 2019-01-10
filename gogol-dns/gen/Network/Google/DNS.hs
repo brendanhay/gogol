@@ -110,11 +110,6 @@ module Network.Google.DNS
     -- ** ManagedZoneDNSSecConfigState
     , ManagedZoneDNSSecConfigState (..)
 
-    -- ** ManagedZonesDeleteResponse
-    , ManagedZonesDeleteResponse
-    , managedZonesDeleteResponse
-    , mzdrHeader
-
     -- ** Project
     , Project
     , project
@@ -134,11 +129,6 @@ module Network.Google.DNS
     , oType
     , oZoneContext
     , oDNSKeyContext
-
-    -- ** DNSResponseHeader
-    , DNSResponseHeader
-    , dnsResponseHeader
-    , drhOperationId
 
     -- ** DNSKeySpec
     , DNSKeySpec
@@ -192,6 +182,11 @@ module Network.Google.DNS
     -- ** DNSKeyAlgorithm
     , DNSKeyAlgorithm (..)
 
+    -- ** ResponseHeader
+    , ResponseHeader
+    , responseHeader
+    , rhOperationId
+
     -- ** DNSKeySpecKeyType
     , DNSKeySpecKeyType (..)
 
@@ -240,10 +235,16 @@ module Network.Google.DNS
     , mzNameServerSet
     , mzName
     , mzId
+    , mzLabels
     , mzDNSName
     , mzDescription
     , mzDNSsecConfig
     , mzNameServers
+
+    -- ** ManagedZoneLabels
+    , ManagedZoneLabels
+    , managedZoneLabels
+    , mzlAddtional
 
     -- ** Quota
     , Quota

@@ -44,6 +44,7 @@ module Network.Google.Resource.Reports.Activities.Watch
     , awEventName
     , awUserKey
     , awMaxResults
+    , awOrgUnitId
     ) where
 
 import           Network.Google.Prelude
@@ -69,9 +70,10 @@ type ActivitiesWatchResource =
                                  QueryParam "pageToken" Text :>
                                    QueryParam "eventName" Text :>
                                      QueryParam "maxResults" (Textual Int32) :>
-                                       QueryParam "alt" AltJSON :>
-                                         ReqBody '[JSON] Channel :>
-                                           Post '[JSON] Channel
+                                       QueryParam "orgUnitID" Text :>
+                                         QueryParam "alt" AltJSON :>
+                                           ReqBody '[JSON] Channel :>
+                                             Post '[JSON] Channel
 
 -- | Push changes to activities
 --
@@ -88,6 +90,7 @@ data ActivitiesWatch = ActivitiesWatch'
     , _awEventName       :: !(Maybe Text)
     , _awUserKey         :: !Text
     , _awMaxResults      :: !(Maybe (Textual Int32))
+    , _awOrgUnitId       :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivitiesWatch' with the minimum fields required to make a request.
@@ -115,6 +118,8 @@ data ActivitiesWatch = ActivitiesWatch'
 -- * 'awUserKey'
 --
 -- * 'awMaxResults'
+--
+-- * 'awOrgUnitId'
 activitiesWatch
     :: Channel -- ^ 'awPayload'
     -> Text -- ^ 'awApplicationName'
@@ -133,9 +138,10 @@ activitiesWatch pAwPayload_ pAwApplicationName_ pAwUserKey_ =
     , _awEventName = Nothing
     , _awUserKey = pAwUserKey_
     , _awMaxResults = Nothing
+    , _awOrgUnitId = ""
     }
 
--- | Return events which occured at or after this time.
+-- | Return events which occurred at or after this time.
 awStartTime :: Lens' ActivitiesWatch (Maybe Text)
 awStartTime
   = lens _awStartTime (\ s a -> s{_awStartTime = a})
@@ -163,7 +169,7 @@ awActorIPAddress
   = lens _awActorIPAddress
       (\ s a -> s{_awActorIPAddress = a})
 
--- | Return events which occured at or before this time.
+-- | Return events which occurred at or before this time.
 awEndTime :: Lens' ActivitiesWatch (Maybe Text)
 awEndTime
   = lens _awEndTime (\ s a -> s{_awEndTime = a})
@@ -197,6 +203,12 @@ awMaxResults
   = lens _awMaxResults (\ s a -> s{_awMaxResults = a})
       . mapping _Coerce
 
+-- | the organizational unit\'s(OU) ID to filter activities from users
+-- belonging to a specific OU or one of its sub-OU(s)
+awOrgUnitId :: Lens' ActivitiesWatch Text
+awOrgUnitId
+  = lens _awOrgUnitId (\ s a -> s{_awOrgUnitId = a})
+
 instance GoogleRequest ActivitiesWatch where
         type Rs ActivitiesWatch = Channel
         type Scopes ActivitiesWatch =
@@ -210,6 +222,7 @@ instance GoogleRequest ActivitiesWatch where
               _awPageToken
               _awEventName
               _awMaxResults
+              (Just _awOrgUnitId)
               (Just AltJSON)
               _awPayload
               reportsService

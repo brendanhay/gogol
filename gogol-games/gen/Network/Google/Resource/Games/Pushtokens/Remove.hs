@@ -34,7 +34,6 @@ module Network.Google.Resource.Games.Pushtokens.Remove
     , PushtokensRemove
 
     -- * Request Lenses
-    , prConsistencyToken
     , prPayload
     ) where
 
@@ -48,24 +47,20 @@ type PushtokensRemoveResource =
        "v1" :>
          "pushtokens" :>
            "remove" :>
-             QueryParam "consistencyToken" (Textual Int64) :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] PushTokenId :> Post '[JSON] ()
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] PushTokenId :> Post '[JSON] ()
 
 -- | Removes a push token for the current user and application. Removing a
 -- non-existent push token will report success.
 --
 -- /See:/ 'pushtokensRemove' smart constructor.
-data PushtokensRemove = PushtokensRemove'
-    { _prConsistencyToken :: !(Maybe (Textual Int64))
-    , _prPayload          :: !PushTokenId
+newtype PushtokensRemove = PushtokensRemove'
+    { _prPayload :: PushTokenId
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PushtokensRemove' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'prConsistencyToken'
 --
 -- * 'prPayload'
 pushtokensRemove
@@ -73,16 +68,8 @@ pushtokensRemove
     -> PushtokensRemove
 pushtokensRemove pPrPayload_ =
     PushtokensRemove'
-    { _prConsistencyToken = Nothing
-    , _prPayload = pPrPayload_
+    { _prPayload = pPrPayload_
     }
-
--- | The last-seen mutation timestamp.
-prConsistencyToken :: Lens' PushtokensRemove (Maybe Int64)
-prConsistencyToken
-  = lens _prConsistencyToken
-      (\ s a -> s{_prConsistencyToken = a})
-      . mapping _Coerce
 
 -- | Multipart request metadata.
 prPayload :: Lens' PushtokensRemove PushTokenId
@@ -92,11 +79,9 @@ prPayload
 instance GoogleRequest PushtokensRemove where
         type Rs PushtokensRemove = ()
         type Scopes PushtokensRemove =
-             '["https://www.googleapis.com/auth/games",
-               "https://www.googleapis.com/auth/plus.login"]
+             '["https://www.googleapis.com/auth/games"]
         requestClient PushtokensRemove'{..}
-          = go _prConsistencyToken (Just AltJSON) _prPayload
-              gamesService
+          = go (Just AltJSON) _prPayload gamesService
           where go
                   = buildClient
                       (Proxy :: Proxy PushtokensRemoveResource)

@@ -22,11 +22,16 @@
 --
 -- Lists operations that match the specified filter in the request. If the
 -- server doesn\'t support this method, it returns \`UNIMPLEMENTED\`. NOTE:
--- the \`name\` binding below allows API services to override the binding
--- to use different resource name schemes, such as
--- \`users\/*\/operations\`.
+-- the \`name\` binding allows API services to override the binding to use
+-- different resource name schemes, such as \`users\/*\/operations\`. To
+-- override the binding, API services can add a binding such as
+-- \`\"\/v1\/{name=users\/*}\/operations\"\` to their service
+-- configuration. For backwards compatibility, the default name includes
+-- the operations collection id, however overriding users must ensure the
+-- name binding is the parent resource, without the operations collection
+-- id.
 --
--- /See:/ <https://cloud.google.com/ml/ Google Cloud Machine Learning Reference> for @ml.projects.operations.list@.
+-- /See:/ <https://cloud.google.com/ml/ Cloud Machine Learning Engine Reference> for @ml.projects.operations.list@.
 module Network.Google.Resource.Ml.Projects.Operations.List
     (
     -- * REST Resource
@@ -39,10 +44,8 @@ module Network.Google.Resource.Ml.Projects.Operations.List
     -- * Request Lenses
     , polXgafv
     , polUploadProtocol
-    , polPp
     , polAccessToken
     , polUploadType
-    , polBearerToken
     , polName
     , polFilter
     , polPageToken
@@ -56,37 +59,38 @@ import           Network.Google.Prelude
 -- | A resource alias for @ml.projects.operations.list@ method which the
 -- 'ProjectsOperationsList' request conforms to.
 type ProjectsOperationsListResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          "operations" :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "filter" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "pageSize" (Textual Int32) :>
-                             QueryParam "callback" Text :>
-                               QueryParam "alt" AltJSON :>
-                                 Get '[JSON]
-                                   GoogleLongrunning__ListOperationsResponse
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "pageSize" (Textual Int32) :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON]
+                               GoogleLongrunning__ListOperationsResponse
 
 -- | Lists operations that match the specified filter in the request. If the
 -- server doesn\'t support this method, it returns \`UNIMPLEMENTED\`. NOTE:
--- the \`name\` binding below allows API services to override the binding
--- to use different resource name schemes, such as
--- \`users\/*\/operations\`.
+-- the \`name\` binding allows API services to override the binding to use
+-- different resource name schemes, such as \`users\/*\/operations\`. To
+-- override the binding, API services can add a binding such as
+-- \`\"\/v1\/{name=users\/*}\/operations\"\` to their service
+-- configuration. For backwards compatibility, the default name includes
+-- the operations collection id, however overriding users must ensure the
+-- name binding is the parent resource, without the operations collection
+-- id.
 --
 -- /See:/ 'projectsOperationsList' smart constructor.
 data ProjectsOperationsList = ProjectsOperationsList'
     { _polXgafv          :: !(Maybe Xgafv)
     , _polUploadProtocol :: !(Maybe Text)
-    , _polPp             :: !Bool
     , _polAccessToken    :: !(Maybe Text)
     , _polUploadType     :: !(Maybe Text)
-    , _polBearerToken    :: !(Maybe Text)
     , _polName           :: !Text
     , _polFilter         :: !(Maybe Text)
     , _polPageToken      :: !(Maybe Text)
@@ -102,13 +106,9 @@ data ProjectsOperationsList = ProjectsOperationsList'
 --
 -- * 'polUploadProtocol'
 --
--- * 'polPp'
---
 -- * 'polAccessToken'
 --
 -- * 'polUploadType'
---
--- * 'polBearerToken'
 --
 -- * 'polName'
 --
@@ -126,10 +126,8 @@ projectsOperationsList pPolName_ =
     ProjectsOperationsList'
     { _polXgafv = Nothing
     , _polUploadProtocol = Nothing
-    , _polPp = True
     , _polAccessToken = Nothing
     , _polUploadType = Nothing
-    , _polBearerToken = Nothing
     , _polName = pPolName_
     , _polFilter = Nothing
     , _polPageToken = Nothing
@@ -147,10 +145,6 @@ polUploadProtocol
   = lens _polUploadProtocol
       (\ s a -> s{_polUploadProtocol = a})
 
--- | Pretty-print response.
-polPp :: Lens' ProjectsOperationsList Bool
-polPp = lens _polPp (\ s a -> s{_polPp = a})
-
 -- | OAuth access token.
 polAccessToken :: Lens' ProjectsOperationsList (Maybe Text)
 polAccessToken
@@ -163,13 +157,7 @@ polUploadType
   = lens _polUploadType
       (\ s a -> s{_polUploadType = a})
 
--- | OAuth bearer token.
-polBearerToken :: Lens' ProjectsOperationsList (Maybe Text)
-polBearerToken
-  = lens _polBearerToken
-      (\ s a -> s{_polBearerToken = a})
-
--- | The name of the operation collection.
+-- | The name of the operation\'s parent resource.
 polName :: Lens' ProjectsOperationsList Text
 polName = lens _polName (\ s a -> s{_polName = a})
 
@@ -201,10 +189,8 @@ instance GoogleRequest ProjectsOperationsList where
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsOperationsList'{..}
           = go _polName _polXgafv _polUploadProtocol
-              (Just _polPp)
               _polAccessToken
               _polUploadType
-              _polBearerToken
               _polFilter
               _polPageToken
               _polPageSize
