@@ -26,9 +26,9 @@ import Data.Word           as Export (Word32, Word64, Word8)
 import GHC.Generics        as Export (Generic)
 import Network.HTTP.Client as Export (RequestBody)
 import Numeric.Natural     as Export (Natural)
-import Prelude             as Export hiding (product)
-import Servant.API         as Export hiding (Headers, Link, getResponse, Stream)
-import Servant.Utils.Links as Export hiding (Link)
+import Prelude             as Export hiding (product, span, any, Word)
+import Servant.API         as Export hiding (Headers, Link, getResponse, Stream, ResponseHeader, Header, header)
+import Servant.Links       as Export hiding (Link)
 import Web.HttpApiData     as Export (FromHttpApiData (..), ToHttpApiData (..))
 
 import Network.Google.Data.Bytes   as Export

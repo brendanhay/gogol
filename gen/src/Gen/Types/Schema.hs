@@ -197,8 +197,8 @@ data Lit
     | Time
     | Date
     | DateTime
-    | FieldMask
-    | Duration
+    | GFieldMask
+    | GDuration
 
     -- Core types.
     | RqBody
@@ -228,8 +228,8 @@ instance FromJSON Lit where
             "date-time"        -> pure DateTime
 
             "google-datetime"  -> pure DateTime
-            "google-fieldmask" -> pure FieldMask
-            "google-duration"  -> pure Duration
+            "google-fieldmask" -> pure GFieldMask
+            "google-duration"  -> pure GDuration
 
             _                 -> fail $
                 "Unable to parse Literal from: " ++ Text.unpack t
