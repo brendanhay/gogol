@@ -1,4 +1,3 @@
-{-# LANGUAGE CPP                        #-}
 {-# LANGUAGE DataKinds                  #-}
 {-# LANGUAGE DeriveDataTypeable         #-}
 {-# LANGUAGE DeriveGeneric              #-}
@@ -38,9 +37,7 @@ import Data.Data
 import Data.DList             (DList)
 import Data.Foldable          (foldMap, foldl')
 import Data.String
-#if _GLASGOW_HASKELL__ < 804
 import Data.Semigroup
-#endif
 import Data.Text              (Text)
 import Data.Text.Lazy.Builder (Builder)
 
