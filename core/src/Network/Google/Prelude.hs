@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP                        #-}
 -- |
 -- Module      : Network.Google.Prelude
 -- Copyright   : (c) 2015-2016 Brendan Hay <brendan.g.hay@gmail.com>
@@ -28,7 +29,11 @@ import Network.HTTP.Client as Export (RequestBody)
 import Numeric.Natural     as Export (Natural)
 import Prelude             as Export hiding (product, span, any, Word)
 import Servant.API         as Export hiding (Headers, Link, getResponse, Stream, ResponseHeader, Header, header)
+#if _GLASGOW_HASKELL__ < 804
+import Servant.Utils.Links as Export hiding (Link)
+#else
 import Servant.Links       as Export hiding (Link)
+#endif
 import Web.HttpApiData     as Export (FromHttpApiData (..), ToHttpApiData (..))
 
 import Network.Google.Data.Bytes   as Export
