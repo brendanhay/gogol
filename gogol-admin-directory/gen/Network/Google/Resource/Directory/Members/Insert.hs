@@ -77,7 +77,7 @@ membersInsert pMiGroupKey_ pMiPayload_ =
     , _miPayload = pMiPayload_
     }
 
--- | Email or immutable Id of the group
+-- | Email or immutable ID of the group
 miGroupKey :: Lens' MembersInsert Text
 miGroupKey
   = lens _miGroupKey (\ s a -> s{_miGroupKey = a})

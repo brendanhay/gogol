@@ -37,7 +37,6 @@ module Network.Google.Resource.Games.TurnBasedMatches.Sync
 
     -- * Request Lenses
     , tbmsMaxCompletedMatches
-    , tbmsConsistencyToken
     , tbmsIncludeMatchData
     , tbmsLanguage
     , tbmsPageToken
@@ -55,13 +54,12 @@ type TurnBasedMatchesSyncResource =
          "turnbasedmatches" :>
            "sync" :>
              QueryParam "maxCompletedMatches" (Textual Int32) :>
-               QueryParam "consistencyToken" (Textual Int64) :>
-                 QueryParam "includeMatchData" Bool :>
-                   QueryParam "language" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" (Textual Int32) :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] TurnBasedMatchSync
+               QueryParam "includeMatchData" Bool :>
+                 QueryParam "language" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" (Textual Int32) :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] TurnBasedMatchSync
 
 -- | Returns turn-based matches the player is or was involved in that changed
 -- since the last sync call, with the least recent changes coming first.
@@ -71,7 +69,6 @@ type TurnBasedMatchesSyncResource =
 -- /See:/ 'turnBasedMatchesSync' smart constructor.
 data TurnBasedMatchesSync = TurnBasedMatchesSync'
     { _tbmsMaxCompletedMatches :: !(Maybe (Textual Int32))
-    , _tbmsConsistencyToken    :: !(Maybe (Textual Int64))
     , _tbmsIncludeMatchData    :: !(Maybe Bool)
     , _tbmsLanguage            :: !(Maybe Text)
     , _tbmsPageToken           :: !(Maybe Text)
@@ -83,8 +80,6 @@ data TurnBasedMatchesSync = TurnBasedMatchesSync'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'tbmsMaxCompletedMatches'
---
--- * 'tbmsConsistencyToken'
 --
 -- * 'tbmsIncludeMatchData'
 --
@@ -98,7 +93,6 @@ turnBasedMatchesSync
 turnBasedMatchesSync =
     TurnBasedMatchesSync'
     { _tbmsMaxCompletedMatches = Nothing
-    , _tbmsConsistencyToken = Nothing
     , _tbmsIncludeMatchData = Nothing
     , _tbmsLanguage = Nothing
     , _tbmsPageToken = Nothing
@@ -112,13 +106,6 @@ tbmsMaxCompletedMatches :: Lens' TurnBasedMatchesSync (Maybe Int32)
 tbmsMaxCompletedMatches
   = lens _tbmsMaxCompletedMatches
       (\ s a -> s{_tbmsMaxCompletedMatches = a})
-      . mapping _Coerce
-
--- | The last-seen mutation timestamp.
-tbmsConsistencyToken :: Lens' TurnBasedMatchesSync (Maybe Int64)
-tbmsConsistencyToken
-  = lens _tbmsConsistencyToken
-      (\ s a -> s{_tbmsConsistencyToken = a})
       . mapping _Coerce
 
 -- | True if match data should be returned in the response. Note that not all
@@ -154,11 +141,9 @@ tbmsMaxResults
 instance GoogleRequest TurnBasedMatchesSync where
         type Rs TurnBasedMatchesSync = TurnBasedMatchSync
         type Scopes TurnBasedMatchesSync =
-             '["https://www.googleapis.com/auth/games",
-               "https://www.googleapis.com/auth/plus.login"]
+             '["https://www.googleapis.com/auth/games"]
         requestClient TurnBasedMatchesSync'{..}
-          = go _tbmsMaxCompletedMatches _tbmsConsistencyToken
-              _tbmsIncludeMatchData
+          = go _tbmsMaxCompletedMatches _tbmsIncludeMatchData
               _tbmsLanguage
               _tbmsPageToken
               _tbmsMaxResults

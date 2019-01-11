@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the logs in projects or organizations. Only logs that have entries
--- are listed.
+-- Lists the logs in projects, organizations, folders, or billing accounts.
+-- Only logs that have entries are listed.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.billingAccounts.logs.list@.
 module Network.Google.Resource.Logging.BillingAccounts.Logs.List
@@ -37,10 +37,8 @@ module Network.Google.Resource.Logging.BillingAccounts.Logs.List
     , ballParent
     , ballXgafv
     , ballUploadProtocol
-    , ballPp
     , ballAccessToken
     , ballUploadType
-    , ballBearerToken
     , ballPageToken
     , ballPageSize
     , ballCallback
@@ -57,28 +55,24 @@ type BillingAccountsLogsListResource =
          "logs" :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" (Textual Int32) :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] ListLogsResponse
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "pageSize" (Textual Int32) :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] ListLogsResponse
 
--- | Lists the logs in projects or organizations. Only logs that have entries
--- are listed.
+-- | Lists the logs in projects, organizations, folders, or billing accounts.
+-- Only logs that have entries are listed.
 --
 -- /See:/ 'billingAccountsLogsList' smart constructor.
 data BillingAccountsLogsList = BillingAccountsLogsList'
     { _ballParent         :: !Text
     , _ballXgafv          :: !(Maybe Xgafv)
     , _ballUploadProtocol :: !(Maybe Text)
-    , _ballPp             :: !Bool
     , _ballAccessToken    :: !(Maybe Text)
     , _ballUploadType     :: !(Maybe Text)
-    , _ballBearerToken    :: !(Maybe Text)
     , _ballPageToken      :: !(Maybe Text)
     , _ballPageSize       :: !(Maybe (Textual Int32))
     , _ballCallback       :: !(Maybe Text)
@@ -94,13 +88,9 @@ data BillingAccountsLogsList = BillingAccountsLogsList'
 --
 -- * 'ballUploadProtocol'
 --
--- * 'ballPp'
---
 -- * 'ballAccessToken'
 --
 -- * 'ballUploadType'
---
--- * 'ballBearerToken'
 --
 -- * 'ballPageToken'
 --
@@ -115,10 +105,8 @@ billingAccountsLogsList pBallParent_ =
     { _ballParent = pBallParent_
     , _ballXgafv = Nothing
     , _ballUploadProtocol = Nothing
-    , _ballPp = True
     , _ballAccessToken = Nothing
     , _ballUploadType = Nothing
-    , _ballBearerToken = Nothing
     , _ballPageToken = Nothing
     , _ballPageSize = Nothing
     , _ballCallback = Nothing
@@ -126,6 +114,7 @@ billingAccountsLogsList pBallParent_ =
 
 -- | Required. The resource name that owns the logs:
 -- \"projects\/[PROJECT_ID]\" \"organizations\/[ORGANIZATION_ID]\"
+-- \"billingAccounts\/[BILLING_ACCOUNT_ID]\" \"folders\/[FOLDER_ID]\"
 ballParent :: Lens' BillingAccountsLogsList Text
 ballParent
   = lens _ballParent (\ s a -> s{_ballParent = a})
@@ -141,10 +130,6 @@ ballUploadProtocol
   = lens _ballUploadProtocol
       (\ s a -> s{_ballUploadProtocol = a})
 
--- | Pretty-print response.
-ballPp :: Lens' BillingAccountsLogsList Bool
-ballPp = lens _ballPp (\ s a -> s{_ballPp = a})
-
 -- | OAuth access token.
 ballAccessToken :: Lens' BillingAccountsLogsList (Maybe Text)
 ballAccessToken
@@ -156,12 +141,6 @@ ballUploadType :: Lens' BillingAccountsLogsList (Maybe Text)
 ballUploadType
   = lens _ballUploadType
       (\ s a -> s{_ballUploadType = a})
-
--- | OAuth bearer token.
-ballBearerToken :: Lens' BillingAccountsLogsList (Maybe Text)
-ballBearerToken
-  = lens _ballBearerToken
-      (\ s a -> s{_ballBearerToken = a})
 
 -- | Optional. If present, then retrieve the next batch of results from the
 -- preceding call to this method. pageToken must be the value of
@@ -194,10 +173,8 @@ instance GoogleRequest BillingAccountsLogsList where
                "https://www.googleapis.com/auth/logging.read"]
         requestClient BillingAccountsLogsList'{..}
           = go _ballParent _ballXgafv _ballUploadProtocol
-              (Just _ballPp)
               _ballAccessToken
               _ballUploadType
-              _ballBearerToken
               _ballPageToken
               _ballPageSize
               _ballCallback

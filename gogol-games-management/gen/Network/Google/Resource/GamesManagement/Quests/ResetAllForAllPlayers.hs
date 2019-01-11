@@ -65,8 +65,7 @@ instance GoogleRequest QuestsResetAllForAllPlayers
          where
         type Rs QuestsResetAllForAllPlayers = ()
         type Scopes QuestsResetAllForAllPlayers =
-             '["https://www.googleapis.com/auth/games",
-               "https://www.googleapis.com/auth/plus.login"]
+             '["https://www.googleapis.com/auth/games"]
         requestClient QuestsResetAllForAllPlayers'{}
           = go (Just AltJSON) gamesManagementService
           where go

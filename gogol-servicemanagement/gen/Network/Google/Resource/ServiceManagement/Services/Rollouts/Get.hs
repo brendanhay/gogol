@@ -22,7 +22,7 @@
 --
 -- Gets a service configuration rollout.
 --
--- /See:/ <https://cloud.google.com/service-management/ Google Service Management API Reference> for @servicemanagement.services.rollouts.get@.
+-- /See:/ <https://cloud.google.com/service-management/ Service Management API Reference> for @servicemanagement.services.rollouts.get@.
 module Network.Google.Resource.ServiceManagement.Services.Rollouts.Get
     (
     -- * REST Resource
@@ -35,10 +35,8 @@ module Network.Google.Resource.ServiceManagement.Services.Rollouts.Get
     -- * Request Lenses
     , srgXgafv
     , srgUploadProtocol
-    , srgPp
     , srgAccessToken
     , srgUploadType
-    , srgBearerToken
     , srgServiceName
     , srgRolloutId
     , srgCallback
@@ -57,12 +55,10 @@ type ServicesRolloutsGetResource =
              Capture "rolloutId" Text :>
                QueryParam "$.xgafv" Xgafv :>
                  QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :> Get '[JSON] Rollout
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] Rollout
 
 -- | Gets a service configuration rollout.
 --
@@ -70,10 +66,8 @@ type ServicesRolloutsGetResource =
 data ServicesRolloutsGet = ServicesRolloutsGet'
     { _srgXgafv          :: !(Maybe Xgafv)
     , _srgUploadProtocol :: !(Maybe Text)
-    , _srgPp             :: !Bool
     , _srgAccessToken    :: !(Maybe Text)
     , _srgUploadType     :: !(Maybe Text)
-    , _srgBearerToken    :: !(Maybe Text)
     , _srgServiceName    :: !Text
     , _srgRolloutId      :: !Text
     , _srgCallback       :: !(Maybe Text)
@@ -87,13 +81,9 @@ data ServicesRolloutsGet = ServicesRolloutsGet'
 --
 -- * 'srgUploadProtocol'
 --
--- * 'srgPp'
---
 -- * 'srgAccessToken'
 --
 -- * 'srgUploadType'
---
--- * 'srgBearerToken'
 --
 -- * 'srgServiceName'
 --
@@ -108,10 +98,8 @@ servicesRolloutsGet pSrgServiceName_ pSrgRolloutId_ =
     ServicesRolloutsGet'
     { _srgXgafv = Nothing
     , _srgUploadProtocol = Nothing
-    , _srgPp = True
     , _srgAccessToken = Nothing
     , _srgUploadType = Nothing
-    , _srgBearerToken = Nothing
     , _srgServiceName = pSrgServiceName_
     , _srgRolloutId = pSrgRolloutId_
     , _srgCallback = Nothing
@@ -127,10 +115,6 @@ srgUploadProtocol
   = lens _srgUploadProtocol
       (\ s a -> s{_srgUploadProtocol = a})
 
--- | Pretty-print response.
-srgPp :: Lens' ServicesRolloutsGet Bool
-srgPp = lens _srgPp (\ s a -> s{_srgPp = a})
-
 -- | OAuth access token.
 srgAccessToken :: Lens' ServicesRolloutsGet (Maybe Text)
 srgAccessToken
@@ -142,12 +126,6 @@ srgUploadType :: Lens' ServicesRolloutsGet (Maybe Text)
 srgUploadType
   = lens _srgUploadType
       (\ s a -> s{_srgUploadType = a})
-
--- | OAuth bearer token.
-srgBearerToken :: Lens' ServicesRolloutsGet (Maybe Text)
-srgBearerToken
-  = lens _srgBearerToken
-      (\ s a -> s{_srgBearerToken = a})
 
 -- | The name of the service. See the
 -- [overview](\/service-management\/overview) for naming requirements. For
@@ -177,10 +155,8 @@ instance GoogleRequest ServicesRolloutsGet where
         requestClient ServicesRolloutsGet'{..}
           = go _srgServiceName _srgRolloutId _srgXgafv
               _srgUploadProtocol
-              (Just _srgPp)
               _srgAccessToken
               _srgUploadType
-              _srgBearerToken
               _srgCallback
               (Just AltJSON)
               serviceManagementService

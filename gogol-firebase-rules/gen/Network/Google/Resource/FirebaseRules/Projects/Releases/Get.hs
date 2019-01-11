@@ -35,10 +35,8 @@ module Network.Google.Resource.FirebaseRules.Projects.Releases.Get
     -- * Request Lenses
     , pXgafv
     , pUploadProtocol
-    , pPp
     , pAccessToken
     , pUploadType
-    , pBearerToken
     , pName
     , pCallback
     ) where
@@ -53,12 +51,10 @@ type ProjectsReleasesGetResource =
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] Release
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Release
 
 -- | Get a \`Release\` by name.
 --
@@ -66,10 +62,8 @@ type ProjectsReleasesGetResource =
 data ProjectsReleasesGet = ProjectsReleasesGet'
     { _pXgafv          :: !(Maybe Xgafv)
     , _pUploadProtocol :: !(Maybe Text)
-    , _pPp             :: !Bool
     , _pAccessToken    :: !(Maybe Text)
     , _pUploadType     :: !(Maybe Text)
-    , _pBearerToken    :: !(Maybe Text)
     , _pName           :: !Text
     , _pCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -82,13 +76,9 @@ data ProjectsReleasesGet = ProjectsReleasesGet'
 --
 -- * 'pUploadProtocol'
 --
--- * 'pPp'
---
 -- * 'pAccessToken'
 --
 -- * 'pUploadType'
---
--- * 'pBearerToken'
 --
 -- * 'pName'
 --
@@ -100,10 +90,8 @@ projectsReleasesGet pPName_ =
     ProjectsReleasesGet'
     { _pXgafv = Nothing
     , _pUploadProtocol = Nothing
-    , _pPp = True
     , _pAccessToken = Nothing
     , _pUploadType = Nothing
-    , _pBearerToken = Nothing
     , _pName = pPName_
     , _pCallback = Nothing
     }
@@ -118,10 +106,6 @@ pUploadProtocol
   = lens _pUploadProtocol
       (\ s a -> s{_pUploadProtocol = a})
 
--- | Pretty-print response.
-pPp :: Lens' ProjectsReleasesGet Bool
-pPp = lens _pPp (\ s a -> s{_pPp = a})
-
 -- | OAuth access token.
 pAccessToken :: Lens' ProjectsReleasesGet (Maybe Text)
 pAccessToken
@@ -131,11 +115,6 @@ pAccessToken
 pUploadType :: Lens' ProjectsReleasesGet (Maybe Text)
 pUploadType
   = lens _pUploadType (\ s a -> s{_pUploadType = a})
-
--- | OAuth bearer token.
-pBearerToken :: Lens' ProjectsReleasesGet (Maybe Text)
-pBearerToken
-  = lens _pBearerToken (\ s a -> s{_pBearerToken = a})
 
 -- | Resource name of the \`Release\`. Format:
 -- \`projects\/{project_id}\/releases\/{release_id}\`
@@ -154,10 +133,8 @@ instance GoogleRequest ProjectsReleasesGet where
                "https://www.googleapis.com/auth/firebase",
                "https://www.googleapis.com/auth/firebase.readonly"]
         requestClient ProjectsReleasesGet'{..}
-          = go _pName _pXgafv _pUploadProtocol (Just _pPp)
-              _pAccessToken
+          = go _pName _pXgafv _pUploadProtocol _pAccessToken
               _pUploadType
-              _pBearerToken
               _pCallback
               (Just AltJSON)
               firebaseRulesService

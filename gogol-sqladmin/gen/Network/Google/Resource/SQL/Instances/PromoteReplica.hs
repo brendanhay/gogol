@@ -23,7 +23,7 @@
 -- Promotes the read replica instance to be a stand-alone Cloud SQL
 -- instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.instances.promoteReplica@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.instances.promoteReplica@.
 module Network.Google.Resource.SQL.Instances.PromoteReplica
     (
     -- * REST Resource

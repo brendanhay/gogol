@@ -21,7 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Updates an autoscaler in the specified project using the data included
--- in the request. This method supports patch semantics.
+-- in the request. This method supports PATCH semantics and uses the JSON
+-- merge patch format and processing rules.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.regionAutoscalers.patch@.
 module Network.Google.Resource.Compute.RegionAutoscalers.Patch
@@ -34,6 +35,7 @@ module Network.Google.Resource.Compute.RegionAutoscalers.Patch
     , RegionAutoscalersPatch
 
     -- * Request Lenses
+    , rapRequestId
     , rapProject
     , rapPayload
     , rapAutoscaler
@@ -53,24 +55,29 @@ type RegionAutoscalersPatchResource =
              "regions" :>
                Capture "region" Text :>
                  "autoscalers" :>
-                   QueryParam "autoscaler" Text :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] Autoscaler :> Patch '[JSON] Operation
+                   QueryParam "requestId" Text :>
+                     QueryParam "autoscaler" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Autoscaler :> Patch '[JSON] Operation
 
 -- | Updates an autoscaler in the specified project using the data included
--- in the request. This method supports patch semantics.
+-- in the request. This method supports PATCH semantics and uses the JSON
+-- merge patch format and processing rules.
 --
 -- /See:/ 'regionAutoscalersPatch' smart constructor.
 data RegionAutoscalersPatch = RegionAutoscalersPatch'
-    { _rapProject    :: !Text
+    { _rapRequestId  :: !(Maybe Text)
+    , _rapProject    :: !Text
     , _rapPayload    :: !Autoscaler
-    , _rapAutoscaler :: !Text
+    , _rapAutoscaler :: !(Maybe Text)
     , _rapRegion     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RegionAutoscalersPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rapRequestId'
 --
 -- * 'rapProject'
 --
@@ -82,16 +89,30 @@ data RegionAutoscalersPatch = RegionAutoscalersPatch'
 regionAutoscalersPatch
     :: Text -- ^ 'rapProject'
     -> Autoscaler -- ^ 'rapPayload'
-    -> Text -- ^ 'rapAutoscaler'
     -> Text -- ^ 'rapRegion'
     -> RegionAutoscalersPatch
-regionAutoscalersPatch pRapProject_ pRapPayload_ pRapAutoscaler_ pRapRegion_ =
+regionAutoscalersPatch pRapProject_ pRapPayload_ pRapRegion_ =
     RegionAutoscalersPatch'
-    { _rapProject = pRapProject_
+    { _rapRequestId = Nothing
+    , _rapProject = pRapProject_
     , _rapPayload = pRapPayload_
-    , _rapAutoscaler = pRapAutoscaler_
+    , _rapAutoscaler = Nothing
     , _rapRegion = pRapRegion_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+rapRequestId :: Lens' RegionAutoscalersPatch (Maybe Text)
+rapRequestId
+  = lens _rapRequestId (\ s a -> s{_rapRequestId = a})
 
 -- | Project ID for this request.
 rapProject :: Lens' RegionAutoscalersPatch Text
@@ -103,8 +124,8 @@ rapPayload :: Lens' RegionAutoscalersPatch Autoscaler
 rapPayload
   = lens _rapPayload (\ s a -> s{_rapPayload = a})
 
--- | Name of the autoscaler to update.
-rapAutoscaler :: Lens' RegionAutoscalersPatch Text
+-- | Name of the autoscaler to patch.
+rapAutoscaler :: Lens' RegionAutoscalersPatch (Maybe Text)
 rapAutoscaler
   = lens _rapAutoscaler
       (\ s a -> s{_rapAutoscaler = a})
@@ -120,7 +141,8 @@ instance GoogleRequest RegionAutoscalersPatch where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient RegionAutoscalersPatch'{..}
-          = go _rapProject _rapRegion (Just _rapAutoscaler)
+          = go _rapProject _rapRegion _rapRequestId
+              _rapAutoscaler
               (Just AltJSON)
               _rapPayload
               computeService

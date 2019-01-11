@@ -21,7 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Deletes all the log entries in a log. The log reappears if it receives
--- new entries.
+-- new entries. Log entries written shortly before the delete operation
+-- might not be deleted.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.folders.logs.delete@.
 module Network.Google.Resource.Logging.Folders.Logs.Delete
@@ -36,10 +37,8 @@ module Network.Google.Resource.Logging.Folders.Logs.Delete
     -- * Request Lenses
     , fldXgafv
     , fldUploadProtocol
-    , fldPp
     , fldAccessToken
     , fldUploadType
-    , fldBearerToken
     , fldLogName
     , fldCallback
     ) where
@@ -54,24 +53,21 @@ type FoldersLogsDeleteResource =
        Capture "logName" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :> Delete '[JSON] Empty
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
 -- | Deletes all the log entries in a log. The log reappears if it receives
--- new entries.
+-- new entries. Log entries written shortly before the delete operation
+-- might not be deleted.
 --
 -- /See:/ 'foldersLogsDelete' smart constructor.
 data FoldersLogsDelete = FoldersLogsDelete'
     { _fldXgafv          :: !(Maybe Xgafv)
     , _fldUploadProtocol :: !(Maybe Text)
-    , _fldPp             :: !Bool
     , _fldAccessToken    :: !(Maybe Text)
     , _fldUploadType     :: !(Maybe Text)
-    , _fldBearerToken    :: !(Maybe Text)
     , _fldLogName        :: !Text
     , _fldCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -84,13 +80,9 @@ data FoldersLogsDelete = FoldersLogsDelete'
 --
 -- * 'fldUploadProtocol'
 --
--- * 'fldPp'
---
 -- * 'fldAccessToken'
 --
 -- * 'fldUploadType'
---
--- * 'fldBearerToken'
 --
 -- * 'fldLogName'
 --
@@ -102,10 +94,8 @@ foldersLogsDelete pFldLogName_ =
     FoldersLogsDelete'
     { _fldXgafv = Nothing
     , _fldUploadProtocol = Nothing
-    , _fldPp = True
     , _fldAccessToken = Nothing
     , _fldUploadType = Nothing
-    , _fldBearerToken = Nothing
     , _fldLogName = pFldLogName_
     , _fldCallback = Nothing
     }
@@ -120,10 +110,6 @@ fldUploadProtocol
   = lens _fldUploadProtocol
       (\ s a -> s{_fldUploadProtocol = a})
 
--- | Pretty-print response.
-fldPp :: Lens' FoldersLogsDelete Bool
-fldPp = lens _fldPp (\ s a -> s{_fldPp = a})
-
 -- | OAuth access token.
 fldAccessToken :: Lens' FoldersLogsDelete (Maybe Text)
 fldAccessToken
@@ -136,16 +122,12 @@ fldUploadType
   = lens _fldUploadType
       (\ s a -> s{_fldUploadType = a})
 
--- | OAuth bearer token.
-fldBearerToken :: Lens' FoldersLogsDelete (Maybe Text)
-fldBearerToken
-  = lens _fldBearerToken
-      (\ s a -> s{_fldBearerToken = a})
-
 -- | Required. The resource name of the log to delete:
 -- \"projects\/[PROJECT_ID]\/logs\/[LOG_ID]\"
--- \"organizations\/[ORGANIZATION_ID]\/logs\/[LOG_ID]\" [LOG_ID] must be
--- URL-encoded. For example, \"projects\/my-project-id\/logs\/syslog\",
+-- \"organizations\/[ORGANIZATION_ID]\/logs\/[LOG_ID]\"
+-- \"billingAccounts\/[BILLING_ACCOUNT_ID]\/logs\/[LOG_ID]\"
+-- \"folders\/[FOLDER_ID]\/logs\/[LOG_ID]\" [LOG_ID] must be URL-encoded.
+-- For example, \"projects\/my-project-id\/logs\/syslog\",
 -- \"organizations\/1234567890\/logs\/cloudresourcemanager.googleapis.com%2Factivity\".
 -- For more information about log names, see LogEntry.
 fldLogName :: Lens' FoldersLogsDelete Text
@@ -164,10 +146,8 @@ instance GoogleRequest FoldersLogsDelete where
                "https://www.googleapis.com/auth/logging.admin"]
         requestClient FoldersLogsDelete'{..}
           = go _fldLogName _fldXgafv _fldUploadProtocol
-              (Just _fldPp)
               _fldAccessToken
               _fldUploadType
-              _fldBearerToken
               _fldCallback
               (Just AltJSON)
               loggingService

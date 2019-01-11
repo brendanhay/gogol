@@ -41,7 +41,7 @@ import           Network.Google.ShoppingContent.Types
 -- 'DatafeedstatusesCustombatch' request conforms to.
 type DatafeedstatusesCustombatchResource =
      "content" :>
-       "v2" :>
+       "v2.1" :>
          "datafeedstatuses" :>
            "batch" :>
              QueryParam "alt" AltJSON :>

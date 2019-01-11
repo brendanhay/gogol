@@ -27,11 +27,6 @@ module Network.Google.AndroidPublisher.Types
     , inAppProductListings
     , iaplAddtional
 
-    -- * InAppProductsUpdateResponse
-    , InAppProductsUpdateResponse
-    , inAppProductsUpdateResponse
-    , iapurInAppProduct
-
     -- * EditsImagesDeleteallImageType
     , EditsImagesDeleteallImageType (..)
 
@@ -44,9 +39,8 @@ module Network.Google.AndroidPublisher.Types
     -- * Track
     , Track
     , track
-    , tVersionCodes
     , tTrack
-    , tUserFraction
+    , tReleases
 
     -- * Image
     , Image
@@ -54,14 +48,6 @@ module Network.Google.AndroidPublisher.Types
     , iURL
     , iSha1
     , iId
-
-    -- * InAppProductsBatchRequestEntry
-    , InAppProductsBatchRequestEntry
-    , inAppProductsBatchRequestEntry
-    , iapbreMethodName
-    , iapbreInAppProductsinsertrequest
-    , iapbreInAppProductsupdaterequest
-    , iapbreBatchId
 
     -- * InAppProductListing
     , InAppProductListing
@@ -86,9 +72,6 @@ module Network.Google.AndroidPublisher.Types
     , efFileSize
     , efReferencesVersion
 
-    -- * EditsTracksPatchTrack
-    , EditsTracksPatchTrack (..)
-
     -- * UserComment
     , UserComment
     , userComment
@@ -111,8 +94,11 @@ module Network.Google.AndroidPublisher.Types
     , tGooglePlusCommUnities
     , tGoogleGroups
 
-    -- * EditsTracksGetTrack
-    , EditsTracksGetTrack (..)
+    -- * SubscriptionCancelSurveyResult
+    , SubscriptionCancelSurveyResult
+    , subscriptionCancelSurveyResult
+    , scsrCancelSurveyReason
+    , scsrUserInputCancelReason
 
     -- * Listing
     , Listing
@@ -139,9 +125,6 @@ module Network.Google.AndroidPublisher.Types
     , tracksListResponse
     , tlrTracks
     , tlrKind
-
-    -- * EditsTracksUpdateTrack
-    , EditsTracksUpdateTrack (..)
 
     -- * Season
     , Season
@@ -175,7 +158,9 @@ module Network.Google.AndroidPublisher.Types
     , ppConsumptionState
     , ppKind
     , ppPurchaseTimeMillis
+    , ppPurchaseType
     , ppDeveloperPayload
+    , ppOrderId
 
     -- * ReviewsListResponse
     , ReviewsListResponse
@@ -189,25 +174,37 @@ module Network.Google.AndroidPublisher.Types
     , subscriptionPurchasesDeferResponse
     , spdrNewExpiryTimeMillis
 
-    -- * APKListing
-    , APKListing
-    , aPKListing
-    , apklLanguage
-    , apklRecentChanges
-
     -- * SubscriptionPurchase
     , SubscriptionPurchase
     , subscriptionPurchase
+    , spGivenName
+    , spAutoResumeTimeMillis
+    , spUserCancellationTimeMillis
     , spPaymentState
     , spKind
+    , spPurchaseType
+    , spPriceChange
+    , spProFileId
+    , spLinkedPurchaseToken
+    , spFamilyName
+    , spProFileName
     , spExpiryTimeMillis
     , spAutoRenewing
     , spPriceCurrencyCode
+    , spEmailAddress
     , spCancelReason
     , spCountryCode
     , spDeveloperPayload
     , spPriceAmountMicros
     , spStartTimeMillis
+    , spOrderId
+    , spCancelSurveyResult
+
+    -- * SubscriptionPriceChange
+    , SubscriptionPriceChange
+    , subscriptionPriceChange
+    , spcState
+    , spcNewPrice
 
     -- * AppDetails
     , AppDetails
@@ -221,11 +218,6 @@ module Network.Google.AndroidPublisher.Types
     , InAppProductPrices
     , inAppProductPrices
     , iAppAddtional
-
-    -- * InAppProductsBatchRequest
-    , InAppProductsBatchRequest
-    , inAppProductsBatchRequest
-    , iapbrEntrys
 
     -- * ExternallyHostedAPK
     , ExternallyHostedAPK
@@ -246,14 +238,24 @@ module Network.Google.AndroidPublisher.Types
     , ehapkUsesPermissions
     , ehapkCertificateBase64s
 
+    -- * TrackRelease
+    , TrackRelease
+    , trackRelease
+    , trVersionCodes
+    , trStatus
+    , trReleaseNotes
+    , trUserFraction
+    , trName
+
     -- * EditsImagesListImageType
     , EditsImagesListImageType (..)
 
-    -- * EditsTestersPatchTrack
-    , EditsTestersPatchTrack (..)
-
-    -- * EditsTestersGetTrack
-    , EditsTestersGetTrack (..)
+    -- * Bundle
+    , Bundle
+    , bundle
+    , bVersionCode
+    , bSha1
+    , bSha256
 
     -- * DeobfuscationFile
     , DeobfuscationFile
@@ -305,11 +307,11 @@ module Network.Google.AndroidPublisher.Types
     -- * EditsExpansionFilesUploadExpansionFileType
     , EditsExpansionFilesUploadExpansionFileType (..)
 
-    -- * APKListingsListResponse
-    , APKListingsListResponse
-    , aPKListingsListResponse
-    , apkllrKind
-    , apkllrListings
+    -- * LocalizedText
+    , LocalizedText
+    , localizedText
+    , ltText
+    , ltLanguage
 
     -- * Review
     , Review
@@ -317,11 +319,6 @@ module Network.Google.AndroidPublisher.Types
     , rReviewId
     , rAuthorName
     , rComments
-
-    -- * InAppProductsInsertResponse
-    , InAppProductsInsertResponse
-    , inAppProductsInsertResponse
-    , iapirInAppProduct
 
     -- * APKsAddExternallyHostedResponse
     , APKsAddExternallyHostedResponse
@@ -373,6 +370,7 @@ module Network.Google.AndroidPublisher.Types
     , InAppProduct
     , inAppProduct
     , iapStatus
+    , iapGracePeriod
     , iapTrialPeriod
     , iapPackageName
     , iapSeason
@@ -383,13 +381,6 @@ module Network.Google.AndroidPublisher.Types
     , iapDefaultPrice
     , iapListings
     , iapDefaultLanguage
-
-    -- * InAppProductsBatchResponseEntry
-    , InAppProductsBatchResponseEntry
-    , inAppProductsBatchResponseEntry
-    , iInAppProductsupdateresponse
-    , iInAppProductsinsertresponse
-    , iBatchId
 
     -- * Price
     , Price
@@ -404,6 +395,7 @@ module Network.Google.AndroidPublisher.Types
     , APKBinary
     , aPKBinary
     , apkbSha1
+    , apkbSha256
 
     -- * APKsListResponse
     , APKsListResponse
@@ -433,31 +425,11 @@ module Network.Google.AndroidPublisher.Types
     , aPKsAddExternallyHostedRequest
     , aExternallyHostedAPK
 
-    -- * InAppProductsInsertRequest
-    , InAppProductsInsertRequest
-    , inAppProductsInsertRequest
-    , iInAppProduct
-
-    -- * EntitlementsListResponse
-    , EntitlementsListResponse
-    , entitlementsListResponse
-    , elrTokenPagination
-    , elrPageInfo
-    , elrResources
-
     -- * Comment
     , Comment
     , comment
     , cUserComment
     , cDeveloperComment
-
-    -- * EditsTestersUpdateTrack
-    , EditsTestersUpdateTrack (..)
-
-    -- * InAppProductsUpdateRequest
-    , InAppProductsUpdateRequest
-    , inAppProductsUpdateRequest
-    , inInAppProduct
 
     -- * Timestamp
     , Timestamp
@@ -473,35 +445,27 @@ module Network.Google.AndroidPublisher.Types
     , vpPurchaseToken
     , vpVoidedTimeMillis
 
+    -- * BundlesListResponse
+    , BundlesListResponse
+    , bundlesListResponse
+    , blrBundles
+    , blrKind
+
     -- * ReviewReplyResult
     , ReviewReplyResult
     , reviewReplyResult
     , rReplyText
     , rLastEdited
-
-    -- * Entitlement
-    , Entitlement
-    , entitlement
-    , eKind
-    , eProductType
-    , eToken
-    , eProductId
-
-    -- * InAppProductsBatchResponse
-    , InAppProductsBatchResponse
-    , inAppProductsBatchResponse
-    , iEntrys
-    , iKind
     ) where
 
 import           Network.Google.AndroidPublisher.Types.Product
 import           Network.Google.AndroidPublisher.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v2' of the Google Play Developer API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v3' of the Google Play Developer API. This contains the host and root path used as a starting point for constructing service requests.
 androidPublisherService :: ServiceConfig
 androidPublisherService
-  = defaultService (ServiceId "androidpublisher:v2")
+  = defaultService (ServiceId "androidpublisher:v3")
       "www.googleapis.com"
 
 -- | View and manage your Google Play Developer account

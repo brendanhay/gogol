@@ -22,7 +22,7 @@
 --
 -- Gets the configuration details of a subscription.
 --
--- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.get@.
+-- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.get@.
 module Network.Google.Resource.PubSub.Projects.Subscriptions.Get
     (
     -- * REST Resource
@@ -35,10 +35,8 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.Get
     -- * Request Lenses
     , psgXgafv
     , psgUploadProtocol
-    , psgPp
     , psgAccessToken
     , psgUploadType
-    , psgBearerToken
     , psgSubscription
     , psgCallback
     ) where
@@ -53,12 +51,10 @@ type ProjectsSubscriptionsGetResource =
        Capture "subscription" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] Subscription
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Subscription
 
 -- | Gets the configuration details of a subscription.
 --
@@ -66,10 +62,8 @@ type ProjectsSubscriptionsGetResource =
 data ProjectsSubscriptionsGet = ProjectsSubscriptionsGet'
     { _psgXgafv          :: !(Maybe Xgafv)
     , _psgUploadProtocol :: !(Maybe Text)
-    , _psgPp             :: !Bool
     , _psgAccessToken    :: !(Maybe Text)
     , _psgUploadType     :: !(Maybe Text)
-    , _psgBearerToken    :: !(Maybe Text)
     , _psgSubscription   :: !Text
     , _psgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -82,13 +76,9 @@ data ProjectsSubscriptionsGet = ProjectsSubscriptionsGet'
 --
 -- * 'psgUploadProtocol'
 --
--- * 'psgPp'
---
 -- * 'psgAccessToken'
 --
 -- * 'psgUploadType'
---
--- * 'psgBearerToken'
 --
 -- * 'psgSubscription'
 --
@@ -100,10 +90,8 @@ projectsSubscriptionsGet pPsgSubscription_ =
     ProjectsSubscriptionsGet'
     { _psgXgafv = Nothing
     , _psgUploadProtocol = Nothing
-    , _psgPp = True
     , _psgAccessToken = Nothing
     , _psgUploadType = Nothing
-    , _psgBearerToken = Nothing
     , _psgSubscription = pPsgSubscription_
     , _psgCallback = Nothing
     }
@@ -118,10 +106,6 @@ psgUploadProtocol
   = lens _psgUploadProtocol
       (\ s a -> s{_psgUploadProtocol = a})
 
--- | Pretty-print response.
-psgPp :: Lens' ProjectsSubscriptionsGet Bool
-psgPp = lens _psgPp (\ s a -> s{_psgPp = a})
-
 -- | OAuth access token.
 psgAccessToken :: Lens' ProjectsSubscriptionsGet (Maybe Text)
 psgAccessToken
@@ -133,12 +117,6 @@ psgUploadType :: Lens' ProjectsSubscriptionsGet (Maybe Text)
 psgUploadType
   = lens _psgUploadType
       (\ s a -> s{_psgUploadType = a})
-
--- | OAuth bearer token.
-psgBearerToken :: Lens' ProjectsSubscriptionsGet (Maybe Text)
-psgBearerToken
-  = lens _psgBearerToken
-      (\ s a -> s{_psgBearerToken = a})
 
 -- | The name of the subscription to get. Format is
 -- \`projects\/{project}\/subscriptions\/{sub}\`.
@@ -159,10 +137,8 @@ instance GoogleRequest ProjectsSubscriptionsGet where
                "https://www.googleapis.com/auth/pubsub"]
         requestClient ProjectsSubscriptionsGet'{..}
           = go _psgSubscription _psgXgafv _psgUploadProtocol
-              (Just _psgPp)
               _psgAccessToken
               _psgUploadType
-              _psgBearerToken
               _psgCallback
               (Just AltJSON)
               pubSubService

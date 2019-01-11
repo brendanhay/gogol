@@ -35,12 +35,18 @@ library
     exposed-modules:
           Network.Google.Resource.Sheets.Spreadsheets.BatchUpdate
         , Network.Google.Resource.Sheets.Spreadsheets.Create
+        , Network.Google.Resource.Sheets.Spreadsheets.DeveloperMetadata.Get
+        , Network.Google.Resource.Sheets.Spreadsheets.DeveloperMetadata.Search
         , Network.Google.Resource.Sheets.Spreadsheets.Get
+        , Network.Google.Resource.Sheets.Spreadsheets.GetByDataFilter
         , Network.Google.Resource.Sheets.Spreadsheets.Sheets.CopyTo
         , Network.Google.Resource.Sheets.Spreadsheets.Values.Append
         , Network.Google.Resource.Sheets.Spreadsheets.Values.BatchClear
+        , Network.Google.Resource.Sheets.Spreadsheets.Values.BatchClearByDataFilter
         , Network.Google.Resource.Sheets.Spreadsheets.Values.BatchGet
+        , Network.Google.Resource.Sheets.Spreadsheets.Values.BatchGetByDataFilter
         , Network.Google.Resource.Sheets.Spreadsheets.Values.BatchUpdate
+        , Network.Google.Resource.Sheets.Spreadsheets.Values.BatchUpdateByDataFilter
         , Network.Google.Resource.Sheets.Spreadsheets.Values.Clear
         , Network.Google.Resource.Sheets.Spreadsheets.Values.Get
         , Network.Google.Resource.Sheets.Spreadsheets.Values.Update

@@ -24,7 +24,7 @@
 -- method to poll the operation result at intervals as recommended by the
 -- API service.
 --
--- /See:/ <https://cloud.google.com/dataproc/ Google Cloud Dataproc API Reference> for @dataproc.projects.regions.operations.get@.
+-- /See:/ <https://cloud.google.com/dataproc/ Cloud Dataproc API Reference> for @dataproc.projects.regions.operations.get@.
 module Network.Google.Resource.Dataproc.Projects.Regions.Operations.Get
     (
     -- * REST Resource
@@ -37,10 +37,8 @@ module Network.Google.Resource.Dataproc.Projects.Regions.Operations.Get
     -- * Request Lenses
     , progXgafv
     , progUploadProtocol
-    , progPp
     , progAccessToken
     , progUploadType
-    , progBearerToken
     , progName
     , progCallback
     ) where
@@ -53,14 +51,12 @@ import           Network.Google.Prelude
 type ProjectsRegionsOperationsGetResource =
      "v1" :>
        Capture "name" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] Operation
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Operation
 
 -- | Gets the latest state of a long-running operation. Clients can use this
 -- method to poll the operation result at intervals as recommended by the
@@ -68,12 +64,10 @@ type ProjectsRegionsOperationsGetResource =
 --
 -- /See:/ 'projectsRegionsOperationsGet' smart constructor.
 data ProjectsRegionsOperationsGet = ProjectsRegionsOperationsGet'
-    { _progXgafv          :: !(Maybe Text)
+    { _progXgafv          :: !(Maybe Xgafv)
     , _progUploadProtocol :: !(Maybe Text)
-    , _progPp             :: !Bool
     , _progAccessToken    :: !(Maybe Text)
     , _progUploadType     :: !(Maybe Text)
-    , _progBearerToken    :: !(Maybe Text)
     , _progName           :: !Text
     , _progCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -86,13 +80,9 @@ data ProjectsRegionsOperationsGet = ProjectsRegionsOperationsGet'
 --
 -- * 'progUploadProtocol'
 --
--- * 'progPp'
---
 -- * 'progAccessToken'
 --
 -- * 'progUploadType'
---
--- * 'progBearerToken'
 --
 -- * 'progName'
 --
@@ -104,16 +94,14 @@ projectsRegionsOperationsGet pProgName_ =
     ProjectsRegionsOperationsGet'
     { _progXgafv = Nothing
     , _progUploadProtocol = Nothing
-    , _progPp = True
     , _progAccessToken = Nothing
     , _progUploadType = Nothing
-    , _progBearerToken = Nothing
     , _progName = pProgName_
     , _progCallback = Nothing
     }
 
 -- | V1 error format.
-progXgafv :: Lens' ProjectsRegionsOperationsGet (Maybe Text)
+progXgafv :: Lens' ProjectsRegionsOperationsGet (Maybe Xgafv)
 progXgafv
   = lens _progXgafv (\ s a -> s{_progXgafv = a})
 
@@ -122,10 +110,6 @@ progUploadProtocol :: Lens' ProjectsRegionsOperationsGet (Maybe Text)
 progUploadProtocol
   = lens _progUploadProtocol
       (\ s a -> s{_progUploadProtocol = a})
-
--- | Pretty-print response.
-progPp :: Lens' ProjectsRegionsOperationsGet Bool
-progPp = lens _progPp (\ s a -> s{_progPp = a})
 
 -- | OAuth access token.
 progAccessToken :: Lens' ProjectsRegionsOperationsGet (Maybe Text)
@@ -138,12 +122,6 @@ progUploadType :: Lens' ProjectsRegionsOperationsGet (Maybe Text)
 progUploadType
   = lens _progUploadType
       (\ s a -> s{_progUploadType = a})
-
--- | OAuth bearer token.
-progBearerToken :: Lens' ProjectsRegionsOperationsGet (Maybe Text)
-progBearerToken
-  = lens _progBearerToken
-      (\ s a -> s{_progBearerToken = a})
 
 -- | The name of the operation resource.
 progName :: Lens' ProjectsRegionsOperationsGet Text
@@ -161,10 +139,8 @@ instance GoogleRequest ProjectsRegionsOperationsGet
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsRegionsOperationsGet'{..}
           = go _progName _progXgafv _progUploadProtocol
-              (Just _progPp)
               _progAccessToken
               _progUploadType
-              _progBearerToken
               _progCallback
               (Just AltJSON)
               dataprocService

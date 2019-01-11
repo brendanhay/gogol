@@ -21,7 +21,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Requests to install the latest version of an app to a device. If the app
--- is already installed then it is updated to the latest version if
+-- is already installed, then it is updated to the latest version if
 -- necessary.
 --
 -- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.installs.update@.
@@ -62,7 +62,7 @@ type InstallsUpdateResource =
                            ReqBody '[JSON] Install :> Put '[JSON] Install
 
 -- | Requests to install the latest version of an app to a device. If the app
--- is already installed then it is updated to the latest version if
+-- is already installed, then it is updated to the latest version if
 -- necessary.
 --
 -- /See:/ 'installsUpdate' smart constructor.

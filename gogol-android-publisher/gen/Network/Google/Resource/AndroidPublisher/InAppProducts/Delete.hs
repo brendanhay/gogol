@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'InAppProductsDelete' request conforms to.
 type InAppProductsDeleteResource =
      "androidpublisher" :>
-       "v2" :>
+       "v3" :>
          "applications" :>
            Capture "packageName" Text :>
              "inappproducts" :>

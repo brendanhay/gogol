@@ -29,19 +29,59 @@ module Network.Google.Datastore.Types
     , llLatitude
     , llLongitude
 
+    -- * TransactionOptions
+    , TransactionOptions
+    , transactionOptions
+    , toReadWrite
+    , toReadOnly
+
     -- * PropertyOrderDirection
     , PropertyOrderDirection (..)
+
+    -- * Status
+    , Status
+    , status
+    , sDetails
+    , sCode
+    , sMessage
+
+    -- * GoogleLongrunningOperationMetadata
+    , GoogleLongrunningOperationMetadata
+    , googleLongrunningOperationMetadata
+    , glomAddtional
+
+    -- * ReadWrite
+    , ReadWrite
+    , readWrite
+    , rwPreviousTransaction
+
+    -- * GoogleDatastoreAdminV1beta1ExportEntitiesResponse
+    , GoogleDatastoreAdminV1beta1ExportEntitiesResponse
+    , googleDatastoreAdminV1beta1ExportEntitiesResponse
+    , gdaveerOutputURL
 
     -- * RollbackRequest
     , RollbackRequest
     , rollbackRequest
     , rrTransaction
 
+    -- * ReserveIdsRequest
+    , ReserveIdsRequest
+    , reserveIdsRequest
+    , rirKeys
+    , rirDatabaseId
+
     -- * PartitionId
     , PartitionId
     , partitionId
     , piNamespaceId
     , piProjectId
+
+    -- * GoogleDatastoreAdminV1ListIndexesResponse
+    , GoogleDatastoreAdminV1ListIndexesResponse
+    , googleDatastoreAdminV1ListIndexesResponse
+    , gdavlirNextPageToken
+    , gdavlirIndexes
 
     -- * QueryResultBatch
     , QueryResultBatch
@@ -62,9 +102,15 @@ module Network.Google.Datastore.Types
     , entityProperties
     , epAddtional
 
+    -- * GoogleDatastoreAdminV1ImportEntitiesRequestLabels
+    , GoogleDatastoreAdminV1ImportEntitiesRequestLabels
+    , googleDatastoreAdminV1ImportEntitiesRequestLabels
+    , gdavierlAddtional
+
     -- * BeginTransactionRequest
     , BeginTransactionRequest
     , beginTransactionRequest
+    , btrTransactionOptions
 
     -- * RunQueryRequest
     , RunQueryRequest
@@ -79,8 +125,30 @@ module Network.Google.Datastore.Types
     , allocateIdsRequest
     , airKeys
 
+    -- * GoogleDatastoreAdminV1ExportEntitiesMetadata
+    , GoogleDatastoreAdminV1ExportEntitiesMetadata
+    , googleDatastoreAdminV1ExportEntitiesMetadata
+    , gdaveemProgressBytes
+    , gdaveemOutputURLPrefix
+    , gdaveemProgressEntities
+    , gdaveemEntityFilter
+    , gdaveemCommon
+
     -- * QueryResultBatchEntityResultType
     , QueryResultBatchEntityResultType (..)
+
+    -- * GoogleDatastoreAdminV1beta1CommonMetadata
+    , GoogleDatastoreAdminV1beta1CommonMetadata
+    , googleDatastoreAdminV1beta1CommonMetadata
+    , gdavcmState
+    , gdavcmStartTime
+    , gdavcmEndTime
+    , gdavcmLabels
+    , gdavcmOperationType
+
+    -- * Empty
+    , Empty
+    , empty
 
     -- * CompositeFilter
     , CompositeFilter
@@ -88,8 +156,33 @@ module Network.Google.Datastore.Types
     , cfOp
     , cfFilters
 
+    -- * GoogleDatastoreAdminV1beta1CommonMetadataOperationType
+    , GoogleDatastoreAdminV1beta1CommonMetadataOperationType (..)
+
     -- * QueryResultBatchMoreResults
     , QueryResultBatchMoreResults (..)
+
+    -- * GoogleDatastoreAdminV1IndexOperationMetadata
+    , GoogleDatastoreAdminV1IndexOperationMetadata
+    , googleDatastoreAdminV1IndexOperationMetadata
+    , gdaviomProgressEntities
+    , gdaviomCommon
+    , gdaviomIndexId
+
+    -- * GoogleDatastoreAdminV1beta1ImportEntitiesMetadata
+    , GoogleDatastoreAdminV1beta1ImportEntitiesMetadata
+    , googleDatastoreAdminV1beta1ImportEntitiesMetadata
+    , gdaviemProgressBytes
+    , gdaviemProgressEntities
+    , gdaviemEntityFilter
+    , gdaviemInputURL
+    , gdaviemCommon
+
+    -- * GoogleDatastoreAdminV1beta1Progress
+    , GoogleDatastoreAdminV1beta1Progress
+    , googleDatastoreAdminV1beta1Progress
+    , gdavpWorkCompleted
+    , gdavpWorkEstimated
 
     -- * BeginTransactionResponse
     , BeginTransactionResponse
@@ -122,6 +215,14 @@ module Network.Google.Datastore.Types
     , rBatch
     , rQuery
 
+    -- * GoogleDatastoreAdminV1ExportEntitiesRequestLabels
+    , GoogleDatastoreAdminV1ExportEntitiesRequestLabels
+    , googleDatastoreAdminV1ExportEntitiesRequestLabels
+    , gdaveerlAddtional
+
+    -- * GoogleDatastoreAdminV1CommonMetadataOperationType
+    , GoogleDatastoreAdminV1CommonMetadataOperationType (..)
+
     -- * Value
     , Value
     , value
@@ -142,6 +243,22 @@ module Network.Google.Datastore.Types
     -- * ValueNullValue
     , ValueNullValue (..)
 
+    -- * GoogleDatastoreAdminV1IndexedPropertyDirection
+    , GoogleDatastoreAdminV1IndexedPropertyDirection (..)
+
+    -- * GoogleDatastoreAdminV1CommonMetadataLabels
+    , GoogleDatastoreAdminV1CommonMetadataLabels
+    , googleDatastoreAdminV1CommonMetadataLabels
+    , gdavcmlAddtional
+
+    -- * GoogleDatastoreAdminV1IndexAncestor
+    , GoogleDatastoreAdminV1IndexAncestor (..)
+
+    -- * StatusDetailsItem
+    , StatusDetailsItem
+    , statusDetailsItem
+    , sdiAddtional
+
     -- * LookupRequest
     , LookupRequest
     , lookupRequest
@@ -150,6 +267,22 @@ module Network.Google.Datastore.Types
 
     -- * ReadOptionsReadConsistency
     , ReadOptionsReadConsistency (..)
+
+    -- * GoogleDatastoreAdminV1CommonMetadata
+    , GoogleDatastoreAdminV1CommonMetadata
+    , googleDatastoreAdminV1CommonMetadata
+    , gState
+    , gStartTime
+    , gEndTime
+    , gLabels
+    , gOperationType
+
+    -- * GoogleDatastoreAdminV1ExportEntitiesRequest
+    , GoogleDatastoreAdminV1ExportEntitiesRequest
+    , googleDatastoreAdminV1ExportEntitiesRequest
+    , gdaveerOutputURLPrefix
+    , gdaveerEntityFilter
+    , gdaveerLabels
 
     -- * Mutation
     , Mutation
@@ -165,6 +298,11 @@ module Network.Google.Datastore.Types
     , gqlQueryNamedBindings
     , gqnbAddtional
 
+    -- * GoogleDatastoreAdminV1ExportEntitiesResponse
+    , GoogleDatastoreAdminV1ExportEntitiesResponse
+    , googleDatastoreAdminV1ExportEntitiesResponse
+    , gOutputURL
+
     -- * PropertyReference
     , PropertyReference
     , propertyReference
@@ -175,6 +313,16 @@ module Network.Google.Datastore.Types
     , key
     , kPartitionId
     , kPath
+
+    -- * GoogleDatastoreAdminV1ImportEntitiesRequest
+    , GoogleDatastoreAdminV1ImportEntitiesRequest
+    , googleDatastoreAdminV1ImportEntitiesRequest
+    , gdavierEntityFilter
+    , gdavierInputURL
+    , gdavierLabels
+
+    -- * GoogleDatastoreAdminV1IndexState
+    , GoogleDatastoreAdminV1IndexState (..)
 
     -- * PropertyFilter
     , PropertyFilter
@@ -222,11 +370,25 @@ module Network.Google.Datastore.Types
     , kindExpression
     , keName
 
+    -- * GoogleLongrunningOperationResponse
+    , GoogleLongrunningOperationResponse
+    , googleLongrunningOperationResponse
+    , glorAddtional
+
     -- * ReadOptions
     , ReadOptions
     , readOptions
     , roReadConsistency
     , roTransaction
+
+    -- * GoogleDatastoreAdminV1beta1CommonMetadataState
+    , GoogleDatastoreAdminV1beta1CommonMetadataState (..)
+
+    -- * GoogleDatastoreAdminV1EntityFilter
+    , GoogleDatastoreAdminV1EntityFilter
+    , googleDatastoreAdminV1EntityFilter
+    , gdavefNamespaceIds
+    , gdavefKinds
 
     -- * RollbackResponse
     , RollbackResponse
@@ -237,11 +399,30 @@ module Network.Google.Datastore.Types
     , projection
     , pProperty
 
+    -- * ReserveIdsResponse
+    , ReserveIdsResponse
+    , reserveIdsResponse
+
     -- * Filter
     , Filter
     , filter'
     , fCompositeFilter
     , fPropertyFilter
+
+    -- * GoogleDatastoreAdminV1Index
+    , GoogleDatastoreAdminV1Index
+    , googleDatastoreAdminV1Index
+    , gdaviState
+    , gdaviKind
+    , gdaviProjectId
+    , gdaviIndexId
+    , gdaviAncestor
+    , gdaviProperties
+
+    -- * GoogleDatastoreAdminV1beta1CommonMetadataLabels
+    , GoogleDatastoreAdminV1beta1CommonMetadataLabels
+    , googleDatastoreAdminV1beta1CommonMetadataLabels
+    , gAddtional
 
     -- * PropertyFilterOp
     , PropertyFilterOp (..)
@@ -256,6 +437,27 @@ module Network.Google.Datastore.Types
     -- * CommitRequestMode
     , CommitRequestMode (..)
 
+    -- * GoogleLongrunningListOperationsResponse
+    , GoogleLongrunningListOperationsResponse
+    , googleLongrunningListOperationsResponse
+    , gllorNextPageToken
+    , gllorOperations
+
+    -- * GoogleDatastoreAdminV1ImportEntitiesMetadata
+    , GoogleDatastoreAdminV1ImportEntitiesMetadata
+    , googleDatastoreAdminV1ImportEntitiesMetadata
+    , gProgressBytes
+    , gProgressEntities
+    , gEntityFilter
+    , gInputURL
+    , gCommon
+
+    -- * GoogleDatastoreAdminV1Progress
+    , GoogleDatastoreAdminV1Progress
+    , googleDatastoreAdminV1Progress
+    , gWorkCompleted
+    , gWorkEstimated
+
     -- * PathElement
     , PathElement
     , pathElement
@@ -269,6 +471,22 @@ module Network.Google.Datastore.Types
     , eKey
     , eProperties
 
+    -- * GoogleDatastoreAdminV1beta1EntityFilter
+    , GoogleDatastoreAdminV1beta1EntityFilter
+    , googleDatastoreAdminV1beta1EntityFilter
+    , gNamespaceIds
+    , gKinds
+
+    -- * ReadOnly
+    , ReadOnly
+    , readOnly
+
+    -- * GoogleDatastoreAdminV1IndexedProperty
+    , GoogleDatastoreAdminV1IndexedProperty
+    , googleDatastoreAdminV1IndexedProperty
+    , gdavipDirection
+    , gdavipName
+
     -- * LookupResponse
     , LookupResponse
     , lookupResponse
@@ -276,24 +494,45 @@ module Network.Google.Datastore.Types
     , lrFound
     , lrMissing
 
+    -- * GoogleLongrunningOperation
+    , GoogleLongrunningOperation
+    , googleLongrunningOperation
+    , gloDone
+    , gloError
+    , gloResponse
+    , gloName
+    , gloMetadata
+
     -- * PropertyOrder
     , PropertyOrder
     , propertyOrder
     , poProperty
     , poDirection
 
+    -- * GoogleDatastoreAdminV1beta1ExportEntitiesMetadata
+    , GoogleDatastoreAdminV1beta1ExportEntitiesMetadata
+    , googleDatastoreAdminV1beta1ExportEntitiesMetadata
+    , gooProgressBytes
+    , gooOutputURLPrefix
+    , gooProgressEntities
+    , gooEntityFilter
+    , gooCommon
+
     -- * GqlQueryParameter
     , GqlQueryParameter
     , gqlQueryParameter
     , gqpCursor
     , gqpValue
+
+    -- * GoogleDatastoreAdminV1CommonMetadataState
+    , GoogleDatastoreAdminV1CommonMetadataState (..)
     ) where
 
 import           Network.Google.Datastore.Types.Product
 import           Network.Google.Datastore.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v1' of the Google Cloud Datastore API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v1' of the Cloud Datastore API. This contains the host and root path used as a starting point for constructing service requests.
 datastoreService :: ServiceConfig
 datastoreService
   = defaultService (ServiceId "datastore:v1")

@@ -22,7 +22,7 @@
 --
 -- Gets the current configuration of the specified service.
 --
--- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ Google App Engine Admin API Reference> for @appengine.apps.services.get@.
+-- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ App Engine Admin API Reference> for @appengine.apps.services.get@.
 module Network.Google.Resource.AppEngine.Apps.Services.Get
     (
     -- * REST Resource
@@ -35,10 +35,8 @@ module Network.Google.Resource.AppEngine.Apps.Services.Get
     -- * Request Lenses
     , asgXgafv
     , asgUploadProtocol
-    , asgPp
     , asgAccessToken
     , asgUploadType
-    , asgBearerToken
     , asgAppsId
     , asgServicesId
     , asgCallback
@@ -55,25 +53,21 @@ type AppsServicesGetResource =
          Capture "appsId" Text :>
            "services" :>
              Capture "servicesId" Text :>
-               QueryParam "$.xgafv" Text :>
+               QueryParam "$.xgafv" Xgafv :>
                  QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :> Get '[JSON] Service
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] Service
 
 -- | Gets the current configuration of the specified service.
 --
 -- /See:/ 'appsServicesGet' smart constructor.
 data AppsServicesGet = AppsServicesGet'
-    { _asgXgafv          :: !(Maybe Text)
+    { _asgXgafv          :: !(Maybe Xgafv)
     , _asgUploadProtocol :: !(Maybe Text)
-    , _asgPp             :: !Bool
     , _asgAccessToken    :: !(Maybe Text)
     , _asgUploadType     :: !(Maybe Text)
-    , _asgBearerToken    :: !(Maybe Text)
     , _asgAppsId         :: !Text
     , _asgServicesId     :: !Text
     , _asgCallback       :: !(Maybe Text)
@@ -87,13 +81,9 @@ data AppsServicesGet = AppsServicesGet'
 --
 -- * 'asgUploadProtocol'
 --
--- * 'asgPp'
---
 -- * 'asgAccessToken'
 --
 -- * 'asgUploadType'
---
--- * 'asgBearerToken'
 --
 -- * 'asgAppsId'
 --
@@ -108,17 +98,15 @@ appsServicesGet pAsgAppsId_ pAsgServicesId_ =
     AppsServicesGet'
     { _asgXgafv = Nothing
     , _asgUploadProtocol = Nothing
-    , _asgPp = True
     , _asgAccessToken = Nothing
     , _asgUploadType = Nothing
-    , _asgBearerToken = Nothing
     , _asgAppsId = pAsgAppsId_
     , _asgServicesId = pAsgServicesId_
     , _asgCallback = Nothing
     }
 
 -- | V1 error format.
-asgXgafv :: Lens' AppsServicesGet (Maybe Text)
+asgXgafv :: Lens' AppsServicesGet (Maybe Xgafv)
 asgXgafv = lens _asgXgafv (\ s a -> s{_asgXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -126,10 +114,6 @@ asgUploadProtocol :: Lens' AppsServicesGet (Maybe Text)
 asgUploadProtocol
   = lens _asgUploadProtocol
       (\ s a -> s{_asgUploadProtocol = a})
-
--- | Pretty-print response.
-asgPp :: Lens' AppsServicesGet Bool
-asgPp = lens _asgPp (\ s a -> s{_asgPp = a})
 
 -- | OAuth access token.
 asgAccessToken :: Lens' AppsServicesGet (Maybe Text)
@@ -142,12 +126,6 @@ asgUploadType :: Lens' AppsServicesGet (Maybe Text)
 asgUploadType
   = lens _asgUploadType
       (\ s a -> s{_asgUploadType = a})
-
--- | OAuth bearer token.
-asgBearerToken :: Lens' AppsServicesGet (Maybe Text)
-asgBearerToken
-  = lens _asgBearerToken
-      (\ s a -> s{_asgBearerToken = a})
 
 -- | Part of \`name\`. Name of the resource requested. Example:
 -- apps\/myapp\/services\/default.
@@ -175,10 +153,8 @@ instance GoogleRequest AppsServicesGet where
         requestClient AppsServicesGet'{..}
           = go _asgAppsId _asgServicesId _asgXgafv
               _asgUploadProtocol
-              (Just _asgPp)
               _asgAccessToken
               _asgUploadType
-              _asgBearerToken
               _asgCallback
               (Just AltJSON)
               appEngineService

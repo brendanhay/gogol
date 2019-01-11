@@ -38,12 +38,10 @@ module Network.Google.Resource.Sheets.Spreadsheets.Values.BatchClear
     -- * Request Lenses
     , svbcXgafv
     , svbcUploadProtocol
-    , svbcPp
     , svbcAccessToken
     , svbcSpreadsheetId
     , svbcUploadType
     , svbcPayload
-    , svbcBearerToken
     , svbcCallback
     ) where
 
@@ -59,14 +57,12 @@ type SpreadsheetsValuesBatchClearResource =
            "values:batchClear" :>
              QueryParam "$.xgafv" Xgafv :>
                QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "callback" Text :>
-                           QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] BatchClearValuesRequest :>
-                               Post '[JSON] BatchClearValuesResponse
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] BatchClearValuesRequest :>
+                           Post '[JSON] BatchClearValuesResponse
 
 -- | Clears one or more ranges of values from a spreadsheet. The caller must
 -- specify the spreadsheet ID and one or more ranges. Only values are
@@ -77,12 +73,10 @@ type SpreadsheetsValuesBatchClearResource =
 data SpreadsheetsValuesBatchClear = SpreadsheetsValuesBatchClear'
     { _svbcXgafv          :: !(Maybe Xgafv)
     , _svbcUploadProtocol :: !(Maybe Text)
-    , _svbcPp             :: !Bool
     , _svbcAccessToken    :: !(Maybe Text)
     , _svbcSpreadsheetId  :: !Text
     , _svbcUploadType     :: !(Maybe Text)
     , _svbcPayload        :: !BatchClearValuesRequest
-    , _svbcBearerToken    :: !(Maybe Text)
     , _svbcCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -94,8 +88,6 @@ data SpreadsheetsValuesBatchClear = SpreadsheetsValuesBatchClear'
 --
 -- * 'svbcUploadProtocol'
 --
--- * 'svbcPp'
---
 -- * 'svbcAccessToken'
 --
 -- * 'svbcSpreadsheetId'
@@ -103,8 +95,6 @@ data SpreadsheetsValuesBatchClear = SpreadsheetsValuesBatchClear'
 -- * 'svbcUploadType'
 --
 -- * 'svbcPayload'
---
--- * 'svbcBearerToken'
 --
 -- * 'svbcCallback'
 spreadsheetsValuesBatchClear
@@ -115,12 +105,10 @@ spreadsheetsValuesBatchClear pSvbcSpreadsheetId_ pSvbcPayload_ =
     SpreadsheetsValuesBatchClear'
     { _svbcXgafv = Nothing
     , _svbcUploadProtocol = Nothing
-    , _svbcPp = True
     , _svbcAccessToken = Nothing
     , _svbcSpreadsheetId = pSvbcSpreadsheetId_
     , _svbcUploadType = Nothing
     , _svbcPayload = pSvbcPayload_
-    , _svbcBearerToken = Nothing
     , _svbcCallback = Nothing
     }
 
@@ -134,10 +122,6 @@ svbcUploadProtocol :: Lens' SpreadsheetsValuesBatchClear (Maybe Text)
 svbcUploadProtocol
   = lens _svbcUploadProtocol
       (\ s a -> s{_svbcUploadProtocol = a})
-
--- | Pretty-print response.
-svbcPp :: Lens' SpreadsheetsValuesBatchClear Bool
-svbcPp = lens _svbcPp (\ s a -> s{_svbcPp = a})
 
 -- | OAuth access token.
 svbcAccessToken :: Lens' SpreadsheetsValuesBatchClear (Maybe Text)
@@ -162,12 +146,6 @@ svbcPayload :: Lens' SpreadsheetsValuesBatchClear BatchClearValuesRequest
 svbcPayload
   = lens _svbcPayload (\ s a -> s{_svbcPayload = a})
 
--- | OAuth bearer token.
-svbcBearerToken :: Lens' SpreadsheetsValuesBatchClear (Maybe Text)
-svbcBearerToken
-  = lens _svbcBearerToken
-      (\ s a -> s{_svbcBearerToken = a})
-
 -- | JSONP
 svbcCallback :: Lens' SpreadsheetsValuesBatchClear (Maybe Text)
 svbcCallback
@@ -179,14 +157,13 @@ instance GoogleRequest SpreadsheetsValuesBatchClear
              BatchClearValuesResponse
         type Scopes SpreadsheetsValuesBatchClear =
              '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file",
                "https://www.googleapis.com/auth/spreadsheets"]
         requestClient SpreadsheetsValuesBatchClear'{..}
           = go _svbcSpreadsheetId _svbcXgafv
               _svbcUploadProtocol
-              (Just _svbcPp)
               _svbcAccessToken
               _svbcUploadType
-              _svbcBearerToken
               _svbcCallback
               (Just AltJSON)
               _svbcPayload

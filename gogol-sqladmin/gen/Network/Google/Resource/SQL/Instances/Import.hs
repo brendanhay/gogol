@@ -20,10 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Imports data into a Cloud SQL instance from a MySQL dump file in Google
+-- Imports data into a Cloud SQL instance from a SQL dump or CSV file in
 -- Cloud Storage.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.instances.import@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.instances.import@.
 module Network.Google.Resource.SQL.Instances.Import
     (
     -- * REST Resource
@@ -56,7 +56,7 @@ type InstancesImportResource =
                      ReqBody '[JSON] InstancesImportRequest :>
                        Post '[JSON] Operation
 
--- | Imports data into a Cloud SQL instance from a MySQL dump file in Google
+-- | Imports data into a Cloud SQL instance from a SQL dump or CSV file in
 -- Cloud Storage.
 --
 -- /See:/ 'instancesImport' smart constructor.

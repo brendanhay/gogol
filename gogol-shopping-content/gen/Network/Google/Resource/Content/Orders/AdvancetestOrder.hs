@@ -21,8 +21,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Sandbox only. Moves a test order from state \"inProgress\" to state
--- \"pendingShipment\". This method can only be called for non-multi-client
--- accounts.
+-- \"pendingShipment\".
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.advancetestorder@.
 module Network.Google.Resource.Content.Orders.AdvancetestOrder
@@ -46,7 +45,7 @@ import           Network.Google.ShoppingContent.Types
 -- 'OrdersAdvancetestOrder' request conforms to.
 type OrdersAdvancetestOrderResource =
      "content" :>
-       "v2" :>
+       "v2.1" :>
          Capture "merchantId" (Textual Word64) :>
            "testorders" :>
              Capture "orderId" Text :>
@@ -55,8 +54,7 @@ type OrdersAdvancetestOrderResource =
                    Post '[JSON] OrdersAdvanceTestOrderResponse
 
 -- | Sandbox only. Moves a test order from state \"inProgress\" to state
--- \"pendingShipment\". This method can only be called for non-multi-client
--- accounts.
+-- \"pendingShipment\".
 --
 -- /See:/ 'ordersAdvancetestOrder' smart constructor.
 data OrdersAdvancetestOrder = OrdersAdvancetestOrder'
@@ -81,7 +79,8 @@ ordersAdvancetestOrder pOaoMerchantId_ pOaoOrderId_ =
     , _oaoOrderId = pOaoOrderId_
     }
 
--- | The ID of the managing account.
+-- | The ID of the account that manages the order. This cannot be a
+-- multi-client account.
 oaoMerchantId :: Lens' OrdersAdvancetestOrder Word64
 oaoMerchantId
   = lens _oaoMerchantId

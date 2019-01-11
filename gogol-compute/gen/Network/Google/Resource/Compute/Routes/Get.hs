@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified Route resource. Get a list of available routes by
+-- Returns the specified Route resource. Gets a list of available routes by
 -- making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.routes.get@.
@@ -53,7 +53,7 @@ type RoutesGetResource =
                  Capture "route" Text :>
                    QueryParam "alt" AltJSON :> Get '[JSON] Route
 
--- | Returns the specified Route resource. Get a list of available routes by
+-- | Returns the specified Route resource. Gets a list of available routes by
 -- making a list() request.
 --
 -- /See:/ 'routesGet' smart constructor.

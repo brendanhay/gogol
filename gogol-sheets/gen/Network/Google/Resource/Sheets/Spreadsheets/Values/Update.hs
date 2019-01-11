@@ -36,13 +36,11 @@ module Network.Google.Resource.Sheets.Spreadsheets.Values.Update
     -- * Request Lenses
     , svuXgafv
     , svuUploadProtocol
-    , svuPp
     , svuAccessToken
     , svuSpreadsheetId
     , svuUploadType
     , svuValueInputOption
     , svuPayload
-    , svuBearerToken
     , svuRange
     , svuIncludeValuesInResponse
     , svuResponseDateTimeRenderOption
@@ -63,19 +61,16 @@ type SpreadsheetsValuesUpdateResource =
              Capture "range" Text :>
                QueryParam "$.xgafv" Xgafv :>
                  QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "valueInputOption" Text :>
-                           QueryParam "bearer_token" Text :>
-                             QueryParam "includeValuesInResponse" Bool :>
-                               QueryParam "responseDateTimeRenderOption" Text :>
-                                 QueryParam "callback" Text :>
-                                   QueryParam "responseValueRenderOption" Text
-                                     :>
-                                     QueryParam "alt" AltJSON :>
-                                       ReqBody '[JSON] ValueRange :>
-                                         Put '[JSON] UpdateValuesResponse
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "valueInputOption" Text :>
+                         QueryParam "includeValuesInResponse" Bool :>
+                           QueryParam "responseDateTimeRenderOption" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "responseValueRenderOption" Text :>
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] ValueRange :>
+                                     Put '[JSON] UpdateValuesResponse
 
 -- | Sets values in a range of a spreadsheet. The caller must specify the
 -- spreadsheet ID, range, and a valueInputOption.
@@ -84,13 +79,11 @@ type SpreadsheetsValuesUpdateResource =
 data SpreadsheetsValuesUpdate = SpreadsheetsValuesUpdate'
     { _svuXgafv                        :: !(Maybe Xgafv)
     , _svuUploadProtocol               :: !(Maybe Text)
-    , _svuPp                           :: !Bool
     , _svuAccessToken                  :: !(Maybe Text)
     , _svuSpreadsheetId                :: !Text
     , _svuUploadType                   :: !(Maybe Text)
     , _svuValueInputOption             :: !(Maybe Text)
     , _svuPayload                      :: !ValueRange
-    , _svuBearerToken                  :: !(Maybe Text)
     , _svuRange                        :: !Text
     , _svuIncludeValuesInResponse      :: !(Maybe Bool)
     , _svuResponseDateTimeRenderOption :: !(Maybe Text)
@@ -106,8 +99,6 @@ data SpreadsheetsValuesUpdate = SpreadsheetsValuesUpdate'
 --
 -- * 'svuUploadProtocol'
 --
--- * 'svuPp'
---
 -- * 'svuAccessToken'
 --
 -- * 'svuSpreadsheetId'
@@ -117,8 +108,6 @@ data SpreadsheetsValuesUpdate = SpreadsheetsValuesUpdate'
 -- * 'svuValueInputOption'
 --
 -- * 'svuPayload'
---
--- * 'svuBearerToken'
 --
 -- * 'svuRange'
 --
@@ -138,13 +127,11 @@ spreadsheetsValuesUpdate pSvuSpreadsheetId_ pSvuPayload_ pSvuRange_ =
     SpreadsheetsValuesUpdate'
     { _svuXgafv = Nothing
     , _svuUploadProtocol = Nothing
-    , _svuPp = True
     , _svuAccessToken = Nothing
     , _svuSpreadsheetId = pSvuSpreadsheetId_
     , _svuUploadType = Nothing
     , _svuValueInputOption = Nothing
     , _svuPayload = pSvuPayload_
-    , _svuBearerToken = Nothing
     , _svuRange = pSvuRange_
     , _svuIncludeValuesInResponse = Nothing
     , _svuResponseDateTimeRenderOption = Nothing
@@ -161,10 +148,6 @@ svuUploadProtocol :: Lens' SpreadsheetsValuesUpdate (Maybe Text)
 svuUploadProtocol
   = lens _svuUploadProtocol
       (\ s a -> s{_svuUploadProtocol = a})
-
--- | Pretty-print response.
-svuPp :: Lens' SpreadsheetsValuesUpdate Bool
-svuPp = lens _svuPp (\ s a -> s{_svuPp = a})
 
 -- | OAuth access token.
 svuAccessToken :: Lens' SpreadsheetsValuesUpdate (Maybe Text)
@@ -195,12 +178,6 @@ svuPayload :: Lens' SpreadsheetsValuesUpdate ValueRange
 svuPayload
   = lens _svuPayload (\ s a -> s{_svuPayload = a})
 
--- | OAuth bearer token.
-svuBearerToken :: Lens' SpreadsheetsValuesUpdate (Maybe Text)
-svuBearerToken
-  = lens _svuBearerToken
-      (\ s a -> s{_svuBearerToken = a})
-
 -- | The A1 notation of the values to update.
 svuRange :: Lens' SpreadsheetsValuesUpdate Text
 svuRange = lens _svuRange (\ s a -> s{_svuRange = a})
@@ -218,7 +195,7 @@ svuIncludeValuesInResponse
 -- | Determines how dates, times, and durations in the response should be
 -- rendered. This is ignored if response_value_render_option is
 -- FORMATTED_VALUE. The default dateTime render option is
--- [DateTimeRenderOption.SERIAL_NUMBER].
+-- DateTimeRenderOption.SERIAL_NUMBER.
 svuResponseDateTimeRenderOption :: Lens' SpreadsheetsValuesUpdate (Maybe Text)
 svuResponseDateTimeRenderOption
   = lens _svuResponseDateTimeRenderOption
@@ -241,15 +218,14 @@ instance GoogleRequest SpreadsheetsValuesUpdate where
              UpdateValuesResponse
         type Scopes SpreadsheetsValuesUpdate =
              '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file",
                "https://www.googleapis.com/auth/spreadsheets"]
         requestClient SpreadsheetsValuesUpdate'{..}
           = go _svuSpreadsheetId _svuRange _svuXgafv
               _svuUploadProtocol
-              (Just _svuPp)
               _svuAccessToken
               _svuUploadType
               _svuValueInputOption
-              _svuBearerToken
               _svuIncludeValuesInResponse
               _svuResponseDateTimeRenderOption
               _svuCallback

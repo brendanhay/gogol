@@ -35,11 +35,9 @@ module Network.Google.Resource.Partners.UserStates.List
     -- * Request Lenses
     , uslXgafv
     , uslUploadProtocol
-    , uslPp
     , uslAccessToken
     , uslUploadType
     , uslRequestMetadataPartnersSessionId
-    , uslBearerToken
     , uslRequestMetadataLocale
     , uslRequestMetadataExperimentIds
     , uslRequestMetadataUserOverridesIPAddress
@@ -57,45 +55,41 @@ import           Network.Google.Prelude
 type UserStatesListResource =
      "v2" :>
        "userStates" :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "requestMetadata.partnersSessionId" Text
-                     :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "requestMetadata.locale" Text :>
-                         QueryParams "requestMetadata.experimentIds" Text :>
-                           QueryParam "requestMetadata.userOverrides.ipAddress"
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "requestMetadata.partnersSessionId" Text
+                   :>
+                   QueryParam "requestMetadata.locale" Text :>
+                     QueryParams "requestMetadata.experimentIds" Text :>
+                       QueryParam "requestMetadata.userOverrides.ipAddress"
+                         Text
+                         :>
+                         QueryParam
+                           "requestMetadata.trafficSource.trafficSubId"
+                           Text
+                           :>
+                           QueryParam "requestMetadata.userOverrides.userId"
                              Text
                              :>
                              QueryParam
-                               "requestMetadata.trafficSource.trafficSubId"
+                               "requestMetadata.trafficSource.trafficSourceId"
                                Text
                                :>
-                               QueryParam "requestMetadata.userOverrides.userId"
-                                 Text
-                                 :>
-                                 QueryParam
-                                   "requestMetadata.trafficSource.trafficSourceId"
-                                   Text
-                                   :>
-                                   QueryParam "callback" Text :>
-                                     QueryParam "alt" AltJSON :>
-                                       Get '[JSON] ListUserStatesResponse
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON] ListUserStatesResponse
 
 -- | Lists states for current user.
 --
 -- /See:/ 'userStatesList' smart constructor.
 data UserStatesList = UserStatesList'
-    { _uslXgafv                                       :: !(Maybe Text)
+    { _uslXgafv                                       :: !(Maybe Xgafv)
     , _uslUploadProtocol                              :: !(Maybe Text)
-    , _uslPp                                          :: !Bool
     , _uslAccessToken                                 :: !(Maybe Text)
     , _uslUploadType                                  :: !(Maybe Text)
     , _uslRequestMetadataPartnersSessionId            :: !(Maybe Text)
-    , _uslBearerToken                                 :: !(Maybe Text)
     , _uslRequestMetadataLocale                       :: !(Maybe Text)
     , _uslRequestMetadataExperimentIds                :: !(Maybe [Text])
     , _uslRequestMetadataUserOverridesIPAddress       :: !(Maybe Text)
@@ -113,15 +107,11 @@ data UserStatesList = UserStatesList'
 --
 -- * 'uslUploadProtocol'
 --
--- * 'uslPp'
---
 -- * 'uslAccessToken'
 --
 -- * 'uslUploadType'
 --
 -- * 'uslRequestMetadataPartnersSessionId'
---
--- * 'uslBearerToken'
 --
 -- * 'uslRequestMetadataLocale'
 --
@@ -142,11 +132,9 @@ userStatesList =
     UserStatesList'
     { _uslXgafv = Nothing
     , _uslUploadProtocol = Nothing
-    , _uslPp = True
     , _uslAccessToken = Nothing
     , _uslUploadType = Nothing
     , _uslRequestMetadataPartnersSessionId = Nothing
-    , _uslBearerToken = Nothing
     , _uslRequestMetadataLocale = Nothing
     , _uslRequestMetadataExperimentIds = Nothing
     , _uslRequestMetadataUserOverridesIPAddress = Nothing
@@ -157,7 +145,7 @@ userStatesList =
     }
 
 -- | V1 error format.
-uslXgafv :: Lens' UserStatesList (Maybe Text)
+uslXgafv :: Lens' UserStatesList (Maybe Xgafv)
 uslXgafv = lens _uslXgafv (\ s a -> s{_uslXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -165,10 +153,6 @@ uslUploadProtocol :: Lens' UserStatesList (Maybe Text)
 uslUploadProtocol
   = lens _uslUploadProtocol
       (\ s a -> s{_uslUploadProtocol = a})
-
--- | Pretty-print response.
-uslPp :: Lens' UserStatesList Bool
-uslPp = lens _uslPp (\ s a -> s{_uslPp = a})
 
 -- | OAuth access token.
 uslAccessToken :: Lens' UserStatesList (Maybe Text)
@@ -188,12 +172,6 @@ uslRequestMetadataPartnersSessionId
   = lens _uslRequestMetadataPartnersSessionId
       (\ s a ->
          s{_uslRequestMetadataPartnersSessionId = a})
-
--- | OAuth bearer token.
-uslBearerToken :: Lens' UserStatesList (Maybe Text)
-uslBearerToken
-  = lens _uslBearerToken
-      (\ s a -> s{_uslBearerToken = a})
 
 -- | Locale to use for the current request.
 uslRequestMetadataLocale :: Lens' UserStatesList (Maybe Text)
@@ -251,11 +229,9 @@ instance GoogleRequest UserStatesList where
         type Rs UserStatesList = ListUserStatesResponse
         type Scopes UserStatesList = '[]
         requestClient UserStatesList'{..}
-          = go _uslXgafv _uslUploadProtocol (Just _uslPp)
-              _uslAccessToken
+          = go _uslXgafv _uslUploadProtocol _uslAccessToken
               _uslUploadType
               _uslRequestMetadataPartnersSessionId
-              _uslBearerToken
               _uslRequestMetadataLocale
               (_uslRequestMetadataExperimentIds ^. _Default)
               _uslRequestMetadataUserOverridesIPAddress

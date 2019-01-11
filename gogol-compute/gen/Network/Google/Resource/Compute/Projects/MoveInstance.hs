@@ -34,6 +34,7 @@ module Network.Google.Resource.Compute.Projects.MoveInstance
     , ProjectsMoveInstance
 
     -- * Request Lenses
+    , pmiRequestId
     , pmiProject
     , pmiPayload
     ) where
@@ -49,22 +50,26 @@ type ProjectsMoveInstanceResource =
          "projects" :>
            Capture "project" Text :>
              "moveInstance" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] InstanceMoveRequest :>
-                   Post '[JSON] Operation
+               QueryParam "requestId" Text :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] InstanceMoveRequest :>
+                     Post '[JSON] Operation
 
 -- | Moves an instance and its attached persistent disks from one zone to
 -- another.
 --
 -- /See:/ 'projectsMoveInstance' smart constructor.
 data ProjectsMoveInstance = ProjectsMoveInstance'
-    { _pmiProject :: !Text
-    , _pmiPayload :: !InstanceMoveRequest
+    { _pmiRequestId :: !(Maybe Text)
+    , _pmiProject   :: !Text
+    , _pmiPayload   :: !InstanceMoveRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsMoveInstance' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pmiRequestId'
 --
 -- * 'pmiProject'
 --
@@ -75,9 +80,24 @@ projectsMoveInstance
     -> ProjectsMoveInstance
 projectsMoveInstance pPmiProject_ pPmiPayload_ =
     ProjectsMoveInstance'
-    { _pmiProject = pPmiProject_
+    { _pmiRequestId = Nothing
+    , _pmiProject = pPmiProject_
     , _pmiPayload = pPmiPayload_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+pmiRequestId :: Lens' ProjectsMoveInstance (Maybe Text)
+pmiRequestId
+  = lens _pmiRequestId (\ s a -> s{_pmiRequestId = a})
 
 -- | Project ID for this request.
 pmiProject :: Lens' ProjectsMoveInstance Text
@@ -95,7 +115,8 @@ instance GoogleRequest ProjectsMoveInstance where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient ProjectsMoveInstance'{..}
-          = go _pmiProject (Just AltJSON) _pmiPayload
+          = go _pmiProject _pmiRequestId (Just AltJSON)
+              _pmiPayload
               computeService
           where go
                   = buildClient

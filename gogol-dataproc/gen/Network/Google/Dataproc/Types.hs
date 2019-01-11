@@ -28,17 +28,18 @@ module Network.Google.Dataproc.Types
     , jrJobId
     , jrProjectId
 
+    -- * JobStatusState
+    , JobStatusState (..)
+
+    -- * WorkflowNodeState
+    , WorkflowNodeState (..)
+
     -- * Status
     , Status
     , status
     , sDetails
     , sCode
     , sMessage
-
-    -- * OperationSchema
-    , OperationSchema
-    , operationSchema
-    , osAddtional
 
     -- * PySparkJobProperties
     , PySparkJobProperties
@@ -57,6 +58,7 @@ module Network.Google.Dataproc.Types
     , igcDiskConfig
     , igcIsPreemptible
     , igcImageURI
+    , igcAccelerators
     , igcInstanceNames
     , igcManagedGroupConfig
     , igcMachineTypeURI
@@ -78,16 +80,48 @@ module Network.Google.Dataproc.Types
     , softwareConfigProperties
     , scpAddtional
 
+    -- * WorkflowGraph
+    , WorkflowGraph
+    , workflowGraph
+    , wgNodes
+
+    -- * ClusterOperation
+    , ClusterOperation
+    , clusterOperation
+    , coDone
+    , coError
+    , coOperationId
+
+    -- * ClusterSelector
+    , ClusterSelector
+    , clusterSelector
+    , csZone
+    , csClusterLabels
+
+    -- * JobScheduling
+    , JobScheduling
+    , jobScheduling
+    , jsMaxFailuresPerHour
+
     -- * DiskConfig
     , DiskConfig
     , diskConfig
     , dcNumLocalSsds
+    , dcBootDiskType
     , dcBootDiskSizeGb
 
     -- * ClusterOperationMetadataLabels
     , ClusterOperationMetadataLabels
     , clusterOperationMetadataLabels
     , comlAddtional
+
+    -- * Expr
+    , Expr
+    , expr
+    , eLocation
+    , eExpression
+    , eTitle
+    , eDescription
 
     -- * ListOperationsResponse
     , ListOperationsResponse
@@ -99,6 +133,16 @@ module Network.Google.Dataproc.Types
     , HiveJobScriptVariables
     , hiveJobScriptVariables
     , hjsvAddtional
+
+    -- * GetIAMPolicyRequest
+    , GetIAMPolicyRequest
+    , getIAMPolicyRequest
+
+    -- * WorkflowTemplatePlacement
+    , WorkflowTemplatePlacement
+    , workflowTemplatePlacement
+    , wtpClusterSelector
+    , wtpManagedCluster
 
     -- * Cluster
     , Cluster
@@ -112,6 +156,17 @@ module Network.Google.Dataproc.Types
     , cProjectId
     , cStatusHistory
 
+    -- * ManagedClusterLabels
+    , ManagedClusterLabels
+    , managedClusterLabels
+    , mclAddtional
+
+    -- * ParameterValidation
+    , ParameterValidation
+    , parameterValidation
+    , pvRegex
+    , pvValues
+
     -- * JobLabels
     , JobLabels
     , jobLabels
@@ -120,7 +175,11 @@ module Network.Google.Dataproc.Types
     -- * SubmitJobRequest
     , SubmitJobRequest
     , submitJobRequest
+    , sjrRequestId
     , sjrJob
+
+    -- * ClusterStatusSubState
+    , ClusterStatusSubState (..)
 
     -- * ClusterMetrics
     , ClusterMetrics
@@ -151,6 +210,16 @@ module Network.Google.Dataproc.Types
     , hjContinueOnFailure
     , hjProperties
 
+    -- * OrderedJobLabels
+    , OrderedJobLabels
+    , orderedJobLabels
+    , ojlAddtional
+
+    -- * ClusterSelectorClusterLabels
+    , ClusterSelectorClusterLabels
+    , clusterSelectorClusterLabels
+    , csclAddtional
+
     -- * SparkSQLJobScriptVariables
     , SparkSQLJobScriptVariables
     , sparkSQLJobScriptVariables
@@ -169,13 +238,34 @@ module Network.Google.Dataproc.Types
     , ccMasterConfig
     , ccGceClusterConfig
     , ccConfigBucket
+    , ccEncryptionConfig
     , ccSoftwareConfig
     , ccSecondaryWorkerConfig
+
+    -- * InstantiateWorkflowTemplateRequest
+    , InstantiateWorkflowTemplateRequest
+    , instantiateWorkflowTemplateRequest
+    , iwtrRequestId
+    , iwtrVersion
+    , iwtrParameters
 
     -- * HadoopJobProperties
     , HadoopJobProperties
     , hadoopJobProperties
     , hjpAddtional
+
+    -- * WorkflowTemplate
+    , WorkflowTemplate
+    , workflowTemplate
+    , wtJobs
+    , wtUpdateTime
+    , wtName
+    , wtVersion
+    , wtParameters
+    , wtId
+    , wtLabels
+    , wtCreateTime
+    , wtPlacement
 
     -- * ClusterOperationStatus
     , ClusterOperationStatus
@@ -195,6 +285,11 @@ module Network.Google.Dataproc.Types
     , sparkSQLJobProperties
     , ssqljpAddtional
 
+    -- * WorkflowTemplateLabels
+    , WorkflowTemplateLabels
+    , workflowTemplateLabels
+    , wtlAddtional
+
     -- * NodeInitializationAction
     , NodeInitializationAction
     , nodeInitializationAction
@@ -206,11 +301,29 @@ module Network.Google.Dataproc.Types
     , clusterMetricsYarnMetrics
     , cmymAddtional
 
+    -- * RegexValidation
+    , RegexValidation
+    , regexValidation
+    , rvRegexes
+
     -- * JobPlacement
     , JobPlacement
     , jobPlacement
     , jpClusterUuid
     , jpClusterName
+
+    -- * SetIAMPolicyRequest
+    , SetIAMPolicyRequest
+    , setIAMPolicyRequest
+    , siprPolicy
+
+    -- * TemplateParameter
+    , TemplateParameter
+    , templateParameter
+    , tpName
+    , tpValidation
+    , tpDescription
+    , tpFields
 
     -- * GceClusterConfig
     , GceClusterConfig
@@ -219,32 +332,50 @@ module Network.Google.Dataproc.Types
     , gccInternalIPOnly
     , gccNetworkURI
     , gccZoneURI
+    , gccServiceAccount
     , gccMetadata
     , gccServiceAccountScopes
     , gccTags
 
-    -- * OperationStatus
-    , OperationStatus
-    , operationStatus
-    , osState
-    , osInnerState
-    , osStateStartTime
-    , osDetails
+    -- * WorkflowMetadataState
+    , WorkflowMetadataState (..)
+
+    -- * YarnApplicationState
+    , YarnApplicationState (..)
+
+    -- * ClusterStatusState
+    , ClusterStatusState (..)
+
+    -- * ListWorkflowTemplatesResponse
+    , ListWorkflowTemplatesResponse
+    , listWorkflowTemplatesResponse
+    , lwtrNextPageToken
+    , lwtrTemplates
 
     -- * GceClusterConfigMetadata
     , GceClusterConfigMetadata
     , gceClusterConfigMetadata
     , gccmAddtional
 
+    -- * ClusterOperationStatusState
+    , ClusterOperationStatusState (..)
+
     -- * HiveJobProperties
     , HiveJobProperties
     , hiveJobProperties
     , hAddtional
 
-    -- * DiagnoseClusterOutputLocation
-    , DiagnoseClusterOutputLocation
-    , diagnoseClusterOutputLocation
-    , dcolOutputURI
+    -- * WorkflowMetadataParameters
+    , WorkflowMetadataParameters
+    , workflowMetadataParameters
+    , wmpAddtional
+
+    -- * ManagedCluster
+    , ManagedCluster
+    , managedCluster
+    , mcConfig
+    , mcClusterName
+    , mcLabels
 
     -- * ClusterLabels
     , ClusterLabels
@@ -261,10 +392,12 @@ module Network.Google.Dataproc.Types
     , jReference
     , jSparkSQLJob
     , jHadoopJob
+    , jJobUuid
     , jYarnApplications
     , jLabels
     , jPysparkJob
     , jDriverOutputResourceURI
+    , jScheduling
     , jStatusHistory
     , jPlacement
     , jPigJob
@@ -285,16 +418,30 @@ module Network.Google.Dataproc.Types
     , hLoggingConfig
     , hProperties
 
+    -- * Xgafv
+    , Xgafv (..)
+
+    -- * InstantiateWorkflowTemplateRequestParameters
+    , InstantiateWorkflowTemplateRequestParameters
+    , instantiateWorkflowTemplateRequestParameters
+    , iwtrpAddtional
+
     -- * ClusterOperationMetadata
     , ClusterOperationMetadata
     , clusterOperationMetadata
     , comStatus
     , comClusterUuid
+    , comWarnings
     , comClusterName
     , comLabels
     , comOperationType
     , comStatusHistory
     , comDescription
+
+    -- * TestIAMPermissionsRequest
+    , TestIAMPermissionsRequest
+    , testIAMPermissionsRequest
+    , tiprPermissions
 
     -- * SparkSQLJob
     , SparkSQLJob
@@ -318,10 +465,21 @@ module Network.Google.Dataproc.Types
     , ljrNextPageToken
     , ljrJobs
 
+    -- * AcceleratorConfig
+    , AcceleratorConfig
+    , acceleratorConfig
+    , acAcceleratorCount
+    , acAcceleratorTypeURI
+
     -- * SparkJobProperties
     , SparkJobProperties
     , sparkJobProperties
     , sjpAddtional
+
+    -- * EncryptionConfig
+    , EncryptionConfig
+    , encryptionConfig
+    , ecGcePdKmsKeyName
 
     -- * PySparkJob
     , PySparkJob
@@ -341,11 +499,45 @@ module Network.Google.Dataproc.Types
     , mgcInstanceTemplateName
     , mgcInstanceGroupManagerName
 
+    -- * TestIAMPermissionsResponse
+    , TestIAMPermissionsResponse
+    , testIAMPermissionsResponse
+    , tiamprPermissions
+
     -- * ListClustersResponse
     , ListClustersResponse
     , listClustersResponse
     , lcrNextPageToken
     , lcrClusters
+
+    -- * ValueValidation
+    , ValueValidation
+    , valueValidation
+    , vvValues
+
+    -- * JobStatusSubState
+    , JobStatusSubState (..)
+
+    -- * Policy
+    , Policy
+    , policy
+    , pEtag
+    , pVersion
+    , pBindings
+
+    -- * OrderedJob
+    , OrderedJob
+    , orderedJob
+    , ojSparkJob
+    , ojStepId
+    , ojPrerequisiteStepIds
+    , ojHiveJob
+    , ojSparkSQLJob
+    , ojHadoopJob
+    , ojLabels
+    , ojPysparkJob
+    , ojScheduling
+    , ojPigJob
 
     -- * CancelJobRequest
     , CancelJobRequest
@@ -359,23 +551,13 @@ module Network.Google.Dataproc.Types
     -- * OperationMetadata
     , OperationMetadata
     , operationMetadata
-    , omStatus
-    , omState
-    , omClusterUuid
-    , omInsertTime
-    , omStartTime
-    , omInnerState
-    , omEndTime
-    , omDetails
-    , omClusterName
-    , omOperationType
-    , omStatusHistory
-    , omDescription
+    , omAddtional
 
     -- * JobStatus
     , JobStatus
     , jobStatus
     , jsState
+    , jsSubState
     , jsStateStartTime
     , jsDetails
 
@@ -388,6 +570,30 @@ module Network.Google.Dataproc.Types
     , ClusterMetricsHdfsMetrics
     , clusterMetricsHdfsMetrics
     , cmhmAddtional
+
+    -- * WorkflowNode
+    , WorkflowNode
+    , workflowNode
+    , wnState
+    , wnStepId
+    , wnJobId
+    , wnPrerequisiteStepIds
+    , wnError
+
+    -- * WorkflowMetadata
+    , WorkflowMetadata
+    , workflowMetadata
+    , wmGraph
+    , wmState
+    , wmClusterUuid
+    , wmStartTime
+    , wmDeleteCluster
+    , wmCreateCluster
+    , wmVersion
+    , wmEndTime
+    , wmParameters
+    , wmClusterName
+    , wmTemplate
 
     -- * OperationResponse
     , OperationResponse
@@ -403,6 +609,7 @@ module Network.Google.Dataproc.Types
     , ClusterStatus
     , clusterStatus
     , csState
+    , csSubState
     , csStateStartTime
     , csDetail
 
@@ -429,13 +636,20 @@ module Network.Google.Dataproc.Types
     , LoggingConfig
     , loggingConfig
     , lcDriverLogLevels
+
+    -- * Binding
+    , Binding
+    , binding
+    , bMembers
+    , bRole
+    , bCondition
     ) where
 
 import           Network.Google.Dataproc.Types.Product
 import           Network.Google.Dataproc.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v1' of the Google Cloud Dataproc API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v1' of the Cloud Dataproc API. This contains the host and root path used as a starting point for constructing service requests.
 dataprocService :: ServiceConfig
 dataprocService
   = defaultService (ServiceId "dataproc:v1")

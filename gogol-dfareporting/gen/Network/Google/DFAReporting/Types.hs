@@ -30,6 +30,15 @@ module Network.Google.DFAReporting.Types
     , vosOffSetPercentage
     , vosOffSetSeconds
 
+    -- * DeepLink
+    , DeepLink
+    , deepLink
+    , dlRemarketingListIds
+    , dlKind
+    , dlFallbackURL
+    , dlAppURL
+    , dlMobileApp
+
     -- * PlacementsListSortOrder
     , PlacementsListSortOrder (..)
 
@@ -65,13 +74,24 @@ module Network.Google.DFAReporting.Types
     , listPopulationClause
     , lpcTerms
 
+    -- * AdBlockingConfiguration
+    , AdBlockingConfiguration
+    , adBlockingConfiguration
+    , abcCreativeBundleId
+    , abcOverrideClickThroughURL
+    , abcEnabled
+    , abcClickThroughURL
+
+    -- * AdvertiserLandingPagesListSortOrder
+    , AdvertiserLandingPagesListSortOrder (..)
+
     -- * CreativeCustomEvent
     , CreativeCustomEvent
     , creativeCustomEvent
     , cceAdvertiserCustomEventId
     , cceAdvertiserCustomEventType
     , cceAdvertiserCustomEventName
-    , cceExitURL
+    , cceExitClickThroughURL
     , cceTargetType
     , ccePopupWindowProperties
     , cceVideoReportingId
@@ -82,7 +102,7 @@ module Network.Google.DFAReporting.Types
     -- * ClickTag
     , ClickTag
     , clickTag
-    , ctValue
+    , ctClickThroughURL
     , ctName
     , ctEventName
 
@@ -112,6 +132,7 @@ module Network.Google.DFAReporting.Types
     , vsKind
     , vsCompanionSettings
     , vsTranscodeSettings
+    , vsOrientation
     , vsSkippableSettings
 
     -- * ReachReportCompatibleFields
@@ -162,11 +183,11 @@ module Network.Google.DFAReporting.Types
     , DirectorySiteSettings
     , directorySiteSettings
     , dssInterstitialPlacementAccepted
-    , dssDfpSettings
+    , dssInstreamVideoPlacementAccepted
     , dssVerificationTagOptOut
     , dssActiveViewOptOut
+    , dssDfpSettings
     , dssVideoActiveViewOptOut
-    , dssInstreamVideoPlacementAccepted
     , dssNielsenOCROptOut
 
     -- * TargetableRemarketingListsListSortOrder
@@ -298,6 +319,9 @@ module Network.Google.DFAReporting.Types
 
     -- * CampaignsListSortField
     , CampaignsListSortField (..)
+
+    -- * VideoSettingsOrientation
+    , VideoSettingsOrientation (..)
 
     -- * DirectorySiteContact
     , DirectorySiteContact
@@ -493,6 +517,13 @@ module Network.Google.DFAReporting.Types
     , cocOptimizationActivitys
     , cocId
 
+    -- * CreativeClickThroughURL
+    , CreativeClickThroughURL
+    , creativeClickThroughURL
+    , cctuComputedClickThroughURL
+    , cctuCustomClickThroughURL
+    , cctuLandingPageId
+
     -- * ReportCriteria
     , ReportCriteria
     , reportCriteria
@@ -513,6 +544,13 @@ module Network.Google.DFAReporting.Types
     , pslrNextPageToken
     , pslrKind
 
+    -- * ConversionsBatchUpdateResponse
+    , ConversionsBatchUpdateResponse
+    , conversionsBatchUpdateResponse
+    , cburStatus
+    , cburKind
+    , cburHasFailures
+
     -- * CreativeAssetArtworkType
     , CreativeAssetArtworkType (..)
 
@@ -531,6 +569,12 @@ module Network.Google.DFAReporting.Types
     , iilrInventoryItems
     , iilrNextPageToken
     , iilrKind
+
+    -- * UniversalAdId
+    , UniversalAdId
+    , universalAdId
+    , uaiValue
+    , uaiRegistry
 
     -- * CustomFloodlightVariableType
     , CustomFloodlightVariableType (..)
@@ -644,6 +688,9 @@ module Network.Google.DFAReporting.Types
     , sWidth
     , sIab
     , sId
+
+    -- * CreativeAssetOrientation
+    , CreativeAssetOrientation (..)
 
     -- * CreativeAssetDurationType
     , CreativeAssetDurationType (..)
@@ -785,6 +832,9 @@ module Network.Google.DFAReporting.Types
     , citiesListResponse
     , citKind
     , citCities
+
+    -- * AdvertiserLandingPagesListSortField
+    , AdvertiserLandingPagesListSortField (..)
 
     -- * Dimension
     , Dimension
@@ -941,13 +991,13 @@ module Network.Google.DFAReporting.Types
     , creRenderingIdDimensionValue
     , creCustomKeyValues
     , creSkipOffSet
-    , creVideoDuration
     , creRenderingId
     , creThirdPartyBackupImageImpressionsURL
     , creFsCommand
     , creAllowScriptAccess
     , creHTMLCodeLocked
     , creRequiredFlashPluginVersion
+    , creUniversalAdId
     , creAuthoringTool
     , creSize
     , creThirdPartyURLs
@@ -971,16 +1021,19 @@ module Network.Google.DFAReporting.Types
     , creBackupImageClickThroughURL
     , creName
     , creOverrideCss
-    , creVideoDescription
+    , creAdditionalSizes
     , creClickTags
     , creAdParameters
     , creVersion
+    , creMediaDescription
+    , creMediaDuration
     , creLatestTraffickedCreativeId
     , creThirdPartyRichMediaImpressionsURL
     , creDynamicAssetSelection
     , creLastModifiedInfo
     , creId
     , creAuthoringSource
+    , crePoliteLoadAssetId
     , creStudioAdvertiserId
     , creCreativeAssets
     , creSubAccountId
@@ -995,8 +1048,8 @@ module Network.Google.DFAReporting.Types
     , creCompanionCreatives
     , creTotalFileSize
     , creStudioTraffickedCreativeId
-    , creRedirectURL
     , creAutoAdvanceImages
+    , creRedirectURL
     , creCreativeFieldAssignments
 
     -- * SiteContact
@@ -1028,9 +1081,6 @@ module Network.Google.DFAReporting.Types
     , drEndDate
     , drStartDate
     , drRelativeDateRange
-
-    -- * FloodlightConfigurationStandardVariableTypesItem
-    , FloodlightConfigurationStandardVariableTypesItem (..)
 
     -- * Report
     , Report
@@ -1070,6 +1120,7 @@ module Network.Google.DFAReporting.Types
     -- * Campaign
     , Campaign
     , campaign
+    , camAdBlockingConfiguration
     , camCreativeOptimizationConfiguration
     , camCreativeGroupIds
     , camNielsenOCREnabled
@@ -1086,6 +1137,7 @@ module Network.Google.DFAReporting.Types
     , camName
     , camAdvertiserGroupId
     , camBillingInvoiceCode
+    , camDefaultLandingPageId
     , camCreateInfo
     , camLastModifiedInfo
     , camId
@@ -1168,7 +1220,7 @@ module Network.Google.DFAReporting.Types
     , siteSettings
     , ssDisableNewCookie
     , ssVideoActiveViewOptOutTemplate
-    , ssDisableBrandSafeAds
+    , ssAdBlockingOptOut
     , ssLookbackConfiguration
     , ssTagSetting
     , ssActiveViewOptOut
@@ -1407,10 +1459,12 @@ module Network.Google.DFAReporting.Types
     , LandingPage
     , landingPage
     , lpKind
-    , lpDefault
+    , lpAdvertiserId
     , lpURL
     , lpName
+    , lpDeepLinks
     , lpId
+    , lpArchived
 
     -- * ConnectionTypesListResponse
     , ConnectionTypesListResponse
@@ -1549,6 +1603,9 @@ module Network.Google.DFAReporting.Types
     -- * SortedDimensionSortOrder
     , SortedDimensionSortOrder (..)
 
+    -- * MobileAppsListDirectories
+    , MobileAppsListDirectories (..)
+
     -- * CompatibleFields
     , CompatibleFields
     , compatibleFields
@@ -1568,6 +1625,13 @@ module Network.Google.DFAReporting.Types
 
     -- * FilesListSortField
     , FilesListSortField (..)
+
+    -- * ConversionsBatchUpdateRequest
+    , ConversionsBatchUpdateRequest
+    , conversionsBatchUpdateRequest
+    , cburbKind
+    , cburbConversions
+    , cburbEncryptionInfo
 
     -- * DirectorySiteInterstitialTagFormatsItem
     , DirectorySiteInterstitialTagFormatsItem (..)
@@ -1638,6 +1702,9 @@ module Network.Google.DFAReporting.Types
     , companionClickThroughOverride
     , cctoCreativeId
     , cctoClickThroughURL
+
+    -- * FloodlightActivityFloodlightTagType
+    , FloodlightActivityFloodlightTagType (..)
 
     -- * FloodlightActivityGroupsListSortOrder
     , FloodlightActivityGroupsListSortOrder (..)
@@ -1831,7 +1898,6 @@ module Network.Google.DFAReporting.Types
     , faFloodlightActivityGroupTagString
     , faFloodlightConfigurationId
     , faKind
-    , faImageTagEnabled
     , faAdvertiserId
     , faAdvertiserIdDimensionValue
     , faSSLCompliant
@@ -1845,6 +1911,7 @@ module Network.Google.DFAReporting.Types
     , faHidden
     , faFloodlightActivityGroupType
     , faDefaultTags
+    , faFloodlightTagType
     , faFloodlightActivityGroupName
     , faId
     , faSSLRequired
@@ -2009,6 +2076,9 @@ module Network.Google.DFAReporting.Types
     , regCountryDartId
     , regDartId
 
+    -- * UniversalAdIdRegistry
+    , UniversalAdIdRegistry (..)
+
     -- * AdvertiserGroupsListResponse
     , AdvertiserGroupsListResponse
     , advertiserGroupsListResponse
@@ -2076,7 +2146,9 @@ module Network.Google.DFAReporting.Types
     , fcSubAccountId
     , fcFirstDayOfWeek
     , fcOmnitureSettings
-    , fcStandardVariableTypes
+
+    -- * MobileAppDirectory
+    , MobileAppDirectory (..)
 
     -- * CompanionSetting
     , CompanionSetting
@@ -2102,6 +2174,7 @@ module Network.Google.DFAReporting.Types
     -- * Conversion
     , Conversion
     , conversion
+    , conoTreatmentForUnderage
     , conoEncryptedUserIdCandidates
     , conoTimestampMicros
     , conoLimitAdTracking
@@ -2110,10 +2183,12 @@ module Network.Google.DFAReporting.Types
     , conoFloodlightConfigurationId
     , conoKind
     , conoFloodlightActivityId
+    , conoNonPersonalizedAd
     , conoQuantity
     , conoValue
     , conoCustomVariables
     , conoChildDirectedTreatment
+    , conoGclid
     , conoOrdinal
 
     -- * CreativeFieldValuesListResponse
@@ -2141,6 +2216,20 @@ module Network.Google.DFAReporting.Types
 
     -- * DimensionValueMatchType
     , DimensionValueMatchType (..)
+
+    -- * AdvertiserLandingPagesListResponse
+    , AdvertiserLandingPagesListResponse
+    , advertiserLandingPagesListResponse
+    , alplrLandingPages
+    , alplrNextPageToken
+    , alplrKind
+
+    -- * MobileAppsListResponse
+    , MobileAppsListResponse
+    , mobileAppsListResponse
+    , malrNextPageToken
+    , malrKind
+    , malrMobileApps
 
     -- * SortedDimension
     , SortedDimension
@@ -2177,7 +2266,6 @@ module Network.Google.DFAReporting.Types
     , creativeAsset
     , caaZIndex
     , caaPushdown
-    , caaVideoDuration
     , caaOriginalBackup
     , caaWindowMode
     , caaFlashVersion
@@ -2203,7 +2291,9 @@ module Network.Google.DFAReporting.Types
     , caaPositionLeftUnit
     , caaAlignment
     , caaExpandedDimension
+    , caaAdditionalSizes
     , caaZipFilename
+    , caaMediaDuration
     , caaActionScript3
     , caaDisplayType
     , caaChildAssetType
@@ -2213,6 +2303,7 @@ module Network.Google.DFAReporting.Types
     , caaCustomStartTimeValue
     , caaStartTimeType
     , caaDuration
+    , caaOrientation
     , caaArtworkType
     , caaHideFlashObjects
     , caaDetectedFeatures
@@ -2468,12 +2559,6 @@ module Network.Google.DFAReporting.Types
     , mclrMobileCarriers
     , mclrKind
 
-    -- * LandingPagesListResponse
-    , LandingPagesListResponse
-    , landingPagesListResponse
-    , lplrLandingPages
-    , lplrKind
-
     -- * AccountPermissionAccountProFilesItem
     , AccountPermissionAccountProFilesItem (..)
 
@@ -2586,6 +2671,7 @@ module Network.Google.DFAReporting.Types
     -- * FloodlightActivitiesGenerateTagResponse
     , FloodlightActivitiesGenerateTagResponse
     , floodlightActivitiesGenerateTagResponse
+    , fagtrGlobalSiteTagGlobalSnippet
     , fagtrFloodlightActivityTag
     , fagtrKind
 
@@ -2648,6 +2734,15 @@ module Network.Google.DFAReporting.Types
     , metCountryDartId
     , metDartId
 
+    -- * MobileApp
+    , MobileApp
+    , mobileApp
+    , maKind
+    , maId
+    , maTitle
+    , maPublisherName
+    , maDirectory
+
     -- * CreativeAssetDisplayType
     , CreativeAssetDisplayType (..)
 
@@ -2669,6 +2764,7 @@ module Network.Google.DFAReporting.Types
     , p1CampaignId
     , p1IdDimensionValue
     , p1VpaidAdapterChoice
+    , p1AdBlockingOptOut
     , p1Primary
     , p1LookbackConfiguration
     , p1TagSetting
@@ -2677,6 +2773,7 @@ module Network.Google.DFAReporting.Types
     , p1AccountId
     , p1PaymentSource
     , p1Name
+    , p1AdditionalSizes
     , p1DirectorySiteId
     , p1CreateInfo
     , p1VideoActiveViewOptOut
@@ -2762,10 +2859,10 @@ import           Network.Google.DFAReporting.Types.Product
 import           Network.Google.DFAReporting.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v2.7' of the DCM/DFA Reporting And Trafficking API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v3.2' of the DCM/DFA Reporting And Trafficking API. This contains the host and root path used as a starting point for constructing service requests.
 dFAReportingService :: ServiceConfig
 dFAReportingService
-  = defaultService (ServiceId "dfareporting:v2.7")
+  = defaultService (ServiceId "dfareporting:v3.2")
       "www.googleapis.com"
 
 -- | View and manage DoubleClick for Advertisers reports

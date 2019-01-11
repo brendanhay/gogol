@@ -20,47 +20,13 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Performs prediction on the data in the request. Responses are very
--- similar to requests. There are two top-level fields, each of which are
--- JSON lists:
+-- Performs prediction on the data in the request. Cloud ML Engine
+-- implements a custom \`predict\` verb on top of an HTTP POST method.
 --
--- [predictions]
---     The list of predictions, one per instance in the request.
--- [error]
---     An error message returned instead of a prediction list if any
---     instance produced an error.
+-- For details of the request and response format, see the **guide to the
+-- [predict request format](\/ml-engine\/docs\/v1\/predict-request)**.
 --
--- If the call is successful, the response body will contain one prediction
--- entry per instance in the request body. If prediction fails for any
--- instance, the response body will contain no predictions and will contian
--- a single error entry instead. Even though there is one prediction per
--- instance, the format of a prediction is not directly related to the
--- format of an instance. Predictions take whatever format is specified in
--- the outputs collection defined in the model. The collection of
--- predictions is returned in a JSON list. Each member of the list can be a
--- simple value, a list, or a JSON object of any complexity. If your model
--- has more than one output tensor, each prediction will be a JSON object
--- containing a name\/value pair for each output. The names identify the
--- output aliases in the graph. The following examples show some possible
--- responses: A simple set of predictions for three input instances, where
--- each prediction is an integer value:
---
--- > {"predictions": [5, 4, 3]}
---
--- A more complex set of predictions, each containing two named values that
--- correspond to output tensors, named **label** and **scores**
--- respectively. The value of **label** is the predicted category (\"car\"
--- or \"beach\") and **scores** contains a list of probabilities for that
--- instance across the possible categories.
---
--- > {"predictions": [{"label": "beach", "scores": [0.1, 0.9]},
--- >                  {"label": "car", "scores": [0.75, 0.25]}]}
---
--- A response when there is an error processing an input instance:
---
--- > {"error": "Divide by zero"}
---
--- /See:/ <https://cloud.google.com/ml/ Google Cloud Machine Learning Reference> for @ml.projects.predict@.
+-- /See:/ <https://cloud.google.com/ml/ Cloud Machine Learning Engine Reference> for @ml.projects.predict@.
 module Network.Google.Resource.Ml.Projects.Predict
     (
     -- * REST Resource
@@ -73,11 +39,9 @@ module Network.Google.Resource.Ml.Projects.Predict
     -- * Request Lenses
     , ppXgafv
     , ppUploadProtocol
-    , ppPp
     , ppAccessToken
     , ppUploadType
     , ppPayload
-    , ppBearerToken
     , ppName
     , ppCallback
     ) where
@@ -88,68 +52,30 @@ import           Network.Google.Prelude
 -- | A resource alias for @ml.projects.predict@ method which the
 -- 'ProjectsPredict' request conforms to.
 type ProjectsPredictResource =
-     "v1beta1" :>
+     "v1" :>
        CaptureMode "name" "predict" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] GoogleCloudMlV1beta1__PredictRequest
-                           :> Post '[JSON] GoogleAPI__HTTPBody
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] GoogleCloudMlV1__PredictRequest :>
+                       Post '[JSON] GoogleAPI__HTTPBody
 
--- | Performs prediction on the data in the request. Responses are very
--- similar to requests. There are two top-level fields, each of which are
--- JSON lists:
+-- | Performs prediction on the data in the request. Cloud ML Engine
+-- implements a custom \`predict\` verb on top of an HTTP POST method.
 --
--- [predictions]
---     The list of predictions, one per instance in the request.
--- [error]
---     An error message returned instead of a prediction list if any
---     instance produced an error.
---
--- If the call is successful, the response body will contain one prediction
--- entry per instance in the request body. If prediction fails for any
--- instance, the response body will contain no predictions and will contian
--- a single error entry instead. Even though there is one prediction per
--- instance, the format of a prediction is not directly related to the
--- format of an instance. Predictions take whatever format is specified in
--- the outputs collection defined in the model. The collection of
--- predictions is returned in a JSON list. Each member of the list can be a
--- simple value, a list, or a JSON object of any complexity. If your model
--- has more than one output tensor, each prediction will be a JSON object
--- containing a name\/value pair for each output. The names identify the
--- output aliases in the graph. The following examples show some possible
--- responses: A simple set of predictions for three input instances, where
--- each prediction is an integer value:
---
--- > {"predictions": [5, 4, 3]}
---
--- A more complex set of predictions, each containing two named values that
--- correspond to output tensors, named **label** and **scores**
--- respectively. The value of **label** is the predicted category (\"car\"
--- or \"beach\") and **scores** contains a list of probabilities for that
--- instance across the possible categories.
---
--- > {"predictions": [{"label": "beach", "scores": [0.1, 0.9]},
--- >                  {"label": "car", "scores": [0.75, 0.25]}]}
---
--- A response when there is an error processing an input instance:
---
--- > {"error": "Divide by zero"}
+-- For details of the request and response format, see the **guide to the
+-- [predict request format](\/ml-engine\/docs\/v1\/predict-request)**.
 --
 -- /See:/ 'projectsPredict' smart constructor.
 data ProjectsPredict = ProjectsPredict'
     { _ppXgafv          :: !(Maybe Xgafv)
     , _ppUploadProtocol :: !(Maybe Text)
-    , _ppPp             :: !Bool
     , _ppAccessToken    :: !(Maybe Text)
     , _ppUploadType     :: !(Maybe Text)
-    , _ppPayload        :: !GoogleCloudMlV1beta1__PredictRequest
-    , _ppBearerToken    :: !(Maybe Text)
+    , _ppPayload        :: !GoogleCloudMlV1__PredictRequest
     , _ppName           :: !Text
     , _ppCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -162,32 +88,26 @@ data ProjectsPredict = ProjectsPredict'
 --
 -- * 'ppUploadProtocol'
 --
--- * 'ppPp'
---
 -- * 'ppAccessToken'
 --
 -- * 'ppUploadType'
 --
 -- * 'ppPayload'
 --
--- * 'ppBearerToken'
---
 -- * 'ppName'
 --
 -- * 'ppCallback'
 projectsPredict
-    :: GoogleCloudMlV1beta1__PredictRequest -- ^ 'ppPayload'
+    :: GoogleCloudMlV1__PredictRequest -- ^ 'ppPayload'
     -> Text -- ^ 'ppName'
     -> ProjectsPredict
 projectsPredict pPpPayload_ pPpName_ =
     ProjectsPredict'
     { _ppXgafv = Nothing
     , _ppUploadProtocol = Nothing
-    , _ppPp = True
     , _ppAccessToken = Nothing
     , _ppUploadType = Nothing
     , _ppPayload = pPpPayload_
-    , _ppBearerToken = Nothing
     , _ppName = pPpName_
     , _ppCallback = Nothing
     }
@@ -202,10 +122,6 @@ ppUploadProtocol
   = lens _ppUploadProtocol
       (\ s a -> s{_ppUploadProtocol = a})
 
--- | Pretty-print response.
-ppPp :: Lens' ProjectsPredict Bool
-ppPp = lens _ppPp (\ s a -> s{_ppPp = a})
-
 -- | OAuth access token.
 ppAccessToken :: Lens' ProjectsPredict (Maybe Text)
 ppAccessToken
@@ -218,18 +134,12 @@ ppUploadType
   = lens _ppUploadType (\ s a -> s{_ppUploadType = a})
 
 -- | Multipart request metadata.
-ppPayload :: Lens' ProjectsPredict GoogleCloudMlV1beta1__PredictRequest
+ppPayload :: Lens' ProjectsPredict GoogleCloudMlV1__PredictRequest
 ppPayload
   = lens _ppPayload (\ s a -> s{_ppPayload = a})
 
--- | OAuth bearer token.
-ppBearerToken :: Lens' ProjectsPredict (Maybe Text)
-ppBearerToken
-  = lens _ppBearerToken
-      (\ s a -> s{_ppBearerToken = a})
-
 -- | Required. The resource name of a model or a version. Authorization:
--- requires \`Viewer\` role on the parent project.
+-- requires the \`predict\` permission on the specified resource.
 ppName :: Lens' ProjectsPredict Text
 ppName = lens _ppName (\ s a -> s{_ppName = a})
 
@@ -243,10 +153,9 @@ instance GoogleRequest ProjectsPredict where
         type Scopes ProjectsPredict =
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsPredict'{..}
-          = go _ppName _ppXgafv _ppUploadProtocol (Just _ppPp)
+          = go _ppName _ppXgafv _ppUploadProtocol
               _ppAccessToken
               _ppUploadType
-              _ppBearerToken
               _ppCallback
               (Just AltJSON)
               _ppPayload

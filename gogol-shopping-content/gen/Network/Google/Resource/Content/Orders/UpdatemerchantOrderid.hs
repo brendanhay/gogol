@@ -20,8 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the merchant order ID for a given order. This method can only be
--- called for non-multi-client accounts.
+-- Updates the merchant order ID for a given order.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.updatemerchantorderid@.
 module Network.Google.Resource.Content.Orders.UpdatemerchantOrderid
@@ -46,7 +45,7 @@ import           Network.Google.ShoppingContent.Types
 -- 'OrdersUpdatemerchantOrderid' request conforms to.
 type OrdersUpdatemerchantOrderidResource =
      "content" :>
-       "v2" :>
+       "v2.1" :>
          Capture "merchantId" (Textual Word64) :>
            "orders" :>
              Capture "orderId" Text :>
@@ -55,8 +54,7 @@ type OrdersUpdatemerchantOrderidResource =
                    ReqBody '[JSON] OrdersUpdateMerchantOrderIdRequest :>
                      Post '[JSON] OrdersUpdateMerchantOrderIdResponse
 
--- | Updates the merchant order ID for a given order. This method can only be
--- called for non-multi-client accounts.
+-- | Updates the merchant order ID for a given order.
 --
 -- /See:/ 'ordersUpdatemerchantOrderid' smart constructor.
 data OrdersUpdatemerchantOrderid = OrdersUpdatemerchantOrderid'
@@ -86,7 +84,8 @@ ordersUpdatemerchantOrderid pOuoMerchantId_ pOuoPayload_ pOuoOrderId_ =
     , _ouoOrderId = pOuoOrderId_
     }
 
--- | The ID of the managing account.
+-- | The ID of the account that manages the order. This cannot be a
+-- multi-client account.
 ouoMerchantId :: Lens' OrdersUpdatemerchantOrderid Word64
 ouoMerchantId
   = lens _ouoMerchantId

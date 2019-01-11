@@ -20,10 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes an BuildTrigger by its project ID and trigger ID. This API is
+-- Deletes a \`BuildTrigger\` by its project ID and trigger ID. This API is
 -- experimental.
 --
--- /See:/ <https://cloud.google.com/container-builder/docs/ Google Cloud Container Builder API Reference> for @cloudbuild.projects.triggers.delete@.
+-- /See:/ <https://cloud.google.com/cloud-build/docs/ Cloud Build API Reference> for @cloudbuild.projects.triggers.delete@.
 module Network.Google.Resource.Cloudbuild.Projects.Triggers.Delete
     (
     -- * REST Resource
@@ -37,10 +37,8 @@ module Network.Google.Resource.Cloudbuild.Projects.Triggers.Delete
     , ptdXgafv
     , ptdUploadProtocol
     , ptdTriggerId
-    , ptdPp
     , ptdAccessToken
     , ptdUploadType
-    , ptdBearerToken
     , ptdProjectId
     , ptdCallback
     ) where
@@ -58,14 +56,12 @@ type ProjectsTriggersDeleteResource =
              Capture "triggerId" Text :>
                QueryParam "$.xgafv" Xgafv :>
                  QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :> Delete '[JSON] Empty
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
--- | Deletes an BuildTrigger by its project ID and trigger ID. This API is
+-- | Deletes a \`BuildTrigger\` by its project ID and trigger ID. This API is
 -- experimental.
 --
 -- /See:/ 'projectsTriggersDelete' smart constructor.
@@ -73,10 +69,8 @@ data ProjectsTriggersDelete = ProjectsTriggersDelete'
     { _ptdXgafv          :: !(Maybe Xgafv)
     , _ptdUploadProtocol :: !(Maybe Text)
     , _ptdTriggerId      :: !Text
-    , _ptdPp             :: !Bool
     , _ptdAccessToken    :: !(Maybe Text)
     , _ptdUploadType     :: !(Maybe Text)
-    , _ptdBearerToken    :: !(Maybe Text)
     , _ptdProjectId      :: !Text
     , _ptdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -91,13 +85,9 @@ data ProjectsTriggersDelete = ProjectsTriggersDelete'
 --
 -- * 'ptdTriggerId'
 --
--- * 'ptdPp'
---
 -- * 'ptdAccessToken'
 --
 -- * 'ptdUploadType'
---
--- * 'ptdBearerToken'
 --
 -- * 'ptdProjectId'
 --
@@ -111,10 +101,8 @@ projectsTriggersDelete pPtdTriggerId_ pPtdProjectId_ =
     { _ptdXgafv = Nothing
     , _ptdUploadProtocol = Nothing
     , _ptdTriggerId = pPtdTriggerId_
-    , _ptdPp = True
     , _ptdAccessToken = Nothing
     , _ptdUploadType = Nothing
-    , _ptdBearerToken = Nothing
     , _ptdProjectId = pPtdProjectId_
     , _ptdCallback = Nothing
     }
@@ -129,14 +117,10 @@ ptdUploadProtocol
   = lens _ptdUploadProtocol
       (\ s a -> s{_ptdUploadProtocol = a})
 
--- | ID of the BuildTrigger to delete.
+-- | ID of the \`BuildTrigger\` to delete.
 ptdTriggerId :: Lens' ProjectsTriggersDelete Text
 ptdTriggerId
   = lens _ptdTriggerId (\ s a -> s{_ptdTriggerId = a})
-
--- | Pretty-print response.
-ptdPp :: Lens' ProjectsTriggersDelete Bool
-ptdPp = lens _ptdPp (\ s a -> s{_ptdPp = a})
 
 -- | OAuth access token.
 ptdAccessToken :: Lens' ProjectsTriggersDelete (Maybe Text)
@@ -149,12 +133,6 @@ ptdUploadType :: Lens' ProjectsTriggersDelete (Maybe Text)
 ptdUploadType
   = lens _ptdUploadType
       (\ s a -> s{_ptdUploadType = a})
-
--- | OAuth bearer token.
-ptdBearerToken :: Lens' ProjectsTriggersDelete (Maybe Text)
-ptdBearerToken
-  = lens _ptdBearerToken
-      (\ s a -> s{_ptdBearerToken = a})
 
 -- | ID of the project that owns the trigger.
 ptdProjectId :: Lens' ProjectsTriggersDelete Text
@@ -173,10 +151,8 @@ instance GoogleRequest ProjectsTriggersDelete where
         requestClient ProjectsTriggersDelete'{..}
           = go _ptdProjectId _ptdTriggerId _ptdXgafv
               _ptdUploadProtocol
-              (Just _ptdPp)
               _ptdAccessToken
               _ptdUploadType
-              _ptdBearerToken
               _ptdCallback
               (Just AltJSON)
               containerBuilderService

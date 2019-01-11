@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Safe Browsing APIs.
+A client library for the Google Safe Browsing.
 
 
 ## Contribute

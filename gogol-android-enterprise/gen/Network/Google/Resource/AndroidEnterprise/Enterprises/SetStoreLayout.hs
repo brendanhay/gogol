@@ -26,7 +26,7 @@
 -- the available product set for a user (using the setAvailableProductSet
 -- call). Apps on the page are sorted in order of their product ID value.
 -- If you create a custom store layout (by setting storeLayoutType =
--- \"custom\"), the basic store layout is disabled.
+-- \"custom\" and setting a homepage), the basic store layout is disabled.
 --
 -- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.enterprises.setStoreLayout@.
 module Network.Google.Resource.AndroidEnterprise.Enterprises.SetStoreLayout
@@ -64,7 +64,7 @@ type EnterprisesSetStoreLayoutResource =
 -- the available product set for a user (using the setAvailableProductSet
 -- call). Apps on the page are sorted in order of their product ID value.
 -- If you create a custom store layout (by setting storeLayoutType =
--- \"custom\"), the basic store layout is disabled.
+-- \"custom\" and setting a homepage), the basic store layout is disabled.
 --
 -- /See:/ 'enterprisesSetStoreLayout' smart constructor.
 data EnterprisesSetStoreLayout = EnterprisesSetStoreLayout'

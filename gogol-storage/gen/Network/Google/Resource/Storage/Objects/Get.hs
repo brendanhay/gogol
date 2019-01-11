@@ -37,6 +37,7 @@ module Network.Google.Resource.Storage.Objects.Get
     , ogIfGenerationNotMatch
     , ogIfGenerationMatch
     , ogBucket
+    , ogUserProject
     , ogIfMetagenerationNotMatch
     , ogObject
     , ogProjection
@@ -58,11 +59,12 @@ type ObjectsGetResource =
                  QueryParam "ifMetagenerationMatch" (Textual Int64) :>
                    QueryParam "ifGenerationNotMatch" (Textual Int64) :>
                      QueryParam "ifGenerationMatch" (Textual Int64) :>
-                       QueryParam "ifMetagenerationNotMatch" (Textual Int64)
-                         :>
-                         QueryParam "projection" ObjectsGetProjection :>
-                           QueryParam "generation" (Textual Int64) :>
-                             QueryParam "alt" AltJSON :> Get '[JSON] Object
+                       QueryParam "userProject" Text :>
+                         QueryParam "ifMetagenerationNotMatch" (Textual Int64)
+                           :>
+                           QueryParam "projection" ObjectsGetProjection :>
+                             QueryParam "generation" (Textual Int64) :>
+                               QueryParam "alt" AltJSON :> Get '[JSON] Object
        :<|>
        "storage" :>
          "v1" :>
@@ -73,12 +75,13 @@ type ObjectsGetResource =
                    QueryParam "ifMetagenerationMatch" (Textual Int64) :>
                      QueryParam "ifGenerationNotMatch" (Textual Int64) :>
                        QueryParam "ifGenerationMatch" (Textual Int64) :>
-                         QueryParam "ifMetagenerationNotMatch" (Textual Int64)
-                           :>
-                           QueryParam "projection" ObjectsGetProjection :>
-                             QueryParam "generation" (Textual Int64) :>
-                               QueryParam "alt" AltMedia :>
-                                 Get '[OctetStream] Stream
+                         QueryParam "userProject" Text :>
+                           QueryParam "ifMetagenerationNotMatch" (Textual Int64)
+                             :>
+                             QueryParam "projection" ObjectsGetProjection :>
+                               QueryParam "generation" (Textual Int64) :>
+                                 QueryParam "alt" AltMedia :>
+                                   Get '[OctetStream] Stream
 
 -- | Retrieves an object or its metadata.
 --
@@ -88,6 +91,7 @@ data ObjectsGet = ObjectsGet'
     , _ogIfGenerationNotMatch     :: !(Maybe (Textual Int64))
     , _ogIfGenerationMatch        :: !(Maybe (Textual Int64))
     , _ogBucket                   :: !Text
+    , _ogUserProject              :: !(Maybe Text)
     , _ogIfMetagenerationNotMatch :: !(Maybe (Textual Int64))
     , _ogObject                   :: !Text
     , _ogProjection               :: !(Maybe ObjectsGetProjection)
@@ -106,6 +110,8 @@ data ObjectsGet = ObjectsGet'
 --
 -- * 'ogBucket'
 --
+-- * 'ogUserProject'
+--
 -- * 'ogIfMetagenerationNotMatch'
 --
 -- * 'ogObject'
@@ -123,6 +129,7 @@ objectsGet pOgBucket_ pOgObject_ =
     , _ogIfGenerationNotMatch = Nothing
     , _ogIfGenerationMatch = Nothing
     , _ogBucket = pOgBucket_
+    , _ogUserProject = Nothing
     , _ogIfMetagenerationNotMatch = Nothing
     , _ogObject = pOgObject_
     , _ogProjection = Nothing
@@ -137,16 +144,19 @@ ogIfMetagenerationMatch
       (\ s a -> s{_ogIfMetagenerationMatch = a})
       . mapping _Coerce
 
--- | Makes the operation conditional on whether the object\'s generation does
--- not match the given value.
+-- | Makes the operation conditional on whether the object\'s current
+-- generation does not match the given value. If no live object exists, the
+-- precondition fails. Setting to 0 makes the operation succeed only if
+-- there is a live version of the object.
 ogIfGenerationNotMatch :: Lens' ObjectsGet (Maybe Int64)
 ogIfGenerationNotMatch
   = lens _ogIfGenerationNotMatch
       (\ s a -> s{_ogIfGenerationNotMatch = a})
       . mapping _Coerce
 
--- | Makes the operation conditional on whether the object\'s generation
--- matches the given value.
+-- | Makes the operation conditional on whether the object\'s current
+-- generation matches the given value. Setting to 0 makes the operation
+-- succeed only if there are no live versions of the object.
 ogIfGenerationMatch :: Lens' ObjectsGet (Maybe Int64)
 ogIfGenerationMatch
   = lens _ogIfGenerationMatch
@@ -156,6 +166,13 @@ ogIfGenerationMatch
 -- | Name of the bucket in which the object resides.
 ogBucket :: Lens' ObjectsGet Text
 ogBucket = lens _ogBucket (\ s a -> s{_ogBucket = a})
+
+-- | The project to be billed for this request. Required for Requester Pays
+-- buckets.
+ogUserProject :: Lens' ObjectsGet (Maybe Text)
+ogUserProject
+  = lens _ogUserProject
+      (\ s a -> s{_ogUserProject = a})
 
 -- | Makes the operation conditional on whether the object\'s current
 -- metageneration does not match the given value.
@@ -194,6 +211,7 @@ instance GoogleRequest ObjectsGet where
           = go _ogBucket _ogObject _ogIfMetagenerationMatch
               _ogIfGenerationNotMatch
               _ogIfGenerationMatch
+              _ogUserProject
               _ogIfMetagenerationNotMatch
               _ogProjection
               _ogGeneration
@@ -212,6 +230,7 @@ instance GoogleRequest (MediaDownload ObjectsGet)
           = go _ogBucket _ogObject _ogIfMetagenerationMatch
               _ogIfGenerationNotMatch
               _ogIfGenerationMatch
+              _ogUserProject
               _ogIfMetagenerationNotMatch
               _ogProjection
               _ogGeneration

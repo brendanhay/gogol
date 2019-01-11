@@ -39,8 +39,9 @@ library
         , Network.Google.Resource.FirebaseRules.Projects.Releases.Create
         , Network.Google.Resource.FirebaseRules.Projects.Releases.Delete
         , Network.Google.Resource.FirebaseRules.Projects.Releases.Get
+        , Network.Google.Resource.FirebaseRules.Projects.Releases.GetExecutable
         , Network.Google.Resource.FirebaseRules.Projects.Releases.List
-        , Network.Google.Resource.FirebaseRules.Projects.Releases.Update
+        , Network.Google.Resource.FirebaseRules.Projects.Releases.Patch
         , Network.Google.Resource.FirebaseRules.Projects.Rulesets.Create
         , Network.Google.Resource.FirebaseRules.Projects.Rulesets.Delete
         , Network.Google.Resource.FirebaseRules.Projects.Rulesets.Get

@@ -34,8 +34,7 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Resource.StorageTransfer.GetGoogleServiceAccount
-        , Network.Google.Resource.StorageTransfer.GoogleServiceAccounts.Get
+          Network.Google.Resource.StorageTransfer.GoogleServiceAccounts.Get
         , Network.Google.Resource.StorageTransfer.TransferJobs.Create
         , Network.Google.Resource.StorageTransfer.TransferJobs.Get
         , Network.Google.Resource.StorageTransfer.TransferJobs.List

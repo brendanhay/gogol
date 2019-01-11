@@ -19,7 +19,7 @@ description:
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
     .
-    This library is compatible with version @v1@
+    This library is compatible with version @v2@
     of the API.
 
 source-repository head
@@ -40,49 +40,72 @@ library
         , Network.Google.Resource.TagManager.Accounts.Containers.Environments.Get
         , Network.Google.Resource.TagManager.Accounts.Containers.Environments.List
         , Network.Google.Resource.TagManager.Accounts.Containers.Environments.Patch
+        , Network.Google.Resource.TagManager.Accounts.Containers.Environments.Reauthorize
         , Network.Google.Resource.TagManager.Accounts.Containers.Environments.Update
-        , Network.Google.Resource.TagManager.Accounts.Containers.Folders.Create
-        , Network.Google.Resource.TagManager.Accounts.Containers.Folders.Delete
-        , Network.Google.Resource.TagManager.Accounts.Containers.Folders.Entities.List
-        , Network.Google.Resource.TagManager.Accounts.Containers.Folders.Get
-        , Network.Google.Resource.TagManager.Accounts.Containers.Folders.List
-        , Network.Google.Resource.TagManager.Accounts.Containers.Folders.Update
         , Network.Google.Resource.TagManager.Accounts.Containers.Get
         , Network.Google.Resource.TagManager.Accounts.Containers.List
-        , Network.Google.Resource.TagManager.Accounts.Containers.MoveFolders.Update
-        , Network.Google.Resource.TagManager.Accounts.Containers.ReauthorizeEnvironments.Update
-        , Network.Google.Resource.TagManager.Accounts.Containers.Tags.Create
-        , Network.Google.Resource.TagManager.Accounts.Containers.Tags.Delete
-        , Network.Google.Resource.TagManager.Accounts.Containers.Tags.Get
-        , Network.Google.Resource.TagManager.Accounts.Containers.Tags.List
-        , Network.Google.Resource.TagManager.Accounts.Containers.Tags.Update
-        , Network.Google.Resource.TagManager.Accounts.Containers.Triggers.Create
-        , Network.Google.Resource.TagManager.Accounts.Containers.Triggers.Delete
-        , Network.Google.Resource.TagManager.Accounts.Containers.Triggers.Get
-        , Network.Google.Resource.TagManager.Accounts.Containers.Triggers.List
-        , Network.Google.Resource.TagManager.Accounts.Containers.Triggers.Update
         , Network.Google.Resource.TagManager.Accounts.Containers.Update
-        , Network.Google.Resource.TagManager.Accounts.Containers.Variables.Create
-        , Network.Google.Resource.TagManager.Accounts.Containers.Variables.Delete
-        , Network.Google.Resource.TagManager.Accounts.Containers.Variables.Get
-        , Network.Google.Resource.TagManager.Accounts.Containers.Variables.List
-        , Network.Google.Resource.TagManager.Accounts.Containers.Variables.Update
-        , Network.Google.Resource.TagManager.Accounts.Containers.Versions.Create
+        , Network.Google.Resource.TagManager.Accounts.Containers.VersionHeaders.Latest
+        , Network.Google.Resource.TagManager.Accounts.Containers.VersionHeaders.List
         , Network.Google.Resource.TagManager.Accounts.Containers.Versions.Delete
         , Network.Google.Resource.TagManager.Accounts.Containers.Versions.Get
-        , Network.Google.Resource.TagManager.Accounts.Containers.Versions.List
+        , Network.Google.Resource.TagManager.Accounts.Containers.Versions.Live
         , Network.Google.Resource.TagManager.Accounts.Containers.Versions.Publish
-        , Network.Google.Resource.TagManager.Accounts.Containers.Versions.Restore
+        , Network.Google.Resource.TagManager.Accounts.Containers.Versions.SetLatest
         , Network.Google.Resource.TagManager.Accounts.Containers.Versions.Undelete
         , Network.Google.Resource.TagManager.Accounts.Containers.Versions.Update
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.BuiltInVariables.Create
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.BuiltInVariables.Delete
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.BuiltInVariables.List
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.BuiltInVariables.Revert
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Create
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.CreateVersion
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Delete
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.Create
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.Delete
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.Entities
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.Get
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.List
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.MoveEntitiesToFolder
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.Revert
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.Update
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Get
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.GetProposal
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.GetStatus
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.List
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Proposal.Create
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Proposal.Delete
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.QuickPreview
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.ResolveConflict
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Sync
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Tags.Create
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Tags.Delete
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Tags.Get
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Tags.List
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Tags.Revert
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Tags.Update
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Triggers.Create
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Triggers.Delete
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Triggers.Get
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Triggers.List
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Triggers.Revert
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Triggers.Update
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Update
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.UpdateProposal
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Variables.Create
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Variables.Delete
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Variables.Get
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Variables.List
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Variables.Revert
+        , Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Variables.Update
         , Network.Google.Resource.TagManager.Accounts.Get
         , Network.Google.Resource.TagManager.Accounts.List
-        , Network.Google.Resource.TagManager.Accounts.Permissions.Create
-        , Network.Google.Resource.TagManager.Accounts.Permissions.Delete
-        , Network.Google.Resource.TagManager.Accounts.Permissions.Get
-        , Network.Google.Resource.TagManager.Accounts.Permissions.List
-        , Network.Google.Resource.TagManager.Accounts.Permissions.Update
         , Network.Google.Resource.TagManager.Accounts.Update
+        , Network.Google.Resource.TagManager.Accounts.UserPermissions.Create
+        , Network.Google.Resource.TagManager.Accounts.UserPermissions.Delete
+        , Network.Google.Resource.TagManager.Accounts.UserPermissions.Get
+        , Network.Google.Resource.TagManager.Accounts.UserPermissions.List
+        , Network.Google.Resource.TagManager.Accounts.UserPermissions.Update
         , Network.Google.TagManager
         , Network.Google.TagManager.Types
 

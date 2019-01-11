@@ -21,10 +21,11 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Lists the projects associated with a billing account. The current
--- authenticated user must be an [owner of the billing
--- account](https:\/\/support.google.com\/cloud\/answer\/4430947).
+-- authenticated user must have the \`billing.resourceAssociations.list\`
+-- IAM permission, which is often given to billing account
+-- [viewers](https:\/\/cloud.google.com\/billing\/docs\/how-to\/billing-access).
 --
--- /See:/ <https://cloud.google.com/billing/ Google Cloud Billing API Reference> for @cloudbilling.billingAccounts.projects.list@.
+-- /See:/ <https://cloud.google.com/billing/ Cloud Billing API Reference> for @cloudbilling.billingAccounts.projects.list@.
 module Network.Google.Resource.CloudBilling.BillingAccounts.Projects.List
     (
     -- * REST Resource
@@ -37,10 +38,8 @@ module Network.Google.Resource.CloudBilling.BillingAccounts.Projects.List
     -- * Request Lenses
     , baplXgafv
     , baplUploadProtocol
-    , baplPp
     , baplAccessToken
     , baplUploadType
-    , baplBearerToken
     , baplName
     , baplPageToken
     , baplPageSize
@@ -56,30 +55,27 @@ type BillingAccountsProjectsListResource =
      "v1" :>
        Capture "name" Text :>
          "projects" :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" (Textual Int32) :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] ListProjectBillingInfoResponse
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "pageSize" (Textual Int32) :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] ListProjectBillingInfoResponse
 
 -- | Lists the projects associated with a billing account. The current
--- authenticated user must be an [owner of the billing
--- account](https:\/\/support.google.com\/cloud\/answer\/4430947).
+-- authenticated user must have the \`billing.resourceAssociations.list\`
+-- IAM permission, which is often given to billing account
+-- [viewers](https:\/\/cloud.google.com\/billing\/docs\/how-to\/billing-access).
 --
 -- /See:/ 'billingAccountsProjectsList' smart constructor.
 data BillingAccountsProjectsList = BillingAccountsProjectsList'
-    { _baplXgafv          :: !(Maybe Text)
+    { _baplXgafv          :: !(Maybe Xgafv)
     , _baplUploadProtocol :: !(Maybe Text)
-    , _baplPp             :: !Bool
     , _baplAccessToken    :: !(Maybe Text)
     , _baplUploadType     :: !(Maybe Text)
-    , _baplBearerToken    :: !(Maybe Text)
     , _baplName           :: !Text
     , _baplPageToken      :: !(Maybe Text)
     , _baplPageSize       :: !(Maybe (Textual Int32))
@@ -94,13 +90,9 @@ data BillingAccountsProjectsList = BillingAccountsProjectsList'
 --
 -- * 'baplUploadProtocol'
 --
--- * 'baplPp'
---
 -- * 'baplAccessToken'
 --
 -- * 'baplUploadType'
---
--- * 'baplBearerToken'
 --
 -- * 'baplName'
 --
@@ -116,10 +108,8 @@ billingAccountsProjectsList pBaplName_ =
     BillingAccountsProjectsList'
     { _baplXgafv = Nothing
     , _baplUploadProtocol = Nothing
-    , _baplPp = True
     , _baplAccessToken = Nothing
     , _baplUploadType = Nothing
-    , _baplBearerToken = Nothing
     , _baplName = pBaplName_
     , _baplPageToken = Nothing
     , _baplPageSize = Nothing
@@ -127,7 +117,7 @@ billingAccountsProjectsList pBaplName_ =
     }
 
 -- | V1 error format.
-baplXgafv :: Lens' BillingAccountsProjectsList (Maybe Text)
+baplXgafv :: Lens' BillingAccountsProjectsList (Maybe Xgafv)
 baplXgafv
   = lens _baplXgafv (\ s a -> s{_baplXgafv = a})
 
@@ -136,10 +126,6 @@ baplUploadProtocol :: Lens' BillingAccountsProjectsList (Maybe Text)
 baplUploadProtocol
   = lens _baplUploadProtocol
       (\ s a -> s{_baplUploadProtocol = a})
-
--- | Pretty-print response.
-baplPp :: Lens' BillingAccountsProjectsList Bool
-baplPp = lens _baplPp (\ s a -> s{_baplPp = a})
 
 -- | OAuth access token.
 baplAccessToken :: Lens' BillingAccountsProjectsList (Maybe Text)
@@ -152,12 +138,6 @@ baplUploadType :: Lens' BillingAccountsProjectsList (Maybe Text)
 baplUploadType
   = lens _baplUploadType
       (\ s a -> s{_baplUploadType = a})
-
--- | OAuth bearer token.
-baplBearerToken :: Lens' BillingAccountsProjectsList (Maybe Text)
-baplBearerToken
-  = lens _baplBearerToken
-      (\ s a -> s{_baplBearerToken = a})
 
 -- | The resource name of the billing account associated with the projects
 -- that you want to list. For example,
@@ -194,10 +174,8 @@ instance GoogleRequest BillingAccountsProjectsList
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient BillingAccountsProjectsList'{..}
           = go _baplName _baplXgafv _baplUploadProtocol
-              (Just _baplPp)
               _baplAccessToken
               _baplUploadType
-              _baplBearerToken
               _baplPageToken
               _baplPageSize
               _baplCallback

@@ -34,6 +34,7 @@ module Network.Google.Resource.Compute.Instances.SetMetadata
     , InstancesSetMetadata
 
     -- * Request Lenses
+    , ismRequestId
     , ismProject
     , ismZone
     , ismPayload
@@ -55,23 +56,27 @@ type InstancesSetMetadataResource =
                  "instances" :>
                    Capture "instance" Text :>
                      "setMetadata" :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Metadata :> Post '[JSON] Operation
+                       QueryParam "requestId" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Metadata :> Post '[JSON] Operation
 
 -- | Sets metadata for the specified instance to the data included in the
 -- request.
 --
 -- /See:/ 'instancesSetMetadata' smart constructor.
 data InstancesSetMetadata = InstancesSetMetadata'
-    { _ismProject  :: !Text
-    , _ismZone     :: !Text
-    , _ismPayload  :: !Metadata
-    , _ismInstance :: !Text
+    { _ismRequestId :: !(Maybe Text)
+    , _ismProject   :: !Text
+    , _ismZone      :: !Text
+    , _ismPayload   :: !Metadata
+    , _ismInstance  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesSetMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ismRequestId'
 --
 -- * 'ismProject'
 --
@@ -88,11 +93,26 @@ instancesSetMetadata
     -> InstancesSetMetadata
 instancesSetMetadata pIsmProject_ pIsmZone_ pIsmPayload_ pIsmInstance_ =
     InstancesSetMetadata'
-    { _ismProject = pIsmProject_
+    { _ismRequestId = Nothing
+    , _ismProject = pIsmProject_
     , _ismZone = pIsmZone_
     , _ismPayload = pIsmPayload_
     , _ismInstance = pIsmInstance_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+ismRequestId :: Lens' InstancesSetMetadata (Maybe Text)
+ismRequestId
+  = lens _ismRequestId (\ s a -> s{_ismRequestId = a})
 
 -- | Project ID for this request.
 ismProject :: Lens' InstancesSetMetadata Text
@@ -119,7 +139,8 @@ instance GoogleRequest InstancesSetMetadata where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient InstancesSetMetadata'{..}
-          = go _ismProject _ismZone _ismInstance (Just AltJSON)
+          = go _ismProject _ismZone _ismInstance _ismRequestId
+              (Just AltJSON)
               _ismPayload
               computeService
           where go

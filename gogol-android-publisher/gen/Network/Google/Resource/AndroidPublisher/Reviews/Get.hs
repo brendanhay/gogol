@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'ReviewsGet' request conforms to.
 type ReviewsGetResource =
      "androidpublisher" :>
-       "v2" :>
+       "v3" :>
          "applications" :>
            Capture "packageName" Text :>
              "reviews" :>

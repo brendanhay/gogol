@@ -40,11 +40,9 @@ module Network.Google.Resource.FirebaseDynamicLinks.ShortLinks.Create
     -- * Request Lenses
     , slcXgafv
     , slcUploadProtocol
-    , slcPp
     , slcAccessToken
     , slcUploadType
     , slcPayload
-    , slcBearerToken
     , slcCallback
     ) where
 
@@ -58,14 +56,12 @@ type ShortLinksCreateResource =
        "shortLinks" :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] CreateShortDynamicLinkRequest :>
-                           Post '[JSON] CreateShortDynamicLinkResponse
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] CreateShortDynamicLinkRequest :>
+                       Post '[JSON] CreateShortDynamicLinkResponse
 
 -- | Creates a short Dynamic Link given either a valid long Dynamic Link or
 -- details such as Dynamic Link domain, Android and iOS app information.
@@ -78,11 +74,9 @@ type ShortLinksCreateResource =
 data ShortLinksCreate = ShortLinksCreate'
     { _slcXgafv          :: !(Maybe Xgafv)
     , _slcUploadProtocol :: !(Maybe Text)
-    , _slcPp             :: !Bool
     , _slcAccessToken    :: !(Maybe Text)
     , _slcUploadType     :: !(Maybe Text)
     , _slcPayload        :: !CreateShortDynamicLinkRequest
-    , _slcBearerToken    :: !(Maybe Text)
     , _slcCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -94,15 +88,11 @@ data ShortLinksCreate = ShortLinksCreate'
 --
 -- * 'slcUploadProtocol'
 --
--- * 'slcPp'
---
 -- * 'slcAccessToken'
 --
 -- * 'slcUploadType'
 --
 -- * 'slcPayload'
---
--- * 'slcBearerToken'
 --
 -- * 'slcCallback'
 shortLinksCreate
@@ -112,11 +102,9 @@ shortLinksCreate pSlcPayload_ =
     ShortLinksCreate'
     { _slcXgafv = Nothing
     , _slcUploadProtocol = Nothing
-    , _slcPp = True
     , _slcAccessToken = Nothing
     , _slcUploadType = Nothing
     , _slcPayload = pSlcPayload_
-    , _slcBearerToken = Nothing
     , _slcCallback = Nothing
     }
 
@@ -129,10 +117,6 @@ slcUploadProtocol :: Lens' ShortLinksCreate (Maybe Text)
 slcUploadProtocol
   = lens _slcUploadProtocol
       (\ s a -> s{_slcUploadProtocol = a})
-
--- | Pretty-print response.
-slcPp :: Lens' ShortLinksCreate Bool
-slcPp = lens _slcPp (\ s a -> s{_slcPp = a})
 
 -- | OAuth access token.
 slcAccessToken :: Lens' ShortLinksCreate (Maybe Text)
@@ -151,12 +135,6 @@ slcPayload :: Lens' ShortLinksCreate CreateShortDynamicLinkRequest
 slcPayload
   = lens _slcPayload (\ s a -> s{_slcPayload = a})
 
--- | OAuth bearer token.
-slcBearerToken :: Lens' ShortLinksCreate (Maybe Text)
-slcBearerToken
-  = lens _slcBearerToken
-      (\ s a -> s{_slcBearerToken = a})
-
 -- | JSONP
 slcCallback :: Lens' ShortLinksCreate (Maybe Text)
 slcCallback
@@ -168,10 +146,8 @@ instance GoogleRequest ShortLinksCreate where
         type Scopes ShortLinksCreate =
              '["https://www.googleapis.com/auth/firebase"]
         requestClient ShortLinksCreate'{..}
-          = go _slcXgafv _slcUploadProtocol (Just _slcPp)
-              _slcAccessToken
+          = go _slcXgafv _slcUploadProtocol _slcAccessToken
               _slcUploadType
-              _slcBearerToken
               _slcCallback
               (Just AltJSON)
               _slcPayload

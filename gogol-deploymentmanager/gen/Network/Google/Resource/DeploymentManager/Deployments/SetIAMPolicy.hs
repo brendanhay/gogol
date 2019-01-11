@@ -54,7 +54,8 @@ type DeploymentsSetIAMPolicyResource =
                  Capture "resource" Text :>
                    "setIamPolicy" :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] Policy :> Post '[JSON] Policy
+                       ReqBody '[JSON] GlobalSetPolicyRequest :>
+                         Post '[JSON] Policy
 
 -- | Sets the access control policy on the specified resource. Replaces any
 -- existing policy.
@@ -62,7 +63,7 @@ type DeploymentsSetIAMPolicyResource =
 -- /See:/ 'deploymentsSetIAMPolicy' smart constructor.
 data DeploymentsSetIAMPolicy = DeploymentsSetIAMPolicy'
     { _dsipProject  :: !Text
-    , _dsipPayload  :: !Policy
+    , _dsipPayload  :: !GlobalSetPolicyRequest
     , _dsipResource :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -77,7 +78,7 @@ data DeploymentsSetIAMPolicy = DeploymentsSetIAMPolicy'
 -- * 'dsipResource'
 deploymentsSetIAMPolicy
     :: Text -- ^ 'dsipProject'
-    -> Policy -- ^ 'dsipPayload'
+    -> GlobalSetPolicyRequest -- ^ 'dsipPayload'
     -> Text -- ^ 'dsipResource'
     -> DeploymentsSetIAMPolicy
 deploymentsSetIAMPolicy pDsipProject_ pDsipPayload_ pDsipResource_ =
@@ -93,11 +94,11 @@ dsipProject
   = lens _dsipProject (\ s a -> s{_dsipProject = a})
 
 -- | Multipart request metadata.
-dsipPayload :: Lens' DeploymentsSetIAMPolicy Policy
+dsipPayload :: Lens' DeploymentsSetIAMPolicy GlobalSetPolicyRequest
 dsipPayload
   = lens _dsipPayload (\ s a -> s{_dsipPayload = a})
 
--- | Name of the resource for this request.
+-- | Name or id of the resource for this request.
 dsipResource :: Lens' DeploymentsSetIAMPolicy Text
 dsipResource
   = lens _dsipResource (\ s a -> s{_dsipResource = a})

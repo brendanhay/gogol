@@ -21,7 +21,10 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Gets the product from a Manufacturer Center account, including product
--- issues.
+-- issues. A recently updated product takes around 15 minutes to process.
+-- Changes are only visible after it has been processed. While some issues
+-- may be available once the product has been processed, other issues may
+-- take days to appear.
 --
 -- /See:/ <https://developers.google.com/manufacturers/ Manufacturer Center API Reference> for @manufacturers.accounts.products.get@.
 module Network.Google.Resource.Manufacturers.Accounts.Products.Get
@@ -35,12 +38,11 @@ module Network.Google.Resource.Manufacturers.Accounts.Products.Get
 
     -- * Request Lenses
     , apgParent
+    , apgInclude
     , apgXgafv
     , apgUploadProtocol
-    , apgPp
     , apgAccessToken
     , apgUploadType
-    , apgBearerToken
     , apgName
     , apgCallback
     ) where
@@ -55,27 +57,28 @@ type AccountsProductsGetResource =
        Capture "parent" Text :>
          "products" :>
            Capture "name" Text :>
-             QueryParam "$.xgafv" Xgafv :>
-               QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
+             QueryParams "include" Text :>
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "callback" Text :>
-                           QueryParam "alt" AltJSON :> Get '[JSON] Product
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] Product
 
 -- | Gets the product from a Manufacturer Center account, including product
--- issues.
+-- issues. A recently updated product takes around 15 minutes to process.
+-- Changes are only visible after it has been processed. While some issues
+-- may be available once the product has been processed, other issues may
+-- take days to appear.
 --
 -- /See:/ 'accountsProductsGet' smart constructor.
 data AccountsProductsGet = AccountsProductsGet'
     { _apgParent         :: !Text
+    , _apgInclude        :: !(Maybe [Text])
     , _apgXgafv          :: !(Maybe Xgafv)
     , _apgUploadProtocol :: !(Maybe Text)
-    , _apgPp             :: !Bool
     , _apgAccessToken    :: !(Maybe Text)
     , _apgUploadType     :: !(Maybe Text)
-    , _apgBearerToken    :: !(Maybe Text)
     , _apgName           :: !Text
     , _apgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -86,17 +89,15 @@ data AccountsProductsGet = AccountsProductsGet'
 --
 -- * 'apgParent'
 --
+-- * 'apgInclude'
+--
 -- * 'apgXgafv'
 --
 -- * 'apgUploadProtocol'
 --
--- * 'apgPp'
---
 -- * 'apgAccessToken'
 --
 -- * 'apgUploadType'
---
--- * 'apgBearerToken'
 --
 -- * 'apgName'
 --
@@ -108,12 +109,11 @@ accountsProductsGet
 accountsProductsGet pApgParent_ pApgName_ =
     AccountsProductsGet'
     { _apgParent = pApgParent_
+    , _apgInclude = Nothing
     , _apgXgafv = Nothing
     , _apgUploadProtocol = Nothing
-    , _apgPp = True
     , _apgAccessToken = Nothing
     , _apgUploadType = Nothing
-    , _apgBearerToken = Nothing
     , _apgName = pApgName_
     , _apgCallback = Nothing
     }
@@ -124,6 +124,14 @@ apgParent :: Lens' AccountsProductsGet Text
 apgParent
   = lens _apgParent (\ s a -> s{_apgParent = a})
 
+-- | The information to be included in the response. Only sections listed
+-- here will be returned.
+apgInclude :: Lens' AccountsProductsGet [Text]
+apgInclude
+  = lens _apgInclude (\ s a -> s{_apgInclude = a}) .
+      _Default
+      . _Coerce
+
 -- | V1 error format.
 apgXgafv :: Lens' AccountsProductsGet (Maybe Xgafv)
 apgXgafv = lens _apgXgafv (\ s a -> s{_apgXgafv = a})
@@ -133,10 +141,6 @@ apgUploadProtocol :: Lens' AccountsProductsGet (Maybe Text)
 apgUploadProtocol
   = lens _apgUploadProtocol
       (\ s a -> s{_apgUploadProtocol = a})
-
--- | Pretty-print response.
-apgPp :: Lens' AccountsProductsGet Bool
-apgPp = lens _apgPp (\ s a -> s{_apgPp = a})
 
 -- | OAuth access token.
 apgAccessToken :: Lens' AccountsProductsGet (Maybe Text)
@@ -149,12 +153,6 @@ apgUploadType :: Lens' AccountsProductsGet (Maybe Text)
 apgUploadType
   = lens _apgUploadType
       (\ s a -> s{_apgUploadType = a})
-
--- | OAuth bearer token.
-apgBearerToken :: Lens' AccountsProductsGet (Maybe Text)
-apgBearerToken
-  = lens _apgBearerToken
-      (\ s a -> s{_apgBearerToken = a})
 
 -- | Name in the format \`{target_country}:{content_language}:{product_id}\`.
 -- \`target_country\` - The target country of the product as a CLDR
@@ -176,11 +174,11 @@ instance GoogleRequest AccountsProductsGet where
         type Scopes AccountsProductsGet =
              '["https://www.googleapis.com/auth/manufacturercenter"]
         requestClient AccountsProductsGet'{..}
-          = go _apgParent _apgName _apgXgafv _apgUploadProtocol
-              (Just _apgPp)
+          = go _apgParent _apgName (_apgInclude ^. _Default)
+              _apgXgafv
+              _apgUploadProtocol
               _apgAccessToken
               _apgUploadType
-              _apgBearerToken
               _apgCallback
               (Just AltJSON)
               manufacturersService

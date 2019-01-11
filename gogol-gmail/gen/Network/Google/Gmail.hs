@@ -116,6 +116,18 @@ module Network.Google.Gmail
     -- ** gmail.users.messages.untrash
     , module Network.Google.Resource.Gmail.Users.Messages.Untrash
 
+    -- ** gmail.users.settings.delegates.create
+    , module Network.Google.Resource.Gmail.Users.Settings.Delegates.Create
+
+    -- ** gmail.users.settings.delegates.delete
+    , module Network.Google.Resource.Gmail.Users.Settings.Delegates.Delete
+
+    -- ** gmail.users.settings.delegates.get
+    , module Network.Google.Resource.Gmail.Users.Settings.Delegates.Get
+
+    -- ** gmail.users.settings.delegates.list
+    , module Network.Google.Resource.Gmail.Users.Settings.Delegates.List
+
     -- ** gmail.users.settings.filters.create
     , module Network.Google.Resource.Gmail.Users.Settings.Filters.Create
 
@@ -166,6 +178,21 @@ module Network.Google.Gmail
 
     -- ** gmail.users.settings.sendAs.patch
     , module Network.Google.Resource.Gmail.Users.Settings.SendAs.Patch
+
+    -- ** gmail.users.settings.sendAs.smimeInfo.delete
+    , module Network.Google.Resource.Gmail.Users.Settings.SendAs.SmimeInfo.Delete
+
+    -- ** gmail.users.settings.sendAs.smimeInfo.get
+    , module Network.Google.Resource.Gmail.Users.Settings.SendAs.SmimeInfo.Get
+
+    -- ** gmail.users.settings.sendAs.smimeInfo.insert
+    , module Network.Google.Resource.Gmail.Users.Settings.SendAs.SmimeInfo.Insert
+
+    -- ** gmail.users.settings.sendAs.smimeInfo.list
+    , module Network.Google.Resource.Gmail.Users.Settings.SendAs.SmimeInfo.List
+
+    -- ** gmail.users.settings.sendAs.smimeInfo.setDefault
+    , module Network.Google.Resource.Gmail.Users.Settings.SendAs.SmimeInfo.SetDefault
 
     -- ** gmail.users.settings.sendAs.update
     , module Network.Google.Resource.Gmail.Users.Settings.SendAs.Update
@@ -219,6 +246,12 @@ module Network.Google.Gmail
     -- ** FilterCriteriaSizeComparison
     , FilterCriteriaSizeComparison (..)
 
+    -- ** Delegate
+    , Delegate
+    , delegate
+    , dVerificationStatus
+    , dDelegateEmail
+
     -- ** UsersMessagesGetFormat
     , UsersMessagesGetFormat (..)
 
@@ -263,8 +296,19 @@ module Network.Google.Gmail
     , hId
     , hMessages
 
+    -- ** ListDelegatesResponse
+    , ListDelegatesResponse
+    , listDelegatesResponse
+    , ldrDelegates
+
     -- ** ForwardingAddressVerificationStatus
     , ForwardingAddressVerificationStatus (..)
+
+    -- ** LabelColor
+    , LabelColor
+    , labelColor
+    , lcBackgRoundColor
+    , lcTextColor
 
     -- ** FilterCriteria
     , FilterCriteria
@@ -295,6 +339,9 @@ module Network.Google.Gmail
     , messagePartHeader
     , mphValue
     , mphName
+
+    -- ** UsersHistoryListHistoryTypes
+    , UsersHistoryListHistoryTypes (..)
 
     -- ** SendAsVerificationStatus
     , SendAsVerificationStatus (..)
@@ -411,6 +458,9 @@ module Network.Google.Gmail
     , wrExpiration
     , wrHistoryId
 
+    -- ** DelegateVerificationStatus
+    , DelegateVerificationStatus (..)
+
     -- ** UsersThreadsGetFormat
     , UsersThreadsGetFormat (..)
 
@@ -473,6 +523,11 @@ module Network.Google.Gmail
     -- ** ImapSettingsExpungeBehavior
     , ImapSettingsExpungeBehavior (..)
 
+    -- ** ListSmimeInfoResponse
+    , ListSmimeInfoResponse
+    , listSmimeInfoResponse
+    , lsirSmimeInfo
+
     -- ** SmtpMsaSecurityMode
     , SmtpMsaSecurityMode (..)
 
@@ -519,12 +574,24 @@ module Network.Google.Gmail
     , lThreadsUnread
     , lMessageListVisibility
     , lMessagesTotal
+    , lColor
     , lMessagesUnread
     , lName
     , lThreadsTotal
     , lLabelListVisibility
     , lId
     , lType
+
+    -- ** SmimeInfo
+    , SmimeInfo
+    , smimeInfo
+    , siPem
+    , siExpiration
+    , siEncryptedKeyPassword
+    , siId
+    , siPkcs12
+    , siIssuerCn
+    , siIsDefault
 
     -- ** ListMessagesResponse
     , ListMessagesResponse
@@ -567,6 +634,10 @@ import           Network.Google.Resource.Gmail.Users.Messages.Modify
 import           Network.Google.Resource.Gmail.Users.Messages.Send
 import           Network.Google.Resource.Gmail.Users.Messages.Trash
 import           Network.Google.Resource.Gmail.Users.Messages.Untrash
+import           Network.Google.Resource.Gmail.Users.Settings.Delegates.Create
+import           Network.Google.Resource.Gmail.Users.Settings.Delegates.Delete
+import           Network.Google.Resource.Gmail.Users.Settings.Delegates.Get
+import           Network.Google.Resource.Gmail.Users.Settings.Delegates.List
 import           Network.Google.Resource.Gmail.Users.Settings.Filters.Create
 import           Network.Google.Resource.Gmail.Users.Settings.Filters.Delete
 import           Network.Google.Resource.Gmail.Users.Settings.Filters.Get
@@ -584,6 +655,11 @@ import           Network.Google.Resource.Gmail.Users.Settings.SendAs.Delete
 import           Network.Google.Resource.Gmail.Users.Settings.SendAs.Get
 import           Network.Google.Resource.Gmail.Users.Settings.SendAs.List
 import           Network.Google.Resource.Gmail.Users.Settings.SendAs.Patch
+import           Network.Google.Resource.Gmail.Users.Settings.SendAs.SmimeInfo.Delete
+import           Network.Google.Resource.Gmail.Users.Settings.SendAs.SmimeInfo.Get
+import           Network.Google.Resource.Gmail.Users.Settings.SendAs.SmimeInfo.Insert
+import           Network.Google.Resource.Gmail.Users.Settings.SendAs.SmimeInfo.List
+import           Network.Google.Resource.Gmail.Users.Settings.SendAs.SmimeInfo.SetDefault
 import           Network.Google.Resource.Gmail.Users.Settings.SendAs.Update
 import           Network.Google.Resource.Gmail.Users.Settings.SendAs.Verify
 import           Network.Google.Resource.Gmail.Users.Settings.UpdateAutoForwarding
@@ -606,7 +682,11 @@ TODO
 -- | Represents the entirety of the methods and resources available for the Gmail API service.
 type GmailAPI =
      UsersHistoryListResource :<|>
-       UsersSettingsForwardingAddressesListResource
+       UsersSettingsDelegatesListResource
+       :<|> UsersSettingsDelegatesGetResource
+       :<|> UsersSettingsDelegatesCreateResource
+       :<|> UsersSettingsDelegatesDeleteResource
+       :<|> UsersSettingsForwardingAddressesListResource
        :<|> UsersSettingsForwardingAddressesGetResource
        :<|> UsersSettingsForwardingAddressesCreateResource
        :<|> UsersSettingsForwardingAddressesDeleteResource
@@ -614,6 +694,11 @@ type GmailAPI =
        :<|> UsersSettingsFiltersGetResource
        :<|> UsersSettingsFiltersCreateResource
        :<|> UsersSettingsFiltersDeleteResource
+       :<|> UsersSettingsSendAsSmimeInfoInsertResource
+       :<|> UsersSettingsSendAsSmimeInfoListResource
+       :<|> UsersSettingsSendAsSmimeInfoGetResource
+       :<|> UsersSettingsSendAsSmimeInfoSetDefaultResource
+       :<|> UsersSettingsSendAsSmimeInfoDeleteResource
        :<|> UsersSettingsSendAsVerifyResource
        :<|> UsersSettingsSendAsListResource
        :<|> UsersSettingsSendAsPatchResource

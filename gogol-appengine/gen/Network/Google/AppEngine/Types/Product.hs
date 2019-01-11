@@ -20,89 +20,8 @@ module Network.Google.AppEngine.Types.Product where
 import           Network.Google.AppEngine.Types.Sum
 import           Network.Google.Prelude
 
--- | Metadata for the given google.longrunning.Operation.
---
--- /See:/ 'operationMetadataExperimental' smart constructor.
-data OperationMetadataExperimental = OperationMetadataExperimental'
-    { _omeInsertTime :: !(Maybe Text)
-    , _omeUser       :: !(Maybe Text)
-    , _omeMethod     :: !(Maybe Text)
-    , _omeEndTime    :: !(Maybe Text)
-    , _omeTarget     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'OperationMetadataExperimental' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'omeInsertTime'
---
--- * 'omeUser'
---
--- * 'omeMethod'
---
--- * 'omeEndTime'
---
--- * 'omeTarget'
-operationMetadataExperimental
-    :: OperationMetadataExperimental
-operationMetadataExperimental =
-    OperationMetadataExperimental'
-    { _omeInsertTime = Nothing
-    , _omeUser = Nothing
-    , _omeMethod = Nothing
-    , _omeEndTime = Nothing
-    , _omeTarget = Nothing
-    }
-
--- | Time that this operation was created.\'OutputOnly
-omeInsertTime :: Lens' OperationMetadataExperimental (Maybe Text)
-omeInsertTime
-  = lens _omeInsertTime
-      (\ s a -> s{_omeInsertTime = a})
-
--- | User who requested this operation.\'OutputOnly
-omeUser :: Lens' OperationMetadataExperimental (Maybe Text)
-omeUser = lens _omeUser (\ s a -> s{_omeUser = a})
-
--- | API method that initiated this operation. Example:
--- google.appengine.experimental.CustomDomains.CreateCustomDomain.\'OutputOnly
-omeMethod :: Lens' OperationMetadataExperimental (Maybe Text)
-omeMethod
-  = lens _omeMethod (\ s a -> s{_omeMethod = a})
-
--- | Time that this operation completed.\'OutputOnly
-omeEndTime :: Lens' OperationMetadataExperimental (Maybe Text)
-omeEndTime
-  = lens _omeEndTime (\ s a -> s{_omeEndTime = a})
-
--- | Name of the resource that this operation is acting on. Example:
--- apps\/myapp\/customDomains\/example.com.\'OutputOnly
-omeTarget :: Lens' OperationMetadataExperimental (Maybe Text)
-omeTarget
-  = lens _omeTarget (\ s a -> s{_omeTarget = a})
-
-instance FromJSON OperationMetadataExperimental where
-        parseJSON
-          = withObject "OperationMetadataExperimental"
-              (\ o ->
-                 OperationMetadataExperimental' <$>
-                   (o .:? "insertTime") <*> (o .:? "user") <*>
-                     (o .:? "method")
-                     <*> (o .:? "endTime")
-                     <*> (o .:? "target"))
-
-instance ToJSON OperationMetadataExperimental where
-        toJSON OperationMetadataExperimental'{..}
-          = object
-              (catMaybes
-                 [("insertTime" .=) <$> _omeInsertTime,
-                  ("user" .=) <$> _omeUser,
-                  ("method" .=) <$> _omeMethod,
-                  ("endTime" .=) <$> _omeEndTime,
-                  ("target" .=) <$> _omeTarget])
-
--- | Target scaling by network usage. Only applicable for VM runtimes.
+-- | Target scaling by network usage. Only applicable in the App Engine
+-- flexible environment.
 --
 -- /See:/ 'networkUtilization' smart constructor.
 data NetworkUtilization = NetworkUtilization'
@@ -197,28 +116,27 @@ instance ToJSON NetworkUtilization where
 -- put the localized message in the error details or localize it in the
 -- client. The optional error details may contain arbitrary information
 -- about the error. There is a predefined set of error detail types in the
--- package google.rpc which can be used for common error
--- conditions.Language mappingThe Status message is the logical
--- representation of the error model, but it is not necessarily the actual
--- wire format. When the Status message is exposed in different client
--- libraries and different wire protocols, it can be mapped differently.
--- For example, it will likely be mapped to some exceptions in Java, but
--- more likely mapped to some error codes in C.Other usesThe error model
--- and the Status message can be used in a variety of environments, either
--- with or without APIs, to provide a consistent developer experience
--- across different environments.Example uses of this error model include:
--- Partial errors. If a service needs to return partial errors to the
--- client, it may embed the Status in the normal response to indicate the
--- partial errors. Workflow errors. A typical workflow has multiple steps.
--- Each step may have a Status message for error reporting purpose. Batch
--- operations. If a client uses batch request and batch response, the
--- Status message should be used directly inside batch response, one for
--- each error sub-response. Asynchronous operations. If an API call embeds
--- asynchronous operation results in its response, the status of those
--- operations should be represented directly using the Status message.
--- Logging. If some API errors are stored in logs, the message Status could
--- be used directly after any stripping needed for security\/privacy
--- reasons.
+-- package google.rpc that can be used for common error conditions.Language
+-- mappingThe Status message is the logical representation of the error
+-- model, but it is not necessarily the actual wire format. When the Status
+-- message is exposed in different client libraries and different wire
+-- protocols, it can be mapped differently. For example, it will likely be
+-- mapped to some exceptions in Java, but more likely mapped to some error
+-- codes in C.Other usesThe error model and the Status message can be used
+-- in a variety of environments, either with or without APIs, to provide a
+-- consistent developer experience across different environments.Example
+-- uses of this error model include: Partial errors. If a service needs to
+-- return partial errors to the client, it may embed the Status in the
+-- normal response to indicate the partial errors. Workflow errors. A
+-- typical workflow has multiple steps. Each step may have a Status message
+-- for error reporting. Batch operations. If a client uses batch request
+-- and batch response, the Status message should be used directly inside
+-- batch response, one for each error sub-response. Asynchronous
+-- operations. If an API call embeds asynchronous operation results in its
+-- response, the status of those operations should be represented directly
+-- using the Status message. Logging. If some API errors are stored in
+-- logs, the message Status could be used directly after any stripping
+-- needed for security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
 data Status = Status'
@@ -245,8 +163,8 @@ status =
     , _sMessage = Nothing
     }
 
--- | A list of messages that carry the error details. There will be a common
--- set of message types for APIs to use.
+-- | A list of messages that carry the error details. There is a common set
+-- of message types for APIs to use.
 sDetails :: Lens' Status [StatusDetailsItem]
 sDetails
   = lens _sDetails (\ s a -> s{_sDetails = a}) .
@@ -353,13 +271,61 @@ instance FromJSON LocationSchema where
 instance ToJSON LocationSchema where
         toJSON = toJSON . _lsAddtional
 
+-- | A domain that a user has been authorized to administer. To authorize use
+-- of a domain, verify ownership via Webmaster Central
+-- (https:\/\/www.google.com\/webmasters\/verification\/home).
+--
+-- /See:/ 'authorizedDomain' smart constructor.
+data AuthorizedDomain = AuthorizedDomain'
+    { _adName :: !(Maybe Text)
+    , _adId   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AuthorizedDomain' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'adName'
+--
+-- * 'adId'
+authorizedDomain
+    :: AuthorizedDomain
+authorizedDomain =
+    AuthorizedDomain'
+    { _adName = Nothing
+    , _adId = Nothing
+    }
+
+-- | Full path to the AuthorizedDomain resource in the API. Example:
+-- apps\/myapp\/authorizedDomains\/example.com.\'OutputOnly
+adName :: Lens' AuthorizedDomain (Maybe Text)
+adName = lens _adName (\ s a -> s{_adName = a})
+
+-- | Fully qualified domain name of the domain authorized for use. Example:
+-- example.com.
+adId :: Lens' AuthorizedDomain (Maybe Text)
+adId = lens _adId (\ s a -> s{_adId = a})
+
+instance FromJSON AuthorizedDomain where
+        parseJSON
+          = withObject "AuthorizedDomain"
+              (\ o ->
+                 AuthorizedDomain' <$>
+                   (o .:? "name") <*> (o .:? "id"))
+
+instance ToJSON AuthorizedDomain where
+        toJSON AuthorizedDomain'{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _adName, ("id" .=) <$> _adId])
+
 -- | Traffic routing configuration for versions within a single service.
 -- Traffic splits define how traffic directed to the service is assigned to
 -- versions.
 --
 -- /See:/ 'trafficSplit' smart constructor.
 data TrafficSplit = TrafficSplit'
-    { _tsShardBy     :: !(Maybe Text)
+    { _tsShardBy     :: !(Maybe TrafficSplitShardBy)
     , _tsAllocations :: !(Maybe TrafficSplitAllocations)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -381,7 +347,7 @@ trafficSplit =
 -- | Mechanism used to determine which version a request is sent to. The
 -- traffic selection algorithm will be stable for either type until
 -- allocations are changed.
-tsShardBy :: Lens' TrafficSplit (Maybe Text)
+tsShardBy :: Lens' TrafficSplit (Maybe TrafficSplitShardBy)
 tsShardBy
   = lens _tsShardBy (\ s a -> s{_tsShardBy = a})
 
@@ -504,13 +470,13 @@ instance ToJSON ListServicesResponse where
 -- /See:/ 'urlMap' smart constructor.
 data URLMap = URLMap'
     { _umScript                   :: !(Maybe ScriptHandler)
-    , _umSecurityLevel            :: !(Maybe Text)
+    , _umSecurityLevel            :: !(Maybe URLMapSecurityLevel)
     , _umAPIEndpoint              :: !(Maybe APIEndpointHandler)
     , _umURLRegex                 :: !(Maybe Text)
-    , _umRedirectHTTPResponseCode :: !(Maybe Text)
-    , _umAuthFailAction           :: !(Maybe Text)
+    , _umRedirectHTTPResponseCode :: !(Maybe URLMapRedirectHTTPResponseCode)
+    , _umAuthFailAction           :: !(Maybe URLMapAuthFailAction)
     , _umStaticFiles              :: !(Maybe StaticFilesHandler)
-    , _umLogin                    :: !(Maybe Text)
+    , _umLogin                    :: !(Maybe URLMapLogin)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLMap' with the minimum fields required to make a request.
@@ -546,12 +512,14 @@ urlMap =
     , _umLogin = Nothing
     }
 
--- | Executes a script to handle the request that matches this URL pattern.
+-- | Executes a script to handle the requests that match this URL pattern.
+-- Only the auto value is supported for Node.js in the App Engine standard
+-- environment, for example \"script\": \"auto\".
 umScript :: Lens' URLMap (Maybe ScriptHandler)
 umScript = lens _umScript (\ s a -> s{_umScript = a})
 
 -- | Security (HTTPS) enforcement for this URL.
-umSecurityLevel :: Lens' URLMap (Maybe Text)
+umSecurityLevel :: Lens' URLMap (Maybe URLMapSecurityLevel)
 umSecurityLevel
   = lens _umSecurityLevel
       (\ s a -> s{_umSecurityLevel = a})
@@ -572,14 +540,14 @@ umURLRegex
 
 -- | 30x code to use when performing redirects for the secure field. Defaults
 -- to 302.
-umRedirectHTTPResponseCode :: Lens' URLMap (Maybe Text)
+umRedirectHTTPResponseCode :: Lens' URLMap (Maybe URLMapRedirectHTTPResponseCode)
 umRedirectHTTPResponseCode
   = lens _umRedirectHTTPResponseCode
       (\ s a -> s{_umRedirectHTTPResponseCode = a})
 
 -- | Action to take when users access resources that require authentication.
 -- Defaults to redirect.
-umAuthFailAction :: Lens' URLMap (Maybe Text)
+umAuthFailAction :: Lens' URLMap (Maybe URLMapAuthFailAction)
 umAuthFailAction
   = lens _umAuthFailAction
       (\ s a -> s{_umAuthFailAction = a})
@@ -590,8 +558,9 @@ umStaticFiles
   = lens _umStaticFiles
       (\ s a -> s{_umStaticFiles = a})
 
--- | Level of login required to access this resource.
-umLogin :: Lens' URLMap (Maybe Text)
+-- | Level of login required to access this resource. Not supported for
+-- Node.js in the App Engine standard environment.
+umLogin :: Lens' URLMap (Maybe URLMapLogin)
 umLogin = lens _umLogin (\ s a -> s{_umLogin = a})
 
 instance FromJSON URLMap where
@@ -665,7 +634,63 @@ instance ToJSON Library where
                  [("name" .=) <$> _lName,
                   ("version" .=) <$> _lVersion])
 
--- | The response message for LocationService.ListLocations.
+-- | A DNS resource record.
+--
+-- /See:/ 'resourceRecord' smart constructor.
+data ResourceRecord = ResourceRecord'
+    { _rrRrData :: !(Maybe Text)
+    , _rrName   :: !(Maybe Text)
+    , _rrType   :: !(Maybe ResourceRecordType)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ResourceRecord' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rrRrData'
+--
+-- * 'rrName'
+--
+-- * 'rrType'
+resourceRecord
+    :: ResourceRecord
+resourceRecord =
+    ResourceRecord'
+    { _rrRrData = Nothing
+    , _rrName = Nothing
+    , _rrType = Nothing
+    }
+
+-- | Data for this record. Values vary by record type, as defined in RFC 1035
+-- (section 5) and RFC 1034 (section 3.6.1).
+rrRrData :: Lens' ResourceRecord (Maybe Text)
+rrRrData = lens _rrRrData (\ s a -> s{_rrRrData = a})
+
+-- | Relative name of the object affected by this record. Only applicable for
+-- CNAME records. Example: \'www\'.
+rrName :: Lens' ResourceRecord (Maybe Text)
+rrName = lens _rrName (\ s a -> s{_rrName = a})
+
+-- | Resource record type. Example: AAAA.
+rrType :: Lens' ResourceRecord (Maybe ResourceRecordType)
+rrType = lens _rrType (\ s a -> s{_rrType = a})
+
+instance FromJSON ResourceRecord where
+        parseJSON
+          = withObject "ResourceRecord"
+              (\ o ->
+                 ResourceRecord' <$>
+                   (o .:? "rrdata") <*> (o .:? "name") <*>
+                     (o .:? "type"))
+
+instance ToJSON ResourceRecord where
+        toJSON ResourceRecord'{..}
+          = object
+              (catMaybes
+                 [("rrdata" .=) <$> _rrRrData,
+                  ("name" .=) <$> _rrName, ("type" .=) <$> _rrType])
+
+-- | The response message for Locations.ListLocations.
 --
 -- /See:/ 'listLocationsResponse' smart constructor.
 data ListLocationsResponse = ListLocationsResponse'
@@ -716,7 +741,8 @@ instance ToJSON ListLocationsResponse where
                  [("nextPageToken" .=) <$> _llrNextPageToken,
                   ("locations" .=) <$> _llrLocations])
 
--- | Target scaling by disk usage. Only applicable for VM runtimes.
+-- | Target scaling by disk usage. Only applicable in the App Engine flexible
+-- environment.
 --
 -- /See:/ 'diskUtilization' smart constructor.
 data DiskUtilization = DiskUtilization'
@@ -858,10 +884,10 @@ instance ToJSON ListOperationsResponse where
 data HealthCheck = HealthCheck'
     { _hcHealthyThreshold   :: !(Maybe (Textual Word32))
     , _hcDisableHealthCheck :: !(Maybe Bool)
-    , _hcCheckInterval      :: !(Maybe Text)
+    , _hcCheckInterval      :: !(Maybe GDuration)
     , _hcRestartThreshold   :: !(Maybe (Textual Word32))
     , _hcHost               :: !(Maybe Text)
-    , _hcTimeout            :: !(Maybe Text)
+    , _hcTimeout            :: !(Maybe GDuration)
     , _hcUnhealthyThreshold :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -910,10 +936,11 @@ hcDisableHealthCheck
       (\ s a -> s{_hcDisableHealthCheck = a})
 
 -- | Interval between health checks.
-hcCheckInterval :: Lens' HealthCheck (Maybe Text)
+hcCheckInterval :: Lens' HealthCheck (Maybe Scientific)
 hcCheckInterval
   = lens _hcCheckInterval
       (\ s a -> s{_hcCheckInterval = a})
+      . mapping _GDuration
 
 -- | Number of consecutive failed health checks required before an instance
 -- is restarted.
@@ -929,9 +956,10 @@ hcHost :: Lens' HealthCheck (Maybe Text)
 hcHost = lens _hcHost (\ s a -> s{_hcHost = a})
 
 -- | Time before the health check is considered failed.
-hcTimeout :: Lens' HealthCheck (Maybe Text)
+hcTimeout :: Lens' HealthCheck (Maybe Scientific)
 hcTimeout
-  = lens _hcTimeout (\ s a -> s{_hcTimeout = a})
+  = lens _hcTimeout (\ s a -> s{_hcTimeout = a}) .
+      mapping _GDuration
 
 -- | Number of consecutive failed health checks required before removing
 -- traffic.
@@ -966,6 +994,168 @@ instance ToJSON HealthCheck where
                   ("timeout" .=) <$> _hcTimeout,
                   ("unhealthyThreshold" .=) <$> _hcUnhealthyThreshold])
 
+-- | An SSL certificate that a user has been authorized to administer. A user
+-- is authorized to administer any certificate that applies to one of their
+-- authorized domains.
+--
+-- /See:/ 'authorizedCertificate' smart constructor.
+data AuthorizedCertificate = AuthorizedCertificate'
+    { _acManagedCertificate    :: !(Maybe ManagedCertificate)
+    , _acCertificateRawData    :: !(Maybe CertificateRawData)
+    , _acDomainNames           :: !(Maybe [Text])
+    , _acDomainMAppingsCount   :: !(Maybe (Textual Int32))
+    , _acName                  :: !(Maybe Text)
+    , _acDisplayName           :: !(Maybe Text)
+    , _acId                    :: !(Maybe Text)
+    , _acExpireTime            :: !(Maybe DateTime')
+    , _acVisibleDomainMAppings :: !(Maybe [Text])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AuthorizedCertificate' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'acManagedCertificate'
+--
+-- * 'acCertificateRawData'
+--
+-- * 'acDomainNames'
+--
+-- * 'acDomainMAppingsCount'
+--
+-- * 'acName'
+--
+-- * 'acDisplayName'
+--
+-- * 'acId'
+--
+-- * 'acExpireTime'
+--
+-- * 'acVisibleDomainMAppings'
+authorizedCertificate
+    :: AuthorizedCertificate
+authorizedCertificate =
+    AuthorizedCertificate'
+    { _acManagedCertificate = Nothing
+    , _acCertificateRawData = Nothing
+    , _acDomainNames = Nothing
+    , _acDomainMAppingsCount = Nothing
+    , _acName = Nothing
+    , _acDisplayName = Nothing
+    , _acId = Nothing
+    , _acExpireTime = Nothing
+    , _acVisibleDomainMAppings = Nothing
+    }
+
+-- | Only applicable if this certificate is managed by App Engine. Managed
+-- certificates are tied to the lifecycle of a DomainMapping and cannot be
+-- updated or deleted via the AuthorizedCertificates API. If this
+-- certificate is manually administered by the user, this field will be
+-- empty.\'OutputOnly
+acManagedCertificate :: Lens' AuthorizedCertificate (Maybe ManagedCertificate)
+acManagedCertificate
+  = lens _acManagedCertificate
+      (\ s a -> s{_acManagedCertificate = a})
+
+-- | The SSL certificate serving the AuthorizedCertificate resource. This
+-- must be obtained independently from a certificate authority.
+acCertificateRawData :: Lens' AuthorizedCertificate (Maybe CertificateRawData)
+acCertificateRawData
+  = lens _acCertificateRawData
+      (\ s a -> s{_acCertificateRawData = a})
+
+-- | Topmost applicable domains of this certificate. This certificate applies
+-- to these domains and their subdomains. Example: example.com.\'OutputOnly
+acDomainNames :: Lens' AuthorizedCertificate [Text]
+acDomainNames
+  = lens _acDomainNames
+      (\ s a -> s{_acDomainNames = a})
+      . _Default
+      . _Coerce
+
+-- | Aggregate count of the domain mappings with this certificate mapped.
+-- This count includes domain mappings on applications for which the user
+-- does not have VIEWER permissions.Only returned by GET or LIST requests
+-- when specifically requested by the view=FULL_CERTIFICATE
+-- option.\'OutputOnly
+acDomainMAppingsCount :: Lens' AuthorizedCertificate (Maybe Int32)
+acDomainMAppingsCount
+  = lens _acDomainMAppingsCount
+      (\ s a -> s{_acDomainMAppingsCount = a})
+      . mapping _Coerce
+
+-- | Full path to the AuthorizedCertificate resource in the API. Example:
+-- apps\/myapp\/authorizedCertificates\/12345.\'OutputOnly
+acName :: Lens' AuthorizedCertificate (Maybe Text)
+acName = lens _acName (\ s a -> s{_acName = a})
+
+-- | The user-specified display name of the certificate. This is not
+-- guaranteed to be unique. Example: My Certificate.
+acDisplayName :: Lens' AuthorizedCertificate (Maybe Text)
+acDisplayName
+  = lens _acDisplayName
+      (\ s a -> s{_acDisplayName = a})
+
+-- | Relative name of the certificate. This is a unique value autogenerated
+-- on AuthorizedCertificate resource creation. Example: 12345.\'OutputOnly
+acId :: Lens' AuthorizedCertificate (Maybe Text)
+acId = lens _acId (\ s a -> s{_acId = a})
+
+-- | The time when this certificate expires. To update the renewal time on
+-- this certificate, upload an SSL certificate with a different expiration
+-- time using
+-- AuthorizedCertificates.UpdateAuthorizedCertificate.\'OutputOnly
+acExpireTime :: Lens' AuthorizedCertificate (Maybe UTCTime)
+acExpireTime
+  = lens _acExpireTime (\ s a -> s{_acExpireTime = a})
+      . mapping _DateTime
+
+-- | The full paths to user visible Domain Mapping resources that have this
+-- certificate mapped. Example:
+-- apps\/myapp\/domainMappings\/example.com.This may not represent the full
+-- list of mapped domain mappings if the user does not have VIEWER
+-- permissions on all of the applications that have this certificate
+-- mapped. See domain_mappings_count for a complete count.Only returned by
+-- GET or LIST requests when specifically requested by the
+-- view=FULL_CERTIFICATE option.\'OutputOnly
+acVisibleDomainMAppings :: Lens' AuthorizedCertificate [Text]
+acVisibleDomainMAppings
+  = lens _acVisibleDomainMAppings
+      (\ s a -> s{_acVisibleDomainMAppings = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON AuthorizedCertificate where
+        parseJSON
+          = withObject "AuthorizedCertificate"
+              (\ o ->
+                 AuthorizedCertificate' <$>
+                   (o .:? "managedCertificate") <*>
+                     (o .:? "certificateRawData")
+                     <*> (o .:? "domainNames" .!= mempty)
+                     <*> (o .:? "domainMappingsCount")
+                     <*> (o .:? "name")
+                     <*> (o .:? "displayName")
+                     <*> (o .:? "id")
+                     <*> (o .:? "expireTime")
+                     <*> (o .:? "visibleDomainMappings" .!= mempty))
+
+instance ToJSON AuthorizedCertificate where
+        toJSON AuthorizedCertificate'{..}
+          = object
+              (catMaybes
+                 [("managedCertificate" .=) <$> _acManagedCertificate,
+                  ("certificateRawData" .=) <$> _acCertificateRawData,
+                  ("domainNames" .=) <$> _acDomainNames,
+                  ("domainMappingsCount" .=) <$>
+                    _acDomainMAppingsCount,
+                  ("name" .=) <$> _acName,
+                  ("displayName" .=) <$> _acDisplayName,
+                  ("id" .=) <$> _acId,
+                  ("expireTime" .=) <$> _acExpireTime,
+                  ("visibleDomainMappings" .=) <$>
+                    _acVisibleDomainMAppings])
+
 -- | Google Cloud Endpoints
 -- (https:\/\/cloud.google.com\/appengine\/docs\/python\/endpoints\/)
 -- configuration for API handlers.
@@ -973,10 +1163,10 @@ instance ToJSON HealthCheck where
 -- /See:/ 'apiConfigHandler' smart constructor.
 data APIConfigHandler = APIConfigHandler'
     { _achScript         :: !(Maybe Text)
-    , _achSecurityLevel  :: !(Maybe Text)
+    , _achSecurityLevel  :: !(Maybe APIConfigHandlerSecurityLevel)
     , _achURL            :: !(Maybe Text)
-    , _achAuthFailAction :: !(Maybe Text)
-    , _achLogin          :: !(Maybe Text)
+    , _achAuthFailAction :: !(Maybe APIConfigHandlerAuthFailAction)
+    , _achLogin          :: !(Maybe APIConfigHandlerLogin)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'APIConfigHandler' with the minimum fields required to make a request.
@@ -1009,7 +1199,7 @@ achScript
   = lens _achScript (\ s a -> s{_achScript = a})
 
 -- | Security (HTTPS) enforcement for this URL.
-achSecurityLevel :: Lens' APIConfigHandler (Maybe Text)
+achSecurityLevel :: Lens' APIConfigHandler (Maybe APIConfigHandlerSecurityLevel)
 achSecurityLevel
   = lens _achSecurityLevel
       (\ s a -> s{_achSecurityLevel = a})
@@ -1020,13 +1210,13 @@ achURL = lens _achURL (\ s a -> s{_achURL = a})
 
 -- | Action to take when users access resources that require authentication.
 -- Defaults to redirect.
-achAuthFailAction :: Lens' APIConfigHandler (Maybe Text)
+achAuthFailAction :: Lens' APIConfigHandler (Maybe APIConfigHandlerAuthFailAction)
 achAuthFailAction
   = lens _achAuthFailAction
       (\ s a -> s{_achAuthFailAction = a})
 
 -- | Level of login required to access this resource. Defaults to optional.
-achLogin :: Lens' APIConfigHandler (Maybe Text)
+achLogin :: Lens' APIConfigHandler (Maybe APIConfigHandlerLogin)
 achLogin = lens _achLogin (\ s a -> s{_achLogin = a})
 
 instance FromJSON APIConfigHandler where
@@ -1089,14 +1279,18 @@ instance ToJSON VersionEnvVariables where
 -- /See:/ 'application' smart constructor.
 data Application = Application'
     { _aDefaultHostname         :: !(Maybe Text)
-    , _aDefaultCookieExpiration :: !(Maybe Text)
+    , _aDefaultCookieExpiration :: !(Maybe GDuration)
+    , _aIap                     :: !(Maybe IdentityAwareProxy)
     , _aAuthDomain              :: !(Maybe Text)
     , _aCodeBucket              :: !(Maybe Text)
+    , _aGcrDomain               :: !(Maybe Text)
+    , _aFeatureSettings         :: !(Maybe FeatureSettings)
     , _aName                    :: !(Maybe Text)
     , _aDispatchRules           :: !(Maybe [URLDispatchRule])
     , _aDefaultBucket           :: !(Maybe Text)
     , _aId                      :: !(Maybe Text)
     , _aLocationId              :: !(Maybe Text)
+    , _aServingStatus           :: !(Maybe ApplicationServingStatus)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Application' with the minimum fields required to make a request.
@@ -1107,9 +1301,15 @@ data Application = Application'
 --
 -- * 'aDefaultCookieExpiration'
 --
+-- * 'aIap'
+--
 -- * 'aAuthDomain'
 --
 -- * 'aCodeBucket'
+--
+-- * 'aGcrDomain'
+--
+-- * 'aFeatureSettings'
 --
 -- * 'aName'
 --
@@ -1120,19 +1320,25 @@ data Application = Application'
 -- * 'aId'
 --
 -- * 'aLocationId'
+--
+-- * 'aServingStatus'
 application
     :: Application
 application =
     Application'
     { _aDefaultHostname = Nothing
     , _aDefaultCookieExpiration = Nothing
+    , _aIap = Nothing
     , _aAuthDomain = Nothing
     , _aCodeBucket = Nothing
+    , _aGcrDomain = Nothing
+    , _aFeatureSettings = Nothing
     , _aName = Nothing
     , _aDispatchRules = Nothing
     , _aDefaultBucket = Nothing
     , _aId = Nothing
     , _aLocationId = Nothing
+    , _aServingStatus = Nothing
     }
 
 -- | Hostname used to reach this application, as resolved by App
@@ -1143,10 +1349,14 @@ aDefaultHostname
       (\ s a -> s{_aDefaultHostname = a})
 
 -- | Cookie expiration policy for this application.
-aDefaultCookieExpiration :: Lens' Application (Maybe Text)
+aDefaultCookieExpiration :: Lens' Application (Maybe Scientific)
 aDefaultCookieExpiration
   = lens _aDefaultCookieExpiration
       (\ s a -> s{_aDefaultCookieExpiration = a})
+      . mapping _GDuration
+
+aIap :: Lens' Application (Maybe IdentityAwareProxy)
+aIap = lens _aIap (\ s a -> s{_aIap = a})
 
 -- | Google Apps authentication domain that controls which users can access
 -- this application.Defaults to open access for any Google Account.
@@ -1162,14 +1372,26 @@ aCodeBucket :: Lens' Application (Maybe Text)
 aCodeBucket
   = lens _aCodeBucket (\ s a -> s{_aCodeBucket = a})
 
+-- | The Google Container Registry domain used for storing managed build
+-- docker images for this application.
+aGcrDomain :: Lens' Application (Maybe Text)
+aGcrDomain
+  = lens _aGcrDomain (\ s a -> s{_aGcrDomain = a})
+
+-- | The feature specific settings to be used in the application.
+aFeatureSettings :: Lens' Application (Maybe FeatureSettings)
+aFeatureSettings
+  = lens _aFeatureSettings
+      (\ s a -> s{_aFeatureSettings = a})
+
 -- | Full path to the Application resource in the API. Example:
 -- apps\/myapp.\'OutputOnly
 aName :: Lens' Application (Maybe Text)
 aName = lens _aName (\ s a -> s{_aName = a})
 
 -- | HTTP path dispatch rules for requests to the application that do not
--- explicitly target a service or version. Rules are
--- order-dependent.\'OutputOnly
+-- explicitly target a service or version. Rules are order-dependent. Up to
+-- 20 dispatch rules can be supported.
 aDispatchRules :: Lens' Application [URLDispatchRule]
 aDispatchRules
   = lens _aDispatchRules
@@ -1190,14 +1412,20 @@ aDefaultBucket
 aId :: Lens' Application (Maybe Text)
 aId = lens _aId (\ s a -> s{_aId = a})
 
--- | Location from which this application will be run. Application instances
--- will run out of data centers in the chosen location, which is also where
--- all of the application\'s end user content is stored.Defaults to
--- us-central.Options are:us-central - Central USeurope-west - Western
--- Europeus-east1 - Eastern US
+-- | Location from which this application runs. Application instances run out
+-- of the data centers in the specified location, which is also where all
+-- of the application\'s end user content is stored.Defaults to
+-- us-central.View the list of supported locations
+-- (https:\/\/cloud.google.com\/appengine\/docs\/locations).
 aLocationId :: Lens' Application (Maybe Text)
 aLocationId
   = lens _aLocationId (\ s a -> s{_aLocationId = a})
+
+-- | Serving status of this application.
+aServingStatus :: Lens' Application (Maybe ApplicationServingStatus)
+aServingStatus
+  = lens _aServingStatus
+      (\ s a -> s{_aServingStatus = a})
 
 instance FromJSON Application where
         parseJSON
@@ -1206,13 +1434,17 @@ instance FromJSON Application where
                  Application' <$>
                    (o .:? "defaultHostname") <*>
                      (o .:? "defaultCookieExpiration")
+                     <*> (o .:? "iap")
                      <*> (o .:? "authDomain")
                      <*> (o .:? "codeBucket")
+                     <*> (o .:? "gcrDomain")
+                     <*> (o .:? "featureSettings")
                      <*> (o .:? "name")
                      <*> (o .:? "dispatchRules" .!= mempty)
                      <*> (o .:? "defaultBucket")
                      <*> (o .:? "id")
-                     <*> (o .:? "locationId"))
+                     <*> (o .:? "locationId")
+                     <*> (o .:? "servingStatus"))
 
 instance ToJSON Application where
         toJSON Application'{..}
@@ -1221,13 +1453,17 @@ instance ToJSON Application where
                  [("defaultHostname" .=) <$> _aDefaultHostname,
                   ("defaultCookieExpiration" .=) <$>
                     _aDefaultCookieExpiration,
+                  ("iap" .=) <$> _aIap,
                   ("authDomain" .=) <$> _aAuthDomain,
                   ("codeBucket" .=) <$> _aCodeBucket,
+                  ("gcrDomain" .=) <$> _aGcrDomain,
+                  ("featureSettings" .=) <$> _aFeatureSettings,
                   ("name" .=) <$> _aName,
                   ("dispatchRules" .=) <$> _aDispatchRules,
                   ("defaultBucket" .=) <$> _aDefaultBucket,
                   ("id" .=) <$> _aId,
-                  ("locationId" .=) <$> _aLocationId])
+                  ("locationId" .=) <$> _aLocationId,
+                  ("servingStatus" .=) <$> _aServingStatus])
 
 -- | Metadata settings that are supplied to this version to enable beta
 -- runtime features.
@@ -1327,30 +1563,46 @@ instance ToJSON Service where
 
 -- | Cloud Endpoints (https:\/\/cloud.google.com\/endpoints) configuration.
 -- The Endpoints API Service provides tooling for serving Open API and gRPC
--- endpoints via an NGINX proxy.The fields here refer to the name and
--- configuration id of a \"service\" resource in the Service Management API
+-- endpoints via an NGINX proxy. Only valid for App Engine Flexible
+-- environment deployments.The fields here refer to the name and
+-- configuration ID of a \"service\" resource in the Service Management API
 -- (https:\/\/cloud.google.com\/service-management\/overview).
 --
 -- /See:/ 'endpointsAPIService' smart constructor.
 data EndpointsAPIService = EndpointsAPIService'
-    { _easName     :: !(Maybe Text)
-    , _easConfigId :: !(Maybe Text)
+    { _easDisableTraceSampling :: !(Maybe Bool)
+    , _easName                 :: !(Maybe Text)
+    , _easConfigId             :: !(Maybe Text)
+    , _easRolloutStrategy      :: !(Maybe EndpointsAPIServiceRolloutStrategy)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EndpointsAPIService' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'easDisableTraceSampling'
+--
 -- * 'easName'
 --
 -- * 'easConfigId'
+--
+-- * 'easRolloutStrategy'
 endpointsAPIService
     :: EndpointsAPIService
 endpointsAPIService =
     EndpointsAPIService'
-    { _easName = Nothing
+    { _easDisableTraceSampling = Nothing
+    , _easName = Nothing
     , _easConfigId = Nothing
+    , _easRolloutStrategy = Nothing
     }
+
+-- | Enable or disable trace sampling. By default, this is set to false for
+-- enabled.
+easDisableTraceSampling :: Lens' EndpointsAPIService (Maybe Bool)
+easDisableTraceSampling
+  = lens _easDisableTraceSampling
+      (\ s a -> s{_easDisableTraceSampling = a})
 
 -- | Endpoints service name which is the name of the \"service\" resource in
 -- the Service Management API. For example
@@ -1358,34 +1610,55 @@ endpointsAPIService =
 easName :: Lens' EndpointsAPIService (Maybe Text)
 easName = lens _easName (\ s a -> s{_easName = a})
 
--- | Endpoints service configuration id as specified by the Service
--- Management API. For example \"2016-09-19r1\"
+-- | Endpoints service configuration ID as specified by the Service
+-- Management API. For example \"2016-09-19r1\".By default, the rollout
+-- strategy for Endpoints is RolloutStrategy.FIXED. This means that
+-- Endpoints starts up with a particular configuration ID. When a new
+-- configuration is rolled out, Endpoints must be given the new
+-- configuration ID. The config_id field is used to give the configuration
+-- ID and is required in this case.Endpoints also has a rollout strategy
+-- called RolloutStrategy.MANAGED. When using this, Endpoints fetches the
+-- latest configuration and does not need the configuration ID. In this
+-- case, config_id must be omitted.
 easConfigId :: Lens' EndpointsAPIService (Maybe Text)
 easConfigId
   = lens _easConfigId (\ s a -> s{_easConfigId = a})
+
+-- | Endpoints rollout strategy. If FIXED, config_id must be specified. If
+-- MANAGED, config_id must be omitted.
+easRolloutStrategy :: Lens' EndpointsAPIService (Maybe EndpointsAPIServiceRolloutStrategy)
+easRolloutStrategy
+  = lens _easRolloutStrategy
+      (\ s a -> s{_easRolloutStrategy = a})
 
 instance FromJSON EndpointsAPIService where
         parseJSON
           = withObject "EndpointsAPIService"
               (\ o ->
                  EndpointsAPIService' <$>
-                   (o .:? "name") <*> (o .:? "configId"))
+                   (o .:? "disableTraceSampling") <*> (o .:? "name") <*>
+                     (o .:? "configId")
+                     <*> (o .:? "rolloutStrategy"))
 
 instance ToJSON EndpointsAPIService where
         toJSON EndpointsAPIService'{..}
           = object
               (catMaybes
-                 [("name" .=) <$> _easName,
-                  ("configId" .=) <$> _easConfigId])
+                 [("disableTraceSampling" .=) <$>
+                    _easDisableTraceSampling,
+                  ("name" .=) <$> _easName,
+                  ("configId" .=) <$> _easConfigId,
+                  ("rolloutStrategy" .=) <$> _easRolloutStrategy])
 
 -- | A resource that represents Google Cloud Platform location.
 --
 -- /See:/ 'location' smart constructor.
 data Location = Location'
-    { _locName       :: !(Maybe Text)
-    , _locMetadata   :: !(Maybe LocationSchema)
-    , _locLabels     :: !(Maybe LocationLabels)
-    , _locLocationId :: !(Maybe Text)
+    { _locName        :: !(Maybe Text)
+    , _locMetadata    :: !(Maybe LocationSchema)
+    , _locDisplayName :: !(Maybe Text)
+    , _locLabels      :: !(Maybe LocationLabels)
+    , _locLocationId  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Location' with the minimum fields required to make a request.
@@ -1396,6 +1669,8 @@ data Location = Location'
 --
 -- * 'locMetadata'
 --
+-- * 'locDisplayName'
+--
 -- * 'locLabels'
 --
 -- * 'locLocationId'
@@ -1405,6 +1680,7 @@ location =
     Location'
     { _locName = Nothing
     , _locMetadata = Nothing
+    , _locDisplayName = Nothing
     , _locLabels = Nothing
     , _locLocationId = Nothing
     }
@@ -1419,6 +1695,13 @@ locName = lens _locName (\ s a -> s{_locName = a})
 locMetadata :: Lens' Location (Maybe LocationSchema)
 locMetadata
   = lens _locMetadata (\ s a -> s{_locMetadata = a})
+
+-- | The friendly name for this location, typically a nearby city name. For
+-- example, \"Tokyo\".
+locDisplayName :: Lens' Location (Maybe Text)
+locDisplayName
+  = lens _locDisplayName
+      (\ s a -> s{_locDisplayName = a})
 
 -- | Cross-service attributes for the location. For example
 -- {\"cloud.googleapis.com\/region\": \"us-east1\"}
@@ -1438,7 +1721,8 @@ instance FromJSON Location where
               (\ o ->
                  Location' <$>
                    (o .:? "name") <*> (o .:? "metadata") <*>
-                     (o .:? "labels")
+                     (o .:? "displayName")
+                     <*> (o .:? "labels")
                      <*> (o .:? "locationId"))
 
 instance ToJSON Location where
@@ -1447,6 +1731,7 @@ instance ToJSON Location where
               (catMaybes
                  [("name" .=) <$> _locName,
                   ("metadata" .=) <$> _locMetadata,
+                  ("displayName" .=) <$> _locDisplayName,
                   ("labels" .=) <$> _locLabels,
                   ("locationId" .=) <$> _locLocationId])
 
@@ -1573,7 +1858,8 @@ ziFilesCount
 
 -- | URL of the zip file to deploy from. Must be a URL to a resource in
 -- Google Cloud Storage in the form
--- \'http(s):\/\/storage.googleapis.com\/\/\'.
+-- \'http(s):\/\/storage.googleapis.com\/\/
+-- \'.
 ziSourceURL :: Lens' ZipInfo (Maybe Text)
 ziSourceURL
   = lens _ziSourceURL (\ s a -> s{_ziSourceURL = a})
@@ -1591,6 +1877,29 @@ instance ToJSON ZipInfo where
               (catMaybes
                  [("filesCount" .=) <$> _ziFilesCount,
                   ("sourceUrl" .=) <$> _ziSourceURL])
+
+-- | A generic empty message that you can re-use to avoid defining duplicated
+-- empty messages in your APIs. A typical example is to use it as the
+-- request or the response type of an API method. For instance: service Foo
+-- { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The
+-- JSON representation for Empty is empty JSON object {}.
+--
+-- /See:/ 'empty' smart constructor.
+data Empty =
+    Empty'
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Empty' with the minimum fields required to make a request.
+--
+empty
+    :: Empty
+empty = Empty'
+
+instance FromJSON Empty where
+        parseJSON = withObject "Empty" (\ o -> pure Empty')
+
+instance ToJSON Empty where
+        toJSON = const emptyObject
 
 -- | Rules to match an HTTP request and dispatch that request to a service.
 --
@@ -1620,7 +1929,7 @@ urlDispatchRule =
     }
 
 -- | Pathname within the host. Must start with a \"\/\". A single \"*\" can
--- be included at the end of the path. The sum of the lengths of the domain
+-- be included at the end of the path.The sum of the lengths of the domain
 -- and path may not exceed 100 characters.
 udrPath :: Lens' URLDispatchRule (Maybe Text)
 udrPath = lens _udrPath (\ s a -> s{_udrPath = a})
@@ -1653,6 +1962,211 @@ instance ToJSON URLDispatchRule where
                  [("path" .=) <$> _udrPath,
                   ("service" .=) <$> _udrService,
                   ("domain" .=) <$> _udrDomain])
+
+-- | Metadata for the given google.longrunning.Operation.
+--
+-- /See:/ 'operationMetadataV1Beta' smart constructor.
+data OperationMetadataV1Beta = OperationMetadataV1Beta'
+    { _omvbEphemeralMessage      :: !(Maybe Text)
+    , _omvbInsertTime            :: !(Maybe DateTime')
+    , _omvbUser                  :: !(Maybe Text)
+    , _omvbMethod                :: !(Maybe Text)
+    , _omvbEndTime               :: !(Maybe DateTime')
+    , _omvbWarning               :: !(Maybe [Text])
+    , _omvbCreateVersionMetadata :: !(Maybe CreateVersionMetadataV1Beta)
+    , _omvbTarget                :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationMetadataV1Beta' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'omvbEphemeralMessage'
+--
+-- * 'omvbInsertTime'
+--
+-- * 'omvbUser'
+--
+-- * 'omvbMethod'
+--
+-- * 'omvbEndTime'
+--
+-- * 'omvbWarning'
+--
+-- * 'omvbCreateVersionMetadata'
+--
+-- * 'omvbTarget'
+operationMetadataV1Beta
+    :: OperationMetadataV1Beta
+operationMetadataV1Beta =
+    OperationMetadataV1Beta'
+    { _omvbEphemeralMessage = Nothing
+    , _omvbInsertTime = Nothing
+    , _omvbUser = Nothing
+    , _omvbMethod = Nothing
+    , _omvbEndTime = Nothing
+    , _omvbWarning = Nothing
+    , _omvbCreateVersionMetadata = Nothing
+    , _omvbTarget = Nothing
+    }
+
+-- | Ephemeral message that may change every time the operation is polled.
+-- \'OutputOnly
+omvbEphemeralMessage :: Lens' OperationMetadataV1Beta (Maybe Text)
+omvbEphemeralMessage
+  = lens _omvbEphemeralMessage
+      (\ s a -> s{_omvbEphemeralMessage = a})
+
+-- | Time that this operation was created.\'OutputOnly
+omvbInsertTime :: Lens' OperationMetadataV1Beta (Maybe UTCTime)
+omvbInsertTime
+  = lens _omvbInsertTime
+      (\ s a -> s{_omvbInsertTime = a})
+      . mapping _DateTime
+
+-- | User who requested this operation.\'OutputOnly
+omvbUser :: Lens' OperationMetadataV1Beta (Maybe Text)
+omvbUser = lens _omvbUser (\ s a -> s{_omvbUser = a})
+
+-- | API method that initiated this operation. Example:
+-- google.appengine.v1beta.Versions.CreateVersion.\'OutputOnly
+omvbMethod :: Lens' OperationMetadataV1Beta (Maybe Text)
+omvbMethod
+  = lens _omvbMethod (\ s a -> s{_omvbMethod = a})
+
+-- | Time that this operation completed.\'OutputOnly
+omvbEndTime :: Lens' OperationMetadataV1Beta (Maybe UTCTime)
+omvbEndTime
+  = lens _omvbEndTime (\ s a -> s{_omvbEndTime = a}) .
+      mapping _DateTime
+
+-- | Durable messages that persist on every operation poll. \'OutputOnly
+omvbWarning :: Lens' OperationMetadataV1Beta [Text]
+omvbWarning
+  = lens _omvbWarning (\ s a -> s{_omvbWarning = a}) .
+      _Default
+      . _Coerce
+
+omvbCreateVersionMetadata :: Lens' OperationMetadataV1Beta (Maybe CreateVersionMetadataV1Beta)
+omvbCreateVersionMetadata
+  = lens _omvbCreateVersionMetadata
+      (\ s a -> s{_omvbCreateVersionMetadata = a})
+
+-- | Name of the resource that this operation is acting on. Example:
+-- apps\/myapp\/services\/default.\'OutputOnly
+omvbTarget :: Lens' OperationMetadataV1Beta (Maybe Text)
+omvbTarget
+  = lens _omvbTarget (\ s a -> s{_omvbTarget = a})
+
+instance FromJSON OperationMetadataV1Beta where
+        parseJSON
+          = withObject "OperationMetadataV1Beta"
+              (\ o ->
+                 OperationMetadataV1Beta' <$>
+                   (o .:? "ephemeralMessage") <*> (o .:? "insertTime")
+                     <*> (o .:? "user")
+                     <*> (o .:? "method")
+                     <*> (o .:? "endTime")
+                     <*> (o .:? "warning" .!= mempty)
+                     <*> (o .:? "createVersionMetadata")
+                     <*> (o .:? "target"))
+
+instance ToJSON OperationMetadataV1Beta where
+        toJSON OperationMetadataV1Beta'{..}
+          = object
+              (catMaybes
+                 [("ephemeralMessage" .=) <$> _omvbEphemeralMessage,
+                  ("insertTime" .=) <$> _omvbInsertTime,
+                  ("user" .=) <$> _omvbUser,
+                  ("method" .=) <$> _omvbMethod,
+                  ("endTime" .=) <$> _omvbEndTime,
+                  ("warning" .=) <$> _omvbWarning,
+                  ("createVersionMetadata" .=) <$>
+                    _omvbCreateVersionMetadata,
+                  ("target" .=) <$> _omvbTarget])
+
+-- | Response message for AuthorizedDomains.ListAuthorizedDomains.
+--
+-- /See:/ 'listAuthorizedDomainsResponse' smart constructor.
+data ListAuthorizedDomainsResponse = ListAuthorizedDomainsResponse'
+    { _ladrNextPageToken :: !(Maybe Text)
+    , _ladrDomains       :: !(Maybe [AuthorizedDomain])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListAuthorizedDomainsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ladrNextPageToken'
+--
+-- * 'ladrDomains'
+listAuthorizedDomainsResponse
+    :: ListAuthorizedDomainsResponse
+listAuthorizedDomainsResponse =
+    ListAuthorizedDomainsResponse'
+    { _ladrNextPageToken = Nothing
+    , _ladrDomains = Nothing
+    }
+
+-- | Continuation token for fetching the next page of results.
+ladrNextPageToken :: Lens' ListAuthorizedDomainsResponse (Maybe Text)
+ladrNextPageToken
+  = lens _ladrNextPageToken
+      (\ s a -> s{_ladrNextPageToken = a})
+
+-- | The authorized domains belonging to the user.
+ladrDomains :: Lens' ListAuthorizedDomainsResponse [AuthorizedDomain]
+ladrDomains
+  = lens _ladrDomains (\ s a -> s{_ladrDomains = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ListAuthorizedDomainsResponse where
+        parseJSON
+          = withObject "ListAuthorizedDomainsResponse"
+              (\ o ->
+                 ListAuthorizedDomainsResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "domains" .!= mempty))
+
+instance ToJSON ListAuthorizedDomainsResponse where
+        toJSON ListAuthorizedDomainsResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _ladrNextPageToken,
+                  ("domains" .=) <$> _ladrDomains])
+
+-- | The entrypoint for the application.
+--
+-- /See:/ 'entrypoint' smart constructor.
+newtype Entrypoint = Entrypoint'
+    { _eShell :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Entrypoint' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eShell'
+entrypoint
+    :: Entrypoint
+entrypoint =
+    Entrypoint'
+    { _eShell = Nothing
+    }
+
+-- | The format should be a shell command that can be fed to bash -c.
+eShell :: Lens' Entrypoint (Maybe Text)
+eShell = lens _eShell (\ s a -> s{_eShell = a})
+
+instance FromJSON Entrypoint where
+        parseJSON
+          = withObject "Entrypoint"
+              (\ o -> Entrypoint' <$> (o .:? "shell"))
+
+instance ToJSON Entrypoint where
+        toJSON Entrypoint'{..}
+          = object (catMaybes [("shell" .=) <$> _eShell])
 
 -- | Response message for Versions.ListVersions.
 --
@@ -1705,6 +2219,98 @@ instance ToJSON ListVersionsResponse where
                  [("nextPageToken" .=) <$> _lvrNextPageToken,
                   ("versions" .=) <$> _lvrVersions])
 
+-- | A certificate managed by App Engine.
+--
+-- /See:/ 'managedCertificate' smart constructor.
+data ManagedCertificate = ManagedCertificate'
+    { _mcStatus          :: !(Maybe ManagedCertificateStatus)
+    , _mcLastRenewalTime :: !(Maybe DateTime')
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ManagedCertificate' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mcStatus'
+--
+-- * 'mcLastRenewalTime'
+managedCertificate
+    :: ManagedCertificate
+managedCertificate =
+    ManagedCertificate'
+    { _mcStatus = Nothing
+    , _mcLastRenewalTime = Nothing
+    }
+
+-- | Status of certificate management. Refers to the most recent certificate
+-- acquisition or renewal attempt.\'OutputOnly
+mcStatus :: Lens' ManagedCertificate (Maybe ManagedCertificateStatus)
+mcStatus = lens _mcStatus (\ s a -> s{_mcStatus = a})
+
+-- | Time at which the certificate was last renewed. The renewal process is
+-- fully managed. Certificate renewal will automatically occur before the
+-- certificate expires. Renewal errors can be tracked via
+-- ManagementStatus.\'OutputOnly
+mcLastRenewalTime :: Lens' ManagedCertificate (Maybe UTCTime)
+mcLastRenewalTime
+  = lens _mcLastRenewalTime
+      (\ s a -> s{_mcLastRenewalTime = a})
+      . mapping _DateTime
+
+instance FromJSON ManagedCertificate where
+        parseJSON
+          = withObject "ManagedCertificate"
+              (\ o ->
+                 ManagedCertificate' <$>
+                   (o .:? "status") <*> (o .:? "lastRenewalTime"))
+
+instance ToJSON ManagedCertificate where
+        toJSON ManagedCertificate'{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _mcStatus,
+                  ("lastRenewalTime" .=) <$> _mcLastRenewalTime])
+
+-- | Metadata for the given google.longrunning.Operation during a
+-- google.appengine.v1alpha.CreateVersionRequest.
+--
+-- /See:/ 'createVersionMetadataV1Alpha' smart constructor.
+newtype CreateVersionMetadataV1Alpha = CreateVersionMetadataV1Alpha'
+    { _cvmvaCloudBuildId :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CreateVersionMetadataV1Alpha' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cvmvaCloudBuildId'
+createVersionMetadataV1Alpha
+    :: CreateVersionMetadataV1Alpha
+createVersionMetadataV1Alpha =
+    CreateVersionMetadataV1Alpha'
+    { _cvmvaCloudBuildId = Nothing
+    }
+
+-- | The Cloud Build ID if one was created as part of the version create.
+-- \'OutputOnly
+cvmvaCloudBuildId :: Lens' CreateVersionMetadataV1Alpha (Maybe Text)
+cvmvaCloudBuildId
+  = lens _cvmvaCloudBuildId
+      (\ s a -> s{_cvmvaCloudBuildId = a})
+
+instance FromJSON CreateVersionMetadataV1Alpha where
+        parseJSON
+          = withObject "CreateVersionMetadataV1Alpha"
+              (\ o ->
+                 CreateVersionMetadataV1Alpha' <$>
+                   (o .:? "cloudBuildId"))
+
+instance ToJSON CreateVersionMetadataV1Alpha where
+        toJSON CreateVersionMetadataV1Alpha'{..}
+          = object
+              (catMaybes
+                 [("cloudBuildId" .=) <$> _cvmvaCloudBuildId])
+
 -- | Single source file that is part of the version to be deployed. Each
 -- source file that is deployed must be specified separately.
 --
@@ -1746,7 +2352,8 @@ fiMimeType
 
 -- | URL source to use to fetch this file. Must be a URL to a resource in
 -- Google Cloud Storage in the form
--- \'http(s):\/\/storage.googleapis.com\/\/\'.
+-- \'http(s):\/\/storage.googleapis.com\/\/
+-- \'.
 fiSourceURL :: Lens' FileInfo (Maybe Text)
 fiSourceURL
   = lens _fiSourceURL (\ s a -> s{_fiSourceURL = a})
@@ -1772,18 +2379,19 @@ instance ToJSON FileInfo where
 --
 -- /See:/ 'automaticScaling' smart constructor.
 data AutomaticScaling = AutomaticScaling'
-    { _asNetworkUtilization    :: !(Maybe NetworkUtilization)
-    , _asMaxTotalInstances     :: !(Maybe (Textual Int32))
-    , _asMinIdleInstances      :: !(Maybe (Textual Int32))
-    , _asDiskUtilization       :: !(Maybe DiskUtilization)
-    , _asMinPendingLatency     :: !(Maybe Text)
-    , _asCPUUtilization        :: !(Maybe CPUUtilization)
-    , _asMaxIdleInstances      :: !(Maybe (Textual Int32))
-    , _asMinTotalInstances     :: !(Maybe (Textual Int32))
-    , _asMaxConcurrentRequests :: !(Maybe (Textual Int32))
-    , _asCoolDownPeriod        :: !(Maybe Text)
-    , _asRequestUtilization    :: !(Maybe RequestUtilization)
-    , _asMaxPendingLatency     :: !(Maybe Text)
+    { _asNetworkUtilization        :: !(Maybe NetworkUtilization)
+    , _asMaxTotalInstances         :: !(Maybe (Textual Int32))
+    , _asMinIdleInstances          :: !(Maybe (Textual Int32))
+    , _asDiskUtilization           :: !(Maybe DiskUtilization)
+    , _asMinPendingLatency         :: !(Maybe GDuration)
+    , _asCPUUtilization            :: !(Maybe CPUUtilization)
+    , _asMaxIdleInstances          :: !(Maybe (Textual Int32))
+    , _asMinTotalInstances         :: !(Maybe (Textual Int32))
+    , _asMaxConcurrentRequests     :: !(Maybe (Textual Int32))
+    , _asCoolDownPeriod            :: !(Maybe GDuration)
+    , _asRequestUtilization        :: !(Maybe RequestUtilization)
+    , _asMaxPendingLatency         :: !(Maybe GDuration)
+    , _asStandardSchedulerSettings :: !(Maybe StandardSchedulerSettings)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AutomaticScaling' with the minimum fields required to make a request.
@@ -1813,6 +2421,8 @@ data AutomaticScaling = AutomaticScaling'
 -- * 'asRequestUtilization'
 --
 -- * 'asMaxPendingLatency'
+--
+-- * 'asStandardSchedulerSettings'
 automaticScaling
     :: AutomaticScaling
 automaticScaling =
@@ -1829,6 +2439,7 @@ automaticScaling =
     , _asCoolDownPeriod = Nothing
     , _asRequestUtilization = Nothing
     , _asMaxPendingLatency = Nothing
+    , _asStandardSchedulerSettings = Nothing
     }
 
 -- | Target scaling by network usage.
@@ -1837,7 +2448,8 @@ asNetworkUtilization
   = lens _asNetworkUtilization
       (\ s a -> s{_asNetworkUtilization = a})
 
--- | Maximum number of instances that should be started to handle requests.
+-- | Maximum number of instances that should be started to handle requests
+-- for this version.
 asMaxTotalInstances :: Lens' AutomaticScaling (Maybe Int32)
 asMaxTotalInstances
   = lens _asMaxTotalInstances
@@ -1860,10 +2472,11 @@ asDiskUtilization
 
 -- | Minimum amount of time a request should wait in the pending queue before
 -- starting a new instance to handle it.
-asMinPendingLatency :: Lens' AutomaticScaling (Maybe Text)
+asMinPendingLatency :: Lens' AutomaticScaling (Maybe Scientific)
 asMinPendingLatency
   = lens _asMinPendingLatency
       (\ s a -> s{_asMinPendingLatency = a})
+      . mapping _GDuration
 
 -- | Target scaling by CPU usage.
 asCPUUtilization :: Lens' AutomaticScaling (Maybe CPUUtilization)
@@ -1879,7 +2492,8 @@ asMaxIdleInstances
       (\ s a -> s{_asMaxIdleInstances = a})
       . mapping _Coerce
 
--- | Minimum number of instances that should be maintained for this version.
+-- | Minimum number of running instances that should be maintained for this
+-- version.
 asMinTotalInstances :: Lens' AutomaticScaling (Maybe Int32)
 asMinTotalInstances
   = lens _asMinTotalInstances
@@ -1895,14 +2509,17 @@ asMaxConcurrentRequests
       (\ s a -> s{_asMaxConcurrentRequests = a})
       . mapping _Coerce
 
--- | Amount of time that the Autoscaler
+-- | The time period that the Autoscaler
 -- (https:\/\/cloud.google.com\/compute\/docs\/autoscaler\/) should wait
--- between changes to the number of virtual machines. Only applicable for
--- VM runtimes.
-asCoolDownPeriod :: Lens' AutomaticScaling (Maybe Text)
+-- before it starts collecting information from a new instance. This
+-- prevents the autoscaler from collecting information when the instance is
+-- initializing, during which the collected usage would not be reliable.
+-- Only applicable in the App Engine flexible environment.
+asCoolDownPeriod :: Lens' AutomaticScaling (Maybe Scientific)
 asCoolDownPeriod
   = lens _asCoolDownPeriod
       (\ s a -> s{_asCoolDownPeriod = a})
+      . mapping _GDuration
 
 -- | Target scaling by request utilization.
 asRequestUtilization :: Lens' AutomaticScaling (Maybe RequestUtilization)
@@ -1912,10 +2529,17 @@ asRequestUtilization
 
 -- | Maximum amount of time that a request should wait in the pending queue
 -- before starting a new instance to handle it.
-asMaxPendingLatency :: Lens' AutomaticScaling (Maybe Text)
+asMaxPendingLatency :: Lens' AutomaticScaling (Maybe Scientific)
 asMaxPendingLatency
   = lens _asMaxPendingLatency
       (\ s a -> s{_asMaxPendingLatency = a})
+      . mapping _GDuration
+
+-- | Scheduler settings for standard environment.
+asStandardSchedulerSettings :: Lens' AutomaticScaling (Maybe StandardSchedulerSettings)
+asStandardSchedulerSettings
+  = lens _asStandardSchedulerSettings
+      (\ s a -> s{_asStandardSchedulerSettings = a})
 
 instance FromJSON AutomaticScaling where
         parseJSON
@@ -1933,7 +2557,8 @@ instance FromJSON AutomaticScaling where
                      <*> (o .:? "maxConcurrentRequests")
                      <*> (o .:? "coolDownPeriod")
                      <*> (o .:? "requestUtilization")
-                     <*> (o .:? "maxPendingLatency"))
+                     <*> (o .:? "maxPendingLatency")
+                     <*> (o .:? "standardSchedulerSettings"))
 
 instance ToJSON AutomaticScaling where
         toJSON AutomaticScaling'{..}
@@ -1951,69 +2576,70 @@ instance ToJSON AutomaticScaling where
                     _asMaxConcurrentRequests,
                   ("coolDownPeriod" .=) <$> _asCoolDownPeriod,
                   ("requestUtilization" .=) <$> _asRequestUtilization,
-                  ("maxPendingLatency" .=) <$> _asMaxPendingLatency])
+                  ("maxPendingLatency" .=) <$> _asMaxPendingLatency,
+                  ("standardSchedulerSettings" .=) <$>
+                    _asStandardSchedulerSettings])
 
 -- | Metadata for the given google.longrunning.Operation.
 --
 -- /See:/ 'operationMetadataV1Beta5' smart constructor.
 data OperationMetadataV1Beta5 = OperationMetadataV1Beta5'
-    { _omvbInsertTime :: !(Maybe Text)
-    , _omvbUser       :: !(Maybe Text)
-    , _omvbMethod     :: !(Maybe Text)
-    , _omvbEndTime    :: !(Maybe Text)
-    , _omvbTarget     :: !(Maybe Text)
+    { _oInsertTime :: !(Maybe DateTime')
+    , _oUser       :: !(Maybe Text)
+    , _oMethod     :: !(Maybe Text)
+    , _oEndTime    :: !(Maybe DateTime')
+    , _oTarget     :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperationMetadataV1Beta5' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'omvbInsertTime'
+-- * 'oInsertTime'
 --
--- * 'omvbUser'
+-- * 'oUser'
 --
--- * 'omvbMethod'
+-- * 'oMethod'
 --
--- * 'omvbEndTime'
+-- * 'oEndTime'
 --
--- * 'omvbTarget'
+-- * 'oTarget'
 operationMetadataV1Beta5
     :: OperationMetadataV1Beta5
 operationMetadataV1Beta5 =
     OperationMetadataV1Beta5'
-    { _omvbInsertTime = Nothing
-    , _omvbUser = Nothing
-    , _omvbMethod = Nothing
-    , _omvbEndTime = Nothing
-    , _omvbTarget = Nothing
+    { _oInsertTime = Nothing
+    , _oUser = Nothing
+    , _oMethod = Nothing
+    , _oEndTime = Nothing
+    , _oTarget = Nothing
     }
 
 -- | Timestamp that this operation was created.\'OutputOnly
-omvbInsertTime :: Lens' OperationMetadataV1Beta5 (Maybe Text)
-omvbInsertTime
-  = lens _omvbInsertTime
-      (\ s a -> s{_omvbInsertTime = a})
+oInsertTime :: Lens' OperationMetadataV1Beta5 (Maybe UTCTime)
+oInsertTime
+  = lens _oInsertTime (\ s a -> s{_oInsertTime = a}) .
+      mapping _DateTime
 
 -- | User who requested this operation.\'OutputOnly
-omvbUser :: Lens' OperationMetadataV1Beta5 (Maybe Text)
-omvbUser = lens _omvbUser (\ s a -> s{_omvbUser = a})
+oUser :: Lens' OperationMetadataV1Beta5 (Maybe Text)
+oUser = lens _oUser (\ s a -> s{_oUser = a})
 
 -- | API method name that initiated this operation. Example:
 -- google.appengine.v1beta5.Version.CreateVersion.\'OutputOnly
-omvbMethod :: Lens' OperationMetadataV1Beta5 (Maybe Text)
-omvbMethod
-  = lens _omvbMethod (\ s a -> s{_omvbMethod = a})
+oMethod :: Lens' OperationMetadataV1Beta5 (Maybe Text)
+oMethod = lens _oMethod (\ s a -> s{_oMethod = a})
 
 -- | Timestamp that this operation completed.\'OutputOnly
-omvbEndTime :: Lens' OperationMetadataV1Beta5 (Maybe Text)
-omvbEndTime
-  = lens _omvbEndTime (\ s a -> s{_omvbEndTime = a})
+oEndTime :: Lens' OperationMetadataV1Beta5 (Maybe UTCTime)
+oEndTime
+  = lens _oEndTime (\ s a -> s{_oEndTime = a}) .
+      mapping _DateTime
 
 -- | Name of the resource that this operation is acting on. Example:
 -- apps\/myapp\/services\/default.\'OutputOnly
-omvbTarget :: Lens' OperationMetadataV1Beta5 (Maybe Text)
-omvbTarget
-  = lens _omvbTarget (\ s a -> s{_omvbTarget = a})
+oTarget :: Lens' OperationMetadataV1Beta5 (Maybe Text)
+oTarget = lens _oTarget (\ s a -> s{_oTarget = a})
 
 instance FromJSON OperationMetadataV1Beta5 where
         parseJSON
@@ -2029,14 +2655,13 @@ instance ToJSON OperationMetadataV1Beta5 where
         toJSON OperationMetadataV1Beta5'{..}
           = object
               (catMaybes
-                 [("insertTime" .=) <$> _omvbInsertTime,
-                  ("user" .=) <$> _omvbUser,
-                  ("method" .=) <$> _omvbMethod,
-                  ("endTime" .=) <$> _omvbEndTime,
-                  ("target" .=) <$> _omvbTarget])
+                 [("insertTime" .=) <$> _oInsertTime,
+                  ("user" .=) <$> _oUser, ("method" .=) <$> _oMethod,
+                  ("endTime" .=) <$> _oEndTime,
+                  ("target" .=) <$> _oTarget])
 
--- | Volumes mounted within the app container. Only applicable for VM
--- runtimes.
+-- | Volumes mounted within the app container. Only applicable in the App
+-- Engine flexible environment.
 --
 -- /See:/ 'volume' smart constructor.
 data Volume = Volume'
@@ -2161,7 +2786,60 @@ instance FromJSON StatusDetailsItem where
 instance ToJSON StatusDetailsItem where
         toJSON = toJSON . _sdiAddtional
 
--- | Extra network settings. Only applicable for VM runtimes.
+-- | Response message for Firewall.ListIngressRules.
+--
+-- /See:/ 'listIngressRulesResponse' smart constructor.
+data ListIngressRulesResponse = ListIngressRulesResponse'
+    { _lirrNextPageToken :: !(Maybe Text)
+    , _lirrIngressRules  :: !(Maybe [FirewallRule])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListIngressRulesResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lirrNextPageToken'
+--
+-- * 'lirrIngressRules'
+listIngressRulesResponse
+    :: ListIngressRulesResponse
+listIngressRulesResponse =
+    ListIngressRulesResponse'
+    { _lirrNextPageToken = Nothing
+    , _lirrIngressRules = Nothing
+    }
+
+-- | Continuation token for fetching the next page of results.
+lirrNextPageToken :: Lens' ListIngressRulesResponse (Maybe Text)
+lirrNextPageToken
+  = lens _lirrNextPageToken
+      (\ s a -> s{_lirrNextPageToken = a})
+
+-- | The ingress FirewallRules for this application.
+lirrIngressRules :: Lens' ListIngressRulesResponse [FirewallRule]
+lirrIngressRules
+  = lens _lirrIngressRules
+      (\ s a -> s{_lirrIngressRules = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListIngressRulesResponse where
+        parseJSON
+          = withObject "ListIngressRulesResponse"
+              (\ o ->
+                 ListIngressRulesResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "ingressRules" .!= mempty))
+
+instance ToJSON ListIngressRulesResponse where
+        toJSON ListIngressRulesResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lirrNextPageToken,
+                  ("ingressRules" .=) <$> _lirrIngressRules])
+
+-- | Extra network settings. Only applicable in the App Engine flexible
+-- environment.
 --
 -- /See:/ 'network' smart constructor.
 data Network = Network'
@@ -2195,23 +2873,25 @@ network =
 -- | Google Cloud Platform sub-network where the virtual machines are
 -- created. Specify the short name, not the resource path.If a subnetwork
 -- name is specified, a network name will also be required unless it is for
--- the default network. If the network the VM instance is being created in
--- is a Legacy network, then the IP address is allocated from the
--- IPv4Range. If the network the VM instance is being created in is an auto
--- Subnet Mode Network, then only network name should be specified (not the
--- subnetwork_name) and the IP address is created from the IPCidrRange of
--- the subnetwork that exists in that zone for that network. If the network
--- the VM instance is being created in is a custom Subnet Mode Network,
--- then the subnetwork_name must be specified and the IP address is created
--- from the IPCidrRange of the subnetwork.If specified, the subnetwork must
--- exist in the same region as the Flex app.
+-- the default network. If the network that the instance is being created
+-- in is a Legacy network, then the IP address is allocated from the
+-- IPv4Range. If the network that the instance is being created in is an
+-- auto Subnet Mode Network, then only network name should be specified
+-- (not the subnetwork_name) and the IP address is created from the
+-- IPCidrRange of the subnetwork that exists in that zone for that network.
+-- If the network that the instance is being created in is a custom Subnet
+-- Mode Network, then the subnetwork_name must be specified and the IP
+-- address is created from the IPCidrRange of the subnetwork.If specified,
+-- the subnetwork must exist in the same region as the App Engine flexible
+-- environment application.
 nSubnetworkName :: Lens' Network (Maybe Text)
 nSubnetworkName
   = lens _nSubnetworkName
       (\ s a -> s{_nSubnetworkName = a})
 
 -- | List of ports, or port pairs, to forward from the virtual machine to the
--- application container.
+-- application container. Only applicable in the App Engine flexible
+-- environment.
 nForwardedPorts :: Lens' Network [Text]
 nForwardedPorts
   = lens _nForwardedPorts
@@ -2219,12 +2899,13 @@ nForwardedPorts
       . _Default
       . _Coerce
 
--- | Tag to apply to the VM instance during creation.
+-- | Tag to apply to the instance during creation. Only applicable in the App
+-- Engine flexible environment.
 nInstanceTag :: Lens' Network (Maybe Text)
 nInstanceTag
   = lens _nInstanceTag (\ s a -> s{_nInstanceTag = a})
 
--- | Google Cloud Platform network where the virtual machines are created.
+-- | Google Compute Engine network where the virtual machines are created.
 -- Specify the short name, not the resource path.Defaults to default.
 nName :: Lens' Network (Maybe Text)
 nName = lens _nName (\ s a -> s{_nName = a})
@@ -2247,6 +2928,162 @@ instance ToJSON Network where
                   ("forwardedPorts" .=) <$> _nForwardedPorts,
                   ("instanceTag" .=) <$> _nInstanceTag,
                   ("name" .=) <$> _nName])
+
+-- | Readiness checking configuration for VM instances. Unhealthy instances
+-- are removed from traffic rotation.
+--
+-- /See:/ 'readinessCheck' smart constructor.
+data ReadinessCheck = ReadinessCheck'
+    { _rcSuccessThreshold :: !(Maybe (Textual Word32))
+    , _rcFailureThreshold :: !(Maybe (Textual Word32))
+    , _rcPath             :: !(Maybe Text)
+    , _rcCheckInterval    :: !(Maybe GDuration)
+    , _rcAppStartTimeout  :: !(Maybe GDuration)
+    , _rcHost             :: !(Maybe Text)
+    , _rcTimeout          :: !(Maybe GDuration)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ReadinessCheck' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rcSuccessThreshold'
+--
+-- * 'rcFailureThreshold'
+--
+-- * 'rcPath'
+--
+-- * 'rcCheckInterval'
+--
+-- * 'rcAppStartTimeout'
+--
+-- * 'rcHost'
+--
+-- * 'rcTimeout'
+readinessCheck
+    :: ReadinessCheck
+readinessCheck =
+    ReadinessCheck'
+    { _rcSuccessThreshold = Nothing
+    , _rcFailureThreshold = Nothing
+    , _rcPath = Nothing
+    , _rcCheckInterval = Nothing
+    , _rcAppStartTimeout = Nothing
+    , _rcHost = Nothing
+    , _rcTimeout = Nothing
+    }
+
+-- | Number of consecutive successful checks required before receiving
+-- traffic.
+rcSuccessThreshold :: Lens' ReadinessCheck (Maybe Word32)
+rcSuccessThreshold
+  = lens _rcSuccessThreshold
+      (\ s a -> s{_rcSuccessThreshold = a})
+      . mapping _Coerce
+
+-- | Number of consecutive failed checks required before removing traffic.
+rcFailureThreshold :: Lens' ReadinessCheck (Maybe Word32)
+rcFailureThreshold
+  = lens _rcFailureThreshold
+      (\ s a -> s{_rcFailureThreshold = a})
+      . mapping _Coerce
+
+-- | The request path.
+rcPath :: Lens' ReadinessCheck (Maybe Text)
+rcPath = lens _rcPath (\ s a -> s{_rcPath = a})
+
+-- | Interval between health checks.
+rcCheckInterval :: Lens' ReadinessCheck (Maybe Scientific)
+rcCheckInterval
+  = lens _rcCheckInterval
+      (\ s a -> s{_rcCheckInterval = a})
+      . mapping _GDuration
+
+-- | A maximum time limit on application initialization, measured from moment
+-- the application successfully replies to a healthcheck until it is ready
+-- to serve traffic.
+rcAppStartTimeout :: Lens' ReadinessCheck (Maybe Scientific)
+rcAppStartTimeout
+  = lens _rcAppStartTimeout
+      (\ s a -> s{_rcAppStartTimeout = a})
+      . mapping _GDuration
+
+-- | Host header to send when performing a HTTP Readiness check. Example:
+-- \"myapp.appspot.com\"
+rcHost :: Lens' ReadinessCheck (Maybe Text)
+rcHost = lens _rcHost (\ s a -> s{_rcHost = a})
+
+-- | Time before the check is considered failed.
+rcTimeout :: Lens' ReadinessCheck (Maybe Scientific)
+rcTimeout
+  = lens _rcTimeout (\ s a -> s{_rcTimeout = a}) .
+      mapping _GDuration
+
+instance FromJSON ReadinessCheck where
+        parseJSON
+          = withObject "ReadinessCheck"
+              (\ o ->
+                 ReadinessCheck' <$>
+                   (o .:? "successThreshold") <*>
+                     (o .:? "failureThreshold")
+                     <*> (o .:? "path")
+                     <*> (o .:? "checkInterval")
+                     <*> (o .:? "appStartTimeout")
+                     <*> (o .:? "host")
+                     <*> (o .:? "timeout"))
+
+instance ToJSON ReadinessCheck where
+        toJSON ReadinessCheck'{..}
+          = object
+              (catMaybes
+                 [("successThreshold" .=) <$> _rcSuccessThreshold,
+                  ("failureThreshold" .=) <$> _rcFailureThreshold,
+                  ("path" .=) <$> _rcPath,
+                  ("checkInterval" .=) <$> _rcCheckInterval,
+                  ("appStartTimeout" .=) <$> _rcAppStartTimeout,
+                  ("host" .=) <$> _rcHost,
+                  ("timeout" .=) <$> _rcTimeout])
+
+-- | Request message for Firewall.BatchUpdateIngressRules.
+--
+-- /See:/ 'batchUpdateIngressRulesRequest' smart constructor.
+newtype BatchUpdateIngressRulesRequest = BatchUpdateIngressRulesRequest'
+    { _buirrIngressRules :: Maybe [FirewallRule]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BatchUpdateIngressRulesRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'buirrIngressRules'
+batchUpdateIngressRulesRequest
+    :: BatchUpdateIngressRulesRequest
+batchUpdateIngressRulesRequest =
+    BatchUpdateIngressRulesRequest'
+    { _buirrIngressRules = Nothing
+    }
+
+-- | A list of FirewallRules to replace the existing set.
+buirrIngressRules :: Lens' BatchUpdateIngressRulesRequest [FirewallRule]
+buirrIngressRules
+  = lens _buirrIngressRules
+      (\ s a -> s{_buirrIngressRules = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON BatchUpdateIngressRulesRequest
+         where
+        parseJSON
+          = withObject "BatchUpdateIngressRulesRequest"
+              (\ o ->
+                 BatchUpdateIngressRulesRequest' <$>
+                   (o .:? "ingressRules" .!= mempty))
+
+instance ToJSON BatchUpdateIngressRulesRequest where
+        toJSON BatchUpdateIngressRulesRequest'{..}
+          = object
+              (catMaybes
+                 [("ingressRules" .=) <$> _buirrIngressRules])
 
 -- | Request message for Instances.DebugInstance.
 --
@@ -2394,6 +3231,182 @@ instance ToJSON Resources where
                   ("diskGb" .=) <$> _rDiskGb,
                   ("volumes" .=) <$> _rVolumes, ("cpu" .=) <$> _rCPU])
 
+-- | The feature specific settings to be used in the application. These
+-- define behaviors that are user configurable.
+--
+-- /See:/ 'featureSettings' smart constructor.
+newtype FeatureSettings = FeatureSettings'
+    { _fsSplitHealthChecks :: Maybe Bool
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'FeatureSettings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'fsSplitHealthChecks'
+featureSettings
+    :: FeatureSettings
+featureSettings =
+    FeatureSettings'
+    { _fsSplitHealthChecks = Nothing
+    }
+
+-- | Boolean value indicating if split health checks should be used instead
+-- of the legacy health checks. At an app.yaml level, this means defaulting
+-- to \'readiness_check\' and \'liveness_check\' values instead of
+-- \'health_check\' ones. Once the legacy \'health_check\' behavior is
+-- deprecated, and this value is always true, this setting can be removed.
+fsSplitHealthChecks :: Lens' FeatureSettings (Maybe Bool)
+fsSplitHealthChecks
+  = lens _fsSplitHealthChecks
+      (\ s a -> s{_fsSplitHealthChecks = a})
+
+instance FromJSON FeatureSettings where
+        parseJSON
+          = withObject "FeatureSettings"
+              (\ o ->
+                 FeatureSettings' <$> (o .:? "splitHealthChecks"))
+
+instance ToJSON FeatureSettings where
+        toJSON FeatureSettings'{..}
+          = object
+              (catMaybes
+                 [("splitHealthChecks" .=) <$> _fsSplitHealthChecks])
+
+-- | An SSL certificate obtained from a certificate authority.
+--
+-- /See:/ 'certificateRawData' smart constructor.
+data CertificateRawData = CertificateRawData'
+    { _crdPrivateKey        :: !(Maybe Text)
+    , _crdPublicCertificate :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CertificateRawData' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'crdPrivateKey'
+--
+-- * 'crdPublicCertificate'
+certificateRawData
+    :: CertificateRawData
+certificateRawData =
+    CertificateRawData'
+    { _crdPrivateKey = Nothing
+    , _crdPublicCertificate = Nothing
+    }
+
+-- | Unencrypted PEM encoded RSA private key. This field is set once on
+-- certificate creation and then encrypted. The key size must be 2048 bits
+-- or fewer. Must include the header and footer. Example:
+--
+-- >  -----BEGIN RSA PRIVATE KEY-----  -----END RSA PRIVATE KEY-----
+--
+-- \'InputOnly
+crdPrivateKey :: Lens' CertificateRawData (Maybe Text)
+crdPrivateKey
+  = lens _crdPrivateKey
+      (\ s a -> s{_crdPrivateKey = a})
+
+-- | PEM encoded x.509 public key certificate. This field is set once on
+-- certificate creation. Must include the header and footer. Example:
+--
+-- >  -----BEGIN CERTIFICATE-----  -----END CERTIFICATE-----
+crdPublicCertificate :: Lens' CertificateRawData (Maybe Text)
+crdPublicCertificate
+  = lens _crdPublicCertificate
+      (\ s a -> s{_crdPublicCertificate = a})
+
+instance FromJSON CertificateRawData where
+        parseJSON
+          = withObject "CertificateRawData"
+              (\ o ->
+                 CertificateRawData' <$>
+                   (o .:? "privateKey") <*> (o .:? "publicCertificate"))
+
+instance ToJSON CertificateRawData where
+        toJSON CertificateRawData'{..}
+          = object
+              (catMaybes
+                 [("privateKey" .=) <$> _crdPrivateKey,
+                  ("publicCertificate" .=) <$> _crdPublicCertificate])
+
+-- | A domain serving an App Engine application.
+--
+-- /See:/ 'domainMApping' smart constructor.
+data DomainMApping = DomainMApping'
+    { _dmaResourceRecords :: !(Maybe [ResourceRecord])
+    , _dmaName            :: !(Maybe Text)
+    , _dmaId              :: !(Maybe Text)
+    , _dmaSSLSettings     :: !(Maybe SSLSettings)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DomainMApping' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dmaResourceRecords'
+--
+-- * 'dmaName'
+--
+-- * 'dmaId'
+--
+-- * 'dmaSSLSettings'
+domainMApping
+    :: DomainMApping
+domainMApping =
+    DomainMApping'
+    { _dmaResourceRecords = Nothing
+    , _dmaName = Nothing
+    , _dmaId = Nothing
+    , _dmaSSLSettings = Nothing
+    }
+
+-- | The resource records required to configure this domain mapping. These
+-- records must be added to the domain\'s DNS configuration in order to
+-- serve the application via this domain mapping.\'OutputOnly
+dmaResourceRecords :: Lens' DomainMApping [ResourceRecord]
+dmaResourceRecords
+  = lens _dmaResourceRecords
+      (\ s a -> s{_dmaResourceRecords = a})
+      . _Default
+      . _Coerce
+
+-- | Full path to the DomainMapping resource in the API. Example:
+-- apps\/myapp\/domainMapping\/example.com.\'OutputOnly
+dmaName :: Lens' DomainMApping (Maybe Text)
+dmaName = lens _dmaName (\ s a -> s{_dmaName = a})
+
+-- | Relative name of the domain serving the application. Example:
+-- example.com.
+dmaId :: Lens' DomainMApping (Maybe Text)
+dmaId = lens _dmaId (\ s a -> s{_dmaId = a})
+
+-- | SSL configuration for this domain. If unconfigured, this domain will not
+-- serve with SSL.
+dmaSSLSettings :: Lens' DomainMApping (Maybe SSLSettings)
+dmaSSLSettings
+  = lens _dmaSSLSettings
+      (\ s a -> s{_dmaSSLSettings = a})
+
+instance FromJSON DomainMApping where
+        parseJSON
+          = withObject "DomainMApping"
+              (\ o ->
+                 DomainMApping' <$>
+                   (o .:? "resourceRecords" .!= mempty) <*>
+                     (o .:? "name")
+                     <*> (o .:? "id")
+                     <*> (o .:? "sslSettings"))
+
+instance ToJSON DomainMApping where
+        toJSON DomainMApping'{..}
+          = object
+              (catMaybes
+                 [("resourceRecords" .=) <$> _dmaResourceRecords,
+                  ("name" .=) <$> _dmaName, ("id" .=) <$> _dmaId,
+                  ("sslSettings" .=) <$> _dmaSSLSettings])
+
 -- | Manifest of the files stored in Google Cloud Storage that are included
 -- as part of this version. All files must be readable using the
 -- credentials supplied with this call.
@@ -2429,11 +3442,51 @@ instance FromJSON DeploymentFiles where
 instance ToJSON DeploymentFiles where
         toJSON = toJSON . _dfAddtional
 
+-- | Response message for Firewall.UpdateAllIngressRules.
+--
+-- /See:/ 'batchUpdateIngressRulesResponse' smart constructor.
+newtype BatchUpdateIngressRulesResponse = BatchUpdateIngressRulesResponse'
+    { _bIngressRules :: Maybe [FirewallRule]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BatchUpdateIngressRulesResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bIngressRules'
+batchUpdateIngressRulesResponse
+    :: BatchUpdateIngressRulesResponse
+batchUpdateIngressRulesResponse =
+    BatchUpdateIngressRulesResponse'
+    { _bIngressRules = Nothing
+    }
+
+-- | The full list of ingress FirewallRules for this application.
+bIngressRules :: Lens' BatchUpdateIngressRulesResponse [FirewallRule]
+bIngressRules
+  = lens _bIngressRules
+      (\ s a -> s{_bIngressRules = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON BatchUpdateIngressRulesResponse
+         where
+        parseJSON
+          = withObject "BatchUpdateIngressRulesResponse"
+              (\ o ->
+                 BatchUpdateIngressRulesResponse' <$>
+                   (o .:? "ingressRules" .!= mempty))
+
+instance ToJSON BatchUpdateIngressRulesResponse where
+        toJSON BatchUpdateIngressRulesResponse'{..}
+          = object
+              (catMaybes [("ingressRules" .=) <$> _bIngressRules])
+
 -- | Target scaling by CPU usage.
 --
 -- /See:/ 'cpuUtilization' smart constructor.
 data CPUUtilization = CPUUtilization'
-    { _cuAggregationWindowLength :: !(Maybe Text)
+    { _cuAggregationWindowLength :: !(Maybe GDuration)
     , _cuTargetUtilization       :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2453,10 +3506,11 @@ cpuUtilization =
     }
 
 -- | Period of time over which CPU utilization is calculated.
-cuAggregationWindowLength :: Lens' CPUUtilization (Maybe Text)
+cuAggregationWindowLength :: Lens' CPUUtilization (Maybe Scientific)
 cuAggregationWindowLength
   = lens _cuAggregationWindowLength
       (\ s a -> s{_cuAggregationWindowLength = a})
+      . mapping _GDuration
 
 -- | Target CPU utilization ratio to maintain when scaling. Must be between 0
 -- and 1.
@@ -2481,6 +3535,45 @@ instance ToJSON CPUUtilization where
                  [("aggregationWindowLength" .=) <$>
                     _cuAggregationWindowLength,
                   ("targetUtilization" .=) <$> _cuTargetUtilization])
+
+-- | Metadata for the given google.longrunning.Operation during a
+-- google.appengine.v1.CreateVersionRequest.
+--
+-- /See:/ 'createVersionMetadataV1' smart constructor.
+newtype CreateVersionMetadataV1 = CreateVersionMetadataV1'
+    { _cvmvCloudBuildId :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CreateVersionMetadataV1' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cvmvCloudBuildId'
+createVersionMetadataV1
+    :: CreateVersionMetadataV1
+createVersionMetadataV1 =
+    CreateVersionMetadataV1'
+    { _cvmvCloudBuildId = Nothing
+    }
+
+-- | The Cloud Build ID if one was created as part of the version create.
+-- \'OutputOnly
+cvmvCloudBuildId :: Lens' CreateVersionMetadataV1 (Maybe Text)
+cvmvCloudBuildId
+  = lens _cvmvCloudBuildId
+      (\ s a -> s{_cvmvCloudBuildId = a})
+
+instance FromJSON CreateVersionMetadataV1 where
+        parseJSON
+          = withObject "CreateVersionMetadataV1"
+              (\ o ->
+                 CreateVersionMetadataV1' <$> (o .:? "cloudBuildId"))
+
+instance ToJSON CreateVersionMetadataV1 where
+        toJSON CreateVersionMetadataV1'{..}
+          = object
+              (catMaybes
+                 [("cloudBuildId" .=) <$> _cvmvCloudBuildId])
 
 -- | Mapping from version IDs within the service to fractional (0.000, 1]
 -- allocations of traffic for that version. Each version can be specified
@@ -2522,6 +3615,63 @@ instance FromJSON TrafficSplitAllocations where
 
 instance ToJSON TrafficSplitAllocations where
         toJSON = toJSON . _tsaAddtional
+
+-- | Options for the build operations performed as a part of the version
+-- deployment. Only applicable for App Engine flexible environment when
+-- creating a version using source code directly.
+--
+-- /See:/ 'cloudBuildOptions' smart constructor.
+data CloudBuildOptions = CloudBuildOptions'
+    { _cboCloudBuildTimeout :: !(Maybe GDuration)
+    , _cboAppYamlPath       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CloudBuildOptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cboCloudBuildTimeout'
+--
+-- * 'cboAppYamlPath'
+cloudBuildOptions
+    :: CloudBuildOptions
+cloudBuildOptions =
+    CloudBuildOptions'
+    { _cboCloudBuildTimeout = Nothing
+    , _cboAppYamlPath = Nothing
+    }
+
+-- | The Cloud Build timeout used as part of any dependent builds performed
+-- by version creation. Defaults to 10 minutes.
+cboCloudBuildTimeout :: Lens' CloudBuildOptions (Maybe Scientific)
+cboCloudBuildTimeout
+  = lens _cboCloudBuildTimeout
+      (\ s a -> s{_cboCloudBuildTimeout = a})
+      . mapping _GDuration
+
+-- | Path to the yaml file used in deployment, used to determine runtime
+-- configuration details.Required for flexible environment builds.See
+-- https:\/\/cloud.google.com\/appengine\/docs\/standard\/python\/config\/appref
+-- for more details.
+cboAppYamlPath :: Lens' CloudBuildOptions (Maybe Text)
+cboAppYamlPath
+  = lens _cboAppYamlPath
+      (\ s a -> s{_cboAppYamlPath = a})
+
+instance FromJSON CloudBuildOptions where
+        parseJSON
+          = withObject "CloudBuildOptions"
+              (\ o ->
+                 CloudBuildOptions' <$>
+                   (o .:? "cloudBuildTimeout") <*>
+                     (o .:? "appYamlPath"))
+
+instance ToJSON CloudBuildOptions where
+        toJSON CloudBuildOptions'{..}
+          = object
+              (catMaybes
+                 [("cloudBuildTimeout" .=) <$> _cboCloudBuildTimeout,
+                  ("appYamlPath" .=) <$> _cboAppYamlPath])
 
 -- | A service with manual scaling runs continuously, allowing you to perform
 -- complex initialization and rely on the state of its memory over time.
@@ -2570,7 +3720,7 @@ instance ToJSON ManualScaling where
 -- /See:/ 'basicScaling' smart constructor.
 data BasicScaling = BasicScaling'
     { _bsMaxInstances :: !(Maybe (Textual Int32))
-    , _bsIdleTimeout  :: !(Maybe Text)
+    , _bsIdleTimeout  :: !(Maybe GDuration)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BasicScaling' with the minimum fields required to make a request.
@@ -2597,10 +3747,11 @@ bsMaxInstances
 
 -- | Duration of time after the last request that an instance must wait
 -- before the instance is shut down.
-bsIdleTimeout :: Lens' BasicScaling (Maybe Text)
+bsIdleTimeout :: Lens' BasicScaling (Maybe Scientific)
 bsIdleTimeout
   = lens _bsIdleTimeout
       (\ s a -> s{_bsIdleTimeout = a})
+      . mapping _GDuration
 
 instance FromJSON BasicScaling where
         parseJSON
@@ -2620,13 +3771,14 @@ instance ToJSON BasicScaling where
 --
 -- /See:/ 'operationMetadataV1' smart constructor.
 data OperationMetadataV1 = OperationMetadataV1'
-    { _omvEphemeralMessage :: !(Maybe Text)
-    , _omvInsertTime       :: !(Maybe Text)
-    , _omvUser             :: !(Maybe Text)
-    , _omvMethod           :: !(Maybe Text)
-    , _omvEndTime          :: !(Maybe Text)
-    , _omvWarning          :: !(Maybe [Text])
-    , _omvTarget           :: !(Maybe Text)
+    { _omvEphemeralMessage      :: !(Maybe Text)
+    , _omvInsertTime            :: !(Maybe DateTime')
+    , _omvUser                  :: !(Maybe Text)
+    , _omvMethod                :: !(Maybe Text)
+    , _omvEndTime               :: !(Maybe DateTime')
+    , _omvWarning               :: !(Maybe [Text])
+    , _omvCreateVersionMetadata :: !(Maybe CreateVersionMetadataV1)
+    , _omvTarget                :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperationMetadataV1' with the minimum fields required to make a request.
@@ -2645,6 +3797,8 @@ data OperationMetadataV1 = OperationMetadataV1'
 --
 -- * 'omvWarning'
 --
+-- * 'omvCreateVersionMetadata'
+--
 -- * 'omvTarget'
 operationMetadataV1
     :: OperationMetadataV1
@@ -2656,6 +3810,7 @@ operationMetadataV1 =
     , _omvMethod = Nothing
     , _omvEndTime = Nothing
     , _omvWarning = Nothing
+    , _omvCreateVersionMetadata = Nothing
     , _omvTarget = Nothing
     }
 
@@ -2667,10 +3822,11 @@ omvEphemeralMessage
       (\ s a -> s{_omvEphemeralMessage = a})
 
 -- | Time that this operation was created.\'OutputOnly
-omvInsertTime :: Lens' OperationMetadataV1 (Maybe Text)
+omvInsertTime :: Lens' OperationMetadataV1 (Maybe UTCTime)
 omvInsertTime
   = lens _omvInsertTime
       (\ s a -> s{_omvInsertTime = a})
+      . mapping _DateTime
 
 -- | User who requested this operation.\'OutputOnly
 omvUser :: Lens' OperationMetadataV1 (Maybe Text)
@@ -2683,9 +3839,10 @@ omvMethod
   = lens _omvMethod (\ s a -> s{_omvMethod = a})
 
 -- | Time that this operation completed.\'OutputOnly
-omvEndTime :: Lens' OperationMetadataV1 (Maybe Text)
+omvEndTime :: Lens' OperationMetadataV1 (Maybe UTCTime)
 omvEndTime
-  = lens _omvEndTime (\ s a -> s{_omvEndTime = a})
+  = lens _omvEndTime (\ s a -> s{_omvEndTime = a}) .
+      mapping _DateTime
 
 -- | Durable messages that persist on every operation poll. \'OutputOnly
 omvWarning :: Lens' OperationMetadataV1 [Text]
@@ -2693,6 +3850,11 @@ omvWarning
   = lens _omvWarning (\ s a -> s{_omvWarning = a}) .
       _Default
       . _Coerce
+
+omvCreateVersionMetadata :: Lens' OperationMetadataV1 (Maybe CreateVersionMetadataV1)
+omvCreateVersionMetadata
+  = lens _omvCreateVersionMetadata
+      (\ s a -> s{_omvCreateVersionMetadata = a})
 
 -- | Name of the resource that this operation is acting on. Example:
 -- apps\/myapp\/services\/default.\'OutputOnly
@@ -2710,6 +3872,7 @@ instance FromJSON OperationMetadataV1 where
                      <*> (o .:? "method")
                      <*> (o .:? "endTime")
                      <*> (o .:? "warning" .!= mempty)
+                     <*> (o .:? "createVersionMetadata")
                      <*> (o .:? "target"))
 
 instance ToJSON OperationMetadataV1 where
@@ -2722,6 +3885,8 @@ instance ToJSON OperationMetadataV1 where
                   ("method" .=) <$> _omvMethod,
                   ("endTime" .=) <$> _omvEndTime,
                   ("warning" .=) <$> _omvWarning,
+                  ("createVersionMetadata" .=) <$>
+                    _omvCreateVersionMetadata,
                   ("target" .=) <$> _omvTarget])
 
 -- | A Version resource is a specific set of source code and configuration
@@ -2729,35 +3894,42 @@ instance ToJSON OperationMetadataV1 where
 --
 -- /See:/ 'version' smart constructor.
 data Version = Version'
-    { _verRuntime             :: !(Maybe Text)
-    , _verNobuildFilesRegex   :: !(Maybe Text)
-    , _verInstanceClass       :: !(Maybe Text)
-    , _verHealthCheck         :: !(Maybe HealthCheck)
-    , _verEndpointsAPIService :: !(Maybe EndpointsAPIService)
-    , _verEnv                 :: !(Maybe Text)
-    , _verDefaultExpiration   :: !(Maybe Text)
-    , _verAutomaticScaling    :: !(Maybe AutomaticScaling)
-    , _verErrorHandlers       :: !(Maybe [ErrorHandler])
-    , _verCreatedBy           :: !(Maybe Text)
-    , _verVM                  :: !(Maybe Bool)
-    , _verHandlers            :: !(Maybe [URLMap])
-    , _verInboundServices     :: !(Maybe [Text])
-    , _verNetwork             :: !(Maybe Network)
-    , _verResources           :: !(Maybe Resources)
-    , _verName                :: !(Maybe Text)
-    , _verThreadsafe          :: !(Maybe Bool)
-    , _verBetaSettings        :: !(Maybe VersionBetaSettings)
-    , _verBasicScaling        :: !(Maybe BasicScaling)
-    , _verManualScaling       :: !(Maybe ManualScaling)
-    , _verAPIConfig           :: !(Maybe APIConfigHandler)
-    , _verId                  :: !(Maybe Text)
-    , _verEnvVariables        :: !(Maybe VersionEnvVariables)
-    , _verServingStatus       :: !(Maybe Text)
-    , _verDiskUsageBytes      :: !(Maybe (Textual Int64))
-    , _verCreateTime          :: !(Maybe Text)
-    , _verLibraries           :: !(Maybe [Library])
-    , _verVersionURL          :: !(Maybe Text)
-    , _verDeployment          :: !(Maybe Deployment)
+    { _verRuntime                   :: !(Maybe Text)
+    , _verNobuildFilesRegex         :: !(Maybe Text)
+    , _verInstanceClass             :: !(Maybe Text)
+    , _verRuntimeChannel            :: !(Maybe Text)
+    , _verRuntimeMainExecutablePath :: !(Maybe Text)
+    , _verHealthCheck               :: !(Maybe HealthCheck)
+    , _verEndpointsAPIService       :: !(Maybe EndpointsAPIService)
+    , _verEnv                       :: !(Maybe Text)
+    , _verZones                     :: !(Maybe [Text])
+    , _verEntrypoint                :: !(Maybe Entrypoint)
+    , _verDefaultExpiration         :: !(Maybe GDuration)
+    , _verAutomaticScaling          :: !(Maybe AutomaticScaling)
+    , _verErrorHandlers             :: !(Maybe [ErrorHandler])
+    , _verCreatedBy                 :: !(Maybe Text)
+    , _verVM                        :: !(Maybe Bool)
+    , _verHandlers                  :: !(Maybe [URLMap])
+    , _verInboundServices           :: !(Maybe [Text])
+    , _verReadinessCheck            :: !(Maybe ReadinessCheck)
+    , _verNetwork                   :: !(Maybe Network)
+    , _verResources                 :: !(Maybe Resources)
+    , _verName                      :: !(Maybe Text)
+    , _verThreadsafe                :: !(Maybe Bool)
+    , _verBetaSettings              :: !(Maybe VersionBetaSettings)
+    , _verBasicScaling              :: !(Maybe BasicScaling)
+    , _verManualScaling             :: !(Maybe ManualScaling)
+    , _verAPIConfig                 :: !(Maybe APIConfigHandler)
+    , _verId                        :: !(Maybe Text)
+    , _verEnvVariables              :: !(Maybe VersionEnvVariables)
+    , _verLivenessCheck             :: !(Maybe LivenessCheck)
+    , _verRuntimeAPIVersion         :: !(Maybe Text)
+    , _verServingStatus             :: !(Maybe VersionServingStatus)
+    , _verDiskUsageBytes            :: !(Maybe (Textual Int64))
+    , _verCreateTime                :: !(Maybe DateTime')
+    , _verLibraries                 :: !(Maybe [Library])
+    , _verVersionURL                :: !(Maybe Text)
+    , _verDeployment                :: !(Maybe Deployment)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Version' with the minimum fields required to make a request.
@@ -2770,11 +3942,19 @@ data Version = Version'
 --
 -- * 'verInstanceClass'
 --
+-- * 'verRuntimeChannel'
+--
+-- * 'verRuntimeMainExecutablePath'
+--
 -- * 'verHealthCheck'
 --
 -- * 'verEndpointsAPIService'
 --
 -- * 'verEnv'
+--
+-- * 'verZones'
+--
+-- * 'verEntrypoint'
 --
 -- * 'verDefaultExpiration'
 --
@@ -2789,6 +3969,8 @@ data Version = Version'
 -- * 'verHandlers'
 --
 -- * 'verInboundServices'
+--
+-- * 'verReadinessCheck'
 --
 -- * 'verNetwork'
 --
@@ -2810,6 +3992,10 @@ data Version = Version'
 --
 -- * 'verEnvVariables'
 --
+-- * 'verLivenessCheck'
+--
+-- * 'verRuntimeAPIVersion'
+--
 -- * 'verServingStatus'
 --
 -- * 'verDiskUsageBytes'
@@ -2828,9 +4014,13 @@ version =
     { _verRuntime = Nothing
     , _verNobuildFilesRegex = Nothing
     , _verInstanceClass = Nothing
+    , _verRuntimeChannel = Nothing
+    , _verRuntimeMainExecutablePath = Nothing
     , _verHealthCheck = Nothing
     , _verEndpointsAPIService = Nothing
     , _verEnv = Nothing
+    , _verZones = Nothing
+    , _verEntrypoint = Nothing
     , _verDefaultExpiration = Nothing
     , _verAutomaticScaling = Nothing
     , _verErrorHandlers = Nothing
@@ -2838,6 +4028,7 @@ version =
     , _verVM = Nothing
     , _verHandlers = Nothing
     , _verInboundServices = Nothing
+    , _verReadinessCheck = Nothing
     , _verNetwork = Nothing
     , _verResources = Nothing
     , _verName = Nothing
@@ -2848,6 +4039,8 @@ version =
     , _verAPIConfig = Nothing
     , _verId = Nothing
     , _verEnvVariables = Nothing
+    , _verLivenessCheck = Nothing
+    , _verRuntimeAPIVersion = Nothing
     , _verServingStatus = Nothing
     , _verDiskUsageBytes = Nothing
     , _verCreateTime = Nothing
@@ -2878,9 +4071,23 @@ verInstanceClass
   = lens _verInstanceClass
       (\ s a -> s{_verInstanceClass = a})
 
--- | Configures health checking for VM instances. Unhealthy instances are
--- stopped and replaced with new instances. Only applicable for VM
--- runtimes.Only returned in GET requests if view=FULL is set.
+-- | The channel of the runtime to use. Only available for some runtimes.
+-- Defaults to the default channel.
+verRuntimeChannel :: Lens' Version (Maybe Text)
+verRuntimeChannel
+  = lens _verRuntimeChannel
+      (\ s a -> s{_verRuntimeChannel = a})
+
+-- | The path or name of the app\'s main executable.
+verRuntimeMainExecutablePath :: Lens' Version (Maybe Text)
+verRuntimeMainExecutablePath
+  = lens _verRuntimeMainExecutablePath
+      (\ s a -> s{_verRuntimeMainExecutablePath = a})
+
+-- | Configures health checking for instances. Unhealthy instances are
+-- stopped and replaced with new instances. Only applicable in the App
+-- Engine flexible environment.Only returned in GET requests if view=FULL
+-- is set.
 verHealthCheck :: Lens' Version (Maybe HealthCheck)
 verHealthCheck
   = lens _verHealthCheck
@@ -2898,15 +4105,30 @@ verEndpointsAPIService
 verEnv :: Lens' Version (Maybe Text)
 verEnv = lens _verEnv (\ s a -> s{_verEnv = a})
 
+-- | The Google Compute Engine zones that are supported by this version in
+-- the App Engine flexible environment.
+verZones :: Lens' Version [Text]
+verZones
+  = lens _verZones (\ s a -> s{_verZones = a}) .
+      _Default
+      . _Coerce
+
+-- | The entrypoint for the application.
+verEntrypoint :: Lens' Version (Maybe Entrypoint)
+verEntrypoint
+  = lens _verEntrypoint
+      (\ s a -> s{_verEntrypoint = a})
+
 -- | Duration that static files should be cached by web proxies and browsers.
 -- Only applicable if the corresponding StaticFilesHandler
--- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#staticfileshandler)
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#StaticFilesHandler)
 -- does not specify its own expiration time.Only returned in GET requests
 -- if view=FULL is set.
-verDefaultExpiration :: Lens' Version (Maybe Text)
+verDefaultExpiration :: Lens' Version (Maybe Scientific)
 verDefaultExpiration
   = lens _verDefaultExpiration
       (\ s a -> s{_verDefaultExpiration = a})
+      . mapping _GDuration
 
 -- | Automatic scaling is based on request rate, response latencies, and
 -- other application metrics.
@@ -2952,12 +4174,22 @@ verInboundServices
       . _Default
       . _Coerce
 
--- | Extra network settings. Only applicable for VM runtimes.
+-- | Configures readiness health checking for instances. Unhealthy instances
+-- are not put into the backend traffic rotation.Only returned in GET
+-- requests if view=FULL is set.
+verReadinessCheck :: Lens' Version (Maybe ReadinessCheck)
+verReadinessCheck
+  = lens _verReadinessCheck
+      (\ s a -> s{_verReadinessCheck = a})
+
+-- | Extra network settings. Only applicable in the App Engine flexible
+-- environment.
 verNetwork :: Lens' Version (Maybe Network)
 verNetwork
   = lens _verNetwork (\ s a -> s{_verNetwork = a})
 
--- | Machine resources for this version. Only applicable for VM runtimes.
+-- | Machine resources for this version. Only applicable in the App Engine
+-- flexible environment.
 verResources :: Lens' Version (Maybe Resources)
 verResources
   = lens _verResources (\ s a -> s{_verResources = a})
@@ -3016,16 +4248,32 @@ verEnvVariables
   = lens _verEnvVariables
       (\ s a -> s{_verEnvVariables = a})
 
+-- | Configures liveness health checking for instances. Unhealthy instances
+-- are stopped and replaced with new instancesOnly returned in GET requests
+-- if view=FULL is set.
+verLivenessCheck :: Lens' Version (Maybe LivenessCheck)
+verLivenessCheck
+  = lens _verLivenessCheck
+      (\ s a -> s{_verLivenessCheck = a})
+
+-- | The version of the API in the given runtime environment. Please see the
+-- app.yaml reference for valid values at
+-- https:\/\/cloud.google.com\/appengine\/docs\/standard\/\/config\/appref
+verRuntimeAPIVersion :: Lens' Version (Maybe Text)
+verRuntimeAPIVersion
+  = lens _verRuntimeAPIVersion
+      (\ s a -> s{_verRuntimeAPIVersion = a})
+
 -- | Current serving status of this version. Only the versions with a SERVING
 -- status create instances and can be billed.SERVING_STATUS_UNSPECIFIED is
 -- an invalid value. Defaults to SERVING.
-verServingStatus :: Lens' Version (Maybe Text)
+verServingStatus :: Lens' Version (Maybe VersionServingStatus)
 verServingStatus
   = lens _verServingStatus
       (\ s a -> s{_verServingStatus = a})
 
 -- | Total size in bytes of all the files that are included in this version
--- and curerntly hosted on the App Engine disk.\'OutputOnly
+-- and currently hosted on the App Engine disk.\'OutputOnly
 verDiskUsageBytes :: Lens' Version (Maybe Int64)
 verDiskUsageBytes
   = lens _verDiskUsageBytes
@@ -3033,10 +4281,11 @@ verDiskUsageBytes
       . mapping _Coerce
 
 -- | Time that this version was created.\'OutputOnly
-verCreateTime :: Lens' Version (Maybe Text)
+verCreateTime :: Lens' Version (Maybe UTCTime)
 verCreateTime
   = lens _verCreateTime
       (\ s a -> s{_verCreateTime = a})
+      . mapping _DateTime
 
 -- | Configuration for third-party Python runtime libraries that are required
 -- by the application.Only returned in GET requests if view=FULL is set.
@@ -3067,9 +4316,13 @@ instance FromJSON Version where
                  Version' <$>
                    (o .:? "runtime") <*> (o .:? "nobuildFilesRegex") <*>
                      (o .:? "instanceClass")
+                     <*> (o .:? "runtimeChannel")
+                     <*> (o .:? "runtimeMainExecutablePath")
                      <*> (o .:? "healthCheck")
                      <*> (o .:? "endpointsApiService")
                      <*> (o .:? "env")
+                     <*> (o .:? "zones" .!= mempty)
+                     <*> (o .:? "entrypoint")
                      <*> (o .:? "defaultExpiration")
                      <*> (o .:? "automaticScaling")
                      <*> (o .:? "errorHandlers" .!= mempty)
@@ -3077,6 +4330,7 @@ instance FromJSON Version where
                      <*> (o .:? "vm")
                      <*> (o .:? "handlers" .!= mempty)
                      <*> (o .:? "inboundServices" .!= mempty)
+                     <*> (o .:? "readinessCheck")
                      <*> (o .:? "network")
                      <*> (o .:? "resources")
                      <*> (o .:? "name")
@@ -3087,6 +4341,8 @@ instance FromJSON Version where
                      <*> (o .:? "apiConfig")
                      <*> (o .:? "id")
                      <*> (o .:? "envVariables")
+                     <*> (o .:? "livenessCheck")
+                     <*> (o .:? "runtimeApiVersion")
                      <*> (o .:? "servingStatus")
                      <*> (o .:? "diskUsageBytes")
                      <*> (o .:? "createTime")
@@ -3101,10 +4357,14 @@ instance ToJSON Version where
                  [("runtime" .=) <$> _verRuntime,
                   ("nobuildFilesRegex" .=) <$> _verNobuildFilesRegex,
                   ("instanceClass" .=) <$> _verInstanceClass,
+                  ("runtimeChannel" .=) <$> _verRuntimeChannel,
+                  ("runtimeMainExecutablePath" .=) <$>
+                    _verRuntimeMainExecutablePath,
                   ("healthCheck" .=) <$> _verHealthCheck,
                   ("endpointsApiService" .=) <$>
                     _verEndpointsAPIService,
-                  ("env" .=) <$> _verEnv,
+                  ("env" .=) <$> _verEnv, ("zones" .=) <$> _verZones,
+                  ("entrypoint" .=) <$> _verEntrypoint,
                   ("defaultExpiration" .=) <$> _verDefaultExpiration,
                   ("automaticScaling" .=) <$> _verAutomaticScaling,
                   ("errorHandlers" .=) <$> _verErrorHandlers,
@@ -3112,6 +4372,7 @@ instance ToJSON Version where
                   ("vm" .=) <$> _verVM,
                   ("handlers" .=) <$> _verHandlers,
                   ("inboundServices" .=) <$> _verInboundServices,
+                  ("readinessCheck" .=) <$> _verReadinessCheck,
                   ("network" .=) <$> _verNetwork,
                   ("resources" .=) <$> _verResources,
                   ("name" .=) <$> _verName,
@@ -3122,12 +4383,93 @@ instance ToJSON Version where
                   ("apiConfig" .=) <$> _verAPIConfig,
                   ("id" .=) <$> _verId,
                   ("envVariables" .=) <$> _verEnvVariables,
+                  ("livenessCheck" .=) <$> _verLivenessCheck,
+                  ("runtimeApiVersion" .=) <$> _verRuntimeAPIVersion,
                   ("servingStatus" .=) <$> _verServingStatus,
                   ("diskUsageBytes" .=) <$> _verDiskUsageBytes,
                   ("createTime" .=) <$> _verCreateTime,
                   ("libraries" .=) <$> _verLibraries,
                   ("versionUrl" .=) <$> _verVersionURL,
                   ("deployment" .=) <$> _verDeployment])
+
+-- | Identity-Aware Proxy
+--
+-- /See:/ 'identityAwareProxy' smart constructor.
+data IdentityAwareProxy = IdentityAwareProxy'
+    { _iapEnabled                  :: !(Maybe Bool)
+    , _iapOAuth2ClientSecretSha256 :: !(Maybe Text)
+    , _iapOAuth2ClientSecret       :: !(Maybe Text)
+    , _iapOAuth2ClientId           :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'IdentityAwareProxy' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'iapEnabled'
+--
+-- * 'iapOAuth2ClientSecretSha256'
+--
+-- * 'iapOAuth2ClientSecret'
+--
+-- * 'iapOAuth2ClientId'
+identityAwareProxy
+    :: IdentityAwareProxy
+identityAwareProxy =
+    IdentityAwareProxy'
+    { _iapEnabled = Nothing
+    , _iapOAuth2ClientSecretSha256 = Nothing
+    , _iapOAuth2ClientSecret = Nothing
+    , _iapOAuth2ClientId = Nothing
+    }
+
+-- | Whether the serving infrastructure will authenticate and authorize all
+-- incoming requests.If true, the oauth2_client_id and oauth2_client_secret
+-- fields must be non-empty.
+iapEnabled :: Lens' IdentityAwareProxy (Maybe Bool)
+iapEnabled
+  = lens _iapEnabled (\ s a -> s{_iapEnabled = a})
+
+-- | Hex-encoded SHA-256 hash of the client secret.\'OutputOnly
+iapOAuth2ClientSecretSha256 :: Lens' IdentityAwareProxy (Maybe Text)
+iapOAuth2ClientSecretSha256
+  = lens _iapOAuth2ClientSecretSha256
+      (\ s a -> s{_iapOAuth2ClientSecretSha256 = a})
+
+-- | OAuth2 client secret to use for the authentication flow.For security
+-- reasons, this value cannot be retrieved via the API. Instead, the
+-- SHA-256 hash of the value is returned in the oauth2_client_secret_sha256
+-- field.\'InputOnly
+iapOAuth2ClientSecret :: Lens' IdentityAwareProxy (Maybe Text)
+iapOAuth2ClientSecret
+  = lens _iapOAuth2ClientSecret
+      (\ s a -> s{_iapOAuth2ClientSecret = a})
+
+-- | OAuth2 client ID to use for the authentication flow.
+iapOAuth2ClientId :: Lens' IdentityAwareProxy (Maybe Text)
+iapOAuth2ClientId
+  = lens _iapOAuth2ClientId
+      (\ s a -> s{_iapOAuth2ClientId = a})
+
+instance FromJSON IdentityAwareProxy where
+        parseJSON
+          = withObject "IdentityAwareProxy"
+              (\ o ->
+                 IdentityAwareProxy' <$>
+                   (o .:? "enabled") <*>
+                     (o .:? "oauth2ClientSecretSha256")
+                     <*> (o .:? "oauth2ClientSecret")
+                     <*> (o .:? "oauth2ClientId"))
+
+instance ToJSON IdentityAwareProxy where
+        toJSON IdentityAwareProxy'{..}
+          = object
+              (catMaybes
+                 [("enabled" .=) <$> _iapEnabled,
+                  ("oauth2ClientSecretSha256" .=) <$>
+                    _iapOAuth2ClientSecretSha256,
+                  ("oauth2ClientSecret" .=) <$> _iapOAuth2ClientSecret,
+                  ("oauth2ClientId" .=) <$> _iapOAuth2ClientId])
 
 -- | Files served directly to the user for a given URL, such as images, CSS
 -- stylesheets, or JavaScript source files. Static file handlers describe
@@ -3139,7 +4481,7 @@ data StaticFilesHandler = StaticFilesHandler'
     { _sfhHTTPHeaders         :: !(Maybe StaticFilesHandlerHTTPHeaders)
     , _sfhPath                :: !(Maybe Text)
     , _sfhRequireMatchingFile :: !(Maybe Bool)
-    , _sfhExpiration          :: !(Maybe Text)
+    , _sfhExpiration          :: !(Maybe GDuration)
     , _sfhMimeType            :: !(Maybe Text)
     , _sfhApplicationReadable :: !(Maybe Bool)
     , _sfhUploadPathRegex     :: !(Maybe Text)
@@ -3196,10 +4538,11 @@ sfhRequireMatchingFile
 
 -- | Time a static file served by this handler should be cached by web
 -- proxies and browsers.
-sfhExpiration :: Lens' StaticFilesHandler (Maybe Text)
+sfhExpiration :: Lens' StaticFilesHandler (Maybe Scientific)
 sfhExpiration
   = lens _sfhExpiration
       (\ s a -> s{_sfhExpiration = a})
+      . mapping _GDuration
 
 -- | MIME type used to serve all files served by this handler.Defaults to
 -- file-specific MIME types, which are derived from each file\'s filename
@@ -3256,7 +4599,7 @@ instance ToJSON StaticFilesHandler where
 -- /See:/ 'errorHandler' smart constructor.
 data ErrorHandler = ErrorHandler'
     { _ehMimeType   :: !(Maybe Text)
-    , _ehErrorCode  :: !(Maybe Text)
+    , _ehErrorCode  :: !(Maybe ErrorHandlerErrorCode)
     , _ehStaticFile :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3284,7 +4627,7 @@ ehMimeType
   = lens _ehMimeType (\ s a -> s{_ehMimeType = a})
 
 -- | Error condition this handler applies to.
-ehErrorCode :: Lens' ErrorHandler (Maybe Text)
+ehErrorCode :: Lens' ErrorHandler (Maybe ErrorHandlerErrorCode)
 ehErrorCode
   = lens _ehErrorCode (\ s a -> s{_ehErrorCode = a})
 
@@ -3343,6 +4686,146 @@ instance FromJSON LocationLabels where
 instance ToJSON LocationLabels where
         toJSON = toJSON . _llAddtional
 
+-- | Response message for AuthorizedCertificates.ListAuthorizedCertificates.
+--
+-- /See:/ 'listAuthorizedCertificatesResponse' smart constructor.
+data ListAuthorizedCertificatesResponse = ListAuthorizedCertificatesResponse'
+    { _lacrNextPageToken :: !(Maybe Text)
+    , _lacrCertificates  :: !(Maybe [AuthorizedCertificate])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListAuthorizedCertificatesResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lacrNextPageToken'
+--
+-- * 'lacrCertificates'
+listAuthorizedCertificatesResponse
+    :: ListAuthorizedCertificatesResponse
+listAuthorizedCertificatesResponse =
+    ListAuthorizedCertificatesResponse'
+    { _lacrNextPageToken = Nothing
+    , _lacrCertificates = Nothing
+    }
+
+-- | Continuation token for fetching the next page of results.
+lacrNextPageToken :: Lens' ListAuthorizedCertificatesResponse (Maybe Text)
+lacrNextPageToken
+  = lens _lacrNextPageToken
+      (\ s a -> s{_lacrNextPageToken = a})
+
+-- | The SSL certificates the user is authorized to administer.
+lacrCertificates :: Lens' ListAuthorizedCertificatesResponse [AuthorizedCertificate]
+lacrCertificates
+  = lens _lacrCertificates
+      (\ s a -> s{_lacrCertificates = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListAuthorizedCertificatesResponse
+         where
+        parseJSON
+          = withObject "ListAuthorizedCertificatesResponse"
+              (\ o ->
+                 ListAuthorizedCertificatesResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "certificates" .!= mempty))
+
+instance ToJSON ListAuthorizedCertificatesResponse
+         where
+        toJSON ListAuthorizedCertificatesResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lacrNextPageToken,
+                  ("certificates" .=) <$> _lacrCertificates])
+
+-- | A single firewall rule that is evaluated against incoming traffic and
+-- provides an action to take on matched requests.
+--
+-- /See:/ 'firewallRule' smart constructor.
+data FirewallRule = FirewallRule'
+    { _frPriority    :: !(Maybe (Textual Int32))
+    , _frAction      :: !(Maybe FirewallRuleAction)
+    , _frSourceRange :: !(Maybe Text)
+    , _frDescription :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'FirewallRule' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'frPriority'
+--
+-- * 'frAction'
+--
+-- * 'frSourceRange'
+--
+-- * 'frDescription'
+firewallRule
+    :: FirewallRule
+firewallRule =
+    FirewallRule'
+    { _frPriority = Nothing
+    , _frAction = Nothing
+    , _frSourceRange = Nothing
+    , _frDescription = Nothing
+    }
+
+-- | A positive integer between 1, Int32.MaxValue-1 that defines the order of
+-- rule evaluation. Rules with the lowest priority are evaluated first.A
+-- default rule at priority Int32.MaxValue matches all IPv4 and IPv6
+-- traffic when no previous rule matches. Only the action of this rule can
+-- be modified by the user.
+frPriority :: Lens' FirewallRule (Maybe Int32)
+frPriority
+  = lens _frPriority (\ s a -> s{_frPriority = a}) .
+      mapping _Coerce
+
+-- | The action to take on matched requests.
+frAction :: Lens' FirewallRule (Maybe FirewallRuleAction)
+frAction = lens _frAction (\ s a -> s{_frAction = a})
+
+-- | IP address or range, defined using CIDR notation, of requests that this
+-- rule applies to. You can use the wildcard character \"*\" to match all
+-- IPs equivalent to \"0\/0\" and \"::\/0\" together. Examples: 192.168.1.1
+-- or 192.168.0.0\/16 or 2001:db8::\/32 or
+-- 2001:0db8:0000:0042:0000:8a2e:0370:7334.
+--
+-- Truncation will be silently performed on addresses which are not
+-- properly truncated. For example, 1.2.3.4\/24 is accepted as the same
+-- address as 1.2.3.0\/24. Similarly, for IPv6, 2001:db8::1\/32 is accepted
+-- as the same address as 2001:db8::\/32.
+frSourceRange :: Lens' FirewallRule (Maybe Text)
+frSourceRange
+  = lens _frSourceRange
+      (\ s a -> s{_frSourceRange = a})
+
+-- | An optional string description of this rule. This field has a maximum
+-- length of 100 characters.
+frDescription :: Lens' FirewallRule (Maybe Text)
+frDescription
+  = lens _frDescription
+      (\ s a -> s{_frDescription = a})
+
+instance FromJSON FirewallRule where
+        parseJSON
+          = withObject "FirewallRule"
+              (\ o ->
+                 FirewallRule' <$>
+                   (o .:? "priority") <*> (o .:? "action") <*>
+                     (o .:? "sourceRange")
+                     <*> (o .:? "description"))
+
+instance ToJSON FirewallRule where
+        toJSON FirewallRule'{..}
+          = object
+              (catMaybes
+                 [("priority" .=) <$> _frPriority,
+                  ("action" .=) <$> _frAction,
+                  ("sourceRange" .=) <$> _frSourceRange,
+                  ("description" .=) <$> _frDescription])
+
 -- | Metadata for the given google.cloud.location.Location.
 --
 -- /See:/ 'locationMetadata' smart constructor.
@@ -3366,14 +4849,14 @@ locationMetadata =
     , _lmFlexibleEnvironmentAvailable = Nothing
     }
 
--- | App Engine Standard Environment is available in the given
+-- | App Engine standard environment is available in the given
 -- location.\'OutputOnly
 lmStandardEnvironmentAvailable :: Lens' LocationMetadata (Maybe Bool)
 lmStandardEnvironmentAvailable
   = lens _lmStandardEnvironmentAvailable
       (\ s a -> s{_lmStandardEnvironmentAvailable = a})
 
--- | App Engine Flexible Environment is available in the given
+-- | App Engine flexible environment is available in the given
 -- location.\'OutputOnly
 lmFlexibleEnvironmentAvailable :: Lens' LocationMetadata (Maybe Bool)
 lmFlexibleEnvironmentAvailable
@@ -3401,10 +4884,10 @@ instance ToJSON LocationMetadata where
 --
 -- /See:/ 'operationMetadata' smart constructor.
 data OperationMetadata = OperationMetadata'
-    { _omInsertTime    :: !(Maybe Text)
+    { _omInsertTime    :: !(Maybe DateTime')
     , _omUser          :: !(Maybe Text)
     , _omMethod        :: !(Maybe Text)
-    , _omEndTime       :: !(Maybe Text)
+    , _omEndTime       :: !(Maybe DateTime')
     , _omOperationType :: !(Maybe Text)
     , _omTarget        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3437,9 +4920,10 @@ operationMetadata =
     }
 
 -- | Timestamp that this operation was created.\'OutputOnly
-omInsertTime :: Lens' OperationMetadata (Maybe Text)
+omInsertTime :: Lens' OperationMetadata (Maybe UTCTime)
 omInsertTime
   = lens _omInsertTime (\ s a -> s{_omInsertTime = a})
+      . mapping _DateTime
 
 -- | User who requested this operation.\'OutputOnly
 omUser :: Lens' OperationMetadata (Maybe Text)
@@ -3451,9 +4935,10 @@ omMethod :: Lens' OperationMetadata (Maybe Text)
 omMethod = lens _omMethod (\ s a -> s{_omMethod = a})
 
 -- | Timestamp that this operation completed.\'OutputOnly
-omEndTime :: Lens' OperationMetadata (Maybe Text)
+omEndTime :: Lens' OperationMetadata (Maybe UTCTime)
 omEndTime
-  = lens _omEndTime (\ s a -> s{_omEndTime = a})
+  = lens _omEndTime (\ s a -> s{_omEndTime = a}) .
+      mapping _DateTime
 
 -- | Type of this operation. Deprecated, use method field instead. Example:
 -- \"create_version\".\'OutputOnly
@@ -3539,7 +5024,244 @@ instance ToJSON ListInstancesResponse where
                  [("nextPageToken" .=) <$> _lirNextPageToken,
                   ("instances" .=) <$> _lirInstances])
 
--- | Target scaling by request utilization. Only applicable for VM runtimes.
+-- | Metadata for the given google.longrunning.Operation.
+--
+-- /See:/ 'operationMetadataV1Alpha' smart constructor.
+data OperationMetadataV1Alpha = OperationMetadataV1Alpha'
+    { _omvaEphemeralMessage      :: !(Maybe Text)
+    , _omvaInsertTime            :: !(Maybe DateTime')
+    , _omvaUser                  :: !(Maybe Text)
+    , _omvaMethod                :: !(Maybe Text)
+    , _omvaEndTime               :: !(Maybe DateTime')
+    , _omvaWarning               :: !(Maybe [Text])
+    , _omvaCreateVersionMetadata :: !(Maybe CreateVersionMetadataV1Alpha)
+    , _omvaTarget                :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationMetadataV1Alpha' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'omvaEphemeralMessage'
+--
+-- * 'omvaInsertTime'
+--
+-- * 'omvaUser'
+--
+-- * 'omvaMethod'
+--
+-- * 'omvaEndTime'
+--
+-- * 'omvaWarning'
+--
+-- * 'omvaCreateVersionMetadata'
+--
+-- * 'omvaTarget'
+operationMetadataV1Alpha
+    :: OperationMetadataV1Alpha
+operationMetadataV1Alpha =
+    OperationMetadataV1Alpha'
+    { _omvaEphemeralMessage = Nothing
+    , _omvaInsertTime = Nothing
+    , _omvaUser = Nothing
+    , _omvaMethod = Nothing
+    , _omvaEndTime = Nothing
+    , _omvaWarning = Nothing
+    , _omvaCreateVersionMetadata = Nothing
+    , _omvaTarget = Nothing
+    }
+
+-- | Ephemeral message that may change every time the operation is polled.
+-- \'OutputOnly
+omvaEphemeralMessage :: Lens' OperationMetadataV1Alpha (Maybe Text)
+omvaEphemeralMessage
+  = lens _omvaEphemeralMessage
+      (\ s a -> s{_omvaEphemeralMessage = a})
+
+-- | Time that this operation was created.\'OutputOnly
+omvaInsertTime :: Lens' OperationMetadataV1Alpha (Maybe UTCTime)
+omvaInsertTime
+  = lens _omvaInsertTime
+      (\ s a -> s{_omvaInsertTime = a})
+      . mapping _DateTime
+
+-- | User who requested this operation.\'OutputOnly
+omvaUser :: Lens' OperationMetadataV1Alpha (Maybe Text)
+omvaUser = lens _omvaUser (\ s a -> s{_omvaUser = a})
+
+-- | API method that initiated this operation. Example:
+-- google.appengine.v1alpha.Versions.CreateVersion.\'OutputOnly
+omvaMethod :: Lens' OperationMetadataV1Alpha (Maybe Text)
+omvaMethod
+  = lens _omvaMethod (\ s a -> s{_omvaMethod = a})
+
+-- | Time that this operation completed.\'OutputOnly
+omvaEndTime :: Lens' OperationMetadataV1Alpha (Maybe UTCTime)
+omvaEndTime
+  = lens _omvaEndTime (\ s a -> s{_omvaEndTime = a}) .
+      mapping _DateTime
+
+-- | Durable messages that persist on every operation poll. \'OutputOnly
+omvaWarning :: Lens' OperationMetadataV1Alpha [Text]
+omvaWarning
+  = lens _omvaWarning (\ s a -> s{_omvaWarning = a}) .
+      _Default
+      . _Coerce
+
+omvaCreateVersionMetadata :: Lens' OperationMetadataV1Alpha (Maybe CreateVersionMetadataV1Alpha)
+omvaCreateVersionMetadata
+  = lens _omvaCreateVersionMetadata
+      (\ s a -> s{_omvaCreateVersionMetadata = a})
+
+-- | Name of the resource that this operation is acting on. Example:
+-- apps\/myapp\/services\/default.\'OutputOnly
+omvaTarget :: Lens' OperationMetadataV1Alpha (Maybe Text)
+omvaTarget
+  = lens _omvaTarget (\ s a -> s{_omvaTarget = a})
+
+instance FromJSON OperationMetadataV1Alpha where
+        parseJSON
+          = withObject "OperationMetadataV1Alpha"
+              (\ o ->
+                 OperationMetadataV1Alpha' <$>
+                   (o .:? "ephemeralMessage") <*> (o .:? "insertTime")
+                     <*> (o .:? "user")
+                     <*> (o .:? "method")
+                     <*> (o .:? "endTime")
+                     <*> (o .:? "warning" .!= mempty)
+                     <*> (o .:? "createVersionMetadata")
+                     <*> (o .:? "target"))
+
+instance ToJSON OperationMetadataV1Alpha where
+        toJSON OperationMetadataV1Alpha'{..}
+          = object
+              (catMaybes
+                 [("ephemeralMessage" .=) <$> _omvaEphemeralMessage,
+                  ("insertTime" .=) <$> _omvaInsertTime,
+                  ("user" .=) <$> _omvaUser,
+                  ("method" .=) <$> _omvaMethod,
+                  ("endTime" .=) <$> _omvaEndTime,
+                  ("warning" .=) <$> _omvaWarning,
+                  ("createVersionMetadata" .=) <$>
+                    _omvaCreateVersionMetadata,
+                  ("target" .=) <$> _omvaTarget])
+
+-- | Health checking configuration for VM instances. Unhealthy instances are
+-- killed and replaced with new instances.
+--
+-- /See:/ 'livenessCheck' smart constructor.
+data LivenessCheck = LivenessCheck'
+    { _lcSuccessThreshold :: !(Maybe (Textual Word32))
+    , _lcFailureThreshold :: !(Maybe (Textual Word32))
+    , _lcPath             :: !(Maybe Text)
+    , _lcCheckInterval    :: !(Maybe GDuration)
+    , _lcHost             :: !(Maybe Text)
+    , _lcInitialDelay     :: !(Maybe GDuration)
+    , _lcTimeout          :: !(Maybe GDuration)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LivenessCheck' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lcSuccessThreshold'
+--
+-- * 'lcFailureThreshold'
+--
+-- * 'lcPath'
+--
+-- * 'lcCheckInterval'
+--
+-- * 'lcHost'
+--
+-- * 'lcInitialDelay'
+--
+-- * 'lcTimeout'
+livenessCheck
+    :: LivenessCheck
+livenessCheck =
+    LivenessCheck'
+    { _lcSuccessThreshold = Nothing
+    , _lcFailureThreshold = Nothing
+    , _lcPath = Nothing
+    , _lcCheckInterval = Nothing
+    , _lcHost = Nothing
+    , _lcInitialDelay = Nothing
+    , _lcTimeout = Nothing
+    }
+
+-- | Number of consecutive successful checks required before considering the
+-- VM healthy.
+lcSuccessThreshold :: Lens' LivenessCheck (Maybe Word32)
+lcSuccessThreshold
+  = lens _lcSuccessThreshold
+      (\ s a -> s{_lcSuccessThreshold = a})
+      . mapping _Coerce
+
+-- | Number of consecutive failed checks required before considering the VM
+-- unhealthy.
+lcFailureThreshold :: Lens' LivenessCheck (Maybe Word32)
+lcFailureThreshold
+  = lens _lcFailureThreshold
+      (\ s a -> s{_lcFailureThreshold = a})
+      . mapping _Coerce
+
+-- | The request path.
+lcPath :: Lens' LivenessCheck (Maybe Text)
+lcPath = lens _lcPath (\ s a -> s{_lcPath = a})
+
+-- | Interval between health checks.
+lcCheckInterval :: Lens' LivenessCheck (Maybe Scientific)
+lcCheckInterval
+  = lens _lcCheckInterval
+      (\ s a -> s{_lcCheckInterval = a})
+      . mapping _GDuration
+
+-- | Host header to send when performing a HTTP Liveness check. Example:
+-- \"myapp.appspot.com\"
+lcHost :: Lens' LivenessCheck (Maybe Text)
+lcHost = lens _lcHost (\ s a -> s{_lcHost = a})
+
+-- | The initial delay before starting to execute the checks.
+lcInitialDelay :: Lens' LivenessCheck (Maybe Scientific)
+lcInitialDelay
+  = lens _lcInitialDelay
+      (\ s a -> s{_lcInitialDelay = a})
+      . mapping _GDuration
+
+-- | Time before the check is considered failed.
+lcTimeout :: Lens' LivenessCheck (Maybe Scientific)
+lcTimeout
+  = lens _lcTimeout (\ s a -> s{_lcTimeout = a}) .
+      mapping _GDuration
+
+instance FromJSON LivenessCheck where
+        parseJSON
+          = withObject "LivenessCheck"
+              (\ o ->
+                 LivenessCheck' <$>
+                   (o .:? "successThreshold") <*>
+                     (o .:? "failureThreshold")
+                     <*> (o .:? "path")
+                     <*> (o .:? "checkInterval")
+                     <*> (o .:? "host")
+                     <*> (o .:? "initialDelay")
+                     <*> (o .:? "timeout"))
+
+instance ToJSON LivenessCheck where
+        toJSON LivenessCheck'{..}
+          = object
+              (catMaybes
+                 [("successThreshold" .=) <$> _lcSuccessThreshold,
+                  ("failureThreshold" .=) <$> _lcFailureThreshold,
+                  ("path" .=) <$> _lcPath,
+                  ("checkInterval" .=) <$> _lcCheckInterval,
+                  ("host" .=) <$> _lcHost,
+                  ("initialDelay" .=) <$> _lcInitialDelay,
+                  ("timeout" .=) <$> _lcTimeout])
+
+-- | Target scaling by request utilization. Only applicable in the App Engine
+-- flexible environment.
 --
 -- /See:/ 'requestUtilization' smart constructor.
 data RequestUtilization = RequestUtilization'
@@ -3654,8 +5376,183 @@ instance FromJSON OperationResponse where
 instance ToJSON OperationResponse where
         toJSON = toJSON . _orAddtional
 
--- | Docker image that is used to start a VM container for the version you
--- deploy.
+-- | Metadata for the given google.longrunning.Operation during a
+-- google.appengine.v1beta.CreateVersionRequest.
+--
+-- /See:/ 'createVersionMetadataV1Beta' smart constructor.
+newtype CreateVersionMetadataV1Beta = CreateVersionMetadataV1Beta'
+    { _cvmvbCloudBuildId :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CreateVersionMetadataV1Beta' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cvmvbCloudBuildId'
+createVersionMetadataV1Beta
+    :: CreateVersionMetadataV1Beta
+createVersionMetadataV1Beta =
+    CreateVersionMetadataV1Beta'
+    { _cvmvbCloudBuildId = Nothing
+    }
+
+-- | The Cloud Build ID if one was created as part of the version create.
+-- \'OutputOnly
+cvmvbCloudBuildId :: Lens' CreateVersionMetadataV1Beta (Maybe Text)
+cvmvbCloudBuildId
+  = lens _cvmvbCloudBuildId
+      (\ s a -> s{_cvmvbCloudBuildId = a})
+
+instance FromJSON CreateVersionMetadataV1Beta where
+        parseJSON
+          = withObject "CreateVersionMetadataV1Beta"
+              (\ o ->
+                 CreateVersionMetadataV1Beta' <$>
+                   (o .:? "cloudBuildId"))
+
+instance ToJSON CreateVersionMetadataV1Beta where
+        toJSON CreateVersionMetadataV1Beta'{..}
+          = object
+              (catMaybes
+                 [("cloudBuildId" .=) <$> _cvmvbCloudBuildId])
+
+-- | Response message for DomainMappings.ListDomainMappings.
+--
+-- /See:/ 'listDomainMAppingsResponse' smart constructor.
+data ListDomainMAppingsResponse = ListDomainMAppingsResponse'
+    { _ldmarDomainMAppings :: !(Maybe [DomainMApping])
+    , _ldmarNextPageToken  :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListDomainMAppingsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ldmarDomainMAppings'
+--
+-- * 'ldmarNextPageToken'
+listDomainMAppingsResponse
+    :: ListDomainMAppingsResponse
+listDomainMAppingsResponse =
+    ListDomainMAppingsResponse'
+    { _ldmarDomainMAppings = Nothing
+    , _ldmarNextPageToken = Nothing
+    }
+
+-- | The domain mappings for the application.
+ldmarDomainMAppings :: Lens' ListDomainMAppingsResponse [DomainMApping]
+ldmarDomainMAppings
+  = lens _ldmarDomainMAppings
+      (\ s a -> s{_ldmarDomainMAppings = a})
+      . _Default
+      . _Coerce
+
+-- | Continuation token for fetching the next page of results.
+ldmarNextPageToken :: Lens' ListDomainMAppingsResponse (Maybe Text)
+ldmarNextPageToken
+  = lens _ldmarNextPageToken
+      (\ s a -> s{_ldmarNextPageToken = a})
+
+instance FromJSON ListDomainMAppingsResponse where
+        parseJSON
+          = withObject "ListDomainMAppingsResponse"
+              (\ o ->
+                 ListDomainMAppingsResponse' <$>
+                   (o .:? "domainMappings" .!= mempty) <*>
+                     (o .:? "nextPageToken"))
+
+instance ToJSON ListDomainMAppingsResponse where
+        toJSON ListDomainMAppingsResponse'{..}
+          = object
+              (catMaybes
+                 [("domainMappings" .=) <$> _ldmarDomainMAppings,
+                  ("nextPageToken" .=) <$> _ldmarNextPageToken])
+
+-- | Scheduler settings for standard environment.
+--
+-- /See:/ 'standardSchedulerSettings' smart constructor.
+data StandardSchedulerSettings = StandardSchedulerSettings'
+    { _sssTargetCPUUtilization        :: !(Maybe (Textual Double))
+    , _sssMinInstances                :: !(Maybe (Textual Int32))
+    , _sssMaxInstances                :: !(Maybe (Textual Int32))
+    , _sssTargetThroughputUtilization :: !(Maybe (Textual Double))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'StandardSchedulerSettings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sssTargetCPUUtilization'
+--
+-- * 'sssMinInstances'
+--
+-- * 'sssMaxInstances'
+--
+-- * 'sssTargetThroughputUtilization'
+standardSchedulerSettings
+    :: StandardSchedulerSettings
+standardSchedulerSettings =
+    StandardSchedulerSettings'
+    { _sssTargetCPUUtilization = Nothing
+    , _sssMinInstances = Nothing
+    , _sssMaxInstances = Nothing
+    , _sssTargetThroughputUtilization = Nothing
+    }
+
+-- | Target CPU utilization ratio to maintain when scaling.
+sssTargetCPUUtilization :: Lens' StandardSchedulerSettings (Maybe Double)
+sssTargetCPUUtilization
+  = lens _sssTargetCPUUtilization
+      (\ s a -> s{_sssTargetCPUUtilization = a})
+      . mapping _Coerce
+
+-- | Minimum number of instances to run for this version. Set to zero to
+-- disable min_instances configuration.
+sssMinInstances :: Lens' StandardSchedulerSettings (Maybe Int32)
+sssMinInstances
+  = lens _sssMinInstances
+      (\ s a -> s{_sssMinInstances = a})
+      . mapping _Coerce
+
+-- | Maximum number of instances to run for this version. Set to zero to
+-- disable max_instances configuration.
+sssMaxInstances :: Lens' StandardSchedulerSettings (Maybe Int32)
+sssMaxInstances
+  = lens _sssMaxInstances
+      (\ s a -> s{_sssMaxInstances = a})
+      . mapping _Coerce
+
+-- | Target throughput utilization ratio to maintain when scaling
+sssTargetThroughputUtilization :: Lens' StandardSchedulerSettings (Maybe Double)
+sssTargetThroughputUtilization
+  = lens _sssTargetThroughputUtilization
+      (\ s a -> s{_sssTargetThroughputUtilization = a})
+      . mapping _Coerce
+
+instance FromJSON StandardSchedulerSettings where
+        parseJSON
+          = withObject "StandardSchedulerSettings"
+              (\ o ->
+                 StandardSchedulerSettings' <$>
+                   (o .:? "targetCpuUtilization") <*>
+                     (o .:? "minInstances")
+                     <*> (o .:? "maxInstances")
+                     <*> (o .:? "targetThroughputUtilization"))
+
+instance ToJSON StandardSchedulerSettings where
+        toJSON StandardSchedulerSettings'{..}
+          = object
+              (catMaybes
+                 [("targetCpuUtilization" .=) <$>
+                    _sssTargetCPUUtilization,
+                  ("minInstances" .=) <$> _sssMinInstances,
+                  ("maxInstances" .=) <$> _sssMaxInstances,
+                  ("targetThroughputUtilization" .=) <$>
+                    _sssTargetThroughputUtilization])
+
+-- | Docker image that is used to create a container and start a VM instance
+-- for the version that you deploy. Only applicable for instances running
+-- in the App Engine flexible environment.
 --
 -- /See:/ 'containerInfo' smart constructor.
 newtype ContainerInfo = ContainerInfo'
@@ -3674,8 +5571,8 @@ containerInfo =
     { _ciImage = Nothing
     }
 
--- | URI to the hosted container image in a Docker repository. The URI must
--- be fully qualified and include a tag or digest. Examples:
+-- | URI to the hosted container image in Google Container Registry. The URI
+-- must be fully qualified and include a tag or digest. Examples:
 -- \"gcr.io\/my-project\/image:tag\" or
 -- \"gcr.io\/my-project\/image\'digest\"
 ciImage :: Lens' ContainerInfo (Maybe Text)
@@ -3699,9 +5596,9 @@ data Instance = Instance'
     , _iVMStatus         :: !(Maybe Text)
     , _iVMZoneName       :: !(Maybe Text)
     , _iVMIP             :: !(Maybe Text)
-    , _iStartTime        :: !(Maybe Text)
+    , _iStartTime        :: !(Maybe DateTime')
     , _iVMId             :: !(Maybe Text)
-    , _iAvailability     :: !(Maybe Text)
+    , _iAvailability     :: !(Maybe InstanceAvailability)
     , _iVMName           :: !(Maybe Text)
     , _iName             :: !(Maybe Text)
     , _iVMDebugEnabled   :: !(Maybe Bool)
@@ -3794,9 +5691,10 @@ iVMIP :: Lens' Instance (Maybe Text)
 iVMIP = lens _iVMIP (\ s a -> s{_iVMIP = a})
 
 -- | Time that this instance was started.\'OutputOnly
-iStartTime :: Lens' Instance (Maybe Text)
+iStartTime :: Lens' Instance (Maybe UTCTime)
 iStartTime
-  = lens _iStartTime (\ s a -> s{_iStartTime = a})
+  = lens _iStartTime (\ s a -> s{_iStartTime = a}) .
+      mapping _DateTime
 
 -- | Virtual machine ID of this instance. Only applicable for instances in
 -- App Engine flexible environment.\'OutputOnly
@@ -3804,7 +5702,7 @@ iVMId :: Lens' Instance (Maybe Text)
 iVMId = lens _iVMId (\ s a -> s{_iVMId = a})
 
 -- | Availability of the instance.\'OutputOnly
-iAvailability :: Lens' Instance (Maybe Text)
+iAvailability :: Lens' Instance (Maybe InstanceAvailability)
 iAvailability
   = lens _iAvailability
       (\ s a -> s{_iAvailability = a})
@@ -3901,13 +5799,92 @@ instance ToJSON Instance where
                   ("averageLatency" .=) <$> _iAverageLatency,
                   ("appEngineRelease" .=) <$> _iAppEngineRelease])
 
+-- | SSL configuration for a DomainMapping resource.
+--
+-- /See:/ 'sslSettings' smart constructor.
+data SSLSettings = SSLSettings'
+    { _ssSSLManagementType           :: !(Maybe SSLSettingsSSLManagementType)
+    , _ssCertificateId               :: !(Maybe Text)
+    , _ssPendingManagedCertificateId :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SSLSettings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ssSSLManagementType'
+--
+-- * 'ssCertificateId'
+--
+-- * 'ssPendingManagedCertificateId'
+sslSettings
+    :: SSLSettings
+sslSettings =
+    SSLSettings'
+    { _ssSSLManagementType = Nothing
+    , _ssCertificateId = Nothing
+    , _ssPendingManagedCertificateId = Nothing
+    }
+
+-- | SSL management type for this domain. If AUTOMATIC, a managed certificate
+-- is automatically provisioned. If MANUAL, certificate_id must be manually
+-- specified in order to configure SSL for this domain.
+ssSSLManagementType :: Lens' SSLSettings (Maybe SSLSettingsSSLManagementType)
+ssSSLManagementType
+  = lens _ssSSLManagementType
+      (\ s a -> s{_ssSSLManagementType = a})
+
+-- | ID of the AuthorizedCertificate resource configuring SSL for the
+-- application. Clearing this field will remove SSL support.By default, a
+-- managed certificate is automatically created for every domain mapping.
+-- To omit SSL support or to configure SSL manually, specify
+-- SslManagementType.MANUAL on a CREATE or UPDATE request. You must be
+-- authorized to administer the AuthorizedCertificate resource to manually
+-- map it to a DomainMapping resource. Example: 12345.
+ssCertificateId :: Lens' SSLSettings (Maybe Text)
+ssCertificateId
+  = lens _ssCertificateId
+      (\ s a -> s{_ssCertificateId = a})
+
+-- | ID of the managed AuthorizedCertificate resource currently being
+-- provisioned, if applicable. Until the new managed certificate has been
+-- successfully provisioned, the previous SSL state will be preserved. Once
+-- the provisioning process completes, the certificate_id field will
+-- reflect the new managed certificate and this field will be left empty.
+-- To remove SSL support while there is still a pending managed
+-- certificate, clear the certificate_id field with an
+-- UpdateDomainMappingRequest.\'OutputOnly
+ssPendingManagedCertificateId :: Lens' SSLSettings (Maybe Text)
+ssPendingManagedCertificateId
+  = lens _ssPendingManagedCertificateId
+      (\ s a -> s{_ssPendingManagedCertificateId = a})
+
+instance FromJSON SSLSettings where
+        parseJSON
+          = withObject "SSLSettings"
+              (\ o ->
+                 SSLSettings' <$>
+                   (o .:? "sslManagementType") <*>
+                     (o .:? "certificateId")
+                     <*> (o .:? "pendingManagedCertificateId"))
+
+instance ToJSON SSLSettings where
+        toJSON SSLSettings'{..}
+          = object
+              (catMaybes
+                 [("sslManagementType" .=) <$> _ssSSLManagementType,
+                  ("certificateId" .=) <$> _ssCertificateId,
+                  ("pendingManagedCertificateId" .=) <$>
+                    _ssPendingManagedCertificateId])
+
 -- | Code and application artifacts used to deploy a version to App Engine.
 --
 -- /See:/ 'deployment' smart constructor.
 data Deployment = Deployment'
-    { _dZip       :: !(Maybe ZipInfo)
-    , _dContainer :: !(Maybe ContainerInfo)
-    , _dFiles     :: !(Maybe DeploymentFiles)
+    { _dZip               :: !(Maybe ZipInfo)
+    , _dCloudBuildOptions :: !(Maybe CloudBuildOptions)
+    , _dContainer         :: !(Maybe ContainerInfo)
+    , _dFiles             :: !(Maybe DeploymentFiles)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Deployment' with the minimum fields required to make a request.
@@ -3915,6 +5892,8 @@ data Deployment = Deployment'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'dZip'
+--
+-- * 'dCloudBuildOptions'
 --
 -- * 'dContainer'
 --
@@ -3924,6 +5903,7 @@ deployment
 deployment =
     Deployment'
     { _dZip = Nothing
+    , _dCloudBuildOptions = Nothing
     , _dContainer = Nothing
     , _dFiles = Nothing
     }
@@ -3932,8 +5912,17 @@ deployment =
 dZip :: Lens' Deployment (Maybe ZipInfo)
 dZip = lens _dZip (\ s a -> s{_dZip = a})
 
--- | A Docker image that App Engine uses to run the version. Only applicable
--- for instances in App Engine flexible environment.
+-- | Options for any Google Cloud Build builds created as a part of this
+-- deployment.These options will only be used if a new build is created,
+-- such as when deploying to the App Engine flexible environment using
+-- files or zip.
+dCloudBuildOptions :: Lens' Deployment (Maybe CloudBuildOptions)
+dCloudBuildOptions
+  = lens _dCloudBuildOptions
+      (\ s a -> s{_dCloudBuildOptions = a})
+
+-- | The Docker image for the container that runs the version. Only
+-- applicable for instances running in the App Engine flexible environment.
 dContainer :: Lens' Deployment (Maybe ContainerInfo)
 dContainer
   = lens _dContainer (\ s a -> s{_dContainer = a})
@@ -3949,13 +5938,15 @@ instance FromJSON Deployment where
           = withObject "Deployment"
               (\ o ->
                  Deployment' <$>
-                   (o .:? "zip") <*> (o .:? "container") <*>
-                     (o .:? "files"))
+                   (o .:? "zip") <*> (o .:? "cloudBuildOptions") <*>
+                     (o .:? "container")
+                     <*> (o .:? "files"))
 
 instance ToJSON Deployment where
         toJSON Deployment'{..}
           = object
               (catMaybes
                  [("zip" .=) <$> _dZip,
+                  ("cloudBuildOptions" .=) <$> _dCloudBuildOptions,
                   ("container" .=) <$> _dContainer,
                   ("files" .=) <$> _dFiles])

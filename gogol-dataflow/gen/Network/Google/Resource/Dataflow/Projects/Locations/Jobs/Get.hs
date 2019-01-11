@@ -22,7 +22,7 @@
 --
 -- Gets the state of the specified Cloud Dataflow job.
 --
--- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @dataflow.projects.locations.jobs.get@.
+-- /See:/ <https://cloud.google.com/dataflow Dataflow API Reference> for @dataflow.projects.locations.jobs.get@.
 module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Get
     (
     -- * REST Resource
@@ -37,10 +37,8 @@ module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Get
     , pljgJobId
     , pljgUploadProtocol
     , pljgLocation
-    , pljgPp
     , pljgAccessToken
     , pljgUploadType
-    , pljgBearerToken
     , pljgView
     , pljgProjectId
     , pljgCallback
@@ -59,28 +57,24 @@ type ProjectsLocationsJobsGetResource =
              Capture "location" Text :>
                "jobs" :>
                  Capture "jobId" Text :>
-                   QueryParam "$.xgafv" Text :>
+                   QueryParam "$.xgafv" Xgafv :>
                      QueryParam "upload_protocol" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "access_token" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "bearer_token" Text :>
-                               QueryParam "view" Text :>
-                                 QueryParam "callback" Text :>
-                                   QueryParam "alt" AltJSON :> Get '[JSON] Job
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "view" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :> Get '[JSON] Job
 
 -- | Gets the state of the specified Cloud Dataflow job.
 --
 -- /See:/ 'projectsLocationsJobsGet' smart constructor.
 data ProjectsLocationsJobsGet = ProjectsLocationsJobsGet'
-    { _pljgXgafv          :: !(Maybe Text)
+    { _pljgXgafv          :: !(Maybe Xgafv)
     , _pljgJobId          :: !Text
     , _pljgUploadProtocol :: !(Maybe Text)
     , _pljgLocation       :: !Text
-    , _pljgPp             :: !Bool
     , _pljgAccessToken    :: !(Maybe Text)
     , _pljgUploadType     :: !(Maybe Text)
-    , _pljgBearerToken    :: !(Maybe Text)
     , _pljgView           :: !(Maybe Text)
     , _pljgProjectId      :: !Text
     , _pljgCallback       :: !(Maybe Text)
@@ -98,13 +92,9 @@ data ProjectsLocationsJobsGet = ProjectsLocationsJobsGet'
 --
 -- * 'pljgLocation'
 --
--- * 'pljgPp'
---
 -- * 'pljgAccessToken'
 --
 -- * 'pljgUploadType'
---
--- * 'pljgBearerToken'
 --
 -- * 'pljgView'
 --
@@ -122,17 +112,15 @@ projectsLocationsJobsGet pPljgJobId_ pPljgLocation_ pPljgProjectId_ =
     , _pljgJobId = pPljgJobId_
     , _pljgUploadProtocol = Nothing
     , _pljgLocation = pPljgLocation_
-    , _pljgPp = True
     , _pljgAccessToken = Nothing
     , _pljgUploadType = Nothing
-    , _pljgBearerToken = Nothing
     , _pljgView = Nothing
     , _pljgProjectId = pPljgProjectId_
     , _pljgCallback = Nothing
     }
 
 -- | V1 error format.
-pljgXgafv :: Lens' ProjectsLocationsJobsGet (Maybe Text)
+pljgXgafv :: Lens' ProjectsLocationsJobsGet (Maybe Xgafv)
 pljgXgafv
   = lens _pljgXgafv (\ s a -> s{_pljgXgafv = a})
 
@@ -152,10 +140,6 @@ pljgLocation :: Lens' ProjectsLocationsJobsGet Text
 pljgLocation
   = lens _pljgLocation (\ s a -> s{_pljgLocation = a})
 
--- | Pretty-print response.
-pljgPp :: Lens' ProjectsLocationsJobsGet Bool
-pljgPp = lens _pljgPp (\ s a -> s{_pljgPp = a})
-
 -- | OAuth access token.
 pljgAccessToken :: Lens' ProjectsLocationsJobsGet (Maybe Text)
 pljgAccessToken
@@ -167,12 +151,6 @@ pljgUploadType :: Lens' ProjectsLocationsJobsGet (Maybe Text)
 pljgUploadType
   = lens _pljgUploadType
       (\ s a -> s{_pljgUploadType = a})
-
--- | OAuth bearer token.
-pljgBearerToken :: Lens' ProjectsLocationsJobsGet (Maybe Text)
-pljgBearerToken
-  = lens _pljgBearerToken
-      (\ s a -> s{_pljgBearerToken = a})
 
 -- | The level of information requested in response.
 pljgView :: Lens' ProjectsLocationsJobsGet (Maybe Text)
@@ -193,15 +171,15 @@ instance GoogleRequest ProjectsLocationsJobsGet where
         type Rs ProjectsLocationsJobsGet = Job
         type Scopes ProjectsLocationsJobsGet =
              '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly",
                "https://www.googleapis.com/auth/userinfo.email"]
         requestClient ProjectsLocationsJobsGet'{..}
           = go _pljgProjectId _pljgLocation _pljgJobId
               _pljgXgafv
               _pljgUploadProtocol
-              (Just _pljgPp)
               _pljgAccessToken
               _pljgUploadType
-              _pljgBearerToken
               _pljgView
               _pljgCallback
               (Just AltJSON)

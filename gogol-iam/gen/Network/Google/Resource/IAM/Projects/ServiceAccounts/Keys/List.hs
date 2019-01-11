@@ -22,7 +22,7 @@
 --
 -- Lists ServiceAccountKeys.
 --
--- /See:/ <https://cloud.google.com/iam/ Google Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.keys.list@.
+-- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.keys.list@.
 module Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.List
     (
     -- * REST Resource
@@ -36,10 +36,8 @@ module Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.List
     , psaklKeyTypes
     , psaklXgafv
     , psaklUploadProtocol
-    , psaklPp
     , psaklAccessToken
     , psaklUploadType
-    , psaklBearerToken
     , psaklName
     , psaklCallback
     ) where
@@ -54,27 +52,23 @@ type ProjectsServiceAccountsKeysListResource =
        Capture "name" Text :>
          "keys" :>
            QueryParams "keyTypes" Text :>
-             QueryParam "$.xgafv" Text :>
+             QueryParam "$.xgafv" Xgafv :>
                QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "callback" Text :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON] ListServiceAccountKeysResponse
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] ListServiceAccountKeysResponse
 
 -- | Lists ServiceAccountKeys.
 --
 -- /See:/ 'projectsServiceAccountsKeysList' smart constructor.
 data ProjectsServiceAccountsKeysList = ProjectsServiceAccountsKeysList'
     { _psaklKeyTypes       :: !(Maybe [Text])
-    , _psaklXgafv          :: !(Maybe Text)
+    , _psaklXgafv          :: !(Maybe Xgafv)
     , _psaklUploadProtocol :: !(Maybe Text)
-    , _psaklPp             :: !Bool
     , _psaklAccessToken    :: !(Maybe Text)
     , _psaklUploadType     :: !(Maybe Text)
-    , _psaklBearerToken    :: !(Maybe Text)
     , _psaklName           :: !Text
     , _psaklCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -89,13 +83,9 @@ data ProjectsServiceAccountsKeysList = ProjectsServiceAccountsKeysList'
 --
 -- * 'psaklUploadProtocol'
 --
--- * 'psaklPp'
---
 -- * 'psaklAccessToken'
 --
 -- * 'psaklUploadType'
---
--- * 'psaklBearerToken'
 --
 -- * 'psaklName'
 --
@@ -108,10 +98,8 @@ projectsServiceAccountsKeysList pPsaklName_ =
     { _psaklKeyTypes = Nothing
     , _psaklXgafv = Nothing
     , _psaklUploadProtocol = Nothing
-    , _psaklPp = True
     , _psaklAccessToken = Nothing
     , _psaklUploadType = Nothing
-    , _psaklBearerToken = Nothing
     , _psaklName = pPsaklName_
     , _psaklCallback = Nothing
     }
@@ -127,7 +115,7 @@ psaklKeyTypes
       . _Coerce
 
 -- | V1 error format.
-psaklXgafv :: Lens' ProjectsServiceAccountsKeysList (Maybe Text)
+psaklXgafv :: Lens' ProjectsServiceAccountsKeysList (Maybe Xgafv)
 psaklXgafv
   = lens _psaklXgafv (\ s a -> s{_psaklXgafv = a})
 
@@ -136,10 +124,6 @@ psaklUploadProtocol :: Lens' ProjectsServiceAccountsKeysList (Maybe Text)
 psaklUploadProtocol
   = lens _psaklUploadProtocol
       (\ s a -> s{_psaklUploadProtocol = a})
-
--- | Pretty-print response.
-psaklPp :: Lens' ProjectsServiceAccountsKeysList Bool
-psaklPp = lens _psaklPp (\ s a -> s{_psaklPp = a})
 
 -- | OAuth access token.
 psaklAccessToken :: Lens' ProjectsServiceAccountsKeysList (Maybe Text)
@@ -153,17 +137,11 @@ psaklUploadType
   = lens _psaklUploadType
       (\ s a -> s{_psaklUploadType = a})
 
--- | OAuth bearer token.
-psaklBearerToken :: Lens' ProjectsServiceAccountsKeysList (Maybe Text)
-psaklBearerToken
-  = lens _psaklBearerToken
-      (\ s a -> s{_psaklBearerToken = a})
-
 -- | The resource name of the service account in the following format:
--- \`projects\/{project}\/serviceAccounts\/{account}\`. Using \`-\` as a
--- wildcard for the project, will infer the project from the account. The
--- \`account\` value can be the \`email\` address or the \`unique_id\` of
--- the service account.
+-- \`projects\/{PROJECT_ID}\/serviceAccounts\/{ACCOUNT}\`. Using \`-\` as a
+-- wildcard for the \`PROJECT_ID\`, will infer the project from the
+-- account. The \`ACCOUNT\` value can be the \`email\` address or the
+-- \`unique_id\` of the service account.
 psaklName :: Lens' ProjectsServiceAccountsKeysList Text
 psaklName
   = lens _psaklName (\ s a -> s{_psaklName = a})
@@ -184,10 +162,8 @@ instance GoogleRequest
           = go _psaklName (_psaklKeyTypes ^. _Default)
               _psaklXgafv
               _psaklUploadProtocol
-              (Just _psaklPp)
               _psaklAccessToken
               _psaklUploadType
-              _psaklBearerToken
               _psaklCallback
               (Just AltJSON)
               iAMService

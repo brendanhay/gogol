@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'EditsImagesList' request conforms to.
 type EditsImagesListResource =
      "androidpublisher" :>
-       "v2" :>
+       "v3" :>
          "applications" :>
            Capture "packageName" Text :>
              "edits" :>

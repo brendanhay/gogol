@@ -16,7 +16,7 @@
 --
 module Network.Google.AppsActivity.Types.Sum where
 
-import           Network.Google.Prelude
+import           Network.Google.Prelude hiding (Bytes)
 
 -- | The main type of event that occurred.
 data EventPrimaryEventType
@@ -88,6 +88,8 @@ data PermissionRole
       -- ^ @commenter@
     | Owner
       -- ^ @owner@
+    | PublishedReader
+      -- ^ @publishedReader@
     | Reader
       -- ^ @reader@
     | Writer
@@ -100,6 +102,7 @@ instance FromHttpApiData PermissionRole where
     parseQueryParam = \case
         "commenter" -> Right Commenter
         "owner" -> Right Owner
+        "publishedReader" -> Right PublishedReader
         "reader" -> Right Reader
         "writer" -> Right Writer
         x -> Left ("Unable to parse PermissionRole from: " <> x)
@@ -108,6 +111,7 @@ instance ToHttpApiData PermissionRole where
     toQueryParam = \case
         Commenter -> "commenter"
         Owner -> "owner"
+        PublishedReader -> "publishedReader"
         Reader -> "reader"
         Writer -> "writer"
 

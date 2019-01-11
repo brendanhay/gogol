@@ -38,10 +38,8 @@ module Network.Google.Resource.Classroom.Courses.Get
     -- * Request Lenses
     , cgXgafv
     , cgUploadProtocol
-    , cgPp
     , cgAccessToken
     , cgUploadType
-    , cgBearerToken
     , cgId
     , cgCallback
     ) where
@@ -55,14 +53,12 @@ type CoursesGetResource =
      "v1" :>
        "courses" :>
          Capture "id" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] Course
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] Course
 
 -- | Returns a course. This method returns the following error codes: *
 -- \`PERMISSION_DENIED\` if the requesting user is not permitted to access
@@ -71,12 +67,10 @@ type CoursesGetResource =
 --
 -- /See:/ 'coursesGet' smart constructor.
 data CoursesGet = CoursesGet'
-    { _cgXgafv          :: !(Maybe Text)
+    { _cgXgafv          :: !(Maybe Xgafv)
     , _cgUploadProtocol :: !(Maybe Text)
-    , _cgPp             :: !Bool
     , _cgAccessToken    :: !(Maybe Text)
     , _cgUploadType     :: !(Maybe Text)
-    , _cgBearerToken    :: !(Maybe Text)
     , _cgId             :: !Text
     , _cgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -89,13 +83,9 @@ data CoursesGet = CoursesGet'
 --
 -- * 'cgUploadProtocol'
 --
--- * 'cgPp'
---
 -- * 'cgAccessToken'
 --
 -- * 'cgUploadType'
---
--- * 'cgBearerToken'
 --
 -- * 'cgId'
 --
@@ -107,16 +97,14 @@ coursesGet pCgId_ =
     CoursesGet'
     { _cgXgafv = Nothing
     , _cgUploadProtocol = Nothing
-    , _cgPp = True
     , _cgAccessToken = Nothing
     , _cgUploadType = Nothing
-    , _cgBearerToken = Nothing
     , _cgId = pCgId_
     , _cgCallback = Nothing
     }
 
 -- | V1 error format.
-cgXgafv :: Lens' CoursesGet (Maybe Text)
+cgXgafv :: Lens' CoursesGet (Maybe Xgafv)
 cgXgafv = lens _cgXgafv (\ s a -> s{_cgXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -124,10 +112,6 @@ cgUploadProtocol :: Lens' CoursesGet (Maybe Text)
 cgUploadProtocol
   = lens _cgUploadProtocol
       (\ s a -> s{_cgUploadProtocol = a})
-
--- | Pretty-print response.
-cgPp :: Lens' CoursesGet Bool
-cgPp = lens _cgPp (\ s a -> s{_cgPp = a})
 
 -- | OAuth access token.
 cgAccessToken :: Lens' CoursesGet (Maybe Text)
@@ -139,12 +123,6 @@ cgAccessToken
 cgUploadType :: Lens' CoursesGet (Maybe Text)
 cgUploadType
   = lens _cgUploadType (\ s a -> s{_cgUploadType = a})
-
--- | OAuth bearer token.
-cgBearerToken :: Lens' CoursesGet (Maybe Text)
-cgBearerToken
-  = lens _cgBearerToken
-      (\ s a -> s{_cgBearerToken = a})
 
 -- | Identifier of the course to return. This identifier can be either the
 -- Classroom-assigned identifier or an alias.
@@ -162,10 +140,8 @@ instance GoogleRequest CoursesGet where
              '["https://www.googleapis.com/auth/classroom.courses",
                "https://www.googleapis.com/auth/classroom.courses.readonly"]
         requestClient CoursesGet'{..}
-          = go _cgId _cgXgafv _cgUploadProtocol (Just _cgPp)
-              _cgAccessToken
+          = go _cgId _cgXgafv _cgUploadProtocol _cgAccessToken
               _cgUploadType
-              _cgBearerToken
               _cgCallback
               (Just AltJSON)
               classroomService

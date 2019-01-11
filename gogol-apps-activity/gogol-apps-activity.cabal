@@ -1,6 +1,6 @@
 name:                  gogol-apps-activity
 version:               0.3.0
-synopsis:              Google Apps Activity SDK.
+synopsis:              Google Drive Activity SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense

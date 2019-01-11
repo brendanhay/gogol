@@ -34,6 +34,7 @@ module Network.Google.Resource.Compute.RegionInstanceGroupManagers.SetInstanceTe
     , RegionInstanceGroupManagersSetInstanceTemplate
 
     -- * Request Lenses
+    , rigmsitRequestId
     , rigmsitProject
     , rigmsitInstanceGroupManager
     , rigmsitPayload
@@ -56,17 +57,19 @@ type RegionInstanceGroupManagersSetInstanceTemplateResource
                  "instanceGroupManagers" :>
                    Capture "instanceGroupManager" Text :>
                      "setInstanceTemplate" :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON]
-                           RegionInstanceGroupManagersSetTemplateRequest
-                           :> Post '[JSON] Operation
+                       QueryParam "requestId" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON]
+                             RegionInstanceGroupManagersSetTemplateRequest
+                             :> Post '[JSON] Operation
 
 -- | Sets the instance template to use when creating new instances or
 -- recreating instances in this group. Existing instances are not affected.
 --
 -- /See:/ 'regionInstanceGroupManagersSetInstanceTemplate' smart constructor.
 data RegionInstanceGroupManagersSetInstanceTemplate = RegionInstanceGroupManagersSetInstanceTemplate'
-    { _rigmsitProject              :: !Text
+    { _rigmsitRequestId            :: !(Maybe Text)
+    , _rigmsitProject              :: !Text
     , _rigmsitInstanceGroupManager :: !Text
     , _rigmsitPayload              :: !RegionInstanceGroupManagersSetTemplateRequest
     , _rigmsitRegion               :: !Text
@@ -75,6 +78,8 @@ data RegionInstanceGroupManagersSetInstanceTemplate = RegionInstanceGroupManager
 -- | Creates a value of 'RegionInstanceGroupManagersSetInstanceTemplate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rigmsitRequestId'
 --
 -- * 'rigmsitProject'
 --
@@ -91,11 +96,27 @@ regionInstanceGroupManagersSetInstanceTemplate
     -> RegionInstanceGroupManagersSetInstanceTemplate
 regionInstanceGroupManagersSetInstanceTemplate pRigmsitProject_ pRigmsitInstanceGroupManager_ pRigmsitPayload_ pRigmsitRegion_ =
     RegionInstanceGroupManagersSetInstanceTemplate'
-    { _rigmsitProject = pRigmsitProject_
+    { _rigmsitRequestId = Nothing
+    , _rigmsitProject = pRigmsitProject_
     , _rigmsitInstanceGroupManager = pRigmsitInstanceGroupManager_
     , _rigmsitPayload = pRigmsitPayload_
     , _rigmsitRegion = pRigmsitRegion_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+rigmsitRequestId :: Lens' RegionInstanceGroupManagersSetInstanceTemplate (Maybe Text)
+rigmsitRequestId
+  = lens _rigmsitRequestId
+      (\ s a -> s{_rigmsitRequestId = a})
 
 -- | Project ID for this request.
 rigmsitProject :: Lens' RegionInstanceGroupManagersSetInstanceTemplate Text
@@ -135,6 +156,7 @@ instance GoogleRequest
           RegionInstanceGroupManagersSetInstanceTemplate'{..}
           = go _rigmsitProject _rigmsitRegion
               _rigmsitInstanceGroupManager
+              _rigmsitRequestId
               (Just AltJSON)
               _rigmsitPayload
               computeService

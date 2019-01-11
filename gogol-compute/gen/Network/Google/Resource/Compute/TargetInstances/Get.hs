@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified TargetInstance resource. Get a list of available
+-- Returns the specified TargetInstance resource. Gets a list of available
 -- target instances by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetInstances.get@.
@@ -56,7 +56,7 @@ type TargetInstancesGetResource =
                      QueryParam "alt" AltJSON :>
                        Get '[JSON] TargetInstance
 
--- | Returns the specified TargetInstance resource. Get a list of available
+-- | Returns the specified TargetInstance resource. Gets a list of available
 -- target instances by making a list() request.
 --
 -- /See:/ 'targetInstancesGet' smart constructor.

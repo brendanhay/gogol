@@ -34,6 +34,7 @@ module Network.Google.Resource.Compute.InstanceGroups.Insert
     , InstanceGroupsInsert
 
     -- * Request Lenses
+    , igiRequestId
     , igiProject
     , igiZone
     , igiPayload
@@ -52,23 +53,27 @@ type InstanceGroupsInsertResource =
              "zones" :>
                Capture "zone" Text :>
                  "instanceGroups" :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] InstanceGroup :>
-                       Post '[JSON] Operation
+                   QueryParam "requestId" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] InstanceGroup :>
+                         Post '[JSON] Operation
 
 -- | Creates an instance group in the specified project using the parameters
 -- that are included in the request.
 --
 -- /See:/ 'instanceGroupsInsert' smart constructor.
 data InstanceGroupsInsert = InstanceGroupsInsert'
-    { _igiProject :: !Text
-    , _igiZone    :: !Text
-    , _igiPayload :: !InstanceGroup
+    { _igiRequestId :: !(Maybe Text)
+    , _igiProject   :: !Text
+    , _igiZone      :: !Text
+    , _igiPayload   :: !InstanceGroup
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'igiRequestId'
 --
 -- * 'igiProject'
 --
@@ -82,10 +87,25 @@ instanceGroupsInsert
     -> InstanceGroupsInsert
 instanceGroupsInsert pIgiProject_ pIgiZone_ pIgiPayload_ =
     InstanceGroupsInsert'
-    { _igiProject = pIgiProject_
+    { _igiRequestId = Nothing
+    , _igiProject = pIgiProject_
     , _igiZone = pIgiZone_
     , _igiPayload = pIgiPayload_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+igiRequestId :: Lens' InstanceGroupsInsert (Maybe Text)
+igiRequestId
+  = lens _igiRequestId (\ s a -> s{_igiRequestId = a})
 
 -- | Project ID for this request.
 igiProject :: Lens' InstanceGroupsInsert Text
@@ -107,7 +127,9 @@ instance GoogleRequest InstanceGroupsInsert where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient InstanceGroupsInsert'{..}
-          = go _igiProject _igiZone (Just AltJSON) _igiPayload
+          = go _igiProject _igiZone _igiRequestId
+              (Just AltJSON)
+              _igiPayload
               computeService
           where go
                   = buildClient

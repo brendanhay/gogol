@@ -78,7 +78,7 @@ resourcesCalendarsDelete pRcdCustomer_ pRcdCalendarResourceId_ =
     , _rcdCalendarResourceId = pRcdCalendarResourceId_
     }
 
--- | The unique ID for the customer\'s Google account. As an account
+-- | The unique ID for the customer\'s G Suite account. As an account
 -- administrator, you can also use the my_customer alias to represent your
 -- account\'s customer ID.
 rcdCustomer :: Lens' ResourcesCalendarsDelete Text

@@ -20,8 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves an order using merchant order id. This method can only be
--- called for non-multi-client accounts.
+-- Retrieves an order using merchant order id.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.getbymerchantorderid@.
 module Network.Google.Resource.Content.Orders.GetbymerchantOrderid
@@ -45,15 +44,14 @@ import           Network.Google.ShoppingContent.Types
 -- 'OrdersGetbymerchantOrderid' request conforms to.
 type OrdersGetbymerchantOrderidResource =
      "content" :>
-       "v2" :>
+       "v2.1" :>
          Capture "merchantId" (Textual Word64) :>
            "ordersbymerchantid" :>
              Capture "merchantOrderId" Text :>
                QueryParam "alt" AltJSON :>
                  Get '[JSON] OrdersGetByMerchantOrderIdResponse
 
--- | Retrieves an order using merchant order id. This method can only be
--- called for non-multi-client accounts.
+-- | Retrieves an order using merchant order id.
 --
 -- /See:/ 'ordersGetbymerchantOrderid' smart constructor.
 data OrdersGetbymerchantOrderid = OrdersGetbymerchantOrderid'
@@ -78,7 +76,8 @@ ordersGetbymerchantOrderid pOgogMerchantId_ pOgogMerchantOrderId_ =
     , _ogogMerchantOrderId = pOgogMerchantOrderId_
     }
 
--- | The ID of the managing account.
+-- | The ID of the account that manages the order. This cannot be a
+-- multi-client account.
 ogogMerchantId :: Lens' OrdersGetbymerchantOrderid Word64
 ogogMerchantId
   = lens _ogogMerchantId

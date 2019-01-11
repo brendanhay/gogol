@@ -22,7 +22,7 @@
 --
 -- Lists all regions\/{region}\/clusters in a project.
 --
--- /See:/ <https://cloud.google.com/dataproc/ Google Cloud Dataproc API Reference> for @dataproc.projects.regions.clusters.list@.
+-- /See:/ <https://cloud.google.com/dataproc/ Cloud Dataproc API Reference> for @dataproc.projects.regions.clusters.list@.
 module Network.Google.Resource.Dataproc.Projects.Regions.Clusters.List
     (
     -- * REST Resource
@@ -35,10 +35,8 @@ module Network.Google.Resource.Dataproc.Projects.Regions.Clusters.List
     -- * Request Lenses
     , prclXgafv
     , prclUploadProtocol
-    , prclPp
     , prclAccessToken
     , prclUploadType
-    , prclBearerToken
     , prclFilter
     , prclRegion
     , prclPageToken
@@ -59,29 +57,25 @@ type ProjectsRegionsClustersListResource =
            "regions" :>
              Capture "region" Text :>
                "clusters" :>
-                 QueryParam "$.xgafv" Text :>
+                 QueryParam "$.xgafv" Xgafv :>
                    QueryParam "upload_protocol" Text :>
-                     QueryParam "pp" Bool :>
-                       QueryParam "access_token" Text :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "bearer_token" Text :>
-                             QueryParam "filter" Text :>
-                               QueryParam "pageToken" Text :>
-                                 QueryParam "pageSize" (Textual Int32) :>
-                                   QueryParam "callback" Text :>
-                                     QueryParam "alt" AltJSON :>
-                                       Get '[JSON] ListClustersResponse
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "filter" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "pageSize" (Textual Int32) :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON] ListClustersResponse
 
 -- | Lists all regions\/{region}\/clusters in a project.
 --
 -- /See:/ 'projectsRegionsClustersList' smart constructor.
 data ProjectsRegionsClustersList = ProjectsRegionsClustersList'
-    { _prclXgafv          :: !(Maybe Text)
+    { _prclXgafv          :: !(Maybe Xgafv)
     , _prclUploadProtocol :: !(Maybe Text)
-    , _prclPp             :: !Bool
     , _prclAccessToken    :: !(Maybe Text)
     , _prclUploadType     :: !(Maybe Text)
-    , _prclBearerToken    :: !(Maybe Text)
     , _prclFilter         :: !(Maybe Text)
     , _prclRegion         :: !Text
     , _prclPageToken      :: !(Maybe Text)
@@ -98,13 +92,9 @@ data ProjectsRegionsClustersList = ProjectsRegionsClustersList'
 --
 -- * 'prclUploadProtocol'
 --
--- * 'prclPp'
---
 -- * 'prclAccessToken'
 --
 -- * 'prclUploadType'
---
--- * 'prclBearerToken'
 --
 -- * 'prclFilter'
 --
@@ -125,10 +115,8 @@ projectsRegionsClustersList pPrclRegion_ pPrclProjectId_ =
     ProjectsRegionsClustersList'
     { _prclXgafv = Nothing
     , _prclUploadProtocol = Nothing
-    , _prclPp = True
     , _prclAccessToken = Nothing
     , _prclUploadType = Nothing
-    , _prclBearerToken = Nothing
     , _prclFilter = Nothing
     , _prclRegion = pPrclRegion_
     , _prclPageToken = Nothing
@@ -138,7 +126,7 @@ projectsRegionsClustersList pPrclRegion_ pPrclProjectId_ =
     }
 
 -- | V1 error format.
-prclXgafv :: Lens' ProjectsRegionsClustersList (Maybe Text)
+prclXgafv :: Lens' ProjectsRegionsClustersList (Maybe Xgafv)
 prclXgafv
   = lens _prclXgafv (\ s a -> s{_prclXgafv = a})
 
@@ -147,10 +135,6 @@ prclUploadProtocol :: Lens' ProjectsRegionsClustersList (Maybe Text)
 prclUploadProtocol
   = lens _prclUploadProtocol
       (\ s a -> s{_prclUploadProtocol = a})
-
--- | Pretty-print response.
-prclPp :: Lens' ProjectsRegionsClustersList Bool
-prclPp = lens _prclPp (\ s a -> s{_prclPp = a})
 
 -- | OAuth access token.
 prclAccessToken :: Lens' ProjectsRegionsClustersList (Maybe Text)
@@ -164,51 +148,41 @@ prclUploadType
   = lens _prclUploadType
       (\ s a -> s{_prclUploadType = a})
 
--- | OAuth bearer token.
-prclBearerToken :: Lens' ProjectsRegionsClustersList (Maybe Text)
-prclBearerToken
-  = lens _prclBearerToken
-      (\ s a -> s{_prclBearerToken = a})
-
--- | [Optional] A filter constraining the clusters to list. Filters are
--- case-sensitive and have the following syntax: field:value [field:value]
--- ... or field = value [AND [field = value]] ... where **field** is one of
--- \`status.state\`, \`clusterName\`, or \`labels.[KEY]\`, and \`[KEY]\` is
--- a label key. **value** can be \`*\` to match all values.
--- \`status.state\` can be one of the following: \`ACTIVE\`, \`INACTIVE\`,
--- \`CREATING\`, \`RUNNING\`, \`ERROR\`, \`DELETING\`, or \`UPDATING\`.
--- \`ACTIVE\` contains the \`CREATING\`, \`UPDATING\`, and \`RUNNING\`
--- states. \`INACTIVE\` contains the \`DELETING\` and \`ERROR\` states.
--- \`clusterName\` is the name of the cluster provided at creation time.
--- Only the logical \`AND\` operator is supported; space-separated items
--- are treated as having an implicit \`AND\` operator. Example valid
--- filters are: status.state:ACTIVE clusterName:mycluster
--- labels.env:staging \\ labels.starred:* and status.state = ACTIVE AND
--- clusterName = mycluster \\ AND labels.env = staging AND labels.starred =
--- *
+-- | Optional. A filter constraining the clusters to list. Filters are
+-- case-sensitive and have the following syntax:field = value AND field =
+-- value ...where field is one of status.state, clusterName, or
+-- labels.[KEY], and [KEY] is a label key. value can be * to match all
+-- values. status.state can be one of the following: ACTIVE, INACTIVE,
+-- CREATING, RUNNING, ERROR, DELETING, or UPDATING. ACTIVE contains the
+-- CREATING, UPDATING, and RUNNING states. INACTIVE contains the DELETING
+-- and ERROR states. clusterName is the name of the cluster provided at
+-- creation time. Only the logical AND operator is supported;
+-- space-separated items are treated as having an implicit AND
+-- operator.Example filter:status.state = ACTIVE AND clusterName =
+-- mycluster AND labels.env = staging AND labels.starred = *
 prclFilter :: Lens' ProjectsRegionsClustersList (Maybe Text)
 prclFilter
   = lens _prclFilter (\ s a -> s{_prclFilter = a})
 
--- | [Required] The Cloud Dataproc region in which to handle the request.
+-- | Required. The Cloud Dataproc region in which to handle the request.
 prclRegion :: Lens' ProjectsRegionsClustersList Text
 prclRegion
   = lens _prclRegion (\ s a -> s{_prclRegion = a})
 
--- | [Optional] The standard List page token.
+-- | Optional. The standard List page token.
 prclPageToken :: Lens' ProjectsRegionsClustersList (Maybe Text)
 prclPageToken
   = lens _prclPageToken
       (\ s a -> s{_prclPageToken = a})
 
--- | [Required] The ID of the Google Cloud Platform project that the cluster
+-- | Required. The ID of the Google Cloud Platform project that the cluster
 -- belongs to.
 prclProjectId :: Lens' ProjectsRegionsClustersList Text
 prclProjectId
   = lens _prclProjectId
       (\ s a -> s{_prclProjectId = a})
 
--- | [Optional] The standard List page size.
+-- | Optional. The standard List page size.
 prclPageSize :: Lens' ProjectsRegionsClustersList (Maybe Int32)
 prclPageSize
   = lens _prclPageSize (\ s a -> s{_prclPageSize = a})
@@ -228,10 +202,8 @@ instance GoogleRequest ProjectsRegionsClustersList
         requestClient ProjectsRegionsClustersList'{..}
           = go _prclProjectId _prclRegion _prclXgafv
               _prclUploadProtocol
-              (Just _prclPp)
               _prclAccessToken
               _prclUploadType
-              _prclBearerToken
               _prclFilter
               _prclPageToken
               _prclPageSize

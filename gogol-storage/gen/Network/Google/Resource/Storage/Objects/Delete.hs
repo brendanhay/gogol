@@ -39,6 +39,7 @@ module Network.Google.Resource.Storage.Objects.Delete
     , odIfGenerationNotMatch
     , odIfGenerationMatch
     , odBucket
+    , odUserProject
     , odIfMetagenerationNotMatch
     , odObject
     , odGeneration
@@ -59,10 +60,11 @@ type ObjectsDeleteResource =
                  QueryParam "ifMetagenerationMatch" (Textual Int64) :>
                    QueryParam "ifGenerationNotMatch" (Textual Int64) :>
                      QueryParam "ifGenerationMatch" (Textual Int64) :>
-                       QueryParam "ifMetagenerationNotMatch" (Textual Int64)
-                         :>
-                         QueryParam "generation" (Textual Int64) :>
-                           QueryParam "alt" AltJSON :> Delete '[JSON] ()
+                       QueryParam "userProject" Text :>
+                         QueryParam "ifMetagenerationNotMatch" (Textual Int64)
+                           :>
+                           QueryParam "generation" (Textual Int64) :>
+                             QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an object and its metadata. Deletions are permanent if
 -- versioning is not enabled for the bucket, or if the generation parameter
@@ -74,6 +76,7 @@ data ObjectsDelete = ObjectsDelete'
     , _odIfGenerationNotMatch     :: !(Maybe (Textual Int64))
     , _odIfGenerationMatch        :: !(Maybe (Textual Int64))
     , _odBucket                   :: !Text
+    , _odUserProject              :: !(Maybe Text)
     , _odIfMetagenerationNotMatch :: !(Maybe (Textual Int64))
     , _odObject                   :: !Text
     , _odGeneration               :: !(Maybe (Textual Int64))
@@ -91,6 +94,8 @@ data ObjectsDelete = ObjectsDelete'
 --
 -- * 'odBucket'
 --
+-- * 'odUserProject'
+--
 -- * 'odIfMetagenerationNotMatch'
 --
 -- * 'odObject'
@@ -106,6 +111,7 @@ objectsDelete pOdBucket_ pOdObject_ =
     , _odIfGenerationNotMatch = Nothing
     , _odIfGenerationMatch = Nothing
     , _odBucket = pOdBucket_
+    , _odUserProject = Nothing
     , _odIfMetagenerationNotMatch = Nothing
     , _odObject = pOdObject_
     , _odGeneration = Nothing
@@ -120,7 +126,9 @@ odIfMetagenerationMatch
       . mapping _Coerce
 
 -- | Makes the operation conditional on whether the object\'s current
--- generation does not match the given value.
+-- generation does not match the given value. If no live object exists, the
+-- precondition fails. Setting to 0 makes the operation succeed only if
+-- there is a live version of the object.
 odIfGenerationNotMatch :: Lens' ObjectsDelete (Maybe Int64)
 odIfGenerationNotMatch
   = lens _odIfGenerationNotMatch
@@ -128,7 +136,8 @@ odIfGenerationNotMatch
       . mapping _Coerce
 
 -- | Makes the operation conditional on whether the object\'s current
--- generation matches the given value.
+-- generation matches the given value. Setting to 0 makes the operation
+-- succeed only if there are no live versions of the object.
 odIfGenerationMatch :: Lens' ObjectsDelete (Maybe Int64)
 odIfGenerationMatch
   = lens _odIfGenerationMatch
@@ -138,6 +147,13 @@ odIfGenerationMatch
 -- | Name of the bucket in which the object resides.
 odBucket :: Lens' ObjectsDelete Text
 odBucket = lens _odBucket (\ s a -> s{_odBucket = a})
+
+-- | The project to be billed for this request. Required for Requester Pays
+-- buckets.
+odUserProject :: Lens' ObjectsDelete (Maybe Text)
+odUserProject
+  = lens _odUserProject
+      (\ s a -> s{_odUserProject = a})
 
 -- | Makes the operation conditional on whether the object\'s current
 -- metageneration does not match the given value.
@@ -169,6 +185,7 @@ instance GoogleRequest ObjectsDelete where
           = go _odBucket _odObject _odIfMetagenerationMatch
               _odIfGenerationNotMatch
               _odIfGenerationMatch
+              _odUserProject
               _odIfMetagenerationNotMatch
               _odGeneration
               (Just AltJSON)

@@ -84,8 +84,7 @@ instance GoogleRequest
          ScoresResetMultipleForAllPlayers where
         type Rs ScoresResetMultipleForAllPlayers = ()
         type Scopes ScoresResetMultipleForAllPlayers =
-             '["https://www.googleapis.com/auth/games",
-               "https://www.googleapis.com/auth/plus.login"]
+             '["https://www.googleapis.com/auth/games"]
         requestClient ScoresResetMultipleForAllPlayers'{..}
           = go (Just AltJSON) _srmfapPayload
               gamesManagementService

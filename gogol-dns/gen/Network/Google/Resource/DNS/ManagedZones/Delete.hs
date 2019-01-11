@@ -51,8 +51,7 @@ type ManagedZonesDeleteResource =
              "managedZones" :>
                Capture "managedZone" Text :>
                  QueryParam "clientOperationId" Text :>
-                   QueryParam "alt" AltJSON :>
-                     Delete '[JSON] ManagedZonesDeleteResponse
+                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete a previously created ManagedZone.
 --
@@ -104,8 +103,7 @@ mzdClientOperationId
       (\ s a -> s{_mzdClientOperationId = a})
 
 instance GoogleRequest ManagedZonesDelete where
-        type Rs ManagedZonesDelete =
-             ManagedZonesDeleteResponse
+        type Rs ManagedZonesDelete = ()
         type Scopes ManagedZonesDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/ndev.clouddns.readwrite"]

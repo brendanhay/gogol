@@ -14,9 +14,9 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    Google Cloud Natural Language API provides natural language
-    understanding technologies to developers. Examples include sentiment
-    analysis, entity recognition, and text annotations.
+    Provides natural language understanding technologies, such as sentiment
+    analysis, entity recognition, entity sentiment analysis, and other text
+    annotations, to developers.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -38,9 +38,11 @@ library
           Network.Google.Language
         , Network.Google.Language.Types
         , Network.Google.Resource.Language.Documents.AnalyzeEntities
+        , Network.Google.Resource.Language.Documents.AnalyzeEntitySentiment
         , Network.Google.Resource.Language.Documents.AnalyzeSentiment
         , Network.Google.Resource.Language.Documents.AnalyzeSyntax
         , Network.Google.Resource.Language.Documents.AnnotateText
+        , Network.Google.Resource.Language.Documents.ClassifyText
 
     other-modules:
           Network.Google.Language.Types.Product

@@ -45,11 +45,13 @@ module Network.Google.Resource.Storage.Objects.Rewrite
     , orMaxBytesRewrittenPerCall
     , orSourceBucket
     , orPayload
+    , orUserProject
     , orDestinationBucket
     , orIfMetagenerationNotMatch
     , orIfSourceGenerationNotMatch
     , orProjection
     , orSourceGeneration
+    , orDestinationKmsKeyName
     , orRewriteToken
     , orDestinationObject
     ) where
@@ -95,26 +97,36 @@ type ObjectsRewriteResource =
                                          QueryParam "maxBytesRewrittenPerCall"
                                            (Textual Int64)
                                            :>
-                                           QueryParam "ifMetagenerationNotMatch"
-                                             (Textual Int64)
-                                             :>
+                                           QueryParam "userProject" Text :>
                                              QueryParam
-                                               "ifSourceGenerationNotMatch"
+                                               "ifMetagenerationNotMatch"
                                                (Textual Int64)
                                                :>
-                                               QueryParam "projection"
-                                                 ObjectsRewriteProjection
+                                               QueryParam
+                                                 "ifSourceGenerationNotMatch"
+                                                 (Textual Int64)
                                                  :>
-                                                 QueryParam "sourceGeneration"
-                                                   (Textual Int64)
+                                                 QueryParam "projection"
+                                                   ObjectsRewriteProjection
                                                    :>
-                                                   QueryParam "rewriteToken"
-                                                     Text
+                                                   QueryParam "sourceGeneration"
+                                                     (Textual Int64)
                                                      :>
-                                                     QueryParam "alt" AltJSON :>
-                                                       ReqBody '[JSON] Object :>
-                                                         Post '[JSON]
-                                                           RewriteResponse
+                                                     QueryParam
+                                                       "destinationKmsKeyName"
+                                                       Text
+                                                       :>
+                                                       QueryParam "rewriteToken"
+                                                         Text
+                                                         :>
+                                                         QueryParam "alt"
+                                                           AltJSON
+                                                           :>
+                                                           ReqBody '[JSON]
+                                                             Object
+                                                             :>
+                                                             Post '[JSON]
+                                                               RewriteResponse
 
 -- | Rewrites a source object to a destination object. Optionally overrides
 -- metadata.
@@ -132,11 +144,13 @@ data ObjectsRewrite = ObjectsRewrite'
     , _orMaxBytesRewrittenPerCall       :: !(Maybe (Textual Int64))
     , _orSourceBucket                   :: !Text
     , _orPayload                        :: !Object
+    , _orUserProject                    :: !(Maybe Text)
     , _orDestinationBucket              :: !Text
     , _orIfMetagenerationNotMatch       :: !(Maybe (Textual Int64))
     , _orIfSourceGenerationNotMatch     :: !(Maybe (Textual Int64))
     , _orProjection                     :: !(Maybe ObjectsRewriteProjection)
     , _orSourceGeneration               :: !(Maybe (Textual Int64))
+    , _orDestinationKmsKeyName          :: !(Maybe Text)
     , _orRewriteToken                   :: !(Maybe Text)
     , _orDestinationObject              :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -167,6 +181,8 @@ data ObjectsRewrite = ObjectsRewrite'
 --
 -- * 'orPayload'
 --
+-- * 'orUserProject'
+--
 -- * 'orDestinationBucket'
 --
 -- * 'orIfMetagenerationNotMatch'
@@ -176,6 +192,8 @@ data ObjectsRewrite = ObjectsRewrite'
 -- * 'orProjection'
 --
 -- * 'orSourceGeneration'
+--
+-- * 'orDestinationKmsKeyName'
 --
 -- * 'orRewriteToken'
 --
@@ -200,11 +218,13 @@ objectsRewrite pOrSourceObject_ pOrSourceBucket_ pOrPayload_ pOrDestinationBucke
     , _orMaxBytesRewrittenPerCall = Nothing
     , _orSourceBucket = pOrSourceBucket_
     , _orPayload = pOrPayload_
+    , _orUserProject = Nothing
     , _orDestinationBucket = pOrDestinationBucket_
     , _orIfMetagenerationNotMatch = Nothing
     , _orIfSourceGenerationNotMatch = Nothing
     , _orProjection = Nothing
     , _orSourceGeneration = Nothing
+    , _orDestinationKmsKeyName = Nothing
     , _orRewriteToken = Nothing
     , _orDestinationObject = pOrDestinationObject_
     }
@@ -215,7 +235,7 @@ orDestinationPredefinedACL
   = lens _orDestinationPredefinedACL
       (\ s a -> s{_orDestinationPredefinedACL = a})
 
--- | Makes the operation conditional on whether the source object\'s
+-- | Makes the operation conditional on whether the source object\'s current
 -- generation matches the given value.
 orIfSourceGenerationMatch :: Lens' ObjectsRewrite (Maybe Int64)
 orIfSourceGenerationMatch
@@ -231,8 +251,10 @@ orIfMetagenerationMatch
       (\ s a -> s{_orIfMetagenerationMatch = a})
       . mapping _Coerce
 
--- | Makes the operation conditional on whether the destination object\'s
--- current generation does not match the given value.
+-- | Makes the operation conditional on whether the object\'s current
+-- generation does not match the given value. If no live object exists, the
+-- precondition fails. Setting to 0 makes the operation succeed only if
+-- there is a live version of the object.
 orIfGenerationNotMatch :: Lens' ObjectsRewrite (Maybe Int64)
 orIfGenerationNotMatch
   = lens _orIfGenerationNotMatch
@@ -255,8 +277,9 @@ orIfSourceMetagenerationMatch
       (\ s a -> s{_orIfSourceMetagenerationMatch = a})
       . mapping _Coerce
 
--- | Makes the operation conditional on whether the destination object\'s
--- current generation matches the given value.
+-- | Makes the operation conditional on whether the object\'s current
+-- generation matches the given value. Setting to 0 makes the operation
+-- succeed only if there are no live versions of the object.
 orIfGenerationMatch :: Lens' ObjectsRewrite (Maybe Int64)
 orIfGenerationMatch
   = lens _orIfGenerationMatch
@@ -294,6 +317,13 @@ orPayload :: Lens' ObjectsRewrite Object
 orPayload
   = lens _orPayload (\ s a -> s{_orPayload = a})
 
+-- | The project to be billed for this request. Required for Requester Pays
+-- buckets.
+orUserProject :: Lens' ObjectsRewrite (Maybe Text)
+orUserProject
+  = lens _orUserProject
+      (\ s a -> s{_orUserProject = a})
+
 -- | Name of the bucket in which to store the new object. Overrides the
 -- provided object metadata\'s bucket value, if any.
 orDestinationBucket :: Lens' ObjectsRewrite Text
@@ -309,7 +339,7 @@ orIfMetagenerationNotMatch
       (\ s a -> s{_orIfMetagenerationNotMatch = a})
       . mapping _Coerce
 
--- | Makes the operation conditional on whether the source object\'s
+-- | Makes the operation conditional on whether the source object\'s current
 -- generation does not match the given value.
 orIfSourceGenerationNotMatch :: Lens' ObjectsRewrite (Maybe Int64)
 orIfSourceGenerationNotMatch
@@ -330,6 +360,15 @@ orSourceGeneration
   = lens _orSourceGeneration
       (\ s a -> s{_orSourceGeneration = a})
       . mapping _Coerce
+
+-- | Resource name of the Cloud KMS key, of the form
+-- projects\/my-project\/locations\/global\/keyRings\/my-kr\/cryptoKeys\/my-key,
+-- that will be used to encrypt the object. Overrides the object
+-- metadata\'s kms_key_name value, if any.
+orDestinationKmsKeyName :: Lens' ObjectsRewrite (Maybe Text)
+orDestinationKmsKeyName
+  = lens _orDestinationKmsKeyName
+      (\ s a -> s{_orDestinationKmsKeyName = a})
 
 -- | Include this field (from the previous rewrite response) on each rewrite
 -- request after the first one, until the rewrite response \'done\' flag is
@@ -368,10 +407,12 @@ instance GoogleRequest ObjectsRewrite where
               _orIfSourceMetagenerationMatch
               _orIfGenerationMatch
               _orMaxBytesRewrittenPerCall
+              _orUserProject
               _orIfMetagenerationNotMatch
               _orIfSourceGenerationNotMatch
               _orProjection
               _orSourceGeneration
+              _orDestinationKmsKeyName
               _orRewriteToken
               (Just AltJSON)
               _orPayload

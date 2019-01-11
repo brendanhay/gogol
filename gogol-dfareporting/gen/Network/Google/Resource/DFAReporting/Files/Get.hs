@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves a report file by its report ID and file ID.
+-- Retrieves a report file by its report ID and file ID. This method
+-- supports media download.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.files.get@.
 module Network.Google.Resource.DFAReporting.Files.Get
@@ -44,7 +45,7 @@ import           Network.Google.Prelude
 -- 'FilesGet' request conforms to.
 type FilesGetResource =
      "dfareporting" :>
-       "v2.7" :>
+       "v3.2" :>
          "reports" :>
            Capture "reportId" (Textual Int64) :>
              "files" :>
@@ -52,7 +53,7 @@ type FilesGetResource =
                  QueryParam "alt" AltJSON :> Get '[JSON] File
        :<|>
        "dfareporting" :>
-         "v2.7" :>
+         "v3.2" :>
            "reports" :>
              Capture "reportId" (Textual Int64) :>
                "files" :>
@@ -60,7 +61,8 @@ type FilesGetResource =
                    QueryParam "alt" AltMedia :>
                      Get '[OctetStream] Stream
 
--- | Retrieves a report file by its report ID and file ID.
+-- | Retrieves a report file by its report ID and file ID. This method
+-- supports media download.
 --
 -- /See:/ 'filesGet' smart constructor.
 data FilesGet = FilesGet'

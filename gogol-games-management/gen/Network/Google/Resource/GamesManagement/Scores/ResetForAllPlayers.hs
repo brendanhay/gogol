@@ -83,8 +83,7 @@ srfapLeaderboardId
 instance GoogleRequest ScoresResetForAllPlayers where
         type Rs ScoresResetForAllPlayers = ()
         type Scopes ScoresResetForAllPlayers =
-             '["https://www.googleapis.com/auth/games",
-               "https://www.googleapis.com/auth/plus.login"]
+             '["https://www.googleapis.com/auth/games"]
         requestClient ScoresResetForAllPlayers'{..}
           = go _srfapLeaderboardId (Just AltJSON)
               gamesManagementService

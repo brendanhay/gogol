@@ -37,6 +37,7 @@ module Network.Google.Resource.BigQuery.Tables.Get
     -- * Request Lenses
     , tgDataSetId
     , tgProjectId
+    , tgSelectedFields
     , tgTableId
     ) where
 
@@ -54,7 +55,8 @@ type TablesGetResource =
                Capture "datasetId" Text :>
                  "tables" :>
                    Capture "tableId" Text :>
-                     QueryParam "alt" AltJSON :> Get '[JSON] Table
+                     QueryParam "selectedFields" Text :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] Table
 
 -- | Gets the specified table resource by table ID. This method does not
 -- return the data in the table, it only returns the table resource, which
@@ -62,9 +64,10 @@ type TablesGetResource =
 --
 -- /See:/ 'tablesGet' smart constructor.
 data TablesGet = TablesGet'
-    { _tgDataSetId :: !Text
-    , _tgProjectId :: !Text
-    , _tgTableId   :: !Text
+    { _tgDataSetId      :: !Text
+    , _tgProjectId      :: !Text
+    , _tgSelectedFields :: !(Maybe Text)
+    , _tgTableId        :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesGet' with the minimum fields required to make a request.
@@ -74,6 +77,8 @@ data TablesGet = TablesGet'
 -- * 'tgDataSetId'
 --
 -- * 'tgProjectId'
+--
+-- * 'tgSelectedFields'
 --
 -- * 'tgTableId'
 tablesGet
@@ -85,6 +90,7 @@ tablesGet pTgDataSetId_ pTgProjectId_ pTgTableId_ =
     TablesGet'
     { _tgDataSetId = pTgDataSetId_
     , _tgProjectId = pTgProjectId_
+    , _tgSelectedFields = Nothing
     , _tgTableId = pTgTableId_
     }
 
@@ -97,6 +103,13 @@ tgDataSetId
 tgProjectId :: Lens' TablesGet Text
 tgProjectId
   = lens _tgProjectId (\ s a -> s{_tgProjectId = a})
+
+-- | List of fields to return (comma-separated). If unspecified, all fields
+-- are returned
+tgSelectedFields :: Lens' TablesGet (Maybe Text)
+tgSelectedFields
+  = lens _tgSelectedFields
+      (\ s a -> s{_tgSelectedFields = a})
 
 -- | Table ID of the requested table
 tgTableId :: Lens' TablesGet Text
@@ -111,6 +124,7 @@ instance GoogleRequest TablesGet where
                "https://www.googleapis.com/auth/cloud-platform.read-only"]
         requestClient TablesGet'{..}
           = go _tgProjectId _tgDataSetId _tgTableId
+              _tgSelectedFields
               (Just AltJSON)
               bigQueryService
           where go

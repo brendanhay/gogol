@@ -27,6 +27,7 @@ module Network.Google.Analytics
     , analyticsManageUsersReadOnlyScope
     , analyticsScope
     , analyticsReadOnlyScope
+    , analyticsUserDeletionScope
     , analyticsEditScope
 
     -- * API Declaration
@@ -60,6 +61,9 @@ module Network.Google.Analytics
 
     -- ** analytics.management.accounts.list
     , module Network.Google.Resource.Analytics.Management.Accounts.List
+
+    -- ** analytics.management.clientId.hashClientId
+    , module Network.Google.Resource.Analytics.Management.ClientId.HashClientId
 
     -- ** analytics.management.customDataSources.list
     , module Network.Google.Resource.Analytics.Management.CustomDataSources.List
@@ -193,6 +197,9 @@ module Network.Google.Analytics
     -- ** analytics.management.profiles.update
     , module Network.Google.Resource.Analytics.Management.ProFiles.Update
 
+    -- ** analytics.management.remarketingAudience.delete
+    , module Network.Google.Resource.Analytics.Management.RemarketingAudience.Delete
+
     -- ** analytics.management.remarketingAudience.get
     , module Network.Google.Resource.Analytics.Management.RemarketingAudience.Get
 
@@ -286,7 +293,22 @@ module Network.Google.Analytics
     -- ** analytics.provisioning.createAccountTicket
     , module Network.Google.Resource.Analytics.Provisioning.CreateAccountTicket
 
+    -- ** analytics.provisioning.createAccountTree
+    , module Network.Google.Resource.Analytics.Provisioning.CreateAccountTree
+
+    -- ** analytics.userDeletion.userDeletionRequest.upsert
+    , module Network.Google.Resource.Analytics.UserDeletion.UserDeletionRequest.Upsert
+
     -- * Types
+
+    -- ** UserDeletionRequest
+    , UserDeletionRequest
+    , userDeletionRequest
+    , udrWebPropertyId
+    , udrKind
+    , udrId
+    , udrFirebaseProjectId
+    , udrDeletionRequestTime
 
     -- ** UnSampledReports
     , UnSampledReports
@@ -512,6 +534,14 @@ module Network.Google.Analytics
     -- ** DataGaGetSamplingLevel
     , DataGaGetSamplingLevel (..)
 
+    -- ** HashClientIdResponse
+    , HashClientIdResponse
+    , hashClientIdResponse
+    , hcirClientId
+    , hcirWebPropertyId
+    , hcirKind
+    , hcirHashedClientId
+
     -- ** McfData
     , McfData
     , mcfData
@@ -719,6 +749,7 @@ module Network.Google.Analytics
     , cKind
     , cCreated
     , cUploadType
+    , cSchema
     , cImportBehavior
     , cSelfLink
     , cAccountId
@@ -728,6 +759,17 @@ module Network.Google.Analytics
     , cType
     , cDescription
     , cProFilesLinked
+
+    -- ** AccountTreeRequest
+    , AccountTreeRequest
+    , accountTreeRequest
+    , atrAccountSettings
+    , atrWebPropertyName
+    , atrKind
+    , atrAccountName
+    , atrProFileName
+    , atrWebsiteURL
+    , atrTimezone
 
     -- ** WebPropertyRef
     , WebPropertyRef
@@ -902,6 +944,15 @@ module Network.Google.Analytics
     , fadFieldBRequired
     , fadOverrideOutputField
 
+    -- ** AccountTreeResponse
+    , AccountTreeResponse
+    , accountTreeResponse
+    , atrtAccountSettings
+    , atrtKind
+    , atrtProFile
+    , atrtAccount
+    , atrtWebProperty
+
     -- ** FilterUppercaseDetails
     , FilterUppercaseDetails
     , filterUppercaseDetails
@@ -931,6 +982,13 @@ module Network.Google.Analytics
 
     -- ** DataGaGetOutput
     , DataGaGetOutput (..)
+
+    -- ** HashClientIdRequest
+    , HashClientIdRequest
+    , hashClientIdRequest
+    , hClientId
+    , hWebPropertyId
+    , hKind
 
     -- ** RealtimeData
     , RealtimeData
@@ -987,6 +1045,8 @@ module Network.Google.Analytics
     , wDefaultProFileId
     , wKind
     , wCreated
+    , wDataRetentionTtl
+    , wDataRetentionResetOnNewActivity
     , wSelfLink
     , wAccountId
     , wName
@@ -1029,6 +1089,14 @@ module Network.Google.Analytics
     , gedeciComparisonValue
     , gedeciType
     , gedeciComparisonType
+
+    -- ** AccountTreeRequestAccountSettings
+    , AccountTreeRequestAccountSettings
+    , accountTreeRequestAccountSettings
+    , atrasShareWithSpeciaLists
+    , atrasShareWithSupport
+    , atrasShareAnonymouslyWithOthers
+    , atrasShareWithGoogleProducts
 
     -- ** McfDataQuery
     , McfDataQuery
@@ -1182,6 +1250,14 @@ module Network.Google.Analytics
     , rasbadExcludeConditions
     , rasbadIncludeConditions
 
+    -- ** AccountTreeResponseAccountSettings
+    , AccountTreeResponseAccountSettings
+    , accountTreeResponseAccountSettings
+    , aShareWithSpeciaLists
+    , aShareWithSupport
+    , aShareAnonymouslyWithOthers
+    , aShareWithGoogleProducts
+
     -- ** GoalURLDestinationDetails
     , GoalURLDestinationDetails
     , goalURLDestinationDetails
@@ -1225,6 +1301,7 @@ module Network.Google.Analytics
     , uuStatus
     , uuKind
     , uuCustomDataSourceId
+    , uuUploadTime
     , uuAccountId
     , uuId
     , uuErrors
@@ -1322,6 +1399,12 @@ module Network.Google.Analytics
     , mcfDataTotalsForAllResults
     , mdtfarAddtional
 
+    -- ** UserDeletionRequestId
+    , UserDeletionRequestId
+    , userDeletionRequestId
+    , udriUserId
+    , udriType
+
     -- ** UnSampledReportCloudStorageDownloadDetails
     , UnSampledReportCloudStorageDownloadDetails
     , unSampledReportCloudStorageDownloadDetails
@@ -1364,6 +1447,7 @@ import           Network.Google.Resource.Analytics.Management.AccountUserLinks.D
 import           Network.Google.Resource.Analytics.Management.AccountUserLinks.Insert
 import           Network.Google.Resource.Analytics.Management.AccountUserLinks.List
 import           Network.Google.Resource.Analytics.Management.AccountUserLinks.Update
+import           Network.Google.Resource.Analytics.Management.ClientId.HashClientId
 import           Network.Google.Resource.Analytics.Management.CustomDataSources.List
 import           Network.Google.Resource.Analytics.Management.CustomDimensions.Get
 import           Network.Google.Resource.Analytics.Management.CustomDimensions.Insert
@@ -1408,6 +1492,7 @@ import           Network.Google.Resource.Analytics.Management.ProFileUserLinks.D
 import           Network.Google.Resource.Analytics.Management.ProFileUserLinks.Insert
 import           Network.Google.Resource.Analytics.Management.ProFileUserLinks.List
 import           Network.Google.Resource.Analytics.Management.ProFileUserLinks.Update
+import           Network.Google.Resource.Analytics.Management.RemarketingAudience.Delete
 import           Network.Google.Resource.Analytics.Management.RemarketingAudience.Get
 import           Network.Google.Resource.Analytics.Management.RemarketingAudience.Insert
 import           Network.Google.Resource.Analytics.Management.RemarketingAudience.List
@@ -1439,6 +1524,8 @@ import           Network.Google.Resource.Analytics.Management.WebPropertyUserLin
 import           Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Update
 import           Network.Google.Resource.Analytics.Metadata.Columns.List
 import           Network.Google.Resource.Analytics.Provisioning.CreateAccountTicket
+import           Network.Google.Resource.Analytics.Provisioning.CreateAccountTree
+import           Network.Google.Resource.Analytics.UserDeletion.UserDeletionRequest.Upsert
 
 {- $resources
 TODO
@@ -1446,8 +1533,11 @@ TODO
 
 -- | Represents the entirety of the methods and resources available for the Google Analytics API service.
 type AnalyticsAPI =
-     DataMcfGetResource :<|> DataGaGetResource :<|>
-       DataRealtimeGetResource
+     UserDeletionUserDeletionRequestUpsertResource :<|>
+       DataMcfGetResource
+       :<|> DataGaGetResource
+       :<|> DataRealtimeGetResource
+       :<|> ManagementClientIdHashClientIdResource
        :<|> ManagementWebPropertyAdWordsLinksInsertResource
        :<|> ManagementWebPropertyAdWordsLinksListResource
        :<|> ManagementWebPropertyAdWordsLinksPatchResource
@@ -1462,6 +1552,7 @@ type AnalyticsAPI =
        :<|> ManagementRemarketingAudienceListResource
        :<|> ManagementRemarketingAudiencePatchResource
        :<|> ManagementRemarketingAudienceGetResource
+       :<|> ManagementRemarketingAudienceDeleteResource
        :<|> ManagementRemarketingAudienceUpdateResource
        :<|> ManagementAccountsListResource
        :<|> ManagementExperimentsInsertResource
@@ -1527,5 +1618,6 @@ type AnalyticsAPI =
        :<|> ManagementProFileUserLinksListResource
        :<|> ManagementProFileUserLinksDeleteResource
        :<|> ManagementProFileUserLinksUpdateResource
+       :<|> ProvisioningCreateAccountTreeResource
        :<|> ProvisioningCreateAccountTicketResource
        :<|> MetadataColumnsListResource

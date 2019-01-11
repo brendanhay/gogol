@@ -43,19 +43,19 @@ import           Network.Google.Prelude
 -- 'EditsTestersGet' request conforms to.
 type EditsTestersGetResource =
      "androidpublisher" :>
-       "v2" :>
+       "v3" :>
          "applications" :>
            Capture "packageName" Text :>
              "edits" :>
                Capture "editId" Text :>
                  "testers" :>
-                   Capture "track" EditsTestersGetTrack :>
+                   Capture "track" Text :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Testers
 
 --
 -- /See:/ 'editsTestersGet' smart constructor.
 data EditsTestersGet = EditsTestersGet'
-    { _etgTrack       :: !EditsTestersGetTrack
+    { _etgTrack       :: !Text
     , _etgPackageName :: !Text
     , _etgEditId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ data EditsTestersGet = EditsTestersGet'
 --
 -- * 'etgEditId'
 editsTestersGet
-    :: EditsTestersGetTrack -- ^ 'etgTrack'
+    :: Text -- ^ 'etgTrack'
     -> Text -- ^ 'etgPackageName'
     -> Text -- ^ 'etgEditId'
     -> EditsTestersGet
@@ -81,7 +81,9 @@ editsTestersGet pEtgTrack_ pEtgPackageName_ pEtgEditId_ =
     , _etgEditId = pEtgEditId_
     }
 
-etgTrack :: Lens' EditsTestersGet EditsTestersGetTrack
+-- | The track to read or modify. Acceptable values are: \"alpha\", \"beta\",
+-- \"production\", \"rollout\" or \"internal\".
+etgTrack :: Lens' EditsTestersGet Text
 etgTrack = lens _etgTrack (\ s a -> s{_etgTrack = a})
 
 -- | Unique identifier for the Android app that is being updated; for

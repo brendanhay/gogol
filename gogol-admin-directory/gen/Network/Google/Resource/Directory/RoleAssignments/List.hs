@@ -101,7 +101,7 @@ ralRoleId :: Lens' RoleAssignmentsList (Maybe Text)
 ralRoleId
   = lens _ralRoleId (\ s a -> s{_ralRoleId = a})
 
--- | Immutable ID of the Google Apps account.
+-- | Immutable ID of the G Suite account.
 ralCustomer :: Lens' RoleAssignmentsList Text
 ralCustomer
   = lens _ralCustomer (\ s a -> s{_ralCustomer = a})

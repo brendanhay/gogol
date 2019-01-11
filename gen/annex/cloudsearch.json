@@ -1,0 +1,24 @@
+{
+  "library": "cloudsearch",
+  "canonicalName": "CloudSearch",
+  "resources": {
+    "media": {
+      "methods": {
+        "upload": {
+          "mediaUpload": {
+            "protocols": {
+              "resumable": {
+                "multipart": true,
+                "path": "/resumable/upload/v1/media/{+resourceName}"
+              },
+              "simple": {
+                "multipart": true,
+                "path": "/upload/v1/media/{+resourceName}"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

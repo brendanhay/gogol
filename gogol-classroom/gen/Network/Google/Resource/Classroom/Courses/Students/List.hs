@@ -38,11 +38,9 @@ module Network.Google.Resource.Classroom.Courses.Students.List
     -- * Request Lenses
     , cslXgafv
     , cslUploadProtocol
-    , cslPp
     , cslCourseId
     , cslAccessToken
     , cslUploadType
-    , cslBearerToken
     , cslPageToken
     , cslPageSize
     , cslCallback
@@ -58,17 +56,15 @@ type CoursesStudentsListResource =
        "courses" :>
          Capture "courseId" Text :>
            "students" :>
-             QueryParam "$.xgafv" Text :>
+             QueryParam "$.xgafv" Xgafv :>
                QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "pageSize" (Textual Int32) :>
-                             QueryParam "callback" Text :>
-                               QueryParam "alt" AltJSON :>
-                                 Get '[JSON] ListStudentsResponse
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "pageSize" (Textual Int32) :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] ListStudentsResponse
 
 -- | Returns a list of students of this course that the requester is
 -- permitted to view. This method returns the following error codes: *
@@ -77,13 +73,11 @@ type CoursesStudentsListResource =
 --
 -- /See:/ 'coursesStudentsList' smart constructor.
 data CoursesStudentsList = CoursesStudentsList'
-    { _cslXgafv          :: !(Maybe Text)
+    { _cslXgafv          :: !(Maybe Xgafv)
     , _cslUploadProtocol :: !(Maybe Text)
-    , _cslPp             :: !Bool
     , _cslCourseId       :: !Text
     , _cslAccessToken    :: !(Maybe Text)
     , _cslUploadType     :: !(Maybe Text)
-    , _cslBearerToken    :: !(Maybe Text)
     , _cslPageToken      :: !(Maybe Text)
     , _cslPageSize       :: !(Maybe (Textual Int32))
     , _cslCallback       :: !(Maybe Text)
@@ -97,15 +91,11 @@ data CoursesStudentsList = CoursesStudentsList'
 --
 -- * 'cslUploadProtocol'
 --
--- * 'cslPp'
---
 -- * 'cslCourseId'
 --
 -- * 'cslAccessToken'
 --
 -- * 'cslUploadType'
---
--- * 'cslBearerToken'
 --
 -- * 'cslPageToken'
 --
@@ -119,18 +109,16 @@ coursesStudentsList pCslCourseId_ =
     CoursesStudentsList'
     { _cslXgafv = Nothing
     , _cslUploadProtocol = Nothing
-    , _cslPp = True
     , _cslCourseId = pCslCourseId_
     , _cslAccessToken = Nothing
     , _cslUploadType = Nothing
-    , _cslBearerToken = Nothing
     , _cslPageToken = Nothing
     , _cslPageSize = Nothing
     , _cslCallback = Nothing
     }
 
 -- | V1 error format.
-cslXgafv :: Lens' CoursesStudentsList (Maybe Text)
+cslXgafv :: Lens' CoursesStudentsList (Maybe Xgafv)
 cslXgafv = lens _cslXgafv (\ s a -> s{_cslXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -138,10 +126,6 @@ cslUploadProtocol :: Lens' CoursesStudentsList (Maybe Text)
 cslUploadProtocol
   = lens _cslUploadProtocol
       (\ s a -> s{_cslUploadProtocol = a})
-
--- | Pretty-print response.
-cslPp :: Lens' CoursesStudentsList Bool
-cslPp = lens _cslPp (\ s a -> s{_cslPp = a})
 
 -- | Identifier of the course. This identifier can be either the
 -- Classroom-assigned identifier or an alias.
@@ -160,12 +144,6 @@ cslUploadType :: Lens' CoursesStudentsList (Maybe Text)
 cslUploadType
   = lens _cslUploadType
       (\ s a -> s{_cslUploadType = a})
-
--- | OAuth bearer token.
-cslBearerToken :: Lens' CoursesStudentsList (Maybe Text)
-cslBearerToken
-  = lens _cslBearerToken
-      (\ s a -> s{_cslBearerToken = a})
 
 -- | nextPageToken value returned from a previous list call, indicating that
 -- the subsequent page of results should be returned. The list request must
@@ -195,10 +173,8 @@ instance GoogleRequest CoursesStudentsList where
                "https://www.googleapis.com/auth/classroom.rosters.readonly"]
         requestClient CoursesStudentsList'{..}
           = go _cslCourseId _cslXgafv _cslUploadProtocol
-              (Just _cslPp)
               _cslAccessToken
               _cslUploadType
-              _cslBearerToken
               _cslPageToken
               _cslPageSize
               _cslCallback

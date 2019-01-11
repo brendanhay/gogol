@@ -21,9 +21,9 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Lists all backup runs associated with a given instance and configuration
--- in the reverse chronological order of the enqueued time.
+-- in the reverse chronological order of the backup initiation time.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.backupRuns.list@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.backupRuns.list@.
 module Network.Google.Resource.SQL.BackupRuns.List
     (
     -- * REST Resource
@@ -59,7 +59,7 @@ type BackupRunsListResource =
                          Get '[JSON] BackupRunsListResponse
 
 -- | Lists all backup runs associated with a given instance and configuration
--- in the reverse chronological order of the enqueued time.
+-- in the reverse chronological order of the backup initiation time.
 --
 -- /See:/ 'backupRunsList' smart constructor.
 data BackupRunsList = BackupRunsList'

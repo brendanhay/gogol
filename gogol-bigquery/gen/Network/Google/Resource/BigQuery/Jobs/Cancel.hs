@@ -36,6 +36,7 @@ module Network.Google.Resource.BigQuery.Jobs.Cancel
 
     -- * Request Lenses
     , jcJobId
+    , jcLocation
     , jcProjectId
     ) where
 
@@ -52,8 +53,9 @@ type JobsCancelResource =
              "jobs" :>
                Capture "jobId" Text :>
                  "cancel" :>
-                   QueryParam "alt" AltJSON :>
-                     Post '[JSON] JobCancelResponse
+                   QueryParam "location" Text :>
+                     QueryParam "alt" AltJSON :>
+                       Post '[JSON] JobCancelResponse
 
 -- | Requests that a job be cancelled. This call will return immediately, and
 -- the client will need to poll for the job status to see if the cancel
@@ -62,6 +64,7 @@ type JobsCancelResource =
 -- /See:/ 'jobsCancel' smart constructor.
 data JobsCancel = JobsCancel'
     { _jcJobId     :: !Text
+    , _jcLocation  :: !(Maybe Text)
     , _jcProjectId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -71,6 +74,8 @@ data JobsCancel = JobsCancel'
 --
 -- * 'jcJobId'
 --
+-- * 'jcLocation'
+--
 -- * 'jcProjectId'
 jobsCancel
     :: Text -- ^ 'jcJobId'
@@ -79,12 +84,20 @@ jobsCancel
 jobsCancel pJcJobId_ pJcProjectId_ =
     JobsCancel'
     { _jcJobId = pJcJobId_
+    , _jcLocation = Nothing
     , _jcProjectId = pJcProjectId_
     }
 
 -- | [Required] Job ID of the job to cancel
 jcJobId :: Lens' JobsCancel Text
 jcJobId = lens _jcJobId (\ s a -> s{_jcJobId = a})
+
+-- | The geographic location of the job. Required except for US and EU. See
+-- details at
+-- https:\/\/cloud.google.com\/bigquery\/docs\/locations#specifying_your_location.
+jcLocation :: Lens' JobsCancel (Maybe Text)
+jcLocation
+  = lens _jcLocation (\ s a -> s{_jcLocation = a})
 
 -- | [Required] Project ID of the job to cancel
 jcProjectId :: Lens' JobsCancel Text
@@ -97,7 +110,7 @@ instance GoogleRequest JobsCancel where
              '["https://www.googleapis.com/auth/bigquery",
                "https://www.googleapis.com/auth/cloud-platform"]
         requestClient JobsCancel'{..}
-          = go _jcProjectId _jcJobId (Just AltJSON)
+          = go _jcProjectId _jcJobId _jcLocation (Just AltJSON)
               bigQueryService
           where go
                   = buildClient (Proxy :: Proxy JobsCancelResource)

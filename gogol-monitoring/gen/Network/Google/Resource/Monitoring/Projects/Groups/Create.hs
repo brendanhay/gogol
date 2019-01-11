@@ -36,11 +36,9 @@ module Network.Google.Resource.Monitoring.Projects.Groups.Create
     , pgcXgafv
     , pgcValidateOnly
     , pgcUploadProtocol
-    , pgcPp
     , pgcAccessToken
     , pgcUploadType
     , pgcPayload
-    , pgcBearerToken
     , pgcName
     , pgcCallback
     ) where
@@ -57,13 +55,11 @@ type ProjectsGroupsCreateResource =
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "validateOnly" Bool :>
                QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "callback" Text :>
-                           QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] Group :> Post '[JSON] Group
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Group :> Post '[JSON] Group
 
 -- | Creates a new group.
 --
@@ -72,11 +68,9 @@ data ProjectsGroupsCreate = ProjectsGroupsCreate'
     { _pgcXgafv          :: !(Maybe Xgafv)
     , _pgcValidateOnly   :: !(Maybe Bool)
     , _pgcUploadProtocol :: !(Maybe Text)
-    , _pgcPp             :: !Bool
     , _pgcAccessToken    :: !(Maybe Text)
     , _pgcUploadType     :: !(Maybe Text)
     , _pgcPayload        :: !Group
-    , _pgcBearerToken    :: !(Maybe Text)
     , _pgcName           :: !Text
     , _pgcCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -91,15 +85,11 @@ data ProjectsGroupsCreate = ProjectsGroupsCreate'
 --
 -- * 'pgcUploadProtocol'
 --
--- * 'pgcPp'
---
 -- * 'pgcAccessToken'
 --
 -- * 'pgcUploadType'
 --
 -- * 'pgcPayload'
---
--- * 'pgcBearerToken'
 --
 -- * 'pgcName'
 --
@@ -113,11 +103,9 @@ projectsGroupsCreate pPgcPayload_ pPgcName_ =
     { _pgcXgafv = Nothing
     , _pgcValidateOnly = Nothing
     , _pgcUploadProtocol = Nothing
-    , _pgcPp = True
     , _pgcAccessToken = Nothing
     , _pgcUploadType = Nothing
     , _pgcPayload = pPgcPayload_
-    , _pgcBearerToken = Nothing
     , _pgcName = pPgcName_
     , _pgcCallback = Nothing
     }
@@ -138,10 +126,6 @@ pgcUploadProtocol
   = lens _pgcUploadProtocol
       (\ s a -> s{_pgcUploadProtocol = a})
 
--- | Pretty-print response.
-pgcPp :: Lens' ProjectsGroupsCreate Bool
-pgcPp = lens _pgcPp (\ s a -> s{_pgcPp = a})
-
 -- | OAuth access token.
 pgcAccessToken :: Lens' ProjectsGroupsCreate (Maybe Text)
 pgcAccessToken
@@ -158,12 +142,6 @@ pgcUploadType
 pgcPayload :: Lens' ProjectsGroupsCreate Group
 pgcPayload
   = lens _pgcPayload (\ s a -> s{_pgcPayload = a})
-
--- | OAuth bearer token.
-pgcBearerToken :: Lens' ProjectsGroupsCreate (Maybe Text)
-pgcBearerToken
-  = lens _pgcBearerToken
-      (\ s a -> s{_pgcBearerToken = a})
 
 -- | The project in which to create the group. The format is
 -- \"projects\/{project_id_or_number}\".
@@ -183,10 +161,8 @@ instance GoogleRequest ProjectsGroupsCreate where
         requestClient ProjectsGroupsCreate'{..}
           = go _pgcName _pgcXgafv _pgcValidateOnly
               _pgcUploadProtocol
-              (Just _pgcPp)
               _pgcAccessToken
               _pgcUploadType
-              _pgcBearerToken
               _pgcCallback
               (Just AltJSON)
               _pgcPayload

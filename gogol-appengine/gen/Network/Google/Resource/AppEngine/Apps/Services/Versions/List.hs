@@ -22,7 +22,7 @@
 --
 -- Lists the versions of a service.
 --
--- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ Google App Engine Admin API Reference> for @appengine.apps.services.versions.list@.
+-- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ App Engine Admin API Reference> for @appengine.apps.services.versions.list@.
 module Network.Google.Resource.AppEngine.Apps.Services.Versions.List
     (
     -- * REST Resource
@@ -35,10 +35,8 @@ module Network.Google.Resource.AppEngine.Apps.Services.Versions.List
     -- * Request Lenses
     , asvlXgafv
     , asvlUploadProtocol
-    , asvlPp
     , asvlAccessToken
     , asvlUploadType
-    , asvlBearerToken
     , asvlAppsId
     , asvlView
     , asvlPageToken
@@ -59,29 +57,25 @@ type AppsServicesVersionsListResource =
            "services" :>
              Capture "servicesId" Text :>
                "versions" :>
-                 QueryParam "$.xgafv" Text :>
+                 QueryParam "$.xgafv" Xgafv :>
                    QueryParam "upload_protocol" Text :>
-                     QueryParam "pp" Bool :>
-                       QueryParam "access_token" Text :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "bearer_token" Text :>
-                             QueryParam "view" Text :>
-                               QueryParam "pageToken" Text :>
-                                 QueryParam "pageSize" (Textual Int32) :>
-                                   QueryParam "callback" Text :>
-                                     QueryParam "alt" AltJSON :>
-                                       Get '[JSON] ListVersionsResponse
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "view" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "pageSize" (Textual Int32) :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON] ListVersionsResponse
 
 -- | Lists the versions of a service.
 --
 -- /See:/ 'appsServicesVersionsList' smart constructor.
 data AppsServicesVersionsList = AppsServicesVersionsList'
-    { _asvlXgafv          :: !(Maybe Text)
+    { _asvlXgafv          :: !(Maybe Xgafv)
     , _asvlUploadProtocol :: !(Maybe Text)
-    , _asvlPp             :: !Bool
     , _asvlAccessToken    :: !(Maybe Text)
     , _asvlUploadType     :: !(Maybe Text)
-    , _asvlBearerToken    :: !(Maybe Text)
     , _asvlAppsId         :: !Text
     , _asvlView           :: !(Maybe Text)
     , _asvlPageToken      :: !(Maybe Text)
@@ -98,13 +92,9 @@ data AppsServicesVersionsList = AppsServicesVersionsList'
 --
 -- * 'asvlUploadProtocol'
 --
--- * 'asvlPp'
---
 -- * 'asvlAccessToken'
 --
 -- * 'asvlUploadType'
---
--- * 'asvlBearerToken'
 --
 -- * 'asvlAppsId'
 --
@@ -125,10 +115,8 @@ appsServicesVersionsList pAsvlAppsId_ pAsvlServicesId_ =
     AppsServicesVersionsList'
     { _asvlXgafv = Nothing
     , _asvlUploadProtocol = Nothing
-    , _asvlPp = True
     , _asvlAccessToken = Nothing
     , _asvlUploadType = Nothing
-    , _asvlBearerToken = Nothing
     , _asvlAppsId = pAsvlAppsId_
     , _asvlView = Nothing
     , _asvlPageToken = Nothing
@@ -138,7 +126,7 @@ appsServicesVersionsList pAsvlAppsId_ pAsvlServicesId_ =
     }
 
 -- | V1 error format.
-asvlXgafv :: Lens' AppsServicesVersionsList (Maybe Text)
+asvlXgafv :: Lens' AppsServicesVersionsList (Maybe Xgafv)
 asvlXgafv
   = lens _asvlXgafv (\ s a -> s{_asvlXgafv = a})
 
@@ -147,10 +135,6 @@ asvlUploadProtocol :: Lens' AppsServicesVersionsList (Maybe Text)
 asvlUploadProtocol
   = lens _asvlUploadProtocol
       (\ s a -> s{_asvlUploadProtocol = a})
-
--- | Pretty-print response.
-asvlPp :: Lens' AppsServicesVersionsList Bool
-asvlPp = lens _asvlPp (\ s a -> s{_asvlPp = a})
 
 -- | OAuth access token.
 asvlAccessToken :: Lens' AppsServicesVersionsList (Maybe Text)
@@ -163,12 +147,6 @@ asvlUploadType :: Lens' AppsServicesVersionsList (Maybe Text)
 asvlUploadType
   = lens _asvlUploadType
       (\ s a -> s{_asvlUploadType = a})
-
--- | OAuth bearer token.
-asvlBearerToken :: Lens' AppsServicesVersionsList (Maybe Text)
-asvlBearerToken
-  = lens _asvlBearerToken
-      (\ s a -> s{_asvlBearerToken = a})
 
 -- | Part of \`parent\`. Name of the parent Service resource. Example:
 -- apps\/myapp\/services\/default.
@@ -213,10 +191,8 @@ instance GoogleRequest AppsServicesVersionsList where
         requestClient AppsServicesVersionsList'{..}
           = go _asvlAppsId _asvlServicesId _asvlXgafv
               _asvlUploadProtocol
-              (Just _asvlPp)
               _asvlAccessToken
               _asvlUploadType
-              _asvlBearerToken
               _asvlView
               _asvlPageToken
               _asvlPageSize

@@ -33,12 +33,11 @@ module Network.Google.Resource.Games.TurnBasedMatches.List
     , TurnBasedMatchesList
 
     -- * Request Lenses
-    , turMaxCompletedMatches
-    , turConsistencyToken
-    , turIncludeMatchData
-    , turLanguage
-    , turPageToken
-    , turMaxResults
+    , tMaxCompletedMatches
+    , tIncludeMatchData
+    , tLanguage
+    , tPageToken
+    , tMaxResults
     ) where
 
 import           Network.Google.Games.Types
@@ -51,67 +50,55 @@ type TurnBasedMatchesListResource =
        "v1" :>
          "turnbasedmatches" :>
            QueryParam "maxCompletedMatches" (Textual Int32) :>
-             QueryParam "consistencyToken" (Textual Int64) :>
-               QueryParam "includeMatchData" Bool :>
-                 QueryParam "language" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (Textual Int32) :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] TurnBasedMatchList
+             QueryParam "includeMatchData" Bool :>
+               QueryParam "language" Text :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "maxResults" (Textual Int32) :>
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] TurnBasedMatchList
 
 -- | Returns turn-based matches the player is or was involved in.
 --
 -- /See:/ 'turnBasedMatchesList' smart constructor.
 data TurnBasedMatchesList = TurnBasedMatchesList'
-    { _turMaxCompletedMatches :: !(Maybe (Textual Int32))
-    , _turConsistencyToken    :: !(Maybe (Textual Int64))
-    , _turIncludeMatchData    :: !(Maybe Bool)
-    , _turLanguage            :: !(Maybe Text)
-    , _turPageToken           :: !(Maybe Text)
-    , _turMaxResults          :: !(Maybe (Textual Int32))
+    { _tMaxCompletedMatches :: !(Maybe (Textual Int32))
+    , _tIncludeMatchData    :: !(Maybe Bool)
+    , _tLanguage            :: !(Maybe Text)
+    , _tPageToken           :: !(Maybe Text)
+    , _tMaxResults          :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'turMaxCompletedMatches'
+-- * 'tMaxCompletedMatches'
 --
--- * 'turConsistencyToken'
+-- * 'tIncludeMatchData'
 --
--- * 'turIncludeMatchData'
+-- * 'tLanguage'
 --
--- * 'turLanguage'
+-- * 'tPageToken'
 --
--- * 'turPageToken'
---
--- * 'turMaxResults'
+-- * 'tMaxResults'
 turnBasedMatchesList
     :: TurnBasedMatchesList
 turnBasedMatchesList =
     TurnBasedMatchesList'
-    { _turMaxCompletedMatches = Nothing
-    , _turConsistencyToken = Nothing
-    , _turIncludeMatchData = Nothing
-    , _turLanguage = Nothing
-    , _turPageToken = Nothing
-    , _turMaxResults = Nothing
+    { _tMaxCompletedMatches = Nothing
+    , _tIncludeMatchData = Nothing
+    , _tLanguage = Nothing
+    , _tPageToken = Nothing
+    , _tMaxResults = Nothing
     }
 
 -- | The maximum number of completed or canceled matches to return in the
 -- response. If not set, all matches returned could be completed or
 -- canceled.
-turMaxCompletedMatches :: Lens' TurnBasedMatchesList (Maybe Int32)
-turMaxCompletedMatches
-  = lens _turMaxCompletedMatches
-      (\ s a -> s{_turMaxCompletedMatches = a})
-      . mapping _Coerce
-
--- | The last-seen mutation timestamp.
-turConsistencyToken :: Lens' TurnBasedMatchesList (Maybe Int64)
-turConsistencyToken
-  = lens _turConsistencyToken
-      (\ s a -> s{_turConsistencyToken = a})
+tMaxCompletedMatches :: Lens' TurnBasedMatchesList (Maybe Int32)
+tMaxCompletedMatches
+  = lens _tMaxCompletedMatches
+      (\ s a -> s{_tMaxCompletedMatches = a})
       . mapping _Coerce
 
 -- | True if match data should be returned in the response. Note that not all
@@ -119,41 +106,38 @@ turConsistencyToken
 -- server may decide to only return data for some of the matches to limit
 -- download size for the client. The remainder of the data for these
 -- matches will be retrievable on request.
-turIncludeMatchData :: Lens' TurnBasedMatchesList (Maybe Bool)
-turIncludeMatchData
-  = lens _turIncludeMatchData
-      (\ s a -> s{_turIncludeMatchData = a})
+tIncludeMatchData :: Lens' TurnBasedMatchesList (Maybe Bool)
+tIncludeMatchData
+  = lens _tIncludeMatchData
+      (\ s a -> s{_tIncludeMatchData = a})
 
 -- | The preferred language to use for strings returned by this method.
-turLanguage :: Lens' TurnBasedMatchesList (Maybe Text)
-turLanguage
-  = lens _turLanguage (\ s a -> s{_turLanguage = a})
+tLanguage :: Lens' TurnBasedMatchesList (Maybe Text)
+tLanguage
+  = lens _tLanguage (\ s a -> s{_tLanguage = a})
 
 -- | The token returned by the previous request.
-turPageToken :: Lens' TurnBasedMatchesList (Maybe Text)
-turPageToken
-  = lens _turPageToken (\ s a -> s{_turPageToken = a})
+tPageToken :: Lens' TurnBasedMatchesList (Maybe Text)
+tPageToken
+  = lens _tPageToken (\ s a -> s{_tPageToken = a})
 
 -- | The maximum number of matches to return in the response, used for
 -- paging. For any response, the actual number of matches to return may be
 -- less than the specified maxResults.
-turMaxResults :: Lens' TurnBasedMatchesList (Maybe Int32)
-turMaxResults
-  = lens _turMaxResults
-      (\ s a -> s{_turMaxResults = a})
-      . mapping _Coerce
+tMaxResults :: Lens' TurnBasedMatchesList (Maybe Int32)
+tMaxResults
+  = lens _tMaxResults (\ s a -> s{_tMaxResults = a}) .
+      mapping _Coerce
 
 instance GoogleRequest TurnBasedMatchesList where
         type Rs TurnBasedMatchesList = TurnBasedMatchList
         type Scopes TurnBasedMatchesList =
-             '["https://www.googleapis.com/auth/games",
-               "https://www.googleapis.com/auth/plus.login"]
+             '["https://www.googleapis.com/auth/games"]
         requestClient TurnBasedMatchesList'{..}
-          = go _turMaxCompletedMatches _turConsistencyToken
-              _turIncludeMatchData
-              _turLanguage
-              _turPageToken
-              _turMaxResults
+          = go _tMaxCompletedMatches _tIncludeMatchData
+              _tLanguage
+              _tPageToken
+              _tMaxResults
               (Just AltJSON)
               gamesService
           where go

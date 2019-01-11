@@ -27,9 +27,13 @@ module Network.Google.GroupsSettings.Types
     , groups
     , gEmail
     , gSendMessageDenyNotification
+    , gWhoCanEnterFreeFormTags
+    , gWhoCanAssignTopics
     , gWhoCanPostMessage
     , gAllowExternalMembers
     , gShowInGroupDirectory
+    , gWhoCanUnmarkFavoriteReplyOnAnyTopic
+    , gWhoCanTakeTopics
     , gSpamModerationLevel
     , gKind
     , gWhoCanViewMembership
@@ -40,21 +44,29 @@ module Network.Google.GroupsSettings.Types
     , gMaxMessageBytes
     , gReplyTo
     , gMessageModerationLevel
+    , gWhoCanMarkFavoriteReplyOnAnyTopic
     , gIncludeInGlobalAddressList
     , gIsArchived
     , gName
+    , gWhoCanUnassignTopic
     , gMessageDisplayFont
     , gIncludeCustomFooter
+    , gFavoriteRepliesOnTop
     , gCustomReplyTo
+    , gWhoCanAddReferences
     , gWhoCanContactOwner
     , gWhoCanAdd
     , gWhoCanInvite
     , gWhoCanLeaveGroup
+    , gWhoCanModifyTagsAndCategories
     , gAllowGoogleCommunication
+    , gWhoCanMarkNoResponseNeeded
     , gCustomFooterText
+    , gWhoCanMarkDuplicate
     , gPrimaryLanguage
     , gDescription
     , gDefaultMessageDenyNotificationText
+    , gWhoCanMarkFavoriteReplyOnOwnTopic
     , gAllowWebPosting
     ) where
 
@@ -68,6 +80,6 @@ groupsSettingsService
   = defaultService (ServiceId "groupssettings:v1")
       "www.googleapis.com"
 
--- | View and manage the settings of a Google Apps Group
+-- | View and manage the settings of a G Suite group
 appsGroupsSettingsScope :: Proxy '["https://www.googleapis.com/auth/apps.groups.settings"]
 appsGroupsSettingsScope = Proxy;

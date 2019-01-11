@@ -83,7 +83,7 @@ raiPayload :: Lens' RoleAssignmentsInsert RoleAssignment
 raiPayload
   = lens _raiPayload (\ s a -> s{_raiPayload = a})
 
--- | Immutable ID of the Google Apps account.
+-- | Immutable ID of the G Suite account.
 raiCustomer :: Lens' RoleAssignmentsInsert Text
 raiCustomer
   = lens _raiCustomer (\ s a -> s{_raiCustomer = a})

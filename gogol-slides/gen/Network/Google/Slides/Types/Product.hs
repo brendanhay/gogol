@@ -118,6 +118,121 @@ instance ToJSON DeleteTableRowRequest where
                  [("cellLocation" .=) <$> _dtrrCellLocation,
                   ("tableObjectId" .=) <$> _dtrrTableObjectId])
 
+-- | The thumbnail of a page.
+--
+-- /See:/ 'thumbnail' smart constructor.
+data Thumbnail = Thumbnail'
+    { _tHeight     :: !(Maybe (Textual Int32))
+    , _tWidth      :: !(Maybe (Textual Int32))
+    , _tContentURL :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Thumbnail' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tHeight'
+--
+-- * 'tWidth'
+--
+-- * 'tContentURL'
+thumbnail
+    :: Thumbnail
+thumbnail =
+    Thumbnail'
+    { _tHeight = Nothing
+    , _tWidth = Nothing
+    , _tContentURL = Nothing
+    }
+
+-- | The positive height in pixels of the thumbnail image.
+tHeight :: Lens' Thumbnail (Maybe Int32)
+tHeight
+  = lens _tHeight (\ s a -> s{_tHeight = a}) .
+      mapping _Coerce
+
+-- | The positive width in pixels of the thumbnail image.
+tWidth :: Lens' Thumbnail (Maybe Int32)
+tWidth
+  = lens _tWidth (\ s a -> s{_tWidth = a}) .
+      mapping _Coerce
+
+-- | The content URL of the thumbnail image. The URL to the image has a
+-- default lifetime of 30 minutes. This URL is tagged with the account of
+-- the requester. Anyone with the URL effectively accesses the image as the
+-- original requester. Access to the image may be lost if the
+-- presentation\'s sharing settings change. The mime type of the thumbnail
+-- image is the same as specified in the \`GetPageThumbnailRequest\`.
+tContentURL :: Lens' Thumbnail (Maybe Text)
+tContentURL
+  = lens _tContentURL (\ s a -> s{_tContentURL = a})
+
+instance FromJSON Thumbnail where
+        parseJSON
+          = withObject "Thumbnail"
+              (\ o ->
+                 Thumbnail' <$>
+                   (o .:? "height") <*> (o .:? "width") <*>
+                     (o .:? "contentUrl"))
+
+instance ToJSON Thumbnail where
+        toJSON Thumbnail'{..}
+          = object
+              (catMaybes
+                 [("height" .=) <$> _tHeight,
+                  ("width" .=) <$> _tWidth,
+                  ("contentUrl" .=) <$> _tContentURL])
+
+-- | The properties of each border cell.
+--
+-- /See:/ 'tableBOrderCell' smart constructor.
+data TableBOrderCell = TableBOrderCell'
+    { _tbocLocation              :: !(Maybe TableCellLocation)
+    , _tbocTableBOrderProperties :: !(Maybe TableBOrderProperties)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TableBOrderCell' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tbocLocation'
+--
+-- * 'tbocTableBOrderProperties'
+tableBOrderCell
+    :: TableBOrderCell
+tableBOrderCell =
+    TableBOrderCell'
+    { _tbocLocation = Nothing
+    , _tbocTableBOrderProperties = Nothing
+    }
+
+-- | The location of the border within the border table.
+tbocLocation :: Lens' TableBOrderCell (Maybe TableCellLocation)
+tbocLocation
+  = lens _tbocLocation (\ s a -> s{_tbocLocation = a})
+
+-- | The border properties.
+tbocTableBOrderProperties :: Lens' TableBOrderCell (Maybe TableBOrderProperties)
+tbocTableBOrderProperties
+  = lens _tbocTableBOrderProperties
+      (\ s a -> s{_tbocTableBOrderProperties = a})
+
+instance FromJSON TableBOrderCell where
+        parseJSON
+          = withObject "TableBOrderCell"
+              (\ o ->
+                 TableBOrderCell' <$>
+                   (o .:? "location") <*>
+                     (o .:? "tableBorderProperties"))
+
+instance ToJSON TableBOrderCell where
+        toJSON TableBOrderCell'{..}
+          = object
+              (catMaybes
+                 [("location" .=) <$> _tbocLocation,
+                  ("tableBorderProperties" .=) <$>
+                    _tbocTableBOrderProperties])
+
 -- | Common properties for a page element. Note: When you initially create a
 -- PageElement, the API may modify the values of both \`size\` and
 -- \`transform\`, but the visual size will be unchanged.
@@ -260,6 +375,7 @@ instance ToJSON OutlineFill where
 data Image = Image'
     { _iImageProperties :: !(Maybe ImageProperties)
     , _iContentURL      :: !(Maybe Text)
+    , _iSourceURL       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Image' with the minimum fields required to make a request.
@@ -269,12 +385,15 @@ data Image = Image'
 -- * 'iImageProperties'
 --
 -- * 'iContentURL'
+--
+-- * 'iSourceURL'
 image
     :: Image
 image =
     Image'
     { _iImageProperties = Nothing
     , _iContentURL = Nothing
+    , _iSourceURL = Nothing
     }
 
 -- | The properties of the image.
@@ -291,19 +410,27 @@ iContentURL :: Lens' Image (Maybe Text)
 iContentURL
   = lens _iContentURL (\ s a -> s{_iContentURL = a})
 
+-- | The source URL is the URL used to insert the image. The source URL can
+-- be empty.
+iSourceURL :: Lens' Image (Maybe Text)
+iSourceURL
+  = lens _iSourceURL (\ s a -> s{_iSourceURL = a})
+
 instance FromJSON Image where
         parseJSON
           = withObject "Image"
               (\ o ->
                  Image' <$>
-                   (o .:? "imageProperties") <*> (o .:? "contentUrl"))
+                   (o .:? "imageProperties") <*> (o .:? "contentUrl")
+                     <*> (o .:? "sourceUrl"))
 
 instance ToJSON Image where
         toJSON Image'{..}
           = object
               (catMaybes
                  [("imageProperties" .=) <$> _iImageProperties,
-                  ("contentUrl" .=) <$> _iContentURL])
+                  ("contentUrl" .=) <$> _iContentURL,
+                  ("sourceUrl" .=) <$> _iSourceURL])
 
 -- | Updates the properties of a Line.
 --
@@ -311,7 +438,7 @@ instance ToJSON Image where
 data UpdateLinePropertiesRequest = UpdateLinePropertiesRequest'
     { _ulprLineProperties :: !(Maybe LineProperties)
     , _ulprObjectId       :: !(Maybe Text)
-    , _ulprFields         :: !(Maybe FieldMask)
+    , _ulprFields         :: !(Maybe GFieldMask)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UpdateLinePropertiesRequest' with the minimum fields required to make a request.
@@ -350,7 +477,7 @@ ulprObjectId
 -- \`\"lineFill.solidFill.color\"\`. To reset a property to its default
 -- value, include its field name in the field mask but leave the field
 -- itself unset.
-ulprFields :: Lens' UpdateLinePropertiesRequest (Maybe FieldMask)
+ulprFields :: Lens' UpdateLinePropertiesRequest (Maybe GFieldMask)
 ulprFields
   = lens _ulprFields (\ s a -> s{_ulprFields = a})
 
@@ -485,12 +612,14 @@ instance ToJSON CropProperties where
 --
 -- /See:/ 'lineProperties' smart constructor.
 data LineProperties = LineProperties'
-    { _lpWeight     :: !(Maybe Dimension)
-    , _lpLink       :: !(Maybe Link)
-    , _lpDashStyle  :: !(Maybe LinePropertiesDashStyle)
-    , _lpStartArrow :: !(Maybe LinePropertiesStartArrow)
-    , _lpLineFill   :: !(Maybe LineFill)
-    , _lpEndArrow   :: !(Maybe LinePropertiesEndArrow)
+    { _lpWeight          :: !(Maybe Dimension)
+    , _lpLink            :: !(Maybe Link)
+    , _lpStartConnection :: !(Maybe LineConnection)
+    , _lpDashStyle       :: !(Maybe LinePropertiesDashStyle)
+    , _lpStartArrow      :: !(Maybe LinePropertiesStartArrow)
+    , _lpLineFill        :: !(Maybe LineFill)
+    , _lpEndConnection   :: !(Maybe LineConnection)
+    , _lpEndArrow        :: !(Maybe LinePropertiesEndArrow)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LineProperties' with the minimum fields required to make a request.
@@ -501,11 +630,15 @@ data LineProperties = LineProperties'
 --
 -- * 'lpLink'
 --
+-- * 'lpStartConnection'
+--
 -- * 'lpDashStyle'
 --
 -- * 'lpStartArrow'
 --
 -- * 'lpLineFill'
+--
+-- * 'lpEndConnection'
 --
 -- * 'lpEndArrow'
 lineProperties
@@ -514,9 +647,11 @@ lineProperties =
     LineProperties'
     { _lpWeight = Nothing
     , _lpLink = Nothing
+    , _lpStartConnection = Nothing
     , _lpDashStyle = Nothing
     , _lpStartArrow = Nothing
     , _lpLineFill = Nothing
+    , _lpEndConnection = Nothing
     , _lpEndArrow = Nothing
     }
 
@@ -527,6 +662,14 @@ lpWeight = lens _lpWeight (\ s a -> s{_lpWeight = a})
 -- | The hyperlink destination of the line. If unset, there is no link.
 lpLink :: Lens' LineProperties (Maybe Link)
 lpLink = lens _lpLink (\ s a -> s{_lpLink = a})
+
+-- | The connection at the beginning of the line. If unset, there is no
+-- connection. Only lines with a Type indicating it is a \"connector\" can
+-- have a \`start_connection\`.
+lpStartConnection :: Lens' LineProperties (Maybe LineConnection)
+lpStartConnection
+  = lens _lpStartConnection
+      (\ s a -> s{_lpStartConnection = a})
 
 -- | The dash style of the line.
 lpDashStyle :: Lens' LineProperties (Maybe LinePropertiesDashStyle)
@@ -544,6 +687,14 @@ lpLineFill :: Lens' LineProperties (Maybe LineFill)
 lpLineFill
   = lens _lpLineFill (\ s a -> s{_lpLineFill = a})
 
+-- | The connection at the end of the line. If unset, there is no connection.
+-- Only lines with a Type indicating it is a \"connector\" can have an
+-- \`end_connection\`.
+lpEndConnection :: Lens' LineProperties (Maybe LineConnection)
+lpEndConnection
+  = lens _lpEndConnection
+      (\ s a -> s{_lpEndConnection = a})
+
 -- | The style of the arrow at the end of the line.
 lpEndArrow :: Lens' LineProperties (Maybe LinePropertiesEndArrow)
 lpEndArrow
@@ -555,9 +706,11 @@ instance FromJSON LineProperties where
               (\ o ->
                  LineProperties' <$>
                    (o .:? "weight") <*> (o .:? "link") <*>
-                     (o .:? "dashStyle")
+                     (o .:? "startConnection")
+                     <*> (o .:? "dashStyle")
                      <*> (o .:? "startArrow")
                      <*> (o .:? "lineFill")
+                     <*> (o .:? "endConnection")
                      <*> (o .:? "endArrow"))
 
 instance ToJSON LineProperties where
@@ -566,9 +719,11 @@ instance ToJSON LineProperties where
               (catMaybes
                  [("weight" .=) <$> _lpWeight,
                   ("link" .=) <$> _lpLink,
+                  ("startConnection" .=) <$> _lpStartConnection,
                   ("dashStyle" .=) <$> _lpDashStyle,
                   ("startArrow" .=) <$> _lpStartArrow,
                   ("lineFill" .=) <$> _lpLineFill,
+                  ("endConnection" .=) <$> _lpEndConnection,
                   ("endArrow" .=) <$> _lpEndArrow])
 
 -- | A PageElement kind representing a joined collection of PageElements.
@@ -607,11 +762,79 @@ instance ToJSON Group where
         toJSON Group'{..}
           = object (catMaybes [("children" .=) <$> _gChildren])
 
+-- | Replaces an existing image with a new image. Replacing an image removes
+-- some image effects from the existing image.
+--
+-- /See:/ 'replaceImageRequest' smart constructor.
+data ReplaceImageRequest = ReplaceImageRequest'
+    { _rirImageReplaceMethod :: !(Maybe ReplaceImageRequestImageReplaceMethod)
+    , _rirImageObjectId      :: !(Maybe Text)
+    , _rirURL                :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ReplaceImageRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rirImageReplaceMethod'
+--
+-- * 'rirImageObjectId'
+--
+-- * 'rirURL'
+replaceImageRequest
+    :: ReplaceImageRequest
+replaceImageRequest =
+    ReplaceImageRequest'
+    { _rirImageReplaceMethod = Nothing
+    , _rirImageObjectId = Nothing
+    , _rirURL = Nothing
+    }
+
+-- | The replacement method.
+rirImageReplaceMethod :: Lens' ReplaceImageRequest (Maybe ReplaceImageRequestImageReplaceMethod)
+rirImageReplaceMethod
+  = lens _rirImageReplaceMethod
+      (\ s a -> s{_rirImageReplaceMethod = a})
+
+-- | The ID of the existing image that will be replaced.
+rirImageObjectId :: Lens' ReplaceImageRequest (Maybe Text)
+rirImageObjectId
+  = lens _rirImageObjectId
+      (\ s a -> s{_rirImageObjectId = a})
+
+-- | The URL of the new image. The image is fetched once at insertion time
+-- and a copy is stored for display inside the presentation. Images must be
+-- less than 50MB in size, cannot exceed 25 megapixels, and must be in one
+-- of PNG, JPEG, or GIF format. The provided URL can be at most 2 kB in
+-- length. The URL itself is saved with the image, and exposed via the
+-- Image.source_url field.
+rirURL :: Lens' ReplaceImageRequest (Maybe Text)
+rirURL = lens _rirURL (\ s a -> s{_rirURL = a})
+
+instance FromJSON ReplaceImageRequest where
+        parseJSON
+          = withObject "ReplaceImageRequest"
+              (\ o ->
+                 ReplaceImageRequest' <$>
+                   (o .:? "imageReplaceMethod") <*>
+                     (o .:? "imageObjectId")
+                     <*> (o .:? "url"))
+
+instance ToJSON ReplaceImageRequest where
+        toJSON ReplaceImageRequest'{..}
+          = object
+              (catMaybes
+                 [("imageReplaceMethod" .=) <$>
+                    _rirImageReplaceMethod,
+                  ("imageObjectId" .=) <$> _rirImageObjectId,
+                  ("url" .=) <$> _rirURL])
+
 -- | Request message for PresentationsService.BatchUpdatePresentation.
 --
 -- /See:/ 'batchUpdatePresentationRequest' smart constructor.
-newtype BatchUpdatePresentationRequest = BatchUpdatePresentationRequest'
-    { _buprRequests :: Maybe [Request']
+data BatchUpdatePresentationRequest = BatchUpdatePresentationRequest'
+    { _buprRequests     :: !(Maybe [Request'])
+    , _buprWriteControl :: !(Maybe WriteControl)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BatchUpdatePresentationRequest' with the minimum fields required to make a request.
@@ -619,11 +842,14 @@ newtype BatchUpdatePresentationRequest = BatchUpdatePresentationRequest'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'buprRequests'
+--
+-- * 'buprWriteControl'
 batchUpdatePresentationRequest
     :: BatchUpdatePresentationRequest
 batchUpdatePresentationRequest =
     BatchUpdatePresentationRequest'
     { _buprRequests = Nothing
+    , _buprWriteControl = Nothing
     }
 
 -- | A list of updates to apply to the presentation.
@@ -633,18 +859,86 @@ buprRequests
       . _Default
       . _Coerce
 
+-- | Provides control over how write requests are executed.
+buprWriteControl :: Lens' BatchUpdatePresentationRequest (Maybe WriteControl)
+buprWriteControl
+  = lens _buprWriteControl
+      (\ s a -> s{_buprWriteControl = a})
+
 instance FromJSON BatchUpdatePresentationRequest
          where
         parseJSON
           = withObject "BatchUpdatePresentationRequest"
               (\ o ->
                  BatchUpdatePresentationRequest' <$>
-                   (o .:? "requests" .!= mempty))
+                   (o .:? "requests" .!= mempty) <*>
+                     (o .:? "writeControl"))
 
 instance ToJSON BatchUpdatePresentationRequest where
         toJSON BatchUpdatePresentationRequest'{..}
           = object
-              (catMaybes [("requests" .=) <$> _buprRequests])
+              (catMaybes
+                 [("requests" .=) <$> _buprRequests,
+                  ("writeControl" .=) <$> _buprWriteControl])
+
+-- | Updates the Z-order of page elements. Z-order is an ordering of the
+-- elements on the page from back to front. The page element in the front
+-- may cover the elements that are behind it.
+--
+-- /See:/ 'updatePageElementsZOrderRequest' smart constructor.
+data UpdatePageElementsZOrderRequest = UpdatePageElementsZOrderRequest'
+    { _upezorOperation            :: !(Maybe UpdatePageElementsZOrderRequestOperation)
+    , _upezorPageElementObjectIds :: !(Maybe [Text])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UpdatePageElementsZOrderRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'upezorOperation'
+--
+-- * 'upezorPageElementObjectIds'
+updatePageElementsZOrderRequest
+    :: UpdatePageElementsZOrderRequest
+updatePageElementsZOrderRequest =
+    UpdatePageElementsZOrderRequest'
+    { _upezorOperation = Nothing
+    , _upezorPageElementObjectIds = Nothing
+    }
+
+-- | The Z-order operation to apply on the page elements. When applying the
+-- operation on multiple page elements, the relative Z-orders within these
+-- page elements before the operation is maintained.
+upezorOperation :: Lens' UpdatePageElementsZOrderRequest (Maybe UpdatePageElementsZOrderRequestOperation)
+upezorOperation
+  = lens _upezorOperation
+      (\ s a -> s{_upezorOperation = a})
+
+-- | The object IDs of the page elements to update. All the page elements
+-- must be on the same page and must not be grouped.
+upezorPageElementObjectIds :: Lens' UpdatePageElementsZOrderRequest [Text]
+upezorPageElementObjectIds
+  = lens _upezorPageElementObjectIds
+      (\ s a -> s{_upezorPageElementObjectIds = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON UpdatePageElementsZOrderRequest
+         where
+        parseJSON
+          = withObject "UpdatePageElementsZOrderRequest"
+              (\ o ->
+                 UpdatePageElementsZOrderRequest' <$>
+                   (o .:? "operation") <*>
+                     (o .:? "pageElementObjectIds" .!= mempty))
+
+instance ToJSON UpdatePageElementsZOrderRequest where
+        toJSON UpdatePageElementsZOrderRequest'{..}
+          = object
+              (catMaybes
+                 [("operation" .=) <$> _upezorOperation,
+                  ("pageElementObjectIds" .=) <$>
+                    _upezorPageElementObjectIds])
 
 -- | Creates a new shape.
 --
@@ -767,6 +1061,106 @@ instance ToJSON AutoText where
                   ("content" .=) <$> _atContent,
                   ("type" .=) <$> _atType])
 
+-- | Replaces all shapes that match the given criteria with the provided
+-- Google Sheets chart. The chart will be scaled and centered to fit within
+-- the bounds of the original shape. NOTE: Replacing shapes with a chart
+-- requires at least one of the spreadsheets.readonly, spreadsheets,
+-- drive.readonly, or drive OAuth scopes.
+--
+-- /See:/ 'replaceAllShapesWithSheetsChartRequest' smart constructor.
+data ReplaceAllShapesWithSheetsChartRequest = ReplaceAllShapesWithSheetsChartRequest'
+    { _raswscrPageObjectIds :: !(Maybe [Text])
+    , _raswscrSpreadsheetId :: !(Maybe Text)
+    , _raswscrLinkingMode   :: !(Maybe ReplaceAllShapesWithSheetsChartRequestLinkingMode)
+    , _raswscrContainsText  :: !(Maybe SubstringMatchCriteria)
+    , _raswscrChartId       :: !(Maybe (Textual Int32))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ReplaceAllShapesWithSheetsChartRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'raswscrPageObjectIds'
+--
+-- * 'raswscrSpreadsheetId'
+--
+-- * 'raswscrLinkingMode'
+--
+-- * 'raswscrContainsText'
+--
+-- * 'raswscrChartId'
+replaceAllShapesWithSheetsChartRequest
+    :: ReplaceAllShapesWithSheetsChartRequest
+replaceAllShapesWithSheetsChartRequest =
+    ReplaceAllShapesWithSheetsChartRequest'
+    { _raswscrPageObjectIds = Nothing
+    , _raswscrSpreadsheetId = Nothing
+    , _raswscrLinkingMode = Nothing
+    , _raswscrContainsText = Nothing
+    , _raswscrChartId = Nothing
+    }
+
+-- | If non-empty, limits the matches to page elements only on the given
+-- pages. Returns a 400 bad request error if given the page object ID of a
+-- notes page or a notes master, or if a page with that object ID doesn\'t
+-- exist in the presentation.
+raswscrPageObjectIds :: Lens' ReplaceAllShapesWithSheetsChartRequest [Text]
+raswscrPageObjectIds
+  = lens _raswscrPageObjectIds
+      (\ s a -> s{_raswscrPageObjectIds = a})
+      . _Default
+      . _Coerce
+
+-- | The ID of the Google Sheets spreadsheet that contains the chart.
+raswscrSpreadsheetId :: Lens' ReplaceAllShapesWithSheetsChartRequest (Maybe Text)
+raswscrSpreadsheetId
+  = lens _raswscrSpreadsheetId
+      (\ s a -> s{_raswscrSpreadsheetId = a})
+
+-- | The mode with which the chart is linked to the source spreadsheet. When
+-- not specified, the chart will be an image that is not linked.
+raswscrLinkingMode :: Lens' ReplaceAllShapesWithSheetsChartRequest (Maybe ReplaceAllShapesWithSheetsChartRequestLinkingMode)
+raswscrLinkingMode
+  = lens _raswscrLinkingMode
+      (\ s a -> s{_raswscrLinkingMode = a})
+
+-- | The criteria that the shapes must match in order to be replaced. The
+-- request will replace all of the shapes that contain the given text.
+raswscrContainsText :: Lens' ReplaceAllShapesWithSheetsChartRequest (Maybe SubstringMatchCriteria)
+raswscrContainsText
+  = lens _raswscrContainsText
+      (\ s a -> s{_raswscrContainsText = a})
+
+-- | The ID of the specific chart in the Google Sheets spreadsheet.
+raswscrChartId :: Lens' ReplaceAllShapesWithSheetsChartRequest (Maybe Int32)
+raswscrChartId
+  = lens _raswscrChartId
+      (\ s a -> s{_raswscrChartId = a})
+      . mapping _Coerce
+
+instance FromJSON
+         ReplaceAllShapesWithSheetsChartRequest where
+        parseJSON
+          = withObject "ReplaceAllShapesWithSheetsChartRequest"
+              (\ o ->
+                 ReplaceAllShapesWithSheetsChartRequest' <$>
+                   (o .:? "pageObjectIds" .!= mempty) <*>
+                     (o .:? "spreadsheetId")
+                     <*> (o .:? "linkingMode")
+                     <*> (o .:? "containsText")
+                     <*> (o .:? "chartId"))
+
+instance ToJSON
+         ReplaceAllShapesWithSheetsChartRequest where
+        toJSON ReplaceAllShapesWithSheetsChartRequest'{..}
+          = object
+              (catMaybes
+                 [("pageObjectIds" .=) <$> _raswscrPageObjectIds,
+                  ("spreadsheetId" .=) <$> _raswscrSpreadsheetId,
+                  ("linkingMode" .=) <$> _raswscrLinkingMode,
+                  ("containsText" .=) <$> _raswscrContainsText,
+                  ("chartId" .=) <$> _raswscrChartId])
+
 -- | A List describes the look and feel of bullets belonging to paragraphs
 -- associated with a list. A paragraph that is part of a list has an
 -- implicit reference to that list\'s ID.
@@ -817,6 +1211,84 @@ instance ToJSON List where
               (catMaybes
                  [("listId" .=) <$> _lListId,
                   ("nestingLevel" .=) <$> _lNestingLevel])
+
+-- | The properties of Page that are only relevant for pages with page_type
+-- NOTES.
+--
+-- /See:/ 'notesProperties' smart constructor.
+newtype NotesProperties = NotesProperties'
+    { _npSpeakerNotesObjectId :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'NotesProperties' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'npSpeakerNotesObjectId'
+notesProperties
+    :: NotesProperties
+notesProperties =
+    NotesProperties'
+    { _npSpeakerNotesObjectId = Nothing
+    }
+
+-- | The object ID of the shape on this notes page that contains the speaker
+-- notes for the corresponding slide. The actual shape may not always exist
+-- on the notes page. Inserting text using this object ID will
+-- automatically create the shape. In this case, the actual shape may have
+-- different object ID. The \`GetPresentation\` or \`GetPage\` action will
+-- always return the latest object ID.
+npSpeakerNotesObjectId :: Lens' NotesProperties (Maybe Text)
+npSpeakerNotesObjectId
+  = lens _npSpeakerNotesObjectId
+      (\ s a -> s{_npSpeakerNotesObjectId = a})
+
+instance FromJSON NotesProperties where
+        parseJSON
+          = withObject "NotesProperties"
+              (\ o ->
+                 NotesProperties' <$> (o .:? "speakerNotesObjectId"))
+
+instance ToJSON NotesProperties where
+        toJSON NotesProperties'{..}
+          = object
+              (catMaybes
+                 [("speakerNotesObjectId" .=) <$>
+                    _npSpeakerNotesObjectId])
+
+-- | The result of grouping objects.
+--
+-- /See:/ 'groupObjectsResponse' smart constructor.
+newtype GroupObjectsResponse = GroupObjectsResponse'
+    { _gorObjectId :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GroupObjectsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gorObjectId'
+groupObjectsResponse
+    :: GroupObjectsResponse
+groupObjectsResponse =
+    GroupObjectsResponse'
+    { _gorObjectId = Nothing
+    }
+
+-- | The object ID of the created group.
+gorObjectId :: Lens' GroupObjectsResponse (Maybe Text)
+gorObjectId
+  = lens _gorObjectId (\ s a -> s{_gorObjectId = a})
+
+instance FromJSON GroupObjectsResponse where
+        parseJSON
+          = withObject "GroupObjectsResponse"
+              (\ o -> GroupObjectsResponse' <$> (o .:? "objectId"))
+
+instance ToJSON GroupObjectsResponse where
+        toJSON GroupObjectsResponse'{..}
+          = object
+              (catMaybes [("objectId" .=) <$> _gorObjectId])
 
 -- | An RGB color.
 --
@@ -883,7 +1355,7 @@ instance ToJSON RgbColor where
 data UpdatePagePropertiesRequest = UpdatePagePropertiesRequest'
     { _upprObjectId       :: !(Maybe Text)
     , _upprPageProperties :: !(Maybe PageProperties)
-    , _upprFields         :: !(Maybe FieldMask)
+    , _upprFields         :: !(Maybe GFieldMask)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UpdatePagePropertiesRequest' with the minimum fields required to make a request.
@@ -922,7 +1394,7 @@ upprPageProperties
 -- to \`\"pageBackgroundFill.solidFill.color\"\`. To reset a property to
 -- its default value, include its field name in the field mask but leave
 -- the field itself unset.
-upprFields :: Lens' UpdatePagePropertiesRequest (Maybe FieldMask)
+upprFields :: Lens' UpdatePagePropertiesRequest (Maybe GFieldMask)
 upprFields
   = lens _upprFields (\ s a -> s{_upprFields = a})
 
@@ -944,7 +1416,7 @@ instance ToJSON UpdatePagePropertiesRequest where
 
 -- | Creates an embedded Google Sheets chart. NOTE: Chart creation requires
 -- at least one of the spreadsheets.readonly, spreadsheets, drive.readonly,
--- or drive OAuth scopes.
+-- drive.file, or drive OAuth scopes.
 --
 -- /See:/ 'createSheetsChartRequest' smart constructor.
 data CreateSheetsChartRequest = CreateSheetsChartRequest'
@@ -1036,6 +1508,165 @@ instance ToJSON CreateSheetsChartRequest where
                   ("linkingMode" .=) <$> _cscrLinkingMode,
                   ("elementProperties" .=) <$> _cscrElementProperties,
                   ("chartId" .=) <$> _cscrChartId])
+
+-- | Properties of each row in a table.
+--
+-- /See:/ 'tableRowProperties' smart constructor.
+newtype TableRowProperties = TableRowProperties'
+    { _trpMinRowHeight :: Maybe Dimension
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TableRowProperties' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'trpMinRowHeight'
+tableRowProperties
+    :: TableRowProperties
+tableRowProperties =
+    TableRowProperties'
+    { _trpMinRowHeight = Nothing
+    }
+
+-- | Minimum height of the row. The row will be rendered in the Slides editor
+-- at a height equal to or greater than this value in order to show all the
+-- text in the row\'s cell(s).
+trpMinRowHeight :: Lens' TableRowProperties (Maybe Dimension)
+trpMinRowHeight
+  = lens _trpMinRowHeight
+      (\ s a -> s{_trpMinRowHeight = a})
+
+instance FromJSON TableRowProperties where
+        parseJSON
+          = withObject "TableRowProperties"
+              (\ o ->
+                 TableRowProperties' <$> (o .:? "minRowHeight"))
+
+instance ToJSON TableRowProperties where
+        toJSON TableRowProperties'{..}
+          = object
+              (catMaybes
+                 [("minRowHeight" .=) <$> _trpMinRowHeight])
+
+-- | Updates the properties of a Table row.
+--
+-- /See:/ 'updateTableRowPropertiesRequest' smart constructor.
+data UpdateTableRowPropertiesRequest = UpdateTableRowPropertiesRequest'
+    { _utrprTableRowProperties :: !(Maybe TableRowProperties)
+    , _utrprRowIndices         :: !(Maybe [Textual Int32])
+    , _utrprObjectId           :: !(Maybe Text)
+    , _utrprFields             :: !(Maybe GFieldMask)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UpdateTableRowPropertiesRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'utrprTableRowProperties'
+--
+-- * 'utrprRowIndices'
+--
+-- * 'utrprObjectId'
+--
+-- * 'utrprFields'
+updateTableRowPropertiesRequest
+    :: UpdateTableRowPropertiesRequest
+updateTableRowPropertiesRequest =
+    UpdateTableRowPropertiesRequest'
+    { _utrprTableRowProperties = Nothing
+    , _utrprRowIndices = Nothing
+    , _utrprObjectId = Nothing
+    , _utrprFields = Nothing
+    }
+
+-- | The table row properties to update.
+utrprTableRowProperties :: Lens' UpdateTableRowPropertiesRequest (Maybe TableRowProperties)
+utrprTableRowProperties
+  = lens _utrprTableRowProperties
+      (\ s a -> s{_utrprTableRowProperties = a})
+
+-- | The list of zero-based indices specifying which rows to update. If no
+-- indices are provided, all rows in the table will be updated.
+utrprRowIndices :: Lens' UpdateTableRowPropertiesRequest [Int32]
+utrprRowIndices
+  = lens _utrprRowIndices
+      (\ s a -> s{_utrprRowIndices = a})
+      . _Default
+      . _Coerce
+
+-- | The object ID of the table.
+utrprObjectId :: Lens' UpdateTableRowPropertiesRequest (Maybe Text)
+utrprObjectId
+  = lens _utrprObjectId
+      (\ s a -> s{_utrprObjectId = a})
+
+-- | The fields that should be updated. At least one field must be specified.
+-- The root \`tableRowProperties\` is implied and should not be specified.
+-- A single \`\"*\"\` can be used as short-hand for listing every field.
+-- For example to update the minimum row height, set \`fields\` to
+-- \`\"min_row_height\"\`. If \'\"min_row_height\"\' is included in the
+-- field mask but the property is left unset, the minimum row height will
+-- default to 0.
+utrprFields :: Lens' UpdateTableRowPropertiesRequest (Maybe GFieldMask)
+utrprFields
+  = lens _utrprFields (\ s a -> s{_utrprFields = a})
+
+instance FromJSON UpdateTableRowPropertiesRequest
+         where
+        parseJSON
+          = withObject "UpdateTableRowPropertiesRequest"
+              (\ o ->
+                 UpdateTableRowPropertiesRequest' <$>
+                   (o .:? "tableRowProperties") <*>
+                     (o .:? "rowIndices" .!= mempty)
+                     <*> (o .:? "objectId")
+                     <*> (o .:? "fields"))
+
+instance ToJSON UpdateTableRowPropertiesRequest where
+        toJSON UpdateTableRowPropertiesRequest'{..}
+          = object
+              (catMaybes
+                 [("tableRowProperties" .=) <$>
+                    _utrprTableRowProperties,
+                  ("rowIndices" .=) <$> _utrprRowIndices,
+                  ("objectId" .=) <$> _utrprObjectId,
+                  ("fields" .=) <$> _utrprFields])
+
+-- | The properties of Page that are only relevant for pages with page_type
+-- MASTER.
+--
+-- /See:/ 'masterProperties' smart constructor.
+newtype MasterProperties = MasterProperties'
+    { _mpDisplayName :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'MasterProperties' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mpDisplayName'
+masterProperties
+    :: MasterProperties
+masterProperties =
+    MasterProperties'
+    { _mpDisplayName = Nothing
+    }
+
+-- | The human-readable name of the master.
+mpDisplayName :: Lens' MasterProperties (Maybe Text)
+mpDisplayName
+  = lens _mpDisplayName
+      (\ s a -> s{_mpDisplayName = a})
+
+instance FromJSON MasterProperties where
+        parseJSON
+          = withObject "MasterProperties"
+              (\ o -> MasterProperties' <$> (o .:? "displayName"))
+
+instance ToJSON MasterProperties where
+        toJSON MasterProperties'{..}
+          = object
+              (catMaybes [("displayName" .=) <$> _mpDisplayName])
 
 -- | Deletes text from a shape or a table cell.
 --
@@ -1299,7 +1930,8 @@ spfSize = lens _spfSize (\ s a -> s{_spfSize = a})
 -- settings change. Writing the content_url: The picture is fetched once at
 -- insertion time and a copy is stored for display inside the presentation.
 -- Pictures must be less than 50MB in size, cannot exceed 25 megapixels,
--- and must be in either in PNG, JPEG, or GIF format.
+-- and must be in one of PNG, JPEG, or GIF format. The provided URL can be
+-- at most 2 kB in length.
 spfContentURL :: Lens' StretchedPictureFill (Maybe Text)
 spfContentURL
   = lens _spfContentURL
@@ -1318,6 +1950,41 @@ instance ToJSON StretchedPictureFill where
               (catMaybes
                  [("size" .=) <$> _spfSize,
                   ("contentUrl" .=) <$> _spfContentURL])
+
+-- | The fill of the border.
+--
+-- /See:/ 'tableBOrderFill' smart constructor.
+newtype TableBOrderFill = TableBOrderFill'
+    { _tbofSolidFill :: Maybe SolidFill
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TableBOrderFill' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tbofSolidFill'
+tableBOrderFill
+    :: TableBOrderFill
+tableBOrderFill =
+    TableBOrderFill'
+    { _tbofSolidFill = Nothing
+    }
+
+-- | Solid fill.
+tbofSolidFill :: Lens' TableBOrderFill (Maybe SolidFill)
+tbofSolidFill
+  = lens _tbofSolidFill
+      (\ s a -> s{_tbofSolidFill = a})
+
+instance FromJSON TableBOrderFill where
+        parseJSON
+          = withObject "TableBOrderFill"
+              (\ o -> TableBOrderFill' <$> (o .:? "solidFill"))
+
+instance ToJSON TableBOrderFill where
+        toJSON TableBOrderFill'{..}
+          = object
+              (catMaybes [("solidFill" .=) <$> _tbofSolidFill])
 
 -- | A PageElement kind representing a linked chart embedded from Google
 -- Sheets.
@@ -1483,6 +2150,110 @@ instance ToJSON DeleteTableColumnRequest where
                  [("cellLocation" .=) <$> _dtcrCellLocation,
                   ("tableObjectId" .=) <$> _dtcrTableObjectId])
 
+-- | Contents of each border row in a table.
+--
+-- /See:/ 'tableBOrderRow' smart constructor.
+newtype TableBOrderRow = TableBOrderRow'
+    { _tborTableBOrderCells :: Maybe [TableBOrderCell]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TableBOrderRow' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tborTableBOrderCells'
+tableBOrderRow
+    :: TableBOrderRow
+tableBOrderRow =
+    TableBOrderRow'
+    { _tborTableBOrderCells = Nothing
+    }
+
+-- | Properties of each border cell. When a border\'s adjacent table cells
+-- are merged, it is not included in the response.
+tborTableBOrderCells :: Lens' TableBOrderRow [TableBOrderCell]
+tborTableBOrderCells
+  = lens _tborTableBOrderCells
+      (\ s a -> s{_tborTableBOrderCells = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON TableBOrderRow where
+        parseJSON
+          = withObject "TableBOrderRow"
+              (\ o ->
+                 TableBOrderRow' <$>
+                   (o .:? "tableBorderCells" .!= mempty))
+
+instance ToJSON TableBOrderRow where
+        toJSON TableBOrderRow'{..}
+          = object
+              (catMaybes
+                 [("tableBorderCells" .=) <$> _tborTableBOrderCells])
+
+-- | The properties for one end of a Line connection.
+--
+-- /See:/ 'lineConnection' smart constructor.
+data LineConnection = LineConnection'
+    { _lcConnectedObjectId   :: !(Maybe Text)
+    , _lcConnectionSiteIndex :: !(Maybe (Textual Int32))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LineConnection' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lcConnectedObjectId'
+--
+-- * 'lcConnectionSiteIndex'
+lineConnection
+    :: LineConnection
+lineConnection =
+    LineConnection'
+    { _lcConnectedObjectId = Nothing
+    , _lcConnectionSiteIndex = Nothing
+    }
+
+-- | The object ID of the connected page element. Some page elements, such as
+-- groups, tables, and lines do not have connection sites and therefore
+-- cannot be connected to a connector line.
+lcConnectedObjectId :: Lens' LineConnection (Maybe Text)
+lcConnectedObjectId
+  = lens _lcConnectedObjectId
+      (\ s a -> s{_lcConnectedObjectId = a})
+
+-- | The index of the connection site on the connected page element. In most
+-- cases, it corresponds to the predefined connection site index from the
+-- ECMA-376 standard. More information on those connection sites can be
+-- found in the description of the \"cnx\" attribute in section 20.1.9.9
+-- and Annex H. \"Predefined DrawingML Shape and Text Geometries\" of
+-- \"Office Open XML File Formats-Fundamentals and Markup Language
+-- Reference\", part 1 of [ECMA-376 5th edition]
+-- (http:\/\/www.ecma-international.org\/publications\/standards\/Ecma-376.htm).
+-- The position of each connection site can also be viewed from Slides
+-- editor.
+lcConnectionSiteIndex :: Lens' LineConnection (Maybe Int32)
+lcConnectionSiteIndex
+  = lens _lcConnectionSiteIndex
+      (\ s a -> s{_lcConnectionSiteIndex = a})
+      . mapping _Coerce
+
+instance FromJSON LineConnection where
+        parseJSON
+          = withObject "LineConnection"
+              (\ o ->
+                 LineConnection' <$>
+                   (o .:? "connectedObjectId") <*>
+                     (o .:? "connectionSiteIndex"))
+
+instance ToJSON LineConnection where
+        toJSON LineConnection'{..}
+          = object
+              (catMaybes
+                 [("connectedObjectId" .=) <$> _lcConnectedObjectId,
+                  ("connectionSiteIndex" .=) <$>
+                    _lcConnectionSiteIndex])
+
 -- | A hypertext link.
 --
 -- /See:/ 'link' smart constructor.
@@ -1557,6 +2328,68 @@ instance ToJSON Link where
                   ("relativeLink" .=) <$> _lRelativeLink,
                   ("slideIndex" .=) <$> _lSlideIndex])
 
+-- | Groups objects to create an object group. For example, groups
+-- PageElements to create a Group on the same page as all the children.
+--
+-- /See:/ 'groupObjectsRequest' smart constructor.
+data GroupObjectsRequest = GroupObjectsRequest'
+    { _gorGroupObjectId     :: !(Maybe Text)
+    , _gorChildrenObjectIds :: !(Maybe [Text])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GroupObjectsRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gorGroupObjectId'
+--
+-- * 'gorChildrenObjectIds'
+groupObjectsRequest
+    :: GroupObjectsRequest
+groupObjectsRequest =
+    GroupObjectsRequest'
+    { _gorGroupObjectId = Nothing
+    , _gorChildrenObjectIds = Nothing
+    }
+
+-- | A user-supplied object ID for the group to be created. If you specify an
+-- ID, it must be unique among all pages and page elements in the
+-- presentation. The ID must start with an alphanumeric character or an
+-- underscore (matches regex \`[a-zA-Z0-9_]\`); remaining characters may
+-- include those as well as a hyphen or colon (matches regex
+-- \`[a-zA-Z0-9_-:]\`). The length of the ID must not be less than 5 or
+-- greater than 50. If you don\'t specify an ID, a unique one is generated.
+gorGroupObjectId :: Lens' GroupObjectsRequest (Maybe Text)
+gorGroupObjectId
+  = lens _gorGroupObjectId
+      (\ s a -> s{_gorGroupObjectId = a})
+
+-- | The object IDs of the objects to group. Only page elements can be
+-- grouped. There should be at least two page elements on the same page
+-- that are not already in another group. Some page elements, such as
+-- videos, tables and placeholder shapes cannot be grouped.
+gorChildrenObjectIds :: Lens' GroupObjectsRequest [Text]
+gorChildrenObjectIds
+  = lens _gorChildrenObjectIds
+      (\ s a -> s{_gorChildrenObjectIds = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON GroupObjectsRequest where
+        parseJSON
+          = withObject "GroupObjectsRequest"
+              (\ o ->
+                 GroupObjectsRequest' <$>
+                   (o .:? "groupObjectId") <*>
+                     (o .:? "childrenObjectIds" .!= mempty))
+
+instance ToJSON GroupObjectsRequest where
+        toJSON GroupObjectsRequest'{..}
+          = object
+              (catMaybes
+                 [("groupObjectId" .=) <$> _gorGroupObjectId,
+                  ("childrenObjectIds" .=) <$> _gorChildrenObjectIds])
+
 -- | A magnitude in a single direction in the specified units.
 --
 -- /See:/ 'dimension' smart constructor.
@@ -1608,38 +2441,48 @@ instance ToJSON Dimension where
 --
 -- /See:/ 'batchUpdatePresentationResponse' smart constructor.
 data BatchUpdatePresentationResponse = BatchUpdatePresentationResponse'
-    { _buprPresentationId :: !(Maybe Text)
-    , _buprReplies        :: !(Maybe [Response])
+    { _bPresentationId :: !(Maybe Text)
+    , _bReplies        :: !(Maybe [Response])
+    , _bWriteControl   :: !(Maybe WriteControl)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BatchUpdatePresentationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'buprPresentationId'
+-- * 'bPresentationId'
 --
--- * 'buprReplies'
+-- * 'bReplies'
+--
+-- * 'bWriteControl'
 batchUpdatePresentationResponse
     :: BatchUpdatePresentationResponse
 batchUpdatePresentationResponse =
     BatchUpdatePresentationResponse'
-    { _buprPresentationId = Nothing
-    , _buprReplies = Nothing
+    { _bPresentationId = Nothing
+    , _bReplies = Nothing
+    , _bWriteControl = Nothing
     }
 
 -- | The presentation the updates were applied to.
-buprPresentationId :: Lens' BatchUpdatePresentationResponse (Maybe Text)
-buprPresentationId
-  = lens _buprPresentationId
-      (\ s a -> s{_buprPresentationId = a})
+bPresentationId :: Lens' BatchUpdatePresentationResponse (Maybe Text)
+bPresentationId
+  = lens _bPresentationId
+      (\ s a -> s{_bPresentationId = a})
 
 -- | The reply of the updates. This maps 1:1 with the updates, although
 -- replies to some requests may be empty.
-buprReplies :: Lens' BatchUpdatePresentationResponse [Response]
-buprReplies
-  = lens _buprReplies (\ s a -> s{_buprReplies = a}) .
+bReplies :: Lens' BatchUpdatePresentationResponse [Response]
+bReplies
+  = lens _bReplies (\ s a -> s{_bReplies = a}) .
       _Default
       . _Coerce
+
+-- | The updated write control after applying the request.
+bWriteControl :: Lens' BatchUpdatePresentationResponse (Maybe WriteControl)
+bWriteControl
+  = lens _bWriteControl
+      (\ s a -> s{_bWriteControl = a})
 
 instance FromJSON BatchUpdatePresentationResponse
          where
@@ -1648,14 +2491,16 @@ instance FromJSON BatchUpdatePresentationResponse
               (\ o ->
                  BatchUpdatePresentationResponse' <$>
                    (o .:? "presentationId") <*>
-                     (o .:? "replies" .!= mempty))
+                     (o .:? "replies" .!= mempty)
+                     <*> (o .:? "writeControl"))
 
 instance ToJSON BatchUpdatePresentationResponse where
         toJSON BatchUpdatePresentationResponse'{..}
           = object
               (catMaybes
-                 [("presentationId" .=) <$> _buprPresentationId,
-                  ("replies" .=) <$> _buprReplies])
+                 [("presentationId" .=) <$> _bPresentationId,
+                  ("replies" .=) <$> _bReplies,
+                  ("writeControl" .=) <$> _bWriteControl])
 
 -- | The object being duplicated may contain other objects, for example when
 -- duplicating a slide or a group page element. This map defines how the
@@ -1707,6 +2552,49 @@ instance FromJSON DuplicateObjectRequestObjectIds
 
 instance ToJSON DuplicateObjectRequestObjectIds where
         toJSON = toJSON . _doroiAddtional
+
+-- | The result of replacing shapes with a Google Sheets chart.
+--
+-- /See:/ 'replaceAllShapesWithSheetsChartResponse' smart constructor.
+newtype ReplaceAllShapesWithSheetsChartResponse = ReplaceAllShapesWithSheetsChartResponse'
+    { _raswscrOccurrencesChanged :: Maybe (Textual Int32)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ReplaceAllShapesWithSheetsChartResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'raswscrOccurrencesChanged'
+replaceAllShapesWithSheetsChartResponse
+    :: ReplaceAllShapesWithSheetsChartResponse
+replaceAllShapesWithSheetsChartResponse =
+    ReplaceAllShapesWithSheetsChartResponse'
+    { _raswscrOccurrencesChanged = Nothing
+    }
+
+-- | The number of shapes replaced with charts.
+raswscrOccurrencesChanged :: Lens' ReplaceAllShapesWithSheetsChartResponse (Maybe Int32)
+raswscrOccurrencesChanged
+  = lens _raswscrOccurrencesChanged
+      (\ s a -> s{_raswscrOccurrencesChanged = a})
+      . mapping _Coerce
+
+instance FromJSON
+         ReplaceAllShapesWithSheetsChartResponse where
+        parseJSON
+          = withObject
+              "ReplaceAllShapesWithSheetsChartResponse"
+              (\ o ->
+                 ReplaceAllShapesWithSheetsChartResponse' <$>
+                   (o .:? "occurrencesChanged"))
+
+instance ToJSON
+         ReplaceAllShapesWithSheetsChartResponse where
+        toJSON ReplaceAllShapesWithSheetsChartResponse'{..}
+          = object
+              (catMaybes
+                 [("occurrencesChanged" .=) <$>
+                    _raswscrOccurrencesChanged])
 
 -- | Creates a new table.
 --
@@ -1790,20 +2678,82 @@ instance ToJSON CreateTableRequest where
                   ("elementProperties" .=) <$> _ctrElementProperties,
                   ("columns" .=) <$> _ctrColumns])
 
+-- | The border styling properties of the TableBorderCell.
+--
+-- /See:/ 'tableBOrderProperties' smart constructor.
+data TableBOrderProperties = TableBOrderProperties'
+    { _tbopTableBOrderFill :: !(Maybe TableBOrderFill)
+    , _tbopWeight          :: !(Maybe Dimension)
+    , _tbopDashStyle       :: !(Maybe TableBOrderPropertiesDashStyle)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TableBOrderProperties' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tbopTableBOrderFill'
+--
+-- * 'tbopWeight'
+--
+-- * 'tbopDashStyle'
+tableBOrderProperties
+    :: TableBOrderProperties
+tableBOrderProperties =
+    TableBOrderProperties'
+    { _tbopTableBOrderFill = Nothing
+    , _tbopWeight = Nothing
+    , _tbopDashStyle = Nothing
+    }
+
+-- | The fill of the table border.
+tbopTableBOrderFill :: Lens' TableBOrderProperties (Maybe TableBOrderFill)
+tbopTableBOrderFill
+  = lens _tbopTableBOrderFill
+      (\ s a -> s{_tbopTableBOrderFill = a})
+
+-- | The thickness of the border.
+tbopWeight :: Lens' TableBOrderProperties (Maybe Dimension)
+tbopWeight
+  = lens _tbopWeight (\ s a -> s{_tbopWeight = a})
+
+-- | The dash style of the border.
+tbopDashStyle :: Lens' TableBOrderProperties (Maybe TableBOrderPropertiesDashStyle)
+tbopDashStyle
+  = lens _tbopDashStyle
+      (\ s a -> s{_tbopDashStyle = a})
+
+instance FromJSON TableBOrderProperties where
+        parseJSON
+          = withObject "TableBOrderProperties"
+              (\ o ->
+                 TableBOrderProperties' <$>
+                   (o .:? "tableBorderFill") <*> (o .:? "weight") <*>
+                     (o .:? "dashStyle"))
+
+instance ToJSON TableBOrderProperties where
+        toJSON TableBOrderProperties'{..}
+          = object
+              (catMaybes
+                 [("tableBorderFill" .=) <$> _tbopTableBOrderFill,
+                  ("weight" .=) <$> _tbopWeight,
+                  ("dashStyle" .=) <$> _tbopDashStyle])
+
 -- | A single response from an update.
 --
 -- /See:/ 'response' smart constructor.
 data Response = Response'
-    { _rReplaceAllShapesWithImage :: !(Maybe ReplaceAllShapesWithImageResponse)
-    , _rCreateLine                :: !(Maybe CreateLineResponse)
-    , _rReplaceAllText            :: !(Maybe ReplaceAllTextResponse)
-    , _rCreateShape               :: !(Maybe CreateShapeResponse)
-    , _rCreateSheetsChart         :: !(Maybe CreateSheetsChartResponse)
-    , _rDuplicateObject           :: !(Maybe DuplicateObjectResponse)
-    , _rCreateTable               :: !(Maybe CreateTableResponse)
-    , _rCreateVideo               :: !(Maybe CreateVideoResponse)
-    , _rCreateImage               :: !(Maybe CreateImageResponse)
-    , _rCreateSlide               :: !(Maybe CreateSlideResponse)
+    { _rReplaceAllShapesWithImage       :: !(Maybe ReplaceAllShapesWithImageResponse)
+    , _rCreateLine                      :: !(Maybe CreateLineResponse)
+    , _rReplaceAllText                  :: !(Maybe ReplaceAllTextResponse)
+    , _rReplaceAllShapesWithSheetsChart :: !(Maybe ReplaceAllShapesWithSheetsChartResponse)
+    , _rCreateShape                     :: !(Maybe CreateShapeResponse)
+    , _rGroupObjects                    :: !(Maybe GroupObjectsResponse)
+    , _rCreateSheetsChart               :: !(Maybe CreateSheetsChartResponse)
+    , _rDuplicateObject                 :: !(Maybe DuplicateObjectResponse)
+    , _rCreateTable                     :: !(Maybe CreateTableResponse)
+    , _rCreateVideo                     :: !(Maybe CreateVideoResponse)
+    , _rCreateImage                     :: !(Maybe CreateImageResponse)
+    , _rCreateSlide                     :: !(Maybe CreateSlideResponse)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Response' with the minimum fields required to make a request.
@@ -1816,7 +2766,11 @@ data Response = Response'
 --
 -- * 'rReplaceAllText'
 --
+-- * 'rReplaceAllShapesWithSheetsChart'
+--
 -- * 'rCreateShape'
+--
+-- * 'rGroupObjects'
 --
 -- * 'rCreateSheetsChart'
 --
@@ -1836,7 +2790,9 @@ response =
     { _rReplaceAllShapesWithImage = Nothing
     , _rCreateLine = Nothing
     , _rReplaceAllText = Nothing
+    , _rReplaceAllShapesWithSheetsChart = Nothing
     , _rCreateShape = Nothing
+    , _rGroupObjects = Nothing
     , _rCreateSheetsChart = Nothing
     , _rDuplicateObject = Nothing
     , _rCreateTable = Nothing
@@ -1862,10 +2818,23 @@ rReplaceAllText
   = lens _rReplaceAllText
       (\ s a -> s{_rReplaceAllText = a})
 
+-- | The result of replacing all shapes matching some criteria with a Google
+-- Sheets chart.
+rReplaceAllShapesWithSheetsChart :: Lens' Response (Maybe ReplaceAllShapesWithSheetsChartResponse)
+rReplaceAllShapesWithSheetsChart
+  = lens _rReplaceAllShapesWithSheetsChart
+      (\ s a -> s{_rReplaceAllShapesWithSheetsChart = a})
+
 -- | The result of creating a shape.
 rCreateShape :: Lens' Response (Maybe CreateShapeResponse)
 rCreateShape
   = lens _rCreateShape (\ s a -> s{_rCreateShape = a})
+
+-- | The result of grouping objects.
+rGroupObjects :: Lens' Response (Maybe GroupObjectsResponse)
+rGroupObjects
+  = lens _rGroupObjects
+      (\ s a -> s{_rGroupObjects = a})
 
 -- | The result of creating a Google Sheets chart.
 rCreateSheetsChart :: Lens' Response (Maybe CreateSheetsChartResponse)
@@ -1907,7 +2876,9 @@ instance FromJSON Response where
                    (o .:? "replaceAllShapesWithImage") <*>
                      (o .:? "createLine")
                      <*> (o .:? "replaceAllText")
+                     <*> (o .:? "replaceAllShapesWithSheetsChart")
                      <*> (o .:? "createShape")
+                     <*> (o .:? "groupObjects")
                      <*> (o .:? "createSheetsChart")
                      <*> (o .:? "duplicateObject")
                      <*> (o .:? "createTable")
@@ -1923,7 +2894,10 @@ instance ToJSON Response where
                     _rReplaceAllShapesWithImage,
                   ("createLine" .=) <$> _rCreateLine,
                   ("replaceAllText" .=) <$> _rReplaceAllText,
+                  ("replaceAllShapesWithSheetsChart" .=) <$>
+                    _rReplaceAllShapesWithSheetsChart,
                   ("createShape" .=) <$> _rCreateShape,
+                  ("groupObjects" .=) <$> _rGroupObjects,
                   ("createSheetsChart" .=) <$> _rCreateSheetsChart,
                   ("duplicateObject" .=) <$> _rDuplicateObject,
                   ("createTable" .=) <$> _rCreateTable,
@@ -2031,21 +3005,70 @@ instance ToJSON DuplicateObjectRequest where
                  [("objectId" .=) <$> _dorObjectId,
                   ("objectIds" .=) <$> _dorObjectIds])
 
+-- | Ungroups objects, such as groups.
+--
+-- /See:/ 'unGroupObjectsRequest' smart constructor.
+newtype UnGroupObjectsRequest = UnGroupObjectsRequest'
+    { _ugorObjectIds :: Maybe [Text]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UnGroupObjectsRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ugorObjectIds'
+unGroupObjectsRequest
+    :: UnGroupObjectsRequest
+unGroupObjectsRequest =
+    UnGroupObjectsRequest'
+    { _ugorObjectIds = Nothing
+    }
+
+-- | The object IDs of the objects to ungroup. Only groups that are not
+-- inside other groups can be ungrouped. All the groups should be on the
+-- same page. The group itself is deleted. The visual sizes and positions
+-- of all the children are preserved.
+ugorObjectIds :: Lens' UnGroupObjectsRequest [Text]
+ugorObjectIds
+  = lens _ugorObjectIds
+      (\ s a -> s{_ugorObjectIds = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON UnGroupObjectsRequest where
+        parseJSON
+          = withObject "UnGroupObjectsRequest"
+              (\ o ->
+                 UnGroupObjectsRequest' <$>
+                   (o .:? "objectIds" .!= mempty))
+
+instance ToJSON UnGroupObjectsRequest where
+        toJSON UnGroupObjectsRequest'{..}
+          = object
+              (catMaybes [("objectIds" .=) <$> _ugorObjectIds])
+
 -- | A page in a presentation.
 --
 -- /See:/ 'page' smart constructor.
 data Page = Page'
-    { _pObjectId         :: !(Maybe Text)
+    { _pNotesProperties  :: !(Maybe NotesProperties)
+    , _pMasterProperties :: !(Maybe MasterProperties)
+    , _pObjectId         :: !(Maybe Text)
     , _pPageElements     :: !(Maybe [PageElement])
     , _pSlideProperties  :: !(Maybe SlideProperties)
     , _pPageProperties   :: !(Maybe PageProperties)
     , _pLayoutProperties :: !(Maybe LayoutProperties)
     , _pPageType         :: !(Maybe PagePageType)
+    , _pRevisionId       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Page' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pNotesProperties'
+--
+-- * 'pMasterProperties'
 --
 -- * 'pObjectId'
 --
@@ -2058,17 +3081,34 @@ data Page = Page'
 -- * 'pLayoutProperties'
 --
 -- * 'pPageType'
+--
+-- * 'pRevisionId'
 page
     :: Page
 page =
     Page'
-    { _pObjectId = Nothing
+    { _pNotesProperties = Nothing
+    , _pMasterProperties = Nothing
+    , _pObjectId = Nothing
     , _pPageElements = Nothing
     , _pSlideProperties = Nothing
     , _pPageProperties = Nothing
     , _pLayoutProperties = Nothing
     , _pPageType = Nothing
+    , _pRevisionId = Nothing
     }
+
+-- | Notes specific properties. Only set if page_type = NOTES.
+pNotesProperties :: Lens' Page (Maybe NotesProperties)
+pNotesProperties
+  = lens _pNotesProperties
+      (\ s a -> s{_pNotesProperties = a})
+
+-- | Master specific properties. Only set if page_type = MASTER.
+pMasterProperties :: Lens' Page (Maybe MasterProperties)
+pMasterProperties
+  = lens _pMasterProperties
+      (\ s a -> s{_pMasterProperties = a})
 
 -- | The object ID for this page. Object IDs used by Page and PageElement
 -- share the same namespace.
@@ -2107,28 +3147,49 @@ pPageType :: Lens' Page (Maybe PagePageType)
 pPageType
   = lens _pPageType (\ s a -> s{_pPageType = a})
 
+-- | The revision ID of the presentation containing this page. Can be used in
+-- update requests to assert that the presentation revision hasn\'t changed
+-- since the last read operation. Only populated if the user has edit
+-- access to the presentation. The format of the revision ID may change
+-- over time, so it should be treated opaquely. A returned revision ID is
+-- only guaranteed to be valid for 24 hours after it has been returned and
+-- cannot be shared across users. If the revision ID is unchanged between
+-- calls, then the presentation has not changed. Conversely, a changed ID
+-- (for the same presentation and user) usually means the presentation has
+-- been updated; however, a changed ID can also be due to internal factors
+-- such as ID format changes.
+pRevisionId :: Lens' Page (Maybe Text)
+pRevisionId
+  = lens _pRevisionId (\ s a -> s{_pRevisionId = a})
+
 instance FromJSON Page where
         parseJSON
           = withObject "Page"
               (\ o ->
                  Page' <$>
-                   (o .:? "objectId") <*>
-                     (o .:? "pageElements" .!= mempty)
+                   (o .:? "notesProperties") <*>
+                     (o .:? "masterProperties")
+                     <*> (o .:? "objectId")
+                     <*> (o .:? "pageElements" .!= mempty)
                      <*> (o .:? "slideProperties")
                      <*> (o .:? "pageProperties")
                      <*> (o .:? "layoutProperties")
-                     <*> (o .:? "pageType"))
+                     <*> (o .:? "pageType")
+                     <*> (o .:? "revisionId"))
 
 instance ToJSON Page where
         toJSON Page'{..}
           = object
               (catMaybes
-                 [("objectId" .=) <$> _pObjectId,
+                 [("notesProperties" .=) <$> _pNotesProperties,
+                  ("masterProperties" .=) <$> _pMasterProperties,
+                  ("objectId" .=) <$> _pObjectId,
                   ("pageElements" .=) <$> _pPageElements,
                   ("slideProperties" .=) <$> _pSlideProperties,
                   ("pageProperties" .=) <$> _pPageProperties,
                   ("layoutProperties" .=) <$> _pLayoutProperties,
-                  ("pageType" .=) <$> _pPageType])
+                  ("pageType" .=) <$> _pPageType,
+                  ("revisionId" .=) <$> _pRevisionId])
 
 -- | The result of replacing text.
 --
@@ -2245,7 +3306,7 @@ instance ToJSON Bullet where
 data UpdateImagePropertiesRequest = UpdateImagePropertiesRequest'
     { _uiprObjectId        :: !(Maybe Text)
     , _uiprImageProperties :: !(Maybe ImageProperties)
-    , _uiprFields          :: !(Maybe FieldMask)
+    , _uiprFields          :: !(Maybe GFieldMask)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UpdateImagePropertiesRequest' with the minimum fields required to make a request.
@@ -2284,7 +3345,7 @@ uiprImageProperties
 -- \`\"outline.outlineFill.solidFill.color\"\`. To reset a property to its
 -- default value, include its field name in the field mask but leave the
 -- field itself unset.
-uiprFields :: Lens' UpdateImagePropertiesRequest (Maybe FieldMask)
+uiprFields :: Lens' UpdateImagePropertiesRequest (Maybe GFieldMask)
 uiprFields
   = lens _uiprFields (\ s a -> s{_uiprFields = a})
 
@@ -2311,6 +3372,7 @@ instance ToJSON UpdateImagePropertiesRequest where
 data SlideProperties = SlideProperties'
     { _spLayoutObjectId :: !(Maybe Text)
     , _spMasterObjectId :: !(Maybe Text)
+    , _spNotesPage      :: !(Maybe Page)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SlideProperties' with the minimum fields required to make a request.
@@ -2320,90 +3382,130 @@ data SlideProperties = SlideProperties'
 -- * 'spLayoutObjectId'
 --
 -- * 'spMasterObjectId'
+--
+-- * 'spNotesPage'
 slideProperties
     :: SlideProperties
 slideProperties =
     SlideProperties'
     { _spLayoutObjectId = Nothing
     , _spMasterObjectId = Nothing
+    , _spNotesPage = Nothing
     }
 
--- | The object ID of the layout that this slide is based on.
+-- | The object ID of the layout that this slide is based on. This property
+-- is read-only.
 spLayoutObjectId :: Lens' SlideProperties (Maybe Text)
 spLayoutObjectId
   = lens _spLayoutObjectId
       (\ s a -> s{_spLayoutObjectId = a})
 
--- | The object ID of the master that this slide is based on.
+-- | The object ID of the master that this slide is based on. This property
+-- is read-only.
 spMasterObjectId :: Lens' SlideProperties (Maybe Text)
 spMasterObjectId
   = lens _spMasterObjectId
       (\ s a -> s{_spMasterObjectId = a})
+
+-- | The notes page that this slide is associated with. It defines the visual
+-- appearance of a notes page when printing or exporting slides with
+-- speaker notes. A notes page inherits properties from the notes master.
+-- The placeholder shape with type BODY on the notes page contains the
+-- speaker notes for this slide. The ID of this shape is identified by the
+-- speakerNotesObjectId field. The notes page is read-only except for the
+-- text content and styles of the speaker notes shape. This property is
+-- read-only.
+spNotesPage :: Lens' SlideProperties (Maybe Page)
+spNotesPage
+  = lens _spNotesPage (\ s a -> s{_spNotesPage = a})
 
 instance FromJSON SlideProperties where
         parseJSON
           = withObject "SlideProperties"
               (\ o ->
                  SlideProperties' <$>
-                   (o .:? "layoutObjectId") <*>
-                     (o .:? "masterObjectId"))
+                   (o .:? "layoutObjectId") <*> (o .:? "masterObjectId")
+                     <*> (o .:? "notesPage"))
 
 instance ToJSON SlideProperties where
         toJSON SlideProperties'{..}
           = object
               (catMaybes
                  [("layoutObjectId" .=) <$> _spLayoutObjectId,
-                  ("masterObjectId" .=) <$> _spMasterObjectId])
+                  ("masterObjectId" .=) <$> _spMasterObjectId,
+                  ("notesPage" .=) <$> _spNotesPage])
 
 -- | A Google Slides presentation.
 --
 -- /See:/ 'presentation' smart constructor.
 data Presentation = Presentation'
-    { _pSlides         :: !(Maybe [Page])
-    , _pMasters        :: !(Maybe [Page])
-    , _pLocale         :: !(Maybe Text)
-    , _pPresentationId :: !(Maybe Text)
-    , _pTitle          :: !(Maybe Text)
-    , _pPageSize       :: !(Maybe Size)
-    , _pLayouts        :: !(Maybe [Page])
+    { _preSlides         :: !(Maybe [Page])
+    , _preNotesMaster    :: !(Maybe Page)
+    , _preMasters        :: !(Maybe [Page])
+    , _preLocale         :: !(Maybe Text)
+    , _prePresentationId :: !(Maybe Text)
+    , _preTitle          :: !(Maybe Text)
+    , _preRevisionId     :: !(Maybe Text)
+    , _prePageSize       :: !(Maybe Size)
+    , _preLayouts        :: !(Maybe [Page])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Presentation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pSlides'
+-- * 'preSlides'
 --
--- * 'pMasters'
+-- * 'preNotesMaster'
 --
--- * 'pLocale'
+-- * 'preMasters'
 --
--- * 'pPresentationId'
+-- * 'preLocale'
 --
--- * 'pTitle'
+-- * 'prePresentationId'
 --
--- * 'pPageSize'
+-- * 'preTitle'
 --
--- * 'pLayouts'
+-- * 'preRevisionId'
+--
+-- * 'prePageSize'
+--
+-- * 'preLayouts'
 presentation
     :: Presentation
 presentation =
     Presentation'
-    { _pSlides = Nothing
-    , _pMasters = Nothing
-    , _pLocale = Nothing
-    , _pPresentationId = Nothing
-    , _pTitle = Nothing
-    , _pPageSize = Nothing
-    , _pLayouts = Nothing
+    { _preSlides = Nothing
+    , _preNotesMaster = Nothing
+    , _preMasters = Nothing
+    , _preLocale = Nothing
+    , _prePresentationId = Nothing
+    , _preTitle = Nothing
+    , _preRevisionId = Nothing
+    , _prePageSize = Nothing
+    , _preLayouts = Nothing
     }
 
 -- | The slides in the presentation. A slide inherits properties from a slide
 -- layout.
-pSlides :: Lens' Presentation [Page]
-pSlides
-  = lens _pSlides (\ s a -> s{_pSlides = a}) . _Default
+preSlides :: Lens' Presentation [Page]
+preSlides
+  = lens _preSlides (\ s a -> s{_preSlides = a}) .
+      _Default
       . _Coerce
+
+-- | The notes master in the presentation. It serves three purposes: -
+-- Placeholder shapes on a notes master contain the default text styles and
+-- shape properties of all placeholder shapes on notes pages. Specifically,
+-- a \`SLIDE_IMAGE\` placeholder shape contains the slide thumbnail, and a
+-- \`BODY\` placeholder shape contains the speaker notes. - The notes
+-- master page properties define the common page properties inherited by
+-- all notes pages. - Any other shapes on the notes master will appear on
+-- all notes pages. The notes master is read-only.
+preNotesMaster :: Lens' Presentation (Maybe Page)
+preNotesMaster
+  = lens _preNotesMaster
+      (\ s a -> s{_preNotesMaster = a})
 
 -- | The slide masters in the presentation. A slide master contains all
 -- common page elements and the common properties for a set of layouts.
@@ -2413,37 +3515,54 @@ pSlides
 -- common page properties inherited by its layouts. - Any other shapes on
 -- the master slide will appear on all slides using that master, regardless
 -- of their layout.
-pMasters :: Lens' Presentation [Page]
-pMasters
-  = lens _pMasters (\ s a -> s{_pMasters = a}) .
+preMasters :: Lens' Presentation [Page]
+preMasters
+  = lens _preMasters (\ s a -> s{_preMasters = a}) .
       _Default
       . _Coerce
 
 -- | The locale of the presentation, as an IETF BCP 47 language tag.
-pLocale :: Lens' Presentation (Maybe Text)
-pLocale = lens _pLocale (\ s a -> s{_pLocale = a})
+preLocale :: Lens' Presentation (Maybe Text)
+preLocale
+  = lens _preLocale (\ s a -> s{_preLocale = a})
 
 -- | The ID of the presentation.
-pPresentationId :: Lens' Presentation (Maybe Text)
-pPresentationId
-  = lens _pPresentationId
-      (\ s a -> s{_pPresentationId = a})
+prePresentationId :: Lens' Presentation (Maybe Text)
+prePresentationId
+  = lens _prePresentationId
+      (\ s a -> s{_prePresentationId = a})
 
 -- | The title of the presentation.
-pTitle :: Lens' Presentation (Maybe Text)
-pTitle = lens _pTitle (\ s a -> s{_pTitle = a})
+preTitle :: Lens' Presentation (Maybe Text)
+preTitle = lens _preTitle (\ s a -> s{_preTitle = a})
+
+-- | The revision ID of the presentation. Can be used in update requests to
+-- assert that the presentation revision hasn\'t changed since the last
+-- read operation. Only populated if the user has edit access to the
+-- presentation. The format of the revision ID may change over time, so it
+-- should be treated opaquely. A returned revision ID is only guaranteed to
+-- be valid for 24 hours after it has been returned and cannot be shared
+-- across users. If the revision ID is unchanged between calls, then the
+-- presentation has not changed. Conversely, a changed ID (for the same
+-- presentation and user) usually means the presentation has been updated;
+-- however, a changed ID can also be due to internal factors such as ID
+-- format changes.
+preRevisionId :: Lens' Presentation (Maybe Text)
+preRevisionId
+  = lens _preRevisionId
+      (\ s a -> s{_preRevisionId = a})
 
 -- | The size of pages in the presentation.
-pPageSize :: Lens' Presentation (Maybe Size)
-pPageSize
-  = lens _pPageSize (\ s a -> s{_pPageSize = a})
+prePageSize :: Lens' Presentation (Maybe Size)
+prePageSize
+  = lens _prePageSize (\ s a -> s{_prePageSize = a})
 
 -- | The layouts in the presentation. A layout is a template that determines
 -- how content is arranged and styled on the slides that inherit from that
 -- layout.
-pLayouts :: Lens' Presentation [Page]
-pLayouts
-  = lens _pLayouts (\ s a -> s{_pLayouts = a}) .
+preLayouts :: Lens' Presentation [Page]
+preLayouts
+  = lens _preLayouts (\ s a -> s{_preLayouts = a}) .
       _Default
       . _Coerce
 
@@ -2452,11 +3571,12 @@ instance FromJSON Presentation where
           = withObject "Presentation"
               (\ o ->
                  Presentation' <$>
-                   (o .:? "slides" .!= mempty) <*>
-                     (o .:? "masters" .!= mempty)
+                   (o .:? "slides" .!= mempty) <*> (o .:? "notesMaster")
+                     <*> (o .:? "masters" .!= mempty)
                      <*> (o .:? "locale")
                      <*> (o .:? "presentationId")
                      <*> (o .:? "title")
+                     <*> (o .:? "revisionId")
                      <*> (o .:? "pageSize")
                      <*> (o .:? "layouts" .!= mempty))
 
@@ -2464,13 +3584,15 @@ instance ToJSON Presentation where
         toJSON Presentation'{..}
           = object
               (catMaybes
-                 [("slides" .=) <$> _pSlides,
-                  ("masters" .=) <$> _pMasters,
-                  ("locale" .=) <$> _pLocale,
-                  ("presentationId" .=) <$> _pPresentationId,
-                  ("title" .=) <$> _pTitle,
-                  ("pageSize" .=) <$> _pPageSize,
-                  ("layouts" .=) <$> _pLayouts])
+                 [("slides" .=) <$> _preSlides,
+                  ("notesMaster" .=) <$> _preNotesMaster,
+                  ("masters" .=) <$> _preMasters,
+                  ("locale" .=) <$> _preLocale,
+                  ("presentationId" .=) <$> _prePresentationId,
+                  ("title" .=) <$> _preTitle,
+                  ("revisionId" .=) <$> _preRevisionId,
+                  ("pageSize" .=) <$> _prePageSize,
+                  ("layouts" .=) <$> _preLayouts])
 
 -- | A pair mapping a theme color type to the concrete color it represents.
 --
@@ -2583,7 +3705,8 @@ sBlurRadius :: Lens' Shadow (Maybe Dimension)
 sBlurRadius
   = lens _sBlurRadius (\ s a -> s{_sBlurRadius = a})
 
--- | Whether the shadow should rotate with the shape.
+-- | Whether the shadow should rotate with the shape. This property is
+-- read-only.
 sRotateWithShape :: Lens' Shadow (Maybe Bool)
 sRotateWithShape
   = lens _sRotateWithShape
@@ -2596,22 +3719,22 @@ sAlpha
       mapping _Coerce
 
 -- | The alignment point of the shadow, that sets the origin for translate,
--- scale and skew of the shadow.
+-- scale and skew of the shadow. This property is read-only.
 sAlignment :: Lens' Shadow (Maybe ShadowAlignment)
 sAlignment
   = lens _sAlignment (\ s a -> s{_sAlignment = a})
 
--- | The shadow property state. Updating the the shadow on a page element
--- will implicitly update this field to \`RENDERED\`, unless another value
--- is specified in the same request. To have no shadow on a page element,
--- set this field to \`NOT_RENDERED\`. In this case, any other shadow
--- fields set in the same request will be ignored.
+-- | The shadow property state. Updating the shadow on a page element will
+-- implicitly update this field to \`RENDERED\`, unless another value is
+-- specified in the same request. To have no shadow on a page element, set
+-- this field to \`NOT_RENDERED\`. In this case, any other shadow fields
+-- set in the same request will be ignored.
 sPropertyState :: Lens' Shadow (Maybe ShadowPropertyState)
 sPropertyState
   = lens _sPropertyState
       (\ s a -> s{_sPropertyState = a})
 
--- | The type of the shadow.
+-- | The type of the shadow. This property is read-only.
 sType :: Lens' Shadow (Maybe ShadowType)
 sType = lens _sType (\ s a -> s{_sType = a})
 
@@ -2726,7 +3849,7 @@ ipRecolor :: Lens' ImageProperties (Maybe Recolor)
 ipRecolor
   = lens _ipRecolor (\ s a -> s{_ipRecolor = a})
 
--- | The outline of the image. If not set, the the image has no outline.
+-- | The outline of the image. If not set, the image has no outline.
 ipOutline :: Lens' ImageProperties (Maybe Outline)
 ipOutline
   = lens _ipOutline (\ s a -> s{_ipOutline = a})
@@ -2764,12 +3887,13 @@ instance ToJSON ImageProperties where
                   ("outline" .=) <$> _ipOutline,
                   ("brightness" .=) <$> _ipBrightness])
 
--- | A PageElement kind representing a line, curved connector, or bent
--- connector.
+-- | A PageElement kind representing a non-connector line, straight
+-- connector, curved connector, or bent connector.
 --
 -- /See:/ 'line' smart constructor.
 data Line = Line'
     { _lLineProperties :: !(Maybe LineProperties)
+    , _lLineCategory   :: !(Maybe LineLineCategory)
     , _lLineType       :: !(Maybe LineLineType)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2779,12 +3903,15 @@ data Line = Line'
 --
 -- * 'lLineProperties'
 --
+-- * 'lLineCategory'
+--
 -- * 'lLineType'
 line
     :: Line
 line =
     Line'
     { _lLineProperties = Nothing
+    , _lLineCategory = Nothing
     , _lLineType = Nothing
     }
 
@@ -2793,6 +3920,13 @@ lLineProperties :: Lens' Line (Maybe LineProperties)
 lLineProperties
   = lens _lLineProperties
       (\ s a -> s{_lLineProperties = a})
+
+-- | The category of the line. It matches the \`category\` specified in
+-- CreateLineRequest, and can be updated with UpdateLineCategoryRequest.
+lLineCategory :: Lens' Line (Maybe LineLineCategory)
+lLineCategory
+  = lens _lLineCategory
+      (\ s a -> s{_lLineCategory = a})
 
 -- | The type of the line.
 lLineType :: Lens' Line (Maybe LineLineType)
@@ -2804,13 +3938,15 @@ instance FromJSON Line where
           = withObject "Line"
               (\ o ->
                  Line' <$>
-                   (o .:? "lineProperties") <*> (o .:? "lineType"))
+                   (o .:? "lineProperties") <*> (o .:? "lineCategory")
+                     <*> (o .:? "lineType"))
 
 instance ToJSON Line where
         toJSON Line'{..}
           = object
               (catMaybes
                  [("lineProperties" .=) <$> _lLineProperties,
+                  ("lineCategory" .=) <$> _lLineCategory,
                   ("lineType" .=) <$> _lLineType])
 
 -- | The result of creating a video.
@@ -2930,7 +4066,10 @@ instance ToJSON LineFill where
           = object
               (catMaybes [("solidFill" .=) <$> _lfSolidFill])
 
--- | Updates the transform of a page element.
+-- | Updates the transform of a page element. Updating the transform of a
+-- group will change the absolute transform of the page elements in that
+-- group, which can change their visual appearance. See the documentation
+-- for PageElement.transform for more details.
 --
 -- /See:/ 'updatePageElementTransformRequest' smart constructor.
 data UpdatePageElementTransformRequest = UpdatePageElementTransformRequest'
@@ -3070,6 +4209,59 @@ instance ToJSON InsertTableRowsRequest where
                   ("cellLocation" .=) <$> _itrrCellLocation,
                   ("tableObjectId" .=) <$> _itrrTableObjectId])
 
+-- | Unmerges cells in a Table.
+--
+-- /See:/ 'unmergeTableCellsRequest' smart constructor.
+data UnmergeTableCellsRequest = UnmergeTableCellsRequest'
+    { _utcrObjectId   :: !(Maybe Text)
+    , _utcrTableRange :: !(Maybe TableRange)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UnmergeTableCellsRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'utcrObjectId'
+--
+-- * 'utcrTableRange'
+unmergeTableCellsRequest
+    :: UnmergeTableCellsRequest
+unmergeTableCellsRequest =
+    UnmergeTableCellsRequest'
+    { _utcrObjectId = Nothing
+    , _utcrTableRange = Nothing
+    }
+
+-- | The object ID of the table.
+utcrObjectId :: Lens' UnmergeTableCellsRequest (Maybe Text)
+utcrObjectId
+  = lens _utcrObjectId (\ s a -> s{_utcrObjectId = a})
+
+-- | The table range specifying which cells of the table to unmerge. All
+-- merged cells in this range will be unmerged, and cells that are already
+-- unmerged will not be affected. If the range has no merged cells, the
+-- request will do nothing. If there is text in any of the merged cells,
+-- the text will remain in the upper-left (\"head\") cell of the resulting
+-- block of unmerged cells.
+utcrTableRange :: Lens' UnmergeTableCellsRequest (Maybe TableRange)
+utcrTableRange
+  = lens _utcrTableRange
+      (\ s a -> s{_utcrTableRange = a})
+
+instance FromJSON UnmergeTableCellsRequest where
+        parseJSON
+          = withObject "UnmergeTableCellsRequest"
+              (\ o ->
+                 UnmergeTableCellsRequest' <$>
+                   (o .:? "objectId") <*> (o .:? "tableRange"))
+
+instance ToJSON UnmergeTableCellsRequest where
+        toJSON UnmergeTableCellsRequest'{..}
+          = object
+              (catMaybes
+                 [("objectId" .=) <$> _utcrObjectId,
+                  ("tableRange" .=) <$> _utcrTableRange])
+
 -- | A PageElement kind representing a video.
 --
 -- /See:/ 'video' smart constructor.
@@ -3136,11 +4328,99 @@ instance ToJSON Video where
                   ("id" .=) <$> _vId,
                   ("videoProperties" .=) <$> _vVideoProperties])
 
+-- | Updates the properties of a Table column.
+--
+-- /See:/ 'updateTableColumnPropertiesRequest' smart constructor.
+data UpdateTableColumnPropertiesRequest = UpdateTableColumnPropertiesRequest'
+    { _utcprObjectId              :: !(Maybe Text)
+    , _utcprTableColumnProperties :: !(Maybe TableColumnProperties)
+    , _utcprFields                :: !(Maybe GFieldMask)
+    , _utcprColumnIndices         :: !(Maybe [Textual Int32])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UpdateTableColumnPropertiesRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'utcprObjectId'
+--
+-- * 'utcprTableColumnProperties'
+--
+-- * 'utcprFields'
+--
+-- * 'utcprColumnIndices'
+updateTableColumnPropertiesRequest
+    :: UpdateTableColumnPropertiesRequest
+updateTableColumnPropertiesRequest =
+    UpdateTableColumnPropertiesRequest'
+    { _utcprObjectId = Nothing
+    , _utcprTableColumnProperties = Nothing
+    , _utcprFields = Nothing
+    , _utcprColumnIndices = Nothing
+    }
+
+-- | The object ID of the table.
+utcprObjectId :: Lens' UpdateTableColumnPropertiesRequest (Maybe Text)
+utcprObjectId
+  = lens _utcprObjectId
+      (\ s a -> s{_utcprObjectId = a})
+
+-- | The table column properties to update. If the value of
+-- \`table_column_properties#column_width\` in the request is less than
+-- 406,400 EMU (32 points), a 400 bad request error is returned.
+utcprTableColumnProperties :: Lens' UpdateTableColumnPropertiesRequest (Maybe TableColumnProperties)
+utcprTableColumnProperties
+  = lens _utcprTableColumnProperties
+      (\ s a -> s{_utcprTableColumnProperties = a})
+
+-- | The fields that should be updated. At least one field must be specified.
+-- The root \`tableColumnProperties\` is implied and should not be
+-- specified. A single \`\"*\"\` can be used as short-hand for listing
+-- every field. For example to update the column width, set \`fields\` to
+-- \`\"column_width\"\`. If \'\"column_width\"\' is included in the field
+-- mask but the property is left unset, the column width will default to
+-- 406,400 EMU (32 points).
+utcprFields :: Lens' UpdateTableColumnPropertiesRequest (Maybe GFieldMask)
+utcprFields
+  = lens _utcprFields (\ s a -> s{_utcprFields = a})
+
+-- | The list of zero-based indices specifying which columns to update. If no
+-- indices are provided, all columns in the table will be updated.
+utcprColumnIndices :: Lens' UpdateTableColumnPropertiesRequest [Int32]
+utcprColumnIndices
+  = lens _utcprColumnIndices
+      (\ s a -> s{_utcprColumnIndices = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON UpdateTableColumnPropertiesRequest
+         where
+        parseJSON
+          = withObject "UpdateTableColumnPropertiesRequest"
+              (\ o ->
+                 UpdateTableColumnPropertiesRequest' <$>
+                   (o .:? "objectId") <*>
+                     (o .:? "tableColumnProperties")
+                     <*> (o .:? "fields")
+                     <*> (o .:? "columnIndices" .!= mempty))
+
+instance ToJSON UpdateTableColumnPropertiesRequest
+         where
+        toJSON UpdateTableColumnPropertiesRequest'{..}
+          = object
+              (catMaybes
+                 [("objectId" .=) <$> _utcprObjectId,
+                  ("tableColumnProperties" .=) <$>
+                    _utcprTableColumnProperties,
+                  ("fields" .=) <$> _utcprFields,
+                  ("columnIndices" .=) <$> _utcprColumnIndices])
+
 -- | The properties of the TableCell.
 --
 -- /See:/ 'tableCellProperties' smart constructor.
-newtype TableCellProperties = TableCellProperties'
-    { _tcpTableCellBackgRoundFill :: Maybe TableCellBackgRoundFill
+data TableCellProperties = TableCellProperties'
+    { _tcpTableCellBackgRoundFill :: !(Maybe TableCellBackgRoundFill)
+    , _tcpContentAlignment        :: !(Maybe TableCellPropertiesContentAlignment)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableCellProperties' with the minimum fields required to make a request.
@@ -3148,11 +4428,14 @@ newtype TableCellProperties = TableCellProperties'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'tcpTableCellBackgRoundFill'
+--
+-- * 'tcpContentAlignment'
 tableCellProperties
     :: TableCellProperties
 tableCellProperties =
     TableCellProperties'
     { _tcpTableCellBackgRoundFill = Nothing
+    , _tcpContentAlignment = Nothing
     }
 
 -- | The background fill of the table cell. The default fill matches the fill
@@ -3162,19 +4445,29 @@ tcpTableCellBackgRoundFill
   = lens _tcpTableCellBackgRoundFill
       (\ s a -> s{_tcpTableCellBackgRoundFill = a})
 
+-- | The alignment of the content in the table cell. The default alignment
+-- matches the alignment for newly created table cells in the Slides
+-- editor.
+tcpContentAlignment :: Lens' TableCellProperties (Maybe TableCellPropertiesContentAlignment)
+tcpContentAlignment
+  = lens _tcpContentAlignment
+      (\ s a -> s{_tcpContentAlignment = a})
+
 instance FromJSON TableCellProperties where
         parseJSON
           = withObject "TableCellProperties"
               (\ o ->
                  TableCellProperties' <$>
-                   (o .:? "tableCellBackgroundFill"))
+                   (o .:? "tableCellBackgroundFill") <*>
+                     (o .:? "contentAlignment"))
 
 instance ToJSON TableCellProperties where
         toJSON TableCellProperties'{..}
           = object
               (catMaybes
                  [("tableCellBackgroundFill" .=) <$>
-                    _tcpTableCellBackgRoundFill])
+                    _tcpTableCellBackgRoundFill,
+                  ("contentAlignment" .=) <$> _tcpContentAlignment])
 
 -- | The result of creating a line.
 --
@@ -3274,11 +4567,11 @@ tcbrfSolidFill
   = lens _tcbrfSolidFill
       (\ s a -> s{_tcbrfSolidFill = a})
 
--- | The background fill property state. Updating the the fill on a table
--- cell will implicitly update this field to \`RENDERED\`, unless another
--- value is specified in the same request. To have no fill on a table cell,
--- set this field to \`NOT_RENDERED\`. In this case, any other fill fields
--- set in the same request will be ignored.
+-- | The background fill property state. Updating the fill on a table cell
+-- will implicitly update this field to \`RENDERED\`, unless another value
+-- is specified in the same request. To have no fill on a table cell, set
+-- this field to \`NOT_RENDERED\`. In this case, any other fill fields set
+-- in the same request will be ignored.
 tcbrfPropertyState :: Lens' TableCellBackgRoundFill (Maybe TableCellBackgRoundFillPropertyState)
 tcbrfPropertyState
   = lens _tcbrfPropertyState
@@ -3386,13 +4679,16 @@ instance ToJSON RefreshSheetsChartRequest where
 --
 -- /See:/ 'tableRow' smart constructor.
 data TableRow = TableRow'
-    { _trTableCells :: !(Maybe [TableCell])
-    , _trRowHeight  :: !(Maybe Dimension)
+    { _trTableRowProperties :: !(Maybe TableRowProperties)
+    , _trTableCells         :: !(Maybe [TableCell])
+    , _trRowHeight          :: !(Maybe Dimension)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableRow' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'trTableRowProperties'
 --
 -- * 'trTableCells'
 --
@@ -3401,9 +4697,16 @@ tableRow
     :: TableRow
 tableRow =
     TableRow'
-    { _trTableCells = Nothing
+    { _trTableRowProperties = Nothing
+    , _trTableCells = Nothing
     , _trRowHeight = Nothing
     }
+
+-- | Properties of the row.
+trTableRowProperties :: Lens' TableRow (Maybe TableRowProperties)
+trTableRowProperties
+  = lens _trTableRowProperties
+      (\ s a -> s{_trTableRowProperties = a})
 
 -- | Properties and contents of each cell. Cells that span multiple columns
 -- are represented only once with a column_span greater than 1. As a
@@ -3425,17 +4728,80 @@ instance FromJSON TableRow where
           = withObject "TableRow"
               (\ o ->
                  TableRow' <$>
-                   (o .:? "tableCells" .!= mempty) <*>
-                     (o .:? "rowHeight"))
+                   (o .:? "tableRowProperties") <*>
+                     (o .:? "tableCells" .!= mempty)
+                     <*> (o .:? "rowHeight"))
 
 instance ToJSON TableRow where
         toJSON TableRow'{..}
           = object
               (catMaybes
-                 [("tableCells" .=) <$> _trTableCells,
+                 [("tableRowProperties" .=) <$> _trTableRowProperties,
+                  ("tableCells" .=) <$> _trTableCells,
                   ("rowHeight" .=) <$> _trRowHeight])
 
--- | Creates a video.
+-- | Represents a font family and weight used to style a TextRun.
+--
+-- /See:/ 'weightedFontFamily' smart constructor.
+data WeightedFontFamily = WeightedFontFamily'
+    { _wffFontFamily :: !(Maybe Text)
+    , _wffWeight     :: !(Maybe (Textual Int32))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'WeightedFontFamily' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'wffFontFamily'
+--
+-- * 'wffWeight'
+weightedFontFamily
+    :: WeightedFontFamily
+weightedFontFamily =
+    WeightedFontFamily'
+    { _wffFontFamily = Nothing
+    , _wffWeight = Nothing
+    }
+
+-- | The font family of the text. The font family can be any font from the
+-- Font menu in Slides or from [Google Fonts]
+-- (https:\/\/fonts.google.com\/). If the font name is unrecognized, the
+-- text is rendered in \`Arial\`.
+wffFontFamily :: Lens' WeightedFontFamily (Maybe Text)
+wffFontFamily
+  = lens _wffFontFamily
+      (\ s a -> s{_wffFontFamily = a})
+
+-- | The rendered weight of the text. This field can have any value that is a
+-- multiple of \`100\` between \`100\` and \`900\`, inclusive. This range
+-- corresponds to the numerical values described in the CSS 2.1
+-- Specification, [section
+-- 15.6](https:\/\/www.w3.org\/TR\/CSS21\/fonts.html#font-boldness), with
+-- non-numerical values disallowed. Weights greater than or equal to
+-- \`700\` are considered bold, and weights less than \`700\`are not bold.
+-- The default value is \`400\` (\"normal\").
+wffWeight :: Lens' WeightedFontFamily (Maybe Int32)
+wffWeight
+  = lens _wffWeight (\ s a -> s{_wffWeight = a}) .
+      mapping _Coerce
+
+instance FromJSON WeightedFontFamily where
+        parseJSON
+          = withObject "WeightedFontFamily"
+              (\ o ->
+                 WeightedFontFamily' <$>
+                   (o .:? "fontFamily") <*> (o .:? "weight"))
+
+instance ToJSON WeightedFontFamily where
+        toJSON WeightedFontFamily'{..}
+          = object
+              (catMaybes
+                 [("fontFamily" .=) <$> _wffFontFamily,
+                  ("weight" .=) <$> _wffWeight])
+
+-- | Creates a video. NOTE: Creating a video from Google Drive requires that
+-- the requesting app have at least one of the drive, drive.readonly, or
+-- drive.file OAuth scopes.
 --
 -- /See:/ 'createVideoRequest' smart constructor.
 data CreateVideoRequest = CreateVideoRequest'
@@ -3477,7 +4843,12 @@ creObjectId :: Lens' CreateVideoRequest (Maybe Text)
 creObjectId
   = lens _creObjectId (\ s a -> s{_creObjectId = a})
 
--- | The element properties for the video.
+-- | The element properties for the video. The PageElementProperties.size
+-- property is optional. If you don\'t specify a size, a default size is
+-- chosen by the server. The PageElementProperties.transform property is
+-- optional. The transform must not have shear components. If you don\'t
+-- specify a transform, the video will be placed at the top left corner of
+-- the page.
 creElementProperties :: Lens' CreateVideoRequest (Maybe PageElementProperties)
 creElementProperties
   = lens _creElementProperties
@@ -3490,7 +4861,9 @@ creSource
 
 -- | The video source\'s unique identifier for this video. e.g. For YouTube
 -- video https:\/\/www.youtube.com\/watch?v=7U3axjORYZ0, the ID is
--- 7U3axjORYZ0.
+-- 7U3axjORYZ0. For a Google Drive video
+-- https:\/\/drive.google.com\/file\/d\/1xCgQLFTJi5_Xl8DgW_lcUYq5e-q6Hi5Q
+-- the ID is 1xCgQLFTJi5_Xl8DgW_lcUYq5e-q6Hi5Q.
 creId :: Lens' CreateVideoRequest (Maybe Text)
 creId = lens _creId (\ s a -> s{_creId = a})
 
@@ -3812,7 +5185,7 @@ range =
     }
 
 -- | The optional zero-based index of the end of the collection. Required for
--- \`SPECIFIC_RANGE\` delete mode.
+-- \`FIXED_RANGE\` ranges.
 rEndIndex :: Lens' Range (Maybe Int32)
 rEndIndex
   = lens _rEndIndex (\ s a -> s{_rEndIndex = a}) .
@@ -3823,7 +5196,7 @@ rType :: Lens' Range (Maybe RangeType)
 rType = lens _rType (\ s a -> s{_rType = a})
 
 -- | The optional zero-based index of the beginning of the collection.
--- Required for \`SPECIFIC_RANGE\` and \`FROM_START_INDEX\` ranges.
+-- Required for \`FIXED_RANGE\` and \`FROM_START_INDEX\` ranges.
 rStartIndex :: Lens' Range (Maybe Int32)
 rStartIndex
   = lens _rStartIndex (\ s a -> s{_rStartIndex = a}) .
@@ -3885,15 +5258,22 @@ cirObjectId
 
 -- | The image URL. The image is fetched once at insertion time and a copy is
 -- stored for display inside the presentation. Images must be less than
--- 50MB in size, cannot exceed 25 megapixels, and must be in either in PNG,
--- JPEG, or GIF format.
+-- 50MB in size, cannot exceed 25 megapixels, and must be in one of PNG,
+-- JPEG, or GIF format. The provided URL can be at most 2 kB in length. The
+-- URL itself is saved with the image, and exposed via the Image.source_url
+-- field.
 cirURL :: Lens' CreateImageRequest (Maybe Text)
 cirURL = lens _cirURL (\ s a -> s{_cirURL = a})
 
 -- | The element properties for the image. When the aspect ratio of the
 -- provided size does not match the image aspect ratio, the image is scaled
 -- and centered with respect to the size in order to maintain aspect ratio.
--- The provided transform is applied after this operation.
+-- The provided transform is applied after this operation. The
+-- PageElementProperties.size property is optional. If you don\'t specify
+-- the size, the default size of the image is used. The
+-- PageElementProperties.transform property is optional. If you don\'t
+-- specify a transform, the image will be placed at the top left corner of
+-- the page.
 cirElementProperties :: Lens' CreateImageRequest (Maybe PageElementProperties)
 cirElementProperties
   = lens _cirElementProperties
@@ -3915,6 +5295,99 @@ instance ToJSON CreateImageRequest where
                   ("url" .=) <$> _cirURL,
                   ("elementProperties" .=) <$> _cirElementProperties])
 
+-- | Merges cells in a Table.
+--
+-- /See:/ 'mergeTableCellsRequest' smart constructor.
+data MergeTableCellsRequest = MergeTableCellsRequest'
+    { _mtcrObjectId   :: !(Maybe Text)
+    , _mtcrTableRange :: !(Maybe TableRange)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'MergeTableCellsRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mtcrObjectId'
+--
+-- * 'mtcrTableRange'
+mergeTableCellsRequest
+    :: MergeTableCellsRequest
+mergeTableCellsRequest =
+    MergeTableCellsRequest'
+    { _mtcrObjectId = Nothing
+    , _mtcrTableRange = Nothing
+    }
+
+-- | The object ID of the table.
+mtcrObjectId :: Lens' MergeTableCellsRequest (Maybe Text)
+mtcrObjectId
+  = lens _mtcrObjectId (\ s a -> s{_mtcrObjectId = a})
+
+-- | The table range specifying which cells of the table to merge. Any text
+-- in the cells being merged will be concatenated and stored in the
+-- upper-left (\"head\") cell of the range. If the range is non-rectangular
+-- (which can occur in some cases where the range covers cells that are
+-- already merged), a 400 bad request error is returned.
+mtcrTableRange :: Lens' MergeTableCellsRequest (Maybe TableRange)
+mtcrTableRange
+  = lens _mtcrTableRange
+      (\ s a -> s{_mtcrTableRange = a})
+
+instance FromJSON MergeTableCellsRequest where
+        parseJSON
+          = withObject "MergeTableCellsRequest"
+              (\ o ->
+                 MergeTableCellsRequest' <$>
+                   (o .:? "objectId") <*> (o .:? "tableRange"))
+
+instance ToJSON MergeTableCellsRequest where
+        toJSON MergeTableCellsRequest'{..}
+          = object
+              (catMaybes
+                 [("objectId" .=) <$> _mtcrObjectId,
+                  ("tableRange" .=) <$> _mtcrTableRange])
+
+-- | Provides control over how write requests are executed.
+--
+-- /See:/ 'writeControl' smart constructor.
+newtype WriteControl = WriteControl'
+    { _wcRequiredRevisionId :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'WriteControl' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'wcRequiredRevisionId'
+writeControl
+    :: WriteControl
+writeControl =
+    WriteControl'
+    { _wcRequiredRevisionId = Nothing
+    }
+
+-- | The revision ID of the presentation required for the write request. If
+-- specified and the \`required_revision_id\` doesn\'t exactly match the
+-- presentation\'s current \`revision_id\`, the request will not be
+-- processed and will return a 400 bad request error.
+wcRequiredRevisionId :: Lens' WriteControl (Maybe Text)
+wcRequiredRevisionId
+  = lens _wcRequiredRevisionId
+      (\ s a -> s{_wcRequiredRevisionId = a})
+
+instance FromJSON WriteControl where
+        parseJSON
+          = withObject "WriteControl"
+              (\ o ->
+                 WriteControl' <$> (o .:? "requiredRevisionId"))
+
+instance ToJSON WriteControl where
+        toJSON WriteControl'{..}
+          = object
+              (catMaybes
+                 [("requiredRevisionId" .=) <$>
+                    _wcRequiredRevisionId])
+
 -- | Represents the styling that can be applied to a TextRun. If this text is
 -- contained in a shape with a parent placeholder, then these text styles
 -- may be inherited from the parent. Which text styles are inherited depend
@@ -3931,17 +5404,18 @@ instance ToJSON CreateImageRequest where
 --
 -- /See:/ 'textStyle' smart constructor.
 data TextStyle = TextStyle'
-    { _tsFontFamily      :: !(Maybe Text)
-    , _tsLink            :: !(Maybe Link)
-    , _tsBackgRoundColor :: !(Maybe OptionalColor)
-    , _tsBaselineOffSet  :: !(Maybe TextStyleBaselineOffSet)
-    , _tsForegRoundColor :: !(Maybe OptionalColor)
-    , _tsFontSize        :: !(Maybe Dimension)
-    , _tsSmallCaps       :: !(Maybe Bool)
-    , _tsUnderline       :: !(Maybe Bool)
-    , _tsItalic          :: !(Maybe Bool)
-    , _tsBold            :: !(Maybe Bool)
-    , _tsStrikethrough   :: !(Maybe Bool)
+    { _tsFontFamily         :: !(Maybe Text)
+    , _tsLink               :: !(Maybe Link)
+    , _tsBackgRoundColor    :: !(Maybe OptionalColor)
+    , _tsBaselineOffSet     :: !(Maybe TextStyleBaselineOffSet)
+    , _tsForegRoundColor    :: !(Maybe OptionalColor)
+    , _tsFontSize           :: !(Maybe Dimension)
+    , _tsSmallCaps          :: !(Maybe Bool)
+    , _tsUnderline          :: !(Maybe Bool)
+    , _tsWeightedFontFamily :: !(Maybe WeightedFontFamily)
+    , _tsItalic             :: !(Maybe Bool)
+    , _tsBold               :: !(Maybe Bool)
+    , _tsStrikethrough      :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TextStyle' with the minimum fields required to make a request.
@@ -3964,6 +5438,8 @@ data TextStyle = TextStyle'
 --
 -- * 'tsUnderline'
 --
+-- * 'tsWeightedFontFamily'
+--
 -- * 'tsItalic'
 --
 -- * 'tsBold'
@@ -3981,6 +5457,7 @@ textStyle =
     , _tsFontSize = Nothing
     , _tsSmallCaps = Nothing
     , _tsUnderline = Nothing
+    , _tsWeightedFontFamily = Nothing
     , _tsItalic = Nothing
     , _tsBold = Nothing
     , _tsStrikethrough = Nothing
@@ -4055,11 +5532,39 @@ tsUnderline :: Lens' TextStyle (Maybe Bool)
 tsUnderline
   = lens _tsUnderline (\ s a -> s{_tsUnderline = a})
 
+-- | The font family and rendered weight of the text. This field is an
+-- extension of \`font_family\` meant to support explicit font weights
+-- without breaking backwards compatibility. As such, when reading the
+-- style of a range of text, the value of
+-- \`weighted_font_family#font_family\` will always be equal to that of
+-- \`font_family\`. However, when writing, if both fields are included in
+-- the field mask (either explicitly or through the wildcard \`\"*\"\`),
+-- their values are reconciled as follows: * If \`font_family\` is set and
+-- \`weighted_font_family\` is not, the value of \`font_family\` is applied
+-- with weight \`400\` (\"normal\"). * If both fields are set, the value of
+-- \`font_family\` must match that of \`weighted_font_family#font_family\`.
+-- If so, the font family and weight of \`weighted_font_family\` is
+-- applied. Otherwise, a 400 bad request error is returned. * If
+-- \`weighted_font_family\` is set and \`font_family\` is not, the font
+-- family and weight of \`weighted_font_family\` is applied. * If neither
+-- field is set, the font family and weight of the text inherit from the
+-- parent. Note that these properties cannot inherit separately from each
+-- other. If an update request specifies values for both
+-- \`weighted_font_family\` and \`bold\`, the \`weighted_font_family\` is
+-- applied first, then \`bold\`. If \`weighted_font_family#weight\` is not
+-- set, it defaults to \`400\`. If \`weighted_font_family\` is set, then
+-- \`weighted_font_family#font_family\` must also be set with a non-empty
+-- value. Otherwise, a 400 bad request error is returned.
+tsWeightedFontFamily :: Lens' TextStyle (Maybe WeightedFontFamily)
+tsWeightedFontFamily
+  = lens _tsWeightedFontFamily
+      (\ s a -> s{_tsWeightedFontFamily = a})
+
 -- | Whether or not the text is italicized.
 tsItalic :: Lens' TextStyle (Maybe Bool)
 tsItalic = lens _tsItalic (\ s a -> s{_tsItalic = a})
 
--- | Whether or not the text is bold.
+-- | Whether or not the text is rendered as bold.
 tsBold :: Lens' TextStyle (Maybe Bool)
 tsBold = lens _tsBold (\ s a -> s{_tsBold = a})
 
@@ -4081,6 +5586,7 @@ instance FromJSON TextStyle where
                      <*> (o .:? "fontSize")
                      <*> (o .:? "smallCaps")
                      <*> (o .:? "underline")
+                     <*> (o .:? "weightedFontFamily")
                      <*> (o .:? "italic")
                      <*> (o .:? "bold")
                      <*> (o .:? "strikethrough"))
@@ -4097,6 +5603,7 @@ instance ToJSON TextStyle where
                   ("fontSize" .=) <$> _tsFontSize,
                   ("smallCaps" .=) <$> _tsSmallCaps,
                   ("underline" .=) <$> _tsUnderline,
+                  ("weightedFontFamily" .=) <$> _tsWeightedFontFamily,
                   ("italic" .=) <$> _tsItalic, ("bold" .=) <$> _tsBold,
                   ("strikethrough" .=) <$> _tsStrikethrough])
 
@@ -4160,7 +5667,7 @@ data UpdateTextStyleRequest = UpdateTextStyleRequest'
     , _utsrTextRange    :: !(Maybe Range)
     , _utsrObjectId     :: !(Maybe Text)
     , _utsrCellLocation :: !(Maybe TableCellLocation)
-    , _utsrFields       :: !(Maybe FieldMask)
+    , _utsrFields       :: !(Maybe GFieldMask)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UpdateTextStyleRequest' with the minimum fields required to make a request.
@@ -4210,8 +5717,9 @@ utsrObjectId :: Lens' UpdateTextStyleRequest (Maybe Text)
 utsrObjectId
   = lens _utsrObjectId (\ s a -> s{_utsrObjectId = a})
 
--- | The optional table cell location if the text to be styled is in a table
--- cell. If present, the object_id must refer to a table.
+-- | The location of the cell in the table containing the text to style. If
+-- \`object_id\` refers to a table, \`cell_location\` must have a value.
+-- Otherwise, it must not.
 utsrCellLocation :: Lens' UpdateTextStyleRequest (Maybe TableCellLocation)
 utsrCellLocation
   = lens _utsrCellLocation
@@ -4219,11 +5727,11 @@ utsrCellLocation
 
 -- | The fields that should be updated. At least one field must be specified.
 -- The root \`style\` is implied and should not be specified. A single
--- \`\"*\"\` can be used as short-hand for listing every field. For example
--- to update the text style to bold, set \`fields\` to \`\"bold\"\`. To
--- reset a property to its default value, include its field name in the
--- field mask but leave the field itself unset.
-utsrFields :: Lens' UpdateTextStyleRequest (Maybe FieldMask)
+-- \`\"*\"\` can be used as short-hand for listing every field. For
+-- example, to update the text style to bold, set \`fields\` to
+-- \`\"bold\"\`. To reset a property to its default value, include its
+-- field name in the field mask but leave the field itself unset.
+utsrFields :: Lens' UpdateTextStyleRequest (Maybe GFieldMask)
 utsrFields
   = lens _utsrFields (\ s a -> s{_utsrFields = a})
 
@@ -4250,24 +5758,36 @@ instance ToJSON UpdateTextStyleRequest where
 -- | A recolor effect applied on an image.
 --
 -- /See:/ 'recolor' smart constructor.
-newtype Recolor = Recolor'
-    { _rRecolorStops :: Maybe [ColorStop]
+data Recolor = Recolor'
+    { _rName         :: !(Maybe RecolorName)
+    , _rRecolorStops :: !(Maybe [ColorStop])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Recolor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'rName'
+--
 -- * 'rRecolorStops'
 recolor
     :: Recolor
 recolor =
     Recolor'
-    { _rRecolorStops = Nothing
+    { _rName = Nothing
+    , _rRecolorStops = Nothing
     }
 
+-- | The name of the recolor effect. The name is determined from the
+-- \`recolor_stops\` by matching the gradient against the colors in the
+-- page\'s current color scheme. This property is read-only.
+rName :: Lens' Recolor (Maybe RecolorName)
+rName = lens _rName (\ s a -> s{_rName = a})
+
 -- | The recolor effect is represented by a gradient, which is a list of
--- color stops. This property is read-only.
+-- color stops. The colors in the gradient will replace the corresponding
+-- colors at the same position in the color palette and apply to the image.
+-- This property is read-only.
 rRecolorStops :: Lens' Recolor [ColorStop]
 rRecolorStops
   = lens _rRecolorStops
@@ -4279,12 +5799,15 @@ instance FromJSON Recolor where
         parseJSON
           = withObject "Recolor"
               (\ o ->
-                 Recolor' <$> (o .:? "recolorStops" .!= mempty))
+                 Recolor' <$>
+                   (o .:? "name") <*> (o .:? "recolorStops" .!= mempty))
 
 instance ToJSON Recolor where
         toJSON Recolor'{..}
           = object
-              (catMaybes [("recolorStops" .=) <$> _rRecolorStops])
+              (catMaybes
+                 [("name" .=) <$> _rName,
+                  ("recolorStops" .=) <$> _rRecolorStops])
 
 -- | The properties of the Page. The page will inherit properties from the
 -- parent page. Depending on the page type the hierarchy is defined in
@@ -4382,7 +5905,7 @@ pbrfSolidFill
   = lens _pbrfSolidFill
       (\ s a -> s{_pbrfSolidFill = a})
 
--- | The background fill property state. Updating the the fill on a page will
+-- | The background fill property state. Updating the fill on a page will
 -- implicitly update this field to \`RENDERED\`, unless another value is
 -- specified in the same request. To have no fill on a page, set this field
 -- to \`NOT_RENDERED\`. In this case, any other fill fields set in the same
@@ -4497,9 +6020,10 @@ instance ToJSON OpaqueColor where
 --
 -- /See:/ 'createSlideRequest' smart constructor.
 data CreateSlideRequest = CreateSlideRequest'
-    { _csrsObjectId             :: !(Maybe Text)
-    , _csrsSlideLayoutReference :: !(Maybe LayoutReference)
-    , _csrsInsertionIndex       :: !(Maybe (Textual Int32))
+    { _csrsObjectId              :: !(Maybe Text)
+    , _csrsSlideLayoutReference  :: !(Maybe LayoutReference)
+    , _csrsInsertionIndex        :: !(Maybe (Textual Int32))
+    , _csrsPlaceholderIdMAppings :: !(Maybe [LayoutPlaceholderIdMApping])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreateSlideRequest' with the minimum fields required to make a request.
@@ -4511,6 +6035,8 @@ data CreateSlideRequest = CreateSlideRequest'
 -- * 'csrsSlideLayoutReference'
 --
 -- * 'csrsInsertionIndex'
+--
+-- * 'csrsPlaceholderIdMAppings'
 createSlideRequest
     :: CreateSlideRequest
 createSlideRequest =
@@ -4518,6 +6044,7 @@ createSlideRequest =
     { _csrsObjectId = Nothing
     , _csrsSlideLayoutReference = Nothing
     , _csrsInsertionIndex = Nothing
+    , _csrsPlaceholderIdMAppings = Nothing
     }
 
 -- | A user-supplied object ID. If you specify an ID, it must be unique among
@@ -4551,13 +6078,25 @@ csrsInsertionIndex
       (\ s a -> s{_csrsInsertionIndex = a})
       . mapping _Coerce
 
+-- | An optional list of object ID mappings from the placeholder(s) on the
+-- layout to the placeholder(s) that will be created on the new slide from
+-- that specified layout. Can only be used when \`slide_layout_reference\`
+-- is specified.
+csrsPlaceholderIdMAppings :: Lens' CreateSlideRequest [LayoutPlaceholderIdMApping]
+csrsPlaceholderIdMAppings
+  = lens _csrsPlaceholderIdMAppings
+      (\ s a -> s{_csrsPlaceholderIdMAppings = a})
+      . _Default
+      . _Coerce
+
 instance FromJSON CreateSlideRequest where
         parseJSON
           = withObject "CreateSlideRequest"
               (\ o ->
                  CreateSlideRequest' <$>
                    (o .:? "objectId") <*> (o .:? "slideLayoutReference")
-                     <*> (o .:? "insertionIndex"))
+                     <*> (o .:? "insertionIndex")
+                     <*> (o .:? "placeholderIdMappings" .!= mempty))
 
 instance ToJSON CreateSlideRequest where
         toJSON CreateSlideRequest'{..}
@@ -4566,7 +6105,9 @@ instance ToJSON CreateSlideRequest where
                  [("objectId" .=) <$> _csrsObjectId,
                   ("slideLayoutReference" .=) <$>
                     _csrsSlideLayoutReference,
-                  ("insertionIndex" .=) <$> _csrsInsertionIndex])
+                  ("insertionIndex" .=) <$> _csrsInsertionIndex,
+                  ("placeholderIdMappings" .=) <$>
+                    _csrsPlaceholderIdMAppings])
 
 -- | A location of a single table cell within a table.
 --
@@ -4676,18 +6217,26 @@ instance ToJSON UpdateSlidesPositionRequest where
                   ("insertionIndex" .=) <$> _usprInsertionIndex])
 
 -- | Replaces all shapes that match the given criteria with the provided
--- image.
+-- image. The images replacing the shapes are rectangular after being
+-- inserted into the presentation and do not take on the forms of the
+-- shapes.
 --
 -- /See:/ 'replaceAllShapesWithImageRequest' smart constructor.
 data ReplaceAllShapesWithImageRequest = ReplaceAllShapesWithImageRequest'
-    { _raswirContainsText  :: !(Maybe SubstringMatchCriteria)
-    , _raswirImageURL      :: !(Maybe Text)
-    , _raswirReplaceMethod :: !(Maybe ReplaceAllShapesWithImageRequestReplaceMethod)
+    { _raswirImageReplaceMethod :: !(Maybe ReplaceAllShapesWithImageRequestImageReplaceMethod)
+    , _raswirPageObjectIds      :: !(Maybe [Text])
+    , _raswirContainsText       :: !(Maybe SubstringMatchCriteria)
+    , _raswirImageURL           :: !(Maybe Text)
+    , _raswirReplaceMethod      :: !(Maybe ReplaceAllShapesWithImageRequestReplaceMethod)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReplaceAllShapesWithImageRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'raswirImageReplaceMethod'
+--
+-- * 'raswirPageObjectIds'
 --
 -- * 'raswirContainsText'
 --
@@ -4698,10 +6247,34 @@ replaceAllShapesWithImageRequest
     :: ReplaceAllShapesWithImageRequest
 replaceAllShapesWithImageRequest =
     ReplaceAllShapesWithImageRequest'
-    { _raswirContainsText = Nothing
+    { _raswirImageReplaceMethod = Nothing
+    , _raswirPageObjectIds = Nothing
+    , _raswirContainsText = Nothing
     , _raswirImageURL = Nothing
     , _raswirReplaceMethod = Nothing
     }
+
+-- | The image replace method. If you specify both a \`replace_method\` and
+-- an \`image_replace_method\`, the \`image_replace_method\` takes
+-- precedence. If you do not specify a value for \`image_replace_method\`,
+-- but specify a value for \`replace_method\`, then the specified
+-- \`replace_method\` value is used. If you do not specify either, then
+-- CENTER_INSIDE is used.
+raswirImageReplaceMethod :: Lens' ReplaceAllShapesWithImageRequest (Maybe ReplaceAllShapesWithImageRequestImageReplaceMethod)
+raswirImageReplaceMethod
+  = lens _raswirImageReplaceMethod
+      (\ s a -> s{_raswirImageReplaceMethod = a})
+
+-- | If non-empty, limits the matches to page elements only on the given
+-- pages. Returns a 400 bad request error if given the page object ID of a
+-- notes page or a notes master, or if a page with that object ID doesn\'t
+-- exist in the presentation.
+raswirPageObjectIds :: Lens' ReplaceAllShapesWithImageRequest [Text]
+raswirPageObjectIds
+  = lens _raswirPageObjectIds
+      (\ s a -> s{_raswirPageObjectIds = a})
+      . _Default
+      . _Coerce
 
 -- | If set, this request will replace all of the shapes that contain the
 -- given text.
@@ -4712,14 +6285,18 @@ raswirContainsText
 
 -- | The image URL. The image is fetched once at insertion time and a copy is
 -- stored for display inside the presentation. Images must be less than
--- 50MB in size, cannot exceed 25 megapixels, and must be in either in PNG,
--- JPEG, or GIF format.
+-- 50MB in size, cannot exceed 25 megapixels, and must be in one of PNG,
+-- JPEG, or GIF format. The provided URL can be at most 2 kB in length. The
+-- URL itself is saved with the image, and exposed via the Image.source_url
+-- field.
 raswirImageURL :: Lens' ReplaceAllShapesWithImageRequest (Maybe Text)
 raswirImageURL
   = lens _raswirImageURL
       (\ s a -> s{_raswirImageURL = a})
 
--- | The replace method.
+-- | The replace method. __Deprecated__: use \`image_replace_method\`
+-- instead. If you specify both a \`replace_method\` and an
+-- \`image_replace_method\`, the \`image_replace_method\` takes precedence.
 raswirReplaceMethod :: Lens' ReplaceAllShapesWithImageRequest (Maybe ReplaceAllShapesWithImageRequestReplaceMethod)
 raswirReplaceMethod
   = lens _raswirReplaceMethod
@@ -4731,15 +6308,21 @@ instance FromJSON ReplaceAllShapesWithImageRequest
           = withObject "ReplaceAllShapesWithImageRequest"
               (\ o ->
                  ReplaceAllShapesWithImageRequest' <$>
-                   (o .:? "containsText") <*> (o .:? "imageUrl") <*>
-                     (o .:? "replaceMethod"))
+                   (o .:? "imageReplaceMethod") <*>
+                     (o .:? "pageObjectIds" .!= mempty)
+                     <*> (o .:? "containsText")
+                     <*> (o .:? "imageUrl")
+                     <*> (o .:? "replaceMethod"))
 
 instance ToJSON ReplaceAllShapesWithImageRequest
          where
         toJSON ReplaceAllShapesWithImageRequest'{..}
           = object
               (catMaybes
-                 [("containsText" .=) <$> _raswirContainsText,
+                 [("imageReplaceMethod" .=) <$>
+                    _raswirImageReplaceMethod,
+                  ("pageObjectIds" .=) <$> _raswirPageObjectIds,
+                  ("containsText" .=) <$> _raswirContainsText,
                   ("imageUrl" .=) <$> _raswirImageURL,
                   ("replaceMethod" .=) <$> _raswirReplaceMethod])
 
@@ -4810,7 +6393,13 @@ pageElement =
     , _peDescription = Nothing
     }
 
--- | The transform of the page element.
+-- | The transform of the page element. The visual appearance of the page
+-- element is determined by its absolute transform. To compute the absolute
+-- transform, preconcatenate a page element\'s transform with the
+-- transforms of all of its parent groups. If the page element is not in a
+-- group, its absolute transform is the same as the value in this field.
+-- The initial transform for the newly created Group is always the identity
+-- transform.
 peTransform :: Lens' PageElement (Maybe AffineTransform)
 peTransform
   = lens _peTransform (\ s a -> s{_peTransform = a})
@@ -5242,11 +6831,11 @@ oDashStyle :: Lens' Outline (Maybe OutlineDashStyle)
 oDashStyle
   = lens _oDashStyle (\ s a -> s{_oDashStyle = a})
 
--- | The outline property state. Updating the the outline on a page element
--- will implicitly update this field to\`RENDERED\`, unless another value
--- is specified in the same request. To have no outline on a page element,
--- set this field to \`NOT_RENDERED\`. In this case, any other outline
--- fields set in the same request will be ignored.
+-- | The outline property state. Updating the outline on a page element will
+-- implicitly update this field to \`RENDERED\`, unless another value is
+-- specified in the same request. To have no outline on a page element, set
+-- this field to \`NOT_RENDERED\`. In this case, any other outline fields
+-- set in the same request will be ignored.
 oPropertyState :: Lens' Outline (Maybe OutlinePropertyState)
 oPropertyState
   = lens _oPropertyState
@@ -5276,7 +6865,7 @@ instance ToJSON Outline where
 data UpdateVideoPropertiesRequest = UpdateVideoPropertiesRequest'
     { _uvprObjectId        :: !(Maybe Text)
     , _uvprVideoProperties :: !(Maybe VideoProperties)
-    , _uvprFields          :: !(Maybe FieldMask)
+    , _uvprFields          :: !(Maybe GFieldMask)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UpdateVideoPropertiesRequest' with the minimum fields required to make a request.
@@ -5315,7 +6904,7 @@ uvprVideoProperties
 -- \`\"outline.outlineFill.solidFill.color\"\`. To reset a property to its
 -- default value, include its field name in the field mask but leave the
 -- field itself unset.
-uvprFields :: Lens' UpdateVideoPropertiesRequest (Maybe FieldMask)
+uvprFields :: Lens' UpdateVideoPropertiesRequest (Maybe GFieldMask)
 uvprFields
   = lens _uvprFields (\ s a -> s{_uvprFields = a})
 
@@ -5338,21 +6927,66 @@ instance ToJSON UpdateVideoPropertiesRequest where
 -- | The properties of the Video.
 --
 -- /See:/ 'videoProperties' smart constructor.
-newtype VideoProperties = VideoProperties'
-    { _vpOutline :: Maybe Outline
+data VideoProperties = VideoProperties'
+    { _vpStart    :: !(Maybe (Textual Word32))
+    , _vpAutoPlay :: !(Maybe Bool)
+    , _vpMute     :: !(Maybe Bool)
+    , _vpEnd      :: !(Maybe (Textual Word32))
+    , _vpOutline  :: !(Maybe Outline)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideoProperties' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'vpStart'
+--
+-- * 'vpAutoPlay'
+--
+-- * 'vpMute'
+--
+-- * 'vpEnd'
+--
 -- * 'vpOutline'
 videoProperties
     :: VideoProperties
 videoProperties =
     VideoProperties'
-    { _vpOutline = Nothing
+    { _vpStart = Nothing
+    , _vpAutoPlay = Nothing
+    , _vpMute = Nothing
+    , _vpEnd = Nothing
+    , _vpOutline = Nothing
     }
+
+-- | The time at which to start playback, measured in seconds from the
+-- beginning of the video. If set, the start time should be before the end
+-- time. If you set this to a value that exceeds the video\'s length in
+-- seconds, the video will be played from the last second. If not set, the
+-- video will be played from the beginning.
+vpStart :: Lens' VideoProperties (Maybe Word32)
+vpStart
+  = lens _vpStart (\ s a -> s{_vpStart = a}) .
+      mapping _Coerce
+
+-- | Whether to enable video autoplay when the page is displayed in present
+-- mode. Defaults to false.
+vpAutoPlay :: Lens' VideoProperties (Maybe Bool)
+vpAutoPlay
+  = lens _vpAutoPlay (\ s a -> s{_vpAutoPlay = a})
+
+-- | Whether to mute the audio during video playback. Defaults to false.
+vpMute :: Lens' VideoProperties (Maybe Bool)
+vpMute = lens _vpMute (\ s a -> s{_vpMute = a})
+
+-- | The time at which to end playback, measured in seconds from the
+-- beginning of the video. If set, the end time should be after the start
+-- time. If not set or if you set this to a value that exceeds the video\'s
+-- length, the video will be played until its end.
+vpEnd :: Lens' VideoProperties (Maybe Word32)
+vpEnd
+  = lens _vpEnd (\ s a -> s{_vpEnd = a}) .
+      mapping _Coerce
 
 -- | The outline of the video. The default outline matches the defaults for
 -- new videos created in the Slides editor.
@@ -5363,11 +6997,97 @@ vpOutline
 instance FromJSON VideoProperties where
         parseJSON
           = withObject "VideoProperties"
-              (\ o -> VideoProperties' <$> (o .:? "outline"))
+              (\ o ->
+                 VideoProperties' <$>
+                   (o .:? "start") <*> (o .:? "autoPlay") <*>
+                     (o .:? "mute")
+                     <*> (o .:? "end")
+                     <*> (o .:? "outline"))
 
 instance ToJSON VideoProperties where
         toJSON VideoProperties'{..}
-          = object (catMaybes [("outline" .=) <$> _vpOutline])
+          = object
+              (catMaybes
+                 [("start" .=) <$> _vpStart,
+                  ("autoPlay" .=) <$> _vpAutoPlay,
+                  ("mute" .=) <$> _vpMute, ("end" .=) <$> _vpEnd,
+                  ("outline" .=) <$> _vpOutline])
+
+-- | The user-specified ID mapping for a placeholder that will be created on
+-- a slide from a specified layout.
+--
+-- /See:/ 'layoutPlaceholderIdMApping' smart constructor.
+data LayoutPlaceholderIdMApping = LayoutPlaceholderIdMApping'
+    { _lpimaObjectId                  :: !(Maybe Text)
+    , _lpimaLayoutPlaceholderObjectId :: !(Maybe Text)
+    , _lpimaLayoutPlaceholder         :: !(Maybe Placeholder)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LayoutPlaceholderIdMApping' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lpimaObjectId'
+--
+-- * 'lpimaLayoutPlaceholderObjectId'
+--
+-- * 'lpimaLayoutPlaceholder'
+layoutPlaceholderIdMApping
+    :: LayoutPlaceholderIdMApping
+layoutPlaceholderIdMApping =
+    LayoutPlaceholderIdMApping'
+    { _lpimaObjectId = Nothing
+    , _lpimaLayoutPlaceholderObjectId = Nothing
+    , _lpimaLayoutPlaceholder = Nothing
+    }
+
+-- | A user-supplied object ID for the placeholder identified above that to
+-- be created onto a slide. If you specify an ID, it must be unique among
+-- all pages and page elements in the presentation. The ID must start with
+-- an alphanumeric character or an underscore (matches regex
+-- \`[a-zA-Z0-9_]\`); remaining characters may include those as well as a
+-- hyphen or colon (matches regex \`[a-zA-Z0-9_-:]\`). The length of the ID
+-- must not be less than 5 or greater than 50. If you don\'t specify an ID,
+-- a unique one is generated.
+lpimaObjectId :: Lens' LayoutPlaceholderIdMApping (Maybe Text)
+lpimaObjectId
+  = lens _lpimaObjectId
+      (\ s a -> s{_lpimaObjectId = a})
+
+-- | The object ID of the placeholder on a layout that will be applied to a
+-- slide.
+lpimaLayoutPlaceholderObjectId :: Lens' LayoutPlaceholderIdMApping (Maybe Text)
+lpimaLayoutPlaceholderObjectId
+  = lens _lpimaLayoutPlaceholderObjectId
+      (\ s a -> s{_lpimaLayoutPlaceholderObjectId = a})
+
+-- | The placeholder on a layout that will be applied to a slide. Only type
+-- and index are needed. For example, a predefined \`TITLE_AND_BODY\`
+-- layout may usually have a TITLE placeholder with index 0 and a BODY
+-- placeholder with index 0.
+lpimaLayoutPlaceholder :: Lens' LayoutPlaceholderIdMApping (Maybe Placeholder)
+lpimaLayoutPlaceholder
+  = lens _lpimaLayoutPlaceholder
+      (\ s a -> s{_lpimaLayoutPlaceholder = a})
+
+instance FromJSON LayoutPlaceholderIdMApping where
+        parseJSON
+          = withObject "LayoutPlaceholderIdMApping"
+              (\ o ->
+                 LayoutPlaceholderIdMApping' <$>
+                   (o .:? "objectId") <*>
+                     (o .:? "layoutPlaceholderObjectId")
+                     <*> (o .:? "layoutPlaceholder"))
+
+instance ToJSON LayoutPlaceholderIdMApping where
+        toJSON LayoutPlaceholderIdMApping'{..}
+          = object
+              (catMaybes
+                 [("objectId" .=) <$> _lpimaObjectId,
+                  ("layoutPlaceholderObjectId" .=) <$>
+                    _lpimaLayoutPlaceholderObjectId,
+                  ("layoutPlaceholder" .=) <$>
+                    _lpimaLayoutPlaceholder])
 
 -- | The result of creating an image.
 --
@@ -5498,6 +7218,70 @@ instance ToJSON TextElement where
                   ("textRun" .=) <$> _teTextRun,
                   ("startIndex" .=) <$> _teStartIndex])
 
+-- | Deletes bullets from all of the paragraphs that overlap with the given
+-- text index range. The nesting level of each paragraph will be visually
+-- preserved by adding indent to the start of the corresponding paragraph.
+--
+-- /See:/ 'deleteParagraphBulletsRequest' smart constructor.
+data DeleteParagraphBulletsRequest = DeleteParagraphBulletsRequest'
+    { _dpbrTextRange    :: !(Maybe Range)
+    , _dpbrObjectId     :: !(Maybe Text)
+    , _dpbrCellLocation :: !(Maybe TableCellLocation)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DeleteParagraphBulletsRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dpbrTextRange'
+--
+-- * 'dpbrObjectId'
+--
+-- * 'dpbrCellLocation'
+deleteParagraphBulletsRequest
+    :: DeleteParagraphBulletsRequest
+deleteParagraphBulletsRequest =
+    DeleteParagraphBulletsRequest'
+    { _dpbrTextRange = Nothing
+    , _dpbrObjectId = Nothing
+    , _dpbrCellLocation = Nothing
+    }
+
+-- | The range of text to delete bullets from, based on TextElement indexes.
+dpbrTextRange :: Lens' DeleteParagraphBulletsRequest (Maybe Range)
+dpbrTextRange
+  = lens _dpbrTextRange
+      (\ s a -> s{_dpbrTextRange = a})
+
+-- | The object ID of the shape or table containing the text to delete
+-- bullets from.
+dpbrObjectId :: Lens' DeleteParagraphBulletsRequest (Maybe Text)
+dpbrObjectId
+  = lens _dpbrObjectId (\ s a -> s{_dpbrObjectId = a})
+
+-- | The optional table cell location if the text to be modified is in a
+-- table cell. If present, the object_id must refer to a table.
+dpbrCellLocation :: Lens' DeleteParagraphBulletsRequest (Maybe TableCellLocation)
+dpbrCellLocation
+  = lens _dpbrCellLocation
+      (\ s a -> s{_dpbrCellLocation = a})
+
+instance FromJSON DeleteParagraphBulletsRequest where
+        parseJSON
+          = withObject "DeleteParagraphBulletsRequest"
+              (\ o ->
+                 DeleteParagraphBulletsRequest' <$>
+                   (o .:? "textRange") <*> (o .:? "objectId") <*>
+                     (o .:? "cellLocation"))
+
+instance ToJSON DeleteParagraphBulletsRequest where
+        toJSON DeleteParagraphBulletsRequest'{..}
+          = object
+              (catMaybes
+                 [("textRange" .=) <$> _dpbrTextRange,
+                  ("objectId" .=) <$> _dpbrObjectId,
+                  ("cellLocation" .=) <$> _dpbrCellLocation])
+
 -- | Inserts text into a shape or a table cell.
 --
 -- /See:/ 'insertTextRequest' smart constructor.
@@ -5583,11 +7367,109 @@ instance ToJSON InsertTextRequest where
                   ("insertionIndex" .=) <$> _itrInsertionIndex,
                   ("cellLocation" .=) <$> _itrCellLocation])
 
+-- | Updates the properties of the table borders in a Table.
+--
+-- /See:/ 'updateTableBOrderPropertiesRequest' smart constructor.
+data UpdateTableBOrderPropertiesRequest = UpdateTableBOrderPropertiesRequest'
+    { _utboprBOrderPosition        :: !(Maybe UpdateTableBOrderPropertiesRequestBOrderPosition)
+    , _utboprObjectId              :: !(Maybe Text)
+    , _utboprTableBOrderProperties :: !(Maybe TableBOrderProperties)
+    , _utboprTableRange            :: !(Maybe TableRange)
+    , _utboprFields                :: !(Maybe GFieldMask)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UpdateTableBOrderPropertiesRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'utboprBOrderPosition'
+--
+-- * 'utboprObjectId'
+--
+-- * 'utboprTableBOrderProperties'
+--
+-- * 'utboprTableRange'
+--
+-- * 'utboprFields'
+updateTableBOrderPropertiesRequest
+    :: UpdateTableBOrderPropertiesRequest
+updateTableBOrderPropertiesRequest =
+    UpdateTableBOrderPropertiesRequest'
+    { _utboprBOrderPosition = Nothing
+    , _utboprObjectId = Nothing
+    , _utboprTableBOrderProperties = Nothing
+    , _utboprTableRange = Nothing
+    , _utboprFields = Nothing
+    }
+
+-- | The border position in the table range the updates should apply to. If a
+-- border position is not specified, the updates will apply to all borders
+-- in the table range.
+utboprBOrderPosition :: Lens' UpdateTableBOrderPropertiesRequest (Maybe UpdateTableBOrderPropertiesRequestBOrderPosition)
+utboprBOrderPosition
+  = lens _utboprBOrderPosition
+      (\ s a -> s{_utboprBOrderPosition = a})
+
+-- | The object ID of the table.
+utboprObjectId :: Lens' UpdateTableBOrderPropertiesRequest (Maybe Text)
+utboprObjectId
+  = lens _utboprObjectId
+      (\ s a -> s{_utboprObjectId = a})
+
+-- | The table border properties to update.
+utboprTableBOrderProperties :: Lens' UpdateTableBOrderPropertiesRequest (Maybe TableBOrderProperties)
+utboprTableBOrderProperties
+  = lens _utboprTableBOrderProperties
+      (\ s a -> s{_utboprTableBOrderProperties = a})
+
+-- | The table range representing the subset of the table to which the
+-- updates are applied. If a table range is not specified, the updates will
+-- apply to the entire table.
+utboprTableRange :: Lens' UpdateTableBOrderPropertiesRequest (Maybe TableRange)
+utboprTableRange
+  = lens _utboprTableRange
+      (\ s a -> s{_utboprTableRange = a})
+
+-- | The fields that should be updated. At least one field must be specified.
+-- The root \`tableBorderProperties\` is implied and should not be
+-- specified. A single \`\"*\"\` can be used as short-hand for listing
+-- every field. For example to update the table border solid fill color,
+-- set \`fields\` to \`\"tableBorderFill.solidFill.color\"\`. To reset a
+-- property to its default value, include its field name in the field mask
+-- but leave the field itself unset.
+utboprFields :: Lens' UpdateTableBOrderPropertiesRequest (Maybe GFieldMask)
+utboprFields
+  = lens _utboprFields (\ s a -> s{_utboprFields = a})
+
+instance FromJSON UpdateTableBOrderPropertiesRequest
+         where
+        parseJSON
+          = withObject "UpdateTableBOrderPropertiesRequest"
+              (\ o ->
+                 UpdateTableBOrderPropertiesRequest' <$>
+                   (o .:? "borderPosition") <*> (o .:? "objectId") <*>
+                     (o .:? "tableBorderProperties")
+                     <*> (o .:? "tableRange")
+                     <*> (o .:? "fields"))
+
+instance ToJSON UpdateTableBOrderPropertiesRequest
+         where
+        toJSON UpdateTableBOrderPropertiesRequest'{..}
+          = object
+              (catMaybes
+                 [("borderPosition" .=) <$> _utboprBOrderPosition,
+                  ("objectId" .=) <$> _utboprObjectId,
+                  ("tableBorderProperties" .=) <$>
+                    _utboprTableBOrderProperties,
+                  ("tableRange" .=) <$> _utboprTableRange,
+                  ("fields" .=) <$> _utboprFields])
+
 -- | Creates a line.
 --
 -- /See:/ 'createLineRequest' smart constructor.
 data CreateLineRequest = CreateLineRequest'
-    { _clrlObjectId          :: !(Maybe Text)
+    { _clrlCategory          :: !(Maybe CreateLineRequestCategory)
+    , _clrlObjectId          :: !(Maybe Text)
     , _clrlLineCategory      :: !(Maybe CreateLineRequestLineCategory)
     , _clrlElementProperties :: !(Maybe PageElementProperties)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5595,6 +7477,8 @@ data CreateLineRequest = CreateLineRequest'
 -- | Creates a value of 'CreateLineRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'clrlCategory'
 --
 -- * 'clrlObjectId'
 --
@@ -5605,10 +7489,22 @@ createLineRequest
     :: CreateLineRequest
 createLineRequest =
     CreateLineRequest'
-    { _clrlObjectId = Nothing
+    { _clrlCategory = Nothing
+    , _clrlObjectId = Nothing
     , _clrlLineCategory = Nothing
     , _clrlElementProperties = Nothing
     }
+
+-- | The category of the line to be created. The exact line type created is
+-- determined based on the category and how it\'s routed to connect to
+-- other page elements. If you specify both a \`category\` and a
+-- \`line_category\`, the \`category\` takes precedence. If you do not
+-- specify a value for \`category\`, but specify a value for
+-- \`line_category\`, then the specified \`line_category\` value is used.
+-- If you do not specify either, then STRAIGHT is used.
+clrlCategory :: Lens' CreateLineRequest (Maybe CreateLineRequestCategory)
+clrlCategory
+  = lens _clrlCategory (\ s a -> s{_clrlCategory = a})
 
 -- | A user-supplied object ID. If you specify an ID, it must be unique among
 -- all pages and page elements in the presentation. The ID must start with
@@ -5621,7 +7517,11 @@ clrlObjectId :: Lens' CreateLineRequest (Maybe Text)
 clrlObjectId
   = lens _clrlObjectId (\ s a -> s{_clrlObjectId = a})
 
--- | The category of line to be created.
+-- | The category of the line to be created. __Deprecated__: use \`category\`
+-- instead. The exact line type created is determined based on the category
+-- and how it\'s routed to connect to other page elements. If you specify
+-- both a \`category\` and a \`line_category\`, the \`category\` takes
+-- precedence.
 clrlLineCategory :: Lens' CreateLineRequest (Maybe CreateLineRequestLineCategory)
 clrlLineCategory
   = lens _clrlLineCategory
@@ -5638,14 +7538,16 @@ instance FromJSON CreateLineRequest where
           = withObject "CreateLineRequest"
               (\ o ->
                  CreateLineRequest' <$>
-                   (o .:? "objectId") <*> (o .:? "lineCategory") <*>
-                     (o .:? "elementProperties"))
+                   (o .:? "category") <*> (o .:? "objectId") <*>
+                     (o .:? "lineCategory")
+                     <*> (o .:? "elementProperties"))
 
 instance ToJSON CreateLineRequest where
         toJSON CreateLineRequest'{..}
           = object
               (catMaybes
-                 [("objectId" .=) <$> _clrlObjectId,
+                 [("category" .=) <$> _clrlCategory,
+                  ("objectId" .=) <$> _clrlObjectId,
                   ("lineCategory" .=) <$> _clrlLineCategory,
                   ("elementProperties" .=) <$> _clrlElementProperties])
 
@@ -5689,8 +7591,8 @@ pParentObjectId
 pType :: Lens' Placeholder (Maybe PlaceholderType)
 pType = lens _pType (\ s a -> s{_pType = a})
 
--- | The index of the placeholder. If the same placeholder types are the
--- present in the same page, they would have different index values.
+-- | The index of the placeholder. If the same placeholder types are present
+-- in the same page, they would have different index values.
 pIndex :: Lens' Placeholder (Maybe Int32)
 pIndex
   = lens _pIndex (\ s a -> s{_pIndex = a}) .
@@ -5749,7 +7651,7 @@ lpMasterObjectId
 lpName :: Lens' LayoutProperties (Maybe Text)
 lpName = lens _lpName (\ s a -> s{_lpName = a})
 
--- | The human readable name of the layout in the presentation\'s locale.
+-- | The human-readable name of the layout.
 lpDisplayName :: Lens' LayoutProperties (Maybe Text)
 lpDisplayName
   = lens _lpDisplayName
@@ -5777,7 +7679,7 @@ instance ToJSON LayoutProperties where
 data UpdateShapePropertiesRequest = UpdateShapePropertiesRequest'
     { _usprObjectId        :: !(Maybe Text)
     , _usprShapeProperties :: !(Maybe ShapeProperties)
-    , _usprFields          :: !(Maybe FieldMask)
+    , _usprFields          :: !(Maybe GFieldMask)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UpdateShapePropertiesRequest' with the minimum fields required to make a request.
@@ -5816,7 +7718,7 @@ usprShapeProperties
 -- to \`\"shapeBackgroundFill.solidFill.color\"\`. To reset a property to
 -- its default value, include its field name in the field mask but leave
 -- the field itself unset.
-usprFields :: Lens' UpdateShapePropertiesRequest (Maybe FieldMask)
+usprFields :: Lens' UpdateShapePropertiesRequest (Maybe GFieldMask)
 usprFields
   = lens _usprFields (\ s a -> s{_usprFields = a})
 
@@ -5840,10 +7742,12 @@ instance ToJSON UpdateShapePropertiesRequest where
 --
 -- /See:/ 'table' smart constructor.
 data Table = Table'
-    { _tTableRows    :: !(Maybe [TableRow])
-    , _tRows         :: !(Maybe (Textual Int32))
-    , _tColumns      :: !(Maybe (Textual Int32))
-    , _tTableColumns :: !(Maybe [TableColumnProperties])
+    { _tTableRows            :: !(Maybe [TableRow])
+    , _tVerticalBOrderRows   :: !(Maybe [TableBOrderRow])
+    , _tRows                 :: !(Maybe (Textual Int32))
+    , _tColumns              :: !(Maybe (Textual Int32))
+    , _tHorizontalBOrderRows :: !(Maybe [TableBOrderRow])
+    , _tTableColumns         :: !(Maybe [TableColumnProperties])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Table' with the minimum fields required to make a request.
@@ -5852,9 +7756,13 @@ data Table = Table'
 --
 -- * 'tTableRows'
 --
+-- * 'tVerticalBOrderRows'
+--
 -- * 'tRows'
 --
 -- * 'tColumns'
+--
+-- * 'tHorizontalBOrderRows'
 --
 -- * 'tTableColumns'
 table
@@ -5862,8 +7770,10 @@ table
 table =
     Table'
     { _tTableRows = Nothing
+    , _tVerticalBOrderRows = Nothing
     , _tRows = Nothing
     , _tColumns = Nothing
+    , _tHorizontalBOrderRows = Nothing
     , _tTableColumns = Nothing
     }
 
@@ -5873,6 +7783,18 @@ tTableRows :: Lens' Table [TableRow]
 tTableRows
   = lens _tTableRows (\ s a -> s{_tTableRows = a}) .
       _Default
+      . _Coerce
+
+-- | Properties of vertical cell borders. A table\'s vertical cell borders
+-- are represented as a grid. The grid has the same number of rows as the
+-- table and one more column than the number of columns in the table. For
+-- example, if the table is 3 x 3, its vertical borders will be represented
+-- as a grid with 3 rows and 4 columns.
+tVerticalBOrderRows :: Lens' Table [TableBOrderRow]
+tVerticalBOrderRows
+  = lens _tVerticalBOrderRows
+      (\ s a -> s{_tVerticalBOrderRows = a})
+      . _Default
       . _Coerce
 
 -- | Number of rows in the table.
@@ -5887,6 +7809,18 @@ tColumns
   = lens _tColumns (\ s a -> s{_tColumns = a}) .
       mapping _Coerce
 
+-- | Properties of horizontal cell borders. A table\'s horizontal cell
+-- borders are represented as a grid. The grid has one more row than the
+-- number of rows in the table and the same number of columns as the table.
+-- For example, if the table is 3 x 3, its horizontal borders will be
+-- represented as a grid with 4 rows and 3 columns.
+tHorizontalBOrderRows :: Lens' Table [TableBOrderRow]
+tHorizontalBOrderRows
+  = lens _tHorizontalBOrderRows
+      (\ s a -> s{_tHorizontalBOrderRows = a})
+      . _Default
+      . _Coerce
+
 -- | Properties of each column.
 tTableColumns :: Lens' Table [TableColumnProperties]
 tTableColumns
@@ -5900,8 +7834,11 @@ instance FromJSON Table where
           = withObject "Table"
               (\ o ->
                  Table' <$>
-                   (o .:? "tableRows" .!= mempty) <*> (o .:? "rows") <*>
-                     (o .:? "columns")
+                   (o .:? "tableRows" .!= mempty) <*>
+                     (o .:? "verticalBorderRows" .!= mempty)
+                     <*> (o .:? "rows")
+                     <*> (o .:? "columns")
+                     <*> (o .:? "horizontalBorderRows" .!= mempty)
                      <*> (o .:? "tableColumns" .!= mempty))
 
 instance ToJSON Table where
@@ -5909,8 +7846,63 @@ instance ToJSON Table where
           = object
               (catMaybes
                  [("tableRows" .=) <$> _tTableRows,
+                  ("verticalBorderRows" .=) <$> _tVerticalBOrderRows,
                   ("rows" .=) <$> _tRows, ("columns" .=) <$> _tColumns,
+                  ("horizontalBorderRows" .=) <$>
+                    _tHorizontalBOrderRows,
                   ("tableColumns" .=) <$> _tTableColumns])
+
+-- | Updates the category of a line.
+--
+-- /See:/ 'updateLineCategoryRequest' smart constructor.
+data UpdateLineCategoryRequest = UpdateLineCategoryRequest'
+    { _ulcrObjectId     :: !(Maybe Text)
+    , _ulcrLineCategory :: !(Maybe UpdateLineCategoryRequestLineCategory)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UpdateLineCategoryRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ulcrObjectId'
+--
+-- * 'ulcrLineCategory'
+updateLineCategoryRequest
+    :: UpdateLineCategoryRequest
+updateLineCategoryRequest =
+    UpdateLineCategoryRequest'
+    { _ulcrObjectId = Nothing
+    , _ulcrLineCategory = Nothing
+    }
+
+-- | The object ID of the line the update is applied to. Only a line with a
+-- category indicating it is a \"connector\" can be updated. The line may
+-- be rerouted after updating its category.
+ulcrObjectId :: Lens' UpdateLineCategoryRequest (Maybe Text)
+ulcrObjectId
+  = lens _ulcrObjectId (\ s a -> s{_ulcrObjectId = a})
+
+-- | The line category to update to. The exact line type is determined based
+-- on the category to update to and how it\'s routed to connect to other
+-- page elements.
+ulcrLineCategory :: Lens' UpdateLineCategoryRequest (Maybe UpdateLineCategoryRequestLineCategory)
+ulcrLineCategory
+  = lens _ulcrLineCategory
+      (\ s a -> s{_ulcrLineCategory = a})
+
+instance FromJSON UpdateLineCategoryRequest where
+        parseJSON
+          = withObject "UpdateLineCategoryRequest"
+              (\ o ->
+                 UpdateLineCategoryRequest' <$>
+                   (o .:? "objectId") <*> (o .:? "lineCategory"))
+
+instance ToJSON UpdateLineCategoryRequest where
+        toJSON UpdateLineCategoryRequest'{..}
+          = object
+              (catMaybes
+                 [("objectId" .=) <$> _ulcrObjectId,
+                  ("lineCategory" .=) <$> _ulcrLineCategory])
 
 -- | The properties of a Shape. If the shape is a placeholder shape as
 -- determined by the placeholder field, then these properties may be
@@ -5923,6 +7915,7 @@ data ShapeProperties = ShapeProperties'
     { _spLink                :: !(Maybe Link)
     , _spShadow              :: !(Maybe Shadow)
     , _spOutline             :: !(Maybe Outline)
+    , _spContentAlignment    :: !(Maybe ShapePropertiesContentAlignment)
     , _spShapeBackgRoundFill :: !(Maybe ShapeBackgRoundFill)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5936,6 +7929,8 @@ data ShapeProperties = ShapeProperties'
 --
 -- * 'spOutline'
 --
+-- * 'spContentAlignment'
+--
 -- * 'spShapeBackgRoundFill'
 shapeProperties
     :: ShapeProperties
@@ -5944,6 +7939,7 @@ shapeProperties =
     { _spLink = Nothing
     , _spShadow = Nothing
     , _spOutline = Nothing
+    , _spContentAlignment = Nothing
     , _spShapeBackgRoundFill = Nothing
     }
 
@@ -5967,6 +7963,15 @@ spOutline :: Lens' ShapeProperties (Maybe Outline)
 spOutline
   = lens _spOutline (\ s a -> s{_spOutline = a})
 
+-- | The alignment of the content in the shape. If unspecified, the alignment
+-- is inherited from a parent placeholder if it exists. If the shape has no
+-- parent, the default alignment matches the alignment for new shapes
+-- created in the Slides editor.
+spContentAlignment :: Lens' ShapeProperties (Maybe ShapePropertiesContentAlignment)
+spContentAlignment
+  = lens _spContentAlignment
+      (\ s a -> s{_spContentAlignment = a})
+
 -- | The background fill of the shape. If unset, the background fill is
 -- inherited from a parent placeholder if it exists. If the shape has no
 -- parent, then the default background fill depends on the shape type,
@@ -5983,6 +7988,7 @@ instance FromJSON ShapeProperties where
                  ShapeProperties' <$>
                    (o .:? "link") <*> (o .:? "shadow") <*>
                      (o .:? "outline")
+                     <*> (o .:? "contentAlignment")
                      <*> (o .:? "shapeBackgroundFill"))
 
 instance ToJSON ShapeProperties where
@@ -5992,6 +7998,7 @@ instance ToJSON ShapeProperties where
                  [("link" .=) <$> _spLink,
                   ("shadow" .=) <$> _spShadow,
                   ("outline" .=) <$> _spOutline,
+                  ("contentAlignment" .=) <$> _spContentAlignment,
                   ("shapeBackgroundFill" .=) <$>
                     _spShapeBackgRoundFill])
 
@@ -6024,9 +8031,9 @@ sbrfSolidFill
   = lens _sbrfSolidFill
       (\ s a -> s{_sbrfSolidFill = a})
 
--- | The background fill property state. Updating the the fill on a shape
--- will implicitly update this field to \`RENDERED\`, unless another value
--- is specified in the same request. To have no fill on a shape, set this
+-- | The background fill property state. Updating the fill on a shape will
+-- implicitly update this field to \`RENDERED\`, unless another value is
+-- specified in the same request. To have no fill on a shape, set this
 -- field to \`NOT_RENDERED\`. In this case, any other fill fields set in
 -- the same request will be ignored.
 sbrfPropertyState :: Lens' ShapeBackgRoundFill (Maybe ShapeBackgRoundFillPropertyState)
@@ -6131,56 +8138,121 @@ instance ToJSON CreateParagraphBulletsRequest where
                   ("bulletPreset" .=) <$> _cpbrBulletPreset,
                   ("cellLocation" .=) <$> _cpbrCellLocation])
 
+-- | Updates the alt text title and\/or description of a page element.
+--
+-- /See:/ 'updatePageElementAltTextRequest' smart constructor.
+data UpdatePageElementAltTextRequest = UpdatePageElementAltTextRequest'
+    { _upeatrObjectId    :: !(Maybe Text)
+    , _upeatrTitle       :: !(Maybe Text)
+    , _upeatrDescription :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UpdatePageElementAltTextRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'upeatrObjectId'
+--
+-- * 'upeatrTitle'
+--
+-- * 'upeatrDescription'
+updatePageElementAltTextRequest
+    :: UpdatePageElementAltTextRequest
+updatePageElementAltTextRequest =
+    UpdatePageElementAltTextRequest'
+    { _upeatrObjectId = Nothing
+    , _upeatrTitle = Nothing
+    , _upeatrDescription = Nothing
+    }
+
+-- | The object ID of the page element the updates are applied to.
+upeatrObjectId :: Lens' UpdatePageElementAltTextRequest (Maybe Text)
+upeatrObjectId
+  = lens _upeatrObjectId
+      (\ s a -> s{_upeatrObjectId = a})
+
+-- | The updated alt text title of the page element. If unset the existing
+-- value will be maintained. The title is exposed to screen readers and
+-- other accessibility interfaces. Only use human readable values related
+-- to the content of the page element.
+upeatrTitle :: Lens' UpdatePageElementAltTextRequest (Maybe Text)
+upeatrTitle
+  = lens _upeatrTitle (\ s a -> s{_upeatrTitle = a})
+
+-- | The updated alt text description of the page element. If unset the
+-- existing value will be maintained. The description is exposed to screen
+-- readers and other accessibility interfaces. Only use human readable
+-- values related to the content of the page element.
+upeatrDescription :: Lens' UpdatePageElementAltTextRequest (Maybe Text)
+upeatrDescription
+  = lens _upeatrDescription
+      (\ s a -> s{_upeatrDescription = a})
+
+instance FromJSON UpdatePageElementAltTextRequest
+         where
+        parseJSON
+          = withObject "UpdatePageElementAltTextRequest"
+              (\ o ->
+                 UpdatePageElementAltTextRequest' <$>
+                   (o .:? "objectId") <*> (o .:? "title") <*>
+                     (o .:? "description"))
+
+instance ToJSON UpdatePageElementAltTextRequest where
+        toJSON UpdatePageElementAltTextRequest'{..}
+          = object
+              (catMaybes
+                 [("objectId" .=) <$> _upeatrObjectId,
+                  ("title" .=) <$> _upeatrTitle,
+                  ("description" .=) <$> _upeatrDescription])
+
 -- | Update the properties of a TableCell.
 --
 -- /See:/ 'updateTableCellPropertiesRequest' smart constructor.
 data UpdateTableCellPropertiesRequest = UpdateTableCellPropertiesRequest'
-    { _utcprObjectId            :: !(Maybe Text)
-    , _utcprTableCellProperties :: !(Maybe TableCellProperties)
-    , _utcprTableRange          :: !(Maybe TableRange)
-    , _utcprFields              :: !(Maybe FieldMask)
+    { _uObjectId            :: !(Maybe Text)
+    , _uTableCellProperties :: !(Maybe TableCellProperties)
+    , _uTableRange          :: !(Maybe TableRange)
+    , _uFields              :: !(Maybe GFieldMask)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UpdateTableCellPropertiesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'utcprObjectId'
+-- * 'uObjectId'
 --
--- * 'utcprTableCellProperties'
+-- * 'uTableCellProperties'
 --
--- * 'utcprTableRange'
+-- * 'uTableRange'
 --
--- * 'utcprFields'
+-- * 'uFields'
 updateTableCellPropertiesRequest
     :: UpdateTableCellPropertiesRequest
 updateTableCellPropertiesRequest =
     UpdateTableCellPropertiesRequest'
-    { _utcprObjectId = Nothing
-    , _utcprTableCellProperties = Nothing
-    , _utcprTableRange = Nothing
-    , _utcprFields = Nothing
+    { _uObjectId = Nothing
+    , _uTableCellProperties = Nothing
+    , _uTableRange = Nothing
+    , _uFields = Nothing
     }
 
 -- | The object ID of the table.
-utcprObjectId :: Lens' UpdateTableCellPropertiesRequest (Maybe Text)
-utcprObjectId
-  = lens _utcprObjectId
-      (\ s a -> s{_utcprObjectId = a})
+uObjectId :: Lens' UpdateTableCellPropertiesRequest (Maybe Text)
+uObjectId
+  = lens _uObjectId (\ s a -> s{_uObjectId = a})
 
 -- | The table cell properties to update.
-utcprTableCellProperties :: Lens' UpdateTableCellPropertiesRequest (Maybe TableCellProperties)
-utcprTableCellProperties
-  = lens _utcprTableCellProperties
-      (\ s a -> s{_utcprTableCellProperties = a})
+uTableCellProperties :: Lens' UpdateTableCellPropertiesRequest (Maybe TableCellProperties)
+uTableCellProperties
+  = lens _uTableCellProperties
+      (\ s a -> s{_uTableCellProperties = a})
 
 -- | The table range representing the subset of the table to which the
 -- updates are applied. If a table range is not specified, the updates will
 -- apply to the entire table.
-utcprTableRange :: Lens' UpdateTableCellPropertiesRequest (Maybe TableRange)
-utcprTableRange
-  = lens _utcprTableRange
-      (\ s a -> s{_utcprTableRange = a})
+uTableRange :: Lens' UpdateTableCellPropertiesRequest (Maybe TableRange)
+uTableRange
+  = lens _uTableRange (\ s a -> s{_uTableRange = a})
 
 -- | The fields that should be updated. At least one field must be specified.
 -- The root \`tableCellProperties\` is implied and should not be specified.
@@ -6189,9 +8261,8 @@ utcprTableRange
 -- \`fields\` to \`\"tableCellBackgroundFill.solidFill.color\"\`. To reset
 -- a property to its default value, include its field name in the field
 -- mask but leave the field itself unset.
-utcprFields :: Lens' UpdateTableCellPropertiesRequest (Maybe FieldMask)
-utcprFields
-  = lens _utcprFields (\ s a -> s{_utcprFields = a})
+uFields :: Lens' UpdateTableCellPropertiesRequest (Maybe GFieldMask)
+uFields = lens _uFields (\ s a -> s{_uFields = a})
 
 instance FromJSON UpdateTableCellPropertiesRequest
          where
@@ -6208,11 +8279,10 @@ instance ToJSON UpdateTableCellPropertiesRequest
         toJSON UpdateTableCellPropertiesRequest'{..}
           = object
               (catMaybes
-                 [("objectId" .=) <$> _utcprObjectId,
-                  ("tableCellProperties" .=) <$>
-                    _utcprTableCellProperties,
-                  ("tableRange" .=) <$> _utcprTableRange,
-                  ("fields" .=) <$> _utcprFields])
+                 [("objectId" .=) <$> _uObjectId,
+                  ("tableCellProperties" .=) <$> _uTableCellProperties,
+                  ("tableRange" .=) <$> _uTableRange,
+                  ("fields" .=) <$> _uFields])
 
 -- | The properties of the SheetsChart.
 --
@@ -6314,21 +8384,21 @@ paragraphStyle =
 
 -- | The amount of space between lines, as a percentage of normal, where
 -- normal is represented as 100.0. If unset, the value is inherited from
--- the parent. This property is read-only.
+-- the parent.
 psLineSpacing :: Lens' ParagraphStyle (Maybe Double)
 psLineSpacing
   = lens _psLineSpacing
       (\ s a -> s{_psLineSpacing = a})
       . mapping _Coerce
 
--- | The text direction of this paragraph. This property is read-only.
+-- | The text direction of this paragraph. If unset, the value defaults to
+-- LEFT_TO_RIGHT since text direction is not inherited.
 psDirection :: Lens' ParagraphStyle (Maybe ParagraphStyleDirection)
 psDirection
   = lens _psDirection (\ s a -> s{_psDirection = a})
 
 -- | The amount of indentation for the start of the first line of the
--- paragraph. If unset, the value is inherited from the parent. This
--- property is read-only.
+-- paragraph. If unset, the value is inherited from the parent.
 psIndentFirstLine :: Lens' ParagraphStyle (Maybe Dimension)
 psIndentFirstLine
   = lens _psIndentFirstLine
@@ -6336,38 +8406,38 @@ psIndentFirstLine
 
 -- | The amount indentation for the paragraph on the side that corresponds to
 -- the end of the text, based on the current text direction. If unset, the
--- value is inherited from the parent. This property is read-only.
+-- value is inherited from the parent.
 psIndentEnd :: Lens' ParagraphStyle (Maybe Dimension)
 psIndentEnd
   = lens _psIndentEnd (\ s a -> s{_psIndentEnd = a})
 
 -- | The amount indentation for the paragraph on the side that corresponds to
 -- the start of the text, based on the current text direction. If unset,
--- the value is inherited from the parent. This property is read-only.
+-- the value is inherited from the parent.
 psIndentStart :: Lens' ParagraphStyle (Maybe Dimension)
 psIndentStart
   = lens _psIndentStart
       (\ s a -> s{_psIndentStart = a})
 
--- | The text alignment for this paragraph. This property is read-only.
+-- | The text alignment for this paragraph.
 psAlignment :: Lens' ParagraphStyle (Maybe ParagraphStyleAlignment)
 psAlignment
   = lens _psAlignment (\ s a -> s{_psAlignment = a})
 
--- | The amount of extra space above the paragraph. If unset, the value is
--- inherited from the parent. This property is read-only.
+-- | The amount of extra space below the paragraph. If unset, the value is
+-- inherited from the parent.
 psSpaceBelow :: Lens' ParagraphStyle (Maybe Dimension)
 psSpaceBelow
   = lens _psSpaceBelow (\ s a -> s{_psSpaceBelow = a})
 
--- | The spacing mode for the paragraph. This property is read-only.
+-- | The spacing mode for the paragraph.
 psSpacingMode :: Lens' ParagraphStyle (Maybe ParagraphStyleSpacingMode)
 psSpacingMode
   = lens _psSpacingMode
       (\ s a -> s{_psSpacingMode = a})
 
 -- | The amount of extra space above the paragraph. If unset, the value is
--- inherited from the parent. This property is read-only.
+-- inherited from the parent.
 psSpaceAbove :: Lens' ParagraphStyle (Maybe Dimension)
 psSpaceAbove
   = lens _psSpaceAbove (\ s a -> s{_psSpaceAbove = a})
@@ -6433,6 +8503,43 @@ instance ToJSON CreateTableResponse where
         toJSON CreateTableResponse'{..}
           = object
               (catMaybes [("objectId" .=) <$> _ctrtObjectId])
+
+-- | Reroutes a line such that it\'s connected at the two closest connection
+-- sites on the connected page elements.
+--
+-- /See:/ 'rerouteLineRequest' smart constructor.
+newtype RerouteLineRequest = RerouteLineRequest'
+    { _rlrObjectId :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RerouteLineRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rlrObjectId'
+rerouteLineRequest
+    :: RerouteLineRequest
+rerouteLineRequest =
+    RerouteLineRequest'
+    { _rlrObjectId = Nothing
+    }
+
+-- | The object ID of the line to reroute. Only a line with a category
+-- indicating it is a \"connector\" can be rerouted. The start and end
+-- connections of the line must be on different page elements.
+rlrObjectId :: Lens' RerouteLineRequest (Maybe Text)
+rlrObjectId
+  = lens _rlrObjectId (\ s a -> s{_rlrObjectId = a})
+
+instance FromJSON RerouteLineRequest where
+        parseJSON
+          = withObject "RerouteLineRequest"
+              (\ o -> RerouteLineRequest' <$> (o .:? "objectId"))
+
+instance ToJSON RerouteLineRequest where
+        toJSON RerouteLineRequest'{..}
+          = object
+              (catMaybes [("objectId" .=) <$> _rlrObjectId])
 
 -- | Properties of each column in a table.
 --
@@ -6505,17 +8612,110 @@ instance ToJSON DuplicateObjectResponse where
           = object
               (catMaybes [("objectId" .=) <$> _dupObjectId])
 
+-- | Updates the styling for all of the paragraphs within a Shape or Table
+-- that overlap with the given text index range.
+--
+-- /See:/ 'updateParagraphStyleRequest' smart constructor.
+data UpdateParagraphStyleRequest = UpdateParagraphStyleRequest'
+    { _upsrStyle        :: !(Maybe ParagraphStyle)
+    , _upsrTextRange    :: !(Maybe Range)
+    , _upsrObjectId     :: !(Maybe Text)
+    , _upsrCellLocation :: !(Maybe TableCellLocation)
+    , _upsrFields       :: !(Maybe GFieldMask)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UpdateParagraphStyleRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'upsrStyle'
+--
+-- * 'upsrTextRange'
+--
+-- * 'upsrObjectId'
+--
+-- * 'upsrCellLocation'
+--
+-- * 'upsrFields'
+updateParagraphStyleRequest
+    :: UpdateParagraphStyleRequest
+updateParagraphStyleRequest =
+    UpdateParagraphStyleRequest'
+    { _upsrStyle = Nothing
+    , _upsrTextRange = Nothing
+    , _upsrObjectId = Nothing
+    , _upsrCellLocation = Nothing
+    , _upsrFields = Nothing
+    }
+
+-- | The paragraph\'s style.
+upsrStyle :: Lens' UpdateParagraphStyleRequest (Maybe ParagraphStyle)
+upsrStyle
+  = lens _upsrStyle (\ s a -> s{_upsrStyle = a})
+
+-- | The range of text containing the paragraph(s) to style.
+upsrTextRange :: Lens' UpdateParagraphStyleRequest (Maybe Range)
+upsrTextRange
+  = lens _upsrTextRange
+      (\ s a -> s{_upsrTextRange = a})
+
+-- | The object ID of the shape or table with the text to be styled.
+upsrObjectId :: Lens' UpdateParagraphStyleRequest (Maybe Text)
+upsrObjectId
+  = lens _upsrObjectId (\ s a -> s{_upsrObjectId = a})
+
+-- | The location of the cell in the table containing the paragraph(s) to
+-- style. If \`object_id\` refers to a table, \`cell_location\` must have a
+-- value. Otherwise, it must not.
+upsrCellLocation :: Lens' UpdateParagraphStyleRequest (Maybe TableCellLocation)
+upsrCellLocation
+  = lens _upsrCellLocation
+      (\ s a -> s{_upsrCellLocation = a})
+
+-- | The fields that should be updated. At least one field must be specified.
+-- The root \`style\` is implied and should not be specified. A single
+-- \`\"*\"\` can be used as short-hand for listing every field. For
+-- example, to update the paragraph alignment, set \`fields\` to
+-- \`\"alignment\"\`. To reset a property to its default value, include its
+-- field name in the field mask but leave the field itself unset.
+upsrFields :: Lens' UpdateParagraphStyleRequest (Maybe GFieldMask)
+upsrFields
+  = lens _upsrFields (\ s a -> s{_upsrFields = a})
+
+instance FromJSON UpdateParagraphStyleRequest where
+        parseJSON
+          = withObject "UpdateParagraphStyleRequest"
+              (\ o ->
+                 UpdateParagraphStyleRequest' <$>
+                   (o .:? "style") <*> (o .:? "textRange") <*>
+                     (o .:? "objectId")
+                     <*> (o .:? "cellLocation")
+                     <*> (o .:? "fields"))
+
+instance ToJSON UpdateParagraphStyleRequest where
+        toJSON UpdateParagraphStyleRequest'{..}
+          = object
+              (catMaybes
+                 [("style" .=) <$> _upsrStyle,
+                  ("textRange" .=) <$> _upsrTextRange,
+                  ("objectId" .=) <$> _upsrObjectId,
+                  ("cellLocation" .=) <$> _upsrCellLocation,
+                  ("fields" .=) <$> _upsrFields])
+
 -- | Replaces all instances of text matching a criteria with replace text.
 --
 -- /See:/ 'replaceAllTextRequest' smart constructor.
 data ReplaceAllTextRequest = ReplaceAllTextRequest'
-    { _ratrContainsText :: !(Maybe SubstringMatchCriteria)
-    , _ratrReplaceText  :: !(Maybe Text)
+    { _ratrPageObjectIds :: !(Maybe [Text])
+    , _ratrContainsText  :: !(Maybe SubstringMatchCriteria)
+    , _ratrReplaceText   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReplaceAllTextRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ratrPageObjectIds'
 --
 -- * 'ratrContainsText'
 --
@@ -6524,9 +8724,21 @@ replaceAllTextRequest
     :: ReplaceAllTextRequest
 replaceAllTextRequest =
     ReplaceAllTextRequest'
-    { _ratrContainsText = Nothing
+    { _ratrPageObjectIds = Nothing
+    , _ratrContainsText = Nothing
     , _ratrReplaceText = Nothing
     }
+
+-- | If non-empty, limits the matches to page elements only on the given
+-- pages. Returns a 400 bad request error if given the page object ID of a
+-- notes master, or if a page with that object ID doesn\'t exist in the
+-- presentation.
+ratrPageObjectIds :: Lens' ReplaceAllTextRequest [Text]
+ratrPageObjectIds
+  = lens _ratrPageObjectIds
+      (\ s a -> s{_ratrPageObjectIds = a})
+      . _Default
+      . _Coerce
 
 -- | Finds text in a shape matching this substring.
 ratrContainsText :: Lens' ReplaceAllTextRequest (Maybe SubstringMatchCriteria)
@@ -6545,13 +8757,16 @@ instance FromJSON ReplaceAllTextRequest where
           = withObject "ReplaceAllTextRequest"
               (\ o ->
                  ReplaceAllTextRequest' <$>
-                   (o .:? "containsText") <*> (o .:? "replaceText"))
+                   (o .:? "pageObjectIds" .!= mempty) <*>
+                     (o .:? "containsText")
+                     <*> (o .:? "replaceText"))
 
 instance ToJSON ReplaceAllTextRequest where
         toJSON ReplaceAllTextRequest'{..}
           = object
               (catMaybes
-                 [("containsText" .=) <$> _ratrContainsText,
+                 [("pageObjectIds" .=) <$> _ratrPageObjectIds,
+                  ("containsText" .=) <$> _ratrContainsText,
                   ("replaceText" .=) <$> _ratrReplaceText])
 
 -- | A table range represents a reference to a subset of a table. It\'s
@@ -6623,34 +8838,49 @@ instance ToJSON TableRange where
 --
 -- /See:/ 'request'' smart constructor.
 data Request' = Request''
-    { _reqReplaceAllShapesWithImage  :: !(Maybe ReplaceAllShapesWithImageRequest)
-    , _reqDeleteObject               :: !(Maybe DeleteObjectRequest)
-    , _reqUpdateSlidesPosition       :: !(Maybe UpdateSlidesPositionRequest)
-    , _reqUpdateShapeProperties      :: !(Maybe UpdateShapePropertiesRequest)
-    , _reqCreateParagraphBullets     :: !(Maybe CreateParagraphBulletsRequest)
-    , _reqCreateLine                 :: !(Maybe CreateLineRequest)
-    , _reqInsertText                 :: !(Maybe InsertTextRequest)
-    , _reqDeleteTableRow             :: !(Maybe DeleteTableRowRequest)
-    , _reqUpdateTableCellProperties  :: !(Maybe UpdateTableCellPropertiesRequest)
-    , _reqReplaceAllText             :: !(Maybe ReplaceAllTextRequest)
-    , _reqCreateShape                :: !(Maybe CreateShapeRequest)
-    , _reqUpdatePageProperties       :: !(Maybe UpdatePagePropertiesRequest)
-    , _reqUpdateLineProperties       :: !(Maybe UpdateLinePropertiesRequest)
-    , _reqDeleteTableColumn          :: !(Maybe DeleteTableColumnRequest)
-    , _reqDeleteText                 :: !(Maybe DeleteTextRequest)
-    , _reqCreateSheetsChart          :: !(Maybe CreateSheetsChartRequest)
-    , _reqInsertTableColumns         :: !(Maybe InsertTableColumnsRequest)
-    , _reqUpdateImageProperties      :: !(Maybe UpdateImagePropertiesRequest)
-    , _reqDuplicateObject            :: !(Maybe DuplicateObjectRequest)
-    , _reqCreateTable                :: !(Maybe CreateTableRequest)
-    , _reqCreateVideo                :: !(Maybe CreateVideoRequest)
-    , _reqRefreshSheetsChart         :: !(Maybe RefreshSheetsChartRequest)
-    , _reqUpdatePageElementTransform :: !(Maybe UpdatePageElementTransformRequest)
-    , _reqInsertTableRows            :: !(Maybe InsertTableRowsRequest)
-    , _reqCreateImage                :: !(Maybe CreateImageRequest)
-    , _reqCreateSlide                :: !(Maybe CreateSlideRequest)
-    , _reqUpdateTextStyle            :: !(Maybe UpdateTextStyleRequest)
-    , _reqUpdateVideoProperties      :: !(Maybe UpdateVideoPropertiesRequest)
+    { _reqReplaceAllShapesWithImage       :: !(Maybe ReplaceAllShapesWithImageRequest)
+    , _reqDeleteObject                    :: !(Maybe DeleteObjectRequest)
+    , _reqUpdateSlidesPosition            :: !(Maybe UpdateSlidesPositionRequest)
+    , _reqUpdateShapeProperties           :: !(Maybe UpdateShapePropertiesRequest)
+    , _reqCreateParagraphBullets          :: !(Maybe CreateParagraphBulletsRequest)
+    , _reqUpdateLineCategory              :: !(Maybe UpdateLineCategoryRequest)
+    , _reqCreateLine                      :: !(Maybe CreateLineRequest)
+    , _reqInsertText                      :: !(Maybe InsertTextRequest)
+    , _reqUpdateTableBOrderProperties     :: !(Maybe UpdateTableBOrderPropertiesRequest)
+    , _reqDeleteParagraphBullets          :: !(Maybe DeleteParagraphBulletsRequest)
+    , _reqDeleteTableRow                  :: !(Maybe DeleteTableRowRequest)
+    , _reqUpdateTableCellProperties       :: !(Maybe UpdateTableCellPropertiesRequest)
+    , _reqReplaceAllText                  :: !(Maybe ReplaceAllTextRequest)
+    , _reqUpdatePageElementAltText        :: !(Maybe UpdatePageElementAltTextRequest)
+    , _reqUpdateParagraphStyle            :: !(Maybe UpdateParagraphStyleRequest)
+    , _reqRerouteLine                     :: !(Maybe RerouteLineRequest)
+    , _reqReplaceImage                    :: !(Maybe ReplaceImageRequest)
+    , _reqReplaceAllShapesWithSheetsChart :: !(Maybe ReplaceAllShapesWithSheetsChartRequest)
+    , _reqCreateShape                     :: !(Maybe CreateShapeRequest)
+    , _reqUpdatePageElementsZOrder        :: !(Maybe UpdatePageElementsZOrderRequest)
+    , _reqUpdatePageProperties            :: !(Maybe UpdatePagePropertiesRequest)
+    , _reqUpdateLineProperties            :: !(Maybe UpdateLinePropertiesRequest)
+    , _reqDeleteTableColumn               :: !(Maybe DeleteTableColumnRequest)
+    , _reqGroupObjects                    :: !(Maybe GroupObjectsRequest)
+    , _reqDeleteText                      :: !(Maybe DeleteTextRequest)
+    , _reqUpdateTableRowProperties        :: !(Maybe UpdateTableRowPropertiesRequest)
+    , _reqCreateSheetsChart               :: !(Maybe CreateSheetsChartRequest)
+    , _reqInsertTableColumns              :: !(Maybe InsertTableColumnsRequest)
+    , _reqUpdateImageProperties           :: !(Maybe UpdateImagePropertiesRequest)
+    , _reqUnGroupObjects                  :: !(Maybe UnGroupObjectsRequest)
+    , _reqDuplicateObject                 :: !(Maybe DuplicateObjectRequest)
+    , _reqCreateTable                     :: !(Maybe CreateTableRequest)
+    , _reqCreateVideo                     :: !(Maybe CreateVideoRequest)
+    , _reqRefreshSheetsChart              :: !(Maybe RefreshSheetsChartRequest)
+    , _reqUpdateTableColumnProperties     :: !(Maybe UpdateTableColumnPropertiesRequest)
+    , _reqUnmergeTableCells               :: !(Maybe UnmergeTableCellsRequest)
+    , _reqUpdatePageElementTransform      :: !(Maybe UpdatePageElementTransformRequest)
+    , _reqInsertTableRows                 :: !(Maybe InsertTableRowsRequest)
+    , _reqCreateImage                     :: !(Maybe CreateImageRequest)
+    , _reqMergeTableCells                 :: !(Maybe MergeTableCellsRequest)
+    , _reqCreateSlide                     :: !(Maybe CreateSlideRequest)
+    , _reqUpdateTextStyle                 :: !(Maybe UpdateTextStyleRequest)
+    , _reqUpdateVideoProperties           :: !(Maybe UpdateVideoPropertiesRequest)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Request' with the minimum fields required to make a request.
@@ -6667,9 +8897,15 @@ data Request' = Request''
 --
 -- * 'reqCreateParagraphBullets'
 --
+-- * 'reqUpdateLineCategory'
+--
 -- * 'reqCreateLine'
 --
 -- * 'reqInsertText'
+--
+-- * 'reqUpdateTableBOrderProperties'
+--
+-- * 'reqDeleteParagraphBullets'
 --
 -- * 'reqDeleteTableRow'
 --
@@ -6677,7 +8913,19 @@ data Request' = Request''
 --
 -- * 'reqReplaceAllText'
 --
+-- * 'reqUpdatePageElementAltText'
+--
+-- * 'reqUpdateParagraphStyle'
+--
+-- * 'reqRerouteLine'
+--
+-- * 'reqReplaceImage'
+--
+-- * 'reqReplaceAllShapesWithSheetsChart'
+--
 -- * 'reqCreateShape'
+--
+-- * 'reqUpdatePageElementsZOrder'
 --
 -- * 'reqUpdatePageProperties'
 --
@@ -6685,13 +8933,19 @@ data Request' = Request''
 --
 -- * 'reqDeleteTableColumn'
 --
+-- * 'reqGroupObjects'
+--
 -- * 'reqDeleteText'
+--
+-- * 'reqUpdateTableRowProperties'
 --
 -- * 'reqCreateSheetsChart'
 --
 -- * 'reqInsertTableColumns'
 --
 -- * 'reqUpdateImageProperties'
+--
+-- * 'reqUnGroupObjects'
 --
 -- * 'reqDuplicateObject'
 --
@@ -6701,11 +8955,17 @@ data Request' = Request''
 --
 -- * 'reqRefreshSheetsChart'
 --
+-- * 'reqUpdateTableColumnProperties'
+--
+-- * 'reqUnmergeTableCells'
+--
 -- * 'reqUpdatePageElementTransform'
 --
 -- * 'reqInsertTableRows'
 --
 -- * 'reqCreateImage'
+--
+-- * 'reqMergeTableCells'
 --
 -- * 'reqCreateSlide'
 --
@@ -6721,26 +8981,41 @@ request' =
     , _reqUpdateSlidesPosition = Nothing
     , _reqUpdateShapeProperties = Nothing
     , _reqCreateParagraphBullets = Nothing
+    , _reqUpdateLineCategory = Nothing
     , _reqCreateLine = Nothing
     , _reqInsertText = Nothing
+    , _reqUpdateTableBOrderProperties = Nothing
+    , _reqDeleteParagraphBullets = Nothing
     , _reqDeleteTableRow = Nothing
     , _reqUpdateTableCellProperties = Nothing
     , _reqReplaceAllText = Nothing
+    , _reqUpdatePageElementAltText = Nothing
+    , _reqUpdateParagraphStyle = Nothing
+    , _reqRerouteLine = Nothing
+    , _reqReplaceImage = Nothing
+    , _reqReplaceAllShapesWithSheetsChart = Nothing
     , _reqCreateShape = Nothing
+    , _reqUpdatePageElementsZOrder = Nothing
     , _reqUpdatePageProperties = Nothing
     , _reqUpdateLineProperties = Nothing
     , _reqDeleteTableColumn = Nothing
+    , _reqGroupObjects = Nothing
     , _reqDeleteText = Nothing
+    , _reqUpdateTableRowProperties = Nothing
     , _reqCreateSheetsChart = Nothing
     , _reqInsertTableColumns = Nothing
     , _reqUpdateImageProperties = Nothing
+    , _reqUnGroupObjects = Nothing
     , _reqDuplicateObject = Nothing
     , _reqCreateTable = Nothing
     , _reqCreateVideo = Nothing
     , _reqRefreshSheetsChart = Nothing
+    , _reqUpdateTableColumnProperties = Nothing
+    , _reqUnmergeTableCells = Nothing
     , _reqUpdatePageElementTransform = Nothing
     , _reqInsertTableRows = Nothing
     , _reqCreateImage = Nothing
+    , _reqMergeTableCells = Nothing
     , _reqCreateSlide = Nothing
     , _reqUpdateTextStyle = Nothing
     , _reqUpdateVideoProperties = Nothing
@@ -6776,6 +9051,12 @@ reqCreateParagraphBullets
   = lens _reqCreateParagraphBullets
       (\ s a -> s{_reqCreateParagraphBullets = a})
 
+-- | Updates the category of a line.
+reqUpdateLineCategory :: Lens' Request' (Maybe UpdateLineCategoryRequest)
+reqUpdateLineCategory
+  = lens _reqUpdateLineCategory
+      (\ s a -> s{_reqUpdateLineCategory = a})
+
 -- | Creates a line.
 reqCreateLine :: Lens' Request' (Maybe CreateLineRequest)
 reqCreateLine
@@ -6787,6 +9068,18 @@ reqInsertText :: Lens' Request' (Maybe InsertTextRequest)
 reqInsertText
   = lens _reqInsertText
       (\ s a -> s{_reqInsertText = a})
+
+-- | Updates the properties of the table borders in a Table.
+reqUpdateTableBOrderProperties :: Lens' Request' (Maybe UpdateTableBOrderPropertiesRequest)
+reqUpdateTableBOrderProperties
+  = lens _reqUpdateTableBOrderProperties
+      (\ s a -> s{_reqUpdateTableBOrderProperties = a})
+
+-- | Deletes bullets from paragraphs.
+reqDeleteParagraphBullets :: Lens' Request' (Maybe DeleteParagraphBulletsRequest)
+reqDeleteParagraphBullets
+  = lens _reqDeleteParagraphBullets
+      (\ s a -> s{_reqDeleteParagraphBullets = a})
 
 -- | Deletes a row from a table.
 reqDeleteTableRow :: Lens' Request' (Maybe DeleteTableRowRequest)
@@ -6806,11 +9099,48 @@ reqReplaceAllText
   = lens _reqReplaceAllText
       (\ s a -> s{_reqReplaceAllText = a})
 
+-- | Updates the alt text title and\/or description of a page element.
+reqUpdatePageElementAltText :: Lens' Request' (Maybe UpdatePageElementAltTextRequest)
+reqUpdatePageElementAltText
+  = lens _reqUpdatePageElementAltText
+      (\ s a -> s{_reqUpdatePageElementAltText = a})
+
+-- | Updates the styling of paragraphs within a Shape or Table.
+reqUpdateParagraphStyle :: Lens' Request' (Maybe UpdateParagraphStyleRequest)
+reqUpdateParagraphStyle
+  = lens _reqUpdateParagraphStyle
+      (\ s a -> s{_reqUpdateParagraphStyle = a})
+
+-- | Reroutes a line such that it\'s connected at the two closest connection
+-- sites on the connected page elements.
+reqRerouteLine :: Lens' Request' (Maybe RerouteLineRequest)
+reqRerouteLine
+  = lens _reqRerouteLine
+      (\ s a -> s{_reqRerouteLine = a})
+
+-- | Replaces an existing image with a new image.
+reqReplaceImage :: Lens' Request' (Maybe ReplaceImageRequest)
+reqReplaceImage
+  = lens _reqReplaceImage
+      (\ s a -> s{_reqReplaceImage = a})
+
+-- | Replaces all shapes matching some criteria with a Google Sheets chart.
+reqReplaceAllShapesWithSheetsChart :: Lens' Request' (Maybe ReplaceAllShapesWithSheetsChartRequest)
+reqReplaceAllShapesWithSheetsChart
+  = lens _reqReplaceAllShapesWithSheetsChart
+      (\ s a -> s{_reqReplaceAllShapesWithSheetsChart = a})
+
 -- | Creates a new shape.
 reqCreateShape :: Lens' Request' (Maybe CreateShapeRequest)
 reqCreateShape
   = lens _reqCreateShape
       (\ s a -> s{_reqCreateShape = a})
+
+-- | Updates the Z-order of page elements.
+reqUpdatePageElementsZOrder :: Lens' Request' (Maybe UpdatePageElementsZOrderRequest)
+reqUpdatePageElementsZOrder
+  = lens _reqUpdatePageElementsZOrder
+      (\ s a -> s{_reqUpdatePageElementsZOrder = a})
 
 -- | Updates the properties of a Page.
 reqUpdatePageProperties :: Lens' Request' (Maybe UpdatePagePropertiesRequest)
@@ -6830,11 +9160,23 @@ reqDeleteTableColumn
   = lens _reqDeleteTableColumn
       (\ s a -> s{_reqDeleteTableColumn = a})
 
+-- | Groups objects, such as page elements.
+reqGroupObjects :: Lens' Request' (Maybe GroupObjectsRequest)
+reqGroupObjects
+  = lens _reqGroupObjects
+      (\ s a -> s{_reqGroupObjects = a})
+
 -- | Deletes text from a shape or a table cell.
 reqDeleteText :: Lens' Request' (Maybe DeleteTextRequest)
 reqDeleteText
   = lens _reqDeleteText
       (\ s a -> s{_reqDeleteText = a})
+
+-- | Updates the properties of a Table row.
+reqUpdateTableRowProperties :: Lens' Request' (Maybe UpdateTableRowPropertiesRequest)
+reqUpdateTableRowProperties
+  = lens _reqUpdateTableRowProperties
+      (\ s a -> s{_reqUpdateTableRowProperties = a})
 
 -- | Creates an embedded Google Sheets chart.
 reqCreateSheetsChart :: Lens' Request' (Maybe CreateSheetsChartRequest)
@@ -6853,6 +9195,12 @@ reqUpdateImageProperties :: Lens' Request' (Maybe UpdateImagePropertiesRequest)
 reqUpdateImageProperties
   = lens _reqUpdateImageProperties
       (\ s a -> s{_reqUpdateImageProperties = a})
+
+-- | Ungroups objects, such as groups.
+reqUnGroupObjects :: Lens' Request' (Maybe UnGroupObjectsRequest)
+reqUnGroupObjects
+  = lens _reqUnGroupObjects
+      (\ s a -> s{_reqUnGroupObjects = a})
 
 -- | Duplicates a slide or page element.
 reqDuplicateObject :: Lens' Request' (Maybe DuplicateObjectRequest)
@@ -6878,6 +9226,18 @@ reqRefreshSheetsChart
   = lens _reqRefreshSheetsChart
       (\ s a -> s{_reqRefreshSheetsChart = a})
 
+-- | Updates the properties of a Table column.
+reqUpdateTableColumnProperties :: Lens' Request' (Maybe UpdateTableColumnPropertiesRequest)
+reqUpdateTableColumnProperties
+  = lens _reqUpdateTableColumnProperties
+      (\ s a -> s{_reqUpdateTableColumnProperties = a})
+
+-- | Unmerges cells in a Table.
+reqUnmergeTableCells :: Lens' Request' (Maybe UnmergeTableCellsRequest)
+reqUnmergeTableCells
+  = lens _reqUnmergeTableCells
+      (\ s a -> s{_reqUnmergeTableCells = a})
+
 -- | Updates the transform of a page element.
 reqUpdatePageElementTransform :: Lens' Request' (Maybe UpdatePageElementTransformRequest)
 reqUpdatePageElementTransform
@@ -6895,6 +9255,12 @@ reqCreateImage :: Lens' Request' (Maybe CreateImageRequest)
 reqCreateImage
   = lens _reqCreateImage
       (\ s a -> s{_reqCreateImage = a})
+
+-- | Merges cells in a Table.
+reqMergeTableCells :: Lens' Request' (Maybe MergeTableCellsRequest)
+reqMergeTableCells
+  = lens _reqMergeTableCells
+      (\ s a -> s{_reqMergeTableCells = a})
 
 -- | Creates a new slide.
 reqCreateSlide :: Lens' Request' (Maybe CreateSlideRequest)
@@ -6924,26 +9290,41 @@ instance FromJSON Request' where
                      <*> (o .:? "updateSlidesPosition")
                      <*> (o .:? "updateShapeProperties")
                      <*> (o .:? "createParagraphBullets")
+                     <*> (o .:? "updateLineCategory")
                      <*> (o .:? "createLine")
                      <*> (o .:? "insertText")
+                     <*> (o .:? "updateTableBorderProperties")
+                     <*> (o .:? "deleteParagraphBullets")
                      <*> (o .:? "deleteTableRow")
                      <*> (o .:? "updateTableCellProperties")
                      <*> (o .:? "replaceAllText")
+                     <*> (o .:? "updatePageElementAltText")
+                     <*> (o .:? "updateParagraphStyle")
+                     <*> (o .:? "rerouteLine")
+                     <*> (o .:? "replaceImage")
+                     <*> (o .:? "replaceAllShapesWithSheetsChart")
                      <*> (o .:? "createShape")
+                     <*> (o .:? "updatePageElementsZOrder")
                      <*> (o .:? "updatePageProperties")
                      <*> (o .:? "updateLineProperties")
                      <*> (o .:? "deleteTableColumn")
+                     <*> (o .:? "groupObjects")
                      <*> (o .:? "deleteText")
+                     <*> (o .:? "updateTableRowProperties")
                      <*> (o .:? "createSheetsChart")
                      <*> (o .:? "insertTableColumns")
                      <*> (o .:? "updateImageProperties")
+                     <*> (o .:? "ungroupObjects")
                      <*> (o .:? "duplicateObject")
                      <*> (o .:? "createTable")
                      <*> (o .:? "createVideo")
                      <*> (o .:? "refreshSheetsChart")
+                     <*> (o .:? "updateTableColumnProperties")
+                     <*> (o .:? "unmergeTableCells")
                      <*> (o .:? "updatePageElementTransform")
                      <*> (o .:? "insertTableRows")
                      <*> (o .:? "createImage")
+                     <*> (o .:? "mergeTableCells")
                      <*> (o .:? "createSlide")
                      <*> (o .:? "updateTextStyle")
                      <*> (o .:? "updateVideoProperties"))
@@ -6961,31 +9342,54 @@ instance ToJSON Request' where
                     _reqUpdateShapeProperties,
                   ("createParagraphBullets" .=) <$>
                     _reqCreateParagraphBullets,
+                  ("updateLineCategory" .=) <$> _reqUpdateLineCategory,
                   ("createLine" .=) <$> _reqCreateLine,
                   ("insertText" .=) <$> _reqInsertText,
+                  ("updateTableBorderProperties" .=) <$>
+                    _reqUpdateTableBOrderProperties,
+                  ("deleteParagraphBullets" .=) <$>
+                    _reqDeleteParagraphBullets,
                   ("deleteTableRow" .=) <$> _reqDeleteTableRow,
                   ("updateTableCellProperties" .=) <$>
                     _reqUpdateTableCellProperties,
                   ("replaceAllText" .=) <$> _reqReplaceAllText,
+                  ("updatePageElementAltText" .=) <$>
+                    _reqUpdatePageElementAltText,
+                  ("updateParagraphStyle" .=) <$>
+                    _reqUpdateParagraphStyle,
+                  ("rerouteLine" .=) <$> _reqRerouteLine,
+                  ("replaceImage" .=) <$> _reqReplaceImage,
+                  ("replaceAllShapesWithSheetsChart" .=) <$>
+                    _reqReplaceAllShapesWithSheetsChart,
                   ("createShape" .=) <$> _reqCreateShape,
+                  ("updatePageElementsZOrder" .=) <$>
+                    _reqUpdatePageElementsZOrder,
                   ("updatePageProperties" .=) <$>
                     _reqUpdatePageProperties,
                   ("updateLineProperties" .=) <$>
                     _reqUpdateLineProperties,
                   ("deleteTableColumn" .=) <$> _reqDeleteTableColumn,
+                  ("groupObjects" .=) <$> _reqGroupObjects,
                   ("deleteText" .=) <$> _reqDeleteText,
+                  ("updateTableRowProperties" .=) <$>
+                    _reqUpdateTableRowProperties,
                   ("createSheetsChart" .=) <$> _reqCreateSheetsChart,
                   ("insertTableColumns" .=) <$> _reqInsertTableColumns,
                   ("updateImageProperties" .=) <$>
                     _reqUpdateImageProperties,
+                  ("ungroupObjects" .=) <$> _reqUnGroupObjects,
                   ("duplicateObject" .=) <$> _reqDuplicateObject,
                   ("createTable" .=) <$> _reqCreateTable,
                   ("createVideo" .=) <$> _reqCreateVideo,
                   ("refreshSheetsChart" .=) <$> _reqRefreshSheetsChart,
+                  ("updateTableColumnProperties" .=) <$>
+                    _reqUpdateTableColumnProperties,
+                  ("unmergeTableCells" .=) <$> _reqUnmergeTableCells,
                   ("updatePageElementTransform" .=) <$>
                     _reqUpdatePageElementTransform,
                   ("insertTableRows" .=) <$> _reqInsertTableRows,
                   ("createImage" .=) <$> _reqCreateImage,
+                  ("mergeTableCells" .=) <$> _reqMergeTableCells,
                   ("createSlide" .=) <$> _reqCreateSlide,
                   ("updateTextStyle" .=) <$> _reqUpdateTextStyle,
                   ("updateVideoProperties" .=) <$>

@@ -20,9 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the instances of a version.
+-- Lists the instances of a version.Tip: To aggregate details about
+-- instances over time, see the Stackdriver Monitoring API
+-- (https:\/\/cloud.google.com\/monitoring\/api\/ref_v3\/rest\/v3\/projects.timeSeries\/list).
 --
--- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ Google App Engine Admin API Reference> for @appengine.apps.services.versions.instances.list@.
+-- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ App Engine Admin API Reference> for @appengine.apps.services.versions.instances.list@.
 module Network.Google.Resource.AppEngine.Apps.Services.Versions.Instances.List
     (
     -- * REST Resource
@@ -35,11 +37,9 @@ module Network.Google.Resource.AppEngine.Apps.Services.Versions.Instances.List
     -- * Request Lenses
     , asvilXgafv
     , asvilUploadProtocol
-    , asvilPp
     , asvilAccessToken
     , asvilUploadType
     , asvilVersionsId
-    , asvilBearerToken
     , asvilAppsId
     , asvilPageToken
     , asvilServicesId
@@ -61,29 +61,27 @@ type AppsServicesVersionsInstancesListResource =
                "versions" :>
                  Capture "versionsId" Text :>
                    "instances" :>
-                     QueryParam "$.xgafv" Text :>
+                     QueryParam "$.xgafv" Xgafv :>
                        QueryParam "upload_protocol" Text :>
-                         QueryParam "pp" Bool :>
-                           QueryParam "access_token" Text :>
-                             QueryParam "uploadType" Text :>
-                               QueryParam "bearer_token" Text :>
-                                 QueryParam "pageToken" Text :>
-                                   QueryParam "pageSize" (Textual Int32) :>
-                                     QueryParam "callback" Text :>
-                                       QueryParam "alt" AltJSON :>
-                                         Get '[JSON] ListInstancesResponse
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "pageSize" (Textual Int32) :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" AltJSON :>
+                                     Get '[JSON] ListInstancesResponse
 
--- | Lists the instances of a version.
+-- | Lists the instances of a version.Tip: To aggregate details about
+-- instances over time, see the Stackdriver Monitoring API
+-- (https:\/\/cloud.google.com\/monitoring\/api\/ref_v3\/rest\/v3\/projects.timeSeries\/list).
 --
 -- /See:/ 'appsServicesVersionsInstancesList' smart constructor.
 data AppsServicesVersionsInstancesList = AppsServicesVersionsInstancesList'
-    { _asvilXgafv          :: !(Maybe Text)
+    { _asvilXgafv          :: !(Maybe Xgafv)
     , _asvilUploadProtocol :: !(Maybe Text)
-    , _asvilPp             :: !Bool
     , _asvilAccessToken    :: !(Maybe Text)
     , _asvilUploadType     :: !(Maybe Text)
     , _asvilVersionsId     :: !Text
-    , _asvilBearerToken    :: !(Maybe Text)
     , _asvilAppsId         :: !Text
     , _asvilPageToken      :: !(Maybe Text)
     , _asvilServicesId     :: !Text
@@ -99,15 +97,11 @@ data AppsServicesVersionsInstancesList = AppsServicesVersionsInstancesList'
 --
 -- * 'asvilUploadProtocol'
 --
--- * 'asvilPp'
---
 -- * 'asvilAccessToken'
 --
 -- * 'asvilUploadType'
 --
 -- * 'asvilVersionsId'
---
--- * 'asvilBearerToken'
 --
 -- * 'asvilAppsId'
 --
@@ -127,11 +121,9 @@ appsServicesVersionsInstancesList pAsvilVersionsId_ pAsvilAppsId_ pAsvilServices
     AppsServicesVersionsInstancesList'
     { _asvilXgafv = Nothing
     , _asvilUploadProtocol = Nothing
-    , _asvilPp = True
     , _asvilAccessToken = Nothing
     , _asvilUploadType = Nothing
     , _asvilVersionsId = pAsvilVersionsId_
-    , _asvilBearerToken = Nothing
     , _asvilAppsId = pAsvilAppsId_
     , _asvilPageToken = Nothing
     , _asvilServicesId = pAsvilServicesId_
@@ -140,7 +132,7 @@ appsServicesVersionsInstancesList pAsvilVersionsId_ pAsvilAppsId_ pAsvilServices
     }
 
 -- | V1 error format.
-asvilXgafv :: Lens' AppsServicesVersionsInstancesList (Maybe Text)
+asvilXgafv :: Lens' AppsServicesVersionsInstancesList (Maybe Xgafv)
 asvilXgafv
   = lens _asvilXgafv (\ s a -> s{_asvilXgafv = a})
 
@@ -149,10 +141,6 @@ asvilUploadProtocol :: Lens' AppsServicesVersionsInstancesList (Maybe Text)
 asvilUploadProtocol
   = lens _asvilUploadProtocol
       (\ s a -> s{_asvilUploadProtocol = a})
-
--- | Pretty-print response.
-asvilPp :: Lens' AppsServicesVersionsInstancesList Bool
-asvilPp = lens _asvilPp (\ s a -> s{_asvilPp = a})
 
 -- | OAuth access token.
 asvilAccessToken :: Lens' AppsServicesVersionsInstancesList (Maybe Text)
@@ -171,12 +159,6 @@ asvilVersionsId :: Lens' AppsServicesVersionsInstancesList Text
 asvilVersionsId
   = lens _asvilVersionsId
       (\ s a -> s{_asvilVersionsId = a})
-
--- | OAuth bearer token.
-asvilBearerToken :: Lens' AppsServicesVersionsInstancesList (Maybe Text)
-asvilBearerToken
-  = lens _asvilBearerToken
-      (\ s a -> s{_asvilBearerToken = a})
 
 -- | Part of \`parent\`. Name of the parent Version resource. Example:
 -- apps\/myapp\/services\/default\/versions\/v1.
@@ -221,10 +203,8 @@ instance GoogleRequest
           = go _asvilAppsId _asvilServicesId _asvilVersionsId
               _asvilXgafv
               _asvilUploadProtocol
-              (Just _asvilPp)
               _asvilAccessToken
               _asvilUploadType
-              _asvilBearerToken
               _asvilPageToken
               _asvilPageSize
               _asvilCallback

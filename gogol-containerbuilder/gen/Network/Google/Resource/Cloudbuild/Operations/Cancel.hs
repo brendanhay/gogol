@@ -30,7 +30,7 @@
 -- instead, it becomes an operation with an Operation.error value with a
 -- google.rpc.Status.code of 1, corresponding to \`Code.CANCELLED\`.
 --
--- /See:/ <https://cloud.google.com/container-builder/docs/ Google Cloud Container Builder API Reference> for @cloudbuild.operations.cancel@.
+-- /See:/ <https://cloud.google.com/cloud-build/docs/ Cloud Build API Reference> for @cloudbuild.operations.cancel@.
 module Network.Google.Resource.Cloudbuild.Operations.Cancel
     (
     -- * REST Resource
@@ -43,11 +43,9 @@ module Network.Google.Resource.Cloudbuild.Operations.Cancel
     -- * Request Lenses
     , ocXgafv
     , ocUploadProtocol
-    , ocPp
     , ocAccessToken
     , ocUploadType
     , ocPayload
-    , ocBearerToken
     , ocName
     , ocCallback
     ) where
@@ -62,14 +60,12 @@ type OperationsCancelResource =
        CaptureMode "name" "cancel" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] CancelOperationRequest :>
-                           Post '[JSON] Empty
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] CancelOperationRequest :>
+                       Post '[JSON] Empty
 
 -- | Starts asynchronous cancellation on a long-running operation. The server
 -- makes a best effort to cancel the operation, but success is not
@@ -85,11 +81,9 @@ type OperationsCancelResource =
 data OperationsCancel = OperationsCancel'
     { _ocXgafv          :: !(Maybe Xgafv)
     , _ocUploadProtocol :: !(Maybe Text)
-    , _ocPp             :: !Bool
     , _ocAccessToken    :: !(Maybe Text)
     , _ocUploadType     :: !(Maybe Text)
     , _ocPayload        :: !CancelOperationRequest
-    , _ocBearerToken    :: !(Maybe Text)
     , _ocName           :: !Text
     , _ocCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -102,15 +96,11 @@ data OperationsCancel = OperationsCancel'
 --
 -- * 'ocUploadProtocol'
 --
--- * 'ocPp'
---
 -- * 'ocAccessToken'
 --
 -- * 'ocUploadType'
 --
 -- * 'ocPayload'
---
--- * 'ocBearerToken'
 --
 -- * 'ocName'
 --
@@ -123,11 +113,9 @@ operationsCancel pOcPayload_ pOcName_ =
     OperationsCancel'
     { _ocXgafv = Nothing
     , _ocUploadProtocol = Nothing
-    , _ocPp = True
     , _ocAccessToken = Nothing
     , _ocUploadType = Nothing
     , _ocPayload = pOcPayload_
-    , _ocBearerToken = Nothing
     , _ocName = pOcName_
     , _ocCallback = Nothing
     }
@@ -141,10 +129,6 @@ ocUploadProtocol :: Lens' OperationsCancel (Maybe Text)
 ocUploadProtocol
   = lens _ocUploadProtocol
       (\ s a -> s{_ocUploadProtocol = a})
-
--- | Pretty-print response.
-ocPp :: Lens' OperationsCancel Bool
-ocPp = lens _ocPp (\ s a -> s{_ocPp = a})
 
 -- | OAuth access token.
 ocAccessToken :: Lens' OperationsCancel (Maybe Text)
@@ -162,12 +146,6 @@ ocPayload :: Lens' OperationsCancel CancelOperationRequest
 ocPayload
   = lens _ocPayload (\ s a -> s{_ocPayload = a})
 
--- | OAuth bearer token.
-ocBearerToken :: Lens' OperationsCancel (Maybe Text)
-ocBearerToken
-  = lens _ocBearerToken
-      (\ s a -> s{_ocBearerToken = a})
-
 -- | The name of the operation resource to be cancelled.
 ocName :: Lens' OperationsCancel Text
 ocName = lens _ocName (\ s a -> s{_ocName = a})
@@ -182,10 +160,9 @@ instance GoogleRequest OperationsCancel where
         type Scopes OperationsCancel =
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient OperationsCancel'{..}
-          = go _ocName _ocXgafv _ocUploadProtocol (Just _ocPp)
+          = go _ocName _ocXgafv _ocUploadProtocol
               _ocAccessToken
               _ocUploadType
-              _ocBearerToken
               _ocCallback
               (Just AltJSON)
               _ocPayload

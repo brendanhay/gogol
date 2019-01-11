@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'EventTagsGet' request conforms to.
 type EventTagsGetResource =
      "dfareporting" :>
-       "v2.7" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "eventTags" :>

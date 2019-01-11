@@ -22,7 +22,7 @@
 --
 -- Creates a Cloud Dataflow job.
 --
--- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @dataflow.projects.locations.jobs.create@.
+-- /See:/ <https://cloud.google.com/dataflow Dataflow API Reference> for @dataflow.projects.locations.jobs.create@.
 module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Create
     (
     -- * REST Resource
@@ -36,11 +36,9 @@ module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Create
     , pljcXgafv
     , pljcUploadProtocol
     , pljcLocation
-    , pljcPp
     , pljcAccessToken
     , pljcUploadType
     , pljcPayload
-    , pljcBearerToken
     , pljcView
     , pljcProjectId
     , pljcReplaceJobId
@@ -59,30 +57,26 @@ type ProjectsLocationsJobsCreateResource =
            "locations" :>
              Capture "location" Text :>
                "jobs" :>
-                 QueryParam "$.xgafv" Text :>
+                 QueryParam "$.xgafv" Xgafv :>
                    QueryParam "upload_protocol" Text :>
-                     QueryParam "pp" Bool :>
-                       QueryParam "access_token" Text :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "bearer_token" Text :>
-                             QueryParam "view" Text :>
-                               QueryParam "replaceJobId" Text :>
-                                 QueryParam "callback" Text :>
-                                   QueryParam "alt" AltJSON :>
-                                     ReqBody '[JSON] Job :> Post '[JSON] Job
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "view" Text :>
+                           QueryParam "replaceJobId" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] Job :> Post '[JSON] Job
 
 -- | Creates a Cloud Dataflow job.
 --
 -- /See:/ 'projectsLocationsJobsCreate' smart constructor.
 data ProjectsLocationsJobsCreate = ProjectsLocationsJobsCreate'
-    { _pljcXgafv          :: !(Maybe Text)
+    { _pljcXgafv          :: !(Maybe Xgafv)
     , _pljcUploadProtocol :: !(Maybe Text)
     , _pljcLocation       :: !Text
-    , _pljcPp             :: !Bool
     , _pljcAccessToken    :: !(Maybe Text)
     , _pljcUploadType     :: !(Maybe Text)
     , _pljcPayload        :: !Job
-    , _pljcBearerToken    :: !(Maybe Text)
     , _pljcView           :: !(Maybe Text)
     , _pljcProjectId      :: !Text
     , _pljcReplaceJobId   :: !(Maybe Text)
@@ -99,15 +93,11 @@ data ProjectsLocationsJobsCreate = ProjectsLocationsJobsCreate'
 --
 -- * 'pljcLocation'
 --
--- * 'pljcPp'
---
 -- * 'pljcAccessToken'
 --
 -- * 'pljcUploadType'
 --
 -- * 'pljcPayload'
---
--- * 'pljcBearerToken'
 --
 -- * 'pljcView'
 --
@@ -126,11 +116,9 @@ projectsLocationsJobsCreate pPljcLocation_ pPljcPayload_ pPljcProjectId_ =
     { _pljcXgafv = Nothing
     , _pljcUploadProtocol = Nothing
     , _pljcLocation = pPljcLocation_
-    , _pljcPp = True
     , _pljcAccessToken = Nothing
     , _pljcUploadType = Nothing
     , _pljcPayload = pPljcPayload_
-    , _pljcBearerToken = Nothing
     , _pljcView = Nothing
     , _pljcProjectId = pPljcProjectId_
     , _pljcReplaceJobId = Nothing
@@ -138,7 +126,7 @@ projectsLocationsJobsCreate pPljcLocation_ pPljcPayload_ pPljcProjectId_ =
     }
 
 -- | V1 error format.
-pljcXgafv :: Lens' ProjectsLocationsJobsCreate (Maybe Text)
+pljcXgafv :: Lens' ProjectsLocationsJobsCreate (Maybe Xgafv)
 pljcXgafv
   = lens _pljcXgafv (\ s a -> s{_pljcXgafv = a})
 
@@ -152,10 +140,6 @@ pljcUploadProtocol
 pljcLocation :: Lens' ProjectsLocationsJobsCreate Text
 pljcLocation
   = lens _pljcLocation (\ s a -> s{_pljcLocation = a})
-
--- | Pretty-print response.
-pljcPp :: Lens' ProjectsLocationsJobsCreate Bool
-pljcPp = lens _pljcPp (\ s a -> s{_pljcPp = a})
 
 -- | OAuth access token.
 pljcAccessToken :: Lens' ProjectsLocationsJobsCreate (Maybe Text)
@@ -173,12 +157,6 @@ pljcUploadType
 pljcPayload :: Lens' ProjectsLocationsJobsCreate Job
 pljcPayload
   = lens _pljcPayload (\ s a -> s{_pljcPayload = a})
-
--- | OAuth bearer token.
-pljcBearerToken :: Lens' ProjectsLocationsJobsCreate (Maybe Text)
-pljcBearerToken
-  = lens _pljcBearerToken
-      (\ s a -> s{_pljcBearerToken = a})
 
 -- | The level of information requested in response.
 pljcView :: Lens' ProjectsLocationsJobsCreate (Maybe Text)
@@ -206,14 +184,14 @@ instance GoogleRequest ProjectsLocationsJobsCreate
         type Rs ProjectsLocationsJobsCreate = Job
         type Scopes ProjectsLocationsJobsCreate =
              '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly",
                "https://www.googleapis.com/auth/userinfo.email"]
         requestClient ProjectsLocationsJobsCreate'{..}
           = go _pljcProjectId _pljcLocation _pljcXgafv
               _pljcUploadProtocol
-              (Just _pljcPp)
               _pljcAccessToken
               _pljcUploadType
-              _pljcBearerToken
               _pljcView
               _pljcReplaceJobId
               _pljcCallback

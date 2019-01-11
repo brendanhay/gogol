@@ -30,7 +30,7 @@
 -- the project\'s global metadata indicating which CIDR range is being used
 -- by the cluster.
 --
--- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @container.projects.zones.clusters.create@.
+-- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.zones.clusters.create@.
 module Network.Google.Resource.Container.Projects.Zones.Clusters.Create
     (
     -- * REST Resource
@@ -43,12 +43,10 @@ module Network.Google.Resource.Container.Projects.Zones.Clusters.Create
     -- * Request Lenses
     , pzccXgafv
     , pzccUploadProtocol
-    , pzccPp
     , pzccAccessToken
     , pzccUploadType
     , pzccZone
     , pzccPayload
-    , pzccBearerToken
     , pzccProjectId
     , pzccCallback
     ) where
@@ -65,16 +63,14 @@ type ProjectsZonesClustersCreateResource =
            "zones" :>
              Capture "zone" Text :>
                "clusters" :>
-                 QueryParam "$.xgafv" Text :>
+                 QueryParam "$.xgafv" Xgafv :>
                    QueryParam "upload_protocol" Text :>
-                     QueryParam "pp" Bool :>
-                       QueryParam "access_token" Text :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "bearer_token" Text :>
-                             QueryParam "callback" Text :>
-                               QueryParam "alt" AltJSON :>
-                                 ReqBody '[JSON] CreateClusterRequest :>
-                                   Post '[JSON] Operation
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] CreateClusterRequest :>
+                               Post '[JSON] Operation
 
 -- | Creates a cluster, consisting of the specified number and type of Google
 -- Compute Engine instances. By default, the cluster is created in the
@@ -88,14 +84,12 @@ type ProjectsZonesClustersCreateResource =
 --
 -- /See:/ 'projectsZonesClustersCreate' smart constructor.
 data ProjectsZonesClustersCreate = ProjectsZonesClustersCreate'
-    { _pzccXgafv          :: !(Maybe Text)
+    { _pzccXgafv          :: !(Maybe Xgafv)
     , _pzccUploadProtocol :: !(Maybe Text)
-    , _pzccPp             :: !Bool
     , _pzccAccessToken    :: !(Maybe Text)
     , _pzccUploadType     :: !(Maybe Text)
     , _pzccZone           :: !Text
     , _pzccPayload        :: !CreateClusterRequest
-    , _pzccBearerToken    :: !(Maybe Text)
     , _pzccProjectId      :: !Text
     , _pzccCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -108,8 +102,6 @@ data ProjectsZonesClustersCreate = ProjectsZonesClustersCreate'
 --
 -- * 'pzccUploadProtocol'
 --
--- * 'pzccPp'
---
 -- * 'pzccAccessToken'
 --
 -- * 'pzccUploadType'
@@ -117,8 +109,6 @@ data ProjectsZonesClustersCreate = ProjectsZonesClustersCreate'
 -- * 'pzccZone'
 --
 -- * 'pzccPayload'
---
--- * 'pzccBearerToken'
 --
 -- * 'pzccProjectId'
 --
@@ -132,18 +122,16 @@ projectsZonesClustersCreate pPzccZone_ pPzccPayload_ pPzccProjectId_ =
     ProjectsZonesClustersCreate'
     { _pzccXgafv = Nothing
     , _pzccUploadProtocol = Nothing
-    , _pzccPp = True
     , _pzccAccessToken = Nothing
     , _pzccUploadType = Nothing
     , _pzccZone = pPzccZone_
     , _pzccPayload = pPzccPayload_
-    , _pzccBearerToken = Nothing
     , _pzccProjectId = pPzccProjectId_
     , _pzccCallback = Nothing
     }
 
 -- | V1 error format.
-pzccXgafv :: Lens' ProjectsZonesClustersCreate (Maybe Text)
+pzccXgafv :: Lens' ProjectsZonesClustersCreate (Maybe Xgafv)
 pzccXgafv
   = lens _pzccXgafv (\ s a -> s{_pzccXgafv = a})
 
@@ -152,10 +140,6 @@ pzccUploadProtocol :: Lens' ProjectsZonesClustersCreate (Maybe Text)
 pzccUploadProtocol
   = lens _pzccUploadProtocol
       (\ s a -> s{_pzccUploadProtocol = a})
-
--- | Pretty-print response.
-pzccPp :: Lens' ProjectsZonesClustersCreate Bool
-pzccPp = lens _pzccPp (\ s a -> s{_pzccPp = a})
 
 -- | OAuth access token.
 pzccAccessToken :: Lens' ProjectsZonesClustersCreate (Maybe Text)
@@ -169,8 +153,9 @@ pzccUploadType
   = lens _pzccUploadType
       (\ s a -> s{_pzccUploadType = a})
 
--- | The name of the Google Compute Engine
+-- | Deprecated. The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
+-- This field has been deprecated and replaced by the parent field.
 pzccZone :: Lens' ProjectsZonesClustersCreate Text
 pzccZone = lens _pzccZone (\ s a -> s{_pzccZone = a})
 
@@ -179,14 +164,9 @@ pzccPayload :: Lens' ProjectsZonesClustersCreate CreateClusterRequest
 pzccPayload
   = lens _pzccPayload (\ s a -> s{_pzccPayload = a})
 
--- | OAuth bearer token.
-pzccBearerToken :: Lens' ProjectsZonesClustersCreate (Maybe Text)
-pzccBearerToken
-  = lens _pzccBearerToken
-      (\ s a -> s{_pzccBearerToken = a})
-
--- | The Google Developers Console [project ID or project
--- number](https:\/\/support.google.com\/cloud\/answer\/6158840).
+-- | Deprecated. The Google Developers Console [project ID or project
+-- number](https:\/\/support.google.com\/cloud\/answer\/6158840). This
+-- field has been deprecated and replaced by the parent field.
 pzccProjectId :: Lens' ProjectsZonesClustersCreate Text
 pzccProjectId
   = lens _pzccProjectId
@@ -205,10 +185,8 @@ instance GoogleRequest ProjectsZonesClustersCreate
         requestClient ProjectsZonesClustersCreate'{..}
           = go _pzccProjectId _pzccZone _pzccXgafv
               _pzccUploadProtocol
-              (Just _pzccPp)
               _pzccAccessToken
               _pzccUploadType
-              _pzccBearerToken
               _pzccCallback
               (Just AltJSON)
               _pzccPayload

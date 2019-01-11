@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 -- 'EditsExpansionFilesPatch' request conforms to.
 type EditsExpansionFilesPatchResource =
      "androidpublisher" :>
-       "v2" :>
+       "v3" :>
          "applications" :>
            Capture "packageName" Text :>
              "edits" :>

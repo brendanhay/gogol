@@ -24,7 +24,7 @@
 -- method to poll the operation result at intervals as recommended by the
 -- API service.
 --
--- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @storagetransfer.transferOperations.get@.
+-- /See:/ <https://cloud.google.com/storage/transfer Storage Transfer API Reference> for @storagetransfer.transferOperations.get@.
 module Network.Google.Resource.StorageTransfer.TransferOperations.Get
     (
     -- * REST Resource
@@ -37,10 +37,8 @@ module Network.Google.Resource.StorageTransfer.TransferOperations.Get
     -- * Request Lenses
     , togXgafv
     , togUploadProtocol
-    , togPp
     , togAccessToken
     , togUploadType
-    , togBearerToken
     , togName
     , togCallback
     ) where
@@ -53,14 +51,12 @@ import           Network.Google.StorageTransfer.Types
 type TransferOperationsGetResource =
      "v1" :>
        Capture "name" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] Operation
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Operation
 
 -- | Gets the latest state of a long-running operation. Clients can use this
 -- method to poll the operation result at intervals as recommended by the
@@ -68,12 +64,10 @@ type TransferOperationsGetResource =
 --
 -- /See:/ 'transferOperationsGet' smart constructor.
 data TransferOperationsGet = TransferOperationsGet'
-    { _togXgafv          :: !(Maybe Text)
+    { _togXgafv          :: !(Maybe Xgafv)
     , _togUploadProtocol :: !(Maybe Text)
-    , _togPp             :: !Bool
     , _togAccessToken    :: !(Maybe Text)
     , _togUploadType     :: !(Maybe Text)
-    , _togBearerToken    :: !(Maybe Text)
     , _togName           :: !Text
     , _togCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -86,13 +80,9 @@ data TransferOperationsGet = TransferOperationsGet'
 --
 -- * 'togUploadProtocol'
 --
--- * 'togPp'
---
 -- * 'togAccessToken'
 --
 -- * 'togUploadType'
---
--- * 'togBearerToken'
 --
 -- * 'togName'
 --
@@ -104,16 +94,14 @@ transferOperationsGet pTogName_ =
     TransferOperationsGet'
     { _togXgafv = Nothing
     , _togUploadProtocol = Nothing
-    , _togPp = True
     , _togAccessToken = Nothing
     , _togUploadType = Nothing
-    , _togBearerToken = Nothing
     , _togName = pTogName_
     , _togCallback = Nothing
     }
 
 -- | V1 error format.
-togXgafv :: Lens' TransferOperationsGet (Maybe Text)
+togXgafv :: Lens' TransferOperationsGet (Maybe Xgafv)
 togXgafv = lens _togXgafv (\ s a -> s{_togXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -121,10 +109,6 @@ togUploadProtocol :: Lens' TransferOperationsGet (Maybe Text)
 togUploadProtocol
   = lens _togUploadProtocol
       (\ s a -> s{_togUploadProtocol = a})
-
--- | Pretty-print response.
-togPp :: Lens' TransferOperationsGet Bool
-togPp = lens _togPp (\ s a -> s{_togPp = a})
 
 -- | OAuth access token.
 togAccessToken :: Lens' TransferOperationsGet (Maybe Text)
@@ -137,12 +121,6 @@ togUploadType :: Lens' TransferOperationsGet (Maybe Text)
 togUploadType
   = lens _togUploadType
       (\ s a -> s{_togUploadType = a})
-
--- | OAuth bearer token.
-togBearerToken :: Lens' TransferOperationsGet (Maybe Text)
-togBearerToken
-  = lens _togBearerToken
-      (\ s a -> s{_togBearerToken = a})
 
 -- | The name of the operation resource.
 togName :: Lens' TransferOperationsGet Text
@@ -159,10 +137,8 @@ instance GoogleRequest TransferOperationsGet where
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient TransferOperationsGet'{..}
           = go _togName _togXgafv _togUploadProtocol
-              (Just _togPp)
               _togAccessToken
               _togUploadType
-              _togBearerToken
               _togCallback
               (Just AltJSON)
               storageTransferService

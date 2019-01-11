@@ -50,6 +50,15 @@ module Network.Google.Books
     -- ** books.dictionary.listOfflineMetadata
     , module Network.Google.Resource.Books.Dictionary.ListOfflineMetadata
 
+    -- ** books.familysharing.getFamilyInfo
+    , module Network.Google.Resource.Books.Familysharing.GetFamilyInfo
+
+    -- ** books.familysharing.share
+    , module Network.Google.Resource.Books.Familysharing.Share
+
+    -- ** books.familysharing.unshare
+    , module Network.Google.Resource.Books.Familysharing.Unshare
+
     -- ** books.layers.annotationData.get
     , module Network.Google.Resource.Books.Layers.AnnotationData.Get
 
@@ -416,6 +425,11 @@ module Network.Google.Books
     , booksVolumesRecommendedRateResponse
     , bvrrrConsistencyToken
 
+    -- ** UserSettingsNotificationPriceDrop
+    , UserSettingsNotificationPriceDrop
+    , userSettingsNotificationPriceDrop
+    , usnpdOptedState
+
     -- ** VolumeseriesInfo
     , VolumeseriesInfo
     , volumeseriesInfo
@@ -450,6 +464,7 @@ module Network.Google.Books
     , nCrmExperimentIds
     , nPcampaignId
     , nReason
+    , nIsDocumentMature
     , nDontShowNotification
     , nNotificationType
     , nNotificationGroup
@@ -647,6 +662,11 @@ module Network.Google.Books
     , dddwisidieiText
     , dddwisidieiSource
 
+    -- ** UserSettingsNotificationRewardExpirations
+    , UserSettingsNotificationRewardExpirations
+    , userSettingsNotificationRewardExpirations
+    , usnreOptedState
+
     -- ** DictlayerData
     , DictlayerData
     , dictlayerData
@@ -676,6 +696,9 @@ module Network.Google.Books
     -- ** UserSettingsNotification
     , UserSettingsNotification
     , userSettingsNotification
+    , usnRewardExpirations
+    , usnPriceDrop
+    , usnMatchMyInterests
     , usnMoreFromAuthors
     , usnMoreFromSeries
 
@@ -748,6 +771,15 @@ module Network.Google.Books
     , dictlayerDataDictWordsItemSensesItemConjugationsItem
     , dddwisiciValue
     , dddwisiciType
+
+    -- ** FamilyInfoMembership
+    , FamilyInfoMembership
+    , familyInfoMembership
+    , fimAllowedMaturityRating
+    , fimAcquirePermission
+    , fimRole
+    , fimAgeGroup
+    , fimIsInFamily
 
     -- ** Volume2
     , Volume2
@@ -824,6 +856,12 @@ module Network.Google.Books
     , raConcurrentAccess
     , raKind
     , raDownloadAccess
+
+    -- ** FamilyInfo
+    , FamilyInfo
+    , familyInfo
+    , fiMembership
+    , fiKind
 
     -- ** AnnotationClientVersionRanges
     , AnnotationClientVersionRanges
@@ -979,6 +1017,11 @@ module Network.Google.Books
     , v1Kind
     , v1Items
 
+    -- ** UserSettingsNotificationMatchMyInterests
+    , UserSettingsNotificationMatchMyInterests
+    , userSettingsNotificationMatchMyInterests
+    , usnmmiOptedState
+
     -- ** Bookshelves
     , Bookshelves
     , bookshelves
@@ -1026,6 +1069,7 @@ module Network.Google.Books
     , vviSamplePageCount
     , vviCategories
     , vviAuthors
+    , vviComicsContent
     , vviAllowAnonLogging
     , vviSubtitle
     , vviPublishedDate
@@ -1107,6 +1151,9 @@ import           Network.Google.Resource.Books.CloudLoading.AddBook
 import           Network.Google.Resource.Books.CloudLoading.DeleteBook
 import           Network.Google.Resource.Books.CloudLoading.UpdateBook
 import           Network.Google.Resource.Books.Dictionary.ListOfflineMetadata
+import           Network.Google.Resource.Books.Familysharing.GetFamilyInfo
+import           Network.Google.Resource.Books.Familysharing.Share
+import           Network.Google.Resource.Books.Familysharing.Unshare
 import           Network.Google.Resource.Books.Layers.AnnotationData.Get
 import           Network.Google.Resource.Books.Layers.AnnotationData.List
 import           Network.Google.Resource.Books.Layers.Get
@@ -1197,6 +1244,9 @@ type BooksAPI =
        :<|> BookshelvesVolumesListResource
        :<|> BookshelvesListResource
        :<|> BookshelvesGetResource
+       :<|> FamilysharingShareResource
+       :<|> FamilysharingGetFamilyInfoResource
+       :<|> FamilysharingUnshareResource
        :<|> PersonalizedstreamGetResource
        :<|> MyConfigSyncVolumeLicensesResource
        :<|> MyConfigGetUserSettingsResource

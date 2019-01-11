@@ -49,13 +49,13 @@ import           Network.Google.Prelude
 -- 'EditsTracksPatch' request conforms to.
 type EditsTracksPatchResource =
      "androidpublisher" :>
-       "v2" :>
+       "v3" :>
          "applications" :>
            Capture "packageName" Text :>
              "edits" :>
                Capture "editId" Text :>
                  "tracks" :>
-                   Capture "track" EditsTracksPatchTrack :>
+                   Capture "track" Text :>
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Track :> Patch '[JSON] Track
 
@@ -66,7 +66,7 @@ type EditsTracksPatchResource =
 --
 -- /See:/ 'editsTracksPatch' smart constructor.
 data EditsTracksPatch = EditsTracksPatch'
-    { _etptTrack       :: !EditsTracksPatchTrack
+    { _etptTrack       :: !Text
     , _etptPackageName :: !Text
     , _etptPayload     :: !Track
     , _etptEditId      :: !Text
@@ -84,7 +84,7 @@ data EditsTracksPatch = EditsTracksPatch'
 --
 -- * 'etptEditId'
 editsTracksPatch
-    :: EditsTracksPatchTrack -- ^ 'etptTrack'
+    :: Text -- ^ 'etptTrack'
     -> Text -- ^ 'etptPackageName'
     -> Track -- ^ 'etptPayload'
     -> Text -- ^ 'etptEditId'
@@ -97,8 +97,8 @@ editsTracksPatch pEtptTrack_ pEtptPackageName_ pEtptPayload_ pEtptEditId_ =
     , _etptEditId = pEtptEditId_
     }
 
--- | The track type to read or modify.
-etptTrack :: Lens' EditsTracksPatch EditsTracksPatchTrack
+-- | The track to read or modify.
+etptTrack :: Lens' EditsTracksPatch Text
 etptTrack
   = lens _etptTrack (\ s a -> s{_etptTrack = a})
 

@@ -47,11 +47,9 @@ module Network.Google.Resource.Classroom.UserProFiles.Guardians.Delete
     , upfgdStudentId
     , upfgdXgafv
     , upfgdUploadProtocol
-    , upfgdPp
     , upfgdAccessToken
     , upfgdUploadType
     , upfgdGuardianId
-    , upfgdBearerToken
     , upfgdCallback
     ) where
 
@@ -66,14 +64,12 @@ type UserProFilesGuardiansDeleteResource =
          Capture "studentId" Text :>
            "guardians" :>
              Capture "guardianId" Text :>
-               QueryParam "$.xgafv" Text :>
+               QueryParam "$.xgafv" Xgafv :>
                  QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :> Delete '[JSON] Empty
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
 -- | Deletes a guardian. The guardian will no longer receive guardian
 -- notifications and the guardian will no longer be accessible via the API.
@@ -91,13 +87,11 @@ type UserProFilesGuardiansDeleteResource =
 -- /See:/ 'userProFilesGuardiansDelete' smart constructor.
 data UserProFilesGuardiansDelete = UserProFilesGuardiansDelete'
     { _upfgdStudentId      :: !Text
-    , _upfgdXgafv          :: !(Maybe Text)
+    , _upfgdXgafv          :: !(Maybe Xgafv)
     , _upfgdUploadProtocol :: !(Maybe Text)
-    , _upfgdPp             :: !Bool
     , _upfgdAccessToken    :: !(Maybe Text)
     , _upfgdUploadType     :: !(Maybe Text)
     , _upfgdGuardianId     :: !Text
-    , _upfgdBearerToken    :: !(Maybe Text)
     , _upfgdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -111,15 +105,11 @@ data UserProFilesGuardiansDelete = UserProFilesGuardiansDelete'
 --
 -- * 'upfgdUploadProtocol'
 --
--- * 'upfgdPp'
---
 -- * 'upfgdAccessToken'
 --
 -- * 'upfgdUploadType'
 --
 -- * 'upfgdGuardianId'
---
--- * 'upfgdBearerToken'
 --
 -- * 'upfgdCallback'
 userProFilesGuardiansDelete
@@ -131,11 +121,9 @@ userProFilesGuardiansDelete pUpfgdStudentId_ pUpfgdGuardianId_ =
     { _upfgdStudentId = pUpfgdStudentId_
     , _upfgdXgafv = Nothing
     , _upfgdUploadProtocol = Nothing
-    , _upfgdPp = True
     , _upfgdAccessToken = Nothing
     , _upfgdUploadType = Nothing
     , _upfgdGuardianId = pUpfgdGuardianId_
-    , _upfgdBearerToken = Nothing
     , _upfgdCallback = Nothing
     }
 
@@ -148,7 +136,7 @@ upfgdStudentId
       (\ s a -> s{_upfgdStudentId = a})
 
 -- | V1 error format.
-upfgdXgafv :: Lens' UserProFilesGuardiansDelete (Maybe Text)
+upfgdXgafv :: Lens' UserProFilesGuardiansDelete (Maybe Xgafv)
 upfgdXgafv
   = lens _upfgdXgafv (\ s a -> s{_upfgdXgafv = a})
 
@@ -157,10 +145,6 @@ upfgdUploadProtocol :: Lens' UserProFilesGuardiansDelete (Maybe Text)
 upfgdUploadProtocol
   = lens _upfgdUploadProtocol
       (\ s a -> s{_upfgdUploadProtocol = a})
-
--- | Pretty-print response.
-upfgdPp :: Lens' UserProFilesGuardiansDelete Bool
-upfgdPp = lens _upfgdPp (\ s a -> s{_upfgdPp = a})
 
 -- | OAuth access token.
 upfgdAccessToken :: Lens' UserProFilesGuardiansDelete (Maybe Text)
@@ -180,12 +164,6 @@ upfgdGuardianId
   = lens _upfgdGuardianId
       (\ s a -> s{_upfgdGuardianId = a})
 
--- | OAuth bearer token.
-upfgdBearerToken :: Lens' UserProFilesGuardiansDelete (Maybe Text)
-upfgdBearerToken
-  = lens _upfgdBearerToken
-      (\ s a -> s{_upfgdBearerToken = a})
-
 -- | JSONP
 upfgdCallback :: Lens' UserProFilesGuardiansDelete (Maybe Text)
 upfgdCallback
@@ -195,14 +173,13 @@ upfgdCallback
 instance GoogleRequest UserProFilesGuardiansDelete
          where
         type Rs UserProFilesGuardiansDelete = Empty
-        type Scopes UserProFilesGuardiansDelete = '[]
+        type Scopes UserProFilesGuardiansDelete =
+             '["https://www.googleapis.com/auth/classroom.guardianlinks.students"]
         requestClient UserProFilesGuardiansDelete'{..}
           = go _upfgdStudentId _upfgdGuardianId _upfgdXgafv
               _upfgdUploadProtocol
-              (Just _upfgdPp)
               _upfgdAccessToken
               _upfgdUploadType
-              _upfgdBearerToken
               _upfgdCallback
               (Just AltJSON)
               classroomService

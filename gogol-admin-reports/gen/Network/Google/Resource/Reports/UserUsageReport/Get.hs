@@ -41,6 +41,7 @@ module Network.Google.Resource.Reports.UserUsageReport.Get
     , uurgPageToken
     , uurgUserKey
     , uurgMaxResults
+    , uurgOrgUnitId
     ) where
 
 import           Network.Google.Prelude
@@ -62,8 +63,9 @@ type UserUsageReportGetResource =
                          QueryParam "parameters" Text :>
                            QueryParam "pageToken" Text :>
                              QueryParam "maxResults" (Textual Word32) :>
-                               QueryParam "alt" AltJSON :>
-                                 Get '[JSON] UsageReports
+                               QueryParam "orgUnitID" Text :>
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON] UsageReports
 
 -- | Retrieves a report which is a collection of properties \/ statistics for
 -- a set of users.
@@ -77,6 +79,7 @@ data UserUsageReportGet = UserUsageReportGet'
     , _uurgPageToken  :: !(Maybe Text)
     , _uurgUserKey    :: !Text
     , _uurgMaxResults :: !(Maybe (Textual Word32))
+    , _uurgOrgUnitId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserUsageReportGet' with the minimum fields required to make a request.
@@ -96,6 +99,8 @@ data UserUsageReportGet = UserUsageReportGet'
 -- * 'uurgUserKey'
 --
 -- * 'uurgMaxResults'
+--
+-- * 'uurgOrgUnitId'
 userUsageReportGet
     :: Text -- ^ 'uurgDate'
     -> Text -- ^ 'uurgUserKey'
@@ -109,6 +114,7 @@ userUsageReportGet pUurgDate_ pUurgUserKey_ =
     , _uurgPageToken = Nothing
     , _uurgUserKey = pUurgUserKey_
     , _uurgMaxResults = Nothing
+    , _uurgOrgUnitId = ""
     }
 
 -- | Represents the set of filters including parameter operator value.
@@ -153,6 +159,13 @@ uurgMaxResults
       (\ s a -> s{_uurgMaxResults = a})
       . mapping _Coerce
 
+-- | the organizational unit\'s ID to filter usage parameters from users
+-- belonging to a specific OU or one of its sub-OU(s).
+uurgOrgUnitId :: Lens' UserUsageReportGet Text
+uurgOrgUnitId
+  = lens _uurgOrgUnitId
+      (\ s a -> s{_uurgOrgUnitId = a})
+
 instance GoogleRequest UserUsageReportGet where
         type Rs UserUsageReportGet = UsageReports
         type Scopes UserUsageReportGet =
@@ -163,6 +176,7 @@ instance GoogleRequest UserUsageReportGet where
               _uurgParameters
               _uurgPageToken
               _uurgMaxResults
+              (Just _uurgOrgUnitId)
               (Just AltJSON)
               reportsService
           where go

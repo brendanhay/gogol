@@ -38,6 +38,7 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.SetTargetPools
     , InstanceGroupManagersSetTargetPools
 
     -- * Request Lenses
+    , igmstpRequestId
     , igmstpProject
     , igmstpInstanceGroupManager
     , igmstpZone
@@ -59,10 +60,11 @@ type InstanceGroupManagersSetTargetPoolsResource =
                  "instanceGroupManagers" :>
                    Capture "instanceGroupManager" Text :>
                      "setTargetPools" :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON]
-                           InstanceGroupManagersSetTargetPoolsRequest
-                           :> Post '[JSON] Operation
+                       QueryParam "requestId" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON]
+                             InstanceGroupManagersSetTargetPoolsRequest
+                             :> Post '[JSON] Operation
 
 -- | Modifies the target pools to which all instances in this managed
 -- instance group are assigned. The target pools automatically apply to all
@@ -73,7 +75,8 @@ type InstanceGroupManagersSetTargetPoolsResource =
 --
 -- /See:/ 'instanceGroupManagersSetTargetPools' smart constructor.
 data InstanceGroupManagersSetTargetPools = InstanceGroupManagersSetTargetPools'
-    { _igmstpProject              :: !Text
+    { _igmstpRequestId            :: !(Maybe Text)
+    , _igmstpProject              :: !Text
     , _igmstpInstanceGroupManager :: !Text
     , _igmstpZone                 :: !Text
     , _igmstpPayload              :: !InstanceGroupManagersSetTargetPoolsRequest
@@ -82,6 +85,8 @@ data InstanceGroupManagersSetTargetPools = InstanceGroupManagersSetTargetPools'
 -- | Creates a value of 'InstanceGroupManagersSetTargetPools' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'igmstpRequestId'
 --
 -- * 'igmstpProject'
 --
@@ -98,11 +103,27 @@ instanceGroupManagersSetTargetPools
     -> InstanceGroupManagersSetTargetPools
 instanceGroupManagersSetTargetPools pIgmstpProject_ pIgmstpInstanceGroupManager_ pIgmstpZone_ pIgmstpPayload_ =
     InstanceGroupManagersSetTargetPools'
-    { _igmstpProject = pIgmstpProject_
+    { _igmstpRequestId = Nothing
+    , _igmstpProject = pIgmstpProject_
     , _igmstpInstanceGroupManager = pIgmstpInstanceGroupManager_
     , _igmstpZone = pIgmstpZone_
     , _igmstpPayload = pIgmstpPayload_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+igmstpRequestId :: Lens' InstanceGroupManagersSetTargetPools (Maybe Text)
+igmstpRequestId
+  = lens _igmstpRequestId
+      (\ s a -> s{_igmstpRequestId = a})
 
 -- | Project ID for this request.
 igmstpProject :: Lens' InstanceGroupManagersSetTargetPools Text
@@ -138,6 +159,7 @@ instance GoogleRequest
           InstanceGroupManagersSetTargetPools'{..}
           = go _igmstpProject _igmstpZone
               _igmstpInstanceGroupManager
+              _igmstpRequestId
               (Just AltJSON)
               _igmstpPayload
               computeService

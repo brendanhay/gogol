@@ -21,7 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Updates a HttpsHealthCheck resource in the specified project using the
--- data included in the request. This method supports patch semantics.
+-- data included in the request. This method supports PATCH semantics and
+-- uses the JSON merge patch format and processing rules.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.httpsHealthChecks.patch@.
 module Network.Google.Resource.Compute.HTTPSHealthChecks.Patch
@@ -34,6 +35,7 @@ module Network.Google.Resource.Compute.HTTPSHealthChecks.Patch
     , HTTPSHealthChecksPatch
 
     -- * Request Lenses
+    , hhcpRequestId
     , hhcpProject
     , hhcpPayload
     , hhcpHTTPSHealthCheck
@@ -52,16 +54,19 @@ type HTTPSHealthChecksPatchResource =
              "global" :>
                "httpsHealthChecks" :>
                  Capture "httpsHealthCheck" Text :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] HTTPSHealthCheck :>
-                       Patch '[JSON] Operation
+                   QueryParam "requestId" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] HTTPSHealthCheck :>
+                         Patch '[JSON] Operation
 
 -- | Updates a HttpsHealthCheck resource in the specified project using the
--- data included in the request. This method supports patch semantics.
+-- data included in the request. This method supports PATCH semantics and
+-- uses the JSON merge patch format and processing rules.
 --
 -- /See:/ 'httpsHealthChecksPatch' smart constructor.
 data HTTPSHealthChecksPatch = HTTPSHealthChecksPatch'
-    { _hhcpProject          :: !Text
+    { _hhcpRequestId        :: !(Maybe Text)
+    , _hhcpProject          :: !Text
     , _hhcpPayload          :: !HTTPSHealthCheck
     , _hhcpHTTPSHealthCheck :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -69,6 +74,8 @@ data HTTPSHealthChecksPatch = HTTPSHealthChecksPatch'
 -- | Creates a value of 'HTTPSHealthChecksPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'hhcpRequestId'
 --
 -- * 'hhcpProject'
 --
@@ -82,10 +89,26 @@ httpsHealthChecksPatch
     -> HTTPSHealthChecksPatch
 httpsHealthChecksPatch pHhcpProject_ pHhcpPayload_ pHhcpHTTPSHealthCheck_ =
     HTTPSHealthChecksPatch'
-    { _hhcpProject = pHhcpProject_
+    { _hhcpRequestId = Nothing
+    , _hhcpProject = pHhcpProject_
     , _hhcpPayload = pHhcpPayload_
     , _hhcpHTTPSHealthCheck = pHhcpHTTPSHealthCheck_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+hhcpRequestId :: Lens' HTTPSHealthChecksPatch (Maybe Text)
+hhcpRequestId
+  = lens _hhcpRequestId
+      (\ s a -> s{_hhcpRequestId = a})
 
 -- | Project ID for this request.
 hhcpProject :: Lens' HTTPSHealthChecksPatch Text
@@ -97,7 +120,7 @@ hhcpPayload :: Lens' HTTPSHealthChecksPatch HTTPSHealthCheck
 hhcpPayload
   = lens _hhcpPayload (\ s a -> s{_hhcpPayload = a})
 
--- | Name of the HttpsHealthCheck resource to update.
+-- | Name of the HttpsHealthCheck resource to patch.
 hhcpHTTPSHealthCheck :: Lens' HTTPSHealthChecksPatch Text
 hhcpHTTPSHealthCheck
   = lens _hhcpHTTPSHealthCheck
@@ -110,6 +133,7 @@ instance GoogleRequest HTTPSHealthChecksPatch where
                "https://www.googleapis.com/auth/compute"]
         requestClient HTTPSHealthChecksPatch'{..}
           = go _hhcpProject _hhcpHTTPSHealthCheck
+              _hhcpRequestId
               (Just AltJSON)
               _hhcpPayload
               computeService

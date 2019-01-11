@@ -38,12 +38,10 @@ module Network.Google.Resource.Sheets.Spreadsheets.Values.Clear
     -- * Request Lenses
     , svcXgafv
     , svcUploadProtocol
-    , svcPp
     , svcAccessToken
     , svcSpreadsheetId
     , svcUploadType
     , svcPayload
-    , svcBearerToken
     , svcRange
     , svcCallback
     ) where
@@ -61,14 +59,12 @@ type SpreadsheetsValuesClearResource =
              CaptureMode "range" "clear" Text :>
                QueryParam "$.xgafv" Xgafv :>
                  QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :>
-                               ReqBody '[JSON] ClearValuesRequest :>
-                                 Post '[JSON] ClearValuesResponse
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] ClearValuesRequest :>
+                             Post '[JSON] ClearValuesResponse
 
 -- | Clears values from a spreadsheet. The caller must specify the
 -- spreadsheet ID and range. Only values are cleared -- all other
@@ -79,12 +75,10 @@ type SpreadsheetsValuesClearResource =
 data SpreadsheetsValuesClear = SpreadsheetsValuesClear'
     { _svcXgafv          :: !(Maybe Xgafv)
     , _svcUploadProtocol :: !(Maybe Text)
-    , _svcPp             :: !Bool
     , _svcAccessToken    :: !(Maybe Text)
     , _svcSpreadsheetId  :: !Text
     , _svcUploadType     :: !(Maybe Text)
     , _svcPayload        :: !ClearValuesRequest
-    , _svcBearerToken    :: !(Maybe Text)
     , _svcRange          :: !Text
     , _svcCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -97,8 +91,6 @@ data SpreadsheetsValuesClear = SpreadsheetsValuesClear'
 --
 -- * 'svcUploadProtocol'
 --
--- * 'svcPp'
---
 -- * 'svcAccessToken'
 --
 -- * 'svcSpreadsheetId'
@@ -106,8 +98,6 @@ data SpreadsheetsValuesClear = SpreadsheetsValuesClear'
 -- * 'svcUploadType'
 --
 -- * 'svcPayload'
---
--- * 'svcBearerToken'
 --
 -- * 'svcRange'
 --
@@ -121,12 +111,10 @@ spreadsheetsValuesClear pSvcSpreadsheetId_ pSvcPayload_ pSvcRange_ =
     SpreadsheetsValuesClear'
     { _svcXgafv = Nothing
     , _svcUploadProtocol = Nothing
-    , _svcPp = True
     , _svcAccessToken = Nothing
     , _svcSpreadsheetId = pSvcSpreadsheetId_
     , _svcUploadType = Nothing
     , _svcPayload = pSvcPayload_
-    , _svcBearerToken = Nothing
     , _svcRange = pSvcRange_
     , _svcCallback = Nothing
     }
@@ -140,10 +128,6 @@ svcUploadProtocol :: Lens' SpreadsheetsValuesClear (Maybe Text)
 svcUploadProtocol
   = lens _svcUploadProtocol
       (\ s a -> s{_svcUploadProtocol = a})
-
--- | Pretty-print response.
-svcPp :: Lens' SpreadsheetsValuesClear Bool
-svcPp = lens _svcPp (\ s a -> s{_svcPp = a})
 
 -- | OAuth access token.
 svcAccessToken :: Lens' SpreadsheetsValuesClear (Maybe Text)
@@ -168,12 +152,6 @@ svcPayload :: Lens' SpreadsheetsValuesClear ClearValuesRequest
 svcPayload
   = lens _svcPayload (\ s a -> s{_svcPayload = a})
 
--- | OAuth bearer token.
-svcBearerToken :: Lens' SpreadsheetsValuesClear (Maybe Text)
-svcBearerToken
-  = lens _svcBearerToken
-      (\ s a -> s{_svcBearerToken = a})
-
 -- | The A1 notation of the values to clear.
 svcRange :: Lens' SpreadsheetsValuesClear Text
 svcRange = lens _svcRange (\ s a -> s{_svcRange = a})
@@ -187,14 +165,13 @@ instance GoogleRequest SpreadsheetsValuesClear where
         type Rs SpreadsheetsValuesClear = ClearValuesResponse
         type Scopes SpreadsheetsValuesClear =
              '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file",
                "https://www.googleapis.com/auth/spreadsheets"]
         requestClient SpreadsheetsValuesClear'{..}
           = go _svcSpreadsheetId _svcRange _svcXgafv
               _svcUploadProtocol
-              (Just _svcPp)
               _svcAccessToken
               _svcUploadType
-              _svcBearerToken
               _svcCallback
               (Just AltJSON)
               _svcPayload

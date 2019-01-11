@@ -22,7 +22,7 @@
 --
 -- Finds the full hashes that match the requested hash prefixes.
 --
--- /See:/ <https://developers.google.com/safe-browsing/ Safe Browsing APIs Reference> for @safebrowsing.fullHashes.find@.
+-- /See:/ <https://developers.google.com/safe-browsing/ Safe Browsing API Reference> for @safebrowsing.fullHashes.find@.
 module Network.Google.Resource.SafeBrowsing.FullHashes.Find
     (
     -- * REST Resource
@@ -35,11 +35,9 @@ module Network.Google.Resource.SafeBrowsing.FullHashes.Find
     -- * Request Lenses
     , fhfXgafv
     , fhfUploadProtocol
-    , fhfPp
     , fhfAccessToken
     , fhfUploadType
     , fhfPayload
-    , fhfBearerToken
     , fhfCallback
     ) where
 
@@ -51,28 +49,24 @@ import           Network.Google.SafeBrowsing.Types
 type FullHashesFindResource =
      "v4" :>
        "fullHashes:find" :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] FindFullHashesRequest :>
-                           Post '[JSON] FindFullHashesResponse
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] FindFullHashesRequest :>
+                       Post '[JSON] FindFullHashesResponse
 
 -- | Finds the full hashes that match the requested hash prefixes.
 --
 -- /See:/ 'fullHashesFind' smart constructor.
 data FullHashesFind = FullHashesFind'
-    { _fhfXgafv          :: !(Maybe Text)
+    { _fhfXgafv          :: !(Maybe Xgafv)
     , _fhfUploadProtocol :: !(Maybe Text)
-    , _fhfPp             :: !Bool
     , _fhfAccessToken    :: !(Maybe Text)
     , _fhfUploadType     :: !(Maybe Text)
     , _fhfPayload        :: !FindFullHashesRequest
-    , _fhfBearerToken    :: !(Maybe Text)
     , _fhfCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -84,15 +78,11 @@ data FullHashesFind = FullHashesFind'
 --
 -- * 'fhfUploadProtocol'
 --
--- * 'fhfPp'
---
 -- * 'fhfAccessToken'
 --
 -- * 'fhfUploadType'
 --
 -- * 'fhfPayload'
---
--- * 'fhfBearerToken'
 --
 -- * 'fhfCallback'
 fullHashesFind
@@ -102,16 +92,14 @@ fullHashesFind pFhfPayload_ =
     FullHashesFind'
     { _fhfXgafv = Nothing
     , _fhfUploadProtocol = Nothing
-    , _fhfPp = True
     , _fhfAccessToken = Nothing
     , _fhfUploadType = Nothing
     , _fhfPayload = pFhfPayload_
-    , _fhfBearerToken = Nothing
     , _fhfCallback = Nothing
     }
 
 -- | V1 error format.
-fhfXgafv :: Lens' FullHashesFind (Maybe Text)
+fhfXgafv :: Lens' FullHashesFind (Maybe Xgafv)
 fhfXgafv = lens _fhfXgafv (\ s a -> s{_fhfXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -119,10 +107,6 @@ fhfUploadProtocol :: Lens' FullHashesFind (Maybe Text)
 fhfUploadProtocol
   = lens _fhfUploadProtocol
       (\ s a -> s{_fhfUploadProtocol = a})
-
--- | Pretty-print response.
-fhfPp :: Lens' FullHashesFind Bool
-fhfPp = lens _fhfPp (\ s a -> s{_fhfPp = a})
 
 -- | OAuth access token.
 fhfAccessToken :: Lens' FullHashesFind (Maybe Text)
@@ -141,12 +125,6 @@ fhfPayload :: Lens' FullHashesFind FindFullHashesRequest
 fhfPayload
   = lens _fhfPayload (\ s a -> s{_fhfPayload = a})
 
--- | OAuth bearer token.
-fhfBearerToken :: Lens' FullHashesFind (Maybe Text)
-fhfBearerToken
-  = lens _fhfBearerToken
-      (\ s a -> s{_fhfBearerToken = a})
-
 -- | JSONP
 fhfCallback :: Lens' FullHashesFind (Maybe Text)
 fhfCallback
@@ -156,10 +134,8 @@ instance GoogleRequest FullHashesFind where
         type Rs FullHashesFind = FindFullHashesResponse
         type Scopes FullHashesFind = '[]
         requestClient FullHashesFind'{..}
-          = go _fhfXgafv _fhfUploadProtocol (Just _fhfPp)
-              _fhfAccessToken
+          = go _fhfXgafv _fhfUploadProtocol _fhfAccessToken
               _fhfUploadType
-              _fhfBearerToken
               _fhfCallback
               (Just AltJSON)
               _fhfPayload

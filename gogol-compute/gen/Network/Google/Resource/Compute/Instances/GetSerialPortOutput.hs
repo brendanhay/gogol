@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified instance\'s serial port output.
+-- Returns the last 1 MB of serial port output from the specified instance.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instances.getSerialPortOutput@.
 module Network.Google.Resource.Compute.Instances.GetSerialPortOutput
@@ -60,7 +60,7 @@ type InstancesGetSerialPortOutputResource =
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] SerialPortOutput
 
--- | Returns the specified instance\'s serial port output.
+-- | Returns the last 1 MB of serial port output from the specified instance.
 --
 -- /See:/ 'instancesGetSerialPortOutput' smart constructor.
 data InstancesGetSerialPortOutput = InstancesGetSerialPortOutput'
@@ -103,8 +103,10 @@ igspoProject :: Lens' InstancesGetSerialPortOutput Text
 igspoProject
   = lens _igspoProject (\ s a -> s{_igspoProject = a})
 
--- | For the initial request, leave this field unspecified. For subsequent
--- calls, this field should be set to the next value that was returned in
+-- | Returns output starting from a specific byte position. Use this to page
+-- through output when the output is too large to return in a single
+-- request. For the initial request, leave this field unspecified. For
+-- subsequent calls, this field should be set to the next value returned in
 -- the previous call.
 igspoStart :: Lens' InstancesGetSerialPortOutput (Maybe Int64)
 igspoStart

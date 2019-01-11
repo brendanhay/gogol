@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified target VPN gateway. Get a list of available target
--- VPN gateways by making a list() request.
+-- Returns the specified target VPN gateway. Gets a list of available
+-- target VPN gateways by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetVpnGateways.get@.
 module Network.Google.Resource.Compute.TargetVPNGateways.Get
@@ -56,8 +56,8 @@ type TargetVPNGatewaysGetResource =
                      QueryParam "alt" AltJSON :>
                        Get '[JSON] TargetVPNGateway
 
--- | Returns the specified target VPN gateway. Get a list of available target
--- VPN gateways by making a list() request.
+-- | Returns the specified target VPN gateway. Gets a list of available
+-- target VPN gateways by making a list() request.
 --
 -- /See:/ 'targetVPNGatewaysGet' smart constructor.
 data TargetVPNGatewaysGet = TargetVPNGatewaysGet'

@@ -22,7 +22,7 @@
 --
 -- Reports the status of dataflow WorkItems leased by a worker.
 --
--- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @dataflow.projects.locations.jobs.workItems.reportStatus@.
+-- /See:/ <https://cloud.google.com/dataflow Dataflow API Reference> for @dataflow.projects.locations.jobs.workItems.reportStatus@.
 module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.WorkItems.ReportStatus
     (
     -- * REST Resource
@@ -37,11 +37,9 @@ module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.WorkItems.Report
     , pljwirsJobId
     , pljwirsUploadProtocol
     , pljwirsLocation
-    , pljwirsPp
     , pljwirsAccessToken
     , pljwirsUploadType
     , pljwirsPayload
-    , pljwirsBearerToken
     , pljwirsProjectId
     , pljwirsCallback
     ) where
@@ -61,31 +59,26 @@ type ProjectsLocationsJobsWorkItemsReportStatusResource
                "jobs" :>
                  Capture "jobId" Text :>
                    "workItems:reportStatus" :>
-                     QueryParam "$.xgafv" Text :>
+                     QueryParam "$.xgafv" Xgafv :>
                        QueryParam "upload_protocol" Text :>
-                         QueryParam "pp" Bool :>
-                           QueryParam "access_token" Text :>
-                             QueryParam "uploadType" Text :>
-                               QueryParam "bearer_token" Text :>
-                                 QueryParam "callback" Text :>
-                                   QueryParam "alt" AltJSON :>
-                                     ReqBody '[JSON] ReportWorkItemStatusRequest
-                                       :>
-                                       Post '[JSON] ReportWorkItemStatusResponse
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] ReportWorkItemStatusRequest :>
+                                   Post '[JSON] ReportWorkItemStatusResponse
 
 -- | Reports the status of dataflow WorkItems leased by a worker.
 --
 -- /See:/ 'projectsLocationsJobsWorkItemsReportStatus' smart constructor.
 data ProjectsLocationsJobsWorkItemsReportStatus = ProjectsLocationsJobsWorkItemsReportStatus'
-    { _pljwirsXgafv          :: !(Maybe Text)
+    { _pljwirsXgafv          :: !(Maybe Xgafv)
     , _pljwirsJobId          :: !Text
     , _pljwirsUploadProtocol :: !(Maybe Text)
     , _pljwirsLocation       :: !Text
-    , _pljwirsPp             :: !Bool
     , _pljwirsAccessToken    :: !(Maybe Text)
     , _pljwirsUploadType     :: !(Maybe Text)
     , _pljwirsPayload        :: !ReportWorkItemStatusRequest
-    , _pljwirsBearerToken    :: !(Maybe Text)
     , _pljwirsProjectId      :: !Text
     , _pljwirsCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -102,15 +95,11 @@ data ProjectsLocationsJobsWorkItemsReportStatus = ProjectsLocationsJobsWorkItems
 --
 -- * 'pljwirsLocation'
 --
--- * 'pljwirsPp'
---
 -- * 'pljwirsAccessToken'
 --
 -- * 'pljwirsUploadType'
 --
 -- * 'pljwirsPayload'
---
--- * 'pljwirsBearerToken'
 --
 -- * 'pljwirsProjectId'
 --
@@ -127,17 +116,15 @@ projectsLocationsJobsWorkItemsReportStatus pPljwirsJobId_ pPljwirsLocation_ pPlj
     , _pljwirsJobId = pPljwirsJobId_
     , _pljwirsUploadProtocol = Nothing
     , _pljwirsLocation = pPljwirsLocation_
-    , _pljwirsPp = True
     , _pljwirsAccessToken = Nothing
     , _pljwirsUploadType = Nothing
     , _pljwirsPayload = pPljwirsPayload_
-    , _pljwirsBearerToken = Nothing
     , _pljwirsProjectId = pPljwirsProjectId_
     , _pljwirsCallback = Nothing
     }
 
 -- | V1 error format.
-pljwirsXgafv :: Lens' ProjectsLocationsJobsWorkItemsReportStatus (Maybe Text)
+pljwirsXgafv :: Lens' ProjectsLocationsJobsWorkItemsReportStatus (Maybe Xgafv)
 pljwirsXgafv
   = lens _pljwirsXgafv (\ s a -> s{_pljwirsXgafv = a})
 
@@ -158,11 +145,6 @@ pljwirsLocation
   = lens _pljwirsLocation
       (\ s a -> s{_pljwirsLocation = a})
 
--- | Pretty-print response.
-pljwirsPp :: Lens' ProjectsLocationsJobsWorkItemsReportStatus Bool
-pljwirsPp
-  = lens _pljwirsPp (\ s a -> s{_pljwirsPp = a})
-
 -- | OAuth access token.
 pljwirsAccessToken :: Lens' ProjectsLocationsJobsWorkItemsReportStatus (Maybe Text)
 pljwirsAccessToken
@@ -180,12 +162,6 @@ pljwirsPayload :: Lens' ProjectsLocationsJobsWorkItemsReportStatus ReportWorkIte
 pljwirsPayload
   = lens _pljwirsPayload
       (\ s a -> s{_pljwirsPayload = a})
-
--- | OAuth bearer token.
-pljwirsBearerToken :: Lens' ProjectsLocationsJobsWorkItemsReportStatus (Maybe Text)
-pljwirsBearerToken
-  = lens _pljwirsBearerToken
-      (\ s a -> s{_pljwirsBearerToken = a})
 
 -- | The project which owns the WorkItem\'s job.
 pljwirsProjectId :: Lens' ProjectsLocationsJobsWorkItemsReportStatus Text
@@ -207,16 +183,16 @@ instance GoogleRequest
                ProjectsLocationsJobsWorkItemsReportStatus
              =
              '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly",
                "https://www.googleapis.com/auth/userinfo.email"]
         requestClient
           ProjectsLocationsJobsWorkItemsReportStatus'{..}
           = go _pljwirsProjectId _pljwirsLocation _pljwirsJobId
               _pljwirsXgafv
               _pljwirsUploadProtocol
-              (Just _pljwirsPp)
               _pljwirsAccessToken
               _pljwirsUploadType
-              _pljwirsBearerToken
               _pljwirsCallback
               (Just AltJSON)
               _pljwirsPayload

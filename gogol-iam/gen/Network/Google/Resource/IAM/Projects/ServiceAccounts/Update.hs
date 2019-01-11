@@ -23,7 +23,7 @@
 -- Updates a ServiceAccount. Currently, only the following fields are
 -- updatable: \`display_name\` . The \`etag\` is mandatory.
 --
--- /See:/ <https://cloud.google.com/iam/ Google Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.update@.
+-- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.update@.
 module Network.Google.Resource.IAM.Projects.ServiceAccounts.Update
     (
     -- * REST Resource
@@ -36,11 +36,9 @@ module Network.Google.Resource.IAM.Projects.ServiceAccounts.Update
     -- * Request Lenses
     , psauXgafv
     , psauUploadProtocol
-    , psauPp
     , psauAccessToken
     , psauUploadType
     , psauPayload
-    , psauBearerToken
     , psauName
     , psauCallback
     ) where
@@ -53,29 +51,25 @@ import           Network.Google.Prelude
 type ProjectsServiceAccountsUpdateResource =
      "v1" :>
        Capture "name" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] ServiceAccount :>
-                           Put '[JSON] ServiceAccount
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] ServiceAccount :>
+                       Put '[JSON] ServiceAccount
 
 -- | Updates a ServiceAccount. Currently, only the following fields are
 -- updatable: \`display_name\` . The \`etag\` is mandatory.
 --
 -- /See:/ 'projectsServiceAccountsUpdate' smart constructor.
 data ProjectsServiceAccountsUpdate = ProjectsServiceAccountsUpdate'
-    { _psauXgafv          :: !(Maybe Text)
+    { _psauXgafv          :: !(Maybe Xgafv)
     , _psauUploadProtocol :: !(Maybe Text)
-    , _psauPp             :: !Bool
     , _psauAccessToken    :: !(Maybe Text)
     , _psauUploadType     :: !(Maybe Text)
     , _psauPayload        :: !ServiceAccount
-    , _psauBearerToken    :: !(Maybe Text)
     , _psauName           :: !Text
     , _psauCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -88,15 +82,11 @@ data ProjectsServiceAccountsUpdate = ProjectsServiceAccountsUpdate'
 --
 -- * 'psauUploadProtocol'
 --
--- * 'psauPp'
---
 -- * 'psauAccessToken'
 --
 -- * 'psauUploadType'
 --
 -- * 'psauPayload'
---
--- * 'psauBearerToken'
 --
 -- * 'psauName'
 --
@@ -109,17 +99,15 @@ projectsServiceAccountsUpdate pPsauPayload_ pPsauName_ =
     ProjectsServiceAccountsUpdate'
     { _psauXgafv = Nothing
     , _psauUploadProtocol = Nothing
-    , _psauPp = True
     , _psauAccessToken = Nothing
     , _psauUploadType = Nothing
     , _psauPayload = pPsauPayload_
-    , _psauBearerToken = Nothing
     , _psauName = pPsauName_
     , _psauCallback = Nothing
     }
 
 -- | V1 error format.
-psauXgafv :: Lens' ProjectsServiceAccountsUpdate (Maybe Text)
+psauXgafv :: Lens' ProjectsServiceAccountsUpdate (Maybe Xgafv)
 psauXgafv
   = lens _psauXgafv (\ s a -> s{_psauXgafv = a})
 
@@ -128,10 +116,6 @@ psauUploadProtocol :: Lens' ProjectsServiceAccountsUpdate (Maybe Text)
 psauUploadProtocol
   = lens _psauUploadProtocol
       (\ s a -> s{_psauUploadProtocol = a})
-
--- | Pretty-print response.
-psauPp :: Lens' ProjectsServiceAccountsUpdate Bool
-psauPp = lens _psauPp (\ s a -> s{_psauPp = a})
 
 -- | OAuth access token.
 psauAccessToken :: Lens' ProjectsServiceAccountsUpdate (Maybe Text)
@@ -150,19 +134,13 @@ psauPayload :: Lens' ProjectsServiceAccountsUpdate ServiceAccount
 psauPayload
   = lens _psauPayload (\ s a -> s{_psauPayload = a})
 
--- | OAuth bearer token.
-psauBearerToken :: Lens' ProjectsServiceAccountsUpdate (Maybe Text)
-psauBearerToken
-  = lens _psauBearerToken
-      (\ s a -> s{_psauBearerToken = a})
-
 -- | The resource name of the service account in the following format:
--- \`projects\/{project}\/serviceAccounts\/{account}\`. Requests using
--- \`-\` as a wildcard for the project will infer the project from the
--- \`account\` and the \`account\` value can be the \`email\` address or
--- the \`unique_id\` of the service account. In responses the resource name
--- will always be in the format
--- \`projects\/{project}\/serviceAccounts\/{email}\`.
+-- \`projects\/{PROJECT_ID}\/serviceAccounts\/{ACCOUNT}\`. Requests using
+-- \`-\` as a wildcard for the \`PROJECT_ID\` will infer the project from
+-- the \`account\` and the \`ACCOUNT\` value can be the \`email\` address
+-- or the \`unique_id\` of the service account. In responses the resource
+-- name will always be in the format
+-- \`projects\/{PROJECT_ID}\/serviceAccounts\/{ACCOUNT}\`.
 psauName :: Lens' ProjectsServiceAccountsUpdate Text
 psauName = lens _psauName (\ s a -> s{_psauName = a})
 
@@ -179,10 +157,8 @@ instance GoogleRequest ProjectsServiceAccountsUpdate
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsServiceAccountsUpdate'{..}
           = go _psauName _psauXgafv _psauUploadProtocol
-              (Just _psauPp)
               _psauAccessToken
               _psauUploadType
-              _psauBearerToken
               _psauCallback
               (Just AltJSON)
               _psauPayload

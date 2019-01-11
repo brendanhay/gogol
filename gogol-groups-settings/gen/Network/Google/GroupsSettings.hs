@@ -45,9 +45,13 @@ module Network.Google.GroupsSettings
     , groups
     , gEmail
     , gSendMessageDenyNotification
+    , gWhoCanEnterFreeFormTags
+    , gWhoCanAssignTopics
     , gWhoCanPostMessage
     , gAllowExternalMembers
     , gShowInGroupDirectory
+    , gWhoCanUnmarkFavoriteReplyOnAnyTopic
+    , gWhoCanTakeTopics
     , gSpamModerationLevel
     , gKind
     , gWhoCanViewMembership
@@ -58,21 +62,29 @@ module Network.Google.GroupsSettings
     , gMaxMessageBytes
     , gReplyTo
     , gMessageModerationLevel
+    , gWhoCanMarkFavoriteReplyOnAnyTopic
     , gIncludeInGlobalAddressList
     , gIsArchived
     , gName
+    , gWhoCanUnassignTopic
     , gMessageDisplayFont
     , gIncludeCustomFooter
+    , gFavoriteRepliesOnTop
     , gCustomReplyTo
+    , gWhoCanAddReferences
     , gWhoCanContactOwner
     , gWhoCanAdd
     , gWhoCanInvite
     , gWhoCanLeaveGroup
+    , gWhoCanModifyTagsAndCategories
     , gAllowGoogleCommunication
+    , gWhoCanMarkNoResponseNeeded
     , gCustomFooterText
+    , gWhoCanMarkDuplicate
     , gPrimaryLanguage
     , gDescription
     , gDefaultMessageDenyNotificationText
+    , gWhoCanMarkFavoriteReplyOnOwnTopic
     , gAllowWebPosting
     ) where
 

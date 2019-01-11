@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieve Organization Unit
+-- Retrieve organizational unit
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.orgunits.get@.
 module Network.Google.Resource.Directory.OrgUnits.Get
@@ -52,7 +52,7 @@ type OrgUnitsGetResource =
                  Captures "orgUnitPath" Text :>
                    QueryParam "alt" AltJSON :> Get '[JSON] OrgUnit
 
--- | Retrieve Organization Unit
+-- | Retrieve organizational unit
 --
 -- /See:/ 'orgUnitsGet' smart constructor.
 data OrgUnitsGet = OrgUnitsGet'
@@ -77,14 +77,14 @@ orgUnitsGet pOugOrgUnitPath_ pOugCustomerId_ =
     , _ougCustomerId = pOugCustomerId_
     }
 
--- | Full path of the organization unit or its Id
+-- | Full path of the organizational unit or its ID
 ougOrgUnitPath :: Lens' OrgUnitsGet [Text]
 ougOrgUnitPath
   = lens _ougOrgUnitPath
       (\ s a -> s{_ougOrgUnitPath = a})
       . _Coerce
 
--- | Immutable id of the Google Apps account
+-- | Immutable ID of the G Suite account
 ougCustomerId :: Lens' OrgUnitsGet Text
 ougCustomerId
   = lens _ougCustomerId

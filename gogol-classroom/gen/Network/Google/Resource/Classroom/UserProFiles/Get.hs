@@ -38,11 +38,9 @@ module Network.Google.Resource.Classroom.UserProFiles.Get
     -- * Request Lenses
     , upfgXgafv
     , upfgUploadProtocol
-    , upfgPp
     , upfgAccessToken
     , upfgUploadType
     , upfgUserId
-    , upfgBearerToken
     , upfgCallback
     ) where
 
@@ -55,14 +53,12 @@ type UserProFilesGetResource =
      "v1" :>
        "userProfiles" :>
          Capture "userId" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] UserProFile
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] UserProFile
 
 -- | Returns a user profile. This method returns the following error codes: *
 -- \`PERMISSION_DENIED\` if the requesting user is not permitted to access
@@ -71,13 +67,11 @@ type UserProFilesGetResource =
 --
 -- /See:/ 'userProFilesGet' smart constructor.
 data UserProFilesGet = UserProFilesGet'
-    { _upfgXgafv          :: !(Maybe Text)
+    { _upfgXgafv          :: !(Maybe Xgafv)
     , _upfgUploadProtocol :: !(Maybe Text)
-    , _upfgPp             :: !Bool
     , _upfgAccessToken    :: !(Maybe Text)
     , _upfgUploadType     :: !(Maybe Text)
     , _upfgUserId         :: !Text
-    , _upfgBearerToken    :: !(Maybe Text)
     , _upfgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -89,15 +83,11 @@ data UserProFilesGet = UserProFilesGet'
 --
 -- * 'upfgUploadProtocol'
 --
--- * 'upfgPp'
---
 -- * 'upfgAccessToken'
 --
 -- * 'upfgUploadType'
 --
 -- * 'upfgUserId'
---
--- * 'upfgBearerToken'
 --
 -- * 'upfgCallback'
 userProFilesGet
@@ -107,16 +97,14 @@ userProFilesGet pUpfgUserId_ =
     UserProFilesGet'
     { _upfgXgafv = Nothing
     , _upfgUploadProtocol = Nothing
-    , _upfgPp = True
     , _upfgAccessToken = Nothing
     , _upfgUploadType = Nothing
     , _upfgUserId = pUpfgUserId_
-    , _upfgBearerToken = Nothing
     , _upfgCallback = Nothing
     }
 
 -- | V1 error format.
-upfgXgafv :: Lens' UserProFilesGet (Maybe Text)
+upfgXgafv :: Lens' UserProFilesGet (Maybe Xgafv)
 upfgXgafv
   = lens _upfgXgafv (\ s a -> s{_upfgXgafv = a})
 
@@ -125,10 +113,6 @@ upfgUploadProtocol :: Lens' UserProFilesGet (Maybe Text)
 upfgUploadProtocol
   = lens _upfgUploadProtocol
       (\ s a -> s{_upfgUploadProtocol = a})
-
--- | Pretty-print response.
-upfgPp :: Lens' UserProFilesGet Bool
-upfgPp = lens _upfgPp (\ s a -> s{_upfgPp = a})
 
 -- | OAuth access token.
 upfgAccessToken :: Lens' UserProFilesGet (Maybe Text)
@@ -149,12 +133,6 @@ upfgUserId :: Lens' UserProFilesGet Text
 upfgUserId
   = lens _upfgUserId (\ s a -> s{_upfgUserId = a})
 
--- | OAuth bearer token.
-upfgBearerToken :: Lens' UserProFilesGet (Maybe Text)
-upfgBearerToken
-  = lens _upfgBearerToken
-      (\ s a -> s{_upfgBearerToken = a})
-
 -- | JSONP
 upfgCallback :: Lens' UserProFilesGet (Maybe Text)
 upfgCallback
@@ -169,10 +147,8 @@ instance GoogleRequest UserProFilesGet where
                "https://www.googleapis.com/auth/classroom.rosters.readonly"]
         requestClient UserProFilesGet'{..}
           = go _upfgUserId _upfgXgafv _upfgUploadProtocol
-              (Just _upfgPp)
               _upfgAccessToken
               _upfgUploadType
-              _upfgBearerToken
               _upfgCallback
               (Just AltJSON)
               classroomService

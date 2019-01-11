@@ -1,6 +1,6 @@
 name:                  gogol-sqladmin
 version:               0.3.0
-synopsis:              Google Cloud SQL Administration SDK.
+synopsis:              Google Cloud SQL Admin SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -14,8 +14,8 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    Creates and configures Cloud SQL instances, which provide fully-managed
-    MySQL databases.
+    Creates and manages Cloud SQL instances, which provide fully managed
+    MySQL or PostgreSQL databases.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -45,19 +45,23 @@ library
         , Network.Google.Resource.SQL.Databases.Patch
         , Network.Google.Resource.SQL.Databases.Update
         , Network.Google.Resource.SQL.Flags.List
+        , Network.Google.Resource.SQL.Instances.AddServerCa
         , Network.Google.Resource.SQL.Instances.Clone
         , Network.Google.Resource.SQL.Instances.Delete
+        , Network.Google.Resource.SQL.Instances.DemoteMaster
         , Network.Google.Resource.SQL.Instances.Export
         , Network.Google.Resource.SQL.Instances.Failover
         , Network.Google.Resource.SQL.Instances.Get
         , Network.Google.Resource.SQL.Instances.Import
         , Network.Google.Resource.SQL.Instances.Insert
         , Network.Google.Resource.SQL.Instances.List
+        , Network.Google.Resource.SQL.Instances.ListServerCas
         , Network.Google.Resource.SQL.Instances.Patch
         , Network.Google.Resource.SQL.Instances.PromoteReplica
         , Network.Google.Resource.SQL.Instances.ResetSSLConfig
         , Network.Google.Resource.SQL.Instances.Restart
         , Network.Google.Resource.SQL.Instances.RestoreBackup
+        , Network.Google.Resource.SQL.Instances.RotateServerCa
         , Network.Google.Resource.SQL.Instances.StartReplica
         , Network.Google.Resource.SQL.Instances.StopReplica
         , Network.Google.Resource.SQL.Instances.TruncateLog

@@ -35,12 +35,10 @@ module Network.Google.Resource.YouTubeReporting.Jobs.Create
     -- * Request Lenses
     , jcXgafv
     , jcUploadProtocol
-    , jcPp
     , jcAccessToken
     , jcUploadType
     , jcPayload
     , jcOnBehalfOfContentOwner
-    , jcBearerToken
     , jcCallback
     ) where
 
@@ -54,14 +52,12 @@ type JobsCreateResource =
        "jobs" :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "onBehalfOfContentOwner" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Job :> Post '[JSON] Job
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "onBehalfOfContentOwner" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Job :> Post '[JSON] Job
 
 -- | Creates a job and returns it.
 --
@@ -69,12 +65,10 @@ type JobsCreateResource =
 data JobsCreate = JobsCreate'
     { _jcXgafv                  :: !(Maybe Xgafv)
     , _jcUploadProtocol         :: !(Maybe Text)
-    , _jcPp                     :: !Bool
     , _jcAccessToken            :: !(Maybe Text)
     , _jcUploadType             :: !(Maybe Text)
     , _jcPayload                :: !Job
     , _jcOnBehalfOfContentOwner :: !(Maybe Text)
-    , _jcBearerToken            :: !(Maybe Text)
     , _jcCallback               :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -86,8 +80,6 @@ data JobsCreate = JobsCreate'
 --
 -- * 'jcUploadProtocol'
 --
--- * 'jcPp'
---
 -- * 'jcAccessToken'
 --
 -- * 'jcUploadType'
@@ -95,8 +87,6 @@ data JobsCreate = JobsCreate'
 -- * 'jcPayload'
 --
 -- * 'jcOnBehalfOfContentOwner'
---
--- * 'jcBearerToken'
 --
 -- * 'jcCallback'
 jobsCreate
@@ -106,12 +96,10 @@ jobsCreate pJcPayload_ =
     JobsCreate'
     { _jcXgafv = Nothing
     , _jcUploadProtocol = Nothing
-    , _jcPp = True
     , _jcAccessToken = Nothing
     , _jcUploadType = Nothing
     , _jcPayload = pJcPayload_
     , _jcOnBehalfOfContentOwner = Nothing
-    , _jcBearerToken = Nothing
     , _jcCallback = Nothing
     }
 
@@ -124,10 +112,6 @@ jcUploadProtocol :: Lens' JobsCreate (Maybe Text)
 jcUploadProtocol
   = lens _jcUploadProtocol
       (\ s a -> s{_jcUploadProtocol = a})
-
--- | Pretty-print response.
-jcPp :: Lens' JobsCreate Bool
-jcPp = lens _jcPp (\ s a -> s{_jcPp = a})
 
 -- | OAuth access token.
 jcAccessToken :: Lens' JobsCreate (Maybe Text)
@@ -152,12 +136,6 @@ jcOnBehalfOfContentOwner
   = lens _jcOnBehalfOfContentOwner
       (\ s a -> s{_jcOnBehalfOfContentOwner = a})
 
--- | OAuth bearer token.
-jcBearerToken :: Lens' JobsCreate (Maybe Text)
-jcBearerToken
-  = lens _jcBearerToken
-      (\ s a -> s{_jcBearerToken = a})
-
 -- | JSONP
 jcCallback :: Lens' JobsCreate (Maybe Text)
 jcCallback
@@ -169,11 +147,9 @@ instance GoogleRequest JobsCreate where
              '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
                "https://www.googleapis.com/auth/yt-analytics.readonly"]
         requestClient JobsCreate'{..}
-          = go _jcXgafv _jcUploadProtocol (Just _jcPp)
-              _jcAccessToken
+          = go _jcXgafv _jcUploadProtocol _jcAccessToken
               _jcUploadType
               _jcOnBehalfOfContentOwner
-              _jcBearerToken
               _jcCallback
               (Just AltJSON)
               _jcPayload

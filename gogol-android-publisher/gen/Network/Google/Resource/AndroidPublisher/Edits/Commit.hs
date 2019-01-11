@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'EditsCommit' request conforms to.
 type EditsCommitResource =
      "androidpublisher" :>
-       "v2" :>
+       "v3" :>
          "applications" :>
            Capture "packageName" Text :>
              "edits" :>

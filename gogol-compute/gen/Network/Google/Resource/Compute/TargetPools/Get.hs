@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified target pool. Get a list of available target pools
+-- Returns the specified target pool. Gets a list of available target pools
 -- by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetPools.get@.
@@ -55,7 +55,7 @@ type TargetPoolsGetResource =
                    Capture "targetPool" Text :>
                      QueryParam "alt" AltJSON :> Get '[JSON] TargetPool
 
--- | Returns the specified target pool. Get a list of available target pools
+-- | Returns the specified target pool. Gets a list of available target pools
 -- by making a list() request.
 --
 -- /See:/ 'targetPoolsGet' smart constructor.

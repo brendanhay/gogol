@@ -54,7 +54,7 @@ import           Network.Google.Prelude
 -- 'OrderDocumentsList' request conforms to.
 type OrderDocumentsListResource =
      "dfareporting" :>
-       "v2.7" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "projects" :>
@@ -80,14 +80,14 @@ data OrderDocumentsList = OrderDocumentsList'
     { _odlSearchString :: !(Maybe Text)
     , _odlIds          :: !(Maybe [Textual Int64])
     , _odlProFileId    :: !(Textual Int64)
-    , _odlSortOrder    :: !(Maybe OrderDocumentsListSortOrder)
+    , _odlSortOrder    :: !OrderDocumentsListSortOrder
     , _odlPageToken    :: !(Maybe Text)
     , _odlProjectId    :: !(Textual Int64)
-    , _odlSortField    :: !(Maybe OrderDocumentsListSortField)
+    , _odlSortField    :: !OrderDocumentsListSortField
     , _odlOrderId      :: !(Maybe [Textual Int64])
     , _odlApproved     :: !(Maybe Bool)
     , _odlSiteId       :: !(Maybe [Textual Int64])
-    , _odlMaxResults   :: !(Maybe (Textual Int32))
+    , _odlMaxResults   :: !(Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrderDocumentsList' with the minimum fields required to make a request.
@@ -124,14 +124,14 @@ orderDocumentsList pOdlProFileId_ pOdlProjectId_ =
     { _odlSearchString = Nothing
     , _odlIds = Nothing
     , _odlProFileId = _Coerce # pOdlProFileId_
-    , _odlSortOrder = Nothing
+    , _odlSortOrder = ODLSOAscending
     , _odlPageToken = Nothing
     , _odlProjectId = _Coerce # pOdlProjectId_
-    , _odlSortField = Nothing
+    , _odlSortField = ODLSFID
     , _odlOrderId = Nothing
     , _odlApproved = Nothing
     , _odlSiteId = Nothing
-    , _odlMaxResults = Nothing
+    , _odlMaxResults = 1000
     }
 
 -- | Allows searching for order documents by name or ID. Wildcards (*) are
@@ -159,8 +159,8 @@ odlProFileId
   = lens _odlProFileId (\ s a -> s{_odlProFileId = a})
       . _Coerce
 
--- | Order of sorted results, default is ASCENDING.
-odlSortOrder :: Lens' OrderDocumentsList (Maybe OrderDocumentsListSortOrder)
+-- | Order of sorted results.
+odlSortOrder :: Lens' OrderDocumentsList OrderDocumentsListSortOrder
 odlSortOrder
   = lens _odlSortOrder (\ s a -> s{_odlSortOrder = a})
 
@@ -176,7 +176,7 @@ odlProjectId
       . _Coerce
 
 -- | Field by which to sort the list.
-odlSortField :: Lens' OrderDocumentsList (Maybe OrderDocumentsListSortField)
+odlSortField :: Lens' OrderDocumentsList OrderDocumentsListSortField
 odlSortField
   = lens _odlSortField (\ s a -> s{_odlSortField = a})
 
@@ -201,11 +201,11 @@ odlSiteId
       . _Coerce
 
 -- | Maximum number of results to return.
-odlMaxResults :: Lens' OrderDocumentsList (Maybe Int32)
+odlMaxResults :: Lens' OrderDocumentsList Int32
 odlMaxResults
   = lens _odlMaxResults
       (\ s a -> s{_odlMaxResults = a})
-      . mapping _Coerce
+      . _Coerce
 
 instance GoogleRequest OrderDocumentsList where
         type Rs OrderDocumentsList =
@@ -215,13 +215,13 @@ instance GoogleRequest OrderDocumentsList where
         requestClient OrderDocumentsList'{..}
           = go _odlProFileId _odlProjectId _odlSearchString
               (_odlIds ^. _Default)
-              _odlSortOrder
+              (Just _odlSortOrder)
               _odlPageToken
-              _odlSortField
+              (Just _odlSortField)
               (_odlOrderId ^. _Default)
               _odlApproved
               (_odlSiteId ^. _Default)
-              _odlMaxResults
+              (Just _odlMaxResults)
               (Just AltJSON)
               dFAReportingService
           where go

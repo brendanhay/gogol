@@ -36,7 +36,6 @@ module Network.Google.Resource.Games.Achievements.Increment
     -- * Request Lenses
     , aiRequestId
     , aiAchievementId
-    , aiConsistencyToken
     , aiStepsToIncrement
     ) where
 
@@ -53,9 +52,8 @@ type AchievementsIncrementResource =
              "increment" :>
                QueryParam "stepsToIncrement" (Textual Int32) :>
                  QueryParam "requestId" (Textual Int64) :>
-                   QueryParam "consistencyToken" (Textual Int64) :>
-                     QueryParam "alt" AltJSON :>
-                       Post '[JSON] AchievementIncrementResponse
+                   QueryParam "alt" AltJSON :>
+                     Post '[JSON] AchievementIncrementResponse
 
 -- | Increments the steps of the achievement with the given ID for the
 -- currently authenticated player.
@@ -64,7 +62,6 @@ type AchievementsIncrementResource =
 data AchievementsIncrement = AchievementsIncrement'
     { _aiRequestId        :: !(Maybe (Textual Int64))
     , _aiAchievementId    :: !Text
-    , _aiConsistencyToken :: !(Maybe (Textual Int64))
     , _aiStepsToIncrement :: !(Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -76,8 +73,6 @@ data AchievementsIncrement = AchievementsIncrement'
 --
 -- * 'aiAchievementId'
 --
--- * 'aiConsistencyToken'
---
 -- * 'aiStepsToIncrement'
 achievementsIncrement
     :: Text -- ^ 'aiAchievementId'
@@ -87,7 +82,6 @@ achievementsIncrement pAiAchievementId_ pAiStepsToIncrement_ =
     AchievementsIncrement'
     { _aiRequestId = Nothing
     , _aiAchievementId = pAiAchievementId_
-    , _aiConsistencyToken = Nothing
     , _aiStepsToIncrement = _Coerce # pAiStepsToIncrement_
     }
 
@@ -105,13 +99,6 @@ aiAchievementId
   = lens _aiAchievementId
       (\ s a -> s{_aiAchievementId = a})
 
--- | The last-seen mutation timestamp.
-aiConsistencyToken :: Lens' AchievementsIncrement (Maybe Int64)
-aiConsistencyToken
-  = lens _aiConsistencyToken
-      (\ s a -> s{_aiConsistencyToken = a})
-      . mapping _Coerce
-
 -- | The number of steps to increment.
 aiStepsToIncrement :: Lens' AchievementsIncrement Int32
 aiStepsToIncrement
@@ -123,12 +110,10 @@ instance GoogleRequest AchievementsIncrement where
         type Rs AchievementsIncrement =
              AchievementIncrementResponse
         type Scopes AchievementsIncrement =
-             '["https://www.googleapis.com/auth/games",
-               "https://www.googleapis.com/auth/plus.login"]
+             '["https://www.googleapis.com/auth/games"]
         requestClient AchievementsIncrement'{..}
           = go _aiAchievementId (Just _aiStepsToIncrement)
               _aiRequestId
-              _aiConsistencyToken
               (Just AltJSON)
               gamesService
           where go

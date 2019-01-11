@@ -43,12 +43,10 @@ module Network.Google.Resource.Classroom.Courses.Teachers.Create
     -- * Request Lenses
     , ctcXgafv
     , ctcUploadProtocol
-    , ctcPp
     , ctcCourseId
     , ctcAccessToken
     , ctcUploadType
     , ctcPayload
-    , ctcBearerToken
     , ctcCallback
     ) where
 
@@ -62,15 +60,13 @@ type CoursesTeachersCreateResource =
        "courses" :>
          Capture "courseId" Text :>
            "teachers" :>
-             QueryParam "$.xgafv" Text :>
+             QueryParam "$.xgafv" Xgafv :>
                QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "callback" Text :>
-                           QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] Teacher :> Post '[JSON] Teacher
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Teacher :> Post '[JSON] Teacher
 
 -- | Creates a teacher of a course. This method returns the following error
 -- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
@@ -84,14 +80,12 @@ type CoursesTeachersCreateResource =
 --
 -- /See:/ 'coursesTeachersCreate' smart constructor.
 data CoursesTeachersCreate = CoursesTeachersCreate'
-    { _ctcXgafv          :: !(Maybe Text)
+    { _ctcXgafv          :: !(Maybe Xgafv)
     , _ctcUploadProtocol :: !(Maybe Text)
-    , _ctcPp             :: !Bool
     , _ctcCourseId       :: !Text
     , _ctcAccessToken    :: !(Maybe Text)
     , _ctcUploadType     :: !(Maybe Text)
     , _ctcPayload        :: !Teacher
-    , _ctcBearerToken    :: !(Maybe Text)
     , _ctcCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -103,8 +97,6 @@ data CoursesTeachersCreate = CoursesTeachersCreate'
 --
 -- * 'ctcUploadProtocol'
 --
--- * 'ctcPp'
---
 -- * 'ctcCourseId'
 --
 -- * 'ctcAccessToken'
@@ -112,8 +104,6 @@ data CoursesTeachersCreate = CoursesTeachersCreate'
 -- * 'ctcUploadType'
 --
 -- * 'ctcPayload'
---
--- * 'ctcBearerToken'
 --
 -- * 'ctcCallback'
 coursesTeachersCreate
@@ -124,17 +114,15 @@ coursesTeachersCreate pCtcCourseId_ pCtcPayload_ =
     CoursesTeachersCreate'
     { _ctcXgafv = Nothing
     , _ctcUploadProtocol = Nothing
-    , _ctcPp = True
     , _ctcCourseId = pCtcCourseId_
     , _ctcAccessToken = Nothing
     , _ctcUploadType = Nothing
     , _ctcPayload = pCtcPayload_
-    , _ctcBearerToken = Nothing
     , _ctcCallback = Nothing
     }
 
 -- | V1 error format.
-ctcXgafv :: Lens' CoursesTeachersCreate (Maybe Text)
+ctcXgafv :: Lens' CoursesTeachersCreate (Maybe Xgafv)
 ctcXgafv = lens _ctcXgafv (\ s a -> s{_ctcXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -142,10 +130,6 @@ ctcUploadProtocol :: Lens' CoursesTeachersCreate (Maybe Text)
 ctcUploadProtocol
   = lens _ctcUploadProtocol
       (\ s a -> s{_ctcUploadProtocol = a})
-
--- | Pretty-print response.
-ctcPp :: Lens' CoursesTeachersCreate Bool
-ctcPp = lens _ctcPp (\ s a -> s{_ctcPp = a})
 
 -- | Identifier of the course. This identifier can be either the
 -- Classroom-assigned identifier or an alias.
@@ -170,12 +154,6 @@ ctcPayload :: Lens' CoursesTeachersCreate Teacher
 ctcPayload
   = lens _ctcPayload (\ s a -> s{_ctcPayload = a})
 
--- | OAuth bearer token.
-ctcBearerToken :: Lens' CoursesTeachersCreate (Maybe Text)
-ctcBearerToken
-  = lens _ctcBearerToken
-      (\ s a -> s{_ctcBearerToken = a})
-
 -- | JSONP
 ctcCallback :: Lens' CoursesTeachersCreate (Maybe Text)
 ctcCallback
@@ -189,10 +167,8 @@ instance GoogleRequest CoursesTeachersCreate where
                "https://www.googleapis.com/auth/classroom.rosters"]
         requestClient CoursesTeachersCreate'{..}
           = go _ctcCourseId _ctcXgafv _ctcUploadProtocol
-              (Just _ctcPp)
               _ctcAccessToken
               _ctcUploadType
-              _ctcBearerToken
               _ctcCallback
               (Just AltJSON)
               _ctcPayload

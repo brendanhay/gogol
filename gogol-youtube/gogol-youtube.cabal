@@ -57,7 +57,6 @@ library
         , Network.Google.Resource.YouTube.Comments.MarkAsSpam
         , Network.Google.Resource.YouTube.Comments.SetModerationStatus
         , Network.Google.Resource.YouTube.Comments.Update
-        , Network.Google.Resource.YouTube.FanFundingEvents.List
         , Network.Google.Resource.YouTube.GuideCategories.List
         , Network.Google.Resource.YouTube.I18nLanguages.List
         , Network.Google.Resource.YouTube.I18nRegions.List
@@ -93,6 +92,7 @@ library
         , Network.Google.Resource.YouTube.Subscriptions.Delete
         , Network.Google.Resource.YouTube.Subscriptions.Insert
         , Network.Google.Resource.YouTube.Subscriptions.List
+        , Network.Google.Resource.YouTube.SuperChatEvents.List
         , Network.Google.Resource.YouTube.Thumbnails.Set
         , Network.Google.Resource.YouTube.VideoAbuseReportReasons.List
         , Network.Google.Resource.YouTube.VideoCategories.List

@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Upload, process, query, and search Genomics data in the cloud.
+-- Uploads, processes, queries, and searches Genomics data in the cloud.
 --
 -- /See:/ <https://cloud.google.com/genomics Genomics API Reference>
 module Network.Google.Genomics
@@ -24,195 +24,45 @@ module Network.Google.Genomics
     -- * OAuth Scopes
     , genomicsScope
     , cloudPlatformScope
-    , genomicsReadOnlyScope
-    , storageReadWriteScope
-    , bigQueryScope
 
     -- * API Declaration
     , GenomicsAPI
 
     -- * Resources
 
-    -- ** genomics.annotations.batchCreate
-    , module Network.Google.Resource.Genomics.Annotations.BatchCreate
+    -- ** genomics.pipelines.run
+    , module Network.Google.Resource.Genomics.Pipelines.Run
 
-    -- ** genomics.annotations.create
-    , module Network.Google.Resource.Genomics.Annotations.Create
+    -- ** genomics.projects.operations.cancel
+    , module Network.Google.Resource.Genomics.Projects.Operations.Cancel
 
-    -- ** genomics.annotations.delete
-    , module Network.Google.Resource.Genomics.Annotations.Delete
+    -- ** genomics.projects.operations.get
+    , module Network.Google.Resource.Genomics.Projects.Operations.Get
 
-    -- ** genomics.annotations.get
-    , module Network.Google.Resource.Genomics.Annotations.Get
+    -- ** genomics.projects.operations.list
+    , module Network.Google.Resource.Genomics.Projects.Operations.List
 
-    -- ** genomics.annotations.search
-    , module Network.Google.Resource.Genomics.Annotations.Search
-
-    -- ** genomics.annotations.update
-    , module Network.Google.Resource.Genomics.Annotations.Update
-
-    -- ** genomics.annotationsets.create
-    , module Network.Google.Resource.Genomics.AnnotationSets.Create
-
-    -- ** genomics.annotationsets.delete
-    , module Network.Google.Resource.Genomics.AnnotationSets.Delete
-
-    -- ** genomics.annotationsets.get
-    , module Network.Google.Resource.Genomics.AnnotationSets.Get
-
-    -- ** genomics.annotationsets.search
-    , module Network.Google.Resource.Genomics.AnnotationSets.Search
-
-    -- ** genomics.annotationsets.update
-    , module Network.Google.Resource.Genomics.AnnotationSets.Update
-
-    -- ** genomics.callsets.create
-    , module Network.Google.Resource.Genomics.CallSets.Create
-
-    -- ** genomics.callsets.delete
-    , module Network.Google.Resource.Genomics.CallSets.Delete
-
-    -- ** genomics.callsets.get
-    , module Network.Google.Resource.Genomics.CallSets.Get
-
-    -- ** genomics.callsets.patch
-    , module Network.Google.Resource.Genomics.CallSets.Patch
-
-    -- ** genomics.callsets.search
-    , module Network.Google.Resource.Genomics.CallSets.Search
-
-    -- ** genomics.datasets.create
-    , module Network.Google.Resource.Genomics.DataSets.Create
-
-    -- ** genomics.datasets.delete
-    , module Network.Google.Resource.Genomics.DataSets.Delete
-
-    -- ** genomics.datasets.get
-    , module Network.Google.Resource.Genomics.DataSets.Get
-
-    -- ** genomics.datasets.getIamPolicy
-    , module Network.Google.Resource.Genomics.DataSets.GetIAMPolicy
-
-    -- ** genomics.datasets.list
-    , module Network.Google.Resource.Genomics.DataSets.List
-
-    -- ** genomics.datasets.patch
-    , module Network.Google.Resource.Genomics.DataSets.Patch
-
-    -- ** genomics.datasets.setIamPolicy
-    , module Network.Google.Resource.Genomics.DataSets.SetIAMPolicy
-
-    -- ** genomics.datasets.testIamPermissions
-    , module Network.Google.Resource.Genomics.DataSets.TestIAMPermissions
-
-    -- ** genomics.datasets.undelete
-    , module Network.Google.Resource.Genomics.DataSets.Undelete
-
-    -- ** genomics.operations.cancel
-    , module Network.Google.Resource.Genomics.Operations.Cancel
-
-    -- ** genomics.operations.get
-    , module Network.Google.Resource.Genomics.Operations.Get
-
-    -- ** genomics.operations.list
-    , module Network.Google.Resource.Genomics.Operations.List
-
-    -- ** genomics.readgroupsets.coveragebuckets.list
-    , module Network.Google.Resource.Genomics.ReadGroupSets.CoverageBuckets.List
-
-    -- ** genomics.readgroupsets.delete
-    , module Network.Google.Resource.Genomics.ReadGroupSets.Delete
-
-    -- ** genomics.readgroupsets.export
-    , module Network.Google.Resource.Genomics.ReadGroupSets.Export
-
-    -- ** genomics.readgroupsets.get
-    , module Network.Google.Resource.Genomics.ReadGroupSets.Get
-
-    -- ** genomics.readgroupsets.import
-    , module Network.Google.Resource.Genomics.ReadGroupSets.Import
-
-    -- ** genomics.readgroupsets.patch
-    , module Network.Google.Resource.Genomics.ReadGroupSets.Patch
-
-    -- ** genomics.readgroupsets.search
-    , module Network.Google.Resource.Genomics.ReadGroupSets.Search
-
-    -- ** genomics.reads.search
-    , module Network.Google.Resource.Genomics.Reads.Search
-
-    -- ** genomics.references.bases.list
-    , module Network.Google.Resource.Genomics.References.Bases.List
-
-    -- ** genomics.references.get
-    , module Network.Google.Resource.Genomics.References.Get
-
-    -- ** genomics.references.search
-    , module Network.Google.Resource.Genomics.References.Search
-
-    -- ** genomics.referencesets.get
-    , module Network.Google.Resource.Genomics.Referencesets.Get
-
-    -- ** genomics.referencesets.search
-    , module Network.Google.Resource.Genomics.Referencesets.Search
-
-    -- ** genomics.variants.create
-    , module Network.Google.Resource.Genomics.Variants.Create
-
-    -- ** genomics.variants.delete
-    , module Network.Google.Resource.Genomics.Variants.Delete
-
-    -- ** genomics.variants.get
-    , module Network.Google.Resource.Genomics.Variants.Get
-
-    -- ** genomics.variants.import
-    , module Network.Google.Resource.Genomics.Variants.Import
-
-    -- ** genomics.variants.merge
-    , module Network.Google.Resource.Genomics.Variants.Merge
-
-    -- ** genomics.variants.patch
-    , module Network.Google.Resource.Genomics.Variants.Patch
-
-    -- ** genomics.variants.search
-    , module Network.Google.Resource.Genomics.Variants.Search
-
-    -- ** genomics.variantsets.create
-    , module Network.Google.Resource.Genomics.VariantSets.Create
-
-    -- ** genomics.variantsets.delete
-    , module Network.Google.Resource.Genomics.VariantSets.Delete
-
-    -- ** genomics.variantsets.export
-    , module Network.Google.Resource.Genomics.VariantSets.Export
-
-    -- ** genomics.variantsets.get
-    , module Network.Google.Resource.Genomics.VariantSets.Get
-
-    -- ** genomics.variantsets.patch
-    , module Network.Google.Resource.Genomics.VariantSets.Patch
-
-    -- ** genomics.variantsets.search
-    , module Network.Google.Resource.Genomics.VariantSets.Search
+    -- ** genomics.workers.checkIn
+    , module Network.Google.Resource.Genomics.Workers.CheckIn
 
     -- * Types
 
-    -- ** ImportVariantsRequestInfoMergeConfig
-    , ImportVariantsRequestInfoMergeConfig
-    , importVariantsRequestInfoMergeConfig
-    , ivrimcAddtional
+    -- ** ContainerStartedEventPortMAppings
+    , ContainerStartedEventPortMAppings
+    , containerStartedEventPortMAppings
+    , csepmaAddtional
 
-    -- ** ReadInfo
-    , ReadInfo
-    , readInfo
-    , riAddtional
+    -- ** Event
+    , Event
+    , event
+    , eDetails
+    , eTimestamp
+    , eDescription
 
-    -- ** Exon
-    , Exon
-    , exon
-    , eStart
-    , eEnd
-    , eFrame
+    -- ** CheckInRequestEvent
+    , CheckInRequestEvent
+    , checkInRequestEvent
+    , cireAddtional
 
     -- ** Status
     , Status
@@ -226,48 +76,10 @@ module Network.Google.Genomics
     , operationSchema
     , osAddtional
 
-    -- ** VariantAnnotationEffect
-    , VariantAnnotationEffect (..)
-
-    -- ** Variant
-    , Variant
-    , variant
-    , vVariantSetId
-    , vCreated
-    , vStart
-    , vAlternateBases
-    , vReferenceName
-    , vNames
-    , vEnd
-    , vReferenceBases
-    , vId
-    , vQuality
-    , vFilter
-    , vInfo
-    , vCalls
-
-    -- ** Annotation
-    , Annotation
-    , annotation
-    , aVariant
-    , aAnnotationSetId
-    , aStart
-    , aReverseStrand
-    , aReferenceId
-    , aReferenceName
-    , aName
-    , aEnd
-    , aId
-    , aType
-    , aTranscript
-    , aInfo
-
-    -- ** ListBasesResponse
-    , ListBasesResponse
-    , listBasesResponse
-    , lbrNextPageToken
-    , lbrOffSet
-    , lbrSequence
+    -- ** RunPipelineRequestLabels
+    , RunPipelineRequestLabels
+    , runPipelineRequestLabels
+    , rprlAddtional
 
     -- ** ListOperationsResponse
     , ListOperationsResponse
@@ -275,84 +87,48 @@ module Network.Google.Genomics
     , lorNextPageToken
     , lorOperations
 
-    -- ** GetIAMPolicyRequest
-    , GetIAMPolicyRequest
-    , getIAMPolicyRequest
+    -- ** FailedEvent
+    , FailedEvent
+    , failedEvent
+    , feCause
+    , feCode
 
     -- ** CancelOperationRequest
     , CancelOperationRequest
     , cancelOperationRequest
 
-    -- ** DataSet
-    , DataSet
-    , dataSet
-    , dsName
-    , dsId
-    , dsProjectId
-    , dsCreateTime
+    -- ** WorkerStatus
+    , WorkerStatus
+    , workerStatus
+    , wsTotalRamBytes
+    , wsAttachedDisks
+    , wsUptimeSeconds
+    , wsBootDisk
+    , wsFreeRamBytes
 
-    -- ** Read'
-    , Read'
-    , read'
-    , rFragmentLength
-    , rDuplicateFragment
-    , rReadGroupSetId
-    , rNextMatePosition
-    , rFailedVendorQualityChecks
-    , rAlignment
-    , rFragmentName
-    , rNumberReads
-    , rId
-    , rSecondaryAlignment
-    , rReadGroupId
-    , rSupplementaryAlignment
-    , rAlignedSequence
-    , rProperPlacement
-    , rInfo
-    , rReadNumber
-    , rAlignedQuality
+    -- ** ContainerStoppedEvent
+    , ContainerStoppedEvent
+    , containerStoppedEvent
+    , cseExitStatus
+    , cseActionId
+    , cseStderr
+
+    -- ** CheckInResponse
+    , CheckInResponse
+    , checkInResponse
+    , cirDeadline
+    , cirMetadata
+
+    -- ** WorkerAssignedEvent
+    , WorkerAssignedEvent
+    , workerAssignedEvent
+    , waeZone
+    , waeInstance
 
     -- ** OperationMetadataLabels
     , OperationMetadataLabels
     , operationMetadataLabels
     , omlAddtional
-
-    -- ** VariantCall
-    , VariantCall
-    , variantCall
-    , vcGenotypeLikelihood
-    , vcCallSetName
-    , vcPhaseset
-    , vcCallSetId
-    , vcGenotype
-    , vcInfo
-
-    -- ** BatchCreateAnnotationsRequest
-    , BatchCreateAnnotationsRequest
-    , batchCreateAnnotationsRequest
-    , bcarAnnotations
-    , bcarRequestId
-
-    -- ** MergeVariantsRequest
-    , MergeVariantsRequest
-    , mergeVariantsRequest
-    , mvrVariants
-    , mvrVariantSetId
-    , mvrInfoMergeConfig
-
-    -- ** ReadGroup
-    , ReadGroup
-    , readGroup
-    , reaReferenceSetId
-    , reaPrograms
-    , reaExperiment
-    , reaName
-    , reaDataSetId
-    , reaId
-    , reaSampleId
-    , reaPredictedInsertSize
-    , reaDescription
-    , reaInfo
 
     -- ** Operation
     , Operation
@@ -363,400 +139,241 @@ module Network.Google.Genomics
     , oName
     , oMetadata
 
-    -- ** SearchReferenceSetsRequest
-    , SearchReferenceSetsRequest
-    , searchReferenceSetsRequest
-    , srsrMD5checksums
-    , srsrAccessions
-    , srsrPageToken
-    , srsrAssemblyId
-    , srsrPageSize
-
     -- ** Empty
     , Empty
     , empty
 
-    -- ** AnnotationSetType
-    , AnnotationSetType (..)
+    -- ** Disk
+    , Disk
+    , disk
+    , dSourceImage
+    , dSizeGb
+    , dName
+    , dType
 
-    -- ** SearchReferencesResponse
-    , SearchReferencesResponse
-    , searchReferencesResponse
-    , srrNextPageToken
-    , srrReferences
+    -- ** UnexpectedExitStatusEvent
+    , UnexpectedExitStatusEvent
+    , unexpectedExitStatusEvent
+    , ueseExitStatus
+    , ueseActionId
 
-    -- ** VariantSetMetadata
-    , VariantSetMetadata
-    , variantSetMetadata
-    , vsmValue
-    , vsmKey
-    , vsmId
-    , vsmType
-    , vsmNumber
-    , vsmDescription
-    , vsmInfo
+    -- ** DelayedEvent
+    , DelayedEvent
+    , delayedEvent
+    , deMetrics
+    , deCause
 
-    -- ** CallSet
-    , CallSet
-    , callSet
-    , csCreated
-    , csName
-    , csId
-    , csSampleId
-    , csVariantSetIds
-    , csInfo
+    -- ** ActionPortMAppings
+    , ActionPortMAppings
+    , actionPortMAppings
+    , apmaAddtional
 
-    -- ** CoverageBucket
-    , CoverageBucket
-    , coverageBucket
-    , cbRange
-    , cbMeanCoverage
+    -- ** MetadataLabels
+    , MetadataLabels
+    , metadataLabels
+    , mlAddtional
 
-    -- ** VariantAnnotation
-    , VariantAnnotation
-    , variantAnnotation
-    , vaEffect
-    , vaClinicalSignificance
-    , vaAlternateBases
-    , vaGeneId
-    , vaConditions
-    , vaType
-    , vaTranscriptIds
+    -- ** CheckInRequest
+    , CheckInRequest
+    , checkInRequest
+    , cirEvent
+    , cirWorkerStatus
+    , cirResult
+    , cirDeadlineExpired
 
-    -- ** VariantAnnotationClinicalSignificance
-    , VariantAnnotationClinicalSignificance (..)
+    -- ** ContainerKilledEvent
+    , ContainerKilledEvent
+    , containerKilledEvent
+    , ckeActionId
 
-    -- ** SearchReadGroupSetsRequest
-    , SearchReadGroupSetsRequest
-    , searchReadGroupSetsRequest
-    , srgsrDataSetIds
-    , srgsrName
-    , srgsrPageToken
-    , srgsrPageSize
+    -- ** PullStoppedEvent
+    , PullStoppedEvent
+    , pullStoppedEvent
+    , pseImageURI
 
-    -- ** Reference
-    , Reference
-    , reference
-    , refLength
-    , refSourceAccessions
-    , refMD5checksum
-    , refName
-    , refNcbiTaxonId
-    , refId
-    , refSourceURI
-
-    -- ** VariantCallInfo
-    , VariantCallInfo
-    , variantCallInfo
-    , vciAddtional
-
-    -- ** ReadGroupInfo
-    , ReadGroupInfo
-    , readGroupInfo
-    , rgiAddtional
+    -- ** ActionLabels
+    , ActionLabels
+    , actionLabels
+    , alAddtional
 
     -- ** StatusDetailsItem
     , StatusDetailsItem
     , statusDetailsItem
     , sdiAddtional
 
-    -- ** SearchCallSetsResponse
-    , SearchCallSetsResponse
-    , searchCallSetsResponse
-    , scsrNextPageToken
-    , scsrCallSets
+    -- ** Network
+    , Network
+    , network
+    , nUsePrivateAddress
+    , nName
+    , nSubnetwork
 
-    -- ** SetIAMPolicyRequest
-    , SetIAMPolicyRequest
-    , setIAMPolicyRequest
-    , siprPolicy
+    -- ** EventDetails
+    , EventDetails
+    , eventDetails
+    , edAddtional
 
-    -- ** SearchReadsRequest
-    , SearchReadsRequest
-    , searchReadsRequest
-    , srrStart
-    , srrReadGroupIds
-    , srrReferenceName
-    , srrEnd
-    , srrPageToken
-    , srrPageSize
-    , srrReadGroupSetIds
+    -- ** Action
+    , Action
+    , action
+    , aCommands
+    , aFlags
+    , aEnvironment
+    , aCredentials
+    , aEntrypoint
+    , aPortMAppings
+    , aMounts
+    , aImageURI
+    , aName
+    , aLabels
+    , aTimeout
+    , aPidNamespace
+
+    -- ** Secret
+    , Secret
+    , secret
+    , sKeyName
+    , sCipherText
+
+    -- ** WorkerStatusAttachedDisks
+    , WorkerStatusAttachedDisks
+    , workerStatusAttachedDisks
+    , wsadAddtional
 
     -- ** OperationMetadataRequest
     , OperationMetadataRequest
     , operationMetadataRequest
     , omrAddtional
 
-    -- ** MergeVariantsRequestInfoMergeConfig
-    , MergeVariantsRequestInfoMergeConfig
-    , mergeVariantsRequestInfoMergeConfig
-    , mvrimcAddtional
+    -- ** Resources
+    , Resources
+    , resources
+    , rZones
+    , rRegions
+    , rVirtualMachine
+    , rProjectId
 
-    -- ** VariantInfo
-    , VariantInfo
-    , variantInfo
-    , viAddtional
+    -- ** DiskStatus
+    , DiskStatus
+    , diskStatus
+    , dsTotalSpaceBytes
+    , dsFreeSpaceBytes
 
-    -- ** Experiment
-    , Experiment
-    , experiment
-    , eInstrumentModel
-    , ePlatformUnit
-    , eSequencingCenter
-    , eLibraryId
-
-    -- ** SearchVariantSetsRequest
-    , SearchVariantSetsRequest
-    , searchVariantSetsRequest
-    , svsrDataSetIds
-    , svsrPageToken
-    , svsrPageSize
-
-    -- ** AnnotationInfo
-    , AnnotationInfo
-    , annotationInfo
-    , aiAddtional
-
-    -- ** SearchAnnotationsResponse
-    , SearchAnnotationsResponse
-    , searchAnnotationsResponse
-    , sarAnnotations
-    , sarNextPageToken
-
-    -- ** SearchAnnotationSetsRequest
-    , SearchAnnotationSetsRequest
-    , searchAnnotationSetsRequest
-    , sasrReferenceSetId
-    , sasrTypes
-    , sasrDataSetIds
-    , sasrName
-    , sasrPageToken
-    , sasrPageSize
-
-    -- ** ImportReadGroupSetsRequestPartitionStrategy
-    , ImportReadGroupSetsRequestPartitionStrategy (..)
-
-    -- ** SearchVariantsResponse
-    , SearchVariantsResponse
-    , searchVariantsResponse
-    , svrVariants
-    , svrNextPageToken
+    -- ** VirtualMachineLabels
+    , VirtualMachineLabels
+    , virtualMachineLabels
+    , vmlAddtional
 
     -- ** OperationMetadataRuntimeMetadata
     , OperationMetadataRuntimeMetadata
     , operationMetadataRuntimeMetadata
     , omrmAddtional
 
-    -- ** ClinicalCondition
-    , ClinicalCondition
-    , clinicalCondition
-    , ccExternalIds
-    , ccNames
-    , ccConceptId
-    , ccOmimId
+    -- ** VirtualMachine
+    , VirtualMachine
+    , virtualMachine
+    , vmNetwork
+    , vmCPUPlatform
+    , vmServiceAccount
+    , vmAccelerators
+    , vmMachineType
+    , vmLabels
+    , vmBootDiskSizeGb
+    , vmDisks
+    , vmBootImage
+    , vmNvidiaDriverVersion
+    , vmPreemptible
 
-    -- ** SearchCallSetsRequest
-    , SearchCallSetsRequest
-    , searchCallSetsRequest
-    , scsrName
-    , scsrPageToken
-    , scsrVariantSetIds
-    , scsrPageSize
+    -- ** ServiceAccount
+    , ServiceAccount
+    , serviceAccount
+    , saEmail
+    , saScopes
 
-    -- ** Entry
-    , Entry
-    , entry
-    , eStatus
-    , eAnnotation
+    -- ** CheckInResponseMetadata
+    , CheckInResponseMetadata
+    , checkInResponseMetadata
+    , cirmAddtional
 
-    -- ** SearchReadsResponse
-    , SearchReadsResponse
-    , searchReadsResponse
-    , sNextPageToken
-    , sAlignments
+    -- ** Accelerator
+    , Accelerator
+    , accelerator
+    , aCount
+    , aType
 
-    -- ** Program
-    , Program
-    , program
-    , pPrevProgramId
-    , pName
-    , pVersion
-    , pId
-    , pCommandLine
+    -- ** PipelineEnvironment
+    , PipelineEnvironment
+    , pipelineEnvironment
+    , peAddtional
 
-    -- ** SearchReferencesRequest
-    , SearchReferencesRequest
-    , searchReferencesRequest
-    , sReferenceSetId
-    , sMD5checksums
-    , sAccessions
-    , sPageToken
-    , sPageSize
+    -- ** WorkerReleasedEvent
+    , WorkerReleasedEvent
+    , workerReleasedEvent
+    , wreZone
+    , wreInstance
 
-    -- ** BatchCreateAnnotationsResponse
-    , BatchCreateAnnotationsResponse
-    , batchCreateAnnotationsResponse
-    , bcarEntries
+    -- ** ContainerStartedEvent
+    , ContainerStartedEvent
+    , containerStartedEvent
+    , cIPAddress
+    , cActionId
+    , cPortMAppings
 
-    -- ** CodingSequence
-    , CodingSequence
-    , codingSequence
-    , csStart
-    , csEnd
-
-    -- ** AnnotationType
-    , AnnotationType (..)
-
-    -- ** SearchReferenceSetsResponse
-    , SearchReferenceSetsResponse
-    , searchReferenceSetsResponse
-    , srsrNextPageToken
-    , srsrReferenceSets
-
-    -- ** Range
-    , Range
-    , range
-    , rStart
-    , rReferenceName
-    , rEnd
-
-    -- ** ReadGroupSet
-    , ReadGroupSet
-    , readGroupSet
-    , rgsReferenceSetId
-    , rgsName
-    , rgsDataSetId
-    , rgsId
-    , rgsInfo
-    , rgsReadGroups
-    , rgsFilename
+    -- ** FailedEventCode
+    , FailedEventCode (..)
 
     -- ** Xgafv
     , Xgafv (..)
 
-    -- ** ExportReadGroupSetRequest
-    , ExportReadGroupSetRequest
-    , exportReadGroupSetRequest
-    , ergsrReferenceNames
-    , ergsrExportURI
-    , ergsrProjectId
+    -- ** RunPipelineRequest
+    , RunPipelineRequest
+    , runPipelineRequest
+    , rprPipeline
+    , rprLabels
+
+    -- ** Pipeline
+    , Pipeline
+    , pipeline
+    , pActions
+    , pEnvironment
+    , pResources
+    , pTimeout
 
     -- ** ImportVariantsResponse
     , ImportVariantsResponse
     , importVariantsResponse
     , ivrCallSetIds
 
-    -- ** ListCoverageBucketsResponse
-    , ListCoverageBucketsResponse
-    , listCoverageBucketsResponse
-    , lcbrNextPageToken
-    , lcbrBucketWidth
-    , lcbrCoverageBuckets
-
-    -- ** TestIAMPermissionsRequest
-    , TestIAMPermissionsRequest
-    , testIAMPermissionsRequest
-    , tiprPermissions
-
     -- ** ImportReadGroupSetsResponse
     , ImportReadGroupSetsResponse
     , importReadGroupSetsResponse
     , irgsrReadGroupSetIds
 
-    -- ** LinearAlignment
-    , LinearAlignment
-    , linearAlignment
-    , laCigar
-    , laMAppingQuality
-    , laPosition
+    -- ** Metadata
+    , Metadata
+    , metadata
+    , mStartTime
+    , mEvents
+    , mEndTime
+    , mPipeline
+    , mLabels
+    , mCreateTime
 
-    -- ** AnnotationSet
-    , AnnotationSet
-    , annotationSet
-    , asReferenceSetId
-    , asName
-    , asDataSetId
-    , asId
-    , asType
-    , asSourceURI
-    , asInfo
+    -- ** Mount
+    , Mount
+    , mount
+    , mPath
+    , mDisk
+    , mReadOnly
 
-    -- ** VariantSet
-    , VariantSet
-    , variantSet
-    , vsReferenceSetId
-    , vsName
-    , vsDataSetId
-    , vsReferenceBounds
-    , vsMetadata
-    , vsId
-    , vsDescription
+    -- ** PullStartedEvent
+    , PullStartedEvent
+    , pullStartedEvent
+    , pImageURI
 
-    -- ** CigarUnitOperation
-    , CigarUnitOperation (..)
-
-    -- ** VariantSetMetadataType
-    , VariantSetMetadataType (..)
-
-    -- ** TestIAMPermissionsResponse
-    , TestIAMPermissionsResponse
-    , testIAMPermissionsResponse
-    , tiamprPermissions
-
-    -- ** ListDataSetsResponse
-    , ListDataSetsResponse
-    , listDataSetsResponse
-    , ldsrNextPageToken
-    , ldsrDataSets
-
-    -- ** ImportReadGroupSetsRequest
-    , ImportReadGroupSetsRequest
-    , importReadGroupSetsRequest
-    , irgsrReferenceSetId
-    , irgsrDataSetId
-    , irgsrSourceURIs
-    , irgsrPartitionStrategy
-
-    -- ** ImportVariantsRequest
-    , ImportVariantsRequest
-    , importVariantsRequest
-    , ivrVariantSetId
-    , ivrFormat
-    , ivrInfoMergeConfig
-    , ivrNormalizeReferenceNames
-    , ivrSourceURIs
-
-    -- ** ExternalId
-    , ExternalId
-    , externalId
-    , eiSourceName
-    , eiId
-
-    -- ** CigarUnit
-    , CigarUnit
-    , cigarUnit
-    , cuOperation
-    , cuOperationLength
-    , cuReferenceSequence
-
-    -- ** Policy
-    , Policy
-    , policy
-    , polEtag
-    , polVersion
-    , polBindings
-
-    -- ** ExportVariantSetRequest
-    , ExportVariantSetRequest
-    , exportVariantSetRequest
-    , evsrBigQueryDataSet
-    , evsrBigQueryTable
-    , evsrFormat
-    , evsrCallSetIds
-    , evsrProjectId
-
-    -- ** VariantAnnotationType
-    , VariantAnnotationType (..)
+    -- ** RunPipelineResponse
+    , RunPipelineResponse
+    , runPipelineResponse
 
     -- ** OperationMetadata
     , OperationMetadata
@@ -771,46 +388,10 @@ module Network.Google.Genomics
     , omRuntimeMetadata
     , omRequest
 
-    -- ** ImportVariantsRequestFormat
-    , ImportVariantsRequestFormat (..)
-
-    -- ** SearchAnnotationsRequest
-    , SearchAnnotationsRequest
-    , searchAnnotationsRequest
-    , sarStart
-    , sarReferenceId
-    , sarReferenceName
-    , sarEnd
-    , sarPageToken
-    , sarAnnotationSetIds
-    , sarPageSize
-
-    -- ** SearchVariantSetsResponse
-    , SearchVariantSetsResponse
-    , searchVariantSetsResponse
-    , svsrNextPageToken
-    , svsrVariantSets
-
-    -- ** SearchVariantsRequest
-    , SearchVariantsRequest
-    , searchVariantsRequest
-    , svrStart
-    , svrCallSetIds
-    , svrReferenceName
-    , svrEnd
-    , svrMaxCalls
-    , svrPageToken
-    , svrVariantName
-    , svrVariantSetIds
-    , svrPageSize
-
-    -- ** ExportVariantSetRequestFormat
-    , ExportVariantSetRequestFormat (..)
-
-    -- ** AnnotationSetInfo
-    , AnnotationSetInfo
-    , annotationSetInfo
-    , asiAddtional
+    -- ** ActionEnvironment
+    , ActionEnvironment
+    , actionEnvironment
+    , aeAddtional
 
     -- ** ComputeEngine
     , ComputeEngine
@@ -820,33 +401,10 @@ module Network.Google.Genomics
     , ceMachineType
     , ceInstanceName
 
-    -- ** SearchAnnotationSetsResponse
-    , SearchAnnotationSetsResponse
-    , searchAnnotationSetsResponse
-    , sasrNextPageToken
-    , sasrAnnotationSets
-
-    -- ** CallSetInfo
-    , CallSetInfo
-    , callSetInfo
-    , csiAddtional
-
-    -- ** VariantSetMetadataInfo
-    , VariantSetMetadataInfo
-    , variantSetMetadataInfo
-    , vsmiAddtional
-
     -- ** OperationResponse
     , OperationResponse
     , operationResponse
     , orAddtional
-
-    -- ** Transcript
-    , Transcript
-    , transcript
-    , tGeneId
-    , tCodingSequence
-    , tExons
 
     -- ** OperationEvent
     , OperationEvent
@@ -855,114 +413,19 @@ module Network.Google.Genomics
     , oeEndTime
     , oeDescription
 
-    -- ** ReferenceBound
-    , ReferenceBound
-    , referenceBound
-    , rbUpperBound
-    , rbReferenceName
-
-    -- ** UndeleteDataSetRequest
-    , UndeleteDataSetRequest
-    , undeleteDataSetRequest
-
-    -- ** Binding
-    , Binding
-    , binding
-    , bMembers
-    , bRole
-
-    -- ** Position
-    , Position
-    , position
-    , pReverseStrand
-    , pReferenceName
-    , pPosition
-
     -- ** RuntimeMetadata
     , RuntimeMetadata
     , runtimeMetadata
     , rmComputeEngine
-
-    -- ** SearchReadGroupSetsResponse
-    , SearchReadGroupSetsResponse
-    , searchReadGroupSetsResponse
-    , srgsrNextPageToken
-    , srgsrReadGroupSets
-
-    -- ** ReadGroupSetInfo
-    , ReadGroupSetInfo
-    , readGroupSetInfo
-    , rgsiAddtional
-
-    -- ** ReferenceSet
-    , ReferenceSet
-    , referenceSet
-    , rsSourceAccessions
-    , rsReferenceIds
-    , rsMD5checksum
-    , rsNcbiTaxonId
-    , rsId
-    , rsAssemblyId
-    , rsSourceURI
-    , rsDescription
     ) where
 
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
-import           Network.Google.Resource.Genomics.Annotations.BatchCreate
-import           Network.Google.Resource.Genomics.Annotations.Create
-import           Network.Google.Resource.Genomics.Annotations.Delete
-import           Network.Google.Resource.Genomics.Annotations.Get
-import           Network.Google.Resource.Genomics.Annotations.Search
-import           Network.Google.Resource.Genomics.Annotations.Update
-import           Network.Google.Resource.Genomics.AnnotationSets.Create
-import           Network.Google.Resource.Genomics.AnnotationSets.Delete
-import           Network.Google.Resource.Genomics.AnnotationSets.Get
-import           Network.Google.Resource.Genomics.AnnotationSets.Search
-import           Network.Google.Resource.Genomics.AnnotationSets.Update
-import           Network.Google.Resource.Genomics.CallSets.Create
-import           Network.Google.Resource.Genomics.CallSets.Delete
-import           Network.Google.Resource.Genomics.CallSets.Get
-import           Network.Google.Resource.Genomics.CallSets.Patch
-import           Network.Google.Resource.Genomics.CallSets.Search
-import           Network.Google.Resource.Genomics.DataSets.Create
-import           Network.Google.Resource.Genomics.DataSets.Delete
-import           Network.Google.Resource.Genomics.DataSets.Get
-import           Network.Google.Resource.Genomics.DataSets.GetIAMPolicy
-import           Network.Google.Resource.Genomics.DataSets.List
-import           Network.Google.Resource.Genomics.DataSets.Patch
-import           Network.Google.Resource.Genomics.DataSets.SetIAMPolicy
-import           Network.Google.Resource.Genomics.DataSets.TestIAMPermissions
-import           Network.Google.Resource.Genomics.DataSets.Undelete
-import           Network.Google.Resource.Genomics.Operations.Cancel
-import           Network.Google.Resource.Genomics.Operations.Get
-import           Network.Google.Resource.Genomics.Operations.List
-import           Network.Google.Resource.Genomics.ReadGroupSets.CoverageBuckets.List
-import           Network.Google.Resource.Genomics.ReadGroupSets.Delete
-import           Network.Google.Resource.Genomics.ReadGroupSets.Export
-import           Network.Google.Resource.Genomics.ReadGroupSets.Get
-import           Network.Google.Resource.Genomics.ReadGroupSets.Import
-import           Network.Google.Resource.Genomics.ReadGroupSets.Patch
-import           Network.Google.Resource.Genomics.ReadGroupSets.Search
-import           Network.Google.Resource.Genomics.Reads.Search
-import           Network.Google.Resource.Genomics.References.Bases.List
-import           Network.Google.Resource.Genomics.References.Get
-import           Network.Google.Resource.Genomics.References.Search
-import           Network.Google.Resource.Genomics.Referencesets.Get
-import           Network.Google.Resource.Genomics.Referencesets.Search
-import           Network.Google.Resource.Genomics.Variants.Create
-import           Network.Google.Resource.Genomics.Variants.Delete
-import           Network.Google.Resource.Genomics.Variants.Get
-import           Network.Google.Resource.Genomics.Variants.Import
-import           Network.Google.Resource.Genomics.Variants.Merge
-import           Network.Google.Resource.Genomics.Variants.Patch
-import           Network.Google.Resource.Genomics.Variants.Search
-import           Network.Google.Resource.Genomics.VariantSets.Create
-import           Network.Google.Resource.Genomics.VariantSets.Delete
-import           Network.Google.Resource.Genomics.VariantSets.Export
-import           Network.Google.Resource.Genomics.VariantSets.Get
-import           Network.Google.Resource.Genomics.VariantSets.Patch
-import           Network.Google.Resource.Genomics.VariantSets.Search
+import           Network.Google.Resource.Genomics.Pipelines.Run
+import           Network.Google.Resource.Genomics.Projects.Operations.Cancel
+import           Network.Google.Resource.Genomics.Projects.Operations.Get
+import           Network.Google.Resource.Genomics.Projects.Operations.List
+import           Network.Google.Resource.Genomics.Workers.CheckIn
 
 {- $resources
 TODO
@@ -970,56 +433,7 @@ TODO
 
 -- | Represents the entirety of the methods and resources available for the Genomics API service.
 type GenomicsAPI =
-     AnnotationsGetResource :<|> AnnotationsCreateResource
-       :<|> AnnotationsBatchCreateResource
-       :<|> AnnotationsSearchResource
-       :<|> AnnotationsDeleteResource
-       :<|> AnnotationsUpdateResource
-       :<|> VariantsPatchResource
-       :<|> VariantsGetResource
-       :<|> VariantsCreateResource
-       :<|> VariantsImportResource
-       :<|> VariantsMergeResource
-       :<|> VariantsSearchResource
-       :<|> VariantsDeleteResource
-       :<|> ReferencesBasesListResource
-       :<|> ReferencesGetResource
-       :<|> ReferencesSearchResource
-       :<|> VariantSetsExportResource
-       :<|> VariantSetsPatchResource
-       :<|> VariantSetsGetResource
-       :<|> VariantSetsCreateResource
-       :<|> VariantSetsSearchResource
-       :<|> VariantSetsDeleteResource
-       :<|> AnnotationSetsGetResource
-       :<|> AnnotationSetsCreateResource
-       :<|> AnnotationSetsSearchResource
-       :<|> AnnotationSetsDeleteResource
-       :<|> AnnotationSetsUpdateResource
-       :<|> ReadGroupSetsCoverageBucketsListResource
-       :<|> ReadGroupSetsExportResource
-       :<|> ReadGroupSetsPatchResource
-       :<|> ReadGroupSetsGetResource
-       :<|> ReadGroupSetsImportResource
-       :<|> ReadGroupSetsSearchResource
-       :<|> ReadGroupSetsDeleteResource
-       :<|> ReferencesetsGetResource
-       :<|> ReferencesetsSearchResource
-       :<|> CallSetsPatchResource
-       :<|> CallSetsGetResource
-       :<|> CallSetsCreateResource
-       :<|> CallSetsSearchResource
-       :<|> CallSetsDeleteResource
-       :<|> OperationsListResource
-       :<|> OperationsGetResource
-       :<|> OperationsCancelResource
-       :<|> ReadsSearchResource
-       :<|> DataSetsListResource
-       :<|> DataSetsUndeleteResource
-       :<|> DataSetsGetIAMPolicyResource
-       :<|> DataSetsPatchResource
-       :<|> DataSetsGetResource
-       :<|> DataSetsCreateResource
-       :<|> DataSetsSetIAMPolicyResource
-       :<|> DataSetsTestIAMPermissionsResource
-       :<|> DataSetsDeleteResource
+     PipelinesRunResource :<|> WorkersCheckInResource :<|>
+       ProjectsOperationsListResource
+       :<|> ProjectsOperationsGetResource
+       :<|> ProjectsOperationsCancelResource

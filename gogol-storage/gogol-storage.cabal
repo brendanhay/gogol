@@ -45,9 +45,13 @@ library
         , Network.Google.Resource.Storage.BucketAccessControls.Update
         , Network.Google.Resource.Storage.Buckets.Delete
         , Network.Google.Resource.Storage.Buckets.Get
+        , Network.Google.Resource.Storage.Buckets.GetIAMPolicy
         , Network.Google.Resource.Storage.Buckets.Insert
         , Network.Google.Resource.Storage.Buckets.List
+        , Network.Google.Resource.Storage.Buckets.LockRetentionPolicy
         , Network.Google.Resource.Storage.Buckets.Patch
+        , Network.Google.Resource.Storage.Buckets.SetIAMPolicy
+        , Network.Google.Resource.Storage.Buckets.TestIAMPermissions
         , Network.Google.Resource.Storage.Buckets.Update
         , Network.Google.Resource.Storage.Channels.Stop
         , Network.Google.Resource.Storage.DefaultObjectAccessControls.Delete
@@ -56,6 +60,10 @@ library
         , Network.Google.Resource.Storage.DefaultObjectAccessControls.List
         , Network.Google.Resource.Storage.DefaultObjectAccessControls.Patch
         , Network.Google.Resource.Storage.DefaultObjectAccessControls.Update
+        , Network.Google.Resource.Storage.Notifications.Delete
+        , Network.Google.Resource.Storage.Notifications.Get
+        , Network.Google.Resource.Storage.Notifications.Insert
+        , Network.Google.Resource.Storage.Notifications.List
         , Network.Google.Resource.Storage.ObjectAccessControls.Delete
         , Network.Google.Resource.Storage.ObjectAccessControls.Get
         , Network.Google.Resource.Storage.ObjectAccessControls.Insert
@@ -66,12 +74,16 @@ library
         , Network.Google.Resource.Storage.Objects.Copy
         , Network.Google.Resource.Storage.Objects.Delete
         , Network.Google.Resource.Storage.Objects.Get
+        , Network.Google.Resource.Storage.Objects.GetIAMPolicy
         , Network.Google.Resource.Storage.Objects.Insert
         , Network.Google.Resource.Storage.Objects.List
         , Network.Google.Resource.Storage.Objects.Patch
         , Network.Google.Resource.Storage.Objects.Rewrite
+        , Network.Google.Resource.Storage.Objects.SetIAMPolicy
+        , Network.Google.Resource.Storage.Objects.TestIAMPermissions
         , Network.Google.Resource.Storage.Objects.Update
         , Network.Google.Resource.Storage.Objects.WatchAll
+        , Network.Google.Resource.Storage.Projects.ServiceAccount.Get
         , Network.Google.Storage
         , Network.Google.Storage.Types
 

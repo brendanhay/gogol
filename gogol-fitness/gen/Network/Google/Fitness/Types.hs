@@ -206,6 +206,14 @@ module Network.Google.Fitness.Types
     , dtField
     , dtName
 
+    -- * ListDataPointChangesResponse
+    , ListDataPointChangesResponse
+    , listDataPointChangesResponse
+    , ldpcrNextPageToken
+    , ldpcrInsertedDataPoint
+    , ldpcrDataSourceId
+    , ldpcrDeletedDataPoint
+
     -- * Session
     , Session
     , session

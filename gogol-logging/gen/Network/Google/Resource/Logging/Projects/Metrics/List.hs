@@ -36,10 +36,8 @@ module Network.Google.Resource.Logging.Projects.Metrics.List
     , pmlParent
     , pmlXgafv
     , pmlUploadProtocol
-    , pmlPp
     , pmlAccessToken
     , pmlUploadType
-    , pmlBearerToken
     , pmlPageToken
     , pmlPageSize
     , pmlCallback
@@ -56,15 +54,13 @@ type ProjectsMetricsListResource =
          "metrics" :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" (Textual Int32) :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] ListLogMetricsResponse
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "pageSize" (Textual Int32) :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] ListLogMetricsResponse
 
 -- | Lists logs-based metrics.
 --
@@ -73,10 +69,8 @@ data ProjectsMetricsList = ProjectsMetricsList'
     { _pmlParent         :: !Text
     , _pmlXgafv          :: !(Maybe Xgafv)
     , _pmlUploadProtocol :: !(Maybe Text)
-    , _pmlPp             :: !Bool
     , _pmlAccessToken    :: !(Maybe Text)
     , _pmlUploadType     :: !(Maybe Text)
-    , _pmlBearerToken    :: !(Maybe Text)
     , _pmlPageToken      :: !(Maybe Text)
     , _pmlPageSize       :: !(Maybe (Textual Int32))
     , _pmlCallback       :: !(Maybe Text)
@@ -92,13 +86,9 @@ data ProjectsMetricsList = ProjectsMetricsList'
 --
 -- * 'pmlUploadProtocol'
 --
--- * 'pmlPp'
---
 -- * 'pmlAccessToken'
 --
 -- * 'pmlUploadType'
---
--- * 'pmlBearerToken'
 --
 -- * 'pmlPageToken'
 --
@@ -113,10 +103,8 @@ projectsMetricsList pPmlParent_ =
     { _pmlParent = pPmlParent_
     , _pmlXgafv = Nothing
     , _pmlUploadProtocol = Nothing
-    , _pmlPp = True
     , _pmlAccessToken = Nothing
     , _pmlUploadType = Nothing
-    , _pmlBearerToken = Nothing
     , _pmlPageToken = Nothing
     , _pmlPageSize = Nothing
     , _pmlCallback = Nothing
@@ -138,10 +126,6 @@ pmlUploadProtocol
   = lens _pmlUploadProtocol
       (\ s a -> s{_pmlUploadProtocol = a})
 
--- | Pretty-print response.
-pmlPp :: Lens' ProjectsMetricsList Bool
-pmlPp = lens _pmlPp (\ s a -> s{_pmlPp = a})
-
 -- | OAuth access token.
 pmlAccessToken :: Lens' ProjectsMetricsList (Maybe Text)
 pmlAccessToken
@@ -153,12 +137,6 @@ pmlUploadType :: Lens' ProjectsMetricsList (Maybe Text)
 pmlUploadType
   = lens _pmlUploadType
       (\ s a -> s{_pmlUploadType = a})
-
--- | OAuth bearer token.
-pmlBearerToken :: Lens' ProjectsMetricsList (Maybe Text)
-pmlBearerToken
-  = lens _pmlBearerToken
-      (\ s a -> s{_pmlBearerToken = a})
 
 -- | Optional. If present, then retrieve the next batch of results from the
 -- preceding call to this method. pageToken must be the value of
@@ -190,10 +168,8 @@ instance GoogleRequest ProjectsMetricsList where
                "https://www.googleapis.com/auth/logging.read"]
         requestClient ProjectsMetricsList'{..}
           = go _pmlParent _pmlXgafv _pmlUploadProtocol
-              (Just _pmlPp)
               _pmlAccessToken
               _pmlUploadType
-              _pmlBearerToken
               _pmlPageToken
               _pmlPageSize
               _pmlCallback

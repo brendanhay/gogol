@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new BuildTrigger. This API is experimental.
+-- Creates a new \`BuildTrigger\`. This API is experimental.
 --
--- /See:/ <https://cloud.google.com/container-builder/docs/ Google Cloud Container Builder API Reference> for @cloudbuild.projects.triggers.create@.
+-- /See:/ <https://cloud.google.com/cloud-build/docs/ Cloud Build API Reference> for @cloudbuild.projects.triggers.create@.
 module Network.Google.Resource.Cloudbuild.Projects.Triggers.Create
     (
     -- * REST Resource
@@ -35,11 +35,9 @@ module Network.Google.Resource.Cloudbuild.Projects.Triggers.Create
     -- * Request Lenses
     , ptcXgafv
     , ptcUploadProtocol
-    , ptcPp
     , ptcAccessToken
     , ptcUploadType
     , ptcPayload
-    , ptcBearerToken
     , ptcProjectId
     , ptcCallback
     ) where
@@ -56,26 +54,22 @@ type ProjectsTriggersCreateResource =
            "triggers" :>
              QueryParam "$.xgafv" Xgafv :>
                QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "callback" Text :>
-                           QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] BuildTrigger :>
-                               Post '[JSON] BuildTrigger
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] BuildTrigger :>
+                           Post '[JSON] BuildTrigger
 
--- | Creates a new BuildTrigger. This API is experimental.
+-- | Creates a new \`BuildTrigger\`. This API is experimental.
 --
 -- /See:/ 'projectsTriggersCreate' smart constructor.
 data ProjectsTriggersCreate = ProjectsTriggersCreate'
     { _ptcXgafv          :: !(Maybe Xgafv)
     , _ptcUploadProtocol :: !(Maybe Text)
-    , _ptcPp             :: !Bool
     , _ptcAccessToken    :: !(Maybe Text)
     , _ptcUploadType     :: !(Maybe Text)
     , _ptcPayload        :: !BuildTrigger
-    , _ptcBearerToken    :: !(Maybe Text)
     , _ptcProjectId      :: !Text
     , _ptcCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -88,15 +82,11 @@ data ProjectsTriggersCreate = ProjectsTriggersCreate'
 --
 -- * 'ptcUploadProtocol'
 --
--- * 'ptcPp'
---
 -- * 'ptcAccessToken'
 --
 -- * 'ptcUploadType'
 --
 -- * 'ptcPayload'
---
--- * 'ptcBearerToken'
 --
 -- * 'ptcProjectId'
 --
@@ -109,11 +99,9 @@ projectsTriggersCreate pPtcPayload_ pPtcProjectId_ =
     ProjectsTriggersCreate'
     { _ptcXgafv = Nothing
     , _ptcUploadProtocol = Nothing
-    , _ptcPp = True
     , _ptcAccessToken = Nothing
     , _ptcUploadType = Nothing
     , _ptcPayload = pPtcPayload_
-    , _ptcBearerToken = Nothing
     , _ptcProjectId = pPtcProjectId_
     , _ptcCallback = Nothing
     }
@@ -127,10 +115,6 @@ ptcUploadProtocol :: Lens' ProjectsTriggersCreate (Maybe Text)
 ptcUploadProtocol
   = lens _ptcUploadProtocol
       (\ s a -> s{_ptcUploadProtocol = a})
-
--- | Pretty-print response.
-ptcPp :: Lens' ProjectsTriggersCreate Bool
-ptcPp = lens _ptcPp (\ s a -> s{_ptcPp = a})
 
 -- | OAuth access token.
 ptcAccessToken :: Lens' ProjectsTriggersCreate (Maybe Text)
@@ -149,12 +133,6 @@ ptcPayload :: Lens' ProjectsTriggersCreate BuildTrigger
 ptcPayload
   = lens _ptcPayload (\ s a -> s{_ptcPayload = a})
 
--- | OAuth bearer token.
-ptcBearerToken :: Lens' ProjectsTriggersCreate (Maybe Text)
-ptcBearerToken
-  = lens _ptcBearerToken
-      (\ s a -> s{_ptcBearerToken = a})
-
 -- | ID of the project for which to configure automatic builds.
 ptcProjectId :: Lens' ProjectsTriggersCreate Text
 ptcProjectId
@@ -171,10 +149,8 @@ instance GoogleRequest ProjectsTriggersCreate where
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsTriggersCreate'{..}
           = go _ptcProjectId _ptcXgafv _ptcUploadProtocol
-              (Just _ptcPp)
               _ptcAccessToken
               _ptcUploadType
-              _ptcBearerToken
               _ptcCallback
               (Just AltJSON)
               _ptcPayload

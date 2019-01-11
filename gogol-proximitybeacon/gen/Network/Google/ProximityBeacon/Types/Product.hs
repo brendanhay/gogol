@@ -22,27 +22,9 @@ import           Network.Google.ProximityBeacon.Types.Sum
 
 -- | An object representing a latitude\/longitude pair. This is expressed as
 -- a pair of doubles representing degrees latitude and degrees longitude.
--- Unless specified otherwise, this must conform to the WGS84 standard.
--- Values must be within normalized ranges. Example of normalization code
--- in Python: def NormalizeLongitude(longitude): \"\"\"Wraps decimal
--- degrees longitude to [-180.0, 180.0].\"\"\" q, r = divmod(longitude,
--- 360.0) if r > 180.0 or (r == 180.0 and q \<= -1.0): return r - 360.0
--- return r def NormalizeLatLng(latitude, longitude): \"\"\"Wraps decimal
--- degrees latitude and longitude to [-90.0, 90.0] and [-180.0, 180.0],
--- respectively.\"\"\" r = latitude % 360.0 if r = 270.0: return r - 360,
--- NormalizeLongitude(longitude) else: return 180 - r,
--- NormalizeLongitude(longitude + 180.0) assert 180.0 ==
--- NormalizeLongitude(180.0) assert -180.0 == NormalizeLongitude(-180.0)
--- assert -179.0 == NormalizeLongitude(181.0) assert (0.0, 0.0) ==
--- NormalizeLatLng(360.0, 0.0) assert (0.0, 0.0) == NormalizeLatLng(-360.0,
--- 0.0) assert (85.0, 180.0) == NormalizeLatLng(95.0, 0.0) assert (-85.0,
--- -170.0) == NormalizeLatLng(-95.0, 10.0) assert (90.0, 10.0) ==
--- NormalizeLatLng(90.0, 10.0) assert (-90.0, -10.0) ==
--- NormalizeLatLng(-90.0, -10.0) assert (0.0, -170.0) ==
--- NormalizeLatLng(-180.0, 10.0) assert (0.0, -170.0) ==
--- NormalizeLatLng(180.0, 10.0) assert (-90.0, 10.0) ==
--- NormalizeLatLng(270.0, 10.0) assert (90.0, 10.0) ==
--- NormalizeLatLng(-270.0, 10.0)
+-- Unless specified otherwise, this must conform to the
+-- <http://www.unoosa.org/pdf/icg/2012/template/WGS_84.pdf WGS84 standard>.
+-- Values must be within normalized ranges.
 --
 -- /See:/ 'latLng' smart constructor.
 data LatLng = LatLng'
@@ -97,13 +79,16 @@ instance ToJSON LatLng where
 --
 -- /See:/ 'attachmentInfo' smart constructor.
 data AttachmentInfo = AttachmentInfo'
-    { _aiData           :: !(Maybe Bytes)
-    , _aiNamespacedType :: !(Maybe Text)
+    { _aiMaxDistanceMeters :: !(Maybe (Textual Double))
+    , _aiData              :: !(Maybe Bytes)
+    , _aiNamespacedType    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AttachmentInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aiMaxDistanceMeters'
 --
 -- * 'aiData'
 --
@@ -112,9 +97,26 @@ attachmentInfo
     :: AttachmentInfo
 attachmentInfo =
     AttachmentInfo'
-    { _aiData = Nothing
+    { _aiMaxDistanceMeters = Nothing
+    , _aiData = Nothing
     , _aiNamespacedType = Nothing
     }
+
+-- | The distance away from the beacon at which this attachment should be
+-- delivered to a mobile app. Setting this to a value greater than zero
+-- indicates that the app should behave as if the beacon is \"seen\" when
+-- the mobile device is less than this distance away from the beacon.
+-- Different attachments on the same beacon can have different max
+-- distances. Note that even though this value is expressed with fractional
+-- meter precision, real-world behavior is likley to be much less precise
+-- than one meter, due to the nature of current Bluetooth radio technology.
+-- Optional. When not set or zero, the attachment should be delivered at
+-- the beacon\'s outer limit of detection.
+aiMaxDistanceMeters :: Lens' AttachmentInfo (Maybe Double)
+aiMaxDistanceMeters
+  = lens _aiMaxDistanceMeters
+      (\ s a -> s{_aiMaxDistanceMeters = a})
+      . mapping _Coerce
 
 -- | An opaque data container for client-provided data.
 aiData :: Lens' AttachmentInfo (Maybe ByteString)
@@ -124,7 +126,7 @@ aiData
 
 -- | Specifies what kind of attachment this is. Tells a client how to
 -- interpret the \`data\` field. Format is namespace\/type, for example
--- scrupulous-wombat-12345\/welcome-message
+-- 'scrupulous-wombat-12345\/welcome-message'
 aiNamespacedType :: Lens' AttachmentInfo (Maybe Text)
 aiNamespacedType
   = lens _aiNamespacedType
@@ -135,13 +137,15 @@ instance FromJSON AttachmentInfo where
           = withObject "AttachmentInfo"
               (\ o ->
                  AttachmentInfo' <$>
-                   (o .:? "data") <*> (o .:? "namespacedType"))
+                   (o .:? "maxDistanceMeters") <*> (o .:? "data") <*>
+                     (o .:? "namespacedType"))
 
 instance ToJSON AttachmentInfo where
         toJSON AttachmentInfo'{..}
           = object
               (catMaybes
-                 [("data" .=) <$> _aiData,
+                 [("maxDistanceMeters" .=) <$> _aiMaxDistanceMeters,
+                  ("data" .=) <$> _aiData,
                   ("namespacedType" .=) <$> _aiNamespacedType])
 
 -- | Properties of the beacon device, for example battery type or firmware
@@ -273,8 +277,8 @@ gifobrObservations
 -- | Specifies what kind of attachments to include in the response. When
 -- given, the response will include only attachments of the given types.
 -- When empty, no attachments will be returned. Must be in the format
--- namespace\/type. Accepts \`*\` to specify all types in all namespaces.
--- Optional.
+-- namespace\/type. Accepts \`*\` to specify all types in all namespaces
+-- owned by the client. Optional.
 gifobrNamespacedTypes :: Lens' GetInfoForObservedBeaconsRequest [Text]
 gifobrNamespacedTypes
   = lens _gifobrNamespacedTypes
@@ -306,7 +310,7 @@ instance ToJSON GetInfoForObservedBeaconsRequest
 --
 -- /See:/ 'namespace' smart constructor.
 data Namespace = Namespace'
-    { _nServingVisibility :: !(Maybe Text)
+    { _nServingVisibility :: !(Maybe NamespaceServingVisibility)
     , _nNamespaceName     :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -327,13 +331,13 @@ namespace =
 
 -- | Specifies what clients may receive attachments under this namespace via
 -- \`beaconinfo.getforobserved\`.
-nServingVisibility :: Lens' Namespace (Maybe Text)
+nServingVisibility :: Lens' Namespace (Maybe NamespaceServingVisibility)
 nServingVisibility
   = lens _nServingVisibility
       (\ s a -> s{_nServingVisibility = a})
 
 -- | Resource name of this namespace. Namespaces names have the format:
--- namespaces\/namespace.
+-- 'namespaces\/namespace'.
 nNamespaceName :: Lens' Namespace (Maybe Text)
 nNamespaceName
   = lens _nNamespaceName
@@ -539,13 +543,14 @@ instance ToJSON ListNamespacesResponse where
           = object
               (catMaybes [("namespaces" .=) <$> _lnrNamespaces])
 
--- | Represents a whole calendar date, e.g. date of birth. The time of day
--- and time zone are either specified elsewhere or are not significant. The
--- date is relative to the Proleptic Gregorian Calendar. The day may be 0
--- to represent a year and month where the day is not significant, e.g.
--- credit card expiration date. The year may be 0 to represent a month and
--- day independent of year, e.g. anniversary date. Related types are
--- google.type.TimeOfDay and \`google.protobuf.Timestamp\`.
+-- | Represents a whole or partial calendar date, e.g. a birthday. The time
+-- of day and time zone are either specified elsewhere or are not
+-- significant. The date is relative to the Proleptic Gregorian Calendar.
+-- This can represent: * A full date, with non-zero year, month and day
+-- values * A month and day value, with a zero year, e.g. an anniversary *
+-- A year on its own, with zero month and day values * A year and month
+-- value, with a zero day, e.g. a credit card expiration date Related types
+-- are google.type.TimeOfDay and \`google.protobuf.Timestamp\`.
 --
 -- /See:/ 'date' smart constructor.
 data Date = Date'
@@ -573,7 +578,8 @@ date =
     }
 
 -- | Day of month. Must be from 1 to 31 and valid for the year and month, or
--- 0 if specifying a year\/month where the day is not significant.
+-- 0 if specifying a year by itself or a year and month where the day is
+-- not significant.
 dDay :: Lens' Date (Maybe Int32)
 dDay
   = lens _dDay (\ s a -> s{_dDay = a}) .
@@ -586,7 +592,8 @@ dYear
   = lens _dYear (\ s a -> s{_dYear = a}) .
       mapping _Coerce
 
--- | Month of year. Must be from 1 to 12.
+-- | Month of year. Must be from 1 to 12, or 0 if specifying a year without a
+-- month and day.
 dMonth :: Lens' Date (Maybe Int32)
 dMonth
   = lens _dMonth (\ s a -> s{_dMonth = a}) .
@@ -610,71 +617,73 @@ instance ToJSON Date where
 --
 -- /See:/ 'beacon' smart constructor.
 data Beacon = Beacon'
-    { _bLatLng                  :: !(Maybe LatLng)
-    , _bStatus                  :: !(Maybe Text)
-    , _bBeaconName              :: !(Maybe Text)
-    , _bEphemeralIdRegistration :: !(Maybe EphemeralIdRegistration)
-    , _bIndoorLevel             :: !(Maybe IndoorLevel)
-    , _bExpectedStability       :: !(Maybe Text)
-    , _bProvisioningKey         :: !(Maybe Bytes)
-    , _bDescription             :: !(Maybe Text)
-    , _bPlaceId                 :: !(Maybe Text)
-    , _bAdvertisedId            :: !(Maybe AdvertisedId)
-    , _bProperties              :: !(Maybe BeaconProperties)
+    { _beaLatLng                  :: !(Maybe LatLng)
+    , _beaStatus                  :: !(Maybe BeaconStatus)
+    , _beaBeaconName              :: !(Maybe Text)
+    , _beaEphemeralIdRegistration :: !(Maybe EphemeralIdRegistration)
+    , _beaIndoorLevel             :: !(Maybe IndoorLevel)
+    , _beaExpectedStability       :: !(Maybe BeaconExpectedStability)
+    , _beaProvisioningKey         :: !(Maybe Bytes)
+    , _beaDescription             :: !(Maybe Text)
+    , _beaPlaceId                 :: !(Maybe Text)
+    , _beaAdvertisedId            :: !(Maybe AdvertisedId)
+    , _beaProperties              :: !(Maybe BeaconProperties)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Beacon' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'bLatLng'
+-- * 'beaLatLng'
 --
--- * 'bStatus'
+-- * 'beaStatus'
 --
--- * 'bBeaconName'
+-- * 'beaBeaconName'
 --
--- * 'bEphemeralIdRegistration'
+-- * 'beaEphemeralIdRegistration'
 --
--- * 'bIndoorLevel'
+-- * 'beaIndoorLevel'
 --
--- * 'bExpectedStability'
+-- * 'beaExpectedStability'
 --
--- * 'bProvisioningKey'
+-- * 'beaProvisioningKey'
 --
--- * 'bDescription'
+-- * 'beaDescription'
 --
--- * 'bPlaceId'
+-- * 'beaPlaceId'
 --
--- * 'bAdvertisedId'
+-- * 'beaAdvertisedId'
 --
--- * 'bProperties'
+-- * 'beaProperties'
 beacon
     :: Beacon
 beacon =
     Beacon'
-    { _bLatLng = Nothing
-    , _bStatus = Nothing
-    , _bBeaconName = Nothing
-    , _bEphemeralIdRegistration = Nothing
-    , _bIndoorLevel = Nothing
-    , _bExpectedStability = Nothing
-    , _bProvisioningKey = Nothing
-    , _bDescription = Nothing
-    , _bPlaceId = Nothing
-    , _bAdvertisedId = Nothing
-    , _bProperties = Nothing
+    { _beaLatLng = Nothing
+    , _beaStatus = Nothing
+    , _beaBeaconName = Nothing
+    , _beaEphemeralIdRegistration = Nothing
+    , _beaIndoorLevel = Nothing
+    , _beaExpectedStability = Nothing
+    , _beaProvisioningKey = Nothing
+    , _beaDescription = Nothing
+    , _beaPlaceId = Nothing
+    , _beaAdvertisedId = Nothing
+    , _beaProperties = Nothing
     }
 
 -- | The location of the beacon, expressed as a latitude and longitude pair.
 -- This location is given when the beacon is registered or updated. It does
 -- not necessarily indicate the actual current location of the beacon.
 -- Optional.
-bLatLng :: Lens' Beacon (Maybe LatLng)
-bLatLng = lens _bLatLng (\ s a -> s{_bLatLng = a})
+beaLatLng :: Lens' Beacon (Maybe LatLng)
+beaLatLng
+  = lens _beaLatLng (\ s a -> s{_beaLatLng = a})
 
 -- | Current status of the beacon. Required.
-bStatus :: Lens' Beacon (Maybe Text)
-bStatus = lens _bStatus (\ s a -> s{_bStatus = a})
+beaStatus :: Lens' Beacon (Maybe BeaconStatus)
+beaStatus
+  = lens _beaStatus (\ s a -> s{_beaStatus = a})
 
 -- | Resource name of this beacon. A beacon name has the format
 -- \"beacons\/N!beaconId\" where the beaconId is the base16 ID broadcast by
@@ -682,32 +691,34 @@ bStatus = lens _bStatus (\ s a -> s{_bStatus = a})
 -- \`3\` for Eddystone, \`1\` for iBeacon, or \`5\` for AltBeacon. This
 -- field must be left empty when registering. After reading a beacon,
 -- clients can use the name for future operations.
-bBeaconName :: Lens' Beacon (Maybe Text)
-bBeaconName
-  = lens _bBeaconName (\ s a -> s{_bBeaconName = a})
+beaBeaconName :: Lens' Beacon (Maybe Text)
+beaBeaconName
+  = lens _beaBeaconName
+      (\ s a -> s{_beaBeaconName = a})
 
 -- | Write-only registration parameters for beacons using Eddystone-EID
 -- (remotely resolved ephemeral ID) format. This information will not be
 -- populated in API responses. When submitting this data, the
 -- \`advertised_id\` field must contain an ID of type Eddystone-UID. Any
 -- other ID type will result in an error.
-bEphemeralIdRegistration :: Lens' Beacon (Maybe EphemeralIdRegistration)
-bEphemeralIdRegistration
-  = lens _bEphemeralIdRegistration
-      (\ s a -> s{_bEphemeralIdRegistration = a})
+beaEphemeralIdRegistration :: Lens' Beacon (Maybe EphemeralIdRegistration)
+beaEphemeralIdRegistration
+  = lens _beaEphemeralIdRegistration
+      (\ s a -> s{_beaEphemeralIdRegistration = a})
 
 -- | The indoor level information for this beacon, if known. As returned by
 -- the Google Maps API. Optional.
-bIndoorLevel :: Lens' Beacon (Maybe IndoorLevel)
-bIndoorLevel
-  = lens _bIndoorLevel (\ s a -> s{_bIndoorLevel = a})
+beaIndoorLevel :: Lens' Beacon (Maybe IndoorLevel)
+beaIndoorLevel
+  = lens _beaIndoorLevel
+      (\ s a -> s{_beaIndoorLevel = a})
 
 -- | Expected location stability. This is set when the beacon is registered
 -- or updated, not automatically detected in any way. Optional.
-bExpectedStability :: Lens' Beacon (Maybe Text)
-bExpectedStability
-  = lens _bExpectedStability
-      (\ s a -> s{_bExpectedStability = a})
+beaExpectedStability :: Lens' Beacon (Maybe BeaconExpectedStability)
+beaExpectedStability
+  = lens _beaExpectedStability
+      (\ s a -> s{_beaExpectedStability = a})
 
 -- | Some beacons may require a user to provide an authorization key before
 -- changing any of its configuration (e.g. broadcast frames, transmit
@@ -718,23 +729,25 @@ bExpectedStability
 -- beacon\'s confidential data in the service, the service considers them
 -- authorized to configure the beacon. Note that this key grants nothing on
 -- the service, only on the beacon itself.
-bProvisioningKey :: Lens' Beacon (Maybe ByteString)
-bProvisioningKey
-  = lens _bProvisioningKey
-      (\ s a -> s{_bProvisioningKey = a})
+beaProvisioningKey :: Lens' Beacon (Maybe ByteString)
+beaProvisioningKey
+  = lens _beaProvisioningKey
+      (\ s a -> s{_beaProvisioningKey = a})
       . mapping _Bytes
 
 -- | Free text used to identify and describe the beacon. Maximum length 140
 -- characters. Optional.
-bDescription :: Lens' Beacon (Maybe Text)
-bDescription
-  = lens _bDescription (\ s a -> s{_bDescription = a})
+beaDescription :: Lens' Beacon (Maybe Text)
+beaDescription
+  = lens _beaDescription
+      (\ s a -> s{_beaDescription = a})
 
 -- | The [Google Places API](\/places\/place-id) Place ID of the place where
 -- the beacon is deployed. This is given when the beacon is registered or
 -- updated, not automatically detected in any way. Optional.
-bPlaceId :: Lens' Beacon (Maybe Text)
-bPlaceId = lens _bPlaceId (\ s a -> s{_bPlaceId = a})
+beaPlaceId :: Lens' Beacon (Maybe Text)
+beaPlaceId
+  = lens _beaPlaceId (\ s a -> s{_beaPlaceId = a})
 
 -- | The identifier of a beacon as advertised by it. This field must be
 -- populated when registering. It may be empty when updating a beacon
@@ -743,16 +756,17 @@ bPlaceId = lens _bPlaceId (\ s a -> s{_bPlaceId = a})
 -- Eddystone-UID that identifies the beacon and links it to its
 -- attachments. The stable Eddystone-UID is only used for administering the
 -- beacon.
-bAdvertisedId :: Lens' Beacon (Maybe AdvertisedId)
-bAdvertisedId
-  = lens _bAdvertisedId
-      (\ s a -> s{_bAdvertisedId = a})
+beaAdvertisedId :: Lens' Beacon (Maybe AdvertisedId)
+beaAdvertisedId
+  = lens _beaAdvertisedId
+      (\ s a -> s{_beaAdvertisedId = a})
 
 -- | Properties of the beacon device, for example battery type or firmware
 -- version. Optional.
-bProperties :: Lens' Beacon (Maybe BeaconProperties)
-bProperties
-  = lens _bProperties (\ s a -> s{_bProperties = a})
+beaProperties :: Lens' Beacon (Maybe BeaconProperties)
+beaProperties
+  = lens _beaProperties
+      (\ s a -> s{_beaProperties = a})
 
 instance FromJSON Beacon where
         parseJSON
@@ -774,18 +788,18 @@ instance ToJSON Beacon where
         toJSON Beacon'{..}
           = object
               (catMaybes
-                 [("latLng" .=) <$> _bLatLng,
-                  ("status" .=) <$> _bStatus,
-                  ("beaconName" .=) <$> _bBeaconName,
+                 [("latLng" .=) <$> _beaLatLng,
+                  ("status" .=) <$> _beaStatus,
+                  ("beaconName" .=) <$> _beaBeaconName,
                   ("ephemeralIdRegistration" .=) <$>
-                    _bEphemeralIdRegistration,
-                  ("indoorLevel" .=) <$> _bIndoorLevel,
-                  ("expectedStability" .=) <$> _bExpectedStability,
-                  ("provisioningKey" .=) <$> _bProvisioningKey,
-                  ("description" .=) <$> _bDescription,
-                  ("placeId" .=) <$> _bPlaceId,
-                  ("advertisedId" .=) <$> _bAdvertisedId,
-                  ("properties" .=) <$> _bProperties])
+                    _beaEphemeralIdRegistration,
+                  ("indoorLevel" .=) <$> _beaIndoorLevel,
+                  ("expectedStability" .=) <$> _beaExpectedStability,
+                  ("provisioningKey" .=) <$> _beaProvisioningKey,
+                  ("description" .=) <$> _beaDescription,
+                  ("placeId" .=) <$> _beaPlaceId,
+                  ("advertisedId" .=) <$> _beaAdvertisedId,
+                  ("properties" .=) <$> _beaProperties])
 
 -- | Diagnostics for a single beacon.
 --
@@ -851,7 +865,7 @@ instance ToJSON Diagnostics where
                   ("estimatedLowBatteryDate" .=) <$>
                     _dEstimatedLowBatteryDate])
 
--- | Response to ListBeaconAttachments that contains the requested
+-- | Response to \`ListBeaconAttachments\` that contains the requested
 -- attachments.
 --
 -- /See:/ 'listBeaconAttachmentsResponse' smart constructor.
@@ -1029,7 +1043,7 @@ beaconInfo =
     }
 
 -- | Attachments matching the type(s) requested. May be empty if no
--- attachment types were requested, or if none matched.
+-- attachment types were requested.
 biAttachments :: Lens' BeaconInfo [AttachmentInfo]
 biAttachments
   = lens _biAttachments
@@ -1070,7 +1084,7 @@ instance ToJSON BeaconInfo where
 -- /See:/ 'observation' smart constructor.
 data Observation = Observation'
     { _oTelemetry    :: !(Maybe Bytes)
-    , _oTimestampMs  :: !(Maybe Text)
+    , _oTimestampMs  :: !(Maybe DateTime')
     , _oAdvertisedId :: !(Maybe AdvertisedId)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1101,14 +1115,15 @@ oTelemetry
       mapping _Bytes
 
 -- | Time when the beacon was observed.
-oTimestampMs :: Lens' Observation (Maybe Text)
+oTimestampMs :: Lens' Observation (Maybe UTCTime)
 oTimestampMs
   = lens _oTimestampMs (\ s a -> s{_oTimestampMs = a})
+      . mapping _DateTime
 
--- | The ID advertised by the beacon the client has encountered. Clients may
--- submit an Eddystone-EID \`advertised_id\`. If the client is not
--- authorized to resolve the given Eddystone-EID, no data will be returned
--- for that beacon. Required.
+-- | The ID advertised by the beacon the client has encountered. If the
+-- submitted \`advertised_id\` type is Eddystone-EID, then the client must
+-- be authorized to resolve the given beacon. Otherwise no data will be
+-- returned for that beacon. Required.
 oAdvertisedId :: Lens' Observation (Maybe AdvertisedId)
 oAdvertisedId
   = lens _oAdvertisedId
@@ -1134,14 +1149,20 @@ instance ToJSON Observation where
 --
 -- /See:/ 'beaconAttachment' smart constructor.
 data BeaconAttachment = BeaconAttachment'
-    { _baData           :: !(Maybe Bytes)
-    , _baAttachmentName :: !(Maybe Text)
-    , _baNamespacedType :: !(Maybe Text)
+    { _baMaxDistanceMeters :: !(Maybe (Textual Double))
+    , _baCreationTimeMs    :: !(Maybe DateTime')
+    , _baData              :: !(Maybe Bytes)
+    , _baAttachmentName    :: !(Maybe Text)
+    , _baNamespacedType    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeaconAttachment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'baMaxDistanceMeters'
+--
+-- * 'baCreationTimeMs'
 --
 -- * 'baData'
 --
@@ -1152,10 +1173,37 @@ beaconAttachment
     :: BeaconAttachment
 beaconAttachment =
     BeaconAttachment'
-    { _baData = Nothing
+    { _baMaxDistanceMeters = Nothing
+    , _baCreationTimeMs = Nothing
+    , _baData = Nothing
     , _baAttachmentName = Nothing
     , _baNamespacedType = Nothing
     }
+
+-- | The distance away from the beacon at which this attachment should be
+-- delivered to a mobile app. Setting this to a value greater than zero
+-- indicates that the app should behave as if the beacon is \"seen\" when
+-- the mobile device is less than this distance away from the beacon.
+-- Different attachments on the same beacon can have different max
+-- distances. Note that even though this value is expressed with fractional
+-- meter precision, real-world behavior is likley to be much less precise
+-- than one meter, due to the nature of current Bluetooth radio technology.
+-- Optional. When not set or zero, the attachment should be delivered at
+-- the beacon\'s outer limit of detection. Negative values are invalid and
+-- return an error.
+baMaxDistanceMeters :: Lens' BeaconAttachment (Maybe Double)
+baMaxDistanceMeters
+  = lens _baMaxDistanceMeters
+      (\ s a -> s{_baMaxDistanceMeters = a})
+      . mapping _Coerce
+
+-- | The UTC time when this attachment was created, in milliseconds since the
+-- UNIX epoch.
+baCreationTimeMs :: Lens' BeaconAttachment (Maybe UTCTime)
+baCreationTimeMs
+  = lens _baCreationTimeMs
+      (\ s a -> s{_baCreationTimeMs = a})
+      . mapping _DateTime
 
 -- | An opaque data container for client-provided data. Must be
 -- [base64](http:\/\/tools.ietf.org\/html\/rfc4648#section-4) encoded in
@@ -1167,7 +1215,7 @@ baData
       mapping _Bytes
 
 -- | Resource name of this attachment. Attachment names have the format:
--- beacons\/beacon_id\/attachments\/attachment_id. Leave this empty on
+-- 'beacons\/beacon_id\/attachments\/attachment_id'. Leave this empty on
 -- creation.
 baAttachmentName :: Lens' BeaconAttachment (Maybe Text)
 baAttachmentName
@@ -1189,14 +1237,19 @@ instance FromJSON BeaconAttachment where
           = withObject "BeaconAttachment"
               (\ o ->
                  BeaconAttachment' <$>
-                   (o .:? "data") <*> (o .:? "attachmentName") <*>
-                     (o .:? "namespacedType"))
+                   (o .:? "maxDistanceMeters") <*>
+                     (o .:? "creationTimeMs")
+                     <*> (o .:? "data")
+                     <*> (o .:? "attachmentName")
+                     <*> (o .:? "namespacedType"))
 
 instance ToJSON BeaconAttachment where
         toJSON BeaconAttachment'{..}
           = object
               (catMaybes
-                 [("data" .=) <$> _baData,
+                 [("maxDistanceMeters" .=) <$> _baMaxDistanceMeters,
+                  ("creationTimeMs" .=) <$> _baCreationTimeMs,
+                  ("data" .=) <$> _baData,
                   ("attachmentName" .=) <$> _baAttachmentName,
                   ("namespacedType" .=) <$> _baNamespacedType])
 
@@ -1258,7 +1311,7 @@ instance ToJSON ListDiagnosticsResponse where
 -- /See:/ 'advertisedId' smart constructor.
 data AdvertisedId = AdvertisedId'
     { _aiId   :: !(Maybe Bytes)
-    , _aiType :: !(Maybe Text)
+    , _aiType :: !(Maybe AdvertisedIdType)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertisedId' with the minimum fields required to make a request.
@@ -1286,7 +1339,7 @@ aiId
   = lens _aiId (\ s a -> s{_aiId = a}) . mapping _Bytes
 
 -- | Specifies the identifier type. Required.
-aiType :: Lens' AdvertisedId (Maybe Text)
+aiType :: Lens' AdvertisedId (Maybe AdvertisedIdType)
 aiType = lens _aiType (\ s a -> s{_aiType = a})
 
 instance FromJSON AdvertisedId where

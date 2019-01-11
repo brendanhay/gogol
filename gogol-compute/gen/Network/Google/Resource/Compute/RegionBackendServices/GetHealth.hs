@@ -109,8 +109,7 @@ rbsghRegion :: Lens' RegionBackendServicesGetHealth Text
 rbsghRegion
   = lens _rbsghRegion (\ s a -> s{_rbsghRegion = a})
 
--- | Name of the BackendService resource to which the queried instance
--- belongs.
+-- | Name of the BackendService resource for which to get health.
 rbsghBackendService :: Lens' RegionBackendServicesGetHealth Text
 rbsghBackendService
   = lens _rbsghBackendService

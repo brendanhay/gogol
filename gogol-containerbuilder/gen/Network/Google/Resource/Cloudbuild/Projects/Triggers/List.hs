@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists existing BuildTrigger. This API is experimental.
+-- Lists existing \`BuildTrigger\`s. This API is experimental.
 --
--- /See:/ <https://cloud.google.com/container-builder/docs/ Google Cloud Container Builder API Reference> for @cloudbuild.projects.triggers.list@.
+-- /See:/ <https://cloud.google.com/cloud-build/docs/ Cloud Build API Reference> for @cloudbuild.projects.triggers.list@.
 module Network.Google.Resource.Cloudbuild.Projects.Triggers.List
     (
     -- * REST Resource
@@ -35,10 +35,8 @@ module Network.Google.Resource.Cloudbuild.Projects.Triggers.List
     -- * Request Lenses
     , ptlXgafv
     , ptlUploadProtocol
-    , ptlPp
     , ptlAccessToken
     , ptlUploadType
-    , ptlBearerToken
     , ptlProjectId
     , ptlCallback
     ) where
@@ -55,24 +53,20 @@ type ProjectsTriggersListResource =
            "triggers" :>
              QueryParam "$.xgafv" Xgafv :>
                QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "callback" Text :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON] ListBuildTriggersResponse
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] ListBuildTriggersResponse
 
--- | Lists existing BuildTrigger. This API is experimental.
+-- | Lists existing \`BuildTrigger\`s. This API is experimental.
 --
 -- /See:/ 'projectsTriggersList' smart constructor.
 data ProjectsTriggersList = ProjectsTriggersList'
     { _ptlXgafv          :: !(Maybe Xgafv)
     , _ptlUploadProtocol :: !(Maybe Text)
-    , _ptlPp             :: !Bool
     , _ptlAccessToken    :: !(Maybe Text)
     , _ptlUploadType     :: !(Maybe Text)
-    , _ptlBearerToken    :: !(Maybe Text)
     , _ptlProjectId      :: !Text
     , _ptlCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -85,13 +79,9 @@ data ProjectsTriggersList = ProjectsTriggersList'
 --
 -- * 'ptlUploadProtocol'
 --
--- * 'ptlPp'
---
 -- * 'ptlAccessToken'
 --
 -- * 'ptlUploadType'
---
--- * 'ptlBearerToken'
 --
 -- * 'ptlProjectId'
 --
@@ -103,10 +93,8 @@ projectsTriggersList pPtlProjectId_ =
     ProjectsTriggersList'
     { _ptlXgafv = Nothing
     , _ptlUploadProtocol = Nothing
-    , _ptlPp = True
     , _ptlAccessToken = Nothing
     , _ptlUploadType = Nothing
-    , _ptlBearerToken = Nothing
     , _ptlProjectId = pPtlProjectId_
     , _ptlCallback = Nothing
     }
@@ -121,10 +109,6 @@ ptlUploadProtocol
   = lens _ptlUploadProtocol
       (\ s a -> s{_ptlUploadProtocol = a})
 
--- | Pretty-print response.
-ptlPp :: Lens' ProjectsTriggersList Bool
-ptlPp = lens _ptlPp (\ s a -> s{_ptlPp = a})
-
 -- | OAuth access token.
 ptlAccessToken :: Lens' ProjectsTriggersList (Maybe Text)
 ptlAccessToken
@@ -136,12 +120,6 @@ ptlUploadType :: Lens' ProjectsTriggersList (Maybe Text)
 ptlUploadType
   = lens _ptlUploadType
       (\ s a -> s{_ptlUploadType = a})
-
--- | OAuth bearer token.
-ptlBearerToken :: Lens' ProjectsTriggersList (Maybe Text)
-ptlBearerToken
-  = lens _ptlBearerToken
-      (\ s a -> s{_ptlBearerToken = a})
 
 -- | ID of the project for which to list BuildTriggers.
 ptlProjectId :: Lens' ProjectsTriggersList Text
@@ -160,10 +138,8 @@ instance GoogleRequest ProjectsTriggersList where
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsTriggersList'{..}
           = go _ptlProjectId _ptlXgafv _ptlUploadProtocol
-              (Just _ptlPp)
               _ptlAccessToken
               _ptlUploadType
-              _ptlBearerToken
               _ptlCallback
               (Just AltJSON)
               containerBuilderService

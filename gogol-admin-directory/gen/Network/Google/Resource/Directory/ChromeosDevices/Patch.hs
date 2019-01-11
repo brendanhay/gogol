@@ -99,13 +99,13 @@ cdpPayload :: Lens' ChromeosDevicesPatch ChromeOSDevice
 cdpPayload
   = lens _cdpPayload (\ s a -> s{_cdpPayload = a})
 
--- | Immutable id of the Google Apps account
+-- | Immutable ID of the G Suite account
 cdpCustomerId :: Lens' ChromeosDevicesPatch Text
 cdpCustomerId
   = lens _cdpCustomerId
       (\ s a -> s{_cdpCustomerId = a})
 
--- | Immutable id of Chrome OS Device
+-- | Immutable ID of Chrome OS Device
 cdpDeviceId :: Lens' ChromeosDevicesPatch Text
 cdpDeviceId
   = lens _cdpDeviceId (\ s a -> s{_cdpDeviceId = a})

@@ -126,7 +126,13 @@ parseVersion x = first (mappend (Text.unpack x) . mappend " -> ") $
         <*> (alpha <|> beta <|> sandbox <|> pure Nothing)
 
     preface = A.takeWhile (/= '_') *> void (A.char '_') <|> pure ()
-    number  = A.takeWhile  (/= 'v') *> A.char 'v' *> A.double
+
+    protoVersionParser = do
+      n <- A.many1 A.digit
+      _ <- A.char 'p'
+      p <- A.many1 A.digit
+      return (read (n ++ "." ++ p) :: Double)
+    number  = A.takeWhile  (/= 'v') *> A.char 'v' *> (protoVersionParser <|> A.double)
 
     alpha = A.string "alpha"
          *> (Alpha <$> optional A.decimal <*> optional A.letter)
@@ -189,7 +195,7 @@ serviceImports s = Imports
     { tocImports    = [preludeNS]
     , typeImports   = sort [preludeNS, prodNS s, sumNS s]
     , prodImports   = sort [preludeNS, sumNS s]
-    , sumImports    = [preludeNS]
+    , sumImports    = [preludeSumNS]
     , actionImports = sort [preludeNS, typesNS s]
     }
 
@@ -201,6 +207,10 @@ sumNS   = (<> "Sum")     . typesNS
 
 preludeNS :: NS
 preludeNS = "Network.Google.Prelude"
+
+-- | hide some conflicting (unneeded) data types from Sum modules
+preludeSumNS :: NS
+preludeSumNS = "Network.Google.Prelude hiding (Bytes)"
 
 resourceNS, methodNS :: NS
 resourceNS = "Network.Google.Resource"

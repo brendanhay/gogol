@@ -20,8 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Marks line item(s) as shipped. This method can only be called for
--- non-multi-client accounts.
+-- Marks line item(s) as shipped.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.shiplineitems@.
 module Network.Google.Resource.Content.Orders.Shiplineitems
@@ -46,7 +45,7 @@ import           Network.Google.ShoppingContent.Types
 -- 'OrdersShiplineitems' request conforms to.
 type OrdersShiplineitemsResource =
      "content" :>
-       "v2" :>
+       "v2.1" :>
          Capture "merchantId" (Textual Word64) :>
            "orders" :>
              Capture "orderId" Text :>
@@ -55,8 +54,7 @@ type OrdersShiplineitemsResource =
                    ReqBody '[JSON] OrdersShipLineItemsRequest :>
                      Post '[JSON] OrdersShipLineItemsResponse
 
--- | Marks line item(s) as shipped. This method can only be called for
--- non-multi-client accounts.
+-- | Marks line item(s) as shipped.
 --
 -- /See:/ 'ordersShiplineitems' smart constructor.
 data OrdersShiplineitems = OrdersShiplineitems'
@@ -86,7 +84,8 @@ ordersShiplineitems pOsMerchantId_ pOsPayload_ pOsOrderId_ =
     , _osOrderId = pOsOrderId_
     }
 
--- | The ID of the managing account.
+-- | The ID of the account that manages the order. This cannot be a
+-- multi-client account.
 osMerchantId :: Lens' OrdersShiplineitems Word64
 osMerchantId
   = lens _osMerchantId (\ s a -> s{_osMerchantId = a})

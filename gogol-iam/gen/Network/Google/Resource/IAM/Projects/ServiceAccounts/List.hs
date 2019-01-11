@@ -22,7 +22,7 @@
 --
 -- Lists ServiceAccounts for a project.
 --
--- /See:/ <https://cloud.google.com/iam/ Google Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.list@.
+-- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.list@.
 module Network.Google.Resource.IAM.Projects.ServiceAccounts.List
     (
     -- * REST Resource
@@ -35,10 +35,8 @@ module Network.Google.Resource.IAM.Projects.ServiceAccounts.List
     -- * Request Lenses
     , psalXgafv
     , psalUploadProtocol
-    , psalPp
     , psalAccessToken
     , psalUploadType
-    , psalBearerToken
     , psalName
     , psalPageToken
     , psalPageSize
@@ -54,28 +52,24 @@ type ProjectsServiceAccountsListResource =
      "v1" :>
        Capture "name" Text :>
          "serviceAccounts" :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" (Textual Int32) :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] ListServiceAccountsResponse
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "pageSize" (Textual Int32) :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] ListServiceAccountsResponse
 
 -- | Lists ServiceAccounts for a project.
 --
 -- /See:/ 'projectsServiceAccountsList' smart constructor.
 data ProjectsServiceAccountsList = ProjectsServiceAccountsList'
-    { _psalXgafv          :: !(Maybe Text)
+    { _psalXgafv          :: !(Maybe Xgafv)
     , _psalUploadProtocol :: !(Maybe Text)
-    , _psalPp             :: !Bool
     , _psalAccessToken    :: !(Maybe Text)
     , _psalUploadType     :: !(Maybe Text)
-    , _psalBearerToken    :: !(Maybe Text)
     , _psalName           :: !Text
     , _psalPageToken      :: !(Maybe Text)
     , _psalPageSize       :: !(Maybe (Textual Int32))
@@ -90,13 +84,9 @@ data ProjectsServiceAccountsList = ProjectsServiceAccountsList'
 --
 -- * 'psalUploadProtocol'
 --
--- * 'psalPp'
---
 -- * 'psalAccessToken'
 --
 -- * 'psalUploadType'
---
--- * 'psalBearerToken'
 --
 -- * 'psalName'
 --
@@ -112,10 +102,8 @@ projectsServiceAccountsList pPsalName_ =
     ProjectsServiceAccountsList'
     { _psalXgafv = Nothing
     , _psalUploadProtocol = Nothing
-    , _psalPp = True
     , _psalAccessToken = Nothing
     , _psalUploadType = Nothing
-    , _psalBearerToken = Nothing
     , _psalName = pPsalName_
     , _psalPageToken = Nothing
     , _psalPageSize = Nothing
@@ -123,7 +111,7 @@ projectsServiceAccountsList pPsalName_ =
     }
 
 -- | V1 error format.
-psalXgafv :: Lens' ProjectsServiceAccountsList (Maybe Text)
+psalXgafv :: Lens' ProjectsServiceAccountsList (Maybe Xgafv)
 psalXgafv
   = lens _psalXgafv (\ s a -> s{_psalXgafv = a})
 
@@ -132,10 +120,6 @@ psalUploadProtocol :: Lens' ProjectsServiceAccountsList (Maybe Text)
 psalUploadProtocol
   = lens _psalUploadProtocol
       (\ s a -> s{_psalUploadProtocol = a})
-
--- | Pretty-print response.
-psalPp :: Lens' ProjectsServiceAccountsList Bool
-psalPp = lens _psalPp (\ s a -> s{_psalPp = a})
 
 -- | OAuth access token.
 psalAccessToken :: Lens' ProjectsServiceAccountsList (Maybe Text)
@@ -148,12 +132,6 @@ psalUploadType :: Lens' ProjectsServiceAccountsList (Maybe Text)
 psalUploadType
   = lens _psalUploadType
       (\ s a -> s{_psalUploadType = a})
-
--- | OAuth bearer token.
-psalBearerToken :: Lens' ProjectsServiceAccountsList (Maybe Text)
-psalBearerToken
-  = lens _psalBearerToken
-      (\ s a -> s{_psalBearerToken = a})
 
 -- | Required. The resource name of the project associated with the service
 -- accounts, such as \`projects\/my-project-123\`.
@@ -188,10 +166,8 @@ instance GoogleRequest ProjectsServiceAccountsList
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsServiceAccountsList'{..}
           = go _psalName _psalXgafv _psalUploadProtocol
-              (Just _psalPp)
               _psalAccessToken
               _psalUploadType
-              _psalBearerToken
               _psalPageToken
               _psalPageSize
               _psalCallback

@@ -20,8 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Registers a datafeed with your Merchant Center account. This method can
--- only be called for non-multi-client accounts.
+-- Registers a datafeed configuration with your Merchant Center account.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.datafeeds.insert@.
 module Network.Google.Resource.Content.Datafeeds.Insert
@@ -36,7 +35,6 @@ module Network.Google.Resource.Content.Datafeeds.Insert
     -- * Request Lenses
     , diMerchantId
     , diPayload
-    , diDryRun
     ) where
 
 import           Network.Google.Prelude
@@ -46,21 +44,18 @@ import           Network.Google.ShoppingContent.Types
 -- 'DatafeedsInsert' request conforms to.
 type DatafeedsInsertResource =
      "content" :>
-       "v2" :>
+       "v2.1" :>
          Capture "merchantId" (Textual Word64) :>
            "datafeeds" :>
-             QueryParam "dryRun" Bool :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] Datafeed :> Post '[JSON] Datafeed
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] Datafeed :> Post '[JSON] Datafeed
 
--- | Registers a datafeed with your Merchant Center account. This method can
--- only be called for non-multi-client accounts.
+-- | Registers a datafeed configuration with your Merchant Center account.
 --
 -- /See:/ 'datafeedsInsert' smart constructor.
 data DatafeedsInsert = DatafeedsInsert'
     { _diMerchantId :: !(Textual Word64)
     , _diPayload    :: !Datafeed
-    , _diDryRun     :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatafeedsInsert' with the minimum fields required to make a request.
@@ -70,8 +65,6 @@ data DatafeedsInsert = DatafeedsInsert'
 -- * 'diMerchantId'
 --
 -- * 'diPayload'
---
--- * 'diDryRun'
 datafeedsInsert
     :: Word64 -- ^ 'diMerchantId'
     -> Datafeed -- ^ 'diPayload'
@@ -80,9 +73,10 @@ datafeedsInsert pDiMerchantId_ pDiPayload_ =
     DatafeedsInsert'
     { _diMerchantId = _Coerce # pDiMerchantId_
     , _diPayload = pDiPayload_
-    , _diDryRun = Nothing
     }
 
+-- | The ID of the account that manages the datafeed. This account cannot be
+-- a multi-client account.
 diMerchantId :: Lens' DatafeedsInsert Word64
 diMerchantId
   = lens _diMerchantId (\ s a -> s{_diMerchantId = a})
@@ -93,17 +87,12 @@ diPayload :: Lens' DatafeedsInsert Datafeed
 diPayload
   = lens _diPayload (\ s a -> s{_diPayload = a})
 
--- | Flag to run the request in dry-run mode.
-diDryRun :: Lens' DatafeedsInsert (Maybe Bool)
-diDryRun = lens _diDryRun (\ s a -> s{_diDryRun = a})
-
 instance GoogleRequest DatafeedsInsert where
         type Rs DatafeedsInsert = Datafeed
         type Scopes DatafeedsInsert =
              '["https://www.googleapis.com/auth/content"]
         requestClient DatafeedsInsert'{..}
-          = go _diMerchantId _diDryRun (Just AltJSON)
-              _diPayload
+          = go _diMerchantId (Just AltJSON) _diPayload
               shoppingContentService
           where go
                   = buildClient

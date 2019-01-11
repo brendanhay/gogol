@@ -22,7 +22,7 @@
 --
 -- Retrieves an instance operation that has been performed on an instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.operations.get@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.operations.get@.
 module Network.Google.Resource.SQL.Operations.Get
     (
     -- * REST Resource

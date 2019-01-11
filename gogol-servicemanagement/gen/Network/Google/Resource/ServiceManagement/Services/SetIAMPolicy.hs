@@ -23,7 +23,7 @@
 -- Sets the access control policy on the specified resource. Replaces any
 -- existing policy.
 --
--- /See:/ <https://cloud.google.com/service-management/ Google Service Management API Reference> for @servicemanagement.services.setIamPolicy@.
+-- /See:/ <https://cloud.google.com/service-management/ Service Management API Reference> for @servicemanagement.services.setIamPolicy@.
 module Network.Google.Resource.ServiceManagement.Services.SetIAMPolicy
     (
     -- * REST Resource
@@ -36,11 +36,9 @@ module Network.Google.Resource.ServiceManagement.Services.SetIAMPolicy
     -- * Request Lenses
     , ssipXgafv
     , ssipUploadProtocol
-    , ssipPp
     , ssipAccessToken
     , ssipUploadType
     , ssipPayload
-    , ssipBearerToken
     , ssipResource
     , ssipCallback
     ) where
@@ -55,14 +53,12 @@ type ServicesSetIAMPolicyResource =
        CaptureMode "resource" "setIamPolicy" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] SetIAMPolicyRequest :>
-                           Post '[JSON] Policy
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] SetIAMPolicyRequest :>
+                       Post '[JSON] Policy
 
 -- | Sets the access control policy on the specified resource. Replaces any
 -- existing policy.
@@ -71,11 +67,9 @@ type ServicesSetIAMPolicyResource =
 data ServicesSetIAMPolicy = ServicesSetIAMPolicy'
     { _ssipXgafv          :: !(Maybe Xgafv)
     , _ssipUploadProtocol :: !(Maybe Text)
-    , _ssipPp             :: !Bool
     , _ssipAccessToken    :: !(Maybe Text)
     , _ssipUploadType     :: !(Maybe Text)
     , _ssipPayload        :: !SetIAMPolicyRequest
-    , _ssipBearerToken    :: !(Maybe Text)
     , _ssipResource       :: !Text
     , _ssipCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -88,15 +82,11 @@ data ServicesSetIAMPolicy = ServicesSetIAMPolicy'
 --
 -- * 'ssipUploadProtocol'
 --
--- * 'ssipPp'
---
 -- * 'ssipAccessToken'
 --
 -- * 'ssipUploadType'
 --
 -- * 'ssipPayload'
---
--- * 'ssipBearerToken'
 --
 -- * 'ssipResource'
 --
@@ -109,11 +99,9 @@ servicesSetIAMPolicy pSsipPayload_ pSsipResource_ =
     ServicesSetIAMPolicy'
     { _ssipXgafv = Nothing
     , _ssipUploadProtocol = Nothing
-    , _ssipPp = True
     , _ssipAccessToken = Nothing
     , _ssipUploadType = Nothing
     , _ssipPayload = pSsipPayload_
-    , _ssipBearerToken = Nothing
     , _ssipResource = pSsipResource_
     , _ssipCallback = Nothing
     }
@@ -128,10 +116,6 @@ ssipUploadProtocol :: Lens' ServicesSetIAMPolicy (Maybe Text)
 ssipUploadProtocol
   = lens _ssipUploadProtocol
       (\ s a -> s{_ssipUploadProtocol = a})
-
--- | Pretty-print response.
-ssipPp :: Lens' ServicesSetIAMPolicy Bool
-ssipPp = lens _ssipPp (\ s a -> s{_ssipPp = a})
 
 -- | OAuth access token.
 ssipAccessToken :: Lens' ServicesSetIAMPolicy (Maybe Text)
@@ -150,15 +134,8 @@ ssipPayload :: Lens' ServicesSetIAMPolicy SetIAMPolicyRequest
 ssipPayload
   = lens _ssipPayload (\ s a -> s{_ssipPayload = a})
 
--- | OAuth bearer token.
-ssipBearerToken :: Lens' ServicesSetIAMPolicy (Maybe Text)
-ssipBearerToken
-  = lens _ssipBearerToken
-      (\ s a -> s{_ssipBearerToken = a})
-
--- | REQUIRED: The resource for which the policy is being specified.
--- \`resource\` is usually specified as a path. For example, a Project
--- resource is specified as \`projects\/{project}\`.
+-- | REQUIRED: The resource for which the policy is being specified. See the
+-- operation documentation for the appropriate value for this field.
 ssipResource :: Lens' ServicesSetIAMPolicy Text
 ssipResource
   = lens _ssipResource (\ s a -> s{_ssipResource = a})
@@ -175,10 +152,8 @@ instance GoogleRequest ServicesSetIAMPolicy where
                "https://www.googleapis.com/auth/service.management"]
         requestClient ServicesSetIAMPolicy'{..}
           = go _ssipResource _ssipXgafv _ssipUploadProtocol
-              (Just _ssipPp)
               _ssipAccessToken
               _ssipUploadType
-              _ssipBearerToken
               _ssipCallback
               (Just AltJSON)
               _ssipPayload

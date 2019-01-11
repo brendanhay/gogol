@@ -215,6 +215,8 @@ instance GoogleRequest EventsInstances where
         type Rs EventsInstances = Events
         type Scopes EventsInstances =
              '["https://www.googleapis.com/auth/calendar",
+               "https://www.googleapis.com/auth/calendar.events",
+               "https://www.googleapis.com/auth/calendar.events.readonly",
                "https://www.googleapis.com/auth/calendar.readonly"]
         requestClient EventsInstances'{..}
           = go _eCalendarId _eEventId _eTimeMin _eShowDeleted

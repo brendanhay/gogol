@@ -21,11 +21,11 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Stops a running instance, shutting it down cleanly, and allows you to
--- restart the instance at a later time. Stopped instances do not incur
--- per-minute, virtual machine usage charges while they are stopped, but
--- any resources that the virtual machine is using, such as persistent
--- disks and static IP addresses, will continue to be charged until they
--- are deleted. For more information, see Stopping an instance.
+-- restart the instance at a later time. Stopped instances do not incur VM
+-- usage charges while they are stopped. However, resources that the VM is
+-- using, such as persistent disks and static IP addresses, will continue
+-- to be charged until they are deleted. For more information, see Stopping
+-- an instance.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instances.stop@.
 module Network.Google.Resource.Compute.Instances.Stop
@@ -38,6 +38,7 @@ module Network.Google.Resource.Compute.Instances.Stop
     , InstancesStop
 
     -- * Request Lenses
+    , isRequestId
     , isProject
     , isZone
     , isInstance
@@ -58,25 +59,29 @@ type InstancesStopResource =
                  "instances" :>
                    Capture "instance" Text :>
                      "stop" :>
-                       QueryParam "alt" AltJSON :> Post '[JSON] Operation
+                       QueryParam "requestId" Text :>
+                         QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | Stops a running instance, shutting it down cleanly, and allows you to
--- restart the instance at a later time. Stopped instances do not incur
--- per-minute, virtual machine usage charges while they are stopped, but
--- any resources that the virtual machine is using, such as persistent
--- disks and static IP addresses, will continue to be charged until they
--- are deleted. For more information, see Stopping an instance.
+-- restart the instance at a later time. Stopped instances do not incur VM
+-- usage charges while they are stopped. However, resources that the VM is
+-- using, such as persistent disks and static IP addresses, will continue
+-- to be charged until they are deleted. For more information, see Stopping
+-- an instance.
 --
 -- /See:/ 'instancesStop' smart constructor.
 data InstancesStop = InstancesStop'
-    { _isProject  :: !Text
-    , _isZone     :: !Text
-    , _isInstance :: !Text
+    { _isRequestId :: !(Maybe Text)
+    , _isProject   :: !Text
+    , _isZone      :: !Text
+    , _isInstance  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesStop' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'isRequestId'
 --
 -- * 'isProject'
 --
@@ -90,10 +95,25 @@ instancesStop
     -> InstancesStop
 instancesStop pIsProject_ pIsZone_ pIsInstance_ =
     InstancesStop'
-    { _isProject = pIsProject_
+    { _isRequestId = Nothing
+    , _isProject = pIsProject_
     , _isZone = pIsZone_
     , _isInstance = pIsInstance_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+isRequestId :: Lens' InstancesStop (Maybe Text)
+isRequestId
+  = lens _isRequestId (\ s a -> s{_isRequestId = a})
 
 -- | Project ID for this request.
 isProject :: Lens' InstancesStop Text
@@ -115,7 +135,8 @@ instance GoogleRequest InstancesStop where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient InstancesStop'{..}
-          = go _isProject _isZone _isInstance (Just AltJSON)
+          = go _isProject _isZone _isInstance _isRequestId
+              (Just AltJSON)
               computeService
           where go
                   = buildClient (Proxy :: Proxy InstancesStopResource)

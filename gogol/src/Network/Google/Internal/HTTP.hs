@@ -57,7 +57,7 @@ perform Env{..} x = catches go handlers
   where
     Request       {..} = _cliRequest
     ServiceConfig {..} = _cliService
-    Client        {..} = requestClient x
+    GClient       {..} = requestClient x
         & clientService %~ appEndo (getDual _envOverride)
 
     go = liftResourceT $ do

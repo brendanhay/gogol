@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Sets the service account on the instance.
+-- Sets the service account on the instance. For more information, read
+-- Changing the service account and access scopes for an instance.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instances.setServiceAccount@.
 module Network.Google.Resource.Compute.Instances.SetServiceAccount
@@ -33,6 +34,7 @@ module Network.Google.Resource.Compute.Instances.SetServiceAccount
     , InstancesSetServiceAccount
 
     -- * Request Lenses
+    , issaRequestId
     , issaProject
     , issaZone
     , issaPayload
@@ -54,23 +56,28 @@ type InstancesSetServiceAccountResource =
                  "instances" :>
                    Capture "instance" Text :>
                      "setServiceAccount" :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] InstancesSetServiceAccountRequest :>
-                           Post '[JSON] Operation
+                       QueryParam "requestId" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] InstancesSetServiceAccountRequest :>
+                             Post '[JSON] Operation
 
--- | Sets the service account on the instance.
+-- | Sets the service account on the instance. For more information, read
+-- Changing the service account and access scopes for an instance.
 --
 -- /See:/ 'instancesSetServiceAccount' smart constructor.
 data InstancesSetServiceAccount = InstancesSetServiceAccount'
-    { _issaProject  :: !Text
-    , _issaZone     :: !Text
-    , _issaPayload  :: !InstancesSetServiceAccountRequest
-    , _issaInstance :: !Text
+    { _issaRequestId :: !(Maybe Text)
+    , _issaProject   :: !Text
+    , _issaZone      :: !Text
+    , _issaPayload   :: !InstancesSetServiceAccountRequest
+    , _issaInstance  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesSetServiceAccount' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'issaRequestId'
 --
 -- * 'issaProject'
 --
@@ -87,11 +94,27 @@ instancesSetServiceAccount
     -> InstancesSetServiceAccount
 instancesSetServiceAccount pIssaProject_ pIssaZone_ pIssaPayload_ pIssaInstance_ =
     InstancesSetServiceAccount'
-    { _issaProject = pIssaProject_
+    { _issaRequestId = Nothing
+    , _issaProject = pIssaProject_
     , _issaZone = pIssaZone_
     , _issaPayload = pIssaPayload_
     , _issaInstance = pIssaInstance_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+issaRequestId :: Lens' InstancesSetServiceAccount (Maybe Text)
+issaRequestId
+  = lens _issaRequestId
+      (\ s a -> s{_issaRequestId = a})
 
 -- | Project ID for this request.
 issaProject :: Lens' InstancesSetServiceAccount Text
@@ -120,6 +143,7 @@ instance GoogleRequest InstancesSetServiceAccount
                "https://www.googleapis.com/auth/compute"]
         requestClient InstancesSetServiceAccount'{..}
           = go _issaProject _issaZone _issaInstance
+              _issaRequestId
               (Just AltJSON)
               _issaPayload
               computeService

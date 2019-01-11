@@ -16,7 +16,7 @@
 --
 module Network.Google.Mirror.Types.Sum where
 
-import           Network.Google.Prelude
+import           Network.Google.Prelude hiding (Bytes)
 
 -- | Controls the order in which timeline items are returned.
 data TimelineListOrderBy

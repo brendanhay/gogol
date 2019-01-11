@@ -36,10 +36,8 @@ module Network.Google.Resource.Logging.Folders.Sinks.Delete
     -- * Request Lenses
     , fsdXgafv
     , fsdUploadProtocol
-    , fsdPp
     , fsdAccessToken
     , fsdUploadType
-    , fsdBearerToken
     , fsdSinkName
     , fsdCallback
     ) where
@@ -54,12 +52,10 @@ type FoldersSinksDeleteResource =
        Capture "sinkName" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :> Delete '[JSON] Empty
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
 -- | Deletes a sink. If the sink has a unique writer_identity, then that
 -- service account is also deleted.
@@ -68,10 +64,8 @@ type FoldersSinksDeleteResource =
 data FoldersSinksDelete = FoldersSinksDelete'
     { _fsdXgafv          :: !(Maybe Xgafv)
     , _fsdUploadProtocol :: !(Maybe Text)
-    , _fsdPp             :: !Bool
     , _fsdAccessToken    :: !(Maybe Text)
     , _fsdUploadType     :: !(Maybe Text)
-    , _fsdBearerToken    :: !(Maybe Text)
     , _fsdSinkName       :: !Text
     , _fsdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -84,13 +78,9 @@ data FoldersSinksDelete = FoldersSinksDelete'
 --
 -- * 'fsdUploadProtocol'
 --
--- * 'fsdPp'
---
 -- * 'fsdAccessToken'
 --
 -- * 'fsdUploadType'
---
--- * 'fsdBearerToken'
 --
 -- * 'fsdSinkName'
 --
@@ -102,10 +92,8 @@ foldersSinksDelete pFsdSinkName_ =
     FoldersSinksDelete'
     { _fsdXgafv = Nothing
     , _fsdUploadProtocol = Nothing
-    , _fsdPp = True
     , _fsdAccessToken = Nothing
     , _fsdUploadType = Nothing
-    , _fsdBearerToken = Nothing
     , _fsdSinkName = pFsdSinkName_
     , _fsdCallback = Nothing
     }
@@ -120,10 +108,6 @@ fsdUploadProtocol
   = lens _fsdUploadProtocol
       (\ s a -> s{_fsdUploadProtocol = a})
 
--- | Pretty-print response.
-fsdPp :: Lens' FoldersSinksDelete Bool
-fsdPp = lens _fsdPp (\ s a -> s{_fsdPp = a})
-
 -- | OAuth access token.
 fsdAccessToken :: Lens' FoldersSinksDelete (Maybe Text)
 fsdAccessToken
@@ -136,19 +120,13 @@ fsdUploadType
   = lens _fsdUploadType
       (\ s a -> s{_fsdUploadType = a})
 
--- | OAuth bearer token.
-fsdBearerToken :: Lens' FoldersSinksDelete (Maybe Text)
-fsdBearerToken
-  = lens _fsdBearerToken
-      (\ s a -> s{_fsdBearerToken = a})
-
 -- | Required. The full resource name of the sink to delete, including the
 -- parent resource and the sink identifier:
 -- \"projects\/[PROJECT_ID]\/sinks\/[SINK_ID]\"
--- \"organizations\/[ORGANIZATION_ID]\/sinks\/[SINK_ID]\" It is an error if
--- the sink does not exist. Example:
--- \"projects\/my-project-id\/sinks\/my-sink-id\". It is an error if the
--- sink does not exist.
+-- \"organizations\/[ORGANIZATION_ID]\/sinks\/[SINK_ID]\"
+-- \"billingAccounts\/[BILLING_ACCOUNT_ID]\/sinks\/[SINK_ID]\"
+-- \"folders\/[FOLDER_ID]\/sinks\/[SINK_ID]\" Example:
+-- \"projects\/my-project-id\/sinks\/my-sink-id\".
 fsdSinkName :: Lens' FoldersSinksDelete Text
 fsdSinkName
   = lens _fsdSinkName (\ s a -> s{_fsdSinkName = a})
@@ -165,10 +143,8 @@ instance GoogleRequest FoldersSinksDelete where
                "https://www.googleapis.com/auth/logging.admin"]
         requestClient FoldersSinksDelete'{..}
           = go _fsdSinkName _fsdXgafv _fsdUploadProtocol
-              (Just _fsdPp)
               _fsdAccessToken
               _fsdUploadType
-              _fsdBearerToken
               _fsdCallback
               (Just AltJSON)
               loggingService

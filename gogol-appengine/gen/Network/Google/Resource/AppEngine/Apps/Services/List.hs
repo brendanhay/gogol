@@ -22,7 +22,7 @@
 --
 -- Lists all the services in the application.
 --
--- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ Google App Engine Admin API Reference> for @appengine.apps.services.list@.
+-- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ App Engine Admin API Reference> for @appengine.apps.services.list@.
 module Network.Google.Resource.AppEngine.Apps.Services.List
     (
     -- * REST Resource
@@ -35,10 +35,8 @@ module Network.Google.Resource.AppEngine.Apps.Services.List
     -- * Request Lenses
     , aslXgafv
     , aslUploadProtocol
-    , aslPp
     , aslAccessToken
     , aslUploadType
-    , aslBearerToken
     , aslAppsId
     , aslPageToken
     , aslPageSize
@@ -55,28 +53,24 @@ type AppsServicesListResource =
        "apps" :>
          Capture "appsId" Text :>
            "services" :>
-             QueryParam "$.xgafv" Text :>
+             QueryParam "$.xgafv" Xgafv :>
                QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "pageSize" (Textual Int32) :>
-                             QueryParam "callback" Text :>
-                               QueryParam "alt" AltJSON :>
-                                 Get '[JSON] ListServicesResponse
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "pageSize" (Textual Int32) :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] ListServicesResponse
 
 -- | Lists all the services in the application.
 --
 -- /See:/ 'appsServicesList' smart constructor.
 data AppsServicesList = AppsServicesList'
-    { _aslXgafv          :: !(Maybe Text)
+    { _aslXgafv          :: !(Maybe Xgafv)
     , _aslUploadProtocol :: !(Maybe Text)
-    , _aslPp             :: !Bool
     , _aslAccessToken    :: !(Maybe Text)
     , _aslUploadType     :: !(Maybe Text)
-    , _aslBearerToken    :: !(Maybe Text)
     , _aslAppsId         :: !Text
     , _aslPageToken      :: !(Maybe Text)
     , _aslPageSize       :: !(Maybe (Textual Int32))
@@ -91,13 +85,9 @@ data AppsServicesList = AppsServicesList'
 --
 -- * 'aslUploadProtocol'
 --
--- * 'aslPp'
---
 -- * 'aslAccessToken'
 --
 -- * 'aslUploadType'
---
--- * 'aslBearerToken'
 --
 -- * 'aslAppsId'
 --
@@ -113,10 +103,8 @@ appsServicesList pAslAppsId_ =
     AppsServicesList'
     { _aslXgafv = Nothing
     , _aslUploadProtocol = Nothing
-    , _aslPp = True
     , _aslAccessToken = Nothing
     , _aslUploadType = Nothing
-    , _aslBearerToken = Nothing
     , _aslAppsId = pAslAppsId_
     , _aslPageToken = Nothing
     , _aslPageSize = Nothing
@@ -124,7 +112,7 @@ appsServicesList pAslAppsId_ =
     }
 
 -- | V1 error format.
-aslXgafv :: Lens' AppsServicesList (Maybe Text)
+aslXgafv :: Lens' AppsServicesList (Maybe Xgafv)
 aslXgafv = lens _aslXgafv (\ s a -> s{_aslXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -132,10 +120,6 @@ aslUploadProtocol :: Lens' AppsServicesList (Maybe Text)
 aslUploadProtocol
   = lens _aslUploadProtocol
       (\ s a -> s{_aslUploadProtocol = a})
-
--- | Pretty-print response.
-aslPp :: Lens' AppsServicesList Bool
-aslPp = lens _aslPp (\ s a -> s{_aslPp = a})
 
 -- | OAuth access token.
 aslAccessToken :: Lens' AppsServicesList (Maybe Text)
@@ -148,12 +132,6 @@ aslUploadType :: Lens' AppsServicesList (Maybe Text)
 aslUploadType
   = lens _aslUploadType
       (\ s a -> s{_aslUploadType = a})
-
--- | OAuth bearer token.
-aslBearerToken :: Lens' AppsServicesList (Maybe Text)
-aslBearerToken
-  = lens _aslBearerToken
-      (\ s a -> s{_aslBearerToken = a})
 
 -- | Part of \`parent\`. Name of the parent Application resource. Example:
 -- apps\/myapp.
@@ -185,10 +163,8 @@ instance GoogleRequest AppsServicesList where
                "https://www.googleapis.com/auth/cloud-platform.read-only"]
         requestClient AppsServicesList'{..}
           = go _aslAppsId _aslXgafv _aslUploadProtocol
-              (Just _aslPp)
               _aslAccessToken
               _aslUploadType
-              _aslBearerToken
               _aslPageToken
               _aslPageSize
               _aslCallback

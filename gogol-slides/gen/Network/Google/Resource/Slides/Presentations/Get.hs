@@ -35,11 +35,9 @@ module Network.Google.Resource.Slides.Presentations.Get
     -- * Request Lenses
     , pgXgafv
     , pgUploadProtocol
-    , pgPp
     , pgAccessToken
     , pgUploadType
     , pgPresentationId
-    , pgBearerToken
     , pgCallback
     ) where
 
@@ -54,12 +52,10 @@ type PresentationsGetResource =
          Capture "presentationId" Text :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] Presentation
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] Presentation
 
 -- | Gets the latest version of the specified presentation.
 --
@@ -67,11 +63,9 @@ type PresentationsGetResource =
 data PresentationsGet = PresentationsGet'
     { _pgXgafv          :: !(Maybe Xgafv)
     , _pgUploadProtocol :: !(Maybe Text)
-    , _pgPp             :: !Bool
     , _pgAccessToken    :: !(Maybe Text)
     , _pgUploadType     :: !(Maybe Text)
     , _pgPresentationId :: !Text
-    , _pgBearerToken    :: !(Maybe Text)
     , _pgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -83,15 +77,11 @@ data PresentationsGet = PresentationsGet'
 --
 -- * 'pgUploadProtocol'
 --
--- * 'pgPp'
---
 -- * 'pgAccessToken'
 --
 -- * 'pgUploadType'
 --
 -- * 'pgPresentationId'
---
--- * 'pgBearerToken'
 --
 -- * 'pgCallback'
 presentationsGet
@@ -101,11 +91,9 @@ presentationsGet pPgPresentationId_ =
     PresentationsGet'
     { _pgXgafv = Nothing
     , _pgUploadProtocol = Nothing
-    , _pgPp = True
     , _pgAccessToken = Nothing
     , _pgUploadType = Nothing
     , _pgPresentationId = pPgPresentationId_
-    , _pgBearerToken = Nothing
     , _pgCallback = Nothing
     }
 
@@ -118,10 +106,6 @@ pgUploadProtocol :: Lens' PresentationsGet (Maybe Text)
 pgUploadProtocol
   = lens _pgUploadProtocol
       (\ s a -> s{_pgUploadProtocol = a})
-
--- | Pretty-print response.
-pgPp :: Lens' PresentationsGet Bool
-pgPp = lens _pgPp (\ s a -> s{_pgPp = a})
 
 -- | OAuth access token.
 pgAccessToken :: Lens' PresentationsGet (Maybe Text)
@@ -140,12 +124,6 @@ pgPresentationId
   = lens _pgPresentationId
       (\ s a -> s{_pgPresentationId = a})
 
--- | OAuth bearer token.
-pgBearerToken :: Lens' PresentationsGet (Maybe Text)
-pgBearerToken
-  = lens _pgBearerToken
-      (\ s a -> s{_pgBearerToken = a})
-
 -- | JSONP
 pgCallback :: Lens' PresentationsGet (Maybe Text)
 pgCallback
@@ -155,15 +133,14 @@ instance GoogleRequest PresentationsGet where
         type Rs PresentationsGet = Presentation
         type Scopes PresentationsGet =
              '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file",
                "https://www.googleapis.com/auth/drive.readonly",
                "https://www.googleapis.com/auth/presentations",
                "https://www.googleapis.com/auth/presentations.readonly"]
         requestClient PresentationsGet'{..}
           = go _pgPresentationId _pgXgafv _pgUploadProtocol
-              (Just _pgPp)
               _pgAccessToken
               _pgUploadType
-              _pgBearerToken
               _pgCallback
               (Just AltJSON)
               slidesService

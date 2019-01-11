@@ -48,12 +48,10 @@ module Network.Google.Resource.Classroom.Courses.CourseWork.Patch
     , ccwpXgafv
     , ccwpUploadProtocol
     , ccwpUpdateMask
-    , ccwpPp
     , ccwpCourseId
     , ccwpAccessToken
     , ccwpUploadType
     , ccwpPayload
-    , ccwpBearerToken
     , ccwpId
     , ccwpCallback
     ) where
@@ -69,17 +67,15 @@ type CoursesCourseWorkPatchResource =
          Capture "courseId" Text :>
            "courseWork" :>
              Capture "id" Text :>
-               QueryParam "$.xgafv" Text :>
+               QueryParam "$.xgafv" Xgafv :>
                  QueryParam "upload_protocol" Text :>
-                   QueryParam "updateMask" Text :>
-                     QueryParam "pp" Bool :>
-                       QueryParam "access_token" Text :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "bearer_token" Text :>
-                             QueryParam "callback" Text :>
-                               QueryParam "alt" AltJSON :>
-                                 ReqBody '[JSON] CourseWork :>
-                                   Patch '[JSON] CourseWork
+                   QueryParam "updateMask" GFieldMask :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] CourseWork :>
+                               Patch '[JSON] CourseWork
 
 -- | Updates one or more fields of a course work. See
 -- google.classroom.v1.CourseWork for details of which fields may be
@@ -97,15 +93,13 @@ type CoursesCourseWorkPatchResource =
 --
 -- /See:/ 'coursesCourseWorkPatch' smart constructor.
 data CoursesCourseWorkPatch = CoursesCourseWorkPatch'
-    { _ccwpXgafv          :: !(Maybe Text)
+    { _ccwpXgafv          :: !(Maybe Xgafv)
     , _ccwpUploadProtocol :: !(Maybe Text)
-    , _ccwpUpdateMask     :: !(Maybe Text)
-    , _ccwpPp             :: !Bool
+    , _ccwpUpdateMask     :: !(Maybe GFieldMask)
     , _ccwpCourseId       :: !Text
     , _ccwpAccessToken    :: !(Maybe Text)
     , _ccwpUploadType     :: !(Maybe Text)
     , _ccwpPayload        :: !CourseWork
-    , _ccwpBearerToken    :: !(Maybe Text)
     , _ccwpId             :: !Text
     , _ccwpCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -120,8 +114,6 @@ data CoursesCourseWorkPatch = CoursesCourseWorkPatch'
 --
 -- * 'ccwpUpdateMask'
 --
--- * 'ccwpPp'
---
 -- * 'ccwpCourseId'
 --
 -- * 'ccwpAccessToken'
@@ -129,8 +121,6 @@ data CoursesCourseWorkPatch = CoursesCourseWorkPatch'
 -- * 'ccwpUploadType'
 --
 -- * 'ccwpPayload'
---
--- * 'ccwpBearerToken'
 --
 -- * 'ccwpId'
 --
@@ -145,18 +135,16 @@ coursesCourseWorkPatch pCcwpCourseId_ pCcwpPayload_ pCcwpId_ =
     { _ccwpXgafv = Nothing
     , _ccwpUploadProtocol = Nothing
     , _ccwpUpdateMask = Nothing
-    , _ccwpPp = True
     , _ccwpCourseId = pCcwpCourseId_
     , _ccwpAccessToken = Nothing
     , _ccwpUploadType = Nothing
     , _ccwpPayload = pCcwpPayload_
-    , _ccwpBearerToken = Nothing
     , _ccwpId = pCcwpId_
     , _ccwpCallback = Nothing
     }
 
 -- | V1 error format.
-ccwpXgafv :: Lens' CoursesCourseWorkPatch (Maybe Text)
+ccwpXgafv :: Lens' CoursesCourseWorkPatch (Maybe Xgafv)
 ccwpXgafv
   = lens _ccwpXgafv (\ s a -> s{_ccwpXgafv = a})
 
@@ -174,15 +162,11 @@ ccwpUploadProtocol
 -- and not set in the CourseWork object, an \`INVALID_ARGUMENT\` error will
 -- be returned. The following fields may be specified by teachers: *
 -- \`title\` * \`description\` * \`state\` * \`due_date\` * \`due_time\` *
--- \`max_points\` * \`submission_modification_mode\`
-ccwpUpdateMask :: Lens' CoursesCourseWorkPatch (Maybe Text)
+-- \`max_points\` * \`scheduled_time\` * \`submission_modification_mode\`
+ccwpUpdateMask :: Lens' CoursesCourseWorkPatch (Maybe GFieldMask)
 ccwpUpdateMask
   = lens _ccwpUpdateMask
       (\ s a -> s{_ccwpUpdateMask = a})
-
--- | Pretty-print response.
-ccwpPp :: Lens' CoursesCourseWorkPatch Bool
-ccwpPp = lens _ccwpPp (\ s a -> s{_ccwpPp = a})
 
 -- | Identifier of the course. This identifier can be either the
 -- Classroom-assigned identifier or an alias.
@@ -207,12 +191,6 @@ ccwpPayload :: Lens' CoursesCourseWorkPatch CourseWork
 ccwpPayload
   = lens _ccwpPayload (\ s a -> s{_ccwpPayload = a})
 
--- | OAuth bearer token.
-ccwpBearerToken :: Lens' CoursesCourseWorkPatch (Maybe Text)
-ccwpBearerToken
-  = lens _ccwpBearerToken
-      (\ s a -> s{_ccwpBearerToken = a})
-
 -- | Identifier of the course work.
 ccwpId :: Lens' CoursesCourseWorkPatch Text
 ccwpId = lens _ccwpId (\ s a -> s{_ccwpId = a})
@@ -230,10 +208,8 @@ instance GoogleRequest CoursesCourseWorkPatch where
           = go _ccwpCourseId _ccwpId _ccwpXgafv
               _ccwpUploadProtocol
               _ccwpUpdateMask
-              (Just _ccwpPp)
               _ccwpAccessToken
               _ccwpUploadType
-              _ccwpBearerToken
               _ccwpCallback
               (Just AltJSON)
               _ccwpPayload

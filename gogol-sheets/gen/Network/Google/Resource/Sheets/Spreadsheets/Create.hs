@@ -35,11 +35,9 @@ module Network.Google.Resource.Sheets.Spreadsheets.Create
     -- * Request Lenses
     , scXgafv
     , scUploadProtocol
-    , scPp
     , scAccessToken
     , scUploadType
     , scPayload
-    , scBearerToken
     , scCallback
     ) where
 
@@ -53,14 +51,12 @@ type SpreadsheetsCreateResource =
        "spreadsheets" :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Spreadsheet :>
-                           Post '[JSON] Spreadsheet
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Spreadsheet :>
+                       Post '[JSON] Spreadsheet
 
 -- | Creates a spreadsheet, returning the newly created spreadsheet.
 --
@@ -68,11 +64,9 @@ type SpreadsheetsCreateResource =
 data SpreadsheetsCreate = SpreadsheetsCreate'
     { _scXgafv          :: !(Maybe Xgafv)
     , _scUploadProtocol :: !(Maybe Text)
-    , _scPp             :: !Bool
     , _scAccessToken    :: !(Maybe Text)
     , _scUploadType     :: !(Maybe Text)
     , _scPayload        :: !Spreadsheet
-    , _scBearerToken    :: !(Maybe Text)
     , _scCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -84,15 +78,11 @@ data SpreadsheetsCreate = SpreadsheetsCreate'
 --
 -- * 'scUploadProtocol'
 --
--- * 'scPp'
---
 -- * 'scAccessToken'
 --
 -- * 'scUploadType'
 --
 -- * 'scPayload'
---
--- * 'scBearerToken'
 --
 -- * 'scCallback'
 spreadsheetsCreate
@@ -102,11 +92,9 @@ spreadsheetsCreate pScPayload_ =
     SpreadsheetsCreate'
     { _scXgafv = Nothing
     , _scUploadProtocol = Nothing
-    , _scPp = True
     , _scAccessToken = Nothing
     , _scUploadType = Nothing
     , _scPayload = pScPayload_
-    , _scBearerToken = Nothing
     , _scCallback = Nothing
     }
 
@@ -119,10 +107,6 @@ scUploadProtocol :: Lens' SpreadsheetsCreate (Maybe Text)
 scUploadProtocol
   = lens _scUploadProtocol
       (\ s a -> s{_scUploadProtocol = a})
-
--- | Pretty-print response.
-scPp :: Lens' SpreadsheetsCreate Bool
-scPp = lens _scPp (\ s a -> s{_scPp = a})
 
 -- | OAuth access token.
 scAccessToken :: Lens' SpreadsheetsCreate (Maybe Text)
@@ -140,12 +124,6 @@ scPayload :: Lens' SpreadsheetsCreate Spreadsheet
 scPayload
   = lens _scPayload (\ s a -> s{_scPayload = a})
 
--- | OAuth bearer token.
-scBearerToken :: Lens' SpreadsheetsCreate (Maybe Text)
-scBearerToken
-  = lens _scBearerToken
-      (\ s a -> s{_scBearerToken = a})
-
 -- | JSONP
 scCallback :: Lens' SpreadsheetsCreate (Maybe Text)
 scCallback
@@ -155,12 +133,11 @@ instance GoogleRequest SpreadsheetsCreate where
         type Rs SpreadsheetsCreate = Spreadsheet
         type Scopes SpreadsheetsCreate =
              '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file",
                "https://www.googleapis.com/auth/spreadsheets"]
         requestClient SpreadsheetsCreate'{..}
-          = go _scXgafv _scUploadProtocol (Just _scPp)
-              _scAccessToken
+          = go _scXgafv _scUploadProtocol _scAccessToken
               _scUploadType
-              _scBearerToken
               _scCallback
               (Just AltJSON)
               _scPayload

@@ -22,7 +22,7 @@
 --
 -- Gets the resource representation for a job in a project.
 --
--- /See:/ <https://cloud.google.com/dataproc/ Google Cloud Dataproc API Reference> for @dataproc.projects.regions.jobs.get@.
+-- /See:/ <https://cloud.google.com/dataproc/ Cloud Dataproc API Reference> for @dataproc.projects.regions.jobs.get@.
 module Network.Google.Resource.Dataproc.Projects.Regions.Jobs.Get
     (
     -- * REST Resource
@@ -36,10 +36,8 @@ module Network.Google.Resource.Dataproc.Projects.Regions.Jobs.Get
     , prjgXgafv
     , prjgJobId
     , prjgUploadProtocol
-    , prjgPp
     , prjgAccessToken
     , prjgUploadType
-    , prjgBearerToken
     , prjgRegion
     , prjgProjectId
     , prjgCallback
@@ -58,26 +56,22 @@ type ProjectsRegionsJobsGetResource =
              Capture "region" Text :>
                "jobs" :>
                  Capture "jobId" Text :>
-                   QueryParam "$.xgafv" Text :>
+                   QueryParam "$.xgafv" Xgafv :>
                      QueryParam "upload_protocol" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "access_token" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "bearer_token" Text :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" AltJSON :> Get '[JSON] Job
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :> Get '[JSON] Job
 
 -- | Gets the resource representation for a job in a project.
 --
 -- /See:/ 'projectsRegionsJobsGet' smart constructor.
 data ProjectsRegionsJobsGet = ProjectsRegionsJobsGet'
-    { _prjgXgafv          :: !(Maybe Text)
+    { _prjgXgafv          :: !(Maybe Xgafv)
     , _prjgJobId          :: !Text
     , _prjgUploadProtocol :: !(Maybe Text)
-    , _prjgPp             :: !Bool
     , _prjgAccessToken    :: !(Maybe Text)
     , _prjgUploadType     :: !(Maybe Text)
-    , _prjgBearerToken    :: !(Maybe Text)
     , _prjgRegion         :: !Text
     , _prjgProjectId      :: !Text
     , _prjgCallback       :: !(Maybe Text)
@@ -93,13 +87,9 @@ data ProjectsRegionsJobsGet = ProjectsRegionsJobsGet'
 --
 -- * 'prjgUploadProtocol'
 --
--- * 'prjgPp'
---
 -- * 'prjgAccessToken'
 --
 -- * 'prjgUploadType'
---
--- * 'prjgBearerToken'
 --
 -- * 'prjgRegion'
 --
@@ -116,21 +106,19 @@ projectsRegionsJobsGet pPrjgJobId_ pPrjgRegion_ pPrjgProjectId_ =
     { _prjgXgafv = Nothing
     , _prjgJobId = pPrjgJobId_
     , _prjgUploadProtocol = Nothing
-    , _prjgPp = True
     , _prjgAccessToken = Nothing
     , _prjgUploadType = Nothing
-    , _prjgBearerToken = Nothing
     , _prjgRegion = pPrjgRegion_
     , _prjgProjectId = pPrjgProjectId_
     , _prjgCallback = Nothing
     }
 
 -- | V1 error format.
-prjgXgafv :: Lens' ProjectsRegionsJobsGet (Maybe Text)
+prjgXgafv :: Lens' ProjectsRegionsJobsGet (Maybe Xgafv)
 prjgXgafv
   = lens _prjgXgafv (\ s a -> s{_prjgXgafv = a})
 
--- | [Required] The job ID.
+-- | Required. The job ID.
 prjgJobId :: Lens' ProjectsRegionsJobsGet Text
 prjgJobId
   = lens _prjgJobId (\ s a -> s{_prjgJobId = a})
@@ -140,10 +128,6 @@ prjgUploadProtocol :: Lens' ProjectsRegionsJobsGet (Maybe Text)
 prjgUploadProtocol
   = lens _prjgUploadProtocol
       (\ s a -> s{_prjgUploadProtocol = a})
-
--- | Pretty-print response.
-prjgPp :: Lens' ProjectsRegionsJobsGet Bool
-prjgPp = lens _prjgPp (\ s a -> s{_prjgPp = a})
 
 -- | OAuth access token.
 prjgAccessToken :: Lens' ProjectsRegionsJobsGet (Maybe Text)
@@ -157,18 +141,12 @@ prjgUploadType
   = lens _prjgUploadType
       (\ s a -> s{_prjgUploadType = a})
 
--- | OAuth bearer token.
-prjgBearerToken :: Lens' ProjectsRegionsJobsGet (Maybe Text)
-prjgBearerToken
-  = lens _prjgBearerToken
-      (\ s a -> s{_prjgBearerToken = a})
-
--- | [Required] The Cloud Dataproc region in which to handle the request.
+-- | Required. The Cloud Dataproc region in which to handle the request.
 prjgRegion :: Lens' ProjectsRegionsJobsGet Text
 prjgRegion
   = lens _prjgRegion (\ s a -> s{_prjgRegion = a})
 
--- | [Required] The ID of the Google Cloud Platform project that the job
+-- | Required. The ID of the Google Cloud Platform project that the job
 -- belongs to.
 prjgProjectId :: Lens' ProjectsRegionsJobsGet Text
 prjgProjectId
@@ -187,10 +165,8 @@ instance GoogleRequest ProjectsRegionsJobsGet where
         requestClient ProjectsRegionsJobsGet'{..}
           = go _prjgProjectId _prjgRegion _prjgJobId _prjgXgafv
               _prjgUploadProtocol
-              (Just _prjgPp)
               _prjgAccessToken
               _prjgUploadType
-              _prjgBearerToken
               _prjgCallback
               (Just AltJSON)
               dataprocService

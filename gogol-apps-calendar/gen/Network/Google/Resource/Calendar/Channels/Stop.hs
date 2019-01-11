@@ -78,7 +78,10 @@ instance GoogleRequest ChannelsStop where
         type Rs ChannelsStop = ()
         type Scopes ChannelsStop =
              '["https://www.googleapis.com/auth/calendar",
-               "https://www.googleapis.com/auth/calendar.readonly"]
+               "https://www.googleapis.com/auth/calendar.events",
+               "https://www.googleapis.com/auth/calendar.events.readonly",
+               "https://www.googleapis.com/auth/calendar.readonly",
+               "https://www.googleapis.com/auth/calendar.settings.readonly"]
         requestClient ChannelsStop'{..}
           = go (Just AltJSON) _csPayload appsCalendarService
           where go

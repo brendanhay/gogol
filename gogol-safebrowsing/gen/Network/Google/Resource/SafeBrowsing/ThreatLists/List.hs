@@ -22,7 +22,7 @@
 --
 -- Lists the Safe Browsing threat lists available for download.
 --
--- /See:/ <https://developers.google.com/safe-browsing/ Safe Browsing APIs Reference> for @safebrowsing.threatLists.list@.
+-- /See:/ <https://developers.google.com/safe-browsing/ Safe Browsing API Reference> for @safebrowsing.threatLists.list@.
 module Network.Google.Resource.SafeBrowsing.ThreatLists.List
     (
     -- * REST Resource
@@ -35,10 +35,8 @@ module Network.Google.Resource.SafeBrowsing.ThreatLists.List
     -- * Request Lenses
     , tllXgafv
     , tllUploadProtocol
-    , tllPp
     , tllAccessToken
     , tllUploadType
-    , tllBearerToken
     , tllCallback
     ) where
 
@@ -50,26 +48,22 @@ import           Network.Google.SafeBrowsing.Types
 type ThreatListsListResource =
      "v4" :>
        "threatLists" :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] ListThreatListsResponse
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] ListThreatListsResponse
 
 -- | Lists the Safe Browsing threat lists available for download.
 --
 -- /See:/ 'threatListsList' smart constructor.
 data ThreatListsList = ThreatListsList'
-    { _tllXgafv          :: !(Maybe Text)
+    { _tllXgafv          :: !(Maybe Xgafv)
     , _tllUploadProtocol :: !(Maybe Text)
-    , _tllPp             :: !Bool
     , _tllAccessToken    :: !(Maybe Text)
     , _tllUploadType     :: !(Maybe Text)
-    , _tllBearerToken    :: !(Maybe Text)
     , _tllCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -81,13 +75,9 @@ data ThreatListsList = ThreatListsList'
 --
 -- * 'tllUploadProtocol'
 --
--- * 'tllPp'
---
 -- * 'tllAccessToken'
 --
 -- * 'tllUploadType'
---
--- * 'tllBearerToken'
 --
 -- * 'tllCallback'
 threatListsList
@@ -96,15 +86,13 @@ threatListsList =
     ThreatListsList'
     { _tllXgafv = Nothing
     , _tllUploadProtocol = Nothing
-    , _tllPp = True
     , _tllAccessToken = Nothing
     , _tllUploadType = Nothing
-    , _tllBearerToken = Nothing
     , _tllCallback = Nothing
     }
 
 -- | V1 error format.
-tllXgafv :: Lens' ThreatListsList (Maybe Text)
+tllXgafv :: Lens' ThreatListsList (Maybe Xgafv)
 tllXgafv = lens _tllXgafv (\ s a -> s{_tllXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -112,10 +100,6 @@ tllUploadProtocol :: Lens' ThreatListsList (Maybe Text)
 tllUploadProtocol
   = lens _tllUploadProtocol
       (\ s a -> s{_tllUploadProtocol = a})
-
--- | Pretty-print response.
-tllPp :: Lens' ThreatListsList Bool
-tllPp = lens _tllPp (\ s a -> s{_tllPp = a})
 
 -- | OAuth access token.
 tllAccessToken :: Lens' ThreatListsList (Maybe Text)
@@ -129,12 +113,6 @@ tllUploadType
   = lens _tllUploadType
       (\ s a -> s{_tllUploadType = a})
 
--- | OAuth bearer token.
-tllBearerToken :: Lens' ThreatListsList (Maybe Text)
-tllBearerToken
-  = lens _tllBearerToken
-      (\ s a -> s{_tllBearerToken = a})
-
 -- | JSONP
 tllCallback :: Lens' ThreatListsList (Maybe Text)
 tllCallback
@@ -144,10 +122,8 @@ instance GoogleRequest ThreatListsList where
         type Rs ThreatListsList = ListThreatListsResponse
         type Scopes ThreatListsList = '[]
         requestClient ThreatListsList'{..}
-          = go _tllXgafv _tllUploadProtocol (Just _tllPp)
-              _tllAccessToken
+          = go _tllXgafv _tllUploadProtocol _tllAccessToken
               _tllUploadType
-              _tllBearerToken
               _tllCallback
               (Just AltJSON)
               safeBrowsingService

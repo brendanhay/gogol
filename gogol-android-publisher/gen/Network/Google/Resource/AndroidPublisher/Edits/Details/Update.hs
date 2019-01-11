@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'EditsDetailsUpdate' request conforms to.
 type EditsDetailsUpdateResource =
      "androidpublisher" :>
-       "v2" :>
+       "v3" :>
          "applications" :>
            Capture "packageName" Text :>
              "edits" :>

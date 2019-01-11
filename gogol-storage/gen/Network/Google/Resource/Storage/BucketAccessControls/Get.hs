@@ -34,6 +34,7 @@ module Network.Google.Resource.Storage.BucketAccessControls.Get
 
     -- * Request Lenses
     , bacgBucket
+    , bacgUserProject
     , bacgEntity
     ) where
 
@@ -49,15 +50,17 @@ type BucketAccessControlsGetResource =
            Capture "bucket" Text :>
              "acl" :>
                Capture "entity" Text :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] BucketAccessControl
+                 QueryParam "userProject" Text :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] BucketAccessControl
 
 -- | Returns the ACL entry for the specified entity on the specified bucket.
 --
 -- /See:/ 'bucketAccessControlsGet' smart constructor.
 data BucketAccessControlsGet = BucketAccessControlsGet'
-    { _bacgBucket :: !Text
-    , _bacgEntity :: !Text
+    { _bacgBucket      :: !Text
+    , _bacgUserProject :: !(Maybe Text)
+    , _bacgEntity      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketAccessControlsGet' with the minimum fields required to make a request.
@@ -65,6 +68,8 @@ data BucketAccessControlsGet = BucketAccessControlsGet'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'bacgBucket'
+--
+-- * 'bacgUserProject'
 --
 -- * 'bacgEntity'
 bucketAccessControlsGet
@@ -74,6 +79,7 @@ bucketAccessControlsGet
 bucketAccessControlsGet pBacgBucket_ pBacgEntity_ =
     BucketAccessControlsGet'
     { _bacgBucket = pBacgBucket_
+    , _bacgUserProject = Nothing
     , _bacgEntity = pBacgEntity_
     }
 
@@ -81,6 +87,13 @@ bucketAccessControlsGet pBacgBucket_ pBacgEntity_ =
 bacgBucket :: Lens' BucketAccessControlsGet Text
 bacgBucket
   = lens _bacgBucket (\ s a -> s{_bacgBucket = a})
+
+-- | The project to be billed for this request. Required for Requester Pays
+-- buckets.
+bacgUserProject :: Lens' BucketAccessControlsGet (Maybe Text)
+bacgUserProject
+  = lens _bacgUserProject
+      (\ s a -> s{_bacgUserProject = a})
 
 -- | The entity holding the permission. Can be user-userId,
 -- user-emailAddress, group-groupId, group-emailAddress, allUsers, or
@@ -95,7 +108,8 @@ instance GoogleRequest BucketAccessControlsGet where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/devstorage.full_control"]
         requestClient BucketAccessControlsGet'{..}
-          = go _bacgBucket _bacgEntity (Just AltJSON)
+          = go _bacgBucket _bacgEntity _bacgUserProject
+              (Just AltJSON)
               storageService
           where go
                   = buildClient

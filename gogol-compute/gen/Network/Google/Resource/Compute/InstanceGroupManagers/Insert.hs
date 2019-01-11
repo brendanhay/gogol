@@ -21,12 +21,13 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Creates a managed instance group using the information that you specify
--- in the request. After the group is created, it schedules an action to
--- create instances in the group using the specified instance template.
--- This operation is marked as DONE when the group is created even if the
--- instances in the group have not yet been created. You must separately
--- verify the status of the individual instances with the
--- listmanagedinstances method.
+-- in the request. After the group is created, instances in the group are
+-- created using the specified instance template. This operation is marked
+-- as DONE when the group is created even if the instances in the group
+-- have not yet been created. You must separately verify the status of the
+-- individual instances with the listmanagedinstances method. A managed
+-- instance group can have up to 1000 VM instances per group. Please
+-- contact Cloud Support if you need an increase in this limit.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceGroupManagers.insert@.
 module Network.Google.Resource.Compute.InstanceGroupManagers.Insert
@@ -39,6 +40,7 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.Insert
     , InstanceGroupManagersInsert
 
     -- * Request Lenses
+    , igmiRequestId
     , igmiProject
     , igmiZone
     , igmiPayload
@@ -57,28 +59,33 @@ type InstanceGroupManagersInsertResource =
              "zones" :>
                Capture "zone" Text :>
                  "instanceGroupManagers" :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] InstanceGroupManager :>
-                       Post '[JSON] Operation
+                   QueryParam "requestId" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] InstanceGroupManager :>
+                         Post '[JSON] Operation
 
 -- | Creates a managed instance group using the information that you specify
--- in the request. After the group is created, it schedules an action to
--- create instances in the group using the specified instance template.
--- This operation is marked as DONE when the group is created even if the
--- instances in the group have not yet been created. You must separately
--- verify the status of the individual instances with the
--- listmanagedinstances method.
+-- in the request. After the group is created, instances in the group are
+-- created using the specified instance template. This operation is marked
+-- as DONE when the group is created even if the instances in the group
+-- have not yet been created. You must separately verify the status of the
+-- individual instances with the listmanagedinstances method. A managed
+-- instance group can have up to 1000 VM instances per group. Please
+-- contact Cloud Support if you need an increase in this limit.
 --
 -- /See:/ 'instanceGroupManagersInsert' smart constructor.
 data InstanceGroupManagersInsert = InstanceGroupManagersInsert'
-    { _igmiProject :: !Text
-    , _igmiZone    :: !Text
-    , _igmiPayload :: !InstanceGroupManager
+    { _igmiRequestId :: !(Maybe Text)
+    , _igmiProject   :: !Text
+    , _igmiZone      :: !Text
+    , _igmiPayload   :: !InstanceGroupManager
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'igmiRequestId'
 --
 -- * 'igmiProject'
 --
@@ -92,10 +99,26 @@ instanceGroupManagersInsert
     -> InstanceGroupManagersInsert
 instanceGroupManagersInsert pIgmiProject_ pIgmiZone_ pIgmiPayload_ =
     InstanceGroupManagersInsert'
-    { _igmiProject = pIgmiProject_
+    { _igmiRequestId = Nothing
+    , _igmiProject = pIgmiProject_
     , _igmiZone = pIgmiZone_
     , _igmiPayload = pIgmiPayload_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+igmiRequestId :: Lens' InstanceGroupManagersInsert (Maybe Text)
+igmiRequestId
+  = lens _igmiRequestId
+      (\ s a -> s{_igmiRequestId = a})
 
 -- | Project ID for this request.
 igmiProject :: Lens' InstanceGroupManagersInsert Text
@@ -119,7 +142,8 @@ instance GoogleRequest InstanceGroupManagersInsert
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient InstanceGroupManagersInsert'{..}
-          = go _igmiProject _igmiZone (Just AltJSON)
+          = go _igmiProject _igmiZone _igmiRequestId
+              (Just AltJSON)
               _igmiPayload
               computeService
           where go

@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'PurchasesSubscriptionsCancel' request conforms to.
 type PurchasesSubscriptionsCancelResource =
      "androidpublisher" :>
-       "v2" :>
+       "v3" :>
          "applications" :>
            Capture "packageName" Text :>
              "purchases" :>

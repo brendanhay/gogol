@@ -23,7 +23,7 @@
 -- Roll back the previously Aborted or Failed NodePool upgrade. This will
 -- be an no-op if the last upgrade successfully completed.
 --
--- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @container.projects.zones.clusters.nodePools.rollback@.
+-- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.zones.clusters.nodePools.rollback@.
 module Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.Rollback
     (
     -- * REST Resource
@@ -36,13 +36,11 @@ module Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.Rollb
     -- * Request Lenses
     , pzcnprXgafv
     , pzcnprUploadProtocol
-    , pzcnprPp
     , pzcnprAccessToken
     , pzcnprUploadType
     , pzcnprZone
     , pzcnprPayload
     , pzcnprNodePoolId
-    , pzcnprBearerToken
     , pzcnprClusterId
     , pzcnprProjectId
     , pzcnprCallback
@@ -63,32 +61,28 @@ type ProjectsZonesClustersNodePoolsRollbackResource =
                  Capture "clusterId" Text :>
                    "nodePools" :>
                      CaptureMode "nodePoolId" "rollback" Text :>
-                       QueryParam "$.xgafv" Text :>
+                       QueryParam "$.xgafv" Xgafv :>
                          QueryParam "upload_protocol" Text :>
-                           QueryParam "pp" Bool :>
-                             QueryParam "access_token" Text :>
-                               QueryParam "uploadType" Text :>
-                                 QueryParam "bearer_token" Text :>
-                                   QueryParam "callback" Text :>
-                                     QueryParam "alt" AltJSON :>
-                                       ReqBody '[JSON]
-                                         RollbackNodePoolUpgradeRequest
-                                         :> Post '[JSON] Operation
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON]
+                                     RollbackNodePoolUpgradeRequest
+                                     :> Post '[JSON] Operation
 
 -- | Roll back the previously Aborted or Failed NodePool upgrade. This will
 -- be an no-op if the last upgrade successfully completed.
 --
 -- /See:/ 'projectsZonesClustersNodePoolsRollback' smart constructor.
 data ProjectsZonesClustersNodePoolsRollback = ProjectsZonesClustersNodePoolsRollback'
-    { _pzcnprXgafv          :: !(Maybe Text)
+    { _pzcnprXgafv          :: !(Maybe Xgafv)
     , _pzcnprUploadProtocol :: !(Maybe Text)
-    , _pzcnprPp             :: !Bool
     , _pzcnprAccessToken    :: !(Maybe Text)
     , _pzcnprUploadType     :: !(Maybe Text)
     , _pzcnprZone           :: !Text
     , _pzcnprPayload        :: !RollbackNodePoolUpgradeRequest
     , _pzcnprNodePoolId     :: !Text
-    , _pzcnprBearerToken    :: !(Maybe Text)
     , _pzcnprClusterId      :: !Text
     , _pzcnprProjectId      :: !Text
     , _pzcnprCallback       :: !(Maybe Text)
@@ -102,8 +96,6 @@ data ProjectsZonesClustersNodePoolsRollback = ProjectsZonesClustersNodePoolsRoll
 --
 -- * 'pzcnprUploadProtocol'
 --
--- * 'pzcnprPp'
---
 -- * 'pzcnprAccessToken'
 --
 -- * 'pzcnprUploadType'
@@ -113,8 +105,6 @@ data ProjectsZonesClustersNodePoolsRollback = ProjectsZonesClustersNodePoolsRoll
 -- * 'pzcnprPayload'
 --
 -- * 'pzcnprNodePoolId'
---
--- * 'pzcnprBearerToken'
 --
 -- * 'pzcnprClusterId'
 --
@@ -132,20 +122,18 @@ projectsZonesClustersNodePoolsRollback pPzcnprZone_ pPzcnprPayload_ pPzcnprNodeP
     ProjectsZonesClustersNodePoolsRollback'
     { _pzcnprXgafv = Nothing
     , _pzcnprUploadProtocol = Nothing
-    , _pzcnprPp = True
     , _pzcnprAccessToken = Nothing
     , _pzcnprUploadType = Nothing
     , _pzcnprZone = pPzcnprZone_
     , _pzcnprPayload = pPzcnprPayload_
     , _pzcnprNodePoolId = pPzcnprNodePoolId_
-    , _pzcnprBearerToken = Nothing
     , _pzcnprClusterId = pPzcnprClusterId_
     , _pzcnprProjectId = pPzcnprProjectId_
     , _pzcnprCallback = Nothing
     }
 
 -- | V1 error format.
-pzcnprXgafv :: Lens' ProjectsZonesClustersNodePoolsRollback (Maybe Text)
+pzcnprXgafv :: Lens' ProjectsZonesClustersNodePoolsRollback (Maybe Xgafv)
 pzcnprXgafv
   = lens _pzcnprXgafv (\ s a -> s{_pzcnprXgafv = a})
 
@@ -154,10 +142,6 @@ pzcnprUploadProtocol :: Lens' ProjectsZonesClustersNodePoolsRollback (Maybe Text
 pzcnprUploadProtocol
   = lens _pzcnprUploadProtocol
       (\ s a -> s{_pzcnprUploadProtocol = a})
-
--- | Pretty-print response.
-pzcnprPp :: Lens' ProjectsZonesClustersNodePoolsRollback Bool
-pzcnprPp = lens _pzcnprPp (\ s a -> s{_pzcnprPp = a})
 
 -- | OAuth access token.
 pzcnprAccessToken :: Lens' ProjectsZonesClustersNodePoolsRollback (Maybe Text)
@@ -171,8 +155,9 @@ pzcnprUploadType
   = lens _pzcnprUploadType
       (\ s a -> s{_pzcnprUploadType = a})
 
--- | The name of the Google Compute Engine
+-- | Deprecated. The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
+-- This field has been deprecated and replaced by the name field.
 pzcnprZone :: Lens' ProjectsZonesClustersNodePoolsRollback Text
 pzcnprZone
   = lens _pzcnprZone (\ s a -> s{_pzcnprZone = a})
@@ -183,26 +168,23 @@ pzcnprPayload
   = lens _pzcnprPayload
       (\ s a -> s{_pzcnprPayload = a})
 
--- | The name of the node pool to rollback.
+-- | Deprecated. The name of the node pool to rollback. This field has been
+-- deprecated and replaced by the name field.
 pzcnprNodePoolId :: Lens' ProjectsZonesClustersNodePoolsRollback Text
 pzcnprNodePoolId
   = lens _pzcnprNodePoolId
       (\ s a -> s{_pzcnprNodePoolId = a})
 
--- | OAuth bearer token.
-pzcnprBearerToken :: Lens' ProjectsZonesClustersNodePoolsRollback (Maybe Text)
-pzcnprBearerToken
-  = lens _pzcnprBearerToken
-      (\ s a -> s{_pzcnprBearerToken = a})
-
--- | The name of the cluster to rollback.
+-- | Deprecated. The name of the cluster to rollback. This field has been
+-- deprecated and replaced by the name field.
 pzcnprClusterId :: Lens' ProjectsZonesClustersNodePoolsRollback Text
 pzcnprClusterId
   = lens _pzcnprClusterId
       (\ s a -> s{_pzcnprClusterId = a})
 
--- | The Google Developers Console [project ID or project
--- number](https:\/\/support.google.com\/cloud\/answer\/6158840).
+-- | Deprecated. The Google Developers Console [project ID or project
+-- number](https:\/\/support.google.com\/cloud\/answer\/6158840). This
+-- field has been deprecated and replaced by the name field.
 pzcnprProjectId :: Lens' ProjectsZonesClustersNodePoolsRollback Text
 pzcnprProjectId
   = lens _pzcnprProjectId
@@ -226,10 +208,8 @@ instance GoogleRequest
               _pzcnprNodePoolId
               _pzcnprXgafv
               _pzcnprUploadProtocol
-              (Just _pzcnprPp)
               _pzcnprAccessToken
               _pzcnprUploadType
-              _pzcnprBearerToken
               _pzcnprCallback
               (Just AltJSON)
               _pzcnprPayload

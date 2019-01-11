@@ -20,7 +20,6 @@ module Network.Google.Games.Types
       gamesService
 
     -- * OAuth Scopes
-    , plusLoginScope
     , gamesScope
     , driveAppDataScope
 
@@ -944,10 +943,6 @@ gamesService :: ServiceConfig
 gamesService
   = defaultService (ServiceId "games:v1")
       "www.googleapis.com"
-
--- | Know the list of people in your circles, your age range, and language
-plusLoginScope :: Proxy '["https://www.googleapis.com/auth/plus.login"]
-plusLoginScope = Proxy;
 
 -- | Share your Google+ profile information and view and manage your game
 -- activity

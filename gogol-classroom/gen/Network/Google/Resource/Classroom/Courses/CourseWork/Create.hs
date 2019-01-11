@@ -47,12 +47,10 @@ module Network.Google.Resource.Classroom.Courses.CourseWork.Create
     -- * Request Lenses
     , ccwcXgafv
     , ccwcUploadProtocol
-    , ccwcPp
     , ccwcCourseId
     , ccwcAccessToken
     , ccwcUploadType
     , ccwcPayload
-    , ccwcBearerToken
     , ccwcCallback
     ) where
 
@@ -66,16 +64,13 @@ type CoursesCourseWorkCreateResource =
        "courses" :>
          Capture "courseId" Text :>
            "courseWork" :>
-             QueryParam "$.xgafv" Text :>
+             QueryParam "$.xgafv" Xgafv :>
                QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "callback" Text :>
-                           QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] CourseWork :>
-                               Post '[JSON] CourseWork
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] CourseWork :> Post '[JSON] CourseWork
 
 -- | Creates course work. The resulting course work (and corresponding
 -- student submissions) are associated with the Developer Console project
@@ -93,14 +88,12 @@ type CoursesCourseWorkCreateResource =
 --
 -- /See:/ 'coursesCourseWorkCreate' smart constructor.
 data CoursesCourseWorkCreate = CoursesCourseWorkCreate'
-    { _ccwcXgafv          :: !(Maybe Text)
+    { _ccwcXgafv          :: !(Maybe Xgafv)
     , _ccwcUploadProtocol :: !(Maybe Text)
-    , _ccwcPp             :: !Bool
     , _ccwcCourseId       :: !Text
     , _ccwcAccessToken    :: !(Maybe Text)
     , _ccwcUploadType     :: !(Maybe Text)
     , _ccwcPayload        :: !CourseWork
-    , _ccwcBearerToken    :: !(Maybe Text)
     , _ccwcCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -112,8 +105,6 @@ data CoursesCourseWorkCreate = CoursesCourseWorkCreate'
 --
 -- * 'ccwcUploadProtocol'
 --
--- * 'ccwcPp'
---
 -- * 'ccwcCourseId'
 --
 -- * 'ccwcAccessToken'
@@ -121,8 +112,6 @@ data CoursesCourseWorkCreate = CoursesCourseWorkCreate'
 -- * 'ccwcUploadType'
 --
 -- * 'ccwcPayload'
---
--- * 'ccwcBearerToken'
 --
 -- * 'ccwcCallback'
 coursesCourseWorkCreate
@@ -133,17 +122,15 @@ coursesCourseWorkCreate pCcwcCourseId_ pCcwcPayload_ =
     CoursesCourseWorkCreate'
     { _ccwcXgafv = Nothing
     , _ccwcUploadProtocol = Nothing
-    , _ccwcPp = True
     , _ccwcCourseId = pCcwcCourseId_
     , _ccwcAccessToken = Nothing
     , _ccwcUploadType = Nothing
     , _ccwcPayload = pCcwcPayload_
-    , _ccwcBearerToken = Nothing
     , _ccwcCallback = Nothing
     }
 
 -- | V1 error format.
-ccwcXgafv :: Lens' CoursesCourseWorkCreate (Maybe Text)
+ccwcXgafv :: Lens' CoursesCourseWorkCreate (Maybe Xgafv)
 ccwcXgafv
   = lens _ccwcXgafv (\ s a -> s{_ccwcXgafv = a})
 
@@ -152,10 +139,6 @@ ccwcUploadProtocol :: Lens' CoursesCourseWorkCreate (Maybe Text)
 ccwcUploadProtocol
   = lens _ccwcUploadProtocol
       (\ s a -> s{_ccwcUploadProtocol = a})
-
--- | Pretty-print response.
-ccwcPp :: Lens' CoursesCourseWorkCreate Bool
-ccwcPp = lens _ccwcPp (\ s a -> s{_ccwcPp = a})
 
 -- | Identifier of the course. This identifier can be either the
 -- Classroom-assigned identifier or an alias.
@@ -180,12 +163,6 @@ ccwcPayload :: Lens' CoursesCourseWorkCreate CourseWork
 ccwcPayload
   = lens _ccwcPayload (\ s a -> s{_ccwcPayload = a})
 
--- | OAuth bearer token.
-ccwcBearerToken :: Lens' CoursesCourseWorkCreate (Maybe Text)
-ccwcBearerToken
-  = lens _ccwcBearerToken
-      (\ s a -> s{_ccwcBearerToken = a})
-
 -- | JSONP
 ccwcCallback :: Lens' CoursesCourseWorkCreate (Maybe Text)
 ccwcCallback
@@ -197,10 +174,8 @@ instance GoogleRequest CoursesCourseWorkCreate where
              '["https://www.googleapis.com/auth/classroom.coursework.students"]
         requestClient CoursesCourseWorkCreate'{..}
           = go _ccwcCourseId _ccwcXgafv _ccwcUploadProtocol
-              (Just _ccwcPp)
               _ccwcAccessToken
               _ccwcUploadType
-              _ccwcBearerToken
               _ccwcCallback
               (Just AltJSON)
               _ccwcPayload

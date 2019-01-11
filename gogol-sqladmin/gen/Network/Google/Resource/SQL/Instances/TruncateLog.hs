@@ -22,7 +22,7 @@
 --
 -- Truncate MySQL general and slow query log tables
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.instances.truncateLog@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.instances.truncateLog@.
 module Network.Google.Resource.SQL.Instances.TruncateLog
     (
     -- * REST Resource

@@ -21,12 +21,10 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Starts a job cancellation request. To access the job resource after
--- cancellation, call
--- [regions\/{region}\/jobs.list](\/dataproc\/reference\/rest\/v1\/projects.regions.jobs\/list)
--- or
--- [regions\/{region}\/jobs.get](\/dataproc\/reference\/rest\/v1\/projects.regions.jobs\/get).
+-- cancellation, call regions\/{region}\/jobs.list or
+-- regions\/{region}\/jobs.get.
 --
--- /See:/ <https://cloud.google.com/dataproc/ Google Cloud Dataproc API Reference> for @dataproc.projects.regions.jobs.cancel@.
+-- /See:/ <https://cloud.google.com/dataproc/ Cloud Dataproc API Reference> for @dataproc.projects.regions.jobs.cancel@.
 module Network.Google.Resource.Dataproc.Projects.Regions.Jobs.Cancel
     (
     -- * REST Resource
@@ -40,11 +38,9 @@ module Network.Google.Resource.Dataproc.Projects.Regions.Jobs.Cancel
     , prjcXgafv
     , prjcJobId
     , prjcUploadProtocol
-    , prjcPp
     , prjcAccessToken
     , prjcUploadType
     , prjcPayload
-    , prjcBearerToken
     , prjcRegion
     , prjcProjectId
     , prjcCallback
@@ -63,33 +59,27 @@ type ProjectsRegionsJobsCancelResource =
              Capture "region" Text :>
                "jobs" :>
                  CaptureMode "jobId" "cancel" Text :>
-                   QueryParam "$.xgafv" Text :>
+                   QueryParam "$.xgafv" Xgafv :>
                      QueryParam "upload_protocol" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "access_token" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "bearer_token" Text :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" AltJSON :>
-                                   ReqBody '[JSON] CancelJobRequest :>
-                                     Post '[JSON] Job
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] CancelJobRequest :>
+                                 Post '[JSON] Job
 
 -- | Starts a job cancellation request. To access the job resource after
--- cancellation, call
--- [regions\/{region}\/jobs.list](\/dataproc\/reference\/rest\/v1\/projects.regions.jobs\/list)
--- or
--- [regions\/{region}\/jobs.get](\/dataproc\/reference\/rest\/v1\/projects.regions.jobs\/get).
+-- cancellation, call regions\/{region}\/jobs.list or
+-- regions\/{region}\/jobs.get.
 --
 -- /See:/ 'projectsRegionsJobsCancel' smart constructor.
 data ProjectsRegionsJobsCancel = ProjectsRegionsJobsCancel'
-    { _prjcXgafv          :: !(Maybe Text)
+    { _prjcXgafv          :: !(Maybe Xgafv)
     , _prjcJobId          :: !Text
     , _prjcUploadProtocol :: !(Maybe Text)
-    , _prjcPp             :: !Bool
     , _prjcAccessToken    :: !(Maybe Text)
     , _prjcUploadType     :: !(Maybe Text)
     , _prjcPayload        :: !CancelJobRequest
-    , _prjcBearerToken    :: !(Maybe Text)
     , _prjcRegion         :: !Text
     , _prjcProjectId      :: !Text
     , _prjcCallback       :: !(Maybe Text)
@@ -105,15 +95,11 @@ data ProjectsRegionsJobsCancel = ProjectsRegionsJobsCancel'
 --
 -- * 'prjcUploadProtocol'
 --
--- * 'prjcPp'
---
 -- * 'prjcAccessToken'
 --
 -- * 'prjcUploadType'
 --
 -- * 'prjcPayload'
---
--- * 'prjcBearerToken'
 --
 -- * 'prjcRegion'
 --
@@ -131,22 +117,20 @@ projectsRegionsJobsCancel pPrjcJobId_ pPrjcPayload_ pPrjcRegion_ pPrjcProjectId_
     { _prjcXgafv = Nothing
     , _prjcJobId = pPrjcJobId_
     , _prjcUploadProtocol = Nothing
-    , _prjcPp = True
     , _prjcAccessToken = Nothing
     , _prjcUploadType = Nothing
     , _prjcPayload = pPrjcPayload_
-    , _prjcBearerToken = Nothing
     , _prjcRegion = pPrjcRegion_
     , _prjcProjectId = pPrjcProjectId_
     , _prjcCallback = Nothing
     }
 
 -- | V1 error format.
-prjcXgafv :: Lens' ProjectsRegionsJobsCancel (Maybe Text)
+prjcXgafv :: Lens' ProjectsRegionsJobsCancel (Maybe Xgafv)
 prjcXgafv
   = lens _prjcXgafv (\ s a -> s{_prjcXgafv = a})
 
--- | [Required] The job ID.
+-- | Required. The job ID.
 prjcJobId :: Lens' ProjectsRegionsJobsCancel Text
 prjcJobId
   = lens _prjcJobId (\ s a -> s{_prjcJobId = a})
@@ -156,10 +140,6 @@ prjcUploadProtocol :: Lens' ProjectsRegionsJobsCancel (Maybe Text)
 prjcUploadProtocol
   = lens _prjcUploadProtocol
       (\ s a -> s{_prjcUploadProtocol = a})
-
--- | Pretty-print response.
-prjcPp :: Lens' ProjectsRegionsJobsCancel Bool
-prjcPp = lens _prjcPp (\ s a -> s{_prjcPp = a})
 
 -- | OAuth access token.
 prjcAccessToken :: Lens' ProjectsRegionsJobsCancel (Maybe Text)
@@ -178,18 +158,12 @@ prjcPayload :: Lens' ProjectsRegionsJobsCancel CancelJobRequest
 prjcPayload
   = lens _prjcPayload (\ s a -> s{_prjcPayload = a})
 
--- | OAuth bearer token.
-prjcBearerToken :: Lens' ProjectsRegionsJobsCancel (Maybe Text)
-prjcBearerToken
-  = lens _prjcBearerToken
-      (\ s a -> s{_prjcBearerToken = a})
-
--- | [Required] The Cloud Dataproc region in which to handle the request.
+-- | Required. The Cloud Dataproc region in which to handle the request.
 prjcRegion :: Lens' ProjectsRegionsJobsCancel Text
 prjcRegion
   = lens _prjcRegion (\ s a -> s{_prjcRegion = a})
 
--- | [Required] The ID of the Google Cloud Platform project that the job
+-- | Required. The ID of the Google Cloud Platform project that the job
 -- belongs to.
 prjcProjectId :: Lens' ProjectsRegionsJobsCancel Text
 prjcProjectId
@@ -209,10 +183,8 @@ instance GoogleRequest ProjectsRegionsJobsCancel
         requestClient ProjectsRegionsJobsCancel'{..}
           = go _prjcProjectId _prjcRegion _prjcJobId _prjcXgafv
               _prjcUploadProtocol
-              (Just _prjcPp)
               _prjcAccessToken
               _prjcUploadType
-              _prjcBearerToken
               _prjcCallback
               (Just AltJSON)
               _prjcPayload

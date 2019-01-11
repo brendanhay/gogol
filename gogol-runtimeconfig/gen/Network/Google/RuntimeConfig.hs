@@ -13,10 +13,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Provides capabilities for dynamic configuration and coordination for
--- applications running on Google Cloud Platform.
+-- The Runtime Configurator allows you to dynamically configure and expose
+-- variables through Google Cloud Platform. In addition, you can also set
+-- Watchers and Waiters that will watch for changes to your data and return
+-- based on certain conditions.
 --
--- /See:/ <https://cloud.google.com/deployment-manager/runtime-configurator/ Google Cloud RuntimeConfig API Reference>
+-- /See:/ <https://cloud.google.com/deployment-manager/runtime-configurator/ Cloud Runtime Configuration API Reference>
 module Network.Google.RuntimeConfig
     (
     -- * Service Configuration
@@ -101,7 +103,7 @@ import           Network.Google.RuntimeConfig.Types
 TODO
 -}
 
--- | Represents the entirety of the methods and resources available for the Google Cloud RuntimeConfig API service.
+-- | Represents the entirety of the methods and resources available for the Cloud Runtime Configuration API service.
 type RuntimeConfigAPI =
      OperationsListResource :<|> OperationsCancelResource
        :<|> OperationsDeleteResource

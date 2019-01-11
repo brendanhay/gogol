@@ -34,6 +34,7 @@ module Network.Google.Resource.Compute.RegionAutoscalers.Update
     , RegionAutoscalersUpdate
 
     -- * Request Lenses
+    , rauRequestId
     , rauProject
     , rauPayload
     , rauAutoscaler
@@ -53,16 +54,18 @@ type RegionAutoscalersUpdateResource =
              "regions" :>
                Capture "region" Text :>
                  "autoscalers" :>
-                   QueryParam "autoscaler" Text :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] Autoscaler :> Put '[JSON] Operation
+                   QueryParam "requestId" Text :>
+                     QueryParam "autoscaler" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Autoscaler :> Put '[JSON] Operation
 
 -- | Updates an autoscaler in the specified project using the data included
 -- in the request.
 --
 -- /See:/ 'regionAutoscalersUpdate' smart constructor.
 data RegionAutoscalersUpdate = RegionAutoscalersUpdate'
-    { _rauProject    :: !Text
+    { _rauRequestId  :: !(Maybe Text)
+    , _rauProject    :: !Text
     , _rauPayload    :: !Autoscaler
     , _rauAutoscaler :: !(Maybe Text)
     , _rauRegion     :: !Text
@@ -71,6 +74,8 @@ data RegionAutoscalersUpdate = RegionAutoscalersUpdate'
 -- | Creates a value of 'RegionAutoscalersUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rauRequestId'
 --
 -- * 'rauProject'
 --
@@ -86,11 +91,26 @@ regionAutoscalersUpdate
     -> RegionAutoscalersUpdate
 regionAutoscalersUpdate pRauProject_ pRauPayload_ pRauRegion_ =
     RegionAutoscalersUpdate'
-    { _rauProject = pRauProject_
+    { _rauRequestId = Nothing
+    , _rauProject = pRauProject_
     , _rauPayload = pRauPayload_
     , _rauAutoscaler = Nothing
     , _rauRegion = pRauRegion_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+rauRequestId :: Lens' RegionAutoscalersUpdate (Maybe Text)
+rauRequestId
+  = lens _rauRequestId (\ s a -> s{_rauRequestId = a})
 
 -- | Project ID for this request.
 rauProject :: Lens' RegionAutoscalersUpdate Text
@@ -119,7 +139,8 @@ instance GoogleRequest RegionAutoscalersUpdate where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient RegionAutoscalersUpdate'{..}
-          = go _rauProject _rauRegion _rauAutoscaler
+          = go _rauProject _rauRegion _rauRequestId
+              _rauAutoscaler
               (Just AltJSON)
               _rauPayload
               computeService

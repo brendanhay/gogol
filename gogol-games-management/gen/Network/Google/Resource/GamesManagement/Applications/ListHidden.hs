@@ -108,8 +108,7 @@ alhMaxResults
 instance GoogleRequest ApplicationsListHidden where
         type Rs ApplicationsListHidden = HiddenPlayerList
         type Scopes ApplicationsListHidden =
-             '["https://www.googleapis.com/auth/games",
-               "https://www.googleapis.com/auth/plus.login"]
+             '["https://www.googleapis.com/auth/games"]
         requestClient ApplicationsListHidden'{..}
           = go _alhApplicationId _alhPageToken _alhMaxResults
               (Just AltJSON)

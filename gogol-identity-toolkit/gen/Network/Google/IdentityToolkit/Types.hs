@@ -36,6 +36,7 @@ module Network.Google.IdentityToolkit.Types
     , uipuiiEmail
     , uipuiiPhotoURL
     , uipuiiFederatedId
+    , uipuiiPhoneNumber
     , uipuiiDisplayName
     , uipuiiScreenName
     , uipuiiRawId
@@ -43,10 +44,25 @@ module Network.Google.IdentityToolkit.Types
     -- * VerifyCustomTokenResponse
     , VerifyCustomTokenResponse
     , verifyCustomTokenResponse
+    , vctrIsNewUser
     , vctrKind
     , vctrRefreshToken
     , vctrExpiresIn
     , vctrIdToken
+
+    -- * IdentitytoolkitRelyingPartyVerifyPhoneNumberResponse
+    , IdentitytoolkitRelyingPartyVerifyPhoneNumberResponse
+    , identitytoolkitRelyingPartyVerifyPhoneNumberResponse
+    , irpvpnrIsNewUser
+    , irpvpnrTemporaryProof
+    , irpvpnrVerificationProofExpiresIn
+    , irpvpnrVerificationProof
+    , irpvpnrTemporaryProofExpiresIn
+    , irpvpnrRefreshToken
+    , irpvpnrPhoneNumber
+    , irpvpnrExpiresIn
+    , irpvpnrLocalId
+    , irpvpnrIdToken
 
     -- * IdpConfig
     , IdpConfig
@@ -68,8 +84,10 @@ module Network.Google.IdentityToolkit.Types
     , uiDisabled
     , uiCustomAuth
     , uiProviderUserInfo
+    , uiCustomAttributes
     , uiValidSince
     , uiPasswordUpdatedAt
+    , uiPhoneNumber
     , uiVersion
     , uiEmailVerified
     , uiSalt
@@ -111,12 +129,22 @@ module Network.Google.IdentityToolkit.Types
     , irpvprEmail
     , irpvprInstanceId
     , irpvprCaptchaChallenge
+    , irpvprTenantProjectNumber
     , irpvprDelegatedProjectNumber
     , irpvprReturnSecureToken
+    , irpvprTenantId
     , irpvprPassword
     , irpvprCaptchaResponse
     , irpvprIdToken
     , irpvprPendingIdToken
+
+    -- * IdentitytoolkitRelyingPartySendVerificationCodeRequest
+    , IdentitytoolkitRelyingPartySendVerificationCodeRequest
+    , identitytoolkitRelyingPartySendVerificationCodeRequest
+    , irpsvcrPhoneNumber
+    , irpsvcrRecaptchaToken
+    , irpsvcrIosSecret
+    , irpsvcrIosReceipt
 
     -- * SignupNewUserResponse
     , SignupNewUserResponse
@@ -158,10 +186,12 @@ module Network.Google.IdentityToolkit.Types
     , irpsairDeleteAttribute
     , irpsairDeleteProvider
     , irpsairReturnSecureToken
+    , irpsairCustomAttributes
     , irpsairValidSince
     , irpsairOOBCode
     , irpsairPassword
     , irpsairCaptchaResponse
+    , irpsairPhoneNumber
     , irpsairEmailVerified
     , irpsairDisplayName
     , irpsairDisableUser
@@ -174,14 +204,28 @@ module Network.Google.IdentityToolkit.Types
     , identitytoolkitRelyingPartyVerifyAssertionRequest
     , irpvarReturnIdpCredential
     , irpvarInstanceId
+    , irpvarTenantProjectNumber
     , irpvarDelegatedProjectNumber
     , irpvarPostBody
     , irpvarReturnSecureToken
+    , irpvarTenantId
     , irpvarReturnRefreshToken
     , irpvarRequestURI
     , irpvarSessionId
+    , irpvarAutoCreate
     , irpvarIdToken
     , irpvarPendingIdToken
+
+    -- * EmailLinkSigninResponse
+    , EmailLinkSigninResponse
+    , emailLinkSigninResponse
+    , elsrEmail
+    , elsrIsNewUser
+    , elsrKind
+    , elsrRefreshToken
+    , elsrExpiresIn
+    , elsrLocalId
+    , elsrIdToken
 
     -- * DeleteAccountResponse
     , DeleteAccountResponse
@@ -238,6 +282,7 @@ module Network.Google.IdentityToolkit.Types
     , caurAllProviders
     , caurAuthURI
     , caurCaptchaRequired
+    , caurSigninMethods
     , caurRegistered
     , caurSessionId
     , caurForExistingProvider
@@ -250,20 +295,28 @@ module Network.Google.IdentityToolkit.Types
     -- * RelyingParty
     , RelyingParty
     , relyingParty
+    , rpIOSBundleId
     , rpEmail
+    , rpContinueURL
     , rpKind
     , rpUserIP
+    , rpAndroidInstallApp
+    , rpIOSAppStoreId
     , rpRequestType
+    , rpAndroidMinimumVersion
+    , rpCanHandleCodeInApp
     , rpCaptchaResp
     , rpNewEmail
     , rpChallenge
     , rpIdToken
+    , rpAndroidPackageName
 
     -- * IdentitytoolkitRelyingPartyGetAccountInfoRequest
     , IdentitytoolkitRelyingPartyGetAccountInfoRequest
     , identitytoolkitRelyingPartyGetAccountInfoRequest
     , irpgairEmail
     , irpgairDelegatedProjectNumber
+    , irpgairPhoneNumber
     , irpgairLocalId
     , irpgairIdToken
 
@@ -280,13 +333,17 @@ module Network.Google.IdentityToolkit.Types
     -- * IdentitytoolkitRelyingPartyUploadAccountRequest
     , IdentitytoolkitRelyingPartyUploadAccountRequest
     , identitytoolkitRelyingPartyUploadAccountRequest
+    , irpuarBlockSize
     , irpuarUsers
     , irpuarMemoryCost
     , irpuarAllowOverwrite
     , irpuarDelegatedProjectNumber
+    , irpuarParallelization
+    , irpuarCPUMemCost
     , irpuarSanityCheck
     , irpuarSaltSeparator
     , irpuarHashAlgorithm
+    , irpuarDkLen
     , irpuarSignerKey
     , irpuarRounds
     , irpuarTargetProjectId
@@ -306,9 +363,11 @@ module Network.Google.IdentityToolkit.Types
     , irpcaurClientId
     , irpcaurContext
     , irpcaurCustomParameter
+    , irpcaurTenantProjectNumber
     , irpcaurIdentifier
     , irpcaurOtaApp
     , irpcaurOAuthConsumerKey
+    , irpcaurTenantId
     , irpcaurHostedDomain
     , irpcaurAppId
     , irpcaurContinueURI
@@ -317,11 +376,34 @@ module Network.Google.IdentityToolkit.Types
     , irpcaurSessionId
     , irpcaurOpenidRealm
 
+    -- * IdentitytoolkitRelyingPartySendVerificationCodeResponse
+    , IdentitytoolkitRelyingPartySendVerificationCodeResponse
+    , identitytoolkitRelyingPartySendVerificationCodeResponse
+    , irpsvcrSessionInfo
+
     -- * GetAccountInfoResponse
     , GetAccountInfoResponse
     , getAccountInfoResponse
     , gairUsers
     , gairKind
+
+    -- * IdentitytoolkitRelyingPartyVerifyPhoneNumberRequest
+    , IdentitytoolkitRelyingPartyVerifyPhoneNumberRequest
+    , identitytoolkitRelyingPartyVerifyPhoneNumberRequest
+    , iTemporaryProof
+    , iVerificationProof
+    , iOperation
+    , iSessionInfo
+    , iPhoneNumber
+    , iCode
+    , iIdToken
+
+    -- * IdentitytoolkitRelyingPartyEmailLinkSigninRequest
+    , IdentitytoolkitRelyingPartyEmailLinkSigninRequest
+    , identitytoolkitRelyingPartyEmailLinkSigninRequest
+    , irpelsrEmail
+    , irpelsrOOBCode
+    , irpelsrIdToken
 
     -- * IdentitytoolkitRelyingPartyDeleteAccountRequest
     , IdentitytoolkitRelyingPartyDeleteAccountRequest
@@ -370,6 +452,7 @@ module Network.Google.IdentityToolkit.Types
     , sairRefreshToken
     , sairProviderUserInfo
     , sairExpiresIn
+    , sairEmailVerified
     , sairDisplayName
     , sairPasswordHash
     , sairLocalId
@@ -383,11 +466,15 @@ module Network.Google.IdentityToolkit.Types
     , irpsnurInstanceId
     , irpsnurPhotoURL
     , irpsnurCaptchaChallenge
+    , irpsnurTenantProjectNumber
     , irpsnurDisabled
+    , irpsnurTenantId
     , irpsnurPassword
     , irpsnurCaptchaResponse
+    , irpsnurPhoneNumber
     , irpsnurEmailVerified
     , irpsnurDisplayName
+    , irpsnurLocalId
     , irpsnurIdToken
 
     -- * VerifyAssertionResponse
@@ -396,6 +483,7 @@ module Network.Google.IdentityToolkit.Types
     , varProviderId
     , varFullName
     , varEmail
+    , varIsNewUser
     , varEmailRecycled
     , varPhotoURL
     , varVerifiedProvider

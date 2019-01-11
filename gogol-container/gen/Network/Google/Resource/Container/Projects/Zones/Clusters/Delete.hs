@@ -26,7 +26,7 @@
 -- use by the cluster (e.g. load balancer resources) will not be deleted if
 -- they weren\'t present at the initial create time.
 --
--- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @container.projects.zones.clusters.delete@.
+-- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.zones.clusters.delete@.
 module Network.Google.Resource.Container.Projects.Zones.Clusters.Delete
     (
     -- * REST Resource
@@ -39,11 +39,10 @@ module Network.Google.Resource.Container.Projects.Zones.Clusters.Delete
     -- * Request Lenses
     , pzcdXgafv
     , pzcdUploadProtocol
-    , pzcdPp
     , pzcdAccessToken
     , pzcdUploadType
     , pzcdZone
-    , pzcdBearerToken
+    , pzcdName
     , pzcdClusterId
     , pzcdProjectId
     , pzcdCallback
@@ -62,15 +61,14 @@ type ProjectsZonesClustersDeleteResource =
              Capture "zone" Text :>
                "clusters" :>
                  Capture "clusterId" Text :>
-                   QueryParam "$.xgafv" Text :>
+                   QueryParam "$.xgafv" Xgafv :>
                      QueryParam "upload_protocol" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "access_token" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "bearer_token" Text :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" AltJSON :>
-                                   Delete '[JSON] Operation
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "name" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 Delete '[JSON] Operation
 
 -- | Deletes the cluster, including the Kubernetes endpoint and all worker
 -- nodes. Firewalls and routes that were configured during cluster creation
@@ -80,13 +78,12 @@ type ProjectsZonesClustersDeleteResource =
 --
 -- /See:/ 'projectsZonesClustersDelete' smart constructor.
 data ProjectsZonesClustersDelete = ProjectsZonesClustersDelete'
-    { _pzcdXgafv          :: !(Maybe Text)
+    { _pzcdXgafv          :: !(Maybe Xgafv)
     , _pzcdUploadProtocol :: !(Maybe Text)
-    , _pzcdPp             :: !Bool
     , _pzcdAccessToken    :: !(Maybe Text)
     , _pzcdUploadType     :: !(Maybe Text)
     , _pzcdZone           :: !Text
-    , _pzcdBearerToken    :: !(Maybe Text)
+    , _pzcdName           :: !(Maybe Text)
     , _pzcdClusterId      :: !Text
     , _pzcdProjectId      :: !Text
     , _pzcdCallback       :: !(Maybe Text)
@@ -100,15 +97,13 @@ data ProjectsZonesClustersDelete = ProjectsZonesClustersDelete'
 --
 -- * 'pzcdUploadProtocol'
 --
--- * 'pzcdPp'
---
 -- * 'pzcdAccessToken'
 --
 -- * 'pzcdUploadType'
 --
 -- * 'pzcdZone'
 --
--- * 'pzcdBearerToken'
+-- * 'pzcdName'
 --
 -- * 'pzcdClusterId'
 --
@@ -124,18 +119,17 @@ projectsZonesClustersDelete pPzcdZone_ pPzcdClusterId_ pPzcdProjectId_ =
     ProjectsZonesClustersDelete'
     { _pzcdXgafv = Nothing
     , _pzcdUploadProtocol = Nothing
-    , _pzcdPp = True
     , _pzcdAccessToken = Nothing
     , _pzcdUploadType = Nothing
     , _pzcdZone = pPzcdZone_
-    , _pzcdBearerToken = Nothing
+    , _pzcdName = Nothing
     , _pzcdClusterId = pPzcdClusterId_
     , _pzcdProjectId = pPzcdProjectId_
     , _pzcdCallback = Nothing
     }
 
 -- | V1 error format.
-pzcdXgafv :: Lens' ProjectsZonesClustersDelete (Maybe Text)
+pzcdXgafv :: Lens' ProjectsZonesClustersDelete (Maybe Xgafv)
 pzcdXgafv
   = lens _pzcdXgafv (\ s a -> s{_pzcdXgafv = a})
 
@@ -144,10 +138,6 @@ pzcdUploadProtocol :: Lens' ProjectsZonesClustersDelete (Maybe Text)
 pzcdUploadProtocol
   = lens _pzcdUploadProtocol
       (\ s a -> s{_pzcdUploadProtocol = a})
-
--- | Pretty-print response.
-pzcdPp :: Lens' ProjectsZonesClustersDelete Bool
-pzcdPp = lens _pzcdPp (\ s a -> s{_pzcdPp = a})
 
 -- | OAuth access token.
 pzcdAccessToken :: Lens' ProjectsZonesClustersDelete (Maybe Text)
@@ -161,25 +151,27 @@ pzcdUploadType
   = lens _pzcdUploadType
       (\ s a -> s{_pzcdUploadType = a})
 
--- | The name of the Google Compute Engine
+-- | Deprecated. The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
+-- This field has been deprecated and replaced by the name field.
 pzcdZone :: Lens' ProjectsZonesClustersDelete Text
 pzcdZone = lens _pzcdZone (\ s a -> s{_pzcdZone = a})
 
--- | OAuth bearer token.
-pzcdBearerToken :: Lens' ProjectsZonesClustersDelete (Maybe Text)
-pzcdBearerToken
-  = lens _pzcdBearerToken
-      (\ s a -> s{_pzcdBearerToken = a})
+-- | The name (project, location, cluster) of the cluster to delete.
+-- Specified in the format \'projects\/*\/locations\/*\/clusters\/*\'.
+pzcdName :: Lens' ProjectsZonesClustersDelete (Maybe Text)
+pzcdName = lens _pzcdName (\ s a -> s{_pzcdName = a})
 
--- | The name of the cluster to delete.
+-- | Deprecated. The name of the cluster to delete. This field has been
+-- deprecated and replaced by the name field.
 pzcdClusterId :: Lens' ProjectsZonesClustersDelete Text
 pzcdClusterId
   = lens _pzcdClusterId
       (\ s a -> s{_pzcdClusterId = a})
 
--- | The Google Developers Console [project ID or project
--- number](https:\/\/support.google.com\/cloud\/answer\/6158840).
+-- | Deprecated. The Google Developers Console [project ID or project
+-- number](https:\/\/support.google.com\/cloud\/answer\/6158840). This
+-- field has been deprecated and replaced by the name field.
 pzcdProjectId :: Lens' ProjectsZonesClustersDelete Text
 pzcdProjectId
   = lens _pzcdProjectId
@@ -199,10 +191,9 @@ instance GoogleRequest ProjectsZonesClustersDelete
           = go _pzcdProjectId _pzcdZone _pzcdClusterId
               _pzcdXgafv
               _pzcdUploadProtocol
-              (Just _pzcdPp)
               _pzcdAccessToken
               _pzcdUploadType
-              _pzcdBearerToken
+              _pzcdName
               _pzcdCallback
               (Just AltJSON)
               containerService

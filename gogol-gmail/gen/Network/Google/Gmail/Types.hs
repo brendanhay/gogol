@@ -39,6 +39,12 @@ module Network.Google.Gmail.Types
     -- * FilterCriteriaSizeComparison
     , FilterCriteriaSizeComparison (..)
 
+    -- * Delegate
+    , Delegate
+    , delegate
+    , dVerificationStatus
+    , dDelegateEmail
+
     -- * UsersMessagesGetFormat
     , UsersMessagesGetFormat (..)
 
@@ -83,8 +89,19 @@ module Network.Google.Gmail.Types
     , hId
     , hMessages
 
+    -- * ListDelegatesResponse
+    , ListDelegatesResponse
+    , listDelegatesResponse
+    , ldrDelegates
+
     -- * ForwardingAddressVerificationStatus
     , ForwardingAddressVerificationStatus (..)
+
+    -- * LabelColor
+    , LabelColor
+    , labelColor
+    , lcBackgRoundColor
+    , lcTextColor
 
     -- * FilterCriteria
     , FilterCriteria
@@ -115,6 +132,9 @@ module Network.Google.Gmail.Types
     , messagePartHeader
     , mphValue
     , mphName
+
+    -- * UsersHistoryListHistoryTypes
+    , UsersHistoryListHistoryTypes (..)
 
     -- * SendAsVerificationStatus
     , SendAsVerificationStatus (..)
@@ -231,6 +251,9 @@ module Network.Google.Gmail.Types
     , wrExpiration
     , wrHistoryId
 
+    -- * DelegateVerificationStatus
+    , DelegateVerificationStatus (..)
+
     -- * UsersThreadsGetFormat
     , UsersThreadsGetFormat (..)
 
@@ -293,6 +316,11 @@ module Network.Google.Gmail.Types
     -- * ImapSettingsExpungeBehavior
     , ImapSettingsExpungeBehavior (..)
 
+    -- * ListSmimeInfoResponse
+    , ListSmimeInfoResponse
+    , listSmimeInfoResponse
+    , lsirSmimeInfo
+
     -- * SmtpMsaSecurityMode
     , SmtpMsaSecurityMode (..)
 
@@ -339,12 +367,24 @@ module Network.Google.Gmail.Types
     , lThreadsUnread
     , lMessageListVisibility
     , lMessagesTotal
+    , lColor
     , lMessagesUnread
     , lName
     , lThreadsTotal
     , lLabelListVisibility
     , lId
     , lType
+
+    -- * SmimeInfo
+    , SmimeInfo
+    , smimeInfo
+    , siPem
+    , siExpiration
+    , siEncryptedKeyPassword
+    , siId
+    , siPkcs12
+    , siIssuerCn
+    , siIsDefault
 
     -- * ListMessagesResponse
     , ListMessagesResponse
@@ -373,7 +413,7 @@ gmailService
 gmailSettingsBasicScope :: Proxy '["https://www.googleapis.com/auth/gmail.settings.basic"]
 gmailSettingsBasicScope = Proxy;
 
--- | View and manage your mail
+-- | Read, compose, send, and permanently delete all your email from Gmail
 mailGoogleComScope :: Proxy '["https://mail.google.com/"]
 mailGoogleComScope = Proxy;
 
@@ -406,6 +446,6 @@ gmailInsertScope = Proxy;
 gmailComposeScope :: Proxy '["https://www.googleapis.com/auth/gmail.compose"]
 gmailComposeScope = Proxy;
 
--- | View your emails messages and settings
+-- | View your email messages and settings
 gmailReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/gmail.readonly"]
 gmailReadOnlyScope = Proxy;

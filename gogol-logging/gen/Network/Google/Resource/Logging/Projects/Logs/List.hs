@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the logs in projects or organizations. Only logs that have entries
--- are listed.
+-- Lists the logs in projects, organizations, folders, or billing accounts.
+-- Only logs that have entries are listed.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.projects.logs.list@.
 module Network.Google.Resource.Logging.Projects.Logs.List
@@ -37,10 +37,8 @@ module Network.Google.Resource.Logging.Projects.Logs.List
     , pllParent
     , pllXgafv
     , pllUploadProtocol
-    , pllPp
     , pllAccessToken
     , pllUploadType
-    , pllBearerToken
     , pllPageToken
     , pllPageSize
     , pllCallback
@@ -57,28 +55,24 @@ type ProjectsLogsListResource =
          "logs" :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" (Textual Int32) :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] ListLogsResponse
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "pageSize" (Textual Int32) :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] ListLogsResponse
 
--- | Lists the logs in projects or organizations. Only logs that have entries
--- are listed.
+-- | Lists the logs in projects, organizations, folders, or billing accounts.
+-- Only logs that have entries are listed.
 --
 -- /See:/ 'projectsLogsList' smart constructor.
 data ProjectsLogsList = ProjectsLogsList'
     { _pllParent         :: !Text
     , _pllXgafv          :: !(Maybe Xgafv)
     , _pllUploadProtocol :: !(Maybe Text)
-    , _pllPp             :: !Bool
     , _pllAccessToken    :: !(Maybe Text)
     , _pllUploadType     :: !(Maybe Text)
-    , _pllBearerToken    :: !(Maybe Text)
     , _pllPageToken      :: !(Maybe Text)
     , _pllPageSize       :: !(Maybe (Textual Int32))
     , _pllCallback       :: !(Maybe Text)
@@ -94,13 +88,9 @@ data ProjectsLogsList = ProjectsLogsList'
 --
 -- * 'pllUploadProtocol'
 --
--- * 'pllPp'
---
 -- * 'pllAccessToken'
 --
 -- * 'pllUploadType'
---
--- * 'pllBearerToken'
 --
 -- * 'pllPageToken'
 --
@@ -115,10 +105,8 @@ projectsLogsList pPllParent_ =
     { _pllParent = pPllParent_
     , _pllXgafv = Nothing
     , _pllUploadProtocol = Nothing
-    , _pllPp = True
     , _pllAccessToken = Nothing
     , _pllUploadType = Nothing
-    , _pllBearerToken = Nothing
     , _pllPageToken = Nothing
     , _pllPageSize = Nothing
     , _pllCallback = Nothing
@@ -126,6 +114,7 @@ projectsLogsList pPllParent_ =
 
 -- | Required. The resource name that owns the logs:
 -- \"projects\/[PROJECT_ID]\" \"organizations\/[ORGANIZATION_ID]\"
+-- \"billingAccounts\/[BILLING_ACCOUNT_ID]\" \"folders\/[FOLDER_ID]\"
 pllParent :: Lens' ProjectsLogsList Text
 pllParent
   = lens _pllParent (\ s a -> s{_pllParent = a})
@@ -140,10 +129,6 @@ pllUploadProtocol
   = lens _pllUploadProtocol
       (\ s a -> s{_pllUploadProtocol = a})
 
--- | Pretty-print response.
-pllPp :: Lens' ProjectsLogsList Bool
-pllPp = lens _pllPp (\ s a -> s{_pllPp = a})
-
 -- | OAuth access token.
 pllAccessToken :: Lens' ProjectsLogsList (Maybe Text)
 pllAccessToken
@@ -155,12 +140,6 @@ pllUploadType :: Lens' ProjectsLogsList (Maybe Text)
 pllUploadType
   = lens _pllUploadType
       (\ s a -> s{_pllUploadType = a})
-
--- | OAuth bearer token.
-pllBearerToken :: Lens' ProjectsLogsList (Maybe Text)
-pllBearerToken
-  = lens _pllBearerToken
-      (\ s a -> s{_pllBearerToken = a})
 
 -- | Optional. If present, then retrieve the next batch of results from the
 -- preceding call to this method. pageToken must be the value of
@@ -192,10 +171,8 @@ instance GoogleRequest ProjectsLogsList where
                "https://www.googleapis.com/auth/logging.read"]
         requestClient ProjectsLogsList'{..}
           = go _pllParent _pllXgafv _pllUploadProtocol
-              (Just _pllPp)
               _pllAccessToken
               _pllUploadType
-              _pllBearerToken
               _pllPageToken
               _pllPageSize
               _pllCallback

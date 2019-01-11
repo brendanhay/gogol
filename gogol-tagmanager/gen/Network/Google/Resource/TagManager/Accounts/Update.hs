@@ -22,7 +22,7 @@
 --
 -- Updates a GTM Account.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.update@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v2/ Tag Manager API Reference> for @tagmanager.accounts.update@.
 module Network.Google.Resource.TagManager.Accounts.Update
     (
     -- * REST Resource
@@ -33,9 +33,9 @@ module Network.Google.Resource.TagManager.Accounts.Update
     , AccountsUpdate
 
     -- * Request Lenses
+    , auPath
     , auFingerprint
     , auPayload
-    , auAccountId
     ) where
 
 import           Network.Google.Prelude
@@ -45,41 +45,44 @@ import           Network.Google.TagManager.Types
 -- 'AccountsUpdate' request conforms to.
 type AccountsUpdateResource =
      "tagmanager" :>
-       "v1" :>
-         "accounts" :>
-           Capture "accountId" Text :>
-             QueryParam "fingerprint" Text :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] Account :> Put '[JSON] Account
+       "v2" :>
+         Capture "path" Text :>
+           QueryParam "fingerprint" Text :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] Account :> Put '[JSON] Account
 
 -- | Updates a GTM Account.
 --
 -- /See:/ 'accountsUpdate' smart constructor.
 data AccountsUpdate = AccountsUpdate'
-    { _auFingerprint :: !(Maybe Text)
+    { _auPath        :: !Text
+    , _auFingerprint :: !(Maybe Text)
     , _auPayload     :: !Account
-    , _auAccountId   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'auPath'
+--
 -- * 'auFingerprint'
 --
 -- * 'auPayload'
---
--- * 'auAccountId'
 accountsUpdate
-    :: Account -- ^ 'auPayload'
-    -> Text -- ^ 'auAccountId'
+    :: Text -- ^ 'auPath'
+    -> Account -- ^ 'auPayload'
     -> AccountsUpdate
-accountsUpdate pAuPayload_ pAuAccountId_ =
+accountsUpdate pAuPath_ pAuPayload_ =
     AccountsUpdate'
-    { _auFingerprint = Nothing
+    { _auPath = pAuPath_
+    , _auFingerprint = Nothing
     , _auPayload = pAuPayload_
-    , _auAccountId = pAuAccountId_
     }
+
+-- | GTM Accounts\'s API relative path. Example: accounts\/{account_id}
+auPath :: Lens' AccountsUpdate Text
+auPath = lens _auPath (\ s a -> s{_auPath = a})
 
 -- | When provided, this fingerprint must match the fingerprint of the
 -- account in storage.
@@ -93,18 +96,12 @@ auPayload :: Lens' AccountsUpdate Account
 auPayload
   = lens _auPayload (\ s a -> s{_auPayload = a})
 
--- | The GTM Account ID.
-auAccountId :: Lens' AccountsUpdate Text
-auAccountId
-  = lens _auAccountId (\ s a -> s{_auAccountId = a})
-
 instance GoogleRequest AccountsUpdate where
         type Rs AccountsUpdate = Account
         type Scopes AccountsUpdate =
              '["https://www.googleapis.com/auth/tagmanager.manage.accounts"]
         requestClient AccountsUpdate'{..}
-          = go _auAccountId _auFingerprint (Just AltJSON)
-              _auPayload
+          = go _auPath _auFingerprint (Just AltJSON) _auPayload
               tagManagerService
           where go
                   = buildClient (Proxy :: Proxy AccountsUpdateResource)

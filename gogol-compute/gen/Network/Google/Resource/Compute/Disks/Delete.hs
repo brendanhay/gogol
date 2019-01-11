@@ -36,6 +36,7 @@ module Network.Google.Resource.Compute.Disks.Delete
     , DisksDelete
 
     -- * Request Lenses
+    , ddRequestId
     , ddProject
     , ddDisk
     , ddZone
@@ -55,7 +56,8 @@ type DisksDeleteResource =
                Capture "zone" Text :>
                  "disks" :>
                    Capture "disk" Text :>
-                     QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+                     QueryParam "requestId" Text :>
+                       QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified persistent disk. Deleting a disk removes its data
 -- permanently and is irreversible. However, deleting a disk does not
@@ -64,14 +66,17 @@ type DisksDeleteResource =
 --
 -- /See:/ 'disksDelete' smart constructor.
 data DisksDelete = DisksDelete'
-    { _ddProject :: !Text
-    , _ddDisk    :: !Text
-    , _ddZone    :: !Text
+    { _ddRequestId :: !(Maybe Text)
+    , _ddProject   :: !Text
+    , _ddDisk      :: !Text
+    , _ddZone      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DisksDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ddRequestId'
 --
 -- * 'ddProject'
 --
@@ -85,10 +90,25 @@ disksDelete
     -> DisksDelete
 disksDelete pDdProject_ pDdDisk_ pDdZone_ =
     DisksDelete'
-    { _ddProject = pDdProject_
+    { _ddRequestId = Nothing
+    , _ddProject = pDdProject_
     , _ddDisk = pDdDisk_
     , _ddZone = pDdZone_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+ddRequestId :: Lens' DisksDelete (Maybe Text)
+ddRequestId
+  = lens _ddRequestId (\ s a -> s{_ddRequestId = a})
 
 -- | Project ID for this request.
 ddProject :: Lens' DisksDelete Text
@@ -109,7 +129,8 @@ instance GoogleRequest DisksDelete where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient DisksDelete'{..}
-          = go _ddProject _ddZone _ddDisk (Just AltJSON)
+          = go _ddProject _ddZone _ddDisk _ddRequestId
+              (Just AltJSON)
               computeService
           where go
                   = buildClient (Proxy :: Proxy DisksDeleteResource)

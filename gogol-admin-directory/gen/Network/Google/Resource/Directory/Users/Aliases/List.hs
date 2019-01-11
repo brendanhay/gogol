@@ -80,7 +80,7 @@ usersAliasesList pUalUserKey_ =
 ualEvent :: Lens' UsersAliasesList (Maybe UsersAliasesListEvent)
 ualEvent = lens _ualEvent (\ s a -> s{_ualEvent = a})
 
--- | Email or immutable Id of the user
+-- | Email or immutable ID of the user
 ualUserKey :: Lens' UsersAliasesList Text
 ualUserKey
   = lens _ualUserKey (\ s a -> s{_ualUserKey = a})

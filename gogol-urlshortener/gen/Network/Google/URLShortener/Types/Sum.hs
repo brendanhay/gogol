@@ -16,7 +16,7 @@
 --
 module Network.Google.URLShortener.Types.Sum where
 
-import           Network.Google.Prelude
+import           Network.Google.Prelude hiding (Bytes)
 
 -- | Additional information to return.
 data URLListProjection

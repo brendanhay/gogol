@@ -36,6 +36,7 @@ module Network.Google.Resource.Calendar.Events.Move
     , emDestination
     , emCalendarId
     , emSendNotifications
+    , emSendUpdates
     , emEventId
     ) where
 
@@ -54,7 +55,8 @@ type EventsMoveResource =
                  "move" :>
                    QueryParam "destination" Text :>
                      QueryParam "sendNotifications" Bool :>
-                       QueryParam "alt" AltJSON :> Post '[JSON] Event
+                       QueryParam "sendUpdates" EventsMoveSendUpdates :>
+                         QueryParam "alt" AltJSON :> Post '[JSON] Event
 
 -- | Moves an event to another calendar, i.e. changes an event\'s organizer.
 --
@@ -63,6 +65,7 @@ data EventsMove = EventsMove'
     { _emDestination       :: !Text
     , _emCalendarId        :: !Text
     , _emSendNotifications :: !(Maybe Bool)
+    , _emSendUpdates       :: !(Maybe EventsMoveSendUpdates)
     , _emEventId           :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -76,6 +79,8 @@ data EventsMove = EventsMove'
 --
 -- * 'emSendNotifications'
 --
+-- * 'emSendUpdates'
+--
 -- * 'emEventId'
 eventsMove
     :: Text -- ^ 'emDestination'
@@ -87,6 +92,7 @@ eventsMove pEmDestination_ pEmCalendarId_ pEmEventId_ =
     { _emDestination = pEmDestination_
     , _emCalendarId = pEmCalendarId_
     , _emSendNotifications = Nothing
+    , _emSendUpdates = Nothing
     , _emEventId = pEmEventId_
     }
 
@@ -103,12 +109,21 @@ emCalendarId :: Lens' EventsMove Text
 emCalendarId
   = lens _emCalendarId (\ s a -> s{_emCalendarId = a})
 
--- | Whether to send notifications about the change of the event\'s
--- organizer. Optional. The default is False.
+-- | Deprecated. Please use sendUpdates instead. Whether to send
+-- notifications about the change of the event\'s organizer. Note that some
+-- emails might still be sent even if you set the value to false. The
+-- default is false.
 emSendNotifications :: Lens' EventsMove (Maybe Bool)
 emSendNotifications
   = lens _emSendNotifications
       (\ s a -> s{_emSendNotifications = a})
+
+-- | Guests who should receive notifications about the change of the event\'s
+-- organizer.
+emSendUpdates :: Lens' EventsMove (Maybe EventsMoveSendUpdates)
+emSendUpdates
+  = lens _emSendUpdates
+      (\ s a -> s{_emSendUpdates = a})
 
 -- | Event identifier.
 emEventId :: Lens' EventsMove Text
@@ -118,10 +133,12 @@ emEventId
 instance GoogleRequest EventsMove where
         type Rs EventsMove = Event
         type Scopes EventsMove =
-             '["https://www.googleapis.com/auth/calendar"]
+             '["https://www.googleapis.com/auth/calendar",
+               "https://www.googleapis.com/auth/calendar.events"]
         requestClient EventsMove'{..}
           = go _emCalendarId _emEventId (Just _emDestination)
               _emSendNotifications
+              _emSendUpdates
               (Just AltJSON)
               appsCalendarService
           where go

@@ -38,10 +38,8 @@ module Network.Google.Resource.Classroom.Courses.Delete
     -- * Request Lenses
     , cdXgafv
     , cdUploadProtocol
-    , cdPp
     , cdAccessToken
     , cdUploadType
-    , cdBearerToken
     , cdId
     , cdCallback
     ) where
@@ -55,14 +53,12 @@ type CoursesDeleteResource =
      "v1" :>
        "courses" :>
          Capture "id" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :> Delete '[JSON] Empty
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
 -- | Deletes a course. This method returns the following error codes: *
 -- \`PERMISSION_DENIED\` if the requesting user is not permitted to delete
@@ -71,12 +67,10 @@ type CoursesDeleteResource =
 --
 -- /See:/ 'coursesDelete' smart constructor.
 data CoursesDelete = CoursesDelete'
-    { _cdXgafv          :: !(Maybe Text)
+    { _cdXgafv          :: !(Maybe Xgafv)
     , _cdUploadProtocol :: !(Maybe Text)
-    , _cdPp             :: !Bool
     , _cdAccessToken    :: !(Maybe Text)
     , _cdUploadType     :: !(Maybe Text)
-    , _cdBearerToken    :: !(Maybe Text)
     , _cdId             :: !Text
     , _cdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -89,13 +83,9 @@ data CoursesDelete = CoursesDelete'
 --
 -- * 'cdUploadProtocol'
 --
--- * 'cdPp'
---
 -- * 'cdAccessToken'
 --
 -- * 'cdUploadType'
---
--- * 'cdBearerToken'
 --
 -- * 'cdId'
 --
@@ -107,16 +97,14 @@ coursesDelete pCdId_ =
     CoursesDelete'
     { _cdXgafv = Nothing
     , _cdUploadProtocol = Nothing
-    , _cdPp = True
     , _cdAccessToken = Nothing
     , _cdUploadType = Nothing
-    , _cdBearerToken = Nothing
     , _cdId = pCdId_
     , _cdCallback = Nothing
     }
 
 -- | V1 error format.
-cdXgafv :: Lens' CoursesDelete (Maybe Text)
+cdXgafv :: Lens' CoursesDelete (Maybe Xgafv)
 cdXgafv = lens _cdXgafv (\ s a -> s{_cdXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -124,10 +112,6 @@ cdUploadProtocol :: Lens' CoursesDelete (Maybe Text)
 cdUploadProtocol
   = lens _cdUploadProtocol
       (\ s a -> s{_cdUploadProtocol = a})
-
--- | Pretty-print response.
-cdPp :: Lens' CoursesDelete Bool
-cdPp = lens _cdPp (\ s a -> s{_cdPp = a})
 
 -- | OAuth access token.
 cdAccessToken :: Lens' CoursesDelete (Maybe Text)
@@ -139,12 +123,6 @@ cdAccessToken
 cdUploadType :: Lens' CoursesDelete (Maybe Text)
 cdUploadType
   = lens _cdUploadType (\ s a -> s{_cdUploadType = a})
-
--- | OAuth bearer token.
-cdBearerToken :: Lens' CoursesDelete (Maybe Text)
-cdBearerToken
-  = lens _cdBearerToken
-      (\ s a -> s{_cdBearerToken = a})
 
 -- | Identifier of the course to delete. This identifier can be either the
 -- Classroom-assigned identifier or an alias.
@@ -161,10 +139,8 @@ instance GoogleRequest CoursesDelete where
         type Scopes CoursesDelete =
              '["https://www.googleapis.com/auth/classroom.courses"]
         requestClient CoursesDelete'{..}
-          = go _cdId _cdXgafv _cdUploadProtocol (Just _cdPp)
-              _cdAccessToken
+          = go _cdId _cdXgafv _cdUploadProtocol _cdAccessToken
               _cdUploadType
-              _cdBearerToken
               _cdCallback
               (Just AltJSON)
               classroomService

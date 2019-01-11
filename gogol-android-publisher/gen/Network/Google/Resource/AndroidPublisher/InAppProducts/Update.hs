@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'InAppProductsUpdate' request conforms to.
 type InAppProductsUpdateResource =
      "androidpublisher" :>
-       "v2" :>
+       "v3" :>
          "applications" :>
            Capture "packageName" Text :>
              "inappproducts" :>

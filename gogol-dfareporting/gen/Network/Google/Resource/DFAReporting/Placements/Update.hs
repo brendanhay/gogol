@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'PlacementsUpdate' request conforms to.
 type PlacementsUpdateResource =
      "dfareporting" :>
-       "v2.7" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placements" :>

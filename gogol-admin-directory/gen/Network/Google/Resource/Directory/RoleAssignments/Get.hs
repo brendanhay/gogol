@@ -78,7 +78,7 @@ roleAssignmentsGet pRagCustomer_ pRagRoleAssignmentId_ =
     , _ragRoleAssignmentId = pRagRoleAssignmentId_
     }
 
--- | Immutable ID of the Google Apps account.
+-- | Immutable ID of the G Suite account.
 ragCustomer :: Lens' RoleAssignmentsGet Text
 ragCustomer
   = lens _ragCustomer (\ s a -> s{_ragCustomer = a})

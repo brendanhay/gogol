@@ -59,6 +59,54 @@ instance ToJSON ThreatEntryMetadata where
         toJSON ThreatEntryMetadata'{..}
           = object (catMaybes [("entries" .=) <$> _temEntries])
 
+-- | Details about the user that encountered the threat.
+--
+-- /See:/ 'userInfo' smart constructor.
+data UserInfo = UserInfo'
+    { _uiRegionCode :: !(Maybe Text)
+    , _uiUserId     :: !(Maybe Bytes)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UserInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'uiRegionCode'
+--
+-- * 'uiUserId'
+userInfo
+    :: UserInfo
+userInfo =
+    UserInfo'
+    { _uiRegionCode = Nothing
+    , _uiUserId = Nothing
+    }
+
+-- | The UN M.49 region code associated with the user\'s location.
+uiRegionCode :: Lens' UserInfo (Maybe Text)
+uiRegionCode
+  = lens _uiRegionCode (\ s a -> s{_uiRegionCode = a})
+
+-- | Unique user identifier defined by the client.
+uiUserId :: Lens' UserInfo (Maybe ByteString)
+uiUserId
+  = lens _uiUserId (\ s a -> s{_uiUserId = a}) .
+      mapping _Bytes
+
+instance FromJSON UserInfo where
+        parseJSON
+          = withObject "UserInfo"
+              (\ o ->
+                 UserInfo' <$>
+                   (o .:? "regionCode") <*> (o .:? "userId"))
+
+instance ToJSON UserInfo where
+        toJSON UserInfo'{..}
+          = object
+              (catMaybes
+                 [("regionCode" .=) <$> _uiRegionCode,
+                  ("userId" .=) <$> _uiUserId])
+
 -- | The expected state of a client\'s local database.
 --
 -- /See:/ 'checksum' smart constructor.
@@ -130,6 +178,29 @@ instance ToJSON FindThreatMatchesResponse where
         toJSON FindThreatMatchesResponse'{..}
           = object
               (catMaybes [("matches" .=) <$> _ftmrMatches])
+
+-- | A generic empty message that you can re-use to avoid defining duplicated
+-- empty messages in your APIs. A typical example is to use it as the
+-- request or the response type of an API method. For instance: service Foo
+-- { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The
+-- JSON representation for \`Empty\` is empty JSON object \`{}\`.
+--
+-- /See:/ 'empty' smart constructor.
+data Empty =
+    Empty'
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Empty' with the minimum fields required to make a request.
+--
+empty
+    :: Empty
+empty = Empty'
+
+instance FromJSON Empty where
+        parseJSON = withObject "Empty" (\ o -> pure Empty')
+
+instance ToJSON Empty where
+        toJSON = const emptyObject
 
 -- | The information regarding one or more threats that a client submits when
 -- checking for matches in threat lists.
@@ -214,9 +285,102 @@ instance ToJSON ThreatInfo where
                   ("platformTypes" .=) <$> _tiPlatformTypes,
                   ("threatEntryTypes" .=) <$> _tiThreatEntryTypes])
 
+--
+-- /See:/ 'threatHit' smart constructor.
+data ThreatHit = ThreatHit'
+    { _thUserInfo     :: !(Maybe UserInfo)
+    , _thThreatType   :: !(Maybe ThreatHitThreatType)
+    , _thResources    :: !(Maybe [ThreatSource])
+    , _thEntry        :: !(Maybe ThreatEntry)
+    , _thClientInfo   :: !(Maybe ClientInfo)
+    , _thPlatformType :: !(Maybe ThreatHitPlatformType)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ThreatHit' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'thUserInfo'
+--
+-- * 'thThreatType'
+--
+-- * 'thResources'
+--
+-- * 'thEntry'
+--
+-- * 'thClientInfo'
+--
+-- * 'thPlatformType'
+threatHit
+    :: ThreatHit
+threatHit =
+    ThreatHit'
+    { _thUserInfo = Nothing
+    , _thThreatType = Nothing
+    , _thResources = Nothing
+    , _thEntry = Nothing
+    , _thClientInfo = Nothing
+    , _thPlatformType = Nothing
+    }
+
+-- | Details about the user that encountered the threat.
+thUserInfo :: Lens' ThreatHit (Maybe UserInfo)
+thUserInfo
+  = lens _thUserInfo (\ s a -> s{_thUserInfo = a})
+
+-- | The threat type reported.
+thThreatType :: Lens' ThreatHit (Maybe ThreatHitThreatType)
+thThreatType
+  = lens _thThreatType (\ s a -> s{_thThreatType = a})
+
+-- | The resources related to the threat hit.
+thResources :: Lens' ThreatHit [ThreatSource]
+thResources
+  = lens _thResources (\ s a -> s{_thResources = a}) .
+      _Default
+      . _Coerce
+
+-- | The threat entry responsible for the hit. Full hash should be reported
+-- for hash-based hits.
+thEntry :: Lens' ThreatHit (Maybe ThreatEntry)
+thEntry = lens _thEntry (\ s a -> s{_thEntry = a})
+
+-- | Client-reported identification.
+thClientInfo :: Lens' ThreatHit (Maybe ClientInfo)
+thClientInfo
+  = lens _thClientInfo (\ s a -> s{_thClientInfo = a})
+
+-- | The platform type reported.
+thPlatformType :: Lens' ThreatHit (Maybe ThreatHitPlatformType)
+thPlatformType
+  = lens _thPlatformType
+      (\ s a -> s{_thPlatformType = a})
+
+instance FromJSON ThreatHit where
+        parseJSON
+          = withObject "ThreatHit"
+              (\ o ->
+                 ThreatHit' <$>
+                   (o .:? "userInfo") <*> (o .:? "threatType") <*>
+                     (o .:? "resources" .!= mempty)
+                     <*> (o .:? "entry")
+                     <*> (o .:? "clientInfo")
+                     <*> (o .:? "platformType"))
+
+instance ToJSON ThreatHit where
+        toJSON ThreatHit'{..}
+          = object
+              (catMaybes
+                 [("userInfo" .=) <$> _thUserInfo,
+                  ("threatType" .=) <$> _thThreatType,
+                  ("resources" .=) <$> _thResources,
+                  ("entry" .=) <$> _thEntry,
+                  ("clientInfo" .=) <$> _thClientInfo,
+                  ("platformType" .=) <$> _thPlatformType])
+
 -- | Describes a Safe Browsing API update request. Clients can request
 -- updates for multiple lists in a single request. NOTE: Field index 2 is
--- unused. NEXT: 4
+-- unused. NEXT: 5
 --
 -- /See:/ 'fetchThreatListUpdatesRequest' smart constructor.
 data FetchThreatListUpdatesRequest = FetchThreatListUpdatesRequest'
@@ -273,6 +437,7 @@ instance ToJSON FetchThreatListUpdatesRequest where
 -- /See:/ 'findFullHashesRequest' smart constructor.
 data FindFullHashesRequest = FindFullHashesRequest'
     { _ffhrThreatInfo   :: !(Maybe ThreatInfo)
+    , _ffhrAPIClient    :: !(Maybe ClientInfo)
     , _ffhrClientStates :: !(Maybe [Bytes])
     , _ffhrClient       :: !(Maybe ClientInfo)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -283,6 +448,8 @@ data FindFullHashesRequest = FindFullHashesRequest'
 --
 -- * 'ffhrThreatInfo'
 --
+-- * 'ffhrAPIClient'
+--
 -- * 'ffhrClientStates'
 --
 -- * 'ffhrClient'
@@ -291,6 +458,7 @@ findFullHashesRequest
 findFullHashesRequest =
     FindFullHashesRequest'
     { _ffhrThreatInfo = Nothing
+    , _ffhrAPIClient = Nothing
     , _ffhrClientStates = Nothing
     , _ffhrClient = Nothing
     }
@@ -300,6 +468,13 @@ ffhrThreatInfo :: Lens' FindFullHashesRequest (Maybe ThreatInfo)
 ffhrThreatInfo
   = lens _ffhrThreatInfo
       (\ s a -> s{_ffhrThreatInfo = a})
+
+-- | Client metadata associated with callers of higher-level APIs built on
+-- top of the client\'s implementation.
+ffhrAPIClient :: Lens' FindFullHashesRequest (Maybe ClientInfo)
+ffhrAPIClient
+  = lens _ffhrAPIClient
+      (\ s a -> s{_ffhrAPIClient = a})
 
 -- | The current client states for each of the client\'s local threat lists.
 ffhrClientStates :: Lens' FindFullHashesRequest [ByteString]
@@ -319,7 +494,7 @@ instance FromJSON FindFullHashesRequest where
           = withObject "FindFullHashesRequest"
               (\ o ->
                  FindFullHashesRequest' <$>
-                   (o .:? "threatInfo") <*>
+                   (o .:? "threatInfo") <*> (o .:? "apiClient") <*>
                      (o .:? "clientStates" .!= mempty)
                      <*> (o .:? "client"))
 
@@ -328,6 +503,7 @@ instance ToJSON FindFullHashesRequest where
           = object
               (catMaybes
                  [("threatInfo" .=) <$> _ffhrThreatInfo,
+                  ("apiClient" .=) <$> _ffhrAPIClient,
                   ("clientStates" .=) <$> _ffhrClientStates,
                   ("client" .=) <$> _ffhrClient])
 
@@ -336,6 +512,8 @@ instance ToJSON FindFullHashesRequest where
 -- /See:/ 'constraints' smart constructor.
 data Constraints = Constraints'
     { _cMaxUpdateEntries      :: !(Maybe (Textual Int32))
+    , _cDeviceLocation        :: !(Maybe Text)
+    , _cLanguage              :: !(Maybe Text)
     , _cRegion                :: !(Maybe Text)
     , _cSupportedCompressions :: !(Maybe [Text])
     , _cMaxDatabaseEntries    :: !(Maybe (Textual Int32))
@@ -347,6 +525,10 @@ data Constraints = Constraints'
 --
 -- * 'cMaxUpdateEntries'
 --
+-- * 'cDeviceLocation'
+--
+-- * 'cLanguage'
+--
 -- * 'cRegion'
 --
 -- * 'cSupportedCompressions'
@@ -357,6 +539,8 @@ constraints
 constraints =
     Constraints'
     { _cMaxUpdateEntries = Nothing
+    , _cDeviceLocation = Nothing
+    , _cLanguage = Nothing
     , _cRegion = Nothing
     , _cSupportedCompressions = Nothing
     , _cMaxDatabaseEntries = Nothing
@@ -370,6 +554,19 @@ cMaxUpdateEntries
   = lens _cMaxUpdateEntries
       (\ s a -> s{_cMaxUpdateEntries = a})
       . mapping _Coerce
+
+-- | A client\'s physical location, expressed as a ISO 31166-1 alpha-2 region
+-- code.
+cDeviceLocation :: Lens' Constraints (Maybe Text)
+cDeviceLocation
+  = lens _cDeviceLocation
+      (\ s a -> s{_cDeviceLocation = a})
+
+-- | Requests the lists for a specific language. Expects ISO 639 alpha-2
+-- format.
+cLanguage :: Lens' Constraints (Maybe Text)
+cLanguage
+  = lens _cLanguage (\ s a -> s{_cLanguage = a})
 
 -- | Requests the list for a specific geographic location. If not set the
 -- server may pick that value based on the user\'s IP address. Expects ISO
@@ -399,8 +596,11 @@ instance FromJSON Constraints where
           = withObject "Constraints"
               (\ o ->
                  Constraints' <$>
-                   (o .:? "maxUpdateEntries") <*> (o .:? "region") <*>
-                     (o .:? "supportedCompressions" .!= mempty)
+                   (o .:? "maxUpdateEntries") <*>
+                     (o .:? "deviceLocation")
+                     <*> (o .:? "language")
+                     <*> (o .:? "region")
+                     <*> (o .:? "supportedCompressions" .!= mempty)
                      <*> (o .:? "maxDatabaseEntries"))
 
 instance ToJSON Constraints where
@@ -408,6 +608,8 @@ instance ToJSON Constraints where
           = object
               (catMaybes
                  [("maxUpdateEntries" .=) <$> _cMaxUpdateEntries,
+                  ("deviceLocation" .=) <$> _cDeviceLocation,
+                  ("language" .=) <$> _cLanguage,
                   ("region" .=) <$> _cRegion,
                   ("supportedCompressions" .=) <$>
                     _cSupportedCompressions,
@@ -446,7 +648,8 @@ riceDeltaEncoding =
     }
 
 -- | The offset of the first entry in the encoded data, or, if only a single
--- integer was encoded, that single integer\'s value.
+-- integer was encoded, that single integer\'s value. If the field is empty
+-- or missing, assume zero.
 rdeFirstValue :: Lens' RiceDeltaEncoding (Maybe Int64)
 rdeFirstValue
   = lens _rdeFirstValue
@@ -539,9 +742,9 @@ instance ToJSON ListThreatListsResponse where
 --
 -- /See:/ 'threatListDescriptor' smart constructor.
 data ThreatListDescriptor = ThreatListDescriptor'
-    { _tldThreatEntryType :: !(Maybe Text)
-    , _tldThreatType      :: !(Maybe Text)
-    , _tldPlatformType    :: !(Maybe Text)
+    { _tldThreatEntryType :: !(Maybe ThreatListDescriptorThreatEntryType)
+    , _tldThreatType      :: !(Maybe ThreatListDescriptorThreatType)
+    , _tldPlatformType    :: !(Maybe ThreatListDescriptorPlatformType)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ThreatListDescriptor' with the minimum fields required to make a request.
@@ -563,19 +766,19 @@ threatListDescriptor =
     }
 
 -- | The entry types contained in the list.
-tldThreatEntryType :: Lens' ThreatListDescriptor (Maybe Text)
+tldThreatEntryType :: Lens' ThreatListDescriptor (Maybe ThreatListDescriptorThreatEntryType)
 tldThreatEntryType
   = lens _tldThreatEntryType
       (\ s a -> s{_tldThreatEntryType = a})
 
 -- | The threat type posed by the list\'s entries.
-tldThreatType :: Lens' ThreatListDescriptor (Maybe Text)
+tldThreatType :: Lens' ThreatListDescriptor (Maybe ThreatListDescriptorThreatType)
 tldThreatType
   = lens _tldThreatType
       (\ s a -> s{_tldThreatType = a})
 
 -- | The platform type targeted by the list\'s entries.
-tldPlatformType :: Lens' ThreatListDescriptor (Maybe Text)
+tldPlatformType :: Lens' ThreatListDescriptor (Maybe ThreatListDescriptorPlatformType)
 tldPlatformType
   = lens _tldPlatformType
       (\ s a -> s{_tldPlatformType = a})
@@ -698,10 +901,10 @@ instance ToJSON FindThreatMatchesRequest where
 -- /See:/ 'listUpdateRequest' smart constructor.
 data ListUpdateRequest = ListUpdateRequest'
     { _lurState           :: !(Maybe Bytes)
-    , _lurThreatEntryType :: !(Maybe Text)
+    , _lurThreatEntryType :: !(Maybe ListUpdateRequestThreatEntryType)
     , _lurConstraints     :: !(Maybe Constraints)
-    , _lurThreatType      :: !(Maybe Text)
-    , _lurPlatformType    :: !(Maybe Text)
+    , _lurThreatType      :: !(Maybe ListUpdateRequestThreatType)
+    , _lurPlatformType    :: !(Maybe ListUpdateRequestPlatformType)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListUpdateRequest' with the minimum fields required to make a request.
@@ -736,7 +939,7 @@ lurState
       mapping _Bytes
 
 -- | The types of entries present in the list.
-lurThreatEntryType :: Lens' ListUpdateRequest (Maybe Text)
+lurThreatEntryType :: Lens' ListUpdateRequest (Maybe ListUpdateRequestThreatEntryType)
 lurThreatEntryType
   = lens _lurThreatEntryType
       (\ s a -> s{_lurThreatEntryType = a})
@@ -748,13 +951,13 @@ lurConstraints
       (\ s a -> s{_lurConstraints = a})
 
 -- | The type of threat posed by entries present in the list.
-lurThreatType :: Lens' ListUpdateRequest (Maybe Text)
+lurThreatType :: Lens' ListUpdateRequest (Maybe ListUpdateRequestThreatType)
 lurThreatType
   = lens _lurThreatType
       (\ s a -> s{_lurThreatType = a})
 
 -- | The type of platform at risk by entries present in the list.
-lurPlatformType :: Lens' ListUpdateRequest (Maybe Text)
+lurPlatformType :: Lens' ListUpdateRequest (Maybe ListUpdateRequestPlatformType)
 lurPlatformType
   = lens _lurPlatformType
       (\ s a -> s{_lurPlatformType = a})
@@ -808,7 +1011,8 @@ threatEntry =
     }
 
 -- | A hash prefix, consisting of the most significant 4-32 bytes of a SHA256
--- hash. This field is in binary format.
+-- hash. This field is in binary format. For JSON requests, hashes are
+-- base64-encoded.
 teHash :: Lens' ThreatEntry (Maybe ByteString)
 teHash
   = lens _teHash (\ s a -> s{_teHash = a}) .
@@ -819,7 +1023,7 @@ teURL :: Lens' ThreatEntry (Maybe Text)
 teURL = lens _teURL (\ s a -> s{_teURL = a})
 
 -- | The digest of an executable in SHA256 format. The API supports both
--- binary and hex digests.
+-- binary and hex digests. For JSON requests, digests are base64-encoded.
 teDigest :: Lens' ThreatEntry (Maybe ByteString)
 teDigest
   = lens _teDigest (\ s a -> s{_teDigest = a}) .
@@ -845,10 +1049,10 @@ instance ToJSON ThreatEntry where
 -- /See:/ 'threatMatch' smart constructor.
 data ThreatMatch = ThreatMatch'
     { _tmThreatEntryMetadata :: !(Maybe ThreatEntryMetadata)
-    , _tmThreatEntryType     :: !(Maybe Text)
-    , _tmThreatType          :: !(Maybe Text)
-    , _tmPlatformType        :: !(Maybe Text)
-    , _tmCacheDuration       :: !(Maybe Text)
+    , _tmThreatEntryType     :: !(Maybe ThreatMatchThreatEntryType)
+    , _tmThreatType          :: !(Maybe ThreatMatchThreatType)
+    , _tmPlatformType        :: !(Maybe ThreatMatchPlatformType)
+    , _tmCacheDuration       :: !(Maybe GDuration)
     , _tmThreat              :: !(Maybe ThreatEntry)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -886,28 +1090,29 @@ tmThreatEntryMetadata
       (\ s a -> s{_tmThreatEntryMetadata = a})
 
 -- | The threat entry type matching this threat.
-tmThreatEntryType :: Lens' ThreatMatch (Maybe Text)
+tmThreatEntryType :: Lens' ThreatMatch (Maybe ThreatMatchThreatEntryType)
 tmThreatEntryType
   = lens _tmThreatEntryType
       (\ s a -> s{_tmThreatEntryType = a})
 
 -- | The threat type matching this threat.
-tmThreatType :: Lens' ThreatMatch (Maybe Text)
+tmThreatType :: Lens' ThreatMatch (Maybe ThreatMatchThreatType)
 tmThreatType
   = lens _tmThreatType (\ s a -> s{_tmThreatType = a})
 
 -- | The platform type matching this threat.
-tmPlatformType :: Lens' ThreatMatch (Maybe Text)
+tmPlatformType :: Lens' ThreatMatch (Maybe ThreatMatchPlatformType)
 tmPlatformType
   = lens _tmPlatformType
       (\ s a -> s{_tmPlatformType = a})
 
 -- | The cache lifetime for the returned match. Clients must not cache this
 -- response for more than this duration to avoid false positives.
-tmCacheDuration :: Lens' ThreatMatch (Maybe Text)
+tmCacheDuration :: Lens' ThreatMatch (Maybe Scientific)
 tmCacheDuration
   = lens _tmCacheDuration
       (\ s a -> s{_tmCacheDuration = a})
+      . mapping _GDuration
 
 -- | The threat matching this threat.
 tmThreat :: Lens' ThreatMatch (Maybe ThreatEntry)
@@ -972,9 +1177,9 @@ rhPrefixSize
   = lens _rhPrefixSize (\ s a -> s{_rhPrefixSize = a})
       . mapping _Coerce
 
--- | The hashes, all concatenated into one long string. Each hash has a
--- prefix size of |prefix_size| above. Hashes are sorted in lexicographic
--- order.
+-- | The hashes, in binary format, concatenated into one long string. Hashes
+-- are sorted in lexicographic order. For JSON API users, hashes are
+-- base64-encoded.
 rhRawHashes :: Lens' RawHashes (Maybe ByteString)
 rhRawHashes
   = lens _rhRawHashes (\ s a -> s{_rhRawHashes = a}) .
@@ -999,13 +1204,13 @@ instance ToJSON RawHashes where
 -- /See:/ 'listUpdateResponse' smart constructor.
 data ListUpdateResponse = ListUpdateResponse'
     { _lAdditions       :: !(Maybe [ThreatEntrySet])
-    , _lThreatEntryType :: !(Maybe Text)
+    , _lThreatEntryType :: !(Maybe ListUpdateResponseThreatEntryType)
     , _lChecksum        :: !(Maybe Checksum)
-    , _lThreatType      :: !(Maybe Text)
-    , _lPlatformType    :: !(Maybe Text)
+    , _lThreatType      :: !(Maybe ListUpdateResponseThreatType)
+    , _lPlatformType    :: !(Maybe ListUpdateResponsePlatformType)
     , _lNewClientState  :: !(Maybe Bytes)
     , _lRemovals        :: !(Maybe [ThreatEntrySet])
-    , _lResponseType    :: !(Maybe Text)
+    , _lResponseType    :: !(Maybe ListUpdateResponseResponseType)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListUpdateResponse' with the minimum fields required to make a request.
@@ -1051,7 +1256,7 @@ lAdditions
       . _Coerce
 
 -- | The format of the threats.
-lThreatEntryType :: Lens' ListUpdateResponse (Maybe Text)
+lThreatEntryType :: Lens' ListUpdateResponse (Maybe ListUpdateResponseThreatEntryType)
 lThreatEntryType
   = lens _lThreatEntryType
       (\ s a -> s{_lThreatEntryType = a})
@@ -1065,12 +1270,12 @@ lChecksum
   = lens _lChecksum (\ s a -> s{_lChecksum = a})
 
 -- | The threat type for which data is returned.
-lThreatType :: Lens' ListUpdateResponse (Maybe Text)
+lThreatType :: Lens' ListUpdateResponse (Maybe ListUpdateResponseThreatType)
 lThreatType
   = lens _lThreatType (\ s a -> s{_lThreatType = a})
 
 -- | The platform type for which data is returned.
-lPlatformType :: Lens' ListUpdateResponse (Maybe Text)
+lPlatformType :: Lens' ListUpdateResponse (Maybe ListUpdateResponsePlatformType)
 lPlatformType
   = lens _lPlatformType
       (\ s a -> s{_lPlatformType = a})
@@ -1082,8 +1287,8 @@ lNewClientState
       (\ s a -> s{_lNewClientState = a})
       . mapping _Bytes
 
--- | A set of entries to remove from a local threat type\'s list. Repeated
--- for the same reason as above.
+-- | A set of entries to remove from a local threat type\'s list. In
+-- practice, this field is empty or contains exactly one ThreatEntrySet.
 lRemovals :: Lens' ListUpdateResponse [ThreatEntrySet]
 lRemovals
   = lens _lRemovals (\ s a -> s{_lRemovals = a}) .
@@ -1092,7 +1297,7 @@ lRemovals
 
 -- | The type of response. This may indicate that an action is required by
 -- the client when the response is received.
-lResponseType :: Lens' ListUpdateResponse (Maybe Text)
+lResponseType :: Lens' ListUpdateResponse (Maybe ListUpdateResponseResponseType)
 lResponseType
   = lens _lResponseType
       (\ s a -> s{_lResponseType = a})
@@ -1133,7 +1338,7 @@ data ThreatEntrySet = ThreatEntrySet'
     , _tesRiceIndices     :: !(Maybe RiceDeltaEncoding)
     , _tesRawHashes       :: !(Maybe RawHashes)
     , _tesRawIndices      :: !(Maybe RawIndices)
-    , _tesCompressionType :: !(Maybe Text)
+    , _tesCompressionType :: !(Maybe ThreatEntrySetCompressionType)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ThreatEntrySet' with the minimum fields required to make a request.
@@ -1161,14 +1366,17 @@ threatEntrySet =
     }
 
 -- | The encoded 4-byte prefixes of SHA256-formatted entries, using a
--- Golomb-Rice encoding.
+-- Golomb-Rice encoding. The hashes are converted to uint32, sorted in
+-- ascending order, then delta encoded and stored as encoded_data.
 tesRiceHashes :: Lens' ThreatEntrySet (Maybe RiceDeltaEncoding)
 tesRiceHashes
   = lens _tesRiceHashes
       (\ s a -> s{_tesRiceHashes = a})
 
 -- | The encoded local, lexicographically-sorted list indices, using a
--- Golomb-Rice encoding. Used for sending compressed removal indices.
+-- Golomb-Rice encoding. Used for sending compressed removal indices. The
+-- removal indices (uint32) are sorted in ascending order, then delta
+-- encoded and stored as encoded_data.
 tesRiceIndices :: Lens' ThreatEntrySet (Maybe RiceDeltaEncoding)
 tesRiceIndices
   = lens _tesRiceIndices
@@ -1186,7 +1394,7 @@ tesRawIndices
       (\ s a -> s{_tesRawIndices = a})
 
 -- | The compression type for the entries in this set.
-tesCompressionType :: Lens' ThreatEntrySet (Maybe Text)
+tesCompressionType :: Lens' ThreatEntrySet (Maybe ThreatEntrySetCompressionType)
 tesCompressionType
   = lens _tesCompressionType
       (\ s a -> s{_tesCompressionType = a})
@@ -1246,12 +1454,79 @@ instance ToJSON RawIndices where
         toJSON RawIndices'{..}
           = object (catMaybes [("indices" .=) <$> _riIndices])
 
+-- | A single resource related to a threat hit.
+--
+-- /See:/ 'threatSource' smart constructor.
+data ThreatSource = ThreatSource'
+    { _tsRemoteIP :: !(Maybe Text)
+    , _tsURL      :: !(Maybe Text)
+    , _tsReferrer :: !(Maybe Text)
+    , _tsType     :: !(Maybe ThreatSourceType)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ThreatSource' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tsRemoteIP'
+--
+-- * 'tsURL'
+--
+-- * 'tsReferrer'
+--
+-- * 'tsType'
+threatSource
+    :: ThreatSource
+threatSource =
+    ThreatSource'
+    { _tsRemoteIP = Nothing
+    , _tsURL = Nothing
+    , _tsReferrer = Nothing
+    , _tsType = Nothing
+    }
+
+-- | The remote IP of the resource in ASCII format. Either IPv4 or IPv6.
+tsRemoteIP :: Lens' ThreatSource (Maybe Text)
+tsRemoteIP
+  = lens _tsRemoteIP (\ s a -> s{_tsRemoteIP = a})
+
+-- | The URL of the resource.
+tsURL :: Lens' ThreatSource (Maybe Text)
+tsURL = lens _tsURL (\ s a -> s{_tsURL = a})
+
+-- | Referrer of the resource. Only set if the referrer is available.
+tsReferrer :: Lens' ThreatSource (Maybe Text)
+tsReferrer
+  = lens _tsReferrer (\ s a -> s{_tsReferrer = a})
+
+-- | The type of source reported.
+tsType :: Lens' ThreatSource (Maybe ThreatSourceType)
+tsType = lens _tsType (\ s a -> s{_tsType = a})
+
+instance FromJSON ThreatSource where
+        parseJSON
+          = withObject "ThreatSource"
+              (\ o ->
+                 ThreatSource' <$>
+                   (o .:? "remoteIp") <*> (o .:? "url") <*>
+                     (o .:? "referrer")
+                     <*> (o .:? "type"))
+
+instance ToJSON ThreatSource where
+        toJSON ThreatSource'{..}
+          = object
+              (catMaybes
+                 [("remoteIp" .=) <$> _tsRemoteIP,
+                  ("url" .=) <$> _tsURL,
+                  ("referrer" .=) <$> _tsReferrer,
+                  ("type" .=) <$> _tsType])
+
 --
 -- /See:/ 'findFullHashesResponse' smart constructor.
 data FindFullHashesResponse = FindFullHashesResponse'
     { _ffhrMatches               :: !(Maybe [ThreatMatch])
-    , _ffhrNegativeCacheDuration :: !(Maybe Text)
-    , _ffhrMinimumWaitDuration   :: !(Maybe Text)
+    , _ffhrNegativeCacheDuration :: !(Maybe GDuration)
+    , _ffhrMinimumWaitDuration   :: !(Maybe GDuration)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FindFullHashesResponse' with the minimum fields required to make a request.
@@ -1281,18 +1556,20 @@ ffhrMatches
 
 -- | For requested entities that did not match the threat list, how long to
 -- cache the response.
-ffhrNegativeCacheDuration :: Lens' FindFullHashesResponse (Maybe Text)
+ffhrNegativeCacheDuration :: Lens' FindFullHashesResponse (Maybe Scientific)
 ffhrNegativeCacheDuration
   = lens _ffhrNegativeCacheDuration
       (\ s a -> s{_ffhrNegativeCacheDuration = a})
+      . mapping _GDuration
 
 -- | The minimum duration the client must wait before issuing any find hashes
 -- request. If this field is not set, clients can issue a request as soon
 -- as they want.
-ffhrMinimumWaitDuration :: Lens' FindFullHashesResponse (Maybe Text)
+ffhrMinimumWaitDuration :: Lens' FindFullHashesResponse (Maybe Scientific)
 ffhrMinimumWaitDuration
   = lens _ffhrMinimumWaitDuration
       (\ s a -> s{_ffhrMinimumWaitDuration = a})
+      . mapping _GDuration
 
 instance FromJSON FindFullHashesResponse where
         parseJSON
@@ -1336,13 +1613,14 @@ metadataEntry =
     , _meKey = Nothing
     }
 
--- | The metadata entry value.
+-- | The metadata entry value. For JSON requests, the value is
+-- base64-encoded.
 meValue :: Lens' MetadataEntry (Maybe ByteString)
 meValue
   = lens _meValue (\ s a -> s{_meValue = a}) .
       mapping _Bytes
 
--- | The metadata entry key.
+-- | The metadata entry key. For JSON requests, the key is base64-encoded.
 meKey :: Lens' MetadataEntry (Maybe ByteString)
 meKey
   = lens _meKey (\ s a -> s{_meKey = a}) .
@@ -1364,7 +1642,7 @@ instance ToJSON MetadataEntry where
 -- /See:/ 'fetchThreatListUpdatesResponse' smart constructor.
 data FetchThreatListUpdatesResponse = FetchThreatListUpdatesResponse'
     { _ftlurListUpdateResponses :: !(Maybe [ListUpdateResponse])
-    , _ftlurMinimumWaitDuration :: !(Maybe Text)
+    , _ftlurMinimumWaitDuration :: !(Maybe GDuration)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FetchThreatListUpdatesResponse' with the minimum fields required to make a request.
@@ -1393,10 +1671,11 @@ ftlurListUpdateResponses
 -- | The minimum duration the client must wait before issuing any update
 -- request. If this field is not set clients may update as soon as they
 -- want.
-ftlurMinimumWaitDuration :: Lens' FetchThreatListUpdatesResponse (Maybe Text)
+ftlurMinimumWaitDuration :: Lens' FetchThreatListUpdatesResponse (Maybe Scientific)
 ftlurMinimumWaitDuration
   = lens _ftlurMinimumWaitDuration
       (\ s a -> s{_ftlurMinimumWaitDuration = a})
+      . mapping _GDuration
 
 instance FromJSON FetchThreatListUpdatesResponse
          where

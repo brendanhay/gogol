@@ -1,6 +1,6 @@
 name:                  gogol-runtimeconfig
 version:               0.3.0
-synopsis:              Google Cloud RuntimeConfig SDK.
+synopsis:              Google Cloud Runtime Configuration SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -14,8 +14,10 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    Provides capabilities for dynamic configuration and coordination for
-    applications running on Google Cloud Platform.
+    The Runtime Configurator allows you to dynamically configure and expose
+    variables through Google Cloud Platform. In addition, you can also set
+    Watchers and Waiters that will watch for changes to your data and return
+    based on certain conditions.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!

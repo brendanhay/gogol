@@ -66,7 +66,7 @@ type AccountsStoreInfosListResource =
          Capture "accountId" Text :>
            "storeInfos" :>
              QueryParams "pphNames" Text :>
-               QueryParam "$.xgafv" Text :>
+               QueryParam "$.xgafv" Xgafv :>
                  QueryParams "studioNames" Text :>
                    QueryParams "videoIds" Text :>
                      QueryParam "upload_protocol" Text :>
@@ -94,7 +94,7 @@ type AccountsStoreInfosListResource =
 -- /See:/ 'accountsStoreInfosList' smart constructor.
 data AccountsStoreInfosList = AccountsStoreInfosList'
     { _asilPphNames       :: !(Maybe [Text])
-    , _asilXgafv          :: !(Maybe Text)
+    , _asilXgafv          :: !(Maybe Xgafv)
     , _asilStudioNames    :: !(Maybe [Text])
     , _asilVideoIds       :: !(Maybe [Text])
     , _asilUploadProtocol :: !(Maybe Text)
@@ -185,7 +185,7 @@ asilPphNames
       . _Coerce
 
 -- | V1 error format.
-asilXgafv :: Lens' AccountsStoreInfosList (Maybe Text)
+asilXgafv :: Lens' AccountsStoreInfosList (Maybe Xgafv)
 asilXgafv
   = lens _asilXgafv (\ s a -> s{_asilXgafv = a})
 

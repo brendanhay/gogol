@@ -33,9 +33,10 @@ module Network.Google.Resource.Compute.Routers.Delete
     , RoutersDelete
 
     -- * Request Lenses
-    , rddProject
-    , rddRouter
-    , rddRegion
+    , rouoRequestId
+    , rouoProject
+    , rouoRouter
+    , rouoRegion
     ) where
 
 import           Network.Google.Compute.Types
@@ -52,52 +53,72 @@ type RoutersDeleteResource =
                Capture "region" Text :>
                  "routers" :>
                    Capture "router" Text :>
-                     QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+                     QueryParam "requestId" Text :>
+                       QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified Router resource.
 --
 -- /See:/ 'routersDelete' smart constructor.
 data RoutersDelete = RoutersDelete'
-    { _rddProject :: !Text
-    , _rddRouter  :: !Text
-    , _rddRegion  :: !Text
+    { _rouoRequestId :: !(Maybe Text)
+    , _rouoProject   :: !Text
+    , _rouoRouter    :: !Text
+    , _rouoRegion    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoutersDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rddProject'
+-- * 'rouoRequestId'
 --
--- * 'rddRouter'
+-- * 'rouoProject'
 --
--- * 'rddRegion'
+-- * 'rouoRouter'
+--
+-- * 'rouoRegion'
 routersDelete
-    :: Text -- ^ 'rddProject'
-    -> Text -- ^ 'rddRouter'
-    -> Text -- ^ 'rddRegion'
+    :: Text -- ^ 'rouoProject'
+    -> Text -- ^ 'rouoRouter'
+    -> Text -- ^ 'rouoRegion'
     -> RoutersDelete
-routersDelete pRddProject_ pRddRouter_ pRddRegion_ =
+routersDelete pRouoProject_ pRouoRouter_ pRouoRegion_ =
     RoutersDelete'
-    { _rddProject = pRddProject_
-    , _rddRouter = pRddRouter_
-    , _rddRegion = pRddRegion_
+    { _rouoRequestId = Nothing
+    , _rouoProject = pRouoProject_
+    , _rouoRouter = pRouoRouter_
+    , _rouoRegion = pRouoRegion_
     }
 
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+rouoRequestId :: Lens' RoutersDelete (Maybe Text)
+rouoRequestId
+  = lens _rouoRequestId
+      (\ s a -> s{_rouoRequestId = a})
+
 -- | Project ID for this request.
-rddProject :: Lens' RoutersDelete Text
-rddProject
-  = lens _rddProject (\ s a -> s{_rddProject = a})
+rouoProject :: Lens' RoutersDelete Text
+rouoProject
+  = lens _rouoProject (\ s a -> s{_rouoProject = a})
 
 -- | Name of the Router resource to delete.
-rddRouter :: Lens' RoutersDelete Text
-rddRouter
-  = lens _rddRouter (\ s a -> s{_rddRouter = a})
+rouoRouter :: Lens' RoutersDelete Text
+rouoRouter
+  = lens _rouoRouter (\ s a -> s{_rouoRouter = a})
 
 -- | Name of the region for this request.
-rddRegion :: Lens' RoutersDelete Text
-rddRegion
-  = lens _rddRegion (\ s a -> s{_rddRegion = a})
+rouoRegion :: Lens' RoutersDelete Text
+rouoRegion
+  = lens _rouoRegion (\ s a -> s{_rouoRegion = a})
 
 instance GoogleRequest RoutersDelete where
         type Rs RoutersDelete = Operation
@@ -105,7 +126,9 @@ instance GoogleRequest RoutersDelete where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient RoutersDelete'{..}
-          = go _rddProject _rddRegion _rddRouter (Just AltJSON)
+          = go _rouoProject _rouoRegion _rouoRouter
+              _rouoRequestId
+              (Just AltJSON)
               computeService
           where go
                   = buildClient (Proxy :: Proxy RoutersDeleteResource)

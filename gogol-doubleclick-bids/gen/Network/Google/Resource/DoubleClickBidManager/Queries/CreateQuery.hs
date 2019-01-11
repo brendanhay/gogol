@@ -75,7 +75,8 @@ qcqPayload
 
 instance GoogleRequest QueriesCreateQuery where
         type Rs QueriesCreateQuery = Query
-        type Scopes QueriesCreateQuery = '[]
+        type Scopes QueriesCreateQuery =
+             '["https://www.googleapis.com/auth/doubleclickbidmanager"]
         requestClient QueriesCreateQuery'{..}
           = go (Just AltJSON) _qcqPayload
               doubleClickBidsService

@@ -22,7 +22,7 @@
 --
 -- Request the job status.
 --
--- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @dataflow.projects.locations.jobs.messages.list@.
+-- /See:/ <https://cloud.google.com/dataflow Dataflow API Reference> for @dataflow.projects.locations.jobs.messages.list@.
 module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Messages.List
     (
     -- * REST Resource
@@ -38,10 +38,8 @@ module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Messages.List
     , pljmlUploadProtocol
     , pljmlLocation
     , pljmlStartTime
-    , pljmlPp
     , pljmlAccessToken
     , pljmlUploadType
-    , pljmlBearerToken
     , pljmlEndTime
     , pljmlMinimumImportance
     , pljmlPageToken
@@ -64,37 +62,31 @@ type ProjectsLocationsJobsMessagesListResource =
                "jobs" :>
                  Capture "jobId" Text :>
                    "messages" :>
-                     QueryParam "$.xgafv" Text :>
+                     QueryParam "$.xgafv" Xgafv :>
                        QueryParam "upload_protocol" Text :>
-                         QueryParam "startTime" Text :>
-                           QueryParam "pp" Bool :>
-                             QueryParam "access_token" Text :>
-                               QueryParam "uploadType" Text :>
-                                 QueryParam "bearer_token" Text :>
-                                   QueryParam "endTime" Text :>
-                                     QueryParam "minimumImportance" Text :>
-                                       QueryParam "pageToken" Text :>
-                                         QueryParam "pageSize" (Textual Int32)
-                                           :>
-                                           QueryParam "callback" Text :>
-                                             QueryParam "alt" AltJSON :>
-                                               Get '[JSON]
-                                                 ListJobMessagesResponse
+                         QueryParam "startTime" DateTime' :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "endTime" DateTime' :>
+                                 QueryParam "minimumImportance" Text :>
+                                   QueryParam "pageToken" Text :>
+                                     QueryParam "pageSize" (Textual Int32) :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" AltJSON :>
+                                           Get '[JSON] ListJobMessagesResponse
 
 -- | Request the job status.
 --
 -- /See:/ 'projectsLocationsJobsMessagesList' smart constructor.
 data ProjectsLocationsJobsMessagesList = ProjectsLocationsJobsMessagesList'
-    { _pljmlXgafv             :: !(Maybe Text)
+    { _pljmlXgafv             :: !(Maybe Xgafv)
     , _pljmlJobId             :: !Text
     , _pljmlUploadProtocol    :: !(Maybe Text)
     , _pljmlLocation          :: !Text
-    , _pljmlStartTime         :: !(Maybe Text)
-    , _pljmlPp                :: !Bool
+    , _pljmlStartTime         :: !(Maybe DateTime')
     , _pljmlAccessToken       :: !(Maybe Text)
     , _pljmlUploadType        :: !(Maybe Text)
-    , _pljmlBearerToken       :: !(Maybe Text)
-    , _pljmlEndTime           :: !(Maybe Text)
+    , _pljmlEndTime           :: !(Maybe DateTime')
     , _pljmlMinimumImportance :: !(Maybe Text)
     , _pljmlPageToken         :: !(Maybe Text)
     , _pljmlProjectId         :: !Text
@@ -116,13 +108,9 @@ data ProjectsLocationsJobsMessagesList = ProjectsLocationsJobsMessagesList'
 --
 -- * 'pljmlStartTime'
 --
--- * 'pljmlPp'
---
 -- * 'pljmlAccessToken'
 --
 -- * 'pljmlUploadType'
---
--- * 'pljmlBearerToken'
 --
 -- * 'pljmlEndTime'
 --
@@ -147,10 +135,8 @@ projectsLocationsJobsMessagesList pPljmlJobId_ pPljmlLocation_ pPljmlProjectId_ 
     , _pljmlUploadProtocol = Nothing
     , _pljmlLocation = pPljmlLocation_
     , _pljmlStartTime = Nothing
-    , _pljmlPp = True
     , _pljmlAccessToken = Nothing
     , _pljmlUploadType = Nothing
-    , _pljmlBearerToken = Nothing
     , _pljmlEndTime = Nothing
     , _pljmlMinimumImportance = Nothing
     , _pljmlPageToken = Nothing
@@ -160,7 +146,7 @@ projectsLocationsJobsMessagesList pPljmlJobId_ pPljmlLocation_ pPljmlProjectId_ 
     }
 
 -- | V1 error format.
-pljmlXgafv :: Lens' ProjectsLocationsJobsMessagesList (Maybe Text)
+pljmlXgafv :: Lens' ProjectsLocationsJobsMessagesList (Maybe Xgafv)
 pljmlXgafv
   = lens _pljmlXgafv (\ s a -> s{_pljmlXgafv = a})
 
@@ -183,14 +169,11 @@ pljmlLocation
 
 -- | If specified, return only messages with timestamps >= start_time. The
 -- default is the job creation time (i.e. beginning of messages).
-pljmlStartTime :: Lens' ProjectsLocationsJobsMessagesList (Maybe Text)
+pljmlStartTime :: Lens' ProjectsLocationsJobsMessagesList (Maybe UTCTime)
 pljmlStartTime
   = lens _pljmlStartTime
       (\ s a -> s{_pljmlStartTime = a})
-
--- | Pretty-print response.
-pljmlPp :: Lens' ProjectsLocationsJobsMessagesList Bool
-pljmlPp = lens _pljmlPp (\ s a -> s{_pljmlPp = a})
+      . mapping _DateTime
 
 -- | OAuth access token.
 pljmlAccessToken :: Lens' ProjectsLocationsJobsMessagesList (Maybe Text)
@@ -204,17 +187,12 @@ pljmlUploadType
   = lens _pljmlUploadType
       (\ s a -> s{_pljmlUploadType = a})
 
--- | OAuth bearer token.
-pljmlBearerToken :: Lens' ProjectsLocationsJobsMessagesList (Maybe Text)
-pljmlBearerToken
-  = lens _pljmlBearerToken
-      (\ s a -> s{_pljmlBearerToken = a})
-
 -- | Return only messages with timestamps \< end_time. The default is now
 -- (i.e. return up to the latest messages available).
-pljmlEndTime :: Lens' ProjectsLocationsJobsMessagesList (Maybe Text)
+pljmlEndTime :: Lens' ProjectsLocationsJobsMessagesList (Maybe UTCTime)
 pljmlEndTime
   = lens _pljmlEndTime (\ s a -> s{_pljmlEndTime = a})
+      . mapping _DateTime
 
 -- | Filter to only get messages with importance >= level
 pljmlMinimumImportance :: Lens' ProjectsLocationsJobsMessagesList (Maybe Text)
@@ -256,16 +234,16 @@ instance GoogleRequest
              ListJobMessagesResponse
         type Scopes ProjectsLocationsJobsMessagesList =
              '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly",
                "https://www.googleapis.com/auth/userinfo.email"]
         requestClient ProjectsLocationsJobsMessagesList'{..}
           = go _pljmlProjectId _pljmlLocation _pljmlJobId
               _pljmlXgafv
               _pljmlUploadProtocol
               _pljmlStartTime
-              (Just _pljmlPp)
               _pljmlAccessToken
               _pljmlUploadType
-              _pljmlBearerToken
               _pljmlEndTime
               _pljmlMinimumImportance
               _pljmlPageToken

@@ -53,7 +53,7 @@ import           Network.Google.Prelude
 -- 'EventTagsList' request conforms to.
 type EventTagsListResource =
      "dfareporting" :>
-       "v2.7" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "eventTags" :>
@@ -85,9 +85,9 @@ data EventTagsList = EventTagsList'
     , _etlCampaignId      :: !(Maybe (Textual Int64))
     , _etlIds             :: !(Maybe [Textual Int64])
     , _etlProFileId       :: !(Textual Int64)
-    , _etlSortOrder       :: !(Maybe EventTagsListSortOrder)
+    , _etlSortOrder       :: !EventTagsListSortOrder
     , _etlAdId            :: !(Maybe (Textual Int64))
-    , _etlSortField       :: !(Maybe EventTagsListSortField)
+    , _etlSortField       :: !EventTagsListSortField
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventTagsList' with the minimum fields required to make a request.
@@ -128,9 +128,9 @@ eventTagsList pEtlProFileId_ =
     , _etlCampaignId = Nothing
     , _etlIds = Nothing
     , _etlProFileId = _Coerce # pEtlProFileId_
-    , _etlSortOrder = Nothing
+    , _etlSortOrder = ETLSOAscending
     , _etlAdId = Nothing
-    , _etlSortField = Nothing
+    , _etlSortField = ETLSFID
     }
 
 -- | Examine only the specified campaign or advertiser\'s event tags for
@@ -204,8 +204,8 @@ etlProFileId
   = lens _etlProFileId (\ s a -> s{_etlProFileId = a})
       . _Coerce
 
--- | Order of sorted results, default is ASCENDING.
-etlSortOrder :: Lens' EventTagsList (Maybe EventTagsListSortOrder)
+-- | Order of sorted results.
+etlSortOrder :: Lens' EventTagsList EventTagsListSortOrder
 etlSortOrder
   = lens _etlSortOrder (\ s a -> s{_etlSortOrder = a})
 
@@ -216,7 +216,7 @@ etlAdId
       mapping _Coerce
 
 -- | Field by which to sort the list.
-etlSortField :: Lens' EventTagsList (Maybe EventTagsListSortField)
+etlSortField :: Lens' EventTagsList EventTagsListSortField
 etlSortField
   = lens _etlSortField (\ s a -> s{_etlSortField = a})
 
@@ -232,9 +232,9 @@ instance GoogleRequest EventTagsList where
               _etlSearchString
               _etlCampaignId
               (_etlIds ^. _Default)
-              _etlSortOrder
+              (Just _etlSortOrder)
               _etlAdId
-              _etlSortField
+              (Just _etlSortField)
               (Just AltJSON)
               dFAReportingService
           where go

@@ -55,7 +55,7 @@ type AccountsAvailsGetResource =
          Capture "accountId" Text :>
            "avails" :>
              Capture "availId" Text :>
-               QueryParam "$.xgafv" Text :>
+               QueryParam "$.xgafv" Xgafv :>
                  QueryParam "upload_protocol" Text :>
                    QueryParam "pp" Bool :>
                      QueryParam "access_token" Text :>
@@ -68,7 +68,7 @@ type AccountsAvailsGetResource =
 --
 -- /See:/ 'accountsAvailsGet' smart constructor.
 data AccountsAvailsGet = AccountsAvailsGet'
-    { _aagXgafv          :: !(Maybe Text)
+    { _aagXgafv          :: !(Maybe Xgafv)
     , _aagUploadProtocol :: !(Maybe Text)
     , _aagPp             :: !Bool
     , _aagAccessToken    :: !(Maybe Text)
@@ -118,7 +118,7 @@ accountsAvailsGet pAagAvailId_ pAagAccountId_ =
     }
 
 -- | V1 error format.
-aagXgafv :: Lens' AccountsAvailsGet (Maybe Text)
+aagXgafv :: Lens' AccountsAvailsGet (Maybe Xgafv)
 aagXgafv = lens _aagXgafv (\ s a -> s{_aagXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

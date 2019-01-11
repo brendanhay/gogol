@@ -84,13 +84,13 @@ mobileDevicesGet pMdgResourceId_ pMdgCustomerId_ =
     , _mdgProjection = Nothing
     }
 
--- | Immutable id of Mobile Device
+-- | Immutable ID of Mobile Device
 mdgResourceId :: Lens' MobileDevicesGet Text
 mdgResourceId
   = lens _mdgResourceId
       (\ s a -> s{_mdgResourceId = a})
 
--- | Immutable id of the Google Apps account
+-- | Immutable ID of the G Suite account
 mdgCustomerId :: Lens' MobileDevicesGet Text
 mdgCustomerId
   = lens _mdgCustomerId

@@ -66,7 +66,7 @@ type AccountsAvailsListResource =
            "avails" :>
              QueryParam "altId" Text :>
                QueryParams "pphNames" Text :>
-                 QueryParam "$.xgafv" Text :>
+                 QueryParam "$.xgafv" Xgafv :>
                    QueryParams "studioNames" Text :>
                      QueryParams "videoIds" Text :>
                        QueryParam "upload_protocol" Text :>
@@ -92,7 +92,7 @@ type AccountsAvailsListResource =
 data AccountsAvailsList = AccountsAvailsList'
     { _aalAltId          :: !(Maybe Text)
     , _aalPphNames       :: !(Maybe [Text])
-    , _aalXgafv          :: !(Maybe Text)
+    , _aalXgafv          :: !(Maybe Xgafv)
     , _aalStudioNames    :: !(Maybe [Text])
     , _aalVideoIds       :: !(Maybe [Text])
     , _aalUploadProtocol :: !(Maybe Text)
@@ -184,7 +184,7 @@ aalPphNames
       . _Coerce
 
 -- | V1 error format.
-aalXgafv :: Lens' AccountsAvailsList (Maybe Text)
+aalXgafv :: Lens' AccountsAvailsList (Maybe Xgafv)
 aalXgafv = lens _aalXgafv (\ s a -> s{_aalXgafv = a})
 
 -- | See _List methods rules_ for info about this field.

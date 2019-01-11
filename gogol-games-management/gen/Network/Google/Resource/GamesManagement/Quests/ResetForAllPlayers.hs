@@ -81,8 +81,7 @@ qrfapQuestId
 instance GoogleRequest QuestsResetForAllPlayers where
         type Rs QuestsResetForAllPlayers = ()
         type Scopes QuestsResetForAllPlayers =
-             '["https://www.googleapis.com/auth/games",
-               "https://www.googleapis.com/auth/plus.login"]
+             '["https://www.googleapis.com/auth/games"]
         requestClient QuestsResetForAllPlayers'{..}
           = go _qrfapQuestId (Just AltJSON)
               gamesManagementService

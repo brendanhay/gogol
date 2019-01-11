@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Sends a test push notification to validate the EMM integration with the
+-- Sends a test notification to validate the EMM integration with the
 -- Google Cloud Pub\/Sub service for this enterprise.
 --
 -- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.enterprises.sendTestPushNotification@.
@@ -52,7 +52,7 @@ type EnterprisesSendTestPushNotificationResource =
                  Post '[JSON]
                    EnterprisesSendTestPushNotificationResponse
 
--- | Sends a test push notification to validate the EMM integration with the
+-- | Sends a test notification to validate the EMM integration with the
 -- Google Cloud Pub\/Sub service for this enterprise.
 --
 -- /See:/ 'enterprisesSendTestPushNotification' smart constructor.

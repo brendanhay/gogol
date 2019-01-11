@@ -20,8 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a datafeed of your Merchant Center account. This method can only
--- be called for non-multi-client accounts.
+-- Updates a datafeed configuration of your Merchant Center account.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.datafeeds.update@.
 module Network.Google.Resource.Content.Datafeeds.Update
@@ -37,7 +36,6 @@ module Network.Google.Resource.Content.Datafeeds.Update
     , duMerchantId
     , duPayload
     , duDatafeedId
-    , duDryRun
     ) where
 
 import           Network.Google.Prelude
@@ -47,23 +45,20 @@ import           Network.Google.ShoppingContent.Types
 -- 'DatafeedsUpdate' request conforms to.
 type DatafeedsUpdateResource =
      "content" :>
-       "v2" :>
+       "v2.1" :>
          Capture "merchantId" (Textual Word64) :>
            "datafeeds" :>
              Capture "datafeedId" (Textual Word64) :>
-               QueryParam "dryRun" Bool :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] Datafeed :> Put '[JSON] Datafeed
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Datafeed :> Put '[JSON] Datafeed
 
--- | Updates a datafeed of your Merchant Center account. This method can only
--- be called for non-multi-client accounts.
+-- | Updates a datafeed configuration of your Merchant Center account.
 --
 -- /See:/ 'datafeedsUpdate' smart constructor.
 data DatafeedsUpdate = DatafeedsUpdate'
     { _duMerchantId :: !(Textual Word64)
     , _duPayload    :: !Datafeed
     , _duDatafeedId :: !(Textual Word64)
-    , _duDryRun     :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatafeedsUpdate' with the minimum fields required to make a request.
@@ -75,8 +70,6 @@ data DatafeedsUpdate = DatafeedsUpdate'
 -- * 'duPayload'
 --
 -- * 'duDatafeedId'
---
--- * 'duDryRun'
 datafeedsUpdate
     :: Word64 -- ^ 'duMerchantId'
     -> Datafeed -- ^ 'duPayload'
@@ -87,9 +80,10 @@ datafeedsUpdate pDuMerchantId_ pDuPayload_ pDuDatafeedId_ =
     { _duMerchantId = _Coerce # pDuMerchantId_
     , _duPayload = pDuPayload_
     , _duDatafeedId = _Coerce # pDuDatafeedId_
-    , _duDryRun = Nothing
     }
 
+-- | The ID of the account that manages the datafeed. This account cannot be
+-- a multi-client account.
 duMerchantId :: Lens' DatafeedsUpdate Word64
 duMerchantId
   = lens _duMerchantId (\ s a -> s{_duMerchantId = a})
@@ -100,22 +94,18 @@ duPayload :: Lens' DatafeedsUpdate Datafeed
 duPayload
   = lens _duPayload (\ s a -> s{_duPayload = a})
 
+-- | The ID of the datafeed.
 duDatafeedId :: Lens' DatafeedsUpdate Word64
 duDatafeedId
   = lens _duDatafeedId (\ s a -> s{_duDatafeedId = a})
       . _Coerce
-
--- | Flag to run the request in dry-run mode.
-duDryRun :: Lens' DatafeedsUpdate (Maybe Bool)
-duDryRun = lens _duDryRun (\ s a -> s{_duDryRun = a})
 
 instance GoogleRequest DatafeedsUpdate where
         type Rs DatafeedsUpdate = Datafeed
         type Scopes DatafeedsUpdate =
              '["https://www.googleapis.com/auth/content"]
         requestClient DatafeedsUpdate'{..}
-          = go _duMerchantId _duDatafeedId _duDryRun
-              (Just AltJSON)
+          = go _duMerchantId _duDatafeedId (Just AltJSON)
               _duPayload
               shoppingContentService
           where go

@@ -20,8 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists log entries. Use this method to retrieve log entries from
--- Stackdriver Logging. For ways to export log entries, see Exporting Logs.
+-- Lists log entries. Use this method to retrieve log entries that
+-- originated from a project\/folder\/organization\/billing account. For
+-- ways to export log entries, see Exporting Logs.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.entries.list@.
 module Network.Google.Resource.Logging.Entries.List
@@ -36,11 +37,9 @@ module Network.Google.Resource.Logging.Entries.List
     -- * Request Lenses
     , elXgafv
     , elUploadProtocol
-    , elPp
     , elAccessToken
     , elUploadType
     , elPayload
-    , elBearerToken
     , elCallback
     ) where
 
@@ -54,27 +53,24 @@ type EntriesListResource =
        "entries:list" :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] ListLogEntriesRequest :>
-                           Post '[JSON] ListLogEntriesResponse
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] ListLogEntriesRequest :>
+                       Post '[JSON] ListLogEntriesResponse
 
--- | Lists log entries. Use this method to retrieve log entries from
--- Stackdriver Logging. For ways to export log entries, see Exporting Logs.
+-- | Lists log entries. Use this method to retrieve log entries that
+-- originated from a project\/folder\/organization\/billing account. For
+-- ways to export log entries, see Exporting Logs.
 --
 -- /See:/ 'entriesList' smart constructor.
 data EntriesList = EntriesList'
     { _elXgafv          :: !(Maybe Xgafv)
     , _elUploadProtocol :: !(Maybe Text)
-    , _elPp             :: !Bool
     , _elAccessToken    :: !(Maybe Text)
     , _elUploadType     :: !(Maybe Text)
     , _elPayload        :: !ListLogEntriesRequest
-    , _elBearerToken    :: !(Maybe Text)
     , _elCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -86,15 +82,11 @@ data EntriesList = EntriesList'
 --
 -- * 'elUploadProtocol'
 --
--- * 'elPp'
---
 -- * 'elAccessToken'
 --
 -- * 'elUploadType'
 --
 -- * 'elPayload'
---
--- * 'elBearerToken'
 --
 -- * 'elCallback'
 entriesList
@@ -104,11 +96,9 @@ entriesList pElPayload_ =
     EntriesList'
     { _elXgafv = Nothing
     , _elUploadProtocol = Nothing
-    , _elPp = True
     , _elAccessToken = Nothing
     , _elUploadType = Nothing
     , _elPayload = pElPayload_
-    , _elBearerToken = Nothing
     , _elCallback = Nothing
     }
 
@@ -121,10 +111,6 @@ elUploadProtocol :: Lens' EntriesList (Maybe Text)
 elUploadProtocol
   = lens _elUploadProtocol
       (\ s a -> s{_elUploadProtocol = a})
-
--- | Pretty-print response.
-elPp :: Lens' EntriesList Bool
-elPp = lens _elPp (\ s a -> s{_elPp = a})
 
 -- | OAuth access token.
 elAccessToken :: Lens' EntriesList (Maybe Text)
@@ -142,12 +128,6 @@ elPayload :: Lens' EntriesList ListLogEntriesRequest
 elPayload
   = lens _elPayload (\ s a -> s{_elPayload = a})
 
--- | OAuth bearer token.
-elBearerToken :: Lens' EntriesList (Maybe Text)
-elBearerToken
-  = lens _elBearerToken
-      (\ s a -> s{_elBearerToken = a})
-
 -- | JSONP
 elCallback :: Lens' EntriesList (Maybe Text)
 elCallback
@@ -161,10 +141,8 @@ instance GoogleRequest EntriesList where
                "https://www.googleapis.com/auth/logging.admin",
                "https://www.googleapis.com/auth/logging.read"]
         requestClient EntriesList'{..}
-          = go _elXgafv _elUploadProtocol (Just _elPp)
-              _elAccessToken
+          = go _elXgafv _elUploadProtocol _elAccessToken
               _elUploadType
-              _elBearerToken
               _elCallback
               (Just AltJSON)
               _elPayload

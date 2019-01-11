@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Remove Organization Unit
+-- Remove organizational unit
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.orgunits.delete@.
 module Network.Google.Resource.Directory.OrgUnits.Delete
@@ -52,7 +52,7 @@ type OrgUnitsDeleteResource =
                  Captures "orgUnitPath" Text :>
                    QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
--- | Remove Organization Unit
+-- | Remove organizational unit
 --
 -- /See:/ 'orgUnitsDelete' smart constructor.
 data OrgUnitsDelete = OrgUnitsDelete'
@@ -77,14 +77,14 @@ orgUnitsDelete pOudOrgUnitPath_ pOudCustomerId_ =
     , _oudCustomerId = pOudCustomerId_
     }
 
--- | Full path of the organization unit or its Id
+-- | Full path of the organizational unit or its ID
 oudOrgUnitPath :: Lens' OrgUnitsDelete [Text]
 oudOrgUnitPath
   = lens _oudOrgUnitPath
       (\ s a -> s{_oudOrgUnitPath = a})
       . _Coerce
 
--- | Immutable id of the Google Apps account
+-- | Immutable ID of the G Suite account
 oudCustomerId :: Lens' OrgUnitsDelete Text
 oudCustomerId
   = lens _oudCustomerId

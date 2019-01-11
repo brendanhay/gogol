@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified Snapshot resource. Get a list of available
+-- Returns the specified Snapshot resource. Gets a list of available
 -- snapshots by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.snapshots.get@.
@@ -53,7 +53,7 @@ type SnapshotsGetResource =
                  Capture "snapshot" Text :>
                    QueryParam "alt" AltJSON :> Get '[JSON] Snapshot
 
--- | Returns the specified Snapshot resource. Get a list of available
+-- | Returns the specified Snapshot resource. Gets a list of available
 -- snapshots by making a list() request.
 --
 -- /See:/ 'snapshotsGet' smart constructor.

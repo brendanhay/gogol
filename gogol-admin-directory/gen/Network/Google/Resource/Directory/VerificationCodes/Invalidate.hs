@@ -71,7 +71,7 @@ verificationCodesInvalidate pVciUserKey_ =
     { _vciUserKey = pVciUserKey_
     }
 
--- | Email or immutable Id of the user
+-- | Email or immutable ID of the user
 vciUserKey :: Lens' VerificationCodesInvalidate Text
 vciUserKey
   = lens _vciUserKey (\ s a -> s{_vciUserKey = a})

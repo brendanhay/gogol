@@ -33,6 +33,7 @@ module Network.Google.Resource.Compute.Subnetworks.ExpandIPCIdRRange
     , SubnetworksExpandIPCIdRRange
 
     -- * Request Lenses
+    , seicirrRequestId
     , seicirrProject
     , seicirrPayload
     , seicirrSubnetwork
@@ -54,15 +55,17 @@ type SubnetworksExpandIPCIdRRangeResource =
                  "subnetworks" :>
                    Capture "subnetwork" Text :>
                      "expandIpCidrRange" :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] SubnetworksExpandIPCIdRRangeRequest
-                           :> Post '[JSON] Operation
+                       QueryParam "requestId" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] SubnetworksExpandIPCIdRRangeRequest
+                             :> Post '[JSON] Operation
 
 -- | Expands the IP CIDR range of the subnetwork to a specified value.
 --
 -- /See:/ 'subnetworksExpandIPCIdRRange' smart constructor.
 data SubnetworksExpandIPCIdRRange = SubnetworksExpandIPCIdRRange'
-    { _seicirrProject    :: !Text
+    { _seicirrRequestId  :: !(Maybe Text)
+    , _seicirrProject    :: !Text
     , _seicirrPayload    :: !SubnetworksExpandIPCIdRRangeRequest
     , _seicirrSubnetwork :: !Text
     , _seicirrRegion     :: !Text
@@ -71,6 +74,8 @@ data SubnetworksExpandIPCIdRRange = SubnetworksExpandIPCIdRRange'
 -- | Creates a value of 'SubnetworksExpandIPCIdRRange' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'seicirrRequestId'
 --
 -- * 'seicirrProject'
 --
@@ -87,11 +92,27 @@ subnetworksExpandIPCIdRRange
     -> SubnetworksExpandIPCIdRRange
 subnetworksExpandIPCIdRRange pSeicirrProject_ pSeicirrPayload_ pSeicirrSubnetwork_ pSeicirrRegion_ =
     SubnetworksExpandIPCIdRRange'
-    { _seicirrProject = pSeicirrProject_
+    { _seicirrRequestId = Nothing
+    , _seicirrProject = pSeicirrProject_
     , _seicirrPayload = pSeicirrPayload_
     , _seicirrSubnetwork = pSeicirrSubnetwork_
     , _seicirrRegion = pSeicirrRegion_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+seicirrRequestId :: Lens' SubnetworksExpandIPCIdRRange (Maybe Text)
+seicirrRequestId
+  = lens _seicirrRequestId
+      (\ s a -> s{_seicirrRequestId = a})
 
 -- | Project ID for this request.
 seicirrProject :: Lens' SubnetworksExpandIPCIdRRange Text
@@ -126,6 +147,7 @@ instance GoogleRequest SubnetworksExpandIPCIdRRange
         requestClient SubnetworksExpandIPCIdRRange'{..}
           = go _seicirrProject _seicirrRegion
               _seicirrSubnetwork
+              _seicirrRequestId
               (Just AltJSON)
               _seicirrPayload
               computeService

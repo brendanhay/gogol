@@ -33,6 +33,7 @@ module Network.Google.Resource.Compute.RegionAutoscalers.Delete
     , RegionAutoscalersDelete
 
     -- * Request Lenses
+    , radRequestId
     , radProject
     , radAutoscaler
     , radRegion
@@ -52,13 +53,15 @@ type RegionAutoscalersDeleteResource =
                Capture "region" Text :>
                  "autoscalers" :>
                    Capture "autoscaler" Text :>
-                     QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+                     QueryParam "requestId" Text :>
+                       QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified autoscaler.
 --
 -- /See:/ 'regionAutoscalersDelete' smart constructor.
 data RegionAutoscalersDelete = RegionAutoscalersDelete'
-    { _radProject    :: !Text
+    { _radRequestId  :: !(Maybe Text)
+    , _radProject    :: !Text
     , _radAutoscaler :: !Text
     , _radRegion     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -66,6 +69,8 @@ data RegionAutoscalersDelete = RegionAutoscalersDelete'
 -- | Creates a value of 'RegionAutoscalersDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'radRequestId'
 --
 -- * 'radProject'
 --
@@ -79,10 +84,25 @@ regionAutoscalersDelete
     -> RegionAutoscalersDelete
 regionAutoscalersDelete pRadProject_ pRadAutoscaler_ pRadRegion_ =
     RegionAutoscalersDelete'
-    { _radProject = pRadProject_
+    { _radRequestId = Nothing
+    , _radProject = pRadProject_
     , _radAutoscaler = pRadAutoscaler_
     , _radRegion = pRadRegion_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+radRequestId :: Lens' RegionAutoscalersDelete (Maybe Text)
+radRequestId
+  = lens _radRequestId (\ s a -> s{_radRequestId = a})
 
 -- | Project ID for this request.
 radProject :: Lens' RegionAutoscalersDelete Text
@@ -107,6 +127,7 @@ instance GoogleRequest RegionAutoscalersDelete where
                "https://www.googleapis.com/auth/compute"]
         requestClient RegionAutoscalersDelete'{..}
           = go _radProject _radRegion _radAutoscaler
+              _radRequestId
               (Just AltJSON)
               computeService
           where go

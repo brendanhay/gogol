@@ -20,10 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists all available service tiers for Google Cloud SQL, for example D1,
--- D2. For related information, see Pricing.
+-- Lists all available machine types (tiers) for Cloud SQL, for example,
+-- db-n1-standard-1. For related information, see Pricing.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.tiers.list@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.tiers.list@.
 module Network.Google.Resource.SQL.Tiers.List
     (
     -- * REST Resource
@@ -51,8 +51,8 @@ type TiersListResource =
                QueryParam "alt" AltJSON :>
                  Get '[JSON] TiersListResponse
 
--- | Lists all available service tiers for Google Cloud SQL, for example D1,
--- D2. For related information, see Pricing.
+-- | Lists all available machine types (tiers) for Cloud SQL, for example,
+-- db-n1-standard-1. For related information, see Pricing.
 --
 -- /See:/ 'tiersList' smart constructor.
 newtype TiersList = TiersList'

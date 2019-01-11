@@ -82,7 +82,7 @@ riPayload :: Lens' RolesInsert Role
 riPayload
   = lens _riPayload (\ s a -> s{_riPayload = a})
 
--- | Immutable ID of the Google Apps account.
+-- | Immutable ID of the G Suite account.
 riCustomer :: Lens' RolesInsert Text
 riCustomer
   = lens _riCustomer (\ s a -> s{_riCustomer = a})

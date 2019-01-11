@@ -23,7 +23,7 @@
 -- Lists all instance operations that have been performed on the given
 -- Cloud SQL instance in the reverse chronological order of the start time.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.operations.list@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.operations.list@.
 module Network.Google.Resource.SQL.Operations.List
     (
     -- * REST Resource

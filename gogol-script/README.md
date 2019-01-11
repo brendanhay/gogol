@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Apps Script Execution.
+A client library for the Google Apps Script.
 
 
 ## Contribute

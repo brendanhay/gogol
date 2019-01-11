@@ -14,8 +14,7 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    Firebase Dynamic Links API enables third party developers to
-    programmatically create and manage Dynamic Links.
+    Programmatically creates and manages Firebase Dynamic Links.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -36,6 +35,10 @@ library
     exposed-modules:
           Network.Google.FirebaseDynamicLinks
         , Network.Google.FirebaseDynamicLinks.Types
+        , Network.Google.Resource.FirebaseDynamicLinks.GetLinkStats
+        , Network.Google.Resource.FirebaseDynamicLinks.InstallAttribution
+        , Network.Google.Resource.FirebaseDynamicLinks.ManagedShortLinks.Create
+        , Network.Google.Resource.FirebaseDynamicLinks.ReopenAttribution
         , Network.Google.Resource.FirebaseDynamicLinks.ShortLinks.Create
 
     other-modules:

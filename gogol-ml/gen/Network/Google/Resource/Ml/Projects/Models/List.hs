@@ -21,9 +21,11 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Lists the models in a project. Each project can contain multiple models,
--- and each model can have multiple versions.
+-- and each model can have multiple versions. If there are no models that
+-- match the request parameters, the list request returns an empty response
+-- body: {}.
 --
--- /See:/ <https://cloud.google.com/ml/ Google Cloud Machine Learning Reference> for @ml.projects.models.list@.
+-- /See:/ <https://cloud.google.com/ml/ Cloud Machine Learning Engine Reference> for @ml.projects.models.list@.
 module Network.Google.Resource.Ml.Projects.Models.List
     (
     -- * REST Resource
@@ -37,10 +39,9 @@ module Network.Google.Resource.Ml.Projects.Models.List
     , pmlParent
     , pmlXgafv
     , pmlUploadProtocol
-    , pmlPp
     , pmlAccessToken
     , pmlUploadType
-    , pmlBearerToken
+    , pmlFilter
     , pmlPageToken
     , pmlPageSize
     , pmlCallback
@@ -52,34 +53,33 @@ import           Network.Google.Prelude
 -- | A resource alias for @ml.projects.models.list@ method which the
 -- 'ProjectsModelsList' request conforms to.
 type ProjectsModelsListResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "parent" Text :>
          "models" :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" (Textual Int32) :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON]
-                                 GoogleCloudMlV1beta1__ListModelsResponse
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "pageSize" (Textual Int32) :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] GoogleCloudMlV1__ListModelsResponse
 
 -- | Lists the models in a project. Each project can contain multiple models,
--- and each model can have multiple versions.
+-- and each model can have multiple versions. If there are no models that
+-- match the request parameters, the list request returns an empty response
+-- body: {}.
 --
 -- /See:/ 'projectsModelsList' smart constructor.
 data ProjectsModelsList = ProjectsModelsList'
     { _pmlParent         :: !Text
     , _pmlXgafv          :: !(Maybe Xgafv)
     , _pmlUploadProtocol :: !(Maybe Text)
-    , _pmlPp             :: !Bool
     , _pmlAccessToken    :: !(Maybe Text)
     , _pmlUploadType     :: !(Maybe Text)
-    , _pmlBearerToken    :: !(Maybe Text)
+    , _pmlFilter         :: !(Maybe Text)
     , _pmlPageToken      :: !(Maybe Text)
     , _pmlPageSize       :: !(Maybe (Textual Int32))
     , _pmlCallback       :: !(Maybe Text)
@@ -95,13 +95,11 @@ data ProjectsModelsList = ProjectsModelsList'
 --
 -- * 'pmlUploadProtocol'
 --
--- * 'pmlPp'
---
 -- * 'pmlAccessToken'
 --
 -- * 'pmlUploadType'
 --
--- * 'pmlBearerToken'
+-- * 'pmlFilter'
 --
 -- * 'pmlPageToken'
 --
@@ -116,17 +114,15 @@ projectsModelsList pPmlParent_ =
     { _pmlParent = pPmlParent_
     , _pmlXgafv = Nothing
     , _pmlUploadProtocol = Nothing
-    , _pmlPp = True
     , _pmlAccessToken = Nothing
     , _pmlUploadType = Nothing
-    , _pmlBearerToken = Nothing
+    , _pmlFilter = Nothing
     , _pmlPageToken = Nothing
     , _pmlPageSize = Nothing
     , _pmlCallback = Nothing
     }
 
 -- | Required. The name of the project whose models are to be listed.
--- Authorization: requires \`Viewer\` role on the specified project.
 pmlParent :: Lens' ProjectsModelsList Text
 pmlParent
   = lens _pmlParent (\ s a -> s{_pmlParent = a})
@@ -141,10 +137,6 @@ pmlUploadProtocol
   = lens _pmlUploadProtocol
       (\ s a -> s{_pmlUploadProtocol = a})
 
--- | Pretty-print response.
-pmlPp :: Lens' ProjectsModelsList Bool
-pmlPp = lens _pmlPp (\ s a -> s{_pmlPp = a})
-
 -- | OAuth access token.
 pmlAccessToken :: Lens' ProjectsModelsList (Maybe Text)
 pmlAccessToken
@@ -157,11 +149,10 @@ pmlUploadType
   = lens _pmlUploadType
       (\ s a -> s{_pmlUploadType = a})
 
--- | OAuth bearer token.
-pmlBearerToken :: Lens' ProjectsModelsList (Maybe Text)
-pmlBearerToken
-  = lens _pmlBearerToken
-      (\ s a -> s{_pmlBearerToken = a})
+-- | Optional. Specifies the subset of models to retrieve.
+pmlFilter :: Lens' ProjectsModelsList (Maybe Text)
+pmlFilter
+  = lens _pmlFilter (\ s a -> s{_pmlFilter = a})
 
 -- | Optional. A page token to request the next page of results. You get the
 -- token from the \`next_page_token\` field of the response from the
@@ -186,15 +177,14 @@ pmlCallback
 
 instance GoogleRequest ProjectsModelsList where
         type Rs ProjectsModelsList =
-             GoogleCloudMlV1beta1__ListModelsResponse
+             GoogleCloudMlV1__ListModelsResponse
         type Scopes ProjectsModelsList =
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsModelsList'{..}
           = go _pmlParent _pmlXgafv _pmlUploadProtocol
-              (Just _pmlPp)
               _pmlAccessToken
               _pmlUploadType
-              _pmlBearerToken
+              _pmlFilter
               _pmlPageToken
               _pmlPageSize
               _pmlCallback

@@ -25,7 +25,17 @@ module Network.Google.Analytics.Types
     , analyticsManageUsersReadOnlyScope
     , analyticsScope
     , analyticsReadOnlyScope
+    , analyticsUserDeletionScope
     , analyticsEditScope
+
+    -- * UserDeletionRequest
+    , UserDeletionRequest
+    , userDeletionRequest
+    , udrWebPropertyId
+    , udrKind
+    , udrId
+    , udrFirebaseProjectId
+    , udrDeletionRequestTime
 
     -- * UnSampledReports
     , UnSampledReports
@@ -251,6 +261,14 @@ module Network.Google.Analytics.Types
     -- * DataGaGetSamplingLevel
     , DataGaGetSamplingLevel (..)
 
+    -- * HashClientIdResponse
+    , HashClientIdResponse
+    , hashClientIdResponse
+    , hcirClientId
+    , hcirWebPropertyId
+    , hcirKind
+    , hcirHashedClientId
+
     -- * McfData
     , McfData
     , mcfData
@@ -458,6 +476,7 @@ module Network.Google.Analytics.Types
     , cKind
     , cCreated
     , cUploadType
+    , cSchema
     , cImportBehavior
     , cSelfLink
     , cAccountId
@@ -467,6 +486,17 @@ module Network.Google.Analytics.Types
     , cType
     , cDescription
     , cProFilesLinked
+
+    -- * AccountTreeRequest
+    , AccountTreeRequest
+    , accountTreeRequest
+    , atrAccountSettings
+    , atrWebPropertyName
+    , atrKind
+    , atrAccountName
+    , atrProFileName
+    , atrWebsiteURL
+    , atrTimezone
 
     -- * WebPropertyRef
     , WebPropertyRef
@@ -641,6 +671,15 @@ module Network.Google.Analytics.Types
     , fadFieldBRequired
     , fadOverrideOutputField
 
+    -- * AccountTreeResponse
+    , AccountTreeResponse
+    , accountTreeResponse
+    , atrtAccountSettings
+    , atrtKind
+    , atrtProFile
+    , atrtAccount
+    , atrtWebProperty
+
     -- * FilterUppercaseDetails
     , FilterUppercaseDetails
     , filterUppercaseDetails
@@ -670,6 +709,13 @@ module Network.Google.Analytics.Types
 
     -- * DataGaGetOutput
     , DataGaGetOutput (..)
+
+    -- * HashClientIdRequest
+    , HashClientIdRequest
+    , hashClientIdRequest
+    , hClientId
+    , hWebPropertyId
+    , hKind
 
     -- * RealtimeData
     , RealtimeData
@@ -726,6 +772,8 @@ module Network.Google.Analytics.Types
     , wDefaultProFileId
     , wKind
     , wCreated
+    , wDataRetentionTtl
+    , wDataRetentionResetOnNewActivity
     , wSelfLink
     , wAccountId
     , wName
@@ -768,6 +816,14 @@ module Network.Google.Analytics.Types
     , gedeciComparisonValue
     , gedeciType
     , gedeciComparisonType
+
+    -- * AccountTreeRequestAccountSettings
+    , AccountTreeRequestAccountSettings
+    , accountTreeRequestAccountSettings
+    , atrasShareWithSpeciaLists
+    , atrasShareWithSupport
+    , atrasShareAnonymouslyWithOthers
+    , atrasShareWithGoogleProducts
 
     -- * McfDataQuery
     , McfDataQuery
@@ -921,6 +977,14 @@ module Network.Google.Analytics.Types
     , rasbadExcludeConditions
     , rasbadIncludeConditions
 
+    -- * AccountTreeResponseAccountSettings
+    , AccountTreeResponseAccountSettings
+    , accountTreeResponseAccountSettings
+    , aShareWithSpeciaLists
+    , aShareWithSupport
+    , aShareAnonymouslyWithOthers
+    , aShareWithGoogleProducts
+
     -- * GoalURLDestinationDetails
     , GoalURLDestinationDetails
     , goalURLDestinationDetails
@@ -964,6 +1028,7 @@ module Network.Google.Analytics.Types
     , uuStatus
     , uuKind
     , uuCustomDataSourceId
+    , uuUploadTime
     , uuAccountId
     , uuId
     , uuErrors
@@ -1061,6 +1126,12 @@ module Network.Google.Analytics.Types
     , mcfDataTotalsForAllResults
     , mdtfarAddtional
 
+    -- * UserDeletionRequestId
+    , UserDeletionRequestId
+    , userDeletionRequestId
+    , udriUserId
+    , udriType
+
     -- * UnSampledReportCloudStorageDownloadDetails
     , UnSampledReportCloudStorageDownloadDetails
     , unSampledReportCloudStorageDownloadDetails
@@ -1122,6 +1193,10 @@ analyticsScope = Proxy;
 -- | View your Google Analytics data
 analyticsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/analytics.readonly"]
 analyticsReadOnlyScope = Proxy;
+
+-- | Manage Google Analytics user deletion requests
+analyticsUserDeletionScope :: Proxy '["https://www.googleapis.com/auth/analytics.user.deletion"]
+analyticsUserDeletionScope = Proxy;
 
 -- | Edit Google Analytics management entities
 analyticsEditScope :: Proxy '["https://www.googleapis.com/auth/analytics.edit"]

@@ -33,7 +33,7 @@ module Network.Google.Resource.Analytics.Provisioning.CreateAccountTicket
     , ProvisioningCreateAccountTicket
 
     -- * Request Lenses
-    , pcatPayload
+    , pPayload
     ) where
 
 import           Network.Google.Analytics.Types
@@ -54,26 +54,25 @@ type ProvisioningCreateAccountTicketResource =
 --
 -- /See:/ 'provisioningCreateAccountTicket' smart constructor.
 newtype ProvisioningCreateAccountTicket = ProvisioningCreateAccountTicket'
-    { _pcatPayload :: AccountTicket
+    { _pPayload :: AccountTicket
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProvisioningCreateAccountTicket' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pcatPayload'
+-- * 'pPayload'
 provisioningCreateAccountTicket
-    :: AccountTicket -- ^ 'pcatPayload'
+    :: AccountTicket -- ^ 'pPayload'
     -> ProvisioningCreateAccountTicket
-provisioningCreateAccountTicket pPcatPayload_ =
+provisioningCreateAccountTicket pPPayload_ =
     ProvisioningCreateAccountTicket'
-    { _pcatPayload = pPcatPayload_
+    { _pPayload = pPPayload_
     }
 
 -- | Multipart request metadata.
-pcatPayload :: Lens' ProvisioningCreateAccountTicket AccountTicket
-pcatPayload
-  = lens _pcatPayload (\ s a -> s{_pcatPayload = a})
+pPayload :: Lens' ProvisioningCreateAccountTicket AccountTicket
+pPayload = lens _pPayload (\ s a -> s{_pPayload = a})
 
 instance GoogleRequest
          ProvisioningCreateAccountTicket where
@@ -82,7 +81,7 @@ instance GoogleRequest
         type Scopes ProvisioningCreateAccountTicket =
              '["https://www.googleapis.com/auth/analytics.provision"]
         requestClient ProvisioningCreateAccountTicket'{..}
-          = go (Just AltJSON) _pcatPayload analyticsService
+          = go (Just AltJSON) _pPayload analyticsService
           where go
                   = buildClient
                       (Proxy ::

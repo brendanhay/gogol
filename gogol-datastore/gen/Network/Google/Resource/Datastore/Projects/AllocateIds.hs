@@ -23,7 +23,7 @@
 -- Allocates IDs for the given keys, which is useful for referencing an
 -- entity before it is inserted.
 --
--- /See:/ <https://cloud.google.com/datastore/ Google Cloud Datastore API Reference> for @datastore.projects.allocateIds@.
+-- /See:/ <https://cloud.google.com/datastore/ Cloud Datastore API Reference> for @datastore.projects.allocateIds@.
 module Network.Google.Resource.Datastore.Projects.AllocateIds
     (
     -- * REST Resource
@@ -36,11 +36,9 @@ module Network.Google.Resource.Datastore.Projects.AllocateIds
     -- * Request Lenses
     , paiXgafv
     , paiUploadProtocol
-    , paiPp
     , paiAccessToken
     , paiUploadType
     , paiPayload
-    , paiBearerToken
     , paiProjectId
     , paiCallback
     ) where
@@ -56,14 +54,12 @@ type ProjectsAllocateIdsResource =
          CaptureMode "projectId" "allocateIds" Text :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] AllocateIdsRequest :>
-                             Post '[JSON] AllocateIdsResponse
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] AllocateIdsRequest :>
+                         Post '[JSON] AllocateIdsResponse
 
 -- | Allocates IDs for the given keys, which is useful for referencing an
 -- entity before it is inserted.
@@ -72,11 +68,9 @@ type ProjectsAllocateIdsResource =
 data ProjectsAllocateIds = ProjectsAllocateIds'
     { _paiXgafv          :: !(Maybe Xgafv)
     , _paiUploadProtocol :: !(Maybe Text)
-    , _paiPp             :: !Bool
     , _paiAccessToken    :: !(Maybe Text)
     , _paiUploadType     :: !(Maybe Text)
     , _paiPayload        :: !AllocateIdsRequest
-    , _paiBearerToken    :: !(Maybe Text)
     , _paiProjectId      :: !Text
     , _paiCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -89,15 +83,11 @@ data ProjectsAllocateIds = ProjectsAllocateIds'
 --
 -- * 'paiUploadProtocol'
 --
--- * 'paiPp'
---
 -- * 'paiAccessToken'
 --
 -- * 'paiUploadType'
 --
 -- * 'paiPayload'
---
--- * 'paiBearerToken'
 --
 -- * 'paiProjectId'
 --
@@ -110,11 +100,9 @@ projectsAllocateIds pPaiPayload_ pPaiProjectId_ =
     ProjectsAllocateIds'
     { _paiXgafv = Nothing
     , _paiUploadProtocol = Nothing
-    , _paiPp = True
     , _paiAccessToken = Nothing
     , _paiUploadType = Nothing
     , _paiPayload = pPaiPayload_
-    , _paiBearerToken = Nothing
     , _paiProjectId = pPaiProjectId_
     , _paiCallback = Nothing
     }
@@ -128,10 +116,6 @@ paiUploadProtocol :: Lens' ProjectsAllocateIds (Maybe Text)
 paiUploadProtocol
   = lens _paiUploadProtocol
       (\ s a -> s{_paiUploadProtocol = a})
-
--- | Pretty-print response.
-paiPp :: Lens' ProjectsAllocateIds Bool
-paiPp = lens _paiPp (\ s a -> s{_paiPp = a})
 
 -- | OAuth access token.
 paiAccessToken :: Lens' ProjectsAllocateIds (Maybe Text)
@@ -150,12 +134,6 @@ paiPayload :: Lens' ProjectsAllocateIds AllocateIdsRequest
 paiPayload
   = lens _paiPayload (\ s a -> s{_paiPayload = a})
 
--- | OAuth bearer token.
-paiBearerToken :: Lens' ProjectsAllocateIds (Maybe Text)
-paiBearerToken
-  = lens _paiBearerToken
-      (\ s a -> s{_paiBearerToken = a})
-
 -- | The ID of the project against which to make the request.
 paiProjectId :: Lens' ProjectsAllocateIds Text
 paiProjectId
@@ -173,10 +151,8 @@ instance GoogleRequest ProjectsAllocateIds where
                "https://www.googleapis.com/auth/datastore"]
         requestClient ProjectsAllocateIds'{..}
           = go _paiProjectId _paiXgafv _paiUploadProtocol
-              (Just _paiPp)
               _paiAccessToken
               _paiUploadType
-              _paiBearerToken
               _paiCallback
               (Just AltJSON)
               _paiPayload

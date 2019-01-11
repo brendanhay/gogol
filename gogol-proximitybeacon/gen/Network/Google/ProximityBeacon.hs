@@ -15,7 +15,7 @@
 --
 -- Registers, manages, indexes, and searches beacons.
 --
--- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference>
+-- /See:/ <https://developers.google.com/beacons/proximity/ Proximity Beacon API Reference>
 module Network.Google.ProximityBeacon
     (
     -- * Service Configuration
@@ -53,6 +53,9 @@ module Network.Google.ProximityBeacon
     -- ** proximitybeacon.beacons.decommission
     , module Network.Google.Resource.ProximityBeacon.Beacons.Decommission
 
+    -- ** proximitybeacon.beacons.delete
+    , module Network.Google.Resource.ProximityBeacon.Beacons.Delete
+
     -- ** proximitybeacon.beacons.diagnostics.list
     , module Network.Google.Resource.ProximityBeacon.Beacons.Diagnostics.List
 
@@ -88,8 +91,15 @@ module Network.Google.ProximityBeacon
     -- ** AttachmentInfo
     , AttachmentInfo
     , attachmentInfo
+    , aiMaxDistanceMeters
     , aiData
     , aiNamespacedType
+
+    -- ** BeaconExpectedStability
+    , BeaconExpectedStability (..)
+
+    -- ** NamespaceServingVisibility
+    , NamespaceServingVisibility (..)
 
     -- ** BeaconProperties
     , BeaconProperties
@@ -127,6 +137,9 @@ module Network.Google.ProximityBeacon
     , eirInitialEid
     , eirServiceEcdhPublicKey
 
+    -- ** AdvertisedIdType
+    , AdvertisedIdType (..)
+
     -- ** ListNamespacesResponse
     , ListNamespacesResponse
     , listNamespacesResponse
@@ -142,17 +155,17 @@ module Network.Google.ProximityBeacon
     -- ** Beacon
     , Beacon
     , beacon
-    , bLatLng
-    , bStatus
-    , bBeaconName
-    , bEphemeralIdRegistration
-    , bIndoorLevel
-    , bExpectedStability
-    , bProvisioningKey
-    , bDescription
-    , bPlaceId
-    , bAdvertisedId
-    , bProperties
+    , beaLatLng
+    , beaStatus
+    , beaBeaconName
+    , beaEphemeralIdRegistration
+    , beaIndoorLevel
+    , beaExpectedStability
+    , beaProvisioningKey
+    , beaDescription
+    , beaPlaceId
+    , beaAdvertisedId
+    , beaProperties
 
     -- ** Diagnostics
     , Diagnostics
@@ -178,6 +191,9 @@ module Network.Google.ProximityBeacon
     , eirpMaxRotationPeriodExponent
     , eirpServiceEcdhPublicKey
 
+    -- ** Xgafv
+    , Xgafv (..)
+
     -- ** BeaconInfo
     , BeaconInfo
     , beaconInfo
@@ -195,6 +211,8 @@ module Network.Google.ProximityBeacon
     -- ** BeaconAttachment
     , BeaconAttachment
     , beaconAttachment
+    , baMaxDistanceMeters
+    , baCreationTimeMs
     , baData
     , baAttachmentName
     , baNamespacedType
@@ -204,6 +222,9 @@ module Network.Google.ProximityBeacon
     , listDiagnosticsResponse
     , ldrNextPageToken
     , ldrDiagnostics
+
+    -- ** BeaconStatus
+    , BeaconStatus (..)
 
     -- ** AdvertisedId
     , AdvertisedId
@@ -234,6 +255,7 @@ import           Network.Google.Resource.ProximityBeacon.Beacons.Attachments.Del
 import           Network.Google.Resource.ProximityBeacon.Beacons.Attachments.List
 import           Network.Google.Resource.ProximityBeacon.Beacons.Deactivate
 import           Network.Google.Resource.ProximityBeacon.Beacons.Decommission
+import           Network.Google.Resource.ProximityBeacon.Beacons.Delete
 import           Network.Google.Resource.ProximityBeacon.Beacons.Diagnostics.List
 import           Network.Google.Resource.ProximityBeacon.Beacons.Get
 import           Network.Google.Resource.ProximityBeacon.Beacons.List
@@ -247,7 +269,7 @@ import           Network.Google.Resource.ProximityBeacon.Namespaces.Update
 TODO
 -}
 
--- | Represents the entirety of the methods and resources available for the Google Proximity Beacon API service.
+-- | Represents the entirety of the methods and resources available for the Proximity Beacon API service.
 type ProximityBeaconAPI =
      GetEidparamsResource :<|>
        BeaconsAttachmentsListResource
@@ -261,6 +283,7 @@ type ProximityBeaconAPI =
        :<|> BeaconsActivateResource
        :<|> BeaconsRegisterResource
        :<|> BeaconsDecommissionResource
+       :<|> BeaconsDeleteResource
        :<|> BeaconsUpdateResource
        :<|> NamespacesListResource
        :<|> NamespacesUpdateResource

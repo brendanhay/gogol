@@ -66,8 +66,7 @@ roomsReset = RoomsReset'
 instance GoogleRequest RoomsReset where
         type Rs RoomsReset = ()
         type Scopes RoomsReset =
-             '["https://www.googleapis.com/auth/games",
-               "https://www.googleapis.com/auth/plus.login"]
+             '["https://www.googleapis.com/auth/games"]
         requestClient RoomsReset'{}
           = go (Just AltJSON) gamesManagementService
           where go

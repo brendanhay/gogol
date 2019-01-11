@@ -24,7 +24,7 @@
 -- PageSpeed scores, a list of suggestions to make that page faster, and
 -- other information.
 --
--- /See:/ <https://developers.google.com/speed/docs/insights/v2/getting-started PageSpeed Insights API Reference> for @pagespeedonline.pagespeedapi.runpagespeed@.
+-- /See:/ <https://developers.google.com/speed/docs/insights/v5/get-started PageSpeed Insights API Reference> for @pagespeedonline.pagespeedapi.runpagespeed@.
 module Network.Google.Resource.PagespeedOnline.PagespeedAPI.RunPagespeed
     (
     -- * REST Resource
@@ -35,12 +35,12 @@ module Network.Google.Resource.PagespeedOnline.PagespeedAPI.RunPagespeed
     , PagespeedAPIRunPagespeed
 
     -- * Request Lenses
-    , parpScreenshot
+    , parpUtmCampaign
     , parpLocale
+    , parpCategory
     , parpURL
-    , parpFilterThirdPartyResources
     , parpStrategy
-    , parpRule
+    , parpUtmSource
     ) where
 
 import           Network.Google.PageSpeed.Types
@@ -50,17 +50,20 @@ import           Network.Google.Prelude
 -- 'PagespeedAPIRunPagespeed' request conforms to.
 type PagespeedAPIRunPagespeedResource =
      "pagespeedonline" :>
-       "v2" :>
+       "v5" :>
          "runPagespeed" :>
            QueryParam "url" Text :>
-             QueryParam "screenshot" Bool :>
+             QueryParam "utm_campaign" Text :>
                QueryParam "locale" Text :>
-                 QueryParam "filter_third_party_resources" Bool :>
+                 QueryParams "category"
+                   PagespeedAPIRunPagespeedCategory
+                   :>
                    QueryParam "strategy"
                      PagespeedAPIRunPagespeedStrategy
                      :>
-                     QueryParams "rule" Text :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] Result
+                     QueryParam "utm_source" Text :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] PagespeedAPIPagespeedResponseV5
 
 -- | Runs PageSpeed analysis on the page at the specified URL, and returns
 -- PageSpeed scores, a list of suggestions to make that page faster, and
@@ -68,85 +71,86 @@ type PagespeedAPIRunPagespeedResource =
 --
 -- /See:/ 'pagespeedAPIRunPagespeed' smart constructor.
 data PagespeedAPIRunPagespeed = PagespeedAPIRunPagespeed'
-    { _parpScreenshot                :: !Bool
-    , _parpLocale                    :: !(Maybe Text)
-    , _parpURL                       :: !Text
-    , _parpFilterThirdPartyResources :: !Bool
-    , _parpStrategy                  :: !(Maybe PagespeedAPIRunPagespeedStrategy)
-    , _parpRule                      :: !(Maybe [Text])
+    { _parpUtmCampaign :: !(Maybe Text)
+    , _parpLocale      :: !(Maybe Text)
+    , _parpCategory    :: !(Maybe [PagespeedAPIRunPagespeedCategory])
+    , _parpURL         :: !Text
+    , _parpStrategy    :: !(Maybe PagespeedAPIRunPagespeedStrategy)
+    , _parpUtmSource   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagespeedAPIRunPagespeed' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'parpScreenshot'
+-- * 'parpUtmCampaign'
 --
 -- * 'parpLocale'
 --
--- * 'parpURL'
+-- * 'parpCategory'
 --
--- * 'parpFilterThirdPartyResources'
+-- * 'parpURL'
 --
 -- * 'parpStrategy'
 --
--- * 'parpRule'
+-- * 'parpUtmSource'
 pagespeedAPIRunPagespeed
     :: Text -- ^ 'parpURL'
     -> PagespeedAPIRunPagespeed
 pagespeedAPIRunPagespeed pParpURL_ =
     PagespeedAPIRunPagespeed'
-    { _parpScreenshot = False
+    { _parpUtmCampaign = Nothing
     , _parpLocale = Nothing
+    , _parpCategory = Nothing
     , _parpURL = pParpURL_
-    , _parpFilterThirdPartyResources = False
     , _parpStrategy = Nothing
-    , _parpRule = Nothing
+    , _parpUtmSource = Nothing
     }
 
--- | Indicates if binary data containing a screenshot should be included
-parpScreenshot :: Lens' PagespeedAPIRunPagespeed Bool
-parpScreenshot
-  = lens _parpScreenshot
-      (\ s a -> s{_parpScreenshot = a})
+-- | Campaign name for analytics.
+parpUtmCampaign :: Lens' PagespeedAPIRunPagespeed (Maybe Text)
+parpUtmCampaign
+  = lens _parpUtmCampaign
+      (\ s a -> s{_parpUtmCampaign = a})
 
 -- | The locale used to localize formatted results
 parpLocale :: Lens' PagespeedAPIRunPagespeed (Maybe Text)
 parpLocale
   = lens _parpLocale (\ s a -> s{_parpLocale = a})
 
+-- | A Lighthouse category to run; if none are given, only Performance
+-- category will be run
+parpCategory :: Lens' PagespeedAPIRunPagespeed [PagespeedAPIRunPagespeedCategory]
+parpCategory
+  = lens _parpCategory (\ s a -> s{_parpCategory = a})
+      . _Default
+      . _Coerce
+
 -- | The URL to fetch and analyze
 parpURL :: Lens' PagespeedAPIRunPagespeed Text
 parpURL = lens _parpURL (\ s a -> s{_parpURL = a})
 
--- | Indicates if third party resources should be filtered out before
--- PageSpeed analysis.
-parpFilterThirdPartyResources :: Lens' PagespeedAPIRunPagespeed Bool
-parpFilterThirdPartyResources
-  = lens _parpFilterThirdPartyResources
-      (\ s a -> s{_parpFilterThirdPartyResources = a})
-
--- | The analysis strategy to use
+-- | The analysis strategy (desktop or mobile) to use, and desktop is the
+-- default
 parpStrategy :: Lens' PagespeedAPIRunPagespeed (Maybe PagespeedAPIRunPagespeedStrategy)
 parpStrategy
   = lens _parpStrategy (\ s a -> s{_parpStrategy = a})
 
--- | A PageSpeed rule to run; if none are given, all rules are run
-parpRule :: Lens' PagespeedAPIRunPagespeed [Text]
-parpRule
-  = lens _parpRule (\ s a -> s{_parpRule = a}) .
-      _Default
-      . _Coerce
+-- | Campaign source for analytics.
+parpUtmSource :: Lens' PagespeedAPIRunPagespeed (Maybe Text)
+parpUtmSource
+  = lens _parpUtmSource
+      (\ s a -> s{_parpUtmSource = a})
 
 instance GoogleRequest PagespeedAPIRunPagespeed where
-        type Rs PagespeedAPIRunPagespeed = Result
+        type Rs PagespeedAPIRunPagespeed =
+             PagespeedAPIPagespeedResponseV5
         type Scopes PagespeedAPIRunPagespeed = '[]
         requestClient PagespeedAPIRunPagespeed'{..}
-          = go (Just _parpURL) (Just _parpScreenshot)
-              _parpLocale
-              (Just _parpFilterThirdPartyResources)
+          = go (Just _parpURL) _parpUtmCampaign _parpLocale
+              (_parpCategory ^. _Default)
               _parpStrategy
-              (_parpRule ^. _Default)
+              _parpUtmSource
               (Just AltJSON)
               pageSpeedService
           where go

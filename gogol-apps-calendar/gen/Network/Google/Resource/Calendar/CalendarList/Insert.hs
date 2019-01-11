@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Adds an entry to the user\'s calendar list.
+-- Inserts an existing calendar into the user\'s calendar list.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.calendarList.insert@.
 module Network.Google.Resource.Calendar.CalendarList.Insert
@@ -53,7 +53,7 @@ type CalendarListInsertResource =
                    ReqBody '[JSON] CalendarListEntry :>
                      Post '[JSON] CalendarListEntry
 
--- | Adds an entry to the user\'s calendar list.
+-- | Inserts an existing calendar into the user\'s calendar list.
 --
 -- /See:/ 'calendarListInsert' smart constructor.
 data CalendarListInsert = CalendarListInsert'

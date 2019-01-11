@@ -20,8 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a shipment\'s status, carrier, and\/or tracking ID. This method
--- can only be called for non-multi-client accounts.
+-- Updates a shipment\'s status, carrier, and\/or tracking ID.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.updateshipment@.
 module Network.Google.Resource.Content.Orders.Updateshipment
@@ -46,7 +45,7 @@ import           Network.Google.ShoppingContent.Types
 -- 'OrdersUpdateshipment' request conforms to.
 type OrdersUpdateshipmentResource =
      "content" :>
-       "v2" :>
+       "v2.1" :>
          Capture "merchantId" (Textual Word64) :>
            "orders" :>
              Capture "orderId" Text :>
@@ -55,8 +54,7 @@ type OrdersUpdateshipmentResource =
                    ReqBody '[JSON] OrdersUpdateShipmentRequest :>
                      Post '[JSON] OrdersUpdateShipmentResponse
 
--- | Updates a shipment\'s status, carrier, and\/or tracking ID. This method
--- can only be called for non-multi-client accounts.
+-- | Updates a shipment\'s status, carrier, and\/or tracking ID.
 --
 -- /See:/ 'ordersUpdateshipment' smart constructor.
 data OrdersUpdateshipment = OrdersUpdateshipment'
@@ -86,7 +84,8 @@ ordersUpdateshipment pOuMerchantId_ pOuPayload_ pOuOrderId_ =
     , _ouOrderId = pOuOrderId_
     }
 
--- | The ID of the managing account.
+-- | The ID of the account that manages the order. This cannot be a
+-- multi-client account.
 ouMerchantId :: Lens' OrdersUpdateshipment Word64
 ouMerchantId
   = lens _ouMerchantId (\ s a -> s{_ouMerchantId = a})

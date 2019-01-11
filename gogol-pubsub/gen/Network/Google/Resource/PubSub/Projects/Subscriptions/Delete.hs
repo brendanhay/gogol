@@ -27,7 +27,7 @@
 -- with the old subscription or its topic unless the same topic is
 -- specified.
 --
--- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.delete@.
+-- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.delete@.
 module Network.Google.Resource.PubSub.Projects.Subscriptions.Delete
     (
     -- * REST Resource
@@ -40,10 +40,8 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.Delete
     -- * Request Lenses
     , psdXgafv
     , psdUploadProtocol
-    , psdPp
     , psdAccessToken
     , psdUploadType
-    , psdBearerToken
     , psdSubscription
     , psdCallback
     ) where
@@ -58,12 +56,10 @@ type ProjectsSubscriptionsDeleteResource =
        Capture "subscription" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :> Delete '[JSON] Empty
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
 -- | Deletes an existing subscription. All messages retained in the
 -- subscription are immediately dropped. Calls to \`Pull\` after deletion
@@ -76,10 +72,8 @@ type ProjectsSubscriptionsDeleteResource =
 data ProjectsSubscriptionsDelete = ProjectsSubscriptionsDelete'
     { _psdXgafv          :: !(Maybe Xgafv)
     , _psdUploadProtocol :: !(Maybe Text)
-    , _psdPp             :: !Bool
     , _psdAccessToken    :: !(Maybe Text)
     , _psdUploadType     :: !(Maybe Text)
-    , _psdBearerToken    :: !(Maybe Text)
     , _psdSubscription   :: !Text
     , _psdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -92,13 +86,9 @@ data ProjectsSubscriptionsDelete = ProjectsSubscriptionsDelete'
 --
 -- * 'psdUploadProtocol'
 --
--- * 'psdPp'
---
 -- * 'psdAccessToken'
 --
 -- * 'psdUploadType'
---
--- * 'psdBearerToken'
 --
 -- * 'psdSubscription'
 --
@@ -110,10 +100,8 @@ projectsSubscriptionsDelete pPsdSubscription_ =
     ProjectsSubscriptionsDelete'
     { _psdXgafv = Nothing
     , _psdUploadProtocol = Nothing
-    , _psdPp = True
     , _psdAccessToken = Nothing
     , _psdUploadType = Nothing
-    , _psdBearerToken = Nothing
     , _psdSubscription = pPsdSubscription_
     , _psdCallback = Nothing
     }
@@ -128,10 +116,6 @@ psdUploadProtocol
   = lens _psdUploadProtocol
       (\ s a -> s{_psdUploadProtocol = a})
 
--- | Pretty-print response.
-psdPp :: Lens' ProjectsSubscriptionsDelete Bool
-psdPp = lens _psdPp (\ s a -> s{_psdPp = a})
-
 -- | OAuth access token.
 psdAccessToken :: Lens' ProjectsSubscriptionsDelete (Maybe Text)
 psdAccessToken
@@ -143,12 +127,6 @@ psdUploadType :: Lens' ProjectsSubscriptionsDelete (Maybe Text)
 psdUploadType
   = lens _psdUploadType
       (\ s a -> s{_psdUploadType = a})
-
--- | OAuth bearer token.
-psdBearerToken :: Lens' ProjectsSubscriptionsDelete (Maybe Text)
-psdBearerToken
-  = lens _psdBearerToken
-      (\ s a -> s{_psdBearerToken = a})
 
 -- | The subscription to delete. Format is
 -- \`projects\/{project}\/subscriptions\/{sub}\`.
@@ -170,10 +148,8 @@ instance GoogleRequest ProjectsSubscriptionsDelete
                "https://www.googleapis.com/auth/pubsub"]
         requestClient ProjectsSubscriptionsDelete'{..}
           = go _psdSubscription _psdXgafv _psdUploadProtocol
-              (Just _psdPp)
               _psdAccessToken
               _psdUploadType
-              _psdBearerToken
               _psdCallback
               (Just AltJSON)
               pubSubService

@@ -80,7 +80,7 @@ usersUpdate pUPayload_ pUUserKey_ =
 uPayload :: Lens' UsersUpdate User
 uPayload = lens _uPayload (\ s a -> s{_uPayload = a})
 
--- | Email or immutable Id of the user. If Id, it should match with id of
+-- | Email or immutable ID of the user. If ID, it should match with id of
 -- user object
 uUserKey :: Lens' UsersUpdate Text
 uUserKey = lens _uUserKey (\ s a -> s{_uUserKey = a})

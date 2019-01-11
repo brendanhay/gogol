@@ -34,6 +34,7 @@ module Network.Google.Resource.Compute.HealthChecks.Insert
     , HealthChecksInsert
 
     -- * Request Lenses
+    , hciRequestId
     , hciProject
     , hciPayload
     ) where
@@ -50,21 +51,25 @@ type HealthChecksInsertResource =
            Capture "project" Text :>
              "global" :>
                "healthChecks" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] HealthCheck :> Post '[JSON] Operation
+                 QueryParam "requestId" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] HealthCheck :> Post '[JSON] Operation
 
 -- | Creates a HealthCheck resource in the specified project using the data
 -- included in the request.
 --
 -- /See:/ 'healthChecksInsert' smart constructor.
 data HealthChecksInsert = HealthChecksInsert'
-    { _hciProject :: !Text
-    , _hciPayload :: !HealthCheck
+    { _hciRequestId :: !(Maybe Text)
+    , _hciProject   :: !Text
+    , _hciPayload   :: !HealthCheck
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HealthChecksInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'hciRequestId'
 --
 -- * 'hciProject'
 --
@@ -75,9 +80,24 @@ healthChecksInsert
     -> HealthChecksInsert
 healthChecksInsert pHciProject_ pHciPayload_ =
     HealthChecksInsert'
-    { _hciProject = pHciProject_
+    { _hciRequestId = Nothing
+    , _hciProject = pHciProject_
     , _hciPayload = pHciPayload_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+hciRequestId :: Lens' HealthChecksInsert (Maybe Text)
+hciRequestId
+  = lens _hciRequestId (\ s a -> s{_hciRequestId = a})
 
 -- | Project ID for this request.
 hciProject :: Lens' HealthChecksInsert Text
@@ -95,7 +115,8 @@ instance GoogleRequest HealthChecksInsert where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient HealthChecksInsert'{..}
-          = go _hciProject (Just AltJSON) _hciPayload
+          = go _hciProject _hciRequestId (Just AltJSON)
+              _hciPayload
               computeService
           where go
                   = buildClient

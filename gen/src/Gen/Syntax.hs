@@ -12,8 +12,7 @@
 
 module Gen.Syntax where
 
-import           Control.Lens                 hiding (iso, mapping, op, pre,
-                                               strict)
+import           Control.Lens                 hiding (iso, mapping, op, pre, strict)
 import           Data.Either
 import           Data.Foldable                (foldl', foldr')
 import qualified Data.HashMap.Strict          as Map
@@ -25,9 +24,7 @@ import qualified Data.Text                    as Text
 import           Data.Text.Manipulate
 import           Gen.Text
 import           Gen.Types
-import           Language.Haskell.Exts.Build  (app, appFun, infixApp, lamE,
-                                               listE, name, noBinds, paren,
-                                               patBind, pvar, sfun, strE, sym,
+import           Language.Haskell.Exts.Build  (app, appFun, infixApp, lamE, listE, name, noBinds, paren, patBind, pvar, sfun, strE, sym,
                                                var)
 import           Language.Haskell.Exts.SrcLoc
 import           Language.Haskell.Exts.Syntax hiding (Alt, Int, Lit)
@@ -558,47 +555,47 @@ internalType = \case
 
 externalLit :: Lit -> Type
 externalLit = \case
-    Text      -> TyCon "Text"
-    Bool      -> TyCon "Bool"
-    Time      -> TyCon "TimeOfDay"
-    Date      -> TyCon "Day"
-    DateTime  -> TyCon "UTCTime"
-    Nat       -> TyCon "Natural"
-    Float     -> TyCon "Double"
-    Double    -> TyCon "Double"
-    Byte      -> TyCon "ByteString"
-    UInt32    -> TyCon "Word32"
-    UInt64    -> TyCon "Word64"
-    Int32     -> TyCon "Int32"
-    Int64     -> TyCon "Int64"
-    Alt t     -> TyCon (unqual (Text.unpack t))
-    RqBody    -> TyCon "RequestBody"
-    RsBody    -> TyCon "Stream"
-    JSONValue -> TyCon "JSONValue"
-    FieldMask -> TyCon "FieldMask"
-    Duration  -> TyCon "Scientific"
+    Text       -> TyCon "Text"
+    Bool       -> TyCon "Bool"
+    Time       -> TyCon "TimeOfDay"
+    Date       -> TyCon "Day"
+    DateTime   -> TyCon "UTCTime"
+    Nat        -> TyCon "Natural"
+    Float      -> TyCon "Double"
+    Double     -> TyCon "Double"
+    Byte       -> TyCon "ByteString"
+    UInt32     -> TyCon "Word32"
+    UInt64     -> TyCon "Word64"
+    Int32      -> TyCon "Int32"
+    Int64      -> TyCon "Int64"
+    Alt t      -> TyCon (unqual (Text.unpack t))
+    RqBody     -> TyCon "RequestBody"
+    RsBody     -> TyCon "Stream"
+    JSONValue  -> TyCon "JSONValue"
+    GFieldMask -> TyCon "GFieldMask"
+    GDuration  -> TyCon "Scientific"
 
 internalLit :: Lit -> Type
 internalLit = \case
-    Text      -> TyCon "Text"
-    Bool      -> TyCon "Bool"
-    Time      -> TyCon "Time'"
-    Date      -> TyCon "Date'"
-    DateTime  -> TyCon "DateTime'"
-    Nat       -> TyApp (TyCon "Textual") (TyCon "Nat")
-    Float     -> TyApp (TyCon "Textual") (TyCon "Double")
-    Double    -> TyApp (TyCon "Textual") (TyCon "Double")
-    Byte      -> TyCon "Bytes"
-    UInt32    -> TyApp (TyCon "Textual") (TyCon "Word32")
-    UInt64    -> TyApp (TyCon "Textual") (TyCon "Word64")
-    Int32     -> TyApp (TyCon "Textual") (TyCon "Int32")
-    Int64     -> TyApp (TyCon "Textual") (TyCon "Int64")
-    Alt t     -> TyCon (unqual (Text.unpack t))
-    RqBody    -> TyCon "RequestBody"
-    RsBody    -> TyCon "Stream"
-    JSONValue -> TyCon "JSONValue"
-    FieldMask -> TyCon "FieldMask"
-    Duration  -> TyCon "Duration"
+    Text       -> TyCon "Text"
+    Bool       -> TyCon "Bool"
+    Time       -> TyCon "Time'"
+    Date       -> TyCon "Date'"
+    DateTime   -> TyCon "DateTime'"
+    Nat        -> TyApp (TyCon "Textual") (TyCon "Nat")
+    Float      -> TyApp (TyCon "Textual") (TyCon "Double")
+    Double     -> TyApp (TyCon "Textual") (TyCon "Double")
+    Byte       -> TyCon "Bytes"
+    UInt32     -> TyApp (TyCon "Textual") (TyCon "Word32")
+    UInt64     -> TyApp (TyCon "Textual") (TyCon "Word64")
+    Int32      -> TyApp (TyCon "Textual") (TyCon "Int32")
+    Int64      -> TyApp (TyCon "Textual") (TyCon "Int64")
+    Alt t      -> TyCon (unqual (Text.unpack t))
+    RqBody     -> TyCon "RequestBody"
+    RsBody     -> TyCon "Stream"
+    JSONValue  -> TyCon "JSONValue"
+    GFieldMask -> TyCon "GFieldMask"
+    GDuration  -> TyCon "GDuration"
 
 mapping :: TType -> Exp -> Exp
 mapping t e = infixE e "." (go t)
@@ -613,21 +610,21 @@ mapping t e = infixE e "." (go t)
 
 iso :: TType -> Maybe Exp
 iso = \case
-    TList {}      -> Just (var "_Coerce")
-    TMap  {}      -> Just (var "_Coerce")
-    TLit Nat      -> Just (var "_Coerce")
-    TLit Time     -> Just (var "_Time")
-    TLit Date     -> Just (var "_Date")
-    TLit DateTime -> Just (var "_DateTime")
-    TLit Duration -> Just (var "_Duration")
-    TLit Float    -> Just (var "_Coerce")
-    TLit Double   -> Just (var "_Coerce")
-    TLit Byte     -> Just (var "_Bytes")
-    TLit UInt32   -> Just (var "_Coerce")
-    TLit UInt64   -> Just (var "_Coerce")
-    TLit Int32    -> Just (var "_Coerce")
-    TLit Int64    -> Just (var "_Coerce")
-    _             -> Nothing
+    TList {}       -> Just (var "_Coerce")
+    TMap  {}       -> Just (var "_Coerce")
+    TLit Nat       -> Just (var "_Coerce")
+    TLit Time      -> Just (var "_Time")
+    TLit Date      -> Just (var "_Date")
+    TLit DateTime  -> Just (var "_DateTime")
+    TLit GDuration -> Just (var "_GDuration")
+    TLit Float     -> Just (var "_Coerce")
+    TLit Double    -> Just (var "_Coerce")
+    TLit Byte      -> Just (var "_Bytes")
+    TLit UInt32    -> Just (var "_Coerce")
+    TLit UInt64    -> Just (var "_Coerce")
+    TLit Int32     -> Just (var "_Coerce")
+    TLit Int64     -> Just (var "_Coerce")
+    _              -> Nothing
 
 require :: TType -> TType
 require (TMaybe t) = t

@@ -128,7 +128,7 @@ The secret and refresh token are used to obtain a valid 'OAuthToken' from
 data AuthorizedUser = AuthorizedUser
     { _userId      :: !ClientId
     , _userRefresh :: !RefreshToken
-    , _userSecret  :: !Secret
+    , _userSecret  :: !GSecret
     } deriving (Eq, Show)
 
 instance ToJSON AuthorizedUser where
@@ -147,7 +147,7 @@ instance FromJSON AuthorizedUser where
 -- | A client identifier and accompanying secret used to obtain/refresh a token.
 data OAuthClient = OAuthClient
     { _clientId     :: !ClientId
-    , _clientSecret :: !Secret
+    , _clientSecret :: !GSecret
     } deriving (Eq, Show)
 
 {-| An OAuth bearer type token of the following form:

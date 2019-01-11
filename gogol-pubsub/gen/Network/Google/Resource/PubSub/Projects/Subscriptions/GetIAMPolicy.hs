@@ -23,7 +23,7 @@
 -- Gets the access control policy for a resource. Returns an empty policy
 -- if the resource exists and does not have a policy set.
 --
--- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.getIamPolicy@.
+-- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.getIamPolicy@.
 module Network.Google.Resource.PubSub.Projects.Subscriptions.GetIAMPolicy
     (
     -- * REST Resource
@@ -36,10 +36,8 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.GetIAMPolicy
     -- * Request Lenses
     , psgiampXgafv
     , psgiampUploadProtocol
-    , psgiampPp
     , psgiampAccessToken
     , psgiampUploadType
-    , psgiampBearerToken
     , psgiampResource
     , psgiampCallback
     ) where
@@ -54,12 +52,10 @@ type ProjectsSubscriptionsGetIAMPolicyResource =
        CaptureMode "resource" "getIamPolicy" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] Policy
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Policy
 
 -- | Gets the access control policy for a resource. Returns an empty policy
 -- if the resource exists and does not have a policy set.
@@ -68,10 +64,8 @@ type ProjectsSubscriptionsGetIAMPolicyResource =
 data ProjectsSubscriptionsGetIAMPolicy = ProjectsSubscriptionsGetIAMPolicy'
     { _psgiampXgafv          :: !(Maybe Xgafv)
     , _psgiampUploadProtocol :: !(Maybe Text)
-    , _psgiampPp             :: !Bool
     , _psgiampAccessToken    :: !(Maybe Text)
     , _psgiampUploadType     :: !(Maybe Text)
-    , _psgiampBearerToken    :: !(Maybe Text)
     , _psgiampResource       :: !Text
     , _psgiampCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -84,13 +78,9 @@ data ProjectsSubscriptionsGetIAMPolicy = ProjectsSubscriptionsGetIAMPolicy'
 --
 -- * 'psgiampUploadProtocol'
 --
--- * 'psgiampPp'
---
 -- * 'psgiampAccessToken'
 --
 -- * 'psgiampUploadType'
---
--- * 'psgiampBearerToken'
 --
 -- * 'psgiampResource'
 --
@@ -102,10 +92,8 @@ projectsSubscriptionsGetIAMPolicy pPsgiampResource_ =
     ProjectsSubscriptionsGetIAMPolicy'
     { _psgiampXgafv = Nothing
     , _psgiampUploadProtocol = Nothing
-    , _psgiampPp = True
     , _psgiampAccessToken = Nothing
     , _psgiampUploadType = Nothing
-    , _psgiampBearerToken = Nothing
     , _psgiampResource = pPsgiampResource_
     , _psgiampCallback = Nothing
     }
@@ -121,11 +109,6 @@ psgiampUploadProtocol
   = lens _psgiampUploadProtocol
       (\ s a -> s{_psgiampUploadProtocol = a})
 
--- | Pretty-print response.
-psgiampPp :: Lens' ProjectsSubscriptionsGetIAMPolicy Bool
-psgiampPp
-  = lens _psgiampPp (\ s a -> s{_psgiampPp = a})
-
 -- | OAuth access token.
 psgiampAccessToken :: Lens' ProjectsSubscriptionsGetIAMPolicy (Maybe Text)
 psgiampAccessToken
@@ -138,15 +121,8 @@ psgiampUploadType
   = lens _psgiampUploadType
       (\ s a -> s{_psgiampUploadType = a})
 
--- | OAuth bearer token.
-psgiampBearerToken :: Lens' ProjectsSubscriptionsGetIAMPolicy (Maybe Text)
-psgiampBearerToken
-  = lens _psgiampBearerToken
-      (\ s a -> s{_psgiampBearerToken = a})
-
--- | REQUIRED: The resource for which the policy is being requested.
--- \`resource\` is usually specified as a path. For example, a Project
--- resource is specified as \`projects\/{project}\`.
+-- | REQUIRED: The resource for which the policy is being requested. See the
+-- operation documentation for the appropriate value for this field.
 psgiampResource :: Lens' ProjectsSubscriptionsGetIAMPolicy Text
 psgiampResource
   = lens _psgiampResource
@@ -167,10 +143,8 @@ instance GoogleRequest
         requestClient ProjectsSubscriptionsGetIAMPolicy'{..}
           = go _psgiampResource _psgiampXgafv
               _psgiampUploadProtocol
-              (Just _psgiampPp)
               _psgiampAccessToken
               _psgiampUploadType
-              _psgiampBearerToken
               _psgiampCallback
               (Just AltJSON)
               pubSubService

@@ -1,6 +1,6 @@
 name:                  gogol-containerbuilder
 version:               0.3.0
-synopsis:              Google Cloud Container Builder SDK.
+synopsis:              Google Cloud Build SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -14,7 +14,7 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    Builds container images in the cloud.
+    Creates and manages builds on Google Cloud Platform.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -42,11 +42,13 @@ library
         , Network.Google.Resource.Cloudbuild.Projects.Builds.Create
         , Network.Google.Resource.Cloudbuild.Projects.Builds.Get
         , Network.Google.Resource.Cloudbuild.Projects.Builds.List
+        , Network.Google.Resource.Cloudbuild.Projects.Builds.Retry
         , Network.Google.Resource.Cloudbuild.Projects.Triggers.Create
         , Network.Google.Resource.Cloudbuild.Projects.Triggers.Delete
         , Network.Google.Resource.Cloudbuild.Projects.Triggers.Get
         , Network.Google.Resource.Cloudbuild.Projects.Triggers.List
         , Network.Google.Resource.Cloudbuild.Projects.Triggers.Patch
+        , Network.Google.Resource.Cloudbuild.Projects.Triggers.Run
 
     other-modules:
           Network.Google.ContainerBuilder.Types.Product

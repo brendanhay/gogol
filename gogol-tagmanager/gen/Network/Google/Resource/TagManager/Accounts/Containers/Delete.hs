@@ -22,7 +22,7 @@
 --
 -- Deletes a Container.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.containers.delete@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v2/ Tag Manager API Reference> for @tagmanager.accounts.containers.delete@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Delete
     (
     -- * REST Resource
@@ -33,8 +33,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Delete
     , AccountsContainersDelete
 
     -- * Request Lenses
-    , acdContainerId
-    , acdAccountId
+    , acdPath
     ) where
 
 import           Network.Google.Prelude
@@ -44,56 +43,41 @@ import           Network.Google.TagManager.Types
 -- 'AccountsContainersDelete' request conforms to.
 type AccountsContainersDeleteResource =
      "tagmanager" :>
-       "v1" :>
-         "accounts" :>
-           Capture "accountId" Text :>
-             "containers" :>
-               Capture "containerId" Text :>
-                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
+       "v2" :>
+         Capture "path" Text :>
+           QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a Container.
 --
 -- /See:/ 'accountsContainersDelete' smart constructor.
-data AccountsContainersDelete = AccountsContainersDelete'
-    { _acdContainerId :: !Text
-    , _acdAccountId   :: !Text
+newtype AccountsContainersDelete = AccountsContainersDelete'
+    { _acdPath :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acdContainerId'
---
--- * 'acdAccountId'
+-- * 'acdPath'
 accountsContainersDelete
-    :: Text -- ^ 'acdContainerId'
-    -> Text -- ^ 'acdAccountId'
+    :: Text -- ^ 'acdPath'
     -> AccountsContainersDelete
-accountsContainersDelete pAcdContainerId_ pAcdAccountId_ =
+accountsContainersDelete pAcdPath_ =
     AccountsContainersDelete'
-    { _acdContainerId = pAcdContainerId_
-    , _acdAccountId = pAcdAccountId_
+    { _acdPath = pAcdPath_
     }
 
--- | The GTM Container ID.
-acdContainerId :: Lens' AccountsContainersDelete Text
-acdContainerId
-  = lens _acdContainerId
-      (\ s a -> s{_acdContainerId = a})
-
--- | The GTM Account ID.
-acdAccountId :: Lens' AccountsContainersDelete Text
-acdAccountId
-  = lens _acdAccountId (\ s a -> s{_acdAccountId = a})
+-- | GTM Container\'s API relative path. Example:
+-- accounts\/{account_id}\/containers\/{container_id}
+acdPath :: Lens' AccountsContainersDelete Text
+acdPath = lens _acdPath (\ s a -> s{_acdPath = a})
 
 instance GoogleRequest AccountsContainersDelete where
         type Rs AccountsContainersDelete = ()
         type Scopes AccountsContainersDelete =
              '["https://www.googleapis.com/auth/tagmanager.delete.containers"]
         requestClient AccountsContainersDelete'{..}
-          = go _acdAccountId _acdContainerId (Just AltJSON)
-              tagManagerService
+          = go _acdPath (Just AltJSON) tagManagerService
           where go
                   = buildClient
                       (Proxy :: Proxy AccountsContainersDeleteResource)

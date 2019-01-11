@@ -22,7 +22,7 @@
 --
 -- Deletes the specified service and all enclosed versions.
 --
--- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ Google App Engine Admin API Reference> for @appengine.apps.services.delete@.
+-- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ App Engine Admin API Reference> for @appengine.apps.services.delete@.
 module Network.Google.Resource.AppEngine.Apps.Services.Delete
     (
     -- * REST Resource
@@ -35,10 +35,8 @@ module Network.Google.Resource.AppEngine.Apps.Services.Delete
     -- * Request Lenses
     , asdXgafv
     , asdUploadProtocol
-    , asdPp
     , asdAccessToken
     , asdUploadType
-    , asdBearerToken
     , asdAppsId
     , asdServicesId
     , asdCallback
@@ -55,26 +53,21 @@ type AppsServicesDeleteResource =
          Capture "appsId" Text :>
            "services" :>
              Capture "servicesId" Text :>
-               QueryParam "$.xgafv" Text :>
+               QueryParam "$.xgafv" Xgafv :>
                  QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :>
-                               Delete '[JSON] Operation
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified service and all enclosed versions.
 --
 -- /See:/ 'appsServicesDelete' smart constructor.
 data AppsServicesDelete = AppsServicesDelete'
-    { _asdXgafv          :: !(Maybe Text)
+    { _asdXgafv          :: !(Maybe Xgafv)
     , _asdUploadProtocol :: !(Maybe Text)
-    , _asdPp             :: !Bool
     , _asdAccessToken    :: !(Maybe Text)
     , _asdUploadType     :: !(Maybe Text)
-    , _asdBearerToken    :: !(Maybe Text)
     , _asdAppsId         :: !Text
     , _asdServicesId     :: !Text
     , _asdCallback       :: !(Maybe Text)
@@ -88,13 +81,9 @@ data AppsServicesDelete = AppsServicesDelete'
 --
 -- * 'asdUploadProtocol'
 --
--- * 'asdPp'
---
 -- * 'asdAccessToken'
 --
 -- * 'asdUploadType'
---
--- * 'asdBearerToken'
 --
 -- * 'asdAppsId'
 --
@@ -109,17 +98,15 @@ appsServicesDelete pAsdAppsId_ pAsdServicesId_ =
     AppsServicesDelete'
     { _asdXgafv = Nothing
     , _asdUploadProtocol = Nothing
-    , _asdPp = True
     , _asdAccessToken = Nothing
     , _asdUploadType = Nothing
-    , _asdBearerToken = Nothing
     , _asdAppsId = pAsdAppsId_
     , _asdServicesId = pAsdServicesId_
     , _asdCallback = Nothing
     }
 
 -- | V1 error format.
-asdXgafv :: Lens' AppsServicesDelete (Maybe Text)
+asdXgafv :: Lens' AppsServicesDelete (Maybe Xgafv)
 asdXgafv = lens _asdXgafv (\ s a -> s{_asdXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -127,10 +114,6 @@ asdUploadProtocol :: Lens' AppsServicesDelete (Maybe Text)
 asdUploadProtocol
   = lens _asdUploadProtocol
       (\ s a -> s{_asdUploadProtocol = a})
-
--- | Pretty-print response.
-asdPp :: Lens' AppsServicesDelete Bool
-asdPp = lens _asdPp (\ s a -> s{_asdPp = a})
 
 -- | OAuth access token.
 asdAccessToken :: Lens' AppsServicesDelete (Maybe Text)
@@ -143,12 +126,6 @@ asdUploadType :: Lens' AppsServicesDelete (Maybe Text)
 asdUploadType
   = lens _asdUploadType
       (\ s a -> s{_asdUploadType = a})
-
--- | OAuth bearer token.
-asdBearerToken :: Lens' AppsServicesDelete (Maybe Text)
-asdBearerToken
-  = lens _asdBearerToken
-      (\ s a -> s{_asdBearerToken = a})
 
 -- | Part of \`name\`. Name of the resource requested. Example:
 -- apps\/myapp\/services\/default.
@@ -174,10 +151,8 @@ instance GoogleRequest AppsServicesDelete where
         requestClient AppsServicesDelete'{..}
           = go _asdAppsId _asdServicesId _asdXgafv
               _asdUploadProtocol
-              (Just _asdPp)
               _asdAccessToken
               _asdUploadType
-              _asdBearerToken
               _asdCallback
               (Just AltJSON)
               appEngineService

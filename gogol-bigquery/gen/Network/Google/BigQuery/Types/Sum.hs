@@ -16,7 +16,7 @@
 --
 module Network.Google.BigQuery.Types.Sum where
 
-import           Network.Google.Prelude
+import           Network.Google.Prelude hiding (Bytes)
 
 -- | Restrict information returned to a set of selected fields
 data JobsListProjection

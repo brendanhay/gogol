@@ -21,9 +21,9 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Gets cluster diagnostic information. After the operation completes, the
--- Operation.response field contains \`DiagnoseClusterOutputLocation\`.
+-- Operation.response field contains DiagnoseClusterOutputLocation.
 --
--- /See:/ <https://cloud.google.com/dataproc/ Google Cloud Dataproc API Reference> for @dataproc.projects.regions.clusters.diagnose@.
+-- /See:/ <https://cloud.google.com/dataproc/ Cloud Dataproc API Reference> for @dataproc.projects.regions.clusters.diagnose@.
 module Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Diagnose
     (
     -- * REST Resource
@@ -36,11 +36,9 @@ module Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Diagnose
     -- * Request Lenses
     , pXgafv
     , pUploadProtocol
-    , pPp
     , pAccessToken
     , pUploadType
     , pPayload
-    , pBearerToken
     , pClusterName
     , pRegion
     , pProjectId
@@ -60,29 +58,25 @@ type ProjectsRegionsClustersDiagnoseResource =
              Capture "region" Text :>
                "clusters" :>
                  CaptureMode "clusterName" "diagnose" Text :>
-                   QueryParam "$.xgafv" Text :>
+                   QueryParam "$.xgafv" Xgafv :>
                      QueryParam "upload_protocol" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "access_token" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "bearer_token" Text :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" AltJSON :>
-                                   ReqBody '[JSON] DiagnoseClusterRequest :>
-                                     Post '[JSON] Operation
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] DiagnoseClusterRequest :>
+                                 Post '[JSON] Operation
 
 -- | Gets cluster diagnostic information. After the operation completes, the
--- Operation.response field contains \`DiagnoseClusterOutputLocation\`.
+-- Operation.response field contains DiagnoseClusterOutputLocation.
 --
 -- /See:/ 'projectsRegionsClustersDiagnose' smart constructor.
 data ProjectsRegionsClustersDiagnose = ProjectsRegionsClustersDiagnose'
-    { _pXgafv          :: !(Maybe Text)
+    { _pXgafv          :: !(Maybe Xgafv)
     , _pUploadProtocol :: !(Maybe Text)
-    , _pPp             :: !Bool
     , _pAccessToken    :: !(Maybe Text)
     , _pUploadType     :: !(Maybe Text)
     , _pPayload        :: !DiagnoseClusterRequest
-    , _pBearerToken    :: !(Maybe Text)
     , _pClusterName    :: !Text
     , _pRegion         :: !Text
     , _pProjectId      :: !Text
@@ -97,15 +91,11 @@ data ProjectsRegionsClustersDiagnose = ProjectsRegionsClustersDiagnose'
 --
 -- * 'pUploadProtocol'
 --
--- * 'pPp'
---
 -- * 'pAccessToken'
 --
 -- * 'pUploadType'
 --
 -- * 'pPayload'
---
--- * 'pBearerToken'
 --
 -- * 'pClusterName'
 --
@@ -124,11 +114,9 @@ projectsRegionsClustersDiagnose pPPayload_ pPClusterName_ pPRegion_ pPProjectId_
     ProjectsRegionsClustersDiagnose'
     { _pXgafv = Nothing
     , _pUploadProtocol = Nothing
-    , _pPp = True
     , _pAccessToken = Nothing
     , _pUploadType = Nothing
     , _pPayload = pPPayload_
-    , _pBearerToken = Nothing
     , _pClusterName = pPClusterName_
     , _pRegion = pPRegion_
     , _pProjectId = pPProjectId_
@@ -136,7 +124,7 @@ projectsRegionsClustersDiagnose pPPayload_ pPClusterName_ pPRegion_ pPProjectId_
     }
 
 -- | V1 error format.
-pXgafv :: Lens' ProjectsRegionsClustersDiagnose (Maybe Text)
+pXgafv :: Lens' ProjectsRegionsClustersDiagnose (Maybe Xgafv)
 pXgafv = lens _pXgafv (\ s a -> s{_pXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -144,10 +132,6 @@ pUploadProtocol :: Lens' ProjectsRegionsClustersDiagnose (Maybe Text)
 pUploadProtocol
   = lens _pUploadProtocol
       (\ s a -> s{_pUploadProtocol = a})
-
--- | Pretty-print response.
-pPp :: Lens' ProjectsRegionsClustersDiagnose Bool
-pPp = lens _pPp (\ s a -> s{_pPp = a})
 
 -- | OAuth access token.
 pAccessToken :: Lens' ProjectsRegionsClustersDiagnose (Maybe Text)
@@ -163,21 +147,16 @@ pUploadType
 pPayload :: Lens' ProjectsRegionsClustersDiagnose DiagnoseClusterRequest
 pPayload = lens _pPayload (\ s a -> s{_pPayload = a})
 
--- | OAuth bearer token.
-pBearerToken :: Lens' ProjectsRegionsClustersDiagnose (Maybe Text)
-pBearerToken
-  = lens _pBearerToken (\ s a -> s{_pBearerToken = a})
-
--- | [Required] The cluster name.
+-- | Required. The cluster name.
 pClusterName :: Lens' ProjectsRegionsClustersDiagnose Text
 pClusterName
   = lens _pClusterName (\ s a -> s{_pClusterName = a})
 
--- | [Required] The Cloud Dataproc region in which to handle the request.
+-- | Required. The Cloud Dataproc region in which to handle the request.
 pRegion :: Lens' ProjectsRegionsClustersDiagnose Text
 pRegion = lens _pRegion (\ s a -> s{_pRegion = a})
 
--- | [Required] The ID of the Google Cloud Platform project that the cluster
+-- | Required. The ID of the Google Cloud Platform project that the cluster
 -- belongs to.
 pProjectId :: Lens' ProjectsRegionsClustersDiagnose Text
 pProjectId
@@ -196,10 +175,8 @@ instance GoogleRequest
         requestClient ProjectsRegionsClustersDiagnose'{..}
           = go _pProjectId _pRegion _pClusterName _pXgafv
               _pUploadProtocol
-              (Just _pPp)
               _pAccessToken
               _pUploadType
-              _pBearerToken
               _pCallback
               (Just AltJSON)
               _pPayload

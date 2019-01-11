@@ -39,6 +39,7 @@ module Network.Google.Resource.Storage.Buckets.Update
     , buBucket
     , buPayload
     , buPredefinedDefaultObjectACL
+    , buUserProject
     , buIfMetagenerationNotMatch
     , buProjection
     ) where
@@ -59,11 +60,12 @@ type BucketsUpdateResource =
                  QueryParam "predefinedDefaultObjectAcl"
                    BucketsUpdatePredefinedDefaultObjectACL
                    :>
-                   QueryParam "ifMetagenerationNotMatch" (Textual Int64)
-                     :>
-                     QueryParam "projection" BucketsUpdateProjection :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Bucket :> Put '[JSON] Bucket
+                   QueryParam "userProject" Text :>
+                     QueryParam "ifMetagenerationNotMatch" (Textual Int64)
+                       :>
+                       QueryParam "projection" BucketsUpdateProjection :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Bucket :> Put '[JSON] Bucket
 
 -- | Updates a bucket. Changes to the bucket will be readable immediately
 -- after writing, but configuration changes may take time to propagate.
@@ -75,6 +77,7 @@ data BucketsUpdate = BucketsUpdate'
     , _buBucket                     :: !Text
     , _buPayload                    :: !Bucket
     , _buPredefinedDefaultObjectACL :: !(Maybe BucketsUpdatePredefinedDefaultObjectACL)
+    , _buUserProject                :: !(Maybe Text)
     , _buIfMetagenerationNotMatch   :: !(Maybe (Textual Int64))
     , _buProjection                 :: !(Maybe BucketsUpdateProjection)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -93,6 +96,8 @@ data BucketsUpdate = BucketsUpdate'
 --
 -- * 'buPredefinedDefaultObjectACL'
 --
+-- * 'buUserProject'
+--
 -- * 'buIfMetagenerationNotMatch'
 --
 -- * 'buProjection'
@@ -107,6 +112,7 @@ bucketsUpdate pBuBucket_ pBuPayload_ =
     , _buBucket = pBuBucket_
     , _buPayload = pBuPayload_
     , _buPredefinedDefaultObjectACL = Nothing
+    , _buUserProject = Nothing
     , _buIfMetagenerationNotMatch = Nothing
     , _buProjection = Nothing
     }
@@ -140,6 +146,13 @@ buPredefinedDefaultObjectACL
   = lens _buPredefinedDefaultObjectACL
       (\ s a -> s{_buPredefinedDefaultObjectACL = a})
 
+-- | The project to be billed for this request. Required for Requester Pays
+-- buckets.
+buUserProject :: Lens' BucketsUpdate (Maybe Text)
+buUserProject
+  = lens _buUserProject
+      (\ s a -> s{_buUserProject = a})
+
 -- | Makes the return of the bucket metadata conditional on whether the
 -- bucket\'s current metageneration does not match the given value.
 buIfMetagenerationNotMatch :: Lens' BucketsUpdate (Maybe Int64)
@@ -162,6 +175,7 @@ instance GoogleRequest BucketsUpdate where
           = go _buBucket _buIfMetagenerationMatch
               _buPredefinedACL
               _buPredefinedDefaultObjectACL
+              _buUserProject
               _buIfMetagenerationNotMatch
               _buProjection
               (Just AltJSON)

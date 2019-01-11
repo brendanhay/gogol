@@ -21,6 +21,9 @@ module Network.Google.DoubleClickBids
     -- * Service Configuration
       doubleClickBidsService
 
+    -- * OAuth Scopes
+    , doubleClickBidManagerScope
+
     -- * API Declaration
     , DoubleClickBidsAPI
 
@@ -208,6 +211,7 @@ module Network.Google.DoubleClickBids
     , DownloadResponse
     , downloadResponse
     , drInsertionOrders
+    , drCampaigns
     , drLineItems
     , drAdGroups
     , drAds

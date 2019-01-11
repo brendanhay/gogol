@@ -48,12 +48,10 @@ module Network.Google.Resource.Slides.Presentations.BatchUpdate
     -- * Request Lenses
     , pbuXgafv
     , pbuUploadProtocol
-    , pbuPp
     , pbuAccessToken
     , pbuUploadType
     , pbuPresentationId
     , pbuPayload
-    , pbuBearerToken
     , pbuCallback
     ) where
 
@@ -68,14 +66,12 @@ type PresentationsBatchUpdateResource =
          CaptureMode "presentationId" "batchUpdate" Text :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] BatchUpdatePresentationRequest :>
-                             Post '[JSON] BatchUpdatePresentationResponse
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] BatchUpdatePresentationRequest :>
+                         Post '[JSON] BatchUpdatePresentationResponse
 
 -- | Applies one or more updates to the presentation. Each request is
 -- validated before being applied. If any request is not valid, then the
@@ -96,12 +92,10 @@ type PresentationsBatchUpdateResource =
 data PresentationsBatchUpdate = PresentationsBatchUpdate'
     { _pbuXgafv          :: !(Maybe Xgafv)
     , _pbuUploadProtocol :: !(Maybe Text)
-    , _pbuPp             :: !Bool
     , _pbuAccessToken    :: !(Maybe Text)
     , _pbuUploadType     :: !(Maybe Text)
     , _pbuPresentationId :: !Text
     , _pbuPayload        :: !BatchUpdatePresentationRequest
-    , _pbuBearerToken    :: !(Maybe Text)
     , _pbuCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -113,8 +107,6 @@ data PresentationsBatchUpdate = PresentationsBatchUpdate'
 --
 -- * 'pbuUploadProtocol'
 --
--- * 'pbuPp'
---
 -- * 'pbuAccessToken'
 --
 -- * 'pbuUploadType'
@@ -122,8 +114,6 @@ data PresentationsBatchUpdate = PresentationsBatchUpdate'
 -- * 'pbuPresentationId'
 --
 -- * 'pbuPayload'
---
--- * 'pbuBearerToken'
 --
 -- * 'pbuCallback'
 presentationsBatchUpdate
@@ -134,12 +124,10 @@ presentationsBatchUpdate pPbuPresentationId_ pPbuPayload_ =
     PresentationsBatchUpdate'
     { _pbuXgafv = Nothing
     , _pbuUploadProtocol = Nothing
-    , _pbuPp = True
     , _pbuAccessToken = Nothing
     , _pbuUploadType = Nothing
     , _pbuPresentationId = pPbuPresentationId_
     , _pbuPayload = pPbuPayload_
-    , _pbuBearerToken = Nothing
     , _pbuCallback = Nothing
     }
 
@@ -152,10 +140,6 @@ pbuUploadProtocol :: Lens' PresentationsBatchUpdate (Maybe Text)
 pbuUploadProtocol
   = lens _pbuUploadProtocol
       (\ s a -> s{_pbuUploadProtocol = a})
-
--- | Pretty-print response.
-pbuPp :: Lens' PresentationsBatchUpdate Bool
-pbuPp = lens _pbuPp (\ s a -> s{_pbuPp = a})
 
 -- | OAuth access token.
 pbuAccessToken :: Lens' PresentationsBatchUpdate (Maybe Text)
@@ -180,12 +164,6 @@ pbuPayload :: Lens' PresentationsBatchUpdate BatchUpdatePresentationRequest
 pbuPayload
   = lens _pbuPayload (\ s a -> s{_pbuPayload = a})
 
--- | OAuth bearer token.
-pbuBearerToken :: Lens' PresentationsBatchUpdate (Maybe Text)
-pbuBearerToken
-  = lens _pbuBearerToken
-      (\ s a -> s{_pbuBearerToken = a})
-
 -- | JSONP
 pbuCallback :: Lens' PresentationsBatchUpdate (Maybe Text)
 pbuCallback
@@ -196,16 +174,15 @@ instance GoogleRequest PresentationsBatchUpdate where
              BatchUpdatePresentationResponse
         type Scopes PresentationsBatchUpdate =
              '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file",
                "https://www.googleapis.com/auth/drive.readonly",
                "https://www.googleapis.com/auth/presentations",
                "https://www.googleapis.com/auth/spreadsheets",
                "https://www.googleapis.com/auth/spreadsheets.readonly"]
         requestClient PresentationsBatchUpdate'{..}
           = go _pbuPresentationId _pbuXgafv _pbuUploadProtocol
-              (Just _pbuPp)
               _pbuAccessToken
               _pbuUploadType
-              _pbuBearerToken
               _pbuCallback
               (Just AltJSON)
               _pbuPayload

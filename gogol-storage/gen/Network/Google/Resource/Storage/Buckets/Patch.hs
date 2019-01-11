@@ -20,9 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a bucket. Changes to the bucket will be readable immediately
+-- Patches a bucket. Changes to the bucket will be readable immediately
 -- after writing, but configuration changes may take time to propagate.
--- This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.buckets.patch@.
 module Network.Google.Resource.Storage.Buckets.Patch
@@ -40,6 +39,7 @@ module Network.Google.Resource.Storage.Buckets.Patch
     , bpBucket
     , bpPayload
     , bpPredefinedDefaultObjectACL
+    , bpUserProject
     , bpIfMetagenerationNotMatch
     , bpProjection
     ) where
@@ -60,15 +60,15 @@ type BucketsPatchResource =
                  QueryParam "predefinedDefaultObjectAcl"
                    BucketsPatchPredefinedDefaultObjectACL
                    :>
-                   QueryParam "ifMetagenerationNotMatch" (Textual Int64)
-                     :>
-                     QueryParam "projection" BucketsPatchProjection :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Bucket :> Patch '[JSON] Bucket
+                   QueryParam "userProject" Text :>
+                     QueryParam "ifMetagenerationNotMatch" (Textual Int64)
+                       :>
+                       QueryParam "projection" BucketsPatchProjection :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Bucket :> Patch '[JSON] Bucket
 
--- | Updates a bucket. Changes to the bucket will be readable immediately
+-- | Patches a bucket. Changes to the bucket will be readable immediately
 -- after writing, but configuration changes may take time to propagate.
--- This method supports patch semantics.
 --
 -- /See:/ 'bucketsPatch' smart constructor.
 data BucketsPatch = BucketsPatch'
@@ -77,6 +77,7 @@ data BucketsPatch = BucketsPatch'
     , _bpBucket                     :: !Text
     , _bpPayload                    :: !Bucket
     , _bpPredefinedDefaultObjectACL :: !(Maybe BucketsPatchPredefinedDefaultObjectACL)
+    , _bpUserProject                :: !(Maybe Text)
     , _bpIfMetagenerationNotMatch   :: !(Maybe (Textual Int64))
     , _bpProjection                 :: !(Maybe BucketsPatchProjection)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -95,6 +96,8 @@ data BucketsPatch = BucketsPatch'
 --
 -- * 'bpPredefinedDefaultObjectACL'
 --
+-- * 'bpUserProject'
+--
 -- * 'bpIfMetagenerationNotMatch'
 --
 -- * 'bpProjection'
@@ -109,6 +112,7 @@ bucketsPatch pBpBucket_ pBpPayload_ =
     , _bpBucket = pBpBucket_
     , _bpPayload = pBpPayload_
     , _bpPredefinedDefaultObjectACL = Nothing
+    , _bpUserProject = Nothing
     , _bpIfMetagenerationNotMatch = Nothing
     , _bpProjection = Nothing
     }
@@ -142,6 +146,13 @@ bpPredefinedDefaultObjectACL
   = lens _bpPredefinedDefaultObjectACL
       (\ s a -> s{_bpPredefinedDefaultObjectACL = a})
 
+-- | The project to be billed for this request. Required for Requester Pays
+-- buckets.
+bpUserProject :: Lens' BucketsPatch (Maybe Text)
+bpUserProject
+  = lens _bpUserProject
+      (\ s a -> s{_bpUserProject = a})
+
 -- | Makes the return of the bucket metadata conditional on whether the
 -- bucket\'s current metageneration does not match the given value.
 bpIfMetagenerationNotMatch :: Lens' BucketsPatch (Maybe Int64)
@@ -164,6 +175,7 @@ instance GoogleRequest BucketsPatch where
           = go _bpBucket _bpIfMetagenerationMatch
               _bpPredefinedACL
               _bpPredefinedDefaultObjectACL
+              _bpUserProject
               _bpIfMetagenerationNotMatch
               _bpProjection
               (Just AltJSON)

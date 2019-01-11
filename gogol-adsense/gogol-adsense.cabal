@@ -36,6 +36,7 @@ library
     exposed-modules:
           Network.Google.AdSense
         , Network.Google.AdSense.Types
+        , Network.Google.Resource.AdSense.Accounts.AdClients.GetAdCode
         , Network.Google.Resource.AdSense.Accounts.AdClients.List
         , Network.Google.Resource.AdSense.Accounts.AdUnits.CustomChannels.List
         , Network.Google.Resource.AdSense.Accounts.AdUnits.Get

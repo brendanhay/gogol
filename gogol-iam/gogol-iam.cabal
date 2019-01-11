@@ -37,6 +37,21 @@ library
     exposed-modules:
           Network.Google.IAM
         , Network.Google.IAM.Types
+        , Network.Google.Resource.IAM.IAMPolicies.LintPolicy
+        , Network.Google.Resource.IAM.IAMPolicies.QueryAuditableServices
+        , Network.Google.Resource.IAM.Organizations.Roles.Create
+        , Network.Google.Resource.IAM.Organizations.Roles.Delete
+        , Network.Google.Resource.IAM.Organizations.Roles.Get
+        , Network.Google.Resource.IAM.Organizations.Roles.List
+        , Network.Google.Resource.IAM.Organizations.Roles.Patch
+        , Network.Google.Resource.IAM.Organizations.Roles.Undelete
+        , Network.Google.Resource.IAM.Permissions.QueryTestablePermissions
+        , Network.Google.Resource.IAM.Projects.Roles.Create
+        , Network.Google.Resource.IAM.Projects.Roles.Delete
+        , Network.Google.Resource.IAM.Projects.Roles.Get
+        , Network.Google.Resource.IAM.Projects.Roles.List
+        , Network.Google.Resource.IAM.Projects.Roles.Patch
+        , Network.Google.Resource.IAM.Projects.Roles.Undelete
         , Network.Google.Resource.IAM.Projects.ServiceAccounts.Create
         , Network.Google.Resource.IAM.Projects.ServiceAccounts.Delete
         , Network.Google.Resource.IAM.Projects.ServiceAccounts.Get
@@ -48,8 +63,11 @@ library
         , Network.Google.Resource.IAM.Projects.ServiceAccounts.List
         , Network.Google.Resource.IAM.Projects.ServiceAccounts.SetIAMPolicy
         , Network.Google.Resource.IAM.Projects.ServiceAccounts.SignBlob
+        , Network.Google.Resource.IAM.Projects.ServiceAccounts.SignJwt
         , Network.Google.Resource.IAM.Projects.ServiceAccounts.TestIAMPermissions
         , Network.Google.Resource.IAM.Projects.ServiceAccounts.Update
+        , Network.Google.Resource.IAM.Roles.Get
+        , Network.Google.Resource.IAM.Roles.List
         , Network.Google.Resource.IAM.Roles.QueryGrantableRoles
 
     other-modules:

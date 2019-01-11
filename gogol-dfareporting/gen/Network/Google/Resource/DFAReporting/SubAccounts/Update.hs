@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'SubAccountsUpdate' request conforms to.
 type SubAccountsUpdateResource =
      "dfareporting" :>
-       "v2.7" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "subaccounts" :>

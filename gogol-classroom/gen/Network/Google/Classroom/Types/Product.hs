@@ -76,19 +76,23 @@ instance ToJSON ListCourseAliasesResponse where
 --
 -- /See:/ 'courseWork' smart constructor.
 data CourseWork = CourseWork'
-    { _cwCreationTime               :: !(Maybe Text)
-    , _cwState                      :: !(Maybe Text)
+    { _cwCreationTime               :: !(Maybe DateTime')
+    , _cwScheduledTime              :: !(Maybe DateTime')
+    , _cwState                      :: !(Maybe CourseWorkState)
+    , _cwAssigneeMode               :: !(Maybe CourseWorkAssigneeMode)
     , _cwMaterials                  :: !(Maybe [Material])
     , _cwCourseId                   :: !(Maybe Text)
+    , _cwIndividualStudentsOptions  :: !(Maybe IndividualStudentsOptions)
     , _cwMaxPoints                  :: !(Maybe (Textual Double))
-    , _cwWorkType                   :: !(Maybe Text)
+    , _cwWorkType                   :: !(Maybe CourseWorkWorkType)
     , _cwDueTime                    :: !(Maybe TimeOfDay')
     , _cwAssociatedWithDeveloper    :: !(Maybe Bool)
-    , _cwUpdateTime                 :: !(Maybe Text)
+    , _cwUpdateTime                 :: !(Maybe DateTime')
     , _cwMultipleChoiceQuestion     :: !(Maybe MultipleChoiceQuestion)
     , _cwId                         :: !(Maybe Text)
-    , _cwSubmissionModificationMode :: !(Maybe Text)
+    , _cwSubmissionModificationMode :: !(Maybe CourseWorkSubmissionModificationMode)
     , _cwDueDate                    :: !(Maybe Date)
+    , _cwCreatorUserId              :: !(Maybe Text)
     , _cwTitle                      :: !(Maybe Text)
     , _cwAlternateLink              :: !(Maybe Text)
     , _cwAssignment                 :: !(Maybe Assignment)
@@ -101,11 +105,17 @@ data CourseWork = CourseWork'
 --
 -- * 'cwCreationTime'
 --
+-- * 'cwScheduledTime'
+--
 -- * 'cwState'
+--
+-- * 'cwAssigneeMode'
 --
 -- * 'cwMaterials'
 --
 -- * 'cwCourseId'
+--
+-- * 'cwIndividualStudentsOptions'
 --
 -- * 'cwMaxPoints'
 --
@@ -125,6 +135,8 @@ data CourseWork = CourseWork'
 --
 -- * 'cwDueDate'
 --
+-- * 'cwCreatorUserId'
+--
 -- * 'cwTitle'
 --
 -- * 'cwAlternateLink'
@@ -137,9 +149,12 @@ courseWork
 courseWork =
     CourseWork'
     { _cwCreationTime = Nothing
+    , _cwScheduledTime = Nothing
     , _cwState = Nothing
+    , _cwAssigneeMode = Nothing
     , _cwMaterials = Nothing
     , _cwCourseId = Nothing
+    , _cwIndividualStudentsOptions = Nothing
     , _cwMaxPoints = Nothing
     , _cwWorkType = Nothing
     , _cwDueTime = Nothing
@@ -149,6 +164,7 @@ courseWork =
     , _cwId = Nothing
     , _cwSubmissionModificationMode = Nothing
     , _cwDueDate = Nothing
+    , _cwCreatorUserId = Nothing
     , _cwTitle = Nothing
     , _cwAlternateLink = Nothing
     , _cwAssignment = Nothing
@@ -156,15 +172,30 @@ courseWork =
     }
 
 -- | Timestamp when this course work was created. Read-only.
-cwCreationTime :: Lens' CourseWork (Maybe Text)
+cwCreationTime :: Lens' CourseWork (Maybe UTCTime)
 cwCreationTime
   = lens _cwCreationTime
       (\ s a -> s{_cwCreationTime = a})
+      . mapping _DateTime
+
+-- | Optional timestamp when this course work is scheduled to be published.
+cwScheduledTime :: Lens' CourseWork (Maybe UTCTime)
+cwScheduledTime
+  = lens _cwScheduledTime
+      (\ s a -> s{_cwScheduledTime = a})
+      . mapping _DateTime
 
 -- | Status of this course work. If unspecified, the default state is
 -- \`DRAFT\`.
-cwState :: Lens' CourseWork (Maybe Text)
+cwState :: Lens' CourseWork (Maybe CourseWorkState)
 cwState = lens _cwState (\ s a -> s{_cwState = a})
+
+-- | Assignee mode of the coursework. If unspecified, the default value is
+-- \`ALL_STUDENTS\`.
+cwAssigneeMode :: Lens' CourseWork (Maybe CourseWorkAssigneeMode)
+cwAssigneeMode
+  = lens _cwAssigneeMode
+      (\ s a -> s{_cwAssigneeMode = a})
 
 -- | Additional materials. CourseWork must have no more than 20 material
 -- items.
@@ -179,6 +210,15 @@ cwCourseId :: Lens' CourseWork (Maybe Text)
 cwCourseId
   = lens _cwCourseId (\ s a -> s{_cwCourseId = a})
 
+-- | Identifiers of students with access to the coursework. This field is set
+-- only if \`assigneeMode\` is \`INDIVIDUAL_STUDENTS\`. If the
+-- \`assigneeMode\` is \`INDIVIDUAL_STUDENTS\`, then only students
+-- specified in this field will be assigned the coursework.
+cwIndividualStudentsOptions :: Lens' CourseWork (Maybe IndividualStudentsOptions)
+cwIndividualStudentsOptions
+  = lens _cwIndividualStudentsOptions
+      (\ s a -> s{_cwIndividualStudentsOptions = a})
+
 -- | Maximum grade for this course work. If zero or unspecified, this
 -- assignment is considered ungraded. This must be a non-negative integer
 -- value.
@@ -189,12 +229,12 @@ cwMaxPoints
 
 -- | Type of this course work. The type is set when the course work is
 -- created and cannot be changed.
-cwWorkType :: Lens' CourseWork (Maybe Text)
+cwWorkType :: Lens' CourseWork (Maybe CourseWorkWorkType)
 cwWorkType
   = lens _cwWorkType (\ s a -> s{_cwWorkType = a})
 
--- | Optional time of day, in UTC, that submissions for this this course work
--- are due. This must be specified if \`due_date\` is specified.
+-- | Optional time of day, in UTC, that submissions for this course work are
+-- due. This must be specified if \`due_date\` is specified.
 cwDueTime :: Lens' CourseWork (Maybe TimeOfDay')
 cwDueTime
   = lens _cwDueTime (\ s a -> s{_cwDueTime = a})
@@ -208,9 +248,10 @@ cwAssociatedWithDeveloper
       (\ s a -> s{_cwAssociatedWithDeveloper = a})
 
 -- | Timestamp of the most recent change to this course work. Read-only.
-cwUpdateTime :: Lens' CourseWork (Maybe Text)
+cwUpdateTime :: Lens' CourseWork (Maybe UTCTime)
 cwUpdateTime
   = lens _cwUpdateTime (\ s a -> s{_cwUpdateTime = a})
+      . mapping _DateTime
 
 -- | Multiple choice question details. For read operations, this field is
 -- populated only when \`work_type\` is \`MULTIPLE_CHOICE_QUESTION\`. For
@@ -229,16 +270,22 @@ cwId = lens _cwId (\ s a -> s{_cwId = a})
 
 -- | Setting to determine when students are allowed to modify submissions. If
 -- unspecified, the default value is \`MODIFIABLE_UNTIL_TURNED_IN\`.
-cwSubmissionModificationMode :: Lens' CourseWork (Maybe Text)
+cwSubmissionModificationMode :: Lens' CourseWork (Maybe CourseWorkSubmissionModificationMode)
 cwSubmissionModificationMode
   = lens _cwSubmissionModificationMode
       (\ s a -> s{_cwSubmissionModificationMode = a})
 
--- | Optional date, in UTC, that submissions for this this course work are
--- due. This must be specified if \`due_time\` is specified.
+-- | Optional date, in UTC, that submissions for this course work are due.
+-- This must be specified if \`due_time\` is specified.
 cwDueDate :: Lens' CourseWork (Maybe Date)
 cwDueDate
   = lens _cwDueDate (\ s a -> s{_cwDueDate = a})
+
+-- | Identifier for the user that created the coursework. Read-only.
+cwCreatorUserId :: Lens' CourseWork (Maybe Text)
+cwCreatorUserId
+  = lens _cwCreatorUserId
+      (\ s a -> s{_cwCreatorUserId = a})
 
 -- | Title of this course work. The title must be a valid UTF-8 string
 -- containing between 1 and 3000 characters.
@@ -270,9 +317,12 @@ instance FromJSON CourseWork where
           = withObject "CourseWork"
               (\ o ->
                  CourseWork' <$>
-                   (o .:? "creationTime") <*> (o .:? "state") <*>
-                     (o .:? "materials" .!= mempty)
+                   (o .:? "creationTime") <*> (o .:? "scheduledTime")
+                     <*> (o .:? "state")
+                     <*> (o .:? "assigneeMode")
+                     <*> (o .:? "materials" .!= mempty)
                      <*> (o .:? "courseId")
+                     <*> (o .:? "individualStudentsOptions")
                      <*> (o .:? "maxPoints")
                      <*> (o .:? "workType")
                      <*> (o .:? "dueTime")
@@ -282,6 +332,7 @@ instance FromJSON CourseWork where
                      <*> (o .:? "id")
                      <*> (o .:? "submissionModificationMode")
                      <*> (o .:? "dueDate")
+                     <*> (o .:? "creatorUserId")
                      <*> (o .:? "title")
                      <*> (o .:? "alternateLink")
                      <*> (o .:? "assignment")
@@ -292,9 +343,13 @@ instance ToJSON CourseWork where
           = object
               (catMaybes
                  [("creationTime" .=) <$> _cwCreationTime,
+                  ("scheduledTime" .=) <$> _cwScheduledTime,
                   ("state" .=) <$> _cwState,
+                  ("assigneeMode" .=) <$> _cwAssigneeMode,
                   ("materials" .=) <$> _cwMaterials,
                   ("courseId" .=) <$> _cwCourseId,
+                  ("individualStudentsOptions" .=) <$>
+                    _cwIndividualStudentsOptions,
                   ("maxPoints" .=) <$> _cwMaxPoints,
                   ("workType" .=) <$> _cwWorkType,
                   ("dueTime" .=) <$> _cwDueTime,
@@ -307,10 +362,191 @@ instance ToJSON CourseWork where
                   ("submissionModificationMode" .=) <$>
                     _cwSubmissionModificationMode,
                   ("dueDate" .=) <$> _cwDueDate,
+                  ("creatorUserId" .=) <$> _cwCreatorUserId,
                   ("title" .=) <$> _cwTitle,
                   ("alternateLink" .=) <$> _cwAlternateLink,
                   ("assignment" .=) <$> _cwAssignment,
                   ("description" .=) <$> _cwDescription])
+
+-- | The history of each grade on this submission.
+--
+-- /See:/ 'gradeHistory' smart constructor.
+data GradeHistory = GradeHistory'
+    { _ghGradeTimestamp  :: !(Maybe DateTime')
+    , _ghMaxPoints       :: !(Maybe (Textual Double))
+    , _ghPointsEarned    :: !(Maybe (Textual Double))
+    , _ghActorUserId     :: !(Maybe Text)
+    , _ghGradeChangeType :: !(Maybe GradeHistoryGradeChangeType)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GradeHistory' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ghGradeTimestamp'
+--
+-- * 'ghMaxPoints'
+--
+-- * 'ghPointsEarned'
+--
+-- * 'ghActorUserId'
+--
+-- * 'ghGradeChangeType'
+gradeHistory
+    :: GradeHistory
+gradeHistory =
+    GradeHistory'
+    { _ghGradeTimestamp = Nothing
+    , _ghMaxPoints = Nothing
+    , _ghPointsEarned = Nothing
+    , _ghActorUserId = Nothing
+    , _ghGradeChangeType = Nothing
+    }
+
+-- | When the grade of the submission was changed.
+ghGradeTimestamp :: Lens' GradeHistory (Maybe UTCTime)
+ghGradeTimestamp
+  = lens _ghGradeTimestamp
+      (\ s a -> s{_ghGradeTimestamp = a})
+      . mapping _DateTime
+
+-- | The denominator of the grade at this time in the submission grade
+-- history.
+ghMaxPoints :: Lens' GradeHistory (Maybe Double)
+ghMaxPoints
+  = lens _ghMaxPoints (\ s a -> s{_ghMaxPoints = a}) .
+      mapping _Coerce
+
+-- | The numerator of the grade at this time in the submission grade history.
+ghPointsEarned :: Lens' GradeHistory (Maybe Double)
+ghPointsEarned
+  = lens _ghPointsEarned
+      (\ s a -> s{_ghPointsEarned = a})
+      . mapping _Coerce
+
+-- | The teacher who made the grade change.
+ghActorUserId :: Lens' GradeHistory (Maybe Text)
+ghActorUserId
+  = lens _ghActorUserId
+      (\ s a -> s{_ghActorUserId = a})
+
+-- | The type of grade change at this time in the submission grade history.
+ghGradeChangeType :: Lens' GradeHistory (Maybe GradeHistoryGradeChangeType)
+ghGradeChangeType
+  = lens _ghGradeChangeType
+      (\ s a -> s{_ghGradeChangeType = a})
+
+instance FromJSON GradeHistory where
+        parseJSON
+          = withObject "GradeHistory"
+              (\ o ->
+                 GradeHistory' <$>
+                   (o .:? "gradeTimestamp") <*> (o .:? "maxPoints") <*>
+                     (o .:? "pointsEarned")
+                     <*> (o .:? "actorUserId")
+                     <*> (o .:? "gradeChangeType"))
+
+instance ToJSON GradeHistory where
+        toJSON GradeHistory'{..}
+          = object
+              (catMaybes
+                 [("gradeTimestamp" .=) <$> _ghGradeTimestamp,
+                  ("maxPoints" .=) <$> _ghMaxPoints,
+                  ("pointsEarned" .=) <$> _ghPointsEarned,
+                  ("actorUserId" .=) <$> _ghActorUserId,
+                  ("gradeChangeType" .=) <$> _ghGradeChangeType])
+
+-- | Information about a \`Feed\` with a \`feed_type\` of
+-- \`COURSE_WORK_CHANGES\`.
+--
+-- /See:/ 'courseWorkChangesInfo' smart constructor.
+newtype CourseWorkChangesInfo = CourseWorkChangesInfo'
+    { _cwciCourseId :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CourseWorkChangesInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cwciCourseId'
+courseWorkChangesInfo
+    :: CourseWorkChangesInfo
+courseWorkChangesInfo =
+    CourseWorkChangesInfo'
+    { _cwciCourseId = Nothing
+    }
+
+-- | The \`course_id\` of the course to subscribe to work changes for.
+cwciCourseId :: Lens' CourseWorkChangesInfo (Maybe Text)
+cwciCourseId
+  = lens _cwciCourseId (\ s a -> s{_cwciCourseId = a})
+
+instance FromJSON CourseWorkChangesInfo where
+        parseJSON
+          = withObject "CourseWorkChangesInfo"
+              (\ o ->
+                 CourseWorkChangesInfo' <$> (o .:? "courseId"))
+
+instance ToJSON CourseWorkChangesInfo where
+        toJSON CourseWorkChangesInfo'{..}
+          = object
+              (catMaybes [("courseId" .=) <$> _cwciCourseId])
+
+-- | Request to modify assignee mode and options of a coursework.
+--
+-- /See:/ 'modifyCourseWorkAssigneesRequest' smart constructor.
+data ModifyCourseWorkAssigneesRequest = ModifyCourseWorkAssigneesRequest'
+    { _mcwarAssigneeMode                    :: !(Maybe ModifyCourseWorkAssigneesRequestAssigneeMode)
+    , _mcwarModifyIndividualStudentsOptions :: !(Maybe ModifyIndividualStudentsOptions)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ModifyCourseWorkAssigneesRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mcwarAssigneeMode'
+--
+-- * 'mcwarModifyIndividualStudentsOptions'
+modifyCourseWorkAssigneesRequest
+    :: ModifyCourseWorkAssigneesRequest
+modifyCourseWorkAssigneesRequest =
+    ModifyCourseWorkAssigneesRequest'
+    { _mcwarAssigneeMode = Nothing
+    , _mcwarModifyIndividualStudentsOptions = Nothing
+    }
+
+-- | Mode of the coursework describing whether it will be assigned to all
+-- students or specified individual students.
+mcwarAssigneeMode :: Lens' ModifyCourseWorkAssigneesRequest (Maybe ModifyCourseWorkAssigneesRequestAssigneeMode)
+mcwarAssigneeMode
+  = lens _mcwarAssigneeMode
+      (\ s a -> s{_mcwarAssigneeMode = a})
+
+-- | Set which students are assigned or not assigned to the coursework. Must
+-- be specified only when \`assigneeMode\` is \`INDIVIDUAL_STUDENTS\`.
+mcwarModifyIndividualStudentsOptions :: Lens' ModifyCourseWorkAssigneesRequest (Maybe ModifyIndividualStudentsOptions)
+mcwarModifyIndividualStudentsOptions
+  = lens _mcwarModifyIndividualStudentsOptions
+      (\ s a ->
+         s{_mcwarModifyIndividualStudentsOptions = a})
+
+instance FromJSON ModifyCourseWorkAssigneesRequest
+         where
+        parseJSON
+          = withObject "ModifyCourseWorkAssigneesRequest"
+              (\ o ->
+                 ModifyCourseWorkAssigneesRequest' <$>
+                   (o .:? "assigneeMode") <*>
+                     (o .:? "modifyIndividualStudentsOptions"))
+
+instance ToJSON ModifyCourseWorkAssigneesRequest
+         where
+        toJSON ModifyCourseWorkAssigneesRequest'{..}
+          = object
+              (catMaybes
+                 [("assigneeMode" .=) <$> _mcwarAssigneeMode,
+                  ("modifyIndividualStudentsOptions" .=) <$>
+                    _mcwarModifyIndividualStudentsOptions])
 
 -- | Representation of a Google Drive file.
 --
@@ -385,9 +621,9 @@ instance ToJSON DriveFile where
 --
 -- /See:/ 'guardianInvitation' smart constructor.
 data GuardianInvitation = GuardianInvitation'
-    { _giCreationTime        :: !(Maybe Text)
+    { _giCreationTime        :: !(Maybe DateTime')
     , _giStudentId           :: !(Maybe Text)
-    , _giState               :: !(Maybe Text)
+    , _giState               :: !(Maybe GuardianInvitationState)
     , _giInvitationId        :: !(Maybe Text)
     , _giInvitedEmailAddress :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -417,10 +653,11 @@ guardianInvitation =
     }
 
 -- | The time that this invitation was created. Read-only.
-giCreationTime :: Lens' GuardianInvitation (Maybe Text)
+giCreationTime :: Lens' GuardianInvitation (Maybe UTCTime)
 giCreationTime
   = lens _giCreationTime
       (\ s a -> s{_giCreationTime = a})
+      . mapping _DateTime
 
 -- | ID of the student (in standard format)
 giStudentId :: Lens' GuardianInvitation (Maybe Text)
@@ -428,7 +665,7 @@ giStudentId
   = lens _giStudentId (\ s a -> s{_giStudentId = a})
 
 -- | The state that this invitation is in.
-giState :: Lens' GuardianInvitation (Maybe Text)
+giState :: Lens' GuardianInvitation (Maybe GuardianInvitationState)
 giState = lens _giState (\ s a -> s{_giState = a})
 
 -- | Unique identifier for this invitation. Read-only.
@@ -464,6 +701,130 @@ instance ToJSON GuardianInvitation where
                   ("invitationId" .=) <$> _giInvitationId,
                   ("invitedEmailAddress" .=) <$>
                     _giInvitedEmailAddress])
+
+-- | A class of notifications that an application can register to receive.
+-- For example: \"all roster changes for a domain\".
+--
+-- /See:/ 'feed' smart constructor.
+data Feed = Feed'
+    { _fCourseWorkChangesInfo   :: !(Maybe CourseWorkChangesInfo)
+    , _fFeedType                :: !(Maybe FeedFeedType)
+    , _fCourseRosterChangesInfo :: !(Maybe CourseRosterChangesInfo)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Feed' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'fCourseWorkChangesInfo'
+--
+-- * 'fFeedType'
+--
+-- * 'fCourseRosterChangesInfo'
+feed
+    :: Feed
+feed =
+    Feed'
+    { _fCourseWorkChangesInfo = Nothing
+    , _fFeedType = Nothing
+    , _fCourseRosterChangesInfo = Nothing
+    }
+
+-- | Information about a \`Feed\` with a \`feed_type\` of
+-- \`COURSE_WORK_CHANGES\`. This field must be specified if \`feed_type\`
+-- is \`COURSE_WORK_CHANGES\`.
+fCourseWorkChangesInfo :: Lens' Feed (Maybe CourseWorkChangesInfo)
+fCourseWorkChangesInfo
+  = lens _fCourseWorkChangesInfo
+      (\ s a -> s{_fCourseWorkChangesInfo = a})
+
+-- | The type of feed.
+fFeedType :: Lens' Feed (Maybe FeedFeedType)
+fFeedType
+  = lens _fFeedType (\ s a -> s{_fFeedType = a})
+
+-- | Information about a \`Feed\` with a \`feed_type\` of
+-- \`COURSE_ROSTER_CHANGES\`. This field must be specified if \`feed_type\`
+-- is \`COURSE_ROSTER_CHANGES\`.
+fCourseRosterChangesInfo :: Lens' Feed (Maybe CourseRosterChangesInfo)
+fCourseRosterChangesInfo
+  = lens _fCourseRosterChangesInfo
+      (\ s a -> s{_fCourseRosterChangesInfo = a})
+
+instance FromJSON Feed where
+        parseJSON
+          = withObject "Feed"
+              (\ o ->
+                 Feed' <$>
+                   (o .:? "courseWorkChangesInfo") <*>
+                     (o .:? "feedType")
+                     <*> (o .:? "courseRosterChangesInfo"))
+
+instance ToJSON Feed where
+        toJSON Feed'{..}
+          = object
+              (catMaybes
+                 [("courseWorkChangesInfo" .=) <$>
+                    _fCourseWorkChangesInfo,
+                  ("feedType" .=) <$> _fFeedType,
+                  ("courseRosterChangesInfo" .=) <$>
+                    _fCourseRosterChangesInfo])
+
+-- | Request to modify assignee mode and options of an announcement.
+--
+-- /See:/ 'modifyAnnouncementAssigneesRequest' smart constructor.
+data ModifyAnnouncementAssigneesRequest = ModifyAnnouncementAssigneesRequest'
+    { _maarAssigneeMode                    :: !(Maybe ModifyAnnouncementAssigneesRequestAssigneeMode)
+    , _maarModifyIndividualStudentsOptions :: !(Maybe ModifyIndividualStudentsOptions)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ModifyAnnouncementAssigneesRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'maarAssigneeMode'
+--
+-- * 'maarModifyIndividualStudentsOptions'
+modifyAnnouncementAssigneesRequest
+    :: ModifyAnnouncementAssigneesRequest
+modifyAnnouncementAssigneesRequest =
+    ModifyAnnouncementAssigneesRequest'
+    { _maarAssigneeMode = Nothing
+    , _maarModifyIndividualStudentsOptions = Nothing
+    }
+
+-- | Mode of the announcement describing whether it will be accessible by all
+-- students or specified individual students.
+maarAssigneeMode :: Lens' ModifyAnnouncementAssigneesRequest (Maybe ModifyAnnouncementAssigneesRequestAssigneeMode)
+maarAssigneeMode
+  = lens _maarAssigneeMode
+      (\ s a -> s{_maarAssigneeMode = a})
+
+-- | Set which students can view or cannot view the announcement. Must be
+-- specified only when \`assigneeMode\` is \`INDIVIDUAL_STUDENTS\`.
+maarModifyIndividualStudentsOptions :: Lens' ModifyAnnouncementAssigneesRequest (Maybe ModifyIndividualStudentsOptions)
+maarModifyIndividualStudentsOptions
+  = lens _maarModifyIndividualStudentsOptions
+      (\ s a ->
+         s{_maarModifyIndividualStudentsOptions = a})
+
+instance FromJSON ModifyAnnouncementAssigneesRequest
+         where
+        parseJSON
+          = withObject "ModifyAnnouncementAssigneesRequest"
+              (\ o ->
+                 ModifyAnnouncementAssigneesRequest' <$>
+                   (o .:? "assigneeMode") <*>
+                     (o .:? "modifyIndividualStudentsOptions"))
+
+instance ToJSON ModifyAnnouncementAssigneesRequest
+         where
+        toJSON ModifyAnnouncementAssigneesRequest'{..}
+          = object
+              (catMaybes
+                 [("assigneeMode" .=) <$> _maarAssigneeMode,
+                  ("modifyIndividualStudentsOptions" .=) <$>
+                    _maarModifyIndividualStudentsOptions])
 
 -- | Request to return a student submission.
 --
@@ -589,7 +950,7 @@ instance ToJSON Empty where
 --
 -- /See:/ 'globalPermission' smart constructor.
 newtype GlobalPermission = GlobalPermission'
-    { _gpPermission :: Maybe Text
+    { _gpPermission :: Maybe GlobalPermissionPermission
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GlobalPermission' with the minimum fields required to make a request.
@@ -605,7 +966,7 @@ globalPermission =
     }
 
 -- | Permission value.
-gpPermission :: Lens' GlobalPermission (Maybe Text)
+gpPermission :: Lens' GlobalPermission (Maybe GlobalPermissionPermission)
 gpPermission
   = lens _gpPermission (\ s a -> s{_gpPermission = a})
 
@@ -675,6 +1036,47 @@ instance ToJSON Link where
               (catMaybes
                  [("thumbnailUrl" .=) <$> _lThumbnailURL,
                   ("url" .=) <$> _lURL, ("title" .=) <$> _lTitle])
+
+-- | Assignee details about a coursework\/announcement. This field is set if
+-- and only if \`assigneeMode\` is \`INDIVIDUAL_STUDENTS\`.
+--
+-- /See:/ 'individualStudentsOptions' smart constructor.
+newtype IndividualStudentsOptions = IndividualStudentsOptions'
+    { _isoStudentIds :: Maybe [Text]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'IndividualStudentsOptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'isoStudentIds'
+individualStudentsOptions
+    :: IndividualStudentsOptions
+individualStudentsOptions =
+    IndividualStudentsOptions'
+    { _isoStudentIds = Nothing
+    }
+
+-- | Identifiers for the students that have access to the
+-- coursework\/announcement.
+isoStudentIds :: Lens' IndividualStudentsOptions [Text]
+isoStudentIds
+  = lens _isoStudentIds
+      (\ s a -> s{_isoStudentIds = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON IndividualStudentsOptions where
+        parseJSON
+          = withObject "IndividualStudentsOptions"
+              (\ o ->
+                 IndividualStudentsOptions' <$>
+                   (o .:? "studentIds" .!= mempty))
+
+instance ToJSON IndividualStudentsOptions where
+        toJSON IndividualStudentsOptions'{..}
+          = object
+              (catMaybes [("studentIds" .=) <$> _isoStudentIds])
 
 -- | Student work for an assignment.
 --
@@ -760,6 +1162,59 @@ instance ToJSON ModifyAttachmentsRequest where
           = object
               (catMaybes
                  [("addAttachments" .=) <$> _marAddAttachments])
+
+-- | Response when listing course work.
+--
+-- /See:/ 'listAnnouncementsResponse' smart constructor.
+data ListAnnouncementsResponse = ListAnnouncementsResponse'
+    { _larNextPageToken :: !(Maybe Text)
+    , _larAnnouncements :: !(Maybe [Announcement])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListAnnouncementsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'larNextPageToken'
+--
+-- * 'larAnnouncements'
+listAnnouncementsResponse
+    :: ListAnnouncementsResponse
+listAnnouncementsResponse =
+    ListAnnouncementsResponse'
+    { _larNextPageToken = Nothing
+    , _larAnnouncements = Nothing
+    }
+
+-- | Token identifying the next page of results to return. If empty, no
+-- further results are available.
+larNextPageToken :: Lens' ListAnnouncementsResponse (Maybe Text)
+larNextPageToken
+  = lens _larNextPageToken
+      (\ s a -> s{_larNextPageToken = a})
+
+-- | Announcement items that match the request.
+larAnnouncements :: Lens' ListAnnouncementsResponse [Announcement]
+larAnnouncements
+  = lens _larAnnouncements
+      (\ s a -> s{_larAnnouncements = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListAnnouncementsResponse where
+        parseJSON
+          = withObject "ListAnnouncementsResponse"
+              (\ o ->
+                 ListAnnouncementsResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "announcements" .!= mempty))
+
+instance ToJSON ListAnnouncementsResponse where
+        toJSON ListAnnouncementsResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _larNextPageToken,
+                  ("announcements" .=) <$> _larAnnouncements])
 
 -- | Response when listing student submissions.
 --
@@ -1153,7 +1608,7 @@ instance ToJSON ShortAnswerSubmission where
 data Invitation = Invitation'
     { _iCourseId :: !(Maybe Text)
     , _iUserId   :: !(Maybe Text)
-    , _iRole     :: !(Maybe Text)
+    , _iRole     :: !(Maybe InvitationRole)
     , _iId       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1192,7 +1647,7 @@ iUserId = lens _iUserId (\ s a -> s{_iUserId = a})
 
 -- | Role to invite the user to have. Must not be
 -- \`COURSE_ROLE_UNSPECIFIED\`.
-iRole :: Lens' Invitation (Maybe Text)
+iRole :: Lens' Invitation (Maybe InvitationRole)
 iRole = lens _iRole (\ s a -> s{_iRole = a})
 
 -- | Identifier assigned by Classroom. Read-only.
@@ -1285,6 +1740,181 @@ instance ToJSON Attachment where
                   ("youTubeVideo" .=) <$> _aYouTubeVideo,
                   ("form" .=) <$> _aForm])
 
+-- | Announcement created by a teacher for students of the course
+--
+-- /See:/ 'announcement' smart constructor.
+data Announcement = Announcement'
+    { _aCreationTime              :: !(Maybe DateTime')
+    , _aScheduledTime             :: !(Maybe DateTime')
+    , _aState                     :: !(Maybe AnnouncementState)
+    , _aAssigneeMode              :: !(Maybe AnnouncementAssigneeMode)
+    , _aText                      :: !(Maybe Text)
+    , _aMaterials                 :: !(Maybe [Material])
+    , _aCourseId                  :: !(Maybe Text)
+    , _aIndividualStudentsOptions :: !(Maybe IndividualStudentsOptions)
+    , _aUpdateTime                :: !(Maybe DateTime')
+    , _aId                        :: !(Maybe Text)
+    , _aCreatorUserId             :: !(Maybe Text)
+    , _aAlternateLink             :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Announcement' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aCreationTime'
+--
+-- * 'aScheduledTime'
+--
+-- * 'aState'
+--
+-- * 'aAssigneeMode'
+--
+-- * 'aText'
+--
+-- * 'aMaterials'
+--
+-- * 'aCourseId'
+--
+-- * 'aIndividualStudentsOptions'
+--
+-- * 'aUpdateTime'
+--
+-- * 'aId'
+--
+-- * 'aCreatorUserId'
+--
+-- * 'aAlternateLink'
+announcement
+    :: Announcement
+announcement =
+    Announcement'
+    { _aCreationTime = Nothing
+    , _aScheduledTime = Nothing
+    , _aState = Nothing
+    , _aAssigneeMode = Nothing
+    , _aText = Nothing
+    , _aMaterials = Nothing
+    , _aCourseId = Nothing
+    , _aIndividualStudentsOptions = Nothing
+    , _aUpdateTime = Nothing
+    , _aId = Nothing
+    , _aCreatorUserId = Nothing
+    , _aAlternateLink = Nothing
+    }
+
+-- | Timestamp when this announcement was created. Read-only.
+aCreationTime :: Lens' Announcement (Maybe UTCTime)
+aCreationTime
+  = lens _aCreationTime
+      (\ s a -> s{_aCreationTime = a})
+      . mapping _DateTime
+
+-- | Optional timestamp when this announcement is scheduled to be published.
+aScheduledTime :: Lens' Announcement (Maybe UTCTime)
+aScheduledTime
+  = lens _aScheduledTime
+      (\ s a -> s{_aScheduledTime = a})
+      . mapping _DateTime
+
+-- | Status of this announcement. If unspecified, the default state is
+-- \`DRAFT\`.
+aState :: Lens' Announcement (Maybe AnnouncementState)
+aState = lens _aState (\ s a -> s{_aState = a})
+
+-- | Assignee mode of the announcement. If unspecified, the default value is
+-- \`ALL_STUDENTS\`.
+aAssigneeMode :: Lens' Announcement (Maybe AnnouncementAssigneeMode)
+aAssigneeMode
+  = lens _aAssigneeMode
+      (\ s a -> s{_aAssigneeMode = a})
+
+-- | Description of this announcement. The text must be a valid UTF-8 string
+-- containing no more than 30,000 characters.
+aText :: Lens' Announcement (Maybe Text)
+aText = lens _aText (\ s a -> s{_aText = a})
+
+-- | Additional materials. Announcements must have no more than 20 material
+-- items.
+aMaterials :: Lens' Announcement [Material]
+aMaterials
+  = lens _aMaterials (\ s a -> s{_aMaterials = a}) .
+      _Default
+      . _Coerce
+
+-- | Identifier of the course. Read-only.
+aCourseId :: Lens' Announcement (Maybe Text)
+aCourseId
+  = lens _aCourseId (\ s a -> s{_aCourseId = a})
+
+-- | Identifiers of students with access to the announcement. This field is
+-- set only if \`assigneeMode\` is \`INDIVIDUAL_STUDENTS\`. If the
+-- \`assigneeMode\` is \`INDIVIDUAL_STUDENTS\`, then only students
+-- specified in this field will be able to see the announcement.
+aIndividualStudentsOptions :: Lens' Announcement (Maybe IndividualStudentsOptions)
+aIndividualStudentsOptions
+  = lens _aIndividualStudentsOptions
+      (\ s a -> s{_aIndividualStudentsOptions = a})
+
+-- | Timestamp of the most recent change to this announcement. Read-only.
+aUpdateTime :: Lens' Announcement (Maybe UTCTime)
+aUpdateTime
+  = lens _aUpdateTime (\ s a -> s{_aUpdateTime = a}) .
+      mapping _DateTime
+
+-- | Classroom-assigned identifier of this announcement, unique per course.
+-- Read-only.
+aId :: Lens' Announcement (Maybe Text)
+aId = lens _aId (\ s a -> s{_aId = a})
+
+-- | Identifier for the user that created the announcement. Read-only.
+aCreatorUserId :: Lens' Announcement (Maybe Text)
+aCreatorUserId
+  = lens _aCreatorUserId
+      (\ s a -> s{_aCreatorUserId = a})
+
+-- | Absolute link to this announcement in the Classroom web UI. This is only
+-- populated if \`state\` is \`PUBLISHED\`. Read-only.
+aAlternateLink :: Lens' Announcement (Maybe Text)
+aAlternateLink
+  = lens _aAlternateLink
+      (\ s a -> s{_aAlternateLink = a})
+
+instance FromJSON Announcement where
+        parseJSON
+          = withObject "Announcement"
+              (\ o ->
+                 Announcement' <$>
+                   (o .:? "creationTime") <*> (o .:? "scheduledTime")
+                     <*> (o .:? "state")
+                     <*> (o .:? "assigneeMode")
+                     <*> (o .:? "text")
+                     <*> (o .:? "materials" .!= mempty)
+                     <*> (o .:? "courseId")
+                     <*> (o .:? "individualStudentsOptions")
+                     <*> (o .:? "updateTime")
+                     <*> (o .:? "id")
+                     <*> (o .:? "creatorUserId")
+                     <*> (o .:? "alternateLink"))
+
+instance ToJSON Announcement where
+        toJSON Announcement'{..}
+          = object
+              (catMaybes
+                 [("creationTime" .=) <$> _aCreationTime,
+                  ("scheduledTime" .=) <$> _aScheduledTime,
+                  ("state" .=) <$> _aState,
+                  ("assigneeMode" .=) <$> _aAssigneeMode,
+                  ("text" .=) <$> _aText,
+                  ("materials" .=) <$> _aMaterials,
+                  ("courseId" .=) <$> _aCourseId,
+                  ("individualStudentsOptions" .=) <$>
+                    _aIndividualStudentsOptions,
+                  ("updateTime" .=) <$> _aUpdateTime,
+                  ("id" .=) <$> _aId,
+                  ("creatorUserId" .=) <$> _aCreatorUserId,
+                  ("alternateLink" .=) <$> _aAlternateLink])
+
 -- | Student submission for course work. StudentSubmission items are
 -- generated when a CourseWork item is created. StudentSubmissions that
 -- have never been accessed (i.e. with \`state\` = NEW) may not have a
@@ -1292,17 +1922,18 @@ instance ToJSON Attachment where
 --
 -- /See:/ 'studentSubmission' smart constructor.
 data StudentSubmission = StudentSubmission'
-    { _ssCreationTime             :: !(Maybe Text)
+    { _ssCreationTime             :: !(Maybe DateTime')
     , _ssLate                     :: !(Maybe Bool)
-    , _ssState                    :: !(Maybe Text)
+    , _ssState                    :: !(Maybe StudentSubmissionState)
     , _ssCourseId                 :: !(Maybe Text)
     , _ssMultipleChoiceSubmission :: !(Maybe MultipleChoiceSubmission)
     , _ssAssignmentSubmission     :: !(Maybe AssignmentSubmission)
     , _ssShortAnswerSubmission    :: !(Maybe ShortAnswerSubmission)
     , _ssAssociatedWithDeveloper  :: !(Maybe Bool)
     , _ssUserId                   :: !(Maybe Text)
-    , _ssUpdateTime               :: !(Maybe Text)
-    , _ssCourseWorkType           :: !(Maybe Text)
+    , _ssUpdateTime               :: !(Maybe DateTime')
+    , _ssCourseWorkType           :: !(Maybe StudentSubmissionCourseWorkType)
+    , _ssSubmissionHistory        :: !(Maybe [SubmissionHistory])
     , _ssAssignedGrade            :: !(Maybe (Textual Double))
     , _ssId                       :: !(Maybe Text)
     , _ssDraftGrade               :: !(Maybe (Textual Double))
@@ -1336,6 +1967,8 @@ data StudentSubmission = StudentSubmission'
 --
 -- * 'ssCourseWorkType'
 --
+-- * 'ssSubmissionHistory'
+--
 -- * 'ssAssignedGrade'
 --
 -- * 'ssId'
@@ -1360,6 +1993,7 @@ studentSubmission =
     , _ssUserId = Nothing
     , _ssUpdateTime = Nothing
     , _ssCourseWorkType = Nothing
+    , _ssSubmissionHistory = Nothing
     , _ssAssignedGrade = Nothing
     , _ssId = Nothing
     , _ssDraftGrade = Nothing
@@ -1369,17 +2003,18 @@ studentSubmission =
 
 -- | Creation time of this submission. This may be unset if the student has
 -- not accessed this item. Read-only.
-ssCreationTime :: Lens' StudentSubmission (Maybe Text)
+ssCreationTime :: Lens' StudentSubmission (Maybe UTCTime)
 ssCreationTime
   = lens _ssCreationTime
       (\ s a -> s{_ssCreationTime = a})
+      . mapping _DateTime
 
 -- | Whether this submission is late. Read-only.
 ssLate :: Lens' StudentSubmission (Maybe Bool)
 ssLate = lens _ssLate (\ s a -> s{_ssLate = a})
 
 -- | State of this submission. Read-only.
-ssState :: Lens' StudentSubmission (Maybe Text)
+ssState :: Lens' StudentSubmission (Maybe StudentSubmissionState)
 ssState = lens _ssState (\ s a -> s{_ssState = a})
 
 -- | Identifier of the course. Read-only.
@@ -1393,7 +2028,8 @@ ssMultipleChoiceSubmission
   = lens _ssMultipleChoiceSubmission
       (\ s a -> s{_ssMultipleChoiceSubmission = a})
 
--- | Submission content when course_work_type is ASSIGNMENT .
+-- | Submission content when course_work_type is ASSIGNMENT. Students can
+-- modify this content using google.classroom.Work.ModifyAttachments.
 ssAssignmentSubmission :: Lens' StudentSubmission (Maybe AssignmentSubmission)
 ssAssignmentSubmission
   = lens _ssAssignmentSubmission
@@ -1419,18 +2055,30 @@ ssUserId = lens _ssUserId (\ s a -> s{_ssUserId = a})
 
 -- | Last update time of this submission. This may be unset if the student
 -- has not accessed this item. Read-only.
-ssUpdateTime :: Lens' StudentSubmission (Maybe Text)
+ssUpdateTime :: Lens' StudentSubmission (Maybe UTCTime)
 ssUpdateTime
   = lens _ssUpdateTime (\ s a -> s{_ssUpdateTime = a})
+      . mapping _DateTime
 
 -- | Type of course work this submission is for. Read-only.
-ssCourseWorkType :: Lens' StudentSubmission (Maybe Text)
+ssCourseWorkType :: Lens' StudentSubmission (Maybe StudentSubmissionCourseWorkType)
 ssCourseWorkType
   = lens _ssCourseWorkType
       (\ s a -> s{_ssCourseWorkType = a})
 
--- | Optional grade. If unset, no grade was set. This must be a non-negative
--- integer value. This may be modified only by course teachers.
+-- | The history of the submission (includes state and grade histories).
+-- Read-only.
+ssSubmissionHistory :: Lens' StudentSubmission [SubmissionHistory]
+ssSubmissionHistory
+  = lens _ssSubmissionHistory
+      (\ s a -> s{_ssSubmissionHistory = a})
+      . _Default
+      . _Coerce
+
+-- | Optional grade. If unset, no grade was set. This value must be
+-- non-negative. Decimal (i.e. non-integer) values are allowed, but will be
+-- rounded to two decimal places. This may be modified only by course
+-- teachers.
 ssAssignedGrade :: Lens' StudentSubmission (Maybe Double)
 ssAssignedGrade
   = lens _ssAssignedGrade
@@ -1442,8 +2090,9 @@ ssAssignedGrade
 ssId :: Lens' StudentSubmission (Maybe Text)
 ssId = lens _ssId (\ s a -> s{_ssId = a})
 
--- | Optional pending grade. If unset, no grade was set. This must be a
--- non-negative integer value. This is only visible to and modifiable by
+-- | Optional pending grade. If unset, no grade was set. This value must be
+-- non-negative. Decimal (i.e. non-integer) values are allowed, but will be
+-- rounded to two decimal places. This is only visible to and modifiable by
 -- course teachers.
 ssDraftGrade :: Lens' StudentSubmission (Maybe Double)
 ssDraftGrade
@@ -1477,6 +2126,7 @@ instance FromJSON StudentSubmission where
                      <*> (o .:? "userId")
                      <*> (o .:? "updateTime")
                      <*> (o .:? "courseWorkType")
+                     <*> (o .:? "submissionHistory" .!= mempty)
                      <*> (o .:? "assignedGrade")
                      <*> (o .:? "id")
                      <*> (o .:? "draftGrade")
@@ -1501,6 +2151,7 @@ instance ToJSON StudentSubmission where
                   ("userId" .=) <$> _ssUserId,
                   ("updateTime" .=) <$> _ssUpdateTime,
                   ("courseWorkType" .=) <$> _ssCourseWorkType,
+                  ("submissionHistory" .=) <$> _ssSubmissionHistory,
                   ("assignedGrade" .=) <$> _ssAssignedGrade,
                   ("id" .=) <$> _ssId,
                   ("draftGrade" .=) <$> _ssDraftGrade,
@@ -1560,13 +2211,14 @@ instance ToJSON ListGuardiansResponse where
                  [("nextPageToken" .=) <$> _lgrNextPageToken,
                   ("guardians" .=) <$> _lgrGuardians])
 
--- | Represents a whole calendar date, e.g. date of birth. The time of day
--- and time zone are either specified elsewhere or are not significant. The
--- date is relative to the Proleptic Gregorian Calendar. The day may be 0
--- to represent a year and month where the day is not significant, e.g.
--- credit card expiration date. The year may be 0 to represent a month and
--- day independent of year, e.g. anniversary date. Related types are
--- google.type.TimeOfDay and \`google.protobuf.Timestamp\`.
+-- | Represents a whole or partial calendar date, e.g. a birthday. The time
+-- of day and time zone are either specified elsewhere or are not
+-- significant. The date is relative to the Proleptic Gregorian Calendar.
+-- This can represent: * A full date, with non-zero year, month and day
+-- values * A month and day value, with a zero year, e.g. an anniversary *
+-- A year on its own, with zero month and day values * A year and month
+-- value, with a zero day, e.g. a credit card expiration date Related types
+-- are google.type.TimeOfDay and \`google.protobuf.Timestamp\`.
 --
 -- /See:/ 'date' smart constructor.
 data Date = Date'
@@ -1594,7 +2246,8 @@ date =
     }
 
 -- | Day of month. Must be from 1 to 31 and valid for the year and month, or
--- 0 if specifying a year\/month where the day is not significant.
+-- 0 if specifying a year by itself or a year and month where the day is
+-- not significant.
 dDay :: Lens' Date (Maybe Int32)
 dDay
   = lens _dDay (\ s a -> s{_dDay = a}) .
@@ -1607,7 +2260,8 @@ dYear
   = lens _dYear (\ s a -> s{_dYear = a}) .
       mapping _Coerce
 
--- | Month of year. Must be from 1 to 12.
+-- | Month of year. Must be from 1 to 12, or 0 if specifying a year without a
+-- month and day.
 dMonth :: Lens' Date (Maybe Int32)
 dMonth
   = lens _dMonth (\ s a -> s{_dMonth = a}) .
@@ -1941,11 +2595,12 @@ instance ToJSON TurnInStudentSubmissionRequest where
 --
 -- /See:/ 'userProFile' smart constructor.
 data UserProFile = UserProFile'
-    { _upfPhotoURL     :: !(Maybe Text)
-    , _upfName         :: !(Maybe Name)
-    , _upfEmailAddress :: !(Maybe Text)
-    , _upfId           :: !(Maybe Text)
-    , _upfPermissions  :: !(Maybe [GlobalPermission])
+    { _upfPhotoURL        :: !(Maybe Text)
+    , _upfVerifiedTeacher :: !(Maybe Bool)
+    , _upfName            :: !(Maybe Name)
+    , _upfEmailAddress    :: !(Maybe Text)
+    , _upfId              :: !(Maybe Text)
+    , _upfPermissions     :: !(Maybe [GlobalPermission])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserProFile' with the minimum fields required to make a request.
@@ -1953,6 +2608,8 @@ data UserProFile = UserProFile'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'upfPhotoURL'
+--
+-- * 'upfVerifiedTeacher'
 --
 -- * 'upfName'
 --
@@ -1966,6 +2623,7 @@ userProFile
 userProFile =
     UserProFile'
     { _upfPhotoURL = Nothing
+    , _upfVerifiedTeacher = Nothing
     , _upfName = Nothing
     , _upfEmailAddress = Nothing
     , _upfId = Nothing
@@ -1976,6 +2634,15 @@ userProFile =
 upfPhotoURL :: Lens' UserProFile (Maybe Text)
 upfPhotoURL
   = lens _upfPhotoURL (\ s a -> s{_upfPhotoURL = a})
+
+-- | Represents whether a G Suite for Education user\'s domain administrator
+-- has explicitly verified them as being a teacher. If the user is not a
+-- member of a G Suite for Education domain, than this field will always be
+-- false. Read-only
+upfVerifiedTeacher :: Lens' UserProFile (Maybe Bool)
+upfVerifiedTeacher
+  = lens _upfVerifiedTeacher
+      (\ s a -> s{_upfVerifiedTeacher = a})
 
 -- | Name of the user. Read-only.
 upfName :: Lens' UserProFile (Maybe Name)
@@ -2004,8 +2671,9 @@ instance FromJSON UserProFile where
           = withObject "UserProFile"
               (\ o ->
                  UserProFile' <$>
-                   (o .:? "photoUrl") <*> (o .:? "name") <*>
-                     (o .:? "emailAddress")
+                   (o .:? "photoUrl") <*> (o .:? "verifiedTeacher") <*>
+                     (o .:? "name")
+                     <*> (o .:? "emailAddress")
                      <*> (o .:? "id")
                      <*> (o .:? "permissions" .!= mempty))
 
@@ -2014,6 +2682,7 @@ instance ToJSON UserProFile where
           = object
               (catMaybes
                  [("photoUrl" .=) <$> _upfPhotoURL,
+                  ("verifiedTeacher" .=) <$> _upfVerifiedTeacher,
                   ("name" .=) <$> _upfName,
                   ("emailAddress" .=) <$> _upfEmailAddress,
                   ("id" .=) <$> _upfId,
@@ -2075,6 +2744,116 @@ instance ToJSON DriveFolder where
                  [("id" .=) <$> _dId, ("title" .=) <$> _dTitle,
                   ("alternateLink" .=) <$> _dAlternateLink])
 
+-- | The history of the submission. This currently includes state and grade
+-- histories.
+--
+-- /See:/ 'submissionHistory' smart constructor.
+data SubmissionHistory = SubmissionHistory'
+    { _shGradeHistory :: !(Maybe GradeHistory)
+    , _shStateHistory :: !(Maybe StateHistory)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SubmissionHistory' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'shGradeHistory'
+--
+-- * 'shStateHistory'
+submissionHistory
+    :: SubmissionHistory
+submissionHistory =
+    SubmissionHistory'
+    { _shGradeHistory = Nothing
+    , _shStateHistory = Nothing
+    }
+
+-- | The grade history information of the submission, if present.
+shGradeHistory :: Lens' SubmissionHistory (Maybe GradeHistory)
+shGradeHistory
+  = lens _shGradeHistory
+      (\ s a -> s{_shGradeHistory = a})
+
+-- | The state history information of the submission, if present.
+shStateHistory :: Lens' SubmissionHistory (Maybe StateHistory)
+shStateHistory
+  = lens _shStateHistory
+      (\ s a -> s{_shStateHistory = a})
+
+instance FromJSON SubmissionHistory where
+        parseJSON
+          = withObject "SubmissionHistory"
+              (\ o ->
+                 SubmissionHistory' <$>
+                   (o .:? "gradeHistory") <*> (o .:? "stateHistory"))
+
+instance ToJSON SubmissionHistory where
+        toJSON SubmissionHistory'{..}
+          = object
+              (catMaybes
+                 [("gradeHistory" .=) <$> _shGradeHistory,
+                  ("stateHistory" .=) <$> _shStateHistory])
+
+-- | The history of each state this submission has been in.
+--
+-- /See:/ 'stateHistory' smart constructor.
+data StateHistory = StateHistory'
+    { _shState          :: !(Maybe StateHistoryState)
+    , _shActorUserId    :: !(Maybe Text)
+    , _shStateTimestamp :: !(Maybe DateTime')
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'StateHistory' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'shState'
+--
+-- * 'shActorUserId'
+--
+-- * 'shStateTimestamp'
+stateHistory
+    :: StateHistory
+stateHistory =
+    StateHistory'
+    { _shState = Nothing
+    , _shActorUserId = Nothing
+    , _shStateTimestamp = Nothing
+    }
+
+-- | The workflow pipeline stage.
+shState :: Lens' StateHistory (Maybe StateHistoryState)
+shState = lens _shState (\ s a -> s{_shState = a})
+
+-- | The teacher or student who made the change
+shActorUserId :: Lens' StateHistory (Maybe Text)
+shActorUserId
+  = lens _shActorUserId
+      (\ s a -> s{_shActorUserId = a})
+
+-- | When the submission entered this state.
+shStateTimestamp :: Lens' StateHistory (Maybe UTCTime)
+shStateTimestamp
+  = lens _shStateTimestamp
+      (\ s a -> s{_shStateTimestamp = a})
+      . mapping _DateTime
+
+instance FromJSON StateHistory where
+        parseJSON
+          = withObject "StateHistory"
+              (\ o ->
+                 StateHistory' <$>
+                   (o .:? "state") <*> (o .:? "actorUserId") <*>
+                     (o .:? "stateTimestamp"))
+
+instance ToJSON StateHistory where
+        toJSON StateHistory'{..}
+          = object
+              (catMaybes
+                 [("state" .=) <$> _shState,
+                  ("actorUserId" .=) <$> _shActorUserId,
+                  ("stateTimestamp" .=) <$> _shStateTimestamp])
+
 -- | Additional details for multiple-choice questions.
 --
 -- /See:/ 'multipleChoiceQuestion' smart constructor.
@@ -2116,206 +2895,225 @@ instance ToJSON MultipleChoiceQuestion where
 --
 -- /See:/ 'course' smart constructor.
 data Course = Course'
-    { _cCreationTime       :: !(Maybe Text)
-    , _cRoom               :: !(Maybe Text)
-    , _cCourseMaterialSets :: !(Maybe [CourseMaterialSet])
-    , _cTeacherGroupEmail  :: !(Maybe Text)
-    , _cTeacherFolder      :: !(Maybe DriveFolder)
-    , _cCourseState        :: !(Maybe Text)
-    , _cGuardiansEnabled   :: !(Maybe Bool)
-    , _cEnrollmentCode     :: !(Maybe Text)
-    , _cUpdateTime         :: !(Maybe Text)
-    , _cOwnerId            :: !(Maybe Text)
-    , _cName               :: !(Maybe Text)
-    , _cId                 :: !(Maybe Text)
-    , _cAlternateLink      :: !(Maybe Text)
-    , _cCourseGroupEmail   :: !(Maybe Text)
-    , _cDescription        :: !(Maybe Text)
-    , _cDescriptionHeading :: !(Maybe Text)
-    , _cSection            :: !(Maybe Text)
+    { _couCreationTime       :: !(Maybe DateTime')
+    , _couRoom               :: !(Maybe Text)
+    , _couCourseMaterialSets :: !(Maybe [CourseMaterialSet])
+    , _couCalendarId         :: !(Maybe Text)
+    , _couTeacherGroupEmail  :: !(Maybe Text)
+    , _couTeacherFolder      :: !(Maybe DriveFolder)
+    , _couCourseState        :: !(Maybe CourseCourseState)
+    , _couGuardiansEnabled   :: !(Maybe Bool)
+    , _couEnrollmentCode     :: !(Maybe Text)
+    , _couUpdateTime         :: !(Maybe DateTime')
+    , _couOwnerId            :: !(Maybe Text)
+    , _couName               :: !(Maybe Text)
+    , _couId                 :: !(Maybe Text)
+    , _couAlternateLink      :: !(Maybe Text)
+    , _couCourseGroupEmail   :: !(Maybe Text)
+    , _couDescription        :: !(Maybe Text)
+    , _couDescriptionHeading :: !(Maybe Text)
+    , _couSection            :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Course' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cCreationTime'
+-- * 'couCreationTime'
 --
--- * 'cRoom'
+-- * 'couRoom'
 --
--- * 'cCourseMaterialSets'
+-- * 'couCourseMaterialSets'
 --
--- * 'cTeacherGroupEmail'
+-- * 'couCalendarId'
 --
--- * 'cTeacherFolder'
+-- * 'couTeacherGroupEmail'
 --
--- * 'cCourseState'
+-- * 'couTeacherFolder'
 --
--- * 'cGuardiansEnabled'
+-- * 'couCourseState'
 --
--- * 'cEnrollmentCode'
+-- * 'couGuardiansEnabled'
 --
--- * 'cUpdateTime'
+-- * 'couEnrollmentCode'
 --
--- * 'cOwnerId'
+-- * 'couUpdateTime'
 --
--- * 'cName'
+-- * 'couOwnerId'
 --
--- * 'cId'
+-- * 'couName'
 --
--- * 'cAlternateLink'
+-- * 'couId'
 --
--- * 'cCourseGroupEmail'
+-- * 'couAlternateLink'
 --
--- * 'cDescription'
+-- * 'couCourseGroupEmail'
 --
--- * 'cDescriptionHeading'
+-- * 'couDescription'
 --
--- * 'cSection'
+-- * 'couDescriptionHeading'
+--
+-- * 'couSection'
 course
     :: Course
 course =
     Course'
-    { _cCreationTime = Nothing
-    , _cRoom = Nothing
-    , _cCourseMaterialSets = Nothing
-    , _cTeacherGroupEmail = Nothing
-    , _cTeacherFolder = Nothing
-    , _cCourseState = Nothing
-    , _cGuardiansEnabled = Nothing
-    , _cEnrollmentCode = Nothing
-    , _cUpdateTime = Nothing
-    , _cOwnerId = Nothing
-    , _cName = Nothing
-    , _cId = Nothing
-    , _cAlternateLink = Nothing
-    , _cCourseGroupEmail = Nothing
-    , _cDescription = Nothing
-    , _cDescriptionHeading = Nothing
-    , _cSection = Nothing
+    { _couCreationTime = Nothing
+    , _couRoom = Nothing
+    , _couCourseMaterialSets = Nothing
+    , _couCalendarId = Nothing
+    , _couTeacherGroupEmail = Nothing
+    , _couTeacherFolder = Nothing
+    , _couCourseState = Nothing
+    , _couGuardiansEnabled = Nothing
+    , _couEnrollmentCode = Nothing
+    , _couUpdateTime = Nothing
+    , _couOwnerId = Nothing
+    , _couName = Nothing
+    , _couId = Nothing
+    , _couAlternateLink = Nothing
+    , _couCourseGroupEmail = Nothing
+    , _couDescription = Nothing
+    , _couDescriptionHeading = Nothing
+    , _couSection = Nothing
     }
 
 -- | Creation time of the course. Specifying this field in a course update
 -- mask results in an error. Read-only.
-cCreationTime :: Lens' Course (Maybe Text)
-cCreationTime
-  = lens _cCreationTime
-      (\ s a -> s{_cCreationTime = a})
+couCreationTime :: Lens' Course (Maybe UTCTime)
+couCreationTime
+  = lens _couCreationTime
+      (\ s a -> s{_couCreationTime = a})
+      . mapping _DateTime
 
 -- | Optional room location. For example, \"301\". If set, this field must be
 -- a valid UTF-8 string and no longer than 650 characters.
-cRoom :: Lens' Course (Maybe Text)
-cRoom = lens _cRoom (\ s a -> s{_cRoom = a})
+couRoom :: Lens' Course (Maybe Text)
+couRoom = lens _couRoom (\ s a -> s{_couRoom = a})
 
 -- | Sets of materials that appear on the \"about\" page of this course.
 -- Read-only.
-cCourseMaterialSets :: Lens' Course [CourseMaterialSet]
-cCourseMaterialSets
-  = lens _cCourseMaterialSets
-      (\ s a -> s{_cCourseMaterialSets = a})
+couCourseMaterialSets :: Lens' Course [CourseMaterialSet]
+couCourseMaterialSets
+  = lens _couCourseMaterialSets
+      (\ s a -> s{_couCourseMaterialSets = a})
       . _Default
       . _Coerce
+
+-- | The Calendar ID for a calendar that all course members can see, to which
+-- Classroom adds events for course work and announcements in the course.
+-- Read-only.
+couCalendarId :: Lens' Course (Maybe Text)
+couCalendarId
+  = lens _couCalendarId
+      (\ s a -> s{_couCalendarId = a})
 
 -- | The email address of a Google group containing all teachers of the
 -- course. This group does not accept email and can only be used for
 -- permissions. Read-only.
-cTeacherGroupEmail :: Lens' Course (Maybe Text)
-cTeacherGroupEmail
-  = lens _cTeacherGroupEmail
-      (\ s a -> s{_cTeacherGroupEmail = a})
+couTeacherGroupEmail :: Lens' Course (Maybe Text)
+couTeacherGroupEmail
+  = lens _couTeacherGroupEmail
+      (\ s a -> s{_couTeacherGroupEmail = a})
 
 -- | Information about a Drive Folder that is shared with all teachers of the
 -- course. This field will only be set for teachers of the course and
 -- domain administrators. Read-only.
-cTeacherFolder :: Lens' Course (Maybe DriveFolder)
-cTeacherFolder
-  = lens _cTeacherFolder
-      (\ s a -> s{_cTeacherFolder = a})
+couTeacherFolder :: Lens' Course (Maybe DriveFolder)
+couTeacherFolder
+  = lens _couTeacherFolder
+      (\ s a -> s{_couTeacherFolder = a})
 
 -- | State of the course. If unspecified, the default state is
 -- \`PROVISIONED\`.
-cCourseState :: Lens' Course (Maybe Text)
-cCourseState
-  = lens _cCourseState (\ s a -> s{_cCourseState = a})
+couCourseState :: Lens' Course (Maybe CourseCourseState)
+couCourseState
+  = lens _couCourseState
+      (\ s a -> s{_couCourseState = a})
 
 -- | Whether or not guardian notifications are enabled for this course.
 -- Read-only.
-cGuardiansEnabled :: Lens' Course (Maybe Bool)
-cGuardiansEnabled
-  = lens _cGuardiansEnabled
-      (\ s a -> s{_cGuardiansEnabled = a})
+couGuardiansEnabled :: Lens' Course (Maybe Bool)
+couGuardiansEnabled
+  = lens _couGuardiansEnabled
+      (\ s a -> s{_couGuardiansEnabled = a})
 
 -- | Enrollment code to use when joining this course. Specifying this field
 -- in a course update mask results in an error. Read-only.
-cEnrollmentCode :: Lens' Course (Maybe Text)
-cEnrollmentCode
-  = lens _cEnrollmentCode
-      (\ s a -> s{_cEnrollmentCode = a})
+couEnrollmentCode :: Lens' Course (Maybe Text)
+couEnrollmentCode
+  = lens _couEnrollmentCode
+      (\ s a -> s{_couEnrollmentCode = a})
 
 -- | Time of the most recent update to this course. Specifying this field in
 -- a course update mask results in an error. Read-only.
-cUpdateTime :: Lens' Course (Maybe Text)
-cUpdateTime
-  = lens _cUpdateTime (\ s a -> s{_cUpdateTime = a})
+couUpdateTime :: Lens' Course (Maybe UTCTime)
+couUpdateTime
+  = lens _couUpdateTime
+      (\ s a -> s{_couUpdateTime = a})
+      . mapping _DateTime
 
 -- | The identifier of the owner of a course. When specified as a parameter
 -- of a create course request, this field is required. The identifier can
 -- be one of the following: * the numeric identifier for the user * the
 -- email address of the user * the string literal \`\"me\"\`, indicating
--- the requesting user This must be set in a create request. Specifying
--- this field in a course update mask results in an \`INVALID_ARGUMENT\`
--- error.
-cOwnerId :: Lens' Course (Maybe Text)
-cOwnerId = lens _cOwnerId (\ s a -> s{_cOwnerId = a})
+-- the requesting user This must be set in a create request. Admins can
+-- also specify this field in a patch course request to transfer ownership.
+-- In other contexts, it is read-only.
+couOwnerId :: Lens' Course (Maybe Text)
+couOwnerId
+  = lens _couOwnerId (\ s a -> s{_couOwnerId = a})
 
 -- | Name of the course. For example, \"10th Grade Biology\". The name is
 -- required. It must be between 1 and 750 characters and a valid UTF-8
 -- string.
-cName :: Lens' Course (Maybe Text)
-cName = lens _cName (\ s a -> s{_cName = a})
+couName :: Lens' Course (Maybe Text)
+couName = lens _couName (\ s a -> s{_couName = a})
 
 -- | Identifier for this course assigned by Classroom. When creating a
 -- course, you may optionally set this identifier to an alias string in the
 -- request to create a corresponding alias. The \`id\` is still assigned by
 -- Classroom and cannot be updated after the course is created. Specifying
 -- this field in a course update mask results in an error.
-cId :: Lens' Course (Maybe Text)
-cId = lens _cId (\ s a -> s{_cId = a})
+couId :: Lens' Course (Maybe Text)
+couId = lens _couId (\ s a -> s{_couId = a})
 
 -- | Absolute link to this course in the Classroom web UI. Read-only.
-cAlternateLink :: Lens' Course (Maybe Text)
-cAlternateLink
-  = lens _cAlternateLink
-      (\ s a -> s{_cAlternateLink = a})
+couAlternateLink :: Lens' Course (Maybe Text)
+couAlternateLink
+  = lens _couAlternateLink
+      (\ s a -> s{_couAlternateLink = a})
 
 -- | The email address of a Google group containing all members of the
 -- course. This group does not accept email and can only be used for
 -- permissions. Read-only.
-cCourseGroupEmail :: Lens' Course (Maybe Text)
-cCourseGroupEmail
-  = lens _cCourseGroupEmail
-      (\ s a -> s{_cCourseGroupEmail = a})
+couCourseGroupEmail :: Lens' Course (Maybe Text)
+couCourseGroupEmail
+  = lens _couCourseGroupEmail
+      (\ s a -> s{_couCourseGroupEmail = a})
 
 -- | Optional description. For example, \"We\'ll be learning about the
 -- structure of living creatures from a combination of textbooks, guest
 -- lectures, and lab work. Expect to be excited!\" If set, this field must
 -- be a valid UTF-8 string and no longer than 30,000 characters.
-cDescription :: Lens' Course (Maybe Text)
-cDescription
-  = lens _cDescription (\ s a -> s{_cDescription = a})
+couDescription :: Lens' Course (Maybe Text)
+couDescription
+  = lens _couDescription
+      (\ s a -> s{_couDescription = a})
 
 -- | Optional heading for the description. For example, \"Welcome to 10th
 -- Grade Biology.\" If set, this field must be a valid UTF-8 string and no
 -- longer than 3600 characters.
-cDescriptionHeading :: Lens' Course (Maybe Text)
-cDescriptionHeading
-  = lens _cDescriptionHeading
-      (\ s a -> s{_cDescriptionHeading = a})
+couDescriptionHeading :: Lens' Course (Maybe Text)
+couDescriptionHeading
+  = lens _couDescriptionHeading
+      (\ s a -> s{_couDescriptionHeading = a})
 
 -- | Section of the course. For example, \"Period 2\". If set, this field
 -- must be a valid UTF-8 string and no longer than 2800 characters.
-cSection :: Lens' Course (Maybe Text)
-cSection = lens _cSection (\ s a -> s{_cSection = a})
+couSection :: Lens' Course (Maybe Text)
+couSection
+  = lens _couSection (\ s a -> s{_couSection = a})
 
 instance FromJSON Course where
         parseJSON
@@ -2324,6 +3122,7 @@ instance FromJSON Course where
                  Course' <$>
                    (o .:? "creationTime") <*> (o .:? "room") <*>
                      (o .:? "courseMaterialSets" .!= mempty)
+                     <*> (o .:? "calendarId")
                      <*> (o .:? "teacherGroupEmail")
                      <*> (o .:? "teacherFolder")
                      <*> (o .:? "courseState")
@@ -2343,25 +3142,26 @@ instance ToJSON Course where
         toJSON Course'{..}
           = object
               (catMaybes
-                 [("creationTime" .=) <$> _cCreationTime,
-                  ("room" .=) <$> _cRoom,
-                  ("courseMaterialSets" .=) <$> _cCourseMaterialSets,
-                  ("teacherGroupEmail" .=) <$> _cTeacherGroupEmail,
-                  ("teacherFolder" .=) <$> _cTeacherFolder,
-                  ("courseState" .=) <$> _cCourseState,
-                  ("guardiansEnabled" .=) <$> _cGuardiansEnabled,
-                  ("enrollmentCode" .=) <$> _cEnrollmentCode,
-                  ("updateTime" .=) <$> _cUpdateTime,
-                  ("ownerId" .=) <$> _cOwnerId, ("name" .=) <$> _cName,
-                  ("id" .=) <$> _cId,
-                  ("alternateLink" .=) <$> _cAlternateLink,
-                  ("courseGroupEmail" .=) <$> _cCourseGroupEmail,
-                  ("description" .=) <$> _cDescription,
-                  ("descriptionHeading" .=) <$> _cDescriptionHeading,
-                  ("section" .=) <$> _cSection])
+                 [("creationTime" .=) <$> _couCreationTime,
+                  ("room" .=) <$> _couRoom,
+                  ("courseMaterialSets" .=) <$> _couCourseMaterialSets,
+                  ("calendarId" .=) <$> _couCalendarId,
+                  ("teacherGroupEmail" .=) <$> _couTeacherGroupEmail,
+                  ("teacherFolder" .=) <$> _couTeacherFolder,
+                  ("courseState" .=) <$> _couCourseState,
+                  ("guardiansEnabled" .=) <$> _couGuardiansEnabled,
+                  ("enrollmentCode" .=) <$> _couEnrollmentCode,
+                  ("updateTime" .=) <$> _couUpdateTime,
+                  ("ownerId" .=) <$> _couOwnerId,
+                  ("name" .=) <$> _couName, ("id" .=) <$> _couId,
+                  ("alternateLink" .=) <$> _couAlternateLink,
+                  ("courseGroupEmail" .=) <$> _couCourseGroupEmail,
+                  ("description" .=) <$> _couDescription,
+                  ("descriptionHeading" .=) <$> _couDescriptionHeading,
+                  ("section" .=) <$> _couSection])
 
 -- | Represents a time of day. The date and time zone are either not
--- significant or are specified elsewhere. An API may chose to allow leap
+-- significant or are specified elsewhere. An API may choose to allow leap
 -- seconds. Related types are google.type.Date and
 -- \`google.protobuf.Timestamp\`.
 --
@@ -2514,7 +3314,7 @@ assignment =
     }
 
 -- | Drive folder where attachments from student submissions are placed. This
--- is only populated for course teachers.
+-- is only populated for course teachers and administrators.
 aStudentWorkFolder :: Lens' Assignment (Maybe DriveFolder)
 aStudentWorkFolder
   = lens _aStudentWorkFolder
@@ -2588,7 +3388,7 @@ instance ToJSON ListStudentsResponse where
 -- /See:/ 'sharedDriveFile' smart constructor.
 data SharedDriveFile = SharedDriveFile'
     { _sdfDriveFile :: !(Maybe DriveFile)
-    , _sdfShareMode :: !(Maybe Text)
+    , _sdfShareMode :: !(Maybe SharedDriveFileShareMode)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SharedDriveFile' with the minimum fields required to make a request.
@@ -2612,7 +3412,7 @@ sdfDriveFile
   = lens _sdfDriveFile (\ s a -> s{_sdfDriveFile = a})
 
 -- | Mechanism by which students access the Drive item.
-sdfShareMode :: Lens' SharedDriveFile (Maybe Text)
+sdfShareMode :: Lens' SharedDriveFile (Maybe SharedDriveFileShareMode)
 sdfShareMode
   = lens _sdfShareMode (\ s a -> s{_sdfShareMode = a})
 
@@ -2675,6 +3475,139 @@ instance FromJSON CourseAlias where
 instance ToJSON CourseAlias where
         toJSON CourseAlias'{..}
           = object (catMaybes [("alias" .=) <$> _caAlias])
+
+-- | Information about a \`Feed\` with a \`feed_type\` of
+-- \`COURSE_ROSTER_CHANGES\`.
+--
+-- /See:/ 'courseRosterChangesInfo' smart constructor.
+newtype CourseRosterChangesInfo = CourseRosterChangesInfo'
+    { _crciCourseId :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CourseRosterChangesInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'crciCourseId'
+courseRosterChangesInfo
+    :: CourseRosterChangesInfo
+courseRosterChangesInfo =
+    CourseRosterChangesInfo'
+    { _crciCourseId = Nothing
+    }
+
+-- | The \`course_id\` of the course to subscribe to roster changes for.
+crciCourseId :: Lens' CourseRosterChangesInfo (Maybe Text)
+crciCourseId
+  = lens _crciCourseId (\ s a -> s{_crciCourseId = a})
+
+instance FromJSON CourseRosterChangesInfo where
+        parseJSON
+          = withObject "CourseRosterChangesInfo"
+              (\ o ->
+                 CourseRosterChangesInfo' <$> (o .:? "courseId"))
+
+instance ToJSON CourseRosterChangesInfo where
+        toJSON CourseRosterChangesInfo'{..}
+          = object
+              (catMaybes [("courseId" .=) <$> _crciCourseId])
+
+-- | Contains fields to add or remove students from a course work or
+-- announcement where the \`assigneeMode\` is set to
+-- \`INDIVIDUAL_STUDENTS\`.
+--
+-- /See:/ 'modifyIndividualStudentsOptions' smart constructor.
+data ModifyIndividualStudentsOptions = ModifyIndividualStudentsOptions'
+    { _misoAddStudentIds    :: !(Maybe [Text])
+    , _misoRemoveStudentIds :: !(Maybe [Text])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ModifyIndividualStudentsOptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'misoAddStudentIds'
+--
+-- * 'misoRemoveStudentIds'
+modifyIndividualStudentsOptions
+    :: ModifyIndividualStudentsOptions
+modifyIndividualStudentsOptions =
+    ModifyIndividualStudentsOptions'
+    { _misoAddStudentIds = Nothing
+    , _misoRemoveStudentIds = Nothing
+    }
+
+-- | Ids of students to be added as having access to this
+-- coursework\/announcement.
+misoAddStudentIds :: Lens' ModifyIndividualStudentsOptions [Text]
+misoAddStudentIds
+  = lens _misoAddStudentIds
+      (\ s a -> s{_misoAddStudentIds = a})
+      . _Default
+      . _Coerce
+
+-- | Ids of students to be removed from having access to this
+-- coursework\/announcement.
+misoRemoveStudentIds :: Lens' ModifyIndividualStudentsOptions [Text]
+misoRemoveStudentIds
+  = lens _misoRemoveStudentIds
+      (\ s a -> s{_misoRemoveStudentIds = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ModifyIndividualStudentsOptions
+         where
+        parseJSON
+          = withObject "ModifyIndividualStudentsOptions"
+              (\ o ->
+                 ModifyIndividualStudentsOptions' <$>
+                   (o .:? "addStudentIds" .!= mempty) <*>
+                     (o .:? "removeStudentIds" .!= mempty))
+
+instance ToJSON ModifyIndividualStudentsOptions where
+        toJSON ModifyIndividualStudentsOptions'{..}
+          = object
+              (catMaybes
+                 [("addStudentIds" .=) <$> _misoAddStudentIds,
+                  ("removeStudentIds" .=) <$> _misoRemoveStudentIds])
+
+-- | A reference to a Cloud Pub\/Sub topic. To register for notifications,
+-- the owner of the topic must grant
+-- \`classroom-notifications\'system.gserviceaccount.com\` the
+-- \`projects.topics.publish\` permission.
+--
+-- /See:/ 'cloudPubsubTopic' smart constructor.
+newtype CloudPubsubTopic = CloudPubsubTopic'
+    { _cptTopicName :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CloudPubsubTopic' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cptTopicName'
+cloudPubsubTopic
+    :: CloudPubsubTopic
+cloudPubsubTopic =
+    CloudPubsubTopic'
+    { _cptTopicName = Nothing
+    }
+
+-- | The \`name\` field of a Cloud Pub\/Sub
+-- [Topic](https:\/\/cloud.google.com\/pubsub\/docs\/reference\/rest\/v1\/projects.topics#Topic).
+cptTopicName :: Lens' CloudPubsubTopic (Maybe Text)
+cptTopicName
+  = lens _cptTopicName (\ s a -> s{_cptTopicName = a})
+
+instance FromJSON CloudPubsubTopic where
+        parseJSON
+          = withObject "CloudPubsubTopic"
+              (\ o -> CloudPubsubTopic' <$> (o .:? "topicName"))
+
+instance ToJSON CloudPubsubTopic where
+        toJSON CloudPubsubTopic'{..}
+          = object
+              (catMaybes [("topicName" .=) <$> _cptTopicName])
 
 -- | Google Forms item.
 --
@@ -2870,3 +3803,78 @@ instance ToJSON Student where
                   ("profile" .=) <$> _sProFile,
                   ("studentWorkFolder" .=) <$> _sStudentWorkFolder,
                   ("userId" .=) <$> _sUserId])
+
+-- | An instruction to Classroom to send notifications from the \`feed\` to
+-- the provided destination.
+--
+-- /See:/ 'registration' smart constructor.
+data Registration = Registration'
+    { _rRegistrationId   :: !(Maybe Text)
+    , _rExpiryTime       :: !(Maybe DateTime')
+    , _rFeed             :: !(Maybe Feed)
+    , _rCloudPubsubTopic :: !(Maybe CloudPubsubTopic)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Registration' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rRegistrationId'
+--
+-- * 'rExpiryTime'
+--
+-- * 'rFeed'
+--
+-- * 'rCloudPubsubTopic'
+registration
+    :: Registration
+registration =
+    Registration'
+    { _rRegistrationId = Nothing
+    , _rExpiryTime = Nothing
+    , _rFeed = Nothing
+    , _rCloudPubsubTopic = Nothing
+    }
+
+-- | A server-generated unique identifier for this \`Registration\`.
+-- Read-only.
+rRegistrationId :: Lens' Registration (Maybe Text)
+rRegistrationId
+  = lens _rRegistrationId
+      (\ s a -> s{_rRegistrationId = a})
+
+-- | The time until which the \`Registration\` is effective. This is a
+-- read-only field assigned by the server.
+rExpiryTime :: Lens' Registration (Maybe UTCTime)
+rExpiryTime
+  = lens _rExpiryTime (\ s a -> s{_rExpiryTime = a}) .
+      mapping _DateTime
+
+-- | Specification for the class of notifications that Classroom should
+-- deliver to the destination.
+rFeed :: Lens' Registration (Maybe Feed)
+rFeed = lens _rFeed (\ s a -> s{_rFeed = a})
+
+-- | The Cloud Pub\/Sub topic that notifications are to be sent to.
+rCloudPubsubTopic :: Lens' Registration (Maybe CloudPubsubTopic)
+rCloudPubsubTopic
+  = lens _rCloudPubsubTopic
+      (\ s a -> s{_rCloudPubsubTopic = a})
+
+instance FromJSON Registration where
+        parseJSON
+          = withObject "Registration"
+              (\ o ->
+                 Registration' <$>
+                   (o .:? "registrationId") <*> (o .:? "expiryTime") <*>
+                     (o .:? "feed")
+                     <*> (o .:? "cloudPubsubTopic"))
+
+instance ToJSON Registration where
+        toJSON Registration'{..}
+          = object
+              (catMaybes
+                 [("registrationId" .=) <$> _rRegistrationId,
+                  ("expiryTime" .=) <$> _rExpiryTime,
+                  ("feed" .=) <$> _rFeed,
+                  ("cloudPubsubTopic" .=) <$> _rCloudPubsubTopic])

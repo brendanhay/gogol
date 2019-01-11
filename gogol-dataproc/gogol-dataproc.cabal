@@ -14,8 +14,7 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    An API for managing Hadoop-based clusters and jobs on Google Cloud
-    Platform.
+    Manages Hadoop-based clusters and jobs on Google Cloud Platform.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -36,21 +35,51 @@ library
     exposed-modules:
           Network.Google.Dataproc
         , Network.Google.Dataproc.Types
+        , Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.Create
+        , Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.Delete
+        , Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.Get
+        , Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.GetIAMPolicy
+        , Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.Instantiate
+        , Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.InstantiateInline
+        , Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.List
+        , Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.SetIAMPolicy
+        , Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.TestIAMPermissions
+        , Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.Update
         , Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Create
         , Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Delete
         , Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Diagnose
         , Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Get
+        , Network.Google.Resource.Dataproc.Projects.Regions.Clusters.GetIAMPolicy
         , Network.Google.Resource.Dataproc.Projects.Regions.Clusters.List
         , Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Patch
+        , Network.Google.Resource.Dataproc.Projects.Regions.Clusters.SetIAMPolicy
+        , Network.Google.Resource.Dataproc.Projects.Regions.Clusters.TestIAMPermissions
         , Network.Google.Resource.Dataproc.Projects.Regions.Jobs.Cancel
         , Network.Google.Resource.Dataproc.Projects.Regions.Jobs.Delete
         , Network.Google.Resource.Dataproc.Projects.Regions.Jobs.Get
+        , Network.Google.Resource.Dataproc.Projects.Regions.Jobs.GetIAMPolicy
         , Network.Google.Resource.Dataproc.Projects.Regions.Jobs.List
+        , Network.Google.Resource.Dataproc.Projects.Regions.Jobs.Patch
+        , Network.Google.Resource.Dataproc.Projects.Regions.Jobs.SetIAMPolicy
         , Network.Google.Resource.Dataproc.Projects.Regions.Jobs.Submit
+        , Network.Google.Resource.Dataproc.Projects.Regions.Jobs.TestIAMPermissions
         , Network.Google.Resource.Dataproc.Projects.Regions.Operations.Cancel
         , Network.Google.Resource.Dataproc.Projects.Regions.Operations.Delete
         , Network.Google.Resource.Dataproc.Projects.Regions.Operations.Get
+        , Network.Google.Resource.Dataproc.Projects.Regions.Operations.GetIAMPolicy
         , Network.Google.Resource.Dataproc.Projects.Regions.Operations.List
+        , Network.Google.Resource.Dataproc.Projects.Regions.Operations.SetIAMPolicy
+        , Network.Google.Resource.Dataproc.Projects.Regions.Operations.TestIAMPermissions
+        , Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.Create
+        , Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.Delete
+        , Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.Get
+        , Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.GetIAMPolicy
+        , Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.Instantiate
+        , Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.InstantiateInline
+        , Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.List
+        , Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.SetIAMPolicy
+        , Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.TestIAMPermissions
+        , Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.Update
 
     other-modules:
           Network.Google.Dataproc.Types.Product

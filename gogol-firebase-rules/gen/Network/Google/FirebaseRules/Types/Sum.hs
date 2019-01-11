@@ -16,7 +16,41 @@
 --
 module Network.Google.FirebaseRules.Types.Sum where
 
-import           Network.Google.Prelude
+import           Network.Google.Prelude hiding (Bytes)
+
+-- | State of the test.
+data TestResultState
+    = StateUnspecified
+      -- ^ @STATE_UNSPECIFIED@
+      -- Test state is not set.
+    | Success
+      -- ^ @SUCCESS@
+      -- Test is a success.
+    | Failure
+      -- ^ @FAILURE@
+      -- Test is a failure.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable TestResultState
+
+instance FromHttpApiData TestResultState where
+    parseQueryParam = \case
+        "STATE_UNSPECIFIED" -> Right StateUnspecified
+        "SUCCESS" -> Right Success
+        "FAILURE" -> Right Failure
+        x -> Left ("Unable to parse TestResultState from: " <> x)
+
+instance ToHttpApiData TestResultState where
+    toQueryParam = \case
+        StateUnspecified -> "STATE_UNSPECIFIED"
+        Success -> "SUCCESS"
+        Failure -> "FAILURE"
+
+instance FromJSON TestResultState where
+    parseJSON = parseJSONText "TestResultState"
+
+instance ToJSON TestResultState where
+    toJSON = toJSONText
 
 -- | V1 error format.
 data Xgafv
@@ -85,4 +119,107 @@ instance FromJSON IssueSeverity where
     parseJSON = parseJSONText "IssueSeverity"
 
 instance ToJSON IssueSeverity where
+    toJSON = toJSONText
+
+-- | Test expectation.
+data TestCaseExpectation
+    = ExpectationUnspecified
+      -- ^ @EXPECTATION_UNSPECIFIED@
+      -- Unspecified expectation.
+    | Allow
+      -- ^ @ALLOW@
+      -- Expect an allowed result.
+    | Deny
+      -- ^ @DENY@
+      -- Expect a denied result.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable TestCaseExpectation
+
+instance FromHttpApiData TestCaseExpectation where
+    parseQueryParam = \case
+        "EXPECTATION_UNSPECIFIED" -> Right ExpectationUnspecified
+        "ALLOW" -> Right Allow
+        "DENY" -> Right Deny
+        x -> Left ("Unable to parse TestCaseExpectation from: " <> x)
+
+instance ToHttpApiData TestCaseExpectation where
+    toQueryParam = \case
+        ExpectationUnspecified -> "EXPECTATION_UNSPECIFIED"
+        Allow -> "ALLOW"
+        Deny -> "DENY"
+
+instance FromJSON TestCaseExpectation where
+    parseJSON = parseJSONText "TestCaseExpectation"
+
+instance ToJSON TestCaseExpectation where
+    toJSON = toJSONText
+
+-- | The Rules runtime version of the executable.
+data GetReleaseExecutableResponseExecutableVersion
+    = ReleaseExecutableVersionUnspecified
+      -- ^ @RELEASE_EXECUTABLE_VERSION_UNSPECIFIED@
+      -- Executable format unspecified. Defaults to FIREBASE_RULES_EXECUTABLE_V1
+    | FirebaseRulesExecutableV1
+      -- ^ @FIREBASE_RULES_EXECUTABLE_V1@
+      -- Firebase Rules syntax \'rules2\' executable versions: Custom AST for use
+      -- with Java clients.
+    | FirebaseRulesExecutableV2
+      -- ^ @FIREBASE_RULES_EXECUTABLE_V2@
+      -- CEL-based executable for use with C++ clients.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GetReleaseExecutableResponseExecutableVersion
+
+instance FromHttpApiData GetReleaseExecutableResponseExecutableVersion where
+    parseQueryParam = \case
+        "RELEASE_EXECUTABLE_VERSION_UNSPECIFIED" -> Right ReleaseExecutableVersionUnspecified
+        "FIREBASE_RULES_EXECUTABLE_V1" -> Right FirebaseRulesExecutableV1
+        "FIREBASE_RULES_EXECUTABLE_V2" -> Right FirebaseRulesExecutableV2
+        x -> Left ("Unable to parse GetReleaseExecutableResponseExecutableVersion from: " <> x)
+
+instance ToHttpApiData GetReleaseExecutableResponseExecutableVersion where
+    toQueryParam = \case
+        ReleaseExecutableVersionUnspecified -> "RELEASE_EXECUTABLE_VERSION_UNSPECIFIED"
+        FirebaseRulesExecutableV1 -> "FIREBASE_RULES_EXECUTABLE_V1"
+        FirebaseRulesExecutableV2 -> "FIREBASE_RULES_EXECUTABLE_V2"
+
+instance FromJSON GetReleaseExecutableResponseExecutableVersion where
+    parseJSON = parseJSONText "GetReleaseExecutableResponseExecutableVersion"
+
+instance ToJSON GetReleaseExecutableResponseExecutableVersion where
+    toJSON = toJSONText
+
+-- | \`Language\` used to generate the executable bytes.
+data GetReleaseExecutableResponseLanguage
+    = LanguageUnspecified
+      -- ^ @LANGUAGE_UNSPECIFIED@
+      -- Language unspecified. Defaults to FIREBASE_RULES.
+    | FirebaseRules
+      -- ^ @FIREBASE_RULES@
+      -- Firebase Rules language.
+    | EventFlowTriggers
+      -- ^ @EVENT_FLOW_TRIGGERS@
+      -- Event Flow triggers.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GetReleaseExecutableResponseLanguage
+
+instance FromHttpApiData GetReleaseExecutableResponseLanguage where
+    parseQueryParam = \case
+        "LANGUAGE_UNSPECIFIED" -> Right LanguageUnspecified
+        "FIREBASE_RULES" -> Right FirebaseRules
+        "EVENT_FLOW_TRIGGERS" -> Right EventFlowTriggers
+        x -> Left ("Unable to parse GetReleaseExecutableResponseLanguage from: " <> x)
+
+instance ToHttpApiData GetReleaseExecutableResponseLanguage where
+    toQueryParam = \case
+        LanguageUnspecified -> "LANGUAGE_UNSPECIFIED"
+        FirebaseRules -> "FIREBASE_RULES"
+        EventFlowTriggers -> "EVENT_FLOW_TRIGGERS"
+
+instance FromJSON GetReleaseExecutableResponseLanguage where
+    parseJSON = parseJSONText "GetReleaseExecutableResponseLanguage"
+
+instance ToJSON GetReleaseExecutableResponseLanguage where
     toJSON = toJSONText

@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'ContentCategoriesPatch' request conforms to.
 type ContentCategoriesPatchResource =
      "dfareporting" :>
-       "v2.7" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "contentCategories" :>

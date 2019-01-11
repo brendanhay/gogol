@@ -26,9 +26,12 @@
 -- be pushed to Google Cloud Logging. Please note that any previous pending
 -- and running Rollouts and associated Operations will be automatically
 -- cancelled so that the latest Rollout will not be blocked by previous
--- Rollouts. Operation
+-- Rollouts. Only the 100 most recent (in any state) and the last 10
+-- successful (if not already part of the set of 100 most recent) rollouts
+-- are kept for each service. The rest will be deleted eventually.
+-- Operation
 --
--- /See:/ <https://cloud.google.com/service-management/ Google Service Management API Reference> for @servicemanagement.services.rollouts.create@.
+-- /See:/ <https://cloud.google.com/service-management/ Service Management API Reference> for @servicemanagement.services.rollouts.create@.
 module Network.Google.Resource.ServiceManagement.Services.Rollouts.Create
     (
     -- * REST Resource
@@ -41,11 +44,9 @@ module Network.Google.Resource.ServiceManagement.Services.Rollouts.Create
     -- * Request Lenses
     , srcXgafv
     , srcUploadProtocol
-    , srcPp
     , srcAccessToken
     , srcUploadType
     , srcPayload
-    , srcBearerToken
     , srcServiceName
     , srcCallback
     ) where
@@ -62,13 +63,11 @@ type ServicesRolloutsCreateResource =
            "rollouts" :>
              QueryParam "$.xgafv" Xgafv :>
                QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "callback" Text :>
-                           QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] Rollout :> Post '[JSON] Operation
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Rollout :> Post '[JSON] Operation
 
 -- | Creates a new service configuration rollout. Based on rollout, the
 -- Google Service Management will roll out the service configurations to
@@ -76,17 +75,18 @@ type ServicesRolloutsCreateResource =
 -- be pushed to Google Cloud Logging. Please note that any previous pending
 -- and running Rollouts and associated Operations will be automatically
 -- cancelled so that the latest Rollout will not be blocked by previous
--- Rollouts. Operation
+-- Rollouts. Only the 100 most recent (in any state) and the last 10
+-- successful (if not already part of the set of 100 most recent) rollouts
+-- are kept for each service. The rest will be deleted eventually.
+-- Operation
 --
 -- /See:/ 'servicesRolloutsCreate' smart constructor.
 data ServicesRolloutsCreate = ServicesRolloutsCreate'
     { _srcXgafv          :: !(Maybe Xgafv)
     , _srcUploadProtocol :: !(Maybe Text)
-    , _srcPp             :: !Bool
     , _srcAccessToken    :: !(Maybe Text)
     , _srcUploadType     :: !(Maybe Text)
     , _srcPayload        :: !Rollout
-    , _srcBearerToken    :: !(Maybe Text)
     , _srcServiceName    :: !Text
     , _srcCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -99,15 +99,11 @@ data ServicesRolloutsCreate = ServicesRolloutsCreate'
 --
 -- * 'srcUploadProtocol'
 --
--- * 'srcPp'
---
 -- * 'srcAccessToken'
 --
 -- * 'srcUploadType'
 --
 -- * 'srcPayload'
---
--- * 'srcBearerToken'
 --
 -- * 'srcServiceName'
 --
@@ -120,11 +116,9 @@ servicesRolloutsCreate pSrcPayload_ pSrcServiceName_ =
     ServicesRolloutsCreate'
     { _srcXgafv = Nothing
     , _srcUploadProtocol = Nothing
-    , _srcPp = True
     , _srcAccessToken = Nothing
     , _srcUploadType = Nothing
     , _srcPayload = pSrcPayload_
-    , _srcBearerToken = Nothing
     , _srcServiceName = pSrcServiceName_
     , _srcCallback = Nothing
     }
@@ -138,10 +132,6 @@ srcUploadProtocol :: Lens' ServicesRolloutsCreate (Maybe Text)
 srcUploadProtocol
   = lens _srcUploadProtocol
       (\ s a -> s{_srcUploadProtocol = a})
-
--- | Pretty-print response.
-srcPp :: Lens' ServicesRolloutsCreate Bool
-srcPp = lens _srcPp (\ s a -> s{_srcPp = a})
 
 -- | OAuth access token.
 srcAccessToken :: Lens' ServicesRolloutsCreate (Maybe Text)
@@ -159,12 +149,6 @@ srcUploadType
 srcPayload :: Lens' ServicesRolloutsCreate Rollout
 srcPayload
   = lens _srcPayload (\ s a -> s{_srcPayload = a})
-
--- | OAuth bearer token.
-srcBearerToken :: Lens' ServicesRolloutsCreate (Maybe Text)
-srcBearerToken
-  = lens _srcBearerToken
-      (\ s a -> s{_srcBearerToken = a})
 
 -- | The name of the service. See the
 -- [overview](\/service-management\/overview) for naming requirements. For
@@ -186,10 +170,8 @@ instance GoogleRequest ServicesRolloutsCreate where
                "https://www.googleapis.com/auth/service.management"]
         requestClient ServicesRolloutsCreate'{..}
           = go _srcServiceName _srcXgafv _srcUploadProtocol
-              (Just _srcPp)
               _srcAccessToken
               _srcUploadType
-              _srcBearerToken
               _srcCallback
               (Just AltJSON)
               _srcPayload

@@ -33,6 +33,7 @@ module Network.Google.Resource.Compute.Networks.Delete
     , NetworksDelete
 
     -- * Request Lenses
+    , ndRequestId
     , ndProject
     , ndNetwork
     ) where
@@ -50,19 +51,23 @@ type NetworksDeleteResource =
              "global" :>
                "networks" :>
                  Capture "network" Text :>
-                   QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+                   QueryParam "requestId" Text :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified network.
 --
 -- /See:/ 'networksDelete' smart constructor.
 data NetworksDelete = NetworksDelete'
-    { _ndProject :: !Text
-    , _ndNetwork :: !Text
+    { _ndRequestId :: !(Maybe Text)
+    , _ndProject   :: !Text
+    , _ndNetwork   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NetworksDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ndRequestId'
 --
 -- * 'ndProject'
 --
@@ -73,9 +78,24 @@ networksDelete
     -> NetworksDelete
 networksDelete pNdProject_ pNdNetwork_ =
     NetworksDelete'
-    { _ndProject = pNdProject_
+    { _ndRequestId = Nothing
+    , _ndProject = pNdProject_
     , _ndNetwork = pNdNetwork_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+ndRequestId :: Lens' NetworksDelete (Maybe Text)
+ndRequestId
+  = lens _ndRequestId (\ s a -> s{_ndRequestId = a})
 
 -- | Project ID for this request.
 ndProject :: Lens' NetworksDelete Text
@@ -93,7 +113,8 @@ instance GoogleRequest NetworksDelete where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient NetworksDelete'{..}
-          = go _ndProject _ndNetwork (Just AltJSON)
+          = go _ndProject _ndNetwork _ndRequestId
+              (Just AltJSON)
               computeService
           where go
                   = buildClient (Proxy :: Proxy NetworksDeleteResource)

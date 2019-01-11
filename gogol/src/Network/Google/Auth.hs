@@ -63,7 +63,7 @@ module Network.Google.Auth
     -- * Re-exported Types
     , AccessToken    (..)
     , RefreshToken   (..)
-    , Secret         (..)
+    , GSecret        (..)
     , ServiceId      (..)
     , ClientId       (..)
 
@@ -166,10 +166,10 @@ exchange :: forall m s. (MonadIO m, MonadCatch m, AllowScopes s)
 exchange c l = fmap (Auth c) . action l
   where
     action = case c of
-        FromMetadata s    -> metadataToken       s
-        FromAccount  a    -> serviceAccountToken a (Proxy :: Proxy s)
-        FromClient   x n  -> exchangeCode        x n
-        FromUser     u    -> authorizedUserToken u Nothing
+        FromMetadata s   -> metadataToken       s
+        FromAccount  a   -> serviceAccountToken a (Proxy :: Proxy s)
+        FromClient   x n -> exchangeCode        x n
+        FromUser     u   -> authorizedUserToken u Nothing
 
 -- | Refresh an existing 'OAuthToken'.
 refresh :: forall m s. (MonadIO m, MonadCatch m, AllowScopes s)

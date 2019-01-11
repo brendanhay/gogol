@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 -- 'EditsImagesUpload' request conforms to.
 type EditsImagesUploadResource =
      "androidpublisher" :>
-       "v2" :>
+       "v3" :>
          "applications" :>
            Capture "packageName" Text :>
              "edits" :>
@@ -60,7 +60,7 @@ type EditsImagesUploadResource =
        :<|>
        "upload" :>
          "androidpublisher" :>
-           "v2" :>
+           "v3" :>
              "applications" :>
                Capture "packageName" Text :>
                  "edits" :>

@@ -34,12 +34,11 @@ module Network.Google.Resource.Manufacturers.Accounts.Products.List
 
     -- * Request Lenses
     , aplParent
+    , aplInclude
     , aplXgafv
     , aplUploadProtocol
-    , aplPp
     , aplAccessToken
     , aplUploadType
-    , aplBearerToken
     , aplPageToken
     , aplPageSize
     , aplCallback
@@ -54,29 +53,27 @@ type AccountsProductsListResource =
      "v1" :>
        Capture "parent" Text :>
          "products" :>
-           QueryParam "$.xgafv" Xgafv :>
-             QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
+           QueryParams "include" Text :>
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
                  QueryParam "access_token" Text :>
                    QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" (Textual Int32) :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] ListProductsResponse
+                     QueryParam "pageToken" Text :>
+                       QueryParam "pageSize" (Textual Int32) :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] ListProductsResponse
 
 -- | Lists all the products in a Manufacturer Center account.
 --
 -- /See:/ 'accountsProductsList' smart constructor.
 data AccountsProductsList = AccountsProductsList'
     { _aplParent         :: !Text
+    , _aplInclude        :: !(Maybe [Text])
     , _aplXgafv          :: !(Maybe Xgafv)
     , _aplUploadProtocol :: !(Maybe Text)
-    , _aplPp             :: !Bool
     , _aplAccessToken    :: !(Maybe Text)
     , _aplUploadType     :: !(Maybe Text)
-    , _aplBearerToken    :: !(Maybe Text)
     , _aplPageToken      :: !(Maybe Text)
     , _aplPageSize       :: !(Maybe (Textual Int32))
     , _aplCallback       :: !(Maybe Text)
@@ -88,17 +85,15 @@ data AccountsProductsList = AccountsProductsList'
 --
 -- * 'aplParent'
 --
+-- * 'aplInclude'
+--
 -- * 'aplXgafv'
 --
 -- * 'aplUploadProtocol'
 --
--- * 'aplPp'
---
 -- * 'aplAccessToken'
 --
 -- * 'aplUploadType'
---
--- * 'aplBearerToken'
 --
 -- * 'aplPageToken'
 --
@@ -111,12 +106,11 @@ accountsProductsList
 accountsProductsList pAplParent_ =
     AccountsProductsList'
     { _aplParent = pAplParent_
+    , _aplInclude = Nothing
     , _aplXgafv = Nothing
     , _aplUploadProtocol = Nothing
-    , _aplPp = True
     , _aplAccessToken = Nothing
     , _aplUploadType = Nothing
-    , _aplBearerToken = Nothing
     , _aplPageToken = Nothing
     , _aplPageSize = Nothing
     , _aplCallback = Nothing
@@ -128,6 +122,14 @@ aplParent :: Lens' AccountsProductsList Text
 aplParent
   = lens _aplParent (\ s a -> s{_aplParent = a})
 
+-- | The information to be included in the response. Only sections listed
+-- here will be returned.
+aplInclude :: Lens' AccountsProductsList [Text]
+aplInclude
+  = lens _aplInclude (\ s a -> s{_aplInclude = a}) .
+      _Default
+      . _Coerce
+
 -- | V1 error format.
 aplXgafv :: Lens' AccountsProductsList (Maybe Xgafv)
 aplXgafv = lens _aplXgafv (\ s a -> s{_aplXgafv = a})
@@ -137,10 +139,6 @@ aplUploadProtocol :: Lens' AccountsProductsList (Maybe Text)
 aplUploadProtocol
   = lens _aplUploadProtocol
       (\ s a -> s{_aplUploadProtocol = a})
-
--- | Pretty-print response.
-aplPp :: Lens' AccountsProductsList Bool
-aplPp = lens _aplPp (\ s a -> s{_aplPp = a})
 
 -- | OAuth access token.
 aplAccessToken :: Lens' AccountsProductsList (Maybe Text)
@@ -153,12 +151,6 @@ aplUploadType :: Lens' AccountsProductsList (Maybe Text)
 aplUploadType
   = lens _aplUploadType
       (\ s a -> s{_aplUploadType = a})
-
--- | OAuth bearer token.
-aplBearerToken :: Lens' AccountsProductsList (Maybe Text)
-aplBearerToken
-  = lens _aplBearerToken
-      (\ s a -> s{_aplBearerToken = a})
 
 -- | The token returned by the previous request.
 aplPageToken :: Lens' AccountsProductsList (Maybe Text)
@@ -182,11 +174,10 @@ instance GoogleRequest AccountsProductsList where
         type Scopes AccountsProductsList =
              '["https://www.googleapis.com/auth/manufacturercenter"]
         requestClient AccountsProductsList'{..}
-          = go _aplParent _aplXgafv _aplUploadProtocol
-              (Just _aplPp)
+          = go _aplParent (_aplInclude ^. _Default) _aplXgafv
+              _aplUploadProtocol
               _aplAccessToken
               _aplUploadType
-              _aplBearerToken
               _aplPageToken
               _aplPageSize
               _aplCallback

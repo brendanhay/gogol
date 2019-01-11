@@ -39,6 +39,7 @@ module Network.Google.Resource.Drive.Files.Copy
     , fKeepRevisionForever
     , fIgnoreDefaultVisibility
     , fFileId
+    , fSupportsTeamDrives
     ) where
 
 import           Network.Google.Drive.Types
@@ -55,8 +56,9 @@ type FilesCopyResource =
                QueryParam "ocrLanguage" Text :>
                  QueryParam "keepRevisionForever" Bool :>
                    QueryParam "ignoreDefaultVisibility" Bool :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] File :> Post '[JSON] File
+                     QueryParam "supportsTeamDrives" Bool :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] File :> Post '[JSON] File
 
 -- | Creates a copy of a file and applies any requested updates with patch
 -- semantics.
@@ -68,6 +70,7 @@ data FilesCopy = FilesCopy'
     , _fKeepRevisionForever     :: !Bool
     , _fIgnoreDefaultVisibility :: !Bool
     , _fFileId                  :: !Text
+    , _fSupportsTeamDrives      :: !Bool
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesCopy' with the minimum fields required to make a request.
@@ -83,6 +86,8 @@ data FilesCopy = FilesCopy'
 -- * 'fIgnoreDefaultVisibility'
 --
 -- * 'fFileId'
+--
+-- * 'fSupportsTeamDrives'
 filesCopy
     :: File -- ^ 'fPayload'
     -> Text -- ^ 'fFileId'
@@ -94,6 +99,7 @@ filesCopy pFPayload_ pFFileId_ =
     , _fKeepRevisionForever = False
     , _fIgnoreDefaultVisibility = False
     , _fFileId = pFFileId_
+    , _fSupportsTeamDrives = False
     }
 
 -- | Multipart request metadata.
@@ -126,6 +132,12 @@ fIgnoreDefaultVisibility
 fFileId :: Lens' FilesCopy Text
 fFileId = lens _fFileId (\ s a -> s{_fFileId = a})
 
+-- | Whether the requesting application supports Team Drives.
+fSupportsTeamDrives :: Lens' FilesCopy Bool
+fSupportsTeamDrives
+  = lens _fSupportsTeamDrives
+      (\ s a -> s{_fSupportsTeamDrives = a})
+
 instance GoogleRequest FilesCopy where
         type Rs FilesCopy = File
         type Scopes FilesCopy =
@@ -137,6 +149,7 @@ instance GoogleRequest FilesCopy where
           = go _fFileId _fOCRLanguage
               (Just _fKeepRevisionForever)
               (Just _fIgnoreDefaultVisibility)
+              (Just _fSupportsTeamDrives)
               (Just AltJSON)
               _fPayload
               driveService

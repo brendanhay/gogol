@@ -38,8 +38,14 @@ module Network.Google.AndroidEnterprise
     -- ** androidenterprise.devices.list
     , module Network.Google.Resource.AndroidEnterprise.Devices.List
 
+    -- ** androidenterprise.devices.patch
+    , module Network.Google.Resource.AndroidEnterprise.Devices.Patch
+
     -- ** androidenterprise.devices.setState
     , module Network.Google.Resource.AndroidEnterprise.Devices.SetState
+
+    -- ** androidenterprise.devices.update
+    , module Network.Google.Resource.AndroidEnterprise.Devices.Update
 
     -- ** androidenterprise.enterprises.acknowledgeNotificationSet
     , module Network.Google.Resource.AndroidEnterprise.Enterprises.AcknowledgeNotificationSet
@@ -50,9 +56,6 @@ module Network.Google.AndroidEnterprise
     -- ** androidenterprise.enterprises.createWebToken
     , module Network.Google.Resource.AndroidEnterprise.Enterprises.CreateWebToken
 
-    -- ** androidenterprise.enterprises.delete
-    , module Network.Google.Resource.AndroidEnterprise.Enterprises.Delete
-
     -- ** androidenterprise.enterprises.enroll
     , module Network.Google.Resource.AndroidEnterprise.Enterprises.Enroll
 
@@ -62,14 +65,14 @@ module Network.Google.AndroidEnterprise
     -- ** androidenterprise.enterprises.get
     , module Network.Google.Resource.AndroidEnterprise.Enterprises.Get
 
+    -- ** androidenterprise.enterprises.getAndroidDevicePolicyConfig
+    , module Network.Google.Resource.AndroidEnterprise.Enterprises.GetAndroidDevicePolicyConfig
+
     -- ** androidenterprise.enterprises.getServiceAccount
     , module Network.Google.Resource.AndroidEnterprise.Enterprises.GetServiceAccount
 
     -- ** androidenterprise.enterprises.getStoreLayout
     , module Network.Google.Resource.AndroidEnterprise.Enterprises.GetStoreLayout
-
-    -- ** androidenterprise.enterprises.insert
-    , module Network.Google.Resource.AndroidEnterprise.Enterprises.Insert
 
     -- ** androidenterprise.enterprises.list
     , module Network.Google.Resource.AndroidEnterprise.Enterprises.List
@@ -82,6 +85,9 @@ module Network.Google.AndroidEnterprise
 
     -- ** androidenterprise.enterprises.setAccount
     , module Network.Google.Resource.AndroidEnterprise.Enterprises.SetAccount
+
+    -- ** androidenterprise.enterprises.setAndroidDevicePolicyConfig
+    , module Network.Google.Resource.AndroidEnterprise.Enterprises.SetAndroidDevicePolicyConfig
 
     -- ** androidenterprise.enterprises.setStoreLayout
     , module Network.Google.Resource.AndroidEnterprise.Enterprises.SetStoreLayout
@@ -157,6 +163,9 @@ module Network.Google.AndroidEnterprise
 
     -- ** androidenterprise.managedconfigurationsforuser.update
     , module Network.Google.Resource.AndroidEnterprise.ManagedConfigurationsforUser.Update
+
+    -- ** androidenterprise.managedconfigurationssettings.list
+    , module Network.Google.Resource.AndroidEnterprise.ManagedConfigurationssettings.List
 
     -- ** androidenterprise.permissions.get
     , module Network.Google.Resource.AndroidEnterprise.Permissions.Get
@@ -251,6 +260,9 @@ module Network.Google.AndroidEnterprise
     -- ** androidenterprise.users.patch
     , module Network.Google.Resource.AndroidEnterprise.Users.Patch
 
+    -- ** androidenterprise.users.revokeDeviceAccess
+    , module Network.Google.Resource.AndroidEnterprise.Users.RevokeDeviceAccess
+
     -- ** androidenterprise.users.revokeToken
     , module Network.Google.Resource.AndroidEnterprise.Users.RevokeToken
 
@@ -259,6 +271,24 @@ module Network.Google.AndroidEnterprise
 
     -- ** androidenterprise.users.update
     , module Network.Google.Resource.AndroidEnterprise.Users.Update
+
+    -- ** androidenterprise.webapps.delete
+    , module Network.Google.Resource.AndroidEnterprise.WebApps.Delete
+
+    -- ** androidenterprise.webapps.get
+    , module Network.Google.Resource.AndroidEnterprise.WebApps.Get
+
+    -- ** androidenterprise.webapps.insert
+    , module Network.Google.Resource.AndroidEnterprise.WebApps.Insert
+
+    -- ** androidenterprise.webapps.list
+    , module Network.Google.Resource.AndroidEnterprise.WebApps.List
+
+    -- ** androidenterprise.webapps.patch
+    , module Network.Google.Resource.AndroidEnterprise.WebApps.Patch
+
+    -- ** androidenterprise.webapps.update
+    , module Network.Google.Resource.AndroidEnterprise.WebApps.Update
 
     -- * Types
 
@@ -269,6 +299,7 @@ module Network.Google.AndroidEnterprise
     , glNumProvisioned
     , glNumPurchased
     , glApproval
+    , glPermissions
     , glProductId
     , glAcquisitionKind
 
@@ -293,6 +324,12 @@ module Network.Google.AndroidEnterprise
     , arsrrvType
     , arsrrvValueString
 
+    -- ** AdministratorWebTokenSpecPlaySearch
+    , AdministratorWebTokenSpecPlaySearch
+    , administratorWebTokenSpecPlaySearch
+    , awtspsEnabled
+    , awtspsApproveApps
+
     -- ** DeviceState
     , DeviceState
     , deviceState
@@ -311,11 +348,22 @@ module Network.Google.AndroidEnterprise
     , tpNextPageToken
     , tpPreviousPageToken
 
+    -- ** AdministratorWebTokenSpecWebApps
+    , AdministratorWebTokenSpecWebApps
+    , administratorWebTokenSpecWebApps
+    , awtswaEnabled
+
     -- ** ApprovalURLInfo
     , ApprovalURLInfo
     , approvalURLInfo
     , auiApprovalURL
     , auiKind
+
+    -- ** ManagedConfigurationsSettingsListResponse
+    , ManagedConfigurationsSettingsListResponse
+    , managedConfigurationsSettingsListResponse
+    , mcslrKind
+    , mcslrManagedConfigurationsSettings
 
     -- ** ManagedProperty
     , ManagedProperty
@@ -339,6 +387,7 @@ module Network.Google.AndroidEnterprise
     , managedConfiguration
     , mcManagedProperty
     , mcKind
+    , mcConfigurationVariables
     , mcProductId
 
     -- ** StoreCluster
@@ -354,8 +403,19 @@ module Network.Google.AndroidEnterprise
     , AdministratorWebTokenSpec
     , administratorWebTokenSpec
     , awtsParent
+    , awtsPrivateApps
+    , awtsPlaySearch
     , awtsKind
+    , awtsWebApps
     , awtsPermission
+    , awtsStoreBuilder
+
+    -- ** ProductVisibility
+    , ProductVisibility
+    , productVisibility
+    , pvTracks
+    , pvTrackIds
+    , pvProductId
 
     -- ** Notification
     , Notification
@@ -366,6 +426,7 @@ module Network.Google.AndroidEnterprise
     , nProductAvailabilityChangeEvent
     , nAppUpdateEvent
     , nInstallFailureEvent
+    , nNotificationType
     , nAppRestrictionsSchemaChangeEvent
     , nNewDeviceEvent
     , nTimestampMillis
@@ -406,8 +467,16 @@ module Network.Google.AndroidEnterprise
     , Device
     , device
     , dKind
+    , dPolicy
     , dManagementType
     , dAndroidId
+
+    -- ** AutoInstallConstraint
+    , AutoInstallConstraint
+    , autoInstallConstraint
+    , aicChargingStateConstraint
+    , aicDeviceIdleStateConstraint
+    , aicNetworkTypeConstraint
 
     -- ** ServiceAccountKey
     , ServiceAccountKey
@@ -436,6 +505,14 @@ module Network.Google.AndroidEnterprise
     , arsrDescription
     , arsrNestedRestriction
 
+    -- ** ProductPolicy
+    , ProductPolicy
+    , productPolicy
+    , ppTracks
+    , ppTrackIds
+    , ppAutoInstallPolicy
+    , ppProductId
+
     -- ** Administrator
     , Administrator
     , administrator
@@ -447,17 +524,34 @@ module Network.Google.AndroidEnterprise
     , ulrKind
     , ulrUser
 
+    -- ** AdministratorWebTokenSpecStoreBuilder
+    , AdministratorWebTokenSpecStoreBuilder
+    , administratorWebTokenSpecStoreBuilder
+    , awtssbEnabled
+
     -- ** AuthenticationToken
     , AuthenticationToken
     , authenticationToken
     , atKind
     , atToken
 
+    -- ** ManagedConfigurationsSettings
+    , ManagedConfigurationsSettings
+    , managedConfigurationsSettings
+    , mcsLastUpdatedTimestampMillis
+    , mcsManagedProperty
+    , mcsKind
+    , mcsMcmId
+    , mcsName
+
     -- ** AppVersion
     , AppVersion
     , appVersion
+    , avTrack
     , avVersionCode
     , avVersionString
+    , avTrackId
+    , avIsProduction
 
     -- ** EnterprisesPullNotificationSetRequestMode
     , EnterprisesPullNotificationSetRequestMode (..)
@@ -473,9 +567,16 @@ module Network.Google.AndroidEnterprise
     , gllrGroupLicense
     , gllrKind
 
+    -- ** AndroidDevicePolicyConfig
+    , AndroidDevicePolicyConfig
+    , androidDevicePolicyConfig
+    , adpcState
+    , adpcKind
+
     -- ** ProductSet
     , ProductSet
     , productSet
+    , psProductVisibility
     , psKind
     , psProductSetBehavior
     , psProductId
@@ -488,10 +589,22 @@ module Network.Google.AndroidEnterprise
     , iInstallState
     , iProductId
 
+    -- ** MaintenanceWindow
+    , MaintenanceWindow
+    , maintenanceWindow
+    , mwDurationMs
+    , mwStartTimeAfterMidnightMs
+
     -- ** ServiceAccountKeysListResponse
     , ServiceAccountKeysListResponse
     , serviceAccountKeysListResponse
     , saklrServiceAccountKey
+
+    -- ** TrackInfo
+    , TrackInfo
+    , trackInfo
+    , tiTrackAlias
+    , tiTrackId
 
     -- ** User
     , User
@@ -536,6 +649,13 @@ module Network.Google.AndroidEnterprise
     , saKey
     , saName
 
+    -- ** VariableSet
+    , VariableSet
+    , variableSet
+    , vsKind
+    , vsUserValue
+    , vsPlaceholder
+
     -- ** AppUpdateEvent
     , AppUpdateEvent
     , appUpdateEvent
@@ -560,6 +680,11 @@ module Network.Google.AndroidEnterprise
     , arsKind
     , arsRestrictions
 
+    -- ** WebAppIcon
+    , WebAppIcon
+    , webAppIcon
+    , waiImageData
+
     -- ** LocalizedText
     , LocalizedText
     , localizedText
@@ -573,11 +698,22 @@ module Network.Google.AndroidEnterprise
     , utToken
     , utUserId
 
+    -- ** AdministratorWebTokenSpecPrivateApps
+    , AdministratorWebTokenSpecPrivateApps
+    , administratorWebTokenSpecPrivateApps
+    , awtspaEnabled
+
     -- ** DevicesListResponse
     , DevicesListResponse
     , devicesListResponse
     , dlrKind
     , dlrDevice
+
+    -- ** ProductSigningCertificate
+    , ProductSigningCertificate
+    , productSigningCertificate
+    , pscCertificateHashSha256
+    , pscCertificateHashSha1
 
     -- ** Enterprise
     , Enterprise
@@ -603,6 +739,13 @@ module Network.Google.AndroidEnterprise
     , mcfulrManagedConfigurationForUser
     , mcfulrKind
 
+    -- ** ConfigurationVariables
+    , ConfigurationVariables
+    , configurationVariables
+    , cvKind
+    , cvMcmId
+    , cvVariableSet
+
     -- ** StoreLayout
     , StoreLayout
     , storeLayout
@@ -619,8 +762,17 @@ module Network.Google.AndroidEnterprise
     , NewDeviceEvent
     , newDeviceEvent
     , ndeUserId
+    , ndeDpcPackageName
     , ndeDeviceId
     , ndeManagementType
+
+    -- ** Policy
+    , Policy
+    , policy
+    , pProductAvailabilityPolicy
+    , pProductPolicy
+    , pMaintenanceWindow
+    , pAutoUpdatePolicy
 
     -- ** AdministratorWebToken
     , AdministratorWebToken
@@ -638,17 +790,29 @@ module Network.Google.AndroidEnterprise
     -- ** Product
     , Product
     , product
+    , pScreenshotURLs
+    , pLastUpdatedTimestampMillis
     , pSmallIconURL
     , pAuthorName
+    , pAppTracks
     , pKind
     , pWorkDetailsURL
     , pRequiresContainerApp
+    , pCategory
     , pAppVersion
     , pProductPricing
     , pDistributionChannel
+    , pMinAndroidSdkVersion
+    , pAvailableCountries
+    , pAvailableTracks
     , pIconURL
+    , pPermissions
     , pTitle
+    , pSigningCertificate
+    , pContentRating
     , pProductId
+    , pRecentChanges
+    , pDescription
     , pDetailsURL
 
     -- ** EntitlementsListResponse
@@ -663,9 +827,9 @@ module Network.Google.AndroidEnterprise
     -- ** ProductPermissions
     , ProductPermissions
     , productPermissions
-    , ppKind
-    , ppPermission
-    , ppProductId
+    , ppsKind
+    , ppsPermission
+    , ppsProductId
 
     -- ** Permission
     , Permission
@@ -675,10 +839,25 @@ module Network.Google.AndroidEnterprise
     , perDescription
     , perPermissionId
 
+    -- ** WebAppsListResponse
+    , WebAppsListResponse
+    , webAppsListResponse
+    , walrKind
+    , walrWebApp
+
     -- ** ProductsApproveRequest
     , ProductsApproveRequest
     , productsApproveRequest
     , parApprovalURLInfo
+    , parApprovedPermissions
+
+    -- ** AutoInstallPolicy
+    , AutoInstallPolicy
+    , autoInstallPolicy
+    , aipAutoInstallConstraint
+    , aipAutoInstallPriority
+    , aipAutoInstallMode
+    , aipMinimumVersionCode
 
     -- ** Entitlement
     , Entitlement
@@ -694,6 +873,17 @@ module Network.Google.AndroidEnterprise
     , plrPageInfo
     , plrKind
     , plrProduct
+
+    -- ** WebApp
+    , WebApp
+    , webApp
+    , waWebAppId
+    , waVersionCode
+    , waIcons
+    , waStartURL
+    , waDisplayMode
+    , waIsPublished
+    , waTitle
     ) where
 
 import           Network.Google.AndroidEnterprise.Types
@@ -701,21 +891,23 @@ import           Network.Google.Prelude
 import           Network.Google.Resource.AndroidEnterprise.Devices.Get
 import           Network.Google.Resource.AndroidEnterprise.Devices.GetState
 import           Network.Google.Resource.AndroidEnterprise.Devices.List
+import           Network.Google.Resource.AndroidEnterprise.Devices.Patch
 import           Network.Google.Resource.AndroidEnterprise.Devices.SetState
+import           Network.Google.Resource.AndroidEnterprise.Devices.Update
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.AcknowledgeNotificationSet
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.CompleteSignup
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.CreateWebToken
-import           Network.Google.Resource.AndroidEnterprise.Enterprises.Delete
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.Enroll
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.GenerateSignupURL
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.Get
+import           Network.Google.Resource.AndroidEnterprise.Enterprises.GetAndroidDevicePolicyConfig
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.GetServiceAccount
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.GetStoreLayout
-import           Network.Google.Resource.AndroidEnterprise.Enterprises.Insert
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.List
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.PullNotificationSet
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.SendTestPushNotification
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.SetAccount
+import           Network.Google.Resource.AndroidEnterprise.Enterprises.SetAndroidDevicePolicyConfig
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.SetStoreLayout
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.Unenroll
 import           Network.Google.Resource.AndroidEnterprise.Entitlements.Delete
@@ -741,6 +933,7 @@ import           Network.Google.Resource.AndroidEnterprise.ManagedConfigurations
 import           Network.Google.Resource.AndroidEnterprise.ManagedConfigurationsforUser.List
 import           Network.Google.Resource.AndroidEnterprise.ManagedConfigurationsforUser.Patch
 import           Network.Google.Resource.AndroidEnterprise.ManagedConfigurationsforUser.Update
+import           Network.Google.Resource.AndroidEnterprise.ManagedConfigurationssettings.List
 import           Network.Google.Resource.AndroidEnterprise.Permissions.Get
 import           Network.Google.Resource.AndroidEnterprise.Products.Approve
 import           Network.Google.Resource.AndroidEnterprise.Products.GenerateApprovalURL
@@ -772,9 +965,16 @@ import           Network.Google.Resource.AndroidEnterprise.Users.GetAvailablePro
 import           Network.Google.Resource.AndroidEnterprise.Users.Insert
 import           Network.Google.Resource.AndroidEnterprise.Users.List
 import           Network.Google.Resource.AndroidEnterprise.Users.Patch
+import           Network.Google.Resource.AndroidEnterprise.Users.RevokeDeviceAccess
 import           Network.Google.Resource.AndroidEnterprise.Users.RevokeToken
 import           Network.Google.Resource.AndroidEnterprise.Users.SetAvailableProductSet
 import           Network.Google.Resource.AndroidEnterprise.Users.Update
+import           Network.Google.Resource.AndroidEnterprise.WebApps.Delete
+import           Network.Google.Resource.AndroidEnterprise.WebApps.Get
+import           Network.Google.Resource.AndroidEnterprise.WebApps.Insert
+import           Network.Google.Resource.AndroidEnterprise.WebApps.List
+import           Network.Google.Resource.AndroidEnterprise.WebApps.Patch
+import           Network.Google.Resource.AndroidEnterprise.WebApps.Update
 
 {- $resources
 TODO
@@ -794,6 +994,7 @@ type AndroidEnterpriseAPI =
        :<|> UsersGenerateAuthenticationTokenResource
        :<|> UsersPatchResource
        :<|> UsersGetResource
+       :<|> UsersRevokeDeviceAccessResource
        :<|> UsersSetAvailableProductSetResource
        :<|> UsersRevokeTokenResource
        :<|> UsersGetAvailableProductSetResource
@@ -813,22 +1014,23 @@ type AndroidEnterpriseAPI =
        :<|> ServiceAccountkeysInsertResource
        :<|> ServiceAccountkeysListResource
        :<|> ServiceAccountkeysDeleteResource
+       :<|> ManagedConfigurationssettingsListResource
        :<|> EnterprisesCompleteSignupResource
        :<|> EnterprisesCreateWebTokenResource
-       :<|> EnterprisesInsertResource
        :<|> EnterprisesGetServiceAccountResource
        :<|> EnterprisesListResource
        :<|> EnterprisesUnenrollResource
        :<|> EnterprisesGetStoreLayoutResource
+       :<|> EnterprisesSetAndroidDevicePolicyConfigResource
        :<|> EnterprisesSetAccountResource
        :<|> EnterprisesEnrollResource
        :<|> EnterprisesGetResource
        :<|> EnterprisesGenerateSignupURLResource
        :<|> EnterprisesSendTestPushNotificationResource
        :<|> EnterprisesSetStoreLayoutResource
+       :<|> EnterprisesGetAndroidDevicePolicyConfigResource
        :<|> EnterprisesAcknowledgeNotificationSetResource
        :<|> EnterprisesPullNotificationSetResource
-       :<|> EnterprisesDeleteResource
        :<|> ManagedConfigurationsforUserListResource
        :<|> ManagedConfigurationsforUserPatchResource
        :<|> ManagedConfigurationsforUserGetResource
@@ -836,6 +1038,12 @@ type AndroidEnterpriseAPI =
        :<|> ManagedConfigurationsforUserUpdateResource
        :<|> GrouplicensesListResource
        :<|> GrouplicensesGetResource
+       :<|> WebAppsInsertResource
+       :<|> WebAppsListResource
+       :<|> WebAppsPatchResource
+       :<|> WebAppsGetResource
+       :<|> WebAppsDeleteResource
+       :<|> WebAppsUpdateResource
        :<|> EntitlementsListResource
        :<|> EntitlementsPatchResource
        :<|> EntitlementsGetResource
@@ -856,6 +1064,8 @@ type AndroidEnterpriseAPI =
        :<|> ProductsGetPermissionsResource
        :<|> DevicesListResource
        :<|> DevicesSetStateResource
+       :<|> DevicesPatchResource
        :<|> DevicesGetResource
        :<|> DevicesGetStateResource
+       :<|> DevicesUpdateResource
        :<|> GrouplicenseUsersListResource

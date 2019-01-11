@@ -87,7 +87,7 @@ chromeosDevicesAction pCdaResourceId_ pCdaPayload_ pCdaCustomerId_ =
     , _cdaCustomerId = pCdaCustomerId_
     }
 
--- | Immutable id of Chrome OS Device
+-- | Immutable ID of Chrome OS Device
 cdaResourceId :: Lens' ChromeosDevicesAction Text
 cdaResourceId
   = lens _cdaResourceId
@@ -98,7 +98,7 @@ cdaPayload :: Lens' ChromeosDevicesAction ChromeOSDeviceAction
 cdaPayload
   = lens _cdaPayload (\ s a -> s{_cdaPayload = a})
 
--- | Immutable id of the Google Apps account
+-- | Immutable ID of the G Suite account
 cdaCustomerId :: Lens' ChromeosDevicesAction Text
 cdaCustomerId
   = lens _cdaCustomerId

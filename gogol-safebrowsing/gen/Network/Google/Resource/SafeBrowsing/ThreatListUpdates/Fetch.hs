@@ -23,7 +23,7 @@
 -- Fetches the most recent threat list updates. A client can request
 -- updates for multiple lists at once.
 --
--- /See:/ <https://developers.google.com/safe-browsing/ Safe Browsing APIs Reference> for @safebrowsing.threatListUpdates.fetch@.
+-- /See:/ <https://developers.google.com/safe-browsing/ Safe Browsing API Reference> for @safebrowsing.threatListUpdates.fetch@.
 module Network.Google.Resource.SafeBrowsing.ThreatListUpdates.Fetch
     (
     -- * REST Resource
@@ -36,11 +36,9 @@ module Network.Google.Resource.SafeBrowsing.ThreatListUpdates.Fetch
     -- * Request Lenses
     , tlufXgafv
     , tlufUploadProtocol
-    , tlufPp
     , tlufAccessToken
     , tlufUploadType
     , tlufPayload
-    , tlufBearerToken
     , tlufCallback
     ) where
 
@@ -52,29 +50,25 @@ import           Network.Google.SafeBrowsing.Types
 type ThreatListUpdatesFetchResource =
      "v4" :>
        "threatListUpdates:fetch" :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] FetchThreatListUpdatesRequest :>
-                           Post '[JSON] FetchThreatListUpdatesResponse
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] FetchThreatListUpdatesRequest :>
+                       Post '[JSON] FetchThreatListUpdatesResponse
 
 -- | Fetches the most recent threat list updates. A client can request
 -- updates for multiple lists at once.
 --
 -- /See:/ 'threatListUpdatesFetch' smart constructor.
 data ThreatListUpdatesFetch = ThreatListUpdatesFetch'
-    { _tlufXgafv          :: !(Maybe Text)
+    { _tlufXgafv          :: !(Maybe Xgafv)
     , _tlufUploadProtocol :: !(Maybe Text)
-    , _tlufPp             :: !Bool
     , _tlufAccessToken    :: !(Maybe Text)
     , _tlufUploadType     :: !(Maybe Text)
     , _tlufPayload        :: !FetchThreatListUpdatesRequest
-    , _tlufBearerToken    :: !(Maybe Text)
     , _tlufCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -86,15 +80,11 @@ data ThreatListUpdatesFetch = ThreatListUpdatesFetch'
 --
 -- * 'tlufUploadProtocol'
 --
--- * 'tlufPp'
---
 -- * 'tlufAccessToken'
 --
 -- * 'tlufUploadType'
 --
 -- * 'tlufPayload'
---
--- * 'tlufBearerToken'
 --
 -- * 'tlufCallback'
 threatListUpdatesFetch
@@ -104,16 +94,14 @@ threatListUpdatesFetch pTlufPayload_ =
     ThreatListUpdatesFetch'
     { _tlufXgafv = Nothing
     , _tlufUploadProtocol = Nothing
-    , _tlufPp = True
     , _tlufAccessToken = Nothing
     , _tlufUploadType = Nothing
     , _tlufPayload = pTlufPayload_
-    , _tlufBearerToken = Nothing
     , _tlufCallback = Nothing
     }
 
 -- | V1 error format.
-tlufXgafv :: Lens' ThreatListUpdatesFetch (Maybe Text)
+tlufXgafv :: Lens' ThreatListUpdatesFetch (Maybe Xgafv)
 tlufXgafv
   = lens _tlufXgafv (\ s a -> s{_tlufXgafv = a})
 
@@ -122,10 +110,6 @@ tlufUploadProtocol :: Lens' ThreatListUpdatesFetch (Maybe Text)
 tlufUploadProtocol
   = lens _tlufUploadProtocol
       (\ s a -> s{_tlufUploadProtocol = a})
-
--- | Pretty-print response.
-tlufPp :: Lens' ThreatListUpdatesFetch Bool
-tlufPp = lens _tlufPp (\ s a -> s{_tlufPp = a})
 
 -- | OAuth access token.
 tlufAccessToken :: Lens' ThreatListUpdatesFetch (Maybe Text)
@@ -144,12 +128,6 @@ tlufPayload :: Lens' ThreatListUpdatesFetch FetchThreatListUpdatesRequest
 tlufPayload
   = lens _tlufPayload (\ s a -> s{_tlufPayload = a})
 
--- | OAuth bearer token.
-tlufBearerToken :: Lens' ThreatListUpdatesFetch (Maybe Text)
-tlufBearerToken
-  = lens _tlufBearerToken
-      (\ s a -> s{_tlufBearerToken = a})
-
 -- | JSONP
 tlufCallback :: Lens' ThreatListUpdatesFetch (Maybe Text)
 tlufCallback
@@ -160,10 +138,8 @@ instance GoogleRequest ThreatListUpdatesFetch where
              FetchThreatListUpdatesResponse
         type Scopes ThreatListUpdatesFetch = '[]
         requestClient ThreatListUpdatesFetch'{..}
-          = go _tlufXgafv _tlufUploadProtocol (Just _tlufPp)
-              _tlufAccessToken
+          = go _tlufXgafv _tlufUploadProtocol _tlufAccessToken
               _tlufUploadType
-              _tlufBearerToken
               _tlufCallback
               (Just AltJSON)
               _tlufPayload

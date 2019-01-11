@@ -22,7 +22,7 @@
 --
 -- Request the job status.
 --
--- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @dataflow.projects.locations.jobs.getMetrics@.
+-- /See:/ <https://cloud.google.com/dataflow Dataflow API Reference> for @dataflow.projects.locations.jobs.getMetrics@.
 module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.GetMetrics
     (
     -- * REST Resource
@@ -38,10 +38,8 @@ module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.GetMetrics
     , pljgmUploadProtocol
     , pljgmLocation
     , pljgmStartTime
-    , pljgmPp
     , pljgmAccessToken
     , pljgmUploadType
-    , pljgmBearerToken
     , pljgmProjectId
     , pljgmCallback
     ) where
@@ -60,30 +58,26 @@ type ProjectsLocationsJobsGetMetricsResource =
                "jobs" :>
                  Capture "jobId" Text :>
                    "metrics" :>
-                     QueryParam "$.xgafv" Text :>
+                     QueryParam "$.xgafv" Xgafv :>
                        QueryParam "upload_protocol" Text :>
-                         QueryParam "startTime" Text :>
-                           QueryParam "pp" Bool :>
-                             QueryParam "access_token" Text :>
-                               QueryParam "uploadType" Text :>
-                                 QueryParam "bearer_token" Text :>
-                                   QueryParam "callback" Text :>
-                                     QueryParam "alt" AltJSON :>
-                                       Get '[JSON] JobMetrics
+                         QueryParam "startTime" DateTime' :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON] JobMetrics
 
 -- | Request the job status.
 --
 -- /See:/ 'projectsLocationsJobsGetMetrics' smart constructor.
 data ProjectsLocationsJobsGetMetrics = ProjectsLocationsJobsGetMetrics'
-    { _pljgmXgafv          :: !(Maybe Text)
+    { _pljgmXgafv          :: !(Maybe Xgafv)
     , _pljgmJobId          :: !Text
     , _pljgmUploadProtocol :: !(Maybe Text)
     , _pljgmLocation       :: !Text
-    , _pljgmStartTime      :: !(Maybe Text)
-    , _pljgmPp             :: !Bool
+    , _pljgmStartTime      :: !(Maybe DateTime')
     , _pljgmAccessToken    :: !(Maybe Text)
     , _pljgmUploadType     :: !(Maybe Text)
-    , _pljgmBearerToken    :: !(Maybe Text)
     , _pljgmProjectId      :: !Text
     , _pljgmCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -102,13 +96,9 @@ data ProjectsLocationsJobsGetMetrics = ProjectsLocationsJobsGetMetrics'
 --
 -- * 'pljgmStartTime'
 --
--- * 'pljgmPp'
---
 -- * 'pljgmAccessToken'
 --
 -- * 'pljgmUploadType'
---
--- * 'pljgmBearerToken'
 --
 -- * 'pljgmProjectId'
 --
@@ -125,16 +115,14 @@ projectsLocationsJobsGetMetrics pPljgmJobId_ pPljgmLocation_ pPljgmProjectId_ =
     , _pljgmUploadProtocol = Nothing
     , _pljgmLocation = pPljgmLocation_
     , _pljgmStartTime = Nothing
-    , _pljgmPp = True
     , _pljgmAccessToken = Nothing
     , _pljgmUploadType = Nothing
-    , _pljgmBearerToken = Nothing
     , _pljgmProjectId = pPljgmProjectId_
     , _pljgmCallback = Nothing
     }
 
 -- | V1 error format.
-pljgmXgafv :: Lens' ProjectsLocationsJobsGetMetrics (Maybe Text)
+pljgmXgafv :: Lens' ProjectsLocationsJobsGetMetrics (Maybe Xgafv)
 pljgmXgafv
   = lens _pljgmXgafv (\ s a -> s{_pljgmXgafv = a})
 
@@ -157,14 +145,11 @@ pljgmLocation
 
 -- | Return only metric data that has changed since this time. Default is to
 -- return all information about all metrics for the job.
-pljgmStartTime :: Lens' ProjectsLocationsJobsGetMetrics (Maybe Text)
+pljgmStartTime :: Lens' ProjectsLocationsJobsGetMetrics (Maybe UTCTime)
 pljgmStartTime
   = lens _pljgmStartTime
       (\ s a -> s{_pljgmStartTime = a})
-
--- | Pretty-print response.
-pljgmPp :: Lens' ProjectsLocationsJobsGetMetrics Bool
-pljgmPp = lens _pljgmPp (\ s a -> s{_pljgmPp = a})
+      . mapping _DateTime
 
 -- | OAuth access token.
 pljgmAccessToken :: Lens' ProjectsLocationsJobsGetMetrics (Maybe Text)
@@ -177,12 +162,6 @@ pljgmUploadType :: Lens' ProjectsLocationsJobsGetMetrics (Maybe Text)
 pljgmUploadType
   = lens _pljgmUploadType
       (\ s a -> s{_pljgmUploadType = a})
-
--- | OAuth bearer token.
-pljgmBearerToken :: Lens' ProjectsLocationsJobsGetMetrics (Maybe Text)
-pljgmBearerToken
-  = lens _pljgmBearerToken
-      (\ s a -> s{_pljgmBearerToken = a})
 
 -- | A project id.
 pljgmProjectId :: Lens' ProjectsLocationsJobsGetMetrics Text
@@ -201,16 +180,16 @@ instance GoogleRequest
         type Rs ProjectsLocationsJobsGetMetrics = JobMetrics
         type Scopes ProjectsLocationsJobsGetMetrics =
              '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly",
                "https://www.googleapis.com/auth/userinfo.email"]
         requestClient ProjectsLocationsJobsGetMetrics'{..}
           = go _pljgmProjectId _pljgmLocation _pljgmJobId
               _pljgmXgafv
               _pljgmUploadProtocol
               _pljgmStartTime
-              (Just _pljgmPp)
               _pljgmAccessToken
               _pljgmUploadType
-              _pljgmBearerToken
               _pljgmCallback
               (Just AltJSON)
               dataflowService

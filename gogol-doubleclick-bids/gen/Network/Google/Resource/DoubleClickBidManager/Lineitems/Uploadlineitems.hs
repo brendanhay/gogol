@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Uploads line items in CSV format.
+-- Uploads line items in CSV format. TrueView line items are not supported.
 --
 -- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference> for @doubleclickbidmanager.lineitems.uploadlineitems@.
 module Network.Google.Resource.DoubleClickBidManager.Lineitems.Uploadlineitems
@@ -50,7 +50,7 @@ type LineitemsUploadlineitemsResource =
                ReqBody '[JSON] UploadLineItemsRequest :>
                  Post '[JSON] UploadLineItemsResponse
 
--- | Uploads line items in CSV format.
+-- | Uploads line items in CSV format. TrueView line items are not supported.
 --
 -- /See:/ 'lineitemsUploadlineitems' smart constructor.
 newtype LineitemsUploadlineitems = LineitemsUploadlineitems'
@@ -78,7 +78,8 @@ luPayload
 instance GoogleRequest LineitemsUploadlineitems where
         type Rs LineitemsUploadlineitems =
              UploadLineItemsResponse
-        type Scopes LineitemsUploadlineitems = '[]
+        type Scopes LineitemsUploadlineitems =
+             '["https://www.googleapis.com/auth/doubleclickbidmanager"]
         requestClient LineitemsUploadlineitems'{..}
           = go (Just AltJSON) _luPayload doubleClickBidsService
           where go

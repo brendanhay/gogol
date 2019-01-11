@@ -34,6 +34,7 @@ module Network.Google.Resource.DeploymentManager.Deployments.Insert
     , DeploymentsInsert
 
     -- * Request Lenses
+    , diCreatePolicy
     , diProject
     , diPayload
     , diPreview
@@ -51,23 +52,29 @@ type DeploymentsInsertResource =
            Capture "project" Text :>
              "global" :>
                "deployments" :>
-                 QueryParam "preview" Bool :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] Deployment :> Post '[JSON] Operation
+                 QueryParam "createPolicy"
+                   DeploymentsInsertCreatePolicy
+                   :>
+                   QueryParam "preview" Bool :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Deployment :> Post '[JSON] Operation
 
 -- | Creates a deployment and all of the resources described by the
 -- deployment manifest.
 --
 -- /See:/ 'deploymentsInsert' smart constructor.
 data DeploymentsInsert = DeploymentsInsert'
-    { _diProject :: !Text
-    , _diPayload :: !Deployment
-    , _diPreview :: !(Maybe Bool)
+    { _diCreatePolicy :: !DeploymentsInsertCreatePolicy
+    , _diProject      :: !Text
+    , _diPayload      :: !Deployment
+    , _diPreview      :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeploymentsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'diCreatePolicy'
 --
 -- * 'diProject'
 --
@@ -80,10 +87,17 @@ deploymentsInsert
     -> DeploymentsInsert
 deploymentsInsert pDiProject_ pDiPayload_ =
     DeploymentsInsert'
-    { _diProject = pDiProject_
+    { _diCreatePolicy = DICPCreateOrAcquire
+    , _diProject = pDiProject_
     , _diPayload = pDiPayload_
     , _diPreview = Nothing
     }
+
+-- | Sets the policy to use for creating new resources.
+diCreatePolicy :: Lens' DeploymentsInsert DeploymentsInsertCreatePolicy
+diCreatePolicy
+  = lens _diCreatePolicy
+      (\ s a -> s{_diCreatePolicy = a})
 
 -- | The project ID for this request.
 diProject :: Lens' DeploymentsInsert Text
@@ -113,7 +127,9 @@ instance GoogleRequest DeploymentsInsert where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/ndev.cloudman"]
         requestClient DeploymentsInsert'{..}
-          = go _diProject _diPreview (Just AltJSON) _diPayload
+          = go _diProject (Just _diCreatePolicy) _diPreview
+              (Just AltJSON)
+              _diPayload
               deploymentManagerService
           where go
                   = buildClient

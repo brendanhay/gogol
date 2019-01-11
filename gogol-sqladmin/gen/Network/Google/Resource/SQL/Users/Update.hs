@@ -22,7 +22,7 @@
 --
 -- Updates an existing user in a Cloud SQL instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.users.update@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.users.update@.
 module Network.Google.Resource.SQL.Users.Update
     (
     -- * REST Resource
@@ -53,8 +53,8 @@ type UsersUpdateResource =
              "instances" :>
                Capture "instance" Text :>
                  "users" :>
-                   QueryParam "host" Text :>
-                     QueryParam "name" Text :>
+                   QueryParam "name" Text :>
+                     QueryParam "host" Text :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] User :> Put '[JSON] Operation
 
@@ -65,7 +65,7 @@ data UsersUpdate = UsersUpdate'
     { _uuProject  :: !Text
     , _uuPayload  :: !User
     , _uuName     :: !Text
-    , _uuHost     :: !Text
+    , _uuHost     :: !(Maybe Text)
     , _uuInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -86,15 +86,14 @@ usersUpdate
     :: Text -- ^ 'uuProject'
     -> User -- ^ 'uuPayload'
     -> Text -- ^ 'uuName'
-    -> Text -- ^ 'uuHost'
     -> Text -- ^ 'uuInstance'
     -> UsersUpdate
-usersUpdate pUuProject_ pUuPayload_ pUuName_ pUuHost_ pUuInstance_ =
+usersUpdate pUuProject_ pUuPayload_ pUuName_ pUuInstance_ =
     UsersUpdate'
     { _uuProject = pUuProject_
     , _uuPayload = pUuPayload_
     , _uuName = pUuName_
-    , _uuHost = pUuHost_
+    , _uuHost = Nothing
     , _uuInstance = pUuInstance_
     }
 
@@ -113,7 +112,7 @@ uuName :: Lens' UsersUpdate Text
 uuName = lens _uuName (\ s a -> s{_uuName = a})
 
 -- | Host of the user in the instance.
-uuHost :: Lens' UsersUpdate Text
+uuHost :: Lens' UsersUpdate (Maybe Text)
 uuHost = lens _uuHost (\ s a -> s{_uuHost = a})
 
 -- | Database instance ID. This does not include the project ID.
@@ -127,8 +126,7 @@ instance GoogleRequest UsersUpdate where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient UsersUpdate'{..}
-          = go _uuProject _uuInstance (Just _uuHost)
-              (Just _uuName)
+          = go _uuProject _uuInstance (Just _uuName) _uuHost
               (Just AltJSON)
               _uuPayload
               sQLAdminService

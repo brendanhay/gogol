@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'EditsTracksList' request conforms to.
 type EditsTracksListResource =
      "androidpublisher" :>
-       "v2" :>
+       "v3" :>
          "applications" :>
            Capture "packageName" Text :>
              "edits" :>

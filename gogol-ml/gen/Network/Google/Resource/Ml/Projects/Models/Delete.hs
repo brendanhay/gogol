@@ -22,9 +22,9 @@
 --
 -- Deletes a model. You can only delete a model if there are no versions in
 -- it. You can delete versions by calling
--- [projects.models.versions.delete](\/ml\/reference\/rest\/v1beta1\/projects.models.versions\/delete).
+-- [projects.models.versions.delete](\/ml-engine\/reference\/rest\/v1\/projects.models.versions\/delete).
 --
--- /See:/ <https://cloud.google.com/ml/ Google Cloud Machine Learning Reference> for @ml.projects.models.delete@.
+-- /See:/ <https://cloud.google.com/ml/ Cloud Machine Learning Engine Reference> for @ml.projects.models.delete@.
 module Network.Google.Resource.Ml.Projects.Models.Delete
     (
     -- * REST Resource
@@ -37,10 +37,8 @@ module Network.Google.Resource.Ml.Projects.Models.Delete
     -- * Request Lenses
     , pmdXgafv
     , pmdUploadProtocol
-    , pmdPp
     , pmdAccessToken
     , pmdUploadType
-    , pmdBearerToken
     , pmdName
     , pmdCallback
     ) where
@@ -51,30 +49,26 @@ import           Network.Google.Prelude
 -- | A resource alias for @ml.projects.models.delete@ method which the
 -- 'ProjectsModelsDelete' request conforms to.
 type ProjectsModelsDeleteResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         Delete '[JSON] GoogleLongrunning__Operation
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     Delete '[JSON] GoogleLongrunning__Operation
 
 -- | Deletes a model. You can only delete a model if there are no versions in
 -- it. You can delete versions by calling
--- [projects.models.versions.delete](\/ml\/reference\/rest\/v1beta1\/projects.models.versions\/delete).
+-- [projects.models.versions.delete](\/ml-engine\/reference\/rest\/v1\/projects.models.versions\/delete).
 --
 -- /See:/ 'projectsModelsDelete' smart constructor.
 data ProjectsModelsDelete = ProjectsModelsDelete'
     { _pmdXgafv          :: !(Maybe Xgafv)
     , _pmdUploadProtocol :: !(Maybe Text)
-    , _pmdPp             :: !Bool
     , _pmdAccessToken    :: !(Maybe Text)
     , _pmdUploadType     :: !(Maybe Text)
-    , _pmdBearerToken    :: !(Maybe Text)
     , _pmdName           :: !Text
     , _pmdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -87,13 +81,9 @@ data ProjectsModelsDelete = ProjectsModelsDelete'
 --
 -- * 'pmdUploadProtocol'
 --
--- * 'pmdPp'
---
 -- * 'pmdAccessToken'
 --
 -- * 'pmdUploadType'
---
--- * 'pmdBearerToken'
 --
 -- * 'pmdName'
 --
@@ -105,10 +95,8 @@ projectsModelsDelete pPmdName_ =
     ProjectsModelsDelete'
     { _pmdXgafv = Nothing
     , _pmdUploadProtocol = Nothing
-    , _pmdPp = True
     , _pmdAccessToken = Nothing
     , _pmdUploadType = Nothing
-    , _pmdBearerToken = Nothing
     , _pmdName = pPmdName_
     , _pmdCallback = Nothing
     }
@@ -123,10 +111,6 @@ pmdUploadProtocol
   = lens _pmdUploadProtocol
       (\ s a -> s{_pmdUploadProtocol = a})
 
--- | Pretty-print response.
-pmdPp :: Lens' ProjectsModelsDelete Bool
-pmdPp = lens _pmdPp (\ s a -> s{_pmdPp = a})
-
 -- | OAuth access token.
 pmdAccessToken :: Lens' ProjectsModelsDelete (Maybe Text)
 pmdAccessToken
@@ -139,14 +123,7 @@ pmdUploadType
   = lens _pmdUploadType
       (\ s a -> s{_pmdUploadType = a})
 
--- | OAuth bearer token.
-pmdBearerToken :: Lens' ProjectsModelsDelete (Maybe Text)
-pmdBearerToken
-  = lens _pmdBearerToken
-      (\ s a -> s{_pmdBearerToken = a})
-
--- | Required. The name of the model. Authorization: requires \`Editor\` role
--- on the parent project.
+-- | Required. The name of the model.
 pmdName :: Lens' ProjectsModelsDelete Text
 pmdName = lens _pmdName (\ s a -> s{_pmdName = a})
 
@@ -162,10 +139,8 @@ instance GoogleRequest ProjectsModelsDelete where
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsModelsDelete'{..}
           = go _pmdName _pmdXgafv _pmdUploadProtocol
-              (Just _pmdPp)
               _pmdAccessToken
               _pmdUploadType
-              _pmdBearerToken
               _pmdCallback
               (Just AltJSON)
               machineLearningService

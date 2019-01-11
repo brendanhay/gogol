@@ -22,7 +22,7 @@
 --
 -- Starts the replication in the read replica instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.instances.startReplica@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.instances.startReplica@.
 module Network.Google.Resource.SQL.Instances.StartReplica
     (
     -- * REST Resource
@@ -33,8 +33,8 @@ module Network.Google.Resource.SQL.Instances.StartReplica
     , InstancesStartReplica
 
     -- * Request Lenses
-    , iProject
-    , iInstance
+    , insProject
+    , insInstance
     ) where
 
 import           Network.Google.Prelude
@@ -56,35 +56,36 @@ type InstancesStartReplicaResource =
 --
 -- /See:/ 'instancesStartReplica' smart constructor.
 data InstancesStartReplica = InstancesStartReplica'
-    { _iProject  :: !Text
-    , _iInstance :: !Text
+    { _insProject  :: !Text
+    , _insInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesStartReplica' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'iProject'
+-- * 'insProject'
 --
--- * 'iInstance'
+-- * 'insInstance'
 instancesStartReplica
-    :: Text -- ^ 'iProject'
-    -> Text -- ^ 'iInstance'
+    :: Text -- ^ 'insProject'
+    -> Text -- ^ 'insInstance'
     -> InstancesStartReplica
-instancesStartReplica pIProject_ pIInstance_ =
+instancesStartReplica pInsProject_ pInsInstance_ =
     InstancesStartReplica'
-    { _iProject = pIProject_
-    , _iInstance = pIInstance_
+    { _insProject = pInsProject_
+    , _insInstance = pInsInstance_
     }
 
 -- | ID of the project that contains the read replica.
-iProject :: Lens' InstancesStartReplica Text
-iProject = lens _iProject (\ s a -> s{_iProject = a})
+insProject :: Lens' InstancesStartReplica Text
+insProject
+  = lens _insProject (\ s a -> s{_insProject = a})
 
 -- | Cloud SQL read replica instance name.
-iInstance :: Lens' InstancesStartReplica Text
-iInstance
-  = lens _iInstance (\ s a -> s{_iInstance = a})
+insInstance :: Lens' InstancesStartReplica Text
+insInstance
+  = lens _insInstance (\ s a -> s{_insInstance = a})
 
 instance GoogleRequest InstancesStartReplica where
         type Rs InstancesStartReplica = Operation
@@ -92,7 +93,7 @@ instance GoogleRequest InstancesStartReplica where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient InstancesStartReplica'{..}
-          = go _iProject _iInstance (Just AltJSON)
+          = go _insProject _insInstance (Just AltJSON)
               sQLAdminService
           where go
                   = buildClient

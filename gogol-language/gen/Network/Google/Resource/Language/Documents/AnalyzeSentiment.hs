@@ -22,7 +22,7 @@
 --
 -- Analyzes the sentiment of the provided text.
 --
--- /See:/ <https://cloud.google.com/natural-language/ Google Cloud Natural Language API Reference> for @language.documents.analyzeSentiment@.
+-- /See:/ <https://cloud.google.com/natural-language/ Cloud Natural Language API Reference> for @language.documents.analyzeSentiment@.
 module Network.Google.Resource.Language.Documents.AnalyzeSentiment
     (
     -- * REST Resource
@@ -35,11 +35,9 @@ module Network.Google.Resource.Language.Documents.AnalyzeSentiment
     -- * Request Lenses
     , dasXgafv
     , dasUploadProtocol
-    , dasPp
     , dasAccessToken
     , dasUploadType
     , dasPayload
-    , dasBearerToken
     , dasCallback
     ) where
 
@@ -53,14 +51,12 @@ type DocumentsAnalyzeSentimentResource =
        "documents:analyzeSentiment" :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] AnalyzeSentimentRequest :>
-                           Post '[JSON] AnalyzeSentimentResponse
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] AnalyzeSentimentRequest :>
+                       Post '[JSON] AnalyzeSentimentResponse
 
 -- | Analyzes the sentiment of the provided text.
 --
@@ -68,11 +64,9 @@ type DocumentsAnalyzeSentimentResource =
 data DocumentsAnalyzeSentiment = DocumentsAnalyzeSentiment'
     { _dasXgafv          :: !(Maybe Xgafv)
     , _dasUploadProtocol :: !(Maybe Text)
-    , _dasPp             :: !Bool
     , _dasAccessToken    :: !(Maybe Text)
     , _dasUploadType     :: !(Maybe Text)
     , _dasPayload        :: !AnalyzeSentimentRequest
-    , _dasBearerToken    :: !(Maybe Text)
     , _dasCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -84,15 +78,11 @@ data DocumentsAnalyzeSentiment = DocumentsAnalyzeSentiment'
 --
 -- * 'dasUploadProtocol'
 --
--- * 'dasPp'
---
 -- * 'dasAccessToken'
 --
 -- * 'dasUploadType'
 --
 -- * 'dasPayload'
---
--- * 'dasBearerToken'
 --
 -- * 'dasCallback'
 documentsAnalyzeSentiment
@@ -102,11 +92,9 @@ documentsAnalyzeSentiment pDasPayload_ =
     DocumentsAnalyzeSentiment'
     { _dasXgafv = Nothing
     , _dasUploadProtocol = Nothing
-    , _dasPp = True
     , _dasAccessToken = Nothing
     , _dasUploadType = Nothing
     , _dasPayload = pDasPayload_
-    , _dasBearerToken = Nothing
     , _dasCallback = Nothing
     }
 
@@ -119,10 +107,6 @@ dasUploadProtocol :: Lens' DocumentsAnalyzeSentiment (Maybe Text)
 dasUploadProtocol
   = lens _dasUploadProtocol
       (\ s a -> s{_dasUploadProtocol = a})
-
--- | Pretty-print response.
-dasPp :: Lens' DocumentsAnalyzeSentiment Bool
-dasPp = lens _dasPp (\ s a -> s{_dasPp = a})
 
 -- | OAuth access token.
 dasAccessToken :: Lens' DocumentsAnalyzeSentiment (Maybe Text)
@@ -141,12 +125,6 @@ dasPayload :: Lens' DocumentsAnalyzeSentiment AnalyzeSentimentRequest
 dasPayload
   = lens _dasPayload (\ s a -> s{_dasPayload = a})
 
--- | OAuth bearer token.
-dasBearerToken :: Lens' DocumentsAnalyzeSentiment (Maybe Text)
-dasBearerToken
-  = lens _dasBearerToken
-      (\ s a -> s{_dasBearerToken = a})
-
 -- | JSONP
 dasCallback :: Lens' DocumentsAnalyzeSentiment (Maybe Text)
 dasCallback
@@ -157,12 +135,11 @@ instance GoogleRequest DocumentsAnalyzeSentiment
         type Rs DocumentsAnalyzeSentiment =
              AnalyzeSentimentResponse
         type Scopes DocumentsAnalyzeSentiment =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-language",
+               "https://www.googleapis.com/auth/cloud-platform"]
         requestClient DocumentsAnalyzeSentiment'{..}
-          = go _dasXgafv _dasUploadProtocol (Just _dasPp)
-              _dasAccessToken
+          = go _dasXgafv _dasUploadProtocol _dasAccessToken
               _dasUploadType
-              _dasBearerToken
               _dasCallback
               (Just AltJSON)
               _dasPayload

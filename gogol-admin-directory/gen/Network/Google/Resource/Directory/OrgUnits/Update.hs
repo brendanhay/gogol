@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Update Organization Unit
+-- Update organizational unit
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.orgunits.update@.
 module Network.Google.Resource.Directory.OrgUnits.Update
@@ -54,7 +54,7 @@ type OrgUnitsUpdateResource =
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] OrgUnit :> Put '[JSON] OrgUnit
 
--- | Update Organization Unit
+-- | Update organizational unit
 --
 -- /See:/ 'orgUnitsUpdate' smart constructor.
 data OrgUnitsUpdate = OrgUnitsUpdate'
@@ -89,14 +89,14 @@ ouuPayload :: Lens' OrgUnitsUpdate OrgUnit
 ouuPayload
   = lens _ouuPayload (\ s a -> s{_ouuPayload = a})
 
--- | Full path of the organization unit or its Id
+-- | Full path of the organizational unit or its ID
 ouuOrgUnitPath :: Lens' OrgUnitsUpdate [Text]
 ouuOrgUnitPath
   = lens _ouuOrgUnitPath
       (\ s a -> s{_ouuOrgUnitPath = a})
       . _Coerce
 
--- | Immutable id of the Google Apps account
+-- | Immutable ID of the G Suite account
 ouuCustomerId :: Lens' OrgUnitsUpdate Text
 ouuCustomerId
   = lens _ouuCustomerId

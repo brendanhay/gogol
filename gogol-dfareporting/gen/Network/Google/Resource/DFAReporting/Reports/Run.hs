@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'ReportsRun' request conforms to.
 type ReportsRunResource =
      "dfareporting" :>
-       "v2.7" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "reports" :>
@@ -58,7 +58,7 @@ type ReportsRunResource =
 --
 -- /See:/ 'reportsRun' smart constructor.
 data ReportsRun = ReportsRun'
-    { _rrSynchronous :: !(Maybe Bool)
+    { _rrSynchronous :: !Bool
     , _rrReportId    :: !(Textual Int64)
     , _rrProFileId   :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -78,13 +78,13 @@ reportsRun
     -> ReportsRun
 reportsRun pRrReportId_ pRrProFileId_ =
     ReportsRun'
-    { _rrSynchronous = Nothing
+    { _rrSynchronous = False
     , _rrReportId = _Coerce # pRrReportId_
     , _rrProFileId = _Coerce # pRrProFileId_
     }
 
 -- | If set and true, tries to run the report synchronously.
-rrSynchronous :: Lens' ReportsRun (Maybe Bool)
+rrSynchronous :: Lens' ReportsRun Bool
 rrSynchronous
   = lens _rrSynchronous
       (\ s a -> s{_rrSynchronous = a})
@@ -106,7 +106,7 @@ instance GoogleRequest ReportsRun where
         type Scopes ReportsRun =
              '["https://www.googleapis.com/auth/dfareporting"]
         requestClient ReportsRun'{..}
-          = go _rrProFileId _rrReportId _rrSynchronous
+          = go _rrProFileId _rrReportId (Just _rrSynchronous)
               (Just AltJSON)
               dFAReportingService
           where go

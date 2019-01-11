@@ -76,7 +76,7 @@ import           Network.Google.Prelude
 import           Network.Google.RuntimeConfig.Types.Product
 import           Network.Google.RuntimeConfig.Types.Sum
 
--- | Default request referring to version 'v1' of the Google Cloud RuntimeConfig API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v1' of the Cloud Runtime Configuration API. This contains the host and root path used as a starting point for constructing service requests.
 runtimeConfigService :: ServiceConfig
 runtimeConfigService
   = defaultService (ServiceId "runtimeconfig:v1")

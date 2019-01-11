@@ -22,7 +22,7 @@
 --
 -- Updates a GTM Environment.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.containers.environments.update@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v2/ Tag Manager API Reference> for @tagmanager.accounts.containers.environments.update@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Environments.Update
     (
     -- * REST Resource
@@ -33,11 +33,9 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Environments.Updat
     , AccountsContainersEnvironmentsUpdate
 
     -- * Request Lenses
-    , aceuContainerId
+    , aceuPath
     , aceuFingerprint
     , aceuPayload
-    , aceuAccountId
-    , aceuEnvironmentId
     ) where
 
 import           Network.Google.Prelude
@@ -47,62 +45,46 @@ import           Network.Google.TagManager.Types
 -- 'AccountsContainersEnvironmentsUpdate' request conforms to.
 type AccountsContainersEnvironmentsUpdateResource =
      "tagmanager" :>
-       "v1" :>
-         "accounts" :>
-           Capture "accountId" Text :>
-             "containers" :>
-               Capture "containerId" Text :>
-                 "environments" :>
-                   Capture "environmentId" Text :>
-                     QueryParam "fingerprint" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Environment :>
-                           Put '[JSON] Environment
+       "v2" :>
+         Capture "path" Text :>
+           QueryParam "fingerprint" Text :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] Environment :>
+                 Put '[JSON] Environment
 
 -- | Updates a GTM Environment.
 --
 -- /See:/ 'accountsContainersEnvironmentsUpdate' smart constructor.
 data AccountsContainersEnvironmentsUpdate = AccountsContainersEnvironmentsUpdate'
-    { _aceuContainerId   :: !Text
-    , _aceuFingerprint   :: !(Maybe Text)
-    , _aceuPayload       :: !Environment
-    , _aceuAccountId     :: !Text
-    , _aceuEnvironmentId :: !Text
+    { _aceuPath        :: !Text
+    , _aceuFingerprint :: !(Maybe Text)
+    , _aceuPayload     :: !Environment
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersEnvironmentsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aceuContainerId'
+-- * 'aceuPath'
 --
 -- * 'aceuFingerprint'
 --
 -- * 'aceuPayload'
---
--- * 'aceuAccountId'
---
--- * 'aceuEnvironmentId'
 accountsContainersEnvironmentsUpdate
-    :: Text -- ^ 'aceuContainerId'
+    :: Text -- ^ 'aceuPath'
     -> Environment -- ^ 'aceuPayload'
-    -> Text -- ^ 'aceuAccountId'
-    -> Text -- ^ 'aceuEnvironmentId'
     -> AccountsContainersEnvironmentsUpdate
-accountsContainersEnvironmentsUpdate pAceuContainerId_ pAceuPayload_ pAceuAccountId_ pAceuEnvironmentId_ =
+accountsContainersEnvironmentsUpdate pAceuPath_ pAceuPayload_ =
     AccountsContainersEnvironmentsUpdate'
-    { _aceuContainerId = pAceuContainerId_
+    { _aceuPath = pAceuPath_
     , _aceuFingerprint = Nothing
     , _aceuPayload = pAceuPayload_
-    , _aceuAccountId = pAceuAccountId_
-    , _aceuEnvironmentId = pAceuEnvironmentId_
     }
 
--- | The GTM Container ID.
-aceuContainerId :: Lens' AccountsContainersEnvironmentsUpdate Text
-aceuContainerId
-  = lens _aceuContainerId
-      (\ s a -> s{_aceuContainerId = a})
+-- | GTM Environment\'s API relative path. Example:
+-- accounts\/{account_id}\/containers\/{container_id}\/environments\/{environment_id}
+aceuPath :: Lens' AccountsContainersEnvironmentsUpdate Text
+aceuPath = lens _aceuPath (\ s a -> s{_aceuPath = a})
 
 -- | When provided, this fingerprint must match the fingerprint of the
 -- environment in storage.
@@ -116,18 +98,6 @@ aceuPayload :: Lens' AccountsContainersEnvironmentsUpdate Environment
 aceuPayload
   = lens _aceuPayload (\ s a -> s{_aceuPayload = a})
 
--- | The GTM Account ID.
-aceuAccountId :: Lens' AccountsContainersEnvironmentsUpdate Text
-aceuAccountId
-  = lens _aceuAccountId
-      (\ s a -> s{_aceuAccountId = a})
-
--- | The GTM Environment ID.
-aceuEnvironmentId :: Lens' AccountsContainersEnvironmentsUpdate Text
-aceuEnvironmentId
-  = lens _aceuEnvironmentId
-      (\ s a -> s{_aceuEnvironmentId = a})
-
 instance GoogleRequest
          AccountsContainersEnvironmentsUpdate where
         type Rs AccountsContainersEnvironmentsUpdate =
@@ -136,10 +106,7 @@ instance GoogleRequest
              '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
         requestClient
           AccountsContainersEnvironmentsUpdate'{..}
-          = go _aceuAccountId _aceuContainerId
-              _aceuEnvironmentId
-              _aceuFingerprint
-              (Just AltJSON)
+          = go _aceuPath _aceuFingerprint (Just AltJSON)
               _aceuPayload
               tagManagerService
           where go

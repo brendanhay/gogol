@@ -20,8 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new presentation using the title given in the request. Other
--- fields in the request are ignored. Returns the created presentation.
+-- Creates a blank presentation using the title given in the request. If a
+-- \`presentationId\` is provided, it is used as the ID of the new
+-- presentation. Otherwise, a new ID is generated. Other fields in the
+-- request, including any provided content, are ignored. Returns the
+-- created presentation.
 --
 -- /See:/ <https://developers.google.com/slides/ Google Slides API Reference> for @slides.presentations.create@.
 module Network.Google.Resource.Slides.Presentations.Create
@@ -36,11 +39,9 @@ module Network.Google.Resource.Slides.Presentations.Create
     -- * Request Lenses
     , pcXgafv
     , pcUploadProtocol
-    , pcPp
     , pcAccessToken
     , pcUploadType
     , pcPayload
-    , pcBearerToken
     , pcCallback
     ) where
 
@@ -54,27 +55,26 @@ type PresentationsCreateResource =
        "presentations" :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Presentation :>
-                           Post '[JSON] Presentation
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Presentation :>
+                       Post '[JSON] Presentation
 
--- | Creates a new presentation using the title given in the request. Other
--- fields in the request are ignored. Returns the created presentation.
+-- | Creates a blank presentation using the title given in the request. If a
+-- \`presentationId\` is provided, it is used as the ID of the new
+-- presentation. Otherwise, a new ID is generated. Other fields in the
+-- request, including any provided content, are ignored. Returns the
+-- created presentation.
 --
 -- /See:/ 'presentationsCreate' smart constructor.
 data PresentationsCreate = PresentationsCreate'
     { _pcXgafv          :: !(Maybe Xgafv)
     , _pcUploadProtocol :: !(Maybe Text)
-    , _pcPp             :: !Bool
     , _pcAccessToken    :: !(Maybe Text)
     , _pcUploadType     :: !(Maybe Text)
     , _pcPayload        :: !Presentation
-    , _pcBearerToken    :: !(Maybe Text)
     , _pcCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -86,15 +86,11 @@ data PresentationsCreate = PresentationsCreate'
 --
 -- * 'pcUploadProtocol'
 --
--- * 'pcPp'
---
 -- * 'pcAccessToken'
 --
 -- * 'pcUploadType'
 --
 -- * 'pcPayload'
---
--- * 'pcBearerToken'
 --
 -- * 'pcCallback'
 presentationsCreate
@@ -104,11 +100,9 @@ presentationsCreate pPcPayload_ =
     PresentationsCreate'
     { _pcXgafv = Nothing
     , _pcUploadProtocol = Nothing
-    , _pcPp = True
     , _pcAccessToken = Nothing
     , _pcUploadType = Nothing
     , _pcPayload = pPcPayload_
-    , _pcBearerToken = Nothing
     , _pcCallback = Nothing
     }
 
@@ -121,10 +115,6 @@ pcUploadProtocol :: Lens' PresentationsCreate (Maybe Text)
 pcUploadProtocol
   = lens _pcUploadProtocol
       (\ s a -> s{_pcUploadProtocol = a})
-
--- | Pretty-print response.
-pcPp :: Lens' PresentationsCreate Bool
-pcPp = lens _pcPp (\ s a -> s{_pcPp = a})
 
 -- | OAuth access token.
 pcAccessToken :: Lens' PresentationsCreate (Maybe Text)
@@ -142,12 +132,6 @@ pcPayload :: Lens' PresentationsCreate Presentation
 pcPayload
   = lens _pcPayload (\ s a -> s{_pcPayload = a})
 
--- | OAuth bearer token.
-pcBearerToken :: Lens' PresentationsCreate (Maybe Text)
-pcBearerToken
-  = lens _pcBearerToken
-      (\ s a -> s{_pcBearerToken = a})
-
 -- | JSONP
 pcCallback :: Lens' PresentationsCreate (Maybe Text)
 pcCallback
@@ -157,12 +141,11 @@ instance GoogleRequest PresentationsCreate where
         type Rs PresentationsCreate = Presentation
         type Scopes PresentationsCreate =
              '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file",
                "https://www.googleapis.com/auth/presentations"]
         requestClient PresentationsCreate'{..}
-          = go _pcXgafv _pcUploadProtocol (Just _pcPp)
-              _pcAccessToken
+          = go _pcXgafv _pcUploadProtocol _pcAccessToken
               _pcUploadType
-              _pcBearerToken
               _pcCallback
               (Just AltJSON)
               _pcPayload

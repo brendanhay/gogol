@@ -33,6 +33,7 @@ module Network.Google.Resource.Compute.HealthChecks.Delete
     , HealthChecksDelete
 
     -- * Request Lenses
+    , hcdRequestId
     , hcdHealthCheck
     , hcdProject
     ) where
@@ -50,19 +51,23 @@ type HealthChecksDeleteResource =
              "global" :>
                "healthChecks" :>
                  Capture "healthCheck" Text :>
-                   QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+                   QueryParam "requestId" Text :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified HealthCheck resource.
 --
 -- /See:/ 'healthChecksDelete' smart constructor.
 data HealthChecksDelete = HealthChecksDelete'
-    { _hcdHealthCheck :: !Text
+    { _hcdRequestId   :: !(Maybe Text)
+    , _hcdHealthCheck :: !Text
     , _hcdProject     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HealthChecksDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'hcdRequestId'
 --
 -- * 'hcdHealthCheck'
 --
@@ -73,9 +78,24 @@ healthChecksDelete
     -> HealthChecksDelete
 healthChecksDelete pHcdHealthCheck_ pHcdProject_ =
     HealthChecksDelete'
-    { _hcdHealthCheck = pHcdHealthCheck_
+    { _hcdRequestId = Nothing
+    , _hcdHealthCheck = pHcdHealthCheck_
     , _hcdProject = pHcdProject_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+hcdRequestId :: Lens' HealthChecksDelete (Maybe Text)
+hcdRequestId
+  = lens _hcdRequestId (\ s a -> s{_hcdRequestId = a})
 
 -- | Name of the HealthCheck resource to delete.
 hcdHealthCheck :: Lens' HealthChecksDelete Text
@@ -94,7 +114,8 @@ instance GoogleRequest HealthChecksDelete where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient HealthChecksDelete'{..}
-          = go _hcdProject _hcdHealthCheck (Just AltJSON)
+          = go _hcdProject _hcdHealthCheck _hcdRequestId
+              (Just AltJSON)
               computeService
           where go
                   = buildClient

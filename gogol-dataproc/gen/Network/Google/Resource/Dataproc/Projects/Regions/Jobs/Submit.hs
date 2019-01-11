@@ -22,7 +22,7 @@
 --
 -- Submits a job to a cluster.
 --
--- /See:/ <https://cloud.google.com/dataproc/ Google Cloud Dataproc API Reference> for @dataproc.projects.regions.jobs.submit@.
+-- /See:/ <https://cloud.google.com/dataproc/ Cloud Dataproc API Reference> for @dataproc.projects.regions.jobs.submit@.
 module Network.Google.Resource.Dataproc.Projects.Regions.Jobs.Submit
     (
     -- * REST Resource
@@ -35,11 +35,9 @@ module Network.Google.Resource.Dataproc.Projects.Regions.Jobs.Submit
     -- * Request Lenses
     , prjsXgafv
     , prjsUploadProtocol
-    , prjsPp
     , prjsAccessToken
     , prjsUploadType
     , prjsPayload
-    , prjsBearerToken
     , prjsRegion
     , prjsProjectId
     , prjsCallback
@@ -57,28 +55,24 @@ type ProjectsRegionsJobsSubmitResource =
            "regions" :>
              Capture "region" Text :>
                "jobs:submit" :>
-                 QueryParam "$.xgafv" Text :>
+                 QueryParam "$.xgafv" Xgafv :>
                    QueryParam "upload_protocol" Text :>
-                     QueryParam "pp" Bool :>
-                       QueryParam "access_token" Text :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "bearer_token" Text :>
-                             QueryParam "callback" Text :>
-                               QueryParam "alt" AltJSON :>
-                                 ReqBody '[JSON] SubmitJobRequest :>
-                                   Post '[JSON] Job
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] SubmitJobRequest :>
+                               Post '[JSON] Job
 
 -- | Submits a job to a cluster.
 --
 -- /See:/ 'projectsRegionsJobsSubmit' smart constructor.
 data ProjectsRegionsJobsSubmit = ProjectsRegionsJobsSubmit'
-    { _prjsXgafv          :: !(Maybe Text)
+    { _prjsXgafv          :: !(Maybe Xgafv)
     , _prjsUploadProtocol :: !(Maybe Text)
-    , _prjsPp             :: !Bool
     , _prjsAccessToken    :: !(Maybe Text)
     , _prjsUploadType     :: !(Maybe Text)
     , _prjsPayload        :: !SubmitJobRequest
-    , _prjsBearerToken    :: !(Maybe Text)
     , _prjsRegion         :: !Text
     , _prjsProjectId      :: !Text
     , _prjsCallback       :: !(Maybe Text)
@@ -92,15 +86,11 @@ data ProjectsRegionsJobsSubmit = ProjectsRegionsJobsSubmit'
 --
 -- * 'prjsUploadProtocol'
 --
--- * 'prjsPp'
---
 -- * 'prjsAccessToken'
 --
 -- * 'prjsUploadType'
 --
 -- * 'prjsPayload'
---
--- * 'prjsBearerToken'
 --
 -- * 'prjsRegion'
 --
@@ -116,18 +106,16 @@ projectsRegionsJobsSubmit pPrjsPayload_ pPrjsRegion_ pPrjsProjectId_ =
     ProjectsRegionsJobsSubmit'
     { _prjsXgafv = Nothing
     , _prjsUploadProtocol = Nothing
-    , _prjsPp = True
     , _prjsAccessToken = Nothing
     , _prjsUploadType = Nothing
     , _prjsPayload = pPrjsPayload_
-    , _prjsBearerToken = Nothing
     , _prjsRegion = pPrjsRegion_
     , _prjsProjectId = pPrjsProjectId_
     , _prjsCallback = Nothing
     }
 
 -- | V1 error format.
-prjsXgafv :: Lens' ProjectsRegionsJobsSubmit (Maybe Text)
+prjsXgafv :: Lens' ProjectsRegionsJobsSubmit (Maybe Xgafv)
 prjsXgafv
   = lens _prjsXgafv (\ s a -> s{_prjsXgafv = a})
 
@@ -136,10 +124,6 @@ prjsUploadProtocol :: Lens' ProjectsRegionsJobsSubmit (Maybe Text)
 prjsUploadProtocol
   = lens _prjsUploadProtocol
       (\ s a -> s{_prjsUploadProtocol = a})
-
--- | Pretty-print response.
-prjsPp :: Lens' ProjectsRegionsJobsSubmit Bool
-prjsPp = lens _prjsPp (\ s a -> s{_prjsPp = a})
 
 -- | OAuth access token.
 prjsAccessToken :: Lens' ProjectsRegionsJobsSubmit (Maybe Text)
@@ -158,18 +142,12 @@ prjsPayload :: Lens' ProjectsRegionsJobsSubmit SubmitJobRequest
 prjsPayload
   = lens _prjsPayload (\ s a -> s{_prjsPayload = a})
 
--- | OAuth bearer token.
-prjsBearerToken :: Lens' ProjectsRegionsJobsSubmit (Maybe Text)
-prjsBearerToken
-  = lens _prjsBearerToken
-      (\ s a -> s{_prjsBearerToken = a})
-
--- | [Required] The Cloud Dataproc region in which to handle the request.
+-- | Required. The Cloud Dataproc region in which to handle the request.
 prjsRegion :: Lens' ProjectsRegionsJobsSubmit Text
 prjsRegion
   = lens _prjsRegion (\ s a -> s{_prjsRegion = a})
 
--- | [Required] The ID of the Google Cloud Platform project that the job
+-- | Required. The ID of the Google Cloud Platform project that the job
 -- belongs to.
 prjsProjectId :: Lens' ProjectsRegionsJobsSubmit Text
 prjsProjectId
@@ -189,10 +167,8 @@ instance GoogleRequest ProjectsRegionsJobsSubmit
         requestClient ProjectsRegionsJobsSubmit'{..}
           = go _prjsProjectId _prjsRegion _prjsXgafv
               _prjsUploadProtocol
-              (Just _prjsPp)
               _prjsAccessToken
               _prjsUploadType
-              _prjsBearerToken
               _prjsCallback
               (Just AltJSON)
               _prjsPayload

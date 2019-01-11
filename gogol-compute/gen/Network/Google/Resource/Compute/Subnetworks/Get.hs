@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified subnetwork. Get a list of available subnetworks
+-- Returns the specified subnetwork. Gets a list of available subnetworks
 -- list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.subnetworks.get@.
@@ -55,7 +55,7 @@ type SubnetworksGetResource =
                    Capture "subnetwork" Text :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Subnetwork
 
--- | Returns the specified subnetwork. Get a list of available subnetworks
+-- | Returns the specified subnetwork. Gets a list of available subnetworks
 -- list() request.
 --
 -- /See:/ 'subnetworksGet' smart constructor.

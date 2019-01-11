@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Apps Activity.
+A client library for the Google Drive Activity.
 
 
 ## Contribute

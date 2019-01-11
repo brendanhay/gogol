@@ -33,6 +33,7 @@ module Network.Google.Resource.Compute.Instances.SetScheduling
     , InstancesSetScheduling
 
     -- * Request Lenses
+    , issRequestId
     , issProject
     , issZone
     , issPayload
@@ -54,22 +55,26 @@ type InstancesSetSchedulingResource =
                  "instances" :>
                    Capture "instance" Text :>
                      "setScheduling" :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Scheduling :> Post '[JSON] Operation
+                       QueryParam "requestId" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Scheduling :> Post '[JSON] Operation
 
 -- | Sets an instance\'s scheduling options.
 --
 -- /See:/ 'instancesSetScheduling' smart constructor.
 data InstancesSetScheduling = InstancesSetScheduling'
-    { _issProject  :: !Text
-    , _issZone     :: !Text
-    , _issPayload  :: !Scheduling
-    , _issInstance :: !Text
+    { _issRequestId :: !(Maybe Text)
+    , _issProject   :: !Text
+    , _issZone      :: !Text
+    , _issPayload   :: !Scheduling
+    , _issInstance  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesSetScheduling' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'issRequestId'
 --
 -- * 'issProject'
 --
@@ -86,11 +91,26 @@ instancesSetScheduling
     -> InstancesSetScheduling
 instancesSetScheduling pIssProject_ pIssZone_ pIssPayload_ pIssInstance_ =
     InstancesSetScheduling'
-    { _issProject = pIssProject_
+    { _issRequestId = Nothing
+    , _issProject = pIssProject_
     , _issZone = pIssZone_
     , _issPayload = pIssPayload_
     , _issInstance = pIssInstance_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+issRequestId :: Lens' InstancesSetScheduling (Maybe Text)
+issRequestId
+  = lens _issRequestId (\ s a -> s{_issRequestId = a})
 
 -- | Project ID for this request.
 issProject :: Lens' InstancesSetScheduling Text
@@ -106,7 +126,7 @@ issPayload :: Lens' InstancesSetScheduling Scheduling
 issPayload
   = lens _issPayload (\ s a -> s{_issPayload = a})
 
--- | Instance name.
+-- | Instance name for this request.
 issInstance :: Lens' InstancesSetScheduling Text
 issInstance
   = lens _issInstance (\ s a -> s{_issInstance = a})
@@ -117,7 +137,8 @@ instance GoogleRequest InstancesSetScheduling where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient InstancesSetScheduling'{..}
-          = go _issProject _issZone _issInstance (Just AltJSON)
+          = go _issProject _issZone _issInstance _issRequestId
+              (Just AltJSON)
               _issPayload
               computeService
           where go

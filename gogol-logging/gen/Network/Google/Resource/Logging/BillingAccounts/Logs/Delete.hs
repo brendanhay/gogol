@@ -21,7 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Deletes all the log entries in a log. The log reappears if it receives
--- new entries.
+-- new entries. Log entries written shortly before the delete operation
+-- might not be deleted.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.billingAccounts.logs.delete@.
 module Network.Google.Resource.Logging.BillingAccounts.Logs.Delete
@@ -36,10 +37,8 @@ module Network.Google.Resource.Logging.BillingAccounts.Logs.Delete
     -- * Request Lenses
     , baldXgafv
     , baldUploadProtocol
-    , baldPp
     , baldAccessToken
     , baldUploadType
-    , baldBearerToken
     , baldLogName
     , baldCallback
     ) where
@@ -54,24 +53,21 @@ type BillingAccountsLogsDeleteResource =
        Capture "logName" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :> Delete '[JSON] Empty
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
 -- | Deletes all the log entries in a log. The log reappears if it receives
--- new entries.
+-- new entries. Log entries written shortly before the delete operation
+-- might not be deleted.
 --
 -- /See:/ 'billingAccountsLogsDelete' smart constructor.
 data BillingAccountsLogsDelete = BillingAccountsLogsDelete'
     { _baldXgafv          :: !(Maybe Xgafv)
     , _baldUploadProtocol :: !(Maybe Text)
-    , _baldPp             :: !Bool
     , _baldAccessToken    :: !(Maybe Text)
     , _baldUploadType     :: !(Maybe Text)
-    , _baldBearerToken    :: !(Maybe Text)
     , _baldLogName        :: !Text
     , _baldCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -84,13 +80,9 @@ data BillingAccountsLogsDelete = BillingAccountsLogsDelete'
 --
 -- * 'baldUploadProtocol'
 --
--- * 'baldPp'
---
 -- * 'baldAccessToken'
 --
 -- * 'baldUploadType'
---
--- * 'baldBearerToken'
 --
 -- * 'baldLogName'
 --
@@ -102,10 +94,8 @@ billingAccountsLogsDelete pBaldLogName_ =
     BillingAccountsLogsDelete'
     { _baldXgafv = Nothing
     , _baldUploadProtocol = Nothing
-    , _baldPp = True
     , _baldAccessToken = Nothing
     , _baldUploadType = Nothing
-    , _baldBearerToken = Nothing
     , _baldLogName = pBaldLogName_
     , _baldCallback = Nothing
     }
@@ -121,10 +111,6 @@ baldUploadProtocol
   = lens _baldUploadProtocol
       (\ s a -> s{_baldUploadProtocol = a})
 
--- | Pretty-print response.
-baldPp :: Lens' BillingAccountsLogsDelete Bool
-baldPp = lens _baldPp (\ s a -> s{_baldPp = a})
-
 -- | OAuth access token.
 baldAccessToken :: Lens' BillingAccountsLogsDelete (Maybe Text)
 baldAccessToken
@@ -137,16 +123,12 @@ baldUploadType
   = lens _baldUploadType
       (\ s a -> s{_baldUploadType = a})
 
--- | OAuth bearer token.
-baldBearerToken :: Lens' BillingAccountsLogsDelete (Maybe Text)
-baldBearerToken
-  = lens _baldBearerToken
-      (\ s a -> s{_baldBearerToken = a})
-
 -- | Required. The resource name of the log to delete:
 -- \"projects\/[PROJECT_ID]\/logs\/[LOG_ID]\"
--- \"organizations\/[ORGANIZATION_ID]\/logs\/[LOG_ID]\" [LOG_ID] must be
--- URL-encoded. For example, \"projects\/my-project-id\/logs\/syslog\",
+-- \"organizations\/[ORGANIZATION_ID]\/logs\/[LOG_ID]\"
+-- \"billingAccounts\/[BILLING_ACCOUNT_ID]\/logs\/[LOG_ID]\"
+-- \"folders\/[FOLDER_ID]\/logs\/[LOG_ID]\" [LOG_ID] must be URL-encoded.
+-- For example, \"projects\/my-project-id\/logs\/syslog\",
 -- \"organizations\/1234567890\/logs\/cloudresourcemanager.googleapis.com%2Factivity\".
 -- For more information about log names, see LogEntry.
 baldLogName :: Lens' BillingAccountsLogsDelete Text
@@ -166,10 +148,8 @@ instance GoogleRequest BillingAccountsLogsDelete
                "https://www.googleapis.com/auth/logging.admin"]
         requestClient BillingAccountsLogsDelete'{..}
           = go _baldLogName _baldXgafv _baldUploadProtocol
-              (Just _baldPp)
               _baldAccessToken
               _baldUploadType
-              _baldBearerToken
               _baldCallback
               (Just AltJSON)
               loggingService

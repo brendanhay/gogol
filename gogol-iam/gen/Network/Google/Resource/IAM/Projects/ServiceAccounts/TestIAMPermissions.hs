@@ -23,7 +23,7 @@
 -- Tests the specified permissions against the IAM access control policy
 -- for a ServiceAccount.
 --
--- /See:/ <https://cloud.google.com/iam/ Google Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.testIamPermissions@.
+-- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.testIamPermissions@.
 module Network.Google.Resource.IAM.Projects.ServiceAccounts.TestIAMPermissions
     (
     -- * REST Resource
@@ -36,11 +36,9 @@ module Network.Google.Resource.IAM.Projects.ServiceAccounts.TestIAMPermissions
     -- * Request Lenses
     , psatipXgafv
     , psatipUploadProtocol
-    , psatipPp
     , psatipAccessToken
     , psatipUploadType
     , psatipPayload
-    , psatipBearerToken
     , psatipResource
     , psatipCallback
     ) where
@@ -54,29 +52,25 @@ type ProjectsServiceAccountsTestIAMPermissionsResource
      =
      "v1" :>
        CaptureMode "resource" "testIamPermissions" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] TestIAMPermissionsRequest :>
-                           Post '[JSON] TestIAMPermissionsResponse
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] TestIAMPermissionsRequest :>
+                       Post '[JSON] TestIAMPermissionsResponse
 
 -- | Tests the specified permissions against the IAM access control policy
 -- for a ServiceAccount.
 --
 -- /See:/ 'projectsServiceAccountsTestIAMPermissions' smart constructor.
 data ProjectsServiceAccountsTestIAMPermissions = ProjectsServiceAccountsTestIAMPermissions'
-    { _psatipXgafv          :: !(Maybe Text)
+    { _psatipXgafv          :: !(Maybe Xgafv)
     , _psatipUploadProtocol :: !(Maybe Text)
-    , _psatipPp             :: !Bool
     , _psatipAccessToken    :: !(Maybe Text)
     , _psatipUploadType     :: !(Maybe Text)
     , _psatipPayload        :: !TestIAMPermissionsRequest
-    , _psatipBearerToken    :: !(Maybe Text)
     , _psatipResource       :: !Text
     , _psatipCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -89,15 +83,11 @@ data ProjectsServiceAccountsTestIAMPermissions = ProjectsServiceAccountsTestIAMP
 --
 -- * 'psatipUploadProtocol'
 --
--- * 'psatipPp'
---
 -- * 'psatipAccessToken'
 --
 -- * 'psatipUploadType'
 --
 -- * 'psatipPayload'
---
--- * 'psatipBearerToken'
 --
 -- * 'psatipResource'
 --
@@ -110,17 +100,15 @@ projectsServiceAccountsTestIAMPermissions pPsatipPayload_ pPsatipResource_ =
     ProjectsServiceAccountsTestIAMPermissions'
     { _psatipXgafv = Nothing
     , _psatipUploadProtocol = Nothing
-    , _psatipPp = True
     , _psatipAccessToken = Nothing
     , _psatipUploadType = Nothing
     , _psatipPayload = pPsatipPayload_
-    , _psatipBearerToken = Nothing
     , _psatipResource = pPsatipResource_
     , _psatipCallback = Nothing
     }
 
 -- | V1 error format.
-psatipXgafv :: Lens' ProjectsServiceAccountsTestIAMPermissions (Maybe Text)
+psatipXgafv :: Lens' ProjectsServiceAccountsTestIAMPermissions (Maybe Xgafv)
 psatipXgafv
   = lens _psatipXgafv (\ s a -> s{_psatipXgafv = a})
 
@@ -129,10 +117,6 @@ psatipUploadProtocol :: Lens' ProjectsServiceAccountsTestIAMPermissions (Maybe T
 psatipUploadProtocol
   = lens _psatipUploadProtocol
       (\ s a -> s{_psatipUploadProtocol = a})
-
--- | Pretty-print response.
-psatipPp :: Lens' ProjectsServiceAccountsTestIAMPermissions Bool
-psatipPp = lens _psatipPp (\ s a -> s{_psatipPp = a})
 
 -- | OAuth access token.
 psatipAccessToken :: Lens' ProjectsServiceAccountsTestIAMPermissions (Maybe Text)
@@ -152,15 +136,9 @@ psatipPayload
   = lens _psatipPayload
       (\ s a -> s{_psatipPayload = a})
 
--- | OAuth bearer token.
-psatipBearerToken :: Lens' ProjectsServiceAccountsTestIAMPermissions (Maybe Text)
-psatipBearerToken
-  = lens _psatipBearerToken
-      (\ s a -> s{_psatipBearerToken = a})
-
 -- | REQUIRED: The resource for which the policy detail is being requested.
--- \`resource\` is usually specified as a path. For example, a Project
--- resource is specified as \`projects\/{project}\`.
+-- See the operation documentation for the appropriate value for this
+-- field.
 psatipResource :: Lens' ProjectsServiceAccountsTestIAMPermissions Text
 psatipResource
   = lens _psatipResource
@@ -182,10 +160,8 @@ instance GoogleRequest
           ProjectsServiceAccountsTestIAMPermissions'{..}
           = go _psatipResource _psatipXgafv
               _psatipUploadProtocol
-              (Just _psatipPp)
               _psatipAccessToken
               _psatipUploadType
-              _psatipBearerToken
               _psatipCallback
               (Just AltJSON)
               _psatipPayload

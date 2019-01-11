@@ -19,144 +19,193 @@ module Network.Google.PageSpeed.Types
     -- * Service Configuration
       pageSpeedService
 
-    -- * ResultFormattedResultsRuleResultsAdditionalURLBlocksItem
-    , ResultFormattedResultsRuleResultsAdditionalURLBlocksItem
-    , resultFormattedResultsRuleResultsAdditionalURLBlocksItem
-    , rfrrraubiURLs
-    , rfrrraubiHeader
+    -- * LighthouseResultV5CategoryGroups
+    , LighthouseResultV5CategoryGroups
+    , lighthouseResultV5CategoryGroups
+    , lrvcgAddtional
 
-    -- * PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem
-    , PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem
-    , pagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem
-    , pafsvaisiHeight
-    , pafsvaisiLeft
-    , pafsvaisiWidth
-    , pafsvaisiTop
+    -- * LighthouseResultV5RuntimeError
+    , LighthouseResultV5RuntimeError
+    , lighthouseResultV5RuntimeError
+    , lrvreCode
+    , lrvreMessage
 
-    -- * PagespeedAPIImageV2
-    , PagespeedAPIImageV2
-    , pagespeedAPIImageV2
-    , paivHeight
-    , paivData
-    , paivMimeType
-    , paivWidth
-    , paivPageRect
-    , paivKey
+    -- * LighthouseAuditResultV5Details
+    , LighthouseAuditResultV5Details
+    , lighthouseAuditResultV5Details
+    , larvdAddtional
 
-    -- * PagespeedAPIFormatStringV2ArgsItemRectsItem
-    , PagespeedAPIFormatStringV2ArgsItemRectsItem
-    , pagespeedAPIFormatStringV2ArgsItemRectsItem
-    , pafsvairiHeight
-    , pafsvairiLeft
-    , pafsvairiWidth
-    , pafsvairiTop
+    -- * LighthouseResultV5ConfigSettings
+    , LighthouseResultV5ConfigSettings
+    , lighthouseResultV5ConfigSettings
+    , lrvcsLocale
+    , lrvcsEmulatedFormFactor
+    , lrvcsOnlyCategories
 
     -- * PagespeedAPIRunPagespeedStrategy
     , PagespeedAPIRunPagespeedStrategy (..)
 
-    -- * ResultVersion
-    , ResultVersion
-    , resultVersion
-    , rvMinor
-    , rvMajor
+    -- * LighthouseResultV5Environment
+    , LighthouseResultV5Environment
+    , lighthouseResultV5Environment
+    , lrveHostUserAgent
+    , lrveBenchmarkIndex
+    , lrveNetworkUserAgent
 
-    -- * ResultPageStats
-    , ResultPageStats
-    , resultPageStats
-    , rpsHTMLResponseBytes
-    , rpsTotalRequestBytes
-    , rpsNumberResources
-    , rpsNumberStaticResources
-    , rpsNumberHosts
-    , rpsNumberJsResources
-    , rpsNumberCssResources
-    , rpsTextResponseBytes
-    , rpsFlashResponseBytes
-    , rpsImageResponseBytes
-    , rpsOtherResponseBytes
-    , rpsJavascriptResponseBytes
-    , rpsCssResponseBytes
+    -- * LighthouseResultV5CategoryGroupsAdditional
+    , LighthouseResultV5CategoryGroupsAdditional
+    , lighthouseResultV5CategoryGroupsAdditional
+    , lrvcgaTitle
+    , lrvcgaDescription
 
-    -- * PagespeedAPIImageV2Page_rect
-    , PagespeedAPIImageV2Page_rect
-    , pagespeedAPIImageV2Page_rect
-    , paivpHeight
-    , paivpLeft
-    , paivpWidth
-    , paivpTop
+    -- * LighthouseAuditResultV5
+    , LighthouseAuditResultV5
+    , lighthouseAuditResultV5
+    , larvScore
+    , larvExplanation
+    , larvWarnings
+    , larvScoreDisplayMode
+    , larvDisplayValue
+    , larvDetails
+    , larvId
+    , larvTitle
+    , larvErrorMessage
+    , larvDescription
 
-    -- * Result
-    , Result
-    , result
-    , rScreenshot
-    , rKind
-    , rResponseCode
-    , rInvalidRules
-    , rFormattedResults
-    , rVersion
-    , rRuleGroups
-    , rPageStats
-    , rId
-    , rTitle
+    -- * PagespeedAPIPagespeedResponseV5
+    , PagespeedAPIPagespeedResponseV5
+    , pagespeedAPIPagespeedResponseV5
+    , paprvKind
+    , paprvOriginLoadingExperience
+    , paprvVersion
+    , paprvCaptchaResult
+    , paprvId
+    , paprvLoadingExperience
+    , paprvLighthouseResult
+    , paprvAnalysisUTCTimestamp
 
-    -- * PagespeedAPIFormatStringV2ArgsItem
-    , PagespeedAPIFormatStringV2ArgsItem
-    , pagespeedAPIFormatStringV2ArgsItem
-    , pafsvaiValue
-    , pafsvaiRects
-    , pafsvaiKey
-    , pafsvaiType
-    , pafsvaiSecondaryRects
+    -- * PagespeedAPILoadingExperienceV5Metrics
+    , PagespeedAPILoadingExperienceV5Metrics
+    , pagespeedAPILoadingExperienceV5Metrics
+    , palevmAddtional
 
-    -- * ResultRuleGroupsAdditional
-    , ResultRuleGroupsAdditional
-    , resultRuleGroupsAdditional
-    , rrgaScore
+    -- * LighthouseResultV5
+    , LighthouseResultV5
+    , lighthouseResultV5
+    , lrvRuntimeError
+    , lrvCategoryGroups
+    , lrvFinalURL
+    , lrvConfigSettings
+    , lrvEnvironment
+    , lrvLighthouseVersion
+    , lrvRunWarnings
+    , lrvRequestedURL
+    , lrvCategories
+    , lrvFetchTime
+    , lrvUserAgent
+    , lrvTiming
+    , lrvAudits
+    , lrvI18n
 
-    -- * ResultFormattedResults
-    , ResultFormattedResults
-    , resultFormattedResults
-    , rfrLocale
-    , rfrRuleResults
+    -- * LighthouseResultV5Categories
+    , LighthouseResultV5Categories
+    , lighthouseResultV5Categories
+    , lrvcBestPractices
+    , lrvcPerformance
+    , lrvcPwa
+    , lrvcSeo
+    , lrvcAccessibility
 
-    -- * ResultFormattedResultsRuleResultsAdditional
-    , ResultFormattedResultsRuleResultsAdditional
-    , resultFormattedResultsRuleResultsAdditional
-    , rfrrraSummary
-    , rfrrraRuleImpact
-    , rfrrraGroups
-    , rfrrraLocalizedRuleName
-    , rfrrraURLBlocks
+    -- * PagespeedAPIRunPagespeedCategory
+    , PagespeedAPIRunPagespeedCategory (..)
 
-    -- * ResultRuleGroups
-    , ResultRuleGroups
-    , resultRuleGroups
-    , rrgAddtional
+    -- * LighthouseCategoryV5
+    , LighthouseCategoryV5
+    , lighthouseCategoryV5
+    , lcvManualDescription
+    , lcvScore
+    , lcvAuditRefs
+    , lcvId
+    , lcvTitle
+    , lcvDescription
 
-    -- * PagespeedAPIFormatStringV2
-    , PagespeedAPIFormatStringV2
-    , pagespeedAPIFormatStringV2
-    , pafsvArgs
-    , pafsvFormat
+    -- * PagespeedAPILoadingExperienceV5MetricsAdditional
+    , PagespeedAPILoadingExperienceV5MetricsAdditional
+    , pagespeedAPILoadingExperienceV5MetricsAdditional
+    , palevmaCategory
+    , palevmaPercentile
+    , palevmaDistributions
 
-    -- * ResultFormattedResultsRuleResults
-    , ResultFormattedResultsRuleResults
-    , resultFormattedResultsRuleResults
-    , rfrrrAddtional
+    -- * PagespeedAPILoadingExperienceV5
+    , PagespeedAPILoadingExperienceV5
+    , pagespeedAPILoadingExperienceV5
+    , palevMetrics
+    , palevInitialURL
+    , palevId
+    , palevOverallCategory
 
-    -- * ResultFormattedResultsRuleResultsAdditionalURLBlocksItemURLsItem
-    , ResultFormattedResultsRuleResultsAdditionalURLBlocksItemURLsItem
-    , resultFormattedResultsRuleResultsAdditionalURLBlocksItemURLsItem
-    , rfrrraubiuiResult
-    , rfrrraubiuiDetails
+    -- * PagespeedAPIPagespeedResponseV5Version
+    , PagespeedAPIPagespeedResponseV5Version
+    , pagespeedAPIPagespeedResponseV5Version
+    , paprvvMinor
+    , paprvvMajor
+
+    -- * PagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem
+    , PagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem
+    , pagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem
+    , palevmadiMax
+    , palevmadiProportion
+    , palevmadiMin
+
+    -- * LighthouseResultV5Timing
+    , LighthouseResultV5Timing
+    , lighthouseResultV5Timing
+    , lrvtTotal
+
+    -- * LighthouseResultV5I18nRendererFormattedStrings
+    , LighthouseResultV5I18nRendererFormattedStrings
+    , lighthouseResultV5I18nRendererFormattedStrings
+    , lrvirfsLabDataTitle
+    , lrvirfsWarningHeader
+    , lrvirfsOpportUnityResourceColumnLabel
+    , lrvirfsManualAuditsGroupTitle
+    , lrvirfsCrcInitialNavigation
+    , lrvirfsVarianceDisclaimer
+    , lrvirfsPassedAuditsGroupTitle
+    , lrvirfsToplevelWarningsMessage
+    , lrvirfsErrorMissingAuditInfo
+    , lrvirfsCrcLongestDurationLabel
+    , lrvirfsScorescaleLabel
+    , lrvirfsOpportUnitySavingsColumnLabel
+    , lrvirfsErrorLabel
+    , lrvirfsLsPerformanceCategoryDescription
+    , lrvirfsAuditGroupExpandTooltip
+    , lrvirfsNotApplicableAuditsGroupTitle
+
+    -- * LighthouseCategoryV5AuditRefsItem
+    , LighthouseCategoryV5AuditRefsItem
+    , lighthouseCategoryV5AuditRefsItem
+    , lcvariGroup
+    , lcvariWeight
+    , lcvariId
+
+    -- * LighthouseResultV5I18n
+    , LighthouseResultV5I18n
+    , lighthouseResultV5I18n
+    , lrviRendererFormattedStrings
+
+    -- * LighthouseResultV5Audits
+    , LighthouseResultV5Audits
+    , lighthouseResultV5Audits
+    , lrvaAddtional
     ) where
 
 import           Network.Google.PageSpeed.Types.Product
 import           Network.Google.PageSpeed.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v2' of the PageSpeed Insights API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v5' of the PageSpeed Insights API. This contains the host and root path used as a starting point for constructing service requests.
 pageSpeedService :: ServiceConfig
 pageSpeedService
-  = defaultService (ServiceId "pagespeedonline:v2")
+  = defaultService (ServiceId "pagespeedonline:v5")
       "www.googleapis.com"

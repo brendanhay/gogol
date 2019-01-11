@@ -22,9 +22,12 @@
 --
 -- Returns permissions that a caller has on the specified resource. If the
 -- resource does not exist, this will return an empty set of permissions,
--- not a NOT_FOUND error.
+-- not a NOT_FOUND error. Note: This operation is designed to be used for
+-- building permission-aware UIs and command-line tools, not for
+-- authorization checking. This operation may \"fail open\" without
+-- warning.
 --
--- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.snapshots.testIamPermissions@.
+-- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference> for @pubsub.projects.snapshots.testIamPermissions@.
 module Network.Google.Resource.PubSub.Projects.Snapshots.TestIAMPermissions
     (
     -- * REST Resource
@@ -37,11 +40,9 @@ module Network.Google.Resource.PubSub.Projects.Snapshots.TestIAMPermissions
     -- * Request Lenses
     , pstipXgafv
     , pstipUploadProtocol
-    , pstipPp
     , pstipAccessToken
     , pstipUploadType
     , pstipPayload
-    , pstipBearerToken
     , pstipResource
     , pstipCallback
     ) where
@@ -56,28 +57,27 @@ type ProjectsSnapshotsTestIAMPermissionsResource =
        CaptureMode "resource" "testIamPermissions" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] TestIAMPermissionsRequest :>
-                           Post '[JSON] TestIAMPermissionsResponse
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] TestIAMPermissionsRequest :>
+                       Post '[JSON] TestIAMPermissionsResponse
 
 -- | Returns permissions that a caller has on the specified resource. If the
 -- resource does not exist, this will return an empty set of permissions,
--- not a NOT_FOUND error.
+-- not a NOT_FOUND error. Note: This operation is designed to be used for
+-- building permission-aware UIs and command-line tools, not for
+-- authorization checking. This operation may \"fail open\" without
+-- warning.
 --
 -- /See:/ 'projectsSnapshotsTestIAMPermissions' smart constructor.
 data ProjectsSnapshotsTestIAMPermissions = ProjectsSnapshotsTestIAMPermissions'
     { _pstipXgafv          :: !(Maybe Xgafv)
     , _pstipUploadProtocol :: !(Maybe Text)
-    , _pstipPp             :: !Bool
     , _pstipAccessToken    :: !(Maybe Text)
     , _pstipUploadType     :: !(Maybe Text)
     , _pstipPayload        :: !TestIAMPermissionsRequest
-    , _pstipBearerToken    :: !(Maybe Text)
     , _pstipResource       :: !Text
     , _pstipCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -90,15 +90,11 @@ data ProjectsSnapshotsTestIAMPermissions = ProjectsSnapshotsTestIAMPermissions'
 --
 -- * 'pstipUploadProtocol'
 --
--- * 'pstipPp'
---
 -- * 'pstipAccessToken'
 --
 -- * 'pstipUploadType'
 --
 -- * 'pstipPayload'
---
--- * 'pstipBearerToken'
 --
 -- * 'pstipResource'
 --
@@ -111,11 +107,9 @@ projectsSnapshotsTestIAMPermissions pPstipPayload_ pPstipResource_ =
     ProjectsSnapshotsTestIAMPermissions'
     { _pstipXgafv = Nothing
     , _pstipUploadProtocol = Nothing
-    , _pstipPp = True
     , _pstipAccessToken = Nothing
     , _pstipUploadType = Nothing
     , _pstipPayload = pPstipPayload_
-    , _pstipBearerToken = Nothing
     , _pstipResource = pPstipResource_
     , _pstipCallback = Nothing
     }
@@ -130,10 +124,6 @@ pstipUploadProtocol :: Lens' ProjectsSnapshotsTestIAMPermissions (Maybe Text)
 pstipUploadProtocol
   = lens _pstipUploadProtocol
       (\ s a -> s{_pstipUploadProtocol = a})
-
--- | Pretty-print response.
-pstipPp :: Lens' ProjectsSnapshotsTestIAMPermissions Bool
-pstipPp = lens _pstipPp (\ s a -> s{_pstipPp = a})
 
 -- | OAuth access token.
 pstipAccessToken :: Lens' ProjectsSnapshotsTestIAMPermissions (Maybe Text)
@@ -152,15 +142,9 @@ pstipPayload :: Lens' ProjectsSnapshotsTestIAMPermissions TestIAMPermissionsRequ
 pstipPayload
   = lens _pstipPayload (\ s a -> s{_pstipPayload = a})
 
--- | OAuth bearer token.
-pstipBearerToken :: Lens' ProjectsSnapshotsTestIAMPermissions (Maybe Text)
-pstipBearerToken
-  = lens _pstipBearerToken
-      (\ s a -> s{_pstipBearerToken = a})
-
 -- | REQUIRED: The resource for which the policy detail is being requested.
--- \`resource\` is usually specified as a path. For example, a Project
--- resource is specified as \`projects\/{project}\`.
+-- See the operation documentation for the appropriate value for this
+-- field.
 pstipResource :: Lens' ProjectsSnapshotsTestIAMPermissions Text
 pstipResource
   = lens _pstipResource
@@ -182,10 +166,8 @@ instance GoogleRequest
         requestClient
           ProjectsSnapshotsTestIAMPermissions'{..}
           = go _pstipResource _pstipXgafv _pstipUploadProtocol
-              (Just _pstipPp)
               _pstipAccessToken
               _pstipUploadType
-              _pstipBearerToken
               _pstipCallback
               (Just AltJSON)
               _pstipPayload

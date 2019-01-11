@@ -49,10 +49,8 @@ module Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.List
     , upfgilStates
     , upfgilXgafv
     , upfgilUploadProtocol
-    , upfgilPp
     , upfgilAccessToken
     , upfgilUploadType
-    , upfgilBearerToken
     , upfgilInvitedEmailAddress
     , upfgilPageToken
     , upfgilPageSize
@@ -70,18 +68,16 @@ type UserProFilesGuardianInvitationsListResource =
          Capture "studentId" Text :>
            "guardianInvitations" :>
              QueryParams "states" Text :>
-               QueryParam "$.xgafv" Text :>
+               QueryParam "$.xgafv" Xgafv :>
                  QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "invitedEmailAddress" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "pageSize" (Textual Int32) :>
-                                 QueryParam "callback" Text :>
-                                   QueryParam "alt" AltJSON :>
-                                     Get '[JSON] ListGuardianInvitationsResponse
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "invitedEmailAddress" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "pageSize" (Textual Int32) :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] ListGuardianInvitationsResponse
 
 -- | Returns a list of guardian invitations that the requesting user is
 -- permitted to view, filtered by the parameters provided. This method
@@ -101,12 +97,10 @@ type UserProFilesGuardianInvitationsListResource =
 data UserProFilesGuardianInvitationsList = UserProFilesGuardianInvitationsList'
     { _upfgilStudentId           :: !Text
     , _upfgilStates              :: !(Maybe [Text])
-    , _upfgilXgafv               :: !(Maybe Text)
+    , _upfgilXgafv               :: !(Maybe Xgafv)
     , _upfgilUploadProtocol      :: !(Maybe Text)
-    , _upfgilPp                  :: !Bool
     , _upfgilAccessToken         :: !(Maybe Text)
     , _upfgilUploadType          :: !(Maybe Text)
-    , _upfgilBearerToken         :: !(Maybe Text)
     , _upfgilInvitedEmailAddress :: !(Maybe Text)
     , _upfgilPageToken           :: !(Maybe Text)
     , _upfgilPageSize            :: !(Maybe (Textual Int32))
@@ -125,13 +119,9 @@ data UserProFilesGuardianInvitationsList = UserProFilesGuardianInvitationsList'
 --
 -- * 'upfgilUploadProtocol'
 --
--- * 'upfgilPp'
---
 -- * 'upfgilAccessToken'
 --
 -- * 'upfgilUploadType'
---
--- * 'upfgilBearerToken'
 --
 -- * 'upfgilInvitedEmailAddress'
 --
@@ -149,10 +139,8 @@ userProFilesGuardianInvitationsList pUpfgilStudentId_ =
     , _upfgilStates = Nothing
     , _upfgilXgafv = Nothing
     , _upfgilUploadProtocol = Nothing
-    , _upfgilPp = True
     , _upfgilAccessToken = Nothing
     , _upfgilUploadType = Nothing
-    , _upfgilBearerToken = Nothing
     , _upfgilInvitedEmailAddress = Nothing
     , _upfgilPageToken = Nothing
     , _upfgilPageSize = Nothing
@@ -180,7 +168,7 @@ upfgilStates
       . _Coerce
 
 -- | V1 error format.
-upfgilXgafv :: Lens' UserProFilesGuardianInvitationsList (Maybe Text)
+upfgilXgafv :: Lens' UserProFilesGuardianInvitationsList (Maybe Xgafv)
 upfgilXgafv
   = lens _upfgilXgafv (\ s a -> s{_upfgilXgafv = a})
 
@@ -189,10 +177,6 @@ upfgilUploadProtocol :: Lens' UserProFilesGuardianInvitationsList (Maybe Text)
 upfgilUploadProtocol
   = lens _upfgilUploadProtocol
       (\ s a -> s{_upfgilUploadProtocol = a})
-
--- | Pretty-print response.
-upfgilPp :: Lens' UserProFilesGuardianInvitationsList Bool
-upfgilPp = lens _upfgilPp (\ s a -> s{_upfgilPp = a})
 
 -- | OAuth access token.
 upfgilAccessToken :: Lens' UserProFilesGuardianInvitationsList (Maybe Text)
@@ -205,12 +189,6 @@ upfgilUploadType :: Lens' UserProFilesGuardianInvitationsList (Maybe Text)
 upfgilUploadType
   = lens _upfgilUploadType
       (\ s a -> s{_upfgilUploadType = a})
-
--- | OAuth bearer token.
-upfgilBearerToken :: Lens' UserProFilesGuardianInvitationsList (Maybe Text)
-upfgilBearerToken
-  = lens _upfgilBearerToken
-      (\ s a -> s{_upfgilBearerToken = a})
 
 -- | If specified, only results with the specified \`invited_email_address\`
 -- will be returned.
@@ -246,16 +224,16 @@ instance GoogleRequest
          UserProFilesGuardianInvitationsList where
         type Rs UserProFilesGuardianInvitationsList =
              ListGuardianInvitationsResponse
-        type Scopes UserProFilesGuardianInvitationsList = '[]
+        type Scopes UserProFilesGuardianInvitationsList =
+             '["https://www.googleapis.com/auth/classroom.guardianlinks.students",
+               "https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly"]
         requestClient
           UserProFilesGuardianInvitationsList'{..}
           = go _upfgilStudentId (_upfgilStates ^. _Default)
               _upfgilXgafv
               _upfgilUploadProtocol
-              (Just _upfgilPp)
               _upfgilAccessToken
               _upfgilUploadType
-              _upfgilBearerToken
               _upfgilInvitedEmailAddress
               _upfgilPageToken
               _upfgilPageSize

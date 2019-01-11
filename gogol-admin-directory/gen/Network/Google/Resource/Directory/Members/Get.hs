@@ -77,12 +77,12 @@ membersGet pMgMemberKey_ pMgGroupKey_ =
     , _mgGroupKey = pMgGroupKey_
     }
 
--- | Email or immutable Id of the member
+-- | Email or immutable ID of the member
 mgMemberKey :: Lens' MembersGet Text
 mgMemberKey
   = lens _mgMemberKey (\ s a -> s{_mgMemberKey = a})
 
--- | Email or immutable Id of the group
+-- | Email or immutable ID of the group
 mgGroupKey :: Lens' MembersGet Text
 mgGroupKey
   = lens _mgGroupKey (\ s a -> s{_mgGroupKey = a})

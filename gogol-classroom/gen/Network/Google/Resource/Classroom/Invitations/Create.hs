@@ -43,11 +43,9 @@ module Network.Google.Resource.Classroom.Invitations.Create
     -- * Request Lenses
     , icXgafv
     , icUploadProtocol
-    , icPp
     , icAccessToken
     , icUploadType
     , icPayload
-    , icBearerToken
     , icCallback
     ) where
 
@@ -59,15 +57,13 @@ import           Network.Google.Prelude
 type InvitationsCreateResource =
      "v1" :>
        "invitations" :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Invitation :> Post '[JSON] Invitation
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Invitation :> Post '[JSON] Invitation
 
 -- | Creates an invitation. Only one invitation for a user and course may
 -- exist at a time. Delete and re-create an invitation to make changes.
@@ -81,13 +77,11 @@ type InvitationsCreateResource =
 --
 -- /See:/ 'invitationsCreate' smart constructor.
 data InvitationsCreate = InvitationsCreate'
-    { _icXgafv          :: !(Maybe Text)
+    { _icXgafv          :: !(Maybe Xgafv)
     , _icUploadProtocol :: !(Maybe Text)
-    , _icPp             :: !Bool
     , _icAccessToken    :: !(Maybe Text)
     , _icUploadType     :: !(Maybe Text)
     , _icPayload        :: !Invitation
-    , _icBearerToken    :: !(Maybe Text)
     , _icCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -99,15 +93,11 @@ data InvitationsCreate = InvitationsCreate'
 --
 -- * 'icUploadProtocol'
 --
--- * 'icPp'
---
 -- * 'icAccessToken'
 --
 -- * 'icUploadType'
 --
 -- * 'icPayload'
---
--- * 'icBearerToken'
 --
 -- * 'icCallback'
 invitationsCreate
@@ -117,16 +107,14 @@ invitationsCreate pIcPayload_ =
     InvitationsCreate'
     { _icXgafv = Nothing
     , _icUploadProtocol = Nothing
-    , _icPp = True
     , _icAccessToken = Nothing
     , _icUploadType = Nothing
     , _icPayload = pIcPayload_
-    , _icBearerToken = Nothing
     , _icCallback = Nothing
     }
 
 -- | V1 error format.
-icXgafv :: Lens' InvitationsCreate (Maybe Text)
+icXgafv :: Lens' InvitationsCreate (Maybe Xgafv)
 icXgafv = lens _icXgafv (\ s a -> s{_icXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -134,10 +122,6 @@ icUploadProtocol :: Lens' InvitationsCreate (Maybe Text)
 icUploadProtocol
   = lens _icUploadProtocol
       (\ s a -> s{_icUploadProtocol = a})
-
--- | Pretty-print response.
-icPp :: Lens' InvitationsCreate Bool
-icPp = lens _icPp (\ s a -> s{_icPp = a})
 
 -- | OAuth access token.
 icAccessToken :: Lens' InvitationsCreate (Maybe Text)
@@ -155,12 +139,6 @@ icPayload :: Lens' InvitationsCreate Invitation
 icPayload
   = lens _icPayload (\ s a -> s{_icPayload = a})
 
--- | OAuth bearer token.
-icBearerToken :: Lens' InvitationsCreate (Maybe Text)
-icBearerToken
-  = lens _icBearerToken
-      (\ s a -> s{_icBearerToken = a})
-
 -- | JSONP
 icCallback :: Lens' InvitationsCreate (Maybe Text)
 icCallback
@@ -171,10 +149,8 @@ instance GoogleRequest InvitationsCreate where
         type Scopes InvitationsCreate =
              '["https://www.googleapis.com/auth/classroom.rosters"]
         requestClient InvitationsCreate'{..}
-          = go _icXgafv _icUploadProtocol (Just _icPp)
-              _icAccessToken
+          = go _icXgafv _icUploadProtocol _icAccessToken
               _icUploadType
-              _icBearerToken
               _icCallback
               (Just AltJSON)
               _icPayload

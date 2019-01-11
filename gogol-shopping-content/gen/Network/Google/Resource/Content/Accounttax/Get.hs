@@ -20,10 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves the tax settings of the account. This method can only be
--- called for accounts to which the managing account has access: either the
--- managing account itself or sub-accounts if the managing account is a
--- multi-client account.
+-- Retrieves the tax settings of the account.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.accounttax.get@.
 module Network.Google.Resource.Content.Accounttax.Get
@@ -47,16 +44,13 @@ import           Network.Google.ShoppingContent.Types
 -- 'AccounttaxGet' request conforms to.
 type AccounttaxGetResource =
      "content" :>
-       "v2" :>
+       "v2.1" :>
          Capture "merchantId" (Textual Word64) :>
            "accounttax" :>
              Capture "accountId" (Textual Word64) :>
                QueryParam "alt" AltJSON :> Get '[JSON] AccountTax
 
--- | Retrieves the tax settings of the account. This method can only be
--- called for accounts to which the managing account has access: either the
--- managing account itself or sub-accounts if the managing account is a
--- multi-client account.
+-- | Retrieves the tax settings of the account.
 --
 -- /See:/ 'accounttaxGet' smart constructor.
 data AccounttaxGet = AccounttaxGet'
@@ -81,7 +75,9 @@ accounttaxGet pAggMerchantId_ pAggAccountId_ =
     , _aggAccountId = _Coerce # pAggAccountId_
     }
 
--- | The ID of the managing account.
+-- | The ID of the managing account. If this parameter is not the same as
+-- accountId, then this account must be a multi-client account and
+-- accountId must be the ID of a sub-account of this account.
 aggMerchantId :: Lens' AccounttaxGet Word64
 aggMerchantId
   = lens _aggMerchantId

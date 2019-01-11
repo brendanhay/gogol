@@ -81,8 +81,7 @@ qrQuestId
 instance GoogleRequest QuestsReset where
         type Rs QuestsReset = ()
         type Scopes QuestsReset =
-             '["https://www.googleapis.com/auth/games",
-               "https://www.googleapis.com/auth/plus.login"]
+             '["https://www.googleapis.com/auth/games"]
         requestClient QuestsReset'{..}
           = go _qrQuestId (Just AltJSON) gamesManagementService
           where go

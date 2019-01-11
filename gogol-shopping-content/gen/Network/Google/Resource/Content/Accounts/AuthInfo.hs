@@ -41,7 +41,7 @@ import           Network.Google.ShoppingContent.Types
 -- 'AccountsAuthInfo' request conforms to.
 type AccountsAuthInfoResource =
      "content" :>
-       "v2" :>
+       "v2.1" :>
          "accounts" :>
            "authinfo" :>
              QueryParam "alt" AltJSON :>

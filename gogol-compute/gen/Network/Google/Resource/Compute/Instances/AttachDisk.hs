@@ -20,7 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Attaches a Disk resource to an instance.
+-- Attaches an existing Disk resource to an instance. You must first create
+-- the disk before you can attach it. It is not possible to create and
+-- attach a disk at the same time. For more information, read Adding a
+-- persistent disk to your instance.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instances.attachDisk@.
 module Network.Google.Resource.Compute.Instances.AttachDisk
@@ -33,10 +36,12 @@ module Network.Google.Resource.Compute.Instances.AttachDisk
     , InstancesAttachDisk
 
     -- * Request Lenses
-    , iadProject
-    , iadZone
-    , iadPayload
-    , iadInstance
+    , insRequestId
+    , insProject
+    , insZone
+    , insPayload
+    , insForceAttach
+    , insInstance
     ) where
 
 import           Network.Google.Compute.Types
@@ -54,63 +59,97 @@ type InstancesAttachDiskResource =
                  "instances" :>
                    Capture "instance" Text :>
                      "attachDisk" :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] AttachedDisk :>
-                           Post '[JSON] Operation
+                       QueryParam "requestId" Text :>
+                         QueryParam "forceAttach" Bool :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] AttachedDisk :>
+                               Post '[JSON] Operation
 
--- | Attaches a Disk resource to an instance.
+-- | Attaches an existing Disk resource to an instance. You must first create
+-- the disk before you can attach it. It is not possible to create and
+-- attach a disk at the same time. For more information, read Adding a
+-- persistent disk to your instance.
 --
 -- /See:/ 'instancesAttachDisk' smart constructor.
 data InstancesAttachDisk = InstancesAttachDisk'
-    { _iadProject  :: !Text
-    , _iadZone     :: !Text
-    , _iadPayload  :: !AttachedDisk
-    , _iadInstance :: !Text
+    { _insRequestId   :: !(Maybe Text)
+    , _insProject     :: !Text
+    , _insZone        :: !Text
+    , _insPayload     :: !AttachedDisk
+    , _insForceAttach :: !(Maybe Bool)
+    , _insInstance    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesAttachDisk' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'iadProject'
+-- * 'insRequestId'
 --
--- * 'iadZone'
+-- * 'insProject'
 --
--- * 'iadPayload'
+-- * 'insZone'
 --
--- * 'iadInstance'
+-- * 'insPayload'
+--
+-- * 'insForceAttach'
+--
+-- * 'insInstance'
 instancesAttachDisk
-    :: Text -- ^ 'iadProject'
-    -> Text -- ^ 'iadZone'
-    -> AttachedDisk -- ^ 'iadPayload'
-    -> Text -- ^ 'iadInstance'
+    :: Text -- ^ 'insProject'
+    -> Text -- ^ 'insZone'
+    -> AttachedDisk -- ^ 'insPayload'
+    -> Text -- ^ 'insInstance'
     -> InstancesAttachDisk
-instancesAttachDisk pIadProject_ pIadZone_ pIadPayload_ pIadInstance_ =
+instancesAttachDisk pInsProject_ pInsZone_ pInsPayload_ pInsInstance_ =
     InstancesAttachDisk'
-    { _iadProject = pIadProject_
-    , _iadZone = pIadZone_
-    , _iadPayload = pIadPayload_
-    , _iadInstance = pIadInstance_
+    { _insRequestId = Nothing
+    , _insProject = pInsProject_
+    , _insZone = pInsZone_
+    , _insPayload = pInsPayload_
+    , _insForceAttach = Nothing
+    , _insInstance = pInsInstance_
     }
 
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+insRequestId :: Lens' InstancesAttachDisk (Maybe Text)
+insRequestId
+  = lens _insRequestId (\ s a -> s{_insRequestId = a})
+
 -- | Project ID for this request.
-iadProject :: Lens' InstancesAttachDisk Text
-iadProject
-  = lens _iadProject (\ s a -> s{_iadProject = a})
+insProject :: Lens' InstancesAttachDisk Text
+insProject
+  = lens _insProject (\ s a -> s{_insProject = a})
 
 -- | The name of the zone for this request.
-iadZone :: Lens' InstancesAttachDisk Text
-iadZone = lens _iadZone (\ s a -> s{_iadZone = a})
+insZone :: Lens' InstancesAttachDisk Text
+insZone = lens _insZone (\ s a -> s{_insZone = a})
 
 -- | Multipart request metadata.
-iadPayload :: Lens' InstancesAttachDisk AttachedDisk
-iadPayload
-  = lens _iadPayload (\ s a -> s{_iadPayload = a})
+insPayload :: Lens' InstancesAttachDisk AttachedDisk
+insPayload
+  = lens _insPayload (\ s a -> s{_insPayload = a})
+
+-- | Whether to force attach the disk even if it\'s currently attached to
+-- another instance. This is only available for regional disks.
+insForceAttach :: Lens' InstancesAttachDisk (Maybe Bool)
+insForceAttach
+  = lens _insForceAttach
+      (\ s a -> s{_insForceAttach = a})
 
 -- | The instance name for this request.
-iadInstance :: Lens' InstancesAttachDisk Text
-iadInstance
-  = lens _iadInstance (\ s a -> s{_iadInstance = a})
+insInstance :: Lens' InstancesAttachDisk Text
+insInstance
+  = lens _insInstance (\ s a -> s{_insInstance = a})
 
 instance GoogleRequest InstancesAttachDisk where
         type Rs InstancesAttachDisk = Operation
@@ -118,8 +157,10 @@ instance GoogleRequest InstancesAttachDisk where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient InstancesAttachDisk'{..}
-          = go _iadProject _iadZone _iadInstance (Just AltJSON)
-              _iadPayload
+          = go _insProject _insZone _insInstance _insRequestId
+              _insForceAttach
+              (Just AltJSON)
+              _insPayload
               computeService
           where go
                   = buildClient

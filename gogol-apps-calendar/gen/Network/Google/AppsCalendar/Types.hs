@@ -22,11 +22,15 @@ module Network.Google.AppsCalendar.Types
     -- * OAuth Scopes
     , calendarScope
     , calendarReadOnlyScope
+    , calendarEventsScope
+    , calendarSettingsReadOnlyScope
+    , calendarEventsReadOnlyScope
 
     -- * CalendarListEntry
     , CalendarListEntry
     , calendarListEntry
     , cleSummary
+    , cleConferenceProperties
     , cleEtag
     , cleLocation
     , cleKind
@@ -44,6 +48,11 @@ module Network.Google.AppsCalendar.Types
     , cleColorId
     , cleTimeZone
     , cleDescription
+
+    -- * ConferenceParameters
+    , ConferenceParameters
+    , conferenceParameters
+    , cpAddOnParameters
 
     -- * Event
     , Event
@@ -66,6 +75,7 @@ module Network.Google.AppsCalendar.Types
     , eStart
     , ePrivateCopy
     , eEndTimeUnspecified
+    , eConferenceData
     , eExtendedProperties
     , eVisibility
     , eGuestsCanInviteOthers
@@ -91,6 +101,21 @@ module Network.Google.AppsCalendar.Types
     , calendarListEntryNotificationSettings
     , clensNotifications
 
+    -- * ConferenceProperties
+    , ConferenceProperties
+    , conferenceProperties
+    , cpAllowedConferenceSolutionTypes
+
+    -- * ConferenceSolution
+    , ConferenceSolution
+    , conferenceSolution
+    , csIconURI
+    , csKey
+    , csName
+
+    -- * EventsPatchSendUpdates
+    , EventsPatchSendUpdates (..)
+
     -- * ACLRuleScope
     , ACLRuleScope
     , aclRuleScope
@@ -101,6 +126,9 @@ module Network.Google.AppsCalendar.Types
     , ColorsEvent
     , colorsEvent
     , ceAddtional
+
+    -- * EventsQuickAddSendUpdates
+    , EventsQuickAddSendUpdates (..)
 
     -- * Settings
     , Settings
@@ -125,11 +153,36 @@ module Network.Google.AppsCalendar.Types
     , eaTitle
     , eaFileId
 
+    -- * EntryPoint
+    , EntryPoint
+    , entryPoint
+    , epPasscode
+    , epRegionCode
+    , epURI
+    , epMeetingCode
+    , epPassword
+    , epPin
+    , epEntryPointFeatures
+    , epEntryPointType
+    , epLabel
+    , epAccessCode
+
     -- * TimePeriod
     , TimePeriod
     , timePeriod
     , tpStart
     , tpEnd
+
+    -- * EventsUpdateSendUpdates
+    , EventsUpdateSendUpdates (..)
+
+    -- * ConferenceSolutionKey
+    , ConferenceSolutionKey
+    , conferenceSolutionKey
+    , cskType
+
+    -- * EventsMoveSendUpdates
+    , EventsMoveSendUpdates (..)
 
     -- * EventCreator
     , EventCreator
@@ -154,6 +207,9 @@ module Network.Google.AppsCalendar.Types
     -- * EventsListOrderBy
     , EventsListOrderBy (..)
 
+    -- * EventsDeleteSendUpdates
+    , EventsDeleteSendUpdates (..)
+
     -- * Channel
     , Channel
     , channel
@@ -168,11 +224,27 @@ module Network.Google.AppsCalendar.Types
     , cId
     , cType
 
+    -- * ConferenceRequestStatus
+    , ConferenceRequestStatus
+    , conferenceRequestStatus
+    , crsStatusCode
+
     -- * FreeBusyCalendar
     , FreeBusyCalendar
     , freeBusyCalendar
     , fbcBusy
     , fbcErrors
+
+    -- * ConferenceData
+    , ConferenceData
+    , conferenceData
+    , cdSignature
+    , cdConferenceSolution
+    , cdCreateRequest
+    , cdConferenceId
+    , cdParameters
+    , cdNotes
+    , cdEntryPoints
 
     -- * Setting
     , Setting
@@ -187,6 +259,9 @@ module Network.Google.AppsCalendar.Types
     , freeBusyResponseGroups
     , fbrgAddtional
 
+    -- * EventsInsertSendUpdates
+    , EventsInsertSendUpdates (..)
+
     -- * EventReminders
     , EventReminders
     , eventReminders
@@ -197,6 +272,11 @@ module Network.Google.AppsCalendar.Types
     , ColorsCalendar
     , colorsCalendar
     , ccAddtional
+
+    -- * ConferenceParametersAddOnParametersParameters
+    , ConferenceParametersAddOnParametersParameters
+    , conferenceParametersAddOnParametersParameters
+    , cpaoppAddtional
 
     -- * CalendarNotification
     , CalendarNotification
@@ -247,6 +327,7 @@ module Network.Google.AppsCalendar.Types
     , Calendar
     , calendar
     , calSummary
+    , calConferenceProperties
     , calEtag
     , calLocation
     , calKind
@@ -341,6 +422,13 @@ module Network.Google.AppsCalendar.Types
     -- * EventsWatchOrderBy
     , EventsWatchOrderBy (..)
 
+    -- * CreateConferenceRequest
+    , CreateConferenceRequest
+    , createConferenceRequest
+    , ccrStatus
+    , ccrRequestId
+    , ccrConferenceSolutionKey
+
     -- * EventExtendedPropertiesShared
     , EventExtendedPropertiesShared
     , eventExtendedPropertiesShared
@@ -377,6 +465,11 @@ module Network.Google.AppsCalendar.Types
     , fbgCalendars
     , fbgErrors
 
+    -- * ConferenceParametersAddOnParameters
+    , ConferenceParametersAddOnParameters
+    , conferenceParametersAddOnParameters
+    , cpaopParameters
+
     -- * EventSource
     , EventSource
     , eventSource
@@ -394,10 +487,23 @@ appsCalendarService
   = defaultService (ServiceId "calendar:v3")
       "www.googleapis.com"
 
--- | Manage your calendars
+-- | See, edit, share, and permanently delete all the calendars you can
+-- access using Google Calendar
 calendarScope :: Proxy '["https://www.googleapis.com/auth/calendar"]
 calendarScope = Proxy;
 
 -- | View your calendars
 calendarReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/calendar.readonly"]
 calendarReadOnlyScope = Proxy;
+
+-- | View and edit events on all your calendars
+calendarEventsScope :: Proxy '["https://www.googleapis.com/auth/calendar.events"]
+calendarEventsScope = Proxy;
+
+-- | View your Calendar settings
+calendarSettingsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/calendar.settings.readonly"]
+calendarSettingsReadOnlyScope = Proxy;
+
+-- | View events on all your calendars
+calendarEventsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/calendar.events.readonly"]
+calendarEventsReadOnlyScope = Proxy;

@@ -35,6 +35,7 @@ module Network.Google.Resource.Storage.Buckets.List
     -- * Request Lenses
     , blProject
     , blPrefix
+    , blUserProject
     , blProjection
     , blPageToken
     , blMaxResults
@@ -51,20 +52,22 @@ type BucketsListResource =
          "b" :>
            QueryParam "project" Text :>
              QueryParam "prefix" Text :>
-               QueryParam "projection" BucketsListProjection :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" (Textual Word32) :>
-                     QueryParam "alt" AltJSON :> Get '[JSON] Buckets
+               QueryParam "userProject" Text :>
+                 QueryParam "projection" BucketsListProjection :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" (Textual Word32) :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] Buckets
 
 -- | Retrieves a list of buckets for a given project.
 --
 -- /See:/ 'bucketsList' smart constructor.
 data BucketsList = BucketsList'
-    { _blProject    :: !Text
-    , _blPrefix     :: !(Maybe Text)
-    , _blProjection :: !(Maybe BucketsListProjection)
-    , _blPageToken  :: !(Maybe Text)
-    , _blMaxResults :: !(Maybe (Textual Word32))
+    { _blProject     :: !Text
+    , _blPrefix      :: !(Maybe Text)
+    , _blUserProject :: !(Maybe Text)
+    , _blProjection  :: !(Maybe BucketsListProjection)
+    , _blPageToken   :: !(Maybe Text)
+    , _blMaxResults  :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketsList' with the minimum fields required to make a request.
@@ -74,6 +77,8 @@ data BucketsList = BucketsList'
 -- * 'blProject'
 --
 -- * 'blPrefix'
+--
+-- * 'blUserProject'
 --
 -- * 'blProjection'
 --
@@ -87,9 +92,10 @@ bucketsList pBlProject_ =
     BucketsList'
     { _blProject = pBlProject_
     , _blPrefix = Nothing
+    , _blUserProject = Nothing
     , _blProjection = Nothing
     , _blPageToken = Nothing
-    , _blMaxResults = Nothing
+    , _blMaxResults = 1000
     }
 
 -- | A valid API project identifier.
@@ -100,6 +106,12 @@ blProject
 -- | Filter results to buckets whose names begin with this prefix.
 blPrefix :: Lens' BucketsList (Maybe Text)
 blPrefix = lens _blPrefix (\ s a -> s{_blPrefix = a})
+
+-- | The project to be billed for this request.
+blUserProject :: Lens' BucketsList (Maybe Text)
+blUserProject
+  = lens _blUserProject
+      (\ s a -> s{_blUserProject = a})
 
 -- | Set of properties to return. Defaults to noAcl.
 blProjection :: Lens' BucketsList (Maybe BucketsListProjection)
@@ -112,11 +124,12 @@ blPageToken :: Lens' BucketsList (Maybe Text)
 blPageToken
   = lens _blPageToken (\ s a -> s{_blPageToken = a})
 
--- | Maximum number of buckets to return.
-blMaxResults :: Lens' BucketsList (Maybe Word32)
+-- | Maximum number of buckets to return in a single response. The service
+-- will use this parameter or 1,000 items, whichever is smaller.
+blMaxResults :: Lens' BucketsList Word32
 blMaxResults
   = lens _blMaxResults (\ s a -> s{_blMaxResults = a})
-      . mapping _Coerce
+      . _Coerce
 
 instance GoogleRequest BucketsList where
         type Rs BucketsList = Buckets
@@ -127,9 +140,10 @@ instance GoogleRequest BucketsList where
                "https://www.googleapis.com/auth/devstorage.read_only",
                "https://www.googleapis.com/auth/devstorage.read_write"]
         requestClient BucketsList'{..}
-          = go (Just _blProject) _blPrefix _blProjection
+          = go (Just _blProject) _blPrefix _blUserProject
+              _blProjection
               _blPageToken
-              _blMaxResults
+              (Just _blMaxResults)
               (Just AltJSON)
               storageService
           where go

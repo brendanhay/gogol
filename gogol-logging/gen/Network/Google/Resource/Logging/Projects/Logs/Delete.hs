@@ -21,7 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Deletes all the log entries in a log. The log reappears if it receives
--- new entries.
+-- new entries. Log entries written shortly before the delete operation
+-- might not be deleted.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.projects.logs.delete@.
 module Network.Google.Resource.Logging.Projects.Logs.Delete
@@ -36,10 +37,8 @@ module Network.Google.Resource.Logging.Projects.Logs.Delete
     -- * Request Lenses
     , pldXgafv
     , pldUploadProtocol
-    , pldPp
     , pldAccessToken
     , pldUploadType
-    , pldBearerToken
     , pldLogName
     , pldCallback
     ) where
@@ -54,24 +53,21 @@ type ProjectsLogsDeleteResource =
        Capture "logName" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :> Delete '[JSON] Empty
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
 -- | Deletes all the log entries in a log. The log reappears if it receives
--- new entries.
+-- new entries. Log entries written shortly before the delete operation
+-- might not be deleted.
 --
 -- /See:/ 'projectsLogsDelete' smart constructor.
 data ProjectsLogsDelete = ProjectsLogsDelete'
     { _pldXgafv          :: !(Maybe Xgafv)
     , _pldUploadProtocol :: !(Maybe Text)
-    , _pldPp             :: !Bool
     , _pldAccessToken    :: !(Maybe Text)
     , _pldUploadType     :: !(Maybe Text)
-    , _pldBearerToken    :: !(Maybe Text)
     , _pldLogName        :: !Text
     , _pldCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -84,13 +80,9 @@ data ProjectsLogsDelete = ProjectsLogsDelete'
 --
 -- * 'pldUploadProtocol'
 --
--- * 'pldPp'
---
 -- * 'pldAccessToken'
 --
 -- * 'pldUploadType'
---
--- * 'pldBearerToken'
 --
 -- * 'pldLogName'
 --
@@ -102,10 +94,8 @@ projectsLogsDelete pPldLogName_ =
     ProjectsLogsDelete'
     { _pldXgafv = Nothing
     , _pldUploadProtocol = Nothing
-    , _pldPp = True
     , _pldAccessToken = Nothing
     , _pldUploadType = Nothing
-    , _pldBearerToken = Nothing
     , _pldLogName = pPldLogName_
     , _pldCallback = Nothing
     }
@@ -120,10 +110,6 @@ pldUploadProtocol
   = lens _pldUploadProtocol
       (\ s a -> s{_pldUploadProtocol = a})
 
--- | Pretty-print response.
-pldPp :: Lens' ProjectsLogsDelete Bool
-pldPp = lens _pldPp (\ s a -> s{_pldPp = a})
-
 -- | OAuth access token.
 pldAccessToken :: Lens' ProjectsLogsDelete (Maybe Text)
 pldAccessToken
@@ -136,16 +122,12 @@ pldUploadType
   = lens _pldUploadType
       (\ s a -> s{_pldUploadType = a})
 
--- | OAuth bearer token.
-pldBearerToken :: Lens' ProjectsLogsDelete (Maybe Text)
-pldBearerToken
-  = lens _pldBearerToken
-      (\ s a -> s{_pldBearerToken = a})
-
 -- | Required. The resource name of the log to delete:
 -- \"projects\/[PROJECT_ID]\/logs\/[LOG_ID]\"
--- \"organizations\/[ORGANIZATION_ID]\/logs\/[LOG_ID]\" [LOG_ID] must be
--- URL-encoded. For example, \"projects\/my-project-id\/logs\/syslog\",
+-- \"organizations\/[ORGANIZATION_ID]\/logs\/[LOG_ID]\"
+-- \"billingAccounts\/[BILLING_ACCOUNT_ID]\/logs\/[LOG_ID]\"
+-- \"folders\/[FOLDER_ID]\/logs\/[LOG_ID]\" [LOG_ID] must be URL-encoded.
+-- For example, \"projects\/my-project-id\/logs\/syslog\",
 -- \"organizations\/1234567890\/logs\/cloudresourcemanager.googleapis.com%2Factivity\".
 -- For more information about log names, see LogEntry.
 pldLogName :: Lens' ProjectsLogsDelete Text
@@ -164,10 +146,8 @@ instance GoogleRequest ProjectsLogsDelete where
                "https://www.googleapis.com/auth/logging.admin"]
         requestClient ProjectsLogsDelete'{..}
           = go _pldLogName _pldXgafv _pldUploadProtocol
-              (Just _pldPp)
               _pldAccessToken
               _pldUploadType
-              _pldBearerToken
               _pldCallback
               (Just AltJSON)
               loggingService

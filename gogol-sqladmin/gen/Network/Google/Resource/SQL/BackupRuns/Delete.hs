@@ -22,7 +22,7 @@
 --
 -- Deletes the backup taken by a backup run.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.backupRuns.delete@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.backupRuns.delete@.
 module Network.Google.Resource.SQL.BackupRuns.Delete
     (
     -- * REST Resource

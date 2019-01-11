@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified instance group. Get a list of available instance
+-- Returns the specified instance group. Gets a list of available instance
 -- groups by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceGroups.get@.
@@ -55,7 +55,7 @@ type InstanceGroupsGetResource =
                    Capture "instanceGroup" Text :>
                      QueryParam "alt" AltJSON :> Get '[JSON] InstanceGroup
 
--- | Returns the specified instance group. Get a list of available instance
+-- | Returns the specified instance group. Gets a list of available instance
 -- groups by making a list() request.
 --
 -- /See:/ 'instanceGroupsGet' smart constructor.

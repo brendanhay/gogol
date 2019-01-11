@@ -21,10 +21,12 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Returns a list of courses that the requesting user is permitted to view,
--- restricted to those that match the request. This method returns the
--- following error codes: * \`PERMISSION_DENIED\` for access errors. *
--- \`INVALID_ARGUMENT\` if the query argument is malformed. * \`NOT_FOUND\`
--- if any users specified in the query arguments do not exist.
+-- restricted to those that match the request. Returned courses are ordered
+-- by creation time, with the most recently created coming first. This
+-- method returns the following error codes: * \`PERMISSION_DENIED\` for
+-- access errors. * \`INVALID_ARGUMENT\` if the query argument is
+-- malformed. * \`NOT_FOUND\` if any users specified in the query arguments
+-- do not exist.
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @classroom.courses.list@.
 module Network.Google.Resource.Classroom.Courses.List
@@ -40,11 +42,9 @@ module Network.Google.Resource.Classroom.Courses.List
     , clStudentId
     , clXgafv
     , clUploadProtocol
-    , clPp
     , clAccessToken
     , clUploadType
     , clTeacherId
-    , clBearerToken
     , clPageToken
     , clPageSize
     , clCourseStates
@@ -60,36 +60,34 @@ type CoursesListResource =
      "v1" :>
        "courses" :>
          QueryParam "studentId" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "teacherId" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "pageSize" (Textual Int32) :>
-                             QueryParams "courseStates" Text :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" AltJSON :>
-                                   Get '[JSON] ListCoursesResponse
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "teacherId" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "pageSize" (Textual Int32) :>
+                         QueryParams "courseStates" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] ListCoursesResponse
 
 -- | Returns a list of courses that the requesting user is permitted to view,
--- restricted to those that match the request. This method returns the
--- following error codes: * \`PERMISSION_DENIED\` for access errors. *
--- \`INVALID_ARGUMENT\` if the query argument is malformed. * \`NOT_FOUND\`
--- if any users specified in the query arguments do not exist.
+-- restricted to those that match the request. Returned courses are ordered
+-- by creation time, with the most recently created coming first. This
+-- method returns the following error codes: * \`PERMISSION_DENIED\` for
+-- access errors. * \`INVALID_ARGUMENT\` if the query argument is
+-- malformed. * \`NOT_FOUND\` if any users specified in the query arguments
+-- do not exist.
 --
 -- /See:/ 'coursesList' smart constructor.
 data CoursesList = CoursesList'
     { _clStudentId      :: !(Maybe Text)
-    , _clXgafv          :: !(Maybe Text)
+    , _clXgafv          :: !(Maybe Xgafv)
     , _clUploadProtocol :: !(Maybe Text)
-    , _clPp             :: !Bool
     , _clAccessToken    :: !(Maybe Text)
     , _clUploadType     :: !(Maybe Text)
     , _clTeacherId      :: !(Maybe Text)
-    , _clBearerToken    :: !(Maybe Text)
     , _clPageToken      :: !(Maybe Text)
     , _clPageSize       :: !(Maybe (Textual Int32))
     , _clCourseStates   :: !(Maybe [Text])
@@ -106,15 +104,11 @@ data CoursesList = CoursesList'
 --
 -- * 'clUploadProtocol'
 --
--- * 'clPp'
---
 -- * 'clAccessToken'
 --
 -- * 'clUploadType'
 --
 -- * 'clTeacherId'
---
--- * 'clBearerToken'
 --
 -- * 'clPageToken'
 --
@@ -130,11 +124,9 @@ coursesList =
     { _clStudentId = Nothing
     , _clXgafv = Nothing
     , _clUploadProtocol = Nothing
-    , _clPp = True
     , _clAccessToken = Nothing
     , _clUploadType = Nothing
     , _clTeacherId = Nothing
-    , _clBearerToken = Nothing
     , _clPageToken = Nothing
     , _clPageSize = Nothing
     , _clCourseStates = Nothing
@@ -150,7 +142,7 @@ clStudentId
   = lens _clStudentId (\ s a -> s{_clStudentId = a})
 
 -- | V1 error format.
-clXgafv :: Lens' CoursesList (Maybe Text)
+clXgafv :: Lens' CoursesList (Maybe Xgafv)
 clXgafv = lens _clXgafv (\ s a -> s{_clXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -158,10 +150,6 @@ clUploadProtocol :: Lens' CoursesList (Maybe Text)
 clUploadProtocol
   = lens _clUploadProtocol
       (\ s a -> s{_clUploadProtocol = a})
-
--- | Pretty-print response.
-clPp :: Lens' CoursesList Bool
-clPp = lens _clPp (\ s a -> s{_clPp = a})
 
 -- | OAuth access token.
 clAccessToken :: Lens' CoursesList (Maybe Text)
@@ -182,12 +170,6 @@ clTeacherId :: Lens' CoursesList (Maybe Text)
 clTeacherId
   = lens _clTeacherId (\ s a -> s{_clTeacherId = a})
 
--- | OAuth bearer token.
-clBearerToken :: Lens' CoursesList (Maybe Text)
-clBearerToken
-  = lens _clBearerToken
-      (\ s a -> s{_clBearerToken = a})
-
 -- | nextPageToken value returned from a previous list call, indicating that
 -- the subsequent page of results should be returned. The list request must
 -- be otherwise identical to the one that resulted in this token.
@@ -203,7 +185,8 @@ clPageSize
   = lens _clPageSize (\ s a -> s{_clPageSize = a}) .
       mapping _Coerce
 
--- | Restricts returned courses to those in one of the specified states
+-- | Restricts returned courses to those in one of the specified states The
+-- default value is ACTIVE, ARCHIVED, PROVISIONED, DECLINED.
 clCourseStates :: Lens' CoursesList [Text]
 clCourseStates
   = lens _clCourseStates
@@ -223,11 +206,9 @@ instance GoogleRequest CoursesList where
                "https://www.googleapis.com/auth/classroom.courses.readonly"]
         requestClient CoursesList'{..}
           = go _clStudentId _clXgafv _clUploadProtocol
-              (Just _clPp)
               _clAccessToken
               _clUploadType
               _clTeacherId
-              _clBearerToken
               _clPageToken
               _clPageSize
               (_clCourseStates ^. _Default)

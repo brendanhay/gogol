@@ -27,7 +27,7 @@
 -- similar. A request is scoped to activities from a given Google service
 -- using the source parameter.
 --
--- /See:/ <https://developers.google.com/google-apps/activity/ Google Apps Activity API Reference> for @appsactivity.activities.list@.
+-- /See:/ <https://developers.google.com/google-apps/activity/ Drive Activity API Reference> for @appsactivity.activities.list@.
 module Network.Google.Resource.AppsActivity.Activities.List
     (
     -- * REST Resource
@@ -161,11 +161,7 @@ alPageSize
 instance GoogleRequest ActivitiesList where
         type Rs ActivitiesList = ListActivitiesResponse
         type Scopes ActivitiesList =
-             '["https://www.googleapis.com/auth/activity",
-               "https://www.googleapis.com/auth/drive",
-               "https://www.googleapis.com/auth/drive.metadata",
-               "https://www.googleapis.com/auth/drive.metadata.readonly",
-               "https://www.googleapis.com/auth/drive.readonly"]
+             '["https://www.googleapis.com/auth/activity"]
         requestClient ActivitiesList'{..}
           = go _alDriveFileId _alDriveAncestorId
               (Just _alGroupingStrategy)

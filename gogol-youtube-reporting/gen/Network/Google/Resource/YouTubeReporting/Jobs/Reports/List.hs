@@ -38,13 +38,11 @@ module Network.Google.Resource.YouTubeReporting.Jobs.Reports.List
     , jrlXgafv
     , jrlJobId
     , jrlUploadProtocol
-    , jrlPp
     , jrlAccessToken
     , jrlUploadType
     , jrlStartTimeAtOrAfter
     , jrlStartTimeBefore
     , jrlOnBehalfOfContentOwner
-    , jrlBearerToken
     , jrlPageToken
     , jrlPageSize
     , jrlCallback
@@ -63,18 +61,16 @@ type JobsReportsListResource =
              QueryParam "createdAfter" DateTime' :>
                QueryParam "$.xgafv" Xgafv :>
                  QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "startTimeAtOrAfter" DateTime' :>
-                           QueryParam "startTimeBefore" DateTime' :>
-                             QueryParam "onBehalfOfContentOwner" Text :>
-                               QueryParam "bearer_token" Text :>
-                                 QueryParam "pageToken" Text :>
-                                   QueryParam "pageSize" (Textual Int32) :>
-                                     QueryParam "callback" Text :>
-                                       QueryParam "alt" AltJSON :>
-                                         Get '[JSON] ListReportsResponse
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "startTimeAtOrAfter" DateTime' :>
+                         QueryParam "startTimeBefore" DateTime' :>
+                           QueryParam "onBehalfOfContentOwner" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "pageSize" (Textual Int32) :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" AltJSON :>
+                                     Get '[JSON] ListReportsResponse
 
 -- | Lists reports created by a specific job. Returns NOT_FOUND if the job
 -- does not exist.
@@ -85,13 +81,11 @@ data JobsReportsList = JobsReportsList'
     , _jrlXgafv                  :: !(Maybe Xgafv)
     , _jrlJobId                  :: !Text
     , _jrlUploadProtocol         :: !(Maybe Text)
-    , _jrlPp                     :: !Bool
     , _jrlAccessToken            :: !(Maybe Text)
     , _jrlUploadType             :: !(Maybe Text)
     , _jrlStartTimeAtOrAfter     :: !(Maybe DateTime')
     , _jrlStartTimeBefore        :: !(Maybe DateTime')
     , _jrlOnBehalfOfContentOwner :: !(Maybe Text)
-    , _jrlBearerToken            :: !(Maybe Text)
     , _jrlPageToken              :: !(Maybe Text)
     , _jrlPageSize               :: !(Maybe (Textual Int32))
     , _jrlCallback               :: !(Maybe Text)
@@ -109,8 +103,6 @@ data JobsReportsList = JobsReportsList'
 --
 -- * 'jrlUploadProtocol'
 --
--- * 'jrlPp'
---
 -- * 'jrlAccessToken'
 --
 -- * 'jrlUploadType'
@@ -120,8 +112,6 @@ data JobsReportsList = JobsReportsList'
 -- * 'jrlStartTimeBefore'
 --
 -- * 'jrlOnBehalfOfContentOwner'
---
--- * 'jrlBearerToken'
 --
 -- * 'jrlPageToken'
 --
@@ -137,13 +127,11 @@ jobsReportsList pJrlJobId_ =
     , _jrlXgafv = Nothing
     , _jrlJobId = pJrlJobId_
     , _jrlUploadProtocol = Nothing
-    , _jrlPp = True
     , _jrlAccessToken = Nothing
     , _jrlUploadType = Nothing
     , _jrlStartTimeAtOrAfter = Nothing
     , _jrlStartTimeBefore = Nothing
     , _jrlOnBehalfOfContentOwner = Nothing
-    , _jrlBearerToken = Nothing
     , _jrlPageToken = Nothing
     , _jrlPageSize = Nothing
     , _jrlCallback = Nothing
@@ -170,10 +158,6 @@ jrlUploadProtocol :: Lens' JobsReportsList (Maybe Text)
 jrlUploadProtocol
   = lens _jrlUploadProtocol
       (\ s a -> s{_jrlUploadProtocol = a})
-
--- | Pretty-print response.
-jrlPp :: Lens' JobsReportsList Bool
-jrlPp = lens _jrlPp (\ s a -> s{_jrlPp = a})
 
 -- | OAuth access token.
 jrlAccessToken :: Lens' JobsReportsList (Maybe Text)
@@ -210,12 +194,6 @@ jrlOnBehalfOfContentOwner
   = lens _jrlOnBehalfOfContentOwner
       (\ s a -> s{_jrlOnBehalfOfContentOwner = a})
 
--- | OAuth bearer token.
-jrlBearerToken :: Lens' JobsReportsList (Maybe Text)
-jrlBearerToken
-  = lens _jrlBearerToken
-      (\ s a -> s{_jrlBearerToken = a})
-
 -- | A token identifying a page of results the server should return.
 -- Typically, this is the value of ListReportsResponse.next_page_token
 -- returned in response to the previous call to the \`ListReports\` method.
@@ -243,13 +221,11 @@ instance GoogleRequest JobsReportsList where
         requestClient JobsReportsList'{..}
           = go _jrlJobId _jrlCreatedAfter _jrlXgafv
               _jrlUploadProtocol
-              (Just _jrlPp)
               _jrlAccessToken
               _jrlUploadType
               _jrlStartTimeAtOrAfter
               _jrlStartTimeBefore
               _jrlOnBehalfOfContentOwner
-              _jrlBearerToken
               _jrlPageToken
               _jrlPageSize
               _jrlCallback

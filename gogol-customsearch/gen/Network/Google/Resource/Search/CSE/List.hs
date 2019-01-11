@@ -49,7 +49,6 @@ module Network.Google.Resource.Search.CSE.List
     , cselGooglehost
     , cselRelatedSite
     , cselHl
-    , cselCref
     , cselSort
     , cselSiteSearch
     , cselFilter
@@ -93,53 +92,50 @@ type CSEListResource =
                                  QueryParam "googlehost" Text :>
                                    QueryParam "relatedSite" Text :>
                                      QueryParam "hl" Text :>
-                                       QueryParam "cref" Text :>
-                                         QueryParam "sort" Text :>
-                                           QueryParam "siteSearch" Text :>
-                                             QueryParam "filter" CSEListFilter
-                                               :>
-                                               QueryParam "dateRestrict" Text :>
-                                                 QueryParam "linkSite" Text :>
-                                                   QueryParam "lowRange" Text :>
-                                                     QueryParam "imgType"
-                                                       CSEListImgType
-                                                       :>
-                                                       QueryParam "gl" Text :>
-                                                         QueryParam "cx" Text :>
-                                                           QueryParam
-                                                             "imgColorType"
-                                                             CSEListImgColorType
+                                       QueryParam "sort" Text :>
+                                         QueryParam "siteSearch" Text :>
+                                           QueryParam "filter" CSEListFilter :>
+                                             QueryParam "dateRestrict" Text :>
+                                               QueryParam "linkSite" Text :>
+                                                 QueryParam "lowRange" Text :>
+                                                   QueryParam "imgType"
+                                                     CSEListImgType
+                                                     :>
+                                                     QueryParam "gl" Text :>
+                                                       QueryParam "cx" Text :>
+                                                         QueryParam
+                                                           "imgColorType"
+                                                           CSEListImgColorType
+                                                           :>
+                                                           QueryParam "imgSize"
+                                                             CSEListImgSize
                                                              :>
                                                              QueryParam
-                                                               "imgSize"
-                                                               CSEListImgSize
+                                                               "exactTerms"
+                                                               Text
                                                                :>
-                                                               QueryParam
-                                                                 "exactTerms"
+                                                               QueryParam "cr"
                                                                  Text
                                                                  :>
-                                                                 QueryParam "cr"
-                                                                   Text
+                                                                 QueryParam
+                                                                   "safe"
+                                                                   CSEListSafe
                                                                    :>
                                                                    QueryParam
-                                                                     "safe"
-                                                                     CSEListSafe
+                                                                     "hq"
+                                                                     Text
                                                                      :>
                                                                      QueryParam
-                                                                       "hq"
+                                                                       "highRange"
                                                                        Text
                                                                        :>
                                                                        QueryParam
-                                                                         "highRange"
-                                                                         Text
+                                                                         "alt"
+                                                                         AltJSON
                                                                          :>
-                                                                         QueryParam
-                                                                           "alt"
-                                                                           AltJSON
-                                                                           :>
-                                                                           Get
-                                                                             '[JSON]
-                                                                             Search
+                                                                         Get
+                                                                           '[JSON]
+                                                                           Search
 
 -- | Returns metadata about the search performed, metadata about the custom
 -- search engine used for the search, and the search results.
@@ -161,7 +157,6 @@ data CSEList = CSEList'
     , _cselGooglehost       :: !(Maybe Text)
     , _cselRelatedSite      :: !(Maybe Text)
     , _cselHl               :: !(Maybe Text)
-    , _cselCref             :: !(Maybe Text)
     , _cselSort             :: !(Maybe Text)
     , _cselSiteSearch       :: !(Maybe Text)
     , _cselFilter           :: !(Maybe CSEListFilter)
@@ -214,8 +209,6 @@ data CSEList = CSEList'
 --
 -- * 'cselHl'
 --
--- * 'cselCref'
---
 -- * 'cselSort'
 --
 -- * 'cselSiteSearch'
@@ -267,7 +260,6 @@ cSEList pCselQ_ =
     , _cselGooglehost = Nothing
     , _cselRelatedSite = Nothing
     , _cselHl = Nothing
-    , _cselCref = Nothing
     , _cselSort = Nothing
     , _cselSiteSearch = Nothing
     , _cselFilter = Nothing
@@ -286,8 +278,8 @@ cSEList pCselQ_ =
     , _cselHighRange = Nothing
     }
 
--- | Returns images of a specific dominant color: yellow, green, teal, blue,
--- purple, pink, white, gray, black and brown.
+-- | Returns images of a specific dominant color: red, orange, yellow, green,
+-- teal, blue, purple, pink, white, gray, black and brown.
 cselImgDominantColor :: Lens' CSEList (Maybe CSEListImgDominantColor)
 cselImgDominantColor
   = lens _cselImgDominantColor
@@ -373,10 +365,6 @@ cselRelatedSite
 -- | Sets the user interface language.
 cselHl :: Lens' CSEList (Maybe Text)
 cselHl = lens _cselHl (\ s a -> s{_cselHl = a})
-
--- | The URL of a linked custom search engine
-cselCref :: Lens' CSEList (Maybe Text)
-cselCref = lens _cselCref (\ s a -> s{_cselCref = a})
 
 -- | The sort expression to apply to the results
 cselSort :: Lens' CSEList (Maybe Text)
@@ -482,7 +470,6 @@ instance GoogleRequest CSEList where
               _cselGooglehost
               _cselRelatedSite
               _cselHl
-              _cselCref
               _cselSort
               _cselSiteSearch
               _cselFilter

@@ -139,14 +139,53 @@ module Network.Google.Drive
     -- ** drive.revisions.update
     , module Network.Google.Resource.Drive.Revisions.Update
 
+    -- ** drive.teamdrives.create
+    , module Network.Google.Resource.Drive.Teamdrives.Create
+
+    -- ** drive.teamdrives.delete
+    , module Network.Google.Resource.Drive.Teamdrives.Delete
+
+    -- ** drive.teamdrives.get
+    , module Network.Google.Resource.Drive.Teamdrives.Get
+
+    -- ** drive.teamdrives.list
+    , module Network.Google.Resource.Drive.Teamdrives.List
+
+    -- ** drive.teamdrives.update
+    , module Network.Google.Resource.Drive.Teamdrives.Update
+
     -- * Types
 
     -- ** FileList
     , FileList
     , fileList
     , flNextPageToken
+    , flIncompleteSearch
     , flKind
     , flFiles
+
+    -- ** TeamDriveCapabilities
+    , TeamDriveCapabilities
+    , teamDriveCapabilities
+    , tdcCanRename
+    , tdcCanChangeTeamMembersOnlyRestriction
+    , tdcCanComment
+    , tdcCanRenameTeamDrive
+    , tdcCanChangeTeamDriveBackgRound
+    , tdcCanDownload
+    , tdcCanChangeDomainUsersOnlyRestriction
+    , tdcCanTrashChildren
+    , tdcCanAddChildren
+    , tdcCanRemoveChildren
+    , tdcCanChangeCopyRequiresWriterPermissionRestriction
+    , tdcCanDeleteTeamDrive
+    , tdcCanListChildren
+    , tdcCanEdit
+    , tdcCanManageMembers
+    , tdcCanReadRevisions
+    , tdcCanDeleteChildren
+    , tdcCanCopy
+    , tdcCanShare
 
     -- ** FilesListCorpus
     , FilesListCorpus (..)
@@ -186,9 +225,28 @@ module Network.Google.Drive
     -- ** FileCapabilities
     , FileCapabilities
     , fileCapabilities
+    , fcCanRename
     , fcCanComment
+    , fcCanMoveChildrenWithinTeamDrive
+    , fcCanDelete
+    , fcCanMoveItemIntoTeamDrive
+    , fcCanDownload
+    , fcCanTrash
+    , fcCanUntrash
+    , fcCanTrashChildren
+    , fcCanAddChildren
+    , fcCanRemoveChildren
+    , fcCanMoveTeamDriveItem
+    , fcCanMoveItemWithinTeamDrive
+    , fcCanReadTeamDrive
+    , fcCanChangeCopyRequiresWriterPermission
+    , fcCanListChildren
+    , fcCanMoveChildrenOutOfTeamDrive
     , fcCanEdit
+    , fcCanChangeViewersCanCopyContent
     , fcCanReadRevisions
+    , fcCanDeleteChildren
+    , fcCanMoveItemOutOfTeamDrive
     , fcCanCopy
     , fcCanShare
 
@@ -205,6 +263,13 @@ module Network.Google.Drive
     , fchtImage
     , fchtMimeType
 
+    -- ** TeamDriveList
+    , TeamDriveList
+    , teamDriveList
+    , tdlNextPageToken
+    , tdlTeamDrives
+    , tdlKind
+
     -- ** Channel
     , Channel
     , channel
@@ -218,6 +283,29 @@ module Network.Google.Drive
     , cParams
     , cId
     , cType
+
+    -- ** AboutTeamDriveThemesItem
+    , AboutTeamDriveThemesItem
+    , aboutTeamDriveThemesItem
+    , atdtiColorRgb
+    , atdtiBackgRoundImageLink
+    , atdtiId
+
+    -- ** TeamDriveRestrictions
+    , TeamDriveRestrictions
+    , teamDriveRestrictions
+    , tdrTeamMembersOnly
+    , tdrAdminManagedRestrictions
+    , tdrCopyRequiresWriterPermission
+    , tdrDomainUsersOnly
+
+    -- ** TeamDriveBackgRoundImageFile
+    , TeamDriveBackgRoundImageFile
+    , teamDriveBackgRoundImageFile
+    , tdbrifXCoordinate
+    , tdbrifYCoordinate
+    , tdbrifWidth
+    , tdbrifId
 
     -- ** FileVideoMediaMetadata
     , FileVideoMediaMetadata
@@ -237,8 +325,25 @@ module Network.Google.Drive
     , chaRemoved
     , chaTime
     , chaKind
+    , chaTeamDrive
+    , chaTeamDriveId
+    , chaType
     , chaFileId
     , chaFile
+
+    -- ** TeamDrive
+    , TeamDrive
+    , teamDrive
+    , tdThemeId
+    , tdBackgRoundImageFile
+    , tdColorRgb
+    , tdCreatedTime
+    , tdKind
+    , tdBackgRoundImageLink
+    , tdName
+    , tdRestrictions
+    , tdId
+    , tdCapabilities
 
     -- ** AboutExportFormats
     , AboutExportFormats
@@ -262,6 +367,11 @@ module Network.Google.Drive
     , clNextPageToken
     , clChanges
     , clKind
+
+    -- ** RevisionExportLinks
+    , RevisionExportLinks
+    , revisionExportLinks
+    , relAddtional
 
     -- ** FileContentHints
     , FileContentHints
@@ -289,12 +399,14 @@ module Network.Google.Drive
     , about
     , aExportFormats
     , aMaxImportSizes
+    , aCanCreateTeamDrives
     , aImportFormats
     , aKind
     , aAppInstalled
     , aUser
     , aStorageQuota
     , aMaxUploadSize
+    , aTeamDriveThemes
     , aFolderColorPalette
 
     -- ** FileImageMediaMetadataLocation
@@ -364,6 +476,7 @@ module Network.Google.Drive
     , revMD5Checksum
     , revKeepForever
     , revMimeType
+    , revExportLinks
     , revPublishedOutsideDomain
     , revId
 
@@ -371,6 +484,7 @@ module Network.Google.Drive
     , Permission
     , permission
     , pPhotoLink
+    , pTeamDrivePermissionDetails
     , pKind
     , pDomain
     , pRole
@@ -378,6 +492,7 @@ module Network.Google.Drive
     , pAllowFileDiscovery
     , pDisplayName
     , pId
+    , pDeleted
     , pType
     , pExpirationTime
 
@@ -398,6 +513,7 @@ module Network.Google.Drive
     , fTrashed
     , fWebViewLink
     , fCreatedTime
+    , fTrashedTime
     , fOriginalFilename
     , fKind
     , fLastModifyingUser
@@ -408,16 +524,22 @@ module Network.Google.Drive
     , fExplicitlyTrashed
     , fShared
     , fMD5Checksum
+    , fTeamDriveId
     , fFolderColorRgb
     , fMimeType
     , fIsAppAuthorized
+    , fCopyRequiresWriterPermission
     , fName
+    , fExportLinks
     , fParents
     , fStarred
     , fSpaces
     , fVersion
+    , fHasAugmentedPermissions
     , fWritersCanShare
+    , fTrashingUser
     , fId
+    , fPermissionIds
     , fPermissions
     , fQuotaBytesUsed
     , fAppProperties
@@ -432,12 +554,25 @@ module Network.Google.Drive
     , fContentHints
     , fProperties
 
+    -- ** PermissionTeamDrivePermissionDetailsItem
+    , PermissionTeamDrivePermissionDetailsItem
+    , permissionTeamDrivePermissionDetailsItem
+    , ptdpdiInherited
+    , ptdpdiTeamDrivePermissionType
+    , ptdpdiRole
+    , ptdpdiInheritedFrom
+
     -- ** GeneratedIds
     , GeneratedIds
     , generatedIds
     , giSpace
     , giKind
     , giIds
+
+    -- ** FileExportLinks
+    , FileExportLinks
+    , fileExportLinks
+    , felAddtional
 
     -- ** CommentList
     , CommentList
@@ -456,6 +591,7 @@ module Network.Google.Drive
     -- ** PermissionList
     , PermissionList
     , permissionList
+    , plNextPageToken
     , plKind
     , plPermissions
     ) where
@@ -496,6 +632,11 @@ import           Network.Google.Resource.Drive.Revisions.Delete
 import           Network.Google.Resource.Drive.Revisions.Get
 import           Network.Google.Resource.Drive.Revisions.List
 import           Network.Google.Resource.Drive.Revisions.Update
+import           Network.Google.Resource.Drive.Teamdrives.Create
+import           Network.Google.Resource.Drive.Teamdrives.Delete
+import           Network.Google.Resource.Drive.Teamdrives.Get
+import           Network.Google.Resource.Drive.Teamdrives.List
+import           Network.Google.Resource.Drive.Teamdrives.Update
 
 {- $resources
 TODO
@@ -503,8 +644,12 @@ TODO
 
 -- | Represents the entirety of the methods and resources available for the Drive API service.
 type DriveAPI =
-     ChangesListResource :<|>
-       ChangesGetStartPageTokenResource
+     TeamdrivesListResource :<|> TeamdrivesGetResource
+       :<|> TeamdrivesCreateResource
+       :<|> TeamdrivesDeleteResource
+       :<|> TeamdrivesUpdateResource
+       :<|> ChangesListResource
+       :<|> ChangesGetStartPageTokenResource
        :<|> ChangesWatchResource
        :<|> ChannelsStopResource
        :<|> RepliesListResource

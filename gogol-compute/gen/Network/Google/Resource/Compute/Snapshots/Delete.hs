@@ -24,7 +24,7 @@
 -- single snapshot might not necessarily delete all the data on that
 -- snapshot. If any data on the snapshot that is marked for deletion is
 -- needed for subsequent snapshots, the data will be moved to the next
--- corresponding snapshot. For more information, see Deleting snaphots.
+-- corresponding snapshot. For more information, see Deleting snapshots.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.snapshots.delete@.
 module Network.Google.Resource.Compute.Snapshots.Delete
@@ -37,8 +37,9 @@ module Network.Google.Resource.Compute.Snapshots.Delete
     , SnapshotsDelete
 
     -- * Request Lenses
-    , snaSnapshot
-    , snaProject
+    , sddRequestId
+    , sddSnapshot
+    , sddProject
     ) where
 
 import           Network.Google.Compute.Types
@@ -54,46 +55,65 @@ type SnapshotsDeleteResource =
              "global" :>
                "snapshots" :>
                  Capture "snapshot" Text :>
-                   QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+                   QueryParam "requestId" Text :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified Snapshot resource. Keep in mind that deleting a
 -- single snapshot might not necessarily delete all the data on that
 -- snapshot. If any data on the snapshot that is marked for deletion is
 -- needed for subsequent snapshots, the data will be moved to the next
--- corresponding snapshot. For more information, see Deleting snaphots.
+-- corresponding snapshot. For more information, see Deleting snapshots.
 --
 -- /See:/ 'snapshotsDelete' smart constructor.
 data SnapshotsDelete = SnapshotsDelete'
-    { _snaSnapshot :: !Text
-    , _snaProject  :: !Text
+    { _sddRequestId :: !(Maybe Text)
+    , _sddSnapshot  :: !Text
+    , _sddProject   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SnapshotsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'snaSnapshot'
+-- * 'sddRequestId'
 --
--- * 'snaProject'
+-- * 'sddSnapshot'
+--
+-- * 'sddProject'
 snapshotsDelete
-    :: Text -- ^ 'snaSnapshot'
-    -> Text -- ^ 'snaProject'
+    :: Text -- ^ 'sddSnapshot'
+    -> Text -- ^ 'sddProject'
     -> SnapshotsDelete
-snapshotsDelete pSnaSnapshot_ pSnaProject_ =
+snapshotsDelete pSddSnapshot_ pSddProject_ =
     SnapshotsDelete'
-    { _snaSnapshot = pSnaSnapshot_
-    , _snaProject = pSnaProject_
+    { _sddRequestId = Nothing
+    , _sddSnapshot = pSddSnapshot_
+    , _sddProject = pSddProject_
     }
 
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+sddRequestId :: Lens' SnapshotsDelete (Maybe Text)
+sddRequestId
+  = lens _sddRequestId (\ s a -> s{_sddRequestId = a})
+
 -- | Name of the Snapshot resource to delete.
-snaSnapshot :: Lens' SnapshotsDelete Text
-snaSnapshot
-  = lens _snaSnapshot (\ s a -> s{_snaSnapshot = a})
+sddSnapshot :: Lens' SnapshotsDelete Text
+sddSnapshot
+  = lens _sddSnapshot (\ s a -> s{_sddSnapshot = a})
 
 -- | Project ID for this request.
-snaProject :: Lens' SnapshotsDelete Text
-snaProject
-  = lens _snaProject (\ s a -> s{_snaProject = a})
+sddProject :: Lens' SnapshotsDelete Text
+sddProject
+  = lens _sddProject (\ s a -> s{_sddProject = a})
 
 instance GoogleRequest SnapshotsDelete where
         type Rs SnapshotsDelete = Operation
@@ -101,7 +121,8 @@ instance GoogleRequest SnapshotsDelete where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient SnapshotsDelete'{..}
-          = go _snaProject _snaSnapshot (Just AltJSON)
+          = go _sddProject _sddSnapshot _sddRequestId
+              (Just AltJSON)
               computeService
           where go
                   = buildClient

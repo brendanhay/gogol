@@ -38,11 +38,9 @@ module Network.Google.Resource.Monitoring.Projects.TimeSeries.Create
     -- * Request Lenses
     , ptscXgafv
     , ptscUploadProtocol
-    , ptscPp
     , ptscAccessToken
     , ptscUploadType
     , ptscPayload
-    , ptscBearerToken
     , ptscName
     , ptscCallback
     ) where
@@ -58,14 +56,12 @@ type ProjectsTimeSeriesCreateResource =
          "timeSeries" :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] CreateTimeSeriesRequest :>
-                             Post '[JSON] Empty
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] CreateTimeSeriesRequest :>
+                         Post '[JSON] Empty
 
 -- | Creates or adds data to one or more time series. The response is empty
 -- if all time series in the request were written. If any time series could
@@ -76,11 +72,9 @@ type ProjectsTimeSeriesCreateResource =
 data ProjectsTimeSeriesCreate = ProjectsTimeSeriesCreate'
     { _ptscXgafv          :: !(Maybe Xgafv)
     , _ptscUploadProtocol :: !(Maybe Text)
-    , _ptscPp             :: !Bool
     , _ptscAccessToken    :: !(Maybe Text)
     , _ptscUploadType     :: !(Maybe Text)
     , _ptscPayload        :: !CreateTimeSeriesRequest
-    , _ptscBearerToken    :: !(Maybe Text)
     , _ptscName           :: !Text
     , _ptscCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -93,15 +87,11 @@ data ProjectsTimeSeriesCreate = ProjectsTimeSeriesCreate'
 --
 -- * 'ptscUploadProtocol'
 --
--- * 'ptscPp'
---
 -- * 'ptscAccessToken'
 --
 -- * 'ptscUploadType'
 --
 -- * 'ptscPayload'
---
--- * 'ptscBearerToken'
 --
 -- * 'ptscName'
 --
@@ -114,11 +104,9 @@ projectsTimeSeriesCreate pPtscPayload_ pPtscName_ =
     ProjectsTimeSeriesCreate'
     { _ptscXgafv = Nothing
     , _ptscUploadProtocol = Nothing
-    , _ptscPp = True
     , _ptscAccessToken = Nothing
     , _ptscUploadType = Nothing
     , _ptscPayload = pPtscPayload_
-    , _ptscBearerToken = Nothing
     , _ptscName = pPtscName_
     , _ptscCallback = Nothing
     }
@@ -133,10 +121,6 @@ ptscUploadProtocol :: Lens' ProjectsTimeSeriesCreate (Maybe Text)
 ptscUploadProtocol
   = lens _ptscUploadProtocol
       (\ s a -> s{_ptscUploadProtocol = a})
-
--- | Pretty-print response.
-ptscPp :: Lens' ProjectsTimeSeriesCreate Bool
-ptscPp = lens _ptscPp (\ s a -> s{_ptscPp = a})
 
 -- | OAuth access token.
 ptscAccessToken :: Lens' ProjectsTimeSeriesCreate (Maybe Text)
@@ -154,12 +138,6 @@ ptscUploadType
 ptscPayload :: Lens' ProjectsTimeSeriesCreate CreateTimeSeriesRequest
 ptscPayload
   = lens _ptscPayload (\ s a -> s{_ptscPayload = a})
-
--- | OAuth bearer token.
-ptscBearerToken :: Lens' ProjectsTimeSeriesCreate (Maybe Text)
-ptscBearerToken
-  = lens _ptscBearerToken
-      (\ s a -> s{_ptscBearerToken = a})
 
 -- | The project on which to execute the request. The format is
 -- \"projects\/{project_id_or_number}\".
@@ -179,10 +157,8 @@ instance GoogleRequest ProjectsTimeSeriesCreate where
                "https://www.googleapis.com/auth/monitoring.write"]
         requestClient ProjectsTimeSeriesCreate'{..}
           = go _ptscName _ptscXgafv _ptscUploadProtocol
-              (Just _ptscPp)
               _ptscAccessToken
               _ptscUploadType
-              _ptscBearerToken
               _ptscCallback
               (Just AltJSON)
               _ptscPayload

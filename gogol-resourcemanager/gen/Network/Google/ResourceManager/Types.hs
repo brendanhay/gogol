@@ -23,6 +23,12 @@ module Network.Google.ResourceManager.Types
     , cloudPlatformReadOnlyScope
     , cloudPlatformScope
 
+    -- * ListFoldersResponse
+    , ListFoldersResponse
+    , listFoldersResponse
+    , lfrNextPageToken
+    , lfrFolders
+
     -- * Status
     , Status
     , status
@@ -30,47 +36,37 @@ module Network.Google.ResourceManager.Types
     , sCode
     , sMessage
 
-    -- * SearchOrganizationsRequest
-    , SearchOrganizationsRequest
-    , searchOrganizationsRequest
-    , sorFilter
-    , sorPageToken
-    , sorPageSize
+    -- * FolderLifecycleState
+    , FolderLifecycleState (..)
 
-    -- * ResourceId
-    , ResourceId
-    , resourceId
-    , riId
-    , riType
+    -- * AuditConfig
+    , AuditConfig
+    , auditConfig
+    , acService
+    , acAuditLogConfigs
 
-    -- * ListProjectsResponse
-    , ListProjectsResponse
-    , listProjectsResponse
-    , lprNextPageToken
-    , lprProjects
+    -- * Expr
+    , Expr
+    , expr
+    , eLocation
+    , eExpression
+    , eTitle
+    , eDescription
 
     -- * GetIAMPolicyRequest
     , GetIAMPolicyRequest
     , getIAMPolicyRequest
 
-    -- * OrganizationOwner
-    , OrganizationOwner
-    , organizationOwner
-    , ooDirectoryCustomerId
+    -- * SearchFoldersRequest
+    , SearchFoldersRequest
+    , searchFoldersRequest
+    , sfrQuery
+    , sfrPageToken
+    , sfrPageSize
 
-    -- * OrganizationLifecycleState
-    , OrganizationLifecycleState (..)
-
-    -- * Project
-    , Project
-    , project
-    , pParent
-    , pProjectNumber
-    , pName
-    , pLabels
-    , pProjectId
-    , pLifecycleState
-    , pCreateTime
+    -- * UndeleteFolderRequest
+    , UndeleteFolderRequest
+    , undeleteFolderRequest
 
     -- * Operation
     , Operation
@@ -81,12 +77,14 @@ module Network.Google.ResourceManager.Types
     , oName
     , oMetadata
 
-    -- * Empty
-    , Empty
-    , empty
-
     -- * FolderOperationErrorErrorMessageId
     , FolderOperationErrorErrorMessageId (..)
+
+    -- * SearchFoldersResponse
+    , SearchFoldersResponse
+    , searchFoldersResponse
+    , sfrNextPageToken
+    , sfrFolders
 
     -- * ProjectCreationStatus
     , ProjectCreationStatus
@@ -105,16 +103,26 @@ module Network.Google.ResourceManager.Types
     , folderOperationError
     , foeErrorMessageId
 
+    -- * Folder
+    , Folder
+    , folder
+    , fParent
+    , fName
+    , fDisplayName
+    , fLifecycleState
+    , fCreateTime
+
     -- * FolderOperationOperationType
     , FolderOperationOperationType (..)
 
     -- * SetIAMPolicyRequest
     , SetIAMPolicyRequest
     , setIAMPolicyRequest
+    , siprUpdateMask
     , siprPolicy
 
-    -- * ProjectLifecycleState
-    , ProjectLifecycleState (..)
+    -- * AuditLogConfigLogType
+    , AuditLogConfigLogType (..)
 
     -- * Xgafv
     , Xgafv (..)
@@ -124,21 +132,6 @@ module Network.Google.ResourceManager.Types
     , testIAMPermissionsRequest
     , tiprPermissions
 
-    -- * GetAncestryRequest
-    , GetAncestryRequest
-    , getAncestryRequest
-
-    -- * SearchOrganizationsResponse
-    , SearchOrganizationsResponse
-    , searchOrganizationsResponse
-    , sorNextPageToken
-    , sorOrganizations
-
-    -- * GetAncestryResponse
-    , GetAncestryResponse
-    , getAncestryResponse
-    , garAncestor
-
     -- * TestIAMPermissionsResponse
     , TestIAMPermissionsResponse
     , testIAMPermissionsResponse
@@ -147,14 +140,10 @@ module Network.Google.ResourceManager.Types
     -- * Policy
     , Policy
     , policy
+    , pAuditConfigs
     , pEtag
     , pVersion
     , pBindings
-
-    -- * ProjectLabels
-    , ProjectLabels
-    , projectLabels
-    , plAddtional
 
     -- * OperationMetadata
     , OperationMetadata
@@ -169,45 +158,39 @@ module Network.Google.ResourceManager.Types
     , foOperationType
     , foSourceParent
 
-    -- * Organization
-    , Organization
-    , organization
-    , orgCreationTime
-    , orgOwner
-    , orgName
-    , orgDisplayName
-    , orgLifecycleState
-
-    -- * Ancestor
-    , Ancestor
-    , ancestor
-    , aResourceId
+    -- * AuditLogConfig
+    , AuditLogConfig
+    , auditLogConfig
+    , alcLogType
+    , alcExemptedMembers
 
     -- * OperationResponse
     , OperationResponse
     , operationResponse
     , orAddtional
 
-    -- * UndeleteProjectRequest
-    , UndeleteProjectRequest
-    , undeleteProjectRequest
+    -- * MoveFolderRequest
+    , MoveFolderRequest
+    , moveFolderRequest
+    , mfrDestinationParent
 
     -- * Binding
     , Binding
     , binding
     , bMembers
     , bRole
+    , bCondition
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types.Product
 import           Network.Google.ResourceManager.Types.Sum
 
--- | Default request referring to version 'v1' of the Google Cloud Resource Manager API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v2' of the Cloud Resource Manager API. This contains the host and root path used as a starting point for constructing service requests.
 resourceManagerService :: ServiceConfig
 resourceManagerService
   = defaultService
-      (ServiceId "cloudresourcemanager:v1")
+      (ServiceId "cloudresourcemanager:v2")
       "cloudresourcemanager.googleapis.com"
 
 -- | View your data across Google Cloud Platform services

@@ -21,7 +21,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Returns all of the details about the specified managed instance group.
--- Get a list of available managed instance groups by making a list()
+-- Gets a list of available managed instance groups by making a list()
 -- request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceGroupManagers.get@.
@@ -58,7 +58,7 @@ type InstanceGroupManagersGetResource =
                        Get '[JSON] InstanceGroupManager
 
 -- | Returns all of the details about the specified managed instance group.
--- Get a list of available managed instance groups by making a list()
+-- Gets a list of available managed instance groups by making a list()
 -- request.
 --
 -- /See:/ 'instanceGroupManagersGet' smart constructor.

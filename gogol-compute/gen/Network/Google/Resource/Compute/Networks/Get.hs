@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified network. Get a list of available networks by
+-- Returns the specified network. Gets a list of available networks by
 -- making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.networks.get@.
@@ -53,7 +53,7 @@ type NetworksGetResource =
                  Capture "network" Text :>
                    QueryParam "alt" AltJSON :> Get '[JSON] Network
 
--- | Returns the specified network. Get a list of available networks by
+-- | Returns the specified network. Gets a list of available networks by
 -- making a list() request.
 --
 -- /See:/ 'networksGet' smart constructor.

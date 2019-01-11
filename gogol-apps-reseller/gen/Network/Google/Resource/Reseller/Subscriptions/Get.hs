@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a subscription of the customer.
+-- Get a specific subscription.
 --
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @reseller.subscriptions.get@.
 module Network.Google.Resource.Reseller.Subscriptions.Get
@@ -52,7 +52,7 @@ type SubscriptionsGetResource =
                  Capture "subscriptionId" Text :>
                    QueryParam "alt" AltJSON :> Get '[JSON] Subscription
 
--- | Gets a subscription of the customer.
+-- | Get a specific subscription.
 --
 -- /See:/ 'subscriptionsGet' smart constructor.
 data SubscriptionsGet = SubscriptionsGet'
@@ -77,12 +77,19 @@ subscriptionsGet pSgCustomerId_ pSgSubscriptionId_ =
     , _sgSubscriptionId = pSgSubscriptionId_
     }
 
--- | Id of the Customer
+-- | Either the customer\'s primary domain name or the customer\'s unique
+-- identifier. If using the domain name, we do not recommend using a
+-- customerId as a key for persistent data. If the domain name for a
+-- customerId is changed, the Google system automatically updates.
 sgCustomerId :: Lens' SubscriptionsGet Text
 sgCustomerId
   = lens _sgCustomerId (\ s a -> s{_sgCustomerId = a})
 
--- | Id of the subscription, which is unique for a customer
+-- | This is a required property. The subscriptionId is the subscription
+-- identifier and is unique for each customer. Since a subscriptionId
+-- changes when a subscription is updated, we recommend to not use this ID
+-- as a key for persistent data. And the subscriptionId can be found using
+-- the retrieve all reseller subscriptions method.
 sgSubscriptionId :: Lens' SubscriptionsGet Text
 sgSubscriptionId
   = lens _sgSubscriptionId

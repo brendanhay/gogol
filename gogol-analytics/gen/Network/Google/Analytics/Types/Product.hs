@@ -20,6 +20,90 @@ module Network.Google.Analytics.Types.Product where
 import           Network.Google.Analytics.Types.Sum
 import           Network.Google.Prelude
 
+-- | JSON template for a user deletion request resource.
+--
+-- /See:/ 'userDeletionRequest' smart constructor.
+data UserDeletionRequest = UserDeletionRequest'
+    { _udrWebPropertyId       :: !(Maybe Text)
+    , _udrKind                :: !Text
+    , _udrId                  :: !(Maybe UserDeletionRequestId)
+    , _udrFirebaseProjectId   :: !(Maybe Text)
+    , _udrDeletionRequestTime :: !(Maybe DateTime')
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UserDeletionRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'udrWebPropertyId'
+--
+-- * 'udrKind'
+--
+-- * 'udrId'
+--
+-- * 'udrFirebaseProjectId'
+--
+-- * 'udrDeletionRequestTime'
+userDeletionRequest
+    :: UserDeletionRequest
+userDeletionRequest =
+    UserDeletionRequest'
+    { _udrWebPropertyId = Nothing
+    , _udrKind = "analytics#userDeletionRequest"
+    , _udrId = Nothing
+    , _udrFirebaseProjectId = Nothing
+    , _udrDeletionRequestTime = Nothing
+    }
+
+-- | Web property ID of the form UA-XXXXX-YY.
+udrWebPropertyId :: Lens' UserDeletionRequest (Maybe Text)
+udrWebPropertyId
+  = lens _udrWebPropertyId
+      (\ s a -> s{_udrWebPropertyId = a})
+
+-- | Value is \"analytics#userDeletionRequest\".
+udrKind :: Lens' UserDeletionRequest Text
+udrKind = lens _udrKind (\ s a -> s{_udrKind = a})
+
+-- | User ID.
+udrId :: Lens' UserDeletionRequest (Maybe UserDeletionRequestId)
+udrId = lens _udrId (\ s a -> s{_udrId = a})
+
+-- | Firebase Project Id
+udrFirebaseProjectId :: Lens' UserDeletionRequest (Maybe Text)
+udrFirebaseProjectId
+  = lens _udrFirebaseProjectId
+      (\ s a -> s{_udrFirebaseProjectId = a})
+
+-- | This marks the point in time for which all user data before should be
+-- deleted
+udrDeletionRequestTime :: Lens' UserDeletionRequest (Maybe UTCTime)
+udrDeletionRequestTime
+  = lens _udrDeletionRequestTime
+      (\ s a -> s{_udrDeletionRequestTime = a})
+      . mapping _DateTime
+
+instance FromJSON UserDeletionRequest where
+        parseJSON
+          = withObject "UserDeletionRequest"
+              (\ o ->
+                 UserDeletionRequest' <$>
+                   (o .:? "webPropertyId") <*>
+                     (o .:? "kind" .!= "analytics#userDeletionRequest")
+                     <*> (o .:? "id")
+                     <*> (o .:? "firebaseProjectId")
+                     <*> (o .:? "deletionRequestTime"))
+
+instance ToJSON UserDeletionRequest where
+        toJSON UserDeletionRequest'{..}
+          = object
+              (catMaybes
+                 [("webPropertyId" .=) <$> _udrWebPropertyId,
+                  Just ("kind" .= _udrKind), ("id" .=) <$> _udrId,
+                  ("firebaseProjectId" .=) <$> _udrFirebaseProjectId,
+                  ("deletionRequestTime" .=) <$>
+                    _udrDeletionRequestTime])
+
 -- | An unsampled report collection lists Analytics unsampled reports to
 -- which the user has access. Each view (profile) can have a set of
 -- unsampled reports. Each resource in the unsampled report collection
@@ -2185,6 +2269,72 @@ instance ToJSON WebPropertyChildLink where
                  [("href" .=) <$> _wpclHref,
                   Just ("type" .= _wpclType)])
 
+-- | JSON template for a hash Client Id response resource.
+--
+-- /See:/ 'hashClientIdResponse' smart constructor.
+data HashClientIdResponse = HashClientIdResponse'
+    { _hcirClientId       :: !(Maybe Text)
+    , _hcirWebPropertyId  :: !(Maybe Text)
+    , _hcirKind           :: !Text
+    , _hcirHashedClientId :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'HashClientIdResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'hcirClientId'
+--
+-- * 'hcirWebPropertyId'
+--
+-- * 'hcirKind'
+--
+-- * 'hcirHashedClientId'
+hashClientIdResponse
+    :: HashClientIdResponse
+hashClientIdResponse =
+    HashClientIdResponse'
+    { _hcirClientId = Nothing
+    , _hcirWebPropertyId = Nothing
+    , _hcirKind = "analytics#hashClientIdResponse"
+    , _hcirHashedClientId = Nothing
+    }
+
+hcirClientId :: Lens' HashClientIdResponse (Maybe Text)
+hcirClientId
+  = lens _hcirClientId (\ s a -> s{_hcirClientId = a})
+
+hcirWebPropertyId :: Lens' HashClientIdResponse (Maybe Text)
+hcirWebPropertyId
+  = lens _hcirWebPropertyId
+      (\ s a -> s{_hcirWebPropertyId = a})
+
+hcirKind :: Lens' HashClientIdResponse Text
+hcirKind = lens _hcirKind (\ s a -> s{_hcirKind = a})
+
+hcirHashedClientId :: Lens' HashClientIdResponse (Maybe Text)
+hcirHashedClientId
+  = lens _hcirHashedClientId
+      (\ s a -> s{_hcirHashedClientId = a})
+
+instance FromJSON HashClientIdResponse where
+        parseJSON
+          = withObject "HashClientIdResponse"
+              (\ o ->
+                 HashClientIdResponse' <$>
+                   (o .:? "clientId") <*> (o .:? "webPropertyId") <*>
+                     (o .:? "kind" .!= "analytics#hashClientIdResponse")
+                     <*> (o .:? "hashedClientId"))
+
+instance ToJSON HashClientIdResponse where
+        toJSON HashClientIdResponse'{..}
+          = object
+              (catMaybes
+                 [("clientId" .=) <$> _hcirClientId,
+                  ("webPropertyId" .=) <$> _hcirWebPropertyId,
+                  Just ("kind" .= _hcirKind),
+                  ("hashedClientId" .=) <$> _hcirHashedClientId])
+
 -- | Multi-Channel Funnels data for a given view (profile).
 --
 -- /See:/ 'mcfData' smart constructor.
@@ -4192,6 +4342,7 @@ data CustomDataSource = CustomDataSource'
     , _cKind           :: !Text
     , _cCreated        :: !(Maybe DateTime')
     , _cUploadType     :: !(Maybe Text)
+    , _cSchema         :: !(Maybe [Text])
     , _cImportBehavior :: !(Maybe Text)
     , _cSelfLink       :: !(Maybe Text)
     , _cAccountId      :: !(Maybe Text)
@@ -4218,6 +4369,8 @@ data CustomDataSource = CustomDataSource'
 -- * 'cCreated'
 --
 -- * 'cUploadType'
+--
+-- * 'cSchema'
 --
 -- * 'cImportBehavior'
 --
@@ -4246,6 +4399,7 @@ customDataSource =
     , _cKind = "analytics#customDataSource"
     , _cCreated = Nothing
     , _cUploadType = Nothing
+    , _cSchema = Nothing
     , _cImportBehavior = Nothing
     , _cSelfLink = Nothing
     , _cAccountId = Nothing
@@ -4284,9 +4438,16 @@ cCreated
   = lens _cCreated (\ s a -> s{_cCreated = a}) .
       mapping _DateTime
 
+-- | Upload type of the custom data source.
 cUploadType :: Lens' CustomDataSource (Maybe Text)
 cUploadType
   = lens _cUploadType (\ s a -> s{_cUploadType = a})
+
+-- | Collection of schema headers of the custom data source.
+cSchema :: Lens' CustomDataSource [Text]
+cSchema
+  = lens _cSchema (\ s a -> s{_cSchema = a}) . _Default
+      . _Coerce
 
 cImportBehavior :: Lens' CustomDataSource (Maybe Text)
 cImportBehavior
@@ -4344,6 +4505,7 @@ instance FromJSON CustomDataSource where
                      <*> (o .:? "kind" .!= "analytics#customDataSource")
                      <*> (o .:? "created")
                      <*> (o .:? "uploadType")
+                     <*> (o .:? "schema" .!= mempty)
                      <*> (o .:? "importBehavior")
                      <*> (o .:? "selfLink")
                      <*> (o .:? "accountId")
@@ -4364,6 +4526,7 @@ instance ToJSON CustomDataSource where
                   Just ("kind" .= _cKind),
                   ("created" .=) <$> _cCreated,
                   ("uploadType" .=) <$> _cUploadType,
+                  ("schema" .=) <$> _cSchema,
                   ("importBehavior" .=) <$> _cImportBehavior,
                   ("selfLink" .=) <$> _cSelfLink,
                   ("accountId" .=) <$> _cAccountId,
@@ -4371,6 +4534,110 @@ instance ToJSON CustomDataSource where
                   ("updated" .=) <$> _cUpdated, ("type" .=) <$> _cType,
                   ("description" .=) <$> _cDescription,
                   ("profilesLinked" .=) <$> _cProFilesLinked])
+
+-- | JSON template for an Analytics account tree requests. The account tree
+-- request is used in the provisioning api to create an account, property,
+-- and view (profile). It contains the basic information required to make
+-- these fields.
+--
+-- /See:/ 'accountTreeRequest' smart constructor.
+data AccountTreeRequest = AccountTreeRequest'
+    { _atrAccountSettings :: !(Maybe AccountTreeRequestAccountSettings)
+    , _atrWebPropertyName :: !(Maybe Text)
+    , _atrKind            :: !Text
+    , _atrAccountName     :: !(Maybe Text)
+    , _atrProFileName     :: !(Maybe Text)
+    , _atrWebsiteURL      :: !(Maybe Text)
+    , _atrTimezone        :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AccountTreeRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'atrAccountSettings'
+--
+-- * 'atrWebPropertyName'
+--
+-- * 'atrKind'
+--
+-- * 'atrAccountName'
+--
+-- * 'atrProFileName'
+--
+-- * 'atrWebsiteURL'
+--
+-- * 'atrTimezone'
+accountTreeRequest
+    :: AccountTreeRequest
+accountTreeRequest =
+    AccountTreeRequest'
+    { _atrAccountSettings = Nothing
+    , _atrWebPropertyName = Nothing
+    , _atrKind = "analytics#accountTreeRequest"
+    , _atrAccountName = Nothing
+    , _atrProFileName = Nothing
+    , _atrWebsiteURL = Nothing
+    , _atrTimezone = Nothing
+    }
+
+atrAccountSettings :: Lens' AccountTreeRequest (Maybe AccountTreeRequestAccountSettings)
+atrAccountSettings
+  = lens _atrAccountSettings
+      (\ s a -> s{_atrAccountSettings = a})
+
+atrWebPropertyName :: Lens' AccountTreeRequest (Maybe Text)
+atrWebPropertyName
+  = lens _atrWebPropertyName
+      (\ s a -> s{_atrWebPropertyName = a})
+
+-- | Resource type for account ticket.
+atrKind :: Lens' AccountTreeRequest Text
+atrKind = lens _atrKind (\ s a -> s{_atrKind = a})
+
+atrAccountName :: Lens' AccountTreeRequest (Maybe Text)
+atrAccountName
+  = lens _atrAccountName
+      (\ s a -> s{_atrAccountName = a})
+
+atrProFileName :: Lens' AccountTreeRequest (Maybe Text)
+atrProFileName
+  = lens _atrProFileName
+      (\ s a -> s{_atrProFileName = a})
+
+atrWebsiteURL :: Lens' AccountTreeRequest (Maybe Text)
+atrWebsiteURL
+  = lens _atrWebsiteURL
+      (\ s a -> s{_atrWebsiteURL = a})
+
+atrTimezone :: Lens' AccountTreeRequest (Maybe Text)
+atrTimezone
+  = lens _atrTimezone (\ s a -> s{_atrTimezone = a})
+
+instance FromJSON AccountTreeRequest where
+        parseJSON
+          = withObject "AccountTreeRequest"
+              (\ o ->
+                 AccountTreeRequest' <$>
+                   (o .:? "accountSettings") <*>
+                     (o .:? "webpropertyName")
+                     <*> (o .:? "kind" .!= "analytics#accountTreeRequest")
+                     <*> (o .:? "accountName")
+                     <*> (o .:? "profileName")
+                     <*> (o .:? "websiteUrl")
+                     <*> (o .:? "timezone"))
+
+instance ToJSON AccountTreeRequest where
+        toJSON AccountTreeRequest'{..}
+          = object
+              (catMaybes
+                 [("accountSettings" .=) <$> _atrAccountSettings,
+                  ("webpropertyName" .=) <$> _atrWebPropertyName,
+                  Just ("kind" .= _atrKind),
+                  ("accountName" .=) <$> _atrAccountName,
+                  ("profileName" .=) <$> _atrProFileName,
+                  ("websiteUrl" .=) <$> _atrWebsiteURL,
+                  ("timezone" .=) <$> _atrTimezone])
 
 -- | JSON template for a web property reference.
 --
@@ -4567,7 +4834,8 @@ lfaInternalWebPropertyId
 lfaId :: Lens' LinkedForeignAccount (Maybe Text)
 lfaId = lens _lfaId (\ s a -> s{_lfaId = a})
 
--- | The type of the foreign account. For example \`ADWORDS_LINKS\`.
+-- | The type of the foreign account. For example, \`ADWORDS_LINKS\`,
+-- \`DBM_LINKS\`, \`MCC_LINKS\` or \`OPTIMIZE\`.
 lfaType :: Lens' LinkedForeignAccount (Maybe Text)
 lfaType = lens _lfaType (\ s a -> s{_lfaType = a})
 
@@ -6162,6 +6430,89 @@ instance ToJSON FilterAdvancedDetails where
                   ("overrideOutputField" .=) <$>
                     _fadOverrideOutputField])
 
+-- | JSON template for an Analytics account tree response. The account tree
+-- response is used in the provisioning api to return the result of
+-- creating an account, property, and view (profile).
+--
+-- /See:/ 'accountTreeResponse' smart constructor.
+data AccountTreeResponse = AccountTreeResponse'
+    { _atrtAccountSettings :: !(Maybe AccountTreeResponseAccountSettings)
+    , _atrtKind            :: !Text
+    , _atrtProFile         :: !(Maybe ProFile)
+    , _atrtAccount         :: !(Maybe Account)
+    , _atrtWebProperty     :: !(Maybe WebProperty)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AccountTreeResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'atrtAccountSettings'
+--
+-- * 'atrtKind'
+--
+-- * 'atrtProFile'
+--
+-- * 'atrtAccount'
+--
+-- * 'atrtWebProperty'
+accountTreeResponse
+    :: AccountTreeResponse
+accountTreeResponse =
+    AccountTreeResponse'
+    { _atrtAccountSettings = Nothing
+    , _atrtKind = "analytics#accountTreeResponse"
+    , _atrtProFile = Nothing
+    , _atrtAccount = Nothing
+    , _atrtWebProperty = Nothing
+    }
+
+atrtAccountSettings :: Lens' AccountTreeResponse (Maybe AccountTreeResponseAccountSettings)
+atrtAccountSettings
+  = lens _atrtAccountSettings
+      (\ s a -> s{_atrtAccountSettings = a})
+
+-- | Resource type for account ticket.
+atrtKind :: Lens' AccountTreeResponse Text
+atrtKind = lens _atrtKind (\ s a -> s{_atrtKind = a})
+
+-- | View (Profile) for the account.
+atrtProFile :: Lens' AccountTreeResponse (Maybe ProFile)
+atrtProFile
+  = lens _atrtProFile (\ s a -> s{_atrtProFile = a})
+
+-- | The account created.
+atrtAccount :: Lens' AccountTreeResponse (Maybe Account)
+atrtAccount
+  = lens _atrtAccount (\ s a -> s{_atrtAccount = a})
+
+-- | Web property for the account.
+atrtWebProperty :: Lens' AccountTreeResponse (Maybe WebProperty)
+atrtWebProperty
+  = lens _atrtWebProperty
+      (\ s a -> s{_atrtWebProperty = a})
+
+instance FromJSON AccountTreeResponse where
+        parseJSON
+          = withObject "AccountTreeResponse"
+              (\ o ->
+                 AccountTreeResponse' <$>
+                   (o .:? "accountSettings") <*>
+                     (o .:? "kind" .!= "analytics#accountTreeResponse")
+                     <*> (o .:? "profile")
+                     <*> (o .:? "account")
+                     <*> (o .:? "webproperty"))
+
+instance ToJSON AccountTreeResponse where
+        toJSON AccountTreeResponse'{..}
+          = object
+              (catMaybes
+                 [("accountSettings" .=) <$> _atrtAccountSettings,
+                  Just ("kind" .= _atrtKind),
+                  ("profile" .=) <$> _atrtProFile,
+                  ("account" .=) <$> _atrtAccount,
+                  ("webproperty" .=) <$> _atrtWebProperty])
+
 -- | Details for the filter of the type UPPER.
 --
 -- /See:/ 'filterUppercaseDetails' smart constructor.
@@ -6396,6 +6747,61 @@ instance ToJSON FilterParentLink where
               (catMaybes
                  [("href" .=) <$> _fplHref,
                   Just ("type" .= _fplType)])
+
+-- | JSON template for a hash Client Id request resource.
+--
+-- /See:/ 'hashClientIdRequest' smart constructor.
+data HashClientIdRequest = HashClientIdRequest'
+    { _hClientId      :: !(Maybe Text)
+    , _hWebPropertyId :: !(Maybe Text)
+    , _hKind          :: !Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'HashClientIdRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'hClientId'
+--
+-- * 'hWebPropertyId'
+--
+-- * 'hKind'
+hashClientIdRequest
+    :: HashClientIdRequest
+hashClientIdRequest =
+    HashClientIdRequest'
+    { _hClientId = Nothing
+    , _hWebPropertyId = Nothing
+    , _hKind = "analytics#hashClientIdRequest"
+    }
+
+hClientId :: Lens' HashClientIdRequest (Maybe Text)
+hClientId
+  = lens _hClientId (\ s a -> s{_hClientId = a})
+
+hWebPropertyId :: Lens' HashClientIdRequest (Maybe Text)
+hWebPropertyId
+  = lens _hWebPropertyId
+      (\ s a -> s{_hWebPropertyId = a})
+
+hKind :: Lens' HashClientIdRequest Text
+hKind = lens _hKind (\ s a -> s{_hKind = a})
+
+instance FromJSON HashClientIdRequest where
+        parseJSON
+          = withObject "HashClientIdRequest"
+              (\ o ->
+                 HashClientIdRequest' <$>
+                   (o .:? "clientId") <*> (o .:? "webPropertyId") <*>
+                     (o .:? "kind" .!= "analytics#hashClientIdRequest"))
+
+instance ToJSON HashClientIdRequest where
+        toJSON HashClientIdRequest'{..}
+          = object
+              (catMaybes
+                 [("clientId" .=) <$> _hClientId,
+                  ("webPropertyId" .=) <$> _hWebPropertyId,
+                  Just ("kind" .= _hKind)])
 
 -- | Real time data for a given view (profile).
 --
@@ -6851,23 +7257,25 @@ instance ToJSON CustomDimensionParentLink where
 --
 -- /See:/ 'webProperty' smart constructor.
 data WebProperty = WebProperty'
-    { _wParentLink            :: !(Maybe WebPropertyParentLink)
-    , _wChildLink             :: !(Maybe WebPropertyChildLink)
-    , _wDefaultProFileId      :: !(Maybe (Textual Int64))
-    , _wKind                  :: !Text
-    , _wCreated               :: !(Maybe DateTime')
-    , _wSelfLink              :: !(Maybe Text)
-    , _wAccountId             :: !(Maybe Text)
-    , _wName                  :: !(Maybe Text)
-    , _wStarred               :: !(Maybe Bool)
-    , _wInternalWebPropertyId :: !(Maybe Text)
-    , _wId                    :: !(Maybe Text)
-    , _wUpdated               :: !(Maybe DateTime')
-    , _wProFileCount          :: !(Maybe (Textual Int32))
-    , _wPermissions           :: !(Maybe WebPropertyPermissions)
-    , _wWebsiteURL            :: !(Maybe Text)
-    , _wIndustryVertical      :: !(Maybe Text)
-    , _wLevel                 :: !(Maybe Text)
+    { _wParentLink                      :: !(Maybe WebPropertyParentLink)
+    , _wChildLink                       :: !(Maybe WebPropertyChildLink)
+    , _wDefaultProFileId                :: !(Maybe (Textual Int64))
+    , _wKind                            :: !Text
+    , _wCreated                         :: !(Maybe DateTime')
+    , _wDataRetentionTtl                :: !(Maybe Text)
+    , _wDataRetentionResetOnNewActivity :: !(Maybe Bool)
+    , _wSelfLink                        :: !(Maybe Text)
+    , _wAccountId                       :: !(Maybe Text)
+    , _wName                            :: !(Maybe Text)
+    , _wStarred                         :: !(Maybe Bool)
+    , _wInternalWebPropertyId           :: !(Maybe Text)
+    , _wId                              :: !(Maybe Text)
+    , _wUpdated                         :: !(Maybe DateTime')
+    , _wProFileCount                    :: !(Maybe (Textual Int32))
+    , _wPermissions                     :: !(Maybe WebPropertyPermissions)
+    , _wWebsiteURL                      :: !(Maybe Text)
+    , _wIndustryVertical                :: !(Maybe Text)
+    , _wLevel                           :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WebProperty' with the minimum fields required to make a request.
@@ -6883,6 +7291,10 @@ data WebProperty = WebProperty'
 -- * 'wKind'
 --
 -- * 'wCreated'
+--
+-- * 'wDataRetentionTtl'
+--
+-- * 'wDataRetentionResetOnNewActivity'
 --
 -- * 'wSelfLink'
 --
@@ -6916,6 +7328,8 @@ webProperty =
     , _wDefaultProFileId = Nothing
     , _wKind = "analytics#webproperty"
     , _wCreated = Nothing
+    , _wDataRetentionTtl = Nothing
+    , _wDataRetentionResetOnNewActivity = Nothing
     , _wSelfLink = Nothing
     , _wAccountId = Nothing
     , _wName = Nothing
@@ -6958,6 +7372,23 @@ wCreated :: Lens' WebProperty (Maybe UTCTime)
 wCreated
   = lens _wCreated (\ s a -> s{_wCreated = a}) .
       mapping _DateTime
+
+-- | The length of time for which user and event data is retained. This
+-- property cannot be set on insert.
+wDataRetentionTtl :: Lens' WebProperty (Maybe Text)
+wDataRetentionTtl
+  = lens _wDataRetentionTtl
+      (\ s a -> s{_wDataRetentionTtl = a})
+
+-- | Set to true to reset the retention period of the user identifier with
+-- each new event from that user (thus setting the expiration date to
+-- current time plus retention period). Set to false to delete data
+-- associated with the user identifer automatically after the rentention
+-- period. This property cannot be set on insert.
+wDataRetentionResetOnNewActivity :: Lens' WebProperty (Maybe Bool)
+wDataRetentionResetOnNewActivity
+  = lens _wDataRetentionResetOnNewActivity
+      (\ s a -> s{_wDataRetentionResetOnNewActivity = a})
 
 -- | Link for this web property.
 wSelfLink :: Lens' WebProperty (Maybe Text)
@@ -7029,6 +7460,8 @@ instance FromJSON WebProperty where
                      (o .:? "defaultProfileId")
                      <*> (o .:? "kind" .!= "analytics#webproperty")
                      <*> (o .:? "created")
+                     <*> (o .:? "dataRetentionTtl")
+                     <*> (o .:? "dataRetentionResetOnNewActivity")
                      <*> (o .:? "selfLink")
                      <*> (o .:? "accountId")
                      <*> (o .:? "name")
@@ -7051,6 +7484,9 @@ instance ToJSON WebProperty where
                   ("defaultProfileId" .=) <$> _wDefaultProFileId,
                   Just ("kind" .= _wKind),
                   ("created" .=) <$> _wCreated,
+                  ("dataRetentionTtl" .=) <$> _wDataRetentionTtl,
+                  ("dataRetentionResetOnNewActivity" .=) <$>
+                    _wDataRetentionResetOnNewActivity,
                   ("selfLink" .=) <$> _wSelfLink,
                   ("accountId" .=) <$> _wAccountId,
                   ("name" .=) <$> _wName, ("starred" .=) <$> _wStarred,
@@ -7333,6 +7769,80 @@ instance ToJSON GoalEventDetailsEventConditionsItem
                   ("comparisonValue" .=) <$> _gedeciComparisonValue,
                   ("type" .=) <$> _gedeciType,
                   ("comparisonType" .=) <$> _gedeciComparisonType])
+
+--
+-- /See:/ 'accountTreeRequestAccountSettings' smart constructor.
+data AccountTreeRequestAccountSettings = AccountTreeRequestAccountSettings'
+    { _atrasShareWithSpeciaLists       :: !(Maybe Bool)
+    , _atrasShareWithSupport           :: !(Maybe Bool)
+    , _atrasShareAnonymouslyWithOthers :: !(Maybe Bool)
+    , _atrasShareWithGoogleProducts    :: !(Maybe Bool)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AccountTreeRequestAccountSettings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'atrasShareWithSpeciaLists'
+--
+-- * 'atrasShareWithSupport'
+--
+-- * 'atrasShareAnonymouslyWithOthers'
+--
+-- * 'atrasShareWithGoogleProducts'
+accountTreeRequestAccountSettings
+    :: AccountTreeRequestAccountSettings
+accountTreeRequestAccountSettings =
+    AccountTreeRequestAccountSettings'
+    { _atrasShareWithSpeciaLists = Nothing
+    , _atrasShareWithSupport = Nothing
+    , _atrasShareAnonymouslyWithOthers = Nothing
+    , _atrasShareWithGoogleProducts = Nothing
+    }
+
+atrasShareWithSpeciaLists :: Lens' AccountTreeRequestAccountSettings (Maybe Bool)
+atrasShareWithSpeciaLists
+  = lens _atrasShareWithSpeciaLists
+      (\ s a -> s{_atrasShareWithSpeciaLists = a})
+
+atrasShareWithSupport :: Lens' AccountTreeRequestAccountSettings (Maybe Bool)
+atrasShareWithSupport
+  = lens _atrasShareWithSupport
+      (\ s a -> s{_atrasShareWithSupport = a})
+
+atrasShareAnonymouslyWithOthers :: Lens' AccountTreeRequestAccountSettings (Maybe Bool)
+atrasShareAnonymouslyWithOthers
+  = lens _atrasShareAnonymouslyWithOthers
+      (\ s a -> s{_atrasShareAnonymouslyWithOthers = a})
+
+atrasShareWithGoogleProducts :: Lens' AccountTreeRequestAccountSettings (Maybe Bool)
+atrasShareWithGoogleProducts
+  = lens _atrasShareWithGoogleProducts
+      (\ s a -> s{_atrasShareWithGoogleProducts = a})
+
+instance FromJSON AccountTreeRequestAccountSettings
+         where
+        parseJSON
+          = withObject "AccountTreeRequestAccountSettings"
+              (\ o ->
+                 AccountTreeRequestAccountSettings' <$>
+                   (o .:? "shareWithSpecialists") <*>
+                     (o .:? "shareWithSupport")
+                     <*> (o .:? "shareAnonymouslyWithOthers")
+                     <*> (o .:? "shareWithGoogleProducts"))
+
+instance ToJSON AccountTreeRequestAccountSettings
+         where
+        toJSON AccountTreeRequestAccountSettings'{..}
+          = object
+              (catMaybes
+                 [("shareWithSpecialists" .=) <$>
+                    _atrasShareWithSpeciaLists,
+                  ("shareWithSupport" .=) <$> _atrasShareWithSupport,
+                  ("shareAnonymouslyWithOthers" .=) <$>
+                    _atrasShareAnonymouslyWithOthers,
+                  ("shareWithGoogleProducts" .=) <$>
+                    _atrasShareWithGoogleProducts])
 
 -- | Analytics data request query parameters.
 --
@@ -8841,6 +9351,80 @@ instance ToJSON
                   ("includeConditions" .=) <$>
                     _rasbadIncludeConditions])
 
+--
+-- /See:/ 'accountTreeResponseAccountSettings' smart constructor.
+data AccountTreeResponseAccountSettings = AccountTreeResponseAccountSettings'
+    { _aShareWithSpeciaLists       :: !(Maybe Bool)
+    , _aShareWithSupport           :: !(Maybe Bool)
+    , _aShareAnonymouslyWithOthers :: !(Maybe Bool)
+    , _aShareWithGoogleProducts    :: !(Maybe Bool)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AccountTreeResponseAccountSettings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aShareWithSpeciaLists'
+--
+-- * 'aShareWithSupport'
+--
+-- * 'aShareAnonymouslyWithOthers'
+--
+-- * 'aShareWithGoogleProducts'
+accountTreeResponseAccountSettings
+    :: AccountTreeResponseAccountSettings
+accountTreeResponseAccountSettings =
+    AccountTreeResponseAccountSettings'
+    { _aShareWithSpeciaLists = Nothing
+    , _aShareWithSupport = Nothing
+    , _aShareAnonymouslyWithOthers = Nothing
+    , _aShareWithGoogleProducts = Nothing
+    }
+
+aShareWithSpeciaLists :: Lens' AccountTreeResponseAccountSettings (Maybe Bool)
+aShareWithSpeciaLists
+  = lens _aShareWithSpeciaLists
+      (\ s a -> s{_aShareWithSpeciaLists = a})
+
+aShareWithSupport :: Lens' AccountTreeResponseAccountSettings (Maybe Bool)
+aShareWithSupport
+  = lens _aShareWithSupport
+      (\ s a -> s{_aShareWithSupport = a})
+
+aShareAnonymouslyWithOthers :: Lens' AccountTreeResponseAccountSettings (Maybe Bool)
+aShareAnonymouslyWithOthers
+  = lens _aShareAnonymouslyWithOthers
+      (\ s a -> s{_aShareAnonymouslyWithOthers = a})
+
+aShareWithGoogleProducts :: Lens' AccountTreeResponseAccountSettings (Maybe Bool)
+aShareWithGoogleProducts
+  = lens _aShareWithGoogleProducts
+      (\ s a -> s{_aShareWithGoogleProducts = a})
+
+instance FromJSON AccountTreeResponseAccountSettings
+         where
+        parseJSON
+          = withObject "AccountTreeResponseAccountSettings"
+              (\ o ->
+                 AccountTreeResponseAccountSettings' <$>
+                   (o .:? "shareWithSpecialists") <*>
+                     (o .:? "shareWithSupport")
+                     <*> (o .:? "shareAnonymouslyWithOthers")
+                     <*> (o .:? "shareWithGoogleProducts"))
+
+instance ToJSON AccountTreeResponseAccountSettings
+         where
+        toJSON AccountTreeResponseAccountSettings'{..}
+          = object
+              (catMaybes
+                 [("shareWithSpecialists" .=) <$>
+                    _aShareWithSpeciaLists,
+                  ("shareWithSupport" .=) <$> _aShareWithSupport,
+                  ("shareAnonymouslyWithOthers" .=) <$>
+                    _aShareAnonymouslyWithOthers,
+                  ("shareWithGoogleProducts" .=) <$>
+                    _aShareWithGoogleProducts])
+
 -- | Details for the goal of the type URL_DESTINATION.
 --
 -- /See:/ 'goalURLDestinationDetails' smart constructor.
@@ -9206,6 +9790,7 @@ data Upload = Upload'
     { _uuStatus             :: !(Maybe Text)
     , _uuKind               :: !Text
     , _uuCustomDataSourceId :: !(Maybe Text)
+    , _uuUploadTime         :: !(Maybe DateTime')
     , _uuAccountId          :: !(Maybe (Textual Int64))
     , _uuId                 :: !(Maybe Text)
     , _uuErrors             :: !(Maybe [Text])
@@ -9221,6 +9806,8 @@ data Upload = Upload'
 --
 -- * 'uuCustomDataSourceId'
 --
+-- * 'uuUploadTime'
+--
 -- * 'uuAccountId'
 --
 -- * 'uuId'
@@ -9233,6 +9820,7 @@ upload =
     { _uuStatus = Nothing
     , _uuKind = "analytics#upload"
     , _uuCustomDataSourceId = Nothing
+    , _uuUploadTime = Nothing
     , _uuAccountId = Nothing
     , _uuId = Nothing
     , _uuErrors = Nothing
@@ -9252,6 +9840,12 @@ uuCustomDataSourceId :: Lens' Upload (Maybe Text)
 uuCustomDataSourceId
   = lens _uuCustomDataSourceId
       (\ s a -> s{_uuCustomDataSourceId = a})
+
+-- | Time this file is uploaded.
+uuUploadTime :: Lens' Upload (Maybe UTCTime)
+uuUploadTime
+  = lens _uuUploadTime (\ s a -> s{_uuUploadTime = a})
+      . mapping _DateTime
 
 -- | Account Id to which this upload belongs.
 uuAccountId :: Lens' Upload (Maybe Int64)
@@ -9278,6 +9872,7 @@ instance FromJSON Upload where
                    (o .:? "status") <*>
                      (o .:? "kind" .!= "analytics#upload")
                      <*> (o .:? "customDataSourceId")
+                     <*> (o .:? "uploadTime")
                      <*> (o .:? "accountId")
                      <*> (o .:? "id")
                      <*> (o .:? "errors" .!= mempty))
@@ -9289,6 +9884,7 @@ instance ToJSON Upload where
                  [("status" .=) <$> _uuStatus,
                   Just ("kind" .= _uuKind),
                   ("customDataSourceId" .=) <$> _uuCustomDataSourceId,
+                  ("uploadTime" .=) <$> _uuUploadTime,
                   ("accountId" .=) <$> _uuAccountId,
                   ("id" .=) <$> _uuId, ("errors" .=) <$> _uuErrors])
 
@@ -10099,6 +10695,52 @@ instance FromJSON McfDataTotalsForAllResults where
 
 instance ToJSON McfDataTotalsForAllResults where
         toJSON = toJSON . _mdtfarAddtional
+
+-- | User ID.
+--
+-- /See:/ 'userDeletionRequestId' smart constructor.
+data UserDeletionRequestId = UserDeletionRequestId'
+    { _udriUserId :: !(Maybe Text)
+    , _udriType   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UserDeletionRequestId' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'udriUserId'
+--
+-- * 'udriType'
+userDeletionRequestId
+    :: UserDeletionRequestId
+userDeletionRequestId =
+    UserDeletionRequestId'
+    { _udriUserId = Nothing
+    , _udriType = Nothing
+    }
+
+-- | The User\'s id
+udriUserId :: Lens' UserDeletionRequestId (Maybe Text)
+udriUserId
+  = lens _udriUserId (\ s a -> s{_udriUserId = a})
+
+-- | Type of user
+udriType :: Lens' UserDeletionRequestId (Maybe Text)
+udriType = lens _udriType (\ s a -> s{_udriType = a})
+
+instance FromJSON UserDeletionRequestId where
+        parseJSON
+          = withObject "UserDeletionRequestId"
+              (\ o ->
+                 UserDeletionRequestId' <$>
+                   (o .:? "userId") <*> (o .:? "type"))
+
+instance ToJSON UserDeletionRequestId where
+        toJSON UserDeletionRequestId'{..}
+          = object
+              (catMaybes
+                 [("userId" .=) <$> _udriUserId,
+                  ("type" .=) <$> _udriType])
 
 -- | Download details for a file stored in Google Cloud Storage.
 --

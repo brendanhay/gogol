@@ -13,12 +13,14 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Send and retrieve trace data from Google Cloud Trace. Data is generated
--- and available by default for all App Engine applications. Data from
--- other applications can be written to Cloud Trace for display, reporting,
--- and analysis.
+-- Sends application trace data to Stackdriver Trace for viewing. Trace
+-- data is collected for all App Engine applications by default. Trace data
+-- from other applications can be provided using this API. This library is
+-- used to interact with the Trace API directly. If you are looking to
+-- instrument your application for Stackdriver Trace, we recommend using
+-- OpenCensus.
 --
--- /See:/ <https://cloud.google.com/tools/cloud-trace Google Cloud Trace API Reference>
+-- /See:/ <https://cloud.google.com/trace Stackdriver Trace API Reference>
 module Network.Google.CloudTrace
     (
     -- * Service Configuration
@@ -26,7 +28,6 @@ module Network.Google.CloudTrace
 
     -- * OAuth Scopes
     , traceAppendScope
-    , traceReadOnlyScope
     , cloudPlatformScope
 
     -- * API Declaration
@@ -34,68 +35,167 @@ module Network.Google.CloudTrace
 
     -- * Resources
 
-    -- ** cloudtrace.projects.patchTraces
-    , module Network.Google.Resource.CloudTrace.Projects.PatchTraces
+    -- ** cloudtrace.projects.traces.batchWrite
+    , module Network.Google.Resource.CloudTrace.Projects.Traces.BatchWrite
 
-    -- ** cloudtrace.projects.traces.get
-    , module Network.Google.Resource.CloudTrace.Projects.Traces.Get
-
-    -- ** cloudtrace.projects.traces.list
-    , module Network.Google.Resource.CloudTrace.Projects.Traces.List
+    -- ** cloudtrace.projects.traces.spans.createSpan
+    , module Network.Google.Resource.CloudTrace.Projects.Traces.Spans.CreateSpan
 
     -- * Types
+
+    -- ** Span
+    , Span
+    , span
+    , sStatus
+    , sStartTime
+    , sChildSpanCount
+    , sSameProcessAsParentSpan
+    , sName
+    , sStackTrace
+    , sAttributes
+    , sEndTime
+    , sTimeEvents
+    , sDisplayName
+    , sParentSpanId
+    , sLinks
+    , sSpanId
+
+    -- ** TruncatableString
+    , TruncatableString
+    , truncatableString
+    , tsValue
+    , tsTruncatedByteCount
+
+    -- ** Status
+    , Status
+    , status
+    , sDetails
+    , sCode
+    , sMessage
+
+    -- ** AttributesAttributeMap
+    , AttributesAttributeMap
+    , attributesAttributeMap
+    , aamAddtional
+
+    -- ** Annotation
+    , Annotation
+    , annotation
+    , aAttributes
+    , aDescription
+
+    -- ** AttributeValue
+    , AttributeValue
+    , attributeValue
+    , avBoolValue
+    , avIntValue
+    , avStringValue
+
+    -- ** MessageEvent
+    , MessageEvent
+    , messageEvent
+    , meId
+    , meUncompressedSizeBytes
+    , meType
+    , meCompressedSizeBytes
 
     -- ** Empty
     , Empty
     , empty
 
-    -- ** TraceSpanLabels
-    , TraceSpanLabels
-    , traceSpanLabels
-    , tslAddtional
+    -- ** Link
+    , Link
+    , link
+    , lTraceId
+    , lAttributes
+    , lType
+    , lSpanId
 
-    -- ** Traces
-    , Traces
-    , traces
-    , tTraces
+    -- ** StatusDetailsItem
+    , StatusDetailsItem
+    , statusDetailsItem
+    , sdiAddtional
 
-    -- ** TraceSpan
-    , TraceSpan
-    , traceSpan
-    , tsStartTime
-    , tsKind
-    , tsName
-    , tsEndTime
-    , tsLabels
-    , tsParentSpanId
-    , tsSpanId
+    -- ** StackTrace
+    , StackTrace
+    , stackTrace
+    , stStackTraceHashId
+    , stStackFrames
 
-    -- ** ListTracesResponse
-    , ListTracesResponse
-    , listTracesResponse
-    , ltrNextPageToken
-    , ltrTraces
+    -- ** BatchWriteSpansRequest
+    , BatchWriteSpansRequest
+    , batchWriteSpansRequest
+    , bwsrSpans
 
-    -- ** Trace
-    , Trace
-    , trace
-    , tTraceId
-    , tSpans
-    , tProjectId
+    -- ** MessageEventType
+    , MessageEventType (..)
+
+    -- ** Attributes
+    , Attributes
+    , attributes
+    , aDroppedAttributesCount
+    , aAttributeMap
+
+    -- ** Module
+    , Module
+    , module'
+    , mBuildId
+    , mModule
+
+    -- ** TimeEvents
+    , TimeEvents
+    , timeEvents
+    , teDroppedMessageEventsCount
+    , teDroppedAnnotationsCount
+    , teTimeEvent
+
+    -- ** Xgafv
+    , Xgafv (..)
+
+    -- ** StackFrames
+    , StackFrames
+    , stackFrames
+    , sfDroppedFramesCount
+    , sfFrame
+
+    -- ** LinkType
+    , LinkType (..)
+
+    -- ** StackFrame
+    , StackFrame
+    , stackFrame
+    , sfLoadModule
+    , sfOriginalFunctionName
+    , sfLineNumber
+    , sfSourceVersion
+    , sfFunctionName
+    , sfColumnNumber
+    , sfFileName
+
+    -- ** Links
+    , Links
+    , links
+    , lDroppedLinksCount
+    , lLink
+
+    -- ** TimeEvent
+    , TimeEvent
+    , timeEvent
+    , teMessageEvent
+    , teAnnotation
+    , teTime
     ) where
 
 import           Network.Google.CloudTrace.Types
 import           Network.Google.Prelude
-import           Network.Google.Resource.CloudTrace.Projects.PatchTraces
-import           Network.Google.Resource.CloudTrace.Projects.Traces.Get
-import           Network.Google.Resource.CloudTrace.Projects.Traces.List
+import           Network.Google.Resource.CloudTrace.Projects.Traces.BatchWrite
+import           Network.Google.Resource.CloudTrace.Projects.Traces.Spans.CreateSpan
 
 {- $resources
 TODO
 -}
 
--- | Represents the entirety of the methods and resources available for the Google Cloud Trace API service.
+-- | Represents the entirety of the methods and resources available for the Stackdriver Trace API service.
 type CloudTraceAPI =
-     ProjectsTracesListResource :<|>
-       ProjectsTracesGetResource
-       :<|> ProjectsPatchTracesResource
+     ProjectsTracesSpansCreateSpanResource :<|>
+       ProjectsTracesBatchWriteResource

@@ -2176,6 +2176,43 @@ instance ToJSON BooksVolumesRecommendedRateResponse
                     _bvrrrConsistencyToken])
 
 --
+-- /See:/ 'userSettingsNotificationPriceDrop' smart constructor.
+newtype UserSettingsNotificationPriceDrop = UserSettingsNotificationPriceDrop'
+    { _usnpdOptedState :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UserSettingsNotificationPriceDrop' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'usnpdOptedState'
+userSettingsNotificationPriceDrop
+    :: UserSettingsNotificationPriceDrop
+userSettingsNotificationPriceDrop =
+    UserSettingsNotificationPriceDrop'
+    { _usnpdOptedState = Nothing
+    }
+
+usnpdOptedState :: Lens' UserSettingsNotificationPriceDrop (Maybe Text)
+usnpdOptedState
+  = lens _usnpdOptedState
+      (\ s a -> s{_usnpdOptedState = a})
+
+instance FromJSON UserSettingsNotificationPriceDrop
+         where
+        parseJSON
+          = withObject "UserSettingsNotificationPriceDrop"
+              (\ o ->
+                 UserSettingsNotificationPriceDrop' <$>
+                   (o .:? "opted_state"))
+
+instance ToJSON UserSettingsNotificationPriceDrop
+         where
+        toJSON UserSettingsNotificationPriceDrop'{..}
+          = object
+              (catMaybes [("opted_state" .=) <$> _usnpdOptedState])
+
+--
 -- /See:/ 'volumeseriesInfo' smart constructor.
 data VolumeseriesInfo = VolumeseriesInfo'
     { _viBookDisplayNumber    :: !(Maybe Text)
@@ -2399,6 +2436,7 @@ data Notification = Notification'
     , _nCrmExperimentIds               :: !(Maybe [Textual Int64])
     , _nPcampaignId                    :: !(Maybe Text)
     , _nReason                         :: !(Maybe Text)
+    , _nIsDocumentMature               :: !(Maybe Bool)
     , _nDontShowNotification           :: !(Maybe Bool)
     , _nNotificationType               :: !(Maybe Text)
     , _nNotificationGroup              :: !(Maybe Text)
@@ -2428,6 +2466,8 @@ data Notification = Notification'
 --
 -- * 'nReason'
 --
+-- * 'nIsDocumentMature'
+--
 -- * 'nDontShowNotification'
 --
 -- * 'nNotificationType'
@@ -2450,6 +2490,7 @@ notification =
     , _nCrmExperimentIds = Nothing
     , _nPcampaignId = Nothing
     , _nReason = Nothing
+    , _nIsDocumentMature = Nothing
     , _nDontShowNotification = Nothing
     , _nNotificationType = Nothing
     , _nNotificationGroup = Nothing
@@ -2494,6 +2535,11 @@ nPcampaignId
 nReason :: Lens' Notification (Maybe Text)
 nReason = lens _nReason (\ s a -> s{_nReason = a})
 
+nIsDocumentMature :: Lens' Notification (Maybe Bool)
+nIsDocumentMature
+  = lens _nIsDocumentMature
+      (\ s a -> s{_nIsDocumentMature = a})
+
 nDontShowNotification :: Lens' Notification (Maybe Bool)
 nDontShowNotification
   = lens _nDontShowNotification
@@ -2528,6 +2574,7 @@ instance FromJSON Notification where
                      <*> (o .:? "crmExperimentIds" .!= mempty)
                      <*> (o .:? "pcampaign_id")
                      <*> (o .:? "reason")
+                     <*> (o .:? "is_document_mature")
                      <*> (o .:? "dont_show_notification")
                      <*> (o .:? "notification_type")
                      <*> (o .:? "notificationGroup")
@@ -2547,6 +2594,7 @@ instance ToJSON Notification where
                   ("crmExperimentIds" .=) <$> _nCrmExperimentIds,
                   ("pcampaign_id" .=) <$> _nPcampaignId,
                   ("reason" .=) <$> _nReason,
+                  ("is_document_mature" .=) <$> _nIsDocumentMature,
                   ("dont_show_notification" .=) <$>
                     _nDontShowNotification,
                   ("notification_type" .=) <$> _nNotificationType,
@@ -4055,6 +4103,44 @@ instance ToJSON
                   ("source" .=) <$> _dddwisidieiSource])
 
 --
+-- /See:/ 'userSettingsNotificationRewardExpirations' smart constructor.
+newtype UserSettingsNotificationRewardExpirations = UserSettingsNotificationRewardExpirations'
+    { _usnreOptedState :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UserSettingsNotificationRewardExpirations' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'usnreOptedState'
+userSettingsNotificationRewardExpirations
+    :: UserSettingsNotificationRewardExpirations
+userSettingsNotificationRewardExpirations =
+    UserSettingsNotificationRewardExpirations'
+    { _usnreOptedState = Nothing
+    }
+
+usnreOptedState :: Lens' UserSettingsNotificationRewardExpirations (Maybe Text)
+usnreOptedState
+  = lens _usnreOptedState
+      (\ s a -> s{_usnreOptedState = a})
+
+instance FromJSON
+         UserSettingsNotificationRewardExpirations where
+        parseJSON
+          = withObject
+              "UserSettingsNotificationRewardExpirations"
+              (\ o ->
+                 UserSettingsNotificationRewardExpirations' <$>
+                   (o .:? "opted_state"))
+
+instance ToJSON
+         UserSettingsNotificationRewardExpirations where
+        toJSON UserSettingsNotificationRewardExpirations'{..}
+          = object
+              (catMaybes [("opted_state" .=) <$> _usnreOptedState])
+
+--
 -- /See:/ 'dictlayerData' smart constructor.
 data DictlayerData = DictlayerData'
     { _ddKind   :: !Text
@@ -4218,13 +4304,22 @@ instance ToJSON Seriesmembership where
 --
 -- /See:/ 'userSettingsNotification' smart constructor.
 data UserSettingsNotification = UserSettingsNotification'
-    { _usnMoreFromAuthors :: !(Maybe UserSettingsNotificationMoreFromAuthors)
-    , _usnMoreFromSeries  :: !(Maybe UserSettingsNotificationMoreFromSeries)
+    { _usnRewardExpirations :: !(Maybe UserSettingsNotificationRewardExpirations)
+    , _usnPriceDrop         :: !(Maybe UserSettingsNotificationPriceDrop)
+    , _usnMatchMyInterests  :: !(Maybe UserSettingsNotificationMatchMyInterests)
+    , _usnMoreFromAuthors   :: !(Maybe UserSettingsNotificationMoreFromAuthors)
+    , _usnMoreFromSeries    :: !(Maybe UserSettingsNotificationMoreFromSeries)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserSettingsNotification' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'usnRewardExpirations'
+--
+-- * 'usnPriceDrop'
+--
+-- * 'usnMatchMyInterests'
 --
 -- * 'usnMoreFromAuthors'
 --
@@ -4233,9 +4328,26 @@ userSettingsNotification
     :: UserSettingsNotification
 userSettingsNotification =
     UserSettingsNotification'
-    { _usnMoreFromAuthors = Nothing
+    { _usnRewardExpirations = Nothing
+    , _usnPriceDrop = Nothing
+    , _usnMatchMyInterests = Nothing
+    , _usnMoreFromAuthors = Nothing
     , _usnMoreFromSeries = Nothing
     }
+
+usnRewardExpirations :: Lens' UserSettingsNotification (Maybe UserSettingsNotificationRewardExpirations)
+usnRewardExpirations
+  = lens _usnRewardExpirations
+      (\ s a -> s{_usnRewardExpirations = a})
+
+usnPriceDrop :: Lens' UserSettingsNotification (Maybe UserSettingsNotificationPriceDrop)
+usnPriceDrop
+  = lens _usnPriceDrop (\ s a -> s{_usnPriceDrop = a})
+
+usnMatchMyInterests :: Lens' UserSettingsNotification (Maybe UserSettingsNotificationMatchMyInterests)
+usnMatchMyInterests
+  = lens _usnMatchMyInterests
+      (\ s a -> s{_usnMatchMyInterests = a})
 
 usnMoreFromAuthors :: Lens' UserSettingsNotification (Maybe UserSettingsNotificationMoreFromAuthors)
 usnMoreFromAuthors
@@ -4252,14 +4364,19 @@ instance FromJSON UserSettingsNotification where
           = withObject "UserSettingsNotification"
               (\ o ->
                  UserSettingsNotification' <$>
-                   (o .:? "moreFromAuthors") <*>
-                     (o .:? "moreFromSeries"))
+                   (o .:? "rewardExpirations") <*> (o .:? "priceDrop")
+                     <*> (o .:? "matchMyInterests")
+                     <*> (o .:? "moreFromAuthors")
+                     <*> (o .:? "moreFromSeries"))
 
 instance ToJSON UserSettingsNotification where
         toJSON UserSettingsNotification'{..}
           = object
               (catMaybes
-                 [("moreFromAuthors" .=) <$> _usnMoreFromAuthors,
+                 [("rewardExpirations" .=) <$> _usnRewardExpirations,
+                  ("priceDrop" .=) <$> _usnPriceDrop,
+                  ("matchMyInterests" .=) <$> _usnMatchMyInterests,
+                  ("moreFromAuthors" .=) <$> _usnMoreFromAuthors,
                   ("moreFromSeries" .=) <$> _usnMoreFromSeries])
 
 --
@@ -4853,6 +4970,89 @@ instance ToJSON
               (catMaybes
                  [("value" .=) <$> _dddwisiciValue,
                   ("type" .=) <$> _dddwisiciType])
+
+-- | Family membership info of the user that made the request.
+--
+-- /See:/ 'familyInfoMembership' smart constructor.
+data FamilyInfoMembership = FamilyInfoMembership'
+    { _fimAllowedMaturityRating :: !(Maybe Text)
+    , _fimAcquirePermission     :: !(Maybe Text)
+    , _fimRole                  :: !(Maybe Text)
+    , _fimAgeGroup              :: !(Maybe Text)
+    , _fimIsInFamily            :: !(Maybe Bool)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'FamilyInfoMembership' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'fimAllowedMaturityRating'
+--
+-- * 'fimAcquirePermission'
+--
+-- * 'fimRole'
+--
+-- * 'fimAgeGroup'
+--
+-- * 'fimIsInFamily'
+familyInfoMembership
+    :: FamilyInfoMembership
+familyInfoMembership =
+    FamilyInfoMembership'
+    { _fimAllowedMaturityRating = Nothing
+    , _fimAcquirePermission = Nothing
+    , _fimRole = Nothing
+    , _fimAgeGroup = Nothing
+    , _fimIsInFamily = Nothing
+    }
+
+-- | The maximum allowed maturity rating for the user.
+fimAllowedMaturityRating :: Lens' FamilyInfoMembership (Maybe Text)
+fimAllowedMaturityRating
+  = lens _fimAllowedMaturityRating
+      (\ s a -> s{_fimAllowedMaturityRating = a})
+
+-- | Restrictions on user buying and acquiring content.
+fimAcquirePermission :: Lens' FamilyInfoMembership (Maybe Text)
+fimAcquirePermission
+  = lens _fimAcquirePermission
+      (\ s a -> s{_fimAcquirePermission = a})
+
+-- | The role of the user in the family.
+fimRole :: Lens' FamilyInfoMembership (Maybe Text)
+fimRole = lens _fimRole (\ s a -> s{_fimRole = a})
+
+-- | The age group of the user.
+fimAgeGroup :: Lens' FamilyInfoMembership (Maybe Text)
+fimAgeGroup
+  = lens _fimAgeGroup (\ s a -> s{_fimAgeGroup = a})
+
+fimIsInFamily :: Lens' FamilyInfoMembership (Maybe Bool)
+fimIsInFamily
+  = lens _fimIsInFamily
+      (\ s a -> s{_fimIsInFamily = a})
+
+instance FromJSON FamilyInfoMembership where
+        parseJSON
+          = withObject "FamilyInfoMembership"
+              (\ o ->
+                 FamilyInfoMembership' <$>
+                   (o .:? "allowedMaturityRating") <*>
+                     (o .:? "acquirePermission")
+                     <*> (o .:? "role")
+                     <*> (o .:? "ageGroup")
+                     <*> (o .:? "isInFamily"))
+
+instance ToJSON FamilyInfoMembership where
+        toJSON FamilyInfoMembership'{..}
+          = object
+              (catMaybes
+                 [("allowedMaturityRating" .=) <$>
+                    _fimAllowedMaturityRating,
+                  ("acquirePermission" .=) <$> _fimAcquirePermission,
+                  ("role" .=) <$> _fimRole,
+                  ("ageGroup" .=) <$> _fimAgeGroup,
+                  ("isInFamily" .=) <$> _fimIsInFamily])
 
 --
 -- /See:/ 'volume2' smart constructor.
@@ -5494,6 +5694,52 @@ instance ToJSON RequestAccess where
                  [("concurrentAccess" .=) <$> _raConcurrentAccess,
                   Just ("kind" .= _raKind),
                   ("downloadAccess" .=) <$> _raDownloadAccess])
+
+--
+-- /See:/ 'familyInfo' smart constructor.
+data FamilyInfo = FamilyInfo'
+    { _fiMembership :: !(Maybe FamilyInfoMembership)
+    , _fiKind       :: !Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'FamilyInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'fiMembership'
+--
+-- * 'fiKind'
+familyInfo
+    :: FamilyInfo
+familyInfo =
+    FamilyInfo'
+    { _fiMembership = Nothing
+    , _fiKind = "books#familyInfo"
+    }
+
+-- | Family membership info of the user that made the request.
+fiMembership :: Lens' FamilyInfo (Maybe FamilyInfoMembership)
+fiMembership
+  = lens _fiMembership (\ s a -> s{_fiMembership = a})
+
+-- | Resource type.
+fiKind :: Lens' FamilyInfo Text
+fiKind = lens _fiKind (\ s a -> s{_fiKind = a})
+
+instance FromJSON FamilyInfo where
+        parseJSON
+          = withObject "FamilyInfo"
+              (\ o ->
+                 FamilyInfo' <$>
+                   (o .:? "membership") <*>
+                     (o .:? "kind" .!= "books#familyInfo"))
+
+instance ToJSON FamilyInfo where
+        toJSON FamilyInfo'{..}
+          = object
+              (catMaybes
+                 [("membership" .=) <$> _fiMembership,
+                  Just ("kind" .= _fiKind)])
 
 -- | Selection ranges sent from the client.
 --
@@ -6786,6 +7032,45 @@ instance ToJSON Volumes where
                   Just ("kind" .= _v1Kind), ("items" .=) <$> _v1Items])
 
 --
+-- /See:/ 'userSettingsNotificationMatchMyInterests' smart constructor.
+newtype UserSettingsNotificationMatchMyInterests = UserSettingsNotificationMatchMyInterests'
+    { _usnmmiOptedState :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UserSettingsNotificationMatchMyInterests' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'usnmmiOptedState'
+userSettingsNotificationMatchMyInterests
+    :: UserSettingsNotificationMatchMyInterests
+userSettingsNotificationMatchMyInterests =
+    UserSettingsNotificationMatchMyInterests'
+    { _usnmmiOptedState = Nothing
+    }
+
+usnmmiOptedState :: Lens' UserSettingsNotificationMatchMyInterests (Maybe Text)
+usnmmiOptedState
+  = lens _usnmmiOptedState
+      (\ s a -> s{_usnmmiOptedState = a})
+
+instance FromJSON
+         UserSettingsNotificationMatchMyInterests where
+        parseJSON
+          = withObject
+              "UserSettingsNotificationMatchMyInterests"
+              (\ o ->
+                 UserSettingsNotificationMatchMyInterests' <$>
+                   (o .:? "opted_state"))
+
+instance ToJSON
+         UserSettingsNotificationMatchMyInterests where
+        toJSON UserSettingsNotificationMatchMyInterests'{..}
+          = object
+              (catMaybes
+                 [("opted_state" .=) <$> _usnmmiOptedState])
+
+--
 -- /See:/ 'bookshelves' smart constructor.
 data Bookshelves = Bookshelves'
     { _booKind  :: !Text
@@ -6993,6 +7278,7 @@ data VolumeVolumeInfo = VolumeVolumeInfo'
     , _vviSamplePageCount     :: !(Maybe (Textual Int32))
     , _vviCategories          :: !(Maybe [Text])
     , _vviAuthors             :: !(Maybe [Text])
+    , _vviComicsContent       :: !(Maybe Bool)
     , _vviAllowAnonLogging    :: !(Maybe Bool)
     , _vviSubtitle            :: !(Maybe Text)
     , _vviPublishedDate       :: !(Maybe Text)
@@ -7040,6 +7326,8 @@ data VolumeVolumeInfo = VolumeVolumeInfo'
 --
 -- * 'vviAuthors'
 --
+-- * 'vviComicsContent'
+--
 -- * 'vviAllowAnonLogging'
 --
 -- * 'vviSubtitle'
@@ -7083,6 +7371,7 @@ volumeVolumeInfo =
     , _vviSamplePageCount = Nothing
     , _vviCategories = Nothing
     , _vviAuthors = Nothing
+    , _vviComicsContent = Nothing
     , _vviAllowAnonLogging = Nothing
     , _vviSubtitle = Nothing
     , _vviPublishedDate = Nothing
@@ -7194,6 +7483,12 @@ vviAuthors
       _Default
       . _Coerce
 
+-- | Whether the volume has comics content.
+vviComicsContent :: Lens' VolumeVolumeInfo (Maybe Bool)
+vviComicsContent
+  = lens _vviComicsContent
+      (\ s a -> s{_vviComicsContent = a})
+
 -- | Whether anonymous logging should be allowed.
 vviAllowAnonLogging :: Lens' VolumeVolumeInfo (Maybe Bool)
 vviAllowAnonLogging
@@ -7288,6 +7583,7 @@ instance FromJSON VolumeVolumeInfo where
                      <*> (o .:? "samplePageCount")
                      <*> (o .:? "categories" .!= mempty)
                      <*> (o .:? "authors" .!= mempty)
+                     <*> (o .:? "comicsContent")
                      <*> (o .:? "allowAnonLogging")
                      <*> (o .:? "subtitle")
                      <*> (o .:? "publishedDate")
@@ -7323,6 +7619,7 @@ instance ToJSON VolumeVolumeInfo where
                   ("samplePageCount" .=) <$> _vviSamplePageCount,
                   ("categories" .=) <$> _vviCategories,
                   ("authors" .=) <$> _vviAuthors,
+                  ("comicsContent" .=) <$> _vviComicsContent,
                   ("allowAnonLogging" .=) <$> _vviAllowAnonLogging,
                   ("subtitle" .=) <$> _vviSubtitle,
                   ("publishedDate" .=) <$> _vviPublishedDate,

@@ -33,8 +33,8 @@ module Network.Google.Resource.Games.Achievements.Unlock
     , AchievementsUnlock
 
     -- * Request Lenses
+    , auBuiltinGameId
     , auAchievementId
-    , auConsistencyToken
     ) where
 
 import           Network.Google.Games.Types
@@ -48,7 +48,7 @@ type AchievementsUnlockResource =
          "achievements" :>
            Capture "achievementId" Text :>
              "unlock" :>
-               QueryParam "consistencyToken" (Textual Int64) :>
+               QueryParam "builtinGameId" Text :>
                  QueryParam "alt" AltJSON :>
                    Post '[JSON] AchievementUnlockResponse
 
@@ -56,25 +56,31 @@ type AchievementsUnlockResource =
 --
 -- /See:/ 'achievementsUnlock' smart constructor.
 data AchievementsUnlock = AchievementsUnlock'
-    { _auAchievementId    :: !Text
-    , _auConsistencyToken :: !(Maybe (Textual Int64))
+    { _auBuiltinGameId :: !(Maybe Text)
+    , _auAchievementId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementsUnlock' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'auAchievementId'
+-- * 'auBuiltinGameId'
 --
--- * 'auConsistencyToken'
+-- * 'auAchievementId'
 achievementsUnlock
     :: Text -- ^ 'auAchievementId'
     -> AchievementsUnlock
 achievementsUnlock pAuAchievementId_ =
     AchievementsUnlock'
-    { _auAchievementId = pAuAchievementId_
-    , _auConsistencyToken = Nothing
+    { _auBuiltinGameId = Nothing
+    , _auAchievementId = pAuAchievementId_
     }
+
+-- | Override used only by built-in games in Play Games application.
+auBuiltinGameId :: Lens' AchievementsUnlock (Maybe Text)
+auBuiltinGameId
+  = lens _auBuiltinGameId
+      (\ s a -> s{_auBuiltinGameId = a})
 
 -- | The ID of the achievement used by this method.
 auAchievementId :: Lens' AchievementsUnlock Text
@@ -82,22 +88,13 @@ auAchievementId
   = lens _auAchievementId
       (\ s a -> s{_auAchievementId = a})
 
--- | The last-seen mutation timestamp.
-auConsistencyToken :: Lens' AchievementsUnlock (Maybe Int64)
-auConsistencyToken
-  = lens _auConsistencyToken
-      (\ s a -> s{_auConsistencyToken = a})
-      . mapping _Coerce
-
 instance GoogleRequest AchievementsUnlock where
         type Rs AchievementsUnlock =
              AchievementUnlockResponse
         type Scopes AchievementsUnlock =
-             '["https://www.googleapis.com/auth/games",
-               "https://www.googleapis.com/auth/plus.login"]
+             '["https://www.googleapis.com/auth/games"]
         requestClient AchievementsUnlock'{..}
-          = go _auAchievementId _auConsistencyToken
-              (Just AltJSON)
+          = go _auAchievementId _auBuiltinGameId (Just AltJSON)
               gamesService
           where go
                   = buildClient

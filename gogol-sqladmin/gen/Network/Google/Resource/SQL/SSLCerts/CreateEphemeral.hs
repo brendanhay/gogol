@@ -25,7 +25,7 @@
 -- may use the certificate to authenticate as themselves when connecting to
 -- the database.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.sslCerts.createEphemeral@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.sslCerts.createEphemeral@.
 module Network.Google.Resource.SQL.SSLCerts.CreateEphemeral
     (
     -- * REST Resource

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified instance template. Get a list of available
+-- Returns the specified instance template. Gets a list of available
 -- instance templates by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceTemplates.get@.
@@ -54,7 +54,7 @@ type InstanceTemplatesGetResource =
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] InstanceTemplate
 
--- | Returns the specified instance template. Get a list of available
+-- | Returns the specified instance template. Gets a list of available
 -- instance templates by making a list() request.
 --
 -- /See:/ 'instanceTemplatesGet' smart constructor.

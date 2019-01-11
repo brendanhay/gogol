@@ -45,13 +45,11 @@ module Network.Google.Resource.Sheets.Spreadsheets.Get
     -- * Request Lenses
     , sgXgafv
     , sgUploadProtocol
-    , sgPp
     , sgAccessToken
     , sgSpreadsheetId
     , sgUploadType
     , sgRanges
     , sgIncludeGridData
-    , sgBearerToken
     , sgCallback
     ) where
 
@@ -66,14 +64,12 @@ type SpreadsheetsGetResource =
          Capture "spreadsheetId" Text :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParams "ranges" Text :>
-                       QueryParam "includeGridData" Bool :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :> Get '[JSON] Spreadsheet
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParams "ranges" Text :>
+                     QueryParam "includeGridData" Bool :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] Spreadsheet
 
 -- | Returns the spreadsheet at the given ID. The caller must specify the
 -- spreadsheet ID. By default, data within grids will not be returned. You
@@ -91,13 +87,11 @@ type SpreadsheetsGetResource =
 data SpreadsheetsGet = SpreadsheetsGet'
     { _sgXgafv           :: !(Maybe Xgafv)
     , _sgUploadProtocol  :: !(Maybe Text)
-    , _sgPp              :: !Bool
     , _sgAccessToken     :: !(Maybe Text)
     , _sgSpreadsheetId   :: !Text
     , _sgUploadType      :: !(Maybe Text)
     , _sgRanges          :: !(Maybe [Text])
     , _sgIncludeGridData :: !(Maybe Bool)
-    , _sgBearerToken     :: !(Maybe Text)
     , _sgCallback        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -109,8 +103,6 @@ data SpreadsheetsGet = SpreadsheetsGet'
 --
 -- * 'sgUploadProtocol'
 --
--- * 'sgPp'
---
 -- * 'sgAccessToken'
 --
 -- * 'sgSpreadsheetId'
@@ -121,8 +113,6 @@ data SpreadsheetsGet = SpreadsheetsGet'
 --
 -- * 'sgIncludeGridData'
 --
--- * 'sgBearerToken'
---
 -- * 'sgCallback'
 spreadsheetsGet
     :: Text -- ^ 'sgSpreadsheetId'
@@ -131,13 +121,11 @@ spreadsheetsGet pSgSpreadsheetId_ =
     SpreadsheetsGet'
     { _sgXgafv = Nothing
     , _sgUploadProtocol = Nothing
-    , _sgPp = True
     , _sgAccessToken = Nothing
     , _sgSpreadsheetId = pSgSpreadsheetId_
     , _sgUploadType = Nothing
     , _sgRanges = Nothing
     , _sgIncludeGridData = Nothing
-    , _sgBearerToken = Nothing
     , _sgCallback = Nothing
     }
 
@@ -150,10 +138,6 @@ sgUploadProtocol :: Lens' SpreadsheetsGet (Maybe Text)
 sgUploadProtocol
   = lens _sgUploadProtocol
       (\ s a -> s{_sgUploadProtocol = a})
-
--- | Pretty-print response.
-sgPp :: Lens' SpreadsheetsGet Bool
-sgPp = lens _sgPp (\ s a -> s{_sgPp = a})
 
 -- | OAuth access token.
 sgAccessToken :: Lens' SpreadsheetsGet (Maybe Text)
@@ -186,12 +170,6 @@ sgIncludeGridData
   = lens _sgIncludeGridData
       (\ s a -> s{_sgIncludeGridData = a})
 
--- | OAuth bearer token.
-sgBearerToken :: Lens' SpreadsheetsGet (Maybe Text)
-sgBearerToken
-  = lens _sgBearerToken
-      (\ s a -> s{_sgBearerToken = a})
-
 -- | JSONP
 sgCallback :: Lens' SpreadsheetsGet (Maybe Text)
 sgCallback
@@ -201,17 +179,16 @@ instance GoogleRequest SpreadsheetsGet where
         type Rs SpreadsheetsGet = Spreadsheet
         type Scopes SpreadsheetsGet =
              '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file",
                "https://www.googleapis.com/auth/drive.readonly",
                "https://www.googleapis.com/auth/spreadsheets",
                "https://www.googleapis.com/auth/spreadsheets.readonly"]
         requestClient SpreadsheetsGet'{..}
           = go _sgSpreadsheetId _sgXgafv _sgUploadProtocol
-              (Just _sgPp)
               _sgAccessToken
               _sgUploadType
               (_sgRanges ^. _Default)
               _sgIncludeGridData
-              _sgBearerToken
               _sgCallback
               (Just AltJSON)
               sheetsService

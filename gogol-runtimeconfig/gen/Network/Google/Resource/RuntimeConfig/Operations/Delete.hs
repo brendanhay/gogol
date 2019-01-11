@@ -25,7 +25,7 @@
 -- operation. If the server doesn\'t support this method, it returns
 -- \`google.rpc.Code.UNIMPLEMENTED\`.
 --
--- /See:/ <https://cloud.google.com/deployment-manager/runtime-configurator/ Google Cloud RuntimeConfig API Reference> for @runtimeconfig.operations.delete@.
+-- /See:/ <https://cloud.google.com/deployment-manager/runtime-configurator/ Cloud Runtime Configuration API Reference> for @runtimeconfig.operations.delete@.
 module Network.Google.Resource.RuntimeConfig.Operations.Delete
     (
     -- * REST Resource
@@ -38,10 +38,8 @@ module Network.Google.Resource.RuntimeConfig.Operations.Delete
     -- * Request Lenses
     , odXgafv
     , odUploadProtocol
-    , odPp
     , odAccessToken
     , odUploadType
-    , odBearerToken
     , odName
     , odCallback
     ) where
@@ -56,12 +54,10 @@ type OperationsDeleteResource =
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :> Delete '[JSON] Empty
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
 -- | Deletes a long-running operation. This method indicates that the client
 -- is no longer interested in the operation result. It does not cancel the
@@ -72,10 +68,8 @@ type OperationsDeleteResource =
 data OperationsDelete = OperationsDelete'
     { _odXgafv          :: !(Maybe Xgafv)
     , _odUploadProtocol :: !(Maybe Text)
-    , _odPp             :: !Bool
     , _odAccessToken    :: !(Maybe Text)
     , _odUploadType     :: !(Maybe Text)
-    , _odBearerToken    :: !(Maybe Text)
     , _odName           :: !Text
     , _odCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -88,13 +82,9 @@ data OperationsDelete = OperationsDelete'
 --
 -- * 'odUploadProtocol'
 --
--- * 'odPp'
---
 -- * 'odAccessToken'
 --
 -- * 'odUploadType'
---
--- * 'odBearerToken'
 --
 -- * 'odName'
 --
@@ -106,10 +96,8 @@ operationsDelete pOdName_ =
     OperationsDelete'
     { _odXgafv = Nothing
     , _odUploadProtocol = Nothing
-    , _odPp = True
     , _odAccessToken = Nothing
     , _odUploadType = Nothing
-    , _odBearerToken = Nothing
     , _odName = pOdName_
     , _odCallback = Nothing
     }
@@ -124,10 +112,6 @@ odUploadProtocol
   = lens _odUploadProtocol
       (\ s a -> s{_odUploadProtocol = a})
 
--- | Pretty-print response.
-odPp :: Lens' OperationsDelete Bool
-odPp = lens _odPp (\ s a -> s{_odPp = a})
-
 -- | OAuth access token.
 odAccessToken :: Lens' OperationsDelete (Maybe Text)
 odAccessToken
@@ -138,12 +122,6 @@ odAccessToken
 odUploadType :: Lens' OperationsDelete (Maybe Text)
 odUploadType
   = lens _odUploadType (\ s a -> s{_odUploadType = a})
-
--- | OAuth bearer token.
-odBearerToken :: Lens' OperationsDelete (Maybe Text)
-odBearerToken
-  = lens _odBearerToken
-      (\ s a -> s{_odBearerToken = a})
 
 -- | The name of the operation resource to be deleted.
 odName :: Lens' OperationsDelete Text
@@ -160,10 +138,9 @@ instance GoogleRequest OperationsDelete where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/cloudruntimeconfig"]
         requestClient OperationsDelete'{..}
-          = go _odName _odXgafv _odUploadProtocol (Just _odPp)
+          = go _odName _odXgafv _odUploadProtocol
               _odAccessToken
               _odUploadType
-              _odBearerToken
               _odCallback
               (Just AltJSON)
               runtimeConfigService

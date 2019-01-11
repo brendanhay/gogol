@@ -23,7 +23,7 @@
 -- Creates a new managed service. Please note one producer project can own
 -- no more than 20 services. Operation
 --
--- /See:/ <https://cloud.google.com/service-management/ Google Service Management API Reference> for @servicemanagement.services.create@.
+-- /See:/ <https://cloud.google.com/service-management/ Service Management API Reference> for @servicemanagement.services.create@.
 module Network.Google.Resource.ServiceManagement.Services.Create
     (
     -- * REST Resource
@@ -36,11 +36,9 @@ module Network.Google.Resource.ServiceManagement.Services.Create
     -- * Request Lenses
     , scXgafv
     , scUploadProtocol
-    , scPp
     , scAccessToken
     , scUploadType
     , scPayload
-    , scBearerToken
     , scCallback
     ) where
 
@@ -54,14 +52,12 @@ type ServicesCreateResource =
        "services" :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] ManagedService :>
-                           Post '[JSON] Operation
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] ManagedService :>
+                       Post '[JSON] Operation
 
 -- | Creates a new managed service. Please note one producer project can own
 -- no more than 20 services. Operation
@@ -70,11 +66,9 @@ type ServicesCreateResource =
 data ServicesCreate = ServicesCreate'
     { _scXgafv          :: !(Maybe Xgafv)
     , _scUploadProtocol :: !(Maybe Text)
-    , _scPp             :: !Bool
     , _scAccessToken    :: !(Maybe Text)
     , _scUploadType     :: !(Maybe Text)
     , _scPayload        :: !ManagedService
-    , _scBearerToken    :: !(Maybe Text)
     , _scCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -86,15 +80,11 @@ data ServicesCreate = ServicesCreate'
 --
 -- * 'scUploadProtocol'
 --
--- * 'scPp'
---
 -- * 'scAccessToken'
 --
 -- * 'scUploadType'
 --
 -- * 'scPayload'
---
--- * 'scBearerToken'
 --
 -- * 'scCallback'
 servicesCreate
@@ -104,11 +94,9 @@ servicesCreate pScPayload_ =
     ServicesCreate'
     { _scXgafv = Nothing
     , _scUploadProtocol = Nothing
-    , _scPp = True
     , _scAccessToken = Nothing
     , _scUploadType = Nothing
     , _scPayload = pScPayload_
-    , _scBearerToken = Nothing
     , _scCallback = Nothing
     }
 
@@ -121,10 +109,6 @@ scUploadProtocol :: Lens' ServicesCreate (Maybe Text)
 scUploadProtocol
   = lens _scUploadProtocol
       (\ s a -> s{_scUploadProtocol = a})
-
--- | Pretty-print response.
-scPp :: Lens' ServicesCreate Bool
-scPp = lens _scPp (\ s a -> s{_scPp = a})
 
 -- | OAuth access token.
 scAccessToken :: Lens' ServicesCreate (Maybe Text)
@@ -142,12 +126,6 @@ scPayload :: Lens' ServicesCreate ManagedService
 scPayload
   = lens _scPayload (\ s a -> s{_scPayload = a})
 
--- | OAuth bearer token.
-scBearerToken :: Lens' ServicesCreate (Maybe Text)
-scBearerToken
-  = lens _scBearerToken
-      (\ s a -> s{_scBearerToken = a})
-
 -- | JSONP
 scCallback :: Lens' ServicesCreate (Maybe Text)
 scCallback
@@ -159,10 +137,8 @@ instance GoogleRequest ServicesCreate where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/service.management"]
         requestClient ServicesCreate'{..}
-          = go _scXgafv _scUploadProtocol (Just _scPp)
-              _scAccessToken
+          = go _scXgafv _scUploadProtocol _scAccessToken
               _scUploadType
-              _scBearerToken
               _scCallback
               (Just AltJSON)
               _scPayload

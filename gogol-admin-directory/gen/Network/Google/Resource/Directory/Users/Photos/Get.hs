@@ -71,7 +71,7 @@ usersPhotosGet pUpgUserKey_ =
     { _upgUserKey = pUpgUserKey_
     }
 
--- | Email or immutable Id of the user
+-- | Email or immutable ID of the user
 upgUserKey :: Lens' UsersPhotosGet Text
 upgUserKey
   = lens _upgUserKey (\ s a -> s{_upgUserKey = a})

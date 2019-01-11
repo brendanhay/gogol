@@ -22,7 +22,7 @@
 --
 -- Restores a backup of a Cloud SQL instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.instances.restoreBackup@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.instances.restoreBackup@.
 module Network.Google.Resource.SQL.Instances.RestoreBackup
     (
     -- * REST Resource

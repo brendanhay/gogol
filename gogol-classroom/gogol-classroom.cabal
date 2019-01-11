@@ -38,10 +38,17 @@ library
         , Network.Google.Resource.Classroom.Courses.Aliases.Create
         , Network.Google.Resource.Classroom.Courses.Aliases.Delete
         , Network.Google.Resource.Classroom.Courses.Aliases.List
+        , Network.Google.Resource.Classroom.Courses.Announcements.Create
+        , Network.Google.Resource.Classroom.Courses.Announcements.Delete
+        , Network.Google.Resource.Classroom.Courses.Announcements.Get
+        , Network.Google.Resource.Classroom.Courses.Announcements.List
+        , Network.Google.Resource.Classroom.Courses.Announcements.ModifyAssignees
+        , Network.Google.Resource.Classroom.Courses.Announcements.Patch
         , Network.Google.Resource.Classroom.Courses.CourseWork.Create
         , Network.Google.Resource.Classroom.Courses.CourseWork.Delete
         , Network.Google.Resource.Classroom.Courses.CourseWork.Get
         , Network.Google.Resource.Classroom.Courses.CourseWork.List
+        , Network.Google.Resource.Classroom.Courses.CourseWork.ModifyAssignees
         , Network.Google.Resource.Classroom.Courses.CourseWork.Patch
         , Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.Get
         , Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.List
@@ -69,6 +76,8 @@ library
         , Network.Google.Resource.Classroom.Invitations.Delete
         , Network.Google.Resource.Classroom.Invitations.Get
         , Network.Google.Resource.Classroom.Invitations.List
+        , Network.Google.Resource.Classroom.Registrations.Create
+        , Network.Google.Resource.Classroom.Registrations.Delete
         , Network.Google.Resource.Classroom.UserProFiles.Get
         , Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.Create
         , Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.Get

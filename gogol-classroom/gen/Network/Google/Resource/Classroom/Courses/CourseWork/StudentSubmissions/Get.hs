@@ -39,11 +39,9 @@ module Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.G
     -- * Request Lenses
     , ccwssgXgafv
     , ccwssgUploadProtocol
-    , ccwssgPp
     , ccwssgCourseId
     , ccwssgAccessToken
     , ccwssgUploadType
-    , ccwssgBearerToken
     , ccwssgId
     , ccwssgCallback
     , ccwssgCourseWorkId
@@ -62,15 +60,13 @@ type CoursesCourseWorkStudentSubmissionsGetResource =
              Capture "courseWorkId" Text :>
                "studentSubmissions" :>
                  Capture "id" Text :>
-                   QueryParam "$.xgafv" Text :>
+                   QueryParam "$.xgafv" Xgafv :>
                      QueryParam "upload_protocol" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "access_token" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "bearer_token" Text :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" AltJSON :>
-                                   Get '[JSON] StudentSubmission
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] StudentSubmission
 
 -- | Returns a student submission. * \`PERMISSION_DENIED\` if the requesting
 -- user is not permitted to access the requested course, course work, or
@@ -80,13 +76,11 @@ type CoursesCourseWorkStudentSubmissionsGetResource =
 --
 -- /See:/ 'coursesCourseWorkStudentSubmissionsGet' smart constructor.
 data CoursesCourseWorkStudentSubmissionsGet = CoursesCourseWorkStudentSubmissionsGet'
-    { _ccwssgXgafv          :: !(Maybe Text)
+    { _ccwssgXgafv          :: !(Maybe Xgafv)
     , _ccwssgUploadProtocol :: !(Maybe Text)
-    , _ccwssgPp             :: !Bool
     , _ccwssgCourseId       :: !Text
     , _ccwssgAccessToken    :: !(Maybe Text)
     , _ccwssgUploadType     :: !(Maybe Text)
-    , _ccwssgBearerToken    :: !(Maybe Text)
     , _ccwssgId             :: !Text
     , _ccwssgCallback       :: !(Maybe Text)
     , _ccwssgCourseWorkId   :: !Text
@@ -100,15 +94,11 @@ data CoursesCourseWorkStudentSubmissionsGet = CoursesCourseWorkStudentSubmission
 --
 -- * 'ccwssgUploadProtocol'
 --
--- * 'ccwssgPp'
---
 -- * 'ccwssgCourseId'
 --
 -- * 'ccwssgAccessToken'
 --
 -- * 'ccwssgUploadType'
---
--- * 'ccwssgBearerToken'
 --
 -- * 'ccwssgId'
 --
@@ -124,18 +114,16 @@ coursesCourseWorkStudentSubmissionsGet pCcwssgCourseId_ pCcwssgId_ pCcwssgCourse
     CoursesCourseWorkStudentSubmissionsGet'
     { _ccwssgXgafv = Nothing
     , _ccwssgUploadProtocol = Nothing
-    , _ccwssgPp = True
     , _ccwssgCourseId = pCcwssgCourseId_
     , _ccwssgAccessToken = Nothing
     , _ccwssgUploadType = Nothing
-    , _ccwssgBearerToken = Nothing
     , _ccwssgId = pCcwssgId_
     , _ccwssgCallback = Nothing
     , _ccwssgCourseWorkId = pCcwssgCourseWorkId_
     }
 
 -- | V1 error format.
-ccwssgXgafv :: Lens' CoursesCourseWorkStudentSubmissionsGet (Maybe Text)
+ccwssgXgafv :: Lens' CoursesCourseWorkStudentSubmissionsGet (Maybe Xgafv)
 ccwssgXgafv
   = lens _ccwssgXgafv (\ s a -> s{_ccwssgXgafv = a})
 
@@ -144,10 +132,6 @@ ccwssgUploadProtocol :: Lens' CoursesCourseWorkStudentSubmissionsGet (Maybe Text
 ccwssgUploadProtocol
   = lens _ccwssgUploadProtocol
       (\ s a -> s{_ccwssgUploadProtocol = a})
-
--- | Pretty-print response.
-ccwssgPp :: Lens' CoursesCourseWorkStudentSubmissionsGet Bool
-ccwssgPp = lens _ccwssgPp (\ s a -> s{_ccwssgPp = a})
 
 -- | Identifier of the course. This identifier can be either the
 -- Classroom-assigned identifier or an alias.
@@ -167,12 +151,6 @@ ccwssgUploadType :: Lens' CoursesCourseWorkStudentSubmissionsGet (Maybe Text)
 ccwssgUploadType
   = lens _ccwssgUploadType
       (\ s a -> s{_ccwssgUploadType = a})
-
--- | OAuth bearer token.
-ccwssgBearerToken :: Lens' CoursesCourseWorkStudentSubmissionsGet (Maybe Text)
-ccwssgBearerToken
-  = lens _ccwssgBearerToken
-      (\ s a -> s{_ccwssgBearerToken = a})
 
 -- | Identifier of the student submission.
 ccwssgId :: Lens' CoursesCourseWorkStudentSubmissionsGet Text
@@ -206,10 +184,8 @@ instance GoogleRequest
           = go _ccwssgCourseId _ccwssgCourseWorkId _ccwssgId
               _ccwssgXgafv
               _ccwssgUploadProtocol
-              (Just _ccwssgPp)
               _ccwssgAccessToken
               _ccwssgUploadType
-              _ccwssgBearerToken
               _ccwssgCallback
               (Just AltJSON)
               classroomService

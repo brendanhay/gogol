@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'UserRolePermissionGroupsGet' request conforms to.
 type UserRolePermissionGroupsGetResource =
      "dfareporting" :>
-       "v2.7" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "userRolePermissionGroups" :>

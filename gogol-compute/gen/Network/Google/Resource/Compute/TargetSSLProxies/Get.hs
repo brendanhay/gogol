@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified TargetSslProxy resource. Get a list of available
+-- Returns the specified TargetSslProxy resource. Gets a list of available
 -- target SSL proxies by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetSslProxies.get@.
@@ -54,7 +54,7 @@ type TargetSSLProxiesGetResource =
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] TargetSSLProxy
 
--- | Returns the specified TargetSslProxy resource. Get a list of available
+-- | Returns the specified TargetSslProxy resource. Gets a list of available
 -- target SSL proxies by making a list() request.
 --
 -- /See:/ 'targetSSLProxiesGet' smart constructor.

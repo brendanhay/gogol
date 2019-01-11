@@ -37,11 +37,9 @@ module Network.Google.Resource.Monitoring.Projects.Groups.Update
     , pguXgafv
     , pguValidateOnly
     , pguUploadProtocol
-    , pguPp
     , pguAccessToken
     , pguUploadType
     , pguPayload
-    , pguBearerToken
     , pguName
     , pguCallback
     ) where
@@ -57,13 +55,11 @@ type ProjectsGroupsUpdateResource =
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "validateOnly" Bool :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Group :> Put '[JSON] Group
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Group :> Put '[JSON] Group
 
 -- | Updates an existing group. You can change any group attributes except
 -- name.
@@ -73,11 +69,9 @@ data ProjectsGroupsUpdate = ProjectsGroupsUpdate'
     { _pguXgafv          :: !(Maybe Xgafv)
     , _pguValidateOnly   :: !(Maybe Bool)
     , _pguUploadProtocol :: !(Maybe Text)
-    , _pguPp             :: !Bool
     , _pguAccessToken    :: !(Maybe Text)
     , _pguUploadType     :: !(Maybe Text)
     , _pguPayload        :: !Group
-    , _pguBearerToken    :: !(Maybe Text)
     , _pguName           :: !Text
     , _pguCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -92,15 +86,11 @@ data ProjectsGroupsUpdate = ProjectsGroupsUpdate'
 --
 -- * 'pguUploadProtocol'
 --
--- * 'pguPp'
---
 -- * 'pguAccessToken'
 --
 -- * 'pguUploadType'
 --
 -- * 'pguPayload'
---
--- * 'pguBearerToken'
 --
 -- * 'pguName'
 --
@@ -114,11 +104,9 @@ projectsGroupsUpdate pPguPayload_ pPguName_ =
     { _pguXgafv = Nothing
     , _pguValidateOnly = Nothing
     , _pguUploadProtocol = Nothing
-    , _pguPp = True
     , _pguAccessToken = Nothing
     , _pguUploadType = Nothing
     , _pguPayload = pPguPayload_
-    , _pguBearerToken = Nothing
     , _pguName = pPguName_
     , _pguCallback = Nothing
     }
@@ -139,10 +127,6 @@ pguUploadProtocol
   = lens _pguUploadProtocol
       (\ s a -> s{_pguUploadProtocol = a})
 
--- | Pretty-print response.
-pguPp :: Lens' ProjectsGroupsUpdate Bool
-pguPp = lens _pguPp (\ s a -> s{_pguPp = a})
-
 -- | OAuth access token.
 pguAccessToken :: Lens' ProjectsGroupsUpdate (Maybe Text)
 pguAccessToken
@@ -159,12 +143,6 @@ pguUploadType
 pguPayload :: Lens' ProjectsGroupsUpdate Group
 pguPayload
   = lens _pguPayload (\ s a -> s{_pguPayload = a})
-
--- | OAuth bearer token.
-pguBearerToken :: Lens' ProjectsGroupsUpdate (Maybe Text)
-pguBearerToken
-  = lens _pguBearerToken
-      (\ s a -> s{_pguBearerToken = a})
 
 -- | Output only. The name of this group. The format is
 -- \"projects\/{project_id_or_number}\/groups\/{group_id}\". When creating
@@ -187,10 +165,8 @@ instance GoogleRequest ProjectsGroupsUpdate where
         requestClient ProjectsGroupsUpdate'{..}
           = go _pguName _pguXgafv _pguValidateOnly
               _pguUploadProtocol
-              (Just _pguPp)
               _pguAccessToken
               _pguUploadType
-              _pguBearerToken
               _pguCallback
               (Just AltJSON)
               _pguPayload

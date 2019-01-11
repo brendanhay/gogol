@@ -13,9 +13,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Provisions and manages App Engine applications.
+-- Provisions and manages developers\' App Engine applications.
 --
--- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ Google App Engine Admin API Reference>
+-- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ App Engine Admin API Reference>
 module Network.Google.AppEngine
     (
     -- * Service Configuration
@@ -31,8 +31,59 @@ module Network.Google.AppEngine
 
     -- * Resources
 
+    -- ** appengine.apps.authorizedCertificates.create
+    , module Network.Google.Resource.AppEngine.Apps.AuthorizedCertificates.Create
+
+    -- ** appengine.apps.authorizedCertificates.delete
+    , module Network.Google.Resource.AppEngine.Apps.AuthorizedCertificates.Delete
+
+    -- ** appengine.apps.authorizedCertificates.get
+    , module Network.Google.Resource.AppEngine.Apps.AuthorizedCertificates.Get
+
+    -- ** appengine.apps.authorizedCertificates.list
+    , module Network.Google.Resource.AppEngine.Apps.AuthorizedCertificates.List
+
+    -- ** appengine.apps.authorizedCertificates.patch
+    , module Network.Google.Resource.AppEngine.Apps.AuthorizedCertificates.Patch
+
+    -- ** appengine.apps.authorizedDomains.list
+    , module Network.Google.Resource.AppEngine.Apps.AuthorizedDomains.List
+
     -- ** appengine.apps.create
     , module Network.Google.Resource.AppEngine.Apps.Create
+
+    -- ** appengine.apps.domainMappings.create
+    , module Network.Google.Resource.AppEngine.Apps.DomainMAppings.Create
+
+    -- ** appengine.apps.domainMappings.delete
+    , module Network.Google.Resource.AppEngine.Apps.DomainMAppings.Delete
+
+    -- ** appengine.apps.domainMappings.get
+    , module Network.Google.Resource.AppEngine.Apps.DomainMAppings.Get
+
+    -- ** appengine.apps.domainMappings.list
+    , module Network.Google.Resource.AppEngine.Apps.DomainMAppings.List
+
+    -- ** appengine.apps.domainMappings.patch
+    , module Network.Google.Resource.AppEngine.Apps.DomainMAppings.Patch
+
+    -- ** appengine.apps.firewall.ingressRules.batchUpdate
+    , module Network.Google.Resource.AppEngine.Apps.Firewall.IngressRules.BatchUpdate
+
+    -- ** appengine.apps.firewall.ingressRules.create
+    , module Network.Google.Resource.AppEngine.Apps.Firewall.IngressRules.Create
+
+    -- ** appengine.apps.firewall.ingressRules.delete
+    , module Network.Google.Resource.AppEngine.Apps.Firewall.IngressRules.Delete
+
+    -- ** appengine.apps.firewall.ingressRules.get
+    , module Network.Google.Resource.AppEngine.Apps.Firewall.IngressRules.Get
+
+    -- ** appengine.apps.firewall.ingressRules.list
+    , module Network.Google.Resource.AppEngine.Apps.Firewall.IngressRules.List
+
+    -- ** appengine.apps.firewall.ingressRules.patch
+    , module Network.Google.Resource.AppEngine.Apps.Firewall.IngressRules.Patch
 
     -- ** appengine.apps.get
     , module Network.Google.Resource.AppEngine.Apps.Get
@@ -96,14 +147,11 @@ module Network.Google.AppEngine
 
     -- * Types
 
-    -- ** OperationMetadataExperimental
-    , OperationMetadataExperimental
-    , operationMetadataExperimental
-    , omeInsertTime
-    , omeUser
-    , omeMethod
-    , omeEndTime
-    , omeTarget
+    -- ** ApplicationServingStatus
+    , ApplicationServingStatus (..)
+
+    -- ** URLMapLogin
+    , URLMapLogin (..)
 
     -- ** NetworkUtilization
     , NetworkUtilization
@@ -112,6 +160,9 @@ module Network.Google.AppEngine
     , nuTargetSentPacketsPerSecond
     , nuTargetReceivedPacketsPerSecond
     , nuTargetSentBytesPerSecond
+
+    -- ** ManagedCertificateStatus
+    , ManagedCertificateStatus (..)
 
     -- ** Status
     , Status
@@ -129,6 +180,12 @@ module Network.Google.AppEngine
     , LocationSchema
     , locationSchema
     , lsAddtional
+
+    -- ** AuthorizedDomain
+    , AuthorizedDomain
+    , authorizedDomain
+    , adName
+    , adId
 
     -- ** TrafficSplit
     , TrafficSplit
@@ -165,6 +222,13 @@ module Network.Google.AppEngine
     , lName
     , lVersion
 
+    -- ** ResourceRecord
+    , ResourceRecord
+    , resourceRecord
+    , rrRrData
+    , rrName
+    , rrType
+
     -- ** ListLocationsResponse
     , ListLocationsResponse
     , listLocationsResponse
@@ -196,6 +260,19 @@ module Network.Google.AppEngine
     , hcTimeout
     , hcUnhealthyThreshold
 
+    -- ** AuthorizedCertificate
+    , AuthorizedCertificate
+    , authorizedCertificate
+    , acManagedCertificate
+    , acCertificateRawData
+    , acDomainNames
+    , acDomainMAppingsCount
+    , acName
+    , acDisplayName
+    , acId
+    , acExpireTime
+    , acVisibleDomainMAppings
+
     -- ** APIConfigHandler
     , APIConfigHandler
     , apiConfigHandler
@@ -210,18 +287,25 @@ module Network.Google.AppEngine
     , versionEnvVariables
     , vevAddtional
 
+    -- ** APIConfigHandlerSecurityLevel
+    , APIConfigHandlerSecurityLevel (..)
+
     -- ** Application
     , Application
     , application
     , aDefaultHostname
     , aDefaultCookieExpiration
+    , aIap
     , aAuthDomain
     , aCodeBucket
+    , aGcrDomain
+    , aFeatureSettings
     , aName
     , aDispatchRules
     , aDefaultBucket
     , aId
     , aLocationId
+    , aServingStatus
 
     -- ** VersionBetaSettings
     , VersionBetaSettings
@@ -235,17 +319,23 @@ module Network.Google.AppEngine
     , sName
     , sId
 
+    -- ** ErrorHandlerErrorCode
+    , ErrorHandlerErrorCode (..)
+
     -- ** EndpointsAPIService
     , EndpointsAPIService
     , endpointsAPIService
+    , easDisableTraceSampling
     , easName
     , easConfigId
+    , easRolloutStrategy
 
     -- ** Location
     , Location
     , location
     , locName
     , locMetadata
+    , locDisplayName
     , locLabels
     , locLocationId
 
@@ -258,11 +348,18 @@ module Network.Google.AppEngine
     , oName
     , oMetadata
 
+    -- ** EndpointsAPIServiceRolloutStrategy
+    , EndpointsAPIServiceRolloutStrategy (..)
+
     -- ** ZipInfo
     , ZipInfo
     , zipInfo
     , ziFilesCount
     , ziSourceURL
+
+    -- ** Empty
+    , Empty
+    , empty
 
     -- ** URLDispatchRule
     , URLDispatchRule
@@ -271,11 +368,45 @@ module Network.Google.AppEngine
     , udrService
     , udrDomain
 
+    -- ** OperationMetadataV1Beta
+    , OperationMetadataV1Beta
+    , operationMetadataV1Beta
+    , omvbEphemeralMessage
+    , omvbInsertTime
+    , omvbUser
+    , omvbMethod
+    , omvbEndTime
+    , omvbWarning
+    , omvbCreateVersionMetadata
+    , omvbTarget
+
+    -- ** ListAuthorizedDomainsResponse
+    , ListAuthorizedDomainsResponse
+    , listAuthorizedDomainsResponse
+    , ladrNextPageToken
+    , ladrDomains
+
+    -- ** Entrypoint
+    , Entrypoint
+    , entrypoint
+    , eShell
+
     -- ** ListVersionsResponse
     , ListVersionsResponse
     , listVersionsResponse
     , lvrNextPageToken
     , lvrVersions
+
+    -- ** ManagedCertificate
+    , ManagedCertificate
+    , managedCertificate
+    , mcStatus
+    , mcLastRenewalTime
+
+    -- ** CreateVersionMetadataV1Alpha
+    , CreateVersionMetadataV1Alpha
+    , createVersionMetadataV1Alpha
+    , cvmvaCloudBuildId
 
     -- ** FileInfo
     , FileInfo
@@ -299,15 +430,16 @@ module Network.Google.AppEngine
     , asCoolDownPeriod
     , asRequestUtilization
     , asMaxPendingLatency
+    , asStandardSchedulerSettings
 
     -- ** OperationMetadataV1Beta5
     , OperationMetadataV1Beta5
     , operationMetadataV1Beta5
-    , omvbInsertTime
-    , omvbUser
-    , omvbMethod
-    , omvbEndTime
-    , omvbTarget
+    , oInsertTime
+    , oUser
+    , oMethod
+    , oEndTime
+    , oTarget
 
     -- ** Volume
     , Volume
@@ -326,6 +458,12 @@ module Network.Google.AppEngine
     , statusDetailsItem
     , sdiAddtional
 
+    -- ** ListIngressRulesResponse
+    , ListIngressRulesResponse
+    , listIngressRulesResponse
+    , lirrNextPageToken
+    , lirrIngressRules
+
     -- ** Network
     , Network
     , network
@@ -333,6 +471,25 @@ module Network.Google.AppEngine
     , nForwardedPorts
     , nInstanceTag
     , nName
+
+    -- ** APIConfigHandlerAuthFailAction
+    , APIConfigHandlerAuthFailAction (..)
+
+    -- ** ReadinessCheck
+    , ReadinessCheck
+    , readinessCheck
+    , rcSuccessThreshold
+    , rcFailureThreshold
+    , rcPath
+    , rcCheckInterval
+    , rcAppStartTimeout
+    , rcHost
+    , rcTimeout
+
+    -- ** BatchUpdateIngressRulesRequest
+    , BatchUpdateIngressRulesRequest
+    , batchUpdateIngressRulesRequest
+    , buirrIngressRules
 
     -- ** DebugInstanceRequest
     , DebugInstanceRequest
@@ -352,10 +509,37 @@ module Network.Google.AppEngine
     , rVolumes
     , rCPU
 
+    -- ** FeatureSettings
+    , FeatureSettings
+    , featureSettings
+    , fsSplitHealthChecks
+
+    -- ** CertificateRawData
+    , CertificateRawData
+    , certificateRawData
+    , crdPrivateKey
+    , crdPublicCertificate
+
+    -- ** DomainMApping
+    , DomainMApping
+    , domainMApping
+    , dmaResourceRecords
+    , dmaName
+    , dmaId
+    , dmaSSLSettings
+
+    -- ** VersionServingStatus
+    , VersionServingStatus (..)
+
     -- ** DeploymentFiles
     , DeploymentFiles
     , deploymentFiles
     , dfAddtional
+
+    -- ** BatchUpdateIngressRulesResponse
+    , BatchUpdateIngressRulesResponse
+    , batchUpdateIngressRulesResponse
+    , bIngressRules
 
     -- ** CPUUtilization
     , CPUUtilization
@@ -363,10 +547,21 @@ module Network.Google.AppEngine
     , cuAggregationWindowLength
     , cuTargetUtilization
 
+    -- ** CreateVersionMetadataV1
+    , CreateVersionMetadataV1
+    , createVersionMetadataV1
+    , cvmvCloudBuildId
+
     -- ** TrafficSplitAllocations
     , TrafficSplitAllocations
     , trafficSplitAllocations
     , tsaAddtional
+
+    -- ** CloudBuildOptions
+    , CloudBuildOptions
+    , cloudBuildOptions
+    , cboCloudBuildTimeout
+    , cboAppYamlPath
 
     -- ** ManualScaling
     , ManualScaling
@@ -379,6 +574,12 @@ module Network.Google.AppEngine
     , bsMaxInstances
     , bsIdleTimeout
 
+    -- ** URLMapSecurityLevel
+    , URLMapSecurityLevel (..)
+
+    -- ** ResourceRecordType
+    , ResourceRecordType (..)
+
     -- ** OperationMetadataV1
     , OperationMetadataV1
     , operationMetadataV1
@@ -388,6 +589,7 @@ module Network.Google.AppEngine
     , omvMethod
     , omvEndTime
     , omvWarning
+    , omvCreateVersionMetadata
     , omvTarget
 
     -- ** Version
@@ -396,9 +598,13 @@ module Network.Google.AppEngine
     , verRuntime
     , verNobuildFilesRegex
     , verInstanceClass
+    , verRuntimeChannel
+    , verRuntimeMainExecutablePath
     , verHealthCheck
     , verEndpointsAPIService
     , verEnv
+    , verZones
+    , verEntrypoint
     , verDefaultExpiration
     , verAutomaticScaling
     , verErrorHandlers
@@ -406,6 +612,7 @@ module Network.Google.AppEngine
     , verVM
     , verHandlers
     , verInboundServices
+    , verReadinessCheck
     , verNetwork
     , verResources
     , verName
@@ -416,12 +623,25 @@ module Network.Google.AppEngine
     , verAPIConfig
     , verId
     , verEnvVariables
+    , verLivenessCheck
+    , verRuntimeAPIVersion
     , verServingStatus
     , verDiskUsageBytes
     , verCreateTime
     , verLibraries
     , verVersionURL
     , verDeployment
+
+    -- ** Xgafv
+    , Xgafv (..)
+
+    -- ** IdentityAwareProxy
+    , IdentityAwareProxy
+    , identityAwareProxy
+    , iapEnabled
+    , iapOAuth2ClientSecretSha256
+    , iapOAuth2ClientSecret
+    , iapOAuth2ClientId
 
     -- ** StaticFilesHandler
     , StaticFilesHandler
@@ -441,10 +661,30 @@ module Network.Google.AppEngine
     , ehErrorCode
     , ehStaticFile
 
+    -- ** TrafficSplitShardBy
+    , TrafficSplitShardBy (..)
+
+    -- ** InstanceAvailability
+    , InstanceAvailability (..)
+
     -- ** LocationLabels
     , LocationLabels
     , locationLabels
     , llAddtional
+
+    -- ** ListAuthorizedCertificatesResponse
+    , ListAuthorizedCertificatesResponse
+    , listAuthorizedCertificatesResponse
+    , lacrNextPageToken
+    , lacrCertificates
+
+    -- ** FirewallRule
+    , FirewallRule
+    , firewallRule
+    , frPriority
+    , frAction
+    , frSourceRange
+    , frDescription
 
     -- ** LocationMetadata
     , LocationMetadata
@@ -462,17 +702,52 @@ module Network.Google.AppEngine
     , omOperationType
     , omTarget
 
+    -- ** URLMapAuthFailAction
+    , URLMapAuthFailAction (..)
+
     -- ** ListInstancesResponse
     , ListInstancesResponse
     , listInstancesResponse
     , lirNextPageToken
     , lirInstances
 
+    -- ** OperationMetadataV1Alpha
+    , OperationMetadataV1Alpha
+    , operationMetadataV1Alpha
+    , omvaEphemeralMessage
+    , omvaInsertTime
+    , omvaUser
+    , omvaMethod
+    , omvaEndTime
+    , omvaWarning
+    , omvaCreateVersionMetadata
+    , omvaTarget
+
+    -- ** LivenessCheck
+    , LivenessCheck
+    , livenessCheck
+    , lcSuccessThreshold
+    , lcFailureThreshold
+    , lcPath
+    , lcCheckInterval
+    , lcHost
+    , lcInitialDelay
+    , lcTimeout
+
+    -- ** URLMapRedirectHTTPResponseCode
+    , URLMapRedirectHTTPResponseCode (..)
+
     -- ** RequestUtilization
     , RequestUtilization
     , requestUtilization
     , ruTargetConcurrentRequests
     , ruTargetRequestCountPerSecond
+
+    -- ** FirewallRuleAction
+    , FirewallRuleAction (..)
+
+    -- ** SSLSettingsSSLManagementType
+    , SSLSettingsSSLManagementType (..)
 
     -- ** RepairApplicationRequest
     , RepairApplicationRequest
@@ -482,6 +757,28 @@ module Network.Google.AppEngine
     , OperationResponse
     , operationResponse
     , orAddtional
+
+    -- ** CreateVersionMetadataV1Beta
+    , CreateVersionMetadataV1Beta
+    , createVersionMetadataV1Beta
+    , cvmvbCloudBuildId
+
+    -- ** ListDomainMAppingsResponse
+    , ListDomainMAppingsResponse
+    , listDomainMAppingsResponse
+    , ldmarDomainMAppings
+    , ldmarNextPageToken
+
+    -- ** StandardSchedulerSettings
+    , StandardSchedulerSettings
+    , standardSchedulerSettings
+    , sssTargetCPUUtilization
+    , sssMinInstances
+    , sssMaxInstances
+    , sssTargetThroughputUtilization
+
+    -- ** APIConfigHandlerLogin
+    , APIConfigHandlerLogin (..)
 
     -- ** ContainerInfo
     , ContainerInfo
@@ -508,17 +805,42 @@ module Network.Google.AppEngine
     , iAverageLatency
     , iAppEngineRelease
 
+    -- ** SSLSettings
+    , SSLSettings
+    , sslSettings
+    , ssSSLManagementType
+    , ssCertificateId
+    , ssPendingManagedCertificateId
+
     -- ** Deployment
     , Deployment
     , deployment
     , dZip
+    , dCloudBuildOptions
     , dContainer
     , dFiles
     ) where
 
 import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
+import           Network.Google.Resource.AppEngine.Apps.AuthorizedCertificates.Create
+import           Network.Google.Resource.AppEngine.Apps.AuthorizedCertificates.Delete
+import           Network.Google.Resource.AppEngine.Apps.AuthorizedCertificates.Get
+import           Network.Google.Resource.AppEngine.Apps.AuthorizedCertificates.List
+import           Network.Google.Resource.AppEngine.Apps.AuthorizedCertificates.Patch
+import           Network.Google.Resource.AppEngine.Apps.AuthorizedDomains.List
 import           Network.Google.Resource.AppEngine.Apps.Create
+import           Network.Google.Resource.AppEngine.Apps.DomainMAppings.Create
+import           Network.Google.Resource.AppEngine.Apps.DomainMAppings.Delete
+import           Network.Google.Resource.AppEngine.Apps.DomainMAppings.Get
+import           Network.Google.Resource.AppEngine.Apps.DomainMAppings.List
+import           Network.Google.Resource.AppEngine.Apps.DomainMAppings.Patch
+import           Network.Google.Resource.AppEngine.Apps.Firewall.IngressRules.BatchUpdate
+import           Network.Google.Resource.AppEngine.Apps.Firewall.IngressRules.Create
+import           Network.Google.Resource.AppEngine.Apps.Firewall.IngressRules.Delete
+import           Network.Google.Resource.AppEngine.Apps.Firewall.IngressRules.Get
+import           Network.Google.Resource.AppEngine.Apps.Firewall.IngressRules.List
+import           Network.Google.Resource.AppEngine.Apps.Firewall.IngressRules.Patch
 import           Network.Google.Resource.AppEngine.Apps.Get
 import           Network.Google.Resource.AppEngine.Apps.Locations.Get
 import           Network.Google.Resource.AppEngine.Apps.Locations.List
@@ -544,10 +866,22 @@ import           Network.Google.Resource.AppEngine.Apps.Services.Versions.Patch
 TODO
 -}
 
--- | Represents the entirety of the methods and resources available for the Google App Engine Admin API service.
+-- | Represents the entirety of the methods and resources available for the App Engine Admin API service.
 type AppEngineAPI =
-     AppsOperationsListResource :<|>
-       AppsOperationsGetResource
+     AppsAuthorizedDomainsListResource :<|>
+       AppsDomainMAppingsListResource
+       :<|> AppsDomainMAppingsPatchResource
+       :<|> AppsDomainMAppingsGetResource
+       :<|> AppsDomainMAppingsCreateResource
+       :<|> AppsDomainMAppingsDeleteResource
+       :<|> AppsFirewallIngressRulesListResource
+       :<|> AppsFirewallIngressRulesPatchResource
+       :<|> AppsFirewallIngressRulesGetResource
+       :<|> AppsFirewallIngressRulesCreateResource
+       :<|> AppsFirewallIngressRulesBatchUpdateResource
+       :<|> AppsFirewallIngressRulesDeleteResource
+       :<|> AppsOperationsListResource
+       :<|> AppsOperationsGetResource
        :<|> AppsLocationsListResource
        :<|> AppsLocationsGetResource
        :<|> AppsServicesVersionsInstancesListResource
@@ -563,6 +897,11 @@ type AppEngineAPI =
        :<|> AppsServicesPatchResource
        :<|> AppsServicesGetResource
        :<|> AppsServicesDeleteResource
+       :<|> AppsAuthorizedCertificatesListResource
+       :<|> AppsAuthorizedCertificatesPatchResource
+       :<|> AppsAuthorizedCertificatesGetResource
+       :<|> AppsAuthorizedCertificatesCreateResource
+       :<|> AppsAuthorizedCertificatesDeleteResource
        :<|> AppsPatchResource
        :<|> AppsGetResource
        :<|> AppsCreateResource

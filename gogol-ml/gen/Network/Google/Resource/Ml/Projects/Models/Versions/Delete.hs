@@ -25,7 +25,7 @@
 -- version. Note: You cannot delete the version that is set as the default
 -- version of the model unless it is the only remaining version.
 --
--- /See:/ <https://cloud.google.com/ml/ Google Cloud Machine Learning Reference> for @ml.projects.models.versions.delete@.
+-- /See:/ <https://cloud.google.com/ml/ Cloud Machine Learning Engine Reference> for @ml.projects.models.versions.delete@.
 module Network.Google.Resource.Ml.Projects.Models.Versions.Delete
     (
     -- * REST Resource
@@ -38,10 +38,8 @@ module Network.Google.Resource.Ml.Projects.Models.Versions.Delete
     -- * Request Lenses
     , pmvdXgafv
     , pmvdUploadProtocol
-    , pmvdPp
     , pmvdAccessToken
     , pmvdUploadType
-    , pmvdBearerToken
     , pmvdName
     , pmvdCallback
     ) where
@@ -52,17 +50,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @ml.projects.models.versions.delete@ method which the
 -- 'ProjectsModelsVersionsDelete' request conforms to.
 type ProjectsModelsVersionsDeleteResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         Delete '[JSON] GoogleLongrunning__Operation
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     Delete '[JSON] GoogleLongrunning__Operation
 
 -- | Deletes a model version. Each model can have multiple versions deployed
 -- and in use at any given time. Use this method to remove a single
@@ -73,10 +69,8 @@ type ProjectsModelsVersionsDeleteResource =
 data ProjectsModelsVersionsDelete = ProjectsModelsVersionsDelete'
     { _pmvdXgafv          :: !(Maybe Xgafv)
     , _pmvdUploadProtocol :: !(Maybe Text)
-    , _pmvdPp             :: !Bool
     , _pmvdAccessToken    :: !(Maybe Text)
     , _pmvdUploadType     :: !(Maybe Text)
-    , _pmvdBearerToken    :: !(Maybe Text)
     , _pmvdName           :: !Text
     , _pmvdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -89,13 +83,9 @@ data ProjectsModelsVersionsDelete = ProjectsModelsVersionsDelete'
 --
 -- * 'pmvdUploadProtocol'
 --
--- * 'pmvdPp'
---
 -- * 'pmvdAccessToken'
 --
 -- * 'pmvdUploadType'
---
--- * 'pmvdBearerToken'
 --
 -- * 'pmvdName'
 --
@@ -107,10 +97,8 @@ projectsModelsVersionsDelete pPmvdName_ =
     ProjectsModelsVersionsDelete'
     { _pmvdXgafv = Nothing
     , _pmvdUploadProtocol = Nothing
-    , _pmvdPp = True
     , _pmvdAccessToken = Nothing
     , _pmvdUploadType = Nothing
-    , _pmvdBearerToken = Nothing
     , _pmvdName = pPmvdName_
     , _pmvdCallback = Nothing
     }
@@ -126,10 +114,6 @@ pmvdUploadProtocol
   = lens _pmvdUploadProtocol
       (\ s a -> s{_pmvdUploadProtocol = a})
 
--- | Pretty-print response.
-pmvdPp :: Lens' ProjectsModelsVersionsDelete Bool
-pmvdPp = lens _pmvdPp (\ s a -> s{_pmvdPp = a})
-
 -- | OAuth access token.
 pmvdAccessToken :: Lens' ProjectsModelsVersionsDelete (Maybe Text)
 pmvdAccessToken
@@ -142,16 +126,9 @@ pmvdUploadType
   = lens _pmvdUploadType
       (\ s a -> s{_pmvdUploadType = a})
 
--- | OAuth bearer token.
-pmvdBearerToken :: Lens' ProjectsModelsVersionsDelete (Maybe Text)
-pmvdBearerToken
-  = lens _pmvdBearerToken
-      (\ s a -> s{_pmvdBearerToken = a})
-
 -- | Required. The name of the version. You can get the names of all the
 -- versions of a model by calling
--- [projects.models.versions.list](\/ml\/reference\/rest\/v1beta1\/projects.models.versions\/list).
--- Authorization: requires \`Editor\` role on the parent project.
+-- [projects.models.versions.list](\/ml-engine\/reference\/rest\/v1\/projects.models.versions\/list).
 pmvdName :: Lens' ProjectsModelsVersionsDelete Text
 pmvdName = lens _pmvdName (\ s a -> s{_pmvdName = a})
 
@@ -168,10 +145,8 @@ instance GoogleRequest ProjectsModelsVersionsDelete
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsModelsVersionsDelete'{..}
           = go _pmvdName _pmvdXgafv _pmvdUploadProtocol
-              (Just _pmvdPp)
               _pmvdAccessToken
               _pmvdUploadType
-              _pmvdBearerToken
               _pmvdCallback
               (Just AltJSON)
               machineLearningService

@@ -57,6 +57,7 @@ library
         , Network.Google.Resource.FusionTables.Table.Insert
         , Network.Google.Resource.FusionTables.Table.List
         , Network.Google.Resource.FusionTables.Table.Patch
+        , Network.Google.Resource.FusionTables.Table.RefetchSheet
         , Network.Google.Resource.FusionTables.Table.ReplaceRows
         , Network.Google.Resource.FusionTables.Table.Update
         , Network.Google.Resource.FusionTables.Task.Delete

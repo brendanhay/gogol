@@ -46,11 +46,9 @@ module Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.Get
     , upfgigStudentId
     , upfgigXgafv
     , upfgigUploadProtocol
-    , upfgigPp
     , upfgigAccessToken
     , upfgigUploadType
     , upfgigInvitationId
-    , upfgigBearerToken
     , upfgigCallback
     ) where
 
@@ -65,15 +63,13 @@ type UserProFilesGuardianInvitationsGetResource =
          Capture "studentId" Text :>
            "guardianInvitations" :>
              Capture "invitationId" Text :>
-               QueryParam "$.xgafv" Text :>
+               QueryParam "$.xgafv" Xgafv :>
                  QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] GuardianInvitation
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] GuardianInvitation
 
 -- | Returns a specific guardian invitation. This method returns the
 -- following error codes: * \`PERMISSION_DENIED\` if the requesting user is
@@ -90,13 +86,11 @@ type UserProFilesGuardianInvitationsGetResource =
 -- /See:/ 'userProFilesGuardianInvitationsGet' smart constructor.
 data UserProFilesGuardianInvitationsGet = UserProFilesGuardianInvitationsGet'
     { _upfgigStudentId      :: !Text
-    , _upfgigXgafv          :: !(Maybe Text)
+    , _upfgigXgafv          :: !(Maybe Xgafv)
     , _upfgigUploadProtocol :: !(Maybe Text)
-    , _upfgigPp             :: !Bool
     , _upfgigAccessToken    :: !(Maybe Text)
     , _upfgigUploadType     :: !(Maybe Text)
     , _upfgigInvitationId   :: !Text
-    , _upfgigBearerToken    :: !(Maybe Text)
     , _upfgigCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -110,15 +104,11 @@ data UserProFilesGuardianInvitationsGet = UserProFilesGuardianInvitationsGet'
 --
 -- * 'upfgigUploadProtocol'
 --
--- * 'upfgigPp'
---
 -- * 'upfgigAccessToken'
 --
 -- * 'upfgigUploadType'
 --
 -- * 'upfgigInvitationId'
---
--- * 'upfgigBearerToken'
 --
 -- * 'upfgigCallback'
 userProFilesGuardianInvitationsGet
@@ -130,11 +120,9 @@ userProFilesGuardianInvitationsGet pUpfgigStudentId_ pUpfgigInvitationId_ =
     { _upfgigStudentId = pUpfgigStudentId_
     , _upfgigXgafv = Nothing
     , _upfgigUploadProtocol = Nothing
-    , _upfgigPp = True
     , _upfgigAccessToken = Nothing
     , _upfgigUploadType = Nothing
     , _upfgigInvitationId = pUpfgigInvitationId_
-    , _upfgigBearerToken = Nothing
     , _upfgigCallback = Nothing
     }
 
@@ -145,7 +133,7 @@ upfgigStudentId
       (\ s a -> s{_upfgigStudentId = a})
 
 -- | V1 error format.
-upfgigXgafv :: Lens' UserProFilesGuardianInvitationsGet (Maybe Text)
+upfgigXgafv :: Lens' UserProFilesGuardianInvitationsGet (Maybe Xgafv)
 upfgigXgafv
   = lens _upfgigXgafv (\ s a -> s{_upfgigXgafv = a})
 
@@ -154,10 +142,6 @@ upfgigUploadProtocol :: Lens' UserProFilesGuardianInvitationsGet (Maybe Text)
 upfgigUploadProtocol
   = lens _upfgigUploadProtocol
       (\ s a -> s{_upfgigUploadProtocol = a})
-
--- | Pretty-print response.
-upfgigPp :: Lens' UserProFilesGuardianInvitationsGet Bool
-upfgigPp = lens _upfgigPp (\ s a -> s{_upfgigPp = a})
 
 -- | OAuth access token.
 upfgigAccessToken :: Lens' UserProFilesGuardianInvitationsGet (Maybe Text)
@@ -177,12 +161,6 @@ upfgigInvitationId
   = lens _upfgigInvitationId
       (\ s a -> s{_upfgigInvitationId = a})
 
--- | OAuth bearer token.
-upfgigBearerToken :: Lens' UserProFilesGuardianInvitationsGet (Maybe Text)
-upfgigBearerToken
-  = lens _upfgigBearerToken
-      (\ s a -> s{_upfgigBearerToken = a})
-
 -- | JSONP
 upfgigCallback :: Lens' UserProFilesGuardianInvitationsGet (Maybe Text)
 upfgigCallback
@@ -193,15 +171,15 @@ instance GoogleRequest
          UserProFilesGuardianInvitationsGet where
         type Rs UserProFilesGuardianInvitationsGet =
              GuardianInvitation
-        type Scopes UserProFilesGuardianInvitationsGet = '[]
+        type Scopes UserProFilesGuardianInvitationsGet =
+             '["https://www.googleapis.com/auth/classroom.guardianlinks.students",
+               "https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly"]
         requestClient UserProFilesGuardianInvitationsGet'{..}
           = go _upfgigStudentId _upfgigInvitationId
               _upfgigXgafv
               _upfgigUploadProtocol
-              (Just _upfgigPp)
               _upfgigAccessToken
               _upfgigUploadType
-              _upfgigBearerToken
               _upfgigCallback
               (Just AltJSON)
               classroomService

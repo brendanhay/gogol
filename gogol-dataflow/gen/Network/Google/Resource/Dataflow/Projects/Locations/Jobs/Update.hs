@@ -22,7 +22,7 @@
 --
 -- Updates the state of an existing Cloud Dataflow job.
 --
--- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @dataflow.projects.locations.jobs.update@.
+-- /See:/ <https://cloud.google.com/dataflow Dataflow API Reference> for @dataflow.projects.locations.jobs.update@.
 module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Update
     (
     -- * REST Resource
@@ -37,11 +37,9 @@ module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Update
     , pljuJobId
     , pljuUploadProtocol
     , pljuLocation
-    , pljuPp
     , pljuAccessToken
     , pljuUploadType
     , pljuPayload
-    , pljuBearerToken
     , pljuProjectId
     , pljuCallback
     ) where
@@ -59,29 +57,25 @@ type ProjectsLocationsJobsUpdateResource =
              Capture "location" Text :>
                "jobs" :>
                  Capture "jobId" Text :>
-                   QueryParam "$.xgafv" Text :>
+                   QueryParam "$.xgafv" Xgafv :>
                      QueryParam "upload_protocol" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "access_token" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "bearer_token" Text :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" AltJSON :>
-                                   ReqBody '[JSON] Job :> Put '[JSON] Job
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] Job :> Put '[JSON] Job
 
 -- | Updates the state of an existing Cloud Dataflow job.
 --
 -- /See:/ 'projectsLocationsJobsUpdate' smart constructor.
 data ProjectsLocationsJobsUpdate = ProjectsLocationsJobsUpdate'
-    { _pljuXgafv          :: !(Maybe Text)
+    { _pljuXgafv          :: !(Maybe Xgafv)
     , _pljuJobId          :: !Text
     , _pljuUploadProtocol :: !(Maybe Text)
     , _pljuLocation       :: !Text
-    , _pljuPp             :: !Bool
     , _pljuAccessToken    :: !(Maybe Text)
     , _pljuUploadType     :: !(Maybe Text)
     , _pljuPayload        :: !Job
-    , _pljuBearerToken    :: !(Maybe Text)
     , _pljuProjectId      :: !Text
     , _pljuCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -98,15 +92,11 @@ data ProjectsLocationsJobsUpdate = ProjectsLocationsJobsUpdate'
 --
 -- * 'pljuLocation'
 --
--- * 'pljuPp'
---
 -- * 'pljuAccessToken'
 --
 -- * 'pljuUploadType'
 --
 -- * 'pljuPayload'
---
--- * 'pljuBearerToken'
 --
 -- * 'pljuProjectId'
 --
@@ -123,17 +113,15 @@ projectsLocationsJobsUpdate pPljuJobId_ pPljuLocation_ pPljuPayload_ pPljuProjec
     , _pljuJobId = pPljuJobId_
     , _pljuUploadProtocol = Nothing
     , _pljuLocation = pPljuLocation_
-    , _pljuPp = True
     , _pljuAccessToken = Nothing
     , _pljuUploadType = Nothing
     , _pljuPayload = pPljuPayload_
-    , _pljuBearerToken = Nothing
     , _pljuProjectId = pPljuProjectId_
     , _pljuCallback = Nothing
     }
 
 -- | V1 error format.
-pljuXgafv :: Lens' ProjectsLocationsJobsUpdate (Maybe Text)
+pljuXgafv :: Lens' ProjectsLocationsJobsUpdate (Maybe Xgafv)
 pljuXgafv
   = lens _pljuXgafv (\ s a -> s{_pljuXgafv = a})
 
@@ -153,10 +141,6 @@ pljuLocation :: Lens' ProjectsLocationsJobsUpdate Text
 pljuLocation
   = lens _pljuLocation (\ s a -> s{_pljuLocation = a})
 
--- | Pretty-print response.
-pljuPp :: Lens' ProjectsLocationsJobsUpdate Bool
-pljuPp = lens _pljuPp (\ s a -> s{_pljuPp = a})
-
 -- | OAuth access token.
 pljuAccessToken :: Lens' ProjectsLocationsJobsUpdate (Maybe Text)
 pljuAccessToken
@@ -174,12 +158,6 @@ pljuPayload :: Lens' ProjectsLocationsJobsUpdate Job
 pljuPayload
   = lens _pljuPayload (\ s a -> s{_pljuPayload = a})
 
--- | OAuth bearer token.
-pljuBearerToken :: Lens' ProjectsLocationsJobsUpdate (Maybe Text)
-pljuBearerToken
-  = lens _pljuBearerToken
-      (\ s a -> s{_pljuBearerToken = a})
-
 -- | The ID of the Cloud Platform project that the job belongs to.
 pljuProjectId :: Lens' ProjectsLocationsJobsUpdate Text
 pljuProjectId
@@ -196,15 +174,15 @@ instance GoogleRequest ProjectsLocationsJobsUpdate
         type Rs ProjectsLocationsJobsUpdate = Job
         type Scopes ProjectsLocationsJobsUpdate =
              '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly",
                "https://www.googleapis.com/auth/userinfo.email"]
         requestClient ProjectsLocationsJobsUpdate'{..}
           = go _pljuProjectId _pljuLocation _pljuJobId
               _pljuXgafv
               _pljuUploadProtocol
-              (Just _pljuPp)
               _pljuAccessToken
               _pljuUploadType
-              _pljuBearerToken
               _pljuCallback
               (Just AltJSON)
               _pljuPayload

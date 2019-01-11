@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'CreativeGroupsInsert' request conforms to.
 type CreativeGroupsInsertResource =
      "dfareporting" :>
-       "v2.7" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeGroups" :>

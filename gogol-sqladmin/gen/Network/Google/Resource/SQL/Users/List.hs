@@ -22,7 +22,7 @@
 --
 -- Lists users in the specified Cloud SQL instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.users.list@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.users.list@.
 module Network.Google.Resource.SQL.Users.List
     (
     -- * REST Resource

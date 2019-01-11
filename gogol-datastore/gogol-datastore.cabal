@@ -39,7 +39,16 @@ library
         , Network.Google.Resource.Datastore.Projects.AllocateIds
         , Network.Google.Resource.Datastore.Projects.BeginTransaction
         , Network.Google.Resource.Datastore.Projects.Commit
+        , Network.Google.Resource.Datastore.Projects.Export
+        , Network.Google.Resource.Datastore.Projects.Import
+        , Network.Google.Resource.Datastore.Projects.Indexes.Get
+        , Network.Google.Resource.Datastore.Projects.Indexes.List
         , Network.Google.Resource.Datastore.Projects.Lookup
+        , Network.Google.Resource.Datastore.Projects.Operations.Cancel
+        , Network.Google.Resource.Datastore.Projects.Operations.Delete
+        , Network.Google.Resource.Datastore.Projects.Operations.Get
+        , Network.Google.Resource.Datastore.Projects.Operations.List
+        , Network.Google.Resource.Datastore.Projects.ReserveIds
         , Network.Google.Resource.Datastore.Projects.Rollback
         , Network.Google.Resource.Datastore.Projects.RunQuery
 

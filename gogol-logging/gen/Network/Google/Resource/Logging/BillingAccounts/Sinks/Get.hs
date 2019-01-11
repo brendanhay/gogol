@@ -35,10 +35,8 @@ module Network.Google.Resource.Logging.BillingAccounts.Sinks.Get
     -- * Request Lenses
     , basgXgafv
     , basgUploadProtocol
-    , basgPp
     , basgAccessToken
     , basgUploadType
-    , basgBearerToken
     , basgSinkName
     , basgCallback
     ) where
@@ -53,12 +51,10 @@ type BillingAccountsSinksGetResource =
        Capture "sinkName" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] LogSink
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] LogSink
 
 -- | Gets a sink.
 --
@@ -66,10 +62,8 @@ type BillingAccountsSinksGetResource =
 data BillingAccountsSinksGet = BillingAccountsSinksGet'
     { _basgXgafv          :: !(Maybe Xgafv)
     , _basgUploadProtocol :: !(Maybe Text)
-    , _basgPp             :: !Bool
     , _basgAccessToken    :: !(Maybe Text)
     , _basgUploadType     :: !(Maybe Text)
-    , _basgBearerToken    :: !(Maybe Text)
     , _basgSinkName       :: !Text
     , _basgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -82,13 +76,9 @@ data BillingAccountsSinksGet = BillingAccountsSinksGet'
 --
 -- * 'basgUploadProtocol'
 --
--- * 'basgPp'
---
 -- * 'basgAccessToken'
 --
 -- * 'basgUploadType'
---
--- * 'basgBearerToken'
 --
 -- * 'basgSinkName'
 --
@@ -100,10 +90,8 @@ billingAccountsSinksGet pBasgSinkName_ =
     BillingAccountsSinksGet'
     { _basgXgafv = Nothing
     , _basgUploadProtocol = Nothing
-    , _basgPp = True
     , _basgAccessToken = Nothing
     , _basgUploadType = Nothing
-    , _basgBearerToken = Nothing
     , _basgSinkName = pBasgSinkName_
     , _basgCallback = Nothing
     }
@@ -119,10 +107,6 @@ basgUploadProtocol
   = lens _basgUploadProtocol
       (\ s a -> s{_basgUploadProtocol = a})
 
--- | Pretty-print response.
-basgPp :: Lens' BillingAccountsSinksGet Bool
-basgPp = lens _basgPp (\ s a -> s{_basgPp = a})
-
 -- | OAuth access token.
 basgAccessToken :: Lens' BillingAccountsSinksGet (Maybe Text)
 basgAccessToken
@@ -135,15 +119,11 @@ basgUploadType
   = lens _basgUploadType
       (\ s a -> s{_basgUploadType = a})
 
--- | OAuth bearer token.
-basgBearerToken :: Lens' BillingAccountsSinksGet (Maybe Text)
-basgBearerToken
-  = lens _basgBearerToken
-      (\ s a -> s{_basgBearerToken = a})
-
--- | Required. The parent resource name of the sink:
+-- | Required. The resource name of the sink:
 -- \"projects\/[PROJECT_ID]\/sinks\/[SINK_ID]\"
--- \"organizations\/[ORGANIZATION_ID]\/sinks\/[SINK_ID]\" Example:
+-- \"organizations\/[ORGANIZATION_ID]\/sinks\/[SINK_ID]\"
+-- \"billingAccounts\/[BILLING_ACCOUNT_ID]\/sinks\/[SINK_ID]\"
+-- \"folders\/[FOLDER_ID]\/sinks\/[SINK_ID]\" Example:
 -- \"projects\/my-project-id\/sinks\/my-sink-id\".
 basgSinkName :: Lens' BillingAccountsSinksGet Text
 basgSinkName
@@ -163,10 +143,8 @@ instance GoogleRequest BillingAccountsSinksGet where
                "https://www.googleapis.com/auth/logging.read"]
         requestClient BillingAccountsSinksGet'{..}
           = go _basgSinkName _basgXgafv _basgUploadProtocol
-              (Just _basgPp)
               _basgAccessToken
               _basgUploadType
-              _basgBearerToken
               _basgCallback
               (Just AltJSON)
               loggingService

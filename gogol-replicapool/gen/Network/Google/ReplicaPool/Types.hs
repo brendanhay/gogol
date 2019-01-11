@@ -20,153 +20,201 @@ module Network.Google.ReplicaPool.Types
       replicaPoolService
 
     -- * OAuth Scopes
-    , computeScope
     , cloudPlatformReadOnlyScope
     , cloudPlatformScope
-    , computeReadOnlyScope
+    , ndevCloudmanScope
+    , ndevCloudmanReadOnlyScope
+    , replicaPoolScope
+    , replicaPoolReadOnlyScope
 
-    -- * OperationWarningsItemDataItem
-    , OperationWarningsItemDataItem
-    , operationWarningsItemDataItem
-    , owidiValue
-    , owidiKey
+    -- * ReplicaStatus
+    , ReplicaStatus
+    , replicaStatus
+    , rsState
+    , rsTemplateVersion
+    , rsVMLink
+    , rsVMStartTime
+    , rsDetails
 
-    -- * InstanceGroupManagersAbandonInstancesRequest
-    , InstanceGroupManagersAbandonInstancesRequest
-    , instanceGroupManagersAbandonInstancesRequest
-    , igmairInstances
+    -- * DiskAttachment
+    , DiskAttachment
+    , diskAttachment
+    , daDeviceName
+    , daIndex
 
-    -- * InstanceGroupManagersSetInstanceTemplateRequest
-    , InstanceGroupManagersSetInstanceTemplateRequest
-    , instanceGroupManagersSetInstanceTemplateRequest
-    , igmsitrInstanceTemplate
+    -- * PoolsDeleteRequest
+    , PoolsDeleteRequest
+    , poolsDeleteRequest
+    , pdrAbandonInstances
 
-    -- * OperationWarningsItemCode
-    , OperationWarningsItemCode (..)
+    -- * HealthCheck
+    , HealthCheck
+    , healthCheck
+    , hcHealthyThreshold
+    , hcPath
+    , hcCheckIntervalSec
+    , hcName
+    , hcHost
+    , hcTimeoutSec
+    , hcDescription
+    , hcUnhealthyThreshold
+    , hcPort
 
-    -- * OperationList
-    , OperationList
-    , operationList
-    , olNextPageToken
-    , olKind
-    , olItems
-    , olSelfLink
-    , olId
+    -- * Tag
+    , Tag
+    , tag
+    , tFingerPrint
+    , tItems
 
-    -- * InstanceGroupManagerList
-    , InstanceGroupManagerList
-    , instanceGroupManagerList
-    , igmlNextPageToken
-    , igmlKind
-    , igmlItems
-    , igmlSelfLink
-    , igmlId
+    -- * NewDiskInitializeParams
+    , NewDiskInitializeParams
+    , newDiskInitializeParams
+    , ndipSourceImage
+    , ndipDiskSizeGb
+    , ndipDiskType
 
-    -- * ReplicaPoolAutoHealingPolicyActionType
-    , ReplicaPoolAutoHealingPolicyActionType (..)
+    -- * MetadataItem
+    , MetadataItem
+    , metadataItem
+    , miValue
+    , miKey
 
-    -- * Operation
-    , Operation
-    , operation
-    , oTargetId
-    , oStatus
-    , oInsertTime
-    , oProgress
-    , oStartTime
-    , oKind
-    , oError
-    , oHTTPErrorMessage
-    , oZone
-    , oWarnings
-    , oHTTPErrorStatusCode
-    , oUser
-    , oSelfLink
-    , oName
-    , oStatusMessage
-    , oCreationTimestamp
-    , oEndTime
-    , oId
-    , oOperationType
-    , oRegion
-    , oTargetLink
-    , oClientOperationId
+    -- * Replica
+    , Replica
+    , replica
+    , rStatus
+    , rSelfLink
+    , rName
 
-    -- * InstanceGroupManager
-    , InstanceGroupManager
-    , instanceGroupManager
-    , igmCurrentSize
-    , igmGroup
-    , igmKind
-    , igmFingerprint
-    , igmBaseInstanceName
-    , igmAutoHealingPolicies
-    , igmInstanceTemplate
-    , igmTargetSize
-    , igmSelfLink
-    , igmName
-    , igmCreationTimestamp
-    , igmId
-    , igmTargetPools
-    , igmDescription
+    -- * NetworkInterface
+    , NetworkInterface
+    , networkInterface
+    , niNetwork
+    , niNetworkIP
+    , niAccessConfigs
 
-    -- * ReplicaPoolAutoHealingPolicy
-    , ReplicaPoolAutoHealingPolicy
-    , replicaPoolAutoHealingPolicy
-    , rpahpHealthCheck
-    , rpahpActionType
+    -- * ExistingDisk
+    , ExistingDisk
+    , existingDisk
+    , edAttachment
+    , edSource
 
-    -- * InstanceGroupManagersRecreateInstancesRequest
-    , InstanceGroupManagersRecreateInstancesRequest
-    , instanceGroupManagersRecreateInstancesRequest
-    , igmrirInstances
+    -- * Action
+    , Action
+    , action
+    , aCommands
+    , aTimeoutMilliSeconds
+    , aEnvVariables
 
-    -- * OperationStatus
-    , OperationStatus (..)
+    -- * Pool
+    , Pool
+    , pool
+    , pResourceViews
+    , pNumReplicas
+    , pTargetPool
+    , pAutoRestart
+    , pBaseInstanceName
+    , pInitialNumReplicas
+    , pCurrentNumReplicas
+    , pSelfLink
+    , pName
+    , pLabels
+    , pType
+    , pTemplate
+    , pTargetPools
+    , pDescription
+    , pHealthChecks
 
-    -- * InstanceGroupManagersDeleteInstancesRequest
-    , InstanceGroupManagersDeleteInstancesRequest
-    , instanceGroupManagersDeleteInstancesRequest
-    , igmdirInstances
+    -- * ServiceAccount
+    , ServiceAccount
+    , serviceAccount
+    , saEmail
+    , saScopes
 
-    -- * OperationError
-    , OperationError
-    , operationError
-    , oeErrors
+    -- * VMParams
+    , VMParams
+    , vMParams
+    , vmpServiceAccounts
+    , vmpNetworkInterfaces
+    , vmpBaseInstanceName
+    , vmpOnHostMaintenance
+    , vmpMachineType
+    , vmpMetadata
+    , vmpDisksToAttach
+    , vmpCanIPForward
+    , vmpDescription
+    , vmpDisksToCreate
+    , vmpTags
 
-    -- * InstanceGroupManagersSetTargetPoolsRequest
-    , InstanceGroupManagersSetTargetPoolsRequest
-    , instanceGroupManagersSetTargetPoolsRequest
-    , igmstprFingerprint
-    , igmstprTargetPools
+    -- * ReplicasListResponse
+    , ReplicasListResponse
+    , replicasListResponse
+    , rlrNextPageToken
+    , rlrResources
 
-    -- * OperationErrorErrorsItem
-    , OperationErrorErrorsItem
-    , operationErrorErrorsItem
-    , oeeiLocation
-    , oeeiCode
-    , oeeiMessage
+    -- * Metadata
+    , Metadata
+    , metadata
+    , mFingerPrint
+    , mItems
 
-    -- * OperationWarningsItem
-    , OperationWarningsItem
-    , operationWarningsItem
-    , owiData
-    , owiCode
-    , owiMessage
+    -- * Template
+    , Template
+    , template
+    , tAction
+    , tVMParams
+    , tVersion
+    , tHealthChecks
+
+    -- * EnvVariable
+    , EnvVariable
+    , envVariable
+    , evValue
+    , evName
+    , evHidden
+
+    -- * ReplicasDeleteRequest
+    , ReplicasDeleteRequest
+    , replicasDeleteRequest
+    , rdrAbandonInstance
+
+    -- * AccessConfig
+    , AccessConfig
+    , accessConfig
+    , acName
+    , acNATIP
+    , acType
+
+    -- * Label
+    , Label
+    , label
+    , lValue
+    , lKey
+
+    -- * PoolsListResponse
+    , PoolsListResponse
+    , poolsListResponse
+    , plrNextPageToken
+    , plrResources
+
+    -- * NewDisk
+    , NewDisk
+    , newDisk
+    , ndBoot
+    , ndAutoDelete
+    , ndAttachment
+    , ndInitializeParams
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.ReplicaPool.Types.Product
 import           Network.Google.ReplicaPool.Types.Sum
 
--- | Default request referring to version 'v1beta2' of the Google Compute Engine Instance Group Manager API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v1beta1' of the Replica Pool API. This contains the host and root path used as a starting point for constructing service requests.
 replicaPoolService :: ServiceConfig
 replicaPoolService
-  = defaultService (ServiceId "replicapool:v1beta2")
+  = defaultService (ServiceId "replicapool:v1beta1")
       "www.googleapis.com"
-
--- | View and manage your Google Compute Engine resources
-computeScope :: Proxy '["https://www.googleapis.com/auth/compute"]
-computeScope = Proxy;
 
 -- | View your data across Google Cloud Platform services
 cloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
@@ -176,6 +224,20 @@ cloudPlatformReadOnlyScope = Proxy;
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
 cloudPlatformScope = Proxy;
 
--- | View your Google Compute Engine resources
-computeReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/compute.readonly"]
-computeReadOnlyScope = Proxy;
+-- | View and manage your Google Cloud Platform management resources and
+-- deployment status information
+ndevCloudmanScope :: Proxy '["https://www.googleapis.com/auth/ndev.cloudman"]
+ndevCloudmanScope = Proxy;
+
+-- | View your Google Cloud Platform management resources and deployment
+-- status information
+ndevCloudmanReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/ndev.cloudman.readonly"]
+ndevCloudmanReadOnlyScope = Proxy;
+
+-- | View and manage replica pools
+replicaPoolScope :: Proxy '["https://www.googleapis.com/auth/replicapool"]
+replicaPoolScope = Proxy;
+
+-- | View replica pools
+replicaPoolReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/replicapool.readonly"]
+replicaPoolReadOnlyScope = Proxy;

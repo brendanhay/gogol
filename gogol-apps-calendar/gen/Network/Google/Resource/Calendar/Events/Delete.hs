@@ -35,6 +35,7 @@ module Network.Google.Resource.Calendar.Events.Delete
     -- * Request Lenses
     , edCalendarId
     , edSendNotifications
+    , edSendUpdates
     , edEventId
     ) where
 
@@ -51,7 +52,8 @@ type EventsDeleteResource =
              "events" :>
                Capture "eventId" Text :>
                  QueryParam "sendNotifications" Bool :>
-                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
+                   QueryParam "sendUpdates" EventsDeleteSendUpdates :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an event.
 --
@@ -59,6 +61,7 @@ type EventsDeleteResource =
 data EventsDelete = EventsDelete'
     { _edCalendarId        :: !Text
     , _edSendNotifications :: !(Maybe Bool)
+    , _edSendUpdates       :: !(Maybe EventsDeleteSendUpdates)
     , _edEventId           :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -70,6 +73,8 @@ data EventsDelete = EventsDelete'
 --
 -- * 'edSendNotifications'
 --
+-- * 'edSendUpdates'
+--
 -- * 'edEventId'
 eventsDelete
     :: Text -- ^ 'edCalendarId'
@@ -79,6 +84,7 @@ eventsDelete pEdCalendarId_ pEdEventId_ =
     EventsDelete'
     { _edCalendarId = pEdCalendarId_
     , _edSendNotifications = Nothing
+    , _edSendUpdates = Nothing
     , _edEventId = pEdEventId_
     }
 
@@ -89,12 +95,20 @@ edCalendarId :: Lens' EventsDelete Text
 edCalendarId
   = lens _edCalendarId (\ s a -> s{_edCalendarId = a})
 
--- | Whether to send notifications about the deletion of the event. Optional.
--- The default is False.
+-- | Deprecated. Please use sendUpdates instead. Whether to send
+-- notifications about the deletion of the event. Note that some emails
+-- might still be sent even if you set the value to false. The default is
+-- false.
 edSendNotifications :: Lens' EventsDelete (Maybe Bool)
 edSendNotifications
   = lens _edSendNotifications
       (\ s a -> s{_edSendNotifications = a})
+
+-- | Guests who should receive notifications about the deletion of the event.
+edSendUpdates :: Lens' EventsDelete (Maybe EventsDeleteSendUpdates)
+edSendUpdates
+  = lens _edSendUpdates
+      (\ s a -> s{_edSendUpdates = a})
 
 -- | Event identifier.
 edEventId :: Lens' EventsDelete Text
@@ -104,9 +118,11 @@ edEventId
 instance GoogleRequest EventsDelete where
         type Rs EventsDelete = ()
         type Scopes EventsDelete =
-             '["https://www.googleapis.com/auth/calendar"]
+             '["https://www.googleapis.com/auth/calendar",
+               "https://www.googleapis.com/auth/calendar.events"]
         requestClient EventsDelete'{..}
           = go _edCalendarId _edEventId _edSendNotifications
+              _edSendUpdates
               (Just AltJSON)
               appsCalendarService
           where go

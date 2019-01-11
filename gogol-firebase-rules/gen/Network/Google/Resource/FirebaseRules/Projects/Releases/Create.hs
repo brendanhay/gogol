@@ -35,9 +35,7 @@
 -- The table reflects the \`Ruleset\` rollout in progress. The \`prod\` and
 -- \`prod\/beta\` releases refer to the same \`Ruleset\`. However,
 -- \`prod\/v23\` refers to a new \`Ruleset\`. The \`Ruleset\` reference for
--- a \`Release\` may be updated using the UpdateRelease method, and the
--- custom \`Release\` name may be referenced by specifying the
--- \`X-Firebase-Rules-Release-Name\` header.
+-- a \`Release\` may be updated using the UpdateRelease method.
 --
 -- /See:/ <https://firebase.google.com/docs/storage/security Firebase Rules API Reference> for @firebaserules.projects.releases.create@.
 module Network.Google.Resource.FirebaseRules.Projects.Releases.Create
@@ -52,11 +50,9 @@ module Network.Google.Resource.FirebaseRules.Projects.Releases.Create
     -- * Request Lenses
     , prcrXgafv
     , prcrUploadProtocol
-    , prcrPp
     , prcrAccessToken
     , prcrUploadType
     , prcrPayload
-    , prcrBearerToken
     , prcrName
     , prcrCallback
     ) where
@@ -72,13 +68,11 @@ type ProjectsReleasesCreateResource =
          "releases" :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Release :> Post '[JSON] Release
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Release :> Post '[JSON] Release
 
 -- | Create a \`Release\`. Release names should reflect the developer\'s
 -- deployment practices. For example, the release name may include the
@@ -95,19 +89,15 @@ type ProjectsReleasesCreateResource =
 -- The table reflects the \`Ruleset\` rollout in progress. The \`prod\` and
 -- \`prod\/beta\` releases refer to the same \`Ruleset\`. However,
 -- \`prod\/v23\` refers to a new \`Ruleset\`. The \`Ruleset\` reference for
--- a \`Release\` may be updated using the UpdateRelease method, and the
--- custom \`Release\` name may be referenced by specifying the
--- \`X-Firebase-Rules-Release-Name\` header.
+-- a \`Release\` may be updated using the UpdateRelease method.
 --
 -- /See:/ 'projectsReleasesCreate' smart constructor.
 data ProjectsReleasesCreate = ProjectsReleasesCreate'
     { _prcrXgafv          :: !(Maybe Xgafv)
     , _prcrUploadProtocol :: !(Maybe Text)
-    , _prcrPp             :: !Bool
     , _prcrAccessToken    :: !(Maybe Text)
     , _prcrUploadType     :: !(Maybe Text)
     , _prcrPayload        :: !Release
-    , _prcrBearerToken    :: !(Maybe Text)
     , _prcrName           :: !Text
     , _prcrCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -120,15 +110,11 @@ data ProjectsReleasesCreate = ProjectsReleasesCreate'
 --
 -- * 'prcrUploadProtocol'
 --
--- * 'prcrPp'
---
 -- * 'prcrAccessToken'
 --
 -- * 'prcrUploadType'
 --
 -- * 'prcrPayload'
---
--- * 'prcrBearerToken'
 --
 -- * 'prcrName'
 --
@@ -141,11 +127,9 @@ projectsReleasesCreate pPrcrPayload_ pPrcrName_ =
     ProjectsReleasesCreate'
     { _prcrXgafv = Nothing
     , _prcrUploadProtocol = Nothing
-    , _prcrPp = True
     , _prcrAccessToken = Nothing
     , _prcrUploadType = Nothing
     , _prcrPayload = pPrcrPayload_
-    , _prcrBearerToken = Nothing
     , _prcrName = pPrcrName_
     , _prcrCallback = Nothing
     }
@@ -160,10 +144,6 @@ prcrUploadProtocol :: Lens' ProjectsReleasesCreate (Maybe Text)
 prcrUploadProtocol
   = lens _prcrUploadProtocol
       (\ s a -> s{_prcrUploadProtocol = a})
-
--- | Pretty-print response.
-prcrPp :: Lens' ProjectsReleasesCreate Bool
-prcrPp = lens _prcrPp (\ s a -> s{_prcrPp = a})
 
 -- | OAuth access token.
 prcrAccessToken :: Lens' ProjectsReleasesCreate (Maybe Text)
@@ -182,12 +162,6 @@ prcrPayload :: Lens' ProjectsReleasesCreate Release
 prcrPayload
   = lens _prcrPayload (\ s a -> s{_prcrPayload = a})
 
--- | OAuth bearer token.
-prcrBearerToken :: Lens' ProjectsReleasesCreate (Maybe Text)
-prcrBearerToken
-  = lens _prcrBearerToken
-      (\ s a -> s{_prcrBearerToken = a})
-
 -- | Resource name for the project which owns this \`Release\`. Format:
 -- \`projects\/{project_id}\`
 prcrName :: Lens' ProjectsReleasesCreate Text
@@ -205,10 +179,8 @@ instance GoogleRequest ProjectsReleasesCreate where
                "https://www.googleapis.com/auth/firebase"]
         requestClient ProjectsReleasesCreate'{..}
           = go _prcrName _prcrXgafv _prcrUploadProtocol
-              (Just _prcrPp)
               _prcrAccessToken
               _prcrUploadType
-              _prcrBearerToken
               _prcrCallback
               (Just AltJSON)
               _prcrPayload

@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'PostalCodesGet' request conforms to.
 type PostalCodesGetResource =
      "dfareporting" :>
-       "v2.7" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "postalCodes" :>

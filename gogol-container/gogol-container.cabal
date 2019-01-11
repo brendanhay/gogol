@@ -1,6 +1,6 @@
 name:                  gogol-container
 version:               0.3.0
-synopsis:              Google Container Engine SDK.
+synopsis:              Google Kubernetes Engine SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -14,8 +14,8 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    Builds and manages clusters that run container-based applications,
-    powered by open source Kubernetes technology.
+    Builds and manages container-based applications, powered by the open
+    source Kubernetes technology.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -36,16 +36,61 @@ library
     exposed-modules:
           Network.Google.Container
         , Network.Google.Container.Types
+        , Network.Google.Resource.Container.Projects.Locations.Clusters.CompleteIPRotation
+        , Network.Google.Resource.Container.Projects.Locations.Clusters.Create
+        , Network.Google.Resource.Container.Projects.Locations.Clusters.Delete
+        , Network.Google.Resource.Container.Projects.Locations.Clusters.Get
+        , Network.Google.Resource.Container.Projects.Locations.Clusters.List
+        , Network.Google.Resource.Container.Projects.Locations.Clusters.NodePools.Create
+        , Network.Google.Resource.Container.Projects.Locations.Clusters.NodePools.Delete
+        , Network.Google.Resource.Container.Projects.Locations.Clusters.NodePools.Get
+        , Network.Google.Resource.Container.Projects.Locations.Clusters.NodePools.List
+        , Network.Google.Resource.Container.Projects.Locations.Clusters.NodePools.Rollback
+        , Network.Google.Resource.Container.Projects.Locations.Clusters.NodePools.SetAutoscaling
+        , Network.Google.Resource.Container.Projects.Locations.Clusters.NodePools.SetManagement
+        , Network.Google.Resource.Container.Projects.Locations.Clusters.NodePools.SetSize
+        , Network.Google.Resource.Container.Projects.Locations.Clusters.NodePools.Update
+        , Network.Google.Resource.Container.Projects.Locations.Clusters.SetAddons
+        , Network.Google.Resource.Container.Projects.Locations.Clusters.SetLegacyAbac
+        , Network.Google.Resource.Container.Projects.Locations.Clusters.SetLocations
+        , Network.Google.Resource.Container.Projects.Locations.Clusters.SetLogging
+        , Network.Google.Resource.Container.Projects.Locations.Clusters.SetMaintenancePolicy
+        , Network.Google.Resource.Container.Projects.Locations.Clusters.SetMasterAuth
+        , Network.Google.Resource.Container.Projects.Locations.Clusters.SetMonitoring
+        , Network.Google.Resource.Container.Projects.Locations.Clusters.SetNetworkPolicy
+        , Network.Google.Resource.Container.Projects.Locations.Clusters.SetResourceLabels
+        , Network.Google.Resource.Container.Projects.Locations.Clusters.StartIPRotation
+        , Network.Google.Resource.Container.Projects.Locations.Clusters.Update
+        , Network.Google.Resource.Container.Projects.Locations.Clusters.UpdateMaster
+        , Network.Google.Resource.Container.Projects.Locations.GetServerConfig
+        , Network.Google.Resource.Container.Projects.Locations.Operations.Cancel
+        , Network.Google.Resource.Container.Projects.Locations.Operations.Get
+        , Network.Google.Resource.Container.Projects.Locations.Operations.List
+        , Network.Google.Resource.Container.Projects.Zones.Clusters.Addons
+        , Network.Google.Resource.Container.Projects.Zones.Clusters.CompleteIPRotation
         , Network.Google.Resource.Container.Projects.Zones.Clusters.Create
         , Network.Google.Resource.Container.Projects.Zones.Clusters.Delete
         , Network.Google.Resource.Container.Projects.Zones.Clusters.Get
+        , Network.Google.Resource.Container.Projects.Zones.Clusters.LegacyAbac
         , Network.Google.Resource.Container.Projects.Zones.Clusters.List
+        , Network.Google.Resource.Container.Projects.Zones.Clusters.Locations
+        , Network.Google.Resource.Container.Projects.Zones.Clusters.Logging
+        , Network.Google.Resource.Container.Projects.Zones.Clusters.Master
+        , Network.Google.Resource.Container.Projects.Zones.Clusters.Monitoring
+        , Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.Autoscaling
         , Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.Create
         , Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.Delete
         , Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.Get
         , Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.List
         , Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.Rollback
         , Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.SetManagement
+        , Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.SetSize
+        , Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.Update
+        , Network.Google.Resource.Container.Projects.Zones.Clusters.ResourceLabels
+        , Network.Google.Resource.Container.Projects.Zones.Clusters.SetMaintenancePolicy
+        , Network.Google.Resource.Container.Projects.Zones.Clusters.SetMasterAuth
+        , Network.Google.Resource.Container.Projects.Zones.Clusters.SetNetworkPolicy
+        , Network.Google.Resource.Container.Projects.Zones.Clusters.StartIPRotation
         , Network.Google.Resource.Container.Projects.Zones.Clusters.Update
         , Network.Google.Resource.Container.Projects.Zones.GetServerConfig
         , Network.Google.Resource.Container.Projects.Zones.Operations.Cancel

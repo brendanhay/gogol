@@ -82,7 +82,7 @@ umaPayload :: Lens' UsersMakeAdmin UserMakeAdmin
 umaPayload
   = lens _umaPayload (\ s a -> s{_umaPayload = a})
 
--- | Email or immutable Id of the user as admin
+-- | Email or immutable ID of the user as admin
 umaUserKey :: Lens' UsersMakeAdmin Text
 umaUserKey
   = lens _umaUserKey (\ s a -> s{_umaUserKey = a})

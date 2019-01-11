@@ -14,12 +14,12 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    Lets Android application developers access their Google Play accounts.
+    Accesses Android application developers\' Google Play accounts.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
     .
-    This library is compatible with version @v2@
+    This library is compatible with version @v3@
     of the API.
 
 source-repository head
@@ -35,15 +35,11 @@ library
     exposed-modules:
           Network.Google.AndroidPublisher
         , Network.Google.AndroidPublisher.Types
-        , Network.Google.Resource.AndroidPublisher.Edits.APKListings.Delete
-        , Network.Google.Resource.AndroidPublisher.Edits.APKListings.Deleteall
-        , Network.Google.Resource.AndroidPublisher.Edits.APKListings.Get
-        , Network.Google.Resource.AndroidPublisher.Edits.APKListings.List
-        , Network.Google.Resource.AndroidPublisher.Edits.APKListings.Patch
-        , Network.Google.Resource.AndroidPublisher.Edits.APKListings.Update
         , Network.Google.Resource.AndroidPublisher.Edits.APKs.Addexternallyhosted
         , Network.Google.Resource.AndroidPublisher.Edits.APKs.List
         , Network.Google.Resource.AndroidPublisher.Edits.APKs.Upload
+        , Network.Google.Resource.AndroidPublisher.Edits.Bundles.List
+        , Network.Google.Resource.AndroidPublisher.Edits.Bundles.Upload
         , Network.Google.Resource.AndroidPublisher.Edits.Commit
         , Network.Google.Resource.AndroidPublisher.Edits.Delete
         , Network.Google.Resource.AndroidPublisher.Edits.DeobfuscationFiles.Upload
@@ -74,14 +70,13 @@ library
         , Network.Google.Resource.AndroidPublisher.Edits.Tracks.Patch
         , Network.Google.Resource.AndroidPublisher.Edits.Tracks.Update
         , Network.Google.Resource.AndroidPublisher.Edits.Validate
-        , Network.Google.Resource.AndroidPublisher.Entitlements.List
-        , Network.Google.Resource.AndroidPublisher.InAppProducts.Batch
         , Network.Google.Resource.AndroidPublisher.InAppProducts.Delete
         , Network.Google.Resource.AndroidPublisher.InAppProducts.Get
         , Network.Google.Resource.AndroidPublisher.InAppProducts.Insert
         , Network.Google.Resource.AndroidPublisher.InAppProducts.List
         , Network.Google.Resource.AndroidPublisher.InAppProducts.Patch
         , Network.Google.Resource.AndroidPublisher.InAppProducts.Update
+        , Network.Google.Resource.AndroidPublisher.Orders.Refund
         , Network.Google.Resource.AndroidPublisher.Purchases.Products.Get
         , Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Cancel
         , Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Defer

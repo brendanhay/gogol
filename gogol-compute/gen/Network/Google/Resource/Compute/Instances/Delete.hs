@@ -34,6 +34,7 @@ module Network.Google.Resource.Compute.Instances.Delete
     , InstancesDelete
 
     -- * Request Lenses
+    , idRequestId
     , idProject
     , idZone
     , idInstance
@@ -53,21 +54,25 @@ type InstancesDeleteResource =
                Capture "zone" Text :>
                  "instances" :>
                    Capture "instance" Text :>
-                     QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+                     QueryParam "requestId" Text :>
+                       QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified Instance resource. For more information, see
 -- Stopping or Deleting an Instance.
 --
 -- /See:/ 'instancesDelete' smart constructor.
 data InstancesDelete = InstancesDelete'
-    { _idProject  :: !Text
-    , _idZone     :: !Text
-    , _idInstance :: !Text
+    { _idRequestId :: !(Maybe Text)
+    , _idProject   :: !Text
+    , _idZone      :: !Text
+    , _idInstance  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'idRequestId'
 --
 -- * 'idProject'
 --
@@ -81,10 +86,25 @@ instancesDelete
     -> InstancesDelete
 instancesDelete pIdProject_ pIdZone_ pIdInstance_ =
     InstancesDelete'
-    { _idProject = pIdProject_
+    { _idRequestId = Nothing
+    , _idProject = pIdProject_
     , _idZone = pIdZone_
     , _idInstance = pIdInstance_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+idRequestId :: Lens' InstancesDelete (Maybe Text)
+idRequestId
+  = lens _idRequestId (\ s a -> s{_idRequestId = a})
 
 -- | Project ID for this request.
 idProject :: Lens' InstancesDelete Text
@@ -106,7 +126,8 @@ instance GoogleRequest InstancesDelete where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient InstancesDelete'{..}
-          = go _idProject _idZone _idInstance (Just AltJSON)
+          = go _idProject _idZone _idInstance _idRequestId
+              (Just AltJSON)
               computeService
           where go
                   = buildClient

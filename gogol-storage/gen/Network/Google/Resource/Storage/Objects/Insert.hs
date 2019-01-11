@@ -39,9 +39,11 @@ module Network.Google.Resource.Storage.Objects.Insert
     , oiPredefinedACL
     , oiBucket
     , oiPayload
+    , oiUserProject
     , oiName
     , oiIfMetagenerationNotMatch
     , oiContentEncoding
+    , oiKmsKeyName
     , oiProjection
     ) where
 
@@ -61,32 +63,17 @@ type ObjectsInsertResource =
                    QueryParam "ifGenerationMatch" (Textual Int64) :>
                      QueryParam "predefinedAcl" ObjectsInsertPredefinedACL
                        :>
-                       QueryParam "name" Text :>
-                         QueryParam "ifMetagenerationNotMatch" (Textual Int64)
-                           :>
-                           QueryParam "contentEncoding" Text :>
-                             QueryParam "projection" ObjectsInsertProjection :>
-                               QueryParam "alt" AltJSON :>
-                                 ReqBody '[JSON] Object :> Post '[JSON] Object
-       :<|>
-       "storage" :>
-         "v1" :>
-           "b" :>
-             Capture "bucket" Text :>
-               "o" :>
-                 QueryParam "ifMetagenerationMatch" (Textual Int64) :>
-                   QueryParam "ifGenerationNotMatch" (Textual Int64) :>
-                     QueryParam "ifGenerationMatch" (Textual Int64) :>
-                       QueryParam "predefinedAcl" ObjectsInsertPredefinedACL
-                         :>
+                       QueryParam "userProject" Text :>
                          QueryParam "name" Text :>
                            QueryParam "ifMetagenerationNotMatch" (Textual Int64)
                              :>
                              QueryParam "contentEncoding" Text :>
-                               QueryParam "projection" ObjectsInsertProjection
-                                 :>
-                                 QueryParam "alt" AltMedia :>
-                                   Post '[OctetStream] Stream
+                               QueryParam "kmsKeyName" Text :>
+                                 QueryParam "projection" ObjectsInsertProjection
+                                   :>
+                                   QueryParam "alt" AltJSON :>
+                                     ReqBody '[JSON] Object :>
+                                       Post '[JSON] Object
        :<|>
        "upload" :>
          "storage" :>
@@ -99,17 +86,20 @@ type ObjectsInsertResource =
                        QueryParam "ifGenerationMatch" (Textual Int64) :>
                          QueryParam "predefinedAcl" ObjectsInsertPredefinedACL
                            :>
-                           QueryParam "name" Text :>
-                             QueryParam "ifMetagenerationNotMatch"
-                               (Textual Int64)
-                               :>
-                               QueryParam "contentEncoding" Text :>
-                                 QueryParam "projection" ObjectsInsertProjection
-                                   :>
-                                   QueryParam "alt" AltJSON :>
-                                     QueryParam "uploadType" Multipart :>
-                                       MultipartRelated '[JSON] Object :>
-                                         Post '[JSON] Object
+                           QueryParam "userProject" Text :>
+                             QueryParam "name" Text :>
+                               QueryParam "ifMetagenerationNotMatch"
+                                 (Textual Int64)
+                                 :>
+                                 QueryParam "contentEncoding" Text :>
+                                   QueryParam "kmsKeyName" Text :>
+                                     QueryParam "projection"
+                                       ObjectsInsertProjection
+                                       :>
+                                       QueryParam "alt" AltJSON :>
+                                         QueryParam "uploadType" Multipart :>
+                                           MultipartRelated '[JSON] Object :>
+                                             Post '[JSON] Object
 
 -- | Stores a new object and metadata.
 --
@@ -121,9 +111,11 @@ data ObjectsInsert = ObjectsInsert'
     , _oiPredefinedACL            :: !(Maybe ObjectsInsertPredefinedACL)
     , _oiBucket                   :: !Text
     , _oiPayload                  :: !Object
+    , _oiUserProject              :: !(Maybe Text)
     , _oiName                     :: !(Maybe Text)
     , _oiIfMetagenerationNotMatch :: !(Maybe (Textual Int64))
     , _oiContentEncoding          :: !(Maybe Text)
+    , _oiKmsKeyName               :: !(Maybe Text)
     , _oiProjection               :: !(Maybe ObjectsInsertProjection)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -143,11 +135,15 @@ data ObjectsInsert = ObjectsInsert'
 --
 -- * 'oiPayload'
 --
+-- * 'oiUserProject'
+--
 -- * 'oiName'
 --
 -- * 'oiIfMetagenerationNotMatch'
 --
 -- * 'oiContentEncoding'
+--
+-- * 'oiKmsKeyName'
 --
 -- * 'oiProjection'
 objectsInsert
@@ -162,9 +158,11 @@ objectsInsert pOiBucket_ pOiPayload_ =
     , _oiPredefinedACL = Nothing
     , _oiBucket = pOiBucket_
     , _oiPayload = pOiPayload_
+    , _oiUserProject = Nothing
     , _oiName = Nothing
     , _oiIfMetagenerationNotMatch = Nothing
     , _oiContentEncoding = Nothing
+    , _oiKmsKeyName = Nothing
     , _oiProjection = Nothing
     }
 
@@ -177,7 +175,9 @@ oiIfMetagenerationMatch
       . mapping _Coerce
 
 -- | Makes the operation conditional on whether the object\'s current
--- generation does not match the given value.
+-- generation does not match the given value. If no live object exists, the
+-- precondition fails. Setting to 0 makes the operation succeed only if
+-- there is a live version of the object.
 oiIfGenerationNotMatch :: Lens' ObjectsInsert (Maybe Int64)
 oiIfGenerationNotMatch
   = lens _oiIfGenerationNotMatch
@@ -185,7 +185,8 @@ oiIfGenerationNotMatch
       . mapping _Coerce
 
 -- | Makes the operation conditional on whether the object\'s current
--- generation matches the given value.
+-- generation matches the given value. Setting to 0 makes the operation
+-- succeed only if there are no live versions of the object.
 oiIfGenerationMatch :: Lens' ObjectsInsert (Maybe Int64)
 oiIfGenerationMatch
   = lens _oiIfGenerationMatch
@@ -207,6 +208,13 @@ oiBucket = lens _oiBucket (\ s a -> s{_oiBucket = a})
 oiPayload :: Lens' ObjectsInsert Object
 oiPayload
   = lens _oiPayload (\ s a -> s{_oiPayload = a})
+
+-- | The project to be billed for this request. Required for Requester Pays
+-- buckets.
+oiUserProject :: Lens' ObjectsInsert (Maybe Text)
+oiUserProject
+  = lens _oiUserProject
+      (\ s a -> s{_oiUserProject = a})
 
 -- | Name of the object. Required when the object metadata is not otherwise
 -- provided. Overrides the object metadata\'s name value, if any. For
@@ -233,6 +241,14 @@ oiContentEncoding
   = lens _oiContentEncoding
       (\ s a -> s{_oiContentEncoding = a})
 
+-- | Resource name of the Cloud KMS key, of the form
+-- projects\/my-project\/locations\/global\/keyRings\/my-kr\/cryptoKeys\/my-key,
+-- that will be used to encrypt the object. Overrides the object
+-- metadata\'s kms_key_name value, if any.
+oiKmsKeyName :: Lens' ObjectsInsert (Maybe Text)
+oiKmsKeyName
+  = lens _oiKmsKeyName (\ s a -> s{_oiKmsKeyName = a})
+
 -- | Set of properties to return. Defaults to noAcl, unless the object
 -- resource specifies the acl property, when it defaults to full.
 oiProjection :: Lens' ObjectsInsert (Maybe ObjectsInsertProjection)
@@ -250,14 +266,16 @@ instance GoogleRequest ObjectsInsert where
               _oiIfGenerationNotMatch
               _oiIfGenerationMatch
               _oiPredefinedACL
+              _oiUserProject
               _oiName
               _oiIfMetagenerationNotMatch
               _oiContentEncoding
+              _oiKmsKeyName
               _oiProjection
               (Just AltJSON)
               _oiPayload
               storageService
-          where go :<|> (_ :<|> _)
+          where go :<|> _
                   = buildClient (Proxy :: Proxy ObjectsInsertResource)
                       mempty
 
@@ -271,15 +289,17 @@ instance GoogleRequest (MediaUpload ObjectsInsert)
               _oiIfGenerationNotMatch
               _oiIfGenerationMatch
               _oiPredefinedACL
+              _oiUserProject
               _oiName
               _oiIfMetagenerationNotMatch
               _oiContentEncoding
+              _oiKmsKeyName
               _oiProjection
               (Just AltJSON)
               (Just Multipart)
               _oiPayload
               body
               storageService
-          where _ :<|> (_ :<|> go)
+          where _ :<|> go
                   = buildClient (Proxy :: Proxy ObjectsInsertResource)
                       mempty

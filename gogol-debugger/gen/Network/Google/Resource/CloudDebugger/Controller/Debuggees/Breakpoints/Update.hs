@@ -24,11 +24,11 @@
 -- message must be sent back to the controller service. Updates to active
 -- breakpoint fields are only allowed if the new value does not change the
 -- breakpoint specification. Updates to the \`location\`, \`condition\` and
--- \`expression\` fields should not alter the breakpoint semantics. These
+-- \`expressions\` fields should not alter the breakpoint semantics. These
 -- may only make changes such as canonicalizing a value or snapping the
 -- location to the correct line of code.
 --
--- /See:/ <http://cloud.google.com/debugger Stackdriver Debugger API Reference> for @clouddebugger.controller.debuggees.breakpoints.update@.
+-- /See:/ <https://cloud.google.com/debugger Stackdriver Debugger API Reference> for @clouddebugger.controller.debuggees.breakpoints.update@.
 module Network.Google.Resource.CloudDebugger.Controller.Debuggees.Breakpoints.Update
     (
     -- * REST Resource
@@ -41,11 +41,9 @@ module Network.Google.Resource.CloudDebugger.Controller.Debuggees.Breakpoints.Up
     -- * Request Lenses
     , cdbuXgafv
     , cdbuUploadProtocol
-    , cdbuPp
     , cdbuAccessToken
     , cdbuUploadType
     , cdbuPayload
-    , cdbuBearerToken
     , cdbuId
     , cdbuDebuggeeId
     , cdbuCallback
@@ -65,20 +63,18 @@ type ControllerDebuggeesBreakpointsUpdateResource =
                Capture "id" Text :>
                  QueryParam "$.xgafv" Xgafv :>
                    QueryParam "upload_protocol" Text :>
-                     QueryParam "pp" Bool :>
-                       QueryParam "access_token" Text :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "bearer_token" Text :>
-                             QueryParam "callback" Text :>
-                               QueryParam "alt" AltJSON :>
-                                 ReqBody '[JSON] UpdateActiveBreakpointRequest
-                                   :> Put '[JSON] UpdateActiveBreakpointResponse
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] UpdateActiveBreakpointRequest :>
+                               Put '[JSON] UpdateActiveBreakpointResponse
 
 -- | Updates the breakpoint state or mutable fields. The entire Breakpoint
 -- message must be sent back to the controller service. Updates to active
 -- breakpoint fields are only allowed if the new value does not change the
 -- breakpoint specification. Updates to the \`location\`, \`condition\` and
--- \`expression\` fields should not alter the breakpoint semantics. These
+-- \`expressions\` fields should not alter the breakpoint semantics. These
 -- may only make changes such as canonicalizing a value or snapping the
 -- location to the correct line of code.
 --
@@ -86,11 +82,9 @@ type ControllerDebuggeesBreakpointsUpdateResource =
 data ControllerDebuggeesBreakpointsUpdate = ControllerDebuggeesBreakpointsUpdate'
     { _cdbuXgafv          :: !(Maybe Xgafv)
     , _cdbuUploadProtocol :: !(Maybe Text)
-    , _cdbuPp             :: !Bool
     , _cdbuAccessToken    :: !(Maybe Text)
     , _cdbuUploadType     :: !(Maybe Text)
     , _cdbuPayload        :: !UpdateActiveBreakpointRequest
-    , _cdbuBearerToken    :: !(Maybe Text)
     , _cdbuId             :: !Text
     , _cdbuDebuggeeId     :: !Text
     , _cdbuCallback       :: !(Maybe Text)
@@ -104,15 +98,11 @@ data ControllerDebuggeesBreakpointsUpdate = ControllerDebuggeesBreakpointsUpdate
 --
 -- * 'cdbuUploadProtocol'
 --
--- * 'cdbuPp'
---
 -- * 'cdbuAccessToken'
 --
 -- * 'cdbuUploadType'
 --
 -- * 'cdbuPayload'
---
--- * 'cdbuBearerToken'
 --
 -- * 'cdbuId'
 --
@@ -128,11 +118,9 @@ controllerDebuggeesBreakpointsUpdate pCdbuPayload_ pCdbuId_ pCdbuDebuggeeId_ =
     ControllerDebuggeesBreakpointsUpdate'
     { _cdbuXgafv = Nothing
     , _cdbuUploadProtocol = Nothing
-    , _cdbuPp = True
     , _cdbuAccessToken = Nothing
     , _cdbuUploadType = Nothing
     , _cdbuPayload = pCdbuPayload_
-    , _cdbuBearerToken = Nothing
     , _cdbuId = pCdbuId_
     , _cdbuDebuggeeId = pCdbuDebuggeeId_
     , _cdbuCallback = Nothing
@@ -148,10 +136,6 @@ cdbuUploadProtocol :: Lens' ControllerDebuggeesBreakpointsUpdate (Maybe Text)
 cdbuUploadProtocol
   = lens _cdbuUploadProtocol
       (\ s a -> s{_cdbuUploadProtocol = a})
-
--- | Pretty-print response.
-cdbuPp :: Lens' ControllerDebuggeesBreakpointsUpdate Bool
-cdbuPp = lens _cdbuPp (\ s a -> s{_cdbuPp = a})
 
 -- | OAuth access token.
 cdbuAccessToken :: Lens' ControllerDebuggeesBreakpointsUpdate (Maybe Text)
@@ -169,12 +153,6 @@ cdbuUploadType
 cdbuPayload :: Lens' ControllerDebuggeesBreakpointsUpdate UpdateActiveBreakpointRequest
 cdbuPayload
   = lens _cdbuPayload (\ s a -> s{_cdbuPayload = a})
-
--- | OAuth bearer token.
-cdbuBearerToken :: Lens' ControllerDebuggeesBreakpointsUpdate (Maybe Text)
-cdbuBearerToken
-  = lens _cdbuBearerToken
-      (\ s a -> s{_cdbuBearerToken = a})
 
 -- | Breakpoint identifier, unique in the scope of the debuggee.
 cdbuId :: Lens' ControllerDebuggeesBreakpointsUpdate Text
@@ -202,10 +180,8 @@ instance GoogleRequest
           ControllerDebuggeesBreakpointsUpdate'{..}
           = go _cdbuDebuggeeId _cdbuId _cdbuXgafv
               _cdbuUploadProtocol
-              (Just _cdbuPp)
               _cdbuAccessToken
               _cdbuUploadType
-              _cdbuBearerToken
               _cdbuCallback
               (Just AltJSON)
               _cdbuPayload

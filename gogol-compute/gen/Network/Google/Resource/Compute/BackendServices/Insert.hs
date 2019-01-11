@@ -36,6 +36,7 @@ module Network.Google.Resource.Compute.BackendServices.Insert
     , BackendServicesInsert
 
     -- * Request Lenses
+    , bsiRequestId
     , bsiProject
     , bsiPayload
     ) where
@@ -52,9 +53,10 @@ type BackendServicesInsertResource =
            Capture "project" Text :>
              "global" :>
                "backendServices" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] BackendService :>
-                     Post '[JSON] Operation
+                 QueryParam "requestId" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] BackendService :>
+                       Post '[JSON] Operation
 
 -- | Creates a BackendService resource in the specified project using the
 -- data included in the request. There are several restrictions and
@@ -63,13 +65,16 @@ type BackendServicesInsertResource =
 --
 -- /See:/ 'backendServicesInsert' smart constructor.
 data BackendServicesInsert = BackendServicesInsert'
-    { _bsiProject :: !Text
-    , _bsiPayload :: !BackendService
+    { _bsiRequestId :: !(Maybe Text)
+    , _bsiProject   :: !Text
+    , _bsiPayload   :: !BackendService
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BackendServicesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bsiRequestId'
 --
 -- * 'bsiProject'
 --
@@ -80,9 +85,24 @@ backendServicesInsert
     -> BackendServicesInsert
 backendServicesInsert pBsiProject_ pBsiPayload_ =
     BackendServicesInsert'
-    { _bsiProject = pBsiProject_
+    { _bsiRequestId = Nothing
+    , _bsiProject = pBsiProject_
     , _bsiPayload = pBsiPayload_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+bsiRequestId :: Lens' BackendServicesInsert (Maybe Text)
+bsiRequestId
+  = lens _bsiRequestId (\ s a -> s{_bsiRequestId = a})
 
 -- | Project ID for this request.
 bsiProject :: Lens' BackendServicesInsert Text
@@ -100,7 +120,8 @@ instance GoogleRequest BackendServicesInsert where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient BackendServicesInsert'{..}
-          = go _bsiProject (Just AltJSON) _bsiPayload
+          = go _bsiProject _bsiRequestId (Just AltJSON)
+              _bsiPayload
               computeService
           where go
                   = buildClient

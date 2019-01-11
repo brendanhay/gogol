@@ -22,7 +22,7 @@
 --
 -- Sets the IAM access control policy for a ServiceAccount.
 --
--- /See:/ <https://cloud.google.com/iam/ Google Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.setIamPolicy@.
+-- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.setIamPolicy@.
 module Network.Google.Resource.IAM.Projects.ServiceAccounts.SetIAMPolicy
     (
     -- * REST Resource
@@ -35,11 +35,9 @@ module Network.Google.Resource.IAM.Projects.ServiceAccounts.SetIAMPolicy
     -- * Request Lenses
     , psasipXgafv
     , psasipUploadProtocol
-    , psasipPp
     , psasipAccessToken
     , psasipUploadType
     , psasipPayload
-    , psasipBearerToken
     , psasipResource
     , psasipCallback
     ) where
@@ -52,28 +50,24 @@ import           Network.Google.Prelude
 type ProjectsServiceAccountsSetIAMPolicyResource =
      "v1" :>
        CaptureMode "resource" "setIamPolicy" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] SetIAMPolicyRequest :>
-                           Post '[JSON] Policy
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] SetIAMPolicyRequest :>
+                       Post '[JSON] Policy
 
 -- | Sets the IAM access control policy for a ServiceAccount.
 --
 -- /See:/ 'projectsServiceAccountsSetIAMPolicy' smart constructor.
 data ProjectsServiceAccountsSetIAMPolicy = ProjectsServiceAccountsSetIAMPolicy'
-    { _psasipXgafv          :: !(Maybe Text)
+    { _psasipXgafv          :: !(Maybe Xgafv)
     , _psasipUploadProtocol :: !(Maybe Text)
-    , _psasipPp             :: !Bool
     , _psasipAccessToken    :: !(Maybe Text)
     , _psasipUploadType     :: !(Maybe Text)
     , _psasipPayload        :: !SetIAMPolicyRequest
-    , _psasipBearerToken    :: !(Maybe Text)
     , _psasipResource       :: !Text
     , _psasipCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -86,15 +80,11 @@ data ProjectsServiceAccountsSetIAMPolicy = ProjectsServiceAccountsSetIAMPolicy'
 --
 -- * 'psasipUploadProtocol'
 --
--- * 'psasipPp'
---
 -- * 'psasipAccessToken'
 --
 -- * 'psasipUploadType'
 --
 -- * 'psasipPayload'
---
--- * 'psasipBearerToken'
 --
 -- * 'psasipResource'
 --
@@ -107,17 +97,15 @@ projectsServiceAccountsSetIAMPolicy pPsasipPayload_ pPsasipResource_ =
     ProjectsServiceAccountsSetIAMPolicy'
     { _psasipXgafv = Nothing
     , _psasipUploadProtocol = Nothing
-    , _psasipPp = True
     , _psasipAccessToken = Nothing
     , _psasipUploadType = Nothing
     , _psasipPayload = pPsasipPayload_
-    , _psasipBearerToken = Nothing
     , _psasipResource = pPsasipResource_
     , _psasipCallback = Nothing
     }
 
 -- | V1 error format.
-psasipXgafv :: Lens' ProjectsServiceAccountsSetIAMPolicy (Maybe Text)
+psasipXgafv :: Lens' ProjectsServiceAccountsSetIAMPolicy (Maybe Xgafv)
 psasipXgafv
   = lens _psasipXgafv (\ s a -> s{_psasipXgafv = a})
 
@@ -126,10 +114,6 @@ psasipUploadProtocol :: Lens' ProjectsServiceAccountsSetIAMPolicy (Maybe Text)
 psasipUploadProtocol
   = lens _psasipUploadProtocol
       (\ s a -> s{_psasipUploadProtocol = a})
-
--- | Pretty-print response.
-psasipPp :: Lens' ProjectsServiceAccountsSetIAMPolicy Bool
-psasipPp = lens _psasipPp (\ s a -> s{_psasipPp = a})
 
 -- | OAuth access token.
 psasipAccessToken :: Lens' ProjectsServiceAccountsSetIAMPolicy (Maybe Text)
@@ -149,15 +133,8 @@ psasipPayload
   = lens _psasipPayload
       (\ s a -> s{_psasipPayload = a})
 
--- | OAuth bearer token.
-psasipBearerToken :: Lens' ProjectsServiceAccountsSetIAMPolicy (Maybe Text)
-psasipBearerToken
-  = lens _psasipBearerToken
-      (\ s a -> s{_psasipBearerToken = a})
-
--- | REQUIRED: The resource for which the policy is being specified.
--- \`resource\` is usually specified as a path. For example, a Project
--- resource is specified as \`projects\/{project}\`.
+-- | REQUIRED: The resource for which the policy is being specified. See the
+-- operation documentation for the appropriate value for this field.
 psasipResource :: Lens' ProjectsServiceAccountsSetIAMPolicy Text
 psasipResource
   = lens _psasipResource
@@ -178,10 +155,8 @@ instance GoogleRequest
           ProjectsServiceAccountsSetIAMPolicy'{..}
           = go _psasipResource _psasipXgafv
               _psasipUploadProtocol
-              (Just _psasipPp)
               _psasipAccessToken
               _psasipUploadType
-              _psasipBearerToken
               _psasipCallback
               (Just AltJSON)
               _psasipPayload

@@ -37,6 +37,8 @@ module Network.Google.Resource.BigQuery.Jobs.List
     , JobsList
 
     -- * Request Lenses
+    , jlMaxCreationTime
+    , jlMinCreationTime
     , jlStateFilter
     , jlProjection
     , jlPageToken
@@ -56,12 +58,14 @@ type JobsListResource =
          "projects" :>
            Capture "projectId" Text :>
              "jobs" :>
-               QueryParams "stateFilter" JobsListStateFilter :>
-                 QueryParam "projection" JobsListProjection :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "allUsers" Bool :>
-                       QueryParam "maxResults" (Textual Word32) :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] JobList
+               QueryParam "maxCreationTime" (Textual Word64) :>
+                 QueryParam "minCreationTime" (Textual Word64) :>
+                   QueryParams "stateFilter" JobsListStateFilter :>
+                     QueryParam "projection" JobsListProjection :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "allUsers" Bool :>
+                           QueryParam "maxResults" (Textual Word32) :>
+                             QueryParam "alt" AltJSON :> Get '[JSON] JobList
 
 -- | Lists all jobs that you started in the specified project. Job
 -- information is available for a six month period after creation. The job
@@ -71,17 +75,23 @@ type JobsListResource =
 --
 -- /See:/ 'jobsList' smart constructor.
 data JobsList = JobsList'
-    { _jlStateFilter :: !(Maybe [JobsListStateFilter])
-    , _jlProjection  :: !(Maybe JobsListProjection)
-    , _jlPageToken   :: !(Maybe Text)
-    , _jlProjectId   :: !Text
-    , _jlAllUsers    :: !(Maybe Bool)
-    , _jlMaxResults  :: !(Maybe (Textual Word32))
+    { _jlMaxCreationTime :: !(Maybe (Textual Word64))
+    , _jlMinCreationTime :: !(Maybe (Textual Word64))
+    , _jlStateFilter     :: !(Maybe [JobsListStateFilter])
+    , _jlProjection      :: !(Maybe JobsListProjection)
+    , _jlPageToken       :: !(Maybe Text)
+    , _jlProjectId       :: !Text
+    , _jlAllUsers        :: !(Maybe Bool)
+    , _jlMaxResults      :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'jlMaxCreationTime'
+--
+-- * 'jlMinCreationTime'
 --
 -- * 'jlStateFilter'
 --
@@ -99,13 +109,31 @@ jobsList
     -> JobsList
 jobsList pJlProjectId_ =
     JobsList'
-    { _jlStateFilter = Nothing
+    { _jlMaxCreationTime = Nothing
+    , _jlMinCreationTime = Nothing
+    , _jlStateFilter = Nothing
     , _jlProjection = Nothing
     , _jlPageToken = Nothing
     , _jlProjectId = pJlProjectId_
     , _jlAllUsers = Nothing
     , _jlMaxResults = Nothing
     }
+
+-- | Max value for job creation time, in milliseconds since the POSIX epoch.
+-- If set, only jobs created before or at this timestamp are returned
+jlMaxCreationTime :: Lens' JobsList (Maybe Word64)
+jlMaxCreationTime
+  = lens _jlMaxCreationTime
+      (\ s a -> s{_jlMaxCreationTime = a})
+      . mapping _Coerce
+
+-- | Min value for job creation time, in milliseconds since the POSIX epoch.
+-- If set, only jobs created after or at this timestamp are returned
+jlMinCreationTime :: Lens' JobsList (Maybe Word64)
+jlMinCreationTime
+  = lens _jlMinCreationTime
+      (\ s a -> s{_jlMinCreationTime = a})
+      . mapping _Coerce
 
 -- | Filter for job state
 jlStateFilter :: Lens' JobsList [JobsListStateFilter]
@@ -149,7 +177,9 @@ instance GoogleRequest JobsList where
                "https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/cloud-platform.read-only"]
         requestClient JobsList'{..}
-          = go _jlProjectId (_jlStateFilter ^. _Default)
+          = go _jlProjectId _jlMaxCreationTime
+              _jlMinCreationTime
+              (_jlStateFilter ^. _Default)
               _jlProjection
               _jlPageToken
               _jlAllUsers

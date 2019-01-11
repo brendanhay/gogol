@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'EditsExpansionFilesGet' request conforms to.
 type EditsExpansionFilesGetResource =
      "androidpublisher" :>
-       "v2" :>
+       "v3" :>
          "applications" :>
            Capture "packageName" Text :>
              "edits" :>

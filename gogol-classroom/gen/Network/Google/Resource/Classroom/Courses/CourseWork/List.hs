@@ -42,12 +42,10 @@ module Network.Google.Resource.Classroom.Courses.CourseWork.List
     , ccwlXgafv
     , ccwlUploadProtocol
     , ccwlOrderBy
-    , ccwlPp
     , ccwlCourseId
     , ccwlAccessToken
     , ccwlCourseWorkStates
     , ccwlUploadType
-    , ccwlBearerToken
     , ccwlPageToken
     , ccwlPageSize
     , ccwlCallback
@@ -63,19 +61,17 @@ type CoursesCourseWorkListResource =
        "courses" :>
          Capture "courseId" Text :>
            "courseWork" :>
-             QueryParam "$.xgafv" Text :>
+             QueryParam "$.xgafv" Xgafv :>
                QueryParam "upload_protocol" Text :>
                  QueryParam "orderBy" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParams "courseWorkStates" Text :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "bearer_token" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "pageSize" (Textual Int32) :>
-                                 QueryParam "callback" Text :>
-                                   QueryParam "alt" AltJSON :>
-                                     Get '[JSON] ListCourseWorkResponse
+                   QueryParam "access_token" Text :>
+                     QueryParams "courseWorkStates" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "pageSize" (Textual Int32) :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] ListCourseWorkResponse
 
 -- | Returns a list of course work that the requester is permitted to view.
 -- Course students may only view \`PUBLISHED\` course work. Course teachers
@@ -87,15 +83,13 @@ type CoursesCourseWorkListResource =
 --
 -- /See:/ 'coursesCourseWorkList' smart constructor.
 data CoursesCourseWorkList = CoursesCourseWorkList'
-    { _ccwlXgafv            :: !(Maybe Text)
+    { _ccwlXgafv            :: !(Maybe Xgafv)
     , _ccwlUploadProtocol   :: !(Maybe Text)
     , _ccwlOrderBy          :: !(Maybe Text)
-    , _ccwlPp               :: !Bool
     , _ccwlCourseId         :: !Text
     , _ccwlAccessToken      :: !(Maybe Text)
     , _ccwlCourseWorkStates :: !(Maybe [Text])
     , _ccwlUploadType       :: !(Maybe Text)
-    , _ccwlBearerToken      :: !(Maybe Text)
     , _ccwlPageToken        :: !(Maybe Text)
     , _ccwlPageSize         :: !(Maybe (Textual Int32))
     , _ccwlCallback         :: !(Maybe Text)
@@ -111,8 +105,6 @@ data CoursesCourseWorkList = CoursesCourseWorkList'
 --
 -- * 'ccwlOrderBy'
 --
--- * 'ccwlPp'
---
 -- * 'ccwlCourseId'
 --
 -- * 'ccwlAccessToken'
@@ -120,8 +112,6 @@ data CoursesCourseWorkList = CoursesCourseWorkList'
 -- * 'ccwlCourseWorkStates'
 --
 -- * 'ccwlUploadType'
---
--- * 'ccwlBearerToken'
 --
 -- * 'ccwlPageToken'
 --
@@ -136,19 +126,17 @@ coursesCourseWorkList pCcwlCourseId_ =
     { _ccwlXgafv = Nothing
     , _ccwlUploadProtocol = Nothing
     , _ccwlOrderBy = Nothing
-    , _ccwlPp = True
     , _ccwlCourseId = pCcwlCourseId_
     , _ccwlAccessToken = Nothing
     , _ccwlCourseWorkStates = Nothing
     , _ccwlUploadType = Nothing
-    , _ccwlBearerToken = Nothing
     , _ccwlPageToken = Nothing
     , _ccwlPageSize = Nothing
     , _ccwlCallback = Nothing
     }
 
 -- | V1 error format.
-ccwlXgafv :: Lens' CoursesCourseWorkList (Maybe Text)
+ccwlXgafv :: Lens' CoursesCourseWorkList (Maybe Xgafv)
 ccwlXgafv
   = lens _ccwlXgafv (\ s a -> s{_ccwlXgafv = a})
 
@@ -167,10 +155,6 @@ ccwlUploadProtocol
 ccwlOrderBy :: Lens' CoursesCourseWorkList (Maybe Text)
 ccwlOrderBy
   = lens _ccwlOrderBy (\ s a -> s{_ccwlOrderBy = a})
-
--- | Pretty-print response.
-ccwlPp :: Lens' CoursesCourseWorkList Bool
-ccwlPp = lens _ccwlPp (\ s a -> s{_ccwlPp = a})
 
 -- | Identifier of the course. This identifier can be either the
 -- Classroom-assigned identifier or an alias.
@@ -200,12 +184,6 @@ ccwlUploadType
   = lens _ccwlUploadType
       (\ s a -> s{_ccwlUploadType = a})
 
--- | OAuth bearer token.
-ccwlBearerToken :: Lens' CoursesCourseWorkList (Maybe Text)
-ccwlBearerToken
-  = lens _ccwlBearerToken
-      (\ s a -> s{_ccwlBearerToken = a})
-
 -- | nextPageToken value returned from a previous list call, indicating that
 -- the subsequent page of results should be returned. The list request must
 -- be otherwise identical to the one that resulted in this token.
@@ -231,19 +209,16 @@ instance GoogleRequest CoursesCourseWorkList where
         type Rs CoursesCourseWorkList =
              ListCourseWorkResponse
         type Scopes CoursesCourseWorkList =
-             '["https://www.googleapis.com/auth/classroom.course-work.readonly",
-               "https://www.googleapis.com/auth/classroom.coursework.me",
+             '["https://www.googleapis.com/auth/classroom.coursework.me",
                "https://www.googleapis.com/auth/classroom.coursework.me.readonly",
                "https://www.googleapis.com/auth/classroom.coursework.students",
                "https://www.googleapis.com/auth/classroom.coursework.students.readonly"]
         requestClient CoursesCourseWorkList'{..}
           = go _ccwlCourseId _ccwlXgafv _ccwlUploadProtocol
               _ccwlOrderBy
-              (Just _ccwlPp)
               _ccwlAccessToken
               (_ccwlCourseWorkStates ^. _Default)
               _ccwlUploadType
-              _ccwlBearerToken
               _ccwlPageToken
               _ccwlPageSize
               _ccwlCallback

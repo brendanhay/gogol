@@ -22,9 +22,8 @@
 --
 -- Creates a sink that exports specified log entries to a destination. The
 -- export of newly-ingested log entries begins immediately, unless the
--- current time is outside the sink\'s start and end times or the sink\'s
--- writer_identity is not permitted to write to the destination. A sink can
--- export log entries only from the resource owning the sink.
+-- sink\'s writer_identity is not permitted to write to the destination. A
+-- sink can export log entries only from the resource owning the sink.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.billingAccounts.sinks.create@.
 module Network.Google.Resource.Logging.BillingAccounts.Sinks.Create
@@ -41,11 +40,9 @@ module Network.Google.Resource.Logging.BillingAccounts.Sinks.Create
     , bascXgafv
     , bascUniqueWriterIdentity
     , bascUploadProtocol
-    , bascPp
     , bascAccessToken
     , bascUploadType
     , bascPayload
-    , bascBearerToken
     , bascCallback
     ) where
 
@@ -61,19 +58,16 @@ type BillingAccountsSinksCreateResource =
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "uniqueWriterIdentity" Bool :>
                QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "callback" Text :>
-                           QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] LogSink :> Post '[JSON] LogSink
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] LogSink :> Post '[JSON] LogSink
 
 -- | Creates a sink that exports specified log entries to a destination. The
 -- export of newly-ingested log entries begins immediately, unless the
--- current time is outside the sink\'s start and end times or the sink\'s
--- writer_identity is not permitted to write to the destination. A sink can
--- export log entries only from the resource owning the sink.
+-- sink\'s writer_identity is not permitted to write to the destination. A
+-- sink can export log entries only from the resource owning the sink.
 --
 -- /See:/ 'billingAccountsSinksCreate' smart constructor.
 data BillingAccountsSinksCreate = BillingAccountsSinksCreate'
@@ -81,11 +75,9 @@ data BillingAccountsSinksCreate = BillingAccountsSinksCreate'
     , _bascXgafv                :: !(Maybe Xgafv)
     , _bascUniqueWriterIdentity :: !(Maybe Bool)
     , _bascUploadProtocol       :: !(Maybe Text)
-    , _bascPp                   :: !Bool
     , _bascAccessToken          :: !(Maybe Text)
     , _bascUploadType           :: !(Maybe Text)
     , _bascPayload              :: !LogSink
-    , _bascBearerToken          :: !(Maybe Text)
     , _bascCallback             :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -101,15 +93,11 @@ data BillingAccountsSinksCreate = BillingAccountsSinksCreate'
 --
 -- * 'bascUploadProtocol'
 --
--- * 'bascPp'
---
 -- * 'bascAccessToken'
 --
 -- * 'bascUploadType'
 --
 -- * 'bascPayload'
---
--- * 'bascBearerToken'
 --
 -- * 'bascCallback'
 billingAccountsSinksCreate
@@ -122,16 +110,15 @@ billingAccountsSinksCreate pBascParent_ pBascPayload_ =
     , _bascXgafv = Nothing
     , _bascUniqueWriterIdentity = Nothing
     , _bascUploadProtocol = Nothing
-    , _bascPp = True
     , _bascAccessToken = Nothing
     , _bascUploadType = Nothing
     , _bascPayload = pBascPayload_
-    , _bascBearerToken = Nothing
     , _bascCallback = Nothing
     }
 
 -- | Required. The resource in which to create the sink:
 -- \"projects\/[PROJECT_ID]\" \"organizations\/[ORGANIZATION_ID]\"
+-- \"billingAccounts\/[BILLING_ACCOUNT_ID]\" \"folders\/[FOLDER_ID]\"
 -- Examples: \"projects\/my-logging-project\",
 -- \"organizations\/123456789\".
 bascParent :: Lens' BillingAccountsSinksCreate Text
@@ -146,7 +133,7 @@ bascXgafv
 -- | Optional. Determines the kind of IAM identity returned as
 -- writer_identity in the new sink. If this value is omitted or set to
 -- false, and if the sink\'s parent is a project, then the value returned
--- as writer_identity is cloud-logs\'google.com, the same identity used
+-- as writer_identity is the same group or service account used by Logging
 -- before the addition of writer identities to this API. The sink\'s
 -- destination must be in the same project as the sink itself.If this field
 -- is set to true, or if the sink is owned by a non-project resource such
@@ -163,10 +150,6 @@ bascUploadProtocol :: Lens' BillingAccountsSinksCreate (Maybe Text)
 bascUploadProtocol
   = lens _bascUploadProtocol
       (\ s a -> s{_bascUploadProtocol = a})
-
--- | Pretty-print response.
-bascPp :: Lens' BillingAccountsSinksCreate Bool
-bascPp = lens _bascPp (\ s a -> s{_bascPp = a})
 
 -- | OAuth access token.
 bascAccessToken :: Lens' BillingAccountsSinksCreate (Maybe Text)
@@ -185,12 +168,6 @@ bascPayload :: Lens' BillingAccountsSinksCreate LogSink
 bascPayload
   = lens _bascPayload (\ s a -> s{_bascPayload = a})
 
--- | OAuth bearer token.
-bascBearerToken :: Lens' BillingAccountsSinksCreate (Maybe Text)
-bascBearerToken
-  = lens _bascBearerToken
-      (\ s a -> s{_bascBearerToken = a})
-
 -- | JSONP
 bascCallback :: Lens' BillingAccountsSinksCreate (Maybe Text)
 bascCallback
@@ -205,10 +182,8 @@ instance GoogleRequest BillingAccountsSinksCreate
         requestClient BillingAccountsSinksCreate'{..}
           = go _bascParent _bascXgafv _bascUniqueWriterIdentity
               _bascUploadProtocol
-              (Just _bascPp)
               _bascAccessToken
               _bascUploadType
-              _bascBearerToken
               _bascCallback
               (Just AltJSON)
               _bascPayload

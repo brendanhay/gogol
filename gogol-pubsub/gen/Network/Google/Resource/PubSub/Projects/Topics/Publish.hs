@@ -21,10 +21,9 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Adds one or more messages to the topic. Returns \`NOT_FOUND\` if the
--- topic does not exist. The message payload must not be empty; it must
--- contain either a non-empty data field, or at least one attribute.
+-- topic does not exist.
 --
--- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.topics.publish@.
+-- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference> for @pubsub.projects.topics.publish@.
 module Network.Google.Resource.PubSub.Projects.Topics.Publish
     (
     -- * REST Resource
@@ -35,15 +34,13 @@ module Network.Google.Resource.PubSub.Projects.Topics.Publish
     , ProjectsTopicsPublish
 
     -- * Request Lenses
-    , ptpXgafv
-    , ptpUploadProtocol
-    , ptpPp
-    , ptpAccessToken
-    , ptpUploadType
-    , ptpPayload
-    , ptpTopic
-    , ptpBearerToken
-    , ptpCallback
+    , ptptXgafv
+    , ptptUploadProtocol
+    , ptptAccessToken
+    , ptptUploadType
+    , ptptPayload
+    , ptptTopic
+    , ptptCallback
     ) where
 
 import           Network.Google.Prelude
@@ -56,116 +53,97 @@ type ProjectsTopicsPublishResource =
        CaptureMode "topic" "publish" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] PublishRequest :>
-                           Post '[JSON] PublishResponse
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] PublishRequest :>
+                       Post '[JSON] PublishResponse
 
 -- | Adds one or more messages to the topic. Returns \`NOT_FOUND\` if the
--- topic does not exist. The message payload must not be empty; it must
--- contain either a non-empty data field, or at least one attribute.
+-- topic does not exist.
 --
 -- /See:/ 'projectsTopicsPublish' smart constructor.
 data ProjectsTopicsPublish = ProjectsTopicsPublish'
-    { _ptpXgafv          :: !(Maybe Xgafv)
-    , _ptpUploadProtocol :: !(Maybe Text)
-    , _ptpPp             :: !Bool
-    , _ptpAccessToken    :: !(Maybe Text)
-    , _ptpUploadType     :: !(Maybe Text)
-    , _ptpPayload        :: !PublishRequest
-    , _ptpTopic          :: !Text
-    , _ptpBearerToken    :: !(Maybe Text)
-    , _ptpCallback       :: !(Maybe Text)
+    { _ptptXgafv          :: !(Maybe Xgafv)
+    , _ptptUploadProtocol :: !(Maybe Text)
+    , _ptptAccessToken    :: !(Maybe Text)
+    , _ptptUploadType     :: !(Maybe Text)
+    , _ptptPayload        :: !PublishRequest
+    , _ptptTopic          :: !Text
+    , _ptptCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsTopicsPublish' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ptpXgafv'
+-- * 'ptptXgafv'
 --
--- * 'ptpUploadProtocol'
+-- * 'ptptUploadProtocol'
 --
--- * 'ptpPp'
+-- * 'ptptAccessToken'
 --
--- * 'ptpAccessToken'
+-- * 'ptptUploadType'
 --
--- * 'ptpUploadType'
+-- * 'ptptPayload'
 --
--- * 'ptpPayload'
+-- * 'ptptTopic'
 --
--- * 'ptpTopic'
---
--- * 'ptpBearerToken'
---
--- * 'ptpCallback'
+-- * 'ptptCallback'
 projectsTopicsPublish
-    :: PublishRequest -- ^ 'ptpPayload'
-    -> Text -- ^ 'ptpTopic'
+    :: PublishRequest -- ^ 'ptptPayload'
+    -> Text -- ^ 'ptptTopic'
     -> ProjectsTopicsPublish
-projectsTopicsPublish pPtpPayload_ pPtpTopic_ =
+projectsTopicsPublish pPtptPayload_ pPtptTopic_ =
     ProjectsTopicsPublish'
-    { _ptpXgafv = Nothing
-    , _ptpUploadProtocol = Nothing
-    , _ptpPp = True
-    , _ptpAccessToken = Nothing
-    , _ptpUploadType = Nothing
-    , _ptpPayload = pPtpPayload_
-    , _ptpTopic = pPtpTopic_
-    , _ptpBearerToken = Nothing
-    , _ptpCallback = Nothing
+    { _ptptXgafv = Nothing
+    , _ptptUploadProtocol = Nothing
+    , _ptptAccessToken = Nothing
+    , _ptptUploadType = Nothing
+    , _ptptPayload = pPtptPayload_
+    , _ptptTopic = pPtptTopic_
+    , _ptptCallback = Nothing
     }
 
 -- | V1 error format.
-ptpXgafv :: Lens' ProjectsTopicsPublish (Maybe Xgafv)
-ptpXgafv = lens _ptpXgafv (\ s a -> s{_ptpXgafv = a})
+ptptXgafv :: Lens' ProjectsTopicsPublish (Maybe Xgafv)
+ptptXgafv
+  = lens _ptptXgafv (\ s a -> s{_ptptXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-ptpUploadProtocol :: Lens' ProjectsTopicsPublish (Maybe Text)
-ptpUploadProtocol
-  = lens _ptpUploadProtocol
-      (\ s a -> s{_ptpUploadProtocol = a})
-
--- | Pretty-print response.
-ptpPp :: Lens' ProjectsTopicsPublish Bool
-ptpPp = lens _ptpPp (\ s a -> s{_ptpPp = a})
+ptptUploadProtocol :: Lens' ProjectsTopicsPublish (Maybe Text)
+ptptUploadProtocol
+  = lens _ptptUploadProtocol
+      (\ s a -> s{_ptptUploadProtocol = a})
 
 -- | OAuth access token.
-ptpAccessToken :: Lens' ProjectsTopicsPublish (Maybe Text)
-ptpAccessToken
-  = lens _ptpAccessToken
-      (\ s a -> s{_ptpAccessToken = a})
+ptptAccessToken :: Lens' ProjectsTopicsPublish (Maybe Text)
+ptptAccessToken
+  = lens _ptptAccessToken
+      (\ s a -> s{_ptptAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-ptpUploadType :: Lens' ProjectsTopicsPublish (Maybe Text)
-ptpUploadType
-  = lens _ptpUploadType
-      (\ s a -> s{_ptpUploadType = a})
+ptptUploadType :: Lens' ProjectsTopicsPublish (Maybe Text)
+ptptUploadType
+  = lens _ptptUploadType
+      (\ s a -> s{_ptptUploadType = a})
 
 -- | Multipart request metadata.
-ptpPayload :: Lens' ProjectsTopicsPublish PublishRequest
-ptpPayload
-  = lens _ptpPayload (\ s a -> s{_ptpPayload = a})
+ptptPayload :: Lens' ProjectsTopicsPublish PublishRequest
+ptptPayload
+  = lens _ptptPayload (\ s a -> s{_ptptPayload = a})
 
 -- | The messages in the request will be published on this topic. Format is
 -- \`projects\/{project}\/topics\/{topic}\`.
-ptpTopic :: Lens' ProjectsTopicsPublish Text
-ptpTopic = lens _ptpTopic (\ s a -> s{_ptpTopic = a})
-
--- | OAuth bearer token.
-ptpBearerToken :: Lens' ProjectsTopicsPublish (Maybe Text)
-ptpBearerToken
-  = lens _ptpBearerToken
-      (\ s a -> s{_ptpBearerToken = a})
+ptptTopic :: Lens' ProjectsTopicsPublish Text
+ptptTopic
+  = lens _ptptTopic (\ s a -> s{_ptptTopic = a})
 
 -- | JSONP
-ptpCallback :: Lens' ProjectsTopicsPublish (Maybe Text)
-ptpCallback
-  = lens _ptpCallback (\ s a -> s{_ptpCallback = a})
+ptptCallback :: Lens' ProjectsTopicsPublish (Maybe Text)
+ptptCallback
+  = lens _ptptCallback (\ s a -> s{_ptptCallback = a})
 
 instance GoogleRequest ProjectsTopicsPublish where
         type Rs ProjectsTopicsPublish = PublishResponse
@@ -173,14 +151,12 @@ instance GoogleRequest ProjectsTopicsPublish where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/pubsub"]
         requestClient ProjectsTopicsPublish'{..}
-          = go _ptpTopic _ptpXgafv _ptpUploadProtocol
-              (Just _ptpPp)
-              _ptpAccessToken
-              _ptpUploadType
-              _ptpBearerToken
-              _ptpCallback
+          = go _ptptTopic _ptptXgafv _ptptUploadProtocol
+              _ptptAccessToken
+              _ptptUploadType
+              _ptptCallback
               (Just AltJSON)
-              _ptpPayload
+              _ptptPayload
               pubSubService
           where go
                   = buildClient

@@ -22,7 +22,7 @@
 --
 -- Signs a blob using a service account\'s system-managed private key.
 --
--- /See:/ <https://cloud.google.com/iam/ Google Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.signBlob@.
+-- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.signBlob@.
 module Network.Google.Resource.IAM.Projects.ServiceAccounts.SignBlob
     (
     -- * REST Resource
@@ -35,11 +35,9 @@ module Network.Google.Resource.IAM.Projects.ServiceAccounts.SignBlob
     -- * Request Lenses
     , psasbXgafv
     , psasbUploadProtocol
-    , psasbPp
     , psasbAccessToken
     , psasbUploadType
     , psasbPayload
-    , psasbBearerToken
     , psasbName
     , psasbCallback
     ) where
@@ -52,28 +50,24 @@ import           Network.Google.Prelude
 type ProjectsServiceAccountsSignBlobResource =
      "v1" :>
        CaptureMode "name" "signBlob" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] SignBlobRequest :>
-                           Post '[JSON] SignBlobResponse
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] SignBlobRequest :>
+                       Post '[JSON] SignBlobResponse
 
 -- | Signs a blob using a service account\'s system-managed private key.
 --
 -- /See:/ 'projectsServiceAccountsSignBlob' smart constructor.
 data ProjectsServiceAccountsSignBlob = ProjectsServiceAccountsSignBlob'
-    { _psasbXgafv          :: !(Maybe Text)
+    { _psasbXgafv          :: !(Maybe Xgafv)
     , _psasbUploadProtocol :: !(Maybe Text)
-    , _psasbPp             :: !Bool
     , _psasbAccessToken    :: !(Maybe Text)
     , _psasbUploadType     :: !(Maybe Text)
     , _psasbPayload        :: !SignBlobRequest
-    , _psasbBearerToken    :: !(Maybe Text)
     , _psasbName           :: !Text
     , _psasbCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -86,15 +80,11 @@ data ProjectsServiceAccountsSignBlob = ProjectsServiceAccountsSignBlob'
 --
 -- * 'psasbUploadProtocol'
 --
--- * 'psasbPp'
---
 -- * 'psasbAccessToken'
 --
 -- * 'psasbUploadType'
 --
 -- * 'psasbPayload'
---
--- * 'psasbBearerToken'
 --
 -- * 'psasbName'
 --
@@ -107,17 +97,15 @@ projectsServiceAccountsSignBlob pPsasbPayload_ pPsasbName_ =
     ProjectsServiceAccountsSignBlob'
     { _psasbXgafv = Nothing
     , _psasbUploadProtocol = Nothing
-    , _psasbPp = True
     , _psasbAccessToken = Nothing
     , _psasbUploadType = Nothing
     , _psasbPayload = pPsasbPayload_
-    , _psasbBearerToken = Nothing
     , _psasbName = pPsasbName_
     , _psasbCallback = Nothing
     }
 
 -- | V1 error format.
-psasbXgafv :: Lens' ProjectsServiceAccountsSignBlob (Maybe Text)
+psasbXgafv :: Lens' ProjectsServiceAccountsSignBlob (Maybe Xgafv)
 psasbXgafv
   = lens _psasbXgafv (\ s a -> s{_psasbXgafv = a})
 
@@ -126,10 +114,6 @@ psasbUploadProtocol :: Lens' ProjectsServiceAccountsSignBlob (Maybe Text)
 psasbUploadProtocol
   = lens _psasbUploadProtocol
       (\ s a -> s{_psasbUploadProtocol = a})
-
--- | Pretty-print response.
-psasbPp :: Lens' ProjectsServiceAccountsSignBlob Bool
-psasbPp = lens _psasbPp (\ s a -> s{_psasbPp = a})
 
 -- | OAuth access token.
 psasbAccessToken :: Lens' ProjectsServiceAccountsSignBlob (Maybe Text)
@@ -148,17 +132,11 @@ psasbPayload :: Lens' ProjectsServiceAccountsSignBlob SignBlobRequest
 psasbPayload
   = lens _psasbPayload (\ s a -> s{_psasbPayload = a})
 
--- | OAuth bearer token.
-psasbBearerToken :: Lens' ProjectsServiceAccountsSignBlob (Maybe Text)
-psasbBearerToken
-  = lens _psasbBearerToken
-      (\ s a -> s{_psasbBearerToken = a})
-
 -- | The resource name of the service account in the following format:
--- \`projects\/{project}\/serviceAccounts\/{account}\`. Using \`-\` as a
--- wildcard for the project will infer the project from the account. The
--- \`account\` value can be the \`email\` address or the \`unique_id\` of
--- the service account.
+-- \`projects\/{PROJECT_ID}\/serviceAccounts\/{ACCOUNT}\`. Using \`-\` as a
+-- wildcard for the \`PROJECT_ID\` will infer the project from the account.
+-- The \`ACCOUNT\` value can be the \`email\` address or the \`unique_id\`
+-- of the service account.
 psasbName :: Lens' ProjectsServiceAccountsSignBlob Text
 psasbName
   = lens _psasbName (\ s a -> s{_psasbName = a})
@@ -177,10 +155,8 @@ instance GoogleRequest
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsServiceAccountsSignBlob'{..}
           = go _psasbName _psasbXgafv _psasbUploadProtocol
-              (Just _psasbPp)
               _psasbAccessToken
               _psasbUploadType
-              _psasbBearerToken
               _psasbCallback
               (Just AltJSON)
               _psasbPayload

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists a file\'s permissions.
+-- Lists a file\'s or Team Drive\'s permissions.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.permissions.list@.
 module Network.Google.Resource.Drive.Permissions.List
@@ -33,7 +33,11 @@ module Network.Google.Resource.Drive.Permissions.List
     , PermissionsList
 
     -- * Request Lenses
+    , plPageToken
+    , plUseDomainAdminAccess
     , plFileId
+    , plPageSize
+    , plSupportsTeamDrives
     ) where
 
 import           Network.Google.Drive.Types
@@ -47,32 +51,82 @@ type PermissionsListResource =
          "files" :>
            Capture "fileId" Text :>
              "permissions" :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] PermissionList
+               QueryParam "pageToken" Text :>
+                 QueryParam "useDomainAdminAccess" Bool :>
+                   QueryParam "pageSize" (Textual Int32) :>
+                     QueryParam "supportsTeamDrives" Bool :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] PermissionList
 
--- | Lists a file\'s permissions.
+-- | Lists a file\'s or Team Drive\'s permissions.
 --
 -- /See:/ 'permissionsList' smart constructor.
-newtype PermissionsList = PermissionsList'
-    { _plFileId :: Text
+data PermissionsList = PermissionsList'
+    { _plPageToken            :: !(Maybe Text)
+    , _plUseDomainAdminAccess :: !Bool
+    , _plFileId               :: !Text
+    , _plPageSize             :: !(Maybe (Textual Int32))
+    , _plSupportsTeamDrives   :: !Bool
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PermissionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'plPageToken'
+--
+-- * 'plUseDomainAdminAccess'
+--
 -- * 'plFileId'
+--
+-- * 'plPageSize'
+--
+-- * 'plSupportsTeamDrives'
 permissionsList
     :: Text -- ^ 'plFileId'
     -> PermissionsList
 permissionsList pPlFileId_ =
     PermissionsList'
-    { _plFileId = pPlFileId_
+    { _plPageToken = Nothing
+    , _plUseDomainAdminAccess = False
+    , _plFileId = pPlFileId_
+    , _plPageSize = Nothing
+    , _plSupportsTeamDrives = False
     }
 
--- | The ID of the file.
+-- | The token for continuing a previous list request on the next page. This
+-- should be set to the value of \'nextPageToken\' from the previous
+-- response.
+plPageToken :: Lens' PermissionsList (Maybe Text)
+plPageToken
+  = lens _plPageToken (\ s a -> s{_plPageToken = a})
+
+-- | Issue the request as a domain administrator; if set to true, then the
+-- requester will be granted access if they are an administrator of the
+-- domain to which the item belongs.
+plUseDomainAdminAccess :: Lens' PermissionsList Bool
+plUseDomainAdminAccess
+  = lens _plUseDomainAdminAccess
+      (\ s a -> s{_plUseDomainAdminAccess = a})
+
+-- | The ID of the file or Team Drive.
 plFileId :: Lens' PermissionsList Text
 plFileId = lens _plFileId (\ s a -> s{_plFileId = a})
+
+-- | The maximum number of permissions to return per page. When not set for
+-- files in a Team Drive, at most 100 results will be returned. When not
+-- set for files that are not in a Team Drive, the entire list will be
+-- returned.
+plPageSize :: Lens' PermissionsList (Maybe Int32)
+plPageSize
+  = lens _plPageSize (\ s a -> s{_plPageSize = a}) .
+      mapping _Coerce
+
+-- | Whether the requesting application supports Team Drives.
+plSupportsTeamDrives :: Lens' PermissionsList Bool
+plSupportsTeamDrives
+  = lens _plSupportsTeamDrives
+      (\ s a -> s{_plSupportsTeamDrives = a})
 
 instance GoogleRequest PermissionsList where
         type Rs PermissionsList = PermissionList
@@ -84,7 +138,12 @@ instance GoogleRequest PermissionsList where
                "https://www.googleapis.com/auth/drive.photos.readonly",
                "https://www.googleapis.com/auth/drive.readonly"]
         requestClient PermissionsList'{..}
-          = go _plFileId (Just AltJSON) driveService
+          = go _plFileId _plPageToken
+              (Just _plUseDomainAdminAccess)
+              _plPageSize
+              (Just _plSupportsTeamDrives)
+              (Just AltJSON)
+              driveService
           where go
                   = buildClient
                       (Proxy :: Proxy PermissionsListResource)

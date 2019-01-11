@@ -22,7 +22,7 @@
 --
 -- Undeletes a Container Version.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.containers.versions.undelete@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v2/ Tag Manager API Reference> for @tagmanager.accounts.containers.versions.undelete@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Undelete
     (
     -- * REST Resource
@@ -33,9 +33,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Undelete
     , AccountsContainersVersionsUndelete
 
     -- * Request Lenses
-    , acvucContainerId
-    , acvucContainerVersionId
-    , acvucAccountId
+    , acvuPath
     ) where
 
 import           Network.Google.Prelude
@@ -45,64 +43,35 @@ import           Network.Google.TagManager.Types
 -- 'AccountsContainersVersionsUndelete' request conforms to.
 type AccountsContainersVersionsUndeleteResource =
      "tagmanager" :>
-       "v1" :>
-         "accounts" :>
-           Capture "accountId" Text :>
-             "containers" :>
-               Capture "containerId" Text :>
-                 "versions" :>
-                   Capture "containerVersionId" Text :>
-                     "undelete" :>
-                       QueryParam "alt" AltJSON :>
-                         Post '[JSON] ContainerVersion
+       "v2" :>
+         CaptureMode "path" "undelete" Text :>
+           QueryParam "alt" AltJSON :>
+             Post '[JSON] ContainerVersion
 
 -- | Undeletes a Container Version.
 --
 -- /See:/ 'accountsContainersVersionsUndelete' smart constructor.
-data AccountsContainersVersionsUndelete = AccountsContainersVersionsUndelete'
-    { _acvucContainerId        :: !Text
-    , _acvucContainerVersionId :: !Text
-    , _acvucAccountId          :: !Text
+newtype AccountsContainersVersionsUndelete = AccountsContainersVersionsUndelete'
+    { _acvuPath :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersVersionsUndelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acvucContainerId'
---
--- * 'acvucContainerVersionId'
---
--- * 'acvucAccountId'
+-- * 'acvuPath'
 accountsContainersVersionsUndelete
-    :: Text -- ^ 'acvucContainerId'
-    -> Text -- ^ 'acvucContainerVersionId'
-    -> Text -- ^ 'acvucAccountId'
+    :: Text -- ^ 'acvuPath'
     -> AccountsContainersVersionsUndelete
-accountsContainersVersionsUndelete pAcvucContainerId_ pAcvucContainerVersionId_ pAcvucAccountId_ =
+accountsContainersVersionsUndelete pAcvuPath_ =
     AccountsContainersVersionsUndelete'
-    { _acvucContainerId = pAcvucContainerId_
-    , _acvucContainerVersionId = pAcvucContainerVersionId_
-    , _acvucAccountId = pAcvucAccountId_
+    { _acvuPath = pAcvuPath_
     }
 
--- | The GTM Container ID.
-acvucContainerId :: Lens' AccountsContainersVersionsUndelete Text
-acvucContainerId
-  = lens _acvucContainerId
-      (\ s a -> s{_acvucContainerId = a})
-
--- | The GTM Container Version ID.
-acvucContainerVersionId :: Lens' AccountsContainersVersionsUndelete Text
-acvucContainerVersionId
-  = lens _acvucContainerVersionId
-      (\ s a -> s{_acvucContainerVersionId = a})
-
--- | The GTM Account ID.
-acvucAccountId :: Lens' AccountsContainersVersionsUndelete Text
-acvucAccountId
-  = lens _acvucAccountId
-      (\ s a -> s{_acvucAccountId = a})
+-- | GTM ContainerVersion\'s API relative path. Example:
+-- accounts\/{account_id}\/containers\/{container_id}\/versions\/{version_id}
+acvuPath :: Lens' AccountsContainersVersionsUndelete Text
+acvuPath = lens _acvuPath (\ s a -> s{_acvuPath = a})
 
 instance GoogleRequest
          AccountsContainersVersionsUndelete where
@@ -111,10 +80,7 @@ instance GoogleRequest
         type Scopes AccountsContainersVersionsUndelete =
              '["https://www.googleapis.com/auth/tagmanager.edit.containerversions"]
         requestClient AccountsContainersVersionsUndelete'{..}
-          = go _acvucAccountId _acvucContainerId
-              _acvucContainerVersionId
-              (Just AltJSON)
-              tagManagerService
+          = go _acvuPath (Just AltJSON) tagManagerService
           where go
                   = buildClient
                       (Proxy ::

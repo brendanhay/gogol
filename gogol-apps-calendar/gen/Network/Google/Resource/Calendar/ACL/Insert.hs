@@ -35,6 +35,7 @@ module Network.Google.Resource.Calendar.ACL.Insert
     -- * Request Lenses
     , aiCalendarId
     , aiPayload
+    , aiSendNotifications
     ) where
 
 import           Network.Google.AppsCalendar.Types
@@ -48,15 +49,17 @@ type ACLInsertResource =
          "calendars" :>
            Capture "calendarId" Text :>
              "acl" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] ACLRule :> Post '[JSON] ACLRule
+               QueryParam "sendNotifications" Bool :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] ACLRule :> Post '[JSON] ACLRule
 
 -- | Creates an access control rule.
 --
 -- /See:/ 'aclInsert' smart constructor.
 data ACLInsert = ACLInsert'
-    { _aiCalendarId :: !Text
-    , _aiPayload    :: !ACLRule
+    { _aiCalendarId        :: !Text
+    , _aiPayload           :: !ACLRule
+    , _aiSendNotifications :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ACLInsert' with the minimum fields required to make a request.
@@ -66,6 +69,8 @@ data ACLInsert = ACLInsert'
 -- * 'aiCalendarId'
 --
 -- * 'aiPayload'
+--
+-- * 'aiSendNotifications'
 aclInsert
     :: Text -- ^ 'aiCalendarId'
     -> ACLRule -- ^ 'aiPayload'
@@ -74,6 +79,7 @@ aclInsert pAiCalendarId_ pAiPayload_ =
     ACLInsert'
     { _aiCalendarId = pAiCalendarId_
     , _aiPayload = pAiPayload_
+    , _aiSendNotifications = Nothing
     }
 
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
@@ -88,12 +94,21 @@ aiPayload :: Lens' ACLInsert ACLRule
 aiPayload
   = lens _aiPayload (\ s a -> s{_aiPayload = a})
 
+-- | Whether to send notifications about the calendar sharing change.
+-- Optional. The default is True.
+aiSendNotifications :: Lens' ACLInsert (Maybe Bool)
+aiSendNotifications
+  = lens _aiSendNotifications
+      (\ s a -> s{_aiSendNotifications = a})
+
 instance GoogleRequest ACLInsert where
         type Rs ACLInsert = ACLRule
         type Scopes ACLInsert =
              '["https://www.googleapis.com/auth/calendar"]
         requestClient ACLInsert'{..}
-          = go _aiCalendarId (Just AltJSON) _aiPayload
+          = go _aiCalendarId _aiSendNotifications
+              (Just AltJSON)
+              _aiPayload
               appsCalendarService
           where go
                   = buildClient (Proxy :: Proxy ACLInsertResource)

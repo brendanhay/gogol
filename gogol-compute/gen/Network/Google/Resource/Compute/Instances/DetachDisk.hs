@@ -33,10 +33,11 @@ module Network.Google.Resource.Compute.Instances.DetachDisk
     , InstancesDetachDisk
 
     -- * Request Lenses
-    , iddProject
-    , iddZone
-    , iddDeviceName
-    , iddInstance
+    , idddRequestId
+    , idddProject
+    , idddZone
+    , idddDeviceName
+    , idddInstance
     ) where
 
 import           Network.Google.Compute.Types
@@ -55,62 +56,83 @@ type InstancesDetachDiskResource =
                    Capture "instance" Text :>
                      "detachDisk" :>
                        QueryParam "deviceName" Text :>
-                         QueryParam "alt" AltJSON :> Post '[JSON] Operation
+                         QueryParam "requestId" Text :>
+                           QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | Detaches a disk from an instance.
 --
 -- /See:/ 'instancesDetachDisk' smart constructor.
 data InstancesDetachDisk = InstancesDetachDisk'
-    { _iddProject    :: !Text
-    , _iddZone       :: !Text
-    , _iddDeviceName :: !Text
-    , _iddInstance   :: !Text
+    { _idddRequestId  :: !(Maybe Text)
+    , _idddProject    :: !Text
+    , _idddZone       :: !Text
+    , _idddDeviceName :: !Text
+    , _idddInstance   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesDetachDisk' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'iddProject'
+-- * 'idddRequestId'
 --
--- * 'iddZone'
+-- * 'idddProject'
 --
--- * 'iddDeviceName'
+-- * 'idddZone'
 --
--- * 'iddInstance'
+-- * 'idddDeviceName'
+--
+-- * 'idddInstance'
 instancesDetachDisk
-    :: Text -- ^ 'iddProject'
-    -> Text -- ^ 'iddZone'
-    -> Text -- ^ 'iddDeviceName'
-    -> Text -- ^ 'iddInstance'
+    :: Text -- ^ 'idddProject'
+    -> Text -- ^ 'idddZone'
+    -> Text -- ^ 'idddDeviceName'
+    -> Text -- ^ 'idddInstance'
     -> InstancesDetachDisk
-instancesDetachDisk pIddProject_ pIddZone_ pIddDeviceName_ pIddInstance_ =
+instancesDetachDisk pIdddProject_ pIdddZone_ pIdddDeviceName_ pIdddInstance_ =
     InstancesDetachDisk'
-    { _iddProject = pIddProject_
-    , _iddZone = pIddZone_
-    , _iddDeviceName = pIddDeviceName_
-    , _iddInstance = pIddInstance_
+    { _idddRequestId = Nothing
+    , _idddProject = pIdddProject_
+    , _idddZone = pIdddZone_
+    , _idddDeviceName = pIdddDeviceName_
+    , _idddInstance = pIdddInstance_
     }
 
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+idddRequestId :: Lens' InstancesDetachDisk (Maybe Text)
+idddRequestId
+  = lens _idddRequestId
+      (\ s a -> s{_idddRequestId = a})
+
 -- | Project ID for this request.
-iddProject :: Lens' InstancesDetachDisk Text
-iddProject
-  = lens _iddProject (\ s a -> s{_iddProject = a})
+idddProject :: Lens' InstancesDetachDisk Text
+idddProject
+  = lens _idddProject (\ s a -> s{_idddProject = a})
 
 -- | The name of the zone for this request.
-iddZone :: Lens' InstancesDetachDisk Text
-iddZone = lens _iddZone (\ s a -> s{_iddZone = a})
+idddZone :: Lens' InstancesDetachDisk Text
+idddZone = lens _idddZone (\ s a -> s{_idddZone = a})
 
--- | Disk device name to detach.
-iddDeviceName :: Lens' InstancesDetachDisk Text
-iddDeviceName
-  = lens _iddDeviceName
-      (\ s a -> s{_iddDeviceName = a})
+-- | The device name of the disk to detach. Make a get() request on the
+-- instance to view currently attached disks and device names.
+idddDeviceName :: Lens' InstancesDetachDisk Text
+idddDeviceName
+  = lens _idddDeviceName
+      (\ s a -> s{_idddDeviceName = a})
 
--- | Instance name.
-iddInstance :: Lens' InstancesDetachDisk Text
-iddInstance
-  = lens _iddInstance (\ s a -> s{_iddInstance = a})
+-- | Instance name for this request.
+idddInstance :: Lens' InstancesDetachDisk Text
+idddInstance
+  = lens _idddInstance (\ s a -> s{_idddInstance = a})
 
 instance GoogleRequest InstancesDetachDisk where
         type Rs InstancesDetachDisk = Operation
@@ -118,8 +140,9 @@ instance GoogleRequest InstancesDetachDisk where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient InstancesDetachDisk'{..}
-          = go _iddProject _iddZone _iddInstance
-              (Just _iddDeviceName)
+          = go _idddProject _idddZone _idddInstance
+              (Just _idddDeviceName)
+              _idddRequestId
               (Just AltJSON)
               computeService
           where go
