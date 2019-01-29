@@ -1,5 +1,5 @@
 name:                  gogol-adsense
-version:               0.3.0
+version:               0.4.0
 synopsis:              Google AdSense Management SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -81,5 +81,5 @@ library
         , Network.Google.AdSense.Types.Sum
 
     build-depends:
-          gogol-core == 0.3.0.*
+          gogol-core == 0.4.0.*
         , base       >= 4.7 && < 5

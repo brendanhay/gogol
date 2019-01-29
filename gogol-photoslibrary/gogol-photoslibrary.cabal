@@ -1,5 +1,5 @@
 name:                  gogol-photoslibrary
-version:               0.3.0
+version:               0.4.0
 synopsis:              Google Photos Library SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -51,5 +51,5 @@ library
         , Network.Google.PhotosLibrary.Types.Sum
 
     build-depends:
-          gogol-core == 0.3.0.*
+          gogol-core == 0.4.0.*
         , base       >= 4.7 && < 5
