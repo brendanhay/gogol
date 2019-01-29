@@ -6,7 +6,7 @@ pvp="$1"
 semantic="$2"
 
 if [ -z "$pvp" ] || [ -z "$semantic" ]; then
-    echo "Usage: bump-version <VERSION> <DEPENDENCY>"
+    echo "Usage: set-version <VERSION> <DEPENDENCY>"
     exit 1
 fi
 
