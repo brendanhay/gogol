@@ -12,6 +12,7 @@ fi
 
 specs=(
  gogol/*.cabal
+ gogol-*/*.cabal
  core/*.cabal
  gen/*.cabal
  examples/*.cabal
