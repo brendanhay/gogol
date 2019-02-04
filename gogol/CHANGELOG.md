@@ -1,5 +1,92 @@
 # Change Log
 
+## [0.4.0](https://github.com/brendanhay/gogol/tree/0.4.0)
+
+Released: **04 February, 2019**, Compare: [0.4.0](https://github.com/brendanhay/gogol/compare/0.3.0...0.4.0)
+
+### Added
+
+- Added 3 examples of Google Sheets [\#80](https://github.com/brendanhay/gogol/pull/80)
+- Support service account user impersonation [\#78](https://github.com/brendanhay/gogol/pull/78)
+
+### Fixed
+
+- Fixed tinylog typo [\#76](https://github.com/brendanhay/gogol/pull/76)
+- Fix import conflicts for servant 0.13 [\#96](https://github.com/brendanhay/gogol/pull/96)
+- Updated dependencies
+
+## New Libraries
+
+- `gogol-abusiveexperiencereport`
+- `gogol-acceleratedmobilepageurl`
+- `gogol-accesscontextmanager`
+- `gogol-adexchangebuyer2`
+- `gogol-adexperiencereport`
+- `gogol-alertcenter`
+- `gogol-analyticsreporting`
+- `gogol-androiddeviceprovisioning`
+- `gogol-androidmanagement`
+- `gogol-bigquerydatatransfer`
+- `gogol-bigtableadmin`
+- `gogol-binaryauthorization`
+- `gogol-chat`
+- `gogol-cloudasset`
+- `gogol-clouderrorreporting`
+- `gogol-cloudfunctions`
+- `gogol-cloudidentity`
+- `gogol-cloudiot`
+- `gogol-cloudkms`
+- `gogol-cloudprofiler`
+- `gogol-cloudscheduler`
+- `gogol-cloudsearch`
+- `gogol-cloudshell`
+- `gogol-cloudtasks`
+- `gogol-composer`
+- `gogol-consumersurveys`
+- `gogol-containeranalysis`
+- `gogol-dialogflow`
+- `gogol-digitalassetlinks`
+- `gogol-dlp`
+- `gogol-driveactivity`
+- `gogol-file`
+- `gogol-firebasehosting`
+- `gogol-firebaseremoteconfig`
+- `gogol-firestore`
+- `gogol-iamcredentials`
+- `gogol-iap`
+- `gogol-indexing`
+- `gogol-jobs`
+- `gogol-libraryagent`
+- `gogol-oslogin`
+- `gogol-photoslibrary`
+- `gogol-playcustomapp`
+- `gogol-poly`
+- `gogol-redis`
+- `gogol-remotebuildexecution`
+- `gogol-searchconsole`
+- `gogol-servicebroker`
+- `gogol-serviceconsumermanagement`
+- `gogol-servicenetworking`
+- `gogol-serviceusage`
+- `gogol-serviceuser`
+- `gogol-sourcerepo`
+- `gogol-spanner`
+- `gogol-speech`
+- `gogol-streetviewpublish`
+- `gogol-surveys`
+- `gogol-testing`
+- `gogol-texttospeech`
+- `gogol-toolresults`
+- `gogol-tpu`
+- `gogol-tracing`
+- `gogol-vault`
+- `gogol-videointelligence`
+- `gogol-websecurityscanner`
+
+### Updated Service Definitions
+
+- All service definitions have been updated to their latest respective versions.
+
 ## [0.3.0](https://github.com/brendanhay/gogol/tree/0.3.0)
 
 Released: **12 July, 2017**, Compare: [0.3.0](https://github.com/brendanhay/gogol/compare/0.2.0...0.3.0)
