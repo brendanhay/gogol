@@ -51,10 +51,8 @@ module Network.Google.Resource.Classroom.UserProFiles.Guardians.List
     , upfglStudentId
     , upfglXgafv
     , upfglUploadProtocol
-    , upfglPp
     , upfglAccessToken
     , upfglUploadType
-    , upfglBearerToken
     , upfglInvitedEmailAddress
     , upfglPageToken
     , upfglPageSize
@@ -71,18 +69,16 @@ type UserProFilesGuardiansListResource =
        "userProfiles" :>
          Capture "studentId" Text :>
            "guardians" :>
-             QueryParam "$.xgafv" Text :>
+             QueryParam "$.xgafv" Xgafv :>
                QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "invitedEmailAddress" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "pageSize" (Textual Int32) :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" AltJSON :>
-                                   Get '[JSON] ListGuardiansResponse
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "invitedEmailAddress" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "pageSize" (Textual Int32) :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] ListGuardiansResponse
 
 -- | Returns a list of guardians that the requesting user is permitted to
 -- view, restricted to those that match the request. To list guardians for
@@ -104,12 +100,10 @@ type UserProFilesGuardiansListResource =
 -- /See:/ 'userProFilesGuardiansList' smart constructor.
 data UserProFilesGuardiansList = UserProFilesGuardiansList'
     { _upfglStudentId           :: !Text
-    , _upfglXgafv               :: !(Maybe Text)
+    , _upfglXgafv               :: !(Maybe Xgafv)
     , _upfglUploadProtocol      :: !(Maybe Text)
-    , _upfglPp                  :: !Bool
     , _upfglAccessToken         :: !(Maybe Text)
     , _upfglUploadType          :: !(Maybe Text)
-    , _upfglBearerToken         :: !(Maybe Text)
     , _upfglInvitedEmailAddress :: !(Maybe Text)
     , _upfglPageToken           :: !(Maybe Text)
     , _upfglPageSize            :: !(Maybe (Textual Int32))
@@ -126,13 +120,9 @@ data UserProFilesGuardiansList = UserProFilesGuardiansList'
 --
 -- * 'upfglUploadProtocol'
 --
--- * 'upfglPp'
---
 -- * 'upfglAccessToken'
 --
 -- * 'upfglUploadType'
---
--- * 'upfglBearerToken'
 --
 -- * 'upfglInvitedEmailAddress'
 --
@@ -149,10 +139,8 @@ userProFilesGuardiansList pUpfglStudentId_ =
     { _upfglStudentId = pUpfglStudentId_
     , _upfglXgafv = Nothing
     , _upfglUploadProtocol = Nothing
-    , _upfglPp = True
     , _upfglAccessToken = Nothing
     , _upfglUploadType = Nothing
-    , _upfglBearerToken = Nothing
     , _upfglInvitedEmailAddress = Nothing
     , _upfglPageToken = Nothing
     , _upfglPageSize = Nothing
@@ -171,7 +159,7 @@ upfglStudentId
       (\ s a -> s{_upfglStudentId = a})
 
 -- | V1 error format.
-upfglXgafv :: Lens' UserProFilesGuardiansList (Maybe Text)
+upfglXgafv :: Lens' UserProFilesGuardiansList (Maybe Xgafv)
 upfglXgafv
   = lens _upfglXgafv (\ s a -> s{_upfglXgafv = a})
 
@@ -180,10 +168,6 @@ upfglUploadProtocol :: Lens' UserProFilesGuardiansList (Maybe Text)
 upfglUploadProtocol
   = lens _upfglUploadProtocol
       (\ s a -> s{_upfglUploadProtocol = a})
-
--- | Pretty-print response.
-upfglPp :: Lens' UserProFilesGuardiansList Bool
-upfglPp = lens _upfglPp (\ s a -> s{_upfglPp = a})
 
 -- | OAuth access token.
 upfglAccessToken :: Lens' UserProFilesGuardiansList (Maybe Text)
@@ -196,12 +180,6 @@ upfglUploadType :: Lens' UserProFilesGuardiansList (Maybe Text)
 upfglUploadType
   = lens _upfglUploadType
       (\ s a -> s{_upfglUploadType = a})
-
--- | OAuth bearer token.
-upfglBearerToken :: Lens' UserProFilesGuardiansList (Maybe Text)
-upfglBearerToken
-  = lens _upfglBearerToken
-      (\ s a -> s{_upfglBearerToken = a})
 
 -- | Filter results by the email address that the original invitation was
 -- sent to, resulting in this guardian link. This filter can only be used
@@ -238,13 +216,14 @@ instance GoogleRequest UserProFilesGuardiansList
          where
         type Rs UserProFilesGuardiansList =
              ListGuardiansResponse
-        type Scopes UserProFilesGuardiansList = '[]
+        type Scopes UserProFilesGuardiansList =
+             '["https://www.googleapis.com/auth/classroom.guardianlinks.me.readonly",
+               "https://www.googleapis.com/auth/classroom.guardianlinks.students",
+               "https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly"]
         requestClient UserProFilesGuardiansList'{..}
           = go _upfglStudentId _upfglXgafv _upfglUploadProtocol
-              (Just _upfglPp)
               _upfglAccessToken
               _upfglUploadType
-              _upfglBearerToken
               _upfglInvitedEmailAddress
               _upfglPageToken
               _upfglPageSize

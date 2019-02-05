@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'EditsDelete' request conforms to.
 type EditsDeleteResource =
      "androidpublisher" :>
-       "v2" :>
+       "v3" :>
          "applications" :>
            Capture "packageName" Text :>
              "edits" :>

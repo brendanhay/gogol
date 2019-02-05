@@ -34,6 +34,7 @@ module Network.Google.Resource.Storage.ObjectAccessControls.Get
 
     -- * Request Lenses
     , oacgBucket
+    , oacgUserProject
     , oacgObject
     , oacgEntity
     , oacgGeneration
@@ -53,18 +54,20 @@ type ObjectAccessControlsGetResource =
                Capture "object" Text :>
                  "acl" :>
                    Capture "entity" Text :>
-                     QueryParam "generation" (Textual Int64) :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] ObjectAccessControl
+                     QueryParam "userProject" Text :>
+                       QueryParam "generation" (Textual Int64) :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] ObjectAccessControl
 
 -- | Returns the ACL entry for the specified entity on the specified object.
 --
 -- /See:/ 'objectAccessControlsGet' smart constructor.
 data ObjectAccessControlsGet = ObjectAccessControlsGet'
-    { _oacgBucket     :: !Text
-    , _oacgObject     :: !Text
-    , _oacgEntity     :: !Text
-    , _oacgGeneration :: !(Maybe (Textual Int64))
+    { _oacgBucket      :: !Text
+    , _oacgUserProject :: !(Maybe Text)
+    , _oacgObject      :: !Text
+    , _oacgEntity      :: !Text
+    , _oacgGeneration  :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectAccessControlsGet' with the minimum fields required to make a request.
@@ -72,6 +75,8 @@ data ObjectAccessControlsGet = ObjectAccessControlsGet'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'oacgBucket'
+--
+-- * 'oacgUserProject'
 --
 -- * 'oacgObject'
 --
@@ -86,6 +91,7 @@ objectAccessControlsGet
 objectAccessControlsGet pOacgBucket_ pOacgObject_ pOacgEntity_ =
     ObjectAccessControlsGet'
     { _oacgBucket = pOacgBucket_
+    , _oacgUserProject = Nothing
     , _oacgObject = pOacgObject_
     , _oacgEntity = pOacgEntity_
     , _oacgGeneration = Nothing
@@ -95,6 +101,13 @@ objectAccessControlsGet pOacgBucket_ pOacgObject_ pOacgEntity_ =
 oacgBucket :: Lens' ObjectAccessControlsGet Text
 oacgBucket
   = lens _oacgBucket (\ s a -> s{_oacgBucket = a})
+
+-- | The project to be billed for this request. Required for Requester Pays
+-- buckets.
+oacgUserProject :: Lens' ObjectAccessControlsGet (Maybe Text)
+oacgUserProject
+  = lens _oacgUserProject
+      (\ s a -> s{_oacgUserProject = a})
 
 -- | Name of the object. For information about how to URL encode object names
 -- to be path safe, see Encoding URI Path Parts.
@@ -124,6 +137,7 @@ instance GoogleRequest ObjectAccessControlsGet where
                "https://www.googleapis.com/auth/devstorage.full_control"]
         requestClient ObjectAccessControlsGet'{..}
           = go _oacgBucket _oacgObject _oacgEntity
+              _oacgUserProject
               _oacgGeneration
               (Just AltJSON)
               storageService

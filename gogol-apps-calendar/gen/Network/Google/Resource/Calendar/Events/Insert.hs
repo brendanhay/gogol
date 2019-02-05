@@ -33,11 +33,13 @@ module Network.Google.Resource.Calendar.Events.Insert
     , EventsInsert
 
     -- * Request Lenses
+    , eveConferenceDataVersion
     , eveCalendarId
     , evePayload
     , eveMaxAttendees
     , eveSendNotifications
     , eveSupportsAttachments
+    , eveSendUpdates
     ) where
 
 import           Network.Google.AppsCalendar.Types
@@ -51,26 +53,32 @@ type EventsInsertResource =
          "calendars" :>
            Capture "calendarId" Text :>
              "events" :>
-               QueryParam "maxAttendees" (Textual Int32) :>
-                 QueryParam "sendNotifications" Bool :>
-                   QueryParam "supportsAttachments" Bool :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] Event :> Post '[JSON] Event
+               QueryParam "conferenceDataVersion" (Textual Int32) :>
+                 QueryParam "maxAttendees" (Textual Int32) :>
+                   QueryParam "sendNotifications" Bool :>
+                     QueryParam "supportsAttachments" Bool :>
+                       QueryParam "sendUpdates" EventsInsertSendUpdates :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Event :> Post '[JSON] Event
 
 -- | Creates an event.
 --
 -- /See:/ 'eventsInsert' smart constructor.
 data EventsInsert = EventsInsert'
-    { _eveCalendarId          :: !Text
-    , _evePayload             :: !Event
-    , _eveMaxAttendees        :: !(Maybe (Textual Int32))
-    , _eveSendNotifications   :: !(Maybe Bool)
-    , _eveSupportsAttachments :: !(Maybe Bool)
+    { _eveConferenceDataVersion :: !(Maybe (Textual Int32))
+    , _eveCalendarId            :: !Text
+    , _evePayload               :: !Event
+    , _eveMaxAttendees          :: !(Maybe (Textual Int32))
+    , _eveSendNotifications     :: !(Maybe Bool)
+    , _eveSupportsAttachments   :: !(Maybe Bool)
+    , _eveSendUpdates           :: !(Maybe EventsInsertSendUpdates)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eveConferenceDataVersion'
 --
 -- * 'eveCalendarId'
 --
@@ -81,18 +89,33 @@ data EventsInsert = EventsInsert'
 -- * 'eveSendNotifications'
 --
 -- * 'eveSupportsAttachments'
+--
+-- * 'eveSendUpdates'
 eventsInsert
     :: Text -- ^ 'eveCalendarId'
     -> Event -- ^ 'evePayload'
     -> EventsInsert
 eventsInsert pEveCalendarId_ pEvePayload_ =
     EventsInsert'
-    { _eveCalendarId = pEveCalendarId_
+    { _eveConferenceDataVersion = Nothing
+    , _eveCalendarId = pEveCalendarId_
     , _evePayload = pEvePayload_
     , _eveMaxAttendees = Nothing
     , _eveSendNotifications = Nothing
     , _eveSupportsAttachments = Nothing
+    , _eveSendUpdates = Nothing
     }
+
+-- | Version number of conference data supported by the API client. Version 0
+-- assumes no conference data support and ignores conference data in the
+-- event\'s body. Version 1 enables support for copying of ConferenceData
+-- as well as for creating new conferences using the createRequest field of
+-- conferenceData. The default is 0.
+eveConferenceDataVersion :: Lens' EventsInsert (Maybe Int32)
+eveConferenceDataVersion
+  = lens _eveConferenceDataVersion
+      (\ s a -> s{_eveConferenceDataVersion = a})
+      . mapping _Coerce
 
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently
@@ -116,8 +139,10 @@ eveMaxAttendees
       (\ s a -> s{_eveMaxAttendees = a})
       . mapping _Coerce
 
--- | Whether to send notifications about the creation of the new event.
--- Optional. The default is False.
+-- | Deprecated. Please use sendUpdates instead. Whether to send
+-- notifications about the creation of the new event. Note that some emails
+-- might still be sent even if you set the value to false. The default is
+-- false.
 eveSendNotifications :: Lens' EventsInsert (Maybe Bool)
 eveSendNotifications
   = lens _eveSendNotifications
@@ -130,14 +155,24 @@ eveSupportsAttachments
   = lens _eveSupportsAttachments
       (\ s a -> s{_eveSupportsAttachments = a})
 
+-- | Whether to send notifications about the creation of the new event. Note
+-- that some emails might still be sent. The default is false.
+eveSendUpdates :: Lens' EventsInsert (Maybe EventsInsertSendUpdates)
+eveSendUpdates
+  = lens _eveSendUpdates
+      (\ s a -> s{_eveSendUpdates = a})
+
 instance GoogleRequest EventsInsert where
         type Rs EventsInsert = Event
         type Scopes EventsInsert =
-             '["https://www.googleapis.com/auth/calendar"]
+             '["https://www.googleapis.com/auth/calendar",
+               "https://www.googleapis.com/auth/calendar.events"]
         requestClient EventsInsert'{..}
-          = go _eveCalendarId _eveMaxAttendees
+          = go _eveCalendarId _eveConferenceDataVersion
+              _eveMaxAttendees
               _eveSendNotifications
               _eveSupportsAttachments
+              _eveSendUpdates
               (Just AltJSON)
               _evePayload
               appsCalendarService

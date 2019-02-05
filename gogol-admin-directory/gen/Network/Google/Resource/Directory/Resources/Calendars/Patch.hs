@@ -20,7 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a calendar resource. This method supports patch semantics.
+-- Updates a calendar resource. This method supports patch semantics,
+-- meaning you only need to include the fields you wish to update. Fields
+-- that are not present in the request will be preserved. This method
+-- supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.resources.calendars.patch@.
 module Network.Google.Resource.Directory.Resources.Calendars.Patch
@@ -56,7 +59,10 @@ type ResourcesCalendarsPatchResource =
                        ReqBody '[JSON] CalendarResource :>
                          Patch '[JSON] CalendarResource
 
--- | Updates a calendar resource. This method supports patch semantics.
+-- | Updates a calendar resource. This method supports patch semantics,
+-- meaning you only need to include the fields you wish to update. Fields
+-- that are not present in the request will be preserved. This method
+-- supports patch semantics.
 --
 -- /See:/ 'resourcesCalendarsPatch' smart constructor.
 data ResourcesCalendarsPatch = ResourcesCalendarsPatch'
@@ -91,7 +97,7 @@ rcpPayload :: Lens' ResourcesCalendarsPatch CalendarResource
 rcpPayload
   = lens _rcpPayload (\ s a -> s{_rcpPayload = a})
 
--- | The unique ID for the customer\'s Google account. As an account
+-- | The unique ID for the customer\'s G Suite account. As an account
 -- administrator, you can also use the my_customer alias to represent your
 -- account\'s customer ID.
 rcpCustomer :: Lens' ResourcesCalendarsPatch Text

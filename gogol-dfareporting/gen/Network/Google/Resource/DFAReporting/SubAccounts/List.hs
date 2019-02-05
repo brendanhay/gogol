@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a list of subaccounts, possibly filtered.
+-- Gets a list of subaccounts, possibly filtered. This method supports
+-- paging.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.subaccounts.list@.
 module Network.Google.Resource.DFAReporting.SubAccounts.List
@@ -49,7 +50,7 @@ import           Network.Google.Prelude
 -- 'SubAccountsList' request conforms to.
 type SubAccountsListResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "subaccounts" :>
@@ -62,17 +63,18 @@ type SubAccountsListResource =
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] SubAccountsListResponse
 
--- | Gets a list of subaccounts, possibly filtered.
+-- | Gets a list of subaccounts, possibly filtered. This method supports
+-- paging.
 --
 -- /See:/ 'subAccountsList' smart constructor.
 data SubAccountsList = SubAccountsList'
     { _salSearchString :: !(Maybe Text)
     , _salIds          :: !(Maybe [Textual Int64])
     , _salProFileId    :: !(Textual Int64)
-    , _salSortOrder    :: !(Maybe SubAccountsListSortOrder)
+    , _salSortOrder    :: !SubAccountsListSortOrder
     , _salPageToken    :: !(Maybe Text)
-    , _salSortField    :: !(Maybe SubAccountsListSortField)
-    , _salMaxResults   :: !(Maybe (Textual Int32))
+    , _salSortField    :: !SubAccountsListSortField
+    , _salMaxResults   :: !(Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubAccountsList' with the minimum fields required to make a request.
@@ -100,10 +102,10 @@ subAccountsList pSalProFileId_ =
     { _salSearchString = Nothing
     , _salIds = Nothing
     , _salProFileId = _Coerce # pSalProFileId_
-    , _salSortOrder = Nothing
+    , _salSortOrder = SALSOAscending
     , _salPageToken = Nothing
-    , _salSortField = Nothing
-    , _salMaxResults = Nothing
+    , _salSortField = SALSFID
+    , _salMaxResults = 1000
     }
 
 -- | Allows searching for objects by name or ID. Wildcards (*) are allowed.
@@ -130,8 +132,8 @@ salProFileId
   = lens _salProFileId (\ s a -> s{_salProFileId = a})
       . _Coerce
 
--- | Order of sorted results, default is ASCENDING.
-salSortOrder :: Lens' SubAccountsList (Maybe SubAccountsListSortOrder)
+-- | Order of sorted results.
+salSortOrder :: Lens' SubAccountsList SubAccountsListSortOrder
 salSortOrder
   = lens _salSortOrder (\ s a -> s{_salSortOrder = a})
 
@@ -141,16 +143,16 @@ salPageToken
   = lens _salPageToken (\ s a -> s{_salPageToken = a})
 
 -- | Field by which to sort the list.
-salSortField :: Lens' SubAccountsList (Maybe SubAccountsListSortField)
+salSortField :: Lens' SubAccountsList SubAccountsListSortField
 salSortField
   = lens _salSortField (\ s a -> s{_salSortField = a})
 
 -- | Maximum number of results to return.
-salMaxResults :: Lens' SubAccountsList (Maybe Int32)
+salMaxResults :: Lens' SubAccountsList Int32
 salMaxResults
   = lens _salMaxResults
       (\ s a -> s{_salMaxResults = a})
-      . mapping _Coerce
+      . _Coerce
 
 instance GoogleRequest SubAccountsList where
         type Rs SubAccountsList = SubAccountsListResponse
@@ -159,10 +161,10 @@ instance GoogleRequest SubAccountsList where
         requestClient SubAccountsList'{..}
           = go _salProFileId _salSearchString
               (_salIds ^. _Default)
-              _salSortOrder
+              (Just _salSortOrder)
               _salPageToken
-              _salSortField
-              _salMaxResults
+              (Just _salSortField)
+              (Just _salMaxResults)
               (Just AltJSON)
               dFAReportingService
           where go

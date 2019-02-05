@@ -46,7 +46,7 @@ import           Network.Google.ShoppingContent.Types
 -- 'ShippingSettingsList' request conforms to.
 type ShippingSettingsListResource =
      "content" :>
-       "v2" :>
+       "v2.1" :>
          Capture "merchantId" (Textual Word64) :>
            "shippingsettings" :>
              QueryParam "pageToken" Text :>
@@ -83,7 +83,7 @@ shippingSettingsList pSslMerchantId_ =
     , _sslMaxResults = Nothing
     }
 
--- | The ID of the managing account.
+-- | The ID of the managing account. This must be a multi-client account.
 sslMerchantId :: Lens' ShippingSettingsList Word64
 sslMerchantId
   = lens _sslMerchantId

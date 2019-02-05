@@ -79,7 +79,8 @@ instance GoogleRequest RelyingPartyDeleteAccount
          where
         type Rs RelyingPartyDeleteAccount =
              DeleteAccountResponse
-        type Scopes RelyingPartyDeleteAccount = '[]
+        type Scopes RelyingPartyDeleteAccount =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient RelyingPartyDeleteAccount'{..}
           = go (Just AltJSON) _rPayload identityToolkitService
           where go

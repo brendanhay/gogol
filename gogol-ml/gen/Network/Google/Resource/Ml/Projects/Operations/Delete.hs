@@ -25,7 +25,7 @@
 -- operation. If the server doesn\'t support this method, it returns
 -- \`google.rpc.Code.UNIMPLEMENTED\`.
 --
--- /See:/ <https://cloud.google.com/ml/ Google Cloud Machine Learning Reference> for @ml.projects.operations.delete@.
+-- /See:/ <https://cloud.google.com/ml/ Cloud Machine Learning Engine Reference> for @ml.projects.operations.delete@.
 module Network.Google.Resource.Ml.Projects.Operations.Delete
     (
     -- * REST Resource
@@ -38,10 +38,8 @@ module Network.Google.Resource.Ml.Projects.Operations.Delete
     -- * Request Lenses
     , podXgafv
     , podUploadProtocol
-    , podPp
     , podAccessToken
     , podUploadType
-    , podBearerToken
     , podName
     , podCallback
     ) where
@@ -52,17 +50,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @ml.projects.operations.delete@ method which the
 -- 'ProjectsOperationsDelete' request conforms to.
 type ProjectsOperationsDeleteResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         Delete '[JSON] GoogleProtobuf__Empty
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     Delete '[JSON] GoogleProtobuf__Empty
 
 -- | Deletes a long-running operation. This method indicates that the client
 -- is no longer interested in the operation result. It does not cancel the
@@ -73,10 +69,8 @@ type ProjectsOperationsDeleteResource =
 data ProjectsOperationsDelete = ProjectsOperationsDelete'
     { _podXgafv          :: !(Maybe Xgafv)
     , _podUploadProtocol :: !(Maybe Text)
-    , _podPp             :: !Bool
     , _podAccessToken    :: !(Maybe Text)
     , _podUploadType     :: !(Maybe Text)
-    , _podBearerToken    :: !(Maybe Text)
     , _podName           :: !Text
     , _podCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -89,13 +83,9 @@ data ProjectsOperationsDelete = ProjectsOperationsDelete'
 --
 -- * 'podUploadProtocol'
 --
--- * 'podPp'
---
 -- * 'podAccessToken'
 --
 -- * 'podUploadType'
---
--- * 'podBearerToken'
 --
 -- * 'podName'
 --
@@ -107,10 +97,8 @@ projectsOperationsDelete pPodName_ =
     ProjectsOperationsDelete'
     { _podXgafv = Nothing
     , _podUploadProtocol = Nothing
-    , _podPp = True
     , _podAccessToken = Nothing
     , _podUploadType = Nothing
-    , _podBearerToken = Nothing
     , _podName = pPodName_
     , _podCallback = Nothing
     }
@@ -125,10 +113,6 @@ podUploadProtocol
   = lens _podUploadProtocol
       (\ s a -> s{_podUploadProtocol = a})
 
--- | Pretty-print response.
-podPp :: Lens' ProjectsOperationsDelete Bool
-podPp = lens _podPp (\ s a -> s{_podPp = a})
-
 -- | OAuth access token.
 podAccessToken :: Lens' ProjectsOperationsDelete (Maybe Text)
 podAccessToken
@@ -140,12 +124,6 @@ podUploadType :: Lens' ProjectsOperationsDelete (Maybe Text)
 podUploadType
   = lens _podUploadType
       (\ s a -> s{_podUploadType = a})
-
--- | OAuth bearer token.
-podBearerToken :: Lens' ProjectsOperationsDelete (Maybe Text)
-podBearerToken
-  = lens _podBearerToken
-      (\ s a -> s{_podBearerToken = a})
 
 -- | The name of the operation resource to be deleted.
 podName :: Lens' ProjectsOperationsDelete Text
@@ -163,10 +141,8 @@ instance GoogleRequest ProjectsOperationsDelete where
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsOperationsDelete'{..}
           = go _podName _podXgafv _podUploadProtocol
-              (Just _podPp)
               _podAccessToken
               _podUploadType
-              _podBearerToken
               _podCallback
               (Just AltJSON)
               machineLearningService

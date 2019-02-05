@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves line items in CSV format.
+-- Retrieves line items in CSV format. TrueView line items are not
+-- supported.
 --
 -- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference> for @doubleclickbidmanager.lineitems.downloadlineitems@.
 module Network.Google.Resource.DoubleClickBidManager.Lineitems.Downloadlineitems
@@ -50,7 +51,8 @@ type LineitemsDownloadlineitemsResource =
                ReqBody '[JSON] DownloadLineItemsRequest :>
                  Post '[JSON] DownloadLineItemsResponse
 
--- | Retrieves line items in CSV format.
+-- | Retrieves line items in CSV format. TrueView line items are not
+-- supported.
 --
 -- /See:/ 'lineitemsDownloadlineitems' smart constructor.
 newtype LineitemsDownloadlineitems = LineitemsDownloadlineitems'
@@ -79,7 +81,8 @@ instance GoogleRequest LineitemsDownloadlineitems
          where
         type Rs LineitemsDownloadlineitems =
              DownloadLineItemsResponse
-        type Scopes LineitemsDownloadlineitems = '[]
+        type Scopes LineitemsDownloadlineitems =
+             '["https://www.googleapis.com/auth/doubleclickbidmanager"]
         requestClient LineitemsDownloadlineitems'{..}
           = go (Just AltJSON) _ldPayload doubleClickBidsService
           where go

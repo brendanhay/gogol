@@ -36,10 +36,8 @@ module Network.Google.Resource.Logging.Projects.Sinks.List
     , pslParent
     , pslXgafv
     , pslUploadProtocol
-    , pslPp
     , pslAccessToken
     , pslUploadType
-    , pslBearerToken
     , pslPageToken
     , pslPageSize
     , pslCallback
@@ -56,15 +54,13 @@ type ProjectsSinksListResource =
          "sinks" :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" (Textual Int32) :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] ListSinksResponse
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "pageSize" (Textual Int32) :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] ListSinksResponse
 
 -- | Lists sinks.
 --
@@ -73,10 +69,8 @@ data ProjectsSinksList = ProjectsSinksList'
     { _pslParent         :: !Text
     , _pslXgafv          :: !(Maybe Xgafv)
     , _pslUploadProtocol :: !(Maybe Text)
-    , _pslPp             :: !Bool
     , _pslAccessToken    :: !(Maybe Text)
     , _pslUploadType     :: !(Maybe Text)
-    , _pslBearerToken    :: !(Maybe Text)
     , _pslPageToken      :: !(Maybe Text)
     , _pslPageSize       :: !(Maybe (Textual Int32))
     , _pslCallback       :: !(Maybe Text)
@@ -92,13 +86,9 @@ data ProjectsSinksList = ProjectsSinksList'
 --
 -- * 'pslUploadProtocol'
 --
--- * 'pslPp'
---
 -- * 'pslAccessToken'
 --
 -- * 'pslUploadType'
---
--- * 'pslBearerToken'
 --
 -- * 'pslPageToken'
 --
@@ -113,17 +103,16 @@ projectsSinksList pPslParent_ =
     { _pslParent = pPslParent_
     , _pslXgafv = Nothing
     , _pslUploadProtocol = Nothing
-    , _pslPp = True
     , _pslAccessToken = Nothing
     , _pslUploadType = Nothing
-    , _pslBearerToken = Nothing
     , _pslPageToken = Nothing
     , _pslPageSize = Nothing
     , _pslCallback = Nothing
     }
 
--- | Required. The cloud resource containing the sinks. Example:
--- \`\"projects\/my-logging-project\"\`.
+-- | Required. The parent resource whose sinks are to be listed:
+-- \"projects\/[PROJECT_ID]\" \"organizations\/[ORGANIZATION_ID]\"
+-- \"billingAccounts\/[BILLING_ACCOUNT_ID]\" \"folders\/[FOLDER_ID]\"
 pslParent :: Lens' ProjectsSinksList Text
 pslParent
   = lens _pslParent (\ s a -> s{_pslParent = a})
@@ -138,10 +127,6 @@ pslUploadProtocol
   = lens _pslUploadProtocol
       (\ s a -> s{_pslUploadProtocol = a})
 
--- | Pretty-print response.
-pslPp :: Lens' ProjectsSinksList Bool
-pslPp = lens _pslPp (\ s a -> s{_pslPp = a})
-
 -- | OAuth access token.
 pslAccessToken :: Lens' ProjectsSinksList (Maybe Text)
 pslAccessToken
@@ -154,23 +139,17 @@ pslUploadType
   = lens _pslUploadType
       (\ s a -> s{_pslUploadType = a})
 
--- | OAuth bearer token.
-pslBearerToken :: Lens' ProjectsSinksList (Maybe Text)
-pslBearerToken
-  = lens _pslBearerToken
-      (\ s a -> s{_pslBearerToken = a})
-
 -- | Optional. If present, then retrieve the next batch of results from the
--- preceding call to this method. \`pageToken\` must be the value of
--- \`nextPageToken\` from the previous response. The values of other method
+-- preceding call to this method. pageToken must be the value of
+-- nextPageToken from the previous response. The values of other method
 -- parameters should be identical to those in the previous call.
 pslPageToken :: Lens' ProjectsSinksList (Maybe Text)
 pslPageToken
   = lens _pslPageToken (\ s a -> s{_pslPageToken = a})
 
 -- | Optional. The maximum number of results to return from this request.
--- Non-positive values are ignored. The presence of \`nextPageToken\` in
--- the response indicates that more results might be available.
+-- Non-positive values are ignored. The presence of nextPageToken in the
+-- response indicates that more results might be available.
 pslPageSize :: Lens' ProjectsSinksList (Maybe Int32)
 pslPageSize
   = lens _pslPageSize (\ s a -> s{_pslPageSize = a}) .
@@ -190,10 +169,8 @@ instance GoogleRequest ProjectsSinksList where
                "https://www.googleapis.com/auth/logging.read"]
         requestClient ProjectsSinksList'{..}
           = go _pslParent _pslXgafv _pslUploadProtocol
-              (Just _pslPp)
               _pslAccessToken
               _pslUploadType
-              _pslBearerToken
               _pslPageToken
               _pslPageSize
               _pslCallback

@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'TargetingTemplatesUpdate' request conforms to.
 type TargetingTemplatesUpdateResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "targetingTemplates" :>

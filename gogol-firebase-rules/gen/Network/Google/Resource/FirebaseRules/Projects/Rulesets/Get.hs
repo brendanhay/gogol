@@ -35,10 +35,8 @@ module Network.Google.Resource.FirebaseRules.Projects.Rulesets.Get
     -- * Request Lenses
     , prgXgafv
     , prgUploadProtocol
-    , prgPp
     , prgAccessToken
     , prgUploadType
-    , prgBearerToken
     , prgName
     , prgCallback
     ) where
@@ -53,12 +51,10 @@ type ProjectsRulesetsGetResource =
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] Ruleset
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Ruleset
 
 -- | Get a \`Ruleset\` by name including the full \`Source\` contents.
 --
@@ -66,10 +62,8 @@ type ProjectsRulesetsGetResource =
 data ProjectsRulesetsGet = ProjectsRulesetsGet'
     { _prgXgafv          :: !(Maybe Xgafv)
     , _prgUploadProtocol :: !(Maybe Text)
-    , _prgPp             :: !Bool
     , _prgAccessToken    :: !(Maybe Text)
     , _prgUploadType     :: !(Maybe Text)
-    , _prgBearerToken    :: !(Maybe Text)
     , _prgName           :: !Text
     , _prgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -82,13 +76,9 @@ data ProjectsRulesetsGet = ProjectsRulesetsGet'
 --
 -- * 'prgUploadProtocol'
 --
--- * 'prgPp'
---
 -- * 'prgAccessToken'
 --
 -- * 'prgUploadType'
---
--- * 'prgBearerToken'
 --
 -- * 'prgName'
 --
@@ -100,10 +90,8 @@ projectsRulesetsGet pPrgName_ =
     ProjectsRulesetsGet'
     { _prgXgafv = Nothing
     , _prgUploadProtocol = Nothing
-    , _prgPp = True
     , _prgAccessToken = Nothing
     , _prgUploadType = Nothing
-    , _prgBearerToken = Nothing
     , _prgName = pPrgName_
     , _prgCallback = Nothing
     }
@@ -118,10 +106,6 @@ prgUploadProtocol
   = lens _prgUploadProtocol
       (\ s a -> s{_prgUploadProtocol = a})
 
--- | Pretty-print response.
-prgPp :: Lens' ProjectsRulesetsGet Bool
-prgPp = lens _prgPp (\ s a -> s{_prgPp = a})
-
 -- | OAuth access token.
 prgAccessToken :: Lens' ProjectsRulesetsGet (Maybe Text)
 prgAccessToken
@@ -133,12 +117,6 @@ prgUploadType :: Lens' ProjectsRulesetsGet (Maybe Text)
 prgUploadType
   = lens _prgUploadType
       (\ s a -> s{_prgUploadType = a})
-
--- | OAuth bearer token.
-prgBearerToken :: Lens' ProjectsRulesetsGet (Maybe Text)
-prgBearerToken
-  = lens _prgBearerToken
-      (\ s a -> s{_prgBearerToken = a})
 
 -- | Resource name for the ruleset to get. Format:
 -- \`projects\/{project_id}\/rulesets\/{ruleset_id}\`
@@ -158,10 +136,8 @@ instance GoogleRequest ProjectsRulesetsGet where
                "https://www.googleapis.com/auth/firebase.readonly"]
         requestClient ProjectsRulesetsGet'{..}
           = go _prgName _prgXgafv _prgUploadProtocol
-              (Just _prgPp)
               _prgAccessToken
               _prgUploadType
-              _prgBearerToken
               _prgCallback
               (Just AltJSON)
               firebaseRulesService

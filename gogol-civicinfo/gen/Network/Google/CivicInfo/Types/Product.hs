@@ -71,6 +71,7 @@ data VoterInfoResponse = VoterInfoResponse'
     , _virElection         :: !(Maybe Election)
     , _virNormalizedInput  :: !(Maybe SimpleAddressType)
     , _virMailOnly         :: !(Maybe Bool)
+    , _virSegments         :: !(Maybe [StreetSegment])
     , _virEarlyVoteSites   :: !(Maybe [PollingLocation])
     , _virPollingLocations :: !(Maybe [PollingLocation])
     , _virPrecinctId       :: !(Maybe Text)
@@ -96,6 +97,8 @@ data VoterInfoResponse = VoterInfoResponse'
 --
 -- * 'virMailOnly'
 --
+-- * 'virSegments'
+--
 -- * 'virEarlyVoteSites'
 --
 -- * 'virPollingLocations'
@@ -113,14 +116,22 @@ voterInfoResponse =
     , _virElection = Nothing
     , _virNormalizedInput = Nothing
     , _virMailOnly = Nothing
+    , _virSegments = Nothing
     , _virEarlyVoteSites = Nothing
     , _virPollingLocations = Nothing
     , _virPrecinctId = Nothing
     }
 
--- | If no election ID was specified in the query, and there was more than
--- one election with data for the given voter, this will contain
--- information about the other elections that could apply.
+-- | When there are multiple elections for a voter address, the
+-- otherElections field is populated in the API response and there are two
+-- possibilities: 1. If the earliest election is not the intended election,
+-- specify the election ID of the desired election in a second API request
+-- using the electionId field. 2. If these elections occur on the same day,
+-- the API doesn?t return any polling location, contest, or election
+-- official information to ensure that an additional query is made. For
+-- user-facing applications, we recommend displaying these elections to the
+-- user to disambiguate. A second API request using the electionId field
+-- should be made for the election that is relevant to the user.
 virOtherElections :: Lens' VoterInfoResponse [Election]
 virOtherElections
   = lens _virOtherElections
@@ -178,6 +189,12 @@ virMailOnly :: Lens' VoterInfoResponse (Maybe Bool)
 virMailOnly
   = lens _virMailOnly (\ s a -> s{_virMailOnly = a})
 
+virSegments :: Lens' VoterInfoResponse [StreetSegment]
+virSegments
+  = lens _virSegments (\ s a -> s{_virSegments = a}) .
+      _Default
+      . _Coerce
+
 -- | Locations where the voter is eligible to vote early, prior to election
 -- day.
 virEarlyVoteSites :: Lens' VoterInfoResponse [PollingLocation]
@@ -213,6 +230,7 @@ instance FromJSON VoterInfoResponse where
                      <*> (o .:? "election")
                      <*> (o .:? "normalizedInput")
                      <*> (o .:? "mailOnly")
+                     <*> (o .:? "segments" .!= mempty)
                      <*> (o .:? "earlyVoteSites" .!= mempty)
                      <*> (o .:? "pollingLocations" .!= mempty)
                      <*> (o .:? "precinctId"))
@@ -229,6 +247,7 @@ instance ToJSON VoterInfoResponse where
                   ("election" .=) <$> _virElection,
                   ("normalizedInput" .=) <$> _virNormalizedInput,
                   ("mailOnly" .=) <$> _virMailOnly,
+                  ("segments" .=) <$> _virSegments,
                   ("earlyVoteSites" .=) <$> _virEarlyVoteSites,
                   ("pollingLocations" .=) <$> _virPollingLocations,
                   ("precinctId" .=) <$> _virPrecinctId])
@@ -240,6 +259,7 @@ instance ToJSON VoterInfoResponse where
 -- /See:/ 'pollingLocation' smart constructor.
 data PollingLocation = PollingLocation'
     { _plVoterServices :: !(Maybe Text)
+    , _plLatitude      :: !(Maybe (Textual Double))
     , _plEndDate       :: !(Maybe Text)
     , _plSources       :: !(Maybe [Source])
     , _plAddress       :: !(Maybe SimpleAddressType)
@@ -248,6 +268,7 @@ data PollingLocation = PollingLocation'
     , _plName          :: !(Maybe Text)
     , _plId            :: !(Maybe Text)
     , _plNotes         :: !(Maybe Text)
+    , _plLongitude     :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PollingLocation' with the minimum fields required to make a request.
@@ -255,6 +276,8 @@ data PollingLocation = PollingLocation'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'plVoterServices'
+--
+-- * 'plLatitude'
 --
 -- * 'plEndDate'
 --
@@ -271,11 +294,14 @@ data PollingLocation = PollingLocation'
 -- * 'plId'
 --
 -- * 'plNotes'
+--
+-- * 'plLongitude'
 pollingLocation
     :: PollingLocation
 pollingLocation =
     PollingLocation'
     { _plVoterServices = Nothing
+    , _plLatitude = Nothing
     , _plEndDate = Nothing
     , _plSources = Nothing
     , _plAddress = Nothing
@@ -284,6 +310,7 @@ pollingLocation =
     , _plName = Nothing
     , _plId = Nothing
     , _plNotes = Nothing
+    , _plLongitude = Nothing
     }
 
 -- | The services provided by this early vote site or drop off location. This
@@ -292,6 +319,15 @@ plVoterServices :: Lens' PollingLocation (Maybe Text)
 plVoterServices
   = lens _plVoterServices
       (\ s a -> s{_plVoterServices = a})
+
+-- | Latitude of the location, in degrees north of the equator. Only some
+-- locations -- generally, ballot drop boxes for vote-by-mail elections --
+-- will have this set; for others, use a geocoding service like the Google
+-- Maps API to resolve the address to a geographic point.
+plLatitude :: Lens' PollingLocation (Maybe Double)
+plLatitude
+  = lens _plLatitude (\ s a -> s{_plLatitude = a}) .
+      mapping _Coerce
 
 -- | The last date that this early vote site or drop off location may be
 -- used. This field is not populated for polling locations.
@@ -339,32 +375,45 @@ plId = lens _plId (\ s a -> s{_plId = a})
 plNotes :: Lens' PollingLocation (Maybe Text)
 plNotes = lens _plNotes (\ s a -> s{_plNotes = a})
 
+-- | Longitude of the location, in degrees east of the Prime Meridian. Only
+-- some locations -- generally, ballot drop boxes for vote-by-mail
+-- elections -- will have this set; for others, use a geocoding service
+-- like the Google Maps API to resolve the address to a geographic point.
+plLongitude :: Lens' PollingLocation (Maybe Double)
+plLongitude
+  = lens _plLongitude (\ s a -> s{_plLongitude = a}) .
+      mapping _Coerce
+
 instance FromJSON PollingLocation where
         parseJSON
           = withObject "PollingLocation"
               (\ o ->
                  PollingLocation' <$>
-                   (o .:? "voterServices") <*> (o .:? "endDate") <*>
-                     (o .:? "sources" .!= mempty)
+                   (o .:? "voterServices") <*> (o .:? "latitude") <*>
+                     (o .:? "endDate")
+                     <*> (o .:? "sources" .!= mempty)
                      <*> (o .:? "address")
                      <*> (o .:? "startDate")
                      <*> (o .:? "pollingHours")
                      <*> (o .:? "name")
                      <*> (o .:? "id")
-                     <*> (o .:? "notes"))
+                     <*> (o .:? "notes")
+                     <*> (o .:? "longitude"))
 
 instance ToJSON PollingLocation where
         toJSON PollingLocation'{..}
           = object
               (catMaybes
                  [("voterServices" .=) <$> _plVoterServices,
+                  ("latitude" .=) <$> _plLatitude,
                   ("endDate" .=) <$> _plEndDate,
                   ("sources" .=) <$> _plSources,
                   ("address" .=) <$> _plAddress,
                   ("startDate" .=) <$> _plStartDate,
                   ("pollingHours" .=) <$> _plPollingHours,
                   ("name" .=) <$> _plName, ("id" .=) <$> _plId,
-                  ("notes" .=) <$> _plNotes])
+                  ("notes" .=) <$> _plNotes,
+                  ("longitude" .=) <$> _plLongitude])
 
 -- | Describes a political geography.
 --
@@ -438,6 +487,538 @@ instance ToJSON GeographicDivision where
                  [("name" .=) <$> _gdName,
                   ("officeIndices" .=) <$> _gdOfficeIndices,
                   ("alsoKnownAs" .=) <$> _gdAlsoKnownAs])
+
+--
+-- /See:/ 'streetSegment' smart constructor.
+data StreetSegment = StreetSegment'
+    { _ssOriginalId                    :: !(Maybe Text)
+    , _ssPollinglocationByIds          :: !(Maybe [Text])
+    , _ssStartHouseNumber              :: !(Maybe (Textual Int64))
+    , _ssCataListUniquePrecinctCode    :: !(Maybe Text)
+    , _ssState                         :: !(Maybe Text)
+    , _ssContestIds                    :: !(Maybe [Text])
+    , _ssStateHouseDistrict            :: !(Maybe Text)
+    , _ssNcoaAddress                   :: !(Maybe Text)
+    , _ssEarlyVoteSiteByIds            :: !(Maybe [Text])
+    , _ssCountyCouncilDistrict         :: !(Maybe Text)
+    , _ssCityCouncilDistrict           :: !(Maybe Text)
+    , _ssGeocodedPoint                 :: !(Maybe PointProto)
+    , _ssEndHouseNumber                :: !(Maybe (Textual Int64))
+    , _ssSubAdministrativeAreaName     :: !(Maybe Text)
+    , _ssPublished                     :: !(Maybe Bool)
+    , _ssStartLatE7                    :: !(Maybe (Textual Int64))
+    , _ssZip                           :: !(Maybe Text)
+    , _ssSurrogateId                   :: !(Maybe (Textual Int64))
+    , _ssMunicipalDistrict             :: !(Maybe Text)
+    , _ssWardDistrict                  :: !(Maybe Text)
+    , _ssVoterGeographicDivisionOcdIds :: !(Maybe [Text])
+    , _ssStreetName                    :: !(Maybe Text)
+    , _ssTownshipDistrict              :: !(Maybe Text)
+    , _ssUnitType                      :: !(Maybe Text)
+    , _ssCongressionalDistrict         :: !(Maybe Text)
+    , _ssStateSenateDistrict           :: !(Maybe Text)
+    , _ssOddOrEvens                    :: !(Maybe [Text])
+    , _ssGeographicDivisionOcdIds      :: !(Maybe [Text])
+    , _ssBeforeGeocodeId               :: !(Maybe Text)
+    , _ssDataSetId                     :: !(Maybe (Textual Int64))
+    , _ssStartLngE7                    :: !(Maybe (Textual Int64))
+    , _ssCity                          :: !(Maybe Text)
+    , _ssWildcard                      :: !(Maybe Bool)
+    , _ssTargetsmartUniquePrecinctCode :: !(Maybe Text)
+    , _ssProvenances                   :: !(Maybe [Provenance])
+    , _ssSchoolDistrict                :: !(Maybe Text)
+    , _ssMailOnly                      :: !(Maybe Bool)
+    , _ssId                            :: !(Maybe Text)
+    , _ssUnitNumber                    :: !(Maybe Text)
+    , _ssAdministrationRegionIds       :: !(Maybe [Text])
+    , _ssVanPrecinctCode               :: !(Maybe Text)
+    , _ssJudicialDistrict              :: !(Maybe Text)
+    , _ssPrecinctName                  :: !(Maybe Text)
+    , _ssCountyFips                    :: !(Maybe Text)
+    , _ssPrecinctOcdId                 :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'StreetSegment' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ssOriginalId'
+--
+-- * 'ssPollinglocationByIds'
+--
+-- * 'ssStartHouseNumber'
+--
+-- * 'ssCataListUniquePrecinctCode'
+--
+-- * 'ssState'
+--
+-- * 'ssContestIds'
+--
+-- * 'ssStateHouseDistrict'
+--
+-- * 'ssNcoaAddress'
+--
+-- * 'ssEarlyVoteSiteByIds'
+--
+-- * 'ssCountyCouncilDistrict'
+--
+-- * 'ssCityCouncilDistrict'
+--
+-- * 'ssGeocodedPoint'
+--
+-- * 'ssEndHouseNumber'
+--
+-- * 'ssSubAdministrativeAreaName'
+--
+-- * 'ssPublished'
+--
+-- * 'ssStartLatE7'
+--
+-- * 'ssZip'
+--
+-- * 'ssSurrogateId'
+--
+-- * 'ssMunicipalDistrict'
+--
+-- * 'ssWardDistrict'
+--
+-- * 'ssVoterGeographicDivisionOcdIds'
+--
+-- * 'ssStreetName'
+--
+-- * 'ssTownshipDistrict'
+--
+-- * 'ssUnitType'
+--
+-- * 'ssCongressionalDistrict'
+--
+-- * 'ssStateSenateDistrict'
+--
+-- * 'ssOddOrEvens'
+--
+-- * 'ssGeographicDivisionOcdIds'
+--
+-- * 'ssBeforeGeocodeId'
+--
+-- * 'ssDataSetId'
+--
+-- * 'ssStartLngE7'
+--
+-- * 'ssCity'
+--
+-- * 'ssWildcard'
+--
+-- * 'ssTargetsmartUniquePrecinctCode'
+--
+-- * 'ssProvenances'
+--
+-- * 'ssSchoolDistrict'
+--
+-- * 'ssMailOnly'
+--
+-- * 'ssId'
+--
+-- * 'ssUnitNumber'
+--
+-- * 'ssAdministrationRegionIds'
+--
+-- * 'ssVanPrecinctCode'
+--
+-- * 'ssJudicialDistrict'
+--
+-- * 'ssPrecinctName'
+--
+-- * 'ssCountyFips'
+--
+-- * 'ssPrecinctOcdId'
+streetSegment
+    :: StreetSegment
+streetSegment =
+    StreetSegment'
+    { _ssOriginalId = Nothing
+    , _ssPollinglocationByIds = Nothing
+    , _ssStartHouseNumber = Nothing
+    , _ssCataListUniquePrecinctCode = Nothing
+    , _ssState = Nothing
+    , _ssContestIds = Nothing
+    , _ssStateHouseDistrict = Nothing
+    , _ssNcoaAddress = Nothing
+    , _ssEarlyVoteSiteByIds = Nothing
+    , _ssCountyCouncilDistrict = Nothing
+    , _ssCityCouncilDistrict = Nothing
+    , _ssGeocodedPoint = Nothing
+    , _ssEndHouseNumber = Nothing
+    , _ssSubAdministrativeAreaName = Nothing
+    , _ssPublished = Nothing
+    , _ssStartLatE7 = Nothing
+    , _ssZip = Nothing
+    , _ssSurrogateId = Nothing
+    , _ssMunicipalDistrict = Nothing
+    , _ssWardDistrict = Nothing
+    , _ssVoterGeographicDivisionOcdIds = Nothing
+    , _ssStreetName = Nothing
+    , _ssTownshipDistrict = Nothing
+    , _ssUnitType = Nothing
+    , _ssCongressionalDistrict = Nothing
+    , _ssStateSenateDistrict = Nothing
+    , _ssOddOrEvens = Nothing
+    , _ssGeographicDivisionOcdIds = Nothing
+    , _ssBeforeGeocodeId = Nothing
+    , _ssDataSetId = Nothing
+    , _ssStartLngE7 = Nothing
+    , _ssCity = Nothing
+    , _ssWildcard = Nothing
+    , _ssTargetsmartUniquePrecinctCode = Nothing
+    , _ssProvenances = Nothing
+    , _ssSchoolDistrict = Nothing
+    , _ssMailOnly = Nothing
+    , _ssId = Nothing
+    , _ssUnitNumber = Nothing
+    , _ssAdministrationRegionIds = Nothing
+    , _ssVanPrecinctCode = Nothing
+    , _ssJudicialDistrict = Nothing
+    , _ssPrecinctName = Nothing
+    , _ssCountyFips = Nothing
+    , _ssPrecinctOcdId = Nothing
+    }
+
+ssOriginalId :: Lens' StreetSegment (Maybe Text)
+ssOriginalId
+  = lens _ssOriginalId (\ s a -> s{_ssOriginalId = a})
+
+ssPollinglocationByIds :: Lens' StreetSegment [Text]
+ssPollinglocationByIds
+  = lens _ssPollinglocationByIds
+      (\ s a -> s{_ssPollinglocationByIds = a})
+      . _Default
+      . _Coerce
+
+ssStartHouseNumber :: Lens' StreetSegment (Maybe Int64)
+ssStartHouseNumber
+  = lens _ssStartHouseNumber
+      (\ s a -> s{_ssStartHouseNumber = a})
+      . mapping _Coerce
+
+ssCataListUniquePrecinctCode :: Lens' StreetSegment (Maybe Text)
+ssCataListUniquePrecinctCode
+  = lens _ssCataListUniquePrecinctCode
+      (\ s a -> s{_ssCataListUniquePrecinctCode = a})
+
+ssState :: Lens' StreetSegment (Maybe Text)
+ssState = lens _ssState (\ s a -> s{_ssState = a})
+
+ssContestIds :: Lens' StreetSegment [Text]
+ssContestIds
+  = lens _ssContestIds (\ s a -> s{_ssContestIds = a})
+      . _Default
+      . _Coerce
+
+ssStateHouseDistrict :: Lens' StreetSegment (Maybe Text)
+ssStateHouseDistrict
+  = lens _ssStateHouseDistrict
+      (\ s a -> s{_ssStateHouseDistrict = a})
+
+ssNcoaAddress :: Lens' StreetSegment (Maybe Text)
+ssNcoaAddress
+  = lens _ssNcoaAddress
+      (\ s a -> s{_ssNcoaAddress = a})
+
+ssEarlyVoteSiteByIds :: Lens' StreetSegment [Text]
+ssEarlyVoteSiteByIds
+  = lens _ssEarlyVoteSiteByIds
+      (\ s a -> s{_ssEarlyVoteSiteByIds = a})
+      . _Default
+      . _Coerce
+
+ssCountyCouncilDistrict :: Lens' StreetSegment (Maybe Text)
+ssCountyCouncilDistrict
+  = lens _ssCountyCouncilDistrict
+      (\ s a -> s{_ssCountyCouncilDistrict = a})
+
+ssCityCouncilDistrict :: Lens' StreetSegment (Maybe Text)
+ssCityCouncilDistrict
+  = lens _ssCityCouncilDistrict
+      (\ s a -> s{_ssCityCouncilDistrict = a})
+
+ssGeocodedPoint :: Lens' StreetSegment (Maybe PointProto)
+ssGeocodedPoint
+  = lens _ssGeocodedPoint
+      (\ s a -> s{_ssGeocodedPoint = a})
+
+ssEndHouseNumber :: Lens' StreetSegment (Maybe Int64)
+ssEndHouseNumber
+  = lens _ssEndHouseNumber
+      (\ s a -> s{_ssEndHouseNumber = a})
+      . mapping _Coerce
+
+ssSubAdministrativeAreaName :: Lens' StreetSegment (Maybe Text)
+ssSubAdministrativeAreaName
+  = lens _ssSubAdministrativeAreaName
+      (\ s a -> s{_ssSubAdministrativeAreaName = a})
+
+ssPublished :: Lens' StreetSegment (Maybe Bool)
+ssPublished
+  = lens _ssPublished (\ s a -> s{_ssPublished = a})
+
+ssStartLatE7 :: Lens' StreetSegment (Maybe Int64)
+ssStartLatE7
+  = lens _ssStartLatE7 (\ s a -> s{_ssStartLatE7 = a})
+      . mapping _Coerce
+
+ssZip :: Lens' StreetSegment (Maybe Text)
+ssZip = lens _ssZip (\ s a -> s{_ssZip = a})
+
+ssSurrogateId :: Lens' StreetSegment (Maybe Int64)
+ssSurrogateId
+  = lens _ssSurrogateId
+      (\ s a -> s{_ssSurrogateId = a})
+      . mapping _Coerce
+
+ssMunicipalDistrict :: Lens' StreetSegment (Maybe Text)
+ssMunicipalDistrict
+  = lens _ssMunicipalDistrict
+      (\ s a -> s{_ssMunicipalDistrict = a})
+
+ssWardDistrict :: Lens' StreetSegment (Maybe Text)
+ssWardDistrict
+  = lens _ssWardDistrict
+      (\ s a -> s{_ssWardDistrict = a})
+
+ssVoterGeographicDivisionOcdIds :: Lens' StreetSegment [Text]
+ssVoterGeographicDivisionOcdIds
+  = lens _ssVoterGeographicDivisionOcdIds
+      (\ s a -> s{_ssVoterGeographicDivisionOcdIds = a})
+      . _Default
+      . _Coerce
+
+ssStreetName :: Lens' StreetSegment (Maybe Text)
+ssStreetName
+  = lens _ssStreetName (\ s a -> s{_ssStreetName = a})
+
+ssTownshipDistrict :: Lens' StreetSegment (Maybe Text)
+ssTownshipDistrict
+  = lens _ssTownshipDistrict
+      (\ s a -> s{_ssTownshipDistrict = a})
+
+ssUnitType :: Lens' StreetSegment (Maybe Text)
+ssUnitType
+  = lens _ssUnitType (\ s a -> s{_ssUnitType = a})
+
+ssCongressionalDistrict :: Lens' StreetSegment (Maybe Text)
+ssCongressionalDistrict
+  = lens _ssCongressionalDistrict
+      (\ s a -> s{_ssCongressionalDistrict = a})
+
+ssStateSenateDistrict :: Lens' StreetSegment (Maybe Text)
+ssStateSenateDistrict
+  = lens _ssStateSenateDistrict
+      (\ s a -> s{_ssStateSenateDistrict = a})
+
+ssOddOrEvens :: Lens' StreetSegment [Text]
+ssOddOrEvens
+  = lens _ssOddOrEvens (\ s a -> s{_ssOddOrEvens = a})
+      . _Default
+      . _Coerce
+
+ssGeographicDivisionOcdIds :: Lens' StreetSegment [Text]
+ssGeographicDivisionOcdIds
+  = lens _ssGeographicDivisionOcdIds
+      (\ s a -> s{_ssGeographicDivisionOcdIds = a})
+      . _Default
+      . _Coerce
+
+ssBeforeGeocodeId :: Lens' StreetSegment (Maybe Text)
+ssBeforeGeocodeId
+  = lens _ssBeforeGeocodeId
+      (\ s a -> s{_ssBeforeGeocodeId = a})
+
+ssDataSetId :: Lens' StreetSegment (Maybe Int64)
+ssDataSetId
+  = lens _ssDataSetId (\ s a -> s{_ssDataSetId = a}) .
+      mapping _Coerce
+
+ssStartLngE7 :: Lens' StreetSegment (Maybe Int64)
+ssStartLngE7
+  = lens _ssStartLngE7 (\ s a -> s{_ssStartLngE7 = a})
+      . mapping _Coerce
+
+ssCity :: Lens' StreetSegment (Maybe Text)
+ssCity = lens _ssCity (\ s a -> s{_ssCity = a})
+
+ssWildcard :: Lens' StreetSegment (Maybe Bool)
+ssWildcard
+  = lens _ssWildcard (\ s a -> s{_ssWildcard = a})
+
+ssTargetsmartUniquePrecinctCode :: Lens' StreetSegment (Maybe Text)
+ssTargetsmartUniquePrecinctCode
+  = lens _ssTargetsmartUniquePrecinctCode
+      (\ s a -> s{_ssTargetsmartUniquePrecinctCode = a})
+
+ssProvenances :: Lens' StreetSegment [Provenance]
+ssProvenances
+  = lens _ssProvenances
+      (\ s a -> s{_ssProvenances = a})
+      . _Default
+      . _Coerce
+
+ssSchoolDistrict :: Lens' StreetSegment (Maybe Text)
+ssSchoolDistrict
+  = lens _ssSchoolDistrict
+      (\ s a -> s{_ssSchoolDistrict = a})
+
+ssMailOnly :: Lens' StreetSegment (Maybe Bool)
+ssMailOnly
+  = lens _ssMailOnly (\ s a -> s{_ssMailOnly = a})
+
+ssId :: Lens' StreetSegment (Maybe Text)
+ssId = lens _ssId (\ s a -> s{_ssId = a})
+
+ssUnitNumber :: Lens' StreetSegment (Maybe Text)
+ssUnitNumber
+  = lens _ssUnitNumber (\ s a -> s{_ssUnitNumber = a})
+
+ssAdministrationRegionIds :: Lens' StreetSegment [Text]
+ssAdministrationRegionIds
+  = lens _ssAdministrationRegionIds
+      (\ s a -> s{_ssAdministrationRegionIds = a})
+      . _Default
+      . _Coerce
+
+ssVanPrecinctCode :: Lens' StreetSegment (Maybe Text)
+ssVanPrecinctCode
+  = lens _ssVanPrecinctCode
+      (\ s a -> s{_ssVanPrecinctCode = a})
+
+ssJudicialDistrict :: Lens' StreetSegment (Maybe Text)
+ssJudicialDistrict
+  = lens _ssJudicialDistrict
+      (\ s a -> s{_ssJudicialDistrict = a})
+
+ssPrecinctName :: Lens' StreetSegment (Maybe Text)
+ssPrecinctName
+  = lens _ssPrecinctName
+      (\ s a -> s{_ssPrecinctName = a})
+
+ssCountyFips :: Lens' StreetSegment (Maybe Text)
+ssCountyFips
+  = lens _ssCountyFips (\ s a -> s{_ssCountyFips = a})
+
+ssPrecinctOcdId :: Lens' StreetSegment (Maybe Text)
+ssPrecinctOcdId
+  = lens _ssPrecinctOcdId
+      (\ s a -> s{_ssPrecinctOcdId = a})
+
+instance FromJSON StreetSegment where
+        parseJSON
+          = withObject "StreetSegment"
+              (\ o ->
+                 StreetSegment' <$>
+                   (o .:? "originalId") <*>
+                     (o .:? "pollinglocationByIds" .!= mempty)
+                     <*> (o .:? "startHouseNumber")
+                     <*> (o .:? "catalistUniquePrecinctCode")
+                     <*> (o .:? "state")
+                     <*> (o .:? "contestIds" .!= mempty)
+                     <*> (o .:? "stateHouseDistrict")
+                     <*> (o .:? "ncoaAddress")
+                     <*> (o .:? "earlyVoteSiteByIds" .!= mempty)
+                     <*> (o .:? "countyCouncilDistrict")
+                     <*> (o .:? "cityCouncilDistrict")
+                     <*> (o .:? "geocodedPoint")
+                     <*> (o .:? "endHouseNumber")
+                     <*> (o .:? "subAdministrativeAreaName")
+                     <*> (o .:? "published")
+                     <*> (o .:? "startLatE7")
+                     <*> (o .:? "zip")
+                     <*> (o .:? "surrogateId")
+                     <*> (o .:? "municipalDistrict")
+                     <*> (o .:? "wardDistrict")
+                     <*>
+                     (o .:? "voterGeographicDivisionOcdIds" .!= mempty)
+                     <*> (o .:? "streetName")
+                     <*> (o .:? "townshipDistrict")
+                     <*> (o .:? "unitType")
+                     <*> (o .:? "congressionalDistrict")
+                     <*> (o .:? "stateSenateDistrict")
+                     <*> (o .:? "oddOrEvens" .!= mempty)
+                     <*> (o .:? "geographicDivisionOcdIds" .!= mempty)
+                     <*> (o .:? "beforeGeocodeId")
+                     <*> (o .:? "datasetId")
+                     <*> (o .:? "startLngE7")
+                     <*> (o .:? "city")
+                     <*> (o .:? "wildcard")
+                     <*> (o .:? "targetsmartUniquePrecinctCode")
+                     <*> (o .:? "provenances" .!= mempty)
+                     <*> (o .:? "schoolDistrict")
+                     <*> (o .:? "mailOnly")
+                     <*> (o .:? "id")
+                     <*> (o .:? "unitNumber")
+                     <*> (o .:? "administrationRegionIds" .!= mempty)
+                     <*> (o .:? "vanPrecinctCode")
+                     <*> (o .:? "judicialDistrict")
+                     <*> (o .:? "precinctName")
+                     <*> (o .:? "countyFips")
+                     <*> (o .:? "precinctOcdId"))
+
+instance ToJSON StreetSegment where
+        toJSON StreetSegment'{..}
+          = object
+              (catMaybes
+                 [("originalId" .=) <$> _ssOriginalId,
+                  ("pollinglocationByIds" .=) <$>
+                    _ssPollinglocationByIds,
+                  ("startHouseNumber" .=) <$> _ssStartHouseNumber,
+                  ("catalistUniquePrecinctCode" .=) <$>
+                    _ssCataListUniquePrecinctCode,
+                  ("state" .=) <$> _ssState,
+                  ("contestIds" .=) <$> _ssContestIds,
+                  ("stateHouseDistrict" .=) <$> _ssStateHouseDistrict,
+                  ("ncoaAddress" .=) <$> _ssNcoaAddress,
+                  ("earlyVoteSiteByIds" .=) <$> _ssEarlyVoteSiteByIds,
+                  ("countyCouncilDistrict" .=) <$>
+                    _ssCountyCouncilDistrict,
+                  ("cityCouncilDistrict" .=) <$>
+                    _ssCityCouncilDistrict,
+                  ("geocodedPoint" .=) <$> _ssGeocodedPoint,
+                  ("endHouseNumber" .=) <$> _ssEndHouseNumber,
+                  ("subAdministrativeAreaName" .=) <$>
+                    _ssSubAdministrativeAreaName,
+                  ("published" .=) <$> _ssPublished,
+                  ("startLatE7" .=) <$> _ssStartLatE7,
+                  ("zip" .=) <$> _ssZip,
+                  ("surrogateId" .=) <$> _ssSurrogateId,
+                  ("municipalDistrict" .=) <$> _ssMunicipalDistrict,
+                  ("wardDistrict" .=) <$> _ssWardDistrict,
+                  ("voterGeographicDivisionOcdIds" .=) <$>
+                    _ssVoterGeographicDivisionOcdIds,
+                  ("streetName" .=) <$> _ssStreetName,
+                  ("townshipDistrict" .=) <$> _ssTownshipDistrict,
+                  ("unitType" .=) <$> _ssUnitType,
+                  ("congressionalDistrict" .=) <$>
+                    _ssCongressionalDistrict,
+                  ("stateSenateDistrict" .=) <$>
+                    _ssStateSenateDistrict,
+                  ("oddOrEvens" .=) <$> _ssOddOrEvens,
+                  ("geographicDivisionOcdIds" .=) <$>
+                    _ssGeographicDivisionOcdIds,
+                  ("beforeGeocodeId" .=) <$> _ssBeforeGeocodeId,
+                  ("datasetId" .=) <$> _ssDataSetId,
+                  ("startLngE7" .=) <$> _ssStartLngE7,
+                  ("city" .=) <$> _ssCity,
+                  ("wildcard" .=) <$> _ssWildcard,
+                  ("targetsmartUniquePrecinctCode" .=) <$>
+                    _ssTargetsmartUniquePrecinctCode,
+                  ("provenances" .=) <$> _ssProvenances,
+                  ("schoolDistrict" .=) <$> _ssSchoolDistrict,
+                  ("mailOnly" .=) <$> _ssMailOnly, ("id" .=) <$> _ssId,
+                  ("unitNumber" .=) <$> _ssUnitNumber,
+                  ("administrationRegionIds" .=) <$>
+                    _ssAdministrationRegionIds,
+                  ("vanPrecinctCode" .=) <$> _ssVanPrecinctCode,
+                  ("judicialDistrict" .=) <$> _ssJudicialDistrict,
+                  ("precinctName" .=) <$> _ssPrecinctName,
+                  ("countyFips" .=) <$> _ssCountyFips,
+                  ("precinctOcdId" .=) <$> _ssPrecinctOcdId])
 
 -- | Information about a candidate running for elected office.
 --
@@ -658,6 +1239,247 @@ instance ToJSON Office where
                   ("officialIndices" .=) <$> _oOfficialIndices,
                   ("sources" .=) <$> _oSources, ("name" .=) <$> _oName,
                   ("levels" .=) <$> _oLevels])
+
+--
+-- /See:/ 'streetSegmentList' smart constructor.
+newtype StreetSegmentList = StreetSegmentList'
+    { _sslSegments :: Maybe [StreetSegment]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'StreetSegmentList' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sslSegments'
+streetSegmentList
+    :: StreetSegmentList
+streetSegmentList =
+    StreetSegmentList'
+    { _sslSegments = Nothing
+    }
+
+sslSegments :: Lens' StreetSegmentList [StreetSegment]
+sslSegments
+  = lens _sslSegments (\ s a -> s{_sslSegments = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON StreetSegmentList where
+        parseJSON
+          = withObject "StreetSegmentList"
+              (\ o ->
+                 StreetSegmentList' <$> (o .:? "segments" .!= mempty))
+
+instance ToJSON StreetSegmentList where
+        toJSON StreetSegmentList'{..}
+          = object
+              (catMaybes [("segments" .=) <$> _sslSegments])
+
+--
+-- /See:/ 'livegraphBacktraceRecordInfo' smart constructor.
+data LivegraphBacktraceRecordInfo = LivegraphBacktraceRecordInfo'
+    { _lbriDataSourcePublishMsec :: !(Maybe (Textual Int64))
+    , _lbriTopicBuildStartMsec   :: !(Maybe (Textual Int64))
+    , _lbriIsRecon               :: !(Maybe Bool)
+    , _lbriPriority              :: !(Maybe Text)
+    , _lbriShouldMonitorLatency  :: !(Maybe Bool)
+    , _lbriRecordId              :: !(Maybe Text)
+    , _lbriProxySentMsec         :: !(Maybe (Textual Int64))
+    , _lbriExpInfo               :: !(Maybe LivegraphBacktraceRecordInfoExpInfo)
+    , _lbriProcess               :: !(Maybe Text)
+    , _lbriTopicBuildFinishMsec  :: !(Maybe (Textual Int64))
+    , _lbriNumberOfTriples       :: !(Maybe (Textual Int64))
+    , _lbriProxyReceiveMsec      :: !(Maybe (Textual Int64))
+    , _lbriVersion               :: !(Maybe Text)
+    , _lbriIsWlmThrottled        :: !(Maybe Bool)
+    , _lbriExpId                 :: !(Maybe Text)
+    , _lbriSubscriberReceiveMsec :: !(Maybe (Textual Int64))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LivegraphBacktraceRecordInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lbriDataSourcePublishMsec'
+--
+-- * 'lbriTopicBuildStartMsec'
+--
+-- * 'lbriIsRecon'
+--
+-- * 'lbriPriority'
+--
+-- * 'lbriShouldMonitorLatency'
+--
+-- * 'lbriRecordId'
+--
+-- * 'lbriProxySentMsec'
+--
+-- * 'lbriExpInfo'
+--
+-- * 'lbriProcess'
+--
+-- * 'lbriTopicBuildFinishMsec'
+--
+-- * 'lbriNumberOfTriples'
+--
+-- * 'lbriProxyReceiveMsec'
+--
+-- * 'lbriVersion'
+--
+-- * 'lbriIsWlmThrottled'
+--
+-- * 'lbriExpId'
+--
+-- * 'lbriSubscriberReceiveMsec'
+livegraphBacktraceRecordInfo
+    :: LivegraphBacktraceRecordInfo
+livegraphBacktraceRecordInfo =
+    LivegraphBacktraceRecordInfo'
+    { _lbriDataSourcePublishMsec = Nothing
+    , _lbriTopicBuildStartMsec = Nothing
+    , _lbriIsRecon = Nothing
+    , _lbriPriority = Nothing
+    , _lbriShouldMonitorLatency = Nothing
+    , _lbriRecordId = Nothing
+    , _lbriProxySentMsec = Nothing
+    , _lbriExpInfo = Nothing
+    , _lbriProcess = Nothing
+    , _lbriTopicBuildFinishMsec = Nothing
+    , _lbriNumberOfTriples = Nothing
+    , _lbriProxyReceiveMsec = Nothing
+    , _lbriVersion = Nothing
+    , _lbriIsWlmThrottled = Nothing
+    , _lbriExpId = Nothing
+    , _lbriSubscriberReceiveMsec = Nothing
+    }
+
+lbriDataSourcePublishMsec :: Lens' LivegraphBacktraceRecordInfo (Maybe Int64)
+lbriDataSourcePublishMsec
+  = lens _lbriDataSourcePublishMsec
+      (\ s a -> s{_lbriDataSourcePublishMsec = a})
+      . mapping _Coerce
+
+lbriTopicBuildStartMsec :: Lens' LivegraphBacktraceRecordInfo (Maybe Int64)
+lbriTopicBuildStartMsec
+  = lens _lbriTopicBuildStartMsec
+      (\ s a -> s{_lbriTopicBuildStartMsec = a})
+      . mapping _Coerce
+
+lbriIsRecon :: Lens' LivegraphBacktraceRecordInfo (Maybe Bool)
+lbriIsRecon
+  = lens _lbriIsRecon (\ s a -> s{_lbriIsRecon = a})
+
+lbriPriority :: Lens' LivegraphBacktraceRecordInfo (Maybe Text)
+lbriPriority
+  = lens _lbriPriority (\ s a -> s{_lbriPriority = a})
+
+lbriShouldMonitorLatency :: Lens' LivegraphBacktraceRecordInfo (Maybe Bool)
+lbriShouldMonitorLatency
+  = lens _lbriShouldMonitorLatency
+      (\ s a -> s{_lbriShouldMonitorLatency = a})
+
+lbriRecordId :: Lens' LivegraphBacktraceRecordInfo (Maybe Text)
+lbriRecordId
+  = lens _lbriRecordId (\ s a -> s{_lbriRecordId = a})
+
+lbriProxySentMsec :: Lens' LivegraphBacktraceRecordInfo (Maybe Int64)
+lbriProxySentMsec
+  = lens _lbriProxySentMsec
+      (\ s a -> s{_lbriProxySentMsec = a})
+      . mapping _Coerce
+
+lbriExpInfo :: Lens' LivegraphBacktraceRecordInfo (Maybe LivegraphBacktraceRecordInfoExpInfo)
+lbriExpInfo
+  = lens _lbriExpInfo (\ s a -> s{_lbriExpInfo = a})
+
+lbriProcess :: Lens' LivegraphBacktraceRecordInfo (Maybe Text)
+lbriProcess
+  = lens _lbriProcess (\ s a -> s{_lbriProcess = a})
+
+lbriTopicBuildFinishMsec :: Lens' LivegraphBacktraceRecordInfo (Maybe Int64)
+lbriTopicBuildFinishMsec
+  = lens _lbriTopicBuildFinishMsec
+      (\ s a -> s{_lbriTopicBuildFinishMsec = a})
+      . mapping _Coerce
+
+lbriNumberOfTriples :: Lens' LivegraphBacktraceRecordInfo (Maybe Int64)
+lbriNumberOfTriples
+  = lens _lbriNumberOfTriples
+      (\ s a -> s{_lbriNumberOfTriples = a})
+      . mapping _Coerce
+
+lbriProxyReceiveMsec :: Lens' LivegraphBacktraceRecordInfo (Maybe Int64)
+lbriProxyReceiveMsec
+  = lens _lbriProxyReceiveMsec
+      (\ s a -> s{_lbriProxyReceiveMsec = a})
+      . mapping _Coerce
+
+lbriVersion :: Lens' LivegraphBacktraceRecordInfo (Maybe Text)
+lbriVersion
+  = lens _lbriVersion (\ s a -> s{_lbriVersion = a})
+
+lbriIsWlmThrottled :: Lens' LivegraphBacktraceRecordInfo (Maybe Bool)
+lbriIsWlmThrottled
+  = lens _lbriIsWlmThrottled
+      (\ s a -> s{_lbriIsWlmThrottled = a})
+
+lbriExpId :: Lens' LivegraphBacktraceRecordInfo (Maybe Text)
+lbriExpId
+  = lens _lbriExpId (\ s a -> s{_lbriExpId = a})
+
+lbriSubscriberReceiveMsec :: Lens' LivegraphBacktraceRecordInfo (Maybe Int64)
+lbriSubscriberReceiveMsec
+  = lens _lbriSubscriberReceiveMsec
+      (\ s a -> s{_lbriSubscriberReceiveMsec = a})
+      . mapping _Coerce
+
+instance FromJSON LivegraphBacktraceRecordInfo where
+        parseJSON
+          = withObject "LivegraphBacktraceRecordInfo"
+              (\ o ->
+                 LivegraphBacktraceRecordInfo' <$>
+                   (o .:? "dataSourcePublishMsec") <*>
+                     (o .:? "topicBuildStartMsec")
+                     <*> (o .:? "isRecon")
+                     <*> (o .:? "priority")
+                     <*> (o .:? "shouldMonitorLatency")
+                     <*> (o .:? "recordId")
+                     <*> (o .:? "proxySentMsec")
+                     <*> (o .:? "expInfo")
+                     <*> (o .:? "process")
+                     <*> (o .:? "topicBuildFinishMsec")
+                     <*> (o .:? "numberOfTriples")
+                     <*> (o .:? "proxyReceiveMsec")
+                     <*> (o .:? "version")
+                     <*> (o .:? "isWlmThrottled")
+                     <*> (o .:? "expId")
+                     <*> (o .:? "subscriberReceiveMsec"))
+
+instance ToJSON LivegraphBacktraceRecordInfo where
+        toJSON LivegraphBacktraceRecordInfo'{..}
+          = object
+              (catMaybes
+                 [("dataSourcePublishMsec" .=) <$>
+                    _lbriDataSourcePublishMsec,
+                  ("topicBuildStartMsec" .=) <$>
+                    _lbriTopicBuildStartMsec,
+                  ("isRecon" .=) <$> _lbriIsRecon,
+                  ("priority" .=) <$> _lbriPriority,
+                  ("shouldMonitorLatency" .=) <$>
+                    _lbriShouldMonitorLatency,
+                  ("recordId" .=) <$> _lbriRecordId,
+                  ("proxySentMsec" .=) <$> _lbriProxySentMsec,
+                  ("expInfo" .=) <$> _lbriExpInfo,
+                  ("process" .=) <$> _lbriProcess,
+                  ("topicBuildFinishMsec" .=) <$>
+                    _lbriTopicBuildFinishMsec,
+                  ("numberOfTriples" .=) <$> _lbriNumberOfTriples,
+                  ("proxyReceiveMsec" .=) <$> _lbriProxyReceiveMsec,
+                  ("version" .=) <$> _lbriVersion,
+                  ("isWlmThrottled" .=) <$> _lbriIsWlmThrottled,
+                  ("expId" .=) <$> _lbriExpId,
+                  ("subscriberReceiveMsec" .=) <$>
+                    _lbriSubscriberReceiveMsec])
 
 --
 -- /See:/ 'electionsQueryRequest' smart constructor.
@@ -899,6 +1721,73 @@ instance ToJSON RepresentativeInfoResponse where
                   ("divisions" .=) <$> _rirDivisions,
                   ("offices" .=) <$> _rirOffices])
 
+--
+-- /See:/ 'voterInfoSegmentResult' smart constructor.
+data VoterInfoSegmentResult = VoterInfoSegmentResult'
+    { _visrResponse        :: !(Maybe VoterInfoResponse)
+    , _visrGeneratedMillis :: !(Maybe (Textual Int64))
+    , _visrPostalAddress   :: !(Maybe PostalAddress)
+    , _visrRequest         :: !(Maybe VoterInfoRequest)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VoterInfoSegmentResult' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'visrResponse'
+--
+-- * 'visrGeneratedMillis'
+--
+-- * 'visrPostalAddress'
+--
+-- * 'visrRequest'
+voterInfoSegmentResult
+    :: VoterInfoSegmentResult
+voterInfoSegmentResult =
+    VoterInfoSegmentResult'
+    { _visrResponse = Nothing
+    , _visrGeneratedMillis = Nothing
+    , _visrPostalAddress = Nothing
+    , _visrRequest = Nothing
+    }
+
+visrResponse :: Lens' VoterInfoSegmentResult (Maybe VoterInfoResponse)
+visrResponse
+  = lens _visrResponse (\ s a -> s{_visrResponse = a})
+
+visrGeneratedMillis :: Lens' VoterInfoSegmentResult (Maybe Int64)
+visrGeneratedMillis
+  = lens _visrGeneratedMillis
+      (\ s a -> s{_visrGeneratedMillis = a})
+      . mapping _Coerce
+
+visrPostalAddress :: Lens' VoterInfoSegmentResult (Maybe PostalAddress)
+visrPostalAddress
+  = lens _visrPostalAddress
+      (\ s a -> s{_visrPostalAddress = a})
+
+visrRequest :: Lens' VoterInfoSegmentResult (Maybe VoterInfoRequest)
+visrRequest
+  = lens _visrRequest (\ s a -> s{_visrRequest = a})
+
+instance FromJSON VoterInfoSegmentResult where
+        parseJSON
+          = withObject "VoterInfoSegmentResult"
+              (\ o ->
+                 VoterInfoSegmentResult' <$>
+                   (o .:? "response") <*> (o .:? "generatedMillis") <*>
+                     (o .:? "postalAddress")
+                     <*> (o .:? "request"))
+
+instance ToJSON VoterInfoSegmentResult where
+        toJSON VoterInfoSegmentResult'{..}
+          = object
+              (catMaybes
+                 [("response" .=) <$> _visrResponse,
+                  ("generatedMillis" .=) <$> _visrGeneratedMillis,
+                  ("postalAddress" .=) <$> _visrPostalAddress,
+                  ("request" .=) <$> _visrRequest])
+
 -- | Represents a political geographic division that matches the requested
 -- query.
 --
@@ -998,6 +1887,74 @@ instance ToJSON DivisionSearchRequest where
           = object
               (catMaybes
                  [("contextParams" .=) <$> _dsrContextParams])
+
+--
+-- /See:/ 'fieldMetadataProto' smart constructor.
+newtype FieldMetadataProto = FieldMetadataProto'
+    { _fmpInternal :: Maybe InternalFieldMetadataProto
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'FieldMetadataProto' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'fmpInternal'
+fieldMetadataProto
+    :: FieldMetadataProto
+fieldMetadataProto =
+    FieldMetadataProto'
+    { _fmpInternal = Nothing
+    }
+
+fmpInternal :: Lens' FieldMetadataProto (Maybe InternalFieldMetadataProto)
+fmpInternal
+  = lens _fmpInternal (\ s a -> s{_fmpInternal = a})
+
+instance FromJSON FieldMetadataProto where
+        parseJSON
+          = withObject "FieldMetadataProto"
+              (\ o -> FieldMetadataProto' <$> (o .:? "internal"))
+
+instance ToJSON FieldMetadataProto where
+        toJSON FieldMetadataProto'{..}
+          = object
+              (catMaybes [("internal" .=) <$> _fmpInternal])
+
+--
+-- /See:/ 'messageSet' smart constructor.
+newtype MessageSet = MessageSet'
+    { _msRecordMessageSetExt :: Maybe LivegraphBacktraceRecordInfo
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'MessageSet' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'msRecordMessageSetExt'
+messageSet
+    :: MessageSet
+messageSet =
+    MessageSet'
+    { _msRecordMessageSetExt = Nothing
+    }
+
+msRecordMessageSetExt :: Lens' MessageSet (Maybe LivegraphBacktraceRecordInfo)
+msRecordMessageSetExt
+  = lens _msRecordMessageSetExt
+      (\ s a -> s{_msRecordMessageSetExt = a})
+
+instance FromJSON MessageSet where
+        parseJSON
+          = withObject "MessageSet"
+              (\ o ->
+                 MessageSet' <$> (o .:? "recordMessageSetExt"))
+
+instance ToJSON MessageSet where
+        toJSON MessageSet'{..}
+          = object
+              (catMaybes
+                 [("recordMessageSetExt" .=) <$>
+                    _msRecordMessageSetExt])
 
 -- | Information about an election administrative body (e.g. County Board of
 -- Elections).
@@ -1268,6 +2225,7 @@ data Contest = Contest'
     , _conPrimaryParty               :: !(Maybe Text)
     , _conId                         :: !(Maybe Text)
     , _conType                       :: !(Maybe Text)
+    , _conBallotTitle                :: !(Maybe Text)
     , _conElectorateSpecifications   :: !(Maybe Text)
     , _conReferendumBrief            :: !(Maybe Text)
     , _conDistrict                   :: !(Maybe ElectoralDistrict)
@@ -1315,6 +2273,8 @@ data Contest = Contest'
 --
 -- * 'conType'
 --
+-- * 'conBallotTitle'
+--
 -- * 'conElectorateSpecifications'
 --
 -- * 'conReferendumBrief'
@@ -1349,6 +2309,7 @@ contest =
     , _conPrimaryParty = Nothing
     , _conId = Nothing
     , _conType = Nothing
+    , _conBallotTitle = Nothing
     , _conElectorateSpecifications = Nothing
     , _conReferendumBrief = Nothing
     , _conDistrict = Nothing
@@ -1481,6 +2442,12 @@ conId = lens _conId (\ s a -> s{_conId = a})
 conType :: Lens' Contest (Maybe Text)
 conType = lens _conType (\ s a -> s{_conType = a})
 
+-- | The official title on the ballot for this contest, only where available.
+conBallotTitle :: Lens' Contest (Maybe Text)
+conBallotTitle
+  = lens _conBallotTitle
+      (\ s a -> s{_conBallotTitle = a})
+
 -- | A description of any additional eligibility requirements for voting in
 -- this contest.
 conElectorateSpecifications :: Lens' Contest (Maybe Text)
@@ -1556,6 +2523,7 @@ instance FromJSON Contest where
                      <*> (o .:? "primaryParty")
                      <*> (o .:? "id")
                      <*> (o .:? "type")
+                     <*> (o .:? "ballotTitle")
                      <*> (o .:? "electorateSpecifications")
                      <*> (o .:? "referendumBrief")
                      <*> (o .:? "district")
@@ -1589,6 +2557,7 @@ instance ToJSON Contest where
                   ("referendumText" .=) <$> _conReferendumText,
                   ("primaryParty" .=) <$> _conPrimaryParty,
                   ("id" .=) <$> _conId, ("type" .=) <$> _conType,
+                  ("ballotTitle" .=) <$> _conBallotTitle,
                   ("electorateSpecifications" .=) <$>
                     _conElectorateSpecifications,
                   ("referendumBrief" .=) <$> _conReferendumBrief,
@@ -1765,6 +2734,73 @@ instance ToJSON ElectionOfficial where
                   ("officePhoneNumber" .=) <$> _eoOfficePhoneNumber,
                   ("emailAddress" .=) <$> _eoEmailAddress,
                   ("title" .=) <$> _eoTitle])
+
+--
+-- /See:/ 'pointProto' smart constructor.
+data PointProto = PointProto'
+    { _ppLatE7         :: !(Maybe (Textual Word32))
+    , _ppLngE7         :: !(Maybe (Textual Word32))
+    , _ppMetadata      :: !(Maybe FieldMetadataProto)
+    , _ppTemporaryData :: !(Maybe MessageSet)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PointProto' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ppLatE7'
+--
+-- * 'ppLngE7'
+--
+-- * 'ppMetadata'
+--
+-- * 'ppTemporaryData'
+pointProto
+    :: PointProto
+pointProto =
+    PointProto'
+    { _ppLatE7 = Nothing
+    , _ppLngE7 = Nothing
+    , _ppMetadata = Nothing
+    , _ppTemporaryData = Nothing
+    }
+
+ppLatE7 :: Lens' PointProto (Maybe Word32)
+ppLatE7
+  = lens _ppLatE7 (\ s a -> s{_ppLatE7 = a}) .
+      mapping _Coerce
+
+ppLngE7 :: Lens' PointProto (Maybe Word32)
+ppLngE7
+  = lens _ppLngE7 (\ s a -> s{_ppLngE7 = a}) .
+      mapping _Coerce
+
+ppMetadata :: Lens' PointProto (Maybe FieldMetadataProto)
+ppMetadata
+  = lens _ppMetadata (\ s a -> s{_ppMetadata = a})
+
+ppTemporaryData :: Lens' PointProto (Maybe MessageSet)
+ppTemporaryData
+  = lens _ppTemporaryData
+      (\ s a -> s{_ppTemporaryData = a})
+
+instance FromJSON PointProto where
+        parseJSON
+          = withObject "PointProto"
+              (\ o ->
+                 PointProto' <$>
+                   (o .:? "latE7") <*> (o .:? "lngE7") <*>
+                     (o .:? "metadata")
+                     <*> (o .:? "temporaryData"))
+
+instance ToJSON PointProto where
+        toJSON PointProto'{..}
+          = object
+              (catMaybes
+                 [("latE7" .=) <$> _ppLatE7,
+                  ("lngE7" .=) <$> _ppLngE7,
+                  ("metadata" .=) <$> _ppMetadata,
+                  ("temporaryData" .=) <$> _ppTemporaryData])
 
 --
 -- /See:/ 'representativeInfoData' smart constructor.
@@ -1988,21 +3024,30 @@ instance ToJSON ElectoralDistrict where
 -- | A request for information about a voter.
 --
 -- /See:/ 'voterInfoRequest' smart constructor.
-newtype VoterInfoRequest = VoterInfoRequest'
-    { _virContextParams :: Maybe ContextParams
+data VoterInfoRequest = VoterInfoRequest'
+    { _virVoterInfoSegmentResult :: !(Maybe VoterInfoSegmentResult)
+    , _virContextParams          :: !(Maybe ContextParams)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VoterInfoRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'virVoterInfoSegmentResult'
+--
 -- * 'virContextParams'
 voterInfoRequest
     :: VoterInfoRequest
 voterInfoRequest =
     VoterInfoRequest'
-    { _virContextParams = Nothing
+    { _virVoterInfoSegmentResult = Nothing
+    , _virContextParams = Nothing
     }
+
+virVoterInfoSegmentResult :: Lens' VoterInfoRequest (Maybe VoterInfoSegmentResult)
+virVoterInfoSegmentResult
+  = lens _virVoterInfoSegmentResult
+      (\ s a -> s{_virVoterInfoSegmentResult = a})
 
 virContextParams :: Lens' VoterInfoRequest (Maybe ContextParams)
 virContextParams
@@ -2013,13 +3058,17 @@ instance FromJSON VoterInfoRequest where
         parseJSON
           = withObject "VoterInfoRequest"
               (\ o ->
-                 VoterInfoRequest' <$> (o .:? "contextParams"))
+                 VoterInfoRequest' <$>
+                   (o .:? "voterInfoSegmentResult") <*>
+                     (o .:? "contextParams"))
 
 instance ToJSON VoterInfoRequest where
         toJSON VoterInfoRequest'{..}
           = object
               (catMaybes
-                 [("contextParams" .=) <$> _virContextParams])
+                 [("voterInfoSegmentResult" .=) <$>
+                    _virVoterInfoSegmentResult,
+                  ("contextParams" .=) <$> _virContextParams])
 
 -- | A simple representation of an address.
 --
@@ -2117,6 +3166,89 @@ instance ToJSON SimpleAddressType where
                   ("locationName" .=) <$> _satLocationName])
 
 --
+-- /See:/ 'internalSourceSummaryProto' smart constructor.
+data InternalSourceSummaryProto = InternalSourceSummaryProto'
+    { _isspDataSet  :: !(Maybe Text)
+    , _isspProvider :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InternalSourceSummaryProto' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'isspDataSet'
+--
+-- * 'isspProvider'
+internalSourceSummaryProto
+    :: InternalSourceSummaryProto
+internalSourceSummaryProto =
+    InternalSourceSummaryProto'
+    { _isspDataSet = Nothing
+    , _isspProvider = Nothing
+    }
+
+isspDataSet :: Lens' InternalSourceSummaryProto (Maybe Text)
+isspDataSet
+  = lens _isspDataSet (\ s a -> s{_isspDataSet = a})
+
+isspProvider :: Lens' InternalSourceSummaryProto (Maybe Text)
+isspProvider
+  = lens _isspProvider (\ s a -> s{_isspProvider = a})
+
+instance FromJSON InternalSourceSummaryProto where
+        parseJSON
+          = withObject "InternalSourceSummaryProto"
+              (\ o ->
+                 InternalSourceSummaryProto' <$>
+                   (o .:? "dataset") <*> (o .:? "provider"))
+
+instance ToJSON InternalSourceSummaryProto where
+        toJSON InternalSourceSummaryProto'{..}
+          = object
+              (catMaybes
+                 [("dataset" .=) <$> _isspDataSet,
+                  ("provider" .=) <$> _isspProvider])
+
+--
+-- /See:/ 'livegraphBacktraceRecordInfoExpInfo' smart constructor.
+newtype LivegraphBacktraceRecordInfoExpInfo = LivegraphBacktraceRecordInfoExpInfo'
+    { _lbrieiDeletedIns :: Maybe [Text]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LivegraphBacktraceRecordInfoExpInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lbrieiDeletedIns'
+livegraphBacktraceRecordInfoExpInfo
+    :: LivegraphBacktraceRecordInfoExpInfo
+livegraphBacktraceRecordInfoExpInfo =
+    LivegraphBacktraceRecordInfoExpInfo'
+    { _lbrieiDeletedIns = Nothing
+    }
+
+lbrieiDeletedIns :: Lens' LivegraphBacktraceRecordInfoExpInfo [Text]
+lbrieiDeletedIns
+  = lens _lbrieiDeletedIns
+      (\ s a -> s{_lbrieiDeletedIns = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON LivegraphBacktraceRecordInfoExpInfo
+         where
+        parseJSON
+          = withObject "LivegraphBacktraceRecordInfoExpInfo"
+              (\ o ->
+                 LivegraphBacktraceRecordInfoExpInfo' <$>
+                   (o .:? "deletedIns" .!= mempty))
+
+instance ToJSON LivegraphBacktraceRecordInfoExpInfo
+         where
+        toJSON LivegraphBacktraceRecordInfoExpInfo'{..}
+          = object
+              (catMaybes [("deletedIns" .=) <$> _lbrieiDeletedIns])
+
+--
 -- /See:/ 'contextParams' smart constructor.
 newtype ContextParams = ContextParams'
     { _cpClientProFile :: Maybe Text
@@ -2149,6 +3281,301 @@ instance ToJSON ContextParams where
           = object
               (catMaybes
                  [("clientProfile" .=) <$> _cpClientProFile])
+
+--
+-- /See:/ 'postalAddress' smart constructor.
+data PostalAddress = PostalAddress'
+    { _paAdministrativeAreaName    :: !(Maybe Text)
+    , _paRecipientName             :: !(Maybe Text)
+    , _paLanguageCode              :: !(Maybe Text)
+    , _paSortingCode               :: !(Maybe Text)
+    , _paPremiseName               :: !(Maybe Text)
+    , _paPostalCodeNumberExtension :: !(Maybe Text)
+    , _paCountryNameCode           :: !(Maybe Text)
+    , _paSubAdministrativeAreaName :: !(Maybe Text)
+    , _paPostBoxNumber             :: !(Maybe Text)
+    , _paLocalityName              :: !(Maybe Text)
+    , _paIsDisputed                :: !(Maybe Bool)
+    , _paThoroughfareNumber        :: !(Maybe Text)
+    , _paDependentLocalityName     :: !(Maybe Text)
+    , _paFirmName                  :: !(Maybe Text)
+    , _paCountryName               :: !(Maybe Text)
+    , _paDependentThoroughfareName :: !(Maybe Text)
+    , _paAddressLines              :: !(Maybe [Text])
+    , _paPostalCodeNumber          :: !(Maybe Text)
+    , _paThoroughfareName          :: !(Maybe Text)
+    , _paSubPremiseName            :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PostalAddress' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'paAdministrativeAreaName'
+--
+-- * 'paRecipientName'
+--
+-- * 'paLanguageCode'
+--
+-- * 'paSortingCode'
+--
+-- * 'paPremiseName'
+--
+-- * 'paPostalCodeNumberExtension'
+--
+-- * 'paCountryNameCode'
+--
+-- * 'paSubAdministrativeAreaName'
+--
+-- * 'paPostBoxNumber'
+--
+-- * 'paLocalityName'
+--
+-- * 'paIsDisputed'
+--
+-- * 'paThoroughfareNumber'
+--
+-- * 'paDependentLocalityName'
+--
+-- * 'paFirmName'
+--
+-- * 'paCountryName'
+--
+-- * 'paDependentThoroughfareName'
+--
+-- * 'paAddressLines'
+--
+-- * 'paPostalCodeNumber'
+--
+-- * 'paThoroughfareName'
+--
+-- * 'paSubPremiseName'
+postalAddress
+    :: PostalAddress
+postalAddress =
+    PostalAddress'
+    { _paAdministrativeAreaName = Nothing
+    , _paRecipientName = Nothing
+    , _paLanguageCode = Nothing
+    , _paSortingCode = Nothing
+    , _paPremiseName = Nothing
+    , _paPostalCodeNumberExtension = Nothing
+    , _paCountryNameCode = Nothing
+    , _paSubAdministrativeAreaName = Nothing
+    , _paPostBoxNumber = Nothing
+    , _paLocalityName = Nothing
+    , _paIsDisputed = Nothing
+    , _paThoroughfareNumber = Nothing
+    , _paDependentLocalityName = Nothing
+    , _paFirmName = Nothing
+    , _paCountryName = Nothing
+    , _paDependentThoroughfareName = Nothing
+    , _paAddressLines = Nothing
+    , _paPostalCodeNumber = Nothing
+    , _paThoroughfareName = Nothing
+    , _paSubPremiseName = Nothing
+    }
+
+paAdministrativeAreaName :: Lens' PostalAddress (Maybe Text)
+paAdministrativeAreaName
+  = lens _paAdministrativeAreaName
+      (\ s a -> s{_paAdministrativeAreaName = a})
+
+paRecipientName :: Lens' PostalAddress (Maybe Text)
+paRecipientName
+  = lens _paRecipientName
+      (\ s a -> s{_paRecipientName = a})
+
+paLanguageCode :: Lens' PostalAddress (Maybe Text)
+paLanguageCode
+  = lens _paLanguageCode
+      (\ s a -> s{_paLanguageCode = a})
+
+paSortingCode :: Lens' PostalAddress (Maybe Text)
+paSortingCode
+  = lens _paSortingCode
+      (\ s a -> s{_paSortingCode = a})
+
+paPremiseName :: Lens' PostalAddress (Maybe Text)
+paPremiseName
+  = lens _paPremiseName
+      (\ s a -> s{_paPremiseName = a})
+
+paPostalCodeNumberExtension :: Lens' PostalAddress (Maybe Text)
+paPostalCodeNumberExtension
+  = lens _paPostalCodeNumberExtension
+      (\ s a -> s{_paPostalCodeNumberExtension = a})
+
+paCountryNameCode :: Lens' PostalAddress (Maybe Text)
+paCountryNameCode
+  = lens _paCountryNameCode
+      (\ s a -> s{_paCountryNameCode = a})
+
+paSubAdministrativeAreaName :: Lens' PostalAddress (Maybe Text)
+paSubAdministrativeAreaName
+  = lens _paSubAdministrativeAreaName
+      (\ s a -> s{_paSubAdministrativeAreaName = a})
+
+paPostBoxNumber :: Lens' PostalAddress (Maybe Text)
+paPostBoxNumber
+  = lens _paPostBoxNumber
+      (\ s a -> s{_paPostBoxNumber = a})
+
+paLocalityName :: Lens' PostalAddress (Maybe Text)
+paLocalityName
+  = lens _paLocalityName
+      (\ s a -> s{_paLocalityName = a})
+
+paIsDisputed :: Lens' PostalAddress (Maybe Bool)
+paIsDisputed
+  = lens _paIsDisputed (\ s a -> s{_paIsDisputed = a})
+
+paThoroughfareNumber :: Lens' PostalAddress (Maybe Text)
+paThoroughfareNumber
+  = lens _paThoroughfareNumber
+      (\ s a -> s{_paThoroughfareNumber = a})
+
+paDependentLocalityName :: Lens' PostalAddress (Maybe Text)
+paDependentLocalityName
+  = lens _paDependentLocalityName
+      (\ s a -> s{_paDependentLocalityName = a})
+
+paFirmName :: Lens' PostalAddress (Maybe Text)
+paFirmName
+  = lens _paFirmName (\ s a -> s{_paFirmName = a})
+
+paCountryName :: Lens' PostalAddress (Maybe Text)
+paCountryName
+  = lens _paCountryName
+      (\ s a -> s{_paCountryName = a})
+
+paDependentThoroughfareName :: Lens' PostalAddress (Maybe Text)
+paDependentThoroughfareName
+  = lens _paDependentThoroughfareName
+      (\ s a -> s{_paDependentThoroughfareName = a})
+
+paAddressLines :: Lens' PostalAddress [Text]
+paAddressLines
+  = lens _paAddressLines
+      (\ s a -> s{_paAddressLines = a})
+      . _Default
+      . _Coerce
+
+paPostalCodeNumber :: Lens' PostalAddress (Maybe Text)
+paPostalCodeNumber
+  = lens _paPostalCodeNumber
+      (\ s a -> s{_paPostalCodeNumber = a})
+
+paThoroughfareName :: Lens' PostalAddress (Maybe Text)
+paThoroughfareName
+  = lens _paThoroughfareName
+      (\ s a -> s{_paThoroughfareName = a})
+
+paSubPremiseName :: Lens' PostalAddress (Maybe Text)
+paSubPremiseName
+  = lens _paSubPremiseName
+      (\ s a -> s{_paSubPremiseName = a})
+
+instance FromJSON PostalAddress where
+        parseJSON
+          = withObject "PostalAddress"
+              (\ o ->
+                 PostalAddress' <$>
+                   (o .:? "administrativeAreaName") <*>
+                     (o .:? "recipientName")
+                     <*> (o .:? "languageCode")
+                     <*> (o .:? "sortingCode")
+                     <*> (o .:? "premiseName")
+                     <*> (o .:? "postalCodeNumberExtension")
+                     <*> (o .:? "countryNameCode")
+                     <*> (o .:? "subAdministrativeAreaName")
+                     <*> (o .:? "postBoxNumber")
+                     <*> (o .:? "localityName")
+                     <*> (o .:? "isDisputed")
+                     <*> (o .:? "thoroughfareNumber")
+                     <*> (o .:? "dependentLocalityName")
+                     <*> (o .:? "firmName")
+                     <*> (o .:? "countryName")
+                     <*> (o .:? "dependentThoroughfareName")
+                     <*> (o .:? "addressLines" .!= mempty)
+                     <*> (o .:? "postalCodeNumber")
+                     <*> (o .:? "thoroughfareName")
+                     <*> (o .:? "subPremiseName"))
+
+instance ToJSON PostalAddress where
+        toJSON PostalAddress'{..}
+          = object
+              (catMaybes
+                 [("administrativeAreaName" .=) <$>
+                    _paAdministrativeAreaName,
+                  ("recipientName" .=) <$> _paRecipientName,
+                  ("languageCode" .=) <$> _paLanguageCode,
+                  ("sortingCode" .=) <$> _paSortingCode,
+                  ("premiseName" .=) <$> _paPremiseName,
+                  ("postalCodeNumberExtension" .=) <$>
+                    _paPostalCodeNumberExtension,
+                  ("countryNameCode" .=) <$> _paCountryNameCode,
+                  ("subAdministrativeAreaName" .=) <$>
+                    _paSubAdministrativeAreaName,
+                  ("postBoxNumber" .=) <$> _paPostBoxNumber,
+                  ("localityName" .=) <$> _paLocalityName,
+                  ("isDisputed" .=) <$> _paIsDisputed,
+                  ("thoroughfareNumber" .=) <$> _paThoroughfareNumber,
+                  ("dependentLocalityName" .=) <$>
+                    _paDependentLocalityName,
+                  ("firmName" .=) <$> _paFirmName,
+                  ("countryName" .=) <$> _paCountryName,
+                  ("dependentThoroughfareName" .=) <$>
+                    _paDependentThoroughfareName,
+                  ("addressLines" .=) <$> _paAddressLines,
+                  ("postalCodeNumber" .=) <$> _paPostalCodeNumber,
+                  ("thoroughfareName" .=) <$> _paThoroughfareName,
+                  ("subPremiseName" .=) <$> _paSubPremiseName])
+
+--
+-- /See:/ 'internalFieldMetadataProto' smart constructor.
+data InternalFieldMetadataProto = InternalFieldMetadataProto'
+    { _ifmpSourceSummary :: !(Maybe InternalSourceSummaryProto)
+    , _ifmpIsAuto        :: !(Maybe Bool)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InternalFieldMetadataProto' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ifmpSourceSummary'
+--
+-- * 'ifmpIsAuto'
+internalFieldMetadataProto
+    :: InternalFieldMetadataProto
+internalFieldMetadataProto =
+    InternalFieldMetadataProto'
+    { _ifmpSourceSummary = Nothing
+    , _ifmpIsAuto = Nothing
+    }
+
+ifmpSourceSummary :: Lens' InternalFieldMetadataProto (Maybe InternalSourceSummaryProto)
+ifmpSourceSummary
+  = lens _ifmpSourceSummary
+      (\ s a -> s{_ifmpSourceSummary = a})
+
+ifmpIsAuto :: Lens' InternalFieldMetadataProto (Maybe Bool)
+ifmpIsAuto
+  = lens _ifmpIsAuto (\ s a -> s{_ifmpIsAuto = a})
+
+instance FromJSON InternalFieldMetadataProto where
+        parseJSON
+          = withObject "InternalFieldMetadataProto"
+              (\ o ->
+                 InternalFieldMetadataProto' <$>
+                   (o .:? "sourceSummary") <*> (o .:? "isAuto"))
+
+instance ToJSON InternalFieldMetadataProto where
+        toJSON InternalFieldMetadataProto'{..}
+          = object
+              (catMaybes
+                 [("sourceSummary" .=) <$> _ifmpSourceSummary,
+                  ("isAuto" .=) <$> _ifmpIsAuto])
 
 -- | Describes information about a regional election administrative area.
 --
@@ -2237,6 +3664,144 @@ instance ToJSON AdministrationRegion where
                   ("electionAdministrationBody" .=) <$>
                     _arElectionAdministrationBody,
                   ("id" .=) <$> _arId])
+
+--
+-- /See:/ 'provenance' smart constructor.
+data Provenance = Provenance'
+    { _pTsStreetSegmentId     :: !(Maybe Text)
+    , _pVIPStreetSegmentId    :: !(Maybe (Textual Int64))
+    , _pCollidedSegmentSource :: !(Maybe StreetSegmentList)
+    , _pCtclContestUuid       :: !(Maybe Text)
+    , _pDataSetId             :: !(Maybe (Textual Int64))
+    , _pVIP5StreetSegmentId   :: !(Maybe Text)
+    , _pCtclOfficeUuid        :: !(Maybe Text)
+    , _pVIP5PrecinctId        :: !(Maybe Text)
+    , _pPrecinctSplitId       :: !(Maybe (Textual Int64))
+    , _pPrecinctId            :: !(Maybe (Textual Int64))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Provenance' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pTsStreetSegmentId'
+--
+-- * 'pVIPStreetSegmentId'
+--
+-- * 'pCollidedSegmentSource'
+--
+-- * 'pCtclContestUuid'
+--
+-- * 'pDataSetId'
+--
+-- * 'pVIP5StreetSegmentId'
+--
+-- * 'pCtclOfficeUuid'
+--
+-- * 'pVIP5PrecinctId'
+--
+-- * 'pPrecinctSplitId'
+--
+-- * 'pPrecinctId'
+provenance
+    :: Provenance
+provenance =
+    Provenance'
+    { _pTsStreetSegmentId = Nothing
+    , _pVIPStreetSegmentId = Nothing
+    , _pCollidedSegmentSource = Nothing
+    , _pCtclContestUuid = Nothing
+    , _pDataSetId = Nothing
+    , _pVIP5StreetSegmentId = Nothing
+    , _pCtclOfficeUuid = Nothing
+    , _pVIP5PrecinctId = Nothing
+    , _pPrecinctSplitId = Nothing
+    , _pPrecinctId = Nothing
+    }
+
+pTsStreetSegmentId :: Lens' Provenance (Maybe Text)
+pTsStreetSegmentId
+  = lens _pTsStreetSegmentId
+      (\ s a -> s{_pTsStreetSegmentId = a})
+
+pVIPStreetSegmentId :: Lens' Provenance (Maybe Int64)
+pVIPStreetSegmentId
+  = lens _pVIPStreetSegmentId
+      (\ s a -> s{_pVIPStreetSegmentId = a})
+      . mapping _Coerce
+
+pCollidedSegmentSource :: Lens' Provenance (Maybe StreetSegmentList)
+pCollidedSegmentSource
+  = lens _pCollidedSegmentSource
+      (\ s a -> s{_pCollidedSegmentSource = a})
+
+pCtclContestUuid :: Lens' Provenance (Maybe Text)
+pCtclContestUuid
+  = lens _pCtclContestUuid
+      (\ s a -> s{_pCtclContestUuid = a})
+
+pDataSetId :: Lens' Provenance (Maybe Int64)
+pDataSetId
+  = lens _pDataSetId (\ s a -> s{_pDataSetId = a}) .
+      mapping _Coerce
+
+pVIP5StreetSegmentId :: Lens' Provenance (Maybe Text)
+pVIP5StreetSegmentId
+  = lens _pVIP5StreetSegmentId
+      (\ s a -> s{_pVIP5StreetSegmentId = a})
+
+pCtclOfficeUuid :: Lens' Provenance (Maybe Text)
+pCtclOfficeUuid
+  = lens _pCtclOfficeUuid
+      (\ s a -> s{_pCtclOfficeUuid = a})
+
+pVIP5PrecinctId :: Lens' Provenance (Maybe Text)
+pVIP5PrecinctId
+  = lens _pVIP5PrecinctId
+      (\ s a -> s{_pVIP5PrecinctId = a})
+
+pPrecinctSplitId :: Lens' Provenance (Maybe Int64)
+pPrecinctSplitId
+  = lens _pPrecinctSplitId
+      (\ s a -> s{_pPrecinctSplitId = a})
+      . mapping _Coerce
+
+pPrecinctId :: Lens' Provenance (Maybe Int64)
+pPrecinctId
+  = lens _pPrecinctId (\ s a -> s{_pPrecinctId = a}) .
+      mapping _Coerce
+
+instance FromJSON Provenance where
+        parseJSON
+          = withObject "Provenance"
+              (\ o ->
+                 Provenance' <$>
+                   (o .:? "tsStreetSegmentId") <*>
+                     (o .:? "vipStreetSegmentId")
+                     <*> (o .:? "collidedSegmentSource")
+                     <*> (o .:? "ctclContestUuid")
+                     <*> (o .:? "datasetId")
+                     <*> (o .:? "vip5StreetSegmentId")
+                     <*> (o .:? "ctclOfficeUuid")
+                     <*> (o .:? "vip5PrecinctId")
+                     <*> (o .:? "precinctSplitId")
+                     <*> (o .:? "precinctId"))
+
+instance ToJSON Provenance where
+        toJSON Provenance'{..}
+          = object
+              (catMaybes
+                 [("tsStreetSegmentId" .=) <$> _pTsStreetSegmentId,
+                  ("vipStreetSegmentId" .=) <$> _pVIPStreetSegmentId,
+                  ("collidedSegmentSource" .=) <$>
+                    _pCollidedSegmentSource,
+                  ("ctclContestUuid" .=) <$> _pCtclContestUuid,
+                  ("datasetId" .=) <$> _pDataSetId,
+                  ("vip5StreetSegmentId" .=) <$> _pVIP5StreetSegmentId,
+                  ("ctclOfficeUuid" .=) <$> _pCtclOfficeUuid,
+                  ("vip5PrecinctId" .=) <$> _pVIP5PrecinctId,
+                  ("precinctSplitId" .=) <$> _pPrecinctSplitId,
+                  ("precinctId" .=) <$> _pPrecinctId])
 
 -- | The list of elections available for this version of the API.
 --

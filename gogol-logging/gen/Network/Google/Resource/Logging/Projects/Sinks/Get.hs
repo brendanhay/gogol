@@ -35,10 +35,8 @@ module Network.Google.Resource.Logging.Projects.Sinks.Get
     -- * Request Lenses
     , psgXgafv
     , psgUploadProtocol
-    , psgPp
     , psgAccessToken
     , psgUploadType
-    , psgBearerToken
     , psgSinkName
     , psgCallback
     ) where
@@ -53,12 +51,10 @@ type ProjectsSinksGetResource =
        Capture "sinkName" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] LogSink
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] LogSink
 
 -- | Gets a sink.
 --
@@ -66,10 +62,8 @@ type ProjectsSinksGetResource =
 data ProjectsSinksGet = ProjectsSinksGet'
     { _psgXgafv          :: !(Maybe Xgafv)
     , _psgUploadProtocol :: !(Maybe Text)
-    , _psgPp             :: !Bool
     , _psgAccessToken    :: !(Maybe Text)
     , _psgUploadType     :: !(Maybe Text)
-    , _psgBearerToken    :: !(Maybe Text)
     , _psgSinkName       :: !Text
     , _psgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -82,13 +76,9 @@ data ProjectsSinksGet = ProjectsSinksGet'
 --
 -- * 'psgUploadProtocol'
 --
--- * 'psgPp'
---
 -- * 'psgAccessToken'
 --
 -- * 'psgUploadType'
---
--- * 'psgBearerToken'
 --
 -- * 'psgSinkName'
 --
@@ -100,10 +90,8 @@ projectsSinksGet pPsgSinkName_ =
     ProjectsSinksGet'
     { _psgXgafv = Nothing
     , _psgUploadProtocol = Nothing
-    , _psgPp = True
     , _psgAccessToken = Nothing
     , _psgUploadType = Nothing
-    , _psgBearerToken = Nothing
     , _psgSinkName = pPsgSinkName_
     , _psgCallback = Nothing
     }
@@ -118,10 +106,6 @@ psgUploadProtocol
   = lens _psgUploadProtocol
       (\ s a -> s{_psgUploadProtocol = a})
 
--- | Pretty-print response.
-psgPp :: Lens' ProjectsSinksGet Bool
-psgPp = lens _psgPp (\ s a -> s{_psgPp = a})
-
 -- | OAuth access token.
 psgAccessToken :: Lens' ProjectsSinksGet (Maybe Text)
 psgAccessToken
@@ -134,14 +118,12 @@ psgUploadType
   = lens _psgUploadType
       (\ s a -> s{_psgUploadType = a})
 
--- | OAuth bearer token.
-psgBearerToken :: Lens' ProjectsSinksGet (Maybe Text)
-psgBearerToken
-  = lens _psgBearerToken
-      (\ s a -> s{_psgBearerToken = a})
-
--- | Required. The resource name of the sink to return. Example:
--- \`\"projects\/my-project-id\/sinks\/my-sink-id\"\`.
+-- | Required. The resource name of the sink:
+-- \"projects\/[PROJECT_ID]\/sinks\/[SINK_ID]\"
+-- \"organizations\/[ORGANIZATION_ID]\/sinks\/[SINK_ID]\"
+-- \"billingAccounts\/[BILLING_ACCOUNT_ID]\/sinks\/[SINK_ID]\"
+-- \"folders\/[FOLDER_ID]\/sinks\/[SINK_ID]\" Example:
+-- \"projects\/my-project-id\/sinks\/my-sink-id\".
 psgSinkName :: Lens' ProjectsSinksGet Text
 psgSinkName
   = lens _psgSinkName (\ s a -> s{_psgSinkName = a})
@@ -160,10 +142,8 @@ instance GoogleRequest ProjectsSinksGet where
                "https://www.googleapis.com/auth/logging.read"]
         requestClient ProjectsSinksGet'{..}
           = go _psgSinkName _psgXgafv _psgUploadProtocol
-              (Just _psgPp)
               _psgAccessToken
               _psgUploadType
-              _psgBearerToken
               _psgCallback
               (Just AltJSON)
               loggingService

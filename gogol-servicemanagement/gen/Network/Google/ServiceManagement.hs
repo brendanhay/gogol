@@ -17,7 +17,7 @@
 -- services on Google Cloud Platform so that they can be discovered and
 -- used by service consumers.
 --
--- /See:/ <https://cloud.google.com/service-management/ Google Service Management API Reference>
+-- /See:/ <https://cloud.google.com/service-management/ Service Management API Reference>
 module Network.Google.ServiceManagement
     (
     -- * Service Configuration
@@ -37,6 +37,9 @@ module Network.Google.ServiceManagement
     -- ** servicemanagement.operations.get
     , module Network.Google.Resource.ServiceManagement.Operations.Get
 
+    -- ** servicemanagement.operations.list
+    , module Network.Google.Resource.ServiceManagement.Operations.List
+
     -- ** servicemanagement.services.configs.create
     , module Network.Google.Resource.ServiceManagement.Services.Configs.Create
 
@@ -48,6 +51,15 @@ module Network.Google.ServiceManagement
 
     -- ** servicemanagement.services.configs.submit
     , module Network.Google.Resource.ServiceManagement.Services.Configs.Submit
+
+    -- ** servicemanagement.services.consumers.getIamPolicy
+    , module Network.Google.Resource.ServiceManagement.Services.Consumers.GetIAMPolicy
+
+    -- ** servicemanagement.services.consumers.setIamPolicy
+    , module Network.Google.Resource.ServiceManagement.Services.Consumers.SetIAMPolicy
+
+    -- ** servicemanagement.services.consumers.testIamPermissions
+    , module Network.Google.Resource.ServiceManagement.Services.Consumers.TestIAMPermissions
 
     -- ** servicemanagement.services.create
     , module Network.Google.Resource.ServiceManagement.Services.Create
@@ -159,22 +171,17 @@ module Network.Google.ServiceManagement
     , gcrrId
     , gcrrChangeReports
 
-    -- ** CounterOptions
-    , CounterOptions
-    , counterOptions
-    , coField
-    , coMetric
-
-    -- ** MediaUpload'
-    , MediaUpload'
-    , mediaUpload
-    , muEnabled
+    -- ** BillingDestination
+    , BillingDestination
+    , billingDestination
+    , bdMetrics
+    , bdMonitoredResource
 
     -- ** AuditConfig
     , AuditConfig
     , auditConfig
     , acService
-    , acExemptedMembers
+    , acAuditLogConfigs
 
     -- ** Control
     , Control
@@ -197,6 +204,14 @@ module Network.Google.ServiceManagement
     , lsrNextPageToken
     , lsrServices
 
+    -- ** Expr
+    , Expr
+    , expr
+    , eLocation
+    , eExpression
+    , eTitle
+    , eDescription
+
     -- ** Context
     , Context
     , context
@@ -213,12 +228,19 @@ module Network.Google.ServiceManagement
     , metricDescriptor
     , mdMetricKind
     , mdName
+    , mdMetadata
     , mdDisplayName
     , mdLabels
     , mdType
     , mdValueType
     , mdDescription
     , mdUnit
+
+    -- ** ListOperationsResponse
+    , ListOperationsResponse
+    , listOperationsResponse
+    , lorNextPageToken
+    , lorOperations
 
     -- ** GetIAMPolicyRequest
     , GetIAMPolicyRequest
@@ -228,7 +250,9 @@ module Network.Google.ServiceManagement
     , BackendRule
     , backendRule
     , brSelector
+    , brMinDeadline
     , brAddress
+    , brOperationDeadline
     , brDeadline
 
     -- ** SubmitConfigSourceRequest
@@ -241,9 +265,6 @@ module Network.Google.ServiceManagement
     , SourceContext
     , sourceContext
     , scFileName
-
-    -- ** ConditionSys
-    , ConditionSys (..)
 
     -- ** Field
     , Field
@@ -258,6 +279,12 @@ module Network.Google.ServiceManagement
     , fDefaultValue
     , fNumber
     , fTypeURL
+
+    -- ** MetricRule
+    , MetricRule
+    , metricRule
+    , mrSelector
+    , mrMetricCosts
 
     -- ** FieldKind
     , FieldKind (..)
@@ -279,9 +306,8 @@ module Network.Google.ServiceManagement
     , sAuthentication
     , sAPIs
     , sTypes
-    , sAnalytics
-    , sVisibility
     , sSystemTypes
+    , sExperimental
     , sMonitoredResources
     , sBackend
     , sMonitoring
@@ -297,8 +323,11 @@ module Network.Google.ServiceManagement
     , sHTTP
     , sTitle
     , sProducerProjectId
+    , sSourceInfo
+    , sBilling
     , sCustomError
     , sLogging
+    , sQuota
 
     -- ** Operation
     , Operation
@@ -331,21 +360,10 @@ module Network.Google.ServiceManagement
     , submitConfigSourceResponse
     , scsrServiceConfig
 
-    -- ** VisibilityRule
-    , VisibilityRule
-    , visibilityRule
-    , vrRestriction
-    , vrSelector
-
     -- ** ChangeReport
     , ChangeReport
     , changeReport
     , crConfigChanges
-
-    -- ** MediaDownload'
-    , MediaDownload'
-    , mediaDownload
-    , mdEnabled
 
     -- ** OptionValue
     , OptionValue
@@ -365,8 +383,8 @@ module Network.Google.ServiceManagement
     , aRules
     , aProviders
 
-    -- ** RuleAction
-    , RuleAction (..)
+    -- ** MetricDescriptorMetadataLaunchStage
+    , MetricDescriptorMetadataLaunchStage (..)
 
     -- ** Mixin
     , Mixin
@@ -385,6 +403,7 @@ module Network.Google.ServiceManagement
     , usageRule
     , urSelector
     , urAllowUnregisteredCalls
+    , urSkipServiceControl
 
     -- ** StatusDetailsItem
     , StatusDetailsItem
@@ -403,27 +422,6 @@ module Network.Google.ServiceManagement
     , generateConfigReportRequestOldConfig
     , gcrrocAddtional
 
-    -- ** Analytics
-    , Analytics
-    , analytics
-    , aProducerDestinations
-
-    -- ** Rule
-    , Rule
-    , rule
-    , rAction
-    , rIn
-    , rNotIn
-    , rConditions
-    , rPermissions
-    , rLogConfig
-    , rDescription
-
-    -- ** Visibility
-    , Visibility
-    , visibility
-    , vRules
-
     -- ** AuthenticationRule
     , AuthenticationRule
     , authenticationRule
@@ -441,18 +439,34 @@ module Network.Google.ServiceManagement
     -- ** SetIAMPolicyRequest
     , SetIAMPolicyRequest
     , setIAMPolicyRequest
+    , siprUpdateMask
     , siprPolicy
+
+    -- ** MetricRuleMetricCosts
+    , MetricRuleMetricCosts
+    , metricRuleMetricCosts
+    , mrmcAddtional
 
     -- ** TrafficPercentStrategyPercentages
     , TrafficPercentStrategyPercentages
     , trafficPercentStrategyPercentages
     , tpspAddtional
 
+    -- ** AuthorizationConfig
+    , AuthorizationConfig
+    , authorizationConfig
+    , acProvider
+
     -- ** APISyntax
     , APISyntax (..)
 
     -- ** TypeSyntax
     , TypeSyntax (..)
+
+    -- ** Experimental
+    , Experimental
+    , experimental
+    , eAuthorization
 
     -- ** ListServiceRolloutsResponse
     , ListServiceRolloutsResponse
@@ -469,21 +483,10 @@ module Network.Google.ServiceManagement
     , ccChangeType
     , ccElement
 
-    -- ** CloudAuditOptions
-    , CloudAuditOptions
-    , cloudAuditOptions
-
     -- ** Backend
     , Backend
     , backend
     , bRules
-
-    -- ** ConditionOp
-    , ConditionOp (..)
-
-    -- ** DataAccessOptions
-    , DataAccessOptions
-    , dataAccessOptions
 
     -- ** Monitoring
     , Monitoring
@@ -534,6 +537,9 @@ module Network.Google.ServiceManagement
     , csFiles
     , csId
 
+    -- ** AuditLogConfigLogType
+    , AuditLogConfigLogType (..)
+
     -- ** Documentation
     , Documentation
     , documentation
@@ -552,14 +558,15 @@ module Network.Google.ServiceManagement
     -- ** Xgafv
     , Xgafv (..)
 
-    -- ** AnalyticsDestination
-    , AnalyticsDestination
-    , analyticsDestination
-    , adMetrics
-    , adMonitoredResource
-
     -- ** ConfigFileFileType
     , ConfigFileFileType (..)
+
+    -- ** MetricDescriptorMetadata
+    , MetricDescriptorMetadata
+    , metricDescriptorMetadata
+    , mdmSamplePeriod
+    , mdmIngestDelay
+    , mdmLaunchStage
 
     -- ** TestIAMPermissionsRequest
     , TestIAMPermissionsRequest
@@ -587,6 +594,7 @@ module Network.Google.ServiceManagement
     , usage
     , uRequirements
     , uRules
+    , uProducerNotificationChannel
 
     -- ** FieldCardinality
     , FieldCardinality (..)
@@ -605,6 +613,7 @@ module Network.Google.ServiceManagement
     , HTTP
     , hTTP
     , hRules
+    , hFullyDecodeReservedExpansion
 
     -- ** DisableServiceRequest
     , DisableServiceRequest
@@ -616,10 +625,8 @@ module Network.Google.ServiceManagement
     , policy
     , pAuditConfigs
     , pEtag
-    , pRules
     , pVersion
     , pBindings
-    , pIAMOwned
 
     -- ** Type
     , Type
@@ -666,10 +673,10 @@ module Network.Google.ServiceManagement
     , Endpoint
     , endpoint
     , eAliases
-    , eAPIs
     , eAllowCORS
     , eName
     , eFeatures
+    , eTarget
 
     -- ** OAuthRequirements
     , OAuthRequirements
@@ -685,11 +692,46 @@ module Network.Google.ServiceManagement
     , ceRules
     , ceTypes
 
+    -- ** QuotaLimit
+    , QuotaLimit
+    , quotaLimit
+    , qlValues
+    , qlFreeTier
+    , qlMetric
+    , qlName
+    , qlDisplayName
+    , qlDuration
+    , qlDefaultLimit
+    , qlDescription
+    , qlUnit
+    , qlMaxLimit
+
+    -- ** AuditLogConfig
+    , AuditLogConfig
+    , auditLogConfig
+    , alcLogType
+    , alcExemptedMembers
+
     -- ** Option
     , Option
     , option
     , optValue
     , optName
+
+    -- ** Billing
+    , Billing
+    , billing
+    , bConsumerDestinations
+
+    -- ** SourceInfo
+    , SourceInfo
+    , sourceInfo
+    , siSourceFiles
+
+    -- ** QuotaLimitValues
+    , QuotaLimitValues
+    , quotaLimitValues
+    , qlvAddtional
 
     -- ** Rollout
     , Rollout
@@ -701,16 +743,6 @@ module Network.Google.ServiceManagement
     , rServiceName
     , rRolloutId
     , rCreateTime
-
-    -- ** Condition
-    , Condition
-    , condition
-    , cOp
-    , cIAM
-    , cValues
-    , cValue
-    , cSys
-    , cSvc
 
     -- ** Enum'
     , Enum'
@@ -741,13 +773,22 @@ module Network.Google.ServiceManagement
     , gcrrOldConfig
     , gcrrNewConfig
 
+    -- ** SourceInfoSourceFilesItem
+    , SourceInfoSourceFilesItem
+    , sourceInfoSourceFilesItem
+    , sisfiAddtional
+
+    -- ** Quota
+    , Quota
+    , quota
+    , qLimits
+    , qMetricRules
+
     -- ** HTTPRule
     , HTTPRule
     , hTTPRule
-    , httprMediaUpload
     , httprSelector
     , httprPost
-    , httprMediaDownload
     , httprBody
     , httprCustom
     , httprResponseBody
@@ -757,26 +798,18 @@ module Network.Google.ServiceManagement
     , httprDelete
     , httprPut
 
-    -- ** ConditionIAM
-    , ConditionIAM (..)
-
     -- ** OperationResponse
     , OperationResponse
     , operationResponse
     , orAddtional
 
-    -- ** LogConfig
-    , LogConfig
-    , logConfig
-    , lcCloudAudit
-    , lcDataAccess
-    , lcCounter
-
     -- ** AuthProvider
     , AuthProvider
     , authProvider
     , apJWKsURI
+    , apAudiences
     , apId
+    , apAuthorizationURL
     , apIssuer
 
     -- ** Binding
@@ -784,21 +817,28 @@ module Network.Google.ServiceManagement
     , binding
     , bMembers
     , bRole
+    , bCondition
 
     -- ** ContextRule
     , ContextRule
     , contextRule
     , crSelector
     , crRequested
+    , crAllowedRequestExtensions
     , crProvided
+    , crAllowedResponseExtensions
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.Resource.ServiceManagement.Operations.Get
+import           Network.Google.Resource.ServiceManagement.Operations.List
 import           Network.Google.Resource.ServiceManagement.Services.Configs.Create
 import           Network.Google.Resource.ServiceManagement.Services.Configs.Get
 import           Network.Google.Resource.ServiceManagement.Services.Configs.List
 import           Network.Google.Resource.ServiceManagement.Services.Configs.Submit
+import           Network.Google.Resource.ServiceManagement.Services.Consumers.GetIAMPolicy
+import           Network.Google.Resource.ServiceManagement.Services.Consumers.SetIAMPolicy
+import           Network.Google.Resource.ServiceManagement.Services.Consumers.TestIAMPermissions
 import           Network.Google.Resource.ServiceManagement.Services.Create
 import           Network.Google.Resource.ServiceManagement.Services.Delete
 import           Network.Google.Resource.ServiceManagement.Services.Disable
@@ -820,10 +860,13 @@ import           Network.Google.ServiceManagement.Types
 TODO
 -}
 
--- | Represents the entirety of the methods and resources available for the Google Service Management API service.
+-- | Represents the entirety of the methods and resources available for the Service Management API service.
 type ServiceManagementAPI =
-     OperationsGetResource :<|>
-       ServicesRolloutsListResource
+     OperationsListResource :<|> OperationsGetResource
+       :<|> ServicesConsumersGetIAMPolicyResource
+       :<|> ServicesConsumersSetIAMPolicyResource
+       :<|> ServicesConsumersTestIAMPermissionsResource
+       :<|> ServicesRolloutsListResource
        :<|> ServicesRolloutsGetResource
        :<|> ServicesRolloutsCreateResource
        :<|> ServicesConfigsListResource

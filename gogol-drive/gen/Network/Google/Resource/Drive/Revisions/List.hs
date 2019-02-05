@@ -59,7 +59,7 @@ type RevisionsListResource =
 data RevisionsList = RevisionsList'
     { _rllPageToken :: !(Maybe Text)
     , _rllFileId    :: !Text
-    , _rllPageSize  :: !(Maybe (Textual Int32))
+    , _rllPageSize  :: !(Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RevisionsList' with the minimum fields required to make a request.
@@ -78,7 +78,7 @@ revisionsList pRllFileId_ =
     RevisionsList'
     { _rllPageToken = Nothing
     , _rllFileId = pRllFileId_
-    , _rllPageSize = Nothing
+    , _rllPageSize = 200
     }
 
 -- | The token for continuing a previous list request on the next page. This
@@ -94,10 +94,10 @@ rllFileId
   = lens _rllFileId (\ s a -> s{_rllFileId = a})
 
 -- | The maximum number of revisions to return per page.
-rllPageSize :: Lens' RevisionsList (Maybe Int32)
+rllPageSize :: Lens' RevisionsList Int32
 rllPageSize
   = lens _rllPageSize (\ s a -> s{_rllPageSize = a}) .
-      mapping _Coerce
+      _Coerce
 
 instance GoogleRequest RevisionsList where
         type Rs RevisionsList = RevisionList
@@ -110,7 +110,7 @@ instance GoogleRequest RevisionsList where
                "https://www.googleapis.com/auth/drive.photos.readonly",
                "https://www.googleapis.com/auth/drive.readonly"]
         requestClient RevisionsList'{..}
-          = go _rllFileId _rllPageToken _rllPageSize
+          = go _rllFileId _rllPageToken (Just _rllPageSize)
               (Just AltJSON)
               driveService
           where go

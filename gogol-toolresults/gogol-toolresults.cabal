@@ -1,0 +1,69 @@
+name:                  gogol-toolresults
+version:               0.4.0
+synopsis:              Google Cloud Tool Results SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               OtherLicense
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
+copyright:             Copyright (c) 2015-2016 Brendan Hay
+category:              Network, Google, Cloud
+build-type:            Simple
+cabal-version:         >= 1.10
+extra-source-files:    README.md src/.gitkeep
+
+description:
+    Reads and publishes results from Firebase Test Lab.
+    .
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
+    .
+    This library is compatible with version @v1beta3@
+    of the API.
+
+source-repository head
+    type:     git
+    location: git://github.com/brendanhay/gogol.git
+
+library
+    default-language:  Haskell2010
+    hs-source-dirs:    src gen
+
+    ghc-options:       -Wall
+
+    exposed-modules:
+          Network.Google.Resource.ToolResults.Projects.GetSettings
+        , Network.Google.Resource.ToolResults.Projects.Histories.Create
+        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Clusters.Get
+        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Clusters.List
+        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Create
+        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Get
+        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.List
+        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Patch
+        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.Create
+        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.Get
+        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.GetPerfMetricsSummary
+        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.List
+        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.Patch
+        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.PerfMetricsSummary.Create
+        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.PerfSampleSeries.Create
+        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.PerfSampleSeries.Get
+        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.PerfSampleSeries.List
+        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.PerfSampleSeries.Samples.BatchCreate
+        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.PerfSampleSeries.Samples.List
+        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.PublishXUnitXMLFiles
+        , Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.Thumbnails.List
+        , Network.Google.Resource.ToolResults.Projects.Histories.Get
+        , Network.Google.Resource.ToolResults.Projects.Histories.List
+        , Network.Google.Resource.ToolResults.Projects.InitializeSettings
+        , Network.Google.ToolResults
+        , Network.Google.ToolResults.Types
+
+    other-modules:
+          Network.Google.ToolResults.Types.Product
+        , Network.Google.ToolResults.Types.Sum
+
+    build-depends:
+          gogol-core == 0.4.0.*
+        , base       >= 4.7 && < 5

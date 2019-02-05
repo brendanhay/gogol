@@ -25,7 +25,7 @@
 -- target service must exist and must have been deleted within the last 30
 -- days. Operation
 --
--- /See:/ <https://cloud.google.com/service-management/ Google Service Management API Reference> for @servicemanagement.services.undelete@.
+-- /See:/ <https://cloud.google.com/service-management/ Service Management API Reference> for @servicemanagement.services.undelete@.
 module Network.Google.Resource.ServiceManagement.Services.Undelete
     (
     -- * REST Resource
@@ -38,10 +38,8 @@ module Network.Google.Resource.ServiceManagement.Services.Undelete
     -- * Request Lenses
     , suXgafv
     , suUploadProtocol
-    , suPp
     , suAccessToken
     , suUploadType
-    , suBearerToken
     , suServiceName
     , suCallback
     ) where
@@ -57,12 +55,10 @@ type ServicesUndeleteResource =
          CaptureMode "serviceName" "undelete" Text :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :> Post '[JSON] Operation
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | Revives a previously deleted managed service. The method restores the
 -- service using the configuration at the time the service was deleted. The
@@ -73,10 +69,8 @@ type ServicesUndeleteResource =
 data ServicesUndelete = ServicesUndelete'
     { _suXgafv          :: !(Maybe Xgafv)
     , _suUploadProtocol :: !(Maybe Text)
-    , _suPp             :: !Bool
     , _suAccessToken    :: !(Maybe Text)
     , _suUploadType     :: !(Maybe Text)
-    , _suBearerToken    :: !(Maybe Text)
     , _suServiceName    :: !Text
     , _suCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -89,13 +83,9 @@ data ServicesUndelete = ServicesUndelete'
 --
 -- * 'suUploadProtocol'
 --
--- * 'suPp'
---
 -- * 'suAccessToken'
 --
 -- * 'suUploadType'
---
--- * 'suBearerToken'
 --
 -- * 'suServiceName'
 --
@@ -107,10 +97,8 @@ servicesUndelete pSuServiceName_ =
     ServicesUndelete'
     { _suXgafv = Nothing
     , _suUploadProtocol = Nothing
-    , _suPp = True
     , _suAccessToken = Nothing
     , _suUploadType = Nothing
-    , _suBearerToken = Nothing
     , _suServiceName = pSuServiceName_
     , _suCallback = Nothing
     }
@@ -125,10 +113,6 @@ suUploadProtocol
   = lens _suUploadProtocol
       (\ s a -> s{_suUploadProtocol = a})
 
--- | Pretty-print response.
-suPp :: Lens' ServicesUndelete Bool
-suPp = lens _suPp (\ s a -> s{_suPp = a})
-
 -- | OAuth access token.
 suAccessToken :: Lens' ServicesUndelete (Maybe Text)
 suAccessToken
@@ -139,12 +123,6 @@ suAccessToken
 suUploadType :: Lens' ServicesUndelete (Maybe Text)
 suUploadType
   = lens _suUploadType (\ s a -> s{_suUploadType = a})
-
--- | OAuth bearer token.
-suBearerToken :: Lens' ServicesUndelete (Maybe Text)
-suBearerToken
-  = lens _suBearerToken
-      (\ s a -> s{_suBearerToken = a})
 
 -- | The name of the service. See the
 -- [overview](\/service-management\/overview) for naming requirements. For
@@ -166,10 +144,8 @@ instance GoogleRequest ServicesUndelete where
                "https://www.googleapis.com/auth/service.management"]
         requestClient ServicesUndelete'{..}
           = go _suServiceName _suXgafv _suUploadProtocol
-              (Just _suPp)
               _suAccessToken
               _suUploadType
-              _suBearerToken
               _suCallback
               (Just AltJSON)
               serviceManagementService

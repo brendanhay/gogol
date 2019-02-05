@@ -83,7 +83,7 @@ daiPayload :: Lens' DomainAliasesInsert DomainAlias
 daiPayload
   = lens _daiPayload (\ s a -> s{_daiPayload = a})
 
--- | Immutable id of the Google Apps account.
+-- | Immutable ID of the G Suite account.
 daiCustomer :: Lens' DomainAliasesInsert Text
 daiCustomer
   = lens _daiCustomer (\ s a -> s{_daiCustomer = a})

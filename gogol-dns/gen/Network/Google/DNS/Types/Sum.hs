@@ -16,7 +16,7 @@
 --
 module Network.Google.DNS.Types.Sum where
 
-import           Network.Google.Prelude
+import           Network.Google.Prelude hiding (Bytes)
 
 -- | String mnemonic specifying the DNSSEC algorithm of this key.
 data DNSKeySpecAlgorithm

@@ -22,7 +22,7 @@
 --
 -- This method is not supported and the server returns \`UNIMPLEMENTED\`.
 --
--- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @storagetransfer.transferOperations.delete@.
+-- /See:/ <https://cloud.google.com/storage/transfer Storage Transfer API Reference> for @storagetransfer.transferOperations.delete@.
 module Network.Google.Resource.StorageTransfer.TransferOperations.Delete
     (
     -- * REST Resource
@@ -35,10 +35,8 @@ module Network.Google.Resource.StorageTransfer.TransferOperations.Delete
     -- * Request Lenses
     , todXgafv
     , todUploadProtocol
-    , todPp
     , todAccessToken
     , todUploadType
-    , todBearerToken
     , todName
     , todCallback
     ) where
@@ -51,25 +49,21 @@ import           Network.Google.StorageTransfer.Types
 type TransferOperationsDeleteResource =
      "v1" :>
        Capture "name" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :> Delete '[JSON] Empty
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
 -- | This method is not supported and the server returns \`UNIMPLEMENTED\`.
 --
 -- /See:/ 'transferOperationsDelete' smart constructor.
 data TransferOperationsDelete = TransferOperationsDelete'
-    { _todXgafv          :: !(Maybe Text)
+    { _todXgafv          :: !(Maybe Xgafv)
     , _todUploadProtocol :: !(Maybe Text)
-    , _todPp             :: !Bool
     , _todAccessToken    :: !(Maybe Text)
     , _todUploadType     :: !(Maybe Text)
-    , _todBearerToken    :: !(Maybe Text)
     , _todName           :: !Text
     , _todCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -82,13 +76,9 @@ data TransferOperationsDelete = TransferOperationsDelete'
 --
 -- * 'todUploadProtocol'
 --
--- * 'todPp'
---
 -- * 'todAccessToken'
 --
 -- * 'todUploadType'
---
--- * 'todBearerToken'
 --
 -- * 'todName'
 --
@@ -100,16 +90,14 @@ transferOperationsDelete pTodName_ =
     TransferOperationsDelete'
     { _todXgafv = Nothing
     , _todUploadProtocol = Nothing
-    , _todPp = True
     , _todAccessToken = Nothing
     , _todUploadType = Nothing
-    , _todBearerToken = Nothing
     , _todName = pTodName_
     , _todCallback = Nothing
     }
 
 -- | V1 error format.
-todXgafv :: Lens' TransferOperationsDelete (Maybe Text)
+todXgafv :: Lens' TransferOperationsDelete (Maybe Xgafv)
 todXgafv = lens _todXgafv (\ s a -> s{_todXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -117,10 +105,6 @@ todUploadProtocol :: Lens' TransferOperationsDelete (Maybe Text)
 todUploadProtocol
   = lens _todUploadProtocol
       (\ s a -> s{_todUploadProtocol = a})
-
--- | Pretty-print response.
-todPp :: Lens' TransferOperationsDelete Bool
-todPp = lens _todPp (\ s a -> s{_todPp = a})
 
 -- | OAuth access token.
 todAccessToken :: Lens' TransferOperationsDelete (Maybe Text)
@@ -133,12 +117,6 @@ todUploadType :: Lens' TransferOperationsDelete (Maybe Text)
 todUploadType
   = lens _todUploadType
       (\ s a -> s{_todUploadType = a})
-
--- | OAuth bearer token.
-todBearerToken :: Lens' TransferOperationsDelete (Maybe Text)
-todBearerToken
-  = lens _todBearerToken
-      (\ s a -> s{_todBearerToken = a})
 
 -- | The name of the operation resource to be deleted.
 todName :: Lens' TransferOperationsDelete Text
@@ -155,10 +133,8 @@ instance GoogleRequest TransferOperationsDelete where
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient TransferOperationsDelete'{..}
           = go _todName _todXgafv _todUploadProtocol
-              (Just _todPp)
               _todAccessToken
               _todUploadType
-              _todBearerToken
               _todCallback
               (Just AltJSON)
               storageTransferService

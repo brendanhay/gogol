@@ -45,7 +45,7 @@ import           Network.Google.ShoppingContent.Types
 -- 'OrdersAdvancetestOrder' request conforms to.
 type OrdersAdvancetestOrderResource =
      "content" :>
-       "v2" :>
+       "v2.1" :>
          Capture "merchantId" (Textual Word64) :>
            "testorders" :>
              Capture "orderId" Text :>
@@ -79,7 +79,8 @@ ordersAdvancetestOrder pOaoMerchantId_ pOaoOrderId_ =
     , _oaoOrderId = pOaoOrderId_
     }
 
--- | The ID of the managing account.
+-- | The ID of the account that manages the order. This cannot be a
+-- multi-client account.
 oaoMerchantId :: Lens' OrdersAdvancetestOrder Word64
 oaoMerchantId
   = lens _oaoMerchantId

@@ -127,6 +127,12 @@ module Network.Google.Debugger.Types
     , lbrNextWaitToken
     , lbrBreakpoints
 
+    -- * StatusMessageRefersTo
+    , StatusMessageRefersTo (..)
+
+    -- * BreakpointLogLevel
+    , BreakpointLogLevel (..)
+
     -- * ListDebuggeesResponse
     , ListDebuggeesResponse
     , listDebuggeesResponse
@@ -143,6 +149,12 @@ module Network.Google.Debugger.Types
     , smRefersTo
     , smIsError
     , smDescription
+
+    -- * Xgafv
+    , Xgafv (..)
+
+    -- * BreakpointAction
+    , BreakpointAction (..)
 
     -- * ListActiveBreakpointsResponse
     , ListActiveBreakpointsResponse
@@ -168,6 +180,7 @@ module Network.Google.Debugger.Types
     , sourceLocation
     , slPath
     , slLine
+    , slColumn
 
     -- * StackFrame
     , StackFrame
@@ -222,6 +235,9 @@ module Network.Google.Debugger.Types
     , acKind
     , acName
 
+    -- * AliasContextKind
+    , AliasContextKind (..)
+
     -- * CloudWorkspaceId
     , CloudWorkspaceId
     , cloudWorkspaceId
@@ -239,7 +255,7 @@ debuggerService
   = defaultService (ServiceId "clouddebugger:v2")
       "clouddebugger.googleapis.com"
 
--- | Manage cloud debugger
+-- | Use Stackdriver Debugger
 cloudDebuggerScope :: Proxy '["https://www.googleapis.com/auth/cloud_debugger"]
 cloudDebuggerScope = Proxy;
 

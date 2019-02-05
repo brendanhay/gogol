@@ -46,13 +46,13 @@ import           Network.Google.Prelude
 -- 'EditsTracksGet' request conforms to.
 type EditsTracksGetResource =
      "androidpublisher" :>
-       "v2" :>
+       "v3" :>
          "applications" :>
            Capture "packageName" Text :>
              "edits" :>
                Capture "editId" Text :>
                  "tracks" :>
-                   Capture "track" EditsTracksGetTrack :>
+                   Capture "track" Text :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Track
 
 -- | Fetches the track configuration for the specified track type. Includes
@@ -60,7 +60,7 @@ type EditsTracksGetResource =
 --
 -- /See:/ 'editsTracksGet' smart constructor.
 data EditsTracksGet = EditsTracksGet'
-    { _etgtTrack       :: !EditsTracksGetTrack
+    { _etgtTrack       :: !Text
     , _etgtPackageName :: !Text
     , _etgtEditId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -75,7 +75,7 @@ data EditsTracksGet = EditsTracksGet'
 --
 -- * 'etgtEditId'
 editsTracksGet
-    :: EditsTracksGetTrack -- ^ 'etgtTrack'
+    :: Text -- ^ 'etgtTrack'
     -> Text -- ^ 'etgtPackageName'
     -> Text -- ^ 'etgtEditId'
     -> EditsTracksGet
@@ -86,8 +86,8 @@ editsTracksGet pEtgtTrack_ pEtgtPackageName_ pEtgtEditId_ =
     , _etgtEditId = pEtgtEditId_
     }
 
--- | The track type to read or modify.
-etgtTrack :: Lens' EditsTracksGet EditsTracksGetTrack
+-- | The track to read or modify.
+etgtTrack :: Lens' EditsTracksGet Text
 etgtTrack
   = lens _etgtTrack (\ s a -> s{_etgtTrack = a})
 

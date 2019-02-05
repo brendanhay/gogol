@@ -22,7 +22,7 @@
 --
 -- Returns the IAM access control policy for a ServiceAccount.
 --
--- /See:/ <https://cloud.google.com/iam/ Google Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.getIamPolicy@.
+-- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.getIamPolicy@.
 module Network.Google.Resource.IAM.Projects.ServiceAccounts.GetIAMPolicy
     (
     -- * REST Resource
@@ -35,10 +35,8 @@ module Network.Google.Resource.IAM.Projects.ServiceAccounts.GetIAMPolicy
     -- * Request Lenses
     , psagipXgafv
     , psagipUploadProtocol
-    , psagipPp
     , psagipAccessToken
     , psagipUploadType
-    , psagipBearerToken
     , psagipResource
     , psagipCallback
     ) where
@@ -51,25 +49,21 @@ import           Network.Google.Prelude
 type ProjectsServiceAccountsGetIAMPolicyResource =
      "v1" :>
        CaptureMode "resource" "getIamPolicy" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :> Post '[JSON] Policy
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :> Post '[JSON] Policy
 
 -- | Returns the IAM access control policy for a ServiceAccount.
 --
 -- /See:/ 'projectsServiceAccountsGetIAMPolicy' smart constructor.
 data ProjectsServiceAccountsGetIAMPolicy = ProjectsServiceAccountsGetIAMPolicy'
-    { _psagipXgafv          :: !(Maybe Text)
+    { _psagipXgafv          :: !(Maybe Xgafv)
     , _psagipUploadProtocol :: !(Maybe Text)
-    , _psagipPp             :: !Bool
     , _psagipAccessToken    :: !(Maybe Text)
     , _psagipUploadType     :: !(Maybe Text)
-    , _psagipBearerToken    :: !(Maybe Text)
     , _psagipResource       :: !Text
     , _psagipCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -82,13 +76,9 @@ data ProjectsServiceAccountsGetIAMPolicy = ProjectsServiceAccountsGetIAMPolicy'
 --
 -- * 'psagipUploadProtocol'
 --
--- * 'psagipPp'
---
 -- * 'psagipAccessToken'
 --
 -- * 'psagipUploadType'
---
--- * 'psagipBearerToken'
 --
 -- * 'psagipResource'
 --
@@ -100,16 +90,14 @@ projectsServiceAccountsGetIAMPolicy pPsagipResource_ =
     ProjectsServiceAccountsGetIAMPolicy'
     { _psagipXgafv = Nothing
     , _psagipUploadProtocol = Nothing
-    , _psagipPp = True
     , _psagipAccessToken = Nothing
     , _psagipUploadType = Nothing
-    , _psagipBearerToken = Nothing
     , _psagipResource = pPsagipResource_
     , _psagipCallback = Nothing
     }
 
 -- | V1 error format.
-psagipXgafv :: Lens' ProjectsServiceAccountsGetIAMPolicy (Maybe Text)
+psagipXgafv :: Lens' ProjectsServiceAccountsGetIAMPolicy (Maybe Xgafv)
 psagipXgafv
   = lens _psagipXgafv (\ s a -> s{_psagipXgafv = a})
 
@@ -118,10 +106,6 @@ psagipUploadProtocol :: Lens' ProjectsServiceAccountsGetIAMPolicy (Maybe Text)
 psagipUploadProtocol
   = lens _psagipUploadProtocol
       (\ s a -> s{_psagipUploadProtocol = a})
-
--- | Pretty-print response.
-psagipPp :: Lens' ProjectsServiceAccountsGetIAMPolicy Bool
-psagipPp = lens _psagipPp (\ s a -> s{_psagipPp = a})
 
 -- | OAuth access token.
 psagipAccessToken :: Lens' ProjectsServiceAccountsGetIAMPolicy (Maybe Text)
@@ -135,15 +119,8 @@ psagipUploadType
   = lens _psagipUploadType
       (\ s a -> s{_psagipUploadType = a})
 
--- | OAuth bearer token.
-psagipBearerToken :: Lens' ProjectsServiceAccountsGetIAMPolicy (Maybe Text)
-psagipBearerToken
-  = lens _psagipBearerToken
-      (\ s a -> s{_psagipBearerToken = a})
-
--- | REQUIRED: The resource for which the policy is being requested.
--- \`resource\` is usually specified as a path. For example, a Project
--- resource is specified as \`projects\/{project}\`.
+-- | REQUIRED: The resource for which the policy is being requested. See the
+-- operation documentation for the appropriate value for this field.
 psagipResource :: Lens' ProjectsServiceAccountsGetIAMPolicy Text
 psagipResource
   = lens _psagipResource
@@ -164,10 +141,8 @@ instance GoogleRequest
           ProjectsServiceAccountsGetIAMPolicy'{..}
           = go _psagipResource _psagipXgafv
               _psagipUploadProtocol
-              (Just _psagipPp)
               _psagipAccessToken
               _psagipUploadType
-              _psagipBearerToken
               _psagipCallback
               (Just AltJSON)
               iAMService

@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'DirectorySitesGet' request conforms to.
 type DirectorySitesGetResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "directorySites" :>

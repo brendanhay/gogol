@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 -- 'EditsDeobfuscationFilesUpload' request conforms to.
 type EditsDeobfuscationFilesUploadResource =
      "androidpublisher" :>
-       "v2" :>
+       "v3" :>
          "applications" :>
            Capture "packageName" Text :>
              "edits" :>
@@ -63,7 +63,7 @@ type EditsDeobfuscationFilesUploadResource =
        :<|>
        "upload" :>
          "androidpublisher" :>
-           "v2" :>
+           "v3" :>
              "applications" :>
                Capture "packageName" Text :>
                  "edits" :>

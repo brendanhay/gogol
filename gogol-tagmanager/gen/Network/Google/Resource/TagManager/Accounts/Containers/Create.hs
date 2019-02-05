@@ -22,7 +22,7 @@
 --
 -- Creates a Container.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.containers.create@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v2/ Tag Manager API Reference> for @tagmanager.accounts.containers.create@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Create
     (
     -- * REST Resource
@@ -33,8 +33,8 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Create
     , AccountsContainersCreate
 
     -- * Request Lenses
+    , accParent
     , accPayload
-    , accAccountId
     ) where
 
 import           Network.Google.Prelude
@@ -44,54 +44,53 @@ import           Network.Google.TagManager.Types
 -- 'AccountsContainersCreate' request conforms to.
 type AccountsContainersCreateResource =
      "tagmanager" :>
-       "v1" :>
-         "accounts" :>
-           Capture "accountId" Text :>
-             "containers" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] Container :> Post '[JSON] Container
+       "v2" :>
+         Capture "parent" Text :>
+           "containers" :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] Container :> Post '[JSON] Container
 
 -- | Creates a Container.
 --
 -- /See:/ 'accountsContainersCreate' smart constructor.
 data AccountsContainersCreate = AccountsContainersCreate'
-    { _accPayload   :: !Container
-    , _accAccountId :: !Text
+    { _accParent  :: !Text
+    , _accPayload :: !Container
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'accPayload'
+-- * 'accParent'
 --
--- * 'accAccountId'
+-- * 'accPayload'
 accountsContainersCreate
-    :: Container -- ^ 'accPayload'
-    -> Text -- ^ 'accAccountId'
+    :: Text -- ^ 'accParent'
+    -> Container -- ^ 'accPayload'
     -> AccountsContainersCreate
-accountsContainersCreate pAccPayload_ pAccAccountId_ =
+accountsContainersCreate pAccParent_ pAccPayload_ =
     AccountsContainersCreate'
-    { _accPayload = pAccPayload_
-    , _accAccountId = pAccAccountId_
+    { _accParent = pAccParent_
+    , _accPayload = pAccPayload_
     }
+
+-- | GTM Account\'s API relative path. Example: accounts\/{account_id}.
+accParent :: Lens' AccountsContainersCreate Text
+accParent
+  = lens _accParent (\ s a -> s{_accParent = a})
 
 -- | Multipart request metadata.
 accPayload :: Lens' AccountsContainersCreate Container
 accPayload
   = lens _accPayload (\ s a -> s{_accPayload = a})
 
--- | The GTM Account ID.
-accAccountId :: Lens' AccountsContainersCreate Text
-accAccountId
-  = lens _accAccountId (\ s a -> s{_accAccountId = a})
-
 instance GoogleRequest AccountsContainersCreate where
         type Rs AccountsContainersCreate = Container
         type Scopes AccountsContainersCreate =
              '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
         requestClient AccountsContainersCreate'{..}
-          = go _accAccountId (Just AltJSON) _accPayload
+          = go _accParent (Just AltJSON) _accPayload
               tagManagerService
           where go
                   = buildClient

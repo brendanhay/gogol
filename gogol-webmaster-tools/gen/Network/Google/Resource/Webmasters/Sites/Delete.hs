@@ -69,7 +69,9 @@ sitesDelete pSSiteURL_ =
     }
 
 -- | The URI of the property as defined in Search Console. Examples:
--- http:\/\/www.example.com\/ or android-app:\/\/com.example\/
+-- http:\/\/www.example.com\/ or android-app:\/\/com.example\/ Note: for
+-- property-sets, use the URI that starts with sc-set: which is used in
+-- Search Console URLs.
 sSiteURL :: Lens' SitesDelete Text
 sSiteURL = lens _sSiteURL (\ s a -> s{_sSiteURL = a})
 

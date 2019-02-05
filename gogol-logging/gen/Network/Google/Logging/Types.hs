@@ -26,6 +26,9 @@ module Network.Google.Logging.Types
     , cloudPlatformReadOnlyScope
     , cloudPlatformScope
 
+    -- * MetricDescriptorValueType
+    , MetricDescriptorValueType (..)
+
     -- * MonitoredResourceDescriptor
     , MonitoredResourceDescriptor
     , monitoredResourceDescriptor
@@ -41,6 +44,19 @@ module Network.Google.Logging.Types
     , llerNextPageToken
     , llerEntries
 
+    -- * MetricDescriptor
+    , MetricDescriptor
+    , metricDescriptor
+    , mdMetricKind
+    , mdName
+    , mdMetadata
+    , mdDisplayName
+    , mdLabels
+    , mdType
+    , mdValueType
+    , mdDescription
+    , mdUnit
+
     -- * MonitoredResourceLabels
     , MonitoredResourceLabels
     , monitoredResourceLabels
@@ -48,6 +64,12 @@ module Network.Google.Logging.Types
 
     -- * LogMetricVersion
     , LogMetricVersion (..)
+
+    -- * MonitoredResourceMetadata
+    , MonitoredResourceMetadata
+    , monitoredResourceMetadata
+    , mrmUserLabels
+    , mrmSystemLabels
 
     -- * ListLogMetricsResponse
     , ListLogMetricsResponse
@@ -63,6 +85,12 @@ module Network.Google.Logging.Types
     , wlerResource
     , wlerLabels
     , wlerLogName
+    , wlerDryRun
+
+    -- * LogMetricLabelExtractors
+    , LogMetricLabelExtractors
+    , logMetricLabelExtractors
+    , lmleAddtional
 
     -- * LogSinkOutputVersionFormat
     , LogSinkOutputVersionFormat (..)
@@ -113,6 +141,7 @@ module Network.Google.Logging.Types
     , rlUserAgent
     , rlNickname
     , rlHost
+    , rlTraceSampled
     , rlTaskQueueName
     , rlResponseSize
     , rlSourceReference
@@ -123,20 +152,54 @@ module Network.Google.Logging.Types
     , logEntryProtoPayload
     , leppAddtional
 
+    -- * LogEntrySourceLocation
+    , LogEntrySourceLocation
+    , logEntrySourceLocation
+    , leslFunction
+    , leslLine
+    , leslFile
+
+    -- * LogExclusion
+    , LogExclusion
+    , logExclusion
+    , leDisabled
+    , leName
+    , leFilter
+    , leDescription
+
     -- * WriteLogEntriesResponse
     , WriteLogEntriesResponse
     , writeLogEntriesResponse
+
+    -- * MetricDescriptorMetadataLaunchStage
+    , MetricDescriptorMetadataLaunchStage (..)
 
     -- * LogSink
     , LogSink
     , logSink
     , lsDestination
-    , lsStartTime
+    , lsIncludeChildren
     , lsOutputVersionFormat
     , lsWriterIdentity
     , lsName
-    , lsEndTime
     , lsFilter
+
+    -- * MonitoredResourceMetadataUserLabels
+    , MonitoredResourceMetadataUserLabels
+    , monitoredResourceMetadataUserLabels
+    , mrmulAddtional
+
+    -- * ListExclusionsResponse
+    , ListExclusionsResponse
+    , listExclusionsResponse
+    , lerNextPageToken
+    , lerExclusions
+
+    -- * ListLogsResponse
+    , ListLogsResponse
+    , listLogsResponse
+    , llrNextPageToken
+    , llrLogNames
 
     -- * ListMonitoredResourceDescriptorsResponse
     , ListMonitoredResourceDescriptorsResponse
@@ -147,6 +210,11 @@ module Network.Google.Logging.Types
     -- * LabelDescriptorValueType
     , LabelDescriptorValueType (..)
 
+    -- * Explicit
+    , Explicit
+    , explicit
+    , eBounds
+
     -- * HTTPRequest
     , HTTPRequest
     , hTTPRequest
@@ -155,6 +223,7 @@ module Network.Google.Logging.Types
     , httprCacheFillBytes
     , httprRemoteIP
     , httprLatency
+    , httprProtocol
     , httprServerIP
     , httprRequestSize
     , httprCacheValidatedWithOriginServer
@@ -164,6 +233,13 @@ module Network.Google.Logging.Types
     , httprRequestMethod
     , httprCacheHit
     , httprReferer
+
+    -- * Exponential
+    , Exponential
+    , exponential
+    , eGrowthFactor
+    , eScale
+    , eNumFiniteBuckets
 
     -- * WriteLogEntriesRequestLabels
     , WriteLogEntriesRequestLabels
@@ -187,12 +263,31 @@ module Network.Google.Logging.Types
     , llLogMessage
     , llSourceLocation
 
+    -- * MetricDescriptorMetadata
+    , MetricDescriptorMetadata
+    , metricDescriptorMetadata
+    , mdmSamplePeriod
+    , mdmIngestDelay
+    , mdmLaunchStage
+
+    -- * MonitoredResourceMetadataSystemLabels
+    , MonitoredResourceMetadataSystemLabels
+    , monitoredResourceMetadataSystemLabels
+    , mrmslAddtional
+
     -- * LabelDescriptor
     , LabelDescriptor
     , labelDescriptor
     , ldKey
     , ldValueType
     , ldDescription
+
+    -- * Linear
+    , Linear
+    , linear
+    , lOffSet
+    , lWidth
+    , lNumFiniteBuckets
 
     -- * ListLogEntriesRequest
     , ListLogEntriesRequest
@@ -215,9 +310,13 @@ module Network.Google.Logging.Types
     -- * LogMetric
     , LogMetric
     , logMetric
+    , lmMetricDescriptor
     , lmName
     , lmVersion
+    , lmLabelExtractors
     , lmFilter
+    , lmValueExtractor
+    , lmBucketOptions
     , lmDescription
 
     -- * LogEntry
@@ -230,10 +329,16 @@ module Network.Google.Logging.Types
     , leHTTPRequest
     , leResource
     , leInsertId
+    , leMetadata
+    , leReceiveTimestamp
     , leLabels
     , leProtoPayload
+    , leSourceLocation
+    , leTraceSampled
     , leLogName
     , leTimestamp
+    , leTrace
+    , leSpanId
 
     -- * SourceLocation
     , SourceLocation
@@ -242,8 +347,18 @@ module Network.Google.Logging.Types
     , slFunctionName
     , slFile
 
+    -- * MetricDescriptorMetricKind
+    , MetricDescriptorMetricKind (..)
+
     -- * LogEntrySeverity
     , LogEntrySeverity (..)
+
+    -- * BucketOptions
+    , BucketOptions
+    , bucketOptions
+    , boExponentialBuckets
+    , boLinearBuckets
+    , boExplicitBuckets
 
     -- * SourceReference
     , SourceReference

@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the state of the specified dataflow job.
+-- Gets the state of the specified Cloud Dataflow job.
 --
--- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @dataflow.projects.jobs.get@.
+-- /See:/ <https://cloud.google.com/dataflow Dataflow API Reference> for @dataflow.projects.jobs.get@.
 module Network.Google.Resource.Dataflow.Projects.Jobs.Get
     (
     -- * REST Resource
@@ -36,10 +36,9 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.Get
     , pjgXgafv
     , pjgJobId
     , pjgUploadProtocol
-    , pjgPp
+    , pjgLocation
     , pjgAccessToken
     , pjgUploadType
-    , pjgBearerToken
     , pjgView
     , pjgProjectId
     , pjgCallback
@@ -56,27 +55,25 @@ type ProjectsJobsGetResource =
          Capture "projectId" Text :>
            "jobs" :>
              Capture "jobId" Text :>
-               QueryParam "$.xgafv" Text :>
+               QueryParam "$.xgafv" Xgafv :>
                  QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
+                   QueryParam "location" Text :>
                      QueryParam "access_token" Text :>
                        QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "view" Text :>
-                             QueryParam "callback" Text :>
-                               QueryParam "alt" AltJSON :> Get '[JSON] Job
+                         QueryParam "view" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :> Get '[JSON] Job
 
--- | Gets the state of the specified dataflow job.
+-- | Gets the state of the specified Cloud Dataflow job.
 --
 -- /See:/ 'projectsJobsGet' smart constructor.
 data ProjectsJobsGet = ProjectsJobsGet'
-    { _pjgXgafv          :: !(Maybe Text)
+    { _pjgXgafv          :: !(Maybe Xgafv)
     , _pjgJobId          :: !Text
     , _pjgUploadProtocol :: !(Maybe Text)
-    , _pjgPp             :: !Bool
+    , _pjgLocation       :: !(Maybe Text)
     , _pjgAccessToken    :: !(Maybe Text)
     , _pjgUploadType     :: !(Maybe Text)
-    , _pjgBearerToken    :: !(Maybe Text)
     , _pjgView           :: !(Maybe Text)
     , _pjgProjectId      :: !Text
     , _pjgCallback       :: !(Maybe Text)
@@ -92,13 +89,11 @@ data ProjectsJobsGet = ProjectsJobsGet'
 --
 -- * 'pjgUploadProtocol'
 --
--- * 'pjgPp'
+-- * 'pjgLocation'
 --
 -- * 'pjgAccessToken'
 --
 -- * 'pjgUploadType'
---
--- * 'pjgBearerToken'
 --
 -- * 'pjgView'
 --
@@ -114,20 +109,19 @@ projectsJobsGet pPjgJobId_ pPjgProjectId_ =
     { _pjgXgafv = Nothing
     , _pjgJobId = pPjgJobId_
     , _pjgUploadProtocol = Nothing
-    , _pjgPp = True
+    , _pjgLocation = Nothing
     , _pjgAccessToken = Nothing
     , _pjgUploadType = Nothing
-    , _pjgBearerToken = Nothing
     , _pjgView = Nothing
     , _pjgProjectId = pPjgProjectId_
     , _pjgCallback = Nothing
     }
 
 -- | V1 error format.
-pjgXgafv :: Lens' ProjectsJobsGet (Maybe Text)
+pjgXgafv :: Lens' ProjectsJobsGet (Maybe Xgafv)
 pjgXgafv = lens _pjgXgafv (\ s a -> s{_pjgXgafv = a})
 
--- | Identifies a single job.
+-- | The job ID.
 pjgJobId :: Lens' ProjectsJobsGet Text
 pjgJobId = lens _pjgJobId (\ s a -> s{_pjgJobId = a})
 
@@ -137,9 +131,10 @@ pjgUploadProtocol
   = lens _pjgUploadProtocol
       (\ s a -> s{_pjgUploadProtocol = a})
 
--- | Pretty-print response.
-pjgPp :: Lens' ProjectsJobsGet Bool
-pjgPp = lens _pjgPp (\ s a -> s{_pjgPp = a})
+-- | The location that contains this job.
+pjgLocation :: Lens' ProjectsJobsGet (Maybe Text)
+pjgLocation
+  = lens _pjgLocation (\ s a -> s{_pjgLocation = a})
 
 -- | OAuth access token.
 pjgAccessToken :: Lens' ProjectsJobsGet (Maybe Text)
@@ -153,17 +148,11 @@ pjgUploadType
   = lens _pjgUploadType
       (\ s a -> s{_pjgUploadType = a})
 
--- | OAuth bearer token.
-pjgBearerToken :: Lens' ProjectsJobsGet (Maybe Text)
-pjgBearerToken
-  = lens _pjgBearerToken
-      (\ s a -> s{_pjgBearerToken = a})
-
--- | Level of information requested in response.
+-- | The level of information requested in response.
 pjgView :: Lens' ProjectsJobsGet (Maybe Text)
 pjgView = lens _pjgView (\ s a -> s{_pjgView = a})
 
--- | The project which owns the job.
+-- | The ID of the Cloud Platform project that the job belongs to.
 pjgProjectId :: Lens' ProjectsJobsGet Text
 pjgProjectId
   = lens _pjgProjectId (\ s a -> s{_pjgProjectId = a})
@@ -177,14 +166,15 @@ instance GoogleRequest ProjectsJobsGet where
         type Rs ProjectsJobsGet = Job
         type Scopes ProjectsJobsGet =
              '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly",
                "https://www.googleapis.com/auth/userinfo.email"]
         requestClient ProjectsJobsGet'{..}
           = go _pjgProjectId _pjgJobId _pjgXgafv
               _pjgUploadProtocol
-              (Just _pjgPp)
+              _pjgLocation
               _pjgAccessToken
               _pjgUploadType
-              _pjgBearerToken
               _pjgView
               _pjgCallback
               (Just AltJSON)

@@ -80,7 +80,8 @@ instance GoogleRequest RelyingPartyCreateAuthURI
          where
         type Rs RelyingPartyCreateAuthURI =
              CreateAuthURIResponse
-        type Scopes RelyingPartyCreateAuthURI = '[]
+        type Scopes RelyingPartyCreateAuthURI =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient RelyingPartyCreateAuthURI'{..}
           = go (Just AltJSON) _rpcauPayload
               identityToolkitService

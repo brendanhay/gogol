@@ -20,7 +20,13 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Sets the store layout for the enterprise.
+-- Sets the store layout for the enterprise. By default, storeLayoutType is
+-- set to \"basic\" and the basic store layout is enabled. The basic layout
+-- only contains apps approved by the admin, and that have been added to
+-- the available product set for a user (using the setAvailableProductSet
+-- call). Apps on the page are sorted in order of their product ID value.
+-- If you create a custom store layout (by setting storeLayoutType =
+-- \"custom\" and setting a homepage), the basic store layout is disabled.
 --
 -- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.enterprises.setStoreLayout@.
 module Network.Google.Resource.AndroidEnterprise.Enterprises.SetStoreLayout
@@ -52,7 +58,13 @@ type EnterprisesSetStoreLayoutResource =
                  ReqBody '[JSON] StoreLayout :>
                    Put '[JSON] StoreLayout
 
--- | Sets the store layout for the enterprise.
+-- | Sets the store layout for the enterprise. By default, storeLayoutType is
+-- set to \"basic\" and the basic store layout is enabled. The basic layout
+-- only contains apps approved by the admin, and that have been added to
+-- the available product set for a user (using the setAvailableProductSet
+-- call). Apps on the page are sorted in order of their product ID value.
+-- If you create a custom store layout (by setting storeLayoutType =
+-- \"custom\" and setting a homepage), the basic store layout is disabled.
 --
 -- /See:/ 'enterprisesSetStoreLayout' smart constructor.
 data EnterprisesSetStoreLayout = EnterprisesSetStoreLayout'

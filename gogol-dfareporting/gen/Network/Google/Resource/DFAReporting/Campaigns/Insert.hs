@@ -35,8 +35,6 @@ module Network.Google.Resource.DFAReporting.Campaigns.Insert
     -- * Request Lenses
     , camProFileId
     , camPayload
-    , camDefaultLandingPageURL
-    , camDefaultLandingPageName
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -46,23 +44,19 @@ import           Network.Google.Prelude
 -- 'CampaignsInsert' request conforms to.
 type CampaignsInsertResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "campaigns" :>
-               QueryParam "defaultLandingPageName" Text :>
-                 QueryParam "defaultLandingPageUrl" Text :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] Campaign :> Post '[JSON] Campaign
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Campaign :> Post '[JSON] Campaign
 
 -- | Inserts a new campaign.
 --
 -- /See:/ 'campaignsInsert' smart constructor.
 data CampaignsInsert = CampaignsInsert'
-    { _camProFileId              :: !(Textual Int64)
-    , _camPayload                :: !Campaign
-    , _camDefaultLandingPageURL  :: !Text
-    , _camDefaultLandingPageName :: !Text
+    { _camProFileId :: !(Textual Int64)
+    , _camPayload   :: !Campaign
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CampaignsInsert' with the minimum fields required to make a request.
@@ -72,22 +66,14 @@ data CampaignsInsert = CampaignsInsert'
 -- * 'camProFileId'
 --
 -- * 'camPayload'
---
--- * 'camDefaultLandingPageURL'
---
--- * 'camDefaultLandingPageName'
 campaignsInsert
     :: Int64 -- ^ 'camProFileId'
     -> Campaign -- ^ 'camPayload'
-    -> Text -- ^ 'camDefaultLandingPageURL'
-    -> Text -- ^ 'camDefaultLandingPageName'
     -> CampaignsInsert
-campaignsInsert pCamProFileId_ pCamPayload_ pCamDefaultLandingPageURL_ pCamDefaultLandingPageName_ =
+campaignsInsert pCamProFileId_ pCamPayload_ =
     CampaignsInsert'
     { _camProFileId = _Coerce # pCamProFileId_
     , _camPayload = pCamPayload_
-    , _camDefaultLandingPageURL = pCamDefaultLandingPageURL_
-    , _camDefaultLandingPageName = pCamDefaultLandingPageName_
     }
 
 -- | User profile ID associated with this request.
@@ -101,28 +87,12 @@ camPayload :: Lens' CampaignsInsert Campaign
 camPayload
   = lens _camPayload (\ s a -> s{_camPayload = a})
 
--- | Default landing page URL for this new campaign.
-camDefaultLandingPageURL :: Lens' CampaignsInsert Text
-camDefaultLandingPageURL
-  = lens _camDefaultLandingPageURL
-      (\ s a -> s{_camDefaultLandingPageURL = a})
-
--- | Default landing page name for this new campaign. Must be less than 256
--- characters long.
-camDefaultLandingPageName :: Lens' CampaignsInsert Text
-camDefaultLandingPageName
-  = lens _camDefaultLandingPageName
-      (\ s a -> s{_camDefaultLandingPageName = a})
-
 instance GoogleRequest CampaignsInsert where
         type Rs CampaignsInsert = Campaign
         type Scopes CampaignsInsert =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CampaignsInsert'{..}
-          = go _camProFileId (Just _camDefaultLandingPageName)
-              (Just _camDefaultLandingPageURL)
-              (Just AltJSON)
-              _camPayload
+          = go _camProFileId (Just AltJSON) _camPayload
               dFAReportingService
           where go
                   = buildClient

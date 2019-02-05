@@ -22,20 +22,36 @@
 --
 -- Updates the specified Version resource. You can specify the following
 -- fields depending on the App Engine environment and type of scaling that
--- the version resource uses: *
--- [\`serving_status\`](https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.serving_status):
--- For Version resources that use basic scaling, manual scaling, or run in
--- the App Engine flexible environment. *
--- [\`instance_class\`](https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.instance_class):
--- For Version resources that run in the App Engine standard environment. *
--- [\`automatic_scaling.min_idle_instances\`](https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.automatic_scaling):
--- For Version resources that use automatic scaling and run in the App
--- Engine standard environment. *
--- [\`automatic_scaling.max_idle_instances\`](https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.automatic_scaling):
--- For Version resources that use automatic scaling and run in the App
--- Engine standard environment.
+-- the version resource uses:Standard environment instance_class
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.instance_class)automatic
+-- scaling in the standard environment:
+-- automatic_scaling.min_idle_instances
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.automatic_scaling)
+-- automatic_scaling.max_idle_instances
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.automatic_scaling)
+-- automaticScaling.standard_scheduler_settings.max_instances
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#StandardSchedulerSettings)
+-- automaticScaling.standard_scheduler_settings.min_instances
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#StandardSchedulerSettings)
+-- automaticScaling.standard_scheduler_settings.target_cpu_utilization
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#StandardSchedulerSettings)
+-- automaticScaling.standard_scheduler_settings.target_throughput_utilization
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#StandardSchedulerSettings)basic
+-- scaling or manual scaling in the standard environment: serving_status
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.serving_status)Flexible
+-- environment serving_status
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.serving_status)automatic
+-- scaling in the flexible environment:
+-- automatic_scaling.min_total_instances
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.automatic_scaling)
+-- automatic_scaling.max_total_instances
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.automatic_scaling)
+-- automatic_scaling.cool_down_period_sec
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.automatic_scaling)
+-- automatic_scaling.cpu_utilization.target_utilization
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.automatic_scaling)
 --
--- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ Google App Engine Admin API Reference> for @appengine.apps.services.versions.patch@.
+-- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ App Engine Admin API Reference> for @appengine.apps.services.versions.patch@.
 module Network.Google.Resource.AppEngine.Apps.Services.Versions.Patch
     (
     -- * REST Resource
@@ -49,12 +65,10 @@ module Network.Google.Resource.AppEngine.Apps.Services.Versions.Patch
     , asvpXgafv
     , asvpUploadProtocol
     , asvpUpdateMask
-    , asvpPp
     , asvpAccessToken
     , asvpUploadType
     , asvpPayload
     , asvpVersionsId
-    , asvpBearerToken
     , asvpAppsId
     , asvpServicesId
     , asvpCallback
@@ -73,44 +87,56 @@ type AppsServicesVersionsPatchResource =
              Capture "servicesId" Text :>
                "versions" :>
                  Capture "versionsId" Text :>
-                   QueryParam "$.xgafv" Text :>
+                   QueryParam "$.xgafv" Xgafv :>
                      QueryParam "upload_protocol" Text :>
-                       QueryParam "updateMask" Text :>
-                         QueryParam "pp" Bool :>
-                           QueryParam "access_token" Text :>
-                             QueryParam "uploadType" Text :>
-                               QueryParam "bearer_token" Text :>
-                                 QueryParam "callback" Text :>
-                                   QueryParam "alt" AltJSON :>
-                                     ReqBody '[JSON] Version :>
-                                       Patch '[JSON] Operation
+                       QueryParam "updateMask" GFieldMask :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] Version :>
+                                   Patch '[JSON] Operation
 
 -- | Updates the specified Version resource. You can specify the following
 -- fields depending on the App Engine environment and type of scaling that
--- the version resource uses: *
--- [\`serving_status\`](https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.serving_status):
--- For Version resources that use basic scaling, manual scaling, or run in
--- the App Engine flexible environment. *
--- [\`instance_class\`](https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.instance_class):
--- For Version resources that run in the App Engine standard environment. *
--- [\`automatic_scaling.min_idle_instances\`](https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.automatic_scaling):
--- For Version resources that use automatic scaling and run in the App
--- Engine standard environment. *
--- [\`automatic_scaling.max_idle_instances\`](https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.automatic_scaling):
--- For Version resources that use automatic scaling and run in the App
--- Engine standard environment.
+-- the version resource uses:Standard environment instance_class
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.instance_class)automatic
+-- scaling in the standard environment:
+-- automatic_scaling.min_idle_instances
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.automatic_scaling)
+-- automatic_scaling.max_idle_instances
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.automatic_scaling)
+-- automaticScaling.standard_scheduler_settings.max_instances
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#StandardSchedulerSettings)
+-- automaticScaling.standard_scheduler_settings.min_instances
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#StandardSchedulerSettings)
+-- automaticScaling.standard_scheduler_settings.target_cpu_utilization
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#StandardSchedulerSettings)
+-- automaticScaling.standard_scheduler_settings.target_throughput_utilization
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#StandardSchedulerSettings)basic
+-- scaling or manual scaling in the standard environment: serving_status
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.serving_status)Flexible
+-- environment serving_status
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.serving_status)automatic
+-- scaling in the flexible environment:
+-- automatic_scaling.min_total_instances
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.automatic_scaling)
+-- automatic_scaling.max_total_instances
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.automatic_scaling)
+-- automatic_scaling.cool_down_period_sec
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.automatic_scaling)
+-- automatic_scaling.cpu_utilization.target_utilization
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.automatic_scaling)
 --
 -- /See:/ 'appsServicesVersionsPatch' smart constructor.
 data AppsServicesVersionsPatch = AppsServicesVersionsPatch'
-    { _asvpXgafv          :: !(Maybe Text)
+    { _asvpXgafv          :: !(Maybe Xgafv)
     , _asvpUploadProtocol :: !(Maybe Text)
-    , _asvpUpdateMask     :: !(Maybe Text)
-    , _asvpPp             :: !Bool
+    , _asvpUpdateMask     :: !(Maybe GFieldMask)
     , _asvpAccessToken    :: !(Maybe Text)
     , _asvpUploadType     :: !(Maybe Text)
     , _asvpPayload        :: !Version
     , _asvpVersionsId     :: !Text
-    , _asvpBearerToken    :: !(Maybe Text)
     , _asvpAppsId         :: !Text
     , _asvpServicesId     :: !Text
     , _asvpCallback       :: !(Maybe Text)
@@ -126,8 +152,6 @@ data AppsServicesVersionsPatch = AppsServicesVersionsPatch'
 --
 -- * 'asvpUpdateMask'
 --
--- * 'asvpPp'
---
 -- * 'asvpAccessToken'
 --
 -- * 'asvpUploadType'
@@ -135,8 +159,6 @@ data AppsServicesVersionsPatch = AppsServicesVersionsPatch'
 -- * 'asvpPayload'
 --
 -- * 'asvpVersionsId'
---
--- * 'asvpBearerToken'
 --
 -- * 'asvpAppsId'
 --
@@ -154,19 +176,17 @@ appsServicesVersionsPatch pAsvpPayload_ pAsvpVersionsId_ pAsvpAppsId_ pAsvpServi
     { _asvpXgafv = Nothing
     , _asvpUploadProtocol = Nothing
     , _asvpUpdateMask = Nothing
-    , _asvpPp = True
     , _asvpAccessToken = Nothing
     , _asvpUploadType = Nothing
     , _asvpPayload = pAsvpPayload_
     , _asvpVersionsId = pAsvpVersionsId_
-    , _asvpBearerToken = Nothing
     , _asvpAppsId = pAsvpAppsId_
     , _asvpServicesId = pAsvpServicesId_
     , _asvpCallback = Nothing
     }
 
 -- | V1 error format.
-asvpXgafv :: Lens' AppsServicesVersionsPatch (Maybe Text)
+asvpXgafv :: Lens' AppsServicesVersionsPatch (Maybe Xgafv)
 asvpXgafv
   = lens _asvpXgafv (\ s a -> s{_asvpXgafv = a})
 
@@ -177,14 +197,10 @@ asvpUploadProtocol
       (\ s a -> s{_asvpUploadProtocol = a})
 
 -- | Standard field mask for the set of fields to be updated.
-asvpUpdateMask :: Lens' AppsServicesVersionsPatch (Maybe Text)
+asvpUpdateMask :: Lens' AppsServicesVersionsPatch (Maybe GFieldMask)
 asvpUpdateMask
   = lens _asvpUpdateMask
       (\ s a -> s{_asvpUpdateMask = a})
-
--- | Pretty-print response.
-asvpPp :: Lens' AppsServicesVersionsPatch Bool
-asvpPp = lens _asvpPp (\ s a -> s{_asvpPp = a})
 
 -- | OAuth access token.
 asvpAccessToken :: Lens' AppsServicesVersionsPatch (Maybe Text)
@@ -209,14 +225,8 @@ asvpVersionsId
   = lens _asvpVersionsId
       (\ s a -> s{_asvpVersionsId = a})
 
--- | OAuth bearer token.
-asvpBearerToken :: Lens' AppsServicesVersionsPatch (Maybe Text)
-asvpBearerToken
-  = lens _asvpBearerToken
-      (\ s a -> s{_asvpBearerToken = a})
-
 -- | Part of \`name\`. Name of the resource to update. Example:
--- \`apps\/myapp\/services\/default\/versions\/1\`.
+-- apps\/myapp\/services\/default\/versions\/1.
 asvpAppsId :: Lens' AppsServicesVersionsPatch Text
 asvpAppsId
   = lens _asvpAppsId (\ s a -> s{_asvpAppsId = a})
@@ -242,10 +252,8 @@ instance GoogleRequest AppsServicesVersionsPatch
               _asvpXgafv
               _asvpUploadProtocol
               _asvpUpdateMask
-              (Just _asvpPp)
               _asvpAccessToken
               _asvpUploadType
-              _asvpBearerToken
               _asvpCallback
               (Just AltJSON)
               _asvpPayload

@@ -1,5 +1,5 @@
 name:                  gogol-classroom
-version:               0.1.1
+version:               0.4.0
 synopsis:              Google Classroom SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -11,7 +11,7 @@ copyright:             Copyright (c) 2015-2016 Brendan Hay
 category:              Network, Google, Cloud
 build-type:            Simple
 cabal-version:         >= 1.10
-extra-source-files:    README.md
+extra-source-files:    README.md src/.gitkeep
 
 description:
     Manages classes, rosters, and invitations in Google Classroom.
@@ -38,9 +38,18 @@ library
         , Network.Google.Resource.Classroom.Courses.Aliases.Create
         , Network.Google.Resource.Classroom.Courses.Aliases.Delete
         , Network.Google.Resource.Classroom.Courses.Aliases.List
+        , Network.Google.Resource.Classroom.Courses.Announcements.Create
+        , Network.Google.Resource.Classroom.Courses.Announcements.Delete
+        , Network.Google.Resource.Classroom.Courses.Announcements.Get
+        , Network.Google.Resource.Classroom.Courses.Announcements.List
+        , Network.Google.Resource.Classroom.Courses.Announcements.ModifyAssignees
+        , Network.Google.Resource.Classroom.Courses.Announcements.Patch
         , Network.Google.Resource.Classroom.Courses.CourseWork.Create
+        , Network.Google.Resource.Classroom.Courses.CourseWork.Delete
         , Network.Google.Resource.Classroom.Courses.CourseWork.Get
         , Network.Google.Resource.Classroom.Courses.CourseWork.List
+        , Network.Google.Resource.Classroom.Courses.CourseWork.ModifyAssignees
+        , Network.Google.Resource.Classroom.Courses.CourseWork.Patch
         , Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.Get
         , Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.List
         , Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.ModifyAttachments
@@ -67,6 +76,8 @@ library
         , Network.Google.Resource.Classroom.Invitations.Delete
         , Network.Google.Resource.Classroom.Invitations.Get
         , Network.Google.Resource.Classroom.Invitations.List
+        , Network.Google.Resource.Classroom.Registrations.Create
+        , Network.Google.Resource.Classroom.Registrations.Delete
         , Network.Google.Resource.Classroom.UserProFiles.Get
         , Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.Create
         , Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.Get
@@ -81,5 +92,5 @@ library
         , Network.Google.Classroom.Types.Sum
 
     build-depends:
-          gogol-core == 0.1.1.*
+          gogol-core == 0.4.0.*
         , base       >= 4.7 && < 5

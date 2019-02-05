@@ -93,7 +93,7 @@ uawPayload :: Lens' UsersAliasesWatch Channel
 uawPayload
   = lens _uawPayload (\ s a -> s{_uawPayload = a})
 
--- | Email or immutable Id of the user
+-- | Email or immutable ID of the user
 uawUserKey :: Lens' UsersAliasesWatch Text
 uawUserKey
   = lens _uawUserKey (\ s a -> s{_uawUserKey = a})

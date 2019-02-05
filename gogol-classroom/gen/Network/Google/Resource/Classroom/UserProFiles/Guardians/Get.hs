@@ -21,14 +21,17 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Returns a specific guardian. This method returns the following error
--- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
--- to view guardian information for the student identified by the
--- \`student_id\`, if guardians are not enabled for the domain in question,
--- or for other access errors. * \`INVALID_ARGUMENT\` if a \`student_id\`
--- is specified, but its format cannot be recognized (it is not an email
--- address, nor a \`student_id\` from the API, nor the literal string
--- \`me\`). * \`NOT_FOUND\` if Classroom cannot find any record of the
--- given student or \`guardian_id\`, or if the guardian has been disabled.
+-- codes: * \`PERMISSION_DENIED\` if no user that matches the provided
+-- \`student_id\` is visible to the requesting user, if the requesting user
+-- is not permitted to view guardian information for the student identified
+-- by the \`student_id\`, if guardians are not enabled for the domain in
+-- question, or for other access errors. * \`INVALID_ARGUMENT\` if a
+-- \`student_id\` is specified, but its format cannot be recognized (it is
+-- not an email address, nor a \`student_id\` from the API, nor the literal
+-- string \`me\`). * \`NOT_FOUND\` if the requesting user is permitted to
+-- view guardians for the requested \`student_id\`, but no \`Guardian\`
+-- record exists for that student that matches the provided
+-- \`guardian_id\`.
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @classroom.userProfiles.guardians.get@.
 module Network.Google.Resource.Classroom.UserProFiles.Guardians.Get
@@ -44,11 +47,9 @@ module Network.Google.Resource.Classroom.UserProFiles.Guardians.Get
     , upfggStudentId
     , upfggXgafv
     , upfggUploadProtocol
-    , upfggPp
     , upfggAccessToken
     , upfggUploadType
     , upfggGuardianId
-    , upfggBearerToken
     , upfggCallback
     ) where
 
@@ -63,35 +64,34 @@ type UserProFilesGuardiansGetResource =
          Capture "studentId" Text :>
            "guardians" :>
              Capture "guardianId" Text :>
-               QueryParam "$.xgafv" Text :>
+               QueryParam "$.xgafv" Xgafv :>
                  QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :> Get '[JSON] Guardian
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] Guardian
 
 -- | Returns a specific guardian. This method returns the following error
--- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
--- to view guardian information for the student identified by the
--- \`student_id\`, if guardians are not enabled for the domain in question,
--- or for other access errors. * \`INVALID_ARGUMENT\` if a \`student_id\`
--- is specified, but its format cannot be recognized (it is not an email
--- address, nor a \`student_id\` from the API, nor the literal string
--- \`me\`). * \`NOT_FOUND\` if Classroom cannot find any record of the
--- given student or \`guardian_id\`, or if the guardian has been disabled.
+-- codes: * \`PERMISSION_DENIED\` if no user that matches the provided
+-- \`student_id\` is visible to the requesting user, if the requesting user
+-- is not permitted to view guardian information for the student identified
+-- by the \`student_id\`, if guardians are not enabled for the domain in
+-- question, or for other access errors. * \`INVALID_ARGUMENT\` if a
+-- \`student_id\` is specified, but its format cannot be recognized (it is
+-- not an email address, nor a \`student_id\` from the API, nor the literal
+-- string \`me\`). * \`NOT_FOUND\` if the requesting user is permitted to
+-- view guardians for the requested \`student_id\`, but no \`Guardian\`
+-- record exists for that student that matches the provided
+-- \`guardian_id\`.
 --
 -- /See:/ 'userProFilesGuardiansGet' smart constructor.
 data UserProFilesGuardiansGet = UserProFilesGuardiansGet'
     { _upfggStudentId      :: !Text
-    , _upfggXgafv          :: !(Maybe Text)
+    , _upfggXgafv          :: !(Maybe Xgafv)
     , _upfggUploadProtocol :: !(Maybe Text)
-    , _upfggPp             :: !Bool
     , _upfggAccessToken    :: !(Maybe Text)
     , _upfggUploadType     :: !(Maybe Text)
     , _upfggGuardianId     :: !Text
-    , _upfggBearerToken    :: !(Maybe Text)
     , _upfggCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -105,15 +105,11 @@ data UserProFilesGuardiansGet = UserProFilesGuardiansGet'
 --
 -- * 'upfggUploadProtocol'
 --
--- * 'upfggPp'
---
 -- * 'upfggAccessToken'
 --
 -- * 'upfggUploadType'
 --
 -- * 'upfggGuardianId'
---
--- * 'upfggBearerToken'
 --
 -- * 'upfggCallback'
 userProFilesGuardiansGet
@@ -125,11 +121,9 @@ userProFilesGuardiansGet pUpfggStudentId_ pUpfggGuardianId_ =
     { _upfggStudentId = pUpfggStudentId_
     , _upfggXgafv = Nothing
     , _upfggUploadProtocol = Nothing
-    , _upfggPp = True
     , _upfggAccessToken = Nothing
     , _upfggUploadType = Nothing
     , _upfggGuardianId = pUpfggGuardianId_
-    , _upfggBearerToken = Nothing
     , _upfggCallback = Nothing
     }
 
@@ -142,7 +136,7 @@ upfggStudentId
       (\ s a -> s{_upfggStudentId = a})
 
 -- | V1 error format.
-upfggXgafv :: Lens' UserProFilesGuardiansGet (Maybe Text)
+upfggXgafv :: Lens' UserProFilesGuardiansGet (Maybe Xgafv)
 upfggXgafv
   = lens _upfggXgafv (\ s a -> s{_upfggXgafv = a})
 
@@ -151,10 +145,6 @@ upfggUploadProtocol :: Lens' UserProFilesGuardiansGet (Maybe Text)
 upfggUploadProtocol
   = lens _upfggUploadProtocol
       (\ s a -> s{_upfggUploadProtocol = a})
-
--- | Pretty-print response.
-upfggPp :: Lens' UserProFilesGuardiansGet Bool
-upfggPp = lens _upfggPp (\ s a -> s{_upfggPp = a})
 
 -- | OAuth access token.
 upfggAccessToken :: Lens' UserProFilesGuardiansGet (Maybe Text)
@@ -174,12 +164,6 @@ upfggGuardianId
   = lens _upfggGuardianId
       (\ s a -> s{_upfggGuardianId = a})
 
--- | OAuth bearer token.
-upfggBearerToken :: Lens' UserProFilesGuardiansGet (Maybe Text)
-upfggBearerToken
-  = lens _upfggBearerToken
-      (\ s a -> s{_upfggBearerToken = a})
-
 -- | JSONP
 upfggCallback :: Lens' UserProFilesGuardiansGet (Maybe Text)
 upfggCallback
@@ -188,14 +172,15 @@ upfggCallback
 
 instance GoogleRequest UserProFilesGuardiansGet where
         type Rs UserProFilesGuardiansGet = Guardian
-        type Scopes UserProFilesGuardiansGet = '[]
+        type Scopes UserProFilesGuardiansGet =
+             '["https://www.googleapis.com/auth/classroom.guardianlinks.me.readonly",
+               "https://www.googleapis.com/auth/classroom.guardianlinks.students",
+               "https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly"]
         requestClient UserProFilesGuardiansGet'{..}
           = go _upfggStudentId _upfggGuardianId _upfggXgafv
               _upfggUploadProtocol
-              (Just _upfggPp)
               _upfggAccessToken
               _upfggUploadType
-              _upfggBearerToken
               _upfggCallback
               (Just AltJSON)
               classroomService

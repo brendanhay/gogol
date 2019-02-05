@@ -36,11 +36,9 @@ module Network.Google.Resource.Monitoring.Projects.Groups.List
     , pglXgafv
     , pglUploadProtocol
     , pglChildrenOfGroup
-    , pglPp
     , pglDescendantsOfGroup
     , pglAccessToken
     , pglUploadType
-    , pglBearerToken
     , pglName
     , pglPageToken
     , pglPageSize
@@ -60,17 +58,15 @@ type ProjectsGroupsListResource =
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "childrenOfGroup" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "descendantsOfGroup" Text :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "pageSize" (Textual Int32) :>
-                               QueryParam "ancestorsOfGroup" Text :>
-                                 QueryParam "callback" Text :>
-                                   QueryParam "alt" AltJSON :>
-                                     Get '[JSON] ListGroupsResponse
+                 QueryParam "descendantsOfGroup" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "pageSize" (Textual Int32) :>
+                           QueryParam "ancestorsOfGroup" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] ListGroupsResponse
 
 -- | Lists the existing groups.
 --
@@ -79,11 +75,9 @@ data ProjectsGroupsList = ProjectsGroupsList'
     { _pglXgafv              :: !(Maybe Xgafv)
     , _pglUploadProtocol     :: !(Maybe Text)
     , _pglChildrenOfGroup    :: !(Maybe Text)
-    , _pglPp                 :: !Bool
     , _pglDescendantsOfGroup :: !(Maybe Text)
     , _pglAccessToken        :: !(Maybe Text)
     , _pglUploadType         :: !(Maybe Text)
-    , _pglBearerToken        :: !(Maybe Text)
     , _pglName               :: !Text
     , _pglPageToken          :: !(Maybe Text)
     , _pglPageSize           :: !(Maybe (Textual Int32))
@@ -101,15 +95,11 @@ data ProjectsGroupsList = ProjectsGroupsList'
 --
 -- * 'pglChildrenOfGroup'
 --
--- * 'pglPp'
---
 -- * 'pglDescendantsOfGroup'
 --
 -- * 'pglAccessToken'
 --
 -- * 'pglUploadType'
---
--- * 'pglBearerToken'
 --
 -- * 'pglName'
 --
@@ -128,11 +118,9 @@ projectsGroupsList pPglName_ =
     { _pglXgafv = Nothing
     , _pglUploadProtocol = Nothing
     , _pglChildrenOfGroup = Nothing
-    , _pglPp = True
     , _pglDescendantsOfGroup = Nothing
     , _pglAccessToken = Nothing
     , _pglUploadType = Nothing
-    , _pglBearerToken = Nothing
     , _pglName = pPglName_
     , _pglPageToken = Nothing
     , _pglPageSize = Nothing
@@ -158,10 +146,6 @@ pglChildrenOfGroup
   = lens _pglChildrenOfGroup
       (\ s a -> s{_pglChildrenOfGroup = a})
 
--- | Pretty-print response.
-pglPp :: Lens' ProjectsGroupsList Bool
-pglPp = lens _pglPp (\ s a -> s{_pglPp = a})
-
 -- | A group name: \"projects\/{project_id_or_number}\/groups\/{group_id}\".
 -- Returns the descendants of the specified group. This is a superset of
 -- the results returned by the childrenOfGroup filter, and includes
@@ -182,12 +166,6 @@ pglUploadType :: Lens' ProjectsGroupsList (Maybe Text)
 pglUploadType
   = lens _pglUploadType
       (\ s a -> s{_pglUploadType = a})
-
--- | OAuth bearer token.
-pglBearerToken :: Lens' ProjectsGroupsList (Maybe Text)
-pglBearerToken
-  = lens _pglBearerToken
-      (\ s a -> s{_pglBearerToken = a})
 
 -- | The project whose groups are to be listed. The format is
 -- \"projects\/{project_id_or_number}\".
@@ -231,11 +209,9 @@ instance GoogleRequest ProjectsGroupsList where
         requestClient ProjectsGroupsList'{..}
           = go _pglName _pglXgafv _pglUploadProtocol
               _pglChildrenOfGroup
-              (Just _pglPp)
               _pglDescendantsOfGroup
               _pglAccessToken
               _pglUploadType
-              _pglBearerToken
               _pglPageToken
               _pglPageSize
               _pglAncestorsOfGroup

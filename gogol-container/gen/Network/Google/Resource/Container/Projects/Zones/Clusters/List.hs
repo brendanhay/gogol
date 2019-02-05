@@ -23,7 +23,7 @@
 -- Lists all clusters owned by a project in either the specified zone or
 -- all zones.
 --
--- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @container.projects.zones.clusters.list@.
+-- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.zones.clusters.list@.
 module Network.Google.Resource.Container.Projects.Zones.Clusters.List
     (
     -- * REST Resource
@@ -34,15 +34,14 @@ module Network.Google.Resource.Container.Projects.Zones.Clusters.List
     , ProjectsZonesClustersList
 
     -- * Request Lenses
-    , pzclXgafv
-    , pzclUploadProtocol
-    , pzclPp
-    , pzclAccessToken
-    , pzclUploadType
-    , pzclZone
-    , pzclBearerToken
-    , pzclProjectId
-    , pzclCallback
+    , proParent
+    , proXgafv
+    , proUploadProtocol
+    , proAccessToken
+    , proUploadType
+    , proZone
+    , proProjectId
+    , proCallback
     ) where
 
 import           Network.Google.Container.Types
@@ -57,120 +56,112 @@ type ProjectsZonesClustersListResource =
            "zones" :>
              Capture "zone" Text :>
                "clusters" :>
-                 QueryParam "$.xgafv" Text :>
-                   QueryParam "upload_protocol" Text :>
-                     QueryParam "pp" Bool :>
+                 QueryParam "parent" Text :>
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
                        QueryParam "access_token" Text :>
                          QueryParam "uploadType" Text :>
-                           QueryParam "bearer_token" Text :>
-                             QueryParam "callback" Text :>
-                               QueryParam "alt" AltJSON :>
-                                 Get '[JSON] ListClustersResponse
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] ListClustersResponse
 
 -- | Lists all clusters owned by a project in either the specified zone or
 -- all zones.
 --
 -- /See:/ 'projectsZonesClustersList' smart constructor.
 data ProjectsZonesClustersList = ProjectsZonesClustersList'
-    { _pzclXgafv          :: !(Maybe Text)
-    , _pzclUploadProtocol :: !(Maybe Text)
-    , _pzclPp             :: !Bool
-    , _pzclAccessToken    :: !(Maybe Text)
-    , _pzclUploadType     :: !(Maybe Text)
-    , _pzclZone           :: !Text
-    , _pzclBearerToken    :: !(Maybe Text)
-    , _pzclProjectId      :: !Text
-    , _pzclCallback       :: !(Maybe Text)
+    { _proParent         :: !(Maybe Text)
+    , _proXgafv          :: !(Maybe Xgafv)
+    , _proUploadProtocol :: !(Maybe Text)
+    , _proAccessToken    :: !(Maybe Text)
+    , _proUploadType     :: !(Maybe Text)
+    , _proZone           :: !Text
+    , _proProjectId      :: !Text
+    , _proCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsZonesClustersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pzclXgafv'
+-- * 'proParent'
 --
--- * 'pzclUploadProtocol'
+-- * 'proXgafv'
 --
--- * 'pzclPp'
+-- * 'proUploadProtocol'
 --
--- * 'pzclAccessToken'
+-- * 'proAccessToken'
 --
--- * 'pzclUploadType'
+-- * 'proUploadType'
 --
--- * 'pzclZone'
+-- * 'proZone'
 --
--- * 'pzclBearerToken'
+-- * 'proProjectId'
 --
--- * 'pzclProjectId'
---
--- * 'pzclCallback'
+-- * 'proCallback'
 projectsZonesClustersList
-    :: Text -- ^ 'pzclZone'
-    -> Text -- ^ 'pzclProjectId'
+    :: Text -- ^ 'proZone'
+    -> Text -- ^ 'proProjectId'
     -> ProjectsZonesClustersList
-projectsZonesClustersList pPzclZone_ pPzclProjectId_ =
+projectsZonesClustersList pProZone_ pProProjectId_ =
     ProjectsZonesClustersList'
-    { _pzclXgafv = Nothing
-    , _pzclUploadProtocol = Nothing
-    , _pzclPp = True
-    , _pzclAccessToken = Nothing
-    , _pzclUploadType = Nothing
-    , _pzclZone = pPzclZone_
-    , _pzclBearerToken = Nothing
-    , _pzclProjectId = pPzclProjectId_
-    , _pzclCallback = Nothing
+    { _proParent = Nothing
+    , _proXgafv = Nothing
+    , _proUploadProtocol = Nothing
+    , _proAccessToken = Nothing
+    , _proUploadType = Nothing
+    , _proZone = pProZone_
+    , _proProjectId = pProProjectId_
+    , _proCallback = Nothing
     }
 
+-- | The parent (project and location) where the clusters will be listed.
+-- Specified in the format \'projects\/*\/locations\/*\'. Location \"-\"
+-- matches all zones and all regions.
+proParent :: Lens' ProjectsZonesClustersList (Maybe Text)
+proParent
+  = lens _proParent (\ s a -> s{_proParent = a})
+
 -- | V1 error format.
-pzclXgafv :: Lens' ProjectsZonesClustersList (Maybe Text)
-pzclXgafv
-  = lens _pzclXgafv (\ s a -> s{_pzclXgafv = a})
+proXgafv :: Lens' ProjectsZonesClustersList (Maybe Xgafv)
+proXgafv = lens _proXgafv (\ s a -> s{_proXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-pzclUploadProtocol :: Lens' ProjectsZonesClustersList (Maybe Text)
-pzclUploadProtocol
-  = lens _pzclUploadProtocol
-      (\ s a -> s{_pzclUploadProtocol = a})
-
--- | Pretty-print response.
-pzclPp :: Lens' ProjectsZonesClustersList Bool
-pzclPp = lens _pzclPp (\ s a -> s{_pzclPp = a})
+proUploadProtocol :: Lens' ProjectsZonesClustersList (Maybe Text)
+proUploadProtocol
+  = lens _proUploadProtocol
+      (\ s a -> s{_proUploadProtocol = a})
 
 -- | OAuth access token.
-pzclAccessToken :: Lens' ProjectsZonesClustersList (Maybe Text)
-pzclAccessToken
-  = lens _pzclAccessToken
-      (\ s a -> s{_pzclAccessToken = a})
+proAccessToken :: Lens' ProjectsZonesClustersList (Maybe Text)
+proAccessToken
+  = lens _proAccessToken
+      (\ s a -> s{_proAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-pzclUploadType :: Lens' ProjectsZonesClustersList (Maybe Text)
-pzclUploadType
-  = lens _pzclUploadType
-      (\ s a -> s{_pzclUploadType = a})
+proUploadType :: Lens' ProjectsZonesClustersList (Maybe Text)
+proUploadType
+  = lens _proUploadType
+      (\ s a -> s{_proUploadType = a})
 
--- | The name of the Google Compute Engine
+-- | Deprecated. The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) in which the cluster resides,
--- or \"-\" for all zones.
-pzclZone :: Lens' ProjectsZonesClustersList Text
-pzclZone = lens _pzclZone (\ s a -> s{_pzclZone = a})
+-- or \"-\" for all zones. This field has been deprecated and replaced by
+-- the parent field.
+proZone :: Lens' ProjectsZonesClustersList Text
+proZone = lens _proZone (\ s a -> s{_proZone = a})
 
--- | OAuth bearer token.
-pzclBearerToken :: Lens' ProjectsZonesClustersList (Maybe Text)
-pzclBearerToken
-  = lens _pzclBearerToken
-      (\ s a -> s{_pzclBearerToken = a})
-
--- | The Google Developers Console [project ID or project
--- number](https:\/\/support.google.com\/cloud\/answer\/6158840).
-pzclProjectId :: Lens' ProjectsZonesClustersList Text
-pzclProjectId
-  = lens _pzclProjectId
-      (\ s a -> s{_pzclProjectId = a})
+-- | Deprecated. The Google Developers Console [project ID or project
+-- number](https:\/\/support.google.com\/cloud\/answer\/6158840). This
+-- field has been deprecated and replaced by the parent field.
+proProjectId :: Lens' ProjectsZonesClustersList Text
+proProjectId
+  = lens _proProjectId (\ s a -> s{_proProjectId = a})
 
 -- | JSONP
-pzclCallback :: Lens' ProjectsZonesClustersList (Maybe Text)
-pzclCallback
-  = lens _pzclCallback (\ s a -> s{_pzclCallback = a})
+proCallback :: Lens' ProjectsZonesClustersList (Maybe Text)
+proCallback
+  = lens _proCallback (\ s a -> s{_proCallback = a})
 
 instance GoogleRequest ProjectsZonesClustersList
          where
@@ -179,13 +170,11 @@ instance GoogleRequest ProjectsZonesClustersList
         type Scopes ProjectsZonesClustersList =
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsZonesClustersList'{..}
-          = go _pzclProjectId _pzclZone _pzclXgafv
-              _pzclUploadProtocol
-              (Just _pzclPp)
-              _pzclAccessToken
-              _pzclUploadType
-              _pzclBearerToken
-              _pzclCallback
+          = go _proProjectId _proZone _proParent _proXgafv
+              _proUploadProtocol
+              _proAccessToken
+              _proUploadType
+              _proCallback
               (Just AltJSON)
               containerService
           where go

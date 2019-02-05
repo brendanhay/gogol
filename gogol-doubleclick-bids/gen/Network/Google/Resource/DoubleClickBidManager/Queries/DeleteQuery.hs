@@ -76,7 +76,8 @@ qdqQueryId
 
 instance GoogleRequest QueriesDeleteQuery where
         type Rs QueriesDeleteQuery = ()
-        type Scopes QueriesDeleteQuery = '[]
+        type Scopes QueriesDeleteQuery =
+             '["https://www.googleapis.com/auth/doubleclickbidmanager"]
         requestClient QueriesDeleteQuery'{..}
           = go _qdqQueryId (Just AltJSON)
               doubleClickBidsService

@@ -37,11 +37,9 @@ module Network.Google.Resource.Sheets.Spreadsheets.Values.Get
     , svgXgafv
     , svgValueRenderOption
     , svgUploadProtocol
-    , svgPp
     , svgAccessToken
     , svgSpreadsheetId
     , svgUploadType
-    , svgBearerToken
     , svgRange
     , svgDateTimeRenderOption
     , svgMajorDimension
@@ -62,15 +60,13 @@ type SpreadsheetsValuesGetResource =
                QueryParam "$.xgafv" Xgafv :>
                  QueryParam "valueRenderOption" Text :>
                    QueryParam "upload_protocol" Text :>
-                     QueryParam "pp" Bool :>
-                       QueryParam "access_token" Text :>
-                         QueryParam "uploadType" Text :>
-                           QueryParam "bearer_token" Text :>
-                             QueryParam "dateTimeRenderOption" Text :>
-                               QueryParam "majorDimension" Text :>
-                                 QueryParam "callback" Text :>
-                                   QueryParam "alt" AltJSON :>
-                                     Get '[JSON] ValueRange
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "dateTimeRenderOption" Text :>
+                           QueryParam "majorDimension" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] ValueRange
 
 -- | Returns a range of values from a spreadsheet. The caller must specify
 -- the spreadsheet ID and a range.
@@ -80,11 +76,9 @@ data SpreadsheetsValuesGet = SpreadsheetsValuesGet'
     { _svgXgafv                :: !(Maybe Xgafv)
     , _svgValueRenderOption    :: !(Maybe Text)
     , _svgUploadProtocol       :: !(Maybe Text)
-    , _svgPp                   :: !Bool
     , _svgAccessToken          :: !(Maybe Text)
     , _svgSpreadsheetId        :: !Text
     , _svgUploadType           :: !(Maybe Text)
-    , _svgBearerToken          :: !(Maybe Text)
     , _svgRange                :: !Text
     , _svgDateTimeRenderOption :: !(Maybe Text)
     , _svgMajorDimension       :: !(Maybe Text)
@@ -101,15 +95,11 @@ data SpreadsheetsValuesGet = SpreadsheetsValuesGet'
 --
 -- * 'svgUploadProtocol'
 --
--- * 'svgPp'
---
 -- * 'svgAccessToken'
 --
 -- * 'svgSpreadsheetId'
 --
 -- * 'svgUploadType'
---
--- * 'svgBearerToken'
 --
 -- * 'svgRange'
 --
@@ -127,11 +117,9 @@ spreadsheetsValuesGet pSvgSpreadsheetId_ pSvgRange_ =
     { _svgXgafv = Nothing
     , _svgValueRenderOption = Nothing
     , _svgUploadProtocol = Nothing
-    , _svgPp = True
     , _svgAccessToken = Nothing
     , _svgSpreadsheetId = pSvgSpreadsheetId_
     , _svgUploadType = Nothing
-    , _svgBearerToken = Nothing
     , _svgRange = pSvgRange_
     , _svgDateTimeRenderOption = Nothing
     , _svgMajorDimension = Nothing
@@ -142,7 +130,8 @@ spreadsheetsValuesGet pSvgSpreadsheetId_ pSvgRange_ =
 svgXgafv :: Lens' SpreadsheetsValuesGet (Maybe Xgafv)
 svgXgafv = lens _svgXgafv (\ s a -> s{_svgXgafv = a})
 
--- | How values should be represented in the output.
+-- | How values should be represented in the output. The default render
+-- option is ValueRenderOption.FORMATTED_VALUE.
 svgValueRenderOption :: Lens' SpreadsheetsValuesGet (Maybe Text)
 svgValueRenderOption
   = lens _svgValueRenderOption
@@ -153,10 +142,6 @@ svgUploadProtocol :: Lens' SpreadsheetsValuesGet (Maybe Text)
 svgUploadProtocol
   = lens _svgUploadProtocol
       (\ s a -> s{_svgUploadProtocol = a})
-
--- | Pretty-print response.
-svgPp :: Lens' SpreadsheetsValuesGet Bool
-svgPp = lens _svgPp (\ s a -> s{_svgPp = a})
 
 -- | OAuth access token.
 svgAccessToken :: Lens' SpreadsheetsValuesGet (Maybe Text)
@@ -176,18 +161,13 @@ svgUploadType
   = lens _svgUploadType
       (\ s a -> s{_svgUploadType = a})
 
--- | OAuth bearer token.
-svgBearerToken :: Lens' SpreadsheetsValuesGet (Maybe Text)
-svgBearerToken
-  = lens _svgBearerToken
-      (\ s a -> s{_svgBearerToken = a})
-
 -- | The A1 notation of the values to retrieve.
 svgRange :: Lens' SpreadsheetsValuesGet Text
 svgRange = lens _svgRange (\ s a -> s{_svgRange = a})
 
 -- | How dates, times, and durations should be represented in the output.
--- This is ignored if value_render_option is FORMATTED_VALUE.
+-- This is ignored if value_render_option is FORMATTED_VALUE. The default
+-- dateTime render option is [DateTimeRenderOption.SERIAL_NUMBER].
 svgDateTimeRenderOption :: Lens' SpreadsheetsValuesGet (Maybe Text)
 svgDateTimeRenderOption
   = lens _svgDateTimeRenderOption
@@ -212,6 +192,7 @@ instance GoogleRequest SpreadsheetsValuesGet where
         type Rs SpreadsheetsValuesGet = ValueRange
         type Scopes SpreadsheetsValuesGet =
              '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file",
                "https://www.googleapis.com/auth/drive.readonly",
                "https://www.googleapis.com/auth/spreadsheets",
                "https://www.googleapis.com/auth/spreadsheets.readonly"]
@@ -219,10 +200,8 @@ instance GoogleRequest SpreadsheetsValuesGet where
           = go _svgSpreadsheetId _svgRange _svgXgafv
               _svgValueRenderOption
               _svgUploadProtocol
-              (Just _svgPp)
               _svgAccessToken
               _svgUploadType
-              _svgBearerToken
               _svgDateTimeRenderOption
               _svgMajorDimension
               _svgCallback

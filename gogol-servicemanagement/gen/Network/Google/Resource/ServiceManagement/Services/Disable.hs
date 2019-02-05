@@ -20,9 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Disable a managed service for a project. Operation
+-- Disables a service for a project, so it can no longer be be used for the
+-- project. It prevents accidental usage that may cause unexpected billing
+-- charges or security leaks. Operation
 --
--- /See:/ <https://cloud.google.com/service-management/ Google Service Management API Reference> for @servicemanagement.services.disable@.
+-- /See:/ <https://cloud.google.com/service-management/ Service Management API Reference> for @servicemanagement.services.disable@.
 module Network.Google.Resource.ServiceManagement.Services.Disable
     (
     -- * REST Resource
@@ -35,11 +37,9 @@ module Network.Google.Resource.ServiceManagement.Services.Disable
     -- * Request Lenses
     , sXgafv
     , sUploadProtocol
-    , sPp
     , sAccessToken
     , sUploadType
     , sPayload
-    , sBearerToken
     , sServiceName
     , sCallback
     ) where
@@ -55,26 +55,24 @@ type ServicesDisableResource =
          CaptureMode "serviceName" "disable" Text :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] DisableServiceRequest :>
-                             Post '[JSON] Operation
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] DisableServiceRequest :>
+                         Post '[JSON] Operation
 
--- | Disable a managed service for a project. Operation
+-- | Disables a service for a project, so it can no longer be be used for the
+-- project. It prevents accidental usage that may cause unexpected billing
+-- charges or security leaks. Operation
 --
 -- /See:/ 'servicesDisable' smart constructor.
 data ServicesDisable = ServicesDisable'
     { _sXgafv          :: !(Maybe Xgafv)
     , _sUploadProtocol :: !(Maybe Text)
-    , _sPp             :: !Bool
     , _sAccessToken    :: !(Maybe Text)
     , _sUploadType     :: !(Maybe Text)
     , _sPayload        :: !DisableServiceRequest
-    , _sBearerToken    :: !(Maybe Text)
     , _sServiceName    :: !Text
     , _sCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -87,15 +85,11 @@ data ServicesDisable = ServicesDisable'
 --
 -- * 'sUploadProtocol'
 --
--- * 'sPp'
---
 -- * 'sAccessToken'
 --
 -- * 'sUploadType'
 --
 -- * 'sPayload'
---
--- * 'sBearerToken'
 --
 -- * 'sServiceName'
 --
@@ -108,11 +102,9 @@ servicesDisable pSPayload_ pSServiceName_ =
     ServicesDisable'
     { _sXgafv = Nothing
     , _sUploadProtocol = Nothing
-    , _sPp = True
     , _sAccessToken = Nothing
     , _sUploadType = Nothing
     , _sPayload = pSPayload_
-    , _sBearerToken = Nothing
     , _sServiceName = pSServiceName_
     , _sCallback = Nothing
     }
@@ -127,10 +119,6 @@ sUploadProtocol
   = lens _sUploadProtocol
       (\ s a -> s{_sUploadProtocol = a})
 
--- | Pretty-print response.
-sPp :: Lens' ServicesDisable Bool
-sPp = lens _sPp (\ s a -> s{_sPp = a})
-
 -- | OAuth access token.
 sAccessToken :: Lens' ServicesDisable (Maybe Text)
 sAccessToken
@@ -144,11 +132,6 @@ sUploadType
 -- | Multipart request metadata.
 sPayload :: Lens' ServicesDisable DisableServiceRequest
 sPayload = lens _sPayload (\ s a -> s{_sPayload = a})
-
--- | OAuth bearer token.
-sBearerToken :: Lens' ServicesDisable (Maybe Text)
-sBearerToken
-  = lens _sBearerToken (\ s a -> s{_sBearerToken = a})
 
 -- | Name of the service to disable. Specifying an unknown service name will
 -- cause the request to fail.
@@ -168,10 +151,8 @@ instance GoogleRequest ServicesDisable where
                "https://www.googleapis.com/auth/service.management"]
         requestClient ServicesDisable'{..}
           = go _sServiceName _sXgafv _sUploadProtocol
-              (Just _sPp)
               _sAccessToken
               _sUploadType
-              _sBearerToken
               _sCallback
               (Just AltJSON)
               _sPayload

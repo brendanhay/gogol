@@ -22,6 +22,11 @@ module Network.Google.Auth
     , getApplicationDefault
     , fromWellKnownPath
     , fromFilePath
+    , saveAuthorizedUserToWellKnownPath
+    , saveAuthorizedUser
+
+    -- ** Service account user impersonation
+    , serviceAccountUser
 
     -- ** Installed Application Credentials
     , installedApplication
@@ -33,8 +38,10 @@ module Network.Google.Auth
     -- ** Thread-safe Storage
     , Store
     , initStore
+    , retrieveAuthFromStore
 
     , Auth           (..)
+    , authToAuthorizedUser
     , exchange
     , refresh
 
@@ -56,7 +63,7 @@ module Network.Google.Auth
     -- * Re-exported Types
     , AccessToken    (..)
     , RefreshToken   (..)
-    , Secret         (..)
+    , GSecret        (..)
     , ServiceId      (..)
     , ClientId       (..)
 
@@ -80,6 +87,19 @@ import           Network.Google.Prelude
 import           Network.HTTP.Conduit                     (Manager)
 import qualified Network.HTTP.Conduit                     as Client
 import           Network.HTTP.Types                       (hAuthorization)
+
+-- | 'authToAuthorizedUser' converts 'Auth' into an 'AuthorizedUser'
+--  by returning 'Right' if there is a 'FromClient'-constructed
+--  Credentials and a refreshed token; otherwise, returning
+--  'Left' with error message.
+authToAuthorizedUser :: AllowScopes s => Auth s -> Either Text AuthorizedUser
+authToAuthorizedUser a = AuthorizedUser
+                   <$>  (_clientId <$> getClient)
+                   <*>  maybe (Left "no refresh token") Right (_tokenRefresh (_token a))
+                   <*>  (_clientSecret <$> getClient)
+                        where getClient = case _credentials a of
+                                            FromClient c _ -> Right c
+                                            _ -> Left "not FromClient"
 
 -- | An 'OAuthToken' that can potentially be expired, with the original
 -- credentials that can be used to perform a refresh.
@@ -109,6 +129,12 @@ initStore :: (MonadIO m, MonadCatch m, AllowScopes s)
           -> Manager
           -> m (Store s)
 initStore c l m = exchange c l m >>= fmap Store . liftIO . newMVar
+
+-- | Retrieve auth from storage
+retrieveAuthFromStore :: (MonadIO m, MonadCatch m, AllowScopes s)
+             => Store s
+             -> m (Auth s)
+retrieveAuthFromStore (Store s) = liftIO (readMVar s)
 
 -- | Concurrently read the current token, and if expired, then
 -- safely perform a single serial refresh.
@@ -140,12 +166,12 @@ exchange :: forall m s. (MonadIO m, MonadCatch m, AllowScopes s)
 exchange c l = fmap (Auth c) . action l
   where
     action = case c of
-        FromMetadata s    -> metadataToken       s
-        FromAccount  a    -> serviceAccountToken a (Proxy :: Proxy s)
-        FromClient   x n  -> exchangeCode        x n
-        FromUser     u    -> authorizedUserToken u Nothing
+        FromMetadata s   -> metadataToken       s
+        FromAccount  a   -> serviceAccountToken a (Proxy :: Proxy s)
+        FromClient   x n -> exchangeCode        x n
+        FromUser     u   -> authorizedUserToken u Nothing
 
--- | Refresh an existing 'OAuthToken' using
+-- | Refresh an existing 'OAuthToken'.
 refresh :: forall m s. (MonadIO m, MonadCatch m, AllowScopes s)
         => Auth s
         -> Logger
@@ -175,3 +201,13 @@ authorize rq s l m = bearer <$> getToken s l m
             , "Bearer " <> toHeader (_tokenAccess t)
             ) : Client.requestHeaders rq
         }
+
+-- | Set the user to be impersonated for a service account with domain
+-- wide delegation. See
+-- https://developers.google.com/identity/protocols/OAuth2ServiceAccount
+serviceAccountUser :: forall s. (AllowScopes s)
+                   => Maybe Text
+                   -> Credentials s
+                   -> Credentials s
+serviceAccountUser u (FromAccount s) = FromAccount $ s { _serviceAccountUser = u }
+serviceAccountUser _ c               = c

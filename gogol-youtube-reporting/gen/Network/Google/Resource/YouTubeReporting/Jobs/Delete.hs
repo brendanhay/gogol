@@ -36,11 +36,9 @@ module Network.Google.Resource.YouTubeReporting.Jobs.Delete
     , jdXgafv
     , jdJobId
     , jdUploadProtocol
-    , jdPp
     , jdAccessToken
     , jdUploadType
     , jdOnBehalfOfContentOwner
-    , jdBearerToken
     , jdCallback
     ) where
 
@@ -53,28 +51,24 @@ type JobsDeleteResource =
      "v1" :>
        "jobs" :>
          Capture "jobId" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "onBehalfOfContentOwner" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "callback" Text :>
-                           QueryParam "alt" AltJSON :> Delete '[JSON] Empty
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "onBehalfOfContentOwner" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
 -- | Deletes a job.
 --
 -- /See:/ 'jobsDelete' smart constructor.
 data JobsDelete = JobsDelete'
-    { _jdXgafv                  :: !(Maybe Text)
+    { _jdXgafv                  :: !(Maybe Xgafv)
     , _jdJobId                  :: !Text
     , _jdUploadProtocol         :: !(Maybe Text)
-    , _jdPp                     :: !Bool
     , _jdAccessToken            :: !(Maybe Text)
     , _jdUploadType             :: !(Maybe Text)
     , _jdOnBehalfOfContentOwner :: !(Maybe Text)
-    , _jdBearerToken            :: !(Maybe Text)
     , _jdCallback               :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -88,15 +82,11 @@ data JobsDelete = JobsDelete'
 --
 -- * 'jdUploadProtocol'
 --
--- * 'jdPp'
---
 -- * 'jdAccessToken'
 --
 -- * 'jdUploadType'
 --
 -- * 'jdOnBehalfOfContentOwner'
---
--- * 'jdBearerToken'
 --
 -- * 'jdCallback'
 jobsDelete
@@ -107,16 +97,14 @@ jobsDelete pJdJobId_ =
     { _jdXgafv = Nothing
     , _jdJobId = pJdJobId_
     , _jdUploadProtocol = Nothing
-    , _jdPp = True
     , _jdAccessToken = Nothing
     , _jdUploadType = Nothing
     , _jdOnBehalfOfContentOwner = Nothing
-    , _jdBearerToken = Nothing
     , _jdCallback = Nothing
     }
 
 -- | V1 error format.
-jdXgafv :: Lens' JobsDelete (Maybe Text)
+jdXgafv :: Lens' JobsDelete (Maybe Xgafv)
 jdXgafv = lens _jdXgafv (\ s a -> s{_jdXgafv = a})
 
 -- | The ID of the job to delete.
@@ -128,10 +116,6 @@ jdUploadProtocol :: Lens' JobsDelete (Maybe Text)
 jdUploadProtocol
   = lens _jdUploadProtocol
       (\ s a -> s{_jdUploadProtocol = a})
-
--- | Pretty-print response.
-jdPp :: Lens' JobsDelete Bool
-jdPp = lens _jdPp (\ s a -> s{_jdPp = a})
 
 -- | OAuth access token.
 jdAccessToken :: Lens' JobsDelete (Maybe Text)
@@ -151,12 +135,6 @@ jdOnBehalfOfContentOwner
   = lens _jdOnBehalfOfContentOwner
       (\ s a -> s{_jdOnBehalfOfContentOwner = a})
 
--- | OAuth bearer token.
-jdBearerToken :: Lens' JobsDelete (Maybe Text)
-jdBearerToken
-  = lens _jdBearerToken
-      (\ s a -> s{_jdBearerToken = a})
-
 -- | JSONP
 jdCallback :: Lens' JobsDelete (Maybe Text)
 jdCallback
@@ -168,11 +146,10 @@ instance GoogleRequest JobsDelete where
              '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
                "https://www.googleapis.com/auth/yt-analytics.readonly"]
         requestClient JobsDelete'{..}
-          = go _jdJobId _jdXgafv _jdUploadProtocol (Just _jdPp)
+          = go _jdJobId _jdXgafv _jdUploadProtocol
               _jdAccessToken
               _jdUploadType
               _jdOnBehalfOfContentOwner
-              _jdBearerToken
               _jdCallback
               (Just AltJSON)
               youTubeReportingService

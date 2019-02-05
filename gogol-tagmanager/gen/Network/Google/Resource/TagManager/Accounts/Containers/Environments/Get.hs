@@ -22,7 +22,7 @@
 --
 -- Gets a GTM Environment.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.containers.environments.get@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v2/ Tag Manager API Reference> for @tagmanager.accounts.containers.environments.get@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Environments.Get
     (
     -- * REST Resource
@@ -33,9 +33,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Environments.Get
     , AccountsContainersEnvironmentsGet
 
     -- * Request Lenses
-    , acegContainerId
-    , acegAccountId
-    , acegEnvironmentId
+    , acegPath
     ) where
 
 import           Network.Google.Prelude
@@ -45,62 +43,34 @@ import           Network.Google.TagManager.Types
 -- 'AccountsContainersEnvironmentsGet' request conforms to.
 type AccountsContainersEnvironmentsGetResource =
      "tagmanager" :>
-       "v1" :>
-         "accounts" :>
-           Capture "accountId" Text :>
-             "containers" :>
-               Capture "containerId" Text :>
-                 "environments" :>
-                   Capture "environmentId" Text :>
-                     QueryParam "alt" AltJSON :> Get '[JSON] Environment
+       "v2" :>
+         Capture "path" Text :>
+           QueryParam "alt" AltJSON :> Get '[JSON] Environment
 
 -- | Gets a GTM Environment.
 --
 -- /See:/ 'accountsContainersEnvironmentsGet' smart constructor.
-data AccountsContainersEnvironmentsGet = AccountsContainersEnvironmentsGet'
-    { _acegContainerId   :: !Text
-    , _acegAccountId     :: !Text
-    , _acegEnvironmentId :: !Text
+newtype AccountsContainersEnvironmentsGet = AccountsContainersEnvironmentsGet'
+    { _acegPath :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersEnvironmentsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acegContainerId'
---
--- * 'acegAccountId'
---
--- * 'acegEnvironmentId'
+-- * 'acegPath'
 accountsContainersEnvironmentsGet
-    :: Text -- ^ 'acegContainerId'
-    -> Text -- ^ 'acegAccountId'
-    -> Text -- ^ 'acegEnvironmentId'
+    :: Text -- ^ 'acegPath'
     -> AccountsContainersEnvironmentsGet
-accountsContainersEnvironmentsGet pAcegContainerId_ pAcegAccountId_ pAcegEnvironmentId_ =
+accountsContainersEnvironmentsGet pAcegPath_ =
     AccountsContainersEnvironmentsGet'
-    { _acegContainerId = pAcegContainerId_
-    , _acegAccountId = pAcegAccountId_
-    , _acegEnvironmentId = pAcegEnvironmentId_
+    { _acegPath = pAcegPath_
     }
 
--- | The GTM Container ID.
-acegContainerId :: Lens' AccountsContainersEnvironmentsGet Text
-acegContainerId
-  = lens _acegContainerId
-      (\ s a -> s{_acegContainerId = a})
-
--- | The GTM Account ID.
-acegAccountId :: Lens' AccountsContainersEnvironmentsGet Text
-acegAccountId
-  = lens _acegAccountId
-      (\ s a -> s{_acegAccountId = a})
-
--- | The GTM Environment ID.
-acegEnvironmentId :: Lens' AccountsContainersEnvironmentsGet Text
-acegEnvironmentId
-  = lens _acegEnvironmentId
-      (\ s a -> s{_acegEnvironmentId = a})
+-- | GTM Environment\'s API relative path. Example:
+-- accounts\/{account_id}\/containers\/{container_id}\/environments\/{environment_id}
+acegPath :: Lens' AccountsContainersEnvironmentsGet Text
+acegPath = lens _acegPath (\ s a -> s{_acegPath = a})
 
 instance GoogleRequest
          AccountsContainersEnvironmentsGet where
@@ -110,10 +80,7 @@ instance GoogleRequest
              '["https://www.googleapis.com/auth/tagmanager.edit.containers",
                "https://www.googleapis.com/auth/tagmanager.readonly"]
         requestClient AccountsContainersEnvironmentsGet'{..}
-          = go _acegAccountId _acegContainerId
-              _acegEnvironmentId
-              (Just AltJSON)
-              tagManagerService
+          = go _acegPath (Just AltJSON) tagManagerService
           where go
                   = buildClient
                       (Proxy ::

@@ -36,10 +36,8 @@ module Network.Google.Resource.Monitoring.Projects.MonitoredResourceDescriptors.
     -- * Request Lenses
     , pmrdlXgafv
     , pmrdlUploadProtocol
-    , pmrdlPp
     , pmrdlAccessToken
     , pmrdlUploadType
-    , pmrdlBearerToken
     , pmrdlName
     , pmrdlFilter
     , pmrdlPageToken
@@ -59,17 +57,15 @@ type ProjectsMonitoredResourceDescriptorsListResource
          "monitoredResourceDescriptors" :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "filter" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "pageSize" (Textual Int32) :>
-                             QueryParam "callback" Text :>
-                               QueryParam "alt" AltJSON :>
-                                 Get '[JSON]
-                                   ListMonitoredResourceDescriptorsResponse
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "pageSize" (Textual Int32) :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON]
+                               ListMonitoredResourceDescriptorsResponse
 
 -- | Lists monitored resource descriptors that match a filter. This method
 -- does not require a Stackdriver account.
@@ -78,10 +74,8 @@ type ProjectsMonitoredResourceDescriptorsListResource
 data ProjectsMonitoredResourceDescriptorsList = ProjectsMonitoredResourceDescriptorsList'
     { _pmrdlXgafv          :: !(Maybe Xgafv)
     , _pmrdlUploadProtocol :: !(Maybe Text)
-    , _pmrdlPp             :: !Bool
     , _pmrdlAccessToken    :: !(Maybe Text)
     , _pmrdlUploadType     :: !(Maybe Text)
-    , _pmrdlBearerToken    :: !(Maybe Text)
     , _pmrdlName           :: !Text
     , _pmrdlFilter         :: !(Maybe Text)
     , _pmrdlPageToken      :: !(Maybe Text)
@@ -97,13 +91,9 @@ data ProjectsMonitoredResourceDescriptorsList = ProjectsMonitoredResourceDescrip
 --
 -- * 'pmrdlUploadProtocol'
 --
--- * 'pmrdlPp'
---
 -- * 'pmrdlAccessToken'
 --
 -- * 'pmrdlUploadType'
---
--- * 'pmrdlBearerToken'
 --
 -- * 'pmrdlName'
 --
@@ -121,10 +111,8 @@ projectsMonitoredResourceDescriptorsList pPmrdlName_ =
     ProjectsMonitoredResourceDescriptorsList'
     { _pmrdlXgafv = Nothing
     , _pmrdlUploadProtocol = Nothing
-    , _pmrdlPp = True
     , _pmrdlAccessToken = Nothing
     , _pmrdlUploadType = Nothing
-    , _pmrdlBearerToken = Nothing
     , _pmrdlName = pPmrdlName_
     , _pmrdlFilter = Nothing
     , _pmrdlPageToken = Nothing
@@ -143,10 +131,6 @@ pmrdlUploadProtocol
   = lens _pmrdlUploadProtocol
       (\ s a -> s{_pmrdlUploadProtocol = a})
 
--- | Pretty-print response.
-pmrdlPp :: Lens' ProjectsMonitoredResourceDescriptorsList Bool
-pmrdlPp = lens _pmrdlPp (\ s a -> s{_pmrdlPp = a})
-
 -- | OAuth access token.
 pmrdlAccessToken :: Lens' ProjectsMonitoredResourceDescriptorsList (Maybe Text)
 pmrdlAccessToken
@@ -159,23 +143,17 @@ pmrdlUploadType
   = lens _pmrdlUploadType
       (\ s a -> s{_pmrdlUploadType = a})
 
--- | OAuth bearer token.
-pmrdlBearerToken :: Lens' ProjectsMonitoredResourceDescriptorsList (Maybe Text)
-pmrdlBearerToken
-  = lens _pmrdlBearerToken
-      (\ s a -> s{_pmrdlBearerToken = a})
-
 -- | The project on which to execute the request. The format is
 -- \"projects\/{project_id_or_number}\".
 pmrdlName :: Lens' ProjectsMonitoredResourceDescriptorsList Text
 pmrdlName
   = lens _pmrdlName (\ s a -> s{_pmrdlName = a})
 
--- | An optional filter (\/monitoring\/api\/v3\/filters) describing the
--- descriptors to be returned. The filter can reference the descriptor\'s
--- type and labels. For example, the following filter returns only Google
--- Compute Engine descriptors that have an id label: resource.type =
--- starts_with(\"gce_\") AND resource.label:id
+-- | An optional filter describing the descriptors to be returned. The filter
+-- can reference the descriptor\'s type and labels. For example, the
+-- following filter returns only Google Compute Engine descriptors that
+-- have an id label: resource.type = starts_with(\"gce_\") AND
+-- resource.label:id
 pmrdlFilter :: Lens' ProjectsMonitoredResourceDescriptorsList (Maybe Text)
 pmrdlFilter
   = lens _pmrdlFilter (\ s a -> s{_pmrdlFilter = a})
@@ -214,10 +192,8 @@ instance GoogleRequest
         requestClient
           ProjectsMonitoredResourceDescriptorsList'{..}
           = go _pmrdlName _pmrdlXgafv _pmrdlUploadProtocol
-              (Just _pmrdlPp)
               _pmrdlAccessToken
               _pmrdlUploadType
-              _pmrdlBearerToken
               _pmrdlFilter
               _pmrdlPageToken
               _pmrdlPageSize

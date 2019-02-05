@@ -20,20 +20,21 @@ module Network.Google.Auth.ApplicationDefault where
 
 import           Control.Applicative
 import           Control.Exception.Lens          (catching, throwingM)
-import           Control.Monad                   (unless)
+import           Control.Monad                   (unless, when)
 import           Control.Monad.Catch
 import           Control.Monad.IO.Class          (MonadIO (..))
 import           Data.Aeson
 import           Data.Aeson.Types                (parseEither)
 import qualified Data.ByteString.Lazy            as LBS
+import           Data.Maybe                      (maybe)
 import qualified Data.Text                       as Text
 import           Network.Google.Compute.Metadata (isGCE)
 import           Network.Google.Internal.Auth
 
 import Network.HTTP.Conduit (Manager)
-import System.Directory     (doesFileExist, getHomeDirectory)
+import System.Directory     (doesFileExist, getHomeDirectory, createDirectoryIfMissing)
 import System.Environment   (lookupEnv)
-import System.FilePath      ((</>))
+import System.FilePath      ((</>), takeDirectory)
 import System.Info          (os)
 
 -- | The environment variable name which is used to specify the directory
@@ -125,6 +126,30 @@ fromFilePath f = do
     bs <- liftIO (LBS.readFile f)
     either (throwM . InvalidFileError f . Text.pack) pure
            (fromJSONCredentials bs)
+
+-- | Save 'AuthorizedUser'
+-- /See:/ 'cloudSDKConfigPath', 'defaultCredentialsPath'.
+saveAuthorizedUserToWellKnownPath :: (MonadIO m, MonadCatch m)
+                                  => Bool            -- ^ Force to save if True
+                                  -> AuthorizedUser
+                                  -> m ()
+saveAuthorizedUserToWellKnownPath b a = do
+    d <- defaultCredentialsPath
+    f <- maybe cloudSDKConfigPath pure d
+    liftIO $ createDirectoryIfMissing True $ takeDirectory f
+    saveAuthorizedUser f b a
+
+-- | Save 'AuthorizedUser'
+saveAuthorizedUser :: (MonadIO m, MonadCatch m)
+                   => FilePath
+                   -> Bool            -- ^ Force to save if True
+                   -> AuthorizedUser
+                   -> m ()
+saveAuthorizedUser f b a = do
+    p  <- liftIO (doesFileExist f)
+    when (p && not b) $
+        throwM (FileExistError f)
+    liftIO (LBS.writeFile f $ encode a)
 
 -- | Attempt to parse either a @service_account@ or @authorized_user@ formatted
 -- JSON value to obtain credentials.

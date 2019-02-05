@@ -22,7 +22,7 @@
 --
 -- Creates a node pool for a cluster.
 --
--- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @container.projects.zones.clusters.nodePools.create@.
+-- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.zones.clusters.nodePools.create@.
 module Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.Create
     (
     -- * REST Resource
@@ -35,12 +35,10 @@ module Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.Creat
     -- * Request Lenses
     , pzcnpcXgafv
     , pzcnpcUploadProtocol
-    , pzcnpcPp
     , pzcnpcAccessToken
     , pzcnpcUploadType
     , pzcnpcZone
     , pzcnpcPayload
-    , pzcnpcBearerToken
     , pzcnpcClusterId
     , pzcnpcProjectId
     , pzcnpcCallback
@@ -60,29 +58,25 @@ type ProjectsZonesClustersNodePoolsCreateResource =
                "clusters" :>
                  Capture "clusterId" Text :>
                    "nodePools" :>
-                     QueryParam "$.xgafv" Text :>
+                     QueryParam "$.xgafv" Xgafv :>
                        QueryParam "upload_protocol" Text :>
-                         QueryParam "pp" Bool :>
-                           QueryParam "access_token" Text :>
-                             QueryParam "uploadType" Text :>
-                               QueryParam "bearer_token" Text :>
-                                 QueryParam "callback" Text :>
-                                   QueryParam "alt" AltJSON :>
-                                     ReqBody '[JSON] CreateNodePoolRequest :>
-                                       Post '[JSON] Operation
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] CreateNodePoolRequest :>
+                                   Post '[JSON] Operation
 
 -- | Creates a node pool for a cluster.
 --
 -- /See:/ 'projectsZonesClustersNodePoolsCreate' smart constructor.
 data ProjectsZonesClustersNodePoolsCreate = ProjectsZonesClustersNodePoolsCreate'
-    { _pzcnpcXgafv          :: !(Maybe Text)
+    { _pzcnpcXgafv          :: !(Maybe Xgafv)
     , _pzcnpcUploadProtocol :: !(Maybe Text)
-    , _pzcnpcPp             :: !Bool
     , _pzcnpcAccessToken    :: !(Maybe Text)
     , _pzcnpcUploadType     :: !(Maybe Text)
     , _pzcnpcZone           :: !Text
     , _pzcnpcPayload        :: !CreateNodePoolRequest
-    , _pzcnpcBearerToken    :: !(Maybe Text)
     , _pzcnpcClusterId      :: !Text
     , _pzcnpcProjectId      :: !Text
     , _pzcnpcCallback       :: !(Maybe Text)
@@ -96,8 +90,6 @@ data ProjectsZonesClustersNodePoolsCreate = ProjectsZonesClustersNodePoolsCreate
 --
 -- * 'pzcnpcUploadProtocol'
 --
--- * 'pzcnpcPp'
---
 -- * 'pzcnpcAccessToken'
 --
 -- * 'pzcnpcUploadType'
@@ -105,8 +97,6 @@ data ProjectsZonesClustersNodePoolsCreate = ProjectsZonesClustersNodePoolsCreate
 -- * 'pzcnpcZone'
 --
 -- * 'pzcnpcPayload'
---
--- * 'pzcnpcBearerToken'
 --
 -- * 'pzcnpcClusterId'
 --
@@ -123,19 +113,17 @@ projectsZonesClustersNodePoolsCreate pPzcnpcZone_ pPzcnpcPayload_ pPzcnpcCluster
     ProjectsZonesClustersNodePoolsCreate'
     { _pzcnpcXgafv = Nothing
     , _pzcnpcUploadProtocol = Nothing
-    , _pzcnpcPp = True
     , _pzcnpcAccessToken = Nothing
     , _pzcnpcUploadType = Nothing
     , _pzcnpcZone = pPzcnpcZone_
     , _pzcnpcPayload = pPzcnpcPayload_
-    , _pzcnpcBearerToken = Nothing
     , _pzcnpcClusterId = pPzcnpcClusterId_
     , _pzcnpcProjectId = pPzcnpcProjectId_
     , _pzcnpcCallback = Nothing
     }
 
 -- | V1 error format.
-pzcnpcXgafv :: Lens' ProjectsZonesClustersNodePoolsCreate (Maybe Text)
+pzcnpcXgafv :: Lens' ProjectsZonesClustersNodePoolsCreate (Maybe Xgafv)
 pzcnpcXgafv
   = lens _pzcnpcXgafv (\ s a -> s{_pzcnpcXgafv = a})
 
@@ -144,10 +132,6 @@ pzcnpcUploadProtocol :: Lens' ProjectsZonesClustersNodePoolsCreate (Maybe Text)
 pzcnpcUploadProtocol
   = lens _pzcnpcUploadProtocol
       (\ s a -> s{_pzcnpcUploadProtocol = a})
-
--- | Pretty-print response.
-pzcnpcPp :: Lens' ProjectsZonesClustersNodePoolsCreate Bool
-pzcnpcPp = lens _pzcnpcPp (\ s a -> s{_pzcnpcPp = a})
 
 -- | OAuth access token.
 pzcnpcAccessToken :: Lens' ProjectsZonesClustersNodePoolsCreate (Maybe Text)
@@ -161,8 +145,9 @@ pzcnpcUploadType
   = lens _pzcnpcUploadType
       (\ s a -> s{_pzcnpcUploadType = a})
 
--- | The name of the Google Compute Engine
+-- | Deprecated. The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
+-- This field has been deprecated and replaced by the parent field.
 pzcnpcZone :: Lens' ProjectsZonesClustersNodePoolsCreate Text
 pzcnpcZone
   = lens _pzcnpcZone (\ s a -> s{_pzcnpcZone = a})
@@ -173,20 +158,16 @@ pzcnpcPayload
   = lens _pzcnpcPayload
       (\ s a -> s{_pzcnpcPayload = a})
 
--- | OAuth bearer token.
-pzcnpcBearerToken :: Lens' ProjectsZonesClustersNodePoolsCreate (Maybe Text)
-pzcnpcBearerToken
-  = lens _pzcnpcBearerToken
-      (\ s a -> s{_pzcnpcBearerToken = a})
-
--- | The name of the cluster.
+-- | Deprecated. The name of the cluster. This field has been deprecated and
+-- replaced by the parent field.
 pzcnpcClusterId :: Lens' ProjectsZonesClustersNodePoolsCreate Text
 pzcnpcClusterId
   = lens _pzcnpcClusterId
       (\ s a -> s{_pzcnpcClusterId = a})
 
--- | The Google Developers Console [project ID or project
+-- | Deprecated. The Google Developers Console [project ID or project
 -- number](https:\/\/developers.google.com\/console\/help\/new\/#projectnumber).
+-- This field has been deprecated and replaced by the parent field.
 pzcnpcProjectId :: Lens' ProjectsZonesClustersNodePoolsCreate Text
 pzcnpcProjectId
   = lens _pzcnpcProjectId
@@ -209,10 +190,8 @@ instance GoogleRequest
           = go _pzcnpcProjectId _pzcnpcZone _pzcnpcClusterId
               _pzcnpcXgafv
               _pzcnpcUploadProtocol
-              (Just _pzcnpcPp)
               _pzcnpcAccessToken
               _pzcnpcUploadType
-              _pzcnpcBearerToken
               _pzcnpcCallback
               (Just AltJSON)
               _pzcnpcPayload

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified machine type. Get a list of available machine
+-- Returns the specified machine type. Gets a list of available machine
 -- types by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.machineTypes.get@.
@@ -55,7 +55,7 @@ type MachineTypesGetResource =
                    Capture "machineType" Text :>
                      QueryParam "alt" AltJSON :> Get '[JSON] MachineType
 
--- | Returns the specified machine type. Get a list of available machine
+-- | Returns the specified machine type. Gets a list of available machine
 -- types by making a list() request.
 --
 -- /See:/ 'machineTypesGet' smart constructor.

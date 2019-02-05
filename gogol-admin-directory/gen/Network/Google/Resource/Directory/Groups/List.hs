@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieve all groups in a domain (paginated)
+-- Retrieve all groups of a domain or of a user given a userKey (paginated)
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.groups.list@.
 module Network.Google.Resource.Directory.Groups.List
@@ -33,8 +33,11 @@ module Network.Google.Resource.Directory.Groups.List
     , GroupsList
 
     -- * Request Lenses
+    , glOrderBy
     , glDomain
+    , glSortOrder
     , glCustomer
+    , glQuery
     , glPageToken
     , glUserKey
     , glMaxResults
@@ -50,19 +53,25 @@ type GroupsListResource =
        "directory" :>
          "v1" :>
            "groups" :>
-             QueryParam "domain" Text :>
-               QueryParam "customer" Text :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "userKey" Text :>
-                     QueryParam "maxResults" (Textual Int32) :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] Groups
+             QueryParam "orderBy" GroupsListOrderBy :>
+               QueryParam "domain" Text :>
+                 QueryParam "sortOrder" GroupsListSortOrder :>
+                   QueryParam "customer" Text :>
+                     QueryParam "query" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "userKey" Text :>
+                           QueryParam "maxResults" (Textual Int32) :>
+                             QueryParam "alt" AltJSON :> Get '[JSON] Groups
 
--- | Retrieve all groups in a domain (paginated)
+-- | Retrieve all groups of a domain or of a user given a userKey (paginated)
 --
 -- /See:/ 'groupsList' smart constructor.
 data GroupsList = GroupsList'
-    { _glDomain     :: !(Maybe Text)
+    { _glOrderBy    :: !(Maybe GroupsListOrderBy)
+    , _glDomain     :: !(Maybe Text)
+    , _glSortOrder  :: !(Maybe GroupsListSortOrder)
     , _glCustomer   :: !(Maybe Text)
+    , _glQuery      :: !(Maybe Text)
     , _glPageToken  :: !(Maybe Text)
     , _glUserKey    :: !(Maybe Text)
     , _glMaxResults :: !(Maybe (Textual Int32))
@@ -72,9 +81,15 @@ data GroupsList = GroupsList'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'glOrderBy'
+--
 -- * 'glDomain'
 --
+-- * 'glSortOrder'
+--
 -- * 'glCustomer'
+--
+-- * 'glQuery'
 --
 -- * 'glPageToken'
 --
@@ -85,23 +100,43 @@ groupsList
     :: GroupsList
 groupsList =
     GroupsList'
-    { _glDomain = Nothing
+    { _glOrderBy = Nothing
+    , _glDomain = Nothing
+    , _glSortOrder = Nothing
     , _glCustomer = Nothing
+    , _glQuery = Nothing
     , _glPageToken = Nothing
     , _glUserKey = Nothing
     , _glMaxResults = Nothing
     }
+
+-- | Column to use for sorting results
+glOrderBy :: Lens' GroupsList (Maybe GroupsListOrderBy)
+glOrderBy
+  = lens _glOrderBy (\ s a -> s{_glOrderBy = a})
 
 -- | Name of the domain. Fill this field to get groups from only this domain.
 -- To return all groups in a multi-domain fill customer field instead.
 glDomain :: Lens' GroupsList (Maybe Text)
 glDomain = lens _glDomain (\ s a -> s{_glDomain = a})
 
--- | Immutable id of the Google Apps account. In case of multi-domain, to
--- fetch all groups for a customer, fill this field instead of domain.
+-- | Whether to return results in ascending or descending order. Only of use
+-- when orderBy is also used
+glSortOrder :: Lens' GroupsList (Maybe GroupsListSortOrder)
+glSortOrder
+  = lens _glSortOrder (\ s a -> s{_glSortOrder = a})
+
+-- | Immutable ID of the G Suite account. In case of multi-domain, to fetch
+-- all groups for a customer, fill this field instead of domain.
 glCustomer :: Lens' GroupsList (Maybe Text)
 glCustomer
   = lens _glCustomer (\ s a -> s{_glCustomer = a})
+
+-- | Query string search. Should be of the form \"\". Complete documentation
+-- is at
+-- https:\/\/developers.google.com\/admin-sdk\/directory\/v1\/guides\/search-groups
+glQuery :: Lens' GroupsList (Maybe Text)
+glQuery = lens _glQuery (\ s a -> s{_glQuery = a})
 
 -- | Token to specify next page in the list
 glPageToken :: Lens' GroupsList (Maybe Text)
@@ -127,7 +162,10 @@ instance GoogleRequest GroupsList where
              '["https://www.googleapis.com/auth/admin.directory.group",
                "https://www.googleapis.com/auth/admin.directory.group.readonly"]
         requestClient GroupsList'{..}
-          = go _glDomain _glCustomer _glPageToken _glUserKey
+          = go _glOrderBy _glDomain _glSortOrder _glCustomer
+              _glQuery
+              _glPageToken
+              _glUserKey
               _glMaxResults
               (Just AltJSON)
               directoryService

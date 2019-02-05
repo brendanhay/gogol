@@ -36,10 +36,8 @@ module Network.Google.Resource.Monitoring.Projects.MetricDescriptors.List
     -- * Request Lenses
     , pmdlXgafv
     , pmdlUploadProtocol
-    , pmdlPp
     , pmdlAccessToken
     , pmdlUploadType
-    , pmdlBearerToken
     , pmdlName
     , pmdlFilter
     , pmdlPageToken
@@ -58,16 +56,14 @@ type ProjectsMetricDescriptorsListResource =
          "metricDescriptors" :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "filter" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "pageSize" (Textual Int32) :>
-                             QueryParam "callback" Text :>
-                               QueryParam "alt" AltJSON :>
-                                 Get '[JSON] ListMetricDescriptorsResponse
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "pageSize" (Textual Int32) :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] ListMetricDescriptorsResponse
 
 -- | Lists metric descriptors that match a filter. This method does not
 -- require a Stackdriver account.
@@ -76,10 +72,8 @@ type ProjectsMetricDescriptorsListResource =
 data ProjectsMetricDescriptorsList = ProjectsMetricDescriptorsList'
     { _pmdlXgafv          :: !(Maybe Xgafv)
     , _pmdlUploadProtocol :: !(Maybe Text)
-    , _pmdlPp             :: !Bool
     , _pmdlAccessToken    :: !(Maybe Text)
     , _pmdlUploadType     :: !(Maybe Text)
-    , _pmdlBearerToken    :: !(Maybe Text)
     , _pmdlName           :: !Text
     , _pmdlFilter         :: !(Maybe Text)
     , _pmdlPageToken      :: !(Maybe Text)
@@ -95,13 +89,9 @@ data ProjectsMetricDescriptorsList = ProjectsMetricDescriptorsList'
 --
 -- * 'pmdlUploadProtocol'
 --
--- * 'pmdlPp'
---
 -- * 'pmdlAccessToken'
 --
 -- * 'pmdlUploadType'
---
--- * 'pmdlBearerToken'
 --
 -- * 'pmdlName'
 --
@@ -119,10 +109,8 @@ projectsMetricDescriptorsList pPmdlName_ =
     ProjectsMetricDescriptorsList'
     { _pmdlXgafv = Nothing
     , _pmdlUploadProtocol = Nothing
-    , _pmdlPp = True
     , _pmdlAccessToken = Nothing
     , _pmdlUploadType = Nothing
-    , _pmdlBearerToken = Nothing
     , _pmdlName = pPmdlName_
     , _pmdlFilter = Nothing
     , _pmdlPageToken = Nothing
@@ -141,10 +129,6 @@ pmdlUploadProtocol
   = lens _pmdlUploadProtocol
       (\ s a -> s{_pmdlUploadProtocol = a})
 
--- | Pretty-print response.
-pmdlPp :: Lens' ProjectsMetricDescriptorsList Bool
-pmdlPp = lens _pmdlPp (\ s a -> s{_pmdlPp = a})
-
 -- | OAuth access token.
 pmdlAccessToken :: Lens' ProjectsMetricDescriptorsList (Maybe Text)
 pmdlAccessToken
@@ -157,23 +141,15 @@ pmdlUploadType
   = lens _pmdlUploadType
       (\ s a -> s{_pmdlUploadType = a})
 
--- | OAuth bearer token.
-pmdlBearerToken :: Lens' ProjectsMetricDescriptorsList (Maybe Text)
-pmdlBearerToken
-  = lens _pmdlBearerToken
-      (\ s a -> s{_pmdlBearerToken = a})
-
 -- | The project on which to execute the request. The format is
 -- \"projects\/{project_id_or_number}\".
 pmdlName :: Lens' ProjectsMetricDescriptorsList Text
 pmdlName = lens _pmdlName (\ s a -> s{_pmdlName = a})
 
 -- | If this field is empty, all custom and system-defined metric descriptors
--- are returned. Otherwise, the filter (\/monitoring\/api\/v3\/filters)
--- specifies which metric descriptors are to be returned. For example, the
--- following filter matches all custom metrics
--- (\/monitoring\/custom-metrics): metric.type =
--- starts_with(\"custom.googleapis.com\/\")
+-- are returned. Otherwise, the filter specifies which metric descriptors
+-- are to be returned. For example, the following filter matches all custom
+-- metrics: metric.type = starts_with(\"custom.googleapis.com\/\")
 pmdlFilter :: Lens' ProjectsMetricDescriptorsList (Maybe Text)
 pmdlFilter
   = lens _pmdlFilter (\ s a -> s{_pmdlFilter = a})
@@ -208,10 +184,8 @@ instance GoogleRequest ProjectsMetricDescriptorsList
                "https://www.googleapis.com/auth/monitoring.write"]
         requestClient ProjectsMetricDescriptorsList'{..}
           = go _pmdlName _pmdlXgafv _pmdlUploadProtocol
-              (Just _pmdlPp)
               _pmdlAccessToken
               _pmdlUploadType
-              _pmdlBearerToken
               _pmdlFilter
               _pmdlPageToken
               _pmdlPageSize

@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Changes the renewal settings of a subscription
+-- Update a user license\'s renewal settings. This is applicable for
+-- accounts with annual commitment plans only.
 --
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @reseller.subscriptions.changeRenewalSettings@.
 module Network.Google.Resource.Reseller.Subscriptions.ChangeRenewalSettings
@@ -56,7 +57,8 @@ type SubscriptionsChangeRenewalSettingsResource =
                        ReqBody '[JSON] RenewalSettings :>
                          Post '[JSON] Subscription
 
--- | Changes the renewal settings of a subscription
+-- | Update a user license\'s renewal settings. This is applicable for
+-- accounts with annual commitment plans only.
 --
 -- /See:/ 'subscriptionsChangeRenewalSettings' smart constructor.
 data SubscriptionsChangeRenewalSettings = SubscriptionsChangeRenewalSettings'
@@ -91,13 +93,20 @@ scrsPayload :: Lens' SubscriptionsChangeRenewalSettings RenewalSettings
 scrsPayload
   = lens _scrsPayload (\ s a -> s{_scrsPayload = a})
 
--- | Id of the Customer
+-- | Either the customer\'s primary domain name or the customer\'s unique
+-- identifier. If using the domain name, we do not recommend using a
+-- customerId as a key for persistent data. If the domain name for a
+-- customerId is changed, the Google system automatically updates.
 scrsCustomerId :: Lens' SubscriptionsChangeRenewalSettings Text
 scrsCustomerId
   = lens _scrsCustomerId
       (\ s a -> s{_scrsCustomerId = a})
 
--- | Id of the subscription, which is unique for a customer
+-- | This is a required property. The subscriptionId is the subscription
+-- identifier and is unique for each customer. Since a subscriptionId
+-- changes when a subscription is updated, we recommend to not use this ID
+-- as a key for persistent data. And the subscriptionId can be found using
+-- the retrieve all reseller subscriptions method.
 scrsSubscriptionId :: Lens' SubscriptionsChangeRenewalSettings Text
 scrsSubscriptionId
   = lens _scrsSubscriptionId

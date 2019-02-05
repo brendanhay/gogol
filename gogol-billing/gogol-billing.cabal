@@ -1,5 +1,5 @@
 name:                  gogol-billing
-version:               0.1.1
+version:               0.4.0
 synopsis:              Google Cloud Billing SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -11,11 +11,11 @@ copyright:             Copyright (c) 2015-2016 Brendan Hay
 category:              Network, Google, Cloud
 build-type:            Simple
 cabal-version:         >= 1.10
-extra-source-files:    README.md
+extra-source-files:    README.md src/.gitkeep
 
 description:
-    Retrieves Google Developers Console billing accounts and associates them
-    with projects.
+    Allows developers to manage billing for their Google Cloud Platform
+    projects programmatically.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -36,16 +36,23 @@ library
     exposed-modules:
           Network.Google.Billing
         , Network.Google.Billing.Types
+        , Network.Google.Resource.CloudBilling.BillingAccounts.Create
         , Network.Google.Resource.CloudBilling.BillingAccounts.Get
+        , Network.Google.Resource.CloudBilling.BillingAccounts.GetIAMPolicy
         , Network.Google.Resource.CloudBilling.BillingAccounts.List
+        , Network.Google.Resource.CloudBilling.BillingAccounts.Patch
         , Network.Google.Resource.CloudBilling.BillingAccounts.Projects.List
+        , Network.Google.Resource.CloudBilling.BillingAccounts.SetIAMPolicy
+        , Network.Google.Resource.CloudBilling.BillingAccounts.TestIAMPermissions
         , Network.Google.Resource.CloudBilling.Projects.GetBillingInfo
         , Network.Google.Resource.CloudBilling.Projects.UpdateBillingInfo
+        , Network.Google.Resource.CloudBilling.Services.List
+        , Network.Google.Resource.CloudBilling.Services.SKUs.List
 
     other-modules:
           Network.Google.Billing.Types.Product
         , Network.Google.Billing.Types.Sum
 
     build-depends:
-          gogol-core == 0.1.1.*
+          gogol-core == 0.4.0.*
         , base       >= 4.7 && < 5

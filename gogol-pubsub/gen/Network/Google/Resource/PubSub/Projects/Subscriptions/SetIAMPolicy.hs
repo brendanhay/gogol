@@ -23,7 +23,7 @@
 -- Sets the access control policy on the specified resource. Replaces any
 -- existing policy.
 --
--- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.setIamPolicy@.
+-- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.setIamPolicy@.
 module Network.Google.Resource.PubSub.Projects.Subscriptions.SetIAMPolicy
     (
     -- * REST Resource
@@ -36,11 +36,9 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.SetIAMPolicy
     -- * Request Lenses
     , pssipXgafv
     , pssipUploadProtocol
-    , pssipPp
     , pssipAccessToken
     , pssipUploadType
     , pssipPayload
-    , pssipBearerToken
     , pssipResource
     , pssipCallback
     ) where
@@ -53,29 +51,25 @@ import           Network.Google.PubSub.Types
 type ProjectsSubscriptionsSetIAMPolicyResource =
      "v1" :>
        CaptureMode "resource" "setIamPolicy" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] SetIAMPolicyRequest :>
-                           Post '[JSON] Policy
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] SetIAMPolicyRequest :>
+                       Post '[JSON] Policy
 
 -- | Sets the access control policy on the specified resource. Replaces any
 -- existing policy.
 --
 -- /See:/ 'projectsSubscriptionsSetIAMPolicy' smart constructor.
 data ProjectsSubscriptionsSetIAMPolicy = ProjectsSubscriptionsSetIAMPolicy'
-    { _pssipXgafv          :: !(Maybe Text)
+    { _pssipXgafv          :: !(Maybe Xgafv)
     , _pssipUploadProtocol :: !(Maybe Text)
-    , _pssipPp             :: !Bool
     , _pssipAccessToken    :: !(Maybe Text)
     , _pssipUploadType     :: !(Maybe Text)
     , _pssipPayload        :: !SetIAMPolicyRequest
-    , _pssipBearerToken    :: !(Maybe Text)
     , _pssipResource       :: !Text
     , _pssipCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -88,15 +82,11 @@ data ProjectsSubscriptionsSetIAMPolicy = ProjectsSubscriptionsSetIAMPolicy'
 --
 -- * 'pssipUploadProtocol'
 --
--- * 'pssipPp'
---
 -- * 'pssipAccessToken'
 --
 -- * 'pssipUploadType'
 --
 -- * 'pssipPayload'
---
--- * 'pssipBearerToken'
 --
 -- * 'pssipResource'
 --
@@ -109,17 +99,15 @@ projectsSubscriptionsSetIAMPolicy pPssipPayload_ pPssipResource_ =
     ProjectsSubscriptionsSetIAMPolicy'
     { _pssipXgafv = Nothing
     , _pssipUploadProtocol = Nothing
-    , _pssipPp = True
     , _pssipAccessToken = Nothing
     , _pssipUploadType = Nothing
     , _pssipPayload = pPssipPayload_
-    , _pssipBearerToken = Nothing
     , _pssipResource = pPssipResource_
     , _pssipCallback = Nothing
     }
 
 -- | V1 error format.
-pssipXgafv :: Lens' ProjectsSubscriptionsSetIAMPolicy (Maybe Text)
+pssipXgafv :: Lens' ProjectsSubscriptionsSetIAMPolicy (Maybe Xgafv)
 pssipXgafv
   = lens _pssipXgafv (\ s a -> s{_pssipXgafv = a})
 
@@ -128,10 +116,6 @@ pssipUploadProtocol :: Lens' ProjectsSubscriptionsSetIAMPolicy (Maybe Text)
 pssipUploadProtocol
   = lens _pssipUploadProtocol
       (\ s a -> s{_pssipUploadProtocol = a})
-
--- | Pretty-print response.
-pssipPp :: Lens' ProjectsSubscriptionsSetIAMPolicy Bool
-pssipPp = lens _pssipPp (\ s a -> s{_pssipPp = a})
 
 -- | OAuth access token.
 pssipAccessToken :: Lens' ProjectsSubscriptionsSetIAMPolicy (Maybe Text)
@@ -150,15 +134,8 @@ pssipPayload :: Lens' ProjectsSubscriptionsSetIAMPolicy SetIAMPolicyRequest
 pssipPayload
   = lens _pssipPayload (\ s a -> s{_pssipPayload = a})
 
--- | OAuth bearer token.
-pssipBearerToken :: Lens' ProjectsSubscriptionsSetIAMPolicy (Maybe Text)
-pssipBearerToken
-  = lens _pssipBearerToken
-      (\ s a -> s{_pssipBearerToken = a})
-
--- | REQUIRED: The resource for which the policy is being specified.
--- \`resource\` is usually specified as a path. For example, a Project
--- resource is specified as \`projects\/{project}\`.
+-- | REQUIRED: The resource for which the policy is being specified. See the
+-- operation documentation for the appropriate value for this field.
 pssipResource :: Lens' ProjectsSubscriptionsSetIAMPolicy Text
 pssipResource
   = lens _pssipResource
@@ -178,10 +155,8 @@ instance GoogleRequest
                "https://www.googleapis.com/auth/pubsub"]
         requestClient ProjectsSubscriptionsSetIAMPolicy'{..}
           = go _pssipResource _pssipXgafv _pssipUploadProtocol
-              (Just _pssipPp)
               _pssipAccessToken
               _pssipUploadType
-              _pssipBearerToken
               _pssipCallback
               (Just AltJSON)
               _pssipPayload

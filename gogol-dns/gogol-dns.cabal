@@ -1,5 +1,5 @@
 name:                  gogol-dns
-version:               0.1.1
+version:               0.4.0
 synopsis:              Google Cloud DNS SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -11,7 +11,7 @@ copyright:             Copyright (c) 2015-2016 Brendan Hay
 category:              Network, Google, Cloud
 build-type:            Simple
 cabal-version:         >= 1.10
-extra-source-files:    README.md
+extra-source-files:    README.md src/.gitkeep
 
 description:
     Configures and serves authoritative DNS records.
@@ -38,8 +38,8 @@ library
         , Network.Google.Resource.DNS.Changes.Create
         , Network.Google.Resource.DNS.Changes.Get
         , Network.Google.Resource.DNS.Changes.List
-        , Network.Google.Resource.DNS.DNSkeys.Get
-        , Network.Google.Resource.DNS.DNSkeys.List
+        , Network.Google.Resource.DNS.DNSKeys.Get
+        , Network.Google.Resource.DNS.DNSKeys.List
         , Network.Google.Resource.DNS.ManagedZoneOperations.Get
         , Network.Google.Resource.DNS.ManagedZoneOperations.List
         , Network.Google.Resource.DNS.ManagedZones.Create
@@ -56,5 +56,5 @@ library
         , Network.Google.DNS.Types.Sum
 
     build-depends:
-          gogol-core == 0.1.1.*
+          gogol-core == 0.4.0.*
         , base       >= 4.7 && < 5

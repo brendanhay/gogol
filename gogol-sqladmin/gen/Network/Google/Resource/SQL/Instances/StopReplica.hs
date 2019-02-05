@@ -22,7 +22,7 @@
 --
 -- Stops the replication in the read replica instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.instances.stopReplica@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.instances.stopReplica@.
 module Network.Google.Resource.SQL.Instances.StopReplica
     (
     -- * REST Resource

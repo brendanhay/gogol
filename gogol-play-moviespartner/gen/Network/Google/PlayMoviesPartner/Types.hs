@@ -22,38 +22,14 @@ module Network.Google.PlayMoviesPartner.Types
     -- * OAuth Scopes
     , playmoviesPartnerReadOnlyScope
 
-    -- * Component
-    , Component
-    , component
-    , cStatus
-    , cPphName
-    , cStudioName
-    , cElIds
-    , cReceivedTime
-    , cPriority
-    , cCustomIds
-    , cAltCutIds
-    , cProcessingErrors
-    , cPlayableUnitType
-    , cEditLevelEidrs
-    , cApprovedTime
-    , cName
-    , cTitleLevelEidrs
-    , cRejectionNote
-    , cComponentId
-    , cLanguage
-    , cStatusDetail
-    , cType
-    , cNormalizedPriority
-    , cComponentDetailType
-    , cFilename
+    -- * AvailWorkType
+    , AvailWorkType (..)
 
-    -- * ListComponentsResponse
-    , ListComponentsResponse
-    , listComponentsResponse
-    , lcrComponents
-    , lcrNextPageToken
-    , lcrTotalSize
+    -- * OrderStatus
+    , OrderStatus (..)
+
+    -- * AvailFormatProFile
+    , AvailFormatProFile (..)
 
     -- * Avail
     , Avail
@@ -92,6 +68,9 @@ module Network.Google.PlayMoviesPartner.Types
     , aSeasonAltId
     , aTitleInternalAlias
 
+    -- * OrderType
+    , OrderType (..)
+
     -- * ListAvailsResponse
     , ListAvailsResponse
     , listAvailsResponse
@@ -99,12 +78,8 @@ module Network.Google.PlayMoviesPartner.Types
     , larAvails
     , larTotalSize
 
-    -- * ListExperienceLocalesResponse
-    , ListExperienceLocalesResponse
-    , listExperienceLocalesResponse
-    , lelrNextPageToken
-    , lelrTotalSize
-    , lelrExperienceLocales
+    -- * StoreInfoType
+    , StoreInfoType (..)
 
     -- * ListOrdersResponse
     , ListOrdersResponse
@@ -112,6 +87,18 @@ module Network.Google.PlayMoviesPartner.Types
     , lorNextPageToken
     , lorTotalSize
     , lorOrders
+
+    -- * Xgafv
+    , Xgafv (..)
+
+    -- * OrderNormalizedPriority
+    , OrderNormalizedPriority (..)
+
+    -- * AvailLicenseType
+    , AvailLicenseType (..)
+
+    -- * OrderStatusDetail
+    , OrderStatusDetail (..)
 
     -- * ListStoreInfosResponse
     , ListStoreInfosResponse
@@ -146,33 +133,6 @@ module Network.Google.PlayMoviesPartner.Types
     , oNormalizedPriority
     , oOrderId
     , oEpisodeName
-
-    -- * ExperienceLocale
-    , ExperienceLocale
-    , experienceLocale
-    , elTitleLevelEidr
-    , elStatus
-    , elPphNames
-    , elInventoryId
-    , elEarliestAvailStartTime
-    , elStudioName
-    , elPriority
-    , elCustomIds
-    , elCreatedTime
-    , elCountry
-    , elTrailerId
-    , elPresentationId
-    , elAltCutId
-    , elChannelId
-    , elApprovedTime
-    , elPlayableSequenceId
-    , elElId
-    , elVideoId
-    , elName
-    , elLanguage
-    , elEditLevelEidr
-    , elType
-    , elNormalizedPriority
 
     -- * StoreInfo
     , StoreInfo

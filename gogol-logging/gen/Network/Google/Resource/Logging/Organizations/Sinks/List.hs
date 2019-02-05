@@ -36,10 +36,8 @@ module Network.Google.Resource.Logging.Organizations.Sinks.List
     , oslParent
     , oslXgafv
     , oslUploadProtocol
-    , oslPp
     , oslAccessToken
     , oslUploadType
-    , oslBearerToken
     , oslPageToken
     , oslPageSize
     , oslCallback
@@ -56,15 +54,13 @@ type OrganizationsSinksListResource =
          "sinks" :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" (Textual Int32) :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] ListSinksResponse
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "pageSize" (Textual Int32) :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] ListSinksResponse
 
 -- | Lists sinks.
 --
@@ -73,10 +69,8 @@ data OrganizationsSinksList = OrganizationsSinksList'
     { _oslParent         :: !Text
     , _oslXgafv          :: !(Maybe Xgafv)
     , _oslUploadProtocol :: !(Maybe Text)
-    , _oslPp             :: !Bool
     , _oslAccessToken    :: !(Maybe Text)
     , _oslUploadType     :: !(Maybe Text)
-    , _oslBearerToken    :: !(Maybe Text)
     , _oslPageToken      :: !(Maybe Text)
     , _oslPageSize       :: !(Maybe (Textual Int32))
     , _oslCallback       :: !(Maybe Text)
@@ -92,13 +86,9 @@ data OrganizationsSinksList = OrganizationsSinksList'
 --
 -- * 'oslUploadProtocol'
 --
--- * 'oslPp'
---
 -- * 'oslAccessToken'
 --
 -- * 'oslUploadType'
---
--- * 'oslBearerToken'
 --
 -- * 'oslPageToken'
 --
@@ -113,17 +103,16 @@ organizationsSinksList pOslParent_ =
     { _oslParent = pOslParent_
     , _oslXgafv = Nothing
     , _oslUploadProtocol = Nothing
-    , _oslPp = True
     , _oslAccessToken = Nothing
     , _oslUploadType = Nothing
-    , _oslBearerToken = Nothing
     , _oslPageToken = Nothing
     , _oslPageSize = Nothing
     , _oslCallback = Nothing
     }
 
--- | Required. The cloud resource containing the sinks. Example:
--- \`\"projects\/my-logging-project\"\`.
+-- | Required. The parent resource whose sinks are to be listed:
+-- \"projects\/[PROJECT_ID]\" \"organizations\/[ORGANIZATION_ID]\"
+-- \"billingAccounts\/[BILLING_ACCOUNT_ID]\" \"folders\/[FOLDER_ID]\"
 oslParent :: Lens' OrganizationsSinksList Text
 oslParent
   = lens _oslParent (\ s a -> s{_oslParent = a})
@@ -138,10 +127,6 @@ oslUploadProtocol
   = lens _oslUploadProtocol
       (\ s a -> s{_oslUploadProtocol = a})
 
--- | Pretty-print response.
-oslPp :: Lens' OrganizationsSinksList Bool
-oslPp = lens _oslPp (\ s a -> s{_oslPp = a})
-
 -- | OAuth access token.
 oslAccessToken :: Lens' OrganizationsSinksList (Maybe Text)
 oslAccessToken
@@ -154,23 +139,17 @@ oslUploadType
   = lens _oslUploadType
       (\ s a -> s{_oslUploadType = a})
 
--- | OAuth bearer token.
-oslBearerToken :: Lens' OrganizationsSinksList (Maybe Text)
-oslBearerToken
-  = lens _oslBearerToken
-      (\ s a -> s{_oslBearerToken = a})
-
 -- | Optional. If present, then retrieve the next batch of results from the
--- preceding call to this method. \`pageToken\` must be the value of
--- \`nextPageToken\` from the previous response. The values of other method
+-- preceding call to this method. pageToken must be the value of
+-- nextPageToken from the previous response. The values of other method
 -- parameters should be identical to those in the previous call.
 oslPageToken :: Lens' OrganizationsSinksList (Maybe Text)
 oslPageToken
   = lens _oslPageToken (\ s a -> s{_oslPageToken = a})
 
 -- | Optional. The maximum number of results to return from this request.
--- Non-positive values are ignored. The presence of \`nextPageToken\` in
--- the response indicates that more results might be available.
+-- Non-positive values are ignored. The presence of nextPageToken in the
+-- response indicates that more results might be available.
 oslPageSize :: Lens' OrganizationsSinksList (Maybe Int32)
 oslPageSize
   = lens _oslPageSize (\ s a -> s{_oslPageSize = a}) .
@@ -190,10 +169,8 @@ instance GoogleRequest OrganizationsSinksList where
                "https://www.googleapis.com/auth/logging.read"]
         requestClient OrganizationsSinksList'{..}
           = go _oslParent _oslXgafv _oslUploadProtocol
-              (Just _oslPp)
               _oslAccessToken
               _oslUploadType
-              _oslBearerToken
               _oslPageToken
               _oslPageSize
               _oslCallback

@@ -30,7 +30,7 @@
 -- from a signed-in user with **viewer**, **Is owner** or **Can edit**
 -- permissions in the Google Developers Console project.
 --
--- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @proximitybeacon.beacons.attachments.list@.
+-- /See:/ <https://developers.google.com/beacons/proximity/ Proximity Beacon API Reference> for @proximitybeacon.beacons.attachments.list@.
 module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.List
     (
     -- * REST Resource
@@ -43,11 +43,9 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.List
     -- * Request Lenses
     , balXgafv
     , balUploadProtocol
-    , balPp
     , balAccessToken
     , balBeaconName
     , balUploadType
-    , balBearerToken
     , balNamespacedType
     , balProjectId
     , balCallback
@@ -62,17 +60,15 @@ type BeaconsAttachmentsListResource =
      "v1beta1" :>
        Capture "beaconName" Text :>
          "attachments" :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "namespacedType" Text :>
-                         QueryParam "projectId" Text :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] ListBeaconAttachmentsResponse
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "namespacedType" Text :>
+                     QueryParam "projectId" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] ListBeaconAttachmentsResponse
 
 -- | Returns the attachments for the specified beacon that match the
 -- specified namespaced-type pattern. To control which namespaced types are
@@ -86,13 +82,11 @@ type BeaconsAttachmentsListResource =
 --
 -- /See:/ 'beaconsAttachmentsList' smart constructor.
 data BeaconsAttachmentsList = BeaconsAttachmentsList'
-    { _balXgafv          :: !(Maybe Text)
+    { _balXgafv          :: !(Maybe Xgafv)
     , _balUploadProtocol :: !(Maybe Text)
-    , _balPp             :: !Bool
     , _balAccessToken    :: !(Maybe Text)
     , _balBeaconName     :: !Text
     , _balUploadType     :: !(Maybe Text)
-    , _balBearerToken    :: !(Maybe Text)
     , _balNamespacedType :: !(Maybe Text)
     , _balProjectId      :: !(Maybe Text)
     , _balCallback       :: !(Maybe Text)
@@ -106,15 +100,11 @@ data BeaconsAttachmentsList = BeaconsAttachmentsList'
 --
 -- * 'balUploadProtocol'
 --
--- * 'balPp'
---
 -- * 'balAccessToken'
 --
 -- * 'balBeaconName'
 --
 -- * 'balUploadType'
---
--- * 'balBearerToken'
 --
 -- * 'balNamespacedType'
 --
@@ -128,18 +118,16 @@ beaconsAttachmentsList pBalBeaconName_ =
     BeaconsAttachmentsList'
     { _balXgafv = Nothing
     , _balUploadProtocol = Nothing
-    , _balPp = True
     , _balAccessToken = Nothing
     , _balBeaconName = pBalBeaconName_
     , _balUploadType = Nothing
-    , _balBearerToken = Nothing
     , _balNamespacedType = Nothing
     , _balProjectId = Nothing
     , _balCallback = Nothing
     }
 
 -- | V1 error format.
-balXgafv :: Lens' BeaconsAttachmentsList (Maybe Text)
+balXgafv :: Lens' BeaconsAttachmentsList (Maybe Xgafv)
 balXgafv = lens _balXgafv (\ s a -> s{_balXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -147,10 +135,6 @@ balUploadProtocol :: Lens' BeaconsAttachmentsList (Maybe Text)
 balUploadProtocol
   = lens _balUploadProtocol
       (\ s a -> s{_balUploadProtocol = a})
-
--- | Pretty-print response.
-balPp :: Lens' BeaconsAttachmentsList Bool
-balPp = lens _balPp (\ s a -> s{_balPp = a})
 
 -- | OAuth access token.
 balAccessToken :: Lens' BeaconsAttachmentsList (Maybe Text)
@@ -174,12 +158,6 @@ balUploadType :: Lens' BeaconsAttachmentsList (Maybe Text)
 balUploadType
   = lens _balUploadType
       (\ s a -> s{_balUploadType = a})
-
--- | OAuth bearer token.
-balBearerToken :: Lens' BeaconsAttachmentsList (Maybe Text)
-balBearerToken
-  = lens _balBearerToken
-      (\ s a -> s{_balBearerToken = a})
 
 -- | Specifies the namespace and type of attachment to include in response in
 -- namespace\/type format. Accepts \`*\/*\` to specify \"all types in all
@@ -210,10 +188,8 @@ instance GoogleRequest BeaconsAttachmentsList where
              '["https://www.googleapis.com/auth/userlocation.beacon.registry"]
         requestClient BeaconsAttachmentsList'{..}
           = go _balBeaconName _balXgafv _balUploadProtocol
-              (Just _balPp)
               _balAccessToken
               _balUploadType
-              _balBearerToken
               _balNamespacedType
               _balProjectId
               _balCallback

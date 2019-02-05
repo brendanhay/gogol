@@ -34,8 +34,9 @@ module Network.Google.Resource.Compute.Routes.Insert
     , RoutesInsert
 
     -- * Request Lenses
-    , rProject
-    , rPayload
+    , rouRequestId
+    , rouProject
+    , rouPayload
     ) where
 
 import           Network.Google.Compute.Types
@@ -50,42 +51,63 @@ type RoutesInsertResource =
            Capture "project" Text :>
              "global" :>
                "routes" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] Route :> Post '[JSON] Operation
+                 QueryParam "requestId" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Route :> Post '[JSON] Operation
 
 -- | Creates a Route resource in the specified project using the data
 -- included in the request.
 --
 -- /See:/ 'routesInsert' smart constructor.
 data RoutesInsert = RoutesInsert'
-    { _rProject :: !Text
-    , _rPayload :: !Route
+    { _rouRequestId :: !(Maybe Text)
+    , _rouProject   :: !Text
+    , _rouPayload   :: !Route
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoutesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rProject'
+-- * 'rouRequestId'
 --
--- * 'rPayload'
+-- * 'rouProject'
+--
+-- * 'rouPayload'
 routesInsert
-    :: Text -- ^ 'rProject'
-    -> Route -- ^ 'rPayload'
+    :: Text -- ^ 'rouProject'
+    -> Route -- ^ 'rouPayload'
     -> RoutesInsert
-routesInsert pRProject_ pRPayload_ =
+routesInsert pRouProject_ pRouPayload_ =
     RoutesInsert'
-    { _rProject = pRProject_
-    , _rPayload = pRPayload_
+    { _rouRequestId = Nothing
+    , _rouProject = pRouProject_
+    , _rouPayload = pRouPayload_
     }
 
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+rouRequestId :: Lens' RoutesInsert (Maybe Text)
+rouRequestId
+  = lens _rouRequestId (\ s a -> s{_rouRequestId = a})
+
 -- | Project ID for this request.
-rProject :: Lens' RoutesInsert Text
-rProject = lens _rProject (\ s a -> s{_rProject = a})
+rouProject :: Lens' RoutesInsert Text
+rouProject
+  = lens _rouProject (\ s a -> s{_rouProject = a})
 
 -- | Multipart request metadata.
-rPayload :: Lens' RoutesInsert Route
-rPayload = lens _rPayload (\ s a -> s{_rPayload = a})
+rouPayload :: Lens' RoutesInsert Route
+rouPayload
+  = lens _rouPayload (\ s a -> s{_rouPayload = a})
 
 instance GoogleRequest RoutesInsert where
         type Rs RoutesInsert = Operation
@@ -93,7 +115,8 @@ instance GoogleRequest RoutesInsert where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient RoutesInsert'{..}
-          = go _rProject (Just AltJSON) _rPayload
+          = go _rouProject _rouRequestId (Just AltJSON)
+              _rouPayload
               computeService
           where go
                   = buildClient (Proxy :: Proxy RoutesInsertResource)

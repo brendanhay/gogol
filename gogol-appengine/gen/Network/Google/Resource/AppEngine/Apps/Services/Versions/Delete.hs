@@ -22,7 +22,7 @@
 --
 -- Deletes an existing Version resource.
 --
--- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ Google App Engine Admin API Reference> for @appengine.apps.services.versions.delete@.
+-- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ App Engine Admin API Reference> for @appengine.apps.services.versions.delete@.
 module Network.Google.Resource.AppEngine.Apps.Services.Versions.Delete
     (
     -- * REST Resource
@@ -35,11 +35,9 @@ module Network.Google.Resource.AppEngine.Apps.Services.Versions.Delete
     -- * Request Lenses
     , asvdXgafv
     , asvdUploadProtocol
-    , asvdPp
     , asvdAccessToken
     , asvdUploadType
     , asvdVersionsId
-    , asvdBearerToken
     , asvdAppsId
     , asvdServicesId
     , asvdCallback
@@ -58,27 +56,23 @@ type AppsServicesVersionsDeleteResource =
              Capture "servicesId" Text :>
                "versions" :>
                  Capture "versionsId" Text :>
-                   QueryParam "$.xgafv" Text :>
+                   QueryParam "$.xgafv" Xgafv :>
                      QueryParam "upload_protocol" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "access_token" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "bearer_token" Text :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" AltJSON :>
-                                   Delete '[JSON] Operation
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               Delete '[JSON] Operation
 
 -- | Deletes an existing Version resource.
 --
 -- /See:/ 'appsServicesVersionsDelete' smart constructor.
 data AppsServicesVersionsDelete = AppsServicesVersionsDelete'
-    { _asvdXgafv          :: !(Maybe Text)
+    { _asvdXgafv          :: !(Maybe Xgafv)
     , _asvdUploadProtocol :: !(Maybe Text)
-    , _asvdPp             :: !Bool
     , _asvdAccessToken    :: !(Maybe Text)
     , _asvdUploadType     :: !(Maybe Text)
     , _asvdVersionsId     :: !Text
-    , _asvdBearerToken    :: !(Maybe Text)
     , _asvdAppsId         :: !Text
     , _asvdServicesId     :: !Text
     , _asvdCallback       :: !(Maybe Text)
@@ -92,15 +86,11 @@ data AppsServicesVersionsDelete = AppsServicesVersionsDelete'
 --
 -- * 'asvdUploadProtocol'
 --
--- * 'asvdPp'
---
 -- * 'asvdAccessToken'
 --
 -- * 'asvdUploadType'
 --
 -- * 'asvdVersionsId'
---
--- * 'asvdBearerToken'
 --
 -- * 'asvdAppsId'
 --
@@ -116,18 +106,16 @@ appsServicesVersionsDelete pAsvdVersionsId_ pAsvdAppsId_ pAsvdServicesId_ =
     AppsServicesVersionsDelete'
     { _asvdXgafv = Nothing
     , _asvdUploadProtocol = Nothing
-    , _asvdPp = True
     , _asvdAccessToken = Nothing
     , _asvdUploadType = Nothing
     , _asvdVersionsId = pAsvdVersionsId_
-    , _asvdBearerToken = Nothing
     , _asvdAppsId = pAsvdAppsId_
     , _asvdServicesId = pAsvdServicesId_
     , _asvdCallback = Nothing
     }
 
 -- | V1 error format.
-asvdXgafv :: Lens' AppsServicesVersionsDelete (Maybe Text)
+asvdXgafv :: Lens' AppsServicesVersionsDelete (Maybe Xgafv)
 asvdXgafv
   = lens _asvdXgafv (\ s a -> s{_asvdXgafv = a})
 
@@ -136,10 +124,6 @@ asvdUploadProtocol :: Lens' AppsServicesVersionsDelete (Maybe Text)
 asvdUploadProtocol
   = lens _asvdUploadProtocol
       (\ s a -> s{_asvdUploadProtocol = a})
-
--- | Pretty-print response.
-asvdPp :: Lens' AppsServicesVersionsDelete Bool
-asvdPp = lens _asvdPp (\ s a -> s{_asvdPp = a})
 
 -- | OAuth access token.
 asvdAccessToken :: Lens' AppsServicesVersionsDelete (Maybe Text)
@@ -159,14 +143,8 @@ asvdVersionsId
   = lens _asvdVersionsId
       (\ s a -> s{_asvdVersionsId = a})
 
--- | OAuth bearer token.
-asvdBearerToken :: Lens' AppsServicesVersionsDelete (Maybe Text)
-asvdBearerToken
-  = lens _asvdBearerToken
-      (\ s a -> s{_asvdBearerToken = a})
-
 -- | Part of \`name\`. Name of the resource requested. Example:
--- \`apps\/myapp\/services\/default\/versions\/v1\`.
+-- apps\/myapp\/services\/default\/versions\/v1.
 asvdAppsId :: Lens' AppsServicesVersionsDelete Text
 asvdAppsId
   = lens _asvdAppsId (\ s a -> s{_asvdAppsId = a})
@@ -191,10 +169,8 @@ instance GoogleRequest AppsServicesVersionsDelete
           = go _asvdAppsId _asvdServicesId _asvdVersionsId
               _asvdXgafv
               _asvdUploadProtocol
-              (Just _asvdPp)
               _asvdAccessToken
               _asvdUploadType
-              _asvdBearerToken
               _asvdCallback
               (Just AltJSON)
               appEngineService

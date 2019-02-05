@@ -20,7 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates or creates a sink.
+-- Updates a sink. This method replaces the following fields in the
+-- existing sink with values from the new sink: destination, and filter.
+-- The updated sink might also have a new writer_identity; see the
+-- unique_writer_identity field.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.organizations.sinks.update@.
 module Network.Google.Resource.Logging.Organizations.Sinks.Update
@@ -34,12 +37,12 @@ module Network.Google.Resource.Logging.Organizations.Sinks.Update
 
     -- * Request Lenses
     , osuXgafv
+    , osuUniqueWriterIdentity
     , osuUploadProtocol
-    , osuPp
+    , osuUpdateMask
     , osuAccessToken
     , osuUploadType
     , osuPayload
-    , osuBearerToken
     , osuSinkName
     , osuCallback
     ) where
@@ -53,28 +56,31 @@ type OrganizationsSinksUpdateResource =
      "v2" :>
        Capture "sinkName" Text :>
          QueryParam "$.xgafv" Xgafv :>
-           QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
+           QueryParam "uniqueWriterIdentity" Bool :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "updateMask" GFieldMask :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
                      QueryParam "callback" Text :>
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] LogSink :> Put '[JSON] LogSink
 
--- | Updates or creates a sink.
+-- | Updates a sink. This method replaces the following fields in the
+-- existing sink with values from the new sink: destination, and filter.
+-- The updated sink might also have a new writer_identity; see the
+-- unique_writer_identity field.
 --
 -- /See:/ 'organizationsSinksUpdate' smart constructor.
 data OrganizationsSinksUpdate = OrganizationsSinksUpdate'
-    { _osuXgafv          :: !(Maybe Xgafv)
-    , _osuUploadProtocol :: !(Maybe Text)
-    , _osuPp             :: !Bool
-    , _osuAccessToken    :: !(Maybe Text)
-    , _osuUploadType     :: !(Maybe Text)
-    , _osuPayload        :: !LogSink
-    , _osuBearerToken    :: !(Maybe Text)
-    , _osuSinkName       :: !Text
-    , _osuCallback       :: !(Maybe Text)
+    { _osuXgafv                :: !(Maybe Xgafv)
+    , _osuUniqueWriterIdentity :: !(Maybe Bool)
+    , _osuUploadProtocol       :: !(Maybe Text)
+    , _osuUpdateMask           :: !(Maybe GFieldMask)
+    , _osuAccessToken          :: !(Maybe Text)
+    , _osuUploadType           :: !(Maybe Text)
+    , _osuPayload              :: !LogSink
+    , _osuSinkName             :: !Text
+    , _osuCallback             :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrganizationsSinksUpdate' with the minimum fields required to make a request.
@@ -83,17 +89,17 @@ data OrganizationsSinksUpdate = OrganizationsSinksUpdate'
 --
 -- * 'osuXgafv'
 --
+-- * 'osuUniqueWriterIdentity'
+--
 -- * 'osuUploadProtocol'
 --
--- * 'osuPp'
+-- * 'osuUpdateMask'
 --
 -- * 'osuAccessToken'
 --
 -- * 'osuUploadType'
 --
 -- * 'osuPayload'
---
--- * 'osuBearerToken'
 --
 -- * 'osuSinkName'
 --
@@ -105,12 +111,12 @@ organizationsSinksUpdate
 organizationsSinksUpdate pOsuPayload_ pOsuSinkName_ =
     OrganizationsSinksUpdate'
     { _osuXgafv = Nothing
+    , _osuUniqueWriterIdentity = Nothing
     , _osuUploadProtocol = Nothing
-    , _osuPp = True
+    , _osuUpdateMask = Nothing
     , _osuAccessToken = Nothing
     , _osuUploadType = Nothing
     , _osuPayload = pOsuPayload_
-    , _osuBearerToken = Nothing
     , _osuSinkName = pOsuSinkName_
     , _osuCallback = Nothing
     }
@@ -119,15 +125,40 @@ organizationsSinksUpdate pOsuPayload_ pOsuSinkName_ =
 osuXgafv :: Lens' OrganizationsSinksUpdate (Maybe Xgafv)
 osuXgafv = lens _osuXgafv (\ s a -> s{_osuXgafv = a})
 
+-- | Optional. See sinks.create for a description of this field. When
+-- updating a sink, the effect of this field on the value of
+-- writer_identity in the updated sink depends on both the old and new
+-- values of this field: If the old and new values of this field are both
+-- false or both true, then there is no change to the sink\'s
+-- writer_identity. If the old value is false and the new value is true,
+-- then writer_identity is changed to a unique service account. It is an
+-- error if the old value is true and the new value is set to false or
+-- defaulted to false.
+osuUniqueWriterIdentity :: Lens' OrganizationsSinksUpdate (Maybe Bool)
+osuUniqueWriterIdentity
+  = lens _osuUniqueWriterIdentity
+      (\ s a -> s{_osuUniqueWriterIdentity = a})
+
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 osuUploadProtocol :: Lens' OrganizationsSinksUpdate (Maybe Text)
 osuUploadProtocol
   = lens _osuUploadProtocol
       (\ s a -> s{_osuUploadProtocol = a})
 
--- | Pretty-print response.
-osuPp :: Lens' OrganizationsSinksUpdate Bool
-osuPp = lens _osuPp (\ s a -> s{_osuPp = a})
+-- | Optional. Field mask that specifies the fields in sink that need an
+-- update. A sink field will be overwritten if, and only if, it is in the
+-- update mask. name and output only fields cannot be updated.An empty
+-- updateMask is temporarily treated as using the following mask for
+-- backwards compatibility purposes: destination,filter,includeChildren At
+-- some point in the future, behavior will be removed and specifying an
+-- empty updateMask will be an error.For a detailed FieldMask definition,
+-- see
+-- https:\/\/developers.google.com\/protocol-buffers\/docs\/reference\/google.protobuf#google.protobuf.FieldMaskExample:
+-- updateMask=filter.
+osuUpdateMask :: Lens' OrganizationsSinksUpdate (Maybe GFieldMask)
+osuUpdateMask
+  = lens _osuUpdateMask
+      (\ s a -> s{_osuUpdateMask = a})
 
 -- | OAuth access token.
 osuAccessToken :: Lens' OrganizationsSinksUpdate (Maybe Text)
@@ -146,16 +177,13 @@ osuPayload :: Lens' OrganizationsSinksUpdate LogSink
 osuPayload
   = lens _osuPayload (\ s a -> s{_osuPayload = a})
 
--- | OAuth bearer token.
-osuBearerToken :: Lens' OrganizationsSinksUpdate (Maybe Text)
-osuBearerToken
-  = lens _osuBearerToken
-      (\ s a -> s{_osuBearerToken = a})
-
--- | Required. The resource name of the sink to update, including the parent
--- resource and the sink identifier. If the sink does not exist, this
--- method creates the sink. Example:
--- \`\"projects\/my-project-id\/sinks\/my-sink-id\"\`.
+-- | Required. The full resource name of the sink to update, including the
+-- parent resource and the sink identifier:
+-- \"projects\/[PROJECT_ID]\/sinks\/[SINK_ID]\"
+-- \"organizations\/[ORGANIZATION_ID]\/sinks\/[SINK_ID]\"
+-- \"billingAccounts\/[BILLING_ACCOUNT_ID]\/sinks\/[SINK_ID]\"
+-- \"folders\/[FOLDER_ID]\/sinks\/[SINK_ID]\" Example:
+-- \"projects\/my-project-id\/sinks\/my-sink-id\".
 osuSinkName :: Lens' OrganizationsSinksUpdate Text
 osuSinkName
   = lens _osuSinkName (\ s a -> s{_osuSinkName = a})
@@ -171,11 +199,11 @@ instance GoogleRequest OrganizationsSinksUpdate where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/logging.admin"]
         requestClient OrganizationsSinksUpdate'{..}
-          = go _osuSinkName _osuXgafv _osuUploadProtocol
-              (Just _osuPp)
+          = go _osuSinkName _osuXgafv _osuUniqueWriterIdentity
+              _osuUploadProtocol
+              _osuUpdateMask
               _osuAccessToken
               _osuUploadType
-              _osuBearerToken
               _osuCallback
               (Just AltJSON)
               _osuPayload

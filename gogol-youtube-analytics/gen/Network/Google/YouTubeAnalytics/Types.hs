@@ -40,6 +40,24 @@ module Network.Google.YouTubeAnalytics.Types
     , gKind
     , gContentDetails
     , gId
+    , gErrors
+
+    -- * ListGroupsResponse
+    , ListGroupsResponse
+    , listGroupsResponse
+    , lgrEtag
+    , lgrNextPageToken
+    , lgrKind
+    , lgrItems
+    , lgrErrors
+
+    -- * ListGroupItemsResponse
+    , ListGroupItemsResponse
+    , listGroupItemsResponse
+    , lgirEtag
+    , lgirKind
+    , lgirItems
+    , lgirErrors
 
     -- * GroupItemResource
     , GroupItemResource
@@ -47,38 +65,8 @@ module Network.Google.YouTubeAnalytics.Types
     , girKind
     , girId
 
-    -- * ResultTableColumnHeadersItem
-    , ResultTableColumnHeadersItem
-    , resultTableColumnHeadersItem
-    , rtchiColumnType
-    , rtchiName
-    , rtchiDataType
-
-    -- * ResultTable
-    , ResultTable
-    , resultTable
-    , rtKind
-    , rtRows
-    , rtColumnHeaders
-
-    -- * BatchReportDefinition
-    , BatchReportDefinition
-    , batchReportDefinition
-    , brdStatus
-    , brdKind
-    , brdName
-    , brdId
-    , brdType
-
-    -- * BatchReport
-    , BatchReport
-    , batchReport
-    , brTimeUpdated
-    , brKind
-    , brReportId
-    , brTimeSpan
-    , brOutputs
-    , brId
+    -- * Xgafv
+    , Xgafv (..)
 
     -- * GroupSnippet
     , GroupSnippet
@@ -94,57 +82,62 @@ module Network.Google.YouTubeAnalytics.Types
     , giResource
     , giGroupId
     , giId
+    , giErrors
 
-    -- * BatchReportDefinitionList
-    , BatchReportDefinitionList
-    , batchReportDefinitionList
-    , brdlKind
-    , brdlItems
+    -- * Errors
+    , Errors
+    , errors
+    , eRequestId
+    , eError
+    , eCode
 
-    -- * BatchReportList
-    , BatchReportList
-    , batchReportList
-    , brlKind
-    , brlItems
+    -- * ErrorProtoLocationType
+    , ErrorProtoLocationType (..)
 
-    -- * BatchReportOutputsItem
-    , BatchReportOutputsItem
-    , batchReportOutputsItem
-    , broiFormat
-    , broiDownloadURL
-    , broiType
+    -- * ErrorsCode
+    , ErrorsCode (..)
 
-    -- * BatchReportTimeSpan
-    , BatchReportTimeSpan
-    , batchReportTimeSpan
-    , brtsStartTime
-    , brtsEndTime
+    -- * ResultTableColumnHeader
+    , ResultTableColumnHeader
+    , resultTableColumnHeader
+    , rtchColumnType
+    , rtchName
+    , rtchDataType
 
-    -- * GroupItemListResponse
-    , GroupItemListResponse
-    , groupItemListResponse
-    , gilrEtag
-    , gilrKind
-    , gilrItems
+    -- * ErrorProto
+    , ErrorProto
+    , errorProto
+    , epDebugInfo
+    , epLocation
+    , epDomain
+    , epArgument
+    , epExternalErrorMessage
+    , epCode
+    , epLocationType
 
-    -- * GroupListResponse
-    , GroupListResponse
-    , groupListResponse
-    , glrEtag
-    , glrNextPageToken
-    , glrKind
-    , glrItems
+    -- * EmptyResponse
+    , EmptyResponse
+    , emptyResponse
+    , erErrors
+
+    -- * QueryResponse
+    , QueryResponse
+    , queryResponse
+    , qrKind
+    , qrRows
+    , qrColumnHeaders
+    , qrErrors
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.YouTubeAnalytics.Types.Product
 import           Network.Google.YouTubeAnalytics.Types.Sum
 
--- | Default request referring to version 'v1' of the YouTube Analytics API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v2' of the YouTube Analytics API. This contains the host and root path used as a starting point for constructing service requests.
 youTubeAnalyticsService :: ServiceConfig
 youTubeAnalyticsService
-  = defaultService (ServiceId "youtubeAnalytics:v1")
-      "www.googleapis.com"
+  = defaultService (ServiceId "youtubeAnalytics:v2")
+      "youtubeanalytics.googleapis.com"
 
 -- | Manage your YouTube account
 youTubeScope :: Proxy '["https://www.googleapis.com/auth/youtube"]

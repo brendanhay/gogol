@@ -48,6 +48,17 @@ module Network.Google.Directory.Types
     , adminDirectoryDeviceMobileScope
     , adminDirectoryDeviceMobileReadOnlyScope
 
+    -- * UserLocation
+    , UserLocation
+    , userLocation
+    , ulArea
+    , ulBuildingId
+    , ulDeskCode
+    , ulFloorName
+    , ulType
+    , ulCustomType
+    , ulFloorSection
+
     -- * VerificationCode
     , VerificationCode
     , verificationCode
@@ -55,6 +66,13 @@ module Network.Google.Directory.Types
     , vcEtag
     , vcKind
     , vcUserId
+
+    -- * Feature
+    , Feature
+    , feature
+    , fEtags
+    , fKind
+    , fName
 
     -- * OrgUnit
     , OrgUnit
@@ -134,6 +152,11 @@ module Network.Google.Directory.Types
     -- * UsersWatchEvent
     , UsersWatchEvent (..)
 
+    -- * ChromeOSDeviceDiskVolumeReportsItem
+    , ChromeOSDeviceDiskVolumeReportsItem
+    , chromeOSDeviceDiskVolumeReportsItem
+    , coddvriVolumeInfo
+
     -- * UserAddress
     , UserAddress
     , userAddress
@@ -194,7 +217,9 @@ module Network.Google.Directory.Types
     , chromeOSDevice
     , codStatus
     , codEtag
+    , codCPUStatusReports
     , codAnnotatedUser
+    , codSystemRamFreeReports
     , codPlatformVersion
     , codLastSync
     , codActiveTimeRanges
@@ -209,14 +234,18 @@ module Network.Google.Directory.Types
     , codModel
     , codWillAutoRenew
     , codMeid
+    , codDeviceFiles
     , codDeviceId
     , codBootMode
+    , codTpmVersionInfo
     , codOrderNumber
+    , codDiskVolumeReports
     , codAnnotatedAssetId
     , codNotes
     , codSerialNumber
     , codFirmwareVersion
     , codOSVersion
+    , codSystemRamTotal
 
     -- * ChromeosDevicesPatchProjection
     , ChromeosDevicesPatchProjection (..)
@@ -251,8 +280,24 @@ module Network.Google.Directory.Types
     , sSchemas
     , sKind
 
+    -- * ChromeOSDeviceDeviceFilesItem
+    , ChromeOSDeviceDeviceFilesItem
+    , chromeOSDeviceDeviceFilesItem
+    , coddfiName
+    , coddfiDownloadURL
+    , coddfiType
+    , coddfiCreateTime
+
     -- * UsersListViewType
     , UsersListViewType (..)
+
+    -- * Buildings
+    , Buildings
+    , buildings
+    , bEtag
+    , bNextPageToken
+    , bBuildings
+    , bKind
 
     -- * OrgUnitsListType
     , OrgUnitsListType (..)
@@ -297,6 +342,13 @@ module Network.Google.Directory.Types
     , userCustomSchemas
     , ucsAddtional
 
+    -- * UserKeyword
+    , UserKeyword
+    , userKeyword
+    , ukValue
+    , ukType
+    , ukCustomType
+
     -- * DomainAliases
     , DomainAliases
     , domainAliases
@@ -319,8 +371,19 @@ module Network.Google.Directory.Types
     , crResourceType
     , crResourceName
     , crKind
+    , crBuildingId
+    , crFeatureInstances
     , crResourceEmail
+    , crCapacity
     , crResourceDescription
+    , crFloorName
+    , crGeneratedResourceName
+    , crResourceCategory
+    , crFloorSection
+    , crUserVisibleDescription
+
+    -- * GroupsListOrderBy
+    , GroupsListOrderBy (..)
 
     -- * UserUndelete
     , UserUndelete
@@ -379,6 +442,17 @@ module Network.Google.Directory.Types
     -- * UsersWatchViewType
     , UsersWatchViewType (..)
 
+    -- * Building
+    , Building
+    , building
+    , buiEtags
+    , buiKind
+    , buiBuildingId
+    , buiCoordinates
+    , buiBuildingName
+    , buiFloorNames
+    , buiDescription
+
     -- * ChromeOSDeviceRecentUsersItem
     , ChromeOSDeviceRecentUsersItem
     , chromeOSDeviceRecentUsersItem
@@ -394,6 +468,13 @@ module Network.Google.Directory.Types
     , dVerified
     , dDomainAliasName
     , dParentDomainName
+
+    -- * UserGender
+    , UserGender
+    , userGender
+    , ugAddressMeAs
+    , ugCustomGender
+    , ugType
 
     -- * Alias
     , Alias
@@ -414,7 +495,13 @@ module Network.Google.Directory.Types
     , schKind
     , schSchemaName
     , schSchemaId
+    , schDisplayName
     , schFields
+
+    -- * ChromeOSMoveDevicesToOu
+    , ChromeOSMoveDevicesToOu
+    , chromeOSMoveDevicesToOu
+    , comdtoDeviceIds
 
     -- * User
     , User
@@ -423,8 +510,10 @@ module Network.Google.Directory.Types
     , useLastLoginTime
     , useThumbnailPhotoEtag
     , useEtag
+    , usePosixAccounts
     , useIPWhiteListed
     , useRelations
+    , useSSHPublicKeys
     , useHashFunction
     , useKind
     , useChangePasswordAtNextLogin
@@ -439,18 +528,25 @@ module Network.Google.Directory.Types
     , useNonEditableAliases
     , useOrgUnitPath
     , useCustomerId
+    , useLanguages
     , useIncludeInGlobalAddressList
+    , useGender
     , usePhones
     , useName
     , usePassword
     , useEmails
     , useIms
+    , useKeywords
     , useIsAdmin
+    , useIsEnrolledIn2Sv
     , useId
     , useOrganizations
     , usePrimaryEmail
+    , useIsEnforcedIn2Sv
     , useNotes
     , useIsDelegatedAdmin
+    , useLocations
+    , useArchived
     , useIsMailboxSetup
     , useCustomSchemas
     , useSuspensionReason
@@ -463,6 +559,11 @@ module Network.Google.Directory.Types
     , chromeOSDeviceAction
     , codaAction
     , codaDeprovisionReason
+
+    -- * FeatureRename
+    , FeatureRename
+    , featureRename
+    , frNewName
 
     -- * Role
     , Role
@@ -498,6 +599,13 @@ module Network.Google.Directory.Types
     , mdaiDisplayName
     , mdaiPermission
 
+    -- * ChromeOSDeviceDiskVolumeReportsItemVolumeInfoItem
+    , ChromeOSDeviceDiskVolumeReportsItemVolumeInfoItem
+    , chromeOSDeviceDiskVolumeReportsItemVolumeInfoItem
+    , coddvriviiStorageFree
+    , coddvriviiStorageTotal
+    , coddvriviiVolumeId
+
     -- * MobileDevicesListOrderBy
     , MobileDevicesListOrderBy (..)
 
@@ -511,12 +619,25 @@ module Network.Google.Directory.Types
     , oKind
     , oOrganizationUnits
 
+    -- * UserSSHPublicKey
+    , UserSSHPublicKey
+    , userSSHPublicKey
+    , uspkFingerprint
+    , uspkKey
+    , uspkExpirationTimeUsec
+
     -- * VerificationCodes
     , VerificationCodes
     , verificationCodes
     , vEtag
     , vKind
     , vItems
+
+    -- * BuildingCoordinates
+    , BuildingCoordinates
+    , buildingCoordinates
+    , bcLatitude
+    , bcLongitude
 
     -- * ChromeosDevicesListSortOrder
     , ChromeosDevicesListSortOrder (..)
@@ -528,13 +649,39 @@ module Network.Google.Directory.Types
     , urType
     , urCustomType
 
+    -- * TrustedApps
+    , TrustedApps
+    , trustedApps
+    , taEtag
+    , taNextPageToken
+    , taKind
+    , taTrustedApps
+
     -- * UsersWatchSortOrder
     , UsersWatchSortOrder (..)
+
+    -- * Features
+    , Features
+    , features
+    , feaEtag
+    , feaNextPageToken
+    , feaKind
+    , feaFeatures
 
     -- * ChannelParams
     , ChannelParams
     , channelParams
     , cpAddtional
+
+    -- * ChromeOSDeviceTpmVersionInfo
+    , ChromeOSDeviceTpmVersionInfo
+    , chromeOSDeviceTpmVersionInfo
+    , codtviVendorSpecific
+    , codtviManufacturer
+    , codtviSpecLevel
+    , codtviTpmModel
+    , codtviFamily
+    , codtviFirmwareVersion
 
     -- * UserOrganization
     , UserOrganization
@@ -546,6 +693,7 @@ module Network.Google.Directory.Types
     , uoSymbol
     , uoPrimary
     , uoName
+    , uoFullTimeEquivalent
     , uoTitle
     , uoType
     , uoCustomType
@@ -558,6 +706,9 @@ module Network.Google.Directory.Types
     , uwPrimary
     , uwType
     , uwCustomType
+
+    -- * GroupsListSortOrder
+    , GroupsListSortOrder (..)
 
     -- * ChromeOSDeviceActiveTimeRangesItem
     , ChromeOSDeviceActiveTimeRangesItem
@@ -593,8 +744,33 @@ module Network.Google.Directory.Types
     , upId
     , upPrimaryEmail
 
+    -- * ChromeOSDeviceSystemRamFreeReportsItem
+    , ChromeOSDeviceSystemRamFreeReportsItem
+    , chromeOSDeviceSystemRamFreeReportsItem
+    , codsrfriReportTime
+    , codsrfriSystemRamFreeInfo
+
+    -- * UserPosixAccount
+    , UserPosixAccount
+    , userPosixAccount
+    , upaGecos
+    , upaUid
+    , upaUsername
+    , upaShell
+    , upaPrimary
+    , upaAccountId
+    , upaGid
+    , upaOperatingSystemType
+    , upaSystemId
+    , upaHomeDirectory
+
     -- * UsersListProjection
     , UsersListProjection (..)
+
+    -- * FeatureInstance
+    , FeatureInstance
+    , featureInstance
+    , fiFeature
 
     -- * ChromeosDevicesUpdateProjection
     , ChromeosDevicesUpdateProjection (..)
@@ -646,6 +822,13 @@ module Network.Google.Directory.Types
     , mobApplications
     , mobDefaultLanguage
 
+    -- * ChromeOSDeviceCPUStatusReportsItem
+    , ChromeOSDeviceCPUStatusReportsItem
+    , chromeOSDeviceCPUStatusReportsItem
+    , codcsriCPUUtilizationPercentageInfo
+    , codcsriCPUTemperatureInfo
+    , codcsriReportTime
+
     -- * Member
     , Member
     , member
@@ -653,14 +836,33 @@ module Network.Google.Directory.Types
     , memStatus
     , memEtag
     , memKind
+    , memDeliverySettings
     , memRole
     , memId
     , memType
+
+    -- * AppAccessCollections
+    , AppAccessCollections
+    , appAccessCollections
+    , aacEtag
+    , aacResourceId
+    , aacEnforceSettingsForAndroidDrive
+    , aacResourceName
+    , aacKind
+    , aacTrustDomainOwnedApps
+    , aacBlockedAPIAccessBuckets
+    , aacErrorMessage
 
     -- * UserCustomProperties
     , UserCustomProperties
     , userCustomProperties
     , ucpAddtional
+
+    -- * UserLanguage
+    , UserLanguage
+    , userLanguage
+    , ulLanguageCode
+    , ulCustomLanguage
 
     -- * Domains
     , Domains
@@ -724,6 +926,7 @@ module Network.Google.Directory.Types
     , sfsIndexed
     , sfsFieldType
     , sfsFieldName
+    , sfsDisplayName
     , sfsMultiValued
 
     -- * ChromeOSDevices
@@ -733,6 +936,20 @@ module Network.Google.Directory.Types
     , cosdNextPageToken
     , cosdKind
     , cosdChromeosDevices
+
+    -- * MembersHasMember
+    , MembersHasMember
+    , membersHasMember
+    , mhmIsMember
+
+    -- * TrustedAppId
+    , TrustedAppId
+    , trustedAppId
+    , taiCertificateHashSHA256
+    , taiEtag
+    , taiKind
+    , taiCertificateHashSHA1
+    , taiAndroidPackageName
 
     -- * UserExternalId
     , UserExternalId
@@ -747,6 +964,12 @@ module Network.Google.Directory.Types
     , aspEtag
     , aspKind
     , aspItems
+
+    -- * ChromeOSDeviceCPUStatusReportsItemCPUTemperatureInfoItem
+    , ChromeOSDeviceCPUStatusReportsItemCPUTemperatureInfoItem
+    , chromeOSDeviceCPUStatusReportsItemCPUTemperatureInfoItem
+    , codcsrictiiTemperature
+    , codcsrictiiLabel
 
     -- * UsersGetViewType
     , UsersGetViewType (..)

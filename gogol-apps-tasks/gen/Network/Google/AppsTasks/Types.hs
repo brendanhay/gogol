@@ -90,6 +90,6 @@ appsTasksService
 tasksReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/tasks.readonly"]
 tasksReadOnlyScope = Proxy;
 
--- | Manage your tasks
+-- | Create, edit, organize, and delete all your tasks
 tasksScope :: Proxy '["https://www.googleapis.com/auth/tasks"]
 tasksScope = Proxy;

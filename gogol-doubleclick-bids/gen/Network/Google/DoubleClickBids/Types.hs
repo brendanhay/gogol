@@ -19,6 +19,9 @@ module Network.Google.DoubleClickBids.Types
     -- * Service Configuration
       doubleClickBidsService
 
+    -- * OAuth Scopes
+    , doubleClickBidManagerScope
+
     -- * ListReportsResponse
     , ListReportsResponse
     , listReportsResponse
@@ -172,6 +175,7 @@ module Network.Google.DoubleClickBids.Types
     , DownloadResponse
     , downloadResponse
     , drInsertionOrders
+    , drCampaigns
     , drLineItems
     , drAdGroups
     , drAds
@@ -242,3 +246,7 @@ doubleClickBidsService
   = defaultService
       (ServiceId "doubleclickbidmanager:v1")
       "www.googleapis.com"
+
+-- | View and manage your reports in DoubleClick Bid Manager
+doubleClickBidManagerScope :: Proxy '["https://www.googleapis.com/auth/doubleclickbidmanager"]
+doubleClickBidManagerScope = Proxy;

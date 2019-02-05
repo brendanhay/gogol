@@ -76,7 +76,8 @@ qgqQueryId
 
 instance GoogleRequest QueriesGetQuery where
         type Rs QueriesGetQuery = Query
-        type Scopes QueriesGetQuery = '[]
+        type Scopes QueriesGetQuery =
+             '["https://www.googleapis.com/auth/doubleclickbidmanager"]
         requestClient QueriesGetQuery'{..}
           = go _qgqQueryId (Just AltJSON)
               doubleClickBidsService

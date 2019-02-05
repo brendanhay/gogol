@@ -24,7 +24,7 @@
 -- method to poll the operation result at intervals as recommended by the
 -- API service.
 --
--- /See:/ <https://cloud.google.com/ml/ Google Cloud Machine Learning Reference> for @ml.projects.operations.get@.
+-- /See:/ <https://cloud.google.com/ml/ Cloud Machine Learning Engine Reference> for @ml.projects.operations.get@.
 module Network.Google.Resource.Ml.Projects.Operations.Get
     (
     -- * REST Resource
@@ -37,10 +37,8 @@ module Network.Google.Resource.Ml.Projects.Operations.Get
     -- * Request Lenses
     , pogXgafv
     , pogUploadProtocol
-    , pogPp
     , pogAccessToken
     , pogUploadType
-    , pogBearerToken
     , pogName
     , pogCallback
     ) where
@@ -51,17 +49,15 @@ import           Network.Google.Prelude
 -- | A resource alias for @ml.projects.operations.get@ method which the
 -- 'ProjectsOperationsGet' request conforms to.
 type ProjectsOperationsGetResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] GoogleLongrunning__Operation
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] GoogleLongrunning__Operation
 
 -- | Gets the latest state of a long-running operation. Clients can use this
 -- method to poll the operation result at intervals as recommended by the
@@ -71,10 +67,8 @@ type ProjectsOperationsGetResource =
 data ProjectsOperationsGet = ProjectsOperationsGet'
     { _pogXgafv          :: !(Maybe Xgafv)
     , _pogUploadProtocol :: !(Maybe Text)
-    , _pogPp             :: !Bool
     , _pogAccessToken    :: !(Maybe Text)
     , _pogUploadType     :: !(Maybe Text)
-    , _pogBearerToken    :: !(Maybe Text)
     , _pogName           :: !Text
     , _pogCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -87,13 +81,9 @@ data ProjectsOperationsGet = ProjectsOperationsGet'
 --
 -- * 'pogUploadProtocol'
 --
--- * 'pogPp'
---
 -- * 'pogAccessToken'
 --
 -- * 'pogUploadType'
---
--- * 'pogBearerToken'
 --
 -- * 'pogName'
 --
@@ -105,10 +95,8 @@ projectsOperationsGet pPogName_ =
     ProjectsOperationsGet'
     { _pogXgafv = Nothing
     , _pogUploadProtocol = Nothing
-    , _pogPp = True
     , _pogAccessToken = Nothing
     , _pogUploadType = Nothing
-    , _pogBearerToken = Nothing
     , _pogName = pPogName_
     , _pogCallback = Nothing
     }
@@ -123,10 +111,6 @@ pogUploadProtocol
   = lens _pogUploadProtocol
       (\ s a -> s{_pogUploadProtocol = a})
 
--- | Pretty-print response.
-pogPp :: Lens' ProjectsOperationsGet Bool
-pogPp = lens _pogPp (\ s a -> s{_pogPp = a})
-
 -- | OAuth access token.
 pogAccessToken :: Lens' ProjectsOperationsGet (Maybe Text)
 pogAccessToken
@@ -138,12 +122,6 @@ pogUploadType :: Lens' ProjectsOperationsGet (Maybe Text)
 pogUploadType
   = lens _pogUploadType
       (\ s a -> s{_pogUploadType = a})
-
--- | OAuth bearer token.
-pogBearerToken :: Lens' ProjectsOperationsGet (Maybe Text)
-pogBearerToken
-  = lens _pogBearerToken
-      (\ s a -> s{_pogBearerToken = a})
 
 -- | The name of the operation resource.
 pogName :: Lens' ProjectsOperationsGet Text
@@ -161,10 +139,8 @@ instance GoogleRequest ProjectsOperationsGet where
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsOperationsGet'{..}
           = go _pogName _pogXgafv _pogUploadProtocol
-              (Just _pogPp)
               _pogAccessToken
               _pogUploadType
-              _pogBearerToken
               _pogCallback
               (Just AltJSON)
               machineLearningService

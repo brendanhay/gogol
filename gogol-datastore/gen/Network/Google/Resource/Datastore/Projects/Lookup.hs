@@ -22,7 +22,7 @@
 --
 -- Looks up entities by key.
 --
--- /See:/ <https://cloud.google.com/datastore/ Google Cloud Datastore API Reference> for @datastore.projects.lookup@.
+-- /See:/ <https://cloud.google.com/datastore/ Cloud Datastore API Reference> for @datastore.projects.lookup@.
 module Network.Google.Resource.Datastore.Projects.Lookup
     (
     -- * REST Resource
@@ -35,11 +35,9 @@ module Network.Google.Resource.Datastore.Projects.Lookup
     -- * Request Lenses
     , plXgafv
     , plUploadProtocol
-    , plPp
     , plAccessToken
     , plUploadType
     , plPayload
-    , plBearerToken
     , plProjectId
     , plCallback
     ) where
@@ -55,14 +53,12 @@ type ProjectsLookupResource =
          CaptureMode "projectId" "lookup" Text :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] LookupRequest :>
-                             Post '[JSON] LookupResponse
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] LookupRequest :>
+                         Post '[JSON] LookupResponse
 
 -- | Looks up entities by key.
 --
@@ -70,11 +66,9 @@ type ProjectsLookupResource =
 data ProjectsLookup = ProjectsLookup'
     { _plXgafv          :: !(Maybe Xgafv)
     , _plUploadProtocol :: !(Maybe Text)
-    , _plPp             :: !Bool
     , _plAccessToken    :: !(Maybe Text)
     , _plUploadType     :: !(Maybe Text)
     , _plPayload        :: !LookupRequest
-    , _plBearerToken    :: !(Maybe Text)
     , _plProjectId      :: !Text
     , _plCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -87,15 +81,11 @@ data ProjectsLookup = ProjectsLookup'
 --
 -- * 'plUploadProtocol'
 --
--- * 'plPp'
---
 -- * 'plAccessToken'
 --
 -- * 'plUploadType'
 --
 -- * 'plPayload'
---
--- * 'plBearerToken'
 --
 -- * 'plProjectId'
 --
@@ -108,11 +98,9 @@ projectsLookup pPlPayload_ pPlProjectId_ =
     ProjectsLookup'
     { _plXgafv = Nothing
     , _plUploadProtocol = Nothing
-    , _plPp = True
     , _plAccessToken = Nothing
     , _plUploadType = Nothing
     , _plPayload = pPlPayload_
-    , _plBearerToken = Nothing
     , _plProjectId = pPlProjectId_
     , _plCallback = Nothing
     }
@@ -126,10 +114,6 @@ plUploadProtocol :: Lens' ProjectsLookup (Maybe Text)
 plUploadProtocol
   = lens _plUploadProtocol
       (\ s a -> s{_plUploadProtocol = a})
-
--- | Pretty-print response.
-plPp :: Lens' ProjectsLookup Bool
-plPp = lens _plPp (\ s a -> s{_plPp = a})
 
 -- | OAuth access token.
 plAccessToken :: Lens' ProjectsLookup (Maybe Text)
@@ -146,12 +130,6 @@ plUploadType
 plPayload :: Lens' ProjectsLookup LookupRequest
 plPayload
   = lens _plPayload (\ s a -> s{_plPayload = a})
-
--- | OAuth bearer token.
-plBearerToken :: Lens' ProjectsLookup (Maybe Text)
-plBearerToken
-  = lens _plBearerToken
-      (\ s a -> s{_plBearerToken = a})
 
 -- | The ID of the project against which to make the request.
 plProjectId :: Lens' ProjectsLookup Text
@@ -170,10 +148,8 @@ instance GoogleRequest ProjectsLookup where
                "https://www.googleapis.com/auth/datastore"]
         requestClient ProjectsLookup'{..}
           = go _plProjectId _plXgafv _plUploadProtocol
-              (Just _plPp)
               _plAccessToken
               _plUploadType
-              _plBearerToken
               _plCallback
               (Just AltJSON)
               _plPayload

@@ -96,6 +96,9 @@ module Network.Google.FusionTables
     -- ** fusiontables.table.patch
     , module Network.Google.Resource.FusionTables.Table.Patch
 
+    -- ** fusiontables.table.refetchSheet
+    , module Network.Google.Resource.FusionTables.Table.RefetchSheet
+
     -- ** fusiontables.table.replaceRows
     , module Network.Google.Resource.FusionTables.Table.ReplaceRows
 
@@ -360,6 +363,7 @@ import           Network.Google.Resource.FusionTables.Table.ImportTable
 import           Network.Google.Resource.FusionTables.Table.Insert
 import           Network.Google.Resource.FusionTables.Table.List
 import           Network.Google.Resource.FusionTables.Table.Patch
+import           Network.Google.Resource.FusionTables.Table.RefetchSheet
 import           Network.Google.Resource.FusionTables.Table.ReplaceRows
 import           Network.Google.Resource.FusionTables.Table.Update
 import           Network.Google.Resource.FusionTables.Task.Delete
@@ -400,6 +404,7 @@ type FusionTablesAPI =
        :<|> ColumnGetResource
        :<|> ColumnDeleteResource
        :<|> ColumnUpdateResource
+       :<|> TableRefetchSheetResource
        :<|> TableInsertResource
        :<|> TableListResource
        :<|> TableCopyResource

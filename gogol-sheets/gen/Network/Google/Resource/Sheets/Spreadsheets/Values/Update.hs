@@ -36,15 +36,16 @@ module Network.Google.Resource.Sheets.Spreadsheets.Values.Update
     -- * Request Lenses
     , svuXgafv
     , svuUploadProtocol
-    , svuPp
     , svuAccessToken
     , svuSpreadsheetId
     , svuUploadType
     , svuValueInputOption
     , svuPayload
-    , svuBearerToken
     , svuRange
+    , svuIncludeValuesInResponse
+    , svuResponseDateTimeRenderOption
     , svuCallback
+    , svuResponseValueRenderOption
     ) where
 
 import           Network.Google.Prelude
@@ -60,32 +61,34 @@ type SpreadsheetsValuesUpdateResource =
              Capture "range" Text :>
                QueryParam "$.xgafv" Xgafv :>
                  QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "valueInputOption" Text :>
-                           QueryParam "bearer_token" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "valueInputOption" Text :>
+                         QueryParam "includeValuesInResponse" Bool :>
+                           QueryParam "responseDateTimeRenderOption" Text :>
                              QueryParam "callback" Text :>
-                               QueryParam "alt" AltJSON :>
-                                 ReqBody '[JSON] ValueRange :>
-                                   Put '[JSON] UpdateValuesResponse
+                               QueryParam "responseValueRenderOption" Text :>
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] ValueRange :>
+                                     Put '[JSON] UpdateValuesResponse
 
 -- | Sets values in a range of a spreadsheet. The caller must specify the
 -- spreadsheet ID, range, and a valueInputOption.
 --
 -- /See:/ 'spreadsheetsValuesUpdate' smart constructor.
 data SpreadsheetsValuesUpdate = SpreadsheetsValuesUpdate'
-    { _svuXgafv            :: !(Maybe Xgafv)
-    , _svuUploadProtocol   :: !(Maybe Text)
-    , _svuPp               :: !Bool
-    , _svuAccessToken      :: !(Maybe Text)
-    , _svuSpreadsheetId    :: !Text
-    , _svuUploadType       :: !(Maybe Text)
-    , _svuValueInputOption :: !(Maybe Text)
-    , _svuPayload          :: !ValueRange
-    , _svuBearerToken      :: !(Maybe Text)
-    , _svuRange            :: !Text
-    , _svuCallback         :: !(Maybe Text)
+    { _svuXgafv                        :: !(Maybe Xgafv)
+    , _svuUploadProtocol               :: !(Maybe Text)
+    , _svuAccessToken                  :: !(Maybe Text)
+    , _svuSpreadsheetId                :: !Text
+    , _svuUploadType                   :: !(Maybe Text)
+    , _svuValueInputOption             :: !(Maybe Text)
+    , _svuPayload                      :: !ValueRange
+    , _svuRange                        :: !Text
+    , _svuIncludeValuesInResponse      :: !(Maybe Bool)
+    , _svuResponseDateTimeRenderOption :: !(Maybe Text)
+    , _svuCallback                     :: !(Maybe Text)
+    , _svuResponseValueRenderOption    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SpreadsheetsValuesUpdate' with the minimum fields required to make a request.
@@ -95,8 +98,6 @@ data SpreadsheetsValuesUpdate = SpreadsheetsValuesUpdate'
 -- * 'svuXgafv'
 --
 -- * 'svuUploadProtocol'
---
--- * 'svuPp'
 --
 -- * 'svuAccessToken'
 --
@@ -108,11 +109,15 @@ data SpreadsheetsValuesUpdate = SpreadsheetsValuesUpdate'
 --
 -- * 'svuPayload'
 --
--- * 'svuBearerToken'
---
 -- * 'svuRange'
 --
+-- * 'svuIncludeValuesInResponse'
+--
+-- * 'svuResponseDateTimeRenderOption'
+--
 -- * 'svuCallback'
+--
+-- * 'svuResponseValueRenderOption'
 spreadsheetsValuesUpdate
     :: Text -- ^ 'svuSpreadsheetId'
     -> ValueRange -- ^ 'svuPayload'
@@ -122,15 +127,16 @@ spreadsheetsValuesUpdate pSvuSpreadsheetId_ pSvuPayload_ pSvuRange_ =
     SpreadsheetsValuesUpdate'
     { _svuXgafv = Nothing
     , _svuUploadProtocol = Nothing
-    , _svuPp = True
     , _svuAccessToken = Nothing
     , _svuSpreadsheetId = pSvuSpreadsheetId_
     , _svuUploadType = Nothing
     , _svuValueInputOption = Nothing
     , _svuPayload = pSvuPayload_
-    , _svuBearerToken = Nothing
     , _svuRange = pSvuRange_
+    , _svuIncludeValuesInResponse = Nothing
+    , _svuResponseDateTimeRenderOption = Nothing
     , _svuCallback = Nothing
+    , _svuResponseValueRenderOption = Nothing
     }
 
 -- | V1 error format.
@@ -142,10 +148,6 @@ svuUploadProtocol :: Lens' SpreadsheetsValuesUpdate (Maybe Text)
 svuUploadProtocol
   = lens _svuUploadProtocol
       (\ s a -> s{_svuUploadProtocol = a})
-
--- | Pretty-print response.
-svuPp :: Lens' SpreadsheetsValuesUpdate Bool
-svuPp = lens _svuPp (\ s a -> s{_svuPp = a})
 
 -- | OAuth access token.
 svuAccessToken :: Lens' SpreadsheetsValuesUpdate (Maybe Text)
@@ -176,36 +178,58 @@ svuPayload :: Lens' SpreadsheetsValuesUpdate ValueRange
 svuPayload
   = lens _svuPayload (\ s a -> s{_svuPayload = a})
 
--- | OAuth bearer token.
-svuBearerToken :: Lens' SpreadsheetsValuesUpdate (Maybe Text)
-svuBearerToken
-  = lens _svuBearerToken
-      (\ s a -> s{_svuBearerToken = a})
-
 -- | The A1 notation of the values to update.
 svuRange :: Lens' SpreadsheetsValuesUpdate Text
 svuRange = lens _svuRange (\ s a -> s{_svuRange = a})
+
+-- | Determines if the update response should include the values of the cells
+-- that were updated. By default, responses do not include the updated
+-- values. If the range to write was larger than than the range actually
+-- written, the response will include all values in the requested range
+-- (excluding trailing empty rows and columns).
+svuIncludeValuesInResponse :: Lens' SpreadsheetsValuesUpdate (Maybe Bool)
+svuIncludeValuesInResponse
+  = lens _svuIncludeValuesInResponse
+      (\ s a -> s{_svuIncludeValuesInResponse = a})
+
+-- | Determines how dates, times, and durations in the response should be
+-- rendered. This is ignored if response_value_render_option is
+-- FORMATTED_VALUE. The default dateTime render option is
+-- DateTimeRenderOption.SERIAL_NUMBER.
+svuResponseDateTimeRenderOption :: Lens' SpreadsheetsValuesUpdate (Maybe Text)
+svuResponseDateTimeRenderOption
+  = lens _svuResponseDateTimeRenderOption
+      (\ s a -> s{_svuResponseDateTimeRenderOption = a})
 
 -- | JSONP
 svuCallback :: Lens' SpreadsheetsValuesUpdate (Maybe Text)
 svuCallback
   = lens _svuCallback (\ s a -> s{_svuCallback = a})
 
+-- | Determines how values in the response should be rendered. The default
+-- render option is ValueRenderOption.FORMATTED_VALUE.
+svuResponseValueRenderOption :: Lens' SpreadsheetsValuesUpdate (Maybe Text)
+svuResponseValueRenderOption
+  = lens _svuResponseValueRenderOption
+      (\ s a -> s{_svuResponseValueRenderOption = a})
+
 instance GoogleRequest SpreadsheetsValuesUpdate where
         type Rs SpreadsheetsValuesUpdate =
              UpdateValuesResponse
         type Scopes SpreadsheetsValuesUpdate =
              '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file",
                "https://www.googleapis.com/auth/spreadsheets"]
         requestClient SpreadsheetsValuesUpdate'{..}
           = go _svuSpreadsheetId _svuRange _svuXgafv
               _svuUploadProtocol
-              (Just _svuPp)
               _svuAccessToken
               _svuUploadType
               _svuValueInputOption
-              _svuBearerToken
+              _svuIncludeValuesInResponse
+              _svuResponseDateTimeRenderOption
               _svuCallback
+              _svuResponseValueRenderOption
               (Just AltJSON)
               _svuPayload
               sheetsService

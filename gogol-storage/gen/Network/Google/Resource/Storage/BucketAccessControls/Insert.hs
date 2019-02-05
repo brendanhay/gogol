@@ -35,6 +35,7 @@ module Network.Google.Resource.Storage.BucketAccessControls.Insert
     -- * Request Lenses
     , baciBucket
     , baciPayload
+    , baciUserProject
     ) where
 
 import           Network.Google.Prelude
@@ -48,16 +49,18 @@ type BucketAccessControlsInsertResource =
          "b" :>
            Capture "bucket" Text :>
              "acl" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] BucketAccessControl :>
-                   Post '[JSON] BucketAccessControl
+               QueryParam "userProject" Text :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] BucketAccessControl :>
+                     Post '[JSON] BucketAccessControl
 
 -- | Creates a new ACL entry on the specified bucket.
 --
 -- /See:/ 'bucketAccessControlsInsert' smart constructor.
 data BucketAccessControlsInsert = BucketAccessControlsInsert'
-    { _baciBucket  :: !Text
-    , _baciPayload :: !BucketAccessControl
+    { _baciBucket      :: !Text
+    , _baciPayload     :: !BucketAccessControl
+    , _baciUserProject :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketAccessControlsInsert' with the minimum fields required to make a request.
@@ -67,6 +70,8 @@ data BucketAccessControlsInsert = BucketAccessControlsInsert'
 -- * 'baciBucket'
 --
 -- * 'baciPayload'
+--
+-- * 'baciUserProject'
 bucketAccessControlsInsert
     :: Text -- ^ 'baciBucket'
     -> BucketAccessControl -- ^ 'baciPayload'
@@ -75,6 +80,7 @@ bucketAccessControlsInsert pBaciBucket_ pBaciPayload_ =
     BucketAccessControlsInsert'
     { _baciBucket = pBaciBucket_
     , _baciPayload = pBaciPayload_
+    , _baciUserProject = Nothing
     }
 
 -- | Name of a bucket.
@@ -87,6 +93,13 @@ baciPayload :: Lens' BucketAccessControlsInsert BucketAccessControl
 baciPayload
   = lens _baciPayload (\ s a -> s{_baciPayload = a})
 
+-- | The project to be billed for this request. Required for Requester Pays
+-- buckets.
+baciUserProject :: Lens' BucketAccessControlsInsert (Maybe Text)
+baciUserProject
+  = lens _baciUserProject
+      (\ s a -> s{_baciUserProject = a})
+
 instance GoogleRequest BucketAccessControlsInsert
          where
         type Rs BucketAccessControlsInsert =
@@ -95,7 +108,8 @@ instance GoogleRequest BucketAccessControlsInsert
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/devstorage.full_control"]
         requestClient BucketAccessControlsInsert'{..}
-          = go _baciBucket (Just AltJSON) _baciPayload
+          = go _baciBucket _baciUserProject (Just AltJSON)
+              _baciPayload
               storageService
           where go
                   = buildClient

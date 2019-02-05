@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves the list of private images available to the specified project.
--- Private images are images you create that belong to your project. This
+-- Retrieves the list of custom images available to the specified project.
+-- Custom images are images you create that belong to your project. This
 -- method does not get any images that belong to other projects, including
 -- publicly-available images, like Debian 8. If you want to get a list of
 -- publicly-available images, use this method to make a request to the
@@ -38,11 +38,11 @@ module Network.Google.Resource.Compute.Images.List
     , ImagesList
 
     -- * Request Lenses
-    , illOrderBy
-    , illProject
-    , illFilter
-    , illPageToken
-    , illMaxResults
+    , imamOrderBy
+    , imamProject
+    , imamFilter
+    , imamPageToken
+    , imamMaxResults
     ) where
 
 import           Network.Google.Compute.Types
@@ -63,8 +63,8 @@ type ImagesListResource =
                        QueryParam "maxResults" (Textual Word32) :>
                          QueryParam "alt" AltJSON :> Get '[JSON] ImageList
 
--- | Retrieves the list of private images available to the specified project.
--- Private images are images you create that belong to your project. This
+-- | Retrieves the list of custom images available to the specified project.
+-- Custom images are images you create that belong to your project. This
 -- method does not get any images that belong to other projects, including
 -- publicly-available images, like Debian 8. If you want to get a list of
 -- publicly-available images, use this method to make a request to the
@@ -72,36 +72,36 @@ type ImagesListResource =
 --
 -- /See:/ 'imagesList' smart constructor.
 data ImagesList = ImagesList'
-    { _illOrderBy    :: !(Maybe Text)
-    , _illProject    :: !Text
-    , _illFilter     :: !(Maybe Text)
-    , _illPageToken  :: !(Maybe Text)
-    , _illMaxResults :: !(Textual Word32)
+    { _imamOrderBy    :: !(Maybe Text)
+    , _imamProject    :: !Text
+    , _imamFilter     :: !(Maybe Text)
+    , _imamPageToken  :: !(Maybe Text)
+    , _imamMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ImagesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'illOrderBy'
+-- * 'imamOrderBy'
 --
--- * 'illProject'
+-- * 'imamProject'
 --
--- * 'illFilter'
+-- * 'imamFilter'
 --
--- * 'illPageToken'
+-- * 'imamPageToken'
 --
--- * 'illMaxResults'
+-- * 'imamMaxResults'
 imagesList
-    :: Text -- ^ 'illProject'
+    :: Text -- ^ 'imamProject'
     -> ImagesList
-imagesList pIllProject_ =
+imagesList pImamProject_ =
     ImagesList'
-    { _illOrderBy = Nothing
-    , _illProject = pIllProject_
-    , _illFilter = Nothing
-    , _illPageToken = Nothing
-    , _illMaxResults = 500
+    { _imamOrderBy = Nothing
+    , _imamProject = pImamProject_
+    , _imamFilter = Nothing
+    , _imamPageToken = Nothing
+    , _imamMaxResults = 500
     }
 
 -- | Sorts list results by a certain order. By default, results are returned
@@ -112,53 +112,51 @@ imagesList pIllProject_ =
 -- first). Use this to sort resources like operations so that the newest
 -- operation is returned first. Currently, only sorting by name or
 -- creationTimestamp desc is supported.
-illOrderBy :: Lens' ImagesList (Maybe Text)
-illOrderBy
-  = lens _illOrderBy (\ s a -> s{_illOrderBy = a})
+imamOrderBy :: Lens' ImagesList (Maybe Text)
+imamOrderBy
+  = lens _imamOrderBy (\ s a -> s{_imamOrderBy = a})
 
 -- | Project ID for this request.
-illProject :: Lens' ImagesList Text
-illProject
-  = lens _illProject (\ s a -> s{_illProject = a})
+imamProject :: Lens' ImagesList Text
+imamProject
+  = lens _imamProject (\ s a -> s{_imamProject = a})
 
--- | Sets a filter expression for filtering listed resources, in the form
--- filter={expression}. Your {expression} must be in the format: field_name
--- comparison_string literal_string. The field_name is the name of the
--- field you want to compare. Only atomic field types are supported
--- (string, number, boolean). The comparison_string must be either eq
--- (equals) or ne (not equals). The literal_string is the string value to
--- filter to. The literal value must be valid for the type of field you are
--- filtering by (string, number, boolean). For string fields, the literal
--- value is interpreted as a regular expression using RE2 syntax. The
--- literal value must match the entire field. For example, to filter for
--- instances that do not have a name of example-instance, you would use
--- filter=name ne example-instance. You can filter on nested fields. For
--- example, you could filter on instances that have set the
--- scheduling.automaticRestart field to true. Use filtering on nested
--- fields to take advantage of labels to organize and search for results
--- based on label values. To filter on multiple expressions, provide each
--- separate expression within parentheses. For example,
--- (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple
--- expressions are treated as AND expressions, meaning that resources must
--- match all expressions to pass the filters.
-illFilter :: Lens' ImagesList (Maybe Text)
-illFilter
-  = lens _illFilter (\ s a -> s{_illFilter = a})
+-- | A filter expression that filters resources listed in the response. The
+-- expression must specify the field name, a comparison operator, and the
+-- value that you want to use for filtering. The value must be a string, a
+-- number, or a boolean. The comparison operator must be either =, !=, >,
+-- or \<. For example, if you are filtering Compute Engine instances, you
+-- can exclude instances named example-instance by specifying name !=
+-- example-instance. You can also filter nested fields. For example, you
+-- could specify scheduling.automaticRestart = false to include instances
+-- only if they are not scheduled for automatic restarts. You can use
+-- filtering on nested fields to filter based on resource labels. To filter
+-- on multiple expressions, provide each separate expression within
+-- parentheses. For example, (scheduling.automaticRestart = true)
+-- (cpuPlatform = \"Intel Skylake\"). By default, each expression is an AND
+-- expression. However, you can include AND and OR expressions explicitly.
+-- For example, (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel
+-- Broadwell\") AND (scheduling.automaticRestart = true).
+imamFilter :: Lens' ImagesList (Maybe Text)
+imamFilter
+  = lens _imamFilter (\ s a -> s{_imamFilter = a})
 
 -- | Specifies a page token to use. Set pageToken to the nextPageToken
 -- returned by a previous list request to get the next page of results.
-illPageToken :: Lens' ImagesList (Maybe Text)
-illPageToken
-  = lens _illPageToken (\ s a -> s{_illPageToken = a})
+imamPageToken :: Lens' ImagesList (Maybe Text)
+imamPageToken
+  = lens _imamPageToken
+      (\ s a -> s{_imamPageToken = a})
 
 -- | The maximum number of results per page that should be returned. If the
 -- number of available results is larger than maxResults, Compute Engine
 -- returns a nextPageToken that can be used to get the next page of results
--- in subsequent list requests.
-illMaxResults :: Lens' ImagesList Word32
-illMaxResults
-  = lens _illMaxResults
-      (\ s a -> s{_illMaxResults = a})
+-- in subsequent list requests. Acceptable values are 0 to 500, inclusive.
+-- (Default: 500)
+imamMaxResults :: Lens' ImagesList Word32
+imamMaxResults
+  = lens _imamMaxResults
+      (\ s a -> s{_imamMaxResults = a})
       . _Coerce
 
 instance GoogleRequest ImagesList where
@@ -168,8 +166,9 @@ instance GoogleRequest ImagesList where
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient ImagesList'{..}
-          = go _illProject _illOrderBy _illFilter _illPageToken
-              (Just _illMaxResults)
+          = go _imamProject _imamOrderBy _imamFilter
+              _imamPageToken
+              (Just _imamMaxResults)
               (Just AltJSON)
               computeService
           where go

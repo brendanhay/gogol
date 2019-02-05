@@ -36,11 +36,9 @@ module Network.Google.Resource.Logging.Projects.Metrics.Create
     , pmcParent
     , pmcXgafv
     , pmcUploadProtocol
-    , pmcPp
     , pmcAccessToken
     , pmcUploadType
     , pmcPayload
-    , pmcBearerToken
     , pmcCallback
     ) where
 
@@ -55,13 +53,11 @@ type ProjectsMetricsCreateResource =
          "metrics" :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] LogMetric :> Post '[JSON] LogMetric
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] LogMetric :> Post '[JSON] LogMetric
 
 -- | Creates a logs-based metric.
 --
@@ -70,11 +66,9 @@ data ProjectsMetricsCreate = ProjectsMetricsCreate'
     { _pmcParent         :: !Text
     , _pmcXgafv          :: !(Maybe Xgafv)
     , _pmcUploadProtocol :: !(Maybe Text)
-    , _pmcPp             :: !Bool
     , _pmcAccessToken    :: !(Maybe Text)
     , _pmcUploadType     :: !(Maybe Text)
     , _pmcPayload        :: !LogMetric
-    , _pmcBearerToken    :: !(Maybe Text)
     , _pmcCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -88,15 +82,11 @@ data ProjectsMetricsCreate = ProjectsMetricsCreate'
 --
 -- * 'pmcUploadProtocol'
 --
--- * 'pmcPp'
---
 -- * 'pmcAccessToken'
 --
 -- * 'pmcUploadType'
 --
 -- * 'pmcPayload'
---
--- * 'pmcBearerToken'
 --
 -- * 'pmcCallback'
 projectsMetricsCreate
@@ -108,16 +98,14 @@ projectsMetricsCreate pPmcParent_ pPmcPayload_ =
     { _pmcParent = pPmcParent_
     , _pmcXgafv = Nothing
     , _pmcUploadProtocol = Nothing
-    , _pmcPp = True
     , _pmcAccessToken = Nothing
     , _pmcUploadType = Nothing
     , _pmcPayload = pPmcPayload_
-    , _pmcBearerToken = Nothing
     , _pmcCallback = Nothing
     }
 
--- | The resource name of the project in which to create the metric. Example:
--- \`\"projects\/my-project-id\"\`. The new metric must be provided in the
+-- | The resource name of the project in which to create the metric:
+-- \"projects\/[PROJECT_ID]\" The new metric must be provided in the
 -- request.
 pmcParent :: Lens' ProjectsMetricsCreate Text
 pmcParent
@@ -132,10 +120,6 @@ pmcUploadProtocol :: Lens' ProjectsMetricsCreate (Maybe Text)
 pmcUploadProtocol
   = lens _pmcUploadProtocol
       (\ s a -> s{_pmcUploadProtocol = a})
-
--- | Pretty-print response.
-pmcPp :: Lens' ProjectsMetricsCreate Bool
-pmcPp = lens _pmcPp (\ s a -> s{_pmcPp = a})
 
 -- | OAuth access token.
 pmcAccessToken :: Lens' ProjectsMetricsCreate (Maybe Text)
@@ -154,12 +138,6 @@ pmcPayload :: Lens' ProjectsMetricsCreate LogMetric
 pmcPayload
   = lens _pmcPayload (\ s a -> s{_pmcPayload = a})
 
--- | OAuth bearer token.
-pmcBearerToken :: Lens' ProjectsMetricsCreate (Maybe Text)
-pmcBearerToken
-  = lens _pmcBearerToken
-      (\ s a -> s{_pmcBearerToken = a})
-
 -- | JSONP
 pmcCallback :: Lens' ProjectsMetricsCreate (Maybe Text)
 pmcCallback
@@ -173,10 +151,8 @@ instance GoogleRequest ProjectsMetricsCreate where
                "https://www.googleapis.com/auth/logging.write"]
         requestClient ProjectsMetricsCreate'{..}
           = go _pmcParent _pmcXgafv _pmcUploadProtocol
-              (Just _pmcPp)
               _pmcAccessToken
               _pmcUploadType
-              _pmcBearerToken
               _pmcCallback
               (Just AltJSON)
               _pmcPayload

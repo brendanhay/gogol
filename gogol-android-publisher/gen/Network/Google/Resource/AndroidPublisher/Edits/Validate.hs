@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'EditsValidate' request conforms to.
 type EditsValidateResource =
      "androidpublisher" :>
-       "v2" :>
+       "v3" :>
          "applications" :>
            Capture "packageName" Text :>
              "edits" :>

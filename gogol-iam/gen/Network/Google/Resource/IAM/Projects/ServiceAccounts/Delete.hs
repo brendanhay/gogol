@@ -22,7 +22,7 @@
 --
 -- Deletes a ServiceAccount.
 --
--- /See:/ <https://cloud.google.com/iam/ Google Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.delete@.
+-- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.delete@.
 module Network.Google.Resource.IAM.Projects.ServiceAccounts.Delete
     (
     -- * REST Resource
@@ -35,10 +35,8 @@ module Network.Google.Resource.IAM.Projects.ServiceAccounts.Delete
     -- * Request Lenses
     , psadXgafv
     , psadUploadProtocol
-    , psadPp
     , psadAccessToken
     , psadUploadType
-    , psadBearerToken
     , psadName
     , psadCallback
     ) where
@@ -51,25 +49,21 @@ import           Network.Google.Prelude
 type ProjectsServiceAccountsDeleteResource =
      "v1" :>
        Capture "name" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :> Delete '[JSON] Empty
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
 -- | Deletes a ServiceAccount.
 --
 -- /See:/ 'projectsServiceAccountsDelete' smart constructor.
 data ProjectsServiceAccountsDelete = ProjectsServiceAccountsDelete'
-    { _psadXgafv          :: !(Maybe Text)
+    { _psadXgafv          :: !(Maybe Xgafv)
     , _psadUploadProtocol :: !(Maybe Text)
-    , _psadPp             :: !Bool
     , _psadAccessToken    :: !(Maybe Text)
     , _psadUploadType     :: !(Maybe Text)
-    , _psadBearerToken    :: !(Maybe Text)
     , _psadName           :: !Text
     , _psadCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -82,13 +76,9 @@ data ProjectsServiceAccountsDelete = ProjectsServiceAccountsDelete'
 --
 -- * 'psadUploadProtocol'
 --
--- * 'psadPp'
---
 -- * 'psadAccessToken'
 --
 -- * 'psadUploadType'
---
--- * 'psadBearerToken'
 --
 -- * 'psadName'
 --
@@ -100,16 +90,14 @@ projectsServiceAccountsDelete pPsadName_ =
     ProjectsServiceAccountsDelete'
     { _psadXgafv = Nothing
     , _psadUploadProtocol = Nothing
-    , _psadPp = True
     , _psadAccessToken = Nothing
     , _psadUploadType = Nothing
-    , _psadBearerToken = Nothing
     , _psadName = pPsadName_
     , _psadCallback = Nothing
     }
 
 -- | V1 error format.
-psadXgafv :: Lens' ProjectsServiceAccountsDelete (Maybe Text)
+psadXgafv :: Lens' ProjectsServiceAccountsDelete (Maybe Xgafv)
 psadXgafv
   = lens _psadXgafv (\ s a -> s{_psadXgafv = a})
 
@@ -118,10 +106,6 @@ psadUploadProtocol :: Lens' ProjectsServiceAccountsDelete (Maybe Text)
 psadUploadProtocol
   = lens _psadUploadProtocol
       (\ s a -> s{_psadUploadProtocol = a})
-
--- | Pretty-print response.
-psadPp :: Lens' ProjectsServiceAccountsDelete Bool
-psadPp = lens _psadPp (\ s a -> s{_psadPp = a})
 
 -- | OAuth access token.
 psadAccessToken :: Lens' ProjectsServiceAccountsDelete (Maybe Text)
@@ -135,17 +119,11 @@ psadUploadType
   = lens _psadUploadType
       (\ s a -> s{_psadUploadType = a})
 
--- | OAuth bearer token.
-psadBearerToken :: Lens' ProjectsServiceAccountsDelete (Maybe Text)
-psadBearerToken
-  = lens _psadBearerToken
-      (\ s a -> s{_psadBearerToken = a})
-
 -- | The resource name of the service account in the following format:
--- \`projects\/{project}\/serviceAccounts\/{account}\`. Using \`-\` as a
--- wildcard for the project will infer the project from the account. The
--- \`account\` value can be the \`email\` address or the \`unique_id\` of
--- the service account.
+-- \`projects\/{PROJECT_ID}\/serviceAccounts\/{ACCOUNT}\`. Using \`-\` as a
+-- wildcard for the \`PROJECT_ID\` will infer the project from the account.
+-- The \`ACCOUNT\` value can be the \`email\` address or the \`unique_id\`
+-- of the service account.
 psadName :: Lens' ProjectsServiceAccountsDelete Text
 psadName = lens _psadName (\ s a -> s{_psadName = a})
 
@@ -161,10 +139,8 @@ instance GoogleRequest ProjectsServiceAccountsDelete
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsServiceAccountsDelete'{..}
           = go _psadName _psadXgafv _psadUploadProtocol
-              (Just _psadPp)
               _psadAccessToken
               _psadUploadType
-              _psadBearerToken
               _psadCallback
               (Just AltJSON)
               iAMService

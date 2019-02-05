@@ -21,7 +21,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Retrieves the list of creative IDs associated with the specified
--- campaign.
+-- campaign. This method supports paging.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.campaignCreativeAssociations.list@.
 module Network.Google.Resource.DFAReporting.CampaignCreativeAssociations.List
@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 -- 'CampaignCreativeAssociationsList' request conforms to.
 type CampaignCreativeAssociationsListResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "campaigns" :>
@@ -63,15 +63,15 @@ type CampaignCreativeAssociationsListResource =
                            Get '[JSON] CampaignCreativeAssociationsListResponse
 
 -- | Retrieves the list of creative IDs associated with the specified
--- campaign.
+-- campaign. This method supports paging.
 --
 -- /See:/ 'campaignCreativeAssociationsList' smart constructor.
 data CampaignCreativeAssociationsList = CampaignCreativeAssociationsList'
     { _ccalCampaignId :: !(Textual Int64)
     , _ccalProFileId  :: !(Textual Int64)
-    , _ccalSortOrder  :: !(Maybe CampaignCreativeAssociationsListSortOrder)
+    , _ccalSortOrder  :: !CampaignCreativeAssociationsListSortOrder
     , _ccalPageToken  :: !(Maybe Text)
-    , _ccalMaxResults :: !(Maybe (Textual Int32))
+    , _ccalMaxResults :: !(Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CampaignCreativeAssociationsList' with the minimum fields required to make a request.
@@ -95,9 +95,9 @@ campaignCreativeAssociationsList pCcalCampaignId_ pCcalProFileId_ =
     CampaignCreativeAssociationsList'
     { _ccalCampaignId = _Coerce # pCcalCampaignId_
     , _ccalProFileId = _Coerce # pCcalProFileId_
-    , _ccalSortOrder = Nothing
+    , _ccalSortOrder = CCALSOAscending
     , _ccalPageToken = Nothing
-    , _ccalMaxResults = Nothing
+    , _ccalMaxResults = 1000
     }
 
 -- | Campaign ID in this association.
@@ -114,8 +114,8 @@ ccalProFileId
       (\ s a -> s{_ccalProFileId = a})
       . _Coerce
 
--- | Order of sorted results, default is ASCENDING.
-ccalSortOrder :: Lens' CampaignCreativeAssociationsList (Maybe CampaignCreativeAssociationsListSortOrder)
+-- | Order of sorted results.
+ccalSortOrder :: Lens' CampaignCreativeAssociationsList CampaignCreativeAssociationsListSortOrder
 ccalSortOrder
   = lens _ccalSortOrder
       (\ s a -> s{_ccalSortOrder = a})
@@ -127,11 +127,11 @@ ccalPageToken
       (\ s a -> s{_ccalPageToken = a})
 
 -- | Maximum number of results to return.
-ccalMaxResults :: Lens' CampaignCreativeAssociationsList (Maybe Int32)
+ccalMaxResults :: Lens' CampaignCreativeAssociationsList Int32
 ccalMaxResults
   = lens _ccalMaxResults
       (\ s a -> s{_ccalMaxResults = a})
-      . mapping _Coerce
+      . _Coerce
 
 instance GoogleRequest
          CampaignCreativeAssociationsList where
@@ -140,9 +140,10 @@ instance GoogleRequest
         type Scopes CampaignCreativeAssociationsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CampaignCreativeAssociationsList'{..}
-          = go _ccalProFileId _ccalCampaignId _ccalSortOrder
+          = go _ccalProFileId _ccalCampaignId
+              (Just _ccalSortOrder)
               _ccalPageToken
-              _ccalMaxResults
+              (Just _ccalMaxResults)
               (Just AltJSON)
               dFAReportingService
           where go

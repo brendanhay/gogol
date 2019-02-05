@@ -1,5 +1,5 @@
 name:                  gogol-gen
-version:               0.1.1
+version:               0.4.0
 synopsis:              Gogol Code Generator
 homepage:              https://github.com/brendanhay/gogol
 license:               OtherLicense
@@ -44,7 +44,7 @@ executable gogol-gen
     ghc-options:       -Wall -threaded
 
     build-depends:
-          aeson
+          aeson            >= 1
         , attoparsec
         , base             >= 4.8
         , bifunctors
@@ -55,12 +55,12 @@ executable gogol-gen
         , errors           >= 2.1.2
         , formatting
         , hashable
-        , haskell-src-exts >= 1.17.1
-        , hindent
+        , haskell-src-exts == 1.17.1
+        , hindent          == 4.6.4
         , lens
         , mtl
         , optparse-applicative
-        , pandoc
+        , pandoc < 2.0
         , parsec
         , semigroups
         , system-fileio

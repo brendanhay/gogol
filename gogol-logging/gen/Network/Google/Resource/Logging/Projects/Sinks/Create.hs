@@ -20,7 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a sink.
+-- Creates a sink that exports specified log entries to a destination. The
+-- export of newly-ingested log entries begins immediately, unless the
+-- sink\'s writer_identity is not permitted to write to the destination. A
+-- sink can export log entries only from the resource owning the sink.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.projects.sinks.create@.
 module Network.Google.Resource.Logging.Projects.Sinks.Create
@@ -35,12 +38,11 @@ module Network.Google.Resource.Logging.Projects.Sinks.Create
     -- * Request Lenses
     , pscParent
     , pscXgafv
+    , pscUniqueWriterIdentity
     , pscUploadProtocol
-    , pscPp
     , pscAccessToken
     , pscUploadType
     , pscPayload
-    , pscBearerToken
     , pscCallback
     ) where
 
@@ -54,28 +56,29 @@ type ProjectsSinksCreateResource =
        Capture "parent" Text :>
          "sinks" :>
            QueryParam "$.xgafv" Xgafv :>
-             QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
+             QueryParam "uniqueWriterIdentity" Bool :>
+               QueryParam "upload_protocol" Text :>
                  QueryParam "access_token" Text :>
                    QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] LogSink :> Post '[JSON] LogSink
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] LogSink :> Post '[JSON] LogSink
 
--- | Creates a sink.
+-- | Creates a sink that exports specified log entries to a destination. The
+-- export of newly-ingested log entries begins immediately, unless the
+-- sink\'s writer_identity is not permitted to write to the destination. A
+-- sink can export log entries only from the resource owning the sink.
 --
 -- /See:/ 'projectsSinksCreate' smart constructor.
 data ProjectsSinksCreate = ProjectsSinksCreate'
-    { _pscParent         :: !Text
-    , _pscXgafv          :: !(Maybe Xgafv)
-    , _pscUploadProtocol :: !(Maybe Text)
-    , _pscPp             :: !Bool
-    , _pscAccessToken    :: !(Maybe Text)
-    , _pscUploadType     :: !(Maybe Text)
-    , _pscPayload        :: !LogSink
-    , _pscBearerToken    :: !(Maybe Text)
-    , _pscCallback       :: !(Maybe Text)
+    { _pscParent               :: !Text
+    , _pscXgafv                :: !(Maybe Xgafv)
+    , _pscUniqueWriterIdentity :: !(Maybe Bool)
+    , _pscUploadProtocol       :: !(Maybe Text)
+    , _pscAccessToken          :: !(Maybe Text)
+    , _pscUploadType           :: !(Maybe Text)
+    , _pscPayload              :: !LogSink
+    , _pscCallback             :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsSinksCreate' with the minimum fields required to make a request.
@@ -86,17 +89,15 @@ data ProjectsSinksCreate = ProjectsSinksCreate'
 --
 -- * 'pscXgafv'
 --
--- * 'pscUploadProtocol'
+-- * 'pscUniqueWriterIdentity'
 --
--- * 'pscPp'
+-- * 'pscUploadProtocol'
 --
 -- * 'pscAccessToken'
 --
 -- * 'pscUploadType'
 --
 -- * 'pscPayload'
---
--- * 'pscBearerToken'
 --
 -- * 'pscCallback'
 projectsSinksCreate
@@ -107,18 +108,19 @@ projectsSinksCreate pPscParent_ pPscPayload_ =
     ProjectsSinksCreate'
     { _pscParent = pPscParent_
     , _pscXgafv = Nothing
+    , _pscUniqueWriterIdentity = Nothing
     , _pscUploadProtocol = Nothing
-    , _pscPp = True
     , _pscAccessToken = Nothing
     , _pscUploadType = Nothing
     , _pscPayload = pPscPayload_
-    , _pscBearerToken = Nothing
     , _pscCallback = Nothing
     }
 
--- | Required. The resource in which to create the sink. Example:
--- \`\"projects\/my-project-id\"\`. The new sink must be provided in the
--- request.
+-- | Required. The resource in which to create the sink:
+-- \"projects\/[PROJECT_ID]\" \"organizations\/[ORGANIZATION_ID]\"
+-- \"billingAccounts\/[BILLING_ACCOUNT_ID]\" \"folders\/[FOLDER_ID]\"
+-- Examples: \"projects\/my-logging-project\",
+-- \"organizations\/123456789\".
 pscParent :: Lens' ProjectsSinksCreate Text
 pscParent
   = lens _pscParent (\ s a -> s{_pscParent = a})
@@ -127,15 +129,26 @@ pscParent
 pscXgafv :: Lens' ProjectsSinksCreate (Maybe Xgafv)
 pscXgafv = lens _pscXgafv (\ s a -> s{_pscXgafv = a})
 
+-- | Optional. Determines the kind of IAM identity returned as
+-- writer_identity in the new sink. If this value is omitted or set to
+-- false, and if the sink\'s parent is a project, then the value returned
+-- as writer_identity is the same group or service account used by Logging
+-- before the addition of writer identities to this API. The sink\'s
+-- destination must be in the same project as the sink itself.If this field
+-- is set to true, or if the sink is owned by a non-project resource such
+-- as an organization, then the value of writer_identity will be a unique
+-- service account used only for exports from the new sink. For more
+-- information, see writer_identity in LogSink.
+pscUniqueWriterIdentity :: Lens' ProjectsSinksCreate (Maybe Bool)
+pscUniqueWriterIdentity
+  = lens _pscUniqueWriterIdentity
+      (\ s a -> s{_pscUniqueWriterIdentity = a})
+
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 pscUploadProtocol :: Lens' ProjectsSinksCreate (Maybe Text)
 pscUploadProtocol
   = lens _pscUploadProtocol
       (\ s a -> s{_pscUploadProtocol = a})
-
--- | Pretty-print response.
-pscPp :: Lens' ProjectsSinksCreate Bool
-pscPp = lens _pscPp (\ s a -> s{_pscPp = a})
 
 -- | OAuth access token.
 pscAccessToken :: Lens' ProjectsSinksCreate (Maybe Text)
@@ -154,12 +167,6 @@ pscPayload :: Lens' ProjectsSinksCreate LogSink
 pscPayload
   = lens _pscPayload (\ s a -> s{_pscPayload = a})
 
--- | OAuth bearer token.
-pscBearerToken :: Lens' ProjectsSinksCreate (Maybe Text)
-pscBearerToken
-  = lens _pscBearerToken
-      (\ s a -> s{_pscBearerToken = a})
-
 -- | JSONP
 pscCallback :: Lens' ProjectsSinksCreate (Maybe Text)
 pscCallback
@@ -171,11 +178,10 @@ instance GoogleRequest ProjectsSinksCreate where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/logging.admin"]
         requestClient ProjectsSinksCreate'{..}
-          = go _pscParent _pscXgafv _pscUploadProtocol
-              (Just _pscPp)
+          = go _pscParent _pscXgafv _pscUniqueWriterIdentity
+              _pscUploadProtocol
               _pscAccessToken
               _pscUploadType
-              _pscBearerToken
               _pscCallback
               (Just AltJSON)
               _pscPayload

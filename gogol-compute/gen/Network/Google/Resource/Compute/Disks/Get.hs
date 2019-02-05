@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns a specified persistent disk. Get a list of available persistent
+-- Returns a specified persistent disk. Gets a list of available persistent
 -- disks by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.disks.get@.
@@ -55,7 +55,7 @@ type DisksGetResource =
                    Capture "disk" Text :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Disk
 
--- | Returns a specified persistent disk. Get a list of available persistent
+-- | Returns a specified persistent disk. Gets a list of available persistent
 -- disks by making a list() request.
 --
 -- /See:/ 'disksGet' smart constructor.

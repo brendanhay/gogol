@@ -1,6 +1,6 @@
 name:                  gogol-containerbuilder
-version:               0.1.1
-synopsis:              Google Cloud Container Builder SDK.
+version:               0.4.0
+synopsis:              Google Cloud Build SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -11,10 +11,10 @@ copyright:             Copyright (c) 2015-2016 Brendan Hay
 category:              Network, Google, Cloud
 build-type:            Simple
 cabal-version:         >= 1.10
-extra-source-files:    README.md
+extra-source-files:    README.md src/.gitkeep
 
 description:
-    Builds container images in the cloud.
+    Creates and manages builds on Google Cloud Platform.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -35,22 +35,25 @@ library
     exposed-modules:
           Network.Google.ContainerBuilder
         , Network.Google.ContainerBuilder.Types
+        , Network.Google.Resource.Cloudbuild.Operations.Cancel
         , Network.Google.Resource.Cloudbuild.Operations.Get
         , Network.Google.Resource.Cloudbuild.Operations.List
         , Network.Google.Resource.Cloudbuild.Projects.Builds.Cancel
         , Network.Google.Resource.Cloudbuild.Projects.Builds.Create
         , Network.Google.Resource.Cloudbuild.Projects.Builds.Get
         , Network.Google.Resource.Cloudbuild.Projects.Builds.List
+        , Network.Google.Resource.Cloudbuild.Projects.Builds.Retry
         , Network.Google.Resource.Cloudbuild.Projects.Triggers.Create
         , Network.Google.Resource.Cloudbuild.Projects.Triggers.Delete
         , Network.Google.Resource.Cloudbuild.Projects.Triggers.Get
         , Network.Google.Resource.Cloudbuild.Projects.Triggers.List
         , Network.Google.Resource.Cloudbuild.Projects.Triggers.Patch
+        , Network.Google.Resource.Cloudbuild.Projects.Triggers.Run
 
     other-modules:
           Network.Google.ContainerBuilder.Types.Product
         , Network.Google.ContainerBuilder.Types.Sum
 
     build-depends:
-          gogol-core == 0.1.1.*
+          gogol-core == 0.4.0.*
         , base       >= 4.7 && < 5

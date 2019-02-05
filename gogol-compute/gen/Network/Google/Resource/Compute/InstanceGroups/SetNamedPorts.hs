@@ -33,6 +33,7 @@ module Network.Google.Resource.Compute.InstanceGroups.SetNamedPorts
     , InstanceGroupsSetNamedPorts
 
     -- * Request Lenses
+    , igsnpRequestId
     , igsnpProject
     , igsnpZone
     , igsnpPayload
@@ -54,15 +55,17 @@ type InstanceGroupsSetNamedPortsResource =
                  "instanceGroups" :>
                    Capture "instanceGroup" Text :>
                      "setNamedPorts" :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] InstanceGroupsSetNamedPortsRequest :>
-                           Post '[JSON] Operation
+                       QueryParam "requestId" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] InstanceGroupsSetNamedPortsRequest :>
+                             Post '[JSON] Operation
 
 -- | Sets the named ports for the specified instance group.
 --
 -- /See:/ 'instanceGroupsSetNamedPorts' smart constructor.
 data InstanceGroupsSetNamedPorts = InstanceGroupsSetNamedPorts'
-    { _igsnpProject       :: !Text
+    { _igsnpRequestId     :: !(Maybe Text)
+    , _igsnpProject       :: !Text
     , _igsnpZone          :: !Text
     , _igsnpPayload       :: !InstanceGroupsSetNamedPortsRequest
     , _igsnpInstanceGroup :: !Text
@@ -71,6 +74,8 @@ data InstanceGroupsSetNamedPorts = InstanceGroupsSetNamedPorts'
 -- | Creates a value of 'InstanceGroupsSetNamedPorts' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'igsnpRequestId'
 --
 -- * 'igsnpProject'
 --
@@ -87,11 +92,27 @@ instanceGroupsSetNamedPorts
     -> InstanceGroupsSetNamedPorts
 instanceGroupsSetNamedPorts pIgsnpProject_ pIgsnpZone_ pIgsnpPayload_ pIgsnpInstanceGroup_ =
     InstanceGroupsSetNamedPorts'
-    { _igsnpProject = pIgsnpProject_
+    { _igsnpRequestId = Nothing
+    , _igsnpProject = pIgsnpProject_
     , _igsnpZone = pIgsnpZone_
     , _igsnpPayload = pIgsnpPayload_
     , _igsnpInstanceGroup = pIgsnpInstanceGroup_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+igsnpRequestId :: Lens' InstanceGroupsSetNamedPorts (Maybe Text)
+igsnpRequestId
+  = lens _igsnpRequestId
+      (\ s a -> s{_igsnpRequestId = a})
 
 -- | Project ID for this request.
 igsnpProject :: Lens' InstanceGroupsSetNamedPorts Text
@@ -122,6 +143,7 @@ instance GoogleRequest InstanceGroupsSetNamedPorts
                "https://www.googleapis.com/auth/compute"]
         requestClient InstanceGroupsSetNamedPorts'{..}
           = go _igsnpProject _igsnpZone _igsnpInstanceGroup
+              _igsnpRequestId
               (Just AltJSON)
               _igsnpPayload
               computeService

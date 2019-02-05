@@ -22,7 +22,7 @@
 --
 -- Retrieves the node pool requested.
 --
--- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @container.projects.zones.clusters.nodePools.get@.
+-- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.zones.clusters.nodePools.get@.
 module Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.Get
     (
     -- * REST Resource
@@ -35,12 +35,11 @@ module Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.Get
     -- * Request Lenses
     , pzcnpgXgafv
     , pzcnpgUploadProtocol
-    , pzcnpgPp
     , pzcnpgAccessToken
     , pzcnpgUploadType
     , pzcnpgZone
     , pzcnpgNodePoolId
-    , pzcnpgBearerToken
+    , pzcnpgName
     , pzcnpgClusterId
     , pzcnpgProjectId
     , pzcnpgCallback
@@ -61,28 +60,26 @@ type ProjectsZonesClustersNodePoolsGetResource =
                  Capture "clusterId" Text :>
                    "nodePools" :>
                      Capture "nodePoolId" Text :>
-                       QueryParam "$.xgafv" Text :>
+                       QueryParam "$.xgafv" Xgafv :>
                          QueryParam "upload_protocol" Text :>
-                           QueryParam "pp" Bool :>
-                             QueryParam "access_token" Text :>
-                               QueryParam "uploadType" Text :>
-                                 QueryParam "bearer_token" Text :>
-                                   QueryParam "callback" Text :>
-                                     QueryParam "alt" AltJSON :>
-                                       Get '[JSON] NodePool
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "name" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" AltJSON :>
+                                     Get '[JSON] NodePool
 
 -- | Retrieves the node pool requested.
 --
 -- /See:/ 'projectsZonesClustersNodePoolsGet' smart constructor.
 data ProjectsZonesClustersNodePoolsGet = ProjectsZonesClustersNodePoolsGet'
-    { _pzcnpgXgafv          :: !(Maybe Text)
+    { _pzcnpgXgafv          :: !(Maybe Xgafv)
     , _pzcnpgUploadProtocol :: !(Maybe Text)
-    , _pzcnpgPp             :: !Bool
     , _pzcnpgAccessToken    :: !(Maybe Text)
     , _pzcnpgUploadType     :: !(Maybe Text)
     , _pzcnpgZone           :: !Text
     , _pzcnpgNodePoolId     :: !Text
-    , _pzcnpgBearerToken    :: !(Maybe Text)
+    , _pzcnpgName           :: !(Maybe Text)
     , _pzcnpgClusterId      :: !Text
     , _pzcnpgProjectId      :: !Text
     , _pzcnpgCallback       :: !(Maybe Text)
@@ -96,8 +93,6 @@ data ProjectsZonesClustersNodePoolsGet = ProjectsZonesClustersNodePoolsGet'
 --
 -- * 'pzcnpgUploadProtocol'
 --
--- * 'pzcnpgPp'
---
 -- * 'pzcnpgAccessToken'
 --
 -- * 'pzcnpgUploadType'
@@ -106,7 +101,7 @@ data ProjectsZonesClustersNodePoolsGet = ProjectsZonesClustersNodePoolsGet'
 --
 -- * 'pzcnpgNodePoolId'
 --
--- * 'pzcnpgBearerToken'
+-- * 'pzcnpgName'
 --
 -- * 'pzcnpgClusterId'
 --
@@ -123,19 +118,18 @@ projectsZonesClustersNodePoolsGet pPzcnpgZone_ pPzcnpgNodePoolId_ pPzcnpgCluster
     ProjectsZonesClustersNodePoolsGet'
     { _pzcnpgXgafv = Nothing
     , _pzcnpgUploadProtocol = Nothing
-    , _pzcnpgPp = True
     , _pzcnpgAccessToken = Nothing
     , _pzcnpgUploadType = Nothing
     , _pzcnpgZone = pPzcnpgZone_
     , _pzcnpgNodePoolId = pPzcnpgNodePoolId_
-    , _pzcnpgBearerToken = Nothing
+    , _pzcnpgName = Nothing
     , _pzcnpgClusterId = pPzcnpgClusterId_
     , _pzcnpgProjectId = pPzcnpgProjectId_
     , _pzcnpgCallback = Nothing
     }
 
 -- | V1 error format.
-pzcnpgXgafv :: Lens' ProjectsZonesClustersNodePoolsGet (Maybe Text)
+pzcnpgXgafv :: Lens' ProjectsZonesClustersNodePoolsGet (Maybe Xgafv)
 pzcnpgXgafv
   = lens _pzcnpgXgafv (\ s a -> s{_pzcnpgXgafv = a})
 
@@ -144,10 +138,6 @@ pzcnpgUploadProtocol :: Lens' ProjectsZonesClustersNodePoolsGet (Maybe Text)
 pzcnpgUploadProtocol
   = lens _pzcnpgUploadProtocol
       (\ s a -> s{_pzcnpgUploadProtocol = a})
-
--- | Pretty-print response.
-pzcnpgPp :: Lens' ProjectsZonesClustersNodePoolsGet Bool
-pzcnpgPp = lens _pzcnpgPp (\ s a -> s{_pzcnpgPp = a})
 
 -- | OAuth access token.
 pzcnpgAccessToken :: Lens' ProjectsZonesClustersNodePoolsGet (Maybe Text)
@@ -161,32 +151,37 @@ pzcnpgUploadType
   = lens _pzcnpgUploadType
       (\ s a -> s{_pzcnpgUploadType = a})
 
--- | The name of the Google Compute Engine
+-- | Deprecated. The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
+-- This field has been deprecated and replaced by the name field.
 pzcnpgZone :: Lens' ProjectsZonesClustersNodePoolsGet Text
 pzcnpgZone
   = lens _pzcnpgZone (\ s a -> s{_pzcnpgZone = a})
 
--- | The name of the node pool.
+-- | Deprecated. The name of the node pool. This field has been deprecated
+-- and replaced by the name field.
 pzcnpgNodePoolId :: Lens' ProjectsZonesClustersNodePoolsGet Text
 pzcnpgNodePoolId
   = lens _pzcnpgNodePoolId
       (\ s a -> s{_pzcnpgNodePoolId = a})
 
--- | OAuth bearer token.
-pzcnpgBearerToken :: Lens' ProjectsZonesClustersNodePoolsGet (Maybe Text)
-pzcnpgBearerToken
-  = lens _pzcnpgBearerToken
-      (\ s a -> s{_pzcnpgBearerToken = a})
+-- | The name (project, location, cluster, node pool id) of the node pool to
+-- get. Specified in the format
+-- \'projects\/*\/locations\/*\/clusters\/*\/nodePools\/*\'.
+pzcnpgName :: Lens' ProjectsZonesClustersNodePoolsGet (Maybe Text)
+pzcnpgName
+  = lens _pzcnpgName (\ s a -> s{_pzcnpgName = a})
 
--- | The name of the cluster.
+-- | Deprecated. The name of the cluster. This field has been deprecated and
+-- replaced by the name field.
 pzcnpgClusterId :: Lens' ProjectsZonesClustersNodePoolsGet Text
 pzcnpgClusterId
   = lens _pzcnpgClusterId
       (\ s a -> s{_pzcnpgClusterId = a})
 
--- | The Google Developers Console [project ID or project
+-- | Deprecated. The Google Developers Console [project ID or project
 -- number](https:\/\/developers.google.com\/console\/help\/new\/#projectnumber).
+-- This field has been deprecated and replaced by the name field.
 pzcnpgProjectId :: Lens' ProjectsZonesClustersNodePoolsGet Text
 pzcnpgProjectId
   = lens _pzcnpgProjectId
@@ -208,10 +203,9 @@ instance GoogleRequest
               _pzcnpgNodePoolId
               _pzcnpgXgafv
               _pzcnpgUploadProtocol
-              (Just _pzcnpgPp)
               _pzcnpgAccessToken
               _pzcnpgUploadType
-              _pzcnpgBearerToken
+              _pzcnpgName
               _pzcnpgCallback
               (Just AltJSON)
               containerService

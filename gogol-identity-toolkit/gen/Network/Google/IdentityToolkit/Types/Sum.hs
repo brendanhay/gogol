@@ -16,4 +16,4 @@
 --
 module Network.Google.IdentityToolkit.Types.Sum where
 
-import           Network.Google.Prelude
+import           Network.Google.Prelude hiding (Bytes)

@@ -33,6 +33,7 @@ module Network.Google.Resource.Compute.ForwardingRules.Delete
     , ForwardingRulesDelete
 
     -- * Request Lenses
+    , frdRequestId
     , frdProject
     , frdForwardingRule
     , frdRegion
@@ -52,13 +53,15 @@ type ForwardingRulesDeleteResource =
                Capture "region" Text :>
                  "forwardingRules" :>
                    Capture "forwardingRule" Text :>
-                     QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+                     QueryParam "requestId" Text :>
+                       QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified ForwardingRule resource.
 --
 -- /See:/ 'forwardingRulesDelete' smart constructor.
 data ForwardingRulesDelete = ForwardingRulesDelete'
-    { _frdProject        :: !Text
+    { _frdRequestId      :: !(Maybe Text)
+    , _frdProject        :: !Text
     , _frdForwardingRule :: !Text
     , _frdRegion         :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -66,6 +69,8 @@ data ForwardingRulesDelete = ForwardingRulesDelete'
 -- | Creates a value of 'ForwardingRulesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'frdRequestId'
 --
 -- * 'frdProject'
 --
@@ -79,10 +84,25 @@ forwardingRulesDelete
     -> ForwardingRulesDelete
 forwardingRulesDelete pFrdProject_ pFrdForwardingRule_ pFrdRegion_ =
     ForwardingRulesDelete'
-    { _frdProject = pFrdProject_
+    { _frdRequestId = Nothing
+    , _frdProject = pFrdProject_
     , _frdForwardingRule = pFrdForwardingRule_
     , _frdRegion = pFrdRegion_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+frdRequestId :: Lens' ForwardingRulesDelete (Maybe Text)
+frdRequestId
+  = lens _frdRequestId (\ s a -> s{_frdRequestId = a})
 
 -- | Project ID for this request.
 frdProject :: Lens' ForwardingRulesDelete Text
@@ -107,6 +127,7 @@ instance GoogleRequest ForwardingRulesDelete where
                "https://www.googleapis.com/auth/compute"]
         requestClient ForwardingRulesDelete'{..}
           = go _frdProject _frdRegion _frdForwardingRule
+              _frdRequestId
               (Just AltJSON)
               computeService
           where go

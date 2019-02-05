@@ -20,9 +20,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates application parameters.
+-- Updates the specified Application resource. You can update the following
+-- fields: auth_domain - Google authentication domain for controlling user
+-- access to the application. default_cookie_expiration - Cookie expiration
+-- policy for the application.
 --
--- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ Google App Engine Admin API Reference> for @appengine.apps.patch@.
+-- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ App Engine Admin API Reference> for @appengine.apps.patch@.
 module Network.Google.Resource.AppEngine.Apps.Patch
     (
     -- * REST Resource
@@ -36,11 +39,9 @@ module Network.Google.Resource.AppEngine.Apps.Patch
     , apXgafv
     , apUploadProtocol
     , apUpdateMask
-    , apPp
     , apAccessToken
     , apUploadType
     , apPayload
-    , apBearerToken
     , apAppsId
     , apCallback
     ) where
@@ -54,30 +55,29 @@ type AppsPatchResource =
      "v1" :>
        "apps" :>
          Capture "appsId" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "updateMask" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "callback" Text :>
-                           QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] Application :>
-                               Patch '[JSON] Operation
+               QueryParam "updateMask" GFieldMask :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Application :>
+                           Patch '[JSON] Operation
 
--- | Updates application parameters.
+-- | Updates the specified Application resource. You can update the following
+-- fields: auth_domain - Google authentication domain for controlling user
+-- access to the application. default_cookie_expiration - Cookie expiration
+-- policy for the application.
 --
 -- /See:/ 'appsPatch' smart constructor.
 data AppsPatch = AppsPatch'
-    { _apXgafv          :: !(Maybe Text)
+    { _apXgafv          :: !(Maybe Xgafv)
     , _apUploadProtocol :: !(Maybe Text)
-    , _apUpdateMask     :: !(Maybe Text)
-    , _apPp             :: !Bool
+    , _apUpdateMask     :: !(Maybe GFieldMask)
     , _apAccessToken    :: !(Maybe Text)
     , _apUploadType     :: !(Maybe Text)
     , _apPayload        :: !Application
-    , _apBearerToken    :: !(Maybe Text)
     , _apAppsId         :: !Text
     , _apCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -92,15 +92,11 @@ data AppsPatch = AppsPatch'
 --
 -- * 'apUpdateMask'
 --
--- * 'apPp'
---
 -- * 'apAccessToken'
 --
 -- * 'apUploadType'
 --
 -- * 'apPayload'
---
--- * 'apBearerToken'
 --
 -- * 'apAppsId'
 --
@@ -114,17 +110,15 @@ appsPatch pApPayload_ pApAppsId_ =
     { _apXgafv = Nothing
     , _apUploadProtocol = Nothing
     , _apUpdateMask = Nothing
-    , _apPp = True
     , _apAccessToken = Nothing
     , _apUploadType = Nothing
     , _apPayload = pApPayload_
-    , _apBearerToken = Nothing
     , _apAppsId = pApAppsId_
     , _apCallback = Nothing
     }
 
 -- | V1 error format.
-apXgafv :: Lens' AppsPatch (Maybe Text)
+apXgafv :: Lens' AppsPatch (Maybe Xgafv)
 apXgafv = lens _apXgafv (\ s a -> s{_apXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -134,13 +128,9 @@ apUploadProtocol
       (\ s a -> s{_apUploadProtocol = a})
 
 -- | Standard field mask for the set of fields to be updated.
-apUpdateMask :: Lens' AppsPatch (Maybe Text)
+apUpdateMask :: Lens' AppsPatch (Maybe GFieldMask)
 apUpdateMask
   = lens _apUpdateMask (\ s a -> s{_apUpdateMask = a})
-
--- | Pretty-print response.
-apPp :: Lens' AppsPatch Bool
-apPp = lens _apPp (\ s a -> s{_apPp = a})
 
 -- | OAuth access token.
 apAccessToken :: Lens' AppsPatch (Maybe Text)
@@ -158,14 +148,8 @@ apPayload :: Lens' AppsPatch Application
 apPayload
   = lens _apPayload (\ s a -> s{_apPayload = a})
 
--- | OAuth bearer token.
-apBearerToken :: Lens' AppsPatch (Maybe Text)
-apBearerToken
-  = lens _apBearerToken
-      (\ s a -> s{_apBearerToken = a})
-
--- | Part of \`name\`. Name of the application to update. Example:
--- \`apps\/myapp\`.
+-- | Part of \`name\`. Name of the Application resource to update. Example:
+-- apps\/myapp.
 apAppsId :: Lens' AppsPatch Text
 apAppsId = lens _apAppsId (\ s a -> s{_apAppsId = a})
 
@@ -181,10 +165,8 @@ instance GoogleRequest AppsPatch where
         requestClient AppsPatch'{..}
           = go _apAppsId _apXgafv _apUploadProtocol
               _apUpdateMask
-              (Just _apPp)
               _apAccessToken
               _apUploadType
-              _apBearerToken
               _apCallback
               (Just AltJSON)
               _apPayload

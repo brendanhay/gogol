@@ -20,9 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a managed service.
+-- Gets a managed service. Authentication is required unless the service is
+-- public.
 --
--- /See:/ <https://cloud.google.com/service-management/ Google Service Management API Reference> for @servicemanagement.services.get@.
+-- /See:/ <https://cloud.google.com/service-management/ Service Management API Reference> for @servicemanagement.services.get@.
 module Network.Google.Resource.ServiceManagement.Services.Get
     (
     -- * REST Resource
@@ -35,10 +36,8 @@ module Network.Google.Resource.ServiceManagement.Services.Get
     -- * Request Lenses
     , sgXgafv
     , sgUploadProtocol
-    , sgPp
     , sgAccessToken
     , sgUploadType
-    , sgBearerToken
     , sgServiceName
     , sgCallback
     ) where
@@ -54,24 +53,21 @@ type ServicesGetResource =
          Capture "serviceName" Text :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] ManagedService
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] ManagedService
 
--- | Gets a managed service.
+-- | Gets a managed service. Authentication is required unless the service is
+-- public.
 --
 -- /See:/ 'servicesGet' smart constructor.
 data ServicesGet = ServicesGet'
     { _sgXgafv          :: !(Maybe Xgafv)
     , _sgUploadProtocol :: !(Maybe Text)
-    , _sgPp             :: !Bool
     , _sgAccessToken    :: !(Maybe Text)
     , _sgUploadType     :: !(Maybe Text)
-    , _sgBearerToken    :: !(Maybe Text)
     , _sgServiceName    :: !Text
     , _sgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -84,13 +80,9 @@ data ServicesGet = ServicesGet'
 --
 -- * 'sgUploadProtocol'
 --
--- * 'sgPp'
---
 -- * 'sgAccessToken'
 --
 -- * 'sgUploadType'
---
--- * 'sgBearerToken'
 --
 -- * 'sgServiceName'
 --
@@ -102,10 +94,8 @@ servicesGet pSgServiceName_ =
     ServicesGet'
     { _sgXgafv = Nothing
     , _sgUploadProtocol = Nothing
-    , _sgPp = True
     , _sgAccessToken = Nothing
     , _sgUploadType = Nothing
-    , _sgBearerToken = Nothing
     , _sgServiceName = pSgServiceName_
     , _sgCallback = Nothing
     }
@@ -120,10 +110,6 @@ sgUploadProtocol
   = lens _sgUploadProtocol
       (\ s a -> s{_sgUploadProtocol = a})
 
--- | Pretty-print response.
-sgPp :: Lens' ServicesGet Bool
-sgPp = lens _sgPp (\ s a -> s{_sgPp = a})
-
 -- | OAuth access token.
 sgAccessToken :: Lens' ServicesGet (Maybe Text)
 sgAccessToken
@@ -134,12 +120,6 @@ sgAccessToken
 sgUploadType :: Lens' ServicesGet (Maybe Text)
 sgUploadType
   = lens _sgUploadType (\ s a -> s{_sgUploadType = a})
-
--- | OAuth bearer token.
-sgBearerToken :: Lens' ServicesGet (Maybe Text)
-sgBearerToken
-  = lens _sgBearerToken
-      (\ s a -> s{_sgBearerToken = a})
 
 -- | The name of the service. See the \`ServiceManager\` overview for naming
 -- requirements. For example: \`example.googleapis.com\`.
@@ -162,10 +142,8 @@ instance GoogleRequest ServicesGet where
                "https://www.googleapis.com/auth/service.management.readonly"]
         requestClient ServicesGet'{..}
           = go _sgServiceName _sgXgafv _sgUploadProtocol
-              (Just _sgPp)
               _sgAccessToken
               _sgUploadType
-              _sgBearerToken
               _sgCallback
               (Just AltJSON)
               serviceManagementService

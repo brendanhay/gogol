@@ -76,7 +76,7 @@ groupsPatch pGpGroupKey_ pGpPayload_ =
     , _gpPayload = pGpPayload_
     }
 
--- | Email or immutable Id of the group. If Id, it should match with id of
+-- | Email or immutable ID of the group. If ID, it should match with id of
 -- group object
 gpGroupKey :: Lens' GroupsPatch Text
 gpGroupKey

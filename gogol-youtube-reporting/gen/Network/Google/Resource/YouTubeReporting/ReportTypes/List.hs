@@ -35,12 +35,10 @@ module Network.Google.Resource.YouTubeReporting.ReportTypes.List
     -- * Request Lenses
     , rtlXgafv
     , rtlUploadProtocol
-    , rtlPp
     , rtlAccessToken
     , rtlUploadType
     , rtlIncludeSystemManaged
     , rtlOnBehalfOfContentOwner
-    , rtlBearerToken
     , rtlPageToken
     , rtlPageSize
     , rtlCallback
@@ -54,32 +52,28 @@ import           Network.Google.YouTubeReporting.Types
 type ReportTypesListResource =
      "v1" :>
        "reportTypes" :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "includeSystemManaged" Bool :>
-                     QueryParam "onBehalfOfContentOwner" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "pageSize" (Textual Int32) :>
-                             QueryParam "callback" Text :>
-                               QueryParam "alt" AltJSON :>
-                                 Get '[JSON] ListReportTypesResponse
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "includeSystemManaged" Bool :>
+                   QueryParam "onBehalfOfContentOwner" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "pageSize" (Textual Int32) :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] ListReportTypesResponse
 
 -- | Lists report types.
 --
 -- /See:/ 'reportTypesList' smart constructor.
 data ReportTypesList = ReportTypesList'
-    { _rtlXgafv                  :: !(Maybe Text)
+    { _rtlXgafv                  :: !(Maybe Xgafv)
     , _rtlUploadProtocol         :: !(Maybe Text)
-    , _rtlPp                     :: !Bool
     , _rtlAccessToken            :: !(Maybe Text)
     , _rtlUploadType             :: !(Maybe Text)
     , _rtlIncludeSystemManaged   :: !(Maybe Bool)
     , _rtlOnBehalfOfContentOwner :: !(Maybe Text)
-    , _rtlBearerToken            :: !(Maybe Text)
     , _rtlPageToken              :: !(Maybe Text)
     , _rtlPageSize               :: !(Maybe (Textual Int32))
     , _rtlCallback               :: !(Maybe Text)
@@ -93,8 +87,6 @@ data ReportTypesList = ReportTypesList'
 --
 -- * 'rtlUploadProtocol'
 --
--- * 'rtlPp'
---
 -- * 'rtlAccessToken'
 --
 -- * 'rtlUploadType'
@@ -102,8 +94,6 @@ data ReportTypesList = ReportTypesList'
 -- * 'rtlIncludeSystemManaged'
 --
 -- * 'rtlOnBehalfOfContentOwner'
---
--- * 'rtlBearerToken'
 --
 -- * 'rtlPageToken'
 --
@@ -116,19 +106,17 @@ reportTypesList =
     ReportTypesList'
     { _rtlXgafv = Nothing
     , _rtlUploadProtocol = Nothing
-    , _rtlPp = True
     , _rtlAccessToken = Nothing
     , _rtlUploadType = Nothing
     , _rtlIncludeSystemManaged = Nothing
     , _rtlOnBehalfOfContentOwner = Nothing
-    , _rtlBearerToken = Nothing
     , _rtlPageToken = Nothing
     , _rtlPageSize = Nothing
     , _rtlCallback = Nothing
     }
 
 -- | V1 error format.
-rtlXgafv :: Lens' ReportTypesList (Maybe Text)
+rtlXgafv :: Lens' ReportTypesList (Maybe Xgafv)
 rtlXgafv = lens _rtlXgafv (\ s a -> s{_rtlXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -136,10 +124,6 @@ rtlUploadProtocol :: Lens' ReportTypesList (Maybe Text)
 rtlUploadProtocol
   = lens _rtlUploadProtocol
       (\ s a -> s{_rtlUploadProtocol = a})
-
--- | Pretty-print response.
-rtlPp :: Lens' ReportTypesList Bool
-rtlPp = lens _rtlPp (\ s a -> s{_rtlPp = a})
 
 -- | OAuth access token.
 rtlAccessToken :: Lens' ReportTypesList (Maybe Text)
@@ -168,12 +152,6 @@ rtlOnBehalfOfContentOwner
   = lens _rtlOnBehalfOfContentOwner
       (\ s a -> s{_rtlOnBehalfOfContentOwner = a})
 
--- | OAuth bearer token.
-rtlBearerToken :: Lens' ReportTypesList (Maybe Text)
-rtlBearerToken
-  = lens _rtlBearerToken
-      (\ s a -> s{_rtlBearerToken = a})
-
 -- | A token identifying a page of results the server should return.
 -- Typically, this is the value of ListReportTypesResponse.next_page_token
 -- returned in response to the previous call to the \`ListReportTypes\`
@@ -200,12 +178,10 @@ instance GoogleRequest ReportTypesList where
              '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
                "https://www.googleapis.com/auth/yt-analytics.readonly"]
         requestClient ReportTypesList'{..}
-          = go _rtlXgafv _rtlUploadProtocol (Just _rtlPp)
-              _rtlAccessToken
+          = go _rtlXgafv _rtlUploadProtocol _rtlAccessToken
               _rtlUploadType
               _rtlIncludeSystemManaged
               _rtlOnBehalfOfContentOwner
-              _rtlBearerToken
               _rtlPageToken
               _rtlPageSize
               _rtlCallback

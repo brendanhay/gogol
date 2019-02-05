@@ -23,6 +23,16 @@ module Network.Google.SQLAdmin.Types
     , sqlServiceAdminScope
     , cloudPlatformScope
 
+    -- * DemoteMasterMySQLReplicaConfiguration
+    , DemoteMasterMySQLReplicaConfiguration
+    , demoteMasterMySQLReplicaConfiguration
+    , dmmsqlrcKind
+    , dmmsqlrcClientKey
+    , dmmsqlrcUsername
+    , dmmsqlrcClientCertificate
+    , dmmsqlrcCaCertificate
+    , dmmsqlrcPassword
+
     -- * SSLCert
     , SSLCert
     , sslCert
@@ -47,6 +57,18 @@ module Network.Google.SQLAdmin.Types
     , instancesExportRequest
     , ierExportContext
 
+    -- * InstancesListServerCasResponse
+    , InstancesListServerCasResponse
+    , instancesListServerCasResponse
+    , ilscrKind
+    , ilscrCerts
+    , ilscrActiveVersion
+
+    -- * ExportContextSQLExportOptionsMysqlExportOptions
+    , ExportContextSQLExportOptionsMysqlExportOptions
+    , exportContextSQLExportOptionsMysqlExportOptions
+    , ecsqleomeoMasterData
+
     -- * OnPremisesConfiguration
     , OnPremisesConfiguration
     , onPremisesConfiguration
@@ -60,6 +82,12 @@ module Network.Google.SQLAdmin.Types
     , olrKind
     , olrItems
 
+    -- * APIWarning
+    , APIWarning
+    , apiWarning
+    , awCode
+    , awMessage
+
     -- * ImportContext
     , ImportContext
     , importContext
@@ -68,6 +96,7 @@ module Network.Google.SQLAdmin.Types
     , icCSVImportOptions
     , icURI
     , icFileType
+    , icImportUser
 
     -- * Operation
     , Operation
@@ -102,18 +131,27 @@ module Network.Google.SQLAdmin.Types
     , sIPConfiguration
     , sMaintenanceWindow
     , sDatabaseReplicationEnabled
+    , sUserLabels
     , sTier
     , sDatabaseFlags
     , sDataDiskType
     , sCrashSafeReplicationEnabled
     , sLocationPreference
     , sBackupConfiguration
+    , sAvailabilityType
+    , sStorageAutoResizeLimit
+
+    -- * InstancesRotateServerCaRequest
+    , InstancesRotateServerCaRequest
+    , instancesRotateServerCaRequest
+    , irscrRotateServerCaContext
 
     -- * IPMApping
     , IPMApping
     , ipMApping
     , imaIPAddress
     , imaTimeToRetire
+    , imaType
 
     -- * Database
     , Database
@@ -189,6 +227,7 @@ module Network.Google.SQLAdmin.Types
     , IPConfiguration
     , ipConfiguration
     , icAuthorizedNetworks
+    , icPrivateNetwork
     , icRequireSSL
     , icIPv4Enabled
 
@@ -205,6 +244,12 @@ module Network.Google.SQLAdmin.Types
     , importContextCSVImportOptions
     , iccioColumns
     , iccioTable
+
+    -- * RotateServerCaContext
+    , RotateServerCaContext
+    , rotateServerCaContext
+    , rsccNextVersion
+    , rsccKind
 
     -- * ExportContextCSVExportOptions
     , ExportContextCSVExportOptions
@@ -228,6 +273,7 @@ module Network.Google.SQLAdmin.Types
     , datBackendType
     , datMaxDiskSize
     , datOnPremisesConfiguration
+    , datGceZone
     , datEtag
     , datState
     , datIPv6Address
@@ -253,6 +299,7 @@ module Network.Google.SQLAdmin.Types
     -- * CloneContext
     , CloneContext
     , cloneContext
+    , ccPitrTimestampMs
     , ccDestinationInstanceName
     , ccBinLogCoordinates
     , ccKind
@@ -339,6 +386,11 @@ module Network.Google.SQLAdmin.Types
     , instancesRestoreBackupRequest
     , irbrRestoreBackupContext
 
+    -- * InstancesDemoteMasterRequest
+    , InstancesDemoteMasterRequest
+    , instancesDemoteMasterRequest
+    , idmrDemoteMasterContext
+
     -- * BackupRunsListResponse
     , BackupRunsListResponse
     , backupRunsListResponse
@@ -352,6 +404,12 @@ module Network.Google.SQLAdmin.Types
     , opeKind
     , opeCode
     , opeMessage
+
+    -- * TruncateLogContext
+    , TruncateLogContext
+    , truncateLogContext
+    , tlcKind
+    , tlcLogType
 
     -- * InstancesCloneRequest
     , InstancesCloneRequest
@@ -385,10 +443,18 @@ module Network.Google.SQLAdmin.Types
     , ilrNextPageToken
     , ilrKind
     , ilrItems
+    , ilrWarnings
+
+    -- * DemoteMasterConfiguration
+    , DemoteMasterConfiguration
+    , demoteMasterConfiguration
+    , dmcKind
+    , dmcMysqlReplicaConfiguration
 
     -- * BackupConfiguration
     , BackupConfiguration
     , backupConfiguration
+    , bcReplicationLogArchivingEnabled
     , bcEnabled
     , bcStartTime
     , bcKind
@@ -412,10 +478,16 @@ module Network.Google.SQLAdmin.Types
     , flrKind
     , flrItems
 
+    -- * InstancesTruncateLogRequest
+    , InstancesTruncateLogRequest
+    , instancesTruncateLogRequest
+    , itlrTruncateLogContext
+
     -- * ExportContextSQLExportOptions
     , ExportContextSQLExportOptions
     , exportContextSQLExportOptions
     , ecsqleoSchemaOnly
+    , ecsqleoMysqlExportOptions
     , ecsqleoTables
 
     -- * RestoreBackupContext
@@ -424,13 +496,26 @@ module Network.Google.SQLAdmin.Types
     , rbcInstanceId
     , rbcBackupRunId
     , rbcKind
+
+    -- * DemoteMasterContext
+    , DemoteMasterContext
+    , demoteMasterContext
+    , demVerifyGtidConsistency
+    , demKind
+    , demMasterInstanceName
+    , demReplicaConfiguration
+
+    -- * SettingsUserLabels
+    , SettingsUserLabels
+    , settingsUserLabels
+    , sulAddtional
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types.Product
 import           Network.Google.SQLAdmin.Types.Sum
 
--- | Default request referring to version 'v1beta4' of the Cloud SQL Administration API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v1beta4' of the Cloud SQL Admin API. This contains the host and root path used as a starting point for constructing service requests.
 sQLAdminService :: ServiceConfig
 sQLAdminService
   = defaultService (ServiceId "sqladmin:v1beta4")

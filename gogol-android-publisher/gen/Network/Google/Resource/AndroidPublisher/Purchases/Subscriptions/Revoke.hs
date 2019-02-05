@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 -- 'PurchasesSubscriptionsRevoke' request conforms to.
 type PurchasesSubscriptionsRevokeResource =
      "androidpublisher" :>
-       "v2" :>
+       "v3" :>
          "applications" :>
            Capture "packageName" Text :>
              "purchases" :>

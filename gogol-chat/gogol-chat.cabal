@@ -1,0 +1,53 @@
+name:                  gogol-chat
+version:               0.4.0
+synopsis:              Google Hangouts Chat SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               OtherLicense
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
+copyright:             Copyright (c) 2015-2016 Brendan Hay
+category:              Network, Google, Cloud
+build-type:            Simple
+cabal-version:         >= 1.10
+extra-source-files:    README.md src/.gitkeep
+
+description:
+    Enables bots to fetch information and perform actions in Hangouts Chat.
+    .
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
+    .
+    This library is compatible with version @v1@
+    of the API.
+
+source-repository head
+    type:     git
+    location: git://github.com/brendanhay/gogol.git
+
+library
+    default-language:  Haskell2010
+    hs-source-dirs:    src gen
+
+    ghc-options:       -Wall
+
+    exposed-modules:
+          Network.Google.Chat
+        , Network.Google.Chat.Types
+        , Network.Google.Resource.Chat.Spaces.Get
+        , Network.Google.Resource.Chat.Spaces.List
+        , Network.Google.Resource.Chat.Spaces.Members.Get
+        , Network.Google.Resource.Chat.Spaces.Members.List
+        , Network.Google.Resource.Chat.Spaces.Messages.Create
+        , Network.Google.Resource.Chat.Spaces.Messages.Delete
+        , Network.Google.Resource.Chat.Spaces.Messages.Get
+        , Network.Google.Resource.Chat.Spaces.Messages.Update
+
+    other-modules:
+          Network.Google.Chat.Types.Product
+        , Network.Google.Chat.Types.Sum
+
+    build-depends:
+          gogol-core == 0.4.0.*
+        , base       >= 4.7 && < 5

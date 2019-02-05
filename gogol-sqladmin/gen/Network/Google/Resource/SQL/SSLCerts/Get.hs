@@ -24,7 +24,7 @@
 -- (required for usage). The private key must be saved from the response to
 -- initial creation.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.sslCerts.get@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.sslCerts.get@.
 module Network.Google.Resource.SQL.SSLCerts.Get
     (
     -- * REST Resource

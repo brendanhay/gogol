@@ -36,12 +36,10 @@ module Network.Google.Resource.YouTubeReporting.Jobs.Reports.Get
     , jrgXgafv
     , jrgJobId
     , jrgUploadProtocol
-    , jrgPp
     , jrgAccessToken
     , jrgReportId
     , jrgUploadType
     , jrgOnBehalfOfContentOwner
-    , jrgBearerToken
     , jrgCallback
     ) where
 
@@ -56,29 +54,25 @@ type JobsReportsGetResource =
          Capture "jobId" Text :>
            "reports" :>
              Capture "reportId" Text :>
-               QueryParam "$.xgafv" Text :>
+               QueryParam "$.xgafv" Xgafv :>
                  QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "onBehalfOfContentOwner" Text :>
-                           QueryParam "bearer_token" Text :>
-                             QueryParam "callback" Text :>
-                               QueryParam "alt" AltJSON :> Get '[JSON] Report
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "onBehalfOfContentOwner" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :> Get '[JSON] Report
 
 -- | Gets the metadata of a specific report.
 --
 -- /See:/ 'jobsReportsGet' smart constructor.
 data JobsReportsGet = JobsReportsGet'
-    { _jrgXgafv                  :: !(Maybe Text)
+    { _jrgXgafv                  :: !(Maybe Xgafv)
     , _jrgJobId                  :: !Text
     , _jrgUploadProtocol         :: !(Maybe Text)
-    , _jrgPp                     :: !Bool
     , _jrgAccessToken            :: !(Maybe Text)
     , _jrgReportId               :: !Text
     , _jrgUploadType             :: !(Maybe Text)
     , _jrgOnBehalfOfContentOwner :: !(Maybe Text)
-    , _jrgBearerToken            :: !(Maybe Text)
     , _jrgCallback               :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -92,8 +86,6 @@ data JobsReportsGet = JobsReportsGet'
 --
 -- * 'jrgUploadProtocol'
 --
--- * 'jrgPp'
---
 -- * 'jrgAccessToken'
 --
 -- * 'jrgReportId'
@@ -101,8 +93,6 @@ data JobsReportsGet = JobsReportsGet'
 -- * 'jrgUploadType'
 --
 -- * 'jrgOnBehalfOfContentOwner'
---
--- * 'jrgBearerToken'
 --
 -- * 'jrgCallback'
 jobsReportsGet
@@ -114,17 +104,15 @@ jobsReportsGet pJrgJobId_ pJrgReportId_ =
     { _jrgXgafv = Nothing
     , _jrgJobId = pJrgJobId_
     , _jrgUploadProtocol = Nothing
-    , _jrgPp = True
     , _jrgAccessToken = Nothing
     , _jrgReportId = pJrgReportId_
     , _jrgUploadType = Nothing
     , _jrgOnBehalfOfContentOwner = Nothing
-    , _jrgBearerToken = Nothing
     , _jrgCallback = Nothing
     }
 
 -- | V1 error format.
-jrgXgafv :: Lens' JobsReportsGet (Maybe Text)
+jrgXgafv :: Lens' JobsReportsGet (Maybe Xgafv)
 jrgXgafv = lens _jrgXgafv (\ s a -> s{_jrgXgafv = a})
 
 -- | The ID of the job.
@@ -136,10 +124,6 @@ jrgUploadProtocol :: Lens' JobsReportsGet (Maybe Text)
 jrgUploadProtocol
   = lens _jrgUploadProtocol
       (\ s a -> s{_jrgUploadProtocol = a})
-
--- | Pretty-print response.
-jrgPp :: Lens' JobsReportsGet Bool
-jrgPp = lens _jrgPp (\ s a -> s{_jrgPp = a})
 
 -- | OAuth access token.
 jrgAccessToken :: Lens' JobsReportsGet (Maybe Text)
@@ -165,12 +149,6 @@ jrgOnBehalfOfContentOwner
   = lens _jrgOnBehalfOfContentOwner
       (\ s a -> s{_jrgOnBehalfOfContentOwner = a})
 
--- | OAuth bearer token.
-jrgBearerToken :: Lens' JobsReportsGet (Maybe Text)
-jrgBearerToken
-  = lens _jrgBearerToken
-      (\ s a -> s{_jrgBearerToken = a})
-
 -- | JSONP
 jrgCallback :: Lens' JobsReportsGet (Maybe Text)
 jrgCallback
@@ -184,11 +162,9 @@ instance GoogleRequest JobsReportsGet where
         requestClient JobsReportsGet'{..}
           = go _jrgJobId _jrgReportId _jrgXgafv
               _jrgUploadProtocol
-              (Just _jrgPp)
               _jrgAccessToken
               _jrgUploadType
               _jrgOnBehalfOfContentOwner
-              _jrgBearerToken
               _jrgCallback
               (Just AltJSON)
               youTubeReportingService

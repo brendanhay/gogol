@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 -- 'EditsAPKsList' request conforms to.
 type EditsAPKsListResource =
      "androidpublisher" :>
-       "v2" :>
+       "v3" :>
          "applications" :>
            Capture "packageName" Text :>
              "edits" :>

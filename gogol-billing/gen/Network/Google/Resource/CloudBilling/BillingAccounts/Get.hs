@@ -21,10 +21,10 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Gets information about a billing account. The current authenticated user
--- must be an [owner of the billing
--- account](https:\/\/support.google.com\/cloud\/answer\/4430947).
+-- must be a [viewer of the billing
+-- account](https:\/\/cloud.google.com\/billing\/docs\/how-to\/billing-access).
 --
--- /See:/ <https://cloud.google.com/billing/ Google Cloud Billing API Reference> for @cloudbilling.billingAccounts.get@.
+-- /See:/ <https://cloud.google.com/billing/ Cloud Billing API Reference> for @cloudbilling.billingAccounts.get@.
 module Network.Google.Resource.CloudBilling.BillingAccounts.Get
     (
     -- * REST Resource
@@ -37,10 +37,8 @@ module Network.Google.Resource.CloudBilling.BillingAccounts.Get
     -- * Request Lenses
     , bagXgafv
     , bagUploadProtocol
-    , bagPp
     , bagAccessToken
     , bagUploadType
-    , bagBearerToken
     , bagName
     , bagCallback
     ) where
@@ -53,28 +51,24 @@ import           Network.Google.Prelude
 type BillingAccountsGetResource =
      "v1" :>
        Capture "name" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] BillingAccount
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] BillingAccount
 
 -- | Gets information about a billing account. The current authenticated user
--- must be an [owner of the billing
--- account](https:\/\/support.google.com\/cloud\/answer\/4430947).
+-- must be a [viewer of the billing
+-- account](https:\/\/cloud.google.com\/billing\/docs\/how-to\/billing-access).
 --
 -- /See:/ 'billingAccountsGet' smart constructor.
 data BillingAccountsGet = BillingAccountsGet'
-    { _bagXgafv          :: !(Maybe Text)
+    { _bagXgafv          :: !(Maybe Xgafv)
     , _bagUploadProtocol :: !(Maybe Text)
-    , _bagPp             :: !Bool
     , _bagAccessToken    :: !(Maybe Text)
     , _bagUploadType     :: !(Maybe Text)
-    , _bagBearerToken    :: !(Maybe Text)
     , _bagName           :: !Text
     , _bagCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -87,13 +81,9 @@ data BillingAccountsGet = BillingAccountsGet'
 --
 -- * 'bagUploadProtocol'
 --
--- * 'bagPp'
---
 -- * 'bagAccessToken'
 --
 -- * 'bagUploadType'
---
--- * 'bagBearerToken'
 --
 -- * 'bagName'
 --
@@ -105,16 +95,14 @@ billingAccountsGet pBagName_ =
     BillingAccountsGet'
     { _bagXgafv = Nothing
     , _bagUploadProtocol = Nothing
-    , _bagPp = True
     , _bagAccessToken = Nothing
     , _bagUploadType = Nothing
-    , _bagBearerToken = Nothing
     , _bagName = pBagName_
     , _bagCallback = Nothing
     }
 
 -- | V1 error format.
-bagXgafv :: Lens' BillingAccountsGet (Maybe Text)
+bagXgafv :: Lens' BillingAccountsGet (Maybe Xgafv)
 bagXgafv = lens _bagXgafv (\ s a -> s{_bagXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -122,10 +110,6 @@ bagUploadProtocol :: Lens' BillingAccountsGet (Maybe Text)
 bagUploadProtocol
   = lens _bagUploadProtocol
       (\ s a -> s{_bagUploadProtocol = a})
-
--- | Pretty-print response.
-bagPp :: Lens' BillingAccountsGet Bool
-bagPp = lens _bagPp (\ s a -> s{_bagPp = a})
 
 -- | OAuth access token.
 bagAccessToken :: Lens' BillingAccountsGet (Maybe Text)
@@ -138,12 +122,6 @@ bagUploadType :: Lens' BillingAccountsGet (Maybe Text)
 bagUploadType
   = lens _bagUploadType
       (\ s a -> s{_bagUploadType = a})
-
--- | OAuth bearer token.
-bagBearerToken :: Lens' BillingAccountsGet (Maybe Text)
-bagBearerToken
-  = lens _bagBearerToken
-      (\ s a -> s{_bagBearerToken = a})
 
 -- | The resource name of the billing account to retrieve. For example,
 -- \`billingAccounts\/012345-567890-ABCDEF\`.
@@ -161,10 +139,8 @@ instance GoogleRequest BillingAccountsGet where
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient BillingAccountsGet'{..}
           = go _bagName _bagXgafv _bagUploadProtocol
-              (Just _bagPp)
               _bagAccessToken
               _bagUploadType
-              _bagBearerToken
               _bagCallback
               (Just AltJSON)
               billingService

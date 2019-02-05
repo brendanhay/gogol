@@ -22,7 +22,7 @@
 --
 -- Creates a ServiceAccountKey and returns it.
 --
--- /See:/ <https://cloud.google.com/iam/ Google Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.keys.create@.
+-- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.keys.create@.
 module Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Create
     (
     -- * REST Resource
@@ -35,11 +35,9 @@ module Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Create
     -- * Request Lenses
     , psakcXgafv
     , psakcUploadProtocol
-    , psakcPp
     , psakcAccessToken
     , psakcUploadType
     , psakcPayload
-    , psakcBearerToken
     , psakcName
     , psakcCallback
     ) where
@@ -53,28 +51,24 @@ type ProjectsServiceAccountsKeysCreateResource =
      "v1" :>
        Capture "name" Text :>
          "keys" :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] CreateServiceAccountKeyRequest :>
-                             Post '[JSON] ServiceAccountKey
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] CreateServiceAccountKeyRequest :>
+                         Post '[JSON] ServiceAccountKey
 
 -- | Creates a ServiceAccountKey and returns it.
 --
 -- /See:/ 'projectsServiceAccountsKeysCreate' smart constructor.
 data ProjectsServiceAccountsKeysCreate = ProjectsServiceAccountsKeysCreate'
-    { _psakcXgafv          :: !(Maybe Text)
+    { _psakcXgafv          :: !(Maybe Xgafv)
     , _psakcUploadProtocol :: !(Maybe Text)
-    , _psakcPp             :: !Bool
     , _psakcAccessToken    :: !(Maybe Text)
     , _psakcUploadType     :: !(Maybe Text)
     , _psakcPayload        :: !CreateServiceAccountKeyRequest
-    , _psakcBearerToken    :: !(Maybe Text)
     , _psakcName           :: !Text
     , _psakcCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -87,15 +81,11 @@ data ProjectsServiceAccountsKeysCreate = ProjectsServiceAccountsKeysCreate'
 --
 -- * 'psakcUploadProtocol'
 --
--- * 'psakcPp'
---
 -- * 'psakcAccessToken'
 --
 -- * 'psakcUploadType'
 --
 -- * 'psakcPayload'
---
--- * 'psakcBearerToken'
 --
 -- * 'psakcName'
 --
@@ -108,17 +98,15 @@ projectsServiceAccountsKeysCreate pPsakcPayload_ pPsakcName_ =
     ProjectsServiceAccountsKeysCreate'
     { _psakcXgafv = Nothing
     , _psakcUploadProtocol = Nothing
-    , _psakcPp = True
     , _psakcAccessToken = Nothing
     , _psakcUploadType = Nothing
     , _psakcPayload = pPsakcPayload_
-    , _psakcBearerToken = Nothing
     , _psakcName = pPsakcName_
     , _psakcCallback = Nothing
     }
 
 -- | V1 error format.
-psakcXgafv :: Lens' ProjectsServiceAccountsKeysCreate (Maybe Text)
+psakcXgafv :: Lens' ProjectsServiceAccountsKeysCreate (Maybe Xgafv)
 psakcXgafv
   = lens _psakcXgafv (\ s a -> s{_psakcXgafv = a})
 
@@ -127,10 +115,6 @@ psakcUploadProtocol :: Lens' ProjectsServiceAccountsKeysCreate (Maybe Text)
 psakcUploadProtocol
   = lens _psakcUploadProtocol
       (\ s a -> s{_psakcUploadProtocol = a})
-
--- | Pretty-print response.
-psakcPp :: Lens' ProjectsServiceAccountsKeysCreate Bool
-psakcPp = lens _psakcPp (\ s a -> s{_psakcPp = a})
 
 -- | OAuth access token.
 psakcAccessToken :: Lens' ProjectsServiceAccountsKeysCreate (Maybe Text)
@@ -149,17 +133,11 @@ psakcPayload :: Lens' ProjectsServiceAccountsKeysCreate CreateServiceAccountKeyR
 psakcPayload
   = lens _psakcPayload (\ s a -> s{_psakcPayload = a})
 
--- | OAuth bearer token.
-psakcBearerToken :: Lens' ProjectsServiceAccountsKeysCreate (Maybe Text)
-psakcBearerToken
-  = lens _psakcBearerToken
-      (\ s a -> s{_psakcBearerToken = a})
-
 -- | The resource name of the service account in the following format:
--- \`projects\/{project}\/serviceAccounts\/{account}\`. Using \`-\` as a
--- wildcard for the project will infer the project from the account. The
--- \`account\` value can be the \`email\` address or the \`unique_id\` of
--- the service account.
+-- \`projects\/{PROJECT_ID}\/serviceAccounts\/{ACCOUNT}\`. Using \`-\` as a
+-- wildcard for the \`PROJECT_ID\` will infer the project from the account.
+-- The \`ACCOUNT\` value can be the \`email\` address or the \`unique_id\`
+-- of the service account.
 psakcName :: Lens' ProjectsServiceAccountsKeysCreate Text
 psakcName
   = lens _psakcName (\ s a -> s{_psakcName = a})
@@ -178,10 +156,8 @@ instance GoogleRequest
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsServiceAccountsKeysCreate'{..}
           = go _psakcName _psakcXgafv _psakcUploadProtocol
-              (Just _psakcPp)
               _psakcAccessToken
               _psakcUploadType
-              _psakcBearerToken
               _psakcCallback
               (Just AltJSON)
               _psakcPayload

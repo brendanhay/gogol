@@ -22,7 +22,7 @@
 --
 -- Pauses a transfer operation.
 --
--- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @storagetransfer.transferOperations.pause@.
+-- /See:/ <https://cloud.google.com/storage/transfer Storage Transfer API Reference> for @storagetransfer.transferOperations.pause@.
 module Network.Google.Resource.StorageTransfer.TransferOperations.Pause
     (
     -- * REST Resource
@@ -35,11 +35,9 @@ module Network.Google.Resource.StorageTransfer.TransferOperations.Pause
     -- * Request Lenses
     , topXgafv
     , topUploadProtocol
-    , topPp
     , topAccessToken
     , topUploadType
     , topPayload
-    , topBearerToken
     , topName
     , topCallback
     ) where
@@ -52,28 +50,24 @@ import           Network.Google.StorageTransfer.Types
 type TransferOperationsPauseResource =
      "v1" :>
        CaptureMode "name" "pause" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] PauseTransferOperationRequest :>
-                           Post '[JSON] Empty
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] PauseTransferOperationRequest :>
+                       Post '[JSON] Empty
 
 -- | Pauses a transfer operation.
 --
 -- /See:/ 'transferOperationsPause' smart constructor.
 data TransferOperationsPause = TransferOperationsPause'
-    { _topXgafv          :: !(Maybe Text)
+    { _topXgafv          :: !(Maybe Xgafv)
     , _topUploadProtocol :: !(Maybe Text)
-    , _topPp             :: !Bool
     , _topAccessToken    :: !(Maybe Text)
     , _topUploadType     :: !(Maybe Text)
     , _topPayload        :: !PauseTransferOperationRequest
-    , _topBearerToken    :: !(Maybe Text)
     , _topName           :: !Text
     , _topCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -86,15 +80,11 @@ data TransferOperationsPause = TransferOperationsPause'
 --
 -- * 'topUploadProtocol'
 --
--- * 'topPp'
---
 -- * 'topAccessToken'
 --
 -- * 'topUploadType'
 --
 -- * 'topPayload'
---
--- * 'topBearerToken'
 --
 -- * 'topName'
 --
@@ -107,17 +97,15 @@ transferOperationsPause pTopPayload_ pTopName_ =
     TransferOperationsPause'
     { _topXgafv = Nothing
     , _topUploadProtocol = Nothing
-    , _topPp = True
     , _topAccessToken = Nothing
     , _topUploadType = Nothing
     , _topPayload = pTopPayload_
-    , _topBearerToken = Nothing
     , _topName = pTopName_
     , _topCallback = Nothing
     }
 
 -- | V1 error format.
-topXgafv :: Lens' TransferOperationsPause (Maybe Text)
+topXgafv :: Lens' TransferOperationsPause (Maybe Xgafv)
 topXgafv = lens _topXgafv (\ s a -> s{_topXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -125,10 +113,6 @@ topUploadProtocol :: Lens' TransferOperationsPause (Maybe Text)
 topUploadProtocol
   = lens _topUploadProtocol
       (\ s a -> s{_topUploadProtocol = a})
-
--- | Pretty-print response.
-topPp :: Lens' TransferOperationsPause Bool
-topPp = lens _topPp (\ s a -> s{_topPp = a})
 
 -- | OAuth access token.
 topAccessToken :: Lens' TransferOperationsPause (Maybe Text)
@@ -147,12 +131,6 @@ topPayload :: Lens' TransferOperationsPause PauseTransferOperationRequest
 topPayload
   = lens _topPayload (\ s a -> s{_topPayload = a})
 
--- | OAuth bearer token.
-topBearerToken :: Lens' TransferOperationsPause (Maybe Text)
-topBearerToken
-  = lens _topBearerToken
-      (\ s a -> s{_topBearerToken = a})
-
 -- | The name of the transfer operation. Required.
 topName :: Lens' TransferOperationsPause Text
 topName = lens _topName (\ s a -> s{_topName = a})
@@ -168,10 +146,8 @@ instance GoogleRequest TransferOperationsPause where
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient TransferOperationsPause'{..}
           = go _topName _topXgafv _topUploadProtocol
-              (Just _topPp)
               _topAccessToken
               _topUploadType
-              _topBearerToken
               _topCallback
               (Just AltJSON)
               _topPayload

@@ -35,7 +35,6 @@ module Network.Google.Resource.Games.Applications.Verify
     , ApplicationsVerify
 
     -- * Request Lenses
-    , avConsistencyToken
     , avApplicationId
     ) where
 
@@ -50,25 +49,21 @@ type ApplicationsVerifyResource =
          "applications" :>
            Capture "applicationId" Text :>
              "verify" :>
-               QueryParam "consistencyToken" (Textual Int64) :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] ApplicationVerifyResponse
+               QueryParam "alt" AltJSON :>
+                 Get '[JSON] ApplicationVerifyResponse
 
 -- | Verifies the auth token provided with this request is for the
 -- application with the specified ID, and returns the ID of the player it
 -- was granted for.
 --
 -- /See:/ 'applicationsVerify' smart constructor.
-data ApplicationsVerify = ApplicationsVerify'
-    { _avConsistencyToken :: !(Maybe (Textual Int64))
-    , _avApplicationId    :: !Text
+newtype ApplicationsVerify = ApplicationsVerify'
+    { _avApplicationId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ApplicationsVerify' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'avConsistencyToken'
 --
 -- * 'avApplicationId'
 applicationsVerify
@@ -76,16 +71,8 @@ applicationsVerify
     -> ApplicationsVerify
 applicationsVerify pAvApplicationId_ =
     ApplicationsVerify'
-    { _avConsistencyToken = Nothing
-    , _avApplicationId = pAvApplicationId_
+    { _avApplicationId = pAvApplicationId_
     }
-
--- | The last-seen mutation timestamp.
-avConsistencyToken :: Lens' ApplicationsVerify (Maybe Int64)
-avConsistencyToken
-  = lens _avConsistencyToken
-      (\ s a -> s{_avConsistencyToken = a})
-      . mapping _Coerce
 
 -- | The application ID from the Google Play developer console.
 avApplicationId :: Lens' ApplicationsVerify Text
@@ -97,12 +84,9 @@ instance GoogleRequest ApplicationsVerify where
         type Rs ApplicationsVerify =
              ApplicationVerifyResponse
         type Scopes ApplicationsVerify =
-             '["https://www.googleapis.com/auth/games",
-               "https://www.googleapis.com/auth/plus.login"]
+             '["https://www.googleapis.com/auth/games"]
         requestClient ApplicationsVerify'{..}
-          = go _avApplicationId _avConsistencyToken
-              (Just AltJSON)
-              gamesService
+          = go _avApplicationId (Just AltJSON) gamesService
           where go
                   = buildClient
                       (Proxy :: Proxy ApplicationsVerifyResource)

@@ -114,32 +114,33 @@ module Network.Google
     , module Network.Google.Types
     ) where
 
-import           Control.Applicative
-import           Control.Exception.Lens
-import           Control.Monad
-import           Control.Monad.Base
-import           Control.Monad.Catch
-import           Control.Monad.Reader
-import qualified Control.Monad.RWS.Lazy         as LRW
-import qualified Control.Monad.RWS.Strict       as RW
-import qualified Control.Monad.State.Lazy       as LS
-import qualified Control.Monad.State.Strict     as S
-import           Control.Monad.Trans.Control
-import           Control.Monad.Trans.Except     (ExceptT)
-import           Control.Monad.Trans.Identity   (IdentityT)
-import           Control.Monad.Trans.List       (ListT)
-import           Control.Monad.Trans.Maybe      (MaybeT)
-import           Control.Monad.Trans.Resource
-import qualified Control.Monad.Writer.Lazy      as LW
-import qualified Control.Monad.Writer.Strict    as W
-import           Network.Google.Auth
-import           Network.Google.Env
-import           Network.Google.Internal.Body
-import           Network.Google.Internal.HTTP
-import           Network.Google.Internal.Logger
-import           Network.Google.Prelude
-import           Network.Google.Types
-import           Network.HTTP.Conduit           (newManager, tlsManagerSettings)
+import Control.Applicative
+import Control.Exception.Lens
+import Control.Monad
+import Control.Monad.Catch
+import Control.Monad.IO.Unlift      (MonadUnliftIO (withRunInIO))
+import Control.Monad.Reader
+import Control.Monad.Trans.Except   (ExceptT)
+import Control.Monad.Trans.Identity (IdentityT)
+import Control.Monad.Trans.List     (ListT)
+import Control.Monad.Trans.Maybe    (MaybeT)
+import Control.Monad.Trans.Resource
+
+import Network.Google.Auth
+import Network.Google.Env
+import Network.Google.Internal.Body
+import Network.Google.Internal.HTTP
+import Network.Google.Internal.Logger
+import Network.Google.Prelude
+import Network.Google.Types
+import Network.HTTP.Conduit           (newManager, tlsManagerSettings)
+
+import qualified Control.Monad.Writer.Lazy   as LW
+import qualified Control.Monad.Writer.Strict as W
+import qualified Control.Monad.RWS.Lazy      as LRW
+import qualified Control.Monad.RWS.Strict    as RW
+import qualified Control.Monad.State.Lazy    as LS
+import qualified Control.Monad.State.Strict  as S
 
 -- | The 'Google' monad containing configuration environment and tracks
 -- resource allocation via 'ResourceT'.
@@ -155,7 +156,6 @@ newtype Google s a = Google { unGoogle :: ReaderT (Env s) (ResourceT IO) a }
         , MonadThrow
         , MonadCatch
         , MonadMask
-        , MonadBase IO
         , MonadReader (Env s)
         , MonadResource
         )
@@ -183,11 +183,11 @@ class ( Functor     m
 instance AllowScopes s => MonadGoogle s (Google s) where
     liftGoogle = id
 
-instance MonadBaseControl IO (Google s) where
-    type StM (Google s) a = StM (ReaderT (Env s) (ResourceT IO)) a
-
-    liftBaseWith f = Google $ liftBaseWith $ \g -> f (g . unGoogle)
-    restoreM       = Google . restoreM
+instance MonadUnliftIO (Google s) where
+    withRunInIO inner =
+        Google $ withRunInIO $ \run ->
+            inner (run . unGoogle)
+    {-# INLINE withRunInIO #-}
 
 instance MonadGoogle s m => MonadGoogle s (IdentityT m) where
     liftGoogle = lift . liftGoogle
@@ -312,7 +312,7 @@ The following example demonstrates uploading a file to Google
 >         bkt = "my-storage-bucket"
 >
 >     runResourceT . runGoogle env $                                               -- (5)
->         upload (objectsInsert bkt object' & oiName ?~ key) bkt
+>         upload (objectsInsert bkt object' & oiName ?~ key) body
 
 Breaking down the above example, we have the following points of interest:
 
@@ -440,6 +440,6 @@ consuming library to output useful information and diagnostics.
 The 'newLogger' function can be used to construct a simple logger which writes
 output to a 'Handle', but in most production code you should probably consider
 using a more robust logging library such as
-<http://hackage.haskell.org/package/tiny-log tiny-log> or
+<http://hackage.haskell.org/package/tinylog tinylog> or
 <http://hackage.haskell.org/package/fast-logger fast-logger>.
 -}

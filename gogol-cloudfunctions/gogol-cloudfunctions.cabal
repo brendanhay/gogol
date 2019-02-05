@@ -1,0 +1,60 @@
+name:                  gogol-cloudfunctions
+version:               0.4.0
+synopsis:              Google Cloud Functions SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               OtherLicense
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
+copyright:             Copyright (c) 2015-2016 Brendan Hay
+category:              Network, Google, Cloud
+build-type:            Simple
+cabal-version:         >= 1.10
+extra-source-files:    README.md src/.gitkeep
+
+description:
+    Manages lightweight user-provided functions executed in response to
+    events.
+    .
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
+    .
+    This library is compatible with version @v1@
+    of the API.
+
+source-repository head
+    type:     git
+    location: git://github.com/brendanhay/gogol.git
+
+library
+    default-language:  Haskell2010
+    hs-source-dirs:    src gen
+
+    ghc-options:       -Wall
+
+    exposed-modules:
+          Network.Google.CloudFunctions
+        , Network.Google.CloudFunctions.Types
+        , Network.Google.Resource.CloudFunctions.Operations.Get
+        , Network.Google.Resource.CloudFunctions.Operations.List
+        , Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.Call
+        , Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.Create
+        , Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.Delete
+        , Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.GenerateDownloadURL
+        , Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.GenerateUploadURL
+        , Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.Get
+        , Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.GetIAMPolicy
+        , Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.List
+        , Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.Patch
+        , Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.SetIAMPolicy
+        , Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.TestIAMPermissions
+        , Network.Google.Resource.CloudFunctions.Projects.Locations.List
+
+    other-modules:
+          Network.Google.CloudFunctions.Types.Product
+        , Network.Google.CloudFunctions.Types.Sum
+
+    build-depends:
+          gogol-core == 0.4.0.*
+        , base       >= 4.7 && < 5

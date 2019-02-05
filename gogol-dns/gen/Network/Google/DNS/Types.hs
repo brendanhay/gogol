@@ -56,11 +56,6 @@ module Network.Google.DNS.Types
     -- * ManagedZoneDNSSecConfigState
     , ManagedZoneDNSSecConfigState (..)
 
-    -- * ManagedZonesDeleteResponse
-    , ManagedZonesDeleteResponse
-    , managedZonesDeleteResponse
-    , mzdrHeader
-
     -- * Project
     , Project
     , project
@@ -186,10 +181,16 @@ module Network.Google.DNS.Types
     , mzNameServerSet
     , mzName
     , mzId
+    , mzLabels
     , mzDNSName
     , mzDescription
     , mzDNSsecConfig
     , mzNameServers
+
+    -- * ManagedZoneLabels
+    , ManagedZoneLabels
+    , managedZoneLabels
+    , mzlAddtional
 
     -- * Quota
     , Quota

@@ -1,0 +1,62 @@
+name:                  gogol-tpu
+version:               0.4.0
+synopsis:              Google Cloud TPU SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               OtherLicense
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
+copyright:             Copyright (c) 2015-2016 Brendan Hay
+category:              Network, Google, Cloud
+build-type:            Simple
+cabal-version:         >= 1.10
+extra-source-files:    README.md src/.gitkeep
+
+description:
+    TPU API provides customers with access to Google TPU technology.
+    .
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
+    .
+    This library is compatible with version @v1@
+    of the API.
+
+source-repository head
+    type:     git
+    location: git://github.com/brendanhay/gogol.git
+
+library
+    default-language:  Haskell2010
+    hs-source-dirs:    src gen
+
+    ghc-options:       -Wall
+
+    exposed-modules:
+          Network.Google.Resource.TPU.Projects.Locations.AcceleratorTypes.Get
+        , Network.Google.Resource.TPU.Projects.Locations.AcceleratorTypes.List
+        , Network.Google.Resource.TPU.Projects.Locations.Get
+        , Network.Google.Resource.TPU.Projects.Locations.List
+        , Network.Google.Resource.TPU.Projects.Locations.Nodes.Create
+        , Network.Google.Resource.TPU.Projects.Locations.Nodes.Delete
+        , Network.Google.Resource.TPU.Projects.Locations.Nodes.Get
+        , Network.Google.Resource.TPU.Projects.Locations.Nodes.List
+        , Network.Google.Resource.TPU.Projects.Locations.Nodes.Reimage
+        , Network.Google.Resource.TPU.Projects.Locations.Nodes.Start
+        , Network.Google.Resource.TPU.Projects.Locations.Nodes.Stop
+        , Network.Google.Resource.TPU.Projects.Locations.Operations.Cancel
+        , Network.Google.Resource.TPU.Projects.Locations.Operations.Delete
+        , Network.Google.Resource.TPU.Projects.Locations.Operations.Get
+        , Network.Google.Resource.TPU.Projects.Locations.Operations.List
+        , Network.Google.Resource.TPU.Projects.Locations.TensorflowVersions.Get
+        , Network.Google.Resource.TPU.Projects.Locations.TensorflowVersions.List
+        , Network.Google.TPU
+        , Network.Google.TPU.Types
+
+    other-modules:
+          Network.Google.TPU.Types.Product
+        , Network.Google.TPU.Types.Sum
+
+    build-depends:
+          gogol-core == 0.4.0.*
+        , base       >= 4.7 && < 5

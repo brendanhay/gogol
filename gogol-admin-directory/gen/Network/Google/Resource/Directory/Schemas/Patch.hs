@@ -89,12 +89,12 @@ spPayload :: Lens' SchemasPatch Schema
 spPayload
   = lens _spPayload (\ s a -> s{_spPayload = a})
 
--- | Immutable id of the Google Apps account
+-- | Immutable ID of the G Suite account
 spCustomerId :: Lens' SchemasPatch Text
 spCustomerId
   = lens _spCustomerId (\ s a -> s{_spCustomerId = a})
 
--- | Name or immutable Id of the schema.
+-- | Name or immutable ID of the schema.
 spSchemaKey :: Lens' SchemasPatch Text
 spSchemaKey
   = lens _spSchemaKey (\ s a -> s{_spSchemaKey = a})

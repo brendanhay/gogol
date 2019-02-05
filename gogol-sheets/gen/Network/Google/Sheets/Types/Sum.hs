@@ -16,7 +16,49 @@
 --
 module Network.Google.Sheets.Types.Sum where
 
-import           Network.Google.Prelude
+import           Network.Google.Prelude hiding (Bytes)
+
+-- | The stacked type for charts that support vertical stacking. Applies to
+-- Area, Bar, Column, Combo, and Stepped Area charts.
+data BasicChartSpecStackedType
+    = BasicChartStackedTypeUnspecified
+      -- ^ @BASIC_CHART_STACKED_TYPE_UNSPECIFIED@
+      -- Default value, do not use.
+    | NotStacked
+      -- ^ @NOT_STACKED@
+      -- Series are not stacked.
+    | Stacked
+      -- ^ @STACKED@
+      -- Series values are stacked, each value is rendered vertically beginning
+      -- from the top of the value below it.
+    | PercentStacked
+      -- ^ @PERCENT_STACKED@
+      -- Vertical stacks are stretched to reach the top of the chart, with values
+      -- laid out as percentages of each other.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable BasicChartSpecStackedType
+
+instance FromHttpApiData BasicChartSpecStackedType where
+    parseQueryParam = \case
+        "BASIC_CHART_STACKED_TYPE_UNSPECIFIED" -> Right BasicChartStackedTypeUnspecified
+        "NOT_STACKED" -> Right NotStacked
+        "STACKED" -> Right Stacked
+        "PERCENT_STACKED" -> Right PercentStacked
+        x -> Left ("Unable to parse BasicChartSpecStackedType from: " <> x)
+
+instance ToHttpApiData BasicChartSpecStackedType where
+    toQueryParam = \case
+        BasicChartStackedTypeUnspecified -> "BASIC_CHART_STACKED_TYPE_UNSPECIFIED"
+        NotStacked -> "NOT_STACKED"
+        Stacked -> "STACKED"
+        PercentStacked -> "PERCENT_STACKED"
+
+instance FromJSON BasicChartSpecStackedType where
+    parseJSON = parseJSONText "BasicChartSpecStackedType"
+
+instance ToJSON BasicChartSpecStackedType where
+    toJSON = toJSONText
 
 -- | What kind of data to paste.
 data CopyPasteRequestPasteType
@@ -72,6 +114,96 @@ instance FromJSON CopyPasteRequestPasteType where
 instance ToJSON CopyPasteRequestPasteType where
     toJSON = toJSONText
 
+-- | Determines how this lookup matches the location. If this field is
+-- specified as EXACT, only developer metadata associated on the exact
+-- location specified is matched. If this field is specified to
+-- INTERSECTING, developer metadata associated on intersecting locations is
+-- also matched. If left unspecified, this field assumes a default value of
+-- INTERSECTING. If this field is specified, a metadataLocation must also
+-- be specified.
+data DeveloperMetadataLookupLocationMatchingStrategy
+    = DeveloperMetadataLocationMatchingStrategyUnspecified
+      -- ^ @DEVELOPER_METADATA_LOCATION_MATCHING_STRATEGY_UNSPECIFIED@
+      -- Default value. This value must not be used.
+    | ExactLocation
+      -- ^ @EXACT_LOCATION@
+      -- Indicates that a specified location should be matched exactly. For
+      -- example, if row three were specified as a location this matching
+      -- strategy would only match developer metadata also associated on row
+      -- three. Metadata associated on other locations would not be considered.
+    | IntersectingLocation
+      -- ^ @INTERSECTING_LOCATION@
+      -- Indicates that a specified location should match that exact location as
+      -- well as any intersecting locations. For example, if row three were
+      -- specified as a location this matching strategy would match developer
+      -- metadata associated on row three as well as metadata associated on
+      -- locations that intersect row three. If, for instance, there was
+      -- developer metadata associated on column B, this matching strategy would
+      -- also match that location because column B intersects row three.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable DeveloperMetadataLookupLocationMatchingStrategy
+
+instance FromHttpApiData DeveloperMetadataLookupLocationMatchingStrategy where
+    parseQueryParam = \case
+        "DEVELOPER_METADATA_LOCATION_MATCHING_STRATEGY_UNSPECIFIED" -> Right DeveloperMetadataLocationMatchingStrategyUnspecified
+        "EXACT_LOCATION" -> Right ExactLocation
+        "INTERSECTING_LOCATION" -> Right IntersectingLocation
+        x -> Left ("Unable to parse DeveloperMetadataLookupLocationMatchingStrategy from: " <> x)
+
+instance ToHttpApiData DeveloperMetadataLookupLocationMatchingStrategy where
+    toQueryParam = \case
+        DeveloperMetadataLocationMatchingStrategyUnspecified -> "DEVELOPER_METADATA_LOCATION_MATCHING_STRATEGY_UNSPECIFIED"
+        ExactLocation -> "EXACT_LOCATION"
+        IntersectingLocation -> "INTERSECTING_LOCATION"
+
+instance FromJSON DeveloperMetadataLookupLocationMatchingStrategy where
+    parseJSON = parseJSONText "DeveloperMetadataLookupLocationMatchingStrategy"
+
+instance ToJSON DeveloperMetadataLookupLocationMatchingStrategy where
+    toJSON = toJSONText
+
+-- | Determines how dates, times, and durations in the response should be
+-- rendered. This is ignored if response_value_render_option is
+-- FORMATTED_VALUE. The default dateTime render option is
+-- DateTimeRenderOption.SERIAL_NUMBER.
+data BatchUpdateValuesByDataFilterRequestResponseDateTimeRenderOption
+    = SerialNumber
+      -- ^ @SERIAL_NUMBER@
+      -- Instructs date, time, datetime, and duration fields to be output as
+      -- doubles in \"serial number\" format, as popularized by Lotus 1-2-3. The
+      -- whole number portion of the value (left of the decimal) counts the days
+      -- since December 30th 1899. The fractional portion (right of the decimal)
+      -- counts the time as a fraction of the day. For example, January 1st 1900
+      -- at noon would be 2.5, 2 because it\'s 2 days after December 30st 1899,
+      -- and .5 because noon is half a day. February 1st 1900 at 3pm would be
+      -- 33.625. This correctly treats the year 1900 as not a leap year.
+    | FormattedString
+      -- ^ @FORMATTED_STRING@
+      -- Instructs date, time, datetime, and duration fields to be output as
+      -- strings in their given number format (which is dependent on the
+      -- spreadsheet locale).
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable BatchUpdateValuesByDataFilterRequestResponseDateTimeRenderOption
+
+instance FromHttpApiData BatchUpdateValuesByDataFilterRequestResponseDateTimeRenderOption where
+    parseQueryParam = \case
+        "SERIAL_NUMBER" -> Right SerialNumber
+        "FORMATTED_STRING" -> Right FormattedString
+        x -> Left ("Unable to parse BatchUpdateValuesByDataFilterRequestResponseDateTimeRenderOption from: " <> x)
+
+instance ToHttpApiData BatchUpdateValuesByDataFilterRequestResponseDateTimeRenderOption where
+    toQueryParam = \case
+        SerialNumber -> "SERIAL_NUMBER"
+        FormattedString -> "FORMATTED_STRING"
+
+instance FromJSON BatchUpdateValuesByDataFilterRequestResponseDateTimeRenderOption where
+    parseJSON = parseJSONText "BatchUpdateValuesByDataFilterRequestResponseDateTimeRenderOption"
+
+instance ToJSON BatchUpdateValuesByDataFilterRequestResponseDateTimeRenderOption where
+    toJSON = toJSONText
+
 -- | The position of this axis.
 data BasicChartAxisPosition
     = BasicChartAxisPositionUnspecified
@@ -112,6 +244,43 @@ instance FromJSON BasicChartAxisPosition where
     parseJSON = parseJSONText "BasicChartAxisPosition"
 
 instance ToJSON BasicChartAxisPosition where
+    toJSON = toJSONText
+
+-- | The dimension from which deleted cells will be replaced with. If ROWS,
+-- existing cells will be shifted upward to replace the deleted cells. If
+-- COLUMNS, existing cells will be shifted left to replace the deleted
+-- cells.
+data DeleteRangeRequestShiftDimension
+    = DimensionUnspecified
+      -- ^ @DIMENSION_UNSPECIFIED@
+      -- The default value, do not use.
+    | Rows
+      -- ^ @ROWS@
+      -- Operates on the rows of a sheet.
+    | Columns
+      -- ^ @COLUMNS@
+      -- Operates on the columns of a sheet.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable DeleteRangeRequestShiftDimension
+
+instance FromHttpApiData DeleteRangeRequestShiftDimension where
+    parseQueryParam = \case
+        "DIMENSION_UNSPECIFIED" -> Right DimensionUnspecified
+        "ROWS" -> Right Rows
+        "COLUMNS" -> Right Columns
+        x -> Left ("Unable to parse DeleteRangeRequestShiftDimension from: " <> x)
+
+instance ToHttpApiData DeleteRangeRequestShiftDimension where
+    toQueryParam = \case
+        DimensionUnspecified -> "DIMENSION_UNSPECIFIED"
+        Rows -> "ROWS"
+        Columns -> "COLUMNS"
+
+instance FromJSON DeleteRangeRequestShiftDimension where
+    parseJSON = parseJSONText "DeleteRangeRequestShiftDimension"
+
+instance ToJSON DeleteRangeRequestShiftDimension where
     toJSON = toJSONText
 
 -- | The minor axis that will specify the range of values for this series.
@@ -161,15 +330,144 @@ instance FromJSON BasicChartSeriesTargetAxis where
 instance ToJSON BasicChartSeriesTargetAxis where
     toJSON = toJSONText
 
--- | Whether rows or columns should be appended.
-data AppendDimensionRequestDimension
-    = DimensionUnspecified
+-- | The major dimension of the values.
+data DataFilterValueRangeMajorDimension
+    = DFVRMDDimensionUnspecified
       -- ^ @DIMENSION_UNSPECIFIED@
       -- The default value, do not use.
-    | Rows
+    | DFVRMDRows
       -- ^ @ROWS@
       -- Operates on the rows of a sheet.
-    | Columns
+    | DFVRMDColumns
+      -- ^ @COLUMNS@
+      -- Operates on the columns of a sheet.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable DataFilterValueRangeMajorDimension
+
+instance FromHttpApiData DataFilterValueRangeMajorDimension where
+    parseQueryParam = \case
+        "DIMENSION_UNSPECIFIED" -> Right DFVRMDDimensionUnspecified
+        "ROWS" -> Right DFVRMDRows
+        "COLUMNS" -> Right DFVRMDColumns
+        x -> Left ("Unable to parse DataFilterValueRangeMajorDimension from: " <> x)
+
+instance ToHttpApiData DataFilterValueRangeMajorDimension where
+    toQueryParam = \case
+        DFVRMDDimensionUnspecified -> "DIMENSION_UNSPECIFIED"
+        DFVRMDRows -> "ROWS"
+        DFVRMDColumns -> "COLUMNS"
+
+instance FromJSON DataFilterValueRangeMajorDimension where
+    parseJSON = parseJSONText "DataFilterValueRangeMajorDimension"
+
+instance ToJSON DataFilterValueRangeMajorDimension where
+    toJSON = toJSONText
+
+-- | Where the legend of the chart should be drawn.
+data BubbleChartSpecLegendPosition
+    = BubbleChartLegendPositionUnspecified
+      -- ^ @BUBBLE_CHART_LEGEND_POSITION_UNSPECIFIED@
+      -- Default value, do not use.
+    | BottomLegend
+      -- ^ @BOTTOM_LEGEND@
+      -- The legend is rendered on the bottom of the chart.
+    | LeftLegend
+      -- ^ @LEFT_LEGEND@
+      -- The legend is rendered on the left of the chart.
+    | RightLegend
+      -- ^ @RIGHT_LEGEND@
+      -- The legend is rendered on the right of the chart.
+    | TopLegend
+      -- ^ @TOP_LEGEND@
+      -- The legend is rendered on the top of the chart.
+    | NoLegend
+      -- ^ @NO_LEGEND@
+      -- No legend is rendered.
+    | InsideLegend
+      -- ^ @INSIDE_LEGEND@
+      -- The legend is rendered inside the chart area.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable BubbleChartSpecLegendPosition
+
+instance FromHttpApiData BubbleChartSpecLegendPosition where
+    parseQueryParam = \case
+        "BUBBLE_CHART_LEGEND_POSITION_UNSPECIFIED" -> Right BubbleChartLegendPositionUnspecified
+        "BOTTOM_LEGEND" -> Right BottomLegend
+        "LEFT_LEGEND" -> Right LeftLegend
+        "RIGHT_LEGEND" -> Right RightLegend
+        "TOP_LEGEND" -> Right TopLegend
+        "NO_LEGEND" -> Right NoLegend
+        "INSIDE_LEGEND" -> Right InsideLegend
+        x -> Left ("Unable to parse BubbleChartSpecLegendPosition from: " <> x)
+
+instance ToHttpApiData BubbleChartSpecLegendPosition where
+    toQueryParam = \case
+        BubbleChartLegendPositionUnspecified -> "BUBBLE_CHART_LEGEND_POSITION_UNSPECIFIED"
+        BottomLegend -> "BOTTOM_LEGEND"
+        LeftLegend -> "LEFT_LEGEND"
+        RightLegend -> "RIGHT_LEGEND"
+        TopLegend -> "TOP_LEGEND"
+        NoLegend -> "NO_LEGEND"
+        InsideLegend -> "INSIDE_LEGEND"
+
+instance FromJSON BubbleChartSpecLegendPosition where
+    parseJSON = parseJSONText "BubbleChartSpecLegendPosition"
+
+instance ToJSON BubbleChartSpecLegendPosition where
+    toJSON = toJSONText
+
+-- | Determines how dates, times, and durations in the response should be
+-- rendered. This is ignored if response_value_render_option is
+-- FORMATTED_VALUE. The default dateTime render option is
+-- DateTimeRenderOption.SERIAL_NUMBER.
+data BatchUpdateValuesRequestResponseDateTimeRenderOption
+    = BUVRRDTROSerialNumber
+      -- ^ @SERIAL_NUMBER@
+      -- Instructs date, time, datetime, and duration fields to be output as
+      -- doubles in \"serial number\" format, as popularized by Lotus 1-2-3. The
+      -- whole number portion of the value (left of the decimal) counts the days
+      -- since December 30th 1899. The fractional portion (right of the decimal)
+      -- counts the time as a fraction of the day. For example, January 1st 1900
+      -- at noon would be 2.5, 2 because it\'s 2 days after December 30st 1899,
+      -- and .5 because noon is half a day. February 1st 1900 at 3pm would be
+      -- 33.625. This correctly treats the year 1900 as not a leap year.
+    | BUVRRDTROFormattedString
+      -- ^ @FORMATTED_STRING@
+      -- Instructs date, time, datetime, and duration fields to be output as
+      -- strings in their given number format (which is dependent on the
+      -- spreadsheet locale).
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable BatchUpdateValuesRequestResponseDateTimeRenderOption
+
+instance FromHttpApiData BatchUpdateValuesRequestResponseDateTimeRenderOption where
+    parseQueryParam = \case
+        "SERIAL_NUMBER" -> Right BUVRRDTROSerialNumber
+        "FORMATTED_STRING" -> Right BUVRRDTROFormattedString
+        x -> Left ("Unable to parse BatchUpdateValuesRequestResponseDateTimeRenderOption from: " <> x)
+
+instance ToHttpApiData BatchUpdateValuesRequestResponseDateTimeRenderOption where
+    toQueryParam = \case
+        BUVRRDTROSerialNumber -> "SERIAL_NUMBER"
+        BUVRRDTROFormattedString -> "FORMATTED_STRING"
+
+instance FromJSON BatchUpdateValuesRequestResponseDateTimeRenderOption where
+    parseJSON = parseJSONText "BatchUpdateValuesRequestResponseDateTimeRenderOption"
+
+instance ToJSON BatchUpdateValuesRequestResponseDateTimeRenderOption where
+    toJSON = toJSONText
+
+-- | Whether rows or columns should be appended.
+data AppendDimensionRequestDimension
+    = ADRDDimensionUnspecified
+      -- ^ @DIMENSION_UNSPECIFIED@
+      -- The default value, do not use.
+    | ADRDRows
+      -- ^ @ROWS@
+      -- Operates on the rows of a sheet.
+    | ADRDColumns
       -- ^ @COLUMNS@
       -- Operates on the columns of a sheet.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -178,16 +476,16 @@ instance Hashable AppendDimensionRequestDimension
 
 instance FromHttpApiData AppendDimensionRequestDimension where
     parseQueryParam = \case
-        "DIMENSION_UNSPECIFIED" -> Right DimensionUnspecified
-        "ROWS" -> Right Rows
-        "COLUMNS" -> Right Columns
+        "DIMENSION_UNSPECIFIED" -> Right ADRDDimensionUnspecified
+        "ROWS" -> Right ADRDRows
+        "COLUMNS" -> Right ADRDColumns
         x -> Left ("Unable to parse AppendDimensionRequestDimension from: " <> x)
 
 instance ToHttpApiData AppendDimensionRequestDimension where
     toQueryParam = \case
-        DimensionUnspecified -> "DIMENSION_UNSPECIFIED"
-        Rows -> "ROWS"
-        Columns -> "COLUMNS"
+        ADRDDimensionUnspecified -> "DIMENSION_UNSPECIFIED"
+        ADRDRows -> "ROWS"
+        ADRDColumns -> "COLUMNS"
 
 instance FromJSON AppendDimensionRequestDimension where
     parseJSON = parseJSONText "AppendDimensionRequestDimension"
@@ -227,6 +525,49 @@ instance FromJSON DimensionRangeDimension where
     parseJSON = parseJSONText "DimensionRangeDimension"
 
 instance ToJSON DimensionRangeDimension where
+    toJSON = toJSONText
+
+-- | How values should be represented in the output. The default render
+-- option is ValueRenderOption.FORMATTED_VALUE.
+data BatchGetValuesByDataFilterRequestValueRenderOption
+    = FormattedValue
+      -- ^ @FORMATTED_VALUE@
+      -- Values will be calculated & formatted in the reply according to the
+      -- cell\'s formatting. Formatting is based on the spreadsheet\'s locale,
+      -- not the requesting user\'s locale. For example, if \`A1\` is \`1.23\`
+      -- and \`A2\` is \`=A1\` and formatted as currency, then \`A2\` would
+      -- return \`\"$1.23\"\`.
+    | UnformattedValue
+      -- ^ @UNFORMATTED_VALUE@
+      -- Values will be calculated, but not formatted in the reply. For example,
+      -- if \`A1\` is \`1.23\` and \`A2\` is \`=A1\` and formatted as currency,
+      -- then \`A2\` would return the number \`1.23\`.
+    | Formula
+      -- ^ @FORMULA@
+      -- Values will not be calculated. The reply will include the formulas. For
+      -- example, if \`A1\` is \`1.23\` and \`A2\` is \`=A1\` and formatted as
+      -- currency, then A2 would return \`\"=A1\"\`.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable BatchGetValuesByDataFilterRequestValueRenderOption
+
+instance FromHttpApiData BatchGetValuesByDataFilterRequestValueRenderOption where
+    parseQueryParam = \case
+        "FORMATTED_VALUE" -> Right FormattedValue
+        "UNFORMATTED_VALUE" -> Right UnformattedValue
+        "FORMULA" -> Right Formula
+        x -> Left ("Unable to parse BatchGetValuesByDataFilterRequestValueRenderOption from: " <> x)
+
+instance ToHttpApiData BatchGetValuesByDataFilterRequestValueRenderOption where
+    toQueryParam = \case
+        FormattedValue -> "FORMATTED_VALUE"
+        UnformattedValue -> "UNFORMATTED_VALUE"
+        Formula -> "FORMULA"
+
+instance FromJSON BatchGetValuesByDataFilterRequestValueRenderOption where
+    parseJSON = parseJSONText "BatchGetValuesByDataFilterRequestValueRenderOption"
+
+instance ToJSON BatchGetValuesByDataFilterRequestValueRenderOption where
     toJSON = toJSONText
 
 -- | The dimension that data should be filled into.
@@ -358,27 +699,146 @@ instance FromJSON BatchUpdateValuesRequestValueInputOption where
 instance ToJSON BatchUpdateValuesRequestValueInputOption where
     toJSON = toJSONText
 
+-- | Horizontal alignment setting for the piece of text.
+data TextPositionHorizontalAlignment
+    = HorizontalAlignUnspecified
+      -- ^ @HORIZONTAL_ALIGN_UNSPECIFIED@
+      -- The horizontal alignment is not specified. Do not use this.
+    | Left'
+      -- ^ @LEFT@
+      -- The text is explicitly aligned to the left of the cell.
+    | Center
+      -- ^ @CENTER@
+      -- The text is explicitly aligned to the center of the cell.
+    | Right'
+      -- ^ @RIGHT@
+      -- The text is explicitly aligned to the right of the cell.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable TextPositionHorizontalAlignment
+
+instance FromHttpApiData TextPositionHorizontalAlignment where
+    parseQueryParam = \case
+        "HORIZONTAL_ALIGN_UNSPECIFIED" -> Right HorizontalAlignUnspecified
+        "LEFT" -> Right Left'
+        "CENTER" -> Right Center
+        "RIGHT" -> Right Right'
+        x -> Left ("Unable to parse TextPositionHorizontalAlignment from: " <> x)
+
+instance ToHttpApiData TextPositionHorizontalAlignment where
+    toQueryParam = \case
+        HorizontalAlignUnspecified -> "HORIZONTAL_ALIGN_UNSPECIFIED"
+        Left' -> "LEFT"
+        Center -> "CENTER"
+        Right' -> "RIGHT"
+
+instance FromJSON TextPositionHorizontalAlignment where
+    parseJSON = parseJSONText "TextPositionHorizontalAlignment"
+
+instance ToJSON TextPositionHorizontalAlignment where
+    toJSON = toJSONText
+
+-- | The metadata visibility. Developer metadata must always have a
+-- visibility specified.
+data DeveloperMetadataVisibility
+    = DeveloperMetadataVisibilityUnspecified
+      -- ^ @DEVELOPER_METADATA_VISIBILITY_UNSPECIFIED@
+      -- Default value.
+    | Document
+      -- ^ @DOCUMENT@
+      -- Document-visible metadata is accessible from any developer project with
+      -- access to the document.
+    | Project
+      -- ^ @PROJECT@
+      -- Project-visible metadata is only visible to and accessible by the
+      -- developer project that created the metadata.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable DeveloperMetadataVisibility
+
+instance FromHttpApiData DeveloperMetadataVisibility where
+    parseQueryParam = \case
+        "DEVELOPER_METADATA_VISIBILITY_UNSPECIFIED" -> Right DeveloperMetadataVisibilityUnspecified
+        "DOCUMENT" -> Right Document
+        "PROJECT" -> Right Project
+        x -> Left ("Unable to parse DeveloperMetadataVisibility from: " <> x)
+
+instance ToHttpApiData DeveloperMetadataVisibility where
+    toQueryParam = \case
+        DeveloperMetadataVisibilityUnspecified -> "DEVELOPER_METADATA_VISIBILITY_UNSPECIFIED"
+        Document -> "DOCUMENT"
+        Project -> "PROJECT"
+
+instance FromJSON DeveloperMetadataVisibility where
+    parseJSON = parseJSONText "DeveloperMetadataVisibility"
+
+instance ToJSON DeveloperMetadataVisibility where
+    toJSON = toJSONText
+
+-- | Determines how values in the response should be rendered. The default
+-- render option is ValueRenderOption.FORMATTED_VALUE.
+data BatchUpdateValuesRequestResponseValueRenderOption
+    = BUVRRVROFormattedValue
+      -- ^ @FORMATTED_VALUE@
+      -- Values will be calculated & formatted in the reply according to the
+      -- cell\'s formatting. Formatting is based on the spreadsheet\'s locale,
+      -- not the requesting user\'s locale. For example, if \`A1\` is \`1.23\`
+      -- and \`A2\` is \`=A1\` and formatted as currency, then \`A2\` would
+      -- return \`\"$1.23\"\`.
+    | BUVRRVROUnformattedValue
+      -- ^ @UNFORMATTED_VALUE@
+      -- Values will be calculated, but not formatted in the reply. For example,
+      -- if \`A1\` is \`1.23\` and \`A2\` is \`=A1\` and formatted as currency,
+      -- then \`A2\` would return the number \`1.23\`.
+    | BUVRRVROFormula
+      -- ^ @FORMULA@
+      -- Values will not be calculated. The reply will include the formulas. For
+      -- example, if \`A1\` is \`1.23\` and \`A2\` is \`=A1\` and formatted as
+      -- currency, then A2 would return \`\"=A1\"\`.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable BatchUpdateValuesRequestResponseValueRenderOption
+
+instance FromHttpApiData BatchUpdateValuesRequestResponseValueRenderOption where
+    parseQueryParam = \case
+        "FORMATTED_VALUE" -> Right BUVRRVROFormattedValue
+        "UNFORMATTED_VALUE" -> Right BUVRRVROUnformattedValue
+        "FORMULA" -> Right BUVRRVROFormula
+        x -> Left ("Unable to parse BatchUpdateValuesRequestResponseValueRenderOption from: " <> x)
+
+instance ToHttpApiData BatchUpdateValuesRequestResponseValueRenderOption where
+    toQueryParam = \case
+        BUVRRVROFormattedValue -> "FORMATTED_VALUE"
+        BUVRRVROUnformattedValue -> "UNFORMATTED_VALUE"
+        BUVRRVROFormula -> "FORMULA"
+
+instance FromJSON BatchUpdateValuesRequestResponseValueRenderOption where
+    parseJSON = parseJSONText "BatchUpdateValuesRequestResponseValueRenderOption"
+
+instance ToJSON BatchUpdateValuesRequestResponseValueRenderOption where
+    toJSON = toJSONText
+
 -- | Where the legend of the pie chart should be drawn.
 data PieChartSpecLegendPosition
-    = PieChartLegendPositionUnspecified
+    = PCSLPPieChartLegendPositionUnspecified
       -- ^ @PIE_CHART_LEGEND_POSITION_UNSPECIFIED@
       -- Default value, do not use.
-    | BottomLegend
+    | PCSLPBottomLegend
       -- ^ @BOTTOM_LEGEND@
       -- The legend is rendered on the bottom of the chart.
-    | LeftLegend
+    | PCSLPLeftLegend
       -- ^ @LEFT_LEGEND@
       -- The legend is rendered on the left of the chart.
-    | RightLegend
+    | PCSLPRightLegend
       -- ^ @RIGHT_LEGEND@
       -- The legend is rendered on the right of the chart.
-    | TopLegend
+    | PCSLPTopLegend
       -- ^ @TOP_LEGEND@
       -- The legend is rendered on the top of the chart.
-    | NoLegend
+    | PCSLPNoLegend
       -- ^ @NO_LEGEND@
       -- No legend is rendered.
-    | LabeledLegend
+    | PCSLPLabeledLegend
       -- ^ @LABELED_LEGEND@
       -- Each pie slice has a label attached to it.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -387,24 +847,24 @@ instance Hashable PieChartSpecLegendPosition
 
 instance FromHttpApiData PieChartSpecLegendPosition where
     parseQueryParam = \case
-        "PIE_CHART_LEGEND_POSITION_UNSPECIFIED" -> Right PieChartLegendPositionUnspecified
-        "BOTTOM_LEGEND" -> Right BottomLegend
-        "LEFT_LEGEND" -> Right LeftLegend
-        "RIGHT_LEGEND" -> Right RightLegend
-        "TOP_LEGEND" -> Right TopLegend
-        "NO_LEGEND" -> Right NoLegend
-        "LABELED_LEGEND" -> Right LabeledLegend
+        "PIE_CHART_LEGEND_POSITION_UNSPECIFIED" -> Right PCSLPPieChartLegendPositionUnspecified
+        "BOTTOM_LEGEND" -> Right PCSLPBottomLegend
+        "LEFT_LEGEND" -> Right PCSLPLeftLegend
+        "RIGHT_LEGEND" -> Right PCSLPRightLegend
+        "TOP_LEGEND" -> Right PCSLPTopLegend
+        "NO_LEGEND" -> Right PCSLPNoLegend
+        "LABELED_LEGEND" -> Right PCSLPLabeledLegend
         x -> Left ("Unable to parse PieChartSpecLegendPosition from: " <> x)
 
 instance ToHttpApiData PieChartSpecLegendPosition where
     toQueryParam = \case
-        PieChartLegendPositionUnspecified -> "PIE_CHART_LEGEND_POSITION_UNSPECIFIED"
-        BottomLegend -> "BOTTOM_LEGEND"
-        LeftLegend -> "LEFT_LEGEND"
-        RightLegend -> "RIGHT_LEGEND"
-        TopLegend -> "TOP_LEGEND"
-        NoLegend -> "NO_LEGEND"
-        LabeledLegend -> "LABELED_LEGEND"
+        PCSLPPieChartLegendPositionUnspecified -> "PIE_CHART_LEGEND_POSITION_UNSPECIFIED"
+        PCSLPBottomLegend -> "BOTTOM_LEGEND"
+        PCSLPLeftLegend -> "LEFT_LEGEND"
+        PCSLPRightLegend -> "RIGHT_LEGEND"
+        PCSLPTopLegend -> "TOP_LEGEND"
+        PCSLPNoLegend -> "NO_LEGEND"
+        PCSLPLabeledLegend -> "LABELED_LEGEND"
 
 instance FromJSON PieChartSpecLegendPosition where
     parseJSON = parseJSONText "PieChartSpecLegendPosition"
@@ -573,6 +1033,50 @@ instance FromJSON ConditionValueRelativeDate where
 instance ToJSON ConditionValueRelativeDate where
     toJSON = toJSONText
 
+-- | The type of location this object represents. This field is read-only.
+data DeveloperMetadataLocationLocationType
+    = DMLLTDeveloperMetadataLocationTypeUnspecified
+      -- ^ @DEVELOPER_METADATA_LOCATION_TYPE_UNSPECIFIED@
+      -- Default value.
+    | DMLLTRow
+      -- ^ @ROW@
+      -- Developer metadata associated on an entire row dimension.
+    | DMLLTColumn
+      -- ^ @COLUMN@
+      -- Developer metadata associated on an entire column dimension.
+    | DMLLTSheet
+      -- ^ @SHEET@
+      -- Developer metadata associated on an entire sheet.
+    | DMLLTSpreadsheet
+      -- ^ @SPREADSHEET@
+      -- Developer metadata associated on the entire spreadsheet.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable DeveloperMetadataLocationLocationType
+
+instance FromHttpApiData DeveloperMetadataLocationLocationType where
+    parseQueryParam = \case
+        "DEVELOPER_METADATA_LOCATION_TYPE_UNSPECIFIED" -> Right DMLLTDeveloperMetadataLocationTypeUnspecified
+        "ROW" -> Right DMLLTRow
+        "COLUMN" -> Right DMLLTColumn
+        "SHEET" -> Right DMLLTSheet
+        "SPREADSHEET" -> Right DMLLTSpreadsheet
+        x -> Left ("Unable to parse DeveloperMetadataLocationLocationType from: " <> x)
+
+instance ToHttpApiData DeveloperMetadataLocationLocationType where
+    toQueryParam = \case
+        DMLLTDeveloperMetadataLocationTypeUnspecified -> "DEVELOPER_METADATA_LOCATION_TYPE_UNSPECIFIED"
+        DMLLTRow -> "ROW"
+        DMLLTColumn -> "COLUMN"
+        DMLLTSheet -> "SHEET"
+        DMLLTSpreadsheet -> "SPREADSHEET"
+
+instance FromJSON DeveloperMetadataLocationLocationType where
+    parseJSON = parseJSONText "DeveloperMetadataLocationLocationType"
+
+instance ToJSON DeveloperMetadataLocationLocationType where
+    toJSON = toJSONText
+
 -- | The order data should be sorted.
 data SortSpecSortOrder
     = SortOrderUnspecified
@@ -704,6 +1208,153 @@ instance FromJSON PivotValueSummarizeFunction where
 instance ToJSON PivotValueSummarizeFunction where
     toJSON = toJSONText
 
+-- | The size of the org chart nodes.
+data OrgChartSpecNodeSize
+    = OrgChartLabelSizeUnspecified
+      -- ^ @ORG_CHART_LABEL_SIZE_UNSPECIFIED@
+      -- Default value, do not use.
+    | Small
+      -- ^ @SMALL@
+      -- The small org chart node size.
+    | Medium
+      -- ^ @MEDIUM@
+      -- The medium org chart node size.
+    | Large
+      -- ^ @LARGE@
+      -- The large org chart node size.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable OrgChartSpecNodeSize
+
+instance FromHttpApiData OrgChartSpecNodeSize where
+    parseQueryParam = \case
+        "ORG_CHART_LABEL_SIZE_UNSPECIFIED" -> Right OrgChartLabelSizeUnspecified
+        "SMALL" -> Right Small
+        "MEDIUM" -> Right Medium
+        "LARGE" -> Right Large
+        x -> Left ("Unable to parse OrgChartSpecNodeSize from: " <> x)
+
+instance ToHttpApiData OrgChartSpecNodeSize where
+    toQueryParam = \case
+        OrgChartLabelSizeUnspecified -> "ORG_CHART_LABEL_SIZE_UNSPECIFIED"
+        Small -> "SMALL"
+        Medium -> "MEDIUM"
+        Large -> "LARGE"
+
+instance FromJSON OrgChartSpecNodeSize where
+    parseJSON = parseJSONText "OrgChartSpecNodeSize"
+
+instance ToJSON OrgChartSpecNodeSize where
+    toJSON = toJSONText
+
+-- | Determines how values in the response should be rendered. The default
+-- render option is ValueRenderOption.FORMATTED_VALUE.
+data BatchUpdateValuesByDataFilterRequestResponseValueRenderOption
+    = BUVBDFRRVROFormattedValue
+      -- ^ @FORMATTED_VALUE@
+      -- Values will be calculated & formatted in the reply according to the
+      -- cell\'s formatting. Formatting is based on the spreadsheet\'s locale,
+      -- not the requesting user\'s locale. For example, if \`A1\` is \`1.23\`
+      -- and \`A2\` is \`=A1\` and formatted as currency, then \`A2\` would
+      -- return \`\"$1.23\"\`.
+    | BUVBDFRRVROUnformattedValue
+      -- ^ @UNFORMATTED_VALUE@
+      -- Values will be calculated, but not formatted in the reply. For example,
+      -- if \`A1\` is \`1.23\` and \`A2\` is \`=A1\` and formatted as currency,
+      -- then \`A2\` would return the number \`1.23\`.
+    | BUVBDFRRVROFormula
+      -- ^ @FORMULA@
+      -- Values will not be calculated. The reply will include the formulas. For
+      -- example, if \`A1\` is \`1.23\` and \`A2\` is \`=A1\` and formatted as
+      -- currency, then A2 would return \`\"=A1\"\`.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable BatchUpdateValuesByDataFilterRequestResponseValueRenderOption
+
+instance FromHttpApiData BatchUpdateValuesByDataFilterRequestResponseValueRenderOption where
+    parseQueryParam = \case
+        "FORMATTED_VALUE" -> Right BUVBDFRRVROFormattedValue
+        "UNFORMATTED_VALUE" -> Right BUVBDFRRVROUnformattedValue
+        "FORMULA" -> Right BUVBDFRRVROFormula
+        x -> Left ("Unable to parse BatchUpdateValuesByDataFilterRequestResponseValueRenderOption from: " <> x)
+
+instance ToHttpApiData BatchUpdateValuesByDataFilterRequestResponseValueRenderOption where
+    toQueryParam = \case
+        BUVBDFRRVROFormattedValue -> "FORMATTED_VALUE"
+        BUVBDFRRVROUnformattedValue -> "UNFORMATTED_VALUE"
+        BUVBDFRRVROFormula -> "FORMULA"
+
+instance FromJSON BatchUpdateValuesByDataFilterRequestResponseValueRenderOption where
+    parseJSON = parseJSONText "BatchUpdateValuesByDataFilterRequestResponseValueRenderOption"
+
+instance ToJSON BatchUpdateValuesByDataFilterRequestResponseValueRenderOption where
+    toJSON = toJSONText
+
+-- | The dash type of the line.
+data LineStyleType
+    = LSTLineDashTypeUnspecified
+      -- ^ @LINE_DASH_TYPE_UNSPECIFIED@
+      -- Default value, do not use.
+    | LSTInvisible
+      -- ^ @INVISIBLE@
+      -- No dash type, which is equivalent to a non-visible line.
+    | LSTCustom
+      -- ^ @CUSTOM@
+      -- A custom dash for a line. Modifying the exact custom dash style is
+      -- currently unsupported.
+    | LSTSolid
+      -- ^ @SOLID@
+      -- A solid line.
+    | LSTDotted
+      -- ^ @DOTTED@
+      -- A dotted line.
+    | LSTMediumDashed
+      -- ^ @MEDIUM_DASHED@
+      -- A dashed line where the dashes have \"medium\" length.
+    | LSTMediumDashedDotted
+      -- ^ @MEDIUM_DASHED_DOTTED@
+      -- A line that alternates between a \"medium\" dash and a dot.
+    | LSTLongDashed
+      -- ^ @LONG_DASHED@
+      -- A dashed line where the dashes have \"long\" length.
+    | LSTLongDashedDotted
+      -- ^ @LONG_DASHED_DOTTED@
+      -- A line that alternates between a \"long\" dash and a dot.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable LineStyleType
+
+instance FromHttpApiData LineStyleType where
+    parseQueryParam = \case
+        "LINE_DASH_TYPE_UNSPECIFIED" -> Right LSTLineDashTypeUnspecified
+        "INVISIBLE" -> Right LSTInvisible
+        "CUSTOM" -> Right LSTCustom
+        "SOLID" -> Right LSTSolid
+        "DOTTED" -> Right LSTDotted
+        "MEDIUM_DASHED" -> Right LSTMediumDashed
+        "MEDIUM_DASHED_DOTTED" -> Right LSTMediumDashedDotted
+        "LONG_DASHED" -> Right LSTLongDashed
+        "LONG_DASHED_DOTTED" -> Right LSTLongDashedDotted
+        x -> Left ("Unable to parse LineStyleType from: " <> x)
+
+instance ToHttpApiData LineStyleType where
+    toQueryParam = \case
+        LSTLineDashTypeUnspecified -> "LINE_DASH_TYPE_UNSPECIFIED"
+        LSTInvisible -> "INVISIBLE"
+        LSTCustom -> "CUSTOM"
+        LSTSolid -> "SOLID"
+        LSTDotted -> "DOTTED"
+        LSTMediumDashed -> "MEDIUM_DASHED"
+        LSTMediumDashedDotted -> "MEDIUM_DASHED_DOTTED"
+        LSTLongDashed -> "LONG_DASHED"
+        LSTLongDashedDotted -> "LONG_DASHED_DOTTED"
+
+instance FromJSON LineStyleType where
+    parseJSON = parseJSONText "LineStyleType"
+
+instance ToJSON LineStyleType where
+    toJSON = toJSONText
+
 -- | How a hyperlink, if it exists, should be displayed in the cell.
 data CellFormatHyperlinkDisplayType
     = HyperlinkDisplayTypeUnspecified
@@ -736,6 +1387,98 @@ instance FromJSON CellFormatHyperlinkDisplayType where
     parseJSON = parseJSONText "CellFormatHyperlinkDisplayType"
 
 instance ToJSON CellFormatHyperlinkDisplayType where
+    toJSON = toJSONText
+
+-- | How the input data should be interpreted.
+data BatchUpdateValuesByDataFilterRequestValueInputOption
+    = BUVBDFRVIOInputValueOptionUnspecified
+      -- ^ @INPUT_VALUE_OPTION_UNSPECIFIED@
+      -- Default input value. This value must not be used.
+    | BUVBDFRVIORaw
+      -- ^ @RAW@
+      -- The values the user has entered will not be parsed and will be stored
+      -- as-is.
+    | BUVBDFRVIOUserEntered
+      -- ^ @USER_ENTERED@
+      -- The values will be parsed as if the user typed them into the UI. Numbers
+      -- will stay as numbers, but strings may be converted to numbers, dates,
+      -- etc. following the same rules that are applied when entering text into a
+      -- cell via the Google Sheets UI.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable BatchUpdateValuesByDataFilterRequestValueInputOption
+
+instance FromHttpApiData BatchUpdateValuesByDataFilterRequestValueInputOption where
+    parseQueryParam = \case
+        "INPUT_VALUE_OPTION_UNSPECIFIED" -> Right BUVBDFRVIOInputValueOptionUnspecified
+        "RAW" -> Right BUVBDFRVIORaw
+        "USER_ENTERED" -> Right BUVBDFRVIOUserEntered
+        x -> Left ("Unable to parse BatchUpdateValuesByDataFilterRequestValueInputOption from: " <> x)
+
+instance ToHttpApiData BatchUpdateValuesByDataFilterRequestValueInputOption where
+    toQueryParam = \case
+        BUVBDFRVIOInputValueOptionUnspecified -> "INPUT_VALUE_OPTION_UNSPECIFIED"
+        BUVBDFRVIORaw -> "RAW"
+        BUVBDFRVIOUserEntered -> "USER_ENTERED"
+
+instance FromJSON BatchUpdateValuesByDataFilterRequestValueInputOption where
+    parseJSON = parseJSONText "BatchUpdateValuesByDataFilterRequestValueInputOption"
+
+instance ToJSON BatchUpdateValuesByDataFilterRequestValueInputOption where
+    toJSON = toJSONText
+
+-- | The position of the chart legend.
+data HistogramChartSpecLegendPosition
+    = HCSLPHistogramChartLegendPositionUnspecified
+      -- ^ @HISTOGRAM_CHART_LEGEND_POSITION_UNSPECIFIED@
+      -- Default value, do not use.
+    | HCSLPBottomLegend
+      -- ^ @BOTTOM_LEGEND@
+      -- The legend is rendered on the bottom of the chart.
+    | HCSLPLeftLegend
+      -- ^ @LEFT_LEGEND@
+      -- The legend is rendered on the left of the chart.
+    | HCSLPRightLegend
+      -- ^ @RIGHT_LEGEND@
+      -- The legend is rendered on the right of the chart.
+    | HCSLPTopLegend
+      -- ^ @TOP_LEGEND@
+      -- The legend is rendered on the top of the chart.
+    | HCSLPNoLegend
+      -- ^ @NO_LEGEND@
+      -- No legend is rendered.
+    | HCSLPInsideLegend
+      -- ^ @INSIDE_LEGEND@
+      -- The legend is rendered inside the chart area.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable HistogramChartSpecLegendPosition
+
+instance FromHttpApiData HistogramChartSpecLegendPosition where
+    parseQueryParam = \case
+        "HISTOGRAM_CHART_LEGEND_POSITION_UNSPECIFIED" -> Right HCSLPHistogramChartLegendPositionUnspecified
+        "BOTTOM_LEGEND" -> Right HCSLPBottomLegend
+        "LEFT_LEGEND" -> Right HCSLPLeftLegend
+        "RIGHT_LEGEND" -> Right HCSLPRightLegend
+        "TOP_LEGEND" -> Right HCSLPTopLegend
+        "NO_LEGEND" -> Right HCSLPNoLegend
+        "INSIDE_LEGEND" -> Right HCSLPInsideLegend
+        x -> Left ("Unable to parse HistogramChartSpecLegendPosition from: " <> x)
+
+instance ToHttpApiData HistogramChartSpecLegendPosition where
+    toQueryParam = \case
+        HCSLPHistogramChartLegendPositionUnspecified -> "HISTOGRAM_CHART_LEGEND_POSITION_UNSPECIFIED"
+        HCSLPBottomLegend -> "BOTTOM_LEGEND"
+        HCSLPLeftLegend -> "LEFT_LEGEND"
+        HCSLPRightLegend -> "RIGHT_LEGEND"
+        HCSLPTopLegend -> "TOP_LEGEND"
+        HCSLPNoLegend -> "NO_LEGEND"
+        HCSLPInsideLegend -> "INSIDE_LEGEND"
+
+instance FromJSON HistogramChartSpecLegendPosition where
+    parseJSON = parseJSONText "HistogramChartSpecLegendPosition"
+
+instance ToJSON HistogramChartSpecLegendPosition where
     toJSON = toJSONText
 
 -- | The type of sheet. Defaults to GRID. This field cannot be changed once
@@ -771,6 +1514,59 @@ instance FromJSON SheetPropertiesSheetType where
     parseJSON = parseJSONText "SheetPropertiesSheetType"
 
 instance ToJSON SheetPropertiesSheetType where
+    toJSON = toJSONText
+
+-- | Limits the selected developer metadata to those entries which are
+-- associated with locations of the specified type. For example, when this
+-- field is specified as ROW this lookup only considers developer metadata
+-- associated on rows. If the field is left unspecified, all location types
+-- are considered. This field cannot be specified as SPREADSHEET when the
+-- locationMatchingStrategy is specified as INTERSECTING or when the
+-- metadataLocation is specified as a non-spreadsheet location: spreadsheet
+-- metadata cannot intersect any other developer metadata location. This
+-- field also must be left unspecified when the locationMatchingStrategy is
+-- specified as EXACT.
+data DeveloperMetadataLookupLocationType
+    = DDeveloperMetadataLocationTypeUnspecified
+      -- ^ @DEVELOPER_METADATA_LOCATION_TYPE_UNSPECIFIED@
+      -- Default value.
+    | DRow
+      -- ^ @ROW@
+      -- Developer metadata associated on an entire row dimension.
+    | DColumn
+      -- ^ @COLUMN@
+      -- Developer metadata associated on an entire column dimension.
+    | DSheet
+      -- ^ @SHEET@
+      -- Developer metadata associated on an entire sheet.
+    | DSpreadsheet
+      -- ^ @SPREADSHEET@
+      -- Developer metadata associated on the entire spreadsheet.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable DeveloperMetadataLookupLocationType
+
+instance FromHttpApiData DeveloperMetadataLookupLocationType where
+    parseQueryParam = \case
+        "DEVELOPER_METADATA_LOCATION_TYPE_UNSPECIFIED" -> Right DDeveloperMetadataLocationTypeUnspecified
+        "ROW" -> Right DRow
+        "COLUMN" -> Right DColumn
+        "SHEET" -> Right DSheet
+        "SPREADSHEET" -> Right DSpreadsheet
+        x -> Left ("Unable to parse DeveloperMetadataLookupLocationType from: " <> x)
+
+instance ToHttpApiData DeveloperMetadataLookupLocationType where
+    toQueryParam = \case
+        DDeveloperMetadataLocationTypeUnspecified -> "DEVELOPER_METADATA_LOCATION_TYPE_UNSPECIFIED"
+        DRow -> "ROW"
+        DColumn -> "COLUMN"
+        DSheet -> "SHEET"
+        DSpreadsheet -> "SPREADSHEET"
+
+instance FromJSON DeveloperMetadataLookupLocationType where
+    parseJSON = parseJSONText "DeveloperMetadataLookupLocationType"
+
+instance ToJSON DeveloperMetadataLookupLocationType where
     toJSON = toJSONText
 
 -- | How the cells should be merged.
@@ -809,16 +1605,16 @@ instance ToJSON MergeCellsRequestMergeType where
 
 -- | The horizontal alignment of the value in the cell.
 data CellFormatHorizontalAlignment
-    = HorizontalAlignUnspecified
+    = CFHAHorizontalAlignUnspecified
       -- ^ @HORIZONTAL_ALIGN_UNSPECIFIED@
       -- The horizontal alignment is not specified. Do not use this.
-    | Left'
+    | CFHALeft'
       -- ^ @LEFT@
       -- The text is explicitly aligned to the left of the cell.
-    | Center
+    | CFHACenter
       -- ^ @CENTER@
       -- The text is explicitly aligned to the center of the cell.
-    | Right'
+    | CFHARight'
       -- ^ @RIGHT@
       -- The text is explicitly aligned to the right of the cell.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -827,23 +1623,239 @@ instance Hashable CellFormatHorizontalAlignment
 
 instance FromHttpApiData CellFormatHorizontalAlignment where
     parseQueryParam = \case
-        "HORIZONTAL_ALIGN_UNSPECIFIED" -> Right HorizontalAlignUnspecified
-        "LEFT" -> Right Left'
-        "CENTER" -> Right Center
-        "RIGHT" -> Right Right'
+        "HORIZONTAL_ALIGN_UNSPECIFIED" -> Right CFHAHorizontalAlignUnspecified
+        "LEFT" -> Right CFHALeft'
+        "CENTER" -> Right CFHACenter
+        "RIGHT" -> Right CFHARight'
         x -> Left ("Unable to parse CellFormatHorizontalAlignment from: " <> x)
 
 instance ToHttpApiData CellFormatHorizontalAlignment where
     toQueryParam = \case
-        HorizontalAlignUnspecified -> "HORIZONTAL_ALIGN_UNSPECIFIED"
-        Left' -> "LEFT"
-        Center -> "CENTER"
-        Right' -> "RIGHT"
+        CFHAHorizontalAlignUnspecified -> "HORIZONTAL_ALIGN_UNSPECIFIED"
+        CFHALeft' -> "LEFT"
+        CFHACenter -> "CENTER"
+        CFHARight' -> "RIGHT"
 
 instance FromJSON CellFormatHorizontalAlignment where
     parseJSON = parseJSONText "CellFormatHorizontalAlignment"
 
 instance ToJSON CellFormatHorizontalAlignment where
+    toJSON = toJSONText
+
+-- | The stacked type.
+data WaterfallChartSpecStackedType
+    = WCSSTWaterfallStackedTypeUnspecified
+      -- ^ @WATERFALL_STACKED_TYPE_UNSPECIFIED@
+      -- Default value, do not use.
+    | WCSSTStacked
+      -- ^ @STACKED@
+      -- Values corresponding to the same domain (horizontal axis) value will be
+      -- stacked vertically.
+    | WCSSTSequential
+      -- ^ @SEQUENTIAL@
+      -- Series will spread out along the horizontal axis.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable WaterfallChartSpecStackedType
+
+instance FromHttpApiData WaterfallChartSpecStackedType where
+    parseQueryParam = \case
+        "WATERFALL_STACKED_TYPE_UNSPECIFIED" -> Right WCSSTWaterfallStackedTypeUnspecified
+        "STACKED" -> Right WCSSTStacked
+        "SEQUENTIAL" -> Right WCSSTSequential
+        x -> Left ("Unable to parse WaterfallChartSpecStackedType from: " <> x)
+
+instance ToHttpApiData WaterfallChartSpecStackedType where
+    toQueryParam = \case
+        WCSSTWaterfallStackedTypeUnspecified -> "WATERFALL_STACKED_TYPE_UNSPECIFIED"
+        WCSSTStacked -> "STACKED"
+        WCSSTSequential -> "SEQUENTIAL"
+
+instance FromJSON WaterfallChartSpecStackedType where
+    parseJSON = parseJSONText "WaterfallChartSpecStackedType"
+
+instance ToJSON WaterfallChartSpecStackedType where
+    toJSON = toJSONText
+
+-- | The type of date-time grouping to apply.
+data DateTimeRuleType
+    = DateTimeRuleTypeUnspecified
+      -- ^ @DATE_TIME_RULE_TYPE_UNSPECIFIED@
+      -- The default type, do not use.
+    | Second
+      -- ^ @SECOND@
+      -- Group dates by second, from 0 to 59.
+    | Minute
+      -- ^ @MINUTE@
+      -- Group dates by minute, from 0 to 59.
+    | Hour
+      -- ^ @HOUR@
+      -- Group dates by hour using a 24-hour system, from 0 to 23.
+    | HourMinute
+      -- ^ @HOUR_MINUTE@
+      -- Group dates by hour and minute using a 24-hour system, for example
+      -- 19:45.
+    | HourMinuteAmpm
+      -- ^ @HOUR_MINUTE_AMPM@
+      -- Group dates by hour and minute using a 12-hour system, for example 7:45
+      -- PM. The AM\/PM designation is translated based on the spreadsheet
+      -- locale.
+    | DayOfWeek
+      -- ^ @DAY_OF_WEEK@
+      -- Group dates by day of week, for example Sunday. The days of the week
+      -- will be translated based on the spreadsheet locale.
+    | DayOfYear
+      -- ^ @DAY_OF_YEAR@
+      -- Group dates by day of year, from 1 to 366. Note that dates after Feb. 29
+      -- fall in different buckets in leap years than in non-leap years.
+    | DayOfMonth
+      -- ^ @DAY_OF_MONTH@
+      -- Group dates by day of month, from 1 to 31.
+    | DayMonth
+      -- ^ @DAY_MONTH@
+      -- Group dates by day and month, for example 22-Nov. The month is
+      -- translated based on the spreadsheet locale.
+    | Month
+      -- ^ @MONTH@
+      -- Group dates by month, for example Nov. The month is translated based on
+      -- the spreadsheet locale.
+    | Quarter
+      -- ^ @QUARTER@
+      -- Group dates by quarter, for example Q1 (which represents Jan-Mar).
+    | Year
+      -- ^ @YEAR@
+      -- Group dates by year, for example 2008.
+    | YearMonth
+      -- ^ @YEAR_MONTH@
+      -- Group dates by year and month, for example 2008-Nov. The month is
+      -- translated based on the spreadsheet locale.
+    | YearQuarter
+      -- ^ @YEAR_QUARTER@
+      -- Group dates by year and quarter, for example 2008 Q4.
+    | YearMonthDay
+      -- ^ @YEAR_MONTH_DAY@
+      -- Group dates by year, month, and day, for example 2008-11-22.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable DateTimeRuleType
+
+instance FromHttpApiData DateTimeRuleType where
+    parseQueryParam = \case
+        "DATE_TIME_RULE_TYPE_UNSPECIFIED" -> Right DateTimeRuleTypeUnspecified
+        "SECOND" -> Right Second
+        "MINUTE" -> Right Minute
+        "HOUR" -> Right Hour
+        "HOUR_MINUTE" -> Right HourMinute
+        "HOUR_MINUTE_AMPM" -> Right HourMinuteAmpm
+        "DAY_OF_WEEK" -> Right DayOfWeek
+        "DAY_OF_YEAR" -> Right DayOfYear
+        "DAY_OF_MONTH" -> Right DayOfMonth
+        "DAY_MONTH" -> Right DayMonth
+        "MONTH" -> Right Month
+        "QUARTER" -> Right Quarter
+        "YEAR" -> Right Year
+        "YEAR_MONTH" -> Right YearMonth
+        "YEAR_QUARTER" -> Right YearQuarter
+        "YEAR_MONTH_DAY" -> Right YearMonthDay
+        x -> Left ("Unable to parse DateTimeRuleType from: " <> x)
+
+instance ToHttpApiData DateTimeRuleType where
+    toQueryParam = \case
+        DateTimeRuleTypeUnspecified -> "DATE_TIME_RULE_TYPE_UNSPECIFIED"
+        Second -> "SECOND"
+        Minute -> "MINUTE"
+        Hour -> "HOUR"
+        HourMinute -> "HOUR_MINUTE"
+        HourMinuteAmpm -> "HOUR_MINUTE_AMPM"
+        DayOfWeek -> "DAY_OF_WEEK"
+        DayOfYear -> "DAY_OF_YEAR"
+        DayOfMonth -> "DAY_OF_MONTH"
+        DayMonth -> "DAY_MONTH"
+        Month -> "MONTH"
+        Quarter -> "QUARTER"
+        Year -> "YEAR"
+        YearMonth -> "YEAR_MONTH"
+        YearQuarter -> "YEAR_QUARTER"
+        YearMonthDay -> "YEAR_MONTH_DAY"
+
+instance FromJSON DateTimeRuleType where
+    parseJSON = parseJSONText "DateTimeRuleType"
+
+instance ToJSON DateTimeRuleType where
+    toJSON = toJSONText
+
+-- | Limits the selected developer metadata to that which has a matching
+-- DeveloperMetadata.visibility. If left unspecified, all developer
+-- metadata visibile to the requesting project is considered.
+data DeveloperMetadataLookupVisibility
+    = DMLVDeveloperMetadataVisibilityUnspecified
+      -- ^ @DEVELOPER_METADATA_VISIBILITY_UNSPECIFIED@
+      -- Default value.
+    | DMLVDocument
+      -- ^ @DOCUMENT@
+      -- Document-visible metadata is accessible from any developer project with
+      -- access to the document.
+    | DMLVProject
+      -- ^ @PROJECT@
+      -- Project-visible metadata is only visible to and accessible by the
+      -- developer project that created the metadata.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable DeveloperMetadataLookupVisibility
+
+instance FromHttpApiData DeveloperMetadataLookupVisibility where
+    parseQueryParam = \case
+        "DEVELOPER_METADATA_VISIBILITY_UNSPECIFIED" -> Right DMLVDeveloperMetadataVisibilityUnspecified
+        "DOCUMENT" -> Right DMLVDocument
+        "PROJECT" -> Right DMLVProject
+        x -> Left ("Unable to parse DeveloperMetadataLookupVisibility from: " <> x)
+
+instance ToHttpApiData DeveloperMetadataLookupVisibility where
+    toQueryParam = \case
+        DMLVDeveloperMetadataVisibilityUnspecified -> "DEVELOPER_METADATA_VISIBILITY_UNSPECIFIED"
+        DMLVDocument -> "DOCUMENT"
+        DMLVProject -> "PROJECT"
+
+instance FromJSON DeveloperMetadataLookupVisibility where
+    parseJSON = parseJSONText "DeveloperMetadataLookupVisibility"
+
+instance ToJSON DeveloperMetadataLookupVisibility where
+    toJSON = toJSONText
+
+-- | The behavior of tooltips and data highlighting when hovering on data and
+-- chart area.
+data BasicChartSpecCompareMode
+    = BasicChartCompareModeUnspecified
+      -- ^ @BASIC_CHART_COMPARE_MODE_UNSPECIFIED@
+      -- Default value, do not use.
+    | Datum
+      -- ^ @DATUM@
+      -- Only the focused data element is highlighted and shown in the tooltip.
+    | Category
+      -- ^ @CATEGORY@
+      -- All data elements with the same category (e.g., domain value) are
+      -- highlighted and shown in the tooltip.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable BasicChartSpecCompareMode
+
+instance FromHttpApiData BasicChartSpecCompareMode where
+    parseQueryParam = \case
+        "BASIC_CHART_COMPARE_MODE_UNSPECIFIED" -> Right BasicChartCompareModeUnspecified
+        "DATUM" -> Right Datum
+        "CATEGORY" -> Right Category
+        x -> Left ("Unable to parse BasicChartSpecCompareMode from: " <> x)
+
+instance ToHttpApiData BasicChartSpecCompareMode where
+    toQueryParam = \case
+        BasicChartCompareModeUnspecified -> "BASIC_CHART_COMPARE_MODE_UNSPECIFIED"
+        Datum -> "DATUM"
+        Category -> "CATEGORY"
+
+instance FromJSON BasicChartSpecCompareMode where
+    parseJSON = parseJSONText "BasicChartSpecCompareMode"
+
+instance ToJSON BasicChartSpecCompareMode where
     toJSON = toJSONText
 
 -- | The type of condition.
@@ -966,7 +1978,7 @@ data BooleanConditionType
       -- and the value must be a valid range in A1 notation.
     | OneOfList
       -- ^ @ONE_OF_LIST@
-      -- The cell\'s value must in the list of condition values. Supported by
+      -- The cell\'s value must be in the list of condition values. Supported by
       -- data validation. Supports any number of condition values, one per item
       -- in the list. Formulas are not supported in the values.
     | Blank
@@ -982,6 +1994,19 @@ data BooleanConditionType
       -- The condition\'s formula must evaluate to true. Supported by data
       -- validation, conditional formatting and filters. Requires a single
       -- ConditionValue.
+    | Boolean
+      -- ^ @BOOLEAN@
+      -- The cell\'s value must be TRUE\/FALSE or in the list of condition
+      -- values. Supported by data validation. Renders as a cell checkbox.
+      -- Supports zero, one or two ConditionValues. No values indicates the cell
+      -- must be TRUE or FALSE, where TRUE renders as checked and FALSE renders
+      -- as unchecked. One value indicates the cell will render as checked when
+      -- it contains that value and unchecked when it is blank. Two values
+      -- indicate that the cell will render as checked when it contains the first
+      -- value and unchecked when it contains the second value. For example,
+      -- [\"Yes\",\"No\"] indicates that the cell will render a checked box when
+      -- it has the value \"Yes\" and an unchecked box when it has the value
+      -- \"No\".
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BooleanConditionType
@@ -1017,6 +2042,7 @@ instance FromHttpApiData BooleanConditionType where
         "BLANK" -> Right Blank
         "NOT_BLANK" -> Right NotBlank
         "CUSTOM_FORMULA" -> Right CustomFormula
+        "BOOLEAN" -> Right Boolean
         x -> Left ("Unable to parse BooleanConditionType from: " <> x)
 
 instance ToHttpApiData BooleanConditionType where
@@ -1050,6 +2076,7 @@ instance ToHttpApiData BooleanConditionType where
         Blank -> "BLANK"
         NotBlank -> "NOT_BLANK"
         CustomFormula -> "CUSTOM_FORMULA"
+        Boolean -> "BOOLEAN"
 
 instance FromJSON BooleanConditionType where
     parseJSON = parseJSONText "BooleanConditionType"
@@ -1156,6 +2183,9 @@ data BasicChartSpecChartType
     | Combo
       -- ^ @COMBO@
       -- A </chart/interactive/docs/gallery/combochart combo chart>.
+    | SteppedArea
+      -- ^ @STEPPED_AREA@
+      -- A </chart/interactive/docs/gallery/steppedareachart stepped area chart>.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BasicChartSpecChartType
@@ -1169,6 +2199,7 @@ instance FromHttpApiData BasicChartSpecChartType where
         "COLUMN" -> Right Column
         "SCATTER" -> Right Scatter
         "COMBO" -> Right Combo
+        "STEPPED_AREA" -> Right SteppedArea
         x -> Left ("Unable to parse BasicChartSpecChartType from: " <> x)
 
 instance ToHttpApiData BasicChartSpecChartType where
@@ -1180,6 +2211,7 @@ instance ToHttpApiData BasicChartSpecChartType where
         Column -> "COLUMN"
         Scatter -> "SCATTER"
         Combo -> "COMBO"
+        SteppedArea -> "STEPPED_AREA"
 
 instance FromJSON BasicChartSpecChartType where
     parseJSON = parseJSONText "BasicChartSpecChartType"
@@ -1218,16 +2250,16 @@ instance ToJSON Xgafv where
 
 -- | The amount of time to wait before volatile functions are recalculated.
 data SpreadsheetPropertiesAutoRecalc
-    = RecalculationIntervalUnspecified
+    = SPARRecalculationIntervalUnspecified
       -- ^ @RECALCULATION_INTERVAL_UNSPECIFIED@
       -- Default value. This value must not be used.
-    | OnChange
+    | SPAROnChange
       -- ^ @ON_CHANGE@
       -- Volatile functions are updated on every change.
-    | Minute
+    | SPARMinute
       -- ^ @MINUTE@
       -- Volatile functions are updated on every change and every minute.
-    | Hour
+    | SPARHour
       -- ^ @HOUR@
       -- Volatile functions are updated on every change and hourly.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -1236,18 +2268,18 @@ instance Hashable SpreadsheetPropertiesAutoRecalc
 
 instance FromHttpApiData SpreadsheetPropertiesAutoRecalc where
     parseQueryParam = \case
-        "RECALCULATION_INTERVAL_UNSPECIFIED" -> Right RecalculationIntervalUnspecified
-        "ON_CHANGE" -> Right OnChange
-        "MINUTE" -> Right Minute
-        "HOUR" -> Right Hour
+        "RECALCULATION_INTERVAL_UNSPECIFIED" -> Right SPARRecalculationIntervalUnspecified
+        "ON_CHANGE" -> Right SPAROnChange
+        "MINUTE" -> Right SPARMinute
+        "HOUR" -> Right SPARHour
         x -> Left ("Unable to parse SpreadsheetPropertiesAutoRecalc from: " <> x)
 
 instance ToHttpApiData SpreadsheetPropertiesAutoRecalc where
     toQueryParam = \case
-        RecalculationIntervalUnspecified -> "RECALCULATION_INTERVAL_UNSPECIFIED"
-        OnChange -> "ON_CHANGE"
-        Minute -> "MINUTE"
-        Hour -> "HOUR"
+        SPARRecalculationIntervalUnspecified -> "RECALCULATION_INTERVAL_UNSPECIFIED"
+        SPAROnChange -> "ON_CHANGE"
+        SPARMinute -> "MINUTE"
+        SPARHour -> "HOUR"
 
 instance FromJSON SpreadsheetPropertiesAutoRecalc where
     parseJSON = parseJSONText "SpreadsheetPropertiesAutoRecalc"
@@ -1397,6 +2429,9 @@ data BasicChartSeriesType
     | BCSTCombo
       -- ^ @COMBO@
       -- A </chart/interactive/docs/gallery/combochart combo chart>.
+    | BCSTSteppedArea
+      -- ^ @STEPPED_AREA@
+      -- A </chart/interactive/docs/gallery/steppedareachart stepped area chart>.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BasicChartSeriesType
@@ -1410,6 +2445,7 @@ instance FromHttpApiData BasicChartSeriesType where
         "COLUMN" -> Right BCSTColumn
         "SCATTER" -> Right BCSTScatter
         "COMBO" -> Right BCSTCombo
+        "STEPPED_AREA" -> Right BCSTSteppedArea
         x -> Left ("Unable to parse BasicChartSeriesType from: " <> x)
 
 instance ToHttpApiData BasicChartSeriesType where
@@ -1421,11 +2457,96 @@ instance ToHttpApiData BasicChartSeriesType where
         BCSTColumn -> "COLUMN"
         BCSTScatter -> "SCATTER"
         BCSTCombo -> "COMBO"
+        BCSTSteppedArea -> "STEPPED_AREA"
 
 instance FromJSON BasicChartSeriesType where
     parseJSON = parseJSONText "BasicChartSeriesType"
 
 instance ToJSON BasicChartSeriesType where
+    toJSON = toJSONText
+
+-- | If specified, indicates that pivot values should be displayed as the
+-- result of a calculation with another pivot value. For example, if
+-- calculated_display_type is specified as PERCENT_OF_GRAND_TOTAL, all the
+-- pivot values are displayed as the percentage of the grand total. In the
+-- Sheets UI, this is referred to as \"Show As\" in the value section of a
+-- pivot table.
+data PivotValueCalculatedDisplayType
+    = PivotValueCalculatedDisplayTypeUnspecified
+      -- ^ @PIVOT_VALUE_CALCULATED_DISPLAY_TYPE_UNSPECIFIED@
+      -- Default value, do not use.
+    | PercentOfRowTotal
+      -- ^ @PERCENT_OF_ROW_TOTAL@
+      -- Shows the pivot values as percentage of the row total values.
+    | PercentOfColumnTotal
+      -- ^ @PERCENT_OF_COLUMN_TOTAL@
+      -- Shows the pivot values as percentage of the column total values.
+    | PercentOfGrandTotal
+      -- ^ @PERCENT_OF_GRAND_TOTAL@
+      -- Shows the pivot values as percentage of the grand total values.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable PivotValueCalculatedDisplayType
+
+instance FromHttpApiData PivotValueCalculatedDisplayType where
+    parseQueryParam = \case
+        "PIVOT_VALUE_CALCULATED_DISPLAY_TYPE_UNSPECIFIED" -> Right PivotValueCalculatedDisplayTypeUnspecified
+        "PERCENT_OF_ROW_TOTAL" -> Right PercentOfRowTotal
+        "PERCENT_OF_COLUMN_TOTAL" -> Right PercentOfColumnTotal
+        "PERCENT_OF_GRAND_TOTAL" -> Right PercentOfGrandTotal
+        x -> Left ("Unable to parse PivotValueCalculatedDisplayType from: " <> x)
+
+instance ToHttpApiData PivotValueCalculatedDisplayType where
+    toQueryParam = \case
+        PivotValueCalculatedDisplayTypeUnspecified -> "PIVOT_VALUE_CALCULATED_DISPLAY_TYPE_UNSPECIFIED"
+        PercentOfRowTotal -> "PERCENT_OF_ROW_TOTAL"
+        PercentOfColumnTotal -> "PERCENT_OF_COLUMN_TOTAL"
+        PercentOfGrandTotal -> "PERCENT_OF_GRAND_TOTAL"
+
+instance FromJSON PivotValueCalculatedDisplayType where
+    parseJSON = parseJSONText "PivotValueCalculatedDisplayType"
+
+instance ToJSON PivotValueCalculatedDisplayType where
+    toJSON = toJSONText
+
+-- | How dates, times, and durations should be represented in the output.
+-- This is ignored if value_render_option is FORMATTED_VALUE. The default
+-- dateTime render option is [DateTimeRenderOption.SERIAL_NUMBER].
+data BatchGetValuesByDataFilterRequestDateTimeRenderOption
+    = BGVBDFRDTROSerialNumber
+      -- ^ @SERIAL_NUMBER@
+      -- Instructs date, time, datetime, and duration fields to be output as
+      -- doubles in \"serial number\" format, as popularized by Lotus 1-2-3. The
+      -- whole number portion of the value (left of the decimal) counts the days
+      -- since December 30th 1899. The fractional portion (right of the decimal)
+      -- counts the time as a fraction of the day. For example, January 1st 1900
+      -- at noon would be 2.5, 2 because it\'s 2 days after December 30st 1899,
+      -- and .5 because noon is half a day. February 1st 1900 at 3pm would be
+      -- 33.625. This correctly treats the year 1900 as not a leap year.
+    | BGVBDFRDTROFormattedString
+      -- ^ @FORMATTED_STRING@
+      -- Instructs date, time, datetime, and duration fields to be output as
+      -- strings in their given number format (which is dependent on the
+      -- spreadsheet locale).
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable BatchGetValuesByDataFilterRequestDateTimeRenderOption
+
+instance FromHttpApiData BatchGetValuesByDataFilterRequestDateTimeRenderOption where
+    parseQueryParam = \case
+        "SERIAL_NUMBER" -> Right BGVBDFRDTROSerialNumber
+        "FORMATTED_STRING" -> Right BGVBDFRDTROFormattedString
+        x -> Left ("Unable to parse BatchGetValuesByDataFilterRequestDateTimeRenderOption from: " <> x)
+
+instance ToHttpApiData BatchGetValuesByDataFilterRequestDateTimeRenderOption where
+    toQueryParam = \case
+        BGVBDFRDTROSerialNumber -> "SERIAL_NUMBER"
+        BGVBDFRDTROFormattedString -> "FORMATTED_STRING"
+
+instance FromJSON BatchGetValuesByDataFilterRequestDateTimeRenderOption where
+    parseJSON = parseJSONText "BatchGetValuesByDataFilterRequestDateTimeRenderOption"
+
+instance ToJSON BatchGetValuesByDataFilterRequestDateTimeRenderOption where
     toJSON = toJSONText
 
 -- | Determines how the charts will use hidden rows or columns.
@@ -1704,6 +2825,44 @@ instance FromJSON ErrorValueType where
 instance ToJSON ErrorValueType where
     toJSON = toJSONText
 
+-- | The major dimension that results should use. For example, if the
+-- spreadsheet data is: \`A1=1,B1=2,A2=3,B2=4\`, then a request that
+-- selects that range and sets \`majorDimension=ROWS\` will return
+-- \`[[1,2],[3,4]]\`, whereas a request that sets
+-- \`majorDimension=COLUMNS\` will return \`[[1,3],[2,4]]\`.
+data BatchGetValuesByDataFilterRequestMajorDimension
+    = BGVBDFRMDDimensionUnspecified
+      -- ^ @DIMENSION_UNSPECIFIED@
+      -- The default value, do not use.
+    | BGVBDFRMDRows
+      -- ^ @ROWS@
+      -- Operates on the rows of a sheet.
+    | BGVBDFRMDColumns
+      -- ^ @COLUMNS@
+      -- Operates on the columns of a sheet.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable BatchGetValuesByDataFilterRequestMajorDimension
+
+instance FromHttpApiData BatchGetValuesByDataFilterRequestMajorDimension where
+    parseQueryParam = \case
+        "DIMENSION_UNSPECIFIED" -> Right BGVBDFRMDDimensionUnspecified
+        "ROWS" -> Right BGVBDFRMDRows
+        "COLUMNS" -> Right BGVBDFRMDColumns
+        x -> Left ("Unable to parse BatchGetValuesByDataFilterRequestMajorDimension from: " <> x)
+
+instance ToHttpApiData BatchGetValuesByDataFilterRequestMajorDimension where
+    toQueryParam = \case
+        BGVBDFRMDDimensionUnspecified -> "DIMENSION_UNSPECIFIED"
+        BGVBDFRMDRows -> "ROWS"
+        BGVBDFRMDColumns -> "COLUMNS"
+
+instance FromJSON BatchGetValuesByDataFilterRequestMajorDimension where
+    parseJSON = parseJSONText "BatchGetValuesByDataFilterRequestMajorDimension"
+
+instance ToJSON BatchGetValuesByDataFilterRequestMajorDimension where
+    toJSON = toJSONText
+
 -- | Whether values should be listed horizontally (as columns) or vertically
 -- (as rows).
 data PivotTableValueLayout
@@ -1741,29 +2900,29 @@ data InterpolationPointType
       -- The default value, do not use.
     | IPTMin
       -- ^ @MIN@
-      -- The interpolation point will use the minimum value in the cells over the
+      -- The interpolation point uses the minimum value in the cells over the
       -- range of the conditional format.
     | IPTMax
       -- ^ @MAX@
-      -- The interpolation point will use the maximum value in the cells over the
+      -- The interpolation point uses the maximum value in the cells over the
       -- range of the conditional format.
     | IPTNumber
       -- ^ @NUMBER@
-      -- The interpolation point will use exactly the value in
+      -- The interpolation point uses exactly the value in
       -- InterpolationPoint.value.
     | IPTPercent
       -- ^ @PERCENT@
-      -- The interpolation point will be the given percentage over all the cells
-      -- in the range of the conditional format. This is equivalent to NUMBER if
-      -- the value was: \`=(MAX(FLATTEN(range)) * (value \/ 100)) +
+      -- The interpolation point is the given percentage over all the cells in
+      -- the range of the conditional format. This is equivalent to NUMBER if the
+      -- value was: \`=(MAX(FLATTEN(range)) * (value \/ 100)) +
       -- (MIN(FLATTEN(range)) * (1 - (value \/ 100)))\` (where errors in the
       -- range are ignored when flattening).
     | IPTPercentile
       -- ^ @PERCENTILE@
-      -- The interpolation point will be the given percentile over all the cells
-      -- in the range of the conditional format. This is equivalent to NUMBER if
-      -- the value was: \`=PERCENTILE(FLATTEN(range), value \/ 100)\` (where
-      -- errors in the range are ignored when flattening).
+      -- The interpolation point is the given percentile over all the cells in
+      -- the range of the conditional format. This is equivalent to NUMBER if the
+      -- value was: \`=PERCENTILE(FLATTEN(range), value \/ 100)\` (where errors
+      -- in the range are ignored when flattening).
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable InterpolationPointType
@@ -1813,6 +2972,9 @@ data TextToColumnsRequestDelimiterType
     | TTCRDTCustom
       -- ^ @CUSTOM@
       -- A custom value as defined in delimiter.
+    | TTCRDTAutodetect
+      -- ^ @AUTODETECT@
+      -- Automatically detect columns.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TextToColumnsRequestDelimiterType
@@ -1825,6 +2987,7 @@ instance FromHttpApiData TextToColumnsRequestDelimiterType where
         "PERIOD" -> Right TTCRDTPeriod
         "SPACE" -> Right TTCRDTSpace
         "CUSTOM" -> Right TTCRDTCustom
+        "AUTODETECT" -> Right TTCRDTAutodetect
         x -> Left ("Unable to parse TextToColumnsRequestDelimiterType from: " <> x)
 
 instance ToHttpApiData TextToColumnsRequestDelimiterType where
@@ -1835,9 +2998,46 @@ instance ToHttpApiData TextToColumnsRequestDelimiterType where
         TTCRDTPeriod -> "PERIOD"
         TTCRDTSpace -> "SPACE"
         TTCRDTCustom -> "CUSTOM"
+        TTCRDTAutodetect -> "AUTODETECT"
 
 instance FromJSON TextToColumnsRequestDelimiterType where
     parseJSON = parseJSONText "TextToColumnsRequestDelimiterType"
 
 instance ToJSON TextToColumnsRequestDelimiterType where
+    toJSON = toJSONText
+
+-- | The dimension which will be shifted when inserting cells. If ROWS,
+-- existing cells will be shifted down. If COLUMNS, existing cells will be
+-- shifted right.
+data InsertRangeRequestShiftDimension
+    = IRRSDDimensionUnspecified
+      -- ^ @DIMENSION_UNSPECIFIED@
+      -- The default value, do not use.
+    | IRRSDRows
+      -- ^ @ROWS@
+      -- Operates on the rows of a sheet.
+    | IRRSDColumns
+      -- ^ @COLUMNS@
+      -- Operates on the columns of a sheet.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable InsertRangeRequestShiftDimension
+
+instance FromHttpApiData InsertRangeRequestShiftDimension where
+    parseQueryParam = \case
+        "DIMENSION_UNSPECIFIED" -> Right IRRSDDimensionUnspecified
+        "ROWS" -> Right IRRSDRows
+        "COLUMNS" -> Right IRRSDColumns
+        x -> Left ("Unable to parse InsertRangeRequestShiftDimension from: " <> x)
+
+instance ToHttpApiData InsertRangeRequestShiftDimension where
+    toQueryParam = \case
+        IRRSDDimensionUnspecified -> "DIMENSION_UNSPECIFIED"
+        IRRSDRows -> "ROWS"
+        IRRSDColumns -> "COLUMNS"
+
+instance FromJSON InsertRangeRequestShiftDimension where
+    parseJSON = parseJSONText "InsertRangeRequestShiftDimension"
+
+instance ToJSON InsertRangeRequestShiftDimension where
     toJSON = toJSONText

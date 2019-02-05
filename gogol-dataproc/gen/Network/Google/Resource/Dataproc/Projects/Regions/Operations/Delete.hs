@@ -23,9 +23,9 @@
 -- Deletes a long-running operation. This method indicates that the client
 -- is no longer interested in the operation result. It does not cancel the
 -- operation. If the server doesn\'t support this method, it returns
--- \`google.rpc.Code.UNIMPLEMENTED\`.
+-- google.rpc.Code.UNIMPLEMENTED.
 --
--- /See:/ <https://cloud.google.com/dataproc/ Google Cloud Dataproc API Reference> for @dataproc.projects.regions.operations.delete@.
+-- /See:/ <https://cloud.google.com/dataproc/ Cloud Dataproc API Reference> for @dataproc.projects.regions.operations.delete@.
 module Network.Google.Resource.Dataproc.Projects.Regions.Operations.Delete
     (
     -- * REST Resource
@@ -38,10 +38,8 @@ module Network.Google.Resource.Dataproc.Projects.Regions.Operations.Delete
     -- * Request Lenses
     , prodXgafv
     , prodUploadProtocol
-    , prodPp
     , prodAccessToken
     , prodUploadType
-    , prodBearerToken
     , prodName
     , prodCallback
     ) where
@@ -54,28 +52,24 @@ import           Network.Google.Prelude
 type ProjectsRegionsOperationsDeleteResource =
      "v1" :>
        Capture "name" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :> Delete '[JSON] Empty
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
 -- | Deletes a long-running operation. This method indicates that the client
 -- is no longer interested in the operation result. It does not cancel the
 -- operation. If the server doesn\'t support this method, it returns
--- \`google.rpc.Code.UNIMPLEMENTED\`.
+-- google.rpc.Code.UNIMPLEMENTED.
 --
 -- /See:/ 'projectsRegionsOperationsDelete' smart constructor.
 data ProjectsRegionsOperationsDelete = ProjectsRegionsOperationsDelete'
-    { _prodXgafv          :: !(Maybe Text)
+    { _prodXgafv          :: !(Maybe Xgafv)
     , _prodUploadProtocol :: !(Maybe Text)
-    , _prodPp             :: !Bool
     , _prodAccessToken    :: !(Maybe Text)
     , _prodUploadType     :: !(Maybe Text)
-    , _prodBearerToken    :: !(Maybe Text)
     , _prodName           :: !Text
     , _prodCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -88,13 +82,9 @@ data ProjectsRegionsOperationsDelete = ProjectsRegionsOperationsDelete'
 --
 -- * 'prodUploadProtocol'
 --
--- * 'prodPp'
---
 -- * 'prodAccessToken'
 --
 -- * 'prodUploadType'
---
--- * 'prodBearerToken'
 --
 -- * 'prodName'
 --
@@ -106,16 +96,14 @@ projectsRegionsOperationsDelete pProdName_ =
     ProjectsRegionsOperationsDelete'
     { _prodXgafv = Nothing
     , _prodUploadProtocol = Nothing
-    , _prodPp = True
     , _prodAccessToken = Nothing
     , _prodUploadType = Nothing
-    , _prodBearerToken = Nothing
     , _prodName = pProdName_
     , _prodCallback = Nothing
     }
 
 -- | V1 error format.
-prodXgafv :: Lens' ProjectsRegionsOperationsDelete (Maybe Text)
+prodXgafv :: Lens' ProjectsRegionsOperationsDelete (Maybe Xgafv)
 prodXgafv
   = lens _prodXgafv (\ s a -> s{_prodXgafv = a})
 
@@ -124,10 +112,6 @@ prodUploadProtocol :: Lens' ProjectsRegionsOperationsDelete (Maybe Text)
 prodUploadProtocol
   = lens _prodUploadProtocol
       (\ s a -> s{_prodUploadProtocol = a})
-
--- | Pretty-print response.
-prodPp :: Lens' ProjectsRegionsOperationsDelete Bool
-prodPp = lens _prodPp (\ s a -> s{_prodPp = a})
 
 -- | OAuth access token.
 prodAccessToken :: Lens' ProjectsRegionsOperationsDelete (Maybe Text)
@@ -140,12 +124,6 @@ prodUploadType :: Lens' ProjectsRegionsOperationsDelete (Maybe Text)
 prodUploadType
   = lens _prodUploadType
       (\ s a -> s{_prodUploadType = a})
-
--- | OAuth bearer token.
-prodBearerToken :: Lens' ProjectsRegionsOperationsDelete (Maybe Text)
-prodBearerToken
-  = lens _prodBearerToken
-      (\ s a -> s{_prodBearerToken = a})
 
 -- | The name of the operation resource to be deleted.
 prodName :: Lens' ProjectsRegionsOperationsDelete Text
@@ -163,10 +141,8 @@ instance GoogleRequest
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsRegionsOperationsDelete'{..}
           = go _prodName _prodXgafv _prodUploadProtocol
-              (Just _prodPp)
               _prodAccessToken
               _prodUploadType
-              _prodBearerToken
               _prodCallback
               (Just AltJSON)
               dataprocService

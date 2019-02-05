@@ -81,7 +81,7 @@ rolesDelete pRdRoleId_ pRdCustomer_ =
 rdRoleId :: Lens' RolesDelete Text
 rdRoleId = lens _rdRoleId (\ s a -> s{_rdRoleId = a})
 
--- | Immutable ID of the Google Apps account.
+-- | Immutable ID of the G Suite account.
 rdCustomer :: Lens' RolesDelete Text
 rdCustomer
   = lens _rdCustomer (\ s a -> s{_rdCustomer = a})

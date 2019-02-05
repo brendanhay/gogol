@@ -39,12 +39,10 @@ module Network.Google.Resource.Classroom.Courses.Students.Get
     -- * Request Lenses
     , csgXgafv
     , csgUploadProtocol
-    , csgPp
     , csgCourseId
     , csgAccessToken
     , csgUploadType
     , csgUserId
-    , csgBearerToken
     , csgCallback
     ) where
 
@@ -59,14 +57,12 @@ type CoursesStudentsGetResource =
          Capture "courseId" Text :>
            "students" :>
              Capture "userId" Text :>
-               QueryParam "$.xgafv" Text :>
+               QueryParam "$.xgafv" Xgafv :>
                  QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :> Get '[JSON] Student
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] Student
 
 -- | Returns a student of a course. This method returns the following error
 -- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
@@ -76,14 +72,12 @@ type CoursesStudentsGetResource =
 --
 -- /See:/ 'coursesStudentsGet' smart constructor.
 data CoursesStudentsGet = CoursesStudentsGet'
-    { _csgXgafv          :: !(Maybe Text)
+    { _csgXgafv          :: !(Maybe Xgafv)
     , _csgUploadProtocol :: !(Maybe Text)
-    , _csgPp             :: !Bool
     , _csgCourseId       :: !Text
     , _csgAccessToken    :: !(Maybe Text)
     , _csgUploadType     :: !(Maybe Text)
     , _csgUserId         :: !Text
-    , _csgBearerToken    :: !(Maybe Text)
     , _csgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -95,8 +89,6 @@ data CoursesStudentsGet = CoursesStudentsGet'
 --
 -- * 'csgUploadProtocol'
 --
--- * 'csgPp'
---
 -- * 'csgCourseId'
 --
 -- * 'csgAccessToken'
@@ -104,8 +96,6 @@ data CoursesStudentsGet = CoursesStudentsGet'
 -- * 'csgUploadType'
 --
 -- * 'csgUserId'
---
--- * 'csgBearerToken'
 --
 -- * 'csgCallback'
 coursesStudentsGet
@@ -116,17 +106,15 @@ coursesStudentsGet pCsgCourseId_ pCsgUserId_ =
     CoursesStudentsGet'
     { _csgXgafv = Nothing
     , _csgUploadProtocol = Nothing
-    , _csgPp = True
     , _csgCourseId = pCsgCourseId_
     , _csgAccessToken = Nothing
     , _csgUploadType = Nothing
     , _csgUserId = pCsgUserId_
-    , _csgBearerToken = Nothing
     , _csgCallback = Nothing
     }
 
 -- | V1 error format.
-csgXgafv :: Lens' CoursesStudentsGet (Maybe Text)
+csgXgafv :: Lens' CoursesStudentsGet (Maybe Xgafv)
 csgXgafv = lens _csgXgafv (\ s a -> s{_csgXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -134,10 +122,6 @@ csgUploadProtocol :: Lens' CoursesStudentsGet (Maybe Text)
 csgUploadProtocol
   = lens _csgUploadProtocol
       (\ s a -> s{_csgUploadProtocol = a})
-
--- | Pretty-print response.
-csgPp :: Lens' CoursesStudentsGet Bool
-csgPp = lens _csgPp (\ s a -> s{_csgPp = a})
 
 -- | Identifier of the course. This identifier can be either the
 -- Classroom-assigned identifier or an alias.
@@ -164,12 +148,6 @@ csgUserId :: Lens' CoursesStudentsGet Text
 csgUserId
   = lens _csgUserId (\ s a -> s{_csgUserId = a})
 
--- | OAuth bearer token.
-csgBearerToken :: Lens' CoursesStudentsGet (Maybe Text)
-csgBearerToken
-  = lens _csgBearerToken
-      (\ s a -> s{_csgBearerToken = a})
-
 -- | JSONP
 csgCallback :: Lens' CoursesStudentsGet (Maybe Text)
 csgCallback
@@ -185,10 +163,8 @@ instance GoogleRequest CoursesStudentsGet where
         requestClient CoursesStudentsGet'{..}
           = go _csgCourseId _csgUserId _csgXgafv
               _csgUploadProtocol
-              (Just _csgPp)
               _csgAccessToken
               _csgUploadType
-              _csgBearerToken
               _csgCallback
               (Just AltJSON)
               classroomService

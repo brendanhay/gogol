@@ -358,6 +358,7 @@ data User = User'
     { _uPhoto        :: !(Maybe Photo)
     , _uIsDeleted    :: !(Maybe Bool)
     , _uName         :: !(Maybe Text)
+    , _uIsMe         :: !(Maybe Bool)
     , _uPermissionId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -371,6 +372,8 @@ data User = User'
 --
 -- * 'uName'
 --
+-- * 'uIsMe'
+--
 -- * 'uPermissionId'
 user
     :: User
@@ -379,6 +382,7 @@ user =
     { _uPhoto = Nothing
     , _uIsDeleted = Nothing
     , _uName = Nothing
+    , _uIsMe = Nothing
     , _uPermissionId = Nothing
     }
 
@@ -397,6 +401,10 @@ uIsDeleted
 uName :: Lens' User (Maybe Text)
 uName = lens _uName (\ s a -> s{_uName = a})
 
+-- | Whether the user is the authenticated user.
+uIsMe :: Lens' User (Maybe Bool)
+uIsMe = lens _uIsMe (\ s a -> s{_uIsMe = a})
+
 -- | The permission ID associated with this user. Equivalent to the Drive
 -- API\'s permission ID for this user, returned as part of the Drive
 -- Permissions resource.
@@ -412,6 +420,7 @@ instance FromJSON User where
                  User' <$>
                    (o .:? "photo") <*> (o .:? "isDeleted") <*>
                      (o .:? "name")
+                     <*> (o .:? "isMe")
                      <*> (o .:? "permissionId"))
 
 instance ToJSON User where
@@ -420,7 +429,7 @@ instance ToJSON User where
               (catMaybes
                  [("photo" .=) <$> _uPhoto,
                   ("isDeleted" .=) <$> _uIsDeleted,
-                  ("name" .=) <$> _uName,
+                  ("name" .=) <$> _uName, ("isMe" .=) <$> _uIsMe,
                   ("permissionId" .=) <$> _uPermissionId])
 
 -- | An Activity resource is a combined view of multiple events. An activity

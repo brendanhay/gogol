@@ -23,7 +23,7 @@
 -- Lists previously requested builds. Previously requested builds may still
 -- be in-progress, or may have finished successfully or unsuccessfully.
 --
--- /See:/ <https://cloud.google.com/container-builder/docs/ Google Cloud Container Builder API Reference> for @cloudbuild.projects.builds.list@.
+-- /See:/ <https://cloud.google.com/cloud-build/docs/ Cloud Build API Reference> for @cloudbuild.projects.builds.list@.
 module Network.Google.Resource.Cloudbuild.Projects.Builds.List
     (
     -- * REST Resource
@@ -36,10 +36,8 @@ module Network.Google.Resource.Cloudbuild.Projects.Builds.List
     -- * Request Lenses
     , pblXgafv
     , pblUploadProtocol
-    , pblPp
     , pblAccessToken
     , pblUploadType
-    , pblBearerToken
     , pblFilter
     , pblPageToken
     , pblProjectId
@@ -59,16 +57,14 @@ type ProjectsBuildsListResource =
            "builds" :>
              QueryParam "$.xgafv" Xgafv :>
                QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "filter" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "pageSize" (Textual Int32) :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" AltJSON :>
-                                   Get '[JSON] ListBuildsResponse
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "filter" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "pageSize" (Textual Int32) :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] ListBuildsResponse
 
 -- | Lists previously requested builds. Previously requested builds may still
 -- be in-progress, or may have finished successfully or unsuccessfully.
@@ -77,10 +73,8 @@ type ProjectsBuildsListResource =
 data ProjectsBuildsList = ProjectsBuildsList'
     { _pblXgafv          :: !(Maybe Xgafv)
     , _pblUploadProtocol :: !(Maybe Text)
-    , _pblPp             :: !Bool
     , _pblAccessToken    :: !(Maybe Text)
     , _pblUploadType     :: !(Maybe Text)
-    , _pblBearerToken    :: !(Maybe Text)
     , _pblFilter         :: !(Maybe Text)
     , _pblPageToken      :: !(Maybe Text)
     , _pblProjectId      :: !Text
@@ -96,13 +90,9 @@ data ProjectsBuildsList = ProjectsBuildsList'
 --
 -- * 'pblUploadProtocol'
 --
--- * 'pblPp'
---
 -- * 'pblAccessToken'
 --
 -- * 'pblUploadType'
---
--- * 'pblBearerToken'
 --
 -- * 'pblFilter'
 --
@@ -120,10 +110,8 @@ projectsBuildsList pPblProjectId_ =
     ProjectsBuildsList'
     { _pblXgafv = Nothing
     , _pblUploadProtocol = Nothing
-    , _pblPp = True
     , _pblAccessToken = Nothing
     , _pblUploadType = Nothing
-    , _pblBearerToken = Nothing
     , _pblFilter = Nothing
     , _pblPageToken = Nothing
     , _pblProjectId = pPblProjectId_
@@ -141,10 +129,6 @@ pblUploadProtocol
   = lens _pblUploadProtocol
       (\ s a -> s{_pblUploadProtocol = a})
 
--- | Pretty-print response.
-pblPp :: Lens' ProjectsBuildsList Bool
-pblPp = lens _pblPp (\ s a -> s{_pblPp = a})
-
 -- | OAuth access token.
 pblAccessToken :: Lens' ProjectsBuildsList (Maybe Text)
 pblAccessToken
@@ -156,12 +140,6 @@ pblUploadType :: Lens' ProjectsBuildsList (Maybe Text)
 pblUploadType
   = lens _pblUploadType
       (\ s a -> s{_pblUploadType = a})
-
--- | OAuth bearer token.
-pblBearerToken :: Lens' ProjectsBuildsList (Maybe Text)
-pblBearerToken
-  = lens _pblBearerToken
-      (\ s a -> s{_pblBearerToken = a})
 
 -- | The raw filter text to constrain the results.
 pblFilter :: Lens' ProjectsBuildsList (Maybe Text)
@@ -195,10 +173,8 @@ instance GoogleRequest ProjectsBuildsList where
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsBuildsList'{..}
           = go _pblProjectId _pblXgafv _pblUploadProtocol
-              (Just _pblPp)
               _pblAccessToken
               _pblUploadType
-              _pblBearerToken
               _pblFilter
               _pblPageToken
               _pblPageSize

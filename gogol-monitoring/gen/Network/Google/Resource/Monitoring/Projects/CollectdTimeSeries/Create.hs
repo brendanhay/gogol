@@ -37,11 +37,9 @@ module Network.Google.Resource.Monitoring.Projects.CollectdTimeSeries.Create
     -- * Request Lenses
     , pctscXgafv
     , pctscUploadProtocol
-    , pctscPp
     , pctscAccessToken
     , pctscUploadType
     , pctscPayload
-    , pctscBearerToken
     , pctscName
     , pctscCallback
     ) where
@@ -57,14 +55,12 @@ type ProjectsCollectdTimeSeriesCreateResource =
          "collectdTimeSeries" :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] CreateCollectdTimeSeriesRequest :>
-                             Post '[JSON] Empty
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] CreateCollectdTimeSeriesRequest :>
+                         Post '[JSON] CreateCollectdTimeSeriesResponse
 
 -- | Stackdriver Monitoring Agent only: Creates a new time series.
 -- This method is only for use by the Stackdriver Monitoring Agent. Use
@@ -74,11 +70,9 @@ type ProjectsCollectdTimeSeriesCreateResource =
 data ProjectsCollectdTimeSeriesCreate = ProjectsCollectdTimeSeriesCreate'
     { _pctscXgafv          :: !(Maybe Xgafv)
     , _pctscUploadProtocol :: !(Maybe Text)
-    , _pctscPp             :: !Bool
     , _pctscAccessToken    :: !(Maybe Text)
     , _pctscUploadType     :: !(Maybe Text)
     , _pctscPayload        :: !CreateCollectdTimeSeriesRequest
-    , _pctscBearerToken    :: !(Maybe Text)
     , _pctscName           :: !Text
     , _pctscCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -91,15 +85,11 @@ data ProjectsCollectdTimeSeriesCreate = ProjectsCollectdTimeSeriesCreate'
 --
 -- * 'pctscUploadProtocol'
 --
--- * 'pctscPp'
---
 -- * 'pctscAccessToken'
 --
 -- * 'pctscUploadType'
 --
 -- * 'pctscPayload'
---
--- * 'pctscBearerToken'
 --
 -- * 'pctscName'
 --
@@ -112,11 +102,9 @@ projectsCollectdTimeSeriesCreate pPctscPayload_ pPctscName_ =
     ProjectsCollectdTimeSeriesCreate'
     { _pctscXgafv = Nothing
     , _pctscUploadProtocol = Nothing
-    , _pctscPp = True
     , _pctscAccessToken = Nothing
     , _pctscUploadType = Nothing
     , _pctscPayload = pPctscPayload_
-    , _pctscBearerToken = Nothing
     , _pctscName = pPctscName_
     , _pctscCallback = Nothing
     }
@@ -131,10 +119,6 @@ pctscUploadProtocol :: Lens' ProjectsCollectdTimeSeriesCreate (Maybe Text)
 pctscUploadProtocol
   = lens _pctscUploadProtocol
       (\ s a -> s{_pctscUploadProtocol = a})
-
--- | Pretty-print response.
-pctscPp :: Lens' ProjectsCollectdTimeSeriesCreate Bool
-pctscPp = lens _pctscPp (\ s a -> s{_pctscPp = a})
 
 -- | OAuth access token.
 pctscAccessToken :: Lens' ProjectsCollectdTimeSeriesCreate (Maybe Text)
@@ -153,12 +137,6 @@ pctscPayload :: Lens' ProjectsCollectdTimeSeriesCreate CreateCollectdTimeSeriesR
 pctscPayload
   = lens _pctscPayload (\ s a -> s{_pctscPayload = a})
 
--- | OAuth bearer token.
-pctscBearerToken :: Lens' ProjectsCollectdTimeSeriesCreate (Maybe Text)
-pctscBearerToken
-  = lens _pctscBearerToken
-      (\ s a -> s{_pctscBearerToken = a})
-
 -- | The project in which to create the time series. The format is
 -- \"projects\/PROJECT_ID_OR_NUMBER\".
 pctscName :: Lens' ProjectsCollectdTimeSeriesCreate Text
@@ -173,17 +151,16 @@ pctscCallback
 
 instance GoogleRequest
          ProjectsCollectdTimeSeriesCreate where
-        type Rs ProjectsCollectdTimeSeriesCreate = Empty
+        type Rs ProjectsCollectdTimeSeriesCreate =
+             CreateCollectdTimeSeriesResponse
         type Scopes ProjectsCollectdTimeSeriesCreate =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/monitoring",
                "https://www.googleapis.com/auth/monitoring.write"]
         requestClient ProjectsCollectdTimeSeriesCreate'{..}
           = go _pctscName _pctscXgafv _pctscUploadProtocol
-              (Just _pctscPp)
               _pctscAccessToken
               _pctscUploadType
-              _pctscBearerToken
               _pctscCallback
               (Just AltJSON)
               _pctscPayload

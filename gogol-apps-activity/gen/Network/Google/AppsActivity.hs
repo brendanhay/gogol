@@ -15,18 +15,14 @@
 --
 -- Provides a historical view of activity.
 --
--- /See:/ <https://developers.google.com/google-apps/activity/ Google Apps Activity API Reference>
+-- /See:/ <https://developers.google.com/google-apps/activity/ Drive Activity API Reference>
 module Network.Google.AppsActivity
     (
     -- * Service Configuration
       appsActivityService
 
     -- * OAuth Scopes
-    , driveMetadataReadOnlyScope
     , activityScope
-    , driveReadOnlyScope
-    , driveScope
-    , driveMetadataScope
 
     -- * API Declaration
     , AppsActivityAPI
@@ -90,6 +86,7 @@ module Network.Google.AppsActivity
     , uPhoto
     , uIsDeleted
     , uName
+    , uIsMe
     , uPermissionId
 
     -- ** EventAdditionalEventTypesItem
@@ -142,5 +139,5 @@ import           Network.Google.Resource.AppsActivity.Activities.List
 TODO
 -}
 
--- | Represents the entirety of the methods and resources available for the Google Apps Activity API service.
+-- | Represents the entirety of the methods and resources available for the Drive Activity API service.
 type AppsActivityAPI = ActivitiesListResource

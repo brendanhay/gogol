@@ -225,38 +225,6 @@ instance ToJSON ChangesListResponse where
                   Just ("kind" .= _clrKind),
                   ("header" .=) <$> _clrHeader])
 
---
--- /See:/ 'managedZonesDeleteResponse' smart constructor.
-newtype ManagedZonesDeleteResponse = ManagedZonesDeleteResponse'
-    { _mzdrHeader :: Maybe ResponseHeader
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ManagedZonesDeleteResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'mzdrHeader'
-managedZonesDeleteResponse
-    :: ManagedZonesDeleteResponse
-managedZonesDeleteResponse =
-    ManagedZonesDeleteResponse'
-    { _mzdrHeader = Nothing
-    }
-
-mzdrHeader :: Lens' ManagedZonesDeleteResponse (Maybe ResponseHeader)
-mzdrHeader
-  = lens _mzdrHeader (\ s a -> s{_mzdrHeader = a})
-
-instance FromJSON ManagedZonesDeleteResponse where
-        parseJSON
-          = withObject "ManagedZonesDeleteResponse"
-              (\ o ->
-                 ManagedZonesDeleteResponse' <$> (o .:? "header"))
-
-instance ToJSON ManagedZonesDeleteResponse where
-        toJSON ManagedZonesDeleteResponse'{..}
-          = object (catMaybes [("header" .=) <$> _mzdrHeader])
-
 -- | A project resource. The project is a top level container for resources
 -- including Cloud DNS ManagedZones. Projects can be created only in the
 -- APIs console.
@@ -1224,6 +1192,7 @@ data ManagedZone = ManagedZone'
     , _mzNameServerSet :: !(Maybe Text)
     , _mzName          :: !(Maybe Text)
     , _mzId            :: !(Maybe (Textual Word64))
+    , _mzLabels        :: !(Maybe ManagedZoneLabels)
     , _mzDNSName       :: !(Maybe Text)
     , _mzDescription   :: !(Maybe Text)
     , _mzDNSsecConfig  :: !(Maybe ManagedZoneDNSSecConfig)
@@ -1244,6 +1213,8 @@ data ManagedZone = ManagedZone'
 --
 -- * 'mzId'
 --
+-- * 'mzLabels'
+--
 -- * 'mzDNSName'
 --
 -- * 'mzDescription'
@@ -1260,6 +1231,7 @@ managedZone =
     , _mzNameServerSet = Nothing
     , _mzName = Nothing
     , _mzId = Nothing
+    , _mzLabels = Nothing
     , _mzDNSName = Nothing
     , _mzDescription = Nothing
     , _mzDNSsecConfig = Nothing
@@ -1299,6 +1271,10 @@ mzId
   = lens _mzId (\ s a -> s{_mzId = a}) .
       mapping _Coerce
 
+-- | User labels.
+mzLabels :: Lens' ManagedZone (Maybe ManagedZoneLabels)
+mzLabels = lens _mzLabels (\ s a -> s{_mzLabels = a})
+
 -- | The DNS name of this managed zone, for instance \"example.com.\".
 mzDNSName :: Lens' ManagedZone (Maybe Text)
 mzDNSName
@@ -1337,6 +1313,7 @@ instance FromJSON ManagedZone where
                      <*> (o .:? "nameServerSet")
                      <*> (o .:? "name")
                      <*> (o .:? "id")
+                     <*> (o .:? "labels")
                      <*> (o .:? "dnsName")
                      <*> (o .:? "description")
                      <*> (o .:? "dnssecConfig")
@@ -1350,10 +1327,44 @@ instance ToJSON ManagedZone where
                   Just ("kind" .= _mzKind),
                   ("nameServerSet" .=) <$> _mzNameServerSet,
                   ("name" .=) <$> _mzName, ("id" .=) <$> _mzId,
+                  ("labels" .=) <$> _mzLabels,
                   ("dnsName" .=) <$> _mzDNSName,
                   ("description" .=) <$> _mzDescription,
                   ("dnssecConfig" .=) <$> _mzDNSsecConfig,
                   ("nameServers" .=) <$> _mzNameServers])
+
+-- | User labels.
+--
+-- /See:/ 'managedZoneLabels' smart constructor.
+newtype ManagedZoneLabels = ManagedZoneLabels'
+    { _mzlAddtional :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ManagedZoneLabels' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mzlAddtional'
+managedZoneLabels
+    :: HashMap Text Text -- ^ 'mzlAddtional'
+    -> ManagedZoneLabels
+managedZoneLabels pMzlAddtional_ =
+    ManagedZoneLabels'
+    { _mzlAddtional = _Coerce # pMzlAddtional_
+    }
+
+mzlAddtional :: Lens' ManagedZoneLabels (HashMap Text Text)
+mzlAddtional
+  = lens _mzlAddtional (\ s a -> s{_mzlAddtional = a})
+      . _Coerce
+
+instance FromJSON ManagedZoneLabels where
+        parseJSON
+          = withObject "ManagedZoneLabels"
+              (\ o -> ManagedZoneLabels' <$> (parseJSONObject o))
+
+instance ToJSON ManagedZoneLabels where
+        toJSON = toJSON . _mzlAddtional
 
 -- | Limits associated with a Project.
 --

@@ -34,6 +34,7 @@ module Network.Google.Resource.BigQuery.Jobs.GetQueryResults
 
     -- * Request Lenses
     , jgqrJobId
+    , jgqrLocation
     , jgqrTimeoutMs
     , jgqrPageToken
     , jgqrProjectId
@@ -53,18 +54,20 @@ type JobsGetQueryResultsResource =
            Capture "projectId" Text :>
              "queries" :>
                Capture "jobId" Text :>
-                 QueryParam "timeoutMs" (Textual Word32) :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "startIndex" (Textual Word64) :>
-                       QueryParam "maxResults" (Textual Word32) :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] GetQueryResultsResponse
+                 QueryParam "location" Text :>
+                   QueryParam "timeoutMs" (Textual Word32) :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "startIndex" (Textual Word64) :>
+                         QueryParam "maxResults" (Textual Word32) :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] GetQueryResultsResponse
 
 -- | Retrieves the results of a query job.
 --
 -- /See:/ 'jobsGetQueryResults' smart constructor.
 data JobsGetQueryResults = JobsGetQueryResults'
     { _jgqrJobId      :: !Text
+    , _jgqrLocation   :: !(Maybe Text)
     , _jgqrTimeoutMs  :: !(Maybe (Textual Word32))
     , _jgqrPageToken  :: !(Maybe Text)
     , _jgqrProjectId  :: !Text
@@ -77,6 +80,8 @@ data JobsGetQueryResults = JobsGetQueryResults'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'jgqrJobId'
+--
+-- * 'jgqrLocation'
 --
 -- * 'jgqrTimeoutMs'
 --
@@ -94,6 +99,7 @@ jobsGetQueryResults
 jobsGetQueryResults pJgqrJobId_ pJgqrProjectId_ =
     JobsGetQueryResults'
     { _jgqrJobId = pJgqrJobId_
+    , _jgqrLocation = Nothing
     , _jgqrTimeoutMs = Nothing
     , _jgqrPageToken = Nothing
     , _jgqrProjectId = pJgqrProjectId_
@@ -105,6 +111,13 @@ jobsGetQueryResults pJgqrJobId_ pJgqrProjectId_ =
 jgqrJobId :: Lens' JobsGetQueryResults Text
 jgqrJobId
   = lens _jgqrJobId (\ s a -> s{_jgqrJobId = a})
+
+-- | The geographic location where the job should run. Required except for US
+-- and EU. See details at
+-- https:\/\/cloud.google.com\/bigquery\/docs\/locations#specifying_your_location.
+jgqrLocation :: Lens' JobsGetQueryResults (Maybe Text)
+jgqrLocation
+  = lens _jgqrLocation (\ s a -> s{_jgqrLocation = a})
 
 -- | How long to wait for the query to complete, in milliseconds, before
 -- returning. Default is 10 seconds. If the timeout passes before the job
@@ -149,7 +162,8 @@ instance GoogleRequest JobsGetQueryResults where
                "https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/cloud-platform.read-only"]
         requestClient JobsGetQueryResults'{..}
-          = go _jgqrProjectId _jgqrJobId _jgqrTimeoutMs
+          = go _jgqrProjectId _jgqrJobId _jgqrLocation
+              _jgqrTimeoutMs
               _jgqrPageToken
               _jgqrStartIndex
               _jgqrMaxResults

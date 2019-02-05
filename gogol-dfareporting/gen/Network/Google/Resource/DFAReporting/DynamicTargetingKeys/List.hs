@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 -- 'DynamicTargetingKeysList' request conforms to.
 type DynamicTargetingKeysListResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "dynamicTargetingKeys" :>

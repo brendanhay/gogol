@@ -21,7 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Updates the specified firewall rule with the data included in the
--- request.
+-- request. The PUT method can only update the following fields of firewall
+-- rule: allowed, description, sourceRanges, sourceTags, targetTags.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.firewalls.update@.
 module Network.Google.Resource.Compute.Firewalls.Update
@@ -34,6 +35,7 @@ module Network.Google.Resource.Compute.Firewalls.Update
     , FirewallsUpdate
 
     -- * Request Lenses
+    , fuRequestId
     , fuProject
     , fuPayload
     , fuFirewall
@@ -52,22 +54,27 @@ type FirewallsUpdateResource =
              "global" :>
                "firewalls" :>
                  Capture "firewall" Text :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] Firewall :> Put '[JSON] Operation
+                   QueryParam "requestId" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Firewall :> Put '[JSON] Operation
 
 -- | Updates the specified firewall rule with the data included in the
--- request.
+-- request. The PUT method can only update the following fields of firewall
+-- rule: allowed, description, sourceRanges, sourceTags, targetTags.
 --
 -- /See:/ 'firewallsUpdate' smart constructor.
 data FirewallsUpdate = FirewallsUpdate'
-    { _fuProject  :: !Text
-    , _fuPayload  :: !Firewall
-    , _fuFirewall :: !Text
+    { _fuRequestId :: !(Maybe Text)
+    , _fuProject   :: !Text
+    , _fuPayload   :: !Firewall
+    , _fuFirewall  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FirewallsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'fuRequestId'
 --
 -- * 'fuProject'
 --
@@ -81,10 +88,25 @@ firewallsUpdate
     -> FirewallsUpdate
 firewallsUpdate pFuProject_ pFuPayload_ pFuFirewall_ =
     FirewallsUpdate'
-    { _fuProject = pFuProject_
+    { _fuRequestId = Nothing
+    , _fuProject = pFuProject_
     , _fuPayload = pFuPayload_
     , _fuFirewall = pFuFirewall_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+fuRequestId :: Lens' FirewallsUpdate (Maybe Text)
+fuRequestId
+  = lens _fuRequestId (\ s a -> s{_fuRequestId = a})
 
 -- | Project ID for this request.
 fuProject :: Lens' FirewallsUpdate Text
@@ -107,7 +129,9 @@ instance GoogleRequest FirewallsUpdate where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient FirewallsUpdate'{..}
-          = go _fuProject _fuFirewall (Just AltJSON) _fuPayload
+          = go _fuProject _fuFirewall _fuRequestId
+              (Just AltJSON)
+              _fuPayload
               computeService
           where go
                   = buildClient

@@ -1,0 +1,48 @@
+name:                  gogol-firebaseremoteconfig
+version:               0.4.0
+synopsis:              Google Firebase Remote Config SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               OtherLicense
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
+copyright:             Copyright (c) 2015-2016 Brendan Hay
+category:              Network, Google, Cloud
+build-type:            Simple
+cabal-version:         >= 1.10
+extra-source-files:    README.md src/.gitkeep
+
+description:
+    Firebase Remote Config API allows the 3P clients to manage Remote Config
+    conditions and parameters for Firebase applications.
+    .
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
+    .
+    This library is compatible with version @v1@
+    of the API.
+
+source-repository head
+    type:     git
+    location: git://github.com/brendanhay/gogol.git
+
+library
+    default-language:  Haskell2010
+    hs-source-dirs:    src gen
+
+    ghc-options:       -Wall
+
+    exposed-modules:
+          Network.Google.FirebaseRemoteConfig
+        , Network.Google.FirebaseRemoteConfig.Types
+        , Network.Google.Resource.FirebaseRemoteConfig.Projects.GetRemoteConfig
+        , Network.Google.Resource.FirebaseRemoteConfig.Projects.UpdateRemoteConfig
+
+    other-modules:
+          Network.Google.FirebaseRemoteConfig.Types.Product
+        , Network.Google.FirebaseRemoteConfig.Types.Sum
+
+    build-depends:
+          gogol-core == 0.4.0.*
+        , base       >= 4.7 && < 5

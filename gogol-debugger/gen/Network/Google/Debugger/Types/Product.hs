@@ -39,8 +39,11 @@ registerDebuggeeResponse =
     { _rdrDebuggee = Nothing
     }
 
--- | Debuggee resource. The field \`id\` is guranteed to be set (in addition
--- to the echoed fields).
+-- | Debuggee resource. The field \`id\` is guaranteed to be set (in addition
+-- to the echoed fields). If the field \`is_disabled\` is set to \`true\`,
+-- the agent should disable itself by removing all breakpoints and
+-- detaching from the application. It should however continue to poll
+-- \`RegisterDebuggee\` until reenabled.
 rdrDebuggee :: Lens' RegisterDebuggeeResponse (Maybe Debuggee)
 rdrDebuggee
   = lens _rdrDebuggee (\ s a -> s{_rdrDebuggee = a})
@@ -481,10 +484,10 @@ instance ToJSON FormatMessage where
 -- /See:/ 'breakpoint' smart constructor.
 data Breakpoint = Breakpoint'
     { _bStatus               :: !(Maybe StatusMessage)
-    , _bLogLevel             :: !(Maybe Text)
+    , _bLogLevel             :: !(Maybe BreakpointLogLevel)
     , _bLocation             :: !(Maybe SourceLocation)
-    , _bAction               :: !(Maybe Text)
-    , _bFinalTime            :: !(Maybe Text)
+    , _bAction               :: !(Maybe BreakpointAction)
+    , _bFinalTime            :: !(Maybe DateTime')
     , _bExpressions          :: !(Maybe [Text])
     , _bLogMessageFormat     :: !(Maybe Text)
     , _bId                   :: !(Maybe Text)
@@ -494,7 +497,7 @@ data Breakpoint = Breakpoint'
     , _bStackFrames          :: !(Maybe [StackFrame])
     , _bCondition            :: !(Maybe Text)
     , _bEvaluatedExpressions :: !(Maybe [Variable])
-    , _bCreateTime           :: !(Maybe Text)
+    , _bCreateTime           :: !(Maybe DateTime')
     , _bIsFinalState         :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -567,7 +570,7 @@ bStatus :: Lens' Breakpoint (Maybe StatusMessage)
 bStatus = lens _bStatus (\ s a -> s{_bStatus = a})
 
 -- | Indicates the severity of the log. Only relevant when action is \`LOG\`.
-bLogLevel :: Lens' Breakpoint (Maybe Text)
+bLogLevel :: Lens' Breakpoint (Maybe BreakpointLogLevel)
 bLogLevel
   = lens _bLogLevel (\ s a -> s{_bLogLevel = a})
 
@@ -578,14 +581,15 @@ bLocation
 
 -- | Action that the agent should perform when the code at the breakpoint
 -- location is hit.
-bAction :: Lens' Breakpoint (Maybe Text)
+bAction :: Lens' Breakpoint (Maybe BreakpointAction)
 bAction = lens _bAction (\ s a -> s{_bAction = a})
 
 -- | Time this breakpoint was finalized as seen by the server in seconds
 -- resolution.
-bFinalTime :: Lens' Breakpoint (Maybe Text)
+bFinalTime :: Lens' Breakpoint (Maybe UTCTime)
 bFinalTime
-  = lens _bFinalTime (\ s a -> s{_bFinalTime = a})
+  = lens _bFinalTime (\ s a -> s{_bFinalTime = a}) .
+      mapping _DateTime
 
 -- | List of read-only expressions to evaluate at the breakpoint location.
 -- The expressions are composed using expressions in the programming
@@ -640,7 +644,8 @@ bVariableTable
       . _Default
       . _Coerce
 
--- | The stack at breakpoint time.
+-- | The stack at breakpoint time, where stack_frames[0] represents the most
+-- recently entered function.
 bStackFrames :: Lens' Breakpoint [StackFrame]
 bStackFrames
   = lens _bStackFrames (\ s a -> s{_bStackFrames = a})
@@ -669,9 +674,10 @@ bEvaluatedExpressions
       . _Coerce
 
 -- | Time this breakpoint was created by the server in seconds resolution.
-bCreateTime :: Lens' Breakpoint (Maybe Text)
+bCreateTime :: Lens' Breakpoint (Maybe UTCTime)
 bCreateTime
-  = lens _bCreateTime (\ s a -> s{_bCreateTime = a})
+  = lens _bCreateTime (\ s a -> s{_bCreateTime = a}) .
+      mapping _DateTime
 
 -- | When true, indicates that this is a final result and the breakpoint
 -- state will not change from here on.
@@ -807,7 +813,7 @@ instance ToJSON GetBreakpointResponse where
 -- Captured variable name: \"p\", type: \"T*\", value: \"0x00400400\"
 -- status { is_error: true, description { format: \"unavailable\" } } } The
 -- status should describe the reason for the missing value, such as \`\`,
--- \`\`, \` \`. Note that a null pointer should not have members. 5) An
+-- \`\`, \`\`. Note that a null pointer should not have members. 5) An
 -- unnamed value: int* p = new int(7); { \/\/ Captured variable name:
 -- \"p\", value: \"0x00500500\", type: \"int*\", members { value: \"7\",
 -- type: \"int\" } } 6) An unnamed pointer where the pointee was not
@@ -968,8 +974,10 @@ lbrNextWaitToken
   = lens _lbrNextWaitToken
       (\ s a -> s{_lbrNextWaitToken = a})
 
--- | List of all breakpoints with complete state. The fields \`id\` and
--- \`location\` are guaranteed to be set on each breakpoint.
+-- | List of breakpoints matching the request. The fields \`id\` and
+-- \`location\` are guaranteed to be set on each breakpoint. The fields:
+-- \`stack_frames\`, \`evaluated_expressions\` and \`variable_table\` are
+-- cleared on each breakpoint regardless of its status.
 lbrBreakpoints :: Lens' ListBreakpointsResponse [Breakpoint]
 lbrBreakpoints
   = lens _lbrBreakpoints
@@ -1011,10 +1019,10 @@ listDebuggeesResponse =
     { _ldrDebuggees = Nothing
     }
 
--- | List of debuggees accessible to the calling user. Note that the
--- \`description\` field is the only human readable field that should be
--- displayed to the user. The fields \`debuggee.id\` and \`description\`
--- fields are guaranteed to be set on each debuggee.
+-- | List of debuggees accessible to the calling user. The fields
+-- \`debuggee.id\` and \`description\` are guaranteed to be set. The
+-- \`description\` field is a human readable field provided by agents and
+-- can be displayed to users.
 ldrDebuggees :: Lens' ListDebuggeesResponse [Debuggee]
 ldrDebuggees
   = lens _ldrDebuggees (\ s a -> s{_ldrDebuggees = a})
@@ -1052,7 +1060,8 @@ updateActiveBreakpointRequest =
     { _uabrBreakpoint = Nothing
     }
 
--- | Updated breakpoint information. The field \'id\' must be set.
+-- | Updated breakpoint information. The field \`id\` must be set. The agent
+-- must echo all Breakpoint specification fields in the update.
 uabrBreakpoint :: Lens' UpdateActiveBreakpointRequest (Maybe Breakpoint)
 uabrBreakpoint
   = lens _uabrBreakpoint
@@ -1078,7 +1087,7 @@ instance ToJSON UpdateActiveBreakpointRequest where
 --
 -- /See:/ 'statusMessage' smart constructor.
 data StatusMessage = StatusMessage'
-    { _smRefersTo    :: !(Maybe Text)
+    { _smRefersTo    :: !(Maybe StatusMessageRefersTo)
     , _smIsError     :: !(Maybe Bool)
     , _smDescription :: !(Maybe FormatMessage)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1102,7 +1111,7 @@ statusMessage =
     }
 
 -- | Reference to which the message applies.
-smRefersTo :: Lens' StatusMessage (Maybe Text)
+smRefersTo :: Lens' StatusMessage (Maybe StatusMessageRefersTo)
 smRefersTo
   = lens _smRefersTo (\ s a -> s{_smRefersTo = a})
 
@@ -1160,8 +1169,8 @@ listActiveBreakpointsResponse =
     , _labrWaitExpired = Nothing
     }
 
--- | A wait token that can be used in the next method call to block until the
--- list of breakpoints changes.
+-- | A token that can be used in the next method call to block until the list
+-- of breakpoints changes.
 labrNextWaitToken :: Lens' ListActiveBreakpointsResponse (Maybe Text)
 labrNextWaitToken
   = lens _labrNextWaitToken
@@ -1176,8 +1185,9 @@ labrBreakpoints
       . _Default
       . _Coerce
 
--- | The \`wait_expired\` field is set to true by the server when the request
--- times out and the field \`success_on_timeout\` is set to true.
+-- | If set to \`true\`, indicates that there is no change to the list of
+-- active breakpoints and the server-selected timeout has expired. The
+-- \`breakpoints\` field would be empty and should be ignored.
 labrWaitExpired :: Lens' ListActiveBreakpointsResponse (Maybe Bool)
 labrWaitExpired
   = lens _labrWaitExpired
@@ -1299,8 +1309,9 @@ instance ToJSON GitSourceContext where
 --
 -- /See:/ 'sourceLocation' smart constructor.
 data SourceLocation = SourceLocation'
-    { _slPath :: !(Maybe Text)
-    , _slLine :: !(Maybe (Textual Int32))
+    { _slPath   :: !(Maybe Text)
+    , _slLine   :: !(Maybe (Textual Int32))
+    , _slColumn :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SourceLocation' with the minimum fields required to make a request.
@@ -1310,12 +1321,15 @@ data SourceLocation = SourceLocation'
 -- * 'slPath'
 --
 -- * 'slLine'
+--
+-- * 'slColumn'
 sourceLocation
     :: SourceLocation
 sourceLocation =
     SourceLocation'
     { _slPath = Nothing
     , _slLine = Nothing
+    , _slColumn = Nothing
     }
 
 -- | Path to the source file within the source context of the target binary.
@@ -1328,18 +1342,28 @@ slLine
   = lens _slLine (\ s a -> s{_slLine = a}) .
       mapping _Coerce
 
+-- | Column within a line. The first column in a line as the value \`1\`.
+-- Agents that do not support setting breakpoints on specific columns
+-- ignore this field.
+slColumn :: Lens' SourceLocation (Maybe Int32)
+slColumn
+  = lens _slColumn (\ s a -> s{_slColumn = a}) .
+      mapping _Coerce
+
 instance FromJSON SourceLocation where
         parseJSON
           = withObject "SourceLocation"
               (\ o ->
                  SourceLocation' <$>
-                   (o .:? "path") <*> (o .:? "line"))
+                   (o .:? "path") <*> (o .:? "line") <*>
+                     (o .:? "column"))
 
 instance ToJSON SourceLocation where
         toJSON SourceLocation'{..}
           = object
               (catMaybes
-                 [("path" .=) <$> _slPath, ("line" .=) <$> _slLine])
+                 [("path" .=) <$> _slPath, ("line" .=) <$> _slLine,
+                  ("column" .=) <$> _slColumn])
 
 -- | Represents a stack frame context.
 --
@@ -1523,11 +1547,11 @@ instance FromJSON DebuggeeLabels where
 instance ToJSON DebuggeeLabels where
         toJSON = toJSON . _dlAddtional
 
--- | Represents the application to debug. The application may include one or
+-- | Represents the debugged application. The application may include one or
 -- more replicated processes executing the same code. Each of these
 -- processes is attached with a debugger agent, carrying out the debugging
--- commands. The agents attached to the same debuggee are identified by
--- using exactly the same field values when registering.
+-- commands. Agents attached to the same debuggee identify themselves as
+-- such by using exactly the same Debuggee message value when registering.
 --
 -- /See:/ 'debuggee' smart constructor.
 data Debuggee = Debuggee'
@@ -1592,22 +1616,23 @@ debuggee =
 dStatus :: Lens' Debuggee (Maybe StatusMessage)
 dStatus = lens _dStatus (\ s a -> s{_dStatus = a})
 
--- | Debuggee uniquifier within the project. Any string that identifies the
--- application within the project can be used. Including environment and
--- version or build IDs is recommended.
+-- | Uniquifier to further distinguish the application. It is possible that
+-- different applications might have identical values in the debuggee
+-- message, thus, incorrectly identified as a single application by the
+-- Controller service. This field adds salt to further distinguish the
+-- application. Agents should consider seeding this field with value that
+-- identifies the code, binary, configuration and environment.
 dUniquifier :: Lens' Debuggee (Maybe Text)
 dUniquifier
   = lens _dUniquifier (\ s a -> s{_dUniquifier = a})
 
--- | Project the debuggee is associated with. Use the project number when
+-- | Project the debuggee is associated with. Use project number or id when
 -- registering a Google Cloud Platform project.
 dProject :: Lens' Debuggee (Maybe Text)
 dProject = lens _dProject (\ s a -> s{_dProject = a})
 
 -- | References to the locations and revisions of the source code used in the
--- deployed application. Contexts describing a remote repo related to the
--- source code have a \`category\` label of \`remote_repo\`. Source
--- snapshot source contexts have a \`category\` of \`snapshot\`.
+-- deployed application.
 dExtSourceContexts :: Lens' Debuggee [ExtendedSourceContext]
 dExtSourceContexts
   = lens _dExtSourceContexts
@@ -1615,9 +1640,9 @@ dExtSourceContexts
       . _Default
       . _Coerce
 
--- | Version ID of the agent release. The version ID is structured as
--- following: \`domain\/type\/vmajor.minor\` (for example
--- \`google.com\/gcp-java\/v1.1\`).
+-- | Version ID of the agent. Schema:
+-- \`domain\/language-platform\/vmajor.minor\` (for example
+-- \`google.com\/java-gcp\/v1.1\`).
 dAgentVersion :: Lens' Debuggee (Maybe Text)
 dAgentVersion
   = lens _dAgentVersion
@@ -1644,16 +1669,15 @@ dDescription :: Lens' Debuggee (Maybe Text)
 dDescription
   = lens _dDescription (\ s a -> s{_dDescription = a})
 
--- | If set to \`true\`, indicates that the debuggee is considered as
--- inactive by the Controller service.
+-- | If set to \`true\`, indicates that Controller service does not detect
+-- any activity from the debuggee agents and the application is possibly
+-- stopped.
 dIsInactive :: Lens' Debuggee (Maybe Bool)
 dIsInactive
   = lens _dIsInactive (\ s a -> s{_dIsInactive = a})
 
 -- | References to the locations and revisions of the source code used in the
--- deployed application. NOTE: This field is deprecated. Consumers should
--- use \`ext_source_contexts\` if it is not empty. Debug agents should
--- populate both this field and \`ext_source_contexts\`.
+-- deployed application.
 dSourceContexts :: Lens' Debuggee [SourceContext]
 dSourceContexts
   = lens _dSourceContexts
@@ -1783,7 +1807,7 @@ instance ToJSON RegisterDebuggeeRequest where
 --
 -- /See:/ 'aliasContext' smart constructor.
 data AliasContext = AliasContext'
-    { _acKind :: !(Maybe Text)
+    { _acKind :: !(Maybe AliasContextKind)
     , _acName :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1803,7 +1827,7 @@ aliasContext =
     }
 
 -- | The alias kind.
-acKind :: Lens' AliasContext (Maybe Text)
+acKind :: Lens' AliasContext (Maybe AliasContextKind)
 acKind = lens _acKind (\ s a -> s{_acKind = a})
 
 -- | The alias name.

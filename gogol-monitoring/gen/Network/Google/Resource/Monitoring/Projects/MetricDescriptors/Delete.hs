@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a metric descriptor. Only user-created custom metrics
--- (\/monitoring\/custom-metrics) can be deleted.
+-- Deletes a metric descriptor. Only user-created custom metrics can be
+-- deleted.
 --
 -- /See:/ <https://cloud.google.com/monitoring/api/ Stackdriver Monitoring API Reference> for @monitoring.projects.metricDescriptors.delete@.
 module Network.Google.Resource.Monitoring.Projects.MetricDescriptors.Delete
@@ -36,10 +36,8 @@ module Network.Google.Resource.Monitoring.Projects.MetricDescriptors.Delete
     -- * Request Lenses
     , pmddXgafv
     , pmddUploadProtocol
-    , pmddPp
     , pmddAccessToken
     , pmddUploadType
-    , pmddBearerToken
     , pmddName
     , pmddCallback
     ) where
@@ -54,24 +52,20 @@ type ProjectsMetricDescriptorsDeleteResource =
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :> Delete '[JSON] Empty
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
--- | Deletes a metric descriptor. Only user-created custom metrics
--- (\/monitoring\/custom-metrics) can be deleted.
+-- | Deletes a metric descriptor. Only user-created custom metrics can be
+-- deleted.
 --
 -- /See:/ 'projectsMetricDescriptorsDelete' smart constructor.
 data ProjectsMetricDescriptorsDelete = ProjectsMetricDescriptorsDelete'
     { _pmddXgafv          :: !(Maybe Xgafv)
     , _pmddUploadProtocol :: !(Maybe Text)
-    , _pmddPp             :: !Bool
     , _pmddAccessToken    :: !(Maybe Text)
     , _pmddUploadType     :: !(Maybe Text)
-    , _pmddBearerToken    :: !(Maybe Text)
     , _pmddName           :: !Text
     , _pmddCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -84,13 +78,9 @@ data ProjectsMetricDescriptorsDelete = ProjectsMetricDescriptorsDelete'
 --
 -- * 'pmddUploadProtocol'
 --
--- * 'pmddPp'
---
 -- * 'pmddAccessToken'
 --
 -- * 'pmddUploadType'
---
--- * 'pmddBearerToken'
 --
 -- * 'pmddName'
 --
@@ -102,10 +92,8 @@ projectsMetricDescriptorsDelete pPmddName_ =
     ProjectsMetricDescriptorsDelete'
     { _pmddXgafv = Nothing
     , _pmddUploadProtocol = Nothing
-    , _pmddPp = True
     , _pmddAccessToken = Nothing
     , _pmddUploadType = Nothing
-    , _pmddBearerToken = Nothing
     , _pmddName = pPmddName_
     , _pmddCallback = Nothing
     }
@@ -121,10 +109,6 @@ pmddUploadProtocol
   = lens _pmddUploadProtocol
       (\ s a -> s{_pmddUploadProtocol = a})
 
--- | Pretty-print response.
-pmddPp :: Lens' ProjectsMetricDescriptorsDelete Bool
-pmddPp = lens _pmddPp (\ s a -> s{_pmddPp = a})
-
 -- | OAuth access token.
 pmddAccessToken :: Lens' ProjectsMetricDescriptorsDelete (Maybe Text)
 pmddAccessToken
@@ -136,12 +120,6 @@ pmddUploadType :: Lens' ProjectsMetricDescriptorsDelete (Maybe Text)
 pmddUploadType
   = lens _pmddUploadType
       (\ s a -> s{_pmddUploadType = a})
-
--- | OAuth bearer token.
-pmddBearerToken :: Lens' ProjectsMetricDescriptorsDelete (Maybe Text)
-pmddBearerToken
-  = lens _pmddBearerToken
-      (\ s a -> s{_pmddBearerToken = a})
 
 -- | The metric descriptor on which to execute the request. The format is
 -- \"projects\/{project_id_or_number}\/metricDescriptors\/{metric_id}\". An
@@ -162,10 +140,8 @@ instance GoogleRequest
                "https://www.googleapis.com/auth/monitoring"]
         requestClient ProjectsMetricDescriptorsDelete'{..}
           = go _pmddName _pmddXgafv _pmddUploadProtocol
-              (Just _pmddPp)
               _pmddAccessToken
               _pmddUploadType
-              _pmddBearerToken
               _pmddCallback
               (Just AltJSON)
               monitoringService

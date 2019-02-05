@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves the status of a Merchant Center account.
+-- Retrieves the status of a Merchant Center account. Multi-client accounts
+-- can only call this method for sub-accounts.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.accountstatuses.get@.
 module Network.Google.Resource.Content.Accountstatuses.Get
@@ -33,8 +34,9 @@ module Network.Google.Resource.Content.Accountstatuses.Get
     , AccountstatusesGet
 
     -- * Request Lenses
-    , ag1MerchantId
-    , ag1AccountId
+    , aaMerchantId
+    , aaAccountId
+    , aaDestinations
     ) where
 
 import           Network.Google.Prelude
@@ -44,48 +46,64 @@ import           Network.Google.ShoppingContent.Types
 -- 'AccountstatusesGet' request conforms to.
 type AccountstatusesGetResource =
      "content" :>
-       "v2" :>
+       "v2.1" :>
          Capture "merchantId" (Textual Word64) :>
            "accountstatuses" :>
              Capture "accountId" (Textual Word64) :>
-               QueryParam "alt" AltJSON :> Get '[JSON] AccountStatus
+               QueryParams "destinations" Text :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] AccountStatus
 
--- | Retrieves the status of a Merchant Center account.
+-- | Retrieves the status of a Merchant Center account. Multi-client accounts
+-- can only call this method for sub-accounts.
 --
 -- /See:/ 'accountstatusesGet' smart constructor.
 data AccountstatusesGet = AccountstatusesGet'
-    { _ag1MerchantId :: !(Textual Word64)
-    , _ag1AccountId  :: !(Textual Word64)
+    { _aaMerchantId   :: !(Textual Word64)
+    , _aaAccountId    :: !(Textual Word64)
+    , _aaDestinations :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountstatusesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ag1MerchantId'
+-- * 'aaMerchantId'
 --
--- * 'ag1AccountId'
+-- * 'aaAccountId'
+--
+-- * 'aaDestinations'
 accountstatusesGet
-    :: Word64 -- ^ 'ag1MerchantId'
-    -> Word64 -- ^ 'ag1AccountId'
+    :: Word64 -- ^ 'aaMerchantId'
+    -> Word64 -- ^ 'aaAccountId'
     -> AccountstatusesGet
-accountstatusesGet pAg1MerchantId_ pAg1AccountId_ =
+accountstatusesGet pAaMerchantId_ pAaAccountId_ =
     AccountstatusesGet'
-    { _ag1MerchantId = _Coerce # pAg1MerchantId_
-    , _ag1AccountId = _Coerce # pAg1AccountId_
+    { _aaMerchantId = _Coerce # pAaMerchantId_
+    , _aaAccountId = _Coerce # pAaAccountId_
+    , _aaDestinations = Nothing
     }
 
--- | The ID of the managing account.
-ag1MerchantId :: Lens' AccountstatusesGet Word64
-ag1MerchantId
-  = lens _ag1MerchantId
-      (\ s a -> s{_ag1MerchantId = a})
+-- | The ID of the managing account. If this parameter is not the same as
+-- accountId, then this account must be a multi-client account and
+-- accountId must be the ID of a sub-account of this account.
+aaMerchantId :: Lens' AccountstatusesGet Word64
+aaMerchantId
+  = lens _aaMerchantId (\ s a -> s{_aaMerchantId = a})
       . _Coerce
 
 -- | The ID of the account.
-ag1AccountId :: Lens' AccountstatusesGet Word64
-ag1AccountId
-  = lens _ag1AccountId (\ s a -> s{_ag1AccountId = a})
+aaAccountId :: Lens' AccountstatusesGet Word64
+aaAccountId
+  = lens _aaAccountId (\ s a -> s{_aaAccountId = a}) .
+      _Coerce
+
+-- | If set, only issues for the specified destinations are returned,
+-- otherwise only issues for the Shopping destination.
+aaDestinations :: Lens' AccountstatusesGet [Text]
+aaDestinations
+  = lens _aaDestinations
+      (\ s a -> s{_aaDestinations = a})
+      . _Default
       . _Coerce
 
 instance GoogleRequest AccountstatusesGet where
@@ -93,7 +111,9 @@ instance GoogleRequest AccountstatusesGet where
         type Scopes AccountstatusesGet =
              '["https://www.googleapis.com/auth/content"]
         requestClient AccountstatusesGet'{..}
-          = go _ag1MerchantId _ag1AccountId (Just AltJSON)
+          = go _aaMerchantId _aaAccountId
+              (_aaDestinations ^. _Default)
+              (Just AltJSON)
               shoppingContentService
           where go
                   = buildClient

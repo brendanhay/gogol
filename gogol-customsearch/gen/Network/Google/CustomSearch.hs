@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lets you search over a website or collection of websites
+-- Searches over a website or collection of websites
 --
 -- /See:/ <https://developers.google.com/custom-search/v1/using_rest CustomSearch API Reference>
 module Network.Google.CustomSearch
@@ -28,6 +28,9 @@ module Network.Google.CustomSearch
 
     -- ** search.cse.list
     , module Network.Google.Resource.Search.CSE.List
+
+    -- ** search.cse.siterestrict.list
+    , module Network.Google.Resource.Search.CSE.Siterestrict.List
 
     -- * Types
 
@@ -66,11 +69,17 @@ module Network.Google.CustomSearch
     , suType
     , suTemplate
 
+    -- ** CSESiterestrictListFilter
+    , CSESiterestrictListFilter (..)
+
     -- ** SearchSpelling
     , SearchSpelling
     , searchSpelling
     , ssCorrectedQuery
     , ssHTMLCorrectedQuery
+
+    -- ** CSESiterestrictListImgType
+    , CSESiterestrictListImgType (..)
 
     -- ** CSEListImgDominantColor
     , CSEListImgDominantColor (..)
@@ -89,13 +98,22 @@ module Network.Google.CustomSearch
     -- ** CSEListSafe
     , CSEListSafe (..)
 
+    -- ** CSESiterestrictListImgSize
+    , CSESiterestrictListImgSize (..)
+
     -- ** ResultPagemap
     , ResultPagemap
     , resultPagemap
     , rpAddtional
 
+    -- ** CSESiterestrictListImgColorType
+    , CSESiterestrictListImgColorType (..)
+
     -- ** CSEListImgColorType
     , CSEListImgColorType (..)
+
+    -- ** CSESiterestrictListSafe
+    , CSESiterestrictListSafe (..)
 
     -- ** Result
     , Result
@@ -122,6 +140,9 @@ module Network.Google.CustomSearch
     , rliName
     , rliDisplayName
     , rliLabelWithOp
+
+    -- ** CSESiterestrictListImgDominantColor
+    , CSESiterestrictListImgDominantColor (..)
 
     -- ** SearchSearchInformation
     , SearchSearchInformation
@@ -153,7 +174,6 @@ module Network.Google.CustomSearch
     , qDisableCnTwTranslation
     , qRelatedSite
     , qHl
-    , qCref
     , qSort
     , qLanguage
     , qSiteSearch
@@ -175,6 +195,9 @@ module Network.Google.CustomSearch
     , qHq
     , qHighRange
 
+    -- ** CSESiterestrictListSiteSearchFilter
+    , CSESiterestrictListSiteSearchFilter (..)
+
     -- ** PromotionBodyLinesItem
     , PromotionBodyLinesItem
     , promotionBodyLinesItem
@@ -192,6 +215,12 @@ module Network.Google.CustomSearch
     , pLink
     , pHTMLTitle
     , pTitle
+
+    -- ** CSESiterestrictListLr
+    , CSESiterestrictListLr (..)
+
+    -- ** CSESiterestrictListSearchType
+    , CSESiterestrictListSearchType (..)
 
     -- ** Search
     , Search
@@ -225,10 +254,12 @@ module Network.Google.CustomSearch
 import           Network.Google.CustomSearch.Types
 import           Network.Google.Prelude
 import           Network.Google.Resource.Search.CSE.List
+import           Network.Google.Resource.Search.CSE.Siterestrict.List
 
 {- $resources
 TODO
 -}
 
 -- | Represents the entirety of the methods and resources available for the CustomSearch API service.
-type CustomSearchAPI = CSEListResource
+type CustomSearchAPI =
+     CSESiterestrictListResource :<|> CSEListResource

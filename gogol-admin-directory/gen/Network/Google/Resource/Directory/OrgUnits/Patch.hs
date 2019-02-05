@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Update Organization Unit. This method supports patch semantics.
+-- Update organizational unit. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.orgunits.patch@.
 module Network.Google.Resource.Directory.OrgUnits.Patch
@@ -54,7 +54,7 @@ type OrgUnitsPatchResource =
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] OrgUnit :> Patch '[JSON] OrgUnit
 
--- | Update Organization Unit. This method supports patch semantics.
+-- | Update organizational unit. This method supports patch semantics.
 --
 -- /See:/ 'orgUnitsPatch' smart constructor.
 data OrgUnitsPatch = OrgUnitsPatch'
@@ -89,14 +89,14 @@ oupPayload :: Lens' OrgUnitsPatch OrgUnit
 oupPayload
   = lens _oupPayload (\ s a -> s{_oupPayload = a})
 
--- | Full path of the organization unit or its Id
+-- | Full path of the organizational unit or its ID
 oupOrgUnitPath :: Lens' OrgUnitsPatch [Text]
 oupOrgUnitPath
   = lens _oupOrgUnitPath
       (\ s a -> s{_oupOrgUnitPath = a})
       . _Coerce
 
--- | Immutable id of the Google Apps account
+-- | Immutable ID of the G Suite account
 oupCustomerId :: Lens' OrgUnitsPatch Text
 oupCustomerId
   = lens _oupCustomerId

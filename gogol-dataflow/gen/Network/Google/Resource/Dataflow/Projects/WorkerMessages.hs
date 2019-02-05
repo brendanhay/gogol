@@ -22,7 +22,7 @@
 --
 -- Send a worker_message to the service.
 --
--- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @dataflow.projects.workerMessages@.
+-- /See:/ <https://cloud.google.com/dataflow Dataflow API Reference> for @dataflow.projects.workerMessages@.
 module Network.Google.Resource.Dataflow.Projects.WorkerMessages
     (
     -- * REST Resource
@@ -35,11 +35,9 @@ module Network.Google.Resource.Dataflow.Projects.WorkerMessages
     -- * Request Lenses
     , pwmXgafv
     , pwmUploadProtocol
-    , pwmPp
     , pwmAccessToken
     , pwmUploadType
     , pwmPayload
-    , pwmBearerToken
     , pwmProjectId
     , pwmCallback
     ) where
@@ -54,28 +52,24 @@ type ProjectsWorkerMessagesResource =
        "projects" :>
          Capture "projectId" Text :>
            "WorkerMessages" :>
-             QueryParam "$.xgafv" Text :>
+             QueryParam "$.xgafv" Xgafv :>
                QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "callback" Text :>
-                           QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] SendWorkerMessagesRequest :>
-                               Post '[JSON] SendWorkerMessagesResponse
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] SendWorkerMessagesRequest :>
+                           Post '[JSON] SendWorkerMessagesResponse
 
 -- | Send a worker_message to the service.
 --
 -- /See:/ 'projectsWorkerMessages' smart constructor.
 data ProjectsWorkerMessages = ProjectsWorkerMessages'
-    { _pwmXgafv          :: !(Maybe Text)
+    { _pwmXgafv          :: !(Maybe Xgafv)
     , _pwmUploadProtocol :: !(Maybe Text)
-    , _pwmPp             :: !Bool
     , _pwmAccessToken    :: !(Maybe Text)
     , _pwmUploadType     :: !(Maybe Text)
     , _pwmPayload        :: !SendWorkerMessagesRequest
-    , _pwmBearerToken    :: !(Maybe Text)
     , _pwmProjectId      :: !Text
     , _pwmCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -88,15 +82,11 @@ data ProjectsWorkerMessages = ProjectsWorkerMessages'
 --
 -- * 'pwmUploadProtocol'
 --
--- * 'pwmPp'
---
 -- * 'pwmAccessToken'
 --
 -- * 'pwmUploadType'
 --
 -- * 'pwmPayload'
---
--- * 'pwmBearerToken'
 --
 -- * 'pwmProjectId'
 --
@@ -109,17 +99,15 @@ projectsWorkerMessages pPwmPayload_ pPwmProjectId_ =
     ProjectsWorkerMessages'
     { _pwmXgafv = Nothing
     , _pwmUploadProtocol = Nothing
-    , _pwmPp = True
     , _pwmAccessToken = Nothing
     , _pwmUploadType = Nothing
     , _pwmPayload = pPwmPayload_
-    , _pwmBearerToken = Nothing
     , _pwmProjectId = pPwmProjectId_
     , _pwmCallback = Nothing
     }
 
 -- | V1 error format.
-pwmXgafv :: Lens' ProjectsWorkerMessages (Maybe Text)
+pwmXgafv :: Lens' ProjectsWorkerMessages (Maybe Xgafv)
 pwmXgafv = lens _pwmXgafv (\ s a -> s{_pwmXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -127,10 +115,6 @@ pwmUploadProtocol :: Lens' ProjectsWorkerMessages (Maybe Text)
 pwmUploadProtocol
   = lens _pwmUploadProtocol
       (\ s a -> s{_pwmUploadProtocol = a})
-
--- | Pretty-print response.
-pwmPp :: Lens' ProjectsWorkerMessages Bool
-pwmPp = lens _pwmPp (\ s a -> s{_pwmPp = a})
 
 -- | OAuth access token.
 pwmAccessToken :: Lens' ProjectsWorkerMessages (Maybe Text)
@@ -149,12 +133,6 @@ pwmPayload :: Lens' ProjectsWorkerMessages SendWorkerMessagesRequest
 pwmPayload
   = lens _pwmPayload (\ s a -> s{_pwmPayload = a})
 
--- | OAuth bearer token.
-pwmBearerToken :: Lens' ProjectsWorkerMessages (Maybe Text)
-pwmBearerToken
-  = lens _pwmBearerToken
-      (\ s a -> s{_pwmBearerToken = a})
-
 -- | The project to send the WorkerMessages to.
 pwmProjectId :: Lens' ProjectsWorkerMessages Text
 pwmProjectId
@@ -170,13 +148,13 @@ instance GoogleRequest ProjectsWorkerMessages where
              SendWorkerMessagesResponse
         type Scopes ProjectsWorkerMessages =
              '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly",
                "https://www.googleapis.com/auth/userinfo.email"]
         requestClient ProjectsWorkerMessages'{..}
           = go _pwmProjectId _pwmXgafv _pwmUploadProtocol
-              (Just _pwmPp)
               _pwmAccessToken
               _pwmUploadType
-              _pwmBearerToken
               _pwmCallback
               (Just AltJSON)
               _pwmPayload

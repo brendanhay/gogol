@@ -103,7 +103,7 @@ deploymentsUpdate pDuProject_ pDuPayload_ pDuDeployment_ =
     { _duCreatePolicy = CreateOrAcquire
     , _duProject = pDuProject_
     , _duPayload = pDuPayload_
-    , _duDeletePolicy = Delete'
+    , _duDeletePolicy = DUDPDelete'
     , _duPreview = False
     , _duDeployment = pDuDeployment_
     }

@@ -24,7 +24,7 @@
 -- method to poll the operation result at intervals as recommended by the
 -- API service.
 --
--- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @cloudresourcemanager.operations.get@.
+-- /See:/ <https://cloud.google.com/resource-manager Cloud Resource Manager API Reference> for @cloudresourcemanager.operations.get@.
 module Network.Google.Resource.CloudResourceManager.Operations.Get
     (
     -- * REST Resource
@@ -37,10 +37,8 @@ module Network.Google.Resource.CloudResourceManager.Operations.Get
     -- * Request Lenses
     , ogXgafv
     , ogUploadProtocol
-    , ogPp
     , ogAccessToken
     , ogUploadType
-    , ogBearerToken
     , ogName
     , ogCallback
     ) where
@@ -53,14 +51,12 @@ import           Network.Google.ResourceManager.Types
 type OperationsGetResource =
      "v1" :>
        Capture "name" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] Operation
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Operation
 
 -- | Gets the latest state of a long-running operation. Clients can use this
 -- method to poll the operation result at intervals as recommended by the
@@ -68,12 +64,10 @@ type OperationsGetResource =
 --
 -- /See:/ 'operationsGet' smart constructor.
 data OperationsGet = OperationsGet'
-    { _ogXgafv          :: !(Maybe Text)
+    { _ogXgafv          :: !(Maybe Xgafv)
     , _ogUploadProtocol :: !(Maybe Text)
-    , _ogPp             :: !Bool
     , _ogAccessToken    :: !(Maybe Text)
     , _ogUploadType     :: !(Maybe Text)
-    , _ogBearerToken    :: !(Maybe Text)
     , _ogName           :: !Text
     , _ogCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -86,13 +80,9 @@ data OperationsGet = OperationsGet'
 --
 -- * 'ogUploadProtocol'
 --
--- * 'ogPp'
---
 -- * 'ogAccessToken'
 --
 -- * 'ogUploadType'
---
--- * 'ogBearerToken'
 --
 -- * 'ogName'
 --
@@ -104,16 +94,14 @@ operationsGet pOgName_ =
     OperationsGet'
     { _ogXgafv = Nothing
     , _ogUploadProtocol = Nothing
-    , _ogPp = True
     , _ogAccessToken = Nothing
     , _ogUploadType = Nothing
-    , _ogBearerToken = Nothing
     , _ogName = pOgName_
     , _ogCallback = Nothing
     }
 
 -- | V1 error format.
-ogXgafv :: Lens' OperationsGet (Maybe Text)
+ogXgafv :: Lens' OperationsGet (Maybe Xgafv)
 ogXgafv = lens _ogXgafv (\ s a -> s{_ogXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -121,10 +109,6 @@ ogUploadProtocol :: Lens' OperationsGet (Maybe Text)
 ogUploadProtocol
   = lens _ogUploadProtocol
       (\ s a -> s{_ogUploadProtocol = a})
-
--- | Pretty-print response.
-ogPp :: Lens' OperationsGet Bool
-ogPp = lens _ogPp (\ s a -> s{_ogPp = a})
 
 -- | OAuth access token.
 ogAccessToken :: Lens' OperationsGet (Maybe Text)
@@ -136,12 +120,6 @@ ogAccessToken
 ogUploadType :: Lens' OperationsGet (Maybe Text)
 ogUploadType
   = lens _ogUploadType (\ s a -> s{_ogUploadType = a})
-
--- | OAuth bearer token.
-ogBearerToken :: Lens' OperationsGet (Maybe Text)
-ogBearerToken
-  = lens _ogBearerToken
-      (\ s a -> s{_ogBearerToken = a})
 
 -- | The name of the operation resource.
 ogName :: Lens' OperationsGet Text
@@ -158,10 +136,9 @@ instance GoogleRequest OperationsGet where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/cloud-platform.read-only"]
         requestClient OperationsGet'{..}
-          = go _ogName _ogXgafv _ogUploadProtocol (Just _ogPp)
+          = go _ogName _ogXgafv _ogUploadProtocol
               _ogAccessToken
               _ogUploadType
-              _ogBearerToken
               _ogCallback
               (Just AltJSON)
               resourceManagerService

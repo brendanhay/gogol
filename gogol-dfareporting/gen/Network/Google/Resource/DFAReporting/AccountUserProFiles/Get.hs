@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'AccountUserProFilesGet' request conforms to.
 type AccountUserProFilesGetResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "accountUserProfiles" :>

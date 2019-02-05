@@ -33,6 +33,7 @@ module Network.Google.Resource.YouTube.PlayListItems.Delete
     , PlayListItemsDelete
 
     -- * Request Lenses
+    , plidOnBehalfOfContentOwner
     , plidId
     ) where
 
@@ -46,18 +47,22 @@ type PlayListItemsDeleteResource =
        "v3" :>
          "playlistItems" :>
            QueryParam "id" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+             QueryParam "onBehalfOfContentOwner" Text :>
+               QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a playlist item.
 --
 -- /See:/ 'playListItemsDelete' smart constructor.
-newtype PlayListItemsDelete = PlayListItemsDelete'
-    { _plidId :: Text
+data PlayListItemsDelete = PlayListItemsDelete'
+    { _plidOnBehalfOfContentOwner :: !(Maybe Text)
+    , _plidId                     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayListItemsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'plidOnBehalfOfContentOwner'
 --
 -- * 'plidId'
 playListItemsDelete
@@ -65,8 +70,24 @@ playListItemsDelete
     -> PlayListItemsDelete
 playListItemsDelete pPlidId_ =
     PlayListItemsDelete'
-    { _plidId = pPlidId_
+    { _plidOnBehalfOfContentOwner = Nothing
+    , _plidId = pPlidId_
     }
+
+-- | Note: This parameter is intended exclusively for YouTube content
+-- partners. The onBehalfOfContentOwner parameter indicates that the
+-- request\'s authorization credentials identify a YouTube CMS user who is
+-- acting on behalf of the content owner specified in the parameter value.
+-- This parameter is intended for YouTube content partners that own and
+-- manage many different YouTube channels. It allows content owners to
+-- authenticate once and get access to all their video and channel data,
+-- without having to provide authentication credentials for each individual
+-- channel. The CMS account that the user authenticates with must be linked
+-- to the specified YouTube content owner.
+plidOnBehalfOfContentOwner :: Lens' PlayListItemsDelete (Maybe Text)
+plidOnBehalfOfContentOwner
+  = lens _plidOnBehalfOfContentOwner
+      (\ s a -> s{_plidOnBehalfOfContentOwner = a})
 
 -- | The id parameter specifies the YouTube playlist item ID for the playlist
 -- item that is being deleted. In a playlistItem resource, the id property
@@ -81,7 +102,9 @@ instance GoogleRequest PlayListItemsDelete where
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtubepartner"]
         requestClient PlayListItemsDelete'{..}
-          = go (Just _plidId) (Just AltJSON) youTubeService
+          = go (Just _plidId) _plidOnBehalfOfContentOwner
+              (Just AltJSON)
+              youTubeService
           where go
                   = buildClient
                       (Proxy :: Proxy PlayListItemsDeleteResource)

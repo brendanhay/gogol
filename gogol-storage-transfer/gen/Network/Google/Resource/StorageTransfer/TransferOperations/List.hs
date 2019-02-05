@@ -22,11 +22,16 @@
 --
 -- Lists operations that match the specified filter in the request. If the
 -- server doesn\'t support this method, it returns \`UNIMPLEMENTED\`. NOTE:
--- the \`name\` binding below allows API services to override the binding
--- to use different resource name schemes, such as
--- \`users\/*\/operations\`.
+-- the \`name\` binding allows API services to override the binding to use
+-- different resource name schemes, such as \`users\/*\/operations\`. To
+-- override the binding, API services can add a binding such as
+-- \`\"\/v1\/{name=users\/*}\/operations\"\` to their service
+-- configuration. For backwards compatibility, the default name includes
+-- the operations collection id, however overriding users must ensure the
+-- name binding is the parent resource, without the operations collection
+-- id.
 --
--- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @storagetransfer.transferOperations.list@.
+-- /See:/ <https://cloud.google.com/storage/transfer Storage Transfer API Reference> for @storagetransfer.transferOperations.list@.
 module Network.Google.Resource.StorageTransfer.TransferOperations.List
     (
     -- * REST Resource
@@ -39,10 +44,8 @@ module Network.Google.Resource.StorageTransfer.TransferOperations.List
     -- * Request Lenses
     , tolXgafv
     , tolUploadProtocol
-    , tolPp
     , tolAccessToken
     , tolUploadType
-    , tolBearerToken
     , tolName
     , tolFilter
     , tolPageToken
@@ -58,33 +61,34 @@ import           Network.Google.StorageTransfer.Types
 type TransferOperationsListResource =
      "v1" :>
        Capture "name" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "filter" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" (Textual Int32) :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] ListOperationsResponse
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "filter" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "pageSize" (Textual Int32) :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] ListOperationsResponse
 
 -- | Lists operations that match the specified filter in the request. If the
 -- server doesn\'t support this method, it returns \`UNIMPLEMENTED\`. NOTE:
--- the \`name\` binding below allows API services to override the binding
--- to use different resource name schemes, such as
--- \`users\/*\/operations\`.
+-- the \`name\` binding allows API services to override the binding to use
+-- different resource name schemes, such as \`users\/*\/operations\`. To
+-- override the binding, API services can add a binding such as
+-- \`\"\/v1\/{name=users\/*}\/operations\"\` to their service
+-- configuration. For backwards compatibility, the default name includes
+-- the operations collection id, however overriding users must ensure the
+-- name binding is the parent resource, without the operations collection
+-- id.
 --
 -- /See:/ 'transferOperationsList' smart constructor.
 data TransferOperationsList = TransferOperationsList'
-    { _tolXgafv          :: !(Maybe Text)
+    { _tolXgafv          :: !(Maybe Xgafv)
     , _tolUploadProtocol :: !(Maybe Text)
-    , _tolPp             :: !Bool
     , _tolAccessToken    :: !(Maybe Text)
     , _tolUploadType     :: !(Maybe Text)
-    , _tolBearerToken    :: !(Maybe Text)
     , _tolName           :: !Text
     , _tolFilter         :: !(Maybe Text)
     , _tolPageToken      :: !(Maybe Text)
@@ -100,13 +104,9 @@ data TransferOperationsList = TransferOperationsList'
 --
 -- * 'tolUploadProtocol'
 --
--- * 'tolPp'
---
 -- * 'tolAccessToken'
 --
 -- * 'tolUploadType'
---
--- * 'tolBearerToken'
 --
 -- * 'tolName'
 --
@@ -124,10 +124,8 @@ transferOperationsList pTolName_ =
     TransferOperationsList'
     { _tolXgafv = Nothing
     , _tolUploadProtocol = Nothing
-    , _tolPp = True
     , _tolAccessToken = Nothing
     , _tolUploadType = Nothing
-    , _tolBearerToken = Nothing
     , _tolName = pTolName_
     , _tolFilter = Nothing
     , _tolPageToken = Nothing
@@ -136,7 +134,7 @@ transferOperationsList pTolName_ =
     }
 
 -- | V1 error format.
-tolXgafv :: Lens' TransferOperationsList (Maybe Text)
+tolXgafv :: Lens' TransferOperationsList (Maybe Xgafv)
 tolXgafv = lens _tolXgafv (\ s a -> s{_tolXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -144,10 +142,6 @@ tolUploadProtocol :: Lens' TransferOperationsList (Maybe Text)
 tolUploadProtocol
   = lens _tolUploadProtocol
       (\ s a -> s{_tolUploadProtocol = a})
-
--- | Pretty-print response.
-tolPp :: Lens' TransferOperationsList Bool
-tolPp = lens _tolPp (\ s a -> s{_tolPp = a})
 
 -- | OAuth access token.
 tolAccessToken :: Lens' TransferOperationsList (Maybe Text)
@@ -161,27 +155,29 @@ tolUploadType
   = lens _tolUploadType
       (\ s a -> s{_tolUploadType = a})
 
--- | OAuth bearer token.
-tolBearerToken :: Lens' TransferOperationsList (Maybe Text)
-tolBearerToken
-  = lens _tolBearerToken
-      (\ s a -> s{_tolBearerToken = a})
-
 -- | The value \`transferOperations\`.
 tolName :: Lens' TransferOperationsList Text
 tolName = lens _tolName (\ s a -> s{_tolName = a})
 
--- | The standard list filter.
+-- | A list of query parameters specified as JSON text in the form of
+-- {\\\"project_id\\\" : \\\"my_project_id\\\", \\\"job_names\\\" :
+-- [\\\"jobid1\\\", \\\"jobid2\\\",...], \\\"operation_names\\\" :
+-- [\\\"opid1\\\", \\\"opid2\\\",...],
+-- \\\"transfer_statuses\\\":[\\\"status1\\\", \\\"status2\\\",...]}. Since
+-- \`job_names\`, \`operation_names\`, and \`transfer_statuses\` support
+-- multiple values, they must be specified with array notation.
+-- \`job_names\`, \`operation_names\`, and \`transfer_statuses\` are
+-- optional.
 tolFilter :: Lens' TransferOperationsList (Maybe Text)
 tolFilter
   = lens _tolFilter (\ s a -> s{_tolFilter = a})
 
--- | The standard list page token.
+-- | The list page token.
 tolPageToken :: Lens' TransferOperationsList (Maybe Text)
 tolPageToken
   = lens _tolPageToken (\ s a -> s{_tolPageToken = a})
 
--- | The standard list page size.
+-- | The list page size. The max allowed value is 256.
 tolPageSize :: Lens' TransferOperationsList (Maybe Int32)
 tolPageSize
   = lens _tolPageSize (\ s a -> s{_tolPageSize = a}) .
@@ -199,10 +195,8 @@ instance GoogleRequest TransferOperationsList where
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient TransferOperationsList'{..}
           = go _tolName _tolXgafv _tolUploadProtocol
-              (Just _tolPp)
               _tolAccessToken
               _tolUploadType
-              _tolBearerToken
               _tolFilter
               _tolPageToken
               _tolPageSize

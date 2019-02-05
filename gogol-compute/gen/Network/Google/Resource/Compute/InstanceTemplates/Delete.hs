@@ -20,11 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the specified instance template. If you delete an instance
--- template that is being referenced from another instance group, the
--- instance group will not be able to create or recreate virtual machine
--- instances. Deleting an instance template is permanent and cannot be
--- undone.
+-- Deletes the specified instance template. Deleting an instance template
+-- is permanent and cannot be undone. It\'s not possible to delete
+-- templates which are in use by an instance group.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceTemplates.delete@.
 module Network.Google.Resource.Compute.InstanceTemplates.Delete
@@ -37,6 +35,7 @@ module Network.Google.Resource.Compute.InstanceTemplates.Delete
     , InstanceTemplatesDelete
 
     -- * Request Lenses
+    , itdRequestId
     , itdProject
     , itdInstanceTemplate
     ) where
@@ -54,23 +53,25 @@ type InstanceTemplatesDeleteResource =
              "global" :>
                "instanceTemplates" :>
                  Capture "instanceTemplate" Text :>
-                   QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+                   QueryParam "requestId" Text :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
--- | Deletes the specified instance template. If you delete an instance
--- template that is being referenced from another instance group, the
--- instance group will not be able to create or recreate virtual machine
--- instances. Deleting an instance template is permanent and cannot be
--- undone.
+-- | Deletes the specified instance template. Deleting an instance template
+-- is permanent and cannot be undone. It\'s not possible to delete
+-- templates which are in use by an instance group.
 --
 -- /See:/ 'instanceTemplatesDelete' smart constructor.
 data InstanceTemplatesDelete = InstanceTemplatesDelete'
-    { _itdProject          :: !Text
+    { _itdRequestId        :: !(Maybe Text)
+    , _itdProject          :: !Text
     , _itdInstanceTemplate :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceTemplatesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'itdRequestId'
 --
 -- * 'itdProject'
 --
@@ -81,9 +82,24 @@ instanceTemplatesDelete
     -> InstanceTemplatesDelete
 instanceTemplatesDelete pItdProject_ pItdInstanceTemplate_ =
     InstanceTemplatesDelete'
-    { _itdProject = pItdProject_
+    { _itdRequestId = Nothing
+    , _itdProject = pItdProject_
     , _itdInstanceTemplate = pItdInstanceTemplate_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+itdRequestId :: Lens' InstanceTemplatesDelete (Maybe Text)
+itdRequestId
+  = lens _itdRequestId (\ s a -> s{_itdRequestId = a})
 
 -- | Project ID for this request.
 itdProject :: Lens' InstanceTemplatesDelete Text
@@ -102,7 +118,8 @@ instance GoogleRequest InstanceTemplatesDelete where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient InstanceTemplatesDelete'{..}
-          = go _itdProject _itdInstanceTemplate (Just AltJSON)
+          = go _itdProject _itdInstanceTemplate _itdRequestId
+              (Just AltJSON)
               computeService
           where go
                   = buildClient

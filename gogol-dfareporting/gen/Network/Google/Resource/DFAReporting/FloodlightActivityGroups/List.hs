@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves a list of floodlight activity groups, possibly filtered.
+-- Retrieves a list of floodlight activity groups, possibly filtered. This
+-- method supports paging.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.floodlightActivityGroups.list@.
 module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.List
@@ -52,7 +53,7 @@ import           Network.Google.Prelude
 -- 'FloodlightActivityGroupsList' request conforms to.
 type FloodlightActivityGroupsListResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "floodlightActivityGroups" :>
@@ -76,7 +77,8 @@ type FloodlightActivityGroupsListResource =
                                    Get '[JSON]
                                      FloodlightActivityGroupsListResponse
 
--- | Retrieves a list of floodlight activity groups, possibly filtered.
+-- | Retrieves a list of floodlight activity groups, possibly filtered. This
+-- method supports paging.
 --
 -- /See:/ 'floodlightActivityGroupsList' smart constructor.
 data FloodlightActivityGroupsList = FloodlightActivityGroupsList'
@@ -85,11 +87,11 @@ data FloodlightActivityGroupsList = FloodlightActivityGroupsList'
     , _faglSearchString              :: !(Maybe Text)
     , _faglIds                       :: !(Maybe [Textual Int64])
     , _faglProFileId                 :: !(Textual Int64)
-    , _faglSortOrder                 :: !(Maybe FloodlightActivityGroupsListSortOrder)
+    , _faglSortOrder                 :: !FloodlightActivityGroupsListSortOrder
     , _faglPageToken                 :: !(Maybe Text)
-    , _faglSortField                 :: !(Maybe FloodlightActivityGroupsListSortField)
+    , _faglSortField                 :: !FloodlightActivityGroupsListSortField
     , _faglType                      :: !(Maybe FloodlightActivityGroupsListType)
-    , _faglMaxResults                :: !(Maybe (Textual Int32))
+    , _faglMaxResults                :: !(Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivityGroupsList' with the minimum fields required to make a request.
@@ -125,11 +127,11 @@ floodlightActivityGroupsList pFaglProFileId_ =
     , _faglSearchString = Nothing
     , _faglIds = Nothing
     , _faglProFileId = _Coerce # pFaglProFileId_
-    , _faglSortOrder = Nothing
+    , _faglSortOrder = FAGLSOAscending
     , _faglPageToken = Nothing
-    , _faglSortField = Nothing
+    , _faglSortField = FAGLSFID
     , _faglType = Nothing
-    , _faglMaxResults = Nothing
+    , _faglMaxResults = 1000
     }
 
 -- | Select only floodlight activity groups with the specified floodlight
@@ -179,8 +181,8 @@ faglProFileId
       (\ s a -> s{_faglProFileId = a})
       . _Coerce
 
--- | Order of sorted results, default is ASCENDING.
-faglSortOrder :: Lens' FloodlightActivityGroupsList (Maybe FloodlightActivityGroupsListSortOrder)
+-- | Order of sorted results.
+faglSortOrder :: Lens' FloodlightActivityGroupsList FloodlightActivityGroupsListSortOrder
 faglSortOrder
   = lens _faglSortOrder
       (\ s a -> s{_faglSortOrder = a})
@@ -192,7 +194,7 @@ faglPageToken
       (\ s a -> s{_faglPageToken = a})
 
 -- | Field by which to sort the list.
-faglSortField :: Lens' FloodlightActivityGroupsList (Maybe FloodlightActivityGroupsListSortField)
+faglSortField :: Lens' FloodlightActivityGroupsList FloodlightActivityGroupsListSortField
 faglSortField
   = lens _faglSortField
       (\ s a -> s{_faglSortField = a})
@@ -203,11 +205,11 @@ faglType :: Lens' FloodlightActivityGroupsList (Maybe FloodlightActivityGroupsLi
 faglType = lens _faglType (\ s a -> s{_faglType = a})
 
 -- | Maximum number of results to return.
-faglMaxResults :: Lens' FloodlightActivityGroupsList (Maybe Int32)
+faglMaxResults :: Lens' FloodlightActivityGroupsList Int32
 faglMaxResults
   = lens _faglMaxResults
       (\ s a -> s{_faglMaxResults = a})
-      . mapping _Coerce
+      . _Coerce
 
 instance GoogleRequest FloodlightActivityGroupsList
          where
@@ -220,11 +222,11 @@ instance GoogleRequest FloodlightActivityGroupsList
               _faglAdvertiserId
               _faglSearchString
               (_faglIds ^. _Default)
-              _faglSortOrder
+              (Just _faglSortOrder)
               _faglPageToken
-              _faglSortField
+              (Just _faglSortField)
               _faglType
-              _faglMaxResults
+              (Just _faglMaxResults)
               (Just AltJSON)
               dFAReportingService
           where go

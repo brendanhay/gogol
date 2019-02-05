@@ -35,7 +35,6 @@ module Network.Google.Resource.Content.Accounts.Insert
     -- * Request Lenses
     , aMerchantId
     , aPayload
-    , aDryRun
     ) where
 
 import           Network.Google.Prelude
@@ -45,12 +44,11 @@ import           Network.Google.ShoppingContent.Types
 -- 'AccountsInsert' request conforms to.
 type AccountsInsertResource =
      "content" :>
-       "v2" :>
+       "v2.1" :>
          Capture "merchantId" (Textual Word64) :>
            "accounts" :>
-             QueryParam "dryRun" Bool :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] Account :> Post '[JSON] Account
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] Account :> Post '[JSON] Account
 
 -- | Creates a Merchant Center sub-account.
 --
@@ -58,7 +56,6 @@ type AccountsInsertResource =
 data AccountsInsert = AccountsInsert'
     { _aMerchantId :: !(Textual Word64)
     , _aPayload    :: !Account
-    , _aDryRun     :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsInsert' with the minimum fields required to make a request.
@@ -68,8 +65,6 @@ data AccountsInsert = AccountsInsert'
 -- * 'aMerchantId'
 --
 -- * 'aPayload'
---
--- * 'aDryRun'
 accountsInsert
     :: Word64 -- ^ 'aMerchantId'
     -> Account -- ^ 'aPayload'
@@ -78,10 +73,9 @@ accountsInsert pAMerchantId_ pAPayload_ =
     AccountsInsert'
     { _aMerchantId = _Coerce # pAMerchantId_
     , _aPayload = pAPayload_
-    , _aDryRun = Nothing
     }
 
--- | The ID of the managing account.
+-- | The ID of the managing account. This must be a multi-client account.
 aMerchantId :: Lens' AccountsInsert Word64
 aMerchantId
   = lens _aMerchantId (\ s a -> s{_aMerchantId = a}) .
@@ -91,16 +85,12 @@ aMerchantId
 aPayload :: Lens' AccountsInsert Account
 aPayload = lens _aPayload (\ s a -> s{_aPayload = a})
 
--- | Flag to run the request in dry-run mode.
-aDryRun :: Lens' AccountsInsert (Maybe Bool)
-aDryRun = lens _aDryRun (\ s a -> s{_aDryRun = a})
-
 instance GoogleRequest AccountsInsert where
         type Rs AccountsInsert = Account
         type Scopes AccountsInsert =
              '["https://www.googleapis.com/auth/content"]
         requestClient AccountsInsert'{..}
-          = go _aMerchantId _aDryRun (Just AltJSON) _aPayload
+          = go _aMerchantId (Just AltJSON) _aPayload
               shoppingContentService
           where go
                   = buildClient (Proxy :: Proxy AccountsInsertResource)

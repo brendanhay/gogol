@@ -93,7 +93,7 @@ ruPayload
 ruRoleId :: Lens' RolesUpdate Text
 ruRoleId = lens _ruRoleId (\ s a -> s{_ruRoleId = a})
 
--- | Immutable ID of the Google Apps account.
+-- | Immutable ID of the G Suite account.
 ruCustomer :: Lens' RolesUpdate Text
 ruCustomer
   = lens _ruCustomer (\ s a -> s{_ruCustomer = a})

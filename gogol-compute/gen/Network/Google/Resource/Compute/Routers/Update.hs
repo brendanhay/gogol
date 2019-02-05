@@ -34,6 +34,7 @@ module Network.Google.Resource.Compute.Routers.Update
     , RoutersUpdate
 
     -- * Request Lenses
+    , ruRequestId
     , ruProject
     , ruRouter
     , ruPayload
@@ -54,23 +55,27 @@ type RoutersUpdateResource =
                Capture "region" Text :>
                  "routers" :>
                    Capture "router" Text :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] Router :> Put '[JSON] Operation
+                     QueryParam "requestId" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Router :> Put '[JSON] Operation
 
 -- | Updates the specified Router resource with the data included in the
 -- request.
 --
 -- /See:/ 'routersUpdate' smart constructor.
 data RoutersUpdate = RoutersUpdate'
-    { _ruProject :: !Text
-    , _ruRouter  :: !Text
-    , _ruPayload :: !Router
-    , _ruRegion  :: !Text
+    { _ruRequestId :: !(Maybe Text)
+    , _ruProject   :: !Text
+    , _ruRouter    :: !Text
+    , _ruPayload   :: !Router
+    , _ruRegion    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoutersUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ruRequestId'
 --
 -- * 'ruProject'
 --
@@ -87,11 +92,26 @@ routersUpdate
     -> RoutersUpdate
 routersUpdate pRuProject_ pRuRouter_ pRuPayload_ pRuRegion_ =
     RoutersUpdate'
-    { _ruProject = pRuProject_
+    { _ruRequestId = Nothing
+    , _ruProject = pRuProject_
     , _ruRouter = pRuRouter_
     , _ruPayload = pRuPayload_
     , _ruRegion = pRuRegion_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+ruRequestId :: Lens' RoutersUpdate (Maybe Text)
+ruRequestId
+  = lens _ruRequestId (\ s a -> s{_ruRequestId = a})
 
 -- | Project ID for this request.
 ruProject :: Lens' RoutersUpdate Text
@@ -117,7 +137,8 @@ instance GoogleRequest RoutersUpdate where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient RoutersUpdate'{..}
-          = go _ruProject _ruRegion _ruRouter (Just AltJSON)
+          = go _ruProject _ruRegion _ruRouter _ruRequestId
+              (Just AltJSON)
               _ruPayload
               computeService
           where go

@@ -82,7 +82,7 @@ rolesList pRlCustomer_ =
     , _rlMaxResults = Nothing
     }
 
--- | Immutable id of the Google Apps account.
+-- | Immutable ID of the G Suite account.
 rlCustomer :: Lens' RolesList Text
 rlCustomer
   = lens _rlCustomer (\ s a -> s{_rlCustomer = a})

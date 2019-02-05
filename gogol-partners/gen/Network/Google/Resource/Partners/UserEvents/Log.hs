@@ -35,11 +35,9 @@ module Network.Google.Resource.Partners.UserEvents.Log
     -- * Request Lenses
     , uelXgafv
     , uelUploadProtocol
-    , uelPp
     , uelAccessToken
     , uelUploadType
     , uelPayload
-    , uelBearerToken
     , uelCallback
     ) where
 
@@ -51,28 +49,24 @@ import           Network.Google.Prelude
 type UserEventsLogResource =
      "v2" :>
        "userEvents:log" :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] LogUserEventRequest :>
-                           Post '[JSON] LogUserEventResponse
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] LogUserEventRequest :>
+                       Post '[JSON] LogUserEventResponse
 
 -- | Logs a user event.
 --
 -- /See:/ 'userEventsLog' smart constructor.
 data UserEventsLog = UserEventsLog'
-    { _uelXgafv          :: !(Maybe Text)
+    { _uelXgafv          :: !(Maybe Xgafv)
     , _uelUploadProtocol :: !(Maybe Text)
-    , _uelPp             :: !Bool
     , _uelAccessToken    :: !(Maybe Text)
     , _uelUploadType     :: !(Maybe Text)
     , _uelPayload        :: !LogUserEventRequest
-    , _uelBearerToken    :: !(Maybe Text)
     , _uelCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -84,15 +78,11 @@ data UserEventsLog = UserEventsLog'
 --
 -- * 'uelUploadProtocol'
 --
--- * 'uelPp'
---
 -- * 'uelAccessToken'
 --
 -- * 'uelUploadType'
 --
 -- * 'uelPayload'
---
--- * 'uelBearerToken'
 --
 -- * 'uelCallback'
 userEventsLog
@@ -102,16 +92,14 @@ userEventsLog pUelPayload_ =
     UserEventsLog'
     { _uelXgafv = Nothing
     , _uelUploadProtocol = Nothing
-    , _uelPp = True
     , _uelAccessToken = Nothing
     , _uelUploadType = Nothing
     , _uelPayload = pUelPayload_
-    , _uelBearerToken = Nothing
     , _uelCallback = Nothing
     }
 
 -- | V1 error format.
-uelXgafv :: Lens' UserEventsLog (Maybe Text)
+uelXgafv :: Lens' UserEventsLog (Maybe Xgafv)
 uelXgafv = lens _uelXgafv (\ s a -> s{_uelXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -119,10 +107,6 @@ uelUploadProtocol :: Lens' UserEventsLog (Maybe Text)
 uelUploadProtocol
   = lens _uelUploadProtocol
       (\ s a -> s{_uelUploadProtocol = a})
-
--- | Pretty-print response.
-uelPp :: Lens' UserEventsLog Bool
-uelPp = lens _uelPp (\ s a -> s{_uelPp = a})
 
 -- | OAuth access token.
 uelAccessToken :: Lens' UserEventsLog (Maybe Text)
@@ -141,12 +125,6 @@ uelPayload :: Lens' UserEventsLog LogUserEventRequest
 uelPayload
   = lens _uelPayload (\ s a -> s{_uelPayload = a})
 
--- | OAuth bearer token.
-uelBearerToken :: Lens' UserEventsLog (Maybe Text)
-uelBearerToken
-  = lens _uelBearerToken
-      (\ s a -> s{_uelBearerToken = a})
-
 -- | JSONP
 uelCallback :: Lens' UserEventsLog (Maybe Text)
 uelCallback
@@ -156,10 +134,8 @@ instance GoogleRequest UserEventsLog where
         type Rs UserEventsLog = LogUserEventResponse
         type Scopes UserEventsLog = '[]
         requestClient UserEventsLog'{..}
-          = go _uelXgafv _uelUploadProtocol (Just _uelPp)
-              _uelAccessToken
+          = go _uelXgafv _uelUploadProtocol _uelAccessToken
               _uelUploadType
-              _uelBearerToken
               _uelCallback
               (Just AltJSON)
               _uelPayload

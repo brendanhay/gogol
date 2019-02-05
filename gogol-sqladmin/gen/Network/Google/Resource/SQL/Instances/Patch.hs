@@ -25,7 +25,7 @@
 -- retain. For partial updates, use patch.. This method supports patch
 -- semantics.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.instances.patch@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.instances.patch@.
 module Network.Google.Resource.SQL.Instances.Patch
     (
     -- * REST Resource

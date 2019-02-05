@@ -61,6 +61,7 @@ module Network.Google.CivicInfo
     , virElection
     , virNormalizedInput
     , virMailOnly
+    , virSegments
     , virEarlyVoteSites
     , virPollingLocations
     , virPrecinctId
@@ -69,6 +70,7 @@ module Network.Google.CivicInfo
     , PollingLocation
     , pollingLocation
     , plVoterServices
+    , plLatitude
     , plEndDate
     , plSources
     , plAddress
@@ -77,6 +79,7 @@ module Network.Google.CivicInfo
     , plName
     , plId
     , plNotes
+    , plLongitude
 
     -- ** RepresentativesRepresentativeInfoByDivisionLevels
     , RepresentativesRepresentativeInfoByDivisionLevels (..)
@@ -87,6 +90,55 @@ module Network.Google.CivicInfo
     , gdName
     , gdOfficeIndices
     , gdAlsoKnownAs
+
+    -- ** StreetSegment
+    , StreetSegment
+    , streetSegment
+    , ssOriginalId
+    , ssPollinglocationByIds
+    , ssStartHouseNumber
+    , ssCataListUniquePrecinctCode
+    , ssState
+    , ssContestIds
+    , ssStateHouseDistrict
+    , ssNcoaAddress
+    , ssEarlyVoteSiteByIds
+    , ssCountyCouncilDistrict
+    , ssCityCouncilDistrict
+    , ssGeocodedPoint
+    , ssEndHouseNumber
+    , ssSubAdministrativeAreaName
+    , ssPublished
+    , ssStartLatE7
+    , ssZip
+    , ssSurrogateId
+    , ssMunicipalDistrict
+    , ssWardDistrict
+    , ssVoterGeographicDivisionOcdIds
+    , ssStreetName
+    , ssTownshipDistrict
+    , ssUnitType
+    , ssCongressionalDistrict
+    , ssStateSenateDistrict
+    , ssOddOrEvens
+    , ssGeographicDivisionOcdIds
+    , ssBeforeGeocodeId
+    , ssDataSetId
+    , ssStartLngE7
+    , ssCity
+    , ssWildcard
+    , ssTargetsmartUniquePrecinctCode
+    , ssProvenances
+    , ssSchoolDistrict
+    , ssMailOnly
+    , ssId
+    , ssUnitNumber
+    , ssAdministrationRegionIds
+    , ssVanPrecinctCode
+    , ssJudicialDistrict
+    , ssPrecinctName
+    , ssCountyFips
+    , ssPrecinctOcdId
 
     -- ** Candidate
     , Candidate
@@ -116,6 +168,31 @@ module Network.Google.CivicInfo
     -- ** RepresentativesRepresentativeInfoByDivisionRoles
     , RepresentativesRepresentativeInfoByDivisionRoles (..)
 
+    -- ** StreetSegmentList
+    , StreetSegmentList
+    , streetSegmentList
+    , sslSegments
+
+    -- ** LivegraphBacktraceRecordInfo
+    , LivegraphBacktraceRecordInfo
+    , livegraphBacktraceRecordInfo
+    , lbriDataSourcePublishMsec
+    , lbriTopicBuildStartMsec
+    , lbriIsRecon
+    , lbriPriority
+    , lbriShouldMonitorLatency
+    , lbriRecordId
+    , lbriProxySentMsec
+    , lbriExpInfo
+    , lbriProcess
+    , lbriTopicBuildFinishMsec
+    , lbriNumberOfTriples
+    , lbriProxyReceiveMsec
+    , lbriVersion
+    , lbriIsWlmThrottled
+    , lbriExpId
+    , lbriSubscriberReceiveMsec
+
     -- ** ElectionsQueryRequest
     , ElectionsQueryRequest
     , electionsQueryRequest
@@ -144,6 +221,14 @@ module Network.Google.CivicInfo
     , rirDivisions
     , rirOffices
 
+    -- ** VoterInfoSegmentResult
+    , VoterInfoSegmentResult
+    , voterInfoSegmentResult
+    , visrResponse
+    , visrGeneratedMillis
+    , visrPostalAddress
+    , visrRequest
+
     -- ** DivisionSearchResult
     , DivisionSearchResult
     , divisionSearchResult
@@ -155,6 +240,16 @@ module Network.Google.CivicInfo
     , DivisionSearchRequest
     , divisionSearchRequest
     , dsrContextParams
+
+    -- ** FieldMetadataProto
+    , FieldMetadataProto
+    , fieldMetadataProto
+    , fmpInternal
+
+    -- ** MessageSet
+    , MessageSet
+    , messageSet
+    , msRecordMessageSetExt
 
     -- ** AdministrativeBody
     , AdministrativeBody
@@ -199,6 +294,7 @@ module Network.Google.CivicInfo
     , conPrimaryParty
     , conId
     , conType
+    , conBallotTitle
     , conElectorateSpecifications
     , conReferendumBrief
     , conDistrict
@@ -230,6 +326,14 @@ module Network.Google.CivicInfo
     , eoEmailAddress
     , eoTitle
 
+    -- ** PointProto
+    , PointProto
+    , pointProto
+    , ppLatE7
+    , ppLngE7
+    , ppMetadata
+    , ppTemporaryData
+
     -- ** RepresentativeInfoData
     , RepresentativeInfoData
     , representativeInfoData
@@ -259,6 +363,7 @@ module Network.Google.CivicInfo
     -- ** VoterInfoRequest
     , VoterInfoRequest
     , voterInfoRequest
+    , virVoterInfoSegmentResult
     , virContextParams
 
     -- ** SimpleAddressType
@@ -272,10 +377,51 @@ module Network.Google.CivicInfo
     , satLine1
     , satLocationName
 
+    -- ** InternalSourceSummaryProto
+    , InternalSourceSummaryProto
+    , internalSourceSummaryProto
+    , isspDataSet
+    , isspProvider
+
+    -- ** LivegraphBacktraceRecordInfoExpInfo
+    , LivegraphBacktraceRecordInfoExpInfo
+    , livegraphBacktraceRecordInfoExpInfo
+    , lbrieiDeletedIns
+
     -- ** ContextParams
     , ContextParams
     , contextParams
     , cpClientProFile
+
+    -- ** PostalAddress
+    , PostalAddress
+    , postalAddress
+    , paAdministrativeAreaName
+    , paRecipientName
+    , paLanguageCode
+    , paSortingCode
+    , paPremiseName
+    , paPostalCodeNumberExtension
+    , paCountryNameCode
+    , paSubAdministrativeAreaName
+    , paPostBoxNumber
+    , paLocalityName
+    , paIsDisputed
+    , paThoroughfareNumber
+    , paDependentLocalityName
+    , paFirmName
+    , paCountryName
+    , paDependentThoroughfareName
+    , paAddressLines
+    , paPostalCodeNumber
+    , paThoroughfareName
+    , paSubPremiseName
+
+    -- ** InternalFieldMetadataProto
+    , InternalFieldMetadataProto
+    , internalFieldMetadataProto
+    , ifmpSourceSummary
+    , ifmpIsAuto
 
     -- ** AdministrationRegion
     , AdministrationRegion
@@ -285,6 +431,20 @@ module Network.Google.CivicInfo
     , arName
     , arElectionAdministrationBody
     , arId
+
+    -- ** Provenance
+    , Provenance
+    , provenance
+    , pTsStreetSegmentId
+    , pVIPStreetSegmentId
+    , pCollidedSegmentSource
+    , pCtclContestUuid
+    , pDataSetId
+    , pVIP5StreetSegmentId
+    , pCtclOfficeUuid
+    , pVIP5PrecinctId
+    , pPrecinctSplitId
+    , pPrecinctId
 
     -- ** ElectionsQueryResponse
     , ElectionsQueryResponse

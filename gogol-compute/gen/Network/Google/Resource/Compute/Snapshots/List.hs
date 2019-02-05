@@ -34,11 +34,11 @@ module Network.Google.Resource.Compute.Snapshots.List
     , SnapshotsList
 
     -- * Request Lenses
-    , sOrderBy
-    , sProject
-    , sFilter
-    , sPageToken
-    , sMaxResults
+    , snaOrderBy
+    , snaProject
+    , snaFilter
+    , snaPageToken
+    , snaMaxResults
     ) where
 
 import           Network.Google.Compute.Types
@@ -64,36 +64,36 @@ type SnapshotsListResource =
 --
 -- /See:/ 'snapshotsList' smart constructor.
 data SnapshotsList = SnapshotsList'
-    { _sOrderBy    :: !(Maybe Text)
-    , _sProject    :: !Text
-    , _sFilter     :: !(Maybe Text)
-    , _sPageToken  :: !(Maybe Text)
-    , _sMaxResults :: !(Textual Word32)
+    { _snaOrderBy    :: !(Maybe Text)
+    , _snaProject    :: !Text
+    , _snaFilter     :: !(Maybe Text)
+    , _snaPageToken  :: !(Maybe Text)
+    , _snaMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SnapshotsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sOrderBy'
+-- * 'snaOrderBy'
 --
--- * 'sProject'
+-- * 'snaProject'
 --
--- * 'sFilter'
+-- * 'snaFilter'
 --
--- * 'sPageToken'
+-- * 'snaPageToken'
 --
--- * 'sMaxResults'
+-- * 'snaMaxResults'
 snapshotsList
-    :: Text -- ^ 'sProject'
+    :: Text -- ^ 'snaProject'
     -> SnapshotsList
-snapshotsList pSProject_ =
+snapshotsList pSnaProject_ =
     SnapshotsList'
-    { _sOrderBy = Nothing
-    , _sProject = pSProject_
-    , _sFilter = Nothing
-    , _sPageToken = Nothing
-    , _sMaxResults = 500
+    { _snaOrderBy = Nothing
+    , _snaProject = pSnaProject_
+    , _snaFilter = Nothing
+    , _snaPageToken = Nothing
+    , _snaMaxResults = 500
     }
 
 -- | Sorts list results by a certain order. By default, results are returned
@@ -104,50 +104,51 @@ snapshotsList pSProject_ =
 -- first). Use this to sort resources like operations so that the newest
 -- operation is returned first. Currently, only sorting by name or
 -- creationTimestamp desc is supported.
-sOrderBy :: Lens' SnapshotsList (Maybe Text)
-sOrderBy = lens _sOrderBy (\ s a -> s{_sOrderBy = a})
+snaOrderBy :: Lens' SnapshotsList (Maybe Text)
+snaOrderBy
+  = lens _snaOrderBy (\ s a -> s{_snaOrderBy = a})
 
 -- | Project ID for this request.
-sProject :: Lens' SnapshotsList Text
-sProject = lens _sProject (\ s a -> s{_sProject = a})
+snaProject :: Lens' SnapshotsList Text
+snaProject
+  = lens _snaProject (\ s a -> s{_snaProject = a})
 
--- | Sets a filter expression for filtering listed resources, in the form
--- filter={expression}. Your {expression} must be in the format: field_name
--- comparison_string literal_string. The field_name is the name of the
--- field you want to compare. Only atomic field types are supported
--- (string, number, boolean). The comparison_string must be either eq
--- (equals) or ne (not equals). The literal_string is the string value to
--- filter to. The literal value must be valid for the type of field you are
--- filtering by (string, number, boolean). For string fields, the literal
--- value is interpreted as a regular expression using RE2 syntax. The
--- literal value must match the entire field. For example, to filter for
--- instances that do not have a name of example-instance, you would use
--- filter=name ne example-instance. You can filter on nested fields. For
--- example, you could filter on instances that have set the
--- scheduling.automaticRestart field to true. Use filtering on nested
--- fields to take advantage of labels to organize and search for results
--- based on label values. To filter on multiple expressions, provide each
--- separate expression within parentheses. For example,
--- (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple
--- expressions are treated as AND expressions, meaning that resources must
--- match all expressions to pass the filters.
-sFilter :: Lens' SnapshotsList (Maybe Text)
-sFilter = lens _sFilter (\ s a -> s{_sFilter = a})
+-- | A filter expression that filters resources listed in the response. The
+-- expression must specify the field name, a comparison operator, and the
+-- value that you want to use for filtering. The value must be a string, a
+-- number, or a boolean. The comparison operator must be either =, !=, >,
+-- or \<. For example, if you are filtering Compute Engine instances, you
+-- can exclude instances named example-instance by specifying name !=
+-- example-instance. You can also filter nested fields. For example, you
+-- could specify scheduling.automaticRestart = false to include instances
+-- only if they are not scheduled for automatic restarts. You can use
+-- filtering on nested fields to filter based on resource labels. To filter
+-- on multiple expressions, provide each separate expression within
+-- parentheses. For example, (scheduling.automaticRestart = true)
+-- (cpuPlatform = \"Intel Skylake\"). By default, each expression is an AND
+-- expression. However, you can include AND and OR expressions explicitly.
+-- For example, (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel
+-- Broadwell\") AND (scheduling.automaticRestart = true).
+snaFilter :: Lens' SnapshotsList (Maybe Text)
+snaFilter
+  = lens _snaFilter (\ s a -> s{_snaFilter = a})
 
 -- | Specifies a page token to use. Set pageToken to the nextPageToken
 -- returned by a previous list request to get the next page of results.
-sPageToken :: Lens' SnapshotsList (Maybe Text)
-sPageToken
-  = lens _sPageToken (\ s a -> s{_sPageToken = a})
+snaPageToken :: Lens' SnapshotsList (Maybe Text)
+snaPageToken
+  = lens _snaPageToken (\ s a -> s{_snaPageToken = a})
 
 -- | The maximum number of results per page that should be returned. If the
 -- number of available results is larger than maxResults, Compute Engine
 -- returns a nextPageToken that can be used to get the next page of results
--- in subsequent list requests.
-sMaxResults :: Lens' SnapshotsList Word32
-sMaxResults
-  = lens _sMaxResults (\ s a -> s{_sMaxResults = a}) .
-      _Coerce
+-- in subsequent list requests. Acceptable values are 0 to 500, inclusive.
+-- (Default: 500)
+snaMaxResults :: Lens' SnapshotsList Word32
+snaMaxResults
+  = lens _snaMaxResults
+      (\ s a -> s{_snaMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest SnapshotsList where
         type Rs SnapshotsList = SnapshotList
@@ -156,8 +157,8 @@ instance GoogleRequest SnapshotsList where
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient SnapshotsList'{..}
-          = go _sProject _sOrderBy _sFilter _sPageToken
-              (Just _sMaxResults)
+          = go _snaProject _snaOrderBy _snaFilter _snaPageToken
+              (Just _snaMaxResults)
               (Just AltJSON)
               computeService
           where go

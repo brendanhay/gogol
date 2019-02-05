@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves a datafeed from your Merchant Center account.
+-- Retrieves a datafeed configuration from your Merchant Center account.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.datafeeds.get@.
 module Network.Google.Resource.Content.Datafeeds.Get
@@ -44,13 +44,13 @@ import           Network.Google.ShoppingContent.Types
 -- 'DatafeedsGet' request conforms to.
 type DatafeedsGetResource =
      "content" :>
-       "v2" :>
+       "v2.1" :>
          Capture "merchantId" (Textual Word64) :>
            "datafeeds" :>
              Capture "datafeedId" (Textual Word64) :>
                QueryParam "alt" AltJSON :> Get '[JSON] Datafeed
 
--- | Retrieves a datafeed from your Merchant Center account.
+-- | Retrieves a datafeed configuration from your Merchant Center account.
 --
 -- /See:/ 'datafeedsGet' smart constructor.
 data DatafeedsGet = DatafeedsGet'
@@ -75,11 +75,14 @@ datafeedsGet pDgMerchantId_ pDgDatafeedId_ =
     , _dgDatafeedId = _Coerce # pDgDatafeedId_
     }
 
+-- | The ID of the account that manages the datafeed. This account cannot be
+-- a multi-client account.
 dgMerchantId :: Lens' DatafeedsGet Word64
 dgMerchantId
   = lens _dgMerchantId (\ s a -> s{_dgMerchantId = a})
       . _Coerce
 
+-- | The ID of the datafeed.
 dgDatafeedId :: Lens' DatafeedsGet Word64
 dgDatafeedId
   = lens _dgDatafeedId (\ s a -> s{_dgDatafeedId = a})

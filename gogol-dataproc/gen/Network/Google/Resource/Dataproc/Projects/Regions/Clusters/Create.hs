@@ -22,7 +22,7 @@
 --
 -- Creates a cluster in a project.
 --
--- /See:/ <https://cloud.google.com/dataproc/ Google Cloud Dataproc API Reference> for @dataproc.projects.regions.clusters.create@.
+-- /See:/ <https://cloud.google.com/dataproc/ Cloud Dataproc API Reference> for @dataproc.projects.regions.clusters.create@.
 module Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Create
     (
     -- * REST Resource
@@ -34,12 +34,11 @@ module Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Create
 
     -- * Request Lenses
     , prccXgafv
+    , prccRequestId
     , prccUploadProtocol
-    , prccPp
     , prccAccessToken
     , prccUploadType
     , prccPayload
-    , prccBearerToken
     , prccRegion
     , prccProjectId
     , prccCallback
@@ -57,28 +56,25 @@ type ProjectsRegionsClustersCreateResource =
            "regions" :>
              Capture "region" Text :>
                "clusters" :>
-                 QueryParam "$.xgafv" Text :>
-                   QueryParam "upload_protocol" Text :>
-                     QueryParam "pp" Bool :>
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "requestId" Text :>
+                     QueryParam "upload_protocol" Text :>
                        QueryParam "access_token" Text :>
                          QueryParam "uploadType" Text :>
-                           QueryParam "bearer_token" Text :>
-                             QueryParam "callback" Text :>
-                               QueryParam "alt" AltJSON :>
-                                 ReqBody '[JSON] Cluster :>
-                                   Post '[JSON] Operation
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] Cluster :> Post '[JSON] Operation
 
 -- | Creates a cluster in a project.
 --
 -- /See:/ 'projectsRegionsClustersCreate' smart constructor.
 data ProjectsRegionsClustersCreate = ProjectsRegionsClustersCreate'
-    { _prccXgafv          :: !(Maybe Text)
+    { _prccXgafv          :: !(Maybe Xgafv)
+    , _prccRequestId      :: !(Maybe Text)
     , _prccUploadProtocol :: !(Maybe Text)
-    , _prccPp             :: !Bool
     , _prccAccessToken    :: !(Maybe Text)
     , _prccUploadType     :: !(Maybe Text)
     , _prccPayload        :: !Cluster
-    , _prccBearerToken    :: !(Maybe Text)
     , _prccRegion         :: !Text
     , _prccProjectId      :: !Text
     , _prccCallback       :: !(Maybe Text)
@@ -90,17 +86,15 @@ data ProjectsRegionsClustersCreate = ProjectsRegionsClustersCreate'
 --
 -- * 'prccXgafv'
 --
--- * 'prccUploadProtocol'
+-- * 'prccRequestId'
 --
--- * 'prccPp'
+-- * 'prccUploadProtocol'
 --
 -- * 'prccAccessToken'
 --
 -- * 'prccUploadType'
 --
 -- * 'prccPayload'
---
--- * 'prccBearerToken'
 --
 -- * 'prccRegion'
 --
@@ -115,31 +109,39 @@ projectsRegionsClustersCreate
 projectsRegionsClustersCreate pPrccPayload_ pPrccRegion_ pPrccProjectId_ =
     ProjectsRegionsClustersCreate'
     { _prccXgafv = Nothing
+    , _prccRequestId = Nothing
     , _prccUploadProtocol = Nothing
-    , _prccPp = True
     , _prccAccessToken = Nothing
     , _prccUploadType = Nothing
     , _prccPayload = pPrccPayload_
-    , _prccBearerToken = Nothing
     , _prccRegion = pPrccRegion_
     , _prccProjectId = pPrccProjectId_
     , _prccCallback = Nothing
     }
 
 -- | V1 error format.
-prccXgafv :: Lens' ProjectsRegionsClustersCreate (Maybe Text)
+prccXgafv :: Lens' ProjectsRegionsClustersCreate (Maybe Xgafv)
 prccXgafv
   = lens _prccXgafv (\ s a -> s{_prccXgafv = a})
+
+-- | Optional. A unique id used to identify the request. If the server
+-- receives two CreateClusterRequest requests with the same id, then the
+-- second request will be ignored and the first
+-- google.longrunning.Operation created and stored in the backend is
+-- returned.It is recommended to always set this value to a UUID
+-- (https:\/\/en.wikipedia.org\/wiki\/Universally_unique_identifier).The id
+-- must contain only letters (a-z, A-Z), numbers (0-9), underscores (_),
+-- and hyphens (-). The maximum length is 40 characters.
+prccRequestId :: Lens' ProjectsRegionsClustersCreate (Maybe Text)
+prccRequestId
+  = lens _prccRequestId
+      (\ s a -> s{_prccRequestId = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 prccUploadProtocol :: Lens' ProjectsRegionsClustersCreate (Maybe Text)
 prccUploadProtocol
   = lens _prccUploadProtocol
       (\ s a -> s{_prccUploadProtocol = a})
-
--- | Pretty-print response.
-prccPp :: Lens' ProjectsRegionsClustersCreate Bool
-prccPp = lens _prccPp (\ s a -> s{_prccPp = a})
 
 -- | OAuth access token.
 prccAccessToken :: Lens' ProjectsRegionsClustersCreate (Maybe Text)
@@ -158,18 +160,12 @@ prccPayload :: Lens' ProjectsRegionsClustersCreate Cluster
 prccPayload
   = lens _prccPayload (\ s a -> s{_prccPayload = a})
 
--- | OAuth bearer token.
-prccBearerToken :: Lens' ProjectsRegionsClustersCreate (Maybe Text)
-prccBearerToken
-  = lens _prccBearerToken
-      (\ s a -> s{_prccBearerToken = a})
-
--- | [Required] The Cloud Dataproc region in which to handle the request.
+-- | Required. The Cloud Dataproc region in which to handle the request.
 prccRegion :: Lens' ProjectsRegionsClustersCreate Text
 prccRegion
   = lens _prccRegion (\ s a -> s{_prccRegion = a})
 
--- | [Required] The ID of the Google Cloud Platform project that the cluster
+-- | Required. The ID of the Google Cloud Platform project that the cluster
 -- belongs to.
 prccProjectId :: Lens' ProjectsRegionsClustersCreate Text
 prccProjectId
@@ -188,11 +184,10 @@ instance GoogleRequest ProjectsRegionsClustersCreate
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsRegionsClustersCreate'{..}
           = go _prccProjectId _prccRegion _prccXgafv
+              _prccRequestId
               _prccUploadProtocol
-              (Just _prccPp)
               _prccAccessToken
               _prccUploadType
-              _prccBearerToken
               _prccCallback
               (Just AltJSON)
               _prccPayload

@@ -35,10 +35,8 @@ module Network.Google.Resource.Monitoring.Projects.Groups.Get
     -- * Request Lenses
     , pggXgafv
     , pggUploadProtocol
-    , pggPp
     , pggAccessToken
     , pggUploadType
-    , pggBearerToken
     , pggName
     , pggCallback
     ) where
@@ -53,12 +51,10 @@ type ProjectsGroupsGetResource =
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] Group
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Group
 
 -- | Gets a single group.
 --
@@ -66,10 +62,8 @@ type ProjectsGroupsGetResource =
 data ProjectsGroupsGet = ProjectsGroupsGet'
     { _pggXgafv          :: !(Maybe Xgafv)
     , _pggUploadProtocol :: !(Maybe Text)
-    , _pggPp             :: !Bool
     , _pggAccessToken    :: !(Maybe Text)
     , _pggUploadType     :: !(Maybe Text)
-    , _pggBearerToken    :: !(Maybe Text)
     , _pggName           :: !Text
     , _pggCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -82,13 +76,9 @@ data ProjectsGroupsGet = ProjectsGroupsGet'
 --
 -- * 'pggUploadProtocol'
 --
--- * 'pggPp'
---
 -- * 'pggAccessToken'
 --
 -- * 'pggUploadType'
---
--- * 'pggBearerToken'
 --
 -- * 'pggName'
 --
@@ -100,10 +90,8 @@ projectsGroupsGet pPggName_ =
     ProjectsGroupsGet'
     { _pggXgafv = Nothing
     , _pggUploadProtocol = Nothing
-    , _pggPp = True
     , _pggAccessToken = Nothing
     , _pggUploadType = Nothing
-    , _pggBearerToken = Nothing
     , _pggName = pPggName_
     , _pggCallback = Nothing
     }
@@ -118,10 +106,6 @@ pggUploadProtocol
   = lens _pggUploadProtocol
       (\ s a -> s{_pggUploadProtocol = a})
 
--- | Pretty-print response.
-pggPp :: Lens' ProjectsGroupsGet Bool
-pggPp = lens _pggPp (\ s a -> s{_pggPp = a})
-
 -- | OAuth access token.
 pggAccessToken :: Lens' ProjectsGroupsGet (Maybe Text)
 pggAccessToken
@@ -133,12 +117,6 @@ pggUploadType :: Lens' ProjectsGroupsGet (Maybe Text)
 pggUploadType
   = lens _pggUploadType
       (\ s a -> s{_pggUploadType = a})
-
--- | OAuth bearer token.
-pggBearerToken :: Lens' ProjectsGroupsGet (Maybe Text)
-pggBearerToken
-  = lens _pggBearerToken
-      (\ s a -> s{_pggBearerToken = a})
 
 -- | The group to retrieve. The format is
 -- \"projects\/{project_id_or_number}\/groups\/{group_id}\".
@@ -158,10 +136,8 @@ instance GoogleRequest ProjectsGroupsGet where
                "https://www.googleapis.com/auth/monitoring.read"]
         requestClient ProjectsGroupsGet'{..}
           = go _pggName _pggXgafv _pggUploadProtocol
-              (Just _pggPp)
               _pggAccessToken
               _pggUploadType
-              _pggBearerToken
               _pggCallback
               (Just AltJSON)
               monitoringService

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified SslCertificate resource. Get a list of available
+-- Returns the specified SslCertificate resource. Gets a list of available
 -- SSL certificates by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.sslCertificates.get@.
@@ -54,7 +54,7 @@ type SSLCertificatesGetResource =
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] SSLCertificate
 
--- | Returns the specified SslCertificate resource. Get a list of available
+-- | Returns the specified SslCertificate resource. Gets a list of available
 -- SSL certificates by making a list() request.
 --
 -- /See:/ 'sslCertificatesGet' smart constructor.

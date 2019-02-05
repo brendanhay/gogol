@@ -1,5 +1,5 @@
 name:                  gogol-examples
-version:               0.1.1
+version:               0.4.0
 synopsis:              Basic examples for various gogol libraries.
 homepage:              https://github.com/brendanhay/gogol
 license:               OtherLicense
@@ -19,19 +19,18 @@ library
 
     exposed-modules:
           Example.Storage
+        , Example.Sheets
 
     build-depends:
           base          >= 4.7
         , bytestring
         , conduit
         , conduit-extra
-        , exceptions
-        , gogol         == 0.1.1.*
+        , gogol         == 0.4.0.*
         , gogol-core
         , gogol-storage
-        , http-conduit
+        , gogol-sheets
         , lens
-        , semigroups
+        , resourcet
         , text
-        , time
-        , transformers
+        , aeson

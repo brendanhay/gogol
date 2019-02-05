@@ -1,0 +1,70 @@
+name:                  gogol-containeranalysis
+version:               0.4.0
+synopsis:              Google Container Analysis SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               OtherLicense
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
+copyright:             Copyright (c) 2015-2016 Brendan Hay
+category:              Network, Google, Cloud
+build-type:            Simple
+cabal-version:         >= 1.10
+extra-source-files:    README.md src/.gitkeep
+
+description:
+    An implementation of the Grafeas API, which stores, and enables querying
+    and retrieval of critical metadata about all of your software artifacts.
+    .
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
+    .
+    This library is compatible with version @v1beta1@
+    of the API.
+
+source-repository head
+    type:     git
+    location: git://github.com/brendanhay/gogol.git
+
+library
+    default-language:  Haskell2010
+    hs-source-dirs:    src gen
+
+    ghc-options:       -Wall
+
+    exposed-modules:
+          Network.Google.ContainerAnalysis
+        , Network.Google.ContainerAnalysis.Types
+        , Network.Google.Resource.ContainerAnalysis.Projects.Notes.BatchCreate
+        , Network.Google.Resource.ContainerAnalysis.Projects.Notes.Create
+        , Network.Google.Resource.ContainerAnalysis.Projects.Notes.Delete
+        , Network.Google.Resource.ContainerAnalysis.Projects.Notes.Get
+        , Network.Google.Resource.ContainerAnalysis.Projects.Notes.GetIAMPolicy
+        , Network.Google.Resource.ContainerAnalysis.Projects.Notes.List
+        , Network.Google.Resource.ContainerAnalysis.Projects.Notes.Occurrences.List
+        , Network.Google.Resource.ContainerAnalysis.Projects.Notes.Patch
+        , Network.Google.Resource.ContainerAnalysis.Projects.Notes.SetIAMPolicy
+        , Network.Google.Resource.ContainerAnalysis.Projects.Notes.TestIAMPermissions
+        , Network.Google.Resource.ContainerAnalysis.Projects.Occurrences.BatchCreate
+        , Network.Google.Resource.ContainerAnalysis.Projects.Occurrences.Create
+        , Network.Google.Resource.ContainerAnalysis.Projects.Occurrences.Delete
+        , Network.Google.Resource.ContainerAnalysis.Projects.Occurrences.Get
+        , Network.Google.Resource.ContainerAnalysis.Projects.Occurrences.GetIAMPolicy
+        , Network.Google.Resource.ContainerAnalysis.Projects.Occurrences.GetNotes
+        , Network.Google.Resource.ContainerAnalysis.Projects.Occurrences.GetVulnerabilitySummary
+        , Network.Google.Resource.ContainerAnalysis.Projects.Occurrences.List
+        , Network.Google.Resource.ContainerAnalysis.Projects.Occurrences.Patch
+        , Network.Google.Resource.ContainerAnalysis.Projects.Occurrences.SetIAMPolicy
+        , Network.Google.Resource.ContainerAnalysis.Projects.Occurrences.TestIAMPermissions
+        , Network.Google.Resource.ContainerAnalysis.Projects.ScanConfigs.Get
+        , Network.Google.Resource.ContainerAnalysis.Projects.ScanConfigs.List
+        , Network.Google.Resource.ContainerAnalysis.Projects.ScanConfigs.Update
+
+    other-modules:
+          Network.Google.ContainerAnalysis.Types.Product
+        , Network.Google.ContainerAnalysis.Types.Sum
+
+    build-depends:
+          gogol-core == 0.4.0.*
+        , base       >= 4.7 && < 5

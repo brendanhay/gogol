@@ -34,7 +34,7 @@ module Network.Google.Resource.Content.Productstatuses.List
 
     -- * Request Lenses
     , plMerchantId
-    , plIncludeInvalidInsertedItems
+    , plDestinations
     , plPageToken
     , plMaxResults
     ) where
@@ -46,10 +46,10 @@ import           Network.Google.ShoppingContent.Types
 -- 'ProductstatusesList' request conforms to.
 type ProductstatusesListResource =
      "content" :>
-       "v2" :>
+       "v2.1" :>
          Capture "merchantId" (Textual Word64) :>
            "productstatuses" :>
-             QueryParam "includeInvalidInsertedItems" Bool :>
+             QueryParams "destinations" Text :>
                QueryParam "pageToken" Text :>
                  QueryParam "maxResults" (Textual Word32) :>
                    QueryParam "alt" AltJSON :>
@@ -59,10 +59,10 @@ type ProductstatusesListResource =
 --
 -- /See:/ 'productstatusesList' smart constructor.
 data ProductstatusesList = ProductstatusesList'
-    { _plMerchantId                  :: !(Textual Word64)
-    , _plIncludeInvalidInsertedItems :: !(Maybe Bool)
-    , _plPageToken                   :: !(Maybe Text)
-    , _plMaxResults                  :: !(Maybe (Textual Word32))
+    { _plMerchantId   :: !(Textual Word64)
+    , _plDestinations :: !(Maybe [Text])
+    , _plPageToken    :: !(Maybe Text)
+    , _plMaxResults   :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductstatusesList' with the minimum fields required to make a request.
@@ -71,7 +71,7 @@ data ProductstatusesList = ProductstatusesList'
 --
 -- * 'plMerchantId'
 --
--- * 'plIncludeInvalidInsertedItems'
+-- * 'plDestinations'
 --
 -- * 'plPageToken'
 --
@@ -82,24 +82,26 @@ productstatusesList
 productstatusesList pPlMerchantId_ =
     ProductstatusesList'
     { _plMerchantId = _Coerce # pPlMerchantId_
-    , _plIncludeInvalidInsertedItems = Nothing
+    , _plDestinations = Nothing
     , _plPageToken = Nothing
     , _plMaxResults = Nothing
     }
 
--- | The ID of the managing account.
+-- | The ID of the account that contains the products. This account cannot be
+-- a multi-client account.
 plMerchantId :: Lens' ProductstatusesList Word64
 plMerchantId
   = lens _plMerchantId (\ s a -> s{_plMerchantId = a})
       . _Coerce
 
--- | Flag to include the invalid inserted items in the result of the list
--- request. By default the invalid items are not shown (the default value
--- is false).
-plIncludeInvalidInsertedItems :: Lens' ProductstatusesList (Maybe Bool)
-plIncludeInvalidInsertedItems
-  = lens _plIncludeInvalidInsertedItems
-      (\ s a -> s{_plIncludeInvalidInsertedItems = a})
+-- | If set, only issues for the specified destinations are returned,
+-- otherwise only issues for the Shopping destination.
+plDestinations :: Lens' ProductstatusesList [Text]
+plDestinations
+  = lens _plDestinations
+      (\ s a -> s{_plDestinations = a})
+      . _Default
+      . _Coerce
 
 -- | The token returned by the previous request.
 plPageToken :: Lens' ProductstatusesList (Maybe Text)
@@ -119,7 +121,7 @@ instance GoogleRequest ProductstatusesList where
         type Scopes ProductstatusesList =
              '["https://www.googleapis.com/auth/content"]
         requestClient ProductstatusesList'{..}
-          = go _plMerchantId _plIncludeInvalidInsertedItems
+          = go _plMerchantId (_plDestinations ^. _Default)
               _plPageToken
               _plMaxResults
               (Just AltJSON)

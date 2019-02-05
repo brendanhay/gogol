@@ -20,10 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the SSL certificate. The change will not take effect until the
--- instance is restarted.
+-- Deletes the SSL certificate. For First Generation instances, the
+-- certificate remains valid until the instance is restarted.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.sslCerts.delete@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.sslCerts.delete@.
 module Network.Google.Resource.SQL.SSLCerts.Delete
     (
     -- * REST Resource
@@ -55,8 +55,8 @@ type SSLCertsDeleteResource =
                    Capture "sha1Fingerprint" Text :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
--- | Deletes the SSL certificate. The change will not take effect until the
--- instance is restarted.
+-- | Deletes the SSL certificate. For First Generation instances, the
+-- certificate remains valid until the instance is restarted.
 --
 -- /See:/ 'sslCertsDelete' smart constructor.
 data SSLCertsDelete = SSLCertsDelete'
@@ -86,7 +86,7 @@ sslCertsDelete pScdProject_ pScdSha1Fingerprint_ pScdInstance_ =
     , _scdInstance = pScdInstance_
     }
 
--- | Project ID of the project that contains the instance to be deleted.
+-- | Project ID of the project that contains the instance.
 scdProject :: Lens' SSLCertsDelete Text
 scdProject
   = lens _scdProject (\ s a -> s{_scdProject = a})

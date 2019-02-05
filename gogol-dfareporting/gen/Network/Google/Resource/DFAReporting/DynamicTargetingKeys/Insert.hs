@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 -- 'DynamicTargetingKeysInsert' request conforms to.
 type DynamicTargetingKeysInsertResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "dynamicTargetingKeys" :>

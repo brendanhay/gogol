@@ -20,1247 +20,1619 @@ module Network.Google.PageSpeed.Types.Product where
 import           Network.Google.PageSpeed.Types.Sum
 import           Network.Google.Prelude
 
+-- | Map of category groups in the LHR.
 --
--- /See:/ 'resultFormattedResultsRuleResultsAdditionalURLBlocksItem' smart constructor.
-data ResultFormattedResultsRuleResultsAdditionalURLBlocksItem = ResultFormattedResultsRuleResultsAdditionalURLBlocksItem'
-    { _rfrrraubiURLs   :: !(Maybe [ResultFormattedResultsRuleResultsAdditionalURLBlocksItemURLsItem])
-    , _rfrrraubiHeader :: !(Maybe PagespeedAPIFormatStringV2)
+-- /See:/ 'lighthouseResultV5CategoryGroups' smart constructor.
+newtype LighthouseResultV5CategoryGroups = LighthouseResultV5CategoryGroups'
+    { _lrvcgAddtional :: HashMap Text LighthouseResultV5CategoryGroupsAdditional
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ResultFormattedResultsRuleResultsAdditionalURLBlocksItem' with the minimum fields required to make a request.
+-- | Creates a value of 'LighthouseResultV5CategoryGroups' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rfrrraubiURLs'
---
--- * 'rfrrraubiHeader'
-resultFormattedResultsRuleResultsAdditionalURLBlocksItem
-    :: ResultFormattedResultsRuleResultsAdditionalURLBlocksItem
-resultFormattedResultsRuleResultsAdditionalURLBlocksItem =
-    ResultFormattedResultsRuleResultsAdditionalURLBlocksItem'
-    { _rfrrraubiURLs = Nothing
-    , _rfrrraubiHeader = Nothing
+-- * 'lrvcgAddtional'
+lighthouseResultV5CategoryGroups
+    :: HashMap Text LighthouseResultV5CategoryGroupsAdditional -- ^ 'lrvcgAddtional'
+    -> LighthouseResultV5CategoryGroups
+lighthouseResultV5CategoryGroups pLrvcgAddtional_ =
+    LighthouseResultV5CategoryGroups'
+    { _lrvcgAddtional = _Coerce # pLrvcgAddtional_
     }
 
--- | List of entries that provide information about URLs in the url block.
--- Optional.
-rfrrraubiURLs :: Lens' ResultFormattedResultsRuleResultsAdditionalURLBlocksItem [ResultFormattedResultsRuleResultsAdditionalURLBlocksItemURLsItem]
-rfrrraubiURLs
-  = lens _rfrrraubiURLs
-      (\ s a -> s{_rfrrraubiURLs = a})
-      . _Default
+-- | A grouping contained in a category that groups similar audits together.
+lrvcgAddtional :: Lens' LighthouseResultV5CategoryGroups (HashMap Text LighthouseResultV5CategoryGroupsAdditional)
+lrvcgAddtional
+  = lens _lrvcgAddtional
+      (\ s a -> s{_lrvcgAddtional = a})
       . _Coerce
 
--- | Heading to be displayed with the list of URLs.
-rfrrraubiHeader :: Lens' ResultFormattedResultsRuleResultsAdditionalURLBlocksItem (Maybe PagespeedAPIFormatStringV2)
-rfrrraubiHeader
-  = lens _rfrrraubiHeader
-      (\ s a -> s{_rfrrraubiHeader = a})
+instance FromJSON LighthouseResultV5CategoryGroups
+         where
+        parseJSON
+          = withObject "LighthouseResultV5CategoryGroups"
+              (\ o ->
+                 LighthouseResultV5CategoryGroups' <$>
+                   (parseJSONObject o))
+
+instance ToJSON LighthouseResultV5CategoryGroups
+         where
+        toJSON = toJSON . _lrvcgAddtional
+
+-- | A top-level error message that, if present, indicates a serious enough
+-- problem that this Lighthouse result may need to be discarded.
+--
+-- /See:/ 'lighthouseResultV5RuntimeError' smart constructor.
+data LighthouseResultV5RuntimeError = LighthouseResultV5RuntimeError'
+    { _lrvreCode    :: !(Maybe Text)
+    , _lrvreMessage :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LighthouseResultV5RuntimeError' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lrvreCode'
+--
+-- * 'lrvreMessage'
+lighthouseResultV5RuntimeError
+    :: LighthouseResultV5RuntimeError
+lighthouseResultV5RuntimeError =
+    LighthouseResultV5RuntimeError'
+    { _lrvreCode = Nothing
+    , _lrvreMessage = Nothing
+    }
+
+-- | The enumerated Lighthouse Error code.
+lrvreCode :: Lens' LighthouseResultV5RuntimeError (Maybe Text)
+lrvreCode
+  = lens _lrvreCode (\ s a -> s{_lrvreCode = a})
+
+-- | A human readable message explaining the error code.
+lrvreMessage :: Lens' LighthouseResultV5RuntimeError (Maybe Text)
+lrvreMessage
+  = lens _lrvreMessage (\ s a -> s{_lrvreMessage = a})
+
+instance FromJSON LighthouseResultV5RuntimeError
+         where
+        parseJSON
+          = withObject "LighthouseResultV5RuntimeError"
+              (\ o ->
+                 LighthouseResultV5RuntimeError' <$>
+                   (o .:? "code") <*> (o .:? "message"))
+
+instance ToJSON LighthouseResultV5RuntimeError where
+        toJSON LighthouseResultV5RuntimeError'{..}
+          = object
+              (catMaybes
+                 [("code" .=) <$> _lrvreCode,
+                  ("message" .=) <$> _lrvreMessage])
+
+-- | Freeform details section of the audit.
+--
+-- /See:/ 'lighthouseAuditResultV5Details' smart constructor.
+newtype LighthouseAuditResultV5Details = LighthouseAuditResultV5Details'
+    { _larvdAddtional :: HashMap Text JSONValue
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LighthouseAuditResultV5Details' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'larvdAddtional'
+lighthouseAuditResultV5Details
+    :: HashMap Text JSONValue -- ^ 'larvdAddtional'
+    -> LighthouseAuditResultV5Details
+lighthouseAuditResultV5Details pLarvdAddtional_ =
+    LighthouseAuditResultV5Details'
+    { _larvdAddtional = _Coerce # pLarvdAddtional_
+    }
+
+larvdAddtional :: Lens' LighthouseAuditResultV5Details (HashMap Text JSONValue)
+larvdAddtional
+  = lens _larvdAddtional
+      (\ s a -> s{_larvdAddtional = a})
+      . _Coerce
+
+instance FromJSON LighthouseAuditResultV5Details
+         where
+        parseJSON
+          = withObject "LighthouseAuditResultV5Details"
+              (\ o ->
+                 LighthouseAuditResultV5Details' <$>
+                   (parseJSONObject o))
+
+instance ToJSON LighthouseAuditResultV5Details where
+        toJSON = toJSON . _larvdAddtional
+
+-- | The configuration settings for this LHR.
+--
+-- /See:/ 'lighthouseResultV5ConfigSettings' smart constructor.
+data LighthouseResultV5ConfigSettings = LighthouseResultV5ConfigSettings'
+    { _lrvcsLocale             :: !(Maybe Text)
+    , _lrvcsEmulatedFormFactor :: !(Maybe Text)
+    , _lrvcsOnlyCategories     :: !(Maybe JSONValue)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LighthouseResultV5ConfigSettings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lrvcsLocale'
+--
+-- * 'lrvcsEmulatedFormFactor'
+--
+-- * 'lrvcsOnlyCategories'
+lighthouseResultV5ConfigSettings
+    :: LighthouseResultV5ConfigSettings
+lighthouseResultV5ConfigSettings =
+    LighthouseResultV5ConfigSettings'
+    { _lrvcsLocale = Nothing
+    , _lrvcsEmulatedFormFactor = Nothing
+    , _lrvcsOnlyCategories = Nothing
+    }
+
+-- | The locale setting.
+lrvcsLocale :: Lens' LighthouseResultV5ConfigSettings (Maybe Text)
+lrvcsLocale
+  = lens _lrvcsLocale (\ s a -> s{_lrvcsLocale = a})
+
+-- | The form factor the emulation should use.
+lrvcsEmulatedFormFactor :: Lens' LighthouseResultV5ConfigSettings (Maybe Text)
+lrvcsEmulatedFormFactor
+  = lens _lrvcsEmulatedFormFactor
+      (\ s a -> s{_lrvcsEmulatedFormFactor = a})
+
+lrvcsOnlyCategories :: Lens' LighthouseResultV5ConfigSettings (Maybe JSONValue)
+lrvcsOnlyCategories
+  = lens _lrvcsOnlyCategories
+      (\ s a -> s{_lrvcsOnlyCategories = a})
+
+instance FromJSON LighthouseResultV5ConfigSettings
+         where
+        parseJSON
+          = withObject "LighthouseResultV5ConfigSettings"
+              (\ o ->
+                 LighthouseResultV5ConfigSettings' <$>
+                   (o .:? "locale") <*> (o .:? "emulatedFormFactor") <*>
+                     (o .:? "onlyCategories"))
+
+instance ToJSON LighthouseResultV5ConfigSettings
+         where
+        toJSON LighthouseResultV5ConfigSettings'{..}
+          = object
+              (catMaybes
+                 [("locale" .=) <$> _lrvcsLocale,
+                  ("emulatedFormFactor" .=) <$>
+                    _lrvcsEmulatedFormFactor,
+                  ("onlyCategories" .=) <$> _lrvcsOnlyCategories])
+
+-- | Environment settings that were used when making this LHR.
+--
+-- /See:/ 'lighthouseResultV5Environment' smart constructor.
+data LighthouseResultV5Environment = LighthouseResultV5Environment'
+    { _lrveHostUserAgent    :: !(Maybe Text)
+    , _lrveBenchmarkIndex   :: !(Maybe (Textual Double))
+    , _lrveNetworkUserAgent :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LighthouseResultV5Environment' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lrveHostUserAgent'
+--
+-- * 'lrveBenchmarkIndex'
+--
+-- * 'lrveNetworkUserAgent'
+lighthouseResultV5Environment
+    :: LighthouseResultV5Environment
+lighthouseResultV5Environment =
+    LighthouseResultV5Environment'
+    { _lrveHostUserAgent = Nothing
+    , _lrveBenchmarkIndex = Nothing
+    , _lrveNetworkUserAgent = Nothing
+    }
+
+-- | The user agent string of the version of Chrome used.
+lrveHostUserAgent :: Lens' LighthouseResultV5Environment (Maybe Text)
+lrveHostUserAgent
+  = lens _lrveHostUserAgent
+      (\ s a -> s{_lrveHostUserAgent = a})
+
+-- | The benchmark index number that indicates rough device class.
+lrveBenchmarkIndex :: Lens' LighthouseResultV5Environment (Maybe Double)
+lrveBenchmarkIndex
+  = lens _lrveBenchmarkIndex
+      (\ s a -> s{_lrveBenchmarkIndex = a})
+      . mapping _Coerce
+
+-- | The user agent string that was sent over the network.
+lrveNetworkUserAgent :: Lens' LighthouseResultV5Environment (Maybe Text)
+lrveNetworkUserAgent
+  = lens _lrveNetworkUserAgent
+      (\ s a -> s{_lrveNetworkUserAgent = a})
+
+instance FromJSON LighthouseResultV5Environment where
+        parseJSON
+          = withObject "LighthouseResultV5Environment"
+              (\ o ->
+                 LighthouseResultV5Environment' <$>
+                   (o .:? "hostUserAgent") <*> (o .:? "benchmarkIndex")
+                     <*> (o .:? "networkUserAgent"))
+
+instance ToJSON LighthouseResultV5Environment where
+        toJSON LighthouseResultV5Environment'{..}
+          = object
+              (catMaybes
+                 [("hostUserAgent" .=) <$> _lrveHostUserAgent,
+                  ("benchmarkIndex" .=) <$> _lrveBenchmarkIndex,
+                  ("networkUserAgent" .=) <$> _lrveNetworkUserAgent])
+
+-- | A grouping contained in a category that groups similar audits together.
+--
+-- /See:/ 'lighthouseResultV5CategoryGroupsAdditional' smart constructor.
+data LighthouseResultV5CategoryGroupsAdditional = LighthouseResultV5CategoryGroupsAdditional'
+    { _lrvcgaTitle       :: !(Maybe Text)
+    , _lrvcgaDescription :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LighthouseResultV5CategoryGroupsAdditional' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lrvcgaTitle'
+--
+-- * 'lrvcgaDescription'
+lighthouseResultV5CategoryGroupsAdditional
+    :: LighthouseResultV5CategoryGroupsAdditional
+lighthouseResultV5CategoryGroupsAdditional =
+    LighthouseResultV5CategoryGroupsAdditional'
+    { _lrvcgaTitle = Nothing
+    , _lrvcgaDescription = Nothing
+    }
+
+-- | The title of the category group.
+lrvcgaTitle :: Lens' LighthouseResultV5CategoryGroupsAdditional (Maybe Text)
+lrvcgaTitle
+  = lens _lrvcgaTitle (\ s a -> s{_lrvcgaTitle = a})
+
+-- | An optional human readable description of the category group.
+lrvcgaDescription :: Lens' LighthouseResultV5CategoryGroupsAdditional (Maybe Text)
+lrvcgaDescription
+  = lens _lrvcgaDescription
+      (\ s a -> s{_lrvcgaDescription = a})
 
 instance FromJSON
-         ResultFormattedResultsRuleResultsAdditionalURLBlocksItem
-         where
+         LighthouseResultV5CategoryGroupsAdditional where
         parseJSON
           = withObject
-              "ResultFormattedResultsRuleResultsAdditionalURLBlocksItem"
+              "LighthouseResultV5CategoryGroupsAdditional"
               (\ o ->
-                 ResultFormattedResultsRuleResultsAdditionalURLBlocksItem'
-                   <$> (o .:? "urls" .!= mempty) <*> (o .:? "header"))
+                 LighthouseResultV5CategoryGroupsAdditional' <$>
+                   (o .:? "title") <*> (o .:? "description"))
 
 instance ToJSON
-         ResultFormattedResultsRuleResultsAdditionalURLBlocksItem
-         where
+         LighthouseResultV5CategoryGroupsAdditional where
         toJSON
-          ResultFormattedResultsRuleResultsAdditionalURLBlocksItem'{..}
+          LighthouseResultV5CategoryGroupsAdditional'{..}
           = object
               (catMaybes
-                 [("urls" .=) <$> _rfrrraubiURLs,
-                  ("header" .=) <$> _rfrrraubiHeader])
+                 [("title" .=) <$> _lrvcgaTitle,
+                  ("description" .=) <$> _lrvcgaDescription])
 
 --
--- /See:/ 'pagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem' smart constructor.
-data PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem = PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem'
-    { _pafsvaisiHeight :: !(Maybe (Textual Int32))
-    , _pafsvaisiLeft   :: !(Maybe (Textual Int32))
-    , _pafsvaisiWidth  :: !(Maybe (Textual Int32))
-    , _pafsvaisiTop    :: !(Maybe (Textual Int32))
+-- /See:/ 'lighthouseAuditResultV5' smart constructor.
+data LighthouseAuditResultV5 = LighthouseAuditResultV5'
+    { _larvScore            :: !(Maybe JSONValue)
+    , _larvExplanation      :: !(Maybe Text)
+    , _larvWarnings         :: !(Maybe JSONValue)
+    , _larvScoreDisplayMode :: !(Maybe Text)
+    , _larvDisplayValue     :: !(Maybe Text)
+    , _larvDetails          :: !(Maybe LighthouseAuditResultV5Details)
+    , _larvId               :: !(Maybe Text)
+    , _larvTitle            :: !(Maybe Text)
+    , _larvErrorMessage     :: !(Maybe Text)
+    , _larvDescription      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem' with the minimum fields required to make a request.
+-- | Creates a value of 'LighthouseAuditResultV5' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pafsvaisiHeight'
+-- * 'larvScore'
 --
--- * 'pafsvaisiLeft'
+-- * 'larvExplanation'
 --
--- * 'pafsvaisiWidth'
+-- * 'larvWarnings'
 --
--- * 'pafsvaisiTop'
-pagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem
-    :: PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem
-pagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem =
-    PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem'
-    { _pafsvaisiHeight = Nothing
-    , _pafsvaisiLeft = Nothing
-    , _pafsvaisiWidth = Nothing
-    , _pafsvaisiTop = Nothing
+-- * 'larvScoreDisplayMode'
+--
+-- * 'larvDisplayValue'
+--
+-- * 'larvDetails'
+--
+-- * 'larvId'
+--
+-- * 'larvTitle'
+--
+-- * 'larvErrorMessage'
+--
+-- * 'larvDescription'
+lighthouseAuditResultV5
+    :: LighthouseAuditResultV5
+lighthouseAuditResultV5 =
+    LighthouseAuditResultV5'
+    { _larvScore = Nothing
+    , _larvExplanation = Nothing
+    , _larvWarnings = Nothing
+    , _larvScoreDisplayMode = Nothing
+    , _larvDisplayValue = Nothing
+    , _larvDetails = Nothing
+    , _larvId = Nothing
+    , _larvTitle = Nothing
+    , _larvErrorMessage = Nothing
+    , _larvDescription = Nothing
     }
 
--- | The height of the rect.
-pafsvaisiHeight :: Lens' PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem (Maybe Int32)
-pafsvaisiHeight
-  = lens _pafsvaisiHeight
-      (\ s a -> s{_pafsvaisiHeight = a})
-      . mapping _Coerce
+larvScore :: Lens' LighthouseAuditResultV5 (Maybe JSONValue)
+larvScore
+  = lens _larvScore (\ s a -> s{_larvScore = a})
 
--- | The left coordinate of the rect, in page coordinates.
-pafsvaisiLeft :: Lens' PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem (Maybe Int32)
-pafsvaisiLeft
-  = lens _pafsvaisiLeft
-      (\ s a -> s{_pafsvaisiLeft = a})
-      . mapping _Coerce
+-- | An explanation of the errors in the audit.
+larvExplanation :: Lens' LighthouseAuditResultV5 (Maybe Text)
+larvExplanation
+  = lens _larvExplanation
+      (\ s a -> s{_larvExplanation = a})
 
--- | The width of the rect.
-pafsvaisiWidth :: Lens' PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem (Maybe Int32)
-pafsvaisiWidth
-  = lens _pafsvaisiWidth
-      (\ s a -> s{_pafsvaisiWidth = a})
-      . mapping _Coerce
+larvWarnings :: Lens' LighthouseAuditResultV5 (Maybe JSONValue)
+larvWarnings
+  = lens _larvWarnings (\ s a -> s{_larvWarnings = a})
 
--- | The top coordinate of the rect, in page coordinates.
-pafsvaisiTop :: Lens' PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem (Maybe Int32)
-pafsvaisiTop
-  = lens _pafsvaisiTop (\ s a -> s{_pafsvaisiTop = a})
-      . mapping _Coerce
+-- | The enumerated score display mode.
+larvScoreDisplayMode :: Lens' LighthouseAuditResultV5 (Maybe Text)
+larvScoreDisplayMode
+  = lens _larvScoreDisplayMode
+      (\ s a -> s{_larvScoreDisplayMode = a})
 
-instance FromJSON
-         PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem
-         where
+-- | The value that should be displayed on the UI for this audit.
+larvDisplayValue :: Lens' LighthouseAuditResultV5 (Maybe Text)
+larvDisplayValue
+  = lens _larvDisplayValue
+      (\ s a -> s{_larvDisplayValue = a})
+
+-- | Freeform details section of the audit.
+larvDetails :: Lens' LighthouseAuditResultV5 (Maybe LighthouseAuditResultV5Details)
+larvDetails
+  = lens _larvDetails (\ s a -> s{_larvDetails = a})
+
+-- | The audit\'s id.
+larvId :: Lens' LighthouseAuditResultV5 (Maybe Text)
+larvId = lens _larvId (\ s a -> s{_larvId = a})
+
+-- | The human readable title.
+larvTitle :: Lens' LighthouseAuditResultV5 (Maybe Text)
+larvTitle
+  = lens _larvTitle (\ s a -> s{_larvTitle = a})
+
+-- | An error message from a thrown error inside the audit.
+larvErrorMessage :: Lens' LighthouseAuditResultV5 (Maybe Text)
+larvErrorMessage
+  = lens _larvErrorMessage
+      (\ s a -> s{_larvErrorMessage = a})
+
+-- | The description of the audit.
+larvDescription :: Lens' LighthouseAuditResultV5 (Maybe Text)
+larvDescription
+  = lens _larvDescription
+      (\ s a -> s{_larvDescription = a})
+
+instance FromJSON LighthouseAuditResultV5 where
         parseJSON
-          = withObject
-              "PagespeedAPIFormatStringV2ArgsItemSecondaryRectsItem"
+          = withObject "LighthouseAuditResultV5"
               (\ o ->
-                 PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem'
-                   <$>
-                   (o .:? "height") <*> (o .:? "left") <*>
-                     (o .:? "width")
-                     <*> (o .:? "top"))
+                 LighthouseAuditResultV5' <$>
+                   (o .:? "score") <*> (o .:? "explanation") <*>
+                     (o .:? "warnings")
+                     <*> (o .:? "scoreDisplayMode")
+                     <*> (o .:? "displayValue")
+                     <*> (o .:? "details")
+                     <*> (o .:? "id")
+                     <*> (o .:? "title")
+                     <*> (o .:? "errorMessage")
+                     <*> (o .:? "description"))
 
-instance ToJSON
-         PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem
-         where
-        toJSON
-          PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem'{..}
+instance ToJSON LighthouseAuditResultV5 where
+        toJSON LighthouseAuditResultV5'{..}
           = object
               (catMaybes
-                 [("height" .=) <$> _pafsvaisiHeight,
-                  ("left" .=) <$> _pafsvaisiLeft,
-                  ("width" .=) <$> _pafsvaisiWidth,
-                  ("top" .=) <$> _pafsvaisiTop])
+                 [("score" .=) <$> _larvScore,
+                  ("explanation" .=) <$> _larvExplanation,
+                  ("warnings" .=) <$> _larvWarnings,
+                  ("scoreDisplayMode" .=) <$> _larvScoreDisplayMode,
+                  ("displayValue" .=) <$> _larvDisplayValue,
+                  ("details" .=) <$> _larvDetails,
+                  ("id" .=) <$> _larvId, ("title" .=) <$> _larvTitle,
+                  ("errorMessage" .=) <$> _larvErrorMessage,
+                  ("description" .=) <$> _larvDescription])
 
 --
--- /See:/ 'pagespeedAPIImageV2' smart constructor.
-data PagespeedAPIImageV2 = PagespeedAPIImageV2'
-    { _paivHeight   :: !(Maybe (Textual Int32))
-    , _paivData     :: !(Maybe Base64)
-    , _paivMimeType :: !(Maybe Text)
-    , _paivWidth    :: !(Maybe (Textual Int32))
-    , _paivPageRect :: !(Maybe PagespeedAPIImageV2Page_rect)
-    , _paivKey      :: !(Maybe Text)
+-- /See:/ 'pagespeedAPIPagespeedResponseV5' smart constructor.
+data PagespeedAPIPagespeedResponseV5 = PagespeedAPIPagespeedResponseV5'
+    { _paprvKind                    :: !Text
+    , _paprvOriginLoadingExperience :: !(Maybe PagespeedAPILoadingExperienceV5)
+    , _paprvVersion                 :: !(Maybe PagespeedAPIPagespeedResponseV5Version)
+    , _paprvCaptchaResult           :: !(Maybe Text)
+    , _paprvId                      :: !(Maybe Text)
+    , _paprvLoadingExperience       :: !(Maybe PagespeedAPILoadingExperienceV5)
+    , _paprvLighthouseResult        :: !(Maybe LighthouseResultV5)
+    , _paprvAnalysisUTCTimestamp    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PagespeedAPIImageV2' with the minimum fields required to make a request.
+-- | Creates a value of 'PagespeedAPIPagespeedResponseV5' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'paivHeight'
+-- * 'paprvKind'
 --
--- * 'paivData'
+-- * 'paprvOriginLoadingExperience'
 --
--- * 'paivMimeType'
+-- * 'paprvVersion'
 --
--- * 'paivWidth'
+-- * 'paprvCaptchaResult'
 --
--- * 'paivPageRect'
+-- * 'paprvId'
 --
--- * 'paivKey'
-pagespeedAPIImageV2
-    :: PagespeedAPIImageV2
-pagespeedAPIImageV2 =
-    PagespeedAPIImageV2'
-    { _paivHeight = Nothing
-    , _paivData = Nothing
-    , _paivMimeType = Nothing
-    , _paivWidth = Nothing
-    , _paivPageRect = Nothing
-    , _paivKey = Nothing
+-- * 'paprvLoadingExperience'
+--
+-- * 'paprvLighthouseResult'
+--
+-- * 'paprvAnalysisUTCTimestamp'
+pagespeedAPIPagespeedResponseV5
+    :: PagespeedAPIPagespeedResponseV5
+pagespeedAPIPagespeedResponseV5 =
+    PagespeedAPIPagespeedResponseV5'
+    { _paprvKind = "pagespeedonline#result"
+    , _paprvOriginLoadingExperience = Nothing
+    , _paprvVersion = Nothing
+    , _paprvCaptchaResult = Nothing
+    , _paprvId = Nothing
+    , _paprvLoadingExperience = Nothing
+    , _paprvLighthouseResult = Nothing
+    , _paprvAnalysisUTCTimestamp = Nothing
     }
-
--- | Height of screenshot in pixels.
-paivHeight :: Lens' PagespeedAPIImageV2 (Maybe Int32)
-paivHeight
-  = lens _paivHeight (\ s a -> s{_paivHeight = a}) .
-      mapping _Coerce
-
--- | Image data base64 encoded.
-paivData :: Lens' PagespeedAPIImageV2 (Maybe ByteString)
-paivData
-  = lens _paivData (\ s a -> s{_paivData = a}) .
-      mapping _Base64
-
--- | Mime type of image data (e.g. \"image\/jpeg\").
-paivMimeType :: Lens' PagespeedAPIImageV2 (Maybe Text)
-paivMimeType
-  = lens _paivMimeType (\ s a -> s{_paivMimeType = a})
-
--- | Width of screenshot in pixels.
-paivWidth :: Lens' PagespeedAPIImageV2 (Maybe Int32)
-paivWidth
-  = lens _paivWidth (\ s a -> s{_paivWidth = a}) .
-      mapping _Coerce
-
--- | The region of the page that is captured by this image, with dimensions
--- measured in CSS pixels.
-paivPageRect :: Lens' PagespeedAPIImageV2 (Maybe PagespeedAPIImageV2Page_rect)
-paivPageRect
-  = lens _paivPageRect (\ s a -> s{_paivPageRect = a})
-
--- | Unique string key, if any, identifying this image.
-paivKey :: Lens' PagespeedAPIImageV2 (Maybe Text)
-paivKey = lens _paivKey (\ s a -> s{_paivKey = a})
-
-instance FromJSON PagespeedAPIImageV2 where
-        parseJSON
-          = withObject "PagespeedAPIImageV2"
-              (\ o ->
-                 PagespeedAPIImageV2' <$>
-                   (o .:? "height") <*> (o .:? "data") <*>
-                     (o .:? "mime_type")
-                     <*> (o .:? "width")
-                     <*> (o .:? "page_rect")
-                     <*> (o .:? "key"))
-
-instance ToJSON PagespeedAPIImageV2 where
-        toJSON PagespeedAPIImageV2'{..}
-          = object
-              (catMaybes
-                 [("height" .=) <$> _paivHeight,
-                  ("data" .=) <$> _paivData,
-                  ("mime_type" .=) <$> _paivMimeType,
-                  ("width" .=) <$> _paivWidth,
-                  ("page_rect" .=) <$> _paivPageRect,
-                  ("key" .=) <$> _paivKey])
-
---
--- /See:/ 'pagespeedAPIFormatStringV2ArgsItemRectsItem' smart constructor.
-data PagespeedAPIFormatStringV2ArgsItemRectsItem = PagespeedAPIFormatStringV2ArgsItemRectsItem'
-    { _pafsvairiHeight :: !(Maybe (Textual Int32))
-    , _pafsvairiLeft   :: !(Maybe (Textual Int32))
-    , _pafsvairiWidth  :: !(Maybe (Textual Int32))
-    , _pafsvairiTop    :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PagespeedAPIFormatStringV2ArgsItemRectsItem' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'pafsvairiHeight'
---
--- * 'pafsvairiLeft'
---
--- * 'pafsvairiWidth'
---
--- * 'pafsvairiTop'
-pagespeedAPIFormatStringV2ArgsItemRectsItem
-    :: PagespeedAPIFormatStringV2ArgsItemRectsItem
-pagespeedAPIFormatStringV2ArgsItemRectsItem =
-    PagespeedAPIFormatStringV2ArgsItemRectsItem'
-    { _pafsvairiHeight = Nothing
-    , _pafsvairiLeft = Nothing
-    , _pafsvairiWidth = Nothing
-    , _pafsvairiTop = Nothing
-    }
-
--- | The height of the rect.
-pafsvairiHeight :: Lens' PagespeedAPIFormatStringV2ArgsItemRectsItem (Maybe Int32)
-pafsvairiHeight
-  = lens _pafsvairiHeight
-      (\ s a -> s{_pafsvairiHeight = a})
-      . mapping _Coerce
-
--- | The left coordinate of the rect, in page coordinates.
-pafsvairiLeft :: Lens' PagespeedAPIFormatStringV2ArgsItemRectsItem (Maybe Int32)
-pafsvairiLeft
-  = lens _pafsvairiLeft
-      (\ s a -> s{_pafsvairiLeft = a})
-      . mapping _Coerce
-
--- | The width of the rect.
-pafsvairiWidth :: Lens' PagespeedAPIFormatStringV2ArgsItemRectsItem (Maybe Int32)
-pafsvairiWidth
-  = lens _pafsvairiWidth
-      (\ s a -> s{_pafsvairiWidth = a})
-      . mapping _Coerce
-
--- | The top coordinate of the rect, in page coordinates.
-pafsvairiTop :: Lens' PagespeedAPIFormatStringV2ArgsItemRectsItem (Maybe Int32)
-pafsvairiTop
-  = lens _pafsvairiTop (\ s a -> s{_pafsvairiTop = a})
-      . mapping _Coerce
-
-instance FromJSON
-         PagespeedAPIFormatStringV2ArgsItemRectsItem where
-        parseJSON
-          = withObject
-              "PagespeedAPIFormatStringV2ArgsItemRectsItem"
-              (\ o ->
-                 PagespeedAPIFormatStringV2ArgsItemRectsItem' <$>
-                   (o .:? "height") <*> (o .:? "left") <*>
-                     (o .:? "width")
-                     <*> (o .:? "top"))
-
-instance ToJSON
-         PagespeedAPIFormatStringV2ArgsItemRectsItem where
-        toJSON
-          PagespeedAPIFormatStringV2ArgsItemRectsItem'{..}
-          = object
-              (catMaybes
-                 [("height" .=) <$> _pafsvairiHeight,
-                  ("left" .=) <$> _pafsvairiLeft,
-                  ("width" .=) <$> _pafsvairiWidth,
-                  ("top" .=) <$> _pafsvairiTop])
-
--- | The version of PageSpeed used to generate these results.
---
--- /See:/ 'resultVersion' smart constructor.
-data ResultVersion = ResultVersion'
-    { _rvMinor :: !(Maybe (Textual Int32))
-    , _rvMajor :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ResultVersion' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rvMinor'
---
--- * 'rvMajor'
-resultVersion
-    :: ResultVersion
-resultVersion =
-    ResultVersion'
-    { _rvMinor = Nothing
-    , _rvMajor = Nothing
-    }
-
--- | The minor version number of PageSpeed used to generate these results.
-rvMinor :: Lens' ResultVersion (Maybe Int32)
-rvMinor
-  = lens _rvMinor (\ s a -> s{_rvMinor = a}) .
-      mapping _Coerce
-
--- | The major version number of PageSpeed used to generate these results.
-rvMajor :: Lens' ResultVersion (Maybe Int32)
-rvMajor
-  = lens _rvMajor (\ s a -> s{_rvMajor = a}) .
-      mapping _Coerce
-
-instance FromJSON ResultVersion where
-        parseJSON
-          = withObject "ResultVersion"
-              (\ o ->
-                 ResultVersion' <$>
-                   (o .:? "minor") <*> (o .:? "major"))
-
-instance ToJSON ResultVersion where
-        toJSON ResultVersion'{..}
-          = object
-              (catMaybes
-                 [("minor" .=) <$> _rvMinor,
-                  ("major" .=) <$> _rvMajor])
-
--- | Summary statistics for the page, such as number of JavaScript bytes,
--- number of HTML bytes, etc.
---
--- /See:/ 'resultPageStats' smart constructor.
-data ResultPageStats = ResultPageStats'
-    { _rpsHTMLResponseBytes       :: !(Maybe (Textual Int64))
-    , _rpsTotalRequestBytes       :: !(Maybe (Textual Int64))
-    , _rpsNumberResources         :: !(Maybe (Textual Int32))
-    , _rpsNumberStaticResources   :: !(Maybe (Textual Int32))
-    , _rpsNumberHosts             :: !(Maybe (Textual Int32))
-    , _rpsNumberJsResources       :: !(Maybe (Textual Int32))
-    , _rpsNumberCssResources      :: !(Maybe (Textual Int32))
-    , _rpsTextResponseBytes       :: !(Maybe (Textual Int64))
-    , _rpsFlashResponseBytes      :: !(Maybe (Textual Int64))
-    , _rpsImageResponseBytes      :: !(Maybe (Textual Int64))
-    , _rpsOtherResponseBytes      :: !(Maybe (Textual Int64))
-    , _rpsJavascriptResponseBytes :: !(Maybe (Textual Int64))
-    , _rpsCssResponseBytes        :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ResultPageStats' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rpsHTMLResponseBytes'
---
--- * 'rpsTotalRequestBytes'
---
--- * 'rpsNumberResources'
---
--- * 'rpsNumberStaticResources'
---
--- * 'rpsNumberHosts'
---
--- * 'rpsNumberJsResources'
---
--- * 'rpsNumberCssResources'
---
--- * 'rpsTextResponseBytes'
---
--- * 'rpsFlashResponseBytes'
---
--- * 'rpsImageResponseBytes'
---
--- * 'rpsOtherResponseBytes'
---
--- * 'rpsJavascriptResponseBytes'
---
--- * 'rpsCssResponseBytes'
-resultPageStats
-    :: ResultPageStats
-resultPageStats =
-    ResultPageStats'
-    { _rpsHTMLResponseBytes = Nothing
-    , _rpsTotalRequestBytes = Nothing
-    , _rpsNumberResources = Nothing
-    , _rpsNumberStaticResources = Nothing
-    , _rpsNumberHosts = Nothing
-    , _rpsNumberJsResources = Nothing
-    , _rpsNumberCssResources = Nothing
-    , _rpsTextResponseBytes = Nothing
-    , _rpsFlashResponseBytes = Nothing
-    , _rpsImageResponseBytes = Nothing
-    , _rpsOtherResponseBytes = Nothing
-    , _rpsJavascriptResponseBytes = Nothing
-    , _rpsCssResponseBytes = Nothing
-    }
-
--- | Number of uncompressed response bytes for the main HTML document and all
--- iframes on the page.
-rpsHTMLResponseBytes :: Lens' ResultPageStats (Maybe Int64)
-rpsHTMLResponseBytes
-  = lens _rpsHTMLResponseBytes
-      (\ s a -> s{_rpsHTMLResponseBytes = a})
-      . mapping _Coerce
-
--- | Total size of all request bytes sent by the page.
-rpsTotalRequestBytes :: Lens' ResultPageStats (Maybe Int64)
-rpsTotalRequestBytes
-  = lens _rpsTotalRequestBytes
-      (\ s a -> s{_rpsTotalRequestBytes = a})
-      . mapping _Coerce
-
--- | Number of HTTP resources loaded by the page.
-rpsNumberResources :: Lens' ResultPageStats (Maybe Int32)
-rpsNumberResources
-  = lens _rpsNumberResources
-      (\ s a -> s{_rpsNumberResources = a})
-      . mapping _Coerce
-
--- | Number of static (i.e. cacheable) resources on the page.
-rpsNumberStaticResources :: Lens' ResultPageStats (Maybe Int32)
-rpsNumberStaticResources
-  = lens _rpsNumberStaticResources
-      (\ s a -> s{_rpsNumberStaticResources = a})
-      . mapping _Coerce
-
--- | Number of unique hosts referenced by the page.
-rpsNumberHosts :: Lens' ResultPageStats (Maybe Int32)
-rpsNumberHosts
-  = lens _rpsNumberHosts
-      (\ s a -> s{_rpsNumberHosts = a})
-      . mapping _Coerce
-
--- | Number of JavaScript resources referenced by the page.
-rpsNumberJsResources :: Lens' ResultPageStats (Maybe Int32)
-rpsNumberJsResources
-  = lens _rpsNumberJsResources
-      (\ s a -> s{_rpsNumberJsResources = a})
-      . mapping _Coerce
-
--- | Number of CSS resources referenced by the page.
-rpsNumberCssResources :: Lens' ResultPageStats (Maybe Int32)
-rpsNumberCssResources
-  = lens _rpsNumberCssResources
-      (\ s a -> s{_rpsNumberCssResources = a})
-      . mapping _Coerce
-
--- | Number of uncompressed response bytes for text resources not covered by
--- other statistics (i.e non-HTML, non-script, non-CSS resources) on the
--- page.
-rpsTextResponseBytes :: Lens' ResultPageStats (Maybe Int64)
-rpsTextResponseBytes
-  = lens _rpsTextResponseBytes
-      (\ s a -> s{_rpsTextResponseBytes = a})
-      . mapping _Coerce
-
--- | Number of response bytes for flash resources on the page.
-rpsFlashResponseBytes :: Lens' ResultPageStats (Maybe Int64)
-rpsFlashResponseBytes
-  = lens _rpsFlashResponseBytes
-      (\ s a -> s{_rpsFlashResponseBytes = a})
-      . mapping _Coerce
-
--- | Number of response bytes for image resources on the page.
-rpsImageResponseBytes :: Lens' ResultPageStats (Maybe Int64)
-rpsImageResponseBytes
-  = lens _rpsImageResponseBytes
-      (\ s a -> s{_rpsImageResponseBytes = a})
-      . mapping _Coerce
-
--- | Number of response bytes for other resources on the page.
-rpsOtherResponseBytes :: Lens' ResultPageStats (Maybe Int64)
-rpsOtherResponseBytes
-  = lens _rpsOtherResponseBytes
-      (\ s a -> s{_rpsOtherResponseBytes = a})
-      . mapping _Coerce
-
--- | Number of uncompressed response bytes for JS resources on the page.
-rpsJavascriptResponseBytes :: Lens' ResultPageStats (Maybe Int64)
-rpsJavascriptResponseBytes
-  = lens _rpsJavascriptResponseBytes
-      (\ s a -> s{_rpsJavascriptResponseBytes = a})
-      . mapping _Coerce
-
--- | Number of uncompressed response bytes for CSS resources on the page.
-rpsCssResponseBytes :: Lens' ResultPageStats (Maybe Int64)
-rpsCssResponseBytes
-  = lens _rpsCssResponseBytes
-      (\ s a -> s{_rpsCssResponseBytes = a})
-      . mapping _Coerce
-
-instance FromJSON ResultPageStats where
-        parseJSON
-          = withObject "ResultPageStats"
-              (\ o ->
-                 ResultPageStats' <$>
-                   (o .:? "htmlResponseBytes") <*>
-                     (o .:? "totalRequestBytes")
-                     <*> (o .:? "numberResources")
-                     <*> (o .:? "numberStaticResources")
-                     <*> (o .:? "numberHosts")
-                     <*> (o .:? "numberJsResources")
-                     <*> (o .:? "numberCssResources")
-                     <*> (o .:? "textResponseBytes")
-                     <*> (o .:? "flashResponseBytes")
-                     <*> (o .:? "imageResponseBytes")
-                     <*> (o .:? "otherResponseBytes")
-                     <*> (o .:? "javascriptResponseBytes")
-                     <*> (o .:? "cssResponseBytes"))
-
-instance ToJSON ResultPageStats where
-        toJSON ResultPageStats'{..}
-          = object
-              (catMaybes
-                 [("htmlResponseBytes" .=) <$> _rpsHTMLResponseBytes,
-                  ("totalRequestBytes" .=) <$> _rpsTotalRequestBytes,
-                  ("numberResources" .=) <$> _rpsNumberResources,
-                  ("numberStaticResources" .=) <$>
-                    _rpsNumberStaticResources,
-                  ("numberHosts" .=) <$> _rpsNumberHosts,
-                  ("numberJsResources" .=) <$> _rpsNumberJsResources,
-                  ("numberCssResources" .=) <$> _rpsNumberCssResources,
-                  ("textResponseBytes" .=) <$> _rpsTextResponseBytes,
-                  ("flashResponseBytes" .=) <$> _rpsFlashResponseBytes,
-                  ("imageResponseBytes" .=) <$> _rpsImageResponseBytes,
-                  ("otherResponseBytes" .=) <$> _rpsOtherResponseBytes,
-                  ("javascriptResponseBytes" .=) <$>
-                    _rpsJavascriptResponseBytes,
-                  ("cssResponseBytes" .=) <$> _rpsCssResponseBytes])
-
--- | The region of the page that is captured by this image, with dimensions
--- measured in CSS pixels.
---
--- /See:/ 'pagespeedAPIImageV2Page_rect' smart constructor.
-data PagespeedAPIImageV2Page_rect = PagespeedAPIImageV2Page_rect'
-    { _paivpHeight :: !(Maybe (Textual Int32))
-    , _paivpLeft   :: !(Maybe (Textual Int32))
-    , _paivpWidth  :: !(Maybe (Textual Int32))
-    , _paivpTop    :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PagespeedAPIImageV2Page_rect' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'paivpHeight'
---
--- * 'paivpLeft'
---
--- * 'paivpWidth'
---
--- * 'paivpTop'
-pagespeedAPIImageV2Page_rect
-    :: PagespeedAPIImageV2Page_rect
-pagespeedAPIImageV2Page_rect =
-    PagespeedAPIImageV2Page_rect'
-    { _paivpHeight = Nothing
-    , _paivpLeft = Nothing
-    , _paivpWidth = Nothing
-    , _paivpTop = Nothing
-    }
-
--- | The height of the rect.
-paivpHeight :: Lens' PagespeedAPIImageV2Page_rect (Maybe Int32)
-paivpHeight
-  = lens _paivpHeight (\ s a -> s{_paivpHeight = a}) .
-      mapping _Coerce
-
--- | The left coordinate of the rect, in page coordinates.
-paivpLeft :: Lens' PagespeedAPIImageV2Page_rect (Maybe Int32)
-paivpLeft
-  = lens _paivpLeft (\ s a -> s{_paivpLeft = a}) .
-      mapping _Coerce
-
--- | The width of the rect.
-paivpWidth :: Lens' PagespeedAPIImageV2Page_rect (Maybe Int32)
-paivpWidth
-  = lens _paivpWidth (\ s a -> s{_paivpWidth = a}) .
-      mapping _Coerce
-
--- | The top coordinate of the rect, in page coordinates.
-paivpTop :: Lens' PagespeedAPIImageV2Page_rect (Maybe Int32)
-paivpTop
-  = lens _paivpTop (\ s a -> s{_paivpTop = a}) .
-      mapping _Coerce
-
-instance FromJSON PagespeedAPIImageV2Page_rect where
-        parseJSON
-          = withObject "PagespeedAPIImageV2PageRect"
-              (\ o ->
-                 PagespeedAPIImageV2Page_rect' <$>
-                   (o .:? "height") <*> (o .:? "left") <*>
-                     (o .:? "width")
-                     <*> (o .:? "top"))
-
-instance ToJSON PagespeedAPIImageV2Page_rect where
-        toJSON PagespeedAPIImageV2Page_rect'{..}
-          = object
-              (catMaybes
-                 [("height" .=) <$> _paivpHeight,
-                  ("left" .=) <$> _paivpLeft,
-                  ("width" .=) <$> _paivpWidth,
-                  ("top" .=) <$> _paivpTop])
-
---
--- /See:/ 'result' smart constructor.
-data Result = Result'
-    { _rScreenshot       :: !(Maybe PagespeedAPIImageV2)
-    , _rKind             :: !Text
-    , _rResponseCode     :: !(Maybe (Textual Int32))
-    , _rInvalidRules     :: !(Maybe [Text])
-    , _rFormattedResults :: !(Maybe ResultFormattedResults)
-    , _rVersion          :: !(Maybe ResultVersion)
-    , _rRuleGroups       :: !(Maybe ResultRuleGroups)
-    , _rPageStats        :: !(Maybe ResultPageStats)
-    , _rId               :: !(Maybe Text)
-    , _rTitle            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Result' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rScreenshot'
---
--- * 'rKind'
---
--- * 'rResponseCode'
---
--- * 'rInvalidRules'
---
--- * 'rFormattedResults'
---
--- * 'rVersion'
---
--- * 'rRuleGroups'
---
--- * 'rPageStats'
---
--- * 'rId'
---
--- * 'rTitle'
-result
-    :: Result
-result =
-    Result'
-    { _rScreenshot = Nothing
-    , _rKind = "pagespeedonline#result"
-    , _rResponseCode = Nothing
-    , _rInvalidRules = Nothing
-    , _rFormattedResults = Nothing
-    , _rVersion = Nothing
-    , _rRuleGroups = Nothing
-    , _rPageStats = Nothing
-    , _rId = Nothing
-    , _rTitle = Nothing
-    }
-
--- | Base64-encoded screenshot of the page that was analyzed.
-rScreenshot :: Lens' Result (Maybe PagespeedAPIImageV2)
-rScreenshot
-  = lens _rScreenshot (\ s a -> s{_rScreenshot = a})
 
 -- | Kind of result.
-rKind :: Lens' Result Text
-rKind = lens _rKind (\ s a -> s{_rKind = a})
+paprvKind :: Lens' PagespeedAPIPagespeedResponseV5 Text
+paprvKind
+  = lens _paprvKind (\ s a -> s{_paprvKind = a})
 
--- | Response code for the document. 200 indicates a normal page load.
--- 4xx\/5xx indicates an error.
-rResponseCode :: Lens' Result (Maybe Int32)
-rResponseCode
-  = lens _rResponseCode
-      (\ s a -> s{_rResponseCode = a})
-      . mapping _Coerce
-
--- | List of rules that were specified in the request, but which the server
--- did not know how to instantiate.
-rInvalidRules :: Lens' Result [Text]
-rInvalidRules
-  = lens _rInvalidRules
-      (\ s a -> s{_rInvalidRules = a})
-      . _Default
-      . _Coerce
-
--- | Localized PageSpeed results. Contains a ruleResults entry for each
--- PageSpeed rule instantiated and run by the server.
-rFormattedResults :: Lens' Result (Maybe ResultFormattedResults)
-rFormattedResults
-  = lens _rFormattedResults
-      (\ s a -> s{_rFormattedResults = a})
+-- | Metrics of the aggregated page loading experience of the origin
+paprvOriginLoadingExperience :: Lens' PagespeedAPIPagespeedResponseV5 (Maybe PagespeedAPILoadingExperienceV5)
+paprvOriginLoadingExperience
+  = lens _paprvOriginLoadingExperience
+      (\ s a -> s{_paprvOriginLoadingExperience = a})
 
 -- | The version of PageSpeed used to generate these results.
-rVersion :: Lens' Result (Maybe ResultVersion)
-rVersion = lens _rVersion (\ s a -> s{_rVersion = a})
+paprvVersion :: Lens' PagespeedAPIPagespeedResponseV5 (Maybe PagespeedAPIPagespeedResponseV5Version)
+paprvVersion
+  = lens _paprvVersion (\ s a -> s{_paprvVersion = a})
 
--- | A map with one entry for each rule group in these results.
-rRuleGroups :: Lens' Result (Maybe ResultRuleGroups)
-rRuleGroups
-  = lens _rRuleGroups (\ s a -> s{_rRuleGroups = a})
-
--- | Summary statistics for the page, such as number of JavaScript bytes,
--- number of HTML bytes, etc.
-rPageStats :: Lens' Result (Maybe ResultPageStats)
-rPageStats
-  = lens _rPageStats (\ s a -> s{_rPageStats = a})
+-- | The captcha verify result
+paprvCaptchaResult :: Lens' PagespeedAPIPagespeedResponseV5 (Maybe Text)
+paprvCaptchaResult
+  = lens _paprvCaptchaResult
+      (\ s a -> s{_paprvCaptchaResult = a})
 
 -- | Canonicalized and final URL for the document, after following page
 -- redirects (if any).
-rId :: Lens' Result (Maybe Text)
-rId = lens _rId (\ s a -> s{_rId = a})
+paprvId :: Lens' PagespeedAPIPagespeedResponseV5 (Maybe Text)
+paprvId = lens _paprvId (\ s a -> s{_paprvId = a})
 
--- | Title of the page, as displayed in the browser\'s title bar.
-rTitle :: Lens' Result (Maybe Text)
-rTitle = lens _rTitle (\ s a -> s{_rTitle = a})
+-- | Metrics of end users\' page loading experience.
+paprvLoadingExperience :: Lens' PagespeedAPIPagespeedResponseV5 (Maybe PagespeedAPILoadingExperienceV5)
+paprvLoadingExperience
+  = lens _paprvLoadingExperience
+      (\ s a -> s{_paprvLoadingExperience = a})
 
-instance FromJSON Result where
+-- | Lighthouse response for the audit url as an object.
+paprvLighthouseResult :: Lens' PagespeedAPIPagespeedResponseV5 (Maybe LighthouseResultV5)
+paprvLighthouseResult
+  = lens _paprvLighthouseResult
+      (\ s a -> s{_paprvLighthouseResult = a})
+
+-- | The UTC timestamp of this analysis.
+paprvAnalysisUTCTimestamp :: Lens' PagespeedAPIPagespeedResponseV5 (Maybe Text)
+paprvAnalysisUTCTimestamp
+  = lens _paprvAnalysisUTCTimestamp
+      (\ s a -> s{_paprvAnalysisUTCTimestamp = a})
+
+instance FromJSON PagespeedAPIPagespeedResponseV5
+         where
         parseJSON
-          = withObject "Result"
+          = withObject "PagespeedAPIPagespeedResponseV5"
               (\ o ->
-                 Result' <$>
-                   (o .:? "screenshot") <*>
-                     (o .:? "kind" .!= "pagespeedonline#result")
-                     <*> (o .:? "responseCode")
-                     <*> (o .:? "invalidRules" .!= mempty)
-                     <*> (o .:? "formattedResults")
+                 PagespeedAPIPagespeedResponseV5' <$>
+                   (o .:? "kind" .!= "pagespeedonline#result") <*>
+                     (o .:? "originLoadingExperience")
                      <*> (o .:? "version")
-                     <*> (o .:? "ruleGroups")
-                     <*> (o .:? "pageStats")
+                     <*> (o .:? "captchaResult")
                      <*> (o .:? "id")
-                     <*> (o .:? "title"))
+                     <*> (o .:? "loadingExperience")
+                     <*> (o .:? "lighthouseResult")
+                     <*> (o .:? "analysisUTCTimestamp"))
 
-instance ToJSON Result where
-        toJSON Result'{..}
+instance ToJSON PagespeedAPIPagespeedResponseV5 where
+        toJSON PagespeedAPIPagespeedResponseV5'{..}
           = object
               (catMaybes
-                 [("screenshot" .=) <$> _rScreenshot,
-                  Just ("kind" .= _rKind),
-                  ("responseCode" .=) <$> _rResponseCode,
-                  ("invalidRules" .=) <$> _rInvalidRules,
-                  ("formattedResults" .=) <$> _rFormattedResults,
-                  ("version" .=) <$> _rVersion,
-                  ("ruleGroups" .=) <$> _rRuleGroups,
-                  ("pageStats" .=) <$> _rPageStats, ("id" .=) <$> _rId,
-                  ("title" .=) <$> _rTitle])
+                 [Just ("kind" .= _paprvKind),
+                  ("originLoadingExperience" .=) <$>
+                    _paprvOriginLoadingExperience,
+                  ("version" .=) <$> _paprvVersion,
+                  ("captchaResult" .=) <$> _paprvCaptchaResult,
+                  ("id" .=) <$> _paprvId,
+                  ("loadingExperience" .=) <$> _paprvLoadingExperience,
+                  ("lighthouseResult" .=) <$> _paprvLighthouseResult,
+                  ("analysisUTCTimestamp" .=) <$>
+                    _paprvAnalysisUTCTimestamp])
 
 --
--- /See:/ 'pagespeedAPIFormatStringV2ArgsItem' smart constructor.
-data PagespeedAPIFormatStringV2ArgsItem = PagespeedAPIFormatStringV2ArgsItem'
-    { _pafsvaiValue          :: !(Maybe Text)
-    , _pafsvaiRects          :: !(Maybe [PagespeedAPIFormatStringV2ArgsItemRectsItem])
-    , _pafsvaiKey            :: !(Maybe Text)
-    , _pafsvaiType           :: !(Maybe Text)
-    , _pafsvaiSecondaryRects :: !(Maybe [PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem])
+-- /See:/ 'pagespeedAPILoadingExperienceV5Metrics' smart constructor.
+newtype PagespeedAPILoadingExperienceV5Metrics = PagespeedAPILoadingExperienceV5Metrics'
+    { _palevmAddtional :: HashMap Text PagespeedAPILoadingExperienceV5MetricsAdditional
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PagespeedAPIFormatStringV2ArgsItem' with the minimum fields required to make a request.
+-- | Creates a value of 'PagespeedAPILoadingExperienceV5Metrics' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pafsvaiValue'
---
--- * 'pafsvaiRects'
---
--- * 'pafsvaiKey'
---
--- * 'pafsvaiType'
---
--- * 'pafsvaiSecondaryRects'
-pagespeedAPIFormatStringV2ArgsItem
-    :: PagespeedAPIFormatStringV2ArgsItem
-pagespeedAPIFormatStringV2ArgsItem =
-    PagespeedAPIFormatStringV2ArgsItem'
-    { _pafsvaiValue = Nothing
-    , _pafsvaiRects = Nothing
-    , _pafsvaiKey = Nothing
-    , _pafsvaiType = Nothing
-    , _pafsvaiSecondaryRects = Nothing
+-- * 'palevmAddtional'
+pagespeedAPILoadingExperienceV5Metrics
+    :: HashMap Text PagespeedAPILoadingExperienceV5MetricsAdditional -- ^ 'palevmAddtional'
+    -> PagespeedAPILoadingExperienceV5Metrics
+pagespeedAPILoadingExperienceV5Metrics pPalevmAddtional_ =
+    PagespeedAPILoadingExperienceV5Metrics'
+    { _palevmAddtional = _Coerce # pPalevmAddtional_
     }
 
--- | Argument value, as a localized string.
-pafsvaiValue :: Lens' PagespeedAPIFormatStringV2ArgsItem (Maybe Text)
-pafsvaiValue
-  = lens _pafsvaiValue (\ s a -> s{_pafsvaiValue = a})
-
--- | The screen rectangles being referred to, with dimensions measured in CSS
--- pixels. This is only ever used for SNAPSHOT_RECT arguments. If this is
--- absent for a SNAPSHOT_RECT argument, it means that that argument refers
--- to the entire snapshot.
-pafsvaiRects :: Lens' PagespeedAPIFormatStringV2ArgsItem [PagespeedAPIFormatStringV2ArgsItemRectsItem]
-pafsvaiRects
-  = lens _pafsvaiRects (\ s a -> s{_pafsvaiRects = a})
-      . _Default
-      . _Coerce
-
--- | The placeholder key for this arg, as a string.
-pafsvaiKey :: Lens' PagespeedAPIFormatStringV2ArgsItem (Maybe Text)
-pafsvaiKey
-  = lens _pafsvaiKey (\ s a -> s{_pafsvaiKey = a})
-
--- | Type of argument. One of URL, STRING_LITERAL, INT_LITERAL, BYTES,
--- DURATION, VERBATIM_STRING, PERCENTAGE, HYPERLINK, or SNAPSHOT_RECT.
-pafsvaiType :: Lens' PagespeedAPIFormatStringV2ArgsItem (Maybe Text)
-pafsvaiType
-  = lens _pafsvaiType (\ s a -> s{_pafsvaiType = a})
-
--- | Secondary screen rectangles being referred to, with dimensions measured
--- in CSS pixels. This is only ever used for SNAPSHOT_RECT arguments.
-pafsvaiSecondaryRects :: Lens' PagespeedAPIFormatStringV2ArgsItem [PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem]
-pafsvaiSecondaryRects
-  = lens _pafsvaiSecondaryRects
-      (\ s a -> s{_pafsvaiSecondaryRects = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON PagespeedAPIFormatStringV2ArgsItem
-         where
-        parseJSON
-          = withObject "PagespeedAPIFormatStringV2ArgsItem"
-              (\ o ->
-                 PagespeedAPIFormatStringV2ArgsItem' <$>
-                   (o .:? "value") <*> (o .:? "rects" .!= mempty) <*>
-                     (o .:? "key")
-                     <*> (o .:? "type")
-                     <*> (o .:? "secondary_rects" .!= mempty))
-
-instance ToJSON PagespeedAPIFormatStringV2ArgsItem
-         where
-        toJSON PagespeedAPIFormatStringV2ArgsItem'{..}
-          = object
-              (catMaybes
-                 [("value" .=) <$> _pafsvaiValue,
-                  ("rects" .=) <$> _pafsvaiRects,
-                  ("key" .=) <$> _pafsvaiKey,
-                  ("type" .=) <$> _pafsvaiType,
-                  ("secondary_rects" .=) <$> _pafsvaiSecondaryRects])
-
--- | The name of this rule group: one of \"SPEED\" or \"USABILITY\".
---
--- /See:/ 'resultRuleGroupsAdditional' smart constructor.
-newtype ResultRuleGroupsAdditional = ResultRuleGroupsAdditional'
-    { _rrgaScore :: Maybe (Textual Int32)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ResultRuleGroupsAdditional' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rrgaScore'
-resultRuleGroupsAdditional
-    :: ResultRuleGroupsAdditional
-resultRuleGroupsAdditional =
-    ResultRuleGroupsAdditional'
-    { _rrgaScore = Nothing
-    }
-
--- | The score (0-100) for this rule group, which indicates how much better a
--- page could be in that category (e.g. how much faster, or how much more
--- usable). A high score indicates little room for improvement, while a
--- lower score indicates more room for improvement.
-rrgaScore :: Lens' ResultRuleGroupsAdditional (Maybe Int32)
-rrgaScore
-  = lens _rrgaScore (\ s a -> s{_rrgaScore = a}) .
-      mapping _Coerce
-
-instance FromJSON ResultRuleGroupsAdditional where
-        parseJSON
-          = withObject "ResultRuleGroupsAdditional"
-              (\ o ->
-                 ResultRuleGroupsAdditional' <$> (o .:? "score"))
-
-instance ToJSON ResultRuleGroupsAdditional where
-        toJSON ResultRuleGroupsAdditional'{..}
-          = object (catMaybes [("score" .=) <$> _rrgaScore])
-
--- | Localized PageSpeed results. Contains a ruleResults entry for each
--- PageSpeed rule instantiated and run by the server.
---
--- /See:/ 'resultFormattedResults' smart constructor.
-data ResultFormattedResults = ResultFormattedResults'
-    { _rfrLocale      :: !(Maybe Text)
-    , _rfrRuleResults :: !(Maybe ResultFormattedResultsRuleResults)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ResultFormattedResults' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rfrLocale'
---
--- * 'rfrRuleResults'
-resultFormattedResults
-    :: ResultFormattedResults
-resultFormattedResults =
-    ResultFormattedResults'
-    { _rfrLocale = Nothing
-    , _rfrRuleResults = Nothing
-    }
-
--- | The locale of the formattedResults, e.g. \"en_US\".
-rfrLocale :: Lens' ResultFormattedResults (Maybe Text)
-rfrLocale
-  = lens _rfrLocale (\ s a -> s{_rfrLocale = a})
-
--- | Dictionary of formatted rule results, with one entry for each PageSpeed
--- rule instantiated and run by the server.
-rfrRuleResults :: Lens' ResultFormattedResults (Maybe ResultFormattedResultsRuleResults)
-rfrRuleResults
-  = lens _rfrRuleResults
-      (\ s a -> s{_rfrRuleResults = a})
-
-instance FromJSON ResultFormattedResults where
-        parseJSON
-          = withObject "ResultFormattedResults"
-              (\ o ->
-                 ResultFormattedResults' <$>
-                   (o .:? "locale") <*> (o .:? "ruleResults"))
-
-instance ToJSON ResultFormattedResults where
-        toJSON ResultFormattedResults'{..}
-          = object
-              (catMaybes
-                 [("locale" .=) <$> _rfrLocale,
-                  ("ruleResults" .=) <$> _rfrRuleResults])
-
--- | The enum-like identifier for this rule. For instance \"EnableKeepAlive\"
--- or \"AvoidCssImport\". Not localized.
---
--- /See:/ 'resultFormattedResultsRuleResultsAdditional' smart constructor.
-data ResultFormattedResultsRuleResultsAdditional = ResultFormattedResultsRuleResultsAdditional'
-    { _rfrrraSummary           :: !(Maybe PagespeedAPIFormatStringV2)
-    , _rfrrraRuleImpact        :: !(Maybe (Textual Double))
-    , _rfrrraGroups            :: !(Maybe [Text])
-    , _rfrrraLocalizedRuleName :: !(Maybe Text)
-    , _rfrrraURLBlocks         :: !(Maybe [ResultFormattedResultsRuleResultsAdditionalURLBlocksItem])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ResultFormattedResultsRuleResultsAdditional' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rfrrraSummary'
---
--- * 'rfrrraRuleImpact'
---
--- * 'rfrrraGroups'
---
--- * 'rfrrraLocalizedRuleName'
---
--- * 'rfrrraURLBlocks'
-resultFormattedResultsRuleResultsAdditional
-    :: ResultFormattedResultsRuleResultsAdditional
-resultFormattedResultsRuleResultsAdditional =
-    ResultFormattedResultsRuleResultsAdditional'
-    { _rfrrraSummary = Nothing
-    , _rfrrraRuleImpact = Nothing
-    , _rfrrraGroups = Nothing
-    , _rfrrraLocalizedRuleName = Nothing
-    , _rfrrraURLBlocks = Nothing
-    }
-
--- | A brief summary description for the rule, indicating at a high level
--- what should be done to follow the rule and what benefit can be gained by
--- doing so.
-rfrrraSummary :: Lens' ResultFormattedResultsRuleResultsAdditional (Maybe PagespeedAPIFormatStringV2)
-rfrrraSummary
-  = lens _rfrrraSummary
-      (\ s a -> s{_rfrrraSummary = a})
-
--- | The impact (unbounded floating point value) that implementing the
--- suggestions for this rule would have on making the page faster. Impact
--- is comparable between rules to determine which rule\'s suggestions would
--- have a higher or lower impact on making a page faster. For instance, if
--- enabling compression would save 1MB, while optimizing images would save
--- 500kB, the enable compression rule would have 2x the impact of the image
--- optimization rule, all other things being equal.
-rfrrraRuleImpact :: Lens' ResultFormattedResultsRuleResultsAdditional (Maybe Double)
-rfrrraRuleImpact
-  = lens _rfrrraRuleImpact
-      (\ s a -> s{_rfrrraRuleImpact = a})
-      . mapping _Coerce
-
--- | List of rule groups that this rule belongs to. Each entry in the list is
--- one of \"SPEED\" or \"USABILITY\".
-rfrrraGroups :: Lens' ResultFormattedResultsRuleResultsAdditional [Text]
-rfrrraGroups
-  = lens _rfrrraGroups (\ s a -> s{_rfrrraGroups = a})
-      . _Default
-      . _Coerce
-
--- | Localized name of the rule, intended for presentation to a user.
-rfrrraLocalizedRuleName :: Lens' ResultFormattedResultsRuleResultsAdditional (Maybe Text)
-rfrrraLocalizedRuleName
-  = lens _rfrrraLocalizedRuleName
-      (\ s a -> s{_rfrrraLocalizedRuleName = a})
-
--- | List of blocks of URLs. Each block may contain a heading and a list of
--- URLs. Each URL may optionally include additional details.
-rfrrraURLBlocks :: Lens' ResultFormattedResultsRuleResultsAdditional [ResultFormattedResultsRuleResultsAdditionalURLBlocksItem]
-rfrrraURLBlocks
-  = lens _rfrrraURLBlocks
-      (\ s a -> s{_rfrrraURLBlocks = a})
-      . _Default
+-- | The type of the metric.
+palevmAddtional :: Lens' PagespeedAPILoadingExperienceV5Metrics (HashMap Text PagespeedAPILoadingExperienceV5MetricsAdditional)
+palevmAddtional
+  = lens _palevmAddtional
+      (\ s a -> s{_palevmAddtional = a})
       . _Coerce
 
 instance FromJSON
-         ResultFormattedResultsRuleResultsAdditional where
+         PagespeedAPILoadingExperienceV5Metrics where
         parseJSON
-          = withObject
-              "ResultFormattedResultsRuleResultsAdditional"
+          = withObject "PagespeedAPILoadingExperienceV5Metrics"
               (\ o ->
-                 ResultFormattedResultsRuleResultsAdditional' <$>
-                   (o .:? "summary") <*> (o .:? "ruleImpact") <*>
-                     (o .:? "groups" .!= mempty)
-                     <*> (o .:? "localizedRuleName")
-                     <*> (o .:? "urlBlocks" .!= mempty))
-
-instance ToJSON
-         ResultFormattedResultsRuleResultsAdditional where
-        toJSON
-          ResultFormattedResultsRuleResultsAdditional'{..}
-          = object
-              (catMaybes
-                 [("summary" .=) <$> _rfrrraSummary,
-                  ("ruleImpact" .=) <$> _rfrrraRuleImpact,
-                  ("groups" .=) <$> _rfrrraGroups,
-                  ("localizedRuleName" .=) <$>
-                    _rfrrraLocalizedRuleName,
-                  ("urlBlocks" .=) <$> _rfrrraURLBlocks])
-
--- | A map with one entry for each rule group in these results.
---
--- /See:/ 'resultRuleGroups' smart constructor.
-newtype ResultRuleGroups = ResultRuleGroups'
-    { _rrgAddtional :: HashMap Text ResultRuleGroupsAdditional
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ResultRuleGroups' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rrgAddtional'
-resultRuleGroups
-    :: HashMap Text ResultRuleGroupsAdditional -- ^ 'rrgAddtional'
-    -> ResultRuleGroups
-resultRuleGroups pRrgAddtional_ =
-    ResultRuleGroups'
-    { _rrgAddtional = _Coerce # pRrgAddtional_
-    }
-
--- | The name of this rule group: one of \"SPEED\" or \"USABILITY\".
-rrgAddtional :: Lens' ResultRuleGroups (HashMap Text ResultRuleGroupsAdditional)
-rrgAddtional
-  = lens _rrgAddtional (\ s a -> s{_rrgAddtional = a})
-      . _Coerce
-
-instance FromJSON ResultRuleGroups where
-        parseJSON
-          = withObject "ResultRuleGroups"
-              (\ o -> ResultRuleGroups' <$> (parseJSONObject o))
-
-instance ToJSON ResultRuleGroups where
-        toJSON = toJSON . _rrgAddtional
-
---
--- /See:/ 'pagespeedAPIFormatStringV2' smart constructor.
-data PagespeedAPIFormatStringV2 = PagespeedAPIFormatStringV2'
-    { _pafsvArgs   :: !(Maybe [PagespeedAPIFormatStringV2ArgsItem])
-    , _pafsvFormat :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PagespeedAPIFormatStringV2' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'pafsvArgs'
---
--- * 'pafsvFormat'
-pagespeedAPIFormatStringV2
-    :: PagespeedAPIFormatStringV2
-pagespeedAPIFormatStringV2 =
-    PagespeedAPIFormatStringV2'
-    { _pafsvArgs = Nothing
-    , _pafsvFormat = Nothing
-    }
-
--- | List of arguments for the format string.
-pafsvArgs :: Lens' PagespeedAPIFormatStringV2 [PagespeedAPIFormatStringV2ArgsItem]
-pafsvArgs
-  = lens _pafsvArgs (\ s a -> s{_pafsvArgs = a}) .
-      _Default
-      . _Coerce
-
--- | A localized format string with {{FOO}} placeholders, where \'FOO\' is
--- the key of the argument whose value should be substituted. For HYPERLINK
--- arguments, the format string will instead contain {{BEGIN_FOO}} and
--- {{END_FOO}} for the argument with key \'FOO\'.
-pafsvFormat :: Lens' PagespeedAPIFormatStringV2 (Maybe Text)
-pafsvFormat
-  = lens _pafsvFormat (\ s a -> s{_pafsvFormat = a})
-
-instance FromJSON PagespeedAPIFormatStringV2 where
-        parseJSON
-          = withObject "PagespeedAPIFormatStringV2"
-              (\ o ->
-                 PagespeedAPIFormatStringV2' <$>
-                   (o .:? "args" .!= mempty) <*> (o .:? "format"))
-
-instance ToJSON PagespeedAPIFormatStringV2 where
-        toJSON PagespeedAPIFormatStringV2'{..}
-          = object
-              (catMaybes
-                 [("args" .=) <$> _pafsvArgs,
-                  ("format" .=) <$> _pafsvFormat])
-
--- | Dictionary of formatted rule results, with one entry for each PageSpeed
--- rule instantiated and run by the server.
---
--- /See:/ 'resultFormattedResultsRuleResults' smart constructor.
-newtype ResultFormattedResultsRuleResults = ResultFormattedResultsRuleResults'
-    { _rfrrrAddtional :: HashMap Text ResultFormattedResultsRuleResultsAdditional
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ResultFormattedResultsRuleResults' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rfrrrAddtional'
-resultFormattedResultsRuleResults
-    :: HashMap Text ResultFormattedResultsRuleResultsAdditional -- ^ 'rfrrrAddtional'
-    -> ResultFormattedResultsRuleResults
-resultFormattedResultsRuleResults pRfrrrAddtional_ =
-    ResultFormattedResultsRuleResults'
-    { _rfrrrAddtional = _Coerce # pRfrrrAddtional_
-    }
-
--- | The enum-like identifier for this rule. For instance \"EnableKeepAlive\"
--- or \"AvoidCssImport\". Not localized.
-rfrrrAddtional :: Lens' ResultFormattedResultsRuleResults (HashMap Text ResultFormattedResultsRuleResultsAdditional)
-rfrrrAddtional
-  = lens _rfrrrAddtional
-      (\ s a -> s{_rfrrrAddtional = a})
-      . _Coerce
-
-instance FromJSON ResultFormattedResultsRuleResults
-         where
-        parseJSON
-          = withObject "ResultFormattedResultsRuleResults"
-              (\ o ->
-                 ResultFormattedResultsRuleResults' <$>
+                 PagespeedAPILoadingExperienceV5Metrics' <$>
                    (parseJSONObject o))
 
-instance ToJSON ResultFormattedResultsRuleResults
-         where
-        toJSON = toJSON . _rfrrrAddtional
+instance ToJSON
+         PagespeedAPILoadingExperienceV5Metrics where
+        toJSON = toJSON . _palevmAddtional
 
 --
--- /See:/ 'resultFormattedResultsRuleResultsAdditionalURLBlocksItemURLsItem' smart constructor.
-data ResultFormattedResultsRuleResultsAdditionalURLBlocksItemURLsItem = ResultFormattedResultsRuleResultsAdditionalURLBlocksItemURLsItem'
-    { _rfrrraubiuiResult  :: !(Maybe PagespeedAPIFormatStringV2)
-    , _rfrrraubiuiDetails :: !(Maybe [PagespeedAPIFormatStringV2])
+-- /See:/ 'lighthouseResultV5' smart constructor.
+data LighthouseResultV5 = LighthouseResultV5'
+    { _lrvRuntimeError      :: !(Maybe LighthouseResultV5RuntimeError)
+    , _lrvCategoryGroups    :: !(Maybe LighthouseResultV5CategoryGroups)
+    , _lrvFinalURL          :: !(Maybe Text)
+    , _lrvConfigSettings    :: !(Maybe LighthouseResultV5ConfigSettings)
+    , _lrvEnvironment       :: !(Maybe LighthouseResultV5Environment)
+    , _lrvLighthouseVersion :: !(Maybe Text)
+    , _lrvRunWarnings       :: !(Maybe [JSONValue])
+    , _lrvRequestedURL      :: !(Maybe Text)
+    , _lrvCategories        :: !(Maybe LighthouseResultV5Categories)
+    , _lrvFetchTime         :: !(Maybe Text)
+    , _lrvUserAgent         :: !(Maybe Text)
+    , _lrvTiming            :: !(Maybe LighthouseResultV5Timing)
+    , _lrvAudits            :: !(Maybe LighthouseResultV5Audits)
+    , _lrvI18n              :: !(Maybe LighthouseResultV5I18n)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ResultFormattedResultsRuleResultsAdditionalURLBlocksItemURLsItem' with the minimum fields required to make a request.
+-- | Creates a value of 'LighthouseResultV5' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rfrrraubiuiResult'
+-- * 'lrvRuntimeError'
 --
--- * 'rfrrraubiuiDetails'
-resultFormattedResultsRuleResultsAdditionalURLBlocksItemURLsItem
-    :: ResultFormattedResultsRuleResultsAdditionalURLBlocksItemURLsItem
-resultFormattedResultsRuleResultsAdditionalURLBlocksItemURLsItem =
-    ResultFormattedResultsRuleResultsAdditionalURLBlocksItemURLsItem'
-    { _rfrrraubiuiResult = Nothing
-    , _rfrrraubiuiDetails = Nothing
+-- * 'lrvCategoryGroups'
+--
+-- * 'lrvFinalURL'
+--
+-- * 'lrvConfigSettings'
+--
+-- * 'lrvEnvironment'
+--
+-- * 'lrvLighthouseVersion'
+--
+-- * 'lrvRunWarnings'
+--
+-- * 'lrvRequestedURL'
+--
+-- * 'lrvCategories'
+--
+-- * 'lrvFetchTime'
+--
+-- * 'lrvUserAgent'
+--
+-- * 'lrvTiming'
+--
+-- * 'lrvAudits'
+--
+-- * 'lrvI18n'
+lighthouseResultV5
+    :: LighthouseResultV5
+lighthouseResultV5 =
+    LighthouseResultV5'
+    { _lrvRuntimeError = Nothing
+    , _lrvCategoryGroups = Nothing
+    , _lrvFinalURL = Nothing
+    , _lrvConfigSettings = Nothing
+    , _lrvEnvironment = Nothing
+    , _lrvLighthouseVersion = Nothing
+    , _lrvRunWarnings = Nothing
+    , _lrvRequestedURL = Nothing
+    , _lrvCategories = Nothing
+    , _lrvFetchTime = Nothing
+    , _lrvUserAgent = Nothing
+    , _lrvTiming = Nothing
+    , _lrvAudits = Nothing
+    , _lrvI18n = Nothing
     }
 
--- | A format string that gives information about the URL, and a list of
--- arguments for that format string.
-rfrrraubiuiResult :: Lens' ResultFormattedResultsRuleResultsAdditionalURLBlocksItemURLsItem (Maybe PagespeedAPIFormatStringV2)
-rfrrraubiuiResult
-  = lens _rfrrraubiuiResult
-      (\ s a -> s{_rfrrraubiuiResult = a})
+-- | A top-level error message that, if present, indicates a serious enough
+-- problem that this Lighthouse result may need to be discarded.
+lrvRuntimeError :: Lens' LighthouseResultV5 (Maybe LighthouseResultV5RuntimeError)
+lrvRuntimeError
+  = lens _lrvRuntimeError
+      (\ s a -> s{_lrvRuntimeError = a})
 
--- | List of entries that provide additional details about a single URL.
--- Optional.
-rfrrraubiuiDetails :: Lens' ResultFormattedResultsRuleResultsAdditionalURLBlocksItemURLsItem [PagespeedAPIFormatStringV2]
-rfrrraubiuiDetails
-  = lens _rfrrraubiuiDetails
-      (\ s a -> s{_rfrrraubiuiDetails = a})
+-- | Map of category groups in the LHR.
+lrvCategoryGroups :: Lens' LighthouseResultV5 (Maybe LighthouseResultV5CategoryGroups)
+lrvCategoryGroups
+  = lens _lrvCategoryGroups
+      (\ s a -> s{_lrvCategoryGroups = a})
+
+-- | The final resolved url that was audited.
+lrvFinalURL :: Lens' LighthouseResultV5 (Maybe Text)
+lrvFinalURL
+  = lens _lrvFinalURL (\ s a -> s{_lrvFinalURL = a})
+
+-- | The configuration settings for this LHR.
+lrvConfigSettings :: Lens' LighthouseResultV5 (Maybe LighthouseResultV5ConfigSettings)
+lrvConfigSettings
+  = lens _lrvConfigSettings
+      (\ s a -> s{_lrvConfigSettings = a})
+
+-- | Environment settings that were used when making this LHR.
+lrvEnvironment :: Lens' LighthouseResultV5 (Maybe LighthouseResultV5Environment)
+lrvEnvironment
+  = lens _lrvEnvironment
+      (\ s a -> s{_lrvEnvironment = a})
+
+-- | The lighthouse version that was used to generate this LHR.
+lrvLighthouseVersion :: Lens' LighthouseResultV5 (Maybe Text)
+lrvLighthouseVersion
+  = lens _lrvLighthouseVersion
+      (\ s a -> s{_lrvLighthouseVersion = a})
+
+-- | List of all run warnings in the LHR. Will always output to at least
+-- \`[]\`.
+lrvRunWarnings :: Lens' LighthouseResultV5 [JSONValue]
+lrvRunWarnings
+  = lens _lrvRunWarnings
+      (\ s a -> s{_lrvRunWarnings = a})
+      . _Default
+      . _Coerce
+
+-- | The original requested url.
+lrvRequestedURL :: Lens' LighthouseResultV5 (Maybe Text)
+lrvRequestedURL
+  = lens _lrvRequestedURL
+      (\ s a -> s{_lrvRequestedURL = a})
+
+-- | Map of categories in the LHR.
+lrvCategories :: Lens' LighthouseResultV5 (Maybe LighthouseResultV5Categories)
+lrvCategories
+  = lens _lrvCategories
+      (\ s a -> s{_lrvCategories = a})
+
+-- | The time that this run was fetched.
+lrvFetchTime :: Lens' LighthouseResultV5 (Maybe Text)
+lrvFetchTime
+  = lens _lrvFetchTime (\ s a -> s{_lrvFetchTime = a})
+
+-- | The user agent that was used to run this LHR.
+lrvUserAgent :: Lens' LighthouseResultV5 (Maybe Text)
+lrvUserAgent
+  = lens _lrvUserAgent (\ s a -> s{_lrvUserAgent = a})
+
+-- | Timing information for this LHR.
+lrvTiming :: Lens' LighthouseResultV5 (Maybe LighthouseResultV5Timing)
+lrvTiming
+  = lens _lrvTiming (\ s a -> s{_lrvTiming = a})
+
+-- | Map of audits in the LHR.
+lrvAudits :: Lens' LighthouseResultV5 (Maybe LighthouseResultV5Audits)
+lrvAudits
+  = lens _lrvAudits (\ s a -> s{_lrvAudits = a})
+
+-- | The internationalization strings that are required to render the LHR.
+lrvI18n :: Lens' LighthouseResultV5 (Maybe LighthouseResultV5I18n)
+lrvI18n = lens _lrvI18n (\ s a -> s{_lrvI18n = a})
+
+instance FromJSON LighthouseResultV5 where
+        parseJSON
+          = withObject "LighthouseResultV5"
+              (\ o ->
+                 LighthouseResultV5' <$>
+                   (o .:? "runtimeError") <*> (o .:? "categoryGroups")
+                     <*> (o .:? "finalUrl")
+                     <*> (o .:? "configSettings")
+                     <*> (o .:? "environment")
+                     <*> (o .:? "lighthouseVersion")
+                     <*> (o .:? "runWarnings" .!= mempty)
+                     <*> (o .:? "requestedUrl")
+                     <*> (o .:? "categories")
+                     <*> (o .:? "fetchTime")
+                     <*> (o .:? "userAgent")
+                     <*> (o .:? "timing")
+                     <*> (o .:? "audits")
+                     <*> (o .:? "i18n"))
+
+instance ToJSON LighthouseResultV5 where
+        toJSON LighthouseResultV5'{..}
+          = object
+              (catMaybes
+                 [("runtimeError" .=) <$> _lrvRuntimeError,
+                  ("categoryGroups" .=) <$> _lrvCategoryGroups,
+                  ("finalUrl" .=) <$> _lrvFinalURL,
+                  ("configSettings" .=) <$> _lrvConfigSettings,
+                  ("environment" .=) <$> _lrvEnvironment,
+                  ("lighthouseVersion" .=) <$> _lrvLighthouseVersion,
+                  ("runWarnings" .=) <$> _lrvRunWarnings,
+                  ("requestedUrl" .=) <$> _lrvRequestedURL,
+                  ("categories" .=) <$> _lrvCategories,
+                  ("fetchTime" .=) <$> _lrvFetchTime,
+                  ("userAgent" .=) <$> _lrvUserAgent,
+                  ("timing" .=) <$> _lrvTiming,
+                  ("audits" .=) <$> _lrvAudits,
+                  ("i18n" .=) <$> _lrvI18n])
+
+-- | Map of categories in the LHR.
+--
+-- /See:/ 'lighthouseResultV5Categories' smart constructor.
+data LighthouseResultV5Categories = LighthouseResultV5Categories'
+    { _lrvcBestPractices :: !(Maybe LighthouseCategoryV5)
+    , _lrvcPerformance   :: !(Maybe LighthouseCategoryV5)
+    , _lrvcPwa           :: !(Maybe LighthouseCategoryV5)
+    , _lrvcSeo           :: !(Maybe LighthouseCategoryV5)
+    , _lrvcAccessibility :: !(Maybe LighthouseCategoryV5)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LighthouseResultV5Categories' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lrvcBestPractices'
+--
+-- * 'lrvcPerformance'
+--
+-- * 'lrvcPwa'
+--
+-- * 'lrvcSeo'
+--
+-- * 'lrvcAccessibility'
+lighthouseResultV5Categories
+    :: LighthouseResultV5Categories
+lighthouseResultV5Categories =
+    LighthouseResultV5Categories'
+    { _lrvcBestPractices = Nothing
+    , _lrvcPerformance = Nothing
+    , _lrvcPwa = Nothing
+    , _lrvcSeo = Nothing
+    , _lrvcAccessibility = Nothing
+    }
+
+-- | The best practices category, containing all web best practice related
+-- audits.
+lrvcBestPractices :: Lens' LighthouseResultV5Categories (Maybe LighthouseCategoryV5)
+lrvcBestPractices
+  = lens _lrvcBestPractices
+      (\ s a -> s{_lrvcBestPractices = a})
+
+-- | The performance category, containing all performance related audits.
+lrvcPerformance :: Lens' LighthouseResultV5Categories (Maybe LighthouseCategoryV5)
+lrvcPerformance
+  = lens _lrvcPerformance
+      (\ s a -> s{_lrvcPerformance = a})
+
+-- | The Progressive-Web-App (PWA) category, containing all pwa related
+-- audits.
+lrvcPwa :: Lens' LighthouseResultV5Categories (Maybe LighthouseCategoryV5)
+lrvcPwa = lens _lrvcPwa (\ s a -> s{_lrvcPwa = a})
+
+-- | The Search-Engine-Optimization (SEO) category, containing all seo
+-- related audits.
+lrvcSeo :: Lens' LighthouseResultV5Categories (Maybe LighthouseCategoryV5)
+lrvcSeo = lens _lrvcSeo (\ s a -> s{_lrvcSeo = a})
+
+-- | The accessibility category, containing all accessibility related audits.
+lrvcAccessibility :: Lens' LighthouseResultV5Categories (Maybe LighthouseCategoryV5)
+lrvcAccessibility
+  = lens _lrvcAccessibility
+      (\ s a -> s{_lrvcAccessibility = a})
+
+instance FromJSON LighthouseResultV5Categories where
+        parseJSON
+          = withObject "LighthouseResultV5Categories"
+              (\ o ->
+                 LighthouseResultV5Categories' <$>
+                   (o .:? "best-practices") <*> (o .:? "performance")
+                     <*> (o .:? "pwa")
+                     <*> (o .:? "seo")
+                     <*> (o .:? "accessibility"))
+
+instance ToJSON LighthouseResultV5Categories where
+        toJSON LighthouseResultV5Categories'{..}
+          = object
+              (catMaybes
+                 [("best-practices" .=) <$> _lrvcBestPractices,
+                  ("performance" .=) <$> _lrvcPerformance,
+                  ("pwa" .=) <$> _lrvcPwa, ("seo" .=) <$> _lrvcSeo,
+                  ("accessibility" .=) <$> _lrvcAccessibility])
+
+--
+-- /See:/ 'lighthouseCategoryV5' smart constructor.
+data LighthouseCategoryV5 = LighthouseCategoryV5'
+    { _lcvManualDescription :: !(Maybe Text)
+    , _lcvScore             :: !(Maybe JSONValue)
+    , _lcvAuditRefs         :: !(Maybe [LighthouseCategoryV5AuditRefsItem])
+    , _lcvId                :: !(Maybe Text)
+    , _lcvTitle             :: !(Maybe Text)
+    , _lcvDescription       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LighthouseCategoryV5' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lcvManualDescription'
+--
+-- * 'lcvScore'
+--
+-- * 'lcvAuditRefs'
+--
+-- * 'lcvId'
+--
+-- * 'lcvTitle'
+--
+-- * 'lcvDescription'
+lighthouseCategoryV5
+    :: LighthouseCategoryV5
+lighthouseCategoryV5 =
+    LighthouseCategoryV5'
+    { _lcvManualDescription = Nothing
+    , _lcvScore = Nothing
+    , _lcvAuditRefs = Nothing
+    , _lcvId = Nothing
+    , _lcvTitle = Nothing
+    , _lcvDescription = Nothing
+    }
+
+-- | A description for the manual audits in the category.
+lcvManualDescription :: Lens' LighthouseCategoryV5 (Maybe Text)
+lcvManualDescription
+  = lens _lcvManualDescription
+      (\ s a -> s{_lcvManualDescription = a})
+
+lcvScore :: Lens' LighthouseCategoryV5 (Maybe JSONValue)
+lcvScore = lens _lcvScore (\ s a -> s{_lcvScore = a})
+
+-- | An array of references to all the audit members of this category.
+lcvAuditRefs :: Lens' LighthouseCategoryV5 [LighthouseCategoryV5AuditRefsItem]
+lcvAuditRefs
+  = lens _lcvAuditRefs (\ s a -> s{_lcvAuditRefs = a})
+      . _Default
+      . _Coerce
+
+-- | The string identifier of the category.
+lcvId :: Lens' LighthouseCategoryV5 (Maybe Text)
+lcvId = lens _lcvId (\ s a -> s{_lcvId = a})
+
+-- | The human-friendly name of the category.
+lcvTitle :: Lens' LighthouseCategoryV5 (Maybe Text)
+lcvTitle = lens _lcvTitle (\ s a -> s{_lcvTitle = a})
+
+-- | A more detailed description of the category and its importance.
+lcvDescription :: Lens' LighthouseCategoryV5 (Maybe Text)
+lcvDescription
+  = lens _lcvDescription
+      (\ s a -> s{_lcvDescription = a})
+
+instance FromJSON LighthouseCategoryV5 where
+        parseJSON
+          = withObject "LighthouseCategoryV5"
+              (\ o ->
+                 LighthouseCategoryV5' <$>
+                   (o .:? "manualDescription") <*> (o .:? "score") <*>
+                     (o .:? "auditRefs" .!= mempty)
+                     <*> (o .:? "id")
+                     <*> (o .:? "title")
+                     <*> (o .:? "description"))
+
+instance ToJSON LighthouseCategoryV5 where
+        toJSON LighthouseCategoryV5'{..}
+          = object
+              (catMaybes
+                 [("manualDescription" .=) <$> _lcvManualDescription,
+                  ("score" .=) <$> _lcvScore,
+                  ("auditRefs" .=) <$> _lcvAuditRefs,
+                  ("id" .=) <$> _lcvId, ("title" .=) <$> _lcvTitle,
+                  ("description" .=) <$> _lcvDescription])
+
+-- | The type of the metric.
+--
+-- /See:/ 'pagespeedAPILoadingExperienceV5MetricsAdditional' smart constructor.
+data PagespeedAPILoadingExperienceV5MetricsAdditional = PagespeedAPILoadingExperienceV5MetricsAdditional'
+    { _palevmaCategory      :: !(Maybe Text)
+    , _palevmaPercentile    :: !(Maybe (Textual Int32))
+    , _palevmaDistributions :: !(Maybe [PagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PagespeedAPILoadingExperienceV5MetricsAdditional' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'palevmaCategory'
+--
+-- * 'palevmaPercentile'
+--
+-- * 'palevmaDistributions'
+pagespeedAPILoadingExperienceV5MetricsAdditional
+    :: PagespeedAPILoadingExperienceV5MetricsAdditional
+pagespeedAPILoadingExperienceV5MetricsAdditional =
+    PagespeedAPILoadingExperienceV5MetricsAdditional'
+    { _palevmaCategory = Nothing
+    , _palevmaPercentile = Nothing
+    , _palevmaDistributions = Nothing
+    }
+
+palevmaCategory :: Lens' PagespeedAPILoadingExperienceV5MetricsAdditional (Maybe Text)
+palevmaCategory
+  = lens _palevmaCategory
+      (\ s a -> s{_palevmaCategory = a})
+
+palevmaPercentile :: Lens' PagespeedAPILoadingExperienceV5MetricsAdditional (Maybe Int32)
+palevmaPercentile
+  = lens _palevmaPercentile
+      (\ s a -> s{_palevmaPercentile = a})
+      . mapping _Coerce
+
+palevmaDistributions :: Lens' PagespeedAPILoadingExperienceV5MetricsAdditional [PagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem]
+palevmaDistributions
+  = lens _palevmaDistributions
+      (\ s a -> s{_palevmaDistributions = a})
       . _Default
       . _Coerce
 
 instance FromJSON
-         ResultFormattedResultsRuleResultsAdditionalURLBlocksItemURLsItem
+         PagespeedAPILoadingExperienceV5MetricsAdditional
          where
         parseJSON
           = withObject
-              "ResultFormattedResultsRuleResultsAdditionalURLBlocksItemURLsItem"
+              "PagespeedAPILoadingExperienceV5MetricsAdditional"
               (\ o ->
-                 ResultFormattedResultsRuleResultsAdditionalURLBlocksItemURLsItem'
-                   <$>
-                   (o .:? "result") <*> (o .:? "details" .!= mempty))
+                 PagespeedAPILoadingExperienceV5MetricsAdditional' <$>
+                   (o .:? "category") <*> (o .:? "percentile") <*>
+                     (o .:? "distributions" .!= mempty))
 
 instance ToJSON
-         ResultFormattedResultsRuleResultsAdditionalURLBlocksItemURLsItem
+         PagespeedAPILoadingExperienceV5MetricsAdditional
          where
         toJSON
-          ResultFormattedResultsRuleResultsAdditionalURLBlocksItemURLsItem'{..}
+          PagespeedAPILoadingExperienceV5MetricsAdditional'{..}
           = object
               (catMaybes
-                 [("result" .=) <$> _rfrrraubiuiResult,
-                  ("details" .=) <$> _rfrrraubiuiDetails])
+                 [("category" .=) <$> _palevmaCategory,
+                  ("percentile" .=) <$> _palevmaPercentile,
+                  ("distributions" .=) <$> _palevmaDistributions])
+
+--
+-- /See:/ 'pagespeedAPILoadingExperienceV5' smart constructor.
+data PagespeedAPILoadingExperienceV5 = PagespeedAPILoadingExperienceV5'
+    { _palevMetrics         :: !(Maybe PagespeedAPILoadingExperienceV5Metrics)
+    , _palevInitialURL      :: !(Maybe Text)
+    , _palevId              :: !(Maybe Text)
+    , _palevOverallCategory :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PagespeedAPILoadingExperienceV5' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'palevMetrics'
+--
+-- * 'palevInitialURL'
+--
+-- * 'palevId'
+--
+-- * 'palevOverallCategory'
+pagespeedAPILoadingExperienceV5
+    :: PagespeedAPILoadingExperienceV5
+pagespeedAPILoadingExperienceV5 =
+    PagespeedAPILoadingExperienceV5'
+    { _palevMetrics = Nothing
+    , _palevInitialURL = Nothing
+    , _palevId = Nothing
+    , _palevOverallCategory = Nothing
+    }
+
+palevMetrics :: Lens' PagespeedAPILoadingExperienceV5 (Maybe PagespeedAPILoadingExperienceV5Metrics)
+palevMetrics
+  = lens _palevMetrics (\ s a -> s{_palevMetrics = a})
+
+palevInitialURL :: Lens' PagespeedAPILoadingExperienceV5 (Maybe Text)
+palevInitialURL
+  = lens _palevInitialURL
+      (\ s a -> s{_palevInitialURL = a})
+
+-- | The url, pattern or origin which the metrics are on.
+palevId :: Lens' PagespeedAPILoadingExperienceV5 (Maybe Text)
+palevId = lens _palevId (\ s a -> s{_palevId = a})
+
+palevOverallCategory :: Lens' PagespeedAPILoadingExperienceV5 (Maybe Text)
+palevOverallCategory
+  = lens _palevOverallCategory
+      (\ s a -> s{_palevOverallCategory = a})
+
+instance FromJSON PagespeedAPILoadingExperienceV5
+         where
+        parseJSON
+          = withObject "PagespeedAPILoadingExperienceV5"
+              (\ o ->
+                 PagespeedAPILoadingExperienceV5' <$>
+                   (o .:? "metrics") <*> (o .:? "initial_url") <*>
+                     (o .:? "id")
+                     <*> (o .:? "overall_category"))
+
+instance ToJSON PagespeedAPILoadingExperienceV5 where
+        toJSON PagespeedAPILoadingExperienceV5'{..}
+          = object
+              (catMaybes
+                 [("metrics" .=) <$> _palevMetrics,
+                  ("initial_url" .=) <$> _palevInitialURL,
+                  ("id" .=) <$> _palevId,
+                  ("overall_category" .=) <$> _palevOverallCategory])
+
+-- | The version of PageSpeed used to generate these results.
+--
+-- /See:/ 'pagespeedAPIPagespeedResponseV5Version' smart constructor.
+data PagespeedAPIPagespeedResponseV5Version = PagespeedAPIPagespeedResponseV5Version'
+    { _paprvvMinor :: !(Maybe (Textual Int32))
+    , _paprvvMajor :: !(Maybe (Textual Int32))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PagespeedAPIPagespeedResponseV5Version' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'paprvvMinor'
+--
+-- * 'paprvvMajor'
+pagespeedAPIPagespeedResponseV5Version
+    :: PagespeedAPIPagespeedResponseV5Version
+pagespeedAPIPagespeedResponseV5Version =
+    PagespeedAPIPagespeedResponseV5Version'
+    { _paprvvMinor = Nothing
+    , _paprvvMajor = Nothing
+    }
+
+-- | The minor version number of PageSpeed used to generate these results.
+paprvvMinor :: Lens' PagespeedAPIPagespeedResponseV5Version (Maybe Int32)
+paprvvMinor
+  = lens _paprvvMinor (\ s a -> s{_paprvvMinor = a}) .
+      mapping _Coerce
+
+-- | The major version number of PageSpeed used to generate these results.
+paprvvMajor :: Lens' PagespeedAPIPagespeedResponseV5Version (Maybe Int32)
+paprvvMajor
+  = lens _paprvvMajor (\ s a -> s{_paprvvMajor = a}) .
+      mapping _Coerce
+
+instance FromJSON
+         PagespeedAPIPagespeedResponseV5Version where
+        parseJSON
+          = withObject "PagespeedAPIPagespeedResponseV5Version"
+              (\ o ->
+                 PagespeedAPIPagespeedResponseV5Version' <$>
+                   (o .:? "minor") <*> (o .:? "major"))
+
+instance ToJSON
+         PagespeedAPIPagespeedResponseV5Version where
+        toJSON PagespeedAPIPagespeedResponseV5Version'{..}
+          = object
+              (catMaybes
+                 [("minor" .=) <$> _paprvvMinor,
+                  ("major" .=) <$> _paprvvMajor])
+
+--
+-- /See:/ 'pagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem' smart constructor.
+data PagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem = PagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem'
+    { _palevmadiMax        :: !(Maybe (Textual Int32))
+    , _palevmadiProportion :: !(Maybe (Textual Double))
+    , _palevmadiMin        :: !(Maybe (Textual Int32))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'palevmadiMax'
+--
+-- * 'palevmadiProportion'
+--
+-- * 'palevmadiMin'
+pagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem
+    :: PagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem
+pagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem =
+    PagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem'
+    { _palevmadiMax = Nothing
+    , _palevmadiProportion = Nothing
+    , _palevmadiMin = Nothing
+    }
+
+palevmadiMax :: Lens' PagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem (Maybe Int32)
+palevmadiMax
+  = lens _palevmadiMax (\ s a -> s{_palevmadiMax = a})
+      . mapping _Coerce
+
+palevmadiProportion :: Lens' PagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem (Maybe Double)
+palevmadiProportion
+  = lens _palevmadiProportion
+      (\ s a -> s{_palevmadiProportion = a})
+      . mapping _Coerce
+
+palevmadiMin :: Lens' PagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem (Maybe Int32)
+palevmadiMin
+  = lens _palevmadiMin (\ s a -> s{_palevmadiMin = a})
+      . mapping _Coerce
+
+instance FromJSON
+         PagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem
+         where
+        parseJSON
+          = withObject
+              "PagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem"
+              (\ o ->
+                 PagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem'
+                   <$>
+                   (o .:? "max") <*> (o .:? "proportion") <*>
+                     (o .:? "min"))
+
+instance ToJSON
+         PagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem
+         where
+        toJSON
+          PagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem'{..}
+          = object
+              (catMaybes
+                 [("max" .=) <$> _palevmadiMax,
+                  ("proportion" .=) <$> _palevmadiProportion,
+                  ("min" .=) <$> _palevmadiMin])
+
+-- | Timing information for this LHR.
+--
+-- /See:/ 'lighthouseResultV5Timing' smart constructor.
+newtype LighthouseResultV5Timing = LighthouseResultV5Timing'
+    { _lrvtTotal :: Maybe (Textual Double)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LighthouseResultV5Timing' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lrvtTotal'
+lighthouseResultV5Timing
+    :: LighthouseResultV5Timing
+lighthouseResultV5Timing =
+    LighthouseResultV5Timing'
+    { _lrvtTotal = Nothing
+    }
+
+-- | The total duration of Lighthouse\'s run.
+lrvtTotal :: Lens' LighthouseResultV5Timing (Maybe Double)
+lrvtTotal
+  = lens _lrvtTotal (\ s a -> s{_lrvtTotal = a}) .
+      mapping _Coerce
+
+instance FromJSON LighthouseResultV5Timing where
+        parseJSON
+          = withObject "LighthouseResultV5Timing"
+              (\ o ->
+                 LighthouseResultV5Timing' <$> (o .:? "total"))
+
+instance ToJSON LighthouseResultV5Timing where
+        toJSON LighthouseResultV5Timing'{..}
+          = object (catMaybes [("total" .=) <$> _lrvtTotal])
+
+-- | Internationalized strings that are formatted to the locale in
+-- configSettings.
+--
+-- /See:/ 'lighthouseResultV5I18nRendererFormattedStrings' smart constructor.
+data LighthouseResultV5I18nRendererFormattedStrings = LighthouseResultV5I18nRendererFormattedStrings'
+    { _lrvirfsLabDataTitle                     :: !(Maybe Text)
+    , _lrvirfsWarningHeader                    :: !(Maybe Text)
+    , _lrvirfsOpportUnityResourceColumnLabel   :: !(Maybe Text)
+    , _lrvirfsManualAuditsGroupTitle           :: !(Maybe Text)
+    , _lrvirfsCrcInitialNavigation             :: !(Maybe Text)
+    , _lrvirfsVarianceDisclaimer               :: !(Maybe Text)
+    , _lrvirfsPassedAuditsGroupTitle           :: !(Maybe Text)
+    , _lrvirfsToplevelWarningsMessage          :: !(Maybe Text)
+    , _lrvirfsErrorMissingAuditInfo            :: !(Maybe Text)
+    , _lrvirfsCrcLongestDurationLabel          :: !(Maybe Text)
+    , _lrvirfsScorescaleLabel                  :: !(Maybe Text)
+    , _lrvirfsOpportUnitySavingsColumnLabel    :: !(Maybe Text)
+    , _lrvirfsErrorLabel                       :: !(Maybe Text)
+    , _lrvirfsLsPerformanceCategoryDescription :: !(Maybe Text)
+    , _lrvirfsAuditGroupExpandTooltip          :: !(Maybe Text)
+    , _lrvirfsNotApplicableAuditsGroupTitle    :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LighthouseResultV5I18nRendererFormattedStrings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lrvirfsLabDataTitle'
+--
+-- * 'lrvirfsWarningHeader'
+--
+-- * 'lrvirfsOpportUnityResourceColumnLabel'
+--
+-- * 'lrvirfsManualAuditsGroupTitle'
+--
+-- * 'lrvirfsCrcInitialNavigation'
+--
+-- * 'lrvirfsVarianceDisclaimer'
+--
+-- * 'lrvirfsPassedAuditsGroupTitle'
+--
+-- * 'lrvirfsToplevelWarningsMessage'
+--
+-- * 'lrvirfsErrorMissingAuditInfo'
+--
+-- * 'lrvirfsCrcLongestDurationLabel'
+--
+-- * 'lrvirfsScorescaleLabel'
+--
+-- * 'lrvirfsOpportUnitySavingsColumnLabel'
+--
+-- * 'lrvirfsErrorLabel'
+--
+-- * 'lrvirfsLsPerformanceCategoryDescription'
+--
+-- * 'lrvirfsAuditGroupExpandTooltip'
+--
+-- * 'lrvirfsNotApplicableAuditsGroupTitle'
+lighthouseResultV5I18nRendererFormattedStrings
+    :: LighthouseResultV5I18nRendererFormattedStrings
+lighthouseResultV5I18nRendererFormattedStrings =
+    LighthouseResultV5I18nRendererFormattedStrings'
+    { _lrvirfsLabDataTitle = Nothing
+    , _lrvirfsWarningHeader = Nothing
+    , _lrvirfsOpportUnityResourceColumnLabel = Nothing
+    , _lrvirfsManualAuditsGroupTitle = Nothing
+    , _lrvirfsCrcInitialNavigation = Nothing
+    , _lrvirfsVarianceDisclaimer = Nothing
+    , _lrvirfsPassedAuditsGroupTitle = Nothing
+    , _lrvirfsToplevelWarningsMessage = Nothing
+    , _lrvirfsErrorMissingAuditInfo = Nothing
+    , _lrvirfsCrcLongestDurationLabel = Nothing
+    , _lrvirfsScorescaleLabel = Nothing
+    , _lrvirfsOpportUnitySavingsColumnLabel = Nothing
+    , _lrvirfsErrorLabel = Nothing
+    , _lrvirfsLsPerformanceCategoryDescription = Nothing
+    , _lrvirfsAuditGroupExpandTooltip = Nothing
+    , _lrvirfsNotApplicableAuditsGroupTitle = Nothing
+    }
+
+-- | The title of the lab data performance category.
+lrvirfsLabDataTitle :: Lens' LighthouseResultV5I18nRendererFormattedStrings (Maybe Text)
+lrvirfsLabDataTitle
+  = lens _lrvirfsLabDataTitle
+      (\ s a -> s{_lrvirfsLabDataTitle = a})
+
+-- | The label shown above a bulleted list of warnings.
+lrvirfsWarningHeader :: Lens' LighthouseResultV5I18nRendererFormattedStrings (Maybe Text)
+lrvirfsWarningHeader
+  = lens _lrvirfsWarningHeader
+      (\ s a -> s{_lrvirfsWarningHeader = a})
+
+-- | The heading for the estimated page load savings opportunity of an audit.
+lrvirfsOpportUnityResourceColumnLabel :: Lens' LighthouseResultV5I18nRendererFormattedStrings (Maybe Text)
+lrvirfsOpportUnityResourceColumnLabel
+  = lens _lrvirfsOpportUnityResourceColumnLabel
+      (\ s a ->
+         s{_lrvirfsOpportUnityResourceColumnLabel = a})
+
+-- | The heading shown above a list of audits that were not computerd in the
+-- run.
+lrvirfsManualAuditsGroupTitle :: Lens' LighthouseResultV5I18nRendererFormattedStrings (Maybe Text)
+lrvirfsManualAuditsGroupTitle
+  = lens _lrvirfsManualAuditsGroupTitle
+      (\ s a -> s{_lrvirfsManualAuditsGroupTitle = a})
+
+-- | The label for the initial request in a critical request chain.
+lrvirfsCrcInitialNavigation :: Lens' LighthouseResultV5I18nRendererFormattedStrings (Maybe Text)
+lrvirfsCrcInitialNavigation
+  = lens _lrvirfsCrcInitialNavigation
+      (\ s a -> s{_lrvirfsCrcInitialNavigation = a})
+
+-- | The disclaimer shown below a performance metric value.
+lrvirfsVarianceDisclaimer :: Lens' LighthouseResultV5I18nRendererFormattedStrings (Maybe Text)
+lrvirfsVarianceDisclaimer
+  = lens _lrvirfsVarianceDisclaimer
+      (\ s a -> s{_lrvirfsVarianceDisclaimer = a})
+
+-- | The heading that is shown above a list of audits that are passing.
+lrvirfsPassedAuditsGroupTitle :: Lens' LighthouseResultV5I18nRendererFormattedStrings (Maybe Text)
+lrvirfsPassedAuditsGroupTitle
+  = lens _lrvirfsPassedAuditsGroupTitle
+      (\ s a -> s{_lrvirfsPassedAuditsGroupTitle = a})
+
+-- | The label shown preceding important warnings that may have invalidated
+-- an entire report.
+lrvirfsToplevelWarningsMessage :: Lens' LighthouseResultV5I18nRendererFormattedStrings (Maybe Text)
+lrvirfsToplevelWarningsMessage
+  = lens _lrvirfsToplevelWarningsMessage
+      (\ s a -> s{_lrvirfsToplevelWarningsMessage = a})
+
+-- | The error string shown next to an erroring audit.
+lrvirfsErrorMissingAuditInfo :: Lens' LighthouseResultV5I18nRendererFormattedStrings (Maybe Text)
+lrvirfsErrorMissingAuditInfo
+  = lens _lrvirfsErrorMissingAuditInfo
+      (\ s a -> s{_lrvirfsErrorMissingAuditInfo = a})
+
+-- | The label for values shown in the summary of critical request chains.
+lrvirfsCrcLongestDurationLabel :: Lens' LighthouseResultV5I18nRendererFormattedStrings (Maybe Text)
+lrvirfsCrcLongestDurationLabel
+  = lens _lrvirfsCrcLongestDurationLabel
+      (\ s a -> s{_lrvirfsCrcLongestDurationLabel = a})
+
+-- | The label that explains the score gauges scale (0-49, 50-89, 90-100).
+lrvirfsScorescaleLabel :: Lens' LighthouseResultV5I18nRendererFormattedStrings (Maybe Text)
+lrvirfsScorescaleLabel
+  = lens _lrvirfsScorescaleLabel
+      (\ s a -> s{_lrvirfsScorescaleLabel = a})
+
+-- | The heading for the estimated page load savings of opportunity audits.
+lrvirfsOpportUnitySavingsColumnLabel :: Lens' LighthouseResultV5I18nRendererFormattedStrings (Maybe Text)
+lrvirfsOpportUnitySavingsColumnLabel
+  = lens _lrvirfsOpportUnitySavingsColumnLabel
+      (\ s a ->
+         s{_lrvirfsOpportUnitySavingsColumnLabel = a})
+
+-- | The label shown next to an audit or metric that has had an error.
+lrvirfsErrorLabel :: Lens' LighthouseResultV5I18nRendererFormattedStrings (Maybe Text)
+lrvirfsErrorLabel
+  = lens _lrvirfsErrorLabel
+      (\ s a -> s{_lrvirfsErrorLabel = a})
+
+-- | The disclaimer shown under performance explaning that the network can
+-- vary.
+lrvirfsLsPerformanceCategoryDescription :: Lens' LighthouseResultV5I18nRendererFormattedStrings (Maybe Text)
+lrvirfsLsPerformanceCategoryDescription
+  = lens _lrvirfsLsPerformanceCategoryDescription
+      (\ s a ->
+         s{_lrvirfsLsPerformanceCategoryDescription = a})
+
+-- | The tooltip text on an expandable chevron icon.
+lrvirfsAuditGroupExpandTooltip :: Lens' LighthouseResultV5I18nRendererFormattedStrings (Maybe Text)
+lrvirfsAuditGroupExpandTooltip
+  = lens _lrvirfsAuditGroupExpandTooltip
+      (\ s a -> s{_lrvirfsAuditGroupExpandTooltip = a})
+
+-- | The heading shown above a list of audits that do not apply to a page.
+lrvirfsNotApplicableAuditsGroupTitle :: Lens' LighthouseResultV5I18nRendererFormattedStrings (Maybe Text)
+lrvirfsNotApplicableAuditsGroupTitle
+  = lens _lrvirfsNotApplicableAuditsGroupTitle
+      (\ s a ->
+         s{_lrvirfsNotApplicableAuditsGroupTitle = a})
+
+instance FromJSON
+         LighthouseResultV5I18nRendererFormattedStrings where
+        parseJSON
+          = withObject
+              "LighthouseResultV5I18nRendererFormattedStrings"
+              (\ o ->
+                 LighthouseResultV5I18nRendererFormattedStrings' <$>
+                   (o .:? "labDataTitle") <*> (o .:? "warningHeader")
+                     <*> (o .:? "opportunityResourceColumnLabel")
+                     <*> (o .:? "manualAuditsGroupTitle")
+                     <*> (o .:? "crcInitialNavigation")
+                     <*> (o .:? "varianceDisclaimer")
+                     <*> (o .:? "passedAuditsGroupTitle")
+                     <*> (o .:? "toplevelWarningsMessage")
+                     <*> (o .:? "errorMissingAuditInfo")
+                     <*> (o .:? "crcLongestDurationLabel")
+                     <*> (o .:? "scorescaleLabel")
+                     <*> (o .:? "opportunitySavingsColumnLabel")
+                     <*> (o .:? "errorLabel")
+                     <*> (o .:? "lsPerformanceCategoryDescription")
+                     <*> (o .:? "auditGroupExpandTooltip")
+                     <*> (o .:? "notApplicableAuditsGroupTitle"))
+
+instance ToJSON
+         LighthouseResultV5I18nRendererFormattedStrings where
+        toJSON
+          LighthouseResultV5I18nRendererFormattedStrings'{..}
+          = object
+              (catMaybes
+                 [("labDataTitle" .=) <$> _lrvirfsLabDataTitle,
+                  ("warningHeader" .=) <$> _lrvirfsWarningHeader,
+                  ("opportunityResourceColumnLabel" .=) <$>
+                    _lrvirfsOpportUnityResourceColumnLabel,
+                  ("manualAuditsGroupTitle" .=) <$>
+                    _lrvirfsManualAuditsGroupTitle,
+                  ("crcInitialNavigation" .=) <$>
+                    _lrvirfsCrcInitialNavigation,
+                  ("varianceDisclaimer" .=) <$>
+                    _lrvirfsVarianceDisclaimer,
+                  ("passedAuditsGroupTitle" .=) <$>
+                    _lrvirfsPassedAuditsGroupTitle,
+                  ("toplevelWarningsMessage" .=) <$>
+                    _lrvirfsToplevelWarningsMessage,
+                  ("errorMissingAuditInfo" .=) <$>
+                    _lrvirfsErrorMissingAuditInfo,
+                  ("crcLongestDurationLabel" .=) <$>
+                    _lrvirfsCrcLongestDurationLabel,
+                  ("scorescaleLabel" .=) <$> _lrvirfsScorescaleLabel,
+                  ("opportunitySavingsColumnLabel" .=) <$>
+                    _lrvirfsOpportUnitySavingsColumnLabel,
+                  ("errorLabel" .=) <$> _lrvirfsErrorLabel,
+                  ("lsPerformanceCategoryDescription" .=) <$>
+                    _lrvirfsLsPerformanceCategoryDescription,
+                  ("auditGroupExpandTooltip" .=) <$>
+                    _lrvirfsAuditGroupExpandTooltip,
+                  ("notApplicableAuditsGroupTitle" .=) <$>
+                    _lrvirfsNotApplicableAuditsGroupTitle])
+
+--
+-- /See:/ 'lighthouseCategoryV5AuditRefsItem' smart constructor.
+data LighthouseCategoryV5AuditRefsItem = LighthouseCategoryV5AuditRefsItem'
+    { _lcvariGroup  :: !(Maybe Text)
+    , _lcvariWeight :: !(Maybe (Textual Double))
+    , _lcvariId     :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LighthouseCategoryV5AuditRefsItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lcvariGroup'
+--
+-- * 'lcvariWeight'
+--
+-- * 'lcvariId'
+lighthouseCategoryV5AuditRefsItem
+    :: LighthouseCategoryV5AuditRefsItem
+lighthouseCategoryV5AuditRefsItem =
+    LighthouseCategoryV5AuditRefsItem'
+    { _lcvariGroup = Nothing
+    , _lcvariWeight = Nothing
+    , _lcvariId = Nothing
+    }
+
+-- | The category group that the audit belongs to (optional).
+lcvariGroup :: Lens' LighthouseCategoryV5AuditRefsItem (Maybe Text)
+lcvariGroup
+  = lens _lcvariGroup (\ s a -> s{_lcvariGroup = a})
+
+-- | The weight this audit\'s score has on the overall category score.
+lcvariWeight :: Lens' LighthouseCategoryV5AuditRefsItem (Maybe Double)
+lcvariWeight
+  = lens _lcvariWeight (\ s a -> s{_lcvariWeight = a})
+      . mapping _Coerce
+
+-- | The audit ref id.
+lcvariId :: Lens' LighthouseCategoryV5AuditRefsItem (Maybe Text)
+lcvariId = lens _lcvariId (\ s a -> s{_lcvariId = a})
+
+instance FromJSON LighthouseCategoryV5AuditRefsItem
+         where
+        parseJSON
+          = withObject "LighthouseCategoryV5AuditRefsItem"
+              (\ o ->
+                 LighthouseCategoryV5AuditRefsItem' <$>
+                   (o .:? "group") <*> (o .:? "weight") <*>
+                     (o .:? "id"))
+
+instance ToJSON LighthouseCategoryV5AuditRefsItem
+         where
+        toJSON LighthouseCategoryV5AuditRefsItem'{..}
+          = object
+              (catMaybes
+                 [("group" .=) <$> _lcvariGroup,
+                  ("weight" .=) <$> _lcvariWeight,
+                  ("id" .=) <$> _lcvariId])
+
+-- | The internationalization strings that are required to render the LHR.
+--
+-- /See:/ 'lighthouseResultV5I18n' smart constructor.
+newtype LighthouseResultV5I18n = LighthouseResultV5I18n'
+    { _lrviRendererFormattedStrings :: Maybe LighthouseResultV5I18nRendererFormattedStrings
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LighthouseResultV5I18n' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lrviRendererFormattedStrings'
+lighthouseResultV5I18n
+    :: LighthouseResultV5I18n
+lighthouseResultV5I18n =
+    LighthouseResultV5I18n'
+    { _lrviRendererFormattedStrings = Nothing
+    }
+
+-- | Internationalized strings that are formatted to the locale in
+-- configSettings.
+lrviRendererFormattedStrings :: Lens' LighthouseResultV5I18n (Maybe LighthouseResultV5I18nRendererFormattedStrings)
+lrviRendererFormattedStrings
+  = lens _lrviRendererFormattedStrings
+      (\ s a -> s{_lrviRendererFormattedStrings = a})
+
+instance FromJSON LighthouseResultV5I18n where
+        parseJSON
+          = withObject "LighthouseResultV5I18n"
+              (\ o ->
+                 LighthouseResultV5I18n' <$>
+                   (o .:? "rendererFormattedStrings"))
+
+instance ToJSON LighthouseResultV5I18n where
+        toJSON LighthouseResultV5I18n'{..}
+          = object
+              (catMaybes
+                 [("rendererFormattedStrings" .=) <$>
+                    _lrviRendererFormattedStrings])
+
+-- | Map of audits in the LHR.
+--
+-- /See:/ 'lighthouseResultV5Audits' smart constructor.
+newtype LighthouseResultV5Audits = LighthouseResultV5Audits'
+    { _lrvaAddtional :: HashMap Text LighthouseAuditResultV5
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LighthouseResultV5Audits' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lrvaAddtional'
+lighthouseResultV5Audits
+    :: HashMap Text LighthouseAuditResultV5 -- ^ 'lrvaAddtional'
+    -> LighthouseResultV5Audits
+lighthouseResultV5Audits pLrvaAddtional_ =
+    LighthouseResultV5Audits'
+    { _lrvaAddtional = _Coerce # pLrvaAddtional_
+    }
+
+-- | An audit that was performed in this run. Keyed by audit id.
+lrvaAddtional :: Lens' LighthouseResultV5Audits (HashMap Text LighthouseAuditResultV5)
+lrvaAddtional
+  = lens _lrvaAddtional
+      (\ s a -> s{_lrvaAddtional = a})
+      . _Coerce
+
+instance FromJSON LighthouseResultV5Audits where
+        parseJSON
+          = withObject "LighthouseResultV5Audits"
+              (\ o ->
+                 LighthouseResultV5Audits' <$> (parseJSONObject o))
+
+instance ToJSON LighthouseResultV5Audits where
+        toJSON = toJSON . _lrvaAddtional

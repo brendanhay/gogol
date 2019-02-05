@@ -215,6 +215,7 @@ ewCalendarId
 -- The default is not to filter by end time. Must be an RFC3339 timestamp
 -- with mandatory time zone offset, e.g., 2011-06-03T10:00:00-07:00,
 -- 2011-06-03T10:00:00Z. Milliseconds may be provided but will be ignored.
+-- If timeMax is set, timeMin must be smaller than timeMax.
 ewTimeMin :: Lens' EventsWatch (Maybe UTCTime)
 ewTimeMin
   = lens _ewTimeMin (\ s a -> s{_ewTimeMin = a}) .
@@ -317,9 +318,12 @@ ewShowHiddenInvitations
   = lens _ewShowHiddenInvitations
       (\ s a -> s{_ewShowHiddenInvitations = a})
 
--- | Maximum number of events returned on one result page. By default the
--- value is 250 events. The page size can never be larger than 2500 events.
--- Optional.
+-- | Maximum number of events returned on one result page. The number of
+-- events in the resulting page may be less than this value, or none at
+-- all, even if there are more events matching the query. Incomplete pages
+-- can be detected by a non-empty nextPageToken field in the response. By
+-- default the value is 250 events. The page size can never be larger than
+-- 2500 events. Optional.
 ewMaxResults :: Lens' EventsWatch Int32
 ewMaxResults
   = lens _ewMaxResults (\ s a -> s{_ewMaxResults = a})
@@ -340,7 +344,8 @@ ewAlwaysIncludeEmail
 -- Optional. The default is not to filter by start time. Must be an RFC3339
 -- timestamp with mandatory time zone offset, e.g.,
 -- 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be
--- provided but will be ignored.
+-- provided but will be ignored. If timeMin is set, timeMax must be greater
+-- than timeMin.
 ewTimeMax :: Lens' EventsWatch (Maybe UTCTime)
 ewTimeMax
   = lens _ewTimeMax (\ s a -> s{_ewTimeMax = a}) .
@@ -350,6 +355,8 @@ instance GoogleRequest EventsWatch where
         type Rs EventsWatch = Channel
         type Scopes EventsWatch =
              '["https://www.googleapis.com/auth/calendar",
+               "https://www.googleapis.com/auth/calendar.events",
+               "https://www.googleapis.com/auth/calendar.events.readonly",
                "https://www.googleapis.com/auth/calendar.readonly"]
         requestClient EventsWatch'{..}
           = go _ewCalendarId _ewSyncToken _ewTimeMin _ewOrderBy

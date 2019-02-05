@@ -35,6 +35,7 @@ module Network.Google.Resource.Storage.Buckets.Delete
     -- * Request Lenses
     , bdIfMetagenerationMatch
     , bdBucket
+    , bdUserProject
     , bdIfMetagenerationNotMatch
     ) where
 
@@ -49,8 +50,9 @@ type BucketsDeleteResource =
          "b" :>
            Capture "bucket" Text :>
              QueryParam "ifMetagenerationMatch" (Textual Int64) :>
-               QueryParam "ifMetagenerationNotMatch" (Textual Int64)
-                 :> QueryParam "alt" AltJSON :> Delete '[JSON] ()
+               QueryParam "userProject" Text :>
+                 QueryParam "ifMetagenerationNotMatch" (Textual Int64)
+                   :> QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Permanently deletes an empty bucket.
 --
@@ -58,6 +60,7 @@ type BucketsDeleteResource =
 data BucketsDelete = BucketsDelete'
     { _bdIfMetagenerationMatch    :: !(Maybe (Textual Int64))
     , _bdBucket                   :: !Text
+    , _bdUserProject              :: !(Maybe Text)
     , _bdIfMetagenerationNotMatch :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -69,6 +72,8 @@ data BucketsDelete = BucketsDelete'
 --
 -- * 'bdBucket'
 --
+-- * 'bdUserProject'
+--
 -- * 'bdIfMetagenerationNotMatch'
 bucketsDelete
     :: Text -- ^ 'bdBucket'
@@ -77,6 +82,7 @@ bucketsDelete pBdBucket_ =
     BucketsDelete'
     { _bdIfMetagenerationMatch = Nothing
     , _bdBucket = pBdBucket_
+    , _bdUserProject = Nothing
     , _bdIfMetagenerationNotMatch = Nothing
     }
 
@@ -91,6 +97,13 @@ bdIfMetagenerationMatch
 -- | Name of a bucket.
 bdBucket :: Lens' BucketsDelete Text
 bdBucket = lens _bdBucket (\ s a -> s{_bdBucket = a})
+
+-- | The project to be billed for this request. Required for Requester Pays
+-- buckets.
+bdUserProject :: Lens' BucketsDelete (Maybe Text)
+bdUserProject
+  = lens _bdUserProject
+      (\ s a -> s{_bdUserProject = a})
 
 -- | If set, only deletes the bucket if its metageneration does not match
 -- this value.
@@ -108,6 +121,7 @@ instance GoogleRequest BucketsDelete where
                "https://www.googleapis.com/auth/devstorage.read_write"]
         requestClient BucketsDelete'{..}
           = go _bdBucket _bdIfMetagenerationMatch
+              _bdUserProject
               _bdIfMetagenerationNotMatch
               (Just AltJSON)
               storageService

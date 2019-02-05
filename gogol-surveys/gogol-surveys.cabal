@@ -1,0 +1,55 @@
+name:                  gogol-surveys
+version:               0.4.0
+synopsis:              Google Surveys SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               OtherLicense
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
+copyright:             Copyright (c) 2015-2016 Brendan Hay
+category:              Network, Google, Cloud
+build-type:            Simple
+cabal-version:         >= 1.10
+extra-source-files:    README.md src/.gitkeep
+
+description:
+    Creates and conducts surveys, lists the surveys that an authenticated
+    user owns, and retrieves survey results and information about specified
+    surveys.
+    .
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
+    .
+    This library is compatible with version @v2@
+    of the API.
+
+source-repository head
+    type:     git
+    location: git://github.com/brendanhay/gogol.git
+
+library
+    default-language:  Haskell2010
+    hs-source-dirs:    src gen
+
+    ghc-options:       -Wall
+
+    exposed-modules:
+          Network.Google.Resource.Surveys.Results.Get
+        , Network.Google.Resource.Surveys.Surveys.Delete
+        , Network.Google.Resource.Surveys.Surveys.Get
+        , Network.Google.Resource.Surveys.Surveys.Insert
+        , Network.Google.Resource.Surveys.Surveys.List
+        , Network.Google.Resource.Surveys.Surveys.Start
+        , Network.Google.Resource.Surveys.Surveys.Stop
+        , Network.Google.Resource.Surveys.Surveys.Update
+        , Network.Google.Surveys
+        , Network.Google.Surveys.Types
+
+    other-modules:
+          Network.Google.Surveys.Types.Product
+        , Network.Google.Surveys.Types.Sum
+
+    build-depends:
+          gogol-core == 0.4.0.*
+        , base       >= 4.7 && < 5

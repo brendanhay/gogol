@@ -104,9 +104,6 @@ module Network.Google.YouTube
     -- ** youtube.comments.update
     , module Network.Google.Resource.YouTube.Comments.Update
 
-    -- ** youtube.fanFundingEvents.list
-    , module Network.Google.Resource.YouTube.FanFundingEvents.List
-
     -- ** youtube.guideCategories.list
     , module Network.Google.Resource.YouTube.GuideCategories.List
 
@@ -211,6 +208,9 @@ module Network.Google.YouTube
 
     -- ** youtube.subscriptions.list
     , module Network.Google.Resource.YouTube.Subscriptions.List
+
+    -- ** youtube.superChatEvents.list
+    , module Network.Google.Resource.YouTube.SuperChatEvents.List
 
     -- ** youtube.thumbnails.set
     , module Network.Google.Resource.YouTube.Thumbnails.Set
@@ -456,11 +456,6 @@ module Network.Google.YouTube
     -- ** LiveBroadcastStatusPrivacyStatus
     , LiveBroadcastStatusPrivacyStatus (..)
 
-    -- ** LiveBroadcastTopicDetails
-    , LiveBroadcastTopicDetails
-    , liveBroadcastTopicDetails
-    , lbtdTopics
-
     -- ** PlayListStatus
     , PlayListStatus
     , playListStatus
@@ -510,6 +505,18 @@ module Network.Google.YouTube
     , cpfdDisplayName
     , cpfdChannelURL
 
+    -- ** SuperChatEventListResponse
+    , SuperChatEventListResponse
+    , superChatEventListResponse
+    , scelrEtag
+    , scelrTokenPagination
+    , scelrNextPageToken
+    , scelrPageInfo
+    , scelrKind
+    , scelrItems
+    , scelrVisitorId
+    , scelrEventId
+
     -- ** VideoAbuseReportReasonListResponse
     , VideoAbuseReportReasonListResponse
     , videoAbuseReportReasonListResponse
@@ -537,14 +544,18 @@ module Network.Google.YouTube
     , liveBroadcastContentDetails
     , lbcdEnableContentEncryption
     , lbcdEnableLowLatency
+    , lbcdLatencyPreference
     , lbcdClosedCaptionsType
     , lbcdEnableEmbed
     , lbcdStartWithSlate
     , lbcdProjection
     , lbcdMonitorStream
+    , lbcdStereoLayout
     , lbcdBoundStreamId
     , lbcdRecordFromStart
+    , lbcdMesh
     , lbcdEnableClosedCaptions
+    , lbcdEnableAutoStart
     , lbcdBoundStreamLastUpdateTimeMs
     , lbcdEnableDvr
 
@@ -597,6 +608,7 @@ module Network.Google.YouTube
     , VideoContentDetails
     , videoContentDetails
     , vcdCountryRestriction
+    , vcdHasCustomThumbnail
     , vcdDefinition
     , vcdDimension
     , vcdCaption
@@ -640,6 +652,7 @@ module Network.Google.YouTube
     , videoTopicDetails
     , vtdTopicIds
     , vtdRelevantTopicIds
+    , vtdTopicCategories
 
     -- ** ActivityContentDetailsComment
     , ActivityContentDetailsComment
@@ -719,6 +732,15 @@ module Network.Google.YouTube
     -- ** ContentRatingSmsaRating
     , ContentRatingSmsaRating (..)
 
+    -- ** LiveChatSuperChatDetails
+    , LiveChatSuperChatDetails
+    , liveChatSuperChatDetails
+    , lcscdUserComment
+    , lcscdAmountMicros
+    , lcscdAmountDisplayString
+    , lcscdCurrency
+    , lcscdTier
+
     -- ** PageInfo
     , PageInfo
     , pageInfo
@@ -748,7 +770,6 @@ module Network.Google.YouTube
     , videoFileDetails
     , vfdBitrateBps
     , vfdCreationTime
-    , vfdRecordingLocation
     , vfdDurationMs
     , vfdFileSize
     , vfdFileType
@@ -786,7 +807,6 @@ module Network.Google.YouTube
     , ChannelContentDetails
     , channelContentDetails
     , ccdRelatedPlayLists
-    , ccdGooglePlusUserId
 
     -- ** SearchListVideoDefinition
     , SearchListVideoDefinition (..)
@@ -826,6 +846,9 @@ module Network.Google.YouTube
     , vstsTag
     , vstsCategoryRestricts
 
+    -- ** ContentRatingMpaatRating
+    , ContentRatingMpaatRating (..)
+
     -- ** LiveChatModeratorListResponse
     , LiveChatModeratorListResponse
     , liveChatModeratorListResponse
@@ -855,6 +878,7 @@ module Network.Google.YouTube
     , ChannelTopicDetails
     , channelTopicDetails
     , ctdTopicIds
+    , ctdTopicCategories
 
     -- ** LiveChatBanSnippetType
     , LiveChatBanSnippetType (..)
@@ -868,9 +892,6 @@ module Network.Google.YouTube
     , lcpedPrompt
     , lcpedItems
     , lcpedId
-
-    -- ** LiveBroadcastTopicType
-    , LiveBroadcastTopicType (..)
 
     -- ** VideoCategoryListResponse
     , VideoCategoryListResponse
@@ -927,6 +948,14 @@ module Network.Google.YouTube
 
     -- ** CommentSnippetViewerRating
     , CommentSnippetViewerRating (..)
+
+    -- ** SuperChatEvent
+    , SuperChatEvent
+    , superChatEvent
+    , sceEtag
+    , sceSnippet
+    , sceKind
+    , sceId
 
     -- ** VideoAbuseReportReason
     , VideoAbuseReportReason
@@ -1033,6 +1062,20 @@ module Network.Google.YouTube
     , vgrrVisitorId
     , vgrrEventId
 
+    -- ** SuperChatEventSnippet
+    , SuperChatEventSnippet
+    , superChatEventSnippet
+    , scesDisplayString
+    , scesSupporterDetails
+    , scesCreatedAt
+    , scesAmountMicros
+    , scesMessageType
+    , scesChannelId
+    , scesCommentText
+    , scesNonprofit
+    , scesCurrency
+    , scesIsSuperChatForGood
+
     -- ** VideoAbuseReportReasonSnippet
     , VideoAbuseReportReasonSnippet
     , videoAbuseReportReasonSnippet
@@ -1118,6 +1161,7 @@ module Network.Google.YouTube
     , lcmsTextMessageDetails
     , lcmsPollClosedDetails
     , lcmsMessageRetractedDetails
+    , lcmsSuperChatDetails
     , lcmsPollEditedDetails
     , lcmsType
     , lcmsAuthorChannelId
@@ -1186,6 +1230,9 @@ module Network.Google.YouTube
     , acdLike
     , acdRecommendation
 
+    -- ** LiveBroadcastContentDetailsLatencyPreference
+    , LiveBroadcastContentDetailsLatencyPreference (..)
+
     -- ** VideoCategory
     , VideoCategory
     , videoCategory
@@ -1243,13 +1290,18 @@ module Network.Google.YouTube
     , lbEtag
     , lbSnippet
     , lbKind
-    , lbTopicDetails
     , lbContentDetails
     , lbId
     , lbStatistics
 
     -- ** ChannelStatusLongUploadsStatus
     , ChannelStatusLongUploadsStatus (..)
+
+    -- ** Nonprofit
+    , Nonprofit
+    , nonprofit
+    , nNonprofitId
+    , nNonprofitLegalName
 
     -- ** LiveChatModerator
     , LiveChatModerator
@@ -1305,14 +1357,6 @@ module Network.Google.YouTube
     , vsTags
     , vsDefaultLanguage
 
-    -- ** FanFundingEvent
-    , FanFundingEvent
-    , fanFundingEvent
-    , ffeEtag
-    , ffeSnippet
-    , ffeKind
-    , ffeId
-
     -- ** CommentThreadsListModerationStatus
     , CommentThreadsListModerationStatus (..)
 
@@ -1346,7 +1390,6 @@ module Network.Google.YouTube
     , sEtag
     , sSnippet
     , sKind
-    , sId
 
     -- ** LiveChatMessageDeletedDetails
     , LiveChatMessageDeletedDetails
@@ -1383,6 +1426,11 @@ module Network.Google.YouTube
     , csFormat
     , csResolution
     , csIngestionType
+
+    -- ** NonprofitId
+    , NonprofitId
+    , nonprofitId
+    , niValue
 
     -- ** VideoContentDetailsCaption
     , VideoContentDetailsCaption (..)
@@ -1547,6 +1595,9 @@ module Network.Google.YouTube
     -- ** ContentRatingGrfilmRating
     , ContentRatingGrfilmRating (..)
 
+    -- ** LiveBroadcastContentDetailsStereoLayout
+    , LiveBroadcastContentDetailsStereoLayout (..)
+
     -- ** CommentThreadsListOrder
     , CommentThreadsListOrder (..)
 
@@ -1608,6 +1659,8 @@ module Network.Google.YouTube
     -- ** VideoPlayer
     , VideoPlayer
     , videoPlayer
+    , vpEmbedHeight
+    , vpEmbedWidth
     , vpEmbedHTML
 
     -- ** PromotedItemId
@@ -1704,12 +1757,6 @@ module Network.Google.YouTube
     -- ** SearchListVideoDimension
     , SearchListVideoDimension (..)
 
-    -- ** LiveBroadcastTopicSnippet
-    , LiveBroadcastTopicSnippet
-    , liveBroadcastTopicSnippet
-    , lbtsName
-    , lbtsReleaseDate
-
     -- ** ContentRatingNkclvRating
     , ContentRatingNkclvRating (..)
 
@@ -1792,18 +1839,6 @@ module Network.Google.YouTube
     , ctReplies
     , ctId
 
-    -- ** FanFundingEventListResponse
-    , FanFundingEventListResponse
-    , fanFundingEventListResponse
-    , ffelrEtag
-    , ffelrTokenPagination
-    , ffelrNextPageToken
-    , ffelrPageInfo
-    , ffelrKind
-    , ffelrItems
-    , ffelrVisitorId
-    , ffelrEventId
-
     -- ** PlayListLocalization
     , PlayListLocalization
     , playListLocalization
@@ -1830,13 +1865,6 @@ module Network.Google.YouTube
     , scdActivityType
     , scdTotalItemCount
     , scdNewItemCount
-
-    -- ** LiveBroadcastTopic
-    , LiveBroadcastTopic
-    , liveBroadcastTopic
-    , lbtSnippet
-    , lbtUnmatched
-    , lbtType
 
     -- ** ContentRatingCsaRating
     , ContentRatingCsaRating (..)
@@ -1867,6 +1895,7 @@ module Network.Google.YouTube
     , playListItemContentDetails
     , plicdStartAt
     , plicdNote
+    , plicdVideoPublishedAt
     , plicdVideoId
     , plicdEndAt
 
@@ -1894,6 +1923,9 @@ module Network.Google.YouTube
 
     -- ** SearchListVideoEmbeddable
     , SearchListVideoEmbeddable (..)
+
+    -- ** ContentRatingMcstRating
+    , ContentRatingMcstRating (..)
 
     -- ** LanguageTag
     , LanguageTag
@@ -1937,6 +1969,9 @@ module Network.Google.YouTube
     , pliKind
     , pliContentDetails
     , pliId
+
+    -- ** ContentRatingMenaMpaaRating
+    , ContentRatingMenaMpaaRating (..)
 
     -- ** ActivityContentDetailsRecommendationReason
     , ActivityContentDetailsRecommendationReason (..)
@@ -2064,7 +2099,6 @@ module Network.Google.YouTube
     , cUpdatedAt
     , cAuthorChannelId
     , cCanRate
-    , cAuthorGoogleplusProFileURL
     , cParentId
 
     -- ** LiveStreamStatus
@@ -2131,6 +2165,7 @@ module Network.Google.YouTube
     , crSmsaRating
     , crChvrsRating
     , crIncaaRating
+    , crMcstRating
     , crNfrcRating
     , crCsaRating
     , crMocRating
@@ -2154,6 +2189,7 @@ module Network.Google.YouTube
     , crRtcRating
     , crYtRating
     , crBbfcRating
+    , crMenaMpaaRating
     , crKijkwijzerRating
     , crMtrcbRating
     , crFcoRating
@@ -2171,6 +2207,7 @@ module Network.Google.YouTube
     , crFpbRating
     , crLsfRating
     , crBfvcRating
+    , crMpaatRating
     , crEcbmctRating
     , crCNCRating
     , crSkfilmRating
@@ -2240,17 +2277,6 @@ module Network.Google.YouTube
     , vlsdActualStartTime
     , vlsdActiveLiveChatId
 
-    -- ** FanFundingEventSnippet
-    , FanFundingEventSnippet
-    , fanFundingEventSnippet
-    , ffesDisplayString
-    , ffesSupporterDetails
-    , ffesCreatedAt
-    , ffesAmountMicros
-    , ffesChannelId
-    , ffesCommentText
-    , ffesCurrency
-
     -- ** ContentRatingMdaRating
     , ContentRatingMdaRating (..)
 
@@ -2274,6 +2300,7 @@ module Network.Google.YouTube
     -- ** SponsorSnippet
     , SponsorSnippet
     , sponsorSnippet
+    , sCumulativeDurationMonths
     , sChannelId
     , sSponsorDetails
     , sSponsorSince
@@ -2353,7 +2380,6 @@ import           Network.Google.Resource.YouTube.Comments.Update
 import           Network.Google.Resource.YouTube.CommentThreads.Insert
 import           Network.Google.Resource.YouTube.CommentThreads.List
 import           Network.Google.Resource.YouTube.CommentThreads.Update
-import           Network.Google.Resource.YouTube.FanFundingEvents.List
 import           Network.Google.Resource.YouTube.GuideCategories.List
 import           Network.Google.Resource.YouTube.I18nLanguages.List
 import           Network.Google.Resource.YouTube.I18nRegions.List
@@ -2389,6 +2415,7 @@ import           Network.Google.Resource.YouTube.Sponsors.List
 import           Network.Google.Resource.YouTube.Subscriptions.Delete
 import           Network.Google.Resource.YouTube.Subscriptions.Insert
 import           Network.Google.Resource.YouTube.Subscriptions.List
+import           Network.Google.Resource.YouTube.SuperChatEvents.List
 import           Network.Google.Resource.YouTube.Thumbnails.Set
 import           Network.Google.Resource.YouTube.VideoAbuseReportReasons.List
 import           Network.Google.Resource.YouTube.VideoCategories.List
@@ -2412,7 +2439,6 @@ type YouTubeAPI =
      ChannelBannersInsertResource :<|>
        GuideCategoriesListResource
        :<|> SponsorsListResource
-       :<|> FanFundingEventsListResource
        :<|> I18nLanguagesListResource
        :<|> LiveBroadcastsControlResource
        :<|> LiveBroadcastsTransitionResource
@@ -2438,6 +2464,7 @@ type YouTubeAPI =
        :<|> CaptionsUpdateResource
        :<|> I18nRegionsListResource
        :<|> VideoAbuseReportReasonsListResource
+       :<|> SuperChatEventsListResource
        :<|> LiveChatMessagesInsertResource
        :<|> LiveChatMessagesListResource
        :<|> LiveChatMessagesDeleteResource

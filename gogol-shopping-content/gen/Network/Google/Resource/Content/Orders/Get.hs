@@ -44,7 +44,7 @@ import           Network.Google.ShoppingContent.Types
 -- 'OrdersGet' request conforms to.
 type OrdersGetResource =
      "content" :>
-       "v2" :>
+       "v2.1" :>
          Capture "merchantId" (Textual Word64) :>
            "orders" :>
              Capture "orderId" Text :>
@@ -75,7 +75,8 @@ ordersGet pOgMerchantId_ pOgOrderId_ =
     , _ogOrderId = pOgOrderId_
     }
 
--- | The ID of the managing account.
+-- | The ID of the account that manages the order. This cannot be a
+-- multi-client account.
 ogMerchantId :: Lens' OrdersGet Word64
 ogMerchantId
   = lens _ogMerchantId (\ s a -> s{_ogMerchantId = a})

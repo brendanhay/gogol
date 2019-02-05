@@ -20,8 +20,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Adds or updates a per-user managed configuration for an app for the
--- specified user.
+-- Adds or updates the managed configuration settings for an app for the
+-- specified user. If you support the Managed configurations iframe, you
+-- can apply managed configurations to a user by specifying an mcmId and
+-- its associated configuration variables (if any) in the request.
+-- Alternatively, all EMMs can apply managed configurations by passing a
+-- list of managed properties.
 --
 -- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.managedconfigurationsforuser.update@.
 module Network.Google.Resource.AndroidEnterprise.ManagedConfigurationsforUser.Update
@@ -58,8 +62,12 @@ type ManagedConfigurationsforUserUpdateResource =
                        ReqBody '[JSON] ManagedConfiguration :>
                          Put '[JSON] ManagedConfiguration
 
--- | Adds or updates a per-user managed configuration for an app for the
--- specified user.
+-- | Adds or updates the managed configuration settings for an app for the
+-- specified user. If you support the Managed configurations iframe, you
+-- can apply managed configurations to a user by specifying an mcmId and
+-- its associated configuration variables (if any) in the request.
+-- Alternatively, all EMMs can apply managed configurations by passing a
+-- list of managed properties.
 --
 -- /See:/ 'managedConfigurationsforUserUpdate' smart constructor.
 data ManagedConfigurationsforUserUpdate = ManagedConfigurationsforUserUpdate'

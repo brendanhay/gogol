@@ -34,6 +34,7 @@ module Network.Google.Resource.Compute.HTTPSHealthChecks.Insert
     , HTTPSHealthChecksInsert
 
     -- * Request Lenses
+    , hhciRequestId
     , hhciProject
     , hhciPayload
     ) where
@@ -50,22 +51,26 @@ type HTTPSHealthChecksInsertResource =
            Capture "project" Text :>
              "global" :>
                "httpsHealthChecks" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] HTTPSHealthCheck :>
-                     Post '[JSON] Operation
+                 QueryParam "requestId" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] HTTPSHealthCheck :>
+                       Post '[JSON] Operation
 
 -- | Creates a HttpsHealthCheck resource in the specified project using the
 -- data included in the request.
 --
 -- /See:/ 'httpsHealthChecksInsert' smart constructor.
 data HTTPSHealthChecksInsert = HTTPSHealthChecksInsert'
-    { _hhciProject :: !Text
-    , _hhciPayload :: !HTTPSHealthCheck
+    { _hhciRequestId :: !(Maybe Text)
+    , _hhciProject   :: !Text
+    , _hhciPayload   :: !HTTPSHealthCheck
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HTTPSHealthChecksInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'hhciRequestId'
 --
 -- * 'hhciProject'
 --
@@ -76,9 +81,25 @@ httpsHealthChecksInsert
     -> HTTPSHealthChecksInsert
 httpsHealthChecksInsert pHhciProject_ pHhciPayload_ =
     HTTPSHealthChecksInsert'
-    { _hhciProject = pHhciProject_
+    { _hhciRequestId = Nothing
+    , _hhciProject = pHhciProject_
     , _hhciPayload = pHhciPayload_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+hhciRequestId :: Lens' HTTPSHealthChecksInsert (Maybe Text)
+hhciRequestId
+  = lens _hhciRequestId
+      (\ s a -> s{_hhciRequestId = a})
 
 -- | Project ID for this request.
 hhciProject :: Lens' HTTPSHealthChecksInsert Text
@@ -96,7 +117,8 @@ instance GoogleRequest HTTPSHealthChecksInsert where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient HTTPSHealthChecksInsert'{..}
-          = go _hhciProject (Just AltJSON) _hhciPayload
+          = go _hhciProject _hhciRequestId (Just AltJSON)
+              _hhciPayload
               computeService
           where go
                   = buildClient

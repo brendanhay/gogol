@@ -37,10 +37,8 @@ module Network.Google.Resource.YouTubeReporting.Media.Download
     , mdXgafv
     , mdUploadProtocol
     , mdResourceName
-    , mdPp
     , mdAccessToken
     , mdUploadType
-    , mdBearerToken
     , mdCallback
     ) where
 
@@ -53,40 +51,34 @@ type MediaDownloadResource =
      "v1" :>
        "media" :>
          Capture "resourceName" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] Media
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] GDataMedia
        :<|>
        "v1" :>
          "media" :>
            Capture "resourceName" Text :>
-             QueryParam "$.xgafv" Text :>
+             QueryParam "$.xgafv" Xgafv :>
                QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "callback" Text :>
-                           QueryParam "alt" AltMedia :>
-                             Get '[OctetStream] Stream
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltMedia :>
+                         Get '[OctetStream] Stream
 
 -- | Method for media download. Download is supported on the URI
 -- \`\/v1\/media\/{+name}?alt=media\`.
 --
 -- /See:/ 'mediaDownload' smart constructor.
 data MediaDownload' = MediaDownload''
-    { _mdXgafv          :: !(Maybe Text)
+    { _mdXgafv          :: !(Maybe Xgafv)
     , _mdUploadProtocol :: !(Maybe Text)
     , _mdResourceName   :: !Text
-    , _mdPp             :: !Bool
     , _mdAccessToken    :: !(Maybe Text)
     , _mdUploadType     :: !(Maybe Text)
-    , _mdBearerToken    :: !(Maybe Text)
     , _mdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -100,13 +92,9 @@ data MediaDownload' = MediaDownload''
 --
 -- * 'mdResourceName'
 --
--- * 'mdPp'
---
 -- * 'mdAccessToken'
 --
 -- * 'mdUploadType'
---
--- * 'mdBearerToken'
 --
 -- * 'mdCallback'
 mediaDownload
@@ -117,15 +105,13 @@ mediaDownload pMdResourceName_ =
     { _mdXgafv = Nothing
     , _mdUploadProtocol = Nothing
     , _mdResourceName = pMdResourceName_
-    , _mdPp = True
     , _mdAccessToken = Nothing
     , _mdUploadType = Nothing
-    , _mdBearerToken = Nothing
     , _mdCallback = Nothing
     }
 
 -- | V1 error format.
-mdXgafv :: Lens' MediaDownload' (Maybe Text)
+mdXgafv :: Lens' MediaDownload' (Maybe Xgafv)
 mdXgafv = lens _mdXgafv (\ s a -> s{_mdXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -134,16 +120,11 @@ mdUploadProtocol
   = lens _mdUploadProtocol
       (\ s a -> s{_mdUploadProtocol = a})
 
--- | Name of the media that is being downloaded. See
--- ReadRequest.resource_name.
+-- | Name of the media that is being downloaded.
 mdResourceName :: Lens' MediaDownload' Text
 mdResourceName
   = lens _mdResourceName
       (\ s a -> s{_mdResourceName = a})
-
--- | Pretty-print response.
-mdPp :: Lens' MediaDownload' Bool
-mdPp = lens _mdPp (\ s a -> s{_mdPp = a})
 
 -- | OAuth access token.
 mdAccessToken :: Lens' MediaDownload' (Maybe Text)
@@ -156,28 +137,20 @@ mdUploadType :: Lens' MediaDownload' (Maybe Text)
 mdUploadType
   = lens _mdUploadType (\ s a -> s{_mdUploadType = a})
 
--- | OAuth bearer token.
-mdBearerToken :: Lens' MediaDownload' (Maybe Text)
-mdBearerToken
-  = lens _mdBearerToken
-      (\ s a -> s{_mdBearerToken = a})
-
 -- | JSONP
 mdCallback :: Lens' MediaDownload' (Maybe Text)
 mdCallback
   = lens _mdCallback (\ s a -> s{_mdCallback = a})
 
 instance GoogleRequest MediaDownload' where
-        type Rs MediaDownload' = Media
+        type Rs MediaDownload' = GDataMedia
         type Scopes MediaDownload' =
              '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
                "https://www.googleapis.com/auth/yt-analytics.readonly"]
         requestClient MediaDownload''{..}
           = go _mdResourceName _mdXgafv _mdUploadProtocol
-              (Just _mdPp)
               _mdAccessToken
               _mdUploadType
-              _mdBearerToken
               _mdCallback
               (Just AltJSON)
               youTubeReportingService
@@ -192,10 +165,8 @@ instance GoogleRequest (MediaDownload MediaDownload')
              Scopes MediaDownload'
         requestClient (MediaDownload MediaDownload''{..})
           = go _mdResourceName _mdXgafv _mdUploadProtocol
-              (Just _mdPp)
               _mdAccessToken
               _mdUploadType
-              _mdBearerToken
               _mdCallback
               (Just AltMedia)
               youTubeReportingService

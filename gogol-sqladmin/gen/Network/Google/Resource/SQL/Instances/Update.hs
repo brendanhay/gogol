@@ -24,7 +24,7 @@
 -- update, so you must include values for all the settings that you want to
 -- retain. For partial updates, use patch.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.instances.update@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.instances.update@.
 module Network.Google.Resource.SQL.Instances.Update
     (
     -- * REST Resource

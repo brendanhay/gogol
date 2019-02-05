@@ -34,6 +34,7 @@ module Network.Google.Resource.Compute.Networks.Insert
     , NetworksInsert
 
     -- * Request Lenses
+    , niRequestId
     , niProject
     , niPayload
     ) where
@@ -50,21 +51,25 @@ type NetworksInsertResource =
            Capture "project" Text :>
              "global" :>
                "networks" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] Network :> Post '[JSON] Operation
+                 QueryParam "requestId" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Network :> Post '[JSON] Operation
 
 -- | Creates a network in the specified project using the data included in
 -- the request.
 --
 -- /See:/ 'networksInsert' smart constructor.
 data NetworksInsert = NetworksInsert'
-    { _niProject :: !Text
-    , _niPayload :: !Network
+    { _niRequestId :: !(Maybe Text)
+    , _niProject   :: !Text
+    , _niPayload   :: !Network
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NetworksInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'niRequestId'
 --
 -- * 'niProject'
 --
@@ -75,9 +80,24 @@ networksInsert
     -> NetworksInsert
 networksInsert pNiProject_ pNiPayload_ =
     NetworksInsert'
-    { _niProject = pNiProject_
+    { _niRequestId = Nothing
+    , _niProject = pNiProject_
     , _niPayload = pNiPayload_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+niRequestId :: Lens' NetworksInsert (Maybe Text)
+niRequestId
+  = lens _niRequestId (\ s a -> s{_niRequestId = a})
 
 -- | Project ID for this request.
 niProject :: Lens' NetworksInsert Text
@@ -95,7 +115,8 @@ instance GoogleRequest NetworksInsert where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient NetworksInsert'{..}
-          = go _niProject (Just AltJSON) _niPayload
+          = go _niProject _niRequestId (Just AltJSON)
+              _niPayload
               computeService
           where go
                   = buildClient (Proxy :: Proxy NetworksInsertResource)

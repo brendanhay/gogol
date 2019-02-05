@@ -22,7 +22,7 @@
 --
 -- Gets the details of a specific cluster.
 --
--- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @container.projects.zones.clusters.get@.
+-- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.zones.clusters.get@.
 module Network.Google.Resource.Container.Projects.Zones.Clusters.Get
     (
     -- * REST Resource
@@ -35,11 +35,10 @@ module Network.Google.Resource.Container.Projects.Zones.Clusters.Get
     -- * Request Lenses
     , pzcgXgafv
     , pzcgUploadProtocol
-    , pzcgPp
     , pzcgAccessToken
     , pzcgUploadType
     , pzcgZone
-    , pzcgBearerToken
+    , pzcgName
     , pzcgClusterId
     , pzcgProjectId
     , pzcgCallback
@@ -58,26 +57,24 @@ type ProjectsZonesClustersGetResource =
              Capture "zone" Text :>
                "clusters" :>
                  Capture "clusterId" Text :>
-                   QueryParam "$.xgafv" Text :>
+                   QueryParam "$.xgafv" Xgafv :>
                      QueryParam "upload_protocol" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "access_token" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "bearer_token" Text :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" AltJSON :> Get '[JSON] Cluster
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "name" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :> Get '[JSON] Cluster
 
 -- | Gets the details of a specific cluster.
 --
 -- /See:/ 'projectsZonesClustersGet' smart constructor.
 data ProjectsZonesClustersGet = ProjectsZonesClustersGet'
-    { _pzcgXgafv          :: !(Maybe Text)
+    { _pzcgXgafv          :: !(Maybe Xgafv)
     , _pzcgUploadProtocol :: !(Maybe Text)
-    , _pzcgPp             :: !Bool
     , _pzcgAccessToken    :: !(Maybe Text)
     , _pzcgUploadType     :: !(Maybe Text)
     , _pzcgZone           :: !Text
-    , _pzcgBearerToken    :: !(Maybe Text)
+    , _pzcgName           :: !(Maybe Text)
     , _pzcgClusterId      :: !Text
     , _pzcgProjectId      :: !Text
     , _pzcgCallback       :: !(Maybe Text)
@@ -91,15 +88,13 @@ data ProjectsZonesClustersGet = ProjectsZonesClustersGet'
 --
 -- * 'pzcgUploadProtocol'
 --
--- * 'pzcgPp'
---
 -- * 'pzcgAccessToken'
 --
 -- * 'pzcgUploadType'
 --
 -- * 'pzcgZone'
 --
--- * 'pzcgBearerToken'
+-- * 'pzcgName'
 --
 -- * 'pzcgClusterId'
 --
@@ -115,18 +110,17 @@ projectsZonesClustersGet pPzcgZone_ pPzcgClusterId_ pPzcgProjectId_ =
     ProjectsZonesClustersGet'
     { _pzcgXgafv = Nothing
     , _pzcgUploadProtocol = Nothing
-    , _pzcgPp = True
     , _pzcgAccessToken = Nothing
     , _pzcgUploadType = Nothing
     , _pzcgZone = pPzcgZone_
-    , _pzcgBearerToken = Nothing
+    , _pzcgName = Nothing
     , _pzcgClusterId = pPzcgClusterId_
     , _pzcgProjectId = pPzcgProjectId_
     , _pzcgCallback = Nothing
     }
 
 -- | V1 error format.
-pzcgXgafv :: Lens' ProjectsZonesClustersGet (Maybe Text)
+pzcgXgafv :: Lens' ProjectsZonesClustersGet (Maybe Xgafv)
 pzcgXgafv
   = lens _pzcgXgafv (\ s a -> s{_pzcgXgafv = a})
 
@@ -135,10 +129,6 @@ pzcgUploadProtocol :: Lens' ProjectsZonesClustersGet (Maybe Text)
 pzcgUploadProtocol
   = lens _pzcgUploadProtocol
       (\ s a -> s{_pzcgUploadProtocol = a})
-
--- | Pretty-print response.
-pzcgPp :: Lens' ProjectsZonesClustersGet Bool
-pzcgPp = lens _pzcgPp (\ s a -> s{_pzcgPp = a})
 
 -- | OAuth access token.
 pzcgAccessToken :: Lens' ProjectsZonesClustersGet (Maybe Text)
@@ -152,25 +142,27 @@ pzcgUploadType
   = lens _pzcgUploadType
       (\ s a -> s{_pzcgUploadType = a})
 
--- | The name of the Google Compute Engine
+-- | Deprecated. The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
+-- This field has been deprecated and replaced by the name field.
 pzcgZone :: Lens' ProjectsZonesClustersGet Text
 pzcgZone = lens _pzcgZone (\ s a -> s{_pzcgZone = a})
 
--- | OAuth bearer token.
-pzcgBearerToken :: Lens' ProjectsZonesClustersGet (Maybe Text)
-pzcgBearerToken
-  = lens _pzcgBearerToken
-      (\ s a -> s{_pzcgBearerToken = a})
+-- | The name (project, location, cluster) of the cluster to retrieve.
+-- Specified in the format \'projects\/*\/locations\/*\/clusters\/*\'.
+pzcgName :: Lens' ProjectsZonesClustersGet (Maybe Text)
+pzcgName = lens _pzcgName (\ s a -> s{_pzcgName = a})
 
--- | The name of the cluster to retrieve.
+-- | Deprecated. The name of the cluster to retrieve. This field has been
+-- deprecated and replaced by the name field.
 pzcgClusterId :: Lens' ProjectsZonesClustersGet Text
 pzcgClusterId
   = lens _pzcgClusterId
       (\ s a -> s{_pzcgClusterId = a})
 
--- | The Google Developers Console [project ID or project
--- number](https:\/\/support.google.com\/cloud\/answer\/6158840).
+-- | Deprecated. The Google Developers Console [project ID or project
+-- number](https:\/\/support.google.com\/cloud\/answer\/6158840). This
+-- field has been deprecated and replaced by the name field.
 pzcgProjectId :: Lens' ProjectsZonesClustersGet Text
 pzcgProjectId
   = lens _pzcgProjectId
@@ -189,10 +181,9 @@ instance GoogleRequest ProjectsZonesClustersGet where
           = go _pzcgProjectId _pzcgZone _pzcgClusterId
               _pzcgXgafv
               _pzcgUploadProtocol
-              (Just _pzcgPp)
               _pzcgAccessToken
               _pzcgUploadType
-              _pzcgBearerToken
+              _pzcgName
               _pzcgCallback
               (Just AltJSON)
               containerService

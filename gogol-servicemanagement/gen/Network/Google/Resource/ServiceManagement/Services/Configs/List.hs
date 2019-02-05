@@ -23,7 +23,7 @@
 -- Lists the history of the service configuration for a managed service,
 -- from the newest to the oldest.
 --
--- /See:/ <https://cloud.google.com/service-management/ Google Service Management API Reference> for @servicemanagement.services.configs.list@.
+-- /See:/ <https://cloud.google.com/service-management/ Service Management API Reference> for @servicemanagement.services.configs.list@.
 module Network.Google.Resource.ServiceManagement.Services.Configs.List
     (
     -- * REST Resource
@@ -36,10 +36,8 @@ module Network.Google.Resource.ServiceManagement.Services.Configs.List
     -- * Request Lenses
     , sclXgafv
     , sclUploadProtocol
-    , sclPp
     , sclAccessToken
     , sclUploadType
-    , sclBearerToken
     , sclServiceName
     , sclPageToken
     , sclPageSize
@@ -58,15 +56,13 @@ type ServicesConfigsListResource =
            "configs" :>
              QueryParam "$.xgafv" Xgafv :>
                QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "pageSize" (Textual Int32) :>
-                             QueryParam "callback" Text :>
-                               QueryParam "alt" AltJSON :>
-                                 Get '[JSON] ListServiceConfigsResponse
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "pageSize" (Textual Int32) :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] ListServiceConfigsResponse
 
 -- | Lists the history of the service configuration for a managed service,
 -- from the newest to the oldest.
@@ -75,10 +71,8 @@ type ServicesConfigsListResource =
 data ServicesConfigsList = ServicesConfigsList'
     { _sclXgafv          :: !(Maybe Xgafv)
     , _sclUploadProtocol :: !(Maybe Text)
-    , _sclPp             :: !Bool
     , _sclAccessToken    :: !(Maybe Text)
     , _sclUploadType     :: !(Maybe Text)
-    , _sclBearerToken    :: !(Maybe Text)
     , _sclServiceName    :: !Text
     , _sclPageToken      :: !(Maybe Text)
     , _sclPageSize       :: !(Maybe (Textual Int32))
@@ -93,13 +87,9 @@ data ServicesConfigsList = ServicesConfigsList'
 --
 -- * 'sclUploadProtocol'
 --
--- * 'sclPp'
---
 -- * 'sclAccessToken'
 --
 -- * 'sclUploadType'
---
--- * 'sclBearerToken'
 --
 -- * 'sclServiceName'
 --
@@ -115,10 +105,8 @@ servicesConfigsList pSclServiceName_ =
     ServicesConfigsList'
     { _sclXgafv = Nothing
     , _sclUploadProtocol = Nothing
-    , _sclPp = True
     , _sclAccessToken = Nothing
     , _sclUploadType = Nothing
-    , _sclBearerToken = Nothing
     , _sclServiceName = pSclServiceName_
     , _sclPageToken = Nothing
     , _sclPageSize = Nothing
@@ -135,10 +123,6 @@ sclUploadProtocol
   = lens _sclUploadProtocol
       (\ s a -> s{_sclUploadProtocol = a})
 
--- | Pretty-print response.
-sclPp :: Lens' ServicesConfigsList Bool
-sclPp = lens _sclPp (\ s a -> s{_sclPp = a})
-
 -- | OAuth access token.
 sclAccessToken :: Lens' ServicesConfigsList (Maybe Text)
 sclAccessToken
@@ -150,12 +134,6 @@ sclUploadType :: Lens' ServicesConfigsList (Maybe Text)
 sclUploadType
   = lens _sclUploadType
       (\ s a -> s{_sclUploadType = a})
-
--- | OAuth bearer token.
-sclBearerToken :: Lens' ServicesConfigsList (Maybe Text)
-sclBearerToken
-  = lens _sclBearerToken
-      (\ s a -> s{_sclBearerToken = a})
 
 -- | The name of the service. See the
 -- [overview](\/service-management\/overview) for naming requirements. For
@@ -191,10 +169,8 @@ instance GoogleRequest ServicesConfigsList where
                "https://www.googleapis.com/auth/service.management.readonly"]
         requestClient ServicesConfigsList'{..}
           = go _sclServiceName _sclXgafv _sclUploadProtocol
-              (Just _sclPp)
               _sclAccessToken
               _sclUploadType
-              _sclBearerToken
               _sclPageToken
               _sclPageSize
               _sclCallback

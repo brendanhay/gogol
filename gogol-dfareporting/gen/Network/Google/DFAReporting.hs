@@ -106,6 +106,21 @@ module Network.Google.DFAReporting
     -- ** dfareporting.advertiserGroups.update
     , module Network.Google.Resource.DFAReporting.AdvertiserGroups.Update
 
+    -- ** dfareporting.advertiserLandingPages.get
+    , module Network.Google.Resource.DFAReporting.AdvertiserLandingPages.Get
+
+    -- ** dfareporting.advertiserLandingPages.insert
+    , module Network.Google.Resource.DFAReporting.AdvertiserLandingPages.Insert
+
+    -- ** dfareporting.advertiserLandingPages.list
+    , module Network.Google.Resource.DFAReporting.AdvertiserLandingPages.List
+
+    -- ** dfareporting.advertiserLandingPages.patch
+    , module Network.Google.Resource.DFAReporting.AdvertiserLandingPages.Patch
+
+    -- ** dfareporting.advertiserLandingPages.update
+    , module Network.Google.Resource.DFAReporting.AdvertiserLandingPages.Update
+
     -- ** dfareporting.advertisers.get
     , module Network.Google.Resource.DFAReporting.Advertisers.Get
 
@@ -180,6 +195,9 @@ module Network.Google.DFAReporting
 
     -- ** dfareporting.conversions.batchinsert
     , module Network.Google.Resource.DFAReporting.Conversions.Batchinsert
+
+    -- ** dfareporting.conversions.batchupdate
+    , module Network.Google.Resource.DFAReporting.Conversions.Batchupdate
 
     -- ** dfareporting.countries.get
     , module Network.Google.Resource.DFAReporting.Countries.Get
@@ -361,29 +379,17 @@ module Network.Google.DFAReporting
     -- ** dfareporting.inventoryItems.list
     , module Network.Google.Resource.DFAReporting.InventoryItems.List
 
-    -- ** dfareporting.landingPages.delete
-    , module Network.Google.Resource.DFAReporting.LandingPages.Delete
-
-    -- ** dfareporting.landingPages.get
-    , module Network.Google.Resource.DFAReporting.LandingPages.Get
-
-    -- ** dfareporting.landingPages.insert
-    , module Network.Google.Resource.DFAReporting.LandingPages.Insert
-
-    -- ** dfareporting.landingPages.list
-    , module Network.Google.Resource.DFAReporting.LandingPages.List
-
-    -- ** dfareporting.landingPages.patch
-    , module Network.Google.Resource.DFAReporting.LandingPages.Patch
-
-    -- ** dfareporting.landingPages.update
-    , module Network.Google.Resource.DFAReporting.LandingPages.Update
-
     -- ** dfareporting.languages.list
     , module Network.Google.Resource.DFAReporting.Languages.List
 
     -- ** dfareporting.metros.list
     , module Network.Google.Resource.DFAReporting.Metros.List
+
+    -- ** dfareporting.mobileApps.get
+    , module Network.Google.Resource.DFAReporting.MobileApps.Get
+
+    -- ** dfareporting.mobileApps.list
+    , module Network.Google.Resource.DFAReporting.MobileApps.List
 
     -- ** dfareporting.mobileCarriers.get
     , module Network.Google.Resource.DFAReporting.MobileCarriers.Get
@@ -637,7 +643,28 @@ module Network.Google.DFAReporting
     -- ** dfareporting.userRoles.update
     , module Network.Google.Resource.DFAReporting.UserRoles.Update
 
+    -- ** dfareporting.videoFormats.get
+    , module Network.Google.Resource.DFAReporting.VideoFormats.Get
+
+    -- ** dfareporting.videoFormats.list
+    , module Network.Google.Resource.DFAReporting.VideoFormats.List
+
     -- * Types
+
+    -- ** VideoOffSet
+    , VideoOffSet
+    , videoOffSet
+    , vosOffSetPercentage
+    , vosOffSetSeconds
+
+    -- ** DeepLink
+    , DeepLink
+    , deepLink
+    , dlRemarketingListIds
+    , dlKind
+    , dlFallbackURL
+    , dlAppURL
+    , dlMobileApp
 
     -- ** PlacementsListSortOrder
     , PlacementsListSortOrder (..)
@@ -674,13 +701,24 @@ module Network.Google.DFAReporting
     , listPopulationClause
     , lpcTerms
 
+    -- ** AdBlockingConfiguration
+    , AdBlockingConfiguration
+    , adBlockingConfiguration
+    , abcCreativeBundleId
+    , abcOverrideClickThroughURL
+    , abcEnabled
+    , abcClickThroughURL
+
+    -- ** AdvertiserLandingPagesListSortOrder
+    , AdvertiserLandingPagesListSortOrder (..)
+
     -- ** CreativeCustomEvent
     , CreativeCustomEvent
     , creativeCustomEvent
     , cceAdvertiserCustomEventId
     , cceAdvertiserCustomEventType
     , cceAdvertiserCustomEventName
-    , cceExitURL
+    , cceExitClickThroughURL
     , cceTargetType
     , ccePopupWindowProperties
     , cceVideoReportingId
@@ -691,7 +729,7 @@ module Network.Google.DFAReporting
     -- ** ClickTag
     , ClickTag
     , clickTag
-    , ctValue
+    , ctClickThroughURL
     , ctName
     , ctEventName
 
@@ -714,6 +752,15 @@ module Network.Google.DFAReporting
 
     -- ** UserRolesListSortField
     , UserRolesListSortField (..)
+
+    -- ** VideoSettings
+    , VideoSettings
+    , videoSettings
+    , vsKind
+    , vsCompanionSettings
+    , vsTranscodeSettings
+    , vsOrientation
+    , vsSkippableSettings
 
     -- ** ReachReportCompatibleFields
     , ReachReportCompatibleFields
@@ -763,11 +810,11 @@ module Network.Google.DFAReporting
     , DirectorySiteSettings
     , directorySiteSettings
     , dssInterstitialPlacementAccepted
-    , dssDfpSettings
+    , dssInstreamVideoPlacementAccepted
     , dssVerificationTagOptOut
     , dssActiveViewOptOut
+    , dssDfpSettings
     , dssVideoActiveViewOptOut
-    , dssInstreamVideoPlacementAccepted
     , dssNielsenOCROptOut
 
     -- ** TargetableRemarketingListsListSortOrder
@@ -788,6 +835,9 @@ module Network.Google.DFAReporting
 
     -- ** UserRolePermissionAvailability
     , UserRolePermissionAvailability (..)
+
+    -- ** PlacementVpaidAdapterChoice
+    , PlacementVpaidAdapterChoice (..)
 
     -- ** DirectorySiteContactAssignmentVisibility
     , DirectorySiteContactAssignmentVisibility (..)
@@ -897,6 +947,9 @@ module Network.Google.DFAReporting
     -- ** CampaignsListSortField
     , CampaignsListSortField (..)
 
+    -- ** VideoSettingsOrientation
+    , VideoSettingsOrientation (..)
+
     -- ** DirectorySiteContact
     , DirectorySiteContact
     , directorySiteContact
@@ -923,6 +976,15 @@ module Network.Google.DFAReporting
     , fadtTag
     , fadtName
     , fadtId
+
+    -- ** VideoFormat
+    , VideoFormat
+    , videoFormat
+    , vfKind
+    , vfFileType
+    , vfResolution
+    , vfTargetBitRate
+    , vfId
 
     -- ** AccountUserProFileTraffickerType
     , AccountUserProFileTraffickerType (..)
@@ -1082,6 +1144,13 @@ module Network.Google.DFAReporting
     , cocOptimizationActivitys
     , cocId
 
+    -- ** CreativeClickThroughURL
+    , CreativeClickThroughURL
+    , creativeClickThroughURL
+    , cctuComputedClickThroughURL
+    , cctuCustomClickThroughURL
+    , cctuLandingPageId
+
     -- ** ReportCriteria
     , ReportCriteria
     , reportCriteria
@@ -1102,6 +1171,13 @@ module Network.Google.DFAReporting
     , pslrNextPageToken
     , pslrKind
 
+    -- ** ConversionsBatchUpdateResponse
+    , ConversionsBatchUpdateResponse
+    , conversionsBatchUpdateResponse
+    , cburStatus
+    , cburKind
+    , cburHasFailures
+
     -- ** CreativeAssetArtworkType
     , CreativeAssetArtworkType (..)
 
@@ -1120,6 +1196,12 @@ module Network.Google.DFAReporting
     , iilrInventoryItems
     , iilrNextPageToken
     , iilrKind
+
+    -- ** UniversalAdId
+    , UniversalAdId
+    , universalAdId
+    , uaiValue
+    , uaiRegistry
 
     -- ** CustomFloodlightVariableType
     , CustomFloodlightVariableType (..)
@@ -1234,6 +1316,9 @@ module Network.Google.DFAReporting
     , sIab
     , sId
 
+    -- ** CreativeAssetOrientation
+    , CreativeAssetOrientation (..)
+
     -- ** CreativeAssetDurationType
     , CreativeAssetDurationType (..)
 
@@ -1246,6 +1331,14 @@ module Network.Google.DFAReporting
     , ofStatus
     , ofKind
     , ofObjectIds
+
+    -- ** SkippableSetting
+    , SkippableSetting
+    , skippableSetting
+    , ssSkipOffSet
+    , ssProgressOffSet
+    , ssKind
+    , ssSkippable
 
     -- ** CreativeGroupsListSortField
     , CreativeGroupsListSortField (..)
@@ -1366,6 +1459,9 @@ module Network.Google.DFAReporting
     , citiesListResponse
     , citKind
     , citCities
+
+    -- ** AdvertiserLandingPagesListSortField
+    , AdvertiserLandingPagesListSortField (..)
 
     -- ** Dimension
     , Dimension
@@ -1521,16 +1617,18 @@ module Network.Google.DFAReporting
     , creBackupImageTargetWindow
     , creRenderingIdDimensionValue
     , creCustomKeyValues
-    , creVideoDuration
+    , creSkipOffSet
     , creRenderingId
     , creThirdPartyBackupImageImpressionsURL
     , creFsCommand
     , creAllowScriptAccess
     , creHTMLCodeLocked
     , creRequiredFlashPluginVersion
+    , creUniversalAdId
     , creAuthoringTool
     , creSize
     , creThirdPartyURLs
+    , creProgressOffSet
     , creCounterCustomEvents
     , creKind
     , creSSLOverride
@@ -1550,16 +1648,19 @@ module Network.Google.DFAReporting
     , creBackupImageClickThroughURL
     , creName
     , creOverrideCss
-    , creVideoDescription
+    , creAdditionalSizes
     , creClickTags
     , creAdParameters
     , creVersion
+    , creMediaDescription
+    , creMediaDuration
     , creLatestTraffickedCreativeId
     , creThirdPartyRichMediaImpressionsURL
     , creDynamicAssetSelection
     , creLastModifiedInfo
     , creId
     , creAuthoringSource
+    , crePoliteLoadAssetId
     , creStudioAdvertiserId
     , creCreativeAssets
     , creSubAccountId
@@ -1574,8 +1675,8 @@ module Network.Google.DFAReporting
     , creCompanionCreatives
     , creTotalFileSize
     , creStudioTraffickedCreativeId
-    , creRedirectURL
     , creAutoAdvanceImages
+    , creRedirectURL
     , creCreativeFieldAssignments
 
     -- ** SiteContact
@@ -1607,9 +1708,6 @@ module Network.Google.DFAReporting
     , drEndDate
     , drStartDate
     , drRelativeDateRange
-
-    -- ** FloodlightConfigurationStandardVariableTypesItem
-    , FloodlightConfigurationStandardVariableTypesItem (..)
 
     -- ** Report
     , Report
@@ -1649,6 +1747,7 @@ module Network.Google.DFAReporting
     -- ** Campaign
     , Campaign
     , campaign
+    , camAdBlockingConfiguration
     , camCreativeOptimizationConfiguration
     , camCreativeGroupIds
     , camNielsenOCREnabled
@@ -1665,6 +1764,7 @@ module Network.Google.DFAReporting
     , camName
     , camAdvertiserGroupId
     , camBillingInvoiceCode
+    , camDefaultLandingPageId
     , camCreateInfo
     , camLastModifiedInfo
     , camId
@@ -1746,11 +1846,12 @@ module Network.Google.DFAReporting
     , SiteSettings
     , siteSettings
     , ssDisableNewCookie
-    , ssDisableBrandSafeAds
+    , ssVideoActiveViewOptOutTemplate
+    , ssAdBlockingOptOut
     , ssLookbackConfiguration
     , ssTagSetting
     , ssActiveViewOptOut
-    , ssVideoActiveViewOptOut
+    , ssVpaidAdapterChoiceTemplate
     , ssCreativeSettings
 
     -- ** PlacementStrategiesListSortField
@@ -1985,10 +2086,12 @@ module Network.Google.DFAReporting
     , LandingPage
     , landingPage
     , lpKind
-    , lpDefault
+    , lpAdvertiserId
     , lpURL
     , lpName
+    , lpDeepLinks
     , lpId
+    , lpArchived
 
     -- ** ConnectionTypesListResponse
     , ConnectionTypesListResponse
@@ -2044,6 +2147,9 @@ module Network.Google.DFAReporting
     , lookbackConfiguration
     , lcClickDuration
     , lcPostImpressionActivitiesDuration
+
+    -- ** VideoFormatFileType
+    , VideoFormatFileType (..)
 
     -- ** AdsListSortField
     , AdsListSortField (..)
@@ -2124,6 +2230,9 @@ module Network.Google.DFAReporting
     -- ** SortedDimensionSortOrder
     , SortedDimensionSortOrder (..)
 
+    -- ** MobileAppsListDirectories
+    , MobileAppsListDirectories (..)
+
     -- ** CompatibleFields
     , CompatibleFields
     , compatibleFields
@@ -2143,6 +2252,13 @@ module Network.Google.DFAReporting
 
     -- ** FilesListSortField
     , FilesListSortField (..)
+
+    -- ** ConversionsBatchUpdateRequest
+    , ConversionsBatchUpdateRequest
+    , conversionsBatchUpdateRequest
+    , cburbKind
+    , cburbConversions
+    , cburbEncryptionInfo
 
     -- ** DirectorySiteInterstitialTagFormatsItem
     , DirectorySiteInterstitialTagFormatsItem (..)
@@ -2214,8 +2330,8 @@ module Network.Google.DFAReporting
     , cctoCreativeId
     , cctoClickThroughURL
 
-    -- ** AdsListCreativeType
-    , AdsListCreativeType (..)
+    -- ** FloodlightActivityFloodlightTagType
+    , FloodlightActivityFloodlightTagType (..)
 
     -- ** FloodlightActivityGroupsListSortOrder
     , FloodlightActivityGroupsListSortOrder (..)
@@ -2409,7 +2525,6 @@ module Network.Google.DFAReporting
     , faFloodlightActivityGroupTagString
     , faFloodlightConfigurationId
     , faKind
-    , faImageTagEnabled
     , faAdvertiserId
     , faAdvertiserIdDimensionValue
     , faSSLCompliant
@@ -2423,6 +2538,7 @@ module Network.Google.DFAReporting
     , faHidden
     , faFloodlightActivityGroupType
     , faDefaultTags
+    , faFloodlightTagType
     , faFloodlightActivityGroupName
     , faId
     , faSSLRequired
@@ -2535,6 +2651,12 @@ module Network.Google.DFAReporting
     -- ** PlacementGroupPlacementGroupType
     , PlacementGroupPlacementGroupType (..)
 
+    -- ** VideoFormatsListResponse
+    , VideoFormatsListResponse
+    , videoFormatsListResponse
+    , vflrKind
+    , vflrVideoFormats
+
     -- ** DirectorySitesListResponse
     , DirectorySitesListResponse
     , directorySitesListResponse
@@ -2580,6 +2702,9 @@ module Network.Google.DFAReporting
     , regCountryCode
     , regCountryDartId
     , regDartId
+
+    -- ** UniversalAdIdRegistry
+    , UniversalAdIdRegistry (..)
 
     -- ** AdvertiserGroupsListResponse
     , AdvertiserGroupsListResponse
@@ -2648,7 +2773,17 @@ module Network.Google.DFAReporting
     , fcSubAccountId
     , fcFirstDayOfWeek
     , fcOmnitureSettings
-    , fcStandardVariableTypes
+
+    -- ** MobileAppDirectory
+    , MobileAppDirectory (..)
+
+    -- ** CompanionSetting
+    , CompanionSetting
+    , companionSetting
+    , comKind
+    , comImageOnly
+    , comCompanionsDisabled
+    , comEnabledSizes
 
     -- ** ReportScheduleRepeatsOnWeekDaysItem
     , ReportScheduleRepeatsOnWeekDaysItem (..)
@@ -2666,6 +2801,7 @@ module Network.Google.DFAReporting
     -- ** Conversion
     , Conversion
     , conversion
+    , conoTreatmentForUnderage
     , conoEncryptedUserIdCandidates
     , conoTimestampMicros
     , conoLimitAdTracking
@@ -2674,10 +2810,12 @@ module Network.Google.DFAReporting
     , conoFloodlightConfigurationId
     , conoKind
     , conoFloodlightActivityId
+    , conoNonPersonalizedAd
     , conoQuantity
     , conoValue
     , conoCustomVariables
     , conoChildDirectedTreatment
+    , conoGclid
     , conoOrdinal
 
     -- ** CreativeFieldValuesListResponse
@@ -2686,6 +2824,9 @@ module Network.Google.DFAReporting
     , cfvlrNextPageToken
     , cfvlrKind
     , cfvlrCreativeFieldValues
+
+    -- ** SiteSettingsVpaidAdapterChoiceTemplate
+    , SiteSettingsVpaidAdapterChoiceTemplate (..)
 
     -- ** AccountsListSortField
     , AccountsListSortField (..)
@@ -2702,6 +2843,20 @@ module Network.Google.DFAReporting
 
     -- ** DimensionValueMatchType
     , DimensionValueMatchType (..)
+
+    -- ** AdvertiserLandingPagesListResponse
+    , AdvertiserLandingPagesListResponse
+    , advertiserLandingPagesListResponse
+    , alplrLandingPages
+    , alplrNextPageToken
+    , alplrKind
+
+    -- ** MobileAppsListResponse
+    , MobileAppsListResponse
+    , mobileAppsListResponse
+    , malrNextPageToken
+    , malrKind
+    , malrMobileApps
 
     -- ** SortedDimension
     , SortedDimension
@@ -2738,7 +2893,6 @@ module Network.Google.DFAReporting
     , creativeAsset
     , caaZIndex
     , caaPushdown
-    , caaVideoDuration
     , caaOriginalBackup
     , caaWindowMode
     , caaFlashVersion
@@ -2764,7 +2918,9 @@ module Network.Google.DFAReporting
     , caaPositionLeftUnit
     , caaAlignment
     , caaExpandedDimension
+    , caaAdditionalSizes
     , caaZipFilename
+    , caaMediaDuration
     , caaActionScript3
     , caaDisplayType
     , caaChildAssetType
@@ -2774,6 +2930,7 @@ module Network.Google.DFAReporting
     , caaCustomStartTimeValue
     , caaStartTimeType
     , caaDuration
+    , caaOrientation
     , caaArtworkType
     , caaHideFlashObjects
     , caaDetectedFeatures
@@ -2895,18 +3052,18 @@ module Network.Google.DFAReporting
     -- ** Site
     , Site
     , site
-    , ssKind
-    , ssKeyName
-    , ssSiteContacts
-    , ssSiteSettings
-    , ssIdDimensionValue
-    , ssDirectorySiteIdDimensionValue
-    , ssAccountId
-    , ssName
-    , ssDirectorySiteId
-    , ssId
-    , ssSubAccountId
-    , ssApproved
+    , sitiKind
+    , sitiKeyName
+    , sitiSiteContacts
+    , sitiSiteSettings
+    , sitiIdDimensionValue
+    , sitiDirectorySiteIdDimensionValue
+    , sitiAccountId
+    , sitiName
+    , sitiDirectorySiteId
+    , sitiId
+    , sitiSubAccountId
+    , sitiApproved
 
     -- ** ReportCrossDimensionReachCriteriaDimension
     , ReportCrossDimensionReachCriteriaDimension (..)
@@ -3029,12 +3186,6 @@ module Network.Google.DFAReporting
     , mclrMobileCarriers
     , mclrKind
 
-    -- ** LandingPagesListResponse
-    , LandingPagesListResponse
-    , landingPagesListResponse
-    , lplrLandingPages
-    , lplrKind
-
     -- ** AccountPermissionAccountProFilesItem
     , AccountPermissionAccountProFilesItem (..)
 
@@ -3138,9 +3289,16 @@ module Network.Google.DFAReporting
     , ocContactType
     , ocContactInfo
 
+    -- ** TranscodeSetting
+    , TranscodeSetting
+    , transcodeSetting
+    , tsKind
+    , tsEnabledVideoFormats
+
     -- ** FloodlightActivitiesGenerateTagResponse
     , FloodlightActivitiesGenerateTagResponse
     , floodlightActivitiesGenerateTagResponse
+    , fagtrGlobalSiteTagGlobalSnippet
     , fagtrFloodlightActivityTag
     , fagtrKind
 
@@ -3203,6 +3361,15 @@ module Network.Google.DFAReporting
     , metCountryDartId
     , metDartId
 
+    -- ** MobileApp
+    , MobileApp
+    , mobileApp
+    , maKind
+    , maId
+    , maTitle
+    , maPublisherName
+    , maDirectory
+
     -- ** CreativeAssetDisplayType
     , CreativeAssetDisplayType (..)
 
@@ -3210,6 +3377,7 @@ module Network.Google.DFAReporting
     , Placement
     , placement
     , p1Status
+    , p1VideoSettings
     , p1PlacementStrategyId
     , p1TagFormats
     , p1SiteIdDimensionValue
@@ -3222,6 +3390,8 @@ module Network.Google.DFAReporting
     , p1AdvertiserIdDimensionValue
     , p1CampaignId
     , p1IdDimensionValue
+    , p1VpaidAdapterChoice
+    , p1AdBlockingOptOut
     , p1Primary
     , p1LookbackConfiguration
     , p1TagSetting
@@ -3230,8 +3400,10 @@ module Network.Google.DFAReporting
     , p1AccountId
     , p1PaymentSource
     , p1Name
+    , p1AdditionalSizes
     , p1DirectorySiteId
     , p1CreateInfo
+    , p1VideoActiveViewOptOut
     , p1LastModifiedInfo
     , p1Id
     , p1SSLRequired
@@ -3337,6 +3509,11 @@ import           Network.Google.Resource.DFAReporting.AdvertiserGroups.Insert
 import           Network.Google.Resource.DFAReporting.AdvertiserGroups.List
 import           Network.Google.Resource.DFAReporting.AdvertiserGroups.Patch
 import           Network.Google.Resource.DFAReporting.AdvertiserGroups.Update
+import           Network.Google.Resource.DFAReporting.AdvertiserLandingPages.Get
+import           Network.Google.Resource.DFAReporting.AdvertiserLandingPages.Insert
+import           Network.Google.Resource.DFAReporting.AdvertiserLandingPages.List
+import           Network.Google.Resource.DFAReporting.AdvertiserLandingPages.Patch
+import           Network.Google.Resource.DFAReporting.AdvertiserLandingPages.Update
 import           Network.Google.Resource.DFAReporting.Advertisers.Get
 import           Network.Google.Resource.DFAReporting.Advertisers.Insert
 import           Network.Google.Resource.DFAReporting.Advertisers.List
@@ -3362,6 +3539,7 @@ import           Network.Google.Resource.DFAReporting.ContentCategories.List
 import           Network.Google.Resource.DFAReporting.ContentCategories.Patch
 import           Network.Google.Resource.DFAReporting.ContentCategories.Update
 import           Network.Google.Resource.DFAReporting.Conversions.Batchinsert
+import           Network.Google.Resource.DFAReporting.Conversions.Batchupdate
 import           Network.Google.Resource.DFAReporting.Countries.Get
 import           Network.Google.Resource.DFAReporting.Countries.List
 import           Network.Google.Resource.DFAReporting.CreativeAssets.Insert
@@ -3422,14 +3600,10 @@ import           Network.Google.Resource.DFAReporting.FloodlightConfigurations.P
 import           Network.Google.Resource.DFAReporting.FloodlightConfigurations.Update
 import           Network.Google.Resource.DFAReporting.InventoryItems.Get
 import           Network.Google.Resource.DFAReporting.InventoryItems.List
-import           Network.Google.Resource.DFAReporting.LandingPages.Delete
-import           Network.Google.Resource.DFAReporting.LandingPages.Get
-import           Network.Google.Resource.DFAReporting.LandingPages.Insert
-import           Network.Google.Resource.DFAReporting.LandingPages.List
-import           Network.Google.Resource.DFAReporting.LandingPages.Patch
-import           Network.Google.Resource.DFAReporting.LandingPages.Update
 import           Network.Google.Resource.DFAReporting.Languages.List
 import           Network.Google.Resource.DFAReporting.Metros.List
+import           Network.Google.Resource.DFAReporting.MobileApps.Get
+import           Network.Google.Resource.DFAReporting.MobileApps.List
 import           Network.Google.Resource.DFAReporting.MobileCarriers.Get
 import           Network.Google.Resource.DFAReporting.MobileCarriers.List
 import           Network.Google.Resource.DFAReporting.OperatingSystems.Get
@@ -3514,6 +3688,8 @@ import           Network.Google.Resource.DFAReporting.UserRoles.Insert
 import           Network.Google.Resource.DFAReporting.UserRoles.List
 import           Network.Google.Resource.DFAReporting.UserRoles.Patch
 import           Network.Google.Resource.DFAReporting.UserRoles.Update
+import           Network.Google.Resource.DFAReporting.VideoFormats.Get
+import           Network.Google.Resource.DFAReporting.VideoFormats.List
 
 {- $resources
 TODO
@@ -3534,12 +3710,6 @@ type DFAReportingAPI =
        :<|> RemarketingListSharesPatchResource
        :<|> RemarketingListSharesGetResource
        :<|> RemarketingListSharesUpdateResource
-       :<|> LandingPagesInsertResource
-       :<|> LandingPagesListResource
-       :<|> LandingPagesPatchResource
-       :<|> LandingPagesGetResource
-       :<|> LandingPagesDeleteResource
-       :<|> LandingPagesUpdateResource
        :<|> MobileCarriersListResource
        :<|> MobileCarriersGetResource
        :<|> CreativeGroupsInsertResource
@@ -3594,6 +3764,7 @@ type DFAReportingAPI =
        :<|> FloodlightConfigurationsGetResource
        :<|> FloodlightConfigurationsUpdateResource
        :<|> ConversionsBatchinsertResource
+       :<|> ConversionsBatchupdateResource
        :<|> FloodlightActivitiesInsertResource
        :<|> FloodlightActivitiesListResource
        :<|> FloodlightActivitiesPatchResource
@@ -3646,6 +3817,13 @@ type DFAReportingAPI =
        :<|> MetrosListResource
        :<|> OrderDocumentsListResource
        :<|> OrderDocumentsGetResource
+       :<|> AdvertiserLandingPagesInsertResource
+       :<|> AdvertiserLandingPagesListResource
+       :<|> AdvertiserLandingPagesPatchResource
+       :<|> AdvertiserLandingPagesGetResource
+       :<|> AdvertiserLandingPagesUpdateResource
+       :<|> MobileAppsListResource
+       :<|> MobileAppsGetResource
        :<|> CreativeFieldsInsertResource
        :<|> CreativeFieldsListResource
        :<|> CreativeFieldsPatchResource
@@ -3701,6 +3879,8 @@ type DFAReportingAPI =
        :<|> SubAccountsPatchResource
        :<|> SubAccountsGetResource
        :<|> SubAccountsUpdateResource
+       :<|> VideoFormatsListResource
+       :<|> VideoFormatsGetResource
        :<|> CreativeFieldValuesInsertResource
        :<|> CreativeFieldValuesListResource
        :<|> CreativeFieldValuesPatchResource

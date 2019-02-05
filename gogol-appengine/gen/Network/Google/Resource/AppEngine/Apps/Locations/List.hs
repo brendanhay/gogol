@@ -22,7 +22,7 @@
 --
 -- Lists information about the supported locations for this service.
 --
--- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ Google App Engine Admin API Reference> for @appengine.apps.locations.list@.
+-- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ App Engine Admin API Reference> for @appengine.apps.locations.list@.
 module Network.Google.Resource.AppEngine.Apps.Locations.List
     (
     -- * REST Resource
@@ -35,10 +35,8 @@ module Network.Google.Resource.AppEngine.Apps.Locations.List
     -- * Request Lenses
     , allXgafv
     , allUploadProtocol
-    , allPp
     , allAccessToken
     , allUploadType
-    , allBearerToken
     , allAppsId
     , allFilter
     , allPageToken
@@ -56,29 +54,25 @@ type AppsLocationsListResource =
        "apps" :>
          Capture "appsId" Text :>
            "locations" :>
-             QueryParam "$.xgafv" Text :>
+             QueryParam "$.xgafv" Xgafv :>
                QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "filter" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "pageSize" (Textual Int32) :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" AltJSON :>
-                                   Get '[JSON] ListLocationsResponse
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "filter" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "pageSize" (Textual Int32) :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] ListLocationsResponse
 
 -- | Lists information about the supported locations for this service.
 --
 -- /See:/ 'appsLocationsList' smart constructor.
 data AppsLocationsList = AppsLocationsList'
-    { _allXgafv          :: !(Maybe Text)
+    { _allXgafv          :: !(Maybe Xgafv)
     , _allUploadProtocol :: !(Maybe Text)
-    , _allPp             :: !Bool
     , _allAccessToken    :: !(Maybe Text)
     , _allUploadType     :: !(Maybe Text)
-    , _allBearerToken    :: !(Maybe Text)
     , _allAppsId         :: !Text
     , _allFilter         :: !(Maybe Text)
     , _allPageToken      :: !(Maybe Text)
@@ -94,13 +88,9 @@ data AppsLocationsList = AppsLocationsList'
 --
 -- * 'allUploadProtocol'
 --
--- * 'allPp'
---
 -- * 'allAccessToken'
 --
 -- * 'allUploadType'
---
--- * 'allBearerToken'
 --
 -- * 'allAppsId'
 --
@@ -118,10 +108,8 @@ appsLocationsList pAllAppsId_ =
     AppsLocationsList'
     { _allXgafv = Nothing
     , _allUploadProtocol = Nothing
-    , _allPp = True
     , _allAccessToken = Nothing
     , _allUploadType = Nothing
-    , _allBearerToken = Nothing
     , _allAppsId = pAllAppsId_
     , _allFilter = Nothing
     , _allPageToken = Nothing
@@ -130,7 +118,7 @@ appsLocationsList pAllAppsId_ =
     }
 
 -- | V1 error format.
-allXgafv :: Lens' AppsLocationsList (Maybe Text)
+allXgafv :: Lens' AppsLocationsList (Maybe Xgafv)
 allXgafv = lens _allXgafv (\ s a -> s{_allXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -138,10 +126,6 @@ allUploadProtocol :: Lens' AppsLocationsList (Maybe Text)
 allUploadProtocol
   = lens _allUploadProtocol
       (\ s a -> s{_allUploadProtocol = a})
-
--- | Pretty-print response.
-allPp :: Lens' AppsLocationsList Bool
-allPp = lens _allPp (\ s a -> s{_allPp = a})
 
 -- | OAuth access token.
 allAccessToken :: Lens' AppsLocationsList (Maybe Text)
@@ -154,12 +138,6 @@ allUploadType :: Lens' AppsLocationsList (Maybe Text)
 allUploadType
   = lens _allUploadType
       (\ s a -> s{_allUploadType = a})
-
--- | OAuth bearer token.
-allBearerToken :: Lens' AppsLocationsList (Maybe Text)
-allBearerToken
-  = lens _allBearerToken
-      (\ s a -> s{_allBearerToken = a})
 
 -- | Part of \`name\`. The resource that owns the locations collection, if
 -- applicable.
@@ -191,13 +169,13 @@ allCallback
 instance GoogleRequest AppsLocationsList where
         type Rs AppsLocationsList = ListLocationsResponse
         type Scopes AppsLocationsList =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/appengine.admin",
+               "https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
         requestClient AppsLocationsList'{..}
           = go _allAppsId _allXgafv _allUploadProtocol
-              (Just _allPp)
               _allAccessToken
               _allUploadType
-              _allBearerToken
               _allFilter
               _allPageToken
               _allPageSize

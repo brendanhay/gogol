@@ -31,7 +31,7 @@ module Network.Google.Resource.Content.Accountstatuses.Custombatch
     , AccountstatusesCustombatch
 
     -- * Request Lenses
-    , accPayload
+    , acPayload
     ) where
 
 import           Network.Google.Prelude
@@ -41,7 +41,7 @@ import           Network.Google.ShoppingContent.Types
 -- 'AccountstatusesCustombatch' request conforms to.
 type AccountstatusesCustombatchResource =
      "content" :>
-       "v2" :>
+       "v2.1" :>
          "accountstatuses" :>
            "batch" :>
              QueryParam "alt" AltJSON :>
@@ -51,26 +51,26 @@ type AccountstatusesCustombatchResource =
 --
 -- /See:/ 'accountstatusesCustombatch' smart constructor.
 newtype AccountstatusesCustombatch = AccountstatusesCustombatch'
-    { _accPayload :: AccountstatusesCustomBatchRequest
+    { _acPayload :: AccountstatusesCustomBatchRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountstatusesCustombatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'accPayload'
+-- * 'acPayload'
 accountstatusesCustombatch
-    :: AccountstatusesCustomBatchRequest -- ^ 'accPayload'
+    :: AccountstatusesCustomBatchRequest -- ^ 'acPayload'
     -> AccountstatusesCustombatch
-accountstatusesCustombatch pAccPayload_ =
+accountstatusesCustombatch pAcPayload_ =
     AccountstatusesCustombatch'
-    { _accPayload = pAccPayload_
+    { _acPayload = pAcPayload_
     }
 
 -- | Multipart request metadata.
-accPayload :: Lens' AccountstatusesCustombatch AccountstatusesCustomBatchRequest
-accPayload
-  = lens _accPayload (\ s a -> s{_accPayload = a})
+acPayload :: Lens' AccountstatusesCustombatch AccountstatusesCustomBatchRequest
+acPayload
+  = lens _acPayload (\ s a -> s{_acPayload = a})
 
 instance GoogleRequest AccountstatusesCustombatch
          where
@@ -79,8 +79,7 @@ instance GoogleRequest AccountstatusesCustombatch
         type Scopes AccountstatusesCustombatch =
              '["https://www.googleapis.com/auth/content"]
         requestClient AccountstatusesCustombatch'{..}
-          = go (Just AltJSON) _accPayload
-              shoppingContentService
+          = go (Just AltJSON) _acPayload shoppingContentService
           where go
                   = buildClient
                       (Proxy :: Proxy AccountstatusesCustombatchResource)

@@ -83,7 +83,7 @@ dagDomainAliasName
   = lens _dagDomainAliasName
       (\ s a -> s{_dagDomainAliasName = a})
 
--- | Immutable id of the Google Apps account.
+-- | Immutable ID of the G Suite account.
 dagCustomer :: Lens' DomainAliasesGet Text
 dagCustomer
   = lens _dagCustomer (\ s a -> s{_dagCustomer = a})

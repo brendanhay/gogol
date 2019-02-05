@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified HttpHealthCheck resource. Get a list of available
+-- Returns the specified HttpHealthCheck resource. Gets a list of available
 -- HTTP health checks by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.httpHealthChecks.get@.
@@ -54,7 +54,7 @@ type HTTPHealthChecksGetResource =
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] HTTPHealthCheck
 
--- | Returns the specified HttpHealthCheck resource. Get a list of available
+-- | Returns the specified HttpHealthCheck resource. Gets a list of available
 -- HTTP health checks by making a list() request.
 --
 -- /See:/ 'hTTPHealthChecksGet' smart constructor.

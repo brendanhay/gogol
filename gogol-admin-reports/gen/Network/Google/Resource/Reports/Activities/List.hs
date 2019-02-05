@@ -43,6 +43,7 @@ module Network.Google.Resource.Reports.Activities.List
     , alEventName
     , alUserKey
     , alMaxResults
+    , alOrgUnitId
     ) where
 
 import           Network.Google.Prelude
@@ -67,8 +68,9 @@ type ActivitiesListResource =
                                QueryParam "pageToken" Text :>
                                  QueryParam "eventName" Text :>
                                    QueryParam "maxResults" (Textual Int32) :>
-                                     QueryParam "alt" AltJSON :>
-                                       Get '[JSON] Activities
+                                     QueryParam "orgUnitID" Text :>
+                                       QueryParam "alt" AltJSON :>
+                                         Get '[JSON] Activities
 
 -- | Retrieves a list of activities for a specific customer and application.
 --
@@ -84,6 +86,7 @@ data ActivitiesList = ActivitiesList'
     , _alEventName       :: !(Maybe Text)
     , _alUserKey         :: !Text
     , _alMaxResults      :: !(Maybe (Textual Int32))
+    , _alOrgUnitId       :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivitiesList' with the minimum fields required to make a request.
@@ -109,6 +112,8 @@ data ActivitiesList = ActivitiesList'
 -- * 'alUserKey'
 --
 -- * 'alMaxResults'
+--
+-- * 'alOrgUnitId'
 activitiesList
     :: Text -- ^ 'alApplicationName'
     -> Text -- ^ 'alUserKey'
@@ -125,9 +130,10 @@ activitiesList pAlApplicationName_ pAlUserKey_ =
     , _alEventName = Nothing
     , _alUserKey = pAlUserKey_
     , _alMaxResults = Nothing
+    , _alOrgUnitId = ""
     }
 
--- | Return events which occured at or after this time.
+-- | Return events which occurred at or after this time.
 alStartTime :: Lens' ActivitiesList (Maybe Text)
 alStartTime
   = lens _alStartTime (\ s a -> s{_alStartTime = a})
@@ -150,7 +156,7 @@ alActorIPAddress
   = lens _alActorIPAddress
       (\ s a -> s{_alActorIPAddress = a})
 
--- | Return events which occured at or before this time.
+-- | Return events which occurred at or before this time.
 alEndTime :: Lens' ActivitiesList (Maybe Text)
 alEndTime
   = lens _alEndTime (\ s a -> s{_alEndTime = a})
@@ -184,6 +190,12 @@ alMaxResults
   = lens _alMaxResults (\ s a -> s{_alMaxResults = a})
       . mapping _Coerce
 
+-- | the organizational unit\'s(OU) ID to filter activities from users
+-- belonging to a specific OU or one of its sub-OU(s)
+alOrgUnitId :: Lens' ActivitiesList Text
+alOrgUnitId
+  = lens _alOrgUnitId (\ s a -> s{_alOrgUnitId = a})
+
 instance GoogleRequest ActivitiesList where
         type Rs ActivitiesList = Activities
         type Scopes ActivitiesList =
@@ -197,6 +209,7 @@ instance GoogleRequest ActivitiesList where
               _alPageToken
               _alEventName
               _alMaxResults
+              (Just _alOrgUnitId)
               (Just AltJSON)
               reportsService
           where go

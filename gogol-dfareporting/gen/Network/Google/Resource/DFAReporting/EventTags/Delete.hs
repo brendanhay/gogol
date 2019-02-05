@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'EventTagsDelete' request conforms to.
 type EventTagsDeleteResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "eventTags" :>

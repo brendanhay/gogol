@@ -85,7 +85,7 @@ dgipProject :: Lens' DeploymentsGetIAMPolicy Text
 dgipProject
   = lens _dgipProject (\ s a -> s{_dgipProject = a})
 
--- | Name of the resource for this request.
+-- | Name or id of the resource for this request.
 dgipResource :: Lens' DeploymentsGetIAMPolicy Text
 dgipResource
   = lens _dgipResource (\ s a -> s{_dgipResource = a})

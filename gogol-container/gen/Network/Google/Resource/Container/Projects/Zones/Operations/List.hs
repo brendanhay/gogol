@@ -22,7 +22,7 @@
 --
 -- Lists all operations in a project in a specific zone or all zones.
 --
--- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @container.projects.zones.operations.list@.
+-- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.zones.operations.list@.
 module Network.Google.Resource.Container.Projects.Zones.Operations.List
     (
     -- * REST Resource
@@ -33,13 +33,12 @@ module Network.Google.Resource.Container.Projects.Zones.Operations.List
     , ProjectsZonesOperationsList
 
     -- * Request Lenses
+    , pzolParent
     , pzolXgafv
     , pzolUploadProtocol
-    , pzolPp
     , pzolAccessToken
     , pzolUploadType
     , pzolZone
-    , pzolBearerToken
     , pzolProjectId
     , pzolCallback
     ) where
@@ -56,27 +55,25 @@ type ProjectsZonesOperationsListResource =
            "zones" :>
              Capture "zone" Text :>
                "operations" :>
-                 QueryParam "$.xgafv" Text :>
-                   QueryParam "upload_protocol" Text :>
-                     QueryParam "pp" Bool :>
+                 QueryParam "parent" Text :>
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
                        QueryParam "access_token" Text :>
                          QueryParam "uploadType" Text :>
-                           QueryParam "bearer_token" Text :>
-                             QueryParam "callback" Text :>
-                               QueryParam "alt" AltJSON :>
-                                 Get '[JSON] ListOperationsResponse
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] ListOperationsResponse
 
 -- | Lists all operations in a project in a specific zone or all zones.
 --
 -- /See:/ 'projectsZonesOperationsList' smart constructor.
 data ProjectsZonesOperationsList = ProjectsZonesOperationsList'
-    { _pzolXgafv          :: !(Maybe Text)
+    { _pzolParent         :: !(Maybe Text)
+    , _pzolXgafv          :: !(Maybe Xgafv)
     , _pzolUploadProtocol :: !(Maybe Text)
-    , _pzolPp             :: !Bool
     , _pzolAccessToken    :: !(Maybe Text)
     , _pzolUploadType     :: !(Maybe Text)
     , _pzolZone           :: !Text
-    , _pzolBearerToken    :: !(Maybe Text)
     , _pzolProjectId      :: !Text
     , _pzolCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -85,19 +82,17 @@ data ProjectsZonesOperationsList = ProjectsZonesOperationsList'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'pzolParent'
+--
 -- * 'pzolXgafv'
 --
 -- * 'pzolUploadProtocol'
---
--- * 'pzolPp'
 --
 -- * 'pzolAccessToken'
 --
 -- * 'pzolUploadType'
 --
 -- * 'pzolZone'
---
--- * 'pzolBearerToken'
 --
 -- * 'pzolProjectId'
 --
@@ -108,19 +103,25 @@ projectsZonesOperationsList
     -> ProjectsZonesOperationsList
 projectsZonesOperationsList pPzolZone_ pPzolProjectId_ =
     ProjectsZonesOperationsList'
-    { _pzolXgafv = Nothing
+    { _pzolParent = Nothing
+    , _pzolXgafv = Nothing
     , _pzolUploadProtocol = Nothing
-    , _pzolPp = True
     , _pzolAccessToken = Nothing
     , _pzolUploadType = Nothing
     , _pzolZone = pPzolZone_
-    , _pzolBearerToken = Nothing
     , _pzolProjectId = pPzolProjectId_
     , _pzolCallback = Nothing
     }
 
+-- | The parent (project and location) where the operations will be listed.
+-- Specified in the format \'projects\/*\/locations\/*\'. Location \"-\"
+-- matches all zones and all regions.
+pzolParent :: Lens' ProjectsZonesOperationsList (Maybe Text)
+pzolParent
+  = lens _pzolParent (\ s a -> s{_pzolParent = a})
+
 -- | V1 error format.
-pzolXgafv :: Lens' ProjectsZonesOperationsList (Maybe Text)
+pzolXgafv :: Lens' ProjectsZonesOperationsList (Maybe Xgafv)
 pzolXgafv
   = lens _pzolXgafv (\ s a -> s{_pzolXgafv = a})
 
@@ -129,10 +130,6 @@ pzolUploadProtocol :: Lens' ProjectsZonesOperationsList (Maybe Text)
 pzolUploadProtocol
   = lens _pzolUploadProtocol
       (\ s a -> s{_pzolUploadProtocol = a})
-
--- | Pretty-print response.
-pzolPp :: Lens' ProjectsZonesOperationsList Bool
-pzolPp = lens _pzolPp (\ s a -> s{_pzolPp = a})
 
 -- | OAuth access token.
 pzolAccessToken :: Lens' ProjectsZonesOperationsList (Maybe Text)
@@ -146,20 +143,16 @@ pzolUploadType
   = lens _pzolUploadType
       (\ s a -> s{_pzolUploadType = a})
 
--- | The name of the Google Compute Engine
+-- | Deprecated. The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) to return operations for, or
--- \`-\` for all zones.
+-- \`-\` for all zones. This field has been deprecated and replaced by the
+-- parent field.
 pzolZone :: Lens' ProjectsZonesOperationsList Text
 pzolZone = lens _pzolZone (\ s a -> s{_pzolZone = a})
 
--- | OAuth bearer token.
-pzolBearerToken :: Lens' ProjectsZonesOperationsList (Maybe Text)
-pzolBearerToken
-  = lens _pzolBearerToken
-      (\ s a -> s{_pzolBearerToken = a})
-
--- | The Google Developers Console [project ID or project
--- number](https:\/\/support.google.com\/cloud\/answer\/6158840).
+-- | Deprecated. The Google Developers Console [project ID or project
+-- number](https:\/\/support.google.com\/cloud\/answer\/6158840). This
+-- field has been deprecated and replaced by the parent field.
 pzolProjectId :: Lens' ProjectsZonesOperationsList Text
 pzolProjectId
   = lens _pzolProjectId
@@ -177,12 +170,10 @@ instance GoogleRequest ProjectsZonesOperationsList
         type Scopes ProjectsZonesOperationsList =
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsZonesOperationsList'{..}
-          = go _pzolProjectId _pzolZone _pzolXgafv
+          = go _pzolProjectId _pzolZone _pzolParent _pzolXgafv
               _pzolUploadProtocol
-              (Just _pzolPp)
               _pzolAccessToken
               _pzolUploadType
-              _pzolBearerToken
               _pzolCallback
               (Just AltJSON)
               containerService

@@ -20,9 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates the given topic with the given name.
+-- Creates the given topic with the given name. See the
+-- <https://cloud.google.com/pubsub/docs/admin#resource_names resource name rules>.
 --
--- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.topics.create@.
+-- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference> for @pubsub.projects.topics.create@.
 module Network.Google.Resource.PubSub.Projects.Topics.Create
     (
     -- * REST Resource
@@ -35,11 +36,9 @@ module Network.Google.Resource.PubSub.Projects.Topics.Create
     -- * Request Lenses
     , ptcXgafv
     , ptcUploadProtocol
-    , ptcPp
     , ptcAccessToken
     , ptcUploadType
     , ptcPayload
-    , ptcBearerToken
     , ptcName
     , ptcCallback
     ) where
@@ -52,27 +51,24 @@ import           Network.Google.PubSub.Types
 type ProjectsTopicsCreateResource =
      "v1" :>
        Capture "name" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Topic :> Put '[JSON] Topic
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Topic :> Put '[JSON] Topic
 
--- | Creates the given topic with the given name.
+-- | Creates the given topic with the given name. See the
+-- <https://cloud.google.com/pubsub/docs/admin#resource_names resource name rules>.
 --
 -- /See:/ 'projectsTopicsCreate' smart constructor.
 data ProjectsTopicsCreate = ProjectsTopicsCreate'
-    { _ptcXgafv          :: !(Maybe Text)
+    { _ptcXgafv          :: !(Maybe Xgafv)
     , _ptcUploadProtocol :: !(Maybe Text)
-    , _ptcPp             :: !Bool
     , _ptcAccessToken    :: !(Maybe Text)
     , _ptcUploadType     :: !(Maybe Text)
     , _ptcPayload        :: !Topic
-    , _ptcBearerToken    :: !(Maybe Text)
     , _ptcName           :: !Text
     , _ptcCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -85,15 +81,11 @@ data ProjectsTopicsCreate = ProjectsTopicsCreate'
 --
 -- * 'ptcUploadProtocol'
 --
--- * 'ptcPp'
---
 -- * 'ptcAccessToken'
 --
 -- * 'ptcUploadType'
 --
 -- * 'ptcPayload'
---
--- * 'ptcBearerToken'
 --
 -- * 'ptcName'
 --
@@ -106,17 +98,15 @@ projectsTopicsCreate pPtcPayload_ pPtcName_ =
     ProjectsTopicsCreate'
     { _ptcXgafv = Nothing
     , _ptcUploadProtocol = Nothing
-    , _ptcPp = True
     , _ptcAccessToken = Nothing
     , _ptcUploadType = Nothing
     , _ptcPayload = pPtcPayload_
-    , _ptcBearerToken = Nothing
     , _ptcName = pPtcName_
     , _ptcCallback = Nothing
     }
 
 -- | V1 error format.
-ptcXgafv :: Lens' ProjectsTopicsCreate (Maybe Text)
+ptcXgafv :: Lens' ProjectsTopicsCreate (Maybe Xgafv)
 ptcXgafv = lens _ptcXgafv (\ s a -> s{_ptcXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -124,10 +114,6 @@ ptcUploadProtocol :: Lens' ProjectsTopicsCreate (Maybe Text)
 ptcUploadProtocol
   = lens _ptcUploadProtocol
       (\ s a -> s{_ptcUploadProtocol = a})
-
--- | Pretty-print response.
-ptcPp :: Lens' ProjectsTopicsCreate Bool
-ptcPp = lens _ptcPp (\ s a -> s{_ptcPp = a})
 
 -- | OAuth access token.
 ptcAccessToken :: Lens' ProjectsTopicsCreate (Maybe Text)
@@ -145,12 +131,6 @@ ptcUploadType
 ptcPayload :: Lens' ProjectsTopicsCreate Topic
 ptcPayload
   = lens _ptcPayload (\ s a -> s{_ptcPayload = a})
-
--- | OAuth bearer token.
-ptcBearerToken :: Lens' ProjectsTopicsCreate (Maybe Text)
-ptcBearerToken
-  = lens _ptcBearerToken
-      (\ s a -> s{_ptcBearerToken = a})
 
 -- | The name of the topic. It must have the format
 -- \`\"projects\/{project}\/topics\/{topic}\"\`. \`{topic}\` must start
@@ -174,10 +154,8 @@ instance GoogleRequest ProjectsTopicsCreate where
                "https://www.googleapis.com/auth/pubsub"]
         requestClient ProjectsTopicsCreate'{..}
           = go _ptcName _ptcXgafv _ptcUploadProtocol
-              (Just _ptcPp)
               _ptcAccessToken
               _ptcUploadType
-              _ptcBearerToken
               _ptcCallback
               (Just AltJSON)
               _ptcPayload

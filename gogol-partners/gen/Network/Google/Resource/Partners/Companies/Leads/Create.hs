@@ -36,11 +36,9 @@ module Network.Google.Resource.Partners.Companies.Leads.Create
     , clcXgafv
     , clcUploadProtocol
     , clcCompanyId
-    , clcPp
     , clcAccessToken
     , clcUploadType
     , clcPayload
-    , clcBearerToken
     , clcCallback
     ) where
 
@@ -54,29 +52,25 @@ type CompaniesLeadsCreateResource =
        "companies" :>
          Capture "companyId" Text :>
            "leads" :>
-             QueryParam "$.xgafv" Text :>
+             QueryParam "$.xgafv" Xgafv :>
                QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "callback" Text :>
-                           QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] CreateLeadRequest :>
-                               Post '[JSON] CreateLeadResponse
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] CreateLeadRequest :>
+                           Post '[JSON] CreateLeadResponse
 
 -- | Creates an advertiser lead for the given company ID.
 --
 -- /See:/ 'companiesLeadsCreate' smart constructor.
 data CompaniesLeadsCreate = CompaniesLeadsCreate'
-    { _clcXgafv          :: !(Maybe Text)
+    { _clcXgafv          :: !(Maybe Xgafv)
     , _clcUploadProtocol :: !(Maybe Text)
     , _clcCompanyId      :: !Text
-    , _clcPp             :: !Bool
     , _clcAccessToken    :: !(Maybe Text)
     , _clcUploadType     :: !(Maybe Text)
     , _clcPayload        :: !CreateLeadRequest
-    , _clcBearerToken    :: !(Maybe Text)
     , _clcCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -90,15 +84,11 @@ data CompaniesLeadsCreate = CompaniesLeadsCreate'
 --
 -- * 'clcCompanyId'
 --
--- * 'clcPp'
---
 -- * 'clcAccessToken'
 --
 -- * 'clcUploadType'
 --
 -- * 'clcPayload'
---
--- * 'clcBearerToken'
 --
 -- * 'clcCallback'
 companiesLeadsCreate
@@ -110,16 +100,14 @@ companiesLeadsCreate pClcCompanyId_ pClcPayload_ =
     { _clcXgafv = Nothing
     , _clcUploadProtocol = Nothing
     , _clcCompanyId = pClcCompanyId_
-    , _clcPp = True
     , _clcAccessToken = Nothing
     , _clcUploadType = Nothing
     , _clcPayload = pClcPayload_
-    , _clcBearerToken = Nothing
     , _clcCallback = Nothing
     }
 
 -- | V1 error format.
-clcXgafv :: Lens' CompaniesLeadsCreate (Maybe Text)
+clcXgafv :: Lens' CompaniesLeadsCreate (Maybe Xgafv)
 clcXgafv = lens _clcXgafv (\ s a -> s{_clcXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -132,10 +120,6 @@ clcUploadProtocol
 clcCompanyId :: Lens' CompaniesLeadsCreate Text
 clcCompanyId
   = lens _clcCompanyId (\ s a -> s{_clcCompanyId = a})
-
--- | Pretty-print response.
-clcPp :: Lens' CompaniesLeadsCreate Bool
-clcPp = lens _clcPp (\ s a -> s{_clcPp = a})
 
 -- | OAuth access token.
 clcAccessToken :: Lens' CompaniesLeadsCreate (Maybe Text)
@@ -154,12 +138,6 @@ clcPayload :: Lens' CompaniesLeadsCreate CreateLeadRequest
 clcPayload
   = lens _clcPayload (\ s a -> s{_clcPayload = a})
 
--- | OAuth bearer token.
-clcBearerToken :: Lens' CompaniesLeadsCreate (Maybe Text)
-clcBearerToken
-  = lens _clcBearerToken
-      (\ s a -> s{_clcBearerToken = a})
-
 -- | JSONP
 clcCallback :: Lens' CompaniesLeadsCreate (Maybe Text)
 clcCallback
@@ -170,10 +148,8 @@ instance GoogleRequest CompaniesLeadsCreate where
         type Scopes CompaniesLeadsCreate = '[]
         requestClient CompaniesLeadsCreate'{..}
           = go _clcCompanyId _clcXgafv _clcUploadProtocol
-              (Just _clcPp)
               _clcAccessToken
               _clcUploadType
-              _clcBearerToken
               _clcCallback
               (Just AltJSON)
               _clcPayload

@@ -20,11 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the specified Version resource. By default, only a \`BASIC_VIEW\`
--- will be returned. Specify the \`FULL_VIEW\` parameter to get the full
--- resource.
+-- Gets the specified Version resource. By default, only a BASIC_VIEW will
+-- be returned. Specify the FULL_VIEW parameter to get the full resource.
 --
--- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ Google App Engine Admin API Reference> for @appengine.apps.services.versions.get@.
+-- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ App Engine Admin API Reference> for @appengine.apps.services.versions.get@.
 module Network.Google.Resource.AppEngine.Apps.Services.Versions.Get
     (
     -- * REST Resource
@@ -37,11 +36,9 @@ module Network.Google.Resource.AppEngine.Apps.Services.Versions.Get
     -- * Request Lenses
     , asvgXgafv
     , asvgUploadProtocol
-    , asvgPp
     , asvgAccessToken
     , asvgUploadType
     , asvgVersionsId
-    , asvgBearerToken
     , asvgAppsId
     , asvgView
     , asvgServicesId
@@ -61,30 +58,24 @@ type AppsServicesVersionsGetResource =
              Capture "servicesId" Text :>
                "versions" :>
                  Capture "versionsId" Text :>
-                   QueryParam "$.xgafv" Text :>
+                   QueryParam "$.xgafv" Xgafv :>
                      QueryParam "upload_protocol" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "access_token" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "bearer_token" Text :>
-                               QueryParam "view" Text :>
-                                 QueryParam "callback" Text :>
-                                   QueryParam "alt" AltJSON :>
-                                     Get '[JSON] Version
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "view" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :> Get '[JSON] Version
 
--- | Gets the specified Version resource. By default, only a \`BASIC_VIEW\`
--- will be returned. Specify the \`FULL_VIEW\` parameter to get the full
--- resource.
+-- | Gets the specified Version resource. By default, only a BASIC_VIEW will
+-- be returned. Specify the FULL_VIEW parameter to get the full resource.
 --
 -- /See:/ 'appsServicesVersionsGet' smart constructor.
 data AppsServicesVersionsGet = AppsServicesVersionsGet'
-    { _asvgXgafv          :: !(Maybe Text)
+    { _asvgXgafv          :: !(Maybe Xgafv)
     , _asvgUploadProtocol :: !(Maybe Text)
-    , _asvgPp             :: !Bool
     , _asvgAccessToken    :: !(Maybe Text)
     , _asvgUploadType     :: !(Maybe Text)
     , _asvgVersionsId     :: !Text
-    , _asvgBearerToken    :: !(Maybe Text)
     , _asvgAppsId         :: !Text
     , _asvgView           :: !(Maybe Text)
     , _asvgServicesId     :: !Text
@@ -99,15 +90,11 @@ data AppsServicesVersionsGet = AppsServicesVersionsGet'
 --
 -- * 'asvgUploadProtocol'
 --
--- * 'asvgPp'
---
 -- * 'asvgAccessToken'
 --
 -- * 'asvgUploadType'
 --
 -- * 'asvgVersionsId'
---
--- * 'asvgBearerToken'
 --
 -- * 'asvgAppsId'
 --
@@ -125,11 +112,9 @@ appsServicesVersionsGet pAsvgVersionsId_ pAsvgAppsId_ pAsvgServicesId_ =
     AppsServicesVersionsGet'
     { _asvgXgafv = Nothing
     , _asvgUploadProtocol = Nothing
-    , _asvgPp = True
     , _asvgAccessToken = Nothing
     , _asvgUploadType = Nothing
     , _asvgVersionsId = pAsvgVersionsId_
-    , _asvgBearerToken = Nothing
     , _asvgAppsId = pAsvgAppsId_
     , _asvgView = Nothing
     , _asvgServicesId = pAsvgServicesId_
@@ -137,7 +122,7 @@ appsServicesVersionsGet pAsvgVersionsId_ pAsvgAppsId_ pAsvgServicesId_ =
     }
 
 -- | V1 error format.
-asvgXgafv :: Lens' AppsServicesVersionsGet (Maybe Text)
+asvgXgafv :: Lens' AppsServicesVersionsGet (Maybe Xgafv)
 asvgXgafv
   = lens _asvgXgafv (\ s a -> s{_asvgXgafv = a})
 
@@ -146,10 +131,6 @@ asvgUploadProtocol :: Lens' AppsServicesVersionsGet (Maybe Text)
 asvgUploadProtocol
   = lens _asvgUploadProtocol
       (\ s a -> s{_asvgUploadProtocol = a})
-
--- | Pretty-print response.
-asvgPp :: Lens' AppsServicesVersionsGet Bool
-asvgPp = lens _asvgPp (\ s a -> s{_asvgPp = a})
 
 -- | OAuth access token.
 asvgAccessToken :: Lens' AppsServicesVersionsGet (Maybe Text)
@@ -169,19 +150,13 @@ asvgVersionsId
   = lens _asvgVersionsId
       (\ s a -> s{_asvgVersionsId = a})
 
--- | OAuth bearer token.
-asvgBearerToken :: Lens' AppsServicesVersionsGet (Maybe Text)
-asvgBearerToken
-  = lens _asvgBearerToken
-      (\ s a -> s{_asvgBearerToken = a})
-
 -- | Part of \`name\`. Name of the resource requested. Example:
--- \`apps\/myapp\/services\/default\/versions\/v1\`.
+-- apps\/myapp\/services\/default\/versions\/v1.
 asvgAppsId :: Lens' AppsServicesVersionsGet Text
 asvgAppsId
   = lens _asvgAppsId (\ s a -> s{_asvgAppsId = a})
 
--- | Controls the set of fields returned in the \`Get\` response.
+-- | Controls the set of fields returned in the Get response.
 asvgView :: Lens' AppsServicesVersionsGet (Maybe Text)
 asvgView = lens _asvgView (\ s a -> s{_asvgView = a})
 
@@ -199,15 +174,15 @@ asvgCallback
 instance GoogleRequest AppsServicesVersionsGet where
         type Rs AppsServicesVersionsGet = Version
         type Scopes AppsServicesVersionsGet =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/appengine.admin",
+               "https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
         requestClient AppsServicesVersionsGet'{..}
           = go _asvgAppsId _asvgServicesId _asvgVersionsId
               _asvgXgafv
               _asvgUploadProtocol
-              (Just _asvgPp)
               _asvgAccessToken
               _asvgUploadType
-              _asvgBearerToken
               _asvgView
               _asvgCallback
               (Just AltJSON)

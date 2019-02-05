@@ -39,12 +39,10 @@ module Network.Google.Resource.Classroom.Courses.Students.Delete
     -- * Request Lenses
     , csdXgafv
     , csdUploadProtocol
-    , csdPp
     , csdCourseId
     , csdAccessToken
     , csdUploadType
     , csdUserId
-    , csdBearerToken
     , csdCallback
     ) where
 
@@ -59,14 +57,12 @@ type CoursesStudentsDeleteResource =
          Capture "courseId" Text :>
            "students" :>
              Capture "userId" Text :>
-               QueryParam "$.xgafv" Text :>
+               QueryParam "$.xgafv" Xgafv :>
                  QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :> Delete '[JSON] Empty
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
 -- | Deletes a student of a course. This method returns the following error
 -- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
@@ -76,14 +72,12 @@ type CoursesStudentsDeleteResource =
 --
 -- /See:/ 'coursesStudentsDelete' smart constructor.
 data CoursesStudentsDelete = CoursesStudentsDelete'
-    { _csdXgafv          :: !(Maybe Text)
+    { _csdXgafv          :: !(Maybe Xgafv)
     , _csdUploadProtocol :: !(Maybe Text)
-    , _csdPp             :: !Bool
     , _csdCourseId       :: !Text
     , _csdAccessToken    :: !(Maybe Text)
     , _csdUploadType     :: !(Maybe Text)
     , _csdUserId         :: !Text
-    , _csdBearerToken    :: !(Maybe Text)
     , _csdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -95,8 +89,6 @@ data CoursesStudentsDelete = CoursesStudentsDelete'
 --
 -- * 'csdUploadProtocol'
 --
--- * 'csdPp'
---
 -- * 'csdCourseId'
 --
 -- * 'csdAccessToken'
@@ -104,8 +96,6 @@ data CoursesStudentsDelete = CoursesStudentsDelete'
 -- * 'csdUploadType'
 --
 -- * 'csdUserId'
---
--- * 'csdBearerToken'
 --
 -- * 'csdCallback'
 coursesStudentsDelete
@@ -116,17 +106,15 @@ coursesStudentsDelete pCsdCourseId_ pCsdUserId_ =
     CoursesStudentsDelete'
     { _csdXgafv = Nothing
     , _csdUploadProtocol = Nothing
-    , _csdPp = True
     , _csdCourseId = pCsdCourseId_
     , _csdAccessToken = Nothing
     , _csdUploadType = Nothing
     , _csdUserId = pCsdUserId_
-    , _csdBearerToken = Nothing
     , _csdCallback = Nothing
     }
 
 -- | V1 error format.
-csdXgafv :: Lens' CoursesStudentsDelete (Maybe Text)
+csdXgafv :: Lens' CoursesStudentsDelete (Maybe Xgafv)
 csdXgafv = lens _csdXgafv (\ s a -> s{_csdXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -134,10 +122,6 @@ csdUploadProtocol :: Lens' CoursesStudentsDelete (Maybe Text)
 csdUploadProtocol
   = lens _csdUploadProtocol
       (\ s a -> s{_csdUploadProtocol = a})
-
--- | Pretty-print response.
-csdPp :: Lens' CoursesStudentsDelete Bool
-csdPp = lens _csdPp (\ s a -> s{_csdPp = a})
 
 -- | Identifier of the course. This identifier can be either the
 -- Classroom-assigned identifier or an alias.
@@ -164,12 +148,6 @@ csdUserId :: Lens' CoursesStudentsDelete Text
 csdUserId
   = lens _csdUserId (\ s a -> s{_csdUserId = a})
 
--- | OAuth bearer token.
-csdBearerToken :: Lens' CoursesStudentsDelete (Maybe Text)
-csdBearerToken
-  = lens _csdBearerToken
-      (\ s a -> s{_csdBearerToken = a})
-
 -- | JSONP
 csdCallback :: Lens' CoursesStudentsDelete (Maybe Text)
 csdCallback
@@ -182,10 +160,8 @@ instance GoogleRequest CoursesStudentsDelete where
         requestClient CoursesStudentsDelete'{..}
           = go _csdCourseId _csdUserId _csdXgafv
               _csdUploadProtocol
-              (Just _csdPp)
               _csdAccessToken
               _csdUploadType
-              _csdBearerToken
               _csdCallback
               (Just AltJSON)
               classroomService

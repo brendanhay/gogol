@@ -16,7 +16,7 @@
 --
 module Network.Google.Datastore.Types.Sum where
 
-import           Network.Google.Prelude
+import           Network.Google.Prelude hiding (Bytes)
 
 -- | The direction to order by. Defaults to \`ASCENDING\`.
 data PropertyOrderDirection
@@ -120,6 +120,41 @@ instance FromJSON QueryResultBatchEntityResultType where
 instance ToJSON QueryResultBatchEntityResultType where
     toJSON = toJSONText
 
+-- | The type of the operation. Can be used as a filter in
+-- ListOperationsRequest.
+data GoogleDatastoreAdminV1beta1CommonMetadataOperationType
+    = OperationTypeUnspecified
+      -- ^ @OPERATION_TYPE_UNSPECIFIED@
+      -- Unspecified.
+    | ExportEntities
+      -- ^ @EXPORT_ENTITIES@
+      -- ExportEntities.
+    | ImportEntities
+      -- ^ @IMPORT_ENTITIES@
+      -- ImportEntities.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GoogleDatastoreAdminV1beta1CommonMetadataOperationType
+
+instance FromHttpApiData GoogleDatastoreAdminV1beta1CommonMetadataOperationType where
+    parseQueryParam = \case
+        "OPERATION_TYPE_UNSPECIFIED" -> Right OperationTypeUnspecified
+        "EXPORT_ENTITIES" -> Right ExportEntities
+        "IMPORT_ENTITIES" -> Right ImportEntities
+        x -> Left ("Unable to parse GoogleDatastoreAdminV1beta1CommonMetadataOperationType from: " <> x)
+
+instance ToHttpApiData GoogleDatastoreAdminV1beta1CommonMetadataOperationType where
+    toQueryParam = \case
+        OperationTypeUnspecified -> "OPERATION_TYPE_UNSPECIFIED"
+        ExportEntities -> "EXPORT_ENTITIES"
+        ImportEntities -> "IMPORT_ENTITIES"
+
+instance FromJSON GoogleDatastoreAdminV1beta1CommonMetadataOperationType where
+    parseJSON = parseJSONText "GoogleDatastoreAdminV1beta1CommonMetadataOperationType"
+
+instance ToJSON GoogleDatastoreAdminV1beta1CommonMetadataOperationType where
+    toJSON = toJSONText
+
 -- | The state of the query after the current batch.
 data QueryResultBatchMoreResults
     = MoreResultsTypeUnspecified
@@ -137,7 +172,7 @@ data QueryResultBatchMoreResults
       -- cursor.
     | NoMoreResults
       -- ^ @NO_MORE_RESULTS@
-      -- The query has been exhausted.
+      -- The query is finished, and there are no more results.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable QueryResultBatchMoreResults
@@ -165,6 +200,51 @@ instance FromJSON QueryResultBatchMoreResults where
 instance ToJSON QueryResultBatchMoreResults where
     toJSON = toJSONText
 
+-- | The type of the operation. Can be used as a filter in
+-- ListOperationsRequest.
+data GoogleDatastoreAdminV1CommonMetadataOperationType
+    = GDAVCMOTOperationTypeUnspecified
+      -- ^ @OPERATION_TYPE_UNSPECIFIED@
+      -- Unspecified.
+    | GDAVCMOTExportEntities
+      -- ^ @EXPORT_ENTITIES@
+      -- ExportEntities.
+    | GDAVCMOTImportEntities
+      -- ^ @IMPORT_ENTITIES@
+      -- ImportEntities.
+    | GDAVCMOTCreateIndex
+      -- ^ @CREATE_INDEX@
+      -- CreateIndex.
+    | GDAVCMOTDeleteIndex
+      -- ^ @DELETE_INDEX@
+      -- DeleteIndex.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GoogleDatastoreAdminV1CommonMetadataOperationType
+
+instance FromHttpApiData GoogleDatastoreAdminV1CommonMetadataOperationType where
+    parseQueryParam = \case
+        "OPERATION_TYPE_UNSPECIFIED" -> Right GDAVCMOTOperationTypeUnspecified
+        "EXPORT_ENTITIES" -> Right GDAVCMOTExportEntities
+        "IMPORT_ENTITIES" -> Right GDAVCMOTImportEntities
+        "CREATE_INDEX" -> Right GDAVCMOTCreateIndex
+        "DELETE_INDEX" -> Right GDAVCMOTDeleteIndex
+        x -> Left ("Unable to parse GoogleDatastoreAdminV1CommonMetadataOperationType from: " <> x)
+
+instance ToHttpApiData GoogleDatastoreAdminV1CommonMetadataOperationType where
+    toQueryParam = \case
+        GDAVCMOTOperationTypeUnspecified -> "OPERATION_TYPE_UNSPECIFIED"
+        GDAVCMOTExportEntities -> "EXPORT_ENTITIES"
+        GDAVCMOTImportEntities -> "IMPORT_ENTITIES"
+        GDAVCMOTCreateIndex -> "CREATE_INDEX"
+        GDAVCMOTDeleteIndex -> "DELETE_INDEX"
+
+instance FromJSON GoogleDatastoreAdminV1CommonMetadataOperationType where
+    parseJSON = parseJSONText "GoogleDatastoreAdminV1CommonMetadataOperationType"
+
+instance ToJSON GoogleDatastoreAdminV1CommonMetadataOperationType where
+    toJSON = toJSONText
+
 -- | A null value.
 data ValueNullValue
     = NullValue
@@ -187,6 +267,78 @@ instance FromJSON ValueNullValue where
     parseJSON = parseJSONText "ValueNullValue"
 
 instance ToJSON ValueNullValue where
+    toJSON = toJSONText
+
+-- | The indexed property\'s direction. Must not be DIRECTION_UNSPECIFIED.
+-- Required.
+data GoogleDatastoreAdminV1IndexedPropertyDirection
+    = GDAVIPDDirectionUnspecified
+      -- ^ @DIRECTION_UNSPECIFIED@
+      -- The direction is unspecified.
+    | GDAVIPDAscending
+      -- ^ @ASCENDING@
+      -- The property\'s values are indexed so as to support sequencing in
+      -- ascending order and also query by \<, >, \<=, >=, and =.
+    | GDAVIPDDescending
+      -- ^ @DESCENDING@
+      -- The property\'s values are indexed so as to support sequencing in
+      -- descending order and also query by \<, >, \<=, >=, and =.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GoogleDatastoreAdminV1IndexedPropertyDirection
+
+instance FromHttpApiData GoogleDatastoreAdminV1IndexedPropertyDirection where
+    parseQueryParam = \case
+        "DIRECTION_UNSPECIFIED" -> Right GDAVIPDDirectionUnspecified
+        "ASCENDING" -> Right GDAVIPDAscending
+        "DESCENDING" -> Right GDAVIPDDescending
+        x -> Left ("Unable to parse GoogleDatastoreAdminV1IndexedPropertyDirection from: " <> x)
+
+instance ToHttpApiData GoogleDatastoreAdminV1IndexedPropertyDirection where
+    toQueryParam = \case
+        GDAVIPDDirectionUnspecified -> "DIRECTION_UNSPECIFIED"
+        GDAVIPDAscending -> "ASCENDING"
+        GDAVIPDDescending -> "DESCENDING"
+
+instance FromJSON GoogleDatastoreAdminV1IndexedPropertyDirection where
+    parseJSON = parseJSONText "GoogleDatastoreAdminV1IndexedPropertyDirection"
+
+instance ToJSON GoogleDatastoreAdminV1IndexedPropertyDirection where
+    toJSON = toJSONText
+
+-- | The index\'s ancestor mode. Must not be ANCESTOR_MODE_UNSPECIFIED.
+-- Required.
+data GoogleDatastoreAdminV1IndexAncestor
+    = AncestorModeUnspecified
+      -- ^ @ANCESTOR_MODE_UNSPECIFIED@
+      -- The ancestor mode is unspecified.
+    | None
+      -- ^ @NONE@
+      -- Do not include the entity\'s ancestors in the index.
+    | AllAncestors
+      -- ^ @ALL_ANCESTORS@
+      -- Include all the entity\'s ancestors in the index.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GoogleDatastoreAdminV1IndexAncestor
+
+instance FromHttpApiData GoogleDatastoreAdminV1IndexAncestor where
+    parseQueryParam = \case
+        "ANCESTOR_MODE_UNSPECIFIED" -> Right AncestorModeUnspecified
+        "NONE" -> Right None
+        "ALL_ANCESTORS" -> Right AllAncestors
+        x -> Left ("Unable to parse GoogleDatastoreAdminV1IndexAncestor from: " <> x)
+
+instance ToHttpApiData GoogleDatastoreAdminV1IndexAncestor where
+    toQueryParam = \case
+        AncestorModeUnspecified -> "ANCESTOR_MODE_UNSPECIFIED"
+        None -> "NONE"
+        AllAncestors -> "ALL_ANCESTORS"
+
+instance FromJSON GoogleDatastoreAdminV1IndexAncestor where
+    parseJSON = parseJSONText "GoogleDatastoreAdminV1IndexAncestor"
+
+instance ToJSON GoogleDatastoreAdminV1IndexAncestor where
     toJSON = toJSONText
 
 -- | The non-transactional read consistency to use. Cannot be set to
@@ -224,6 +376,60 @@ instance FromJSON ReadOptionsReadConsistency where
 instance ToJSON ReadOptionsReadConsistency where
     toJSON = toJSONText
 
+-- | The state of the index. Output only.
+data GoogleDatastoreAdminV1IndexState
+    = StateUnspecified
+      -- ^ @STATE_UNSPECIFIED@
+      -- The state is unspecified.
+    | Creating
+      -- ^ @CREATING@
+      -- The index is being created, and cannot be used by queries. There is an
+      -- active long-running operation for the index. The index is updated when
+      -- writing an entity. Some index data may exist.
+    | Ready
+      -- ^ @READY@
+      -- The index is ready to be used. The index is updated when writing an
+      -- entity. The index is fully populated from all stored entities it applies
+      -- to.
+    | Deleting
+      -- ^ @DELETING@
+      -- The index is being deleted, and cannot be used by queries. There is an
+      -- active long-running operation for the index. The index is not updated
+      -- when writing an entity. Some index data may exist.
+    | Error'
+      -- ^ @ERROR@
+      -- The index was being created or deleted, but something went wrong. The
+      -- index cannot by used by queries. There is no active long-running
+      -- operation for the index, and the most recently finished long-running
+      -- operation failed. The index is not updated when writing an entity. Some
+      -- index data may exist.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GoogleDatastoreAdminV1IndexState
+
+instance FromHttpApiData GoogleDatastoreAdminV1IndexState where
+    parseQueryParam = \case
+        "STATE_UNSPECIFIED" -> Right StateUnspecified
+        "CREATING" -> Right Creating
+        "READY" -> Right Ready
+        "DELETING" -> Right Deleting
+        "ERROR" -> Right Error'
+        x -> Left ("Unable to parse GoogleDatastoreAdminV1IndexState from: " <> x)
+
+instance ToHttpApiData GoogleDatastoreAdminV1IndexState where
+    toQueryParam = \case
+        StateUnspecified -> "STATE_UNSPECIFIED"
+        Creating -> "CREATING"
+        Ready -> "READY"
+        Deleting -> "DELETING"
+        Error' -> "ERROR"
+
+instance FromJSON GoogleDatastoreAdminV1IndexState where
+    parseJSON = parseJSONText "GoogleDatastoreAdminV1IndexState"
+
+instance ToJSON GoogleDatastoreAdminV1IndexState where
+    toJSON = toJSONText
+
 -- | V1 error format.
 data Xgafv
     = X1
@@ -251,6 +457,67 @@ instance FromJSON Xgafv where
     parseJSON = parseJSONText "Xgafv"
 
 instance ToJSON Xgafv where
+    toJSON = toJSONText
+
+-- | The current state of the Operation.
+data GoogleDatastoreAdminV1beta1CommonMetadataState
+    = GDAVCMSStateUnspecified
+      -- ^ @STATE_UNSPECIFIED@
+      -- Unspecified.
+    | GDAVCMSInitializing
+      -- ^ @INITIALIZING@
+      -- Request is being prepared for processing.
+    | GDAVCMSProcessing
+      -- ^ @PROCESSING@
+      -- Request is actively being processed.
+    | GDAVCMSCancelling
+      -- ^ @CANCELLING@
+      -- Request is in the process of being cancelled after user called
+      -- google.longrunning.Operations.CancelOperation on the operation.
+    | GDAVCMSFinalizing
+      -- ^ @FINALIZING@
+      -- Request has been processed and is in its finalization stage.
+    | GDAVCMSSuccessful
+      -- ^ @SUCCESSFUL@
+      -- Request has completed successfully.
+    | GDAVCMSFailed
+      -- ^ @FAILED@
+      -- Request has finished being processed, but encountered an error.
+    | GDAVCMSCancelled
+      -- ^ @CANCELLED@
+      -- Request has finished being cancelled after user called
+      -- google.longrunning.Operations.CancelOperation.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GoogleDatastoreAdminV1beta1CommonMetadataState
+
+instance FromHttpApiData GoogleDatastoreAdminV1beta1CommonMetadataState where
+    parseQueryParam = \case
+        "STATE_UNSPECIFIED" -> Right GDAVCMSStateUnspecified
+        "INITIALIZING" -> Right GDAVCMSInitializing
+        "PROCESSING" -> Right GDAVCMSProcessing
+        "CANCELLING" -> Right GDAVCMSCancelling
+        "FINALIZING" -> Right GDAVCMSFinalizing
+        "SUCCESSFUL" -> Right GDAVCMSSuccessful
+        "FAILED" -> Right GDAVCMSFailed
+        "CANCELLED" -> Right GDAVCMSCancelled
+        x -> Left ("Unable to parse GoogleDatastoreAdminV1beta1CommonMetadataState from: " <> x)
+
+instance ToHttpApiData GoogleDatastoreAdminV1beta1CommonMetadataState where
+    toQueryParam = \case
+        GDAVCMSStateUnspecified -> "STATE_UNSPECIFIED"
+        GDAVCMSInitializing -> "INITIALIZING"
+        GDAVCMSProcessing -> "PROCESSING"
+        GDAVCMSCancelling -> "CANCELLING"
+        GDAVCMSFinalizing -> "FINALIZING"
+        GDAVCMSSuccessful -> "SUCCESSFUL"
+        GDAVCMSFailed -> "FAILED"
+        GDAVCMSCancelled -> "CANCELLED"
+
+instance FromJSON GoogleDatastoreAdminV1beta1CommonMetadataState where
+    parseJSON = parseJSONText "GoogleDatastoreAdminV1beta1CommonMetadataState"
+
+instance ToJSON GoogleDatastoreAdminV1beta1CommonMetadataState where
     toJSON = toJSONText
 
 -- | The operator to filter by.
@@ -341,4 +608,65 @@ instance FromJSON CommitRequestMode where
     parseJSON = parseJSONText "CommitRequestMode"
 
 instance ToJSON CommitRequestMode where
+    toJSON = toJSONText
+
+-- | The current state of the Operation.
+data GoogleDatastoreAdminV1CommonMetadataState
+    = GStateUnspecified
+      -- ^ @STATE_UNSPECIFIED@
+      -- Unspecified.
+    | GInitializing
+      -- ^ @INITIALIZING@
+      -- Request is being prepared for processing.
+    | GProcessing
+      -- ^ @PROCESSING@
+      -- Request is actively being processed.
+    | GCancelling
+      -- ^ @CANCELLING@
+      -- Request is in the process of being cancelled after user called
+      -- google.longrunning.Operations.CancelOperation on the operation.
+    | GFinalizing
+      -- ^ @FINALIZING@
+      -- Request has been processed and is in its finalization stage.
+    | GSuccessful
+      -- ^ @SUCCESSFUL@
+      -- Request has completed successfully.
+    | GFailed
+      -- ^ @FAILED@
+      -- Request has finished being processed, but encountered an error.
+    | GCancelled
+      -- ^ @CANCELLED@
+      -- Request has finished being cancelled after user called
+      -- google.longrunning.Operations.CancelOperation.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GoogleDatastoreAdminV1CommonMetadataState
+
+instance FromHttpApiData GoogleDatastoreAdminV1CommonMetadataState where
+    parseQueryParam = \case
+        "STATE_UNSPECIFIED" -> Right GStateUnspecified
+        "INITIALIZING" -> Right GInitializing
+        "PROCESSING" -> Right GProcessing
+        "CANCELLING" -> Right GCancelling
+        "FINALIZING" -> Right GFinalizing
+        "SUCCESSFUL" -> Right GSuccessful
+        "FAILED" -> Right GFailed
+        "CANCELLED" -> Right GCancelled
+        x -> Left ("Unable to parse GoogleDatastoreAdminV1CommonMetadataState from: " <> x)
+
+instance ToHttpApiData GoogleDatastoreAdminV1CommonMetadataState where
+    toQueryParam = \case
+        GStateUnspecified -> "STATE_UNSPECIFIED"
+        GInitializing -> "INITIALIZING"
+        GProcessing -> "PROCESSING"
+        GCancelling -> "CANCELLING"
+        GFinalizing -> "FINALIZING"
+        GSuccessful -> "SUCCESSFUL"
+        GFailed -> "FAILED"
+        GCancelled -> "CANCELLED"
+
+instance FromJSON GoogleDatastoreAdminV1CommonMetadataState where
+    parseJSON = parseJSONText "GoogleDatastoreAdminV1CommonMetadataState"
+
+instance ToJSON GoogleDatastoreAdminV1CommonMetadataState where
     toJSON = toJSONText

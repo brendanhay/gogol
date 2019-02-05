@@ -8,12 +8,12 @@
 
 ## Version
 
-`0.1.1`
+`0.3.0`
 
 
 ## Description
 
-A client library for the Google Container Engine.
+A client library for the Google Kubernetes Engine.
 
 
 ## Contribute

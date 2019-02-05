@@ -1,0 +1,82 @@
+name:                  gogol-dialogflow
+version:               0.4.0
+synopsis:              Google Dialogflow SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               OtherLicense
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
+copyright:             Copyright (c) 2015-2016 Brendan Hay
+category:              Network, Google, Cloud
+build-type:            Simple
+cabal-version:         >= 1.10
+extra-source-files:    README.md src/.gitkeep
+
+description:
+    Builds conversational interfaces (for example, chatbots, and
+    voice-powered apps and devices).
+    .
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
+    .
+    This library is compatible with version @v2@
+    of the API.
+
+source-repository head
+    type:     git
+    location: git://github.com/brendanhay/gogol.git
+
+library
+    default-language:  Haskell2010
+    hs-source-dirs:    src gen
+
+    ghc-options:       -Wall
+
+    exposed-modules:
+          Network.Google.DialogFlow
+        , Network.Google.DialogFlow.Types
+        , Network.Google.Resource.DialogFlow.Projects.Agent.EntityTypes.BatchDelete
+        , Network.Google.Resource.DialogFlow.Projects.Agent.EntityTypes.BatchUpdate
+        , Network.Google.Resource.DialogFlow.Projects.Agent.EntityTypes.Create
+        , Network.Google.Resource.DialogFlow.Projects.Agent.EntityTypes.Delete
+        , Network.Google.Resource.DialogFlow.Projects.Agent.EntityTypes.Entities.BatchCreate
+        , Network.Google.Resource.DialogFlow.Projects.Agent.EntityTypes.Entities.BatchDelete
+        , Network.Google.Resource.DialogFlow.Projects.Agent.EntityTypes.Entities.BatchUpdate
+        , Network.Google.Resource.DialogFlow.Projects.Agent.EntityTypes.Get
+        , Network.Google.Resource.DialogFlow.Projects.Agent.EntityTypes.List
+        , Network.Google.Resource.DialogFlow.Projects.Agent.EntityTypes.Patch
+        , Network.Google.Resource.DialogFlow.Projects.Agent.Export
+        , Network.Google.Resource.DialogFlow.Projects.Agent.Import
+        , Network.Google.Resource.DialogFlow.Projects.Agent.Intents.BatchDelete
+        , Network.Google.Resource.DialogFlow.Projects.Agent.Intents.BatchUpdate
+        , Network.Google.Resource.DialogFlow.Projects.Agent.Intents.Create
+        , Network.Google.Resource.DialogFlow.Projects.Agent.Intents.Delete
+        , Network.Google.Resource.DialogFlow.Projects.Agent.Intents.Get
+        , Network.Google.Resource.DialogFlow.Projects.Agent.Intents.List
+        , Network.Google.Resource.DialogFlow.Projects.Agent.Intents.Patch
+        , Network.Google.Resource.DialogFlow.Projects.Agent.Restore
+        , Network.Google.Resource.DialogFlow.Projects.Agent.Search
+        , Network.Google.Resource.DialogFlow.Projects.Agent.Sessions.Contexts.Create
+        , Network.Google.Resource.DialogFlow.Projects.Agent.Sessions.Contexts.Delete
+        , Network.Google.Resource.DialogFlow.Projects.Agent.Sessions.Contexts.Get
+        , Network.Google.Resource.DialogFlow.Projects.Agent.Sessions.Contexts.List
+        , Network.Google.Resource.DialogFlow.Projects.Agent.Sessions.Contexts.Patch
+        , Network.Google.Resource.DialogFlow.Projects.Agent.Sessions.DeleteContexts
+        , Network.Google.Resource.DialogFlow.Projects.Agent.Sessions.DetectIntent
+        , Network.Google.Resource.DialogFlow.Projects.Agent.Sessions.EntityTypes.Create
+        , Network.Google.Resource.DialogFlow.Projects.Agent.Sessions.EntityTypes.Delete
+        , Network.Google.Resource.DialogFlow.Projects.Agent.Sessions.EntityTypes.Get
+        , Network.Google.Resource.DialogFlow.Projects.Agent.Sessions.EntityTypes.List
+        , Network.Google.Resource.DialogFlow.Projects.Agent.Sessions.EntityTypes.Patch
+        , Network.Google.Resource.DialogFlow.Projects.Agent.Train
+        , Network.Google.Resource.DialogFlow.Projects.GetAgent
+        , Network.Google.Resource.DialogFlow.Projects.Operations.Get
+
+    other-modules:
+          Network.Google.DialogFlow.Types.Product
+        , Network.Google.DialogFlow.Types.Sum
+
+    build-depends:
+          gogol-core == 0.4.0.*
+        , base       >= 4.7 && < 5

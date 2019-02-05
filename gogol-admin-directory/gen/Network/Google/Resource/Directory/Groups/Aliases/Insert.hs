@@ -77,7 +77,7 @@ groupsAliasesInsert pGaiGroupKey_ pGaiPayload_ =
     , _gaiPayload = pGaiPayload_
     }
 
--- | Email or immutable Id of the group
+-- | Email or immutable ID of the group
 gaiGroupKey :: Lens' GroupsAliasesInsert Text
 gaiGroupKey
   = lens _gaiGroupKey (\ s a -> s{_gaiGroupKey = a})

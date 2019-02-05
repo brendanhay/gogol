@@ -81,7 +81,7 @@ usersAliasesDelete pUadAlias_ pUadUserKey_ =
 uadAlias :: Lens' UsersAliasesDelete Text
 uadAlias = lens _uadAlias (\ s a -> s{_uadAlias = a})
 
--- | Email or immutable Id of the user
+-- | Email or immutable ID of the user
 uadUserKey :: Lens' UsersAliasesDelete Text
 uadUserKey
   = lens _uadUserKey (\ s a -> s{_uadUserKey = a})

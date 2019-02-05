@@ -1,5 +1,5 @@
 name:                  gogol-firebase-rules
-version:               0.1.1
+version:               0.4.0
 synopsis:              Google Firebase Rules SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -11,7 +11,7 @@ copyright:             Copyright (c) 2015-2016 Brendan Hay
 category:              Network, Google, Cloud
 build-type:            Simple
 cabal-version:         >= 1.10
-extra-source-files:    README.md
+extra-source-files:    README.md src/.gitkeep
 
 description:
     Creates and manages rules that determine when a Firebase Rules-enabled
@@ -39,8 +39,9 @@ library
         , Network.Google.Resource.FirebaseRules.Projects.Releases.Create
         , Network.Google.Resource.FirebaseRules.Projects.Releases.Delete
         , Network.Google.Resource.FirebaseRules.Projects.Releases.Get
+        , Network.Google.Resource.FirebaseRules.Projects.Releases.GetExecutable
         , Network.Google.Resource.FirebaseRules.Projects.Releases.List
-        , Network.Google.Resource.FirebaseRules.Projects.Releases.Update
+        , Network.Google.Resource.FirebaseRules.Projects.Releases.Patch
         , Network.Google.Resource.FirebaseRules.Projects.Rulesets.Create
         , Network.Google.Resource.FirebaseRules.Projects.Rulesets.Delete
         , Network.Google.Resource.FirebaseRules.Projects.Rulesets.Get
@@ -52,5 +53,5 @@ library
         , Network.Google.FirebaseRules.Types.Sum
 
     build-depends:
-          gogol-core == 0.1.1.*
+          gogol-core == 0.4.0.*
         , base       >= 4.7 && < 5

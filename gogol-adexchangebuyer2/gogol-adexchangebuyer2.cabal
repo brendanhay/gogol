@@ -1,0 +1,110 @@
+name:                  gogol-adexchangebuyer2
+version:               0.4.0
+synopsis:              Google Ad Exchange Buyer API II SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               OtherLicense
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
+copyright:             Copyright (c) 2015-2016 Brendan Hay
+category:              Network, Google, Cloud
+build-type:            Simple
+cabal-version:         >= 1.10
+extra-source-files:    README.md src/.gitkeep
+
+description:
+    Accesses the latest features for managing Authorized Buyers accounts,
+    Real-Time Bidding configurations and auction metrics, and Marketplace
+    programmatic deals.
+    .
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
+    .
+    This library is compatible with version @v2beta1@
+    of the API.
+
+source-repository head
+    type:     git
+    location: git://github.com/brendanhay/gogol.git
+
+library
+    default-language:  Haskell2010
+    hs-source-dirs:    src gen
+
+    ghc-options:       -Wall
+
+    exposed-modules:
+          Network.Google.AdExchangeBuyer2
+        , Network.Google.AdExchangeBuyer2.Types
+        , Network.Google.Resource.AdExchangeBuyer2.Accounts.Clients.Create
+        , Network.Google.Resource.AdExchangeBuyer2.Accounts.Clients.Get
+        , Network.Google.Resource.AdExchangeBuyer2.Accounts.Clients.Invitations.Create
+        , Network.Google.Resource.AdExchangeBuyer2.Accounts.Clients.Invitations.Get
+        , Network.Google.Resource.AdExchangeBuyer2.Accounts.Clients.Invitations.List
+        , Network.Google.Resource.AdExchangeBuyer2.Accounts.Clients.List
+        , Network.Google.Resource.AdExchangeBuyer2.Accounts.Clients.Update
+        , Network.Google.Resource.AdExchangeBuyer2.Accounts.Clients.Users.Get
+        , Network.Google.Resource.AdExchangeBuyer2.Accounts.Clients.Users.List
+        , Network.Google.Resource.AdExchangeBuyer2.Accounts.Clients.Users.Update
+        , Network.Google.Resource.AdExchangeBuyer2.Accounts.Creatives.Create
+        , Network.Google.Resource.AdExchangeBuyer2.Accounts.Creatives.DealAssociations.Add
+        , Network.Google.Resource.AdExchangeBuyer2.Accounts.Creatives.DealAssociations.List
+        , Network.Google.Resource.AdExchangeBuyer2.Accounts.Creatives.DealAssociations.Remove
+        , Network.Google.Resource.AdExchangeBuyer2.Accounts.Creatives.Get
+        , Network.Google.Resource.AdExchangeBuyer2.Accounts.Creatives.List
+        , Network.Google.Resource.AdExchangeBuyer2.Accounts.Creatives.StopWatching
+        , Network.Google.Resource.AdExchangeBuyer2.Accounts.Creatives.Update
+        , Network.Google.Resource.AdExchangeBuyer2.Accounts.Creatives.Watch
+        , Network.Google.Resource.AdExchangeBuyer2.Accounts.FinalizedProposals.List
+        , Network.Google.Resource.AdExchangeBuyer2.Accounts.Products.Get
+        , Network.Google.Resource.AdExchangeBuyer2.Accounts.Products.List
+        , Network.Google.Resource.AdExchangeBuyer2.Accounts.Proposals.Accept
+        , Network.Google.Resource.AdExchangeBuyer2.Accounts.Proposals.AddNote
+        , Network.Google.Resource.AdExchangeBuyer2.Accounts.Proposals.CancelNegotiation
+        , Network.Google.Resource.AdExchangeBuyer2.Accounts.Proposals.CompleteSetup
+        , Network.Google.Resource.AdExchangeBuyer2.Accounts.Proposals.Create
+        , Network.Google.Resource.AdExchangeBuyer2.Accounts.Proposals.Get
+        , Network.Google.Resource.AdExchangeBuyer2.Accounts.Proposals.List
+        , Network.Google.Resource.AdExchangeBuyer2.Accounts.Proposals.Pause
+        , Network.Google.Resource.AdExchangeBuyer2.Accounts.Proposals.Resume
+        , Network.Google.Resource.AdExchangeBuyer2.Accounts.Proposals.Update
+        , Network.Google.Resource.AdExchangeBuyer2.Accounts.PublisherProFiles.Get
+        , Network.Google.Resource.AdExchangeBuyer2.Accounts.PublisherProFiles.List
+        , Network.Google.Resource.AdExchangeBuyer2.Bidders.Accounts.Creatives.Delete
+        , Network.Google.Resource.AdExchangeBuyer2.Bidders.Accounts.FilterSets.BidMetrics.List
+        , Network.Google.Resource.AdExchangeBuyer2.Bidders.Accounts.FilterSets.BidResponseErrors.List
+        , Network.Google.Resource.AdExchangeBuyer2.Bidders.Accounts.FilterSets.BidResponsesWithoutBids.List
+        , Network.Google.Resource.AdExchangeBuyer2.Bidders.Accounts.FilterSets.Create
+        , Network.Google.Resource.AdExchangeBuyer2.Bidders.Accounts.FilterSets.Delete
+        , Network.Google.Resource.AdExchangeBuyer2.Bidders.Accounts.FilterSets.FilteredBidRequests.List
+        , Network.Google.Resource.AdExchangeBuyer2.Bidders.Accounts.FilterSets.FilteredBids.Creatives.List
+        , Network.Google.Resource.AdExchangeBuyer2.Bidders.Accounts.FilterSets.FilteredBids.Details.List
+        , Network.Google.Resource.AdExchangeBuyer2.Bidders.Accounts.FilterSets.FilteredBids.List
+        , Network.Google.Resource.AdExchangeBuyer2.Bidders.Accounts.FilterSets.Get
+        , Network.Google.Resource.AdExchangeBuyer2.Bidders.Accounts.FilterSets.ImpressionMetrics.List
+        , Network.Google.Resource.AdExchangeBuyer2.Bidders.Accounts.FilterSets.List
+        , Network.Google.Resource.AdExchangeBuyer2.Bidders.Accounts.FilterSets.LosingBids.List
+        , Network.Google.Resource.AdExchangeBuyer2.Bidders.Accounts.FilterSets.NonBillableWinningBids.List
+        , Network.Google.Resource.AdExchangeBuyer2.Bidders.FilterSets.BidMetrics.List
+        , Network.Google.Resource.AdExchangeBuyer2.Bidders.FilterSets.BidResponseErrors.List
+        , Network.Google.Resource.AdExchangeBuyer2.Bidders.FilterSets.BidResponsesWithoutBids.List
+        , Network.Google.Resource.AdExchangeBuyer2.Bidders.FilterSets.Create
+        , Network.Google.Resource.AdExchangeBuyer2.Bidders.FilterSets.Delete
+        , Network.Google.Resource.AdExchangeBuyer2.Bidders.FilterSets.FilteredBidRequests.List
+        , Network.Google.Resource.AdExchangeBuyer2.Bidders.FilterSets.FilteredBids.Creatives.List
+        , Network.Google.Resource.AdExchangeBuyer2.Bidders.FilterSets.FilteredBids.Details.List
+        , Network.Google.Resource.AdExchangeBuyer2.Bidders.FilterSets.FilteredBids.List
+        , Network.Google.Resource.AdExchangeBuyer2.Bidders.FilterSets.Get
+        , Network.Google.Resource.AdExchangeBuyer2.Bidders.FilterSets.ImpressionMetrics.List
+        , Network.Google.Resource.AdExchangeBuyer2.Bidders.FilterSets.List
+        , Network.Google.Resource.AdExchangeBuyer2.Bidders.FilterSets.LosingBids.List
+        , Network.Google.Resource.AdExchangeBuyer2.Bidders.FilterSets.NonBillableWinningBids.List
+
+    other-modules:
+          Network.Google.AdExchangeBuyer2.Types.Product
+        , Network.Google.AdExchangeBuyer2.Types.Sum
+
+    build-depends:
+          gogol-core == 0.4.0.*
+        , base       >= 4.7 && < 5

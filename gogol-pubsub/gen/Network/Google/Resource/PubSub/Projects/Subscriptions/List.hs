@@ -22,7 +22,7 @@
 --
 -- Lists matching subscriptions.
 --
--- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.list@.
+-- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.list@.
 module Network.Google.Resource.PubSub.Projects.Subscriptions.List
     (
     -- * REST Resource
@@ -36,10 +36,8 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.List
     , pslXgafv
     , pslUploadProtocol
     , pslProject
-    , pslPp
     , pslAccessToken
     , pslUploadType
-    , pslBearerToken
     , pslPageToken
     , pslPageSize
     , pslCallback
@@ -54,29 +52,25 @@ type ProjectsSubscriptionsListResource =
      "v1" :>
        Capture "project" Text :>
          "subscriptions" :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" (Textual Int32) :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] ListSubscriptionsResponse
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "pageSize" (Textual Int32) :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] ListSubscriptionsResponse
 
 -- | Lists matching subscriptions.
 --
 -- /See:/ 'projectsSubscriptionsList' smart constructor.
 data ProjectsSubscriptionsList = ProjectsSubscriptionsList'
-    { _pslXgafv          :: !(Maybe Text)
+    { _pslXgafv          :: !(Maybe Xgafv)
     , _pslUploadProtocol :: !(Maybe Text)
     , _pslProject        :: !Text
-    , _pslPp             :: !Bool
     , _pslAccessToken    :: !(Maybe Text)
     , _pslUploadType     :: !(Maybe Text)
-    , _pslBearerToken    :: !(Maybe Text)
     , _pslPageToken      :: !(Maybe Text)
     , _pslPageSize       :: !(Maybe (Textual Int32))
     , _pslCallback       :: !(Maybe Text)
@@ -92,13 +86,9 @@ data ProjectsSubscriptionsList = ProjectsSubscriptionsList'
 --
 -- * 'pslProject'
 --
--- * 'pslPp'
---
 -- * 'pslAccessToken'
 --
 -- * 'pslUploadType'
---
--- * 'pslBearerToken'
 --
 -- * 'pslPageToken'
 --
@@ -113,17 +103,15 @@ projectsSubscriptionsList pPslProject_ =
     { _pslXgafv = Nothing
     , _pslUploadProtocol = Nothing
     , _pslProject = pPslProject_
-    , _pslPp = True
     , _pslAccessToken = Nothing
     , _pslUploadType = Nothing
-    , _pslBearerToken = Nothing
     , _pslPageToken = Nothing
     , _pslPageSize = Nothing
     , _pslCallback = Nothing
     }
 
 -- | V1 error format.
-pslXgafv :: Lens' ProjectsSubscriptionsList (Maybe Text)
+pslXgafv :: Lens' ProjectsSubscriptionsList (Maybe Xgafv)
 pslXgafv = lens _pslXgafv (\ s a -> s{_pslXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -132,14 +120,11 @@ pslUploadProtocol
   = lens _pslUploadProtocol
       (\ s a -> s{_pslUploadProtocol = a})
 
--- | The name of the cloud project that subscriptions belong to.
+-- | The name of the project in which to list subscriptions. Format is
+-- \`projects\/{project-id}\`.
 pslProject :: Lens' ProjectsSubscriptionsList Text
 pslProject
   = lens _pslProject (\ s a -> s{_pslProject = a})
-
--- | Pretty-print response.
-pslPp :: Lens' ProjectsSubscriptionsList Bool
-pslPp = lens _pslPp (\ s a -> s{_pslPp = a})
 
 -- | OAuth access token.
 pslAccessToken :: Lens' ProjectsSubscriptionsList (Maybe Text)
@@ -152,12 +137,6 @@ pslUploadType :: Lens' ProjectsSubscriptionsList (Maybe Text)
 pslUploadType
   = lens _pslUploadType
       (\ s a -> s{_pslUploadType = a})
-
--- | OAuth bearer token.
-pslBearerToken :: Lens' ProjectsSubscriptionsList (Maybe Text)
-pslBearerToken
-  = lens _pslBearerToken
-      (\ s a -> s{_pslBearerToken = a})
 
 -- | The value returned by the last \`ListSubscriptionsResponse\`; indicates
 -- that this is a continuation of a prior \`ListSubscriptions\` call, and
@@ -186,10 +165,8 @@ instance GoogleRequest ProjectsSubscriptionsList
                "https://www.googleapis.com/auth/pubsub"]
         requestClient ProjectsSubscriptionsList'{..}
           = go _pslProject _pslXgafv _pslUploadProtocol
-              (Just _pslPp)
               _pslAccessToken
               _pslUploadType
-              _pslBearerToken
               _pslPageToken
               _pslPageSize
               _pslCallback

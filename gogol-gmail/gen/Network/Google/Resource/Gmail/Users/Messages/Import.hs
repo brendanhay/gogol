@@ -143,8 +143,7 @@ umiProcessForCalendar
       (\ s a -> s{_umiProcessForCalendar = a})
 
 -- | Mark the email as permanently deleted (not TRASH) and only visible in
--- Google Apps Vault to a Vault administrator. Only used for Google Apps
--- for Work accounts.
+-- Google Vault to a Vault administrator. Only used for G Suite accounts.
 umiDeleted :: Lens' UsersMessagesImport Bool
 umiDeleted
   = lens _umiDeleted (\ s a -> s{_umiDeleted = a})

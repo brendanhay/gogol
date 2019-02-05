@@ -22,7 +22,7 @@
 --
 -- Failover the instance to its failover replica instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.instances.failover@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.instances.failover@.
 module Network.Google.Resource.SQL.Instances.Failover
     (
     -- * REST Resource

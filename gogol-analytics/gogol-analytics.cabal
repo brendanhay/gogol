@@ -1,5 +1,5 @@
 name:                  gogol-analytics
-version:               0.1.1
+version:               0.4.0
 synopsis:              Google Analytics SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -11,7 +11,7 @@ copyright:             Copyright (c) 2015-2016 Brendan Hay
 category:              Network, Google, Cloud
 build-type:            Simple
 cabal-version:         >= 1.10
-extra-source-files:    README.md
+extra-source-files:    README.md src/.gitkeep
 
 description:
     Views and manages your Google Analytics data.
@@ -44,6 +44,7 @@ library
         , Network.Google.Resource.Analytics.Management.AccountUserLinks.List
         , Network.Google.Resource.Analytics.Management.AccountUserLinks.Update
         , Network.Google.Resource.Analytics.Management.Accounts.List
+        , Network.Google.Resource.Analytics.Management.ClientId.HashClientId
         , Network.Google.Resource.Analytics.Management.CustomDataSources.List
         , Network.Google.Resource.Analytics.Management.CustomDimensions.Get
         , Network.Google.Resource.Analytics.Management.CustomDimensions.Insert
@@ -88,6 +89,7 @@ library
         , Network.Google.Resource.Analytics.Management.ProFiles.List
         , Network.Google.Resource.Analytics.Management.ProFiles.Patch
         , Network.Google.Resource.Analytics.Management.ProFiles.Update
+        , Network.Google.Resource.Analytics.Management.RemarketingAudience.Delete
         , Network.Google.Resource.Analytics.Management.RemarketingAudience.Get
         , Network.Google.Resource.Analytics.Management.RemarketingAudience.Insert
         , Network.Google.Resource.Analytics.Management.RemarketingAudience.List
@@ -119,11 +121,13 @@ library
         , Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Update
         , Network.Google.Resource.Analytics.Metadata.Columns.List
         , Network.Google.Resource.Analytics.Provisioning.CreateAccountTicket
+        , Network.Google.Resource.Analytics.Provisioning.CreateAccountTree
+        , Network.Google.Resource.Analytics.UserDeletion.UserDeletionRequest.Upsert
 
     other-modules:
           Network.Google.Analytics.Types.Product
         , Network.Google.Analytics.Types.Sum
 
     build-depends:
-          gogol-core == 0.1.1.*
+          gogol-core == 0.4.0.*
         , base       >= 4.7 && < 5

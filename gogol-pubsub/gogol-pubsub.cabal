@@ -1,5 +1,5 @@
 name:                  gogol-pubsub
-version:               0.1.1
+version:               0.4.0
 synopsis:              Google Cloud Pub/Sub SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -11,7 +11,7 @@ copyright:             Copyright (c) 2015-2016 Brendan Hay
 category:              Network, Google, Cloud
 build-type:            Simple
 cabal-version:         >= 1.10
-extra-source-files:    README.md
+extra-source-files:    README.md src/.gitkeep
 
 description:
     Provides reliable, many-to-many, asynchronous messaging between
@@ -36,7 +36,12 @@ library
     exposed-modules:
           Network.Google.PubSub
         , Network.Google.PubSub.Types
+        , Network.Google.Resource.PubSub.Projects.Snapshots.Create
+        , Network.Google.Resource.PubSub.Projects.Snapshots.Delete
+        , Network.Google.Resource.PubSub.Projects.Snapshots.Get
         , Network.Google.Resource.PubSub.Projects.Snapshots.GetIAMPolicy
+        , Network.Google.Resource.PubSub.Projects.Snapshots.List
+        , Network.Google.Resource.PubSub.Projects.Snapshots.Patch
         , Network.Google.Resource.PubSub.Projects.Snapshots.SetIAMPolicy
         , Network.Google.Resource.PubSub.Projects.Snapshots.TestIAMPermissions
         , Network.Google.Resource.PubSub.Projects.Subscriptions.Acknowledge
@@ -47,7 +52,9 @@ library
         , Network.Google.Resource.PubSub.Projects.Subscriptions.List
         , Network.Google.Resource.PubSub.Projects.Subscriptions.ModifyAckDeadline
         , Network.Google.Resource.PubSub.Projects.Subscriptions.ModifyPushConfig
+        , Network.Google.Resource.PubSub.Projects.Subscriptions.Patch
         , Network.Google.Resource.PubSub.Projects.Subscriptions.Pull
+        , Network.Google.Resource.PubSub.Projects.Subscriptions.Seek
         , Network.Google.Resource.PubSub.Projects.Subscriptions.SetIAMPolicy
         , Network.Google.Resource.PubSub.Projects.Subscriptions.TestIAMPermissions
         , Network.Google.Resource.PubSub.Projects.Topics.Create
@@ -55,8 +62,10 @@ library
         , Network.Google.Resource.PubSub.Projects.Topics.Get
         , Network.Google.Resource.PubSub.Projects.Topics.GetIAMPolicy
         , Network.Google.Resource.PubSub.Projects.Topics.List
+        , Network.Google.Resource.PubSub.Projects.Topics.Patch
         , Network.Google.Resource.PubSub.Projects.Topics.Publish
         , Network.Google.Resource.PubSub.Projects.Topics.SetIAMPolicy
+        , Network.Google.Resource.PubSub.Projects.Topics.Snapshots.List
         , Network.Google.Resource.PubSub.Projects.Topics.Subscriptions.List
         , Network.Google.Resource.PubSub.Projects.Topics.TestIAMPermissions
 
@@ -65,5 +74,5 @@ library
         , Network.Google.PubSub.Types.Sum
 
     build-depends:
-          gogol-core == 0.1.1.*
+          gogol-core == 0.4.0.*
         , base       >= 4.7 && < 5

@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'ConversionsBatchinsert' request conforms to.
 type ConversionsBatchinsertResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "conversions" :>

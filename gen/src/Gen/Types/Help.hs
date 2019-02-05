@@ -15,30 +15,33 @@ module Gen.Types.Help
     , rawHelpText
     ) where
 
-import           Data.Aeson
-import           Data.Char          (isSpace)
-import           Data.String
-import           Data.Text          (Text)
-import qualified Data.Text          as Text
-import           Text.Pandoc
-import           Text.Pandoc.Pretty
+import Data.Aeson
+import Data.Char   (isSpace)
+import Data.String
+import Data.Text   (Text)
+import qualified Data.Text as T
+
+import Text.Pandoc        as Pandoc
+import Text.Pandoc.Pretty
+
+import qualified Data.Text as Text
 
 data Help
-    = Help [Help]
-    | Pan  Pandoc
-    | Raw  Text
+    = Help ![Help]
+    | Pan  !Pandoc !Text
+    | Raw  !Text
       deriving (Eq)
 
 instance Monoid Help where
     mempty      = Help []
     mappend x y =
         case (x, y) of
-            (Help a, Help b) -> Help (a <> b)
-            (Pan  a, Pan  b) -> Pan  (a <> b)
-            (Raw  a, Raw  b) -> Raw  (a <> b)
-            (Help a, b)      -> Help (a <> [b])
-            (a,      Help b) -> Help (a : b)
-            (a,      b)      -> Help [a, b]
+            (Help a,    Help b)    -> Help (a <> b)
+            (Pan  a a', Pan  b b') -> Pan  (a <> b) (a' <> b')
+            (Raw  a,    Raw  b)    -> Raw  (a <> b)
+            (Help a,    b)         -> Help (a <> [b])
+            (a,         Help b)    -> Help (a : b)
+            (a,         b)         -> Help [a, b]
 
 -- | Empty Show instance to avoid verbose debugging output.
 instance Show Help where
@@ -51,11 +54,10 @@ rawHelpText :: Text -> Help
 rawHelpText = Raw
 
 instance FromJSON Help where
-    parseJSON = withText "help" $
-        either (fail . show) pure
-            . fmap Pan
-            . readHtml def
-            . Text.unpack
+    parseJSON = withText "help" $ \t ->
+        case Pandoc.readHtml def (T.unpack t) of
+            Left  e -> fail (show e)
+            Right x -> pure $! Pan x t
 
 instance ToJSON Help where
     toJSON = toJSON
@@ -80,9 +82,9 @@ instance ToJSON Below where
 
 flatten :: Help -> String
 flatten = \case
-    Help xs -> foldMap flatten xs
-    Pan  d  -> writeHaddock def d
-    Raw  t  -> Text.unpack t
+    Help xs  -> foldMap flatten xs
+    Raw  t   -> Text.unpack t
+    Pan  d _t -> Pandoc.writeHaddock def d
 
 wrap :: String -> String -> Text
 wrap sep =

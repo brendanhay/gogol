@@ -36,16 +36,14 @@ module Network.Google.Resource.Classroom.Courses.Aliases.List
     , CoursesAliasesList
 
     -- * Request Lenses
-    , calXgafv
-    , calUploadProtocol
-    , calPp
-    , calCourseId
-    , calAccessToken
-    , calUploadType
-    , calBearerToken
-    , calPageToken
-    , calPageSize
-    , calCallback
+    , calaXgafv
+    , calaUploadProtocol
+    , calaCourseId
+    , calaAccessToken
+    , calaUploadType
+    , calaPageToken
+    , calaPageSize
+    , calaCallback
     ) where
 
 import           Network.Google.Classroom.Types
@@ -58,17 +56,15 @@ type CoursesAliasesListResource =
        "courses" :>
          Capture "courseId" Text :>
            "aliases" :>
-             QueryParam "$.xgafv" Text :>
+             QueryParam "$.xgafv" Xgafv :>
                QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "pageSize" (Textual Int32) :>
-                             QueryParam "callback" Text :>
-                               QueryParam "alt" AltJSON :>
-                                 Get '[JSON] ListCourseAliasesResponse
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "pageSize" (Textual Int32) :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] ListCourseAliasesResponse
 
 -- | Returns a list of aliases for a course. This method returns the
 -- following error codes: * \`PERMISSION_DENIED\` if the requesting user is
@@ -77,115 +73,99 @@ type CoursesAliasesListResource =
 --
 -- /See:/ 'coursesAliasesList' smart constructor.
 data CoursesAliasesList = CoursesAliasesList'
-    { _calXgafv          :: !(Maybe Text)
-    , _calUploadProtocol :: !(Maybe Text)
-    , _calPp             :: !Bool
-    , _calCourseId       :: !Text
-    , _calAccessToken    :: !(Maybe Text)
-    , _calUploadType     :: !(Maybe Text)
-    , _calBearerToken    :: !(Maybe Text)
-    , _calPageToken      :: !(Maybe Text)
-    , _calPageSize       :: !(Maybe (Textual Int32))
-    , _calCallback       :: !(Maybe Text)
+    { _calaXgafv          :: !(Maybe Xgafv)
+    , _calaUploadProtocol :: !(Maybe Text)
+    , _calaCourseId       :: !Text
+    , _calaAccessToken    :: !(Maybe Text)
+    , _calaUploadType     :: !(Maybe Text)
+    , _calaPageToken      :: !(Maybe Text)
+    , _calaPageSize       :: !(Maybe (Textual Int32))
+    , _calaCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CoursesAliasesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'calXgafv'
+-- * 'calaXgafv'
 --
--- * 'calUploadProtocol'
+-- * 'calaUploadProtocol'
 --
--- * 'calPp'
+-- * 'calaCourseId'
 --
--- * 'calCourseId'
+-- * 'calaAccessToken'
 --
--- * 'calAccessToken'
+-- * 'calaUploadType'
 --
--- * 'calUploadType'
+-- * 'calaPageToken'
 --
--- * 'calBearerToken'
+-- * 'calaPageSize'
 --
--- * 'calPageToken'
---
--- * 'calPageSize'
---
--- * 'calCallback'
+-- * 'calaCallback'
 coursesAliasesList
-    :: Text -- ^ 'calCourseId'
+    :: Text -- ^ 'calaCourseId'
     -> CoursesAliasesList
-coursesAliasesList pCalCourseId_ =
+coursesAliasesList pCalaCourseId_ =
     CoursesAliasesList'
-    { _calXgafv = Nothing
-    , _calUploadProtocol = Nothing
-    , _calPp = True
-    , _calCourseId = pCalCourseId_
-    , _calAccessToken = Nothing
-    , _calUploadType = Nothing
-    , _calBearerToken = Nothing
-    , _calPageToken = Nothing
-    , _calPageSize = Nothing
-    , _calCallback = Nothing
+    { _calaXgafv = Nothing
+    , _calaUploadProtocol = Nothing
+    , _calaCourseId = pCalaCourseId_
+    , _calaAccessToken = Nothing
+    , _calaUploadType = Nothing
+    , _calaPageToken = Nothing
+    , _calaPageSize = Nothing
+    , _calaCallback = Nothing
     }
 
 -- | V1 error format.
-calXgafv :: Lens' CoursesAliasesList (Maybe Text)
-calXgafv = lens _calXgafv (\ s a -> s{_calXgafv = a})
+calaXgafv :: Lens' CoursesAliasesList (Maybe Xgafv)
+calaXgafv
+  = lens _calaXgafv (\ s a -> s{_calaXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-calUploadProtocol :: Lens' CoursesAliasesList (Maybe Text)
-calUploadProtocol
-  = lens _calUploadProtocol
-      (\ s a -> s{_calUploadProtocol = a})
-
--- | Pretty-print response.
-calPp :: Lens' CoursesAliasesList Bool
-calPp = lens _calPp (\ s a -> s{_calPp = a})
+calaUploadProtocol :: Lens' CoursesAliasesList (Maybe Text)
+calaUploadProtocol
+  = lens _calaUploadProtocol
+      (\ s a -> s{_calaUploadProtocol = a})
 
 -- | The identifier of the course. This identifier can be either the
 -- Classroom-assigned identifier or an alias.
-calCourseId :: Lens' CoursesAliasesList Text
-calCourseId
-  = lens _calCourseId (\ s a -> s{_calCourseId = a})
+calaCourseId :: Lens' CoursesAliasesList Text
+calaCourseId
+  = lens _calaCourseId (\ s a -> s{_calaCourseId = a})
 
 -- | OAuth access token.
-calAccessToken :: Lens' CoursesAliasesList (Maybe Text)
-calAccessToken
-  = lens _calAccessToken
-      (\ s a -> s{_calAccessToken = a})
+calaAccessToken :: Lens' CoursesAliasesList (Maybe Text)
+calaAccessToken
+  = lens _calaAccessToken
+      (\ s a -> s{_calaAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-calUploadType :: Lens' CoursesAliasesList (Maybe Text)
-calUploadType
-  = lens _calUploadType
-      (\ s a -> s{_calUploadType = a})
-
--- | OAuth bearer token.
-calBearerToken :: Lens' CoursesAliasesList (Maybe Text)
-calBearerToken
-  = lens _calBearerToken
-      (\ s a -> s{_calBearerToken = a})
+calaUploadType :: Lens' CoursesAliasesList (Maybe Text)
+calaUploadType
+  = lens _calaUploadType
+      (\ s a -> s{_calaUploadType = a})
 
 -- | nextPageToken value returned from a previous list call, indicating that
 -- the subsequent page of results should be returned. The list request must
 -- be otherwise identical to the one that resulted in this token.
-calPageToken :: Lens' CoursesAliasesList (Maybe Text)
-calPageToken
-  = lens _calPageToken (\ s a -> s{_calPageToken = a})
+calaPageToken :: Lens' CoursesAliasesList (Maybe Text)
+calaPageToken
+  = lens _calaPageToken
+      (\ s a -> s{_calaPageToken = a})
 
 -- | Maximum number of items to return. Zero or unspecified indicates that
 -- the server may assign a maximum. The server may return fewer than the
 -- specified number of results.
-calPageSize :: Lens' CoursesAliasesList (Maybe Int32)
-calPageSize
-  = lens _calPageSize (\ s a -> s{_calPageSize = a}) .
-      mapping _Coerce
+calaPageSize :: Lens' CoursesAliasesList (Maybe Int32)
+calaPageSize
+  = lens _calaPageSize (\ s a -> s{_calaPageSize = a})
+      . mapping _Coerce
 
 -- | JSONP
-calCallback :: Lens' CoursesAliasesList (Maybe Text)
-calCallback
-  = lens _calCallback (\ s a -> s{_calCallback = a})
+calaCallback :: Lens' CoursesAliasesList (Maybe Text)
+calaCallback
+  = lens _calaCallback (\ s a -> s{_calaCallback = a})
 
 instance GoogleRequest CoursesAliasesList where
         type Rs CoursesAliasesList =
@@ -194,14 +174,12 @@ instance GoogleRequest CoursesAliasesList where
              '["https://www.googleapis.com/auth/classroom.courses",
                "https://www.googleapis.com/auth/classroom.courses.readonly"]
         requestClient CoursesAliasesList'{..}
-          = go _calCourseId _calXgafv _calUploadProtocol
-              (Just _calPp)
-              _calAccessToken
-              _calUploadType
-              _calBearerToken
-              _calPageToken
-              _calPageSize
-              _calCallback
+          = go _calaCourseId _calaXgafv _calaUploadProtocol
+              _calaAccessToken
+              _calaUploadType
+              _calaPageToken
+              _calaPageSize
+              _calaCallback
               (Just AltJSON)
               classroomService
           where go

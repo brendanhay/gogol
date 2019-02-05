@@ -45,7 +45,7 @@ import           Network.Google.ShoppingContent.Types
 -- 'OrdersShiplineitems' request conforms to.
 type OrdersShiplineitemsResource =
      "content" :>
-       "v2" :>
+       "v2.1" :>
          Capture "merchantId" (Textual Word64) :>
            "orders" :>
              Capture "orderId" Text :>
@@ -84,7 +84,8 @@ ordersShiplineitems pOsMerchantId_ pOsPayload_ pOsOrderId_ =
     , _osOrderId = pOsOrderId_
     }
 
--- | The ID of the managing account.
+-- | The ID of the account that manages the order. This cannot be a
+-- multi-client account.
 osMerchantId :: Lens' OrdersShiplineitems Word64
 osMerchantId
   = lens _osMerchantId (\ s a -> s{_osMerchantId = a})

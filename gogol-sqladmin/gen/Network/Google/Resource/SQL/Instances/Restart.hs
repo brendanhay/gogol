@@ -22,7 +22,7 @@
 --
 -- Restarts a Cloud SQL instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.instances.restart@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.instances.restart@.
 module Network.Google.Resource.SQL.Instances.Restart
     (
     -- * REST Resource

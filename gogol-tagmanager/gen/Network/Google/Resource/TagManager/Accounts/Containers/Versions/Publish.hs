@@ -22,7 +22,7 @@
 --
 -- Publishes a Container Version.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.containers.versions.publish@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v2/ Tag Manager API Reference> for @tagmanager.accounts.containers.versions.publish@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Publish
     (
     -- * REST Resource
@@ -33,10 +33,8 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Publish
     , AccountsContainersVersionsPublish
 
     -- * Request Lenses
-    , acvpContainerId
+    , acvpPath
     , acvpFingerprint
-    , acvpContainerVersionId
-    , acvpAccountId
     ) where
 
 import           Network.Google.Prelude
@@ -46,57 +44,40 @@ import           Network.Google.TagManager.Types
 -- 'AccountsContainersVersionsPublish' request conforms to.
 type AccountsContainersVersionsPublishResource =
      "tagmanager" :>
-       "v1" :>
-         "accounts" :>
-           Capture "accountId" Text :>
-             "containers" :>
-               Capture "containerId" Text :>
-                 "versions" :>
-                   Capture "containerVersionId" Text :>
-                     "publish" :>
-                       QueryParam "fingerprint" Text :>
-                         QueryParam "alt" AltJSON :>
-                           Post '[JSON] PublishContainerVersionResponse
+       "v2" :>
+         CaptureMode "path" "publish" Text :>
+           QueryParam "fingerprint" Text :>
+             QueryParam "alt" AltJSON :>
+               Post '[JSON] PublishContainerVersionResponse
 
 -- | Publishes a Container Version.
 --
 -- /See:/ 'accountsContainersVersionsPublish' smart constructor.
 data AccountsContainersVersionsPublish = AccountsContainersVersionsPublish'
-    { _acvpContainerId        :: !Text
-    , _acvpFingerprint        :: !(Maybe Text)
-    , _acvpContainerVersionId :: !Text
-    , _acvpAccountId          :: !Text
+    { _acvpPath        :: !Text
+    , _acvpFingerprint :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersVersionsPublish' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acvpContainerId'
+-- * 'acvpPath'
 --
 -- * 'acvpFingerprint'
---
--- * 'acvpContainerVersionId'
---
--- * 'acvpAccountId'
 accountsContainersVersionsPublish
-    :: Text -- ^ 'acvpContainerId'
-    -> Text -- ^ 'acvpContainerVersionId'
-    -> Text -- ^ 'acvpAccountId'
+    :: Text -- ^ 'acvpPath'
     -> AccountsContainersVersionsPublish
-accountsContainersVersionsPublish pAcvpContainerId_ pAcvpContainerVersionId_ pAcvpAccountId_ =
+accountsContainersVersionsPublish pAcvpPath_ =
     AccountsContainersVersionsPublish'
-    { _acvpContainerId = pAcvpContainerId_
+    { _acvpPath = pAcvpPath_
     , _acvpFingerprint = Nothing
-    , _acvpContainerVersionId = pAcvpContainerVersionId_
-    , _acvpAccountId = pAcvpAccountId_
     }
 
--- | The GTM Container ID.
-acvpContainerId :: Lens' AccountsContainersVersionsPublish Text
-acvpContainerId
-  = lens _acvpContainerId
-      (\ s a -> s{_acvpContainerId = a})
+-- | GTM ContainerVersion\'s API relative path. Example:
+-- accounts\/{account_id}\/containers\/{container_id}\/versions\/{version_id}
+acvpPath :: Lens' AccountsContainersVersionsPublish Text
+acvpPath = lens _acvpPath (\ s a -> s{_acvpPath = a})
 
 -- | When provided, this fingerprint must match the fingerprint of the
 -- container version in storage.
@@ -105,18 +86,6 @@ acvpFingerprint
   = lens _acvpFingerprint
       (\ s a -> s{_acvpFingerprint = a})
 
--- | The GTM Container Version ID.
-acvpContainerVersionId :: Lens' AccountsContainersVersionsPublish Text
-acvpContainerVersionId
-  = lens _acvpContainerVersionId
-      (\ s a -> s{_acvpContainerVersionId = a})
-
--- | The GTM Account ID.
-acvpAccountId :: Lens' AccountsContainersVersionsPublish Text
-acvpAccountId
-  = lens _acvpAccountId
-      (\ s a -> s{_acvpAccountId = a})
-
 instance GoogleRequest
          AccountsContainersVersionsPublish where
         type Rs AccountsContainersVersionsPublish =
@@ -124,10 +93,7 @@ instance GoogleRequest
         type Scopes AccountsContainersVersionsPublish =
              '["https://www.googleapis.com/auth/tagmanager.publish"]
         requestClient AccountsContainersVersionsPublish'{..}
-          = go _acvpAccountId _acvpContainerId
-              _acvpContainerVersionId
-              _acvpFingerprint
-              (Just AltJSON)
+          = go _acvpPath _acvpFingerprint (Just AltJSON)
               tagManagerService
           where go
                   = buildClient

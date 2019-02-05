@@ -38,9 +38,11 @@ module Network.Google.Resource.YouTube.Videos.List
     , vlRegionCode
     , vlLocale
     , vlMyRating
+    , vlMaxHeight
     , vlHl
     , vlOnBehalfOfContentOwner
     , vlVideoCategoryId
+    , vlMaxWidth
     , vlId
     , vlPageToken
     , vlMaxResults
@@ -60,14 +62,16 @@ type VideosListResource =
                QueryParam "regionCode" Text :>
                  QueryParam "locale" Text :>
                    QueryParam "myRating" VideosListMyRating :>
-                     QueryParam "hl" Text :>
-                       QueryParam "onBehalfOfContentOwner" Text :>
-                         QueryParam "videoCategoryId" Text :>
-                           QueryParam "id" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "maxResults" (Textual Word32) :>
-                                 QueryParam "alt" AltJSON :>
-                                   Get '[JSON] VideoListResponse
+                     QueryParam "maxHeight" (Textual Word32) :>
+                       QueryParam "hl" Text :>
+                         QueryParam "onBehalfOfContentOwner" Text :>
+                           QueryParam "videoCategoryId" Text :>
+                             QueryParam "maxWidth" (Textual Word32) :>
+                               QueryParam "id" Text :>
+                                 QueryParam "pageToken" Text :>
+                                   QueryParam "maxResults" (Textual Word32) :>
+                                     QueryParam "alt" AltJSON :>
+                                       Get '[JSON] VideoListResponse
 
 -- | Returns a list of videos that match the API request parameters.
 --
@@ -78,9 +82,11 @@ data VideosList = VideosList'
     , _vlRegionCode             :: !(Maybe Text)
     , _vlLocale                 :: !(Maybe Text)
     , _vlMyRating               :: !(Maybe VideosListMyRating)
+    , _vlMaxHeight              :: !(Maybe (Textual Word32))
     , _vlHl                     :: !(Maybe Text)
     , _vlOnBehalfOfContentOwner :: !(Maybe Text)
     , _vlVideoCategoryId        :: !Text
+    , _vlMaxWidth               :: !(Maybe (Textual Word32))
     , _vlId                     :: !(Maybe Text)
     , _vlPageToken              :: !(Maybe Text)
     , _vlMaxResults             :: !(Textual Word32)
@@ -100,11 +106,15 @@ data VideosList = VideosList'
 --
 -- * 'vlMyRating'
 --
+-- * 'vlMaxHeight'
+--
 -- * 'vlHl'
 --
 -- * 'vlOnBehalfOfContentOwner'
 --
 -- * 'vlVideoCategoryId'
+--
+-- * 'vlMaxWidth'
 --
 -- * 'vlId'
 --
@@ -121,9 +131,11 @@ videosList pVlPart_ =
     , _vlRegionCode = Nothing
     , _vlLocale = Nothing
     , _vlMyRating = Nothing
+    , _vlMaxHeight = Nothing
     , _vlHl = Nothing
     , _vlOnBehalfOfContentOwner = Nothing
     , _vlVideoCategoryId = "0"
+    , _vlMaxWidth = Nothing
     , _vlId = Nothing
     , _vlPageToken = Nothing
     , _vlMaxResults = 5
@@ -161,6 +173,14 @@ vlMyRating :: Lens' VideosList (Maybe VideosListMyRating)
 vlMyRating
   = lens _vlMyRating (\ s a -> s{_vlMyRating = a})
 
+-- | The maxHeight parameter specifies a maximum height of the embedded
+-- player. If maxWidth is provided, maxHeight may not be reached in order
+-- to not violate the width request.
+vlMaxHeight :: Lens' VideosList (Maybe Word32)
+vlMaxHeight
+  = lens _vlMaxHeight (\ s a -> s{_vlMaxHeight = a}) .
+      mapping _Coerce
+
 -- | The hl parameter instructs the API to retrieve localized resource
 -- metadata for a specific application language that the YouTube website
 -- supports. The parameter value must be a language code included in the
@@ -196,6 +216,14 @@ vlVideoCategoryId
   = lens _vlVideoCategoryId
       (\ s a -> s{_vlVideoCategoryId = a})
 
+-- | The maxWidth parameter specifies a maximum width of the embedded player.
+-- If maxHeight is provided, maxWidth may not be reached in order to not
+-- violate the height request.
+vlMaxWidth :: Lens' VideosList (Maybe Word32)
+vlMaxWidth
+  = lens _vlMaxWidth (\ s a -> s{_vlMaxWidth = a}) .
+      mapping _Coerce
+
 -- | The id parameter specifies a comma-separated list of the YouTube video
 -- ID(s) for the resource(s) that are being retrieved. In a video resource,
 -- the id property specifies the video\'s ID.
@@ -206,16 +234,16 @@ vlId = lens _vlId (\ s a -> s{_vlId = a})
 -- that should be returned. In an API response, the nextPageToken and
 -- prevPageToken properties identify other pages that could be retrieved.
 -- Note: This parameter is supported for use in conjunction with the
--- myRating parameter, but it is not supported for use in conjunction with
--- the id parameter.
+-- myRating and chart parameters, but it is not supported for use in
+-- conjunction with the id parameter.
 vlPageToken :: Lens' VideosList (Maybe Text)
 vlPageToken
   = lens _vlPageToken (\ s a -> s{_vlPageToken = a})
 
 -- | The maxResults parameter specifies the maximum number of items that
 -- should be returned in the result set. Note: This parameter is supported
--- for use in conjunction with the myRating parameter, but it is not
--- supported for use in conjunction with the id parameter.
+-- for use in conjunction with the myRating and chart parameters, but it is
+-- not supported for use in conjunction with the id parameter.
 vlMaxResults :: Lens' VideosList Word32
 vlMaxResults
   = lens _vlMaxResults (\ s a -> s{_vlMaxResults = a})
@@ -231,9 +259,11 @@ instance GoogleRequest VideosList where
         requestClient VideosList'{..}
           = go (Just _vlPart) _vlChart _vlRegionCode _vlLocale
               _vlMyRating
+              _vlMaxHeight
               _vlHl
               _vlOnBehalfOfContentOwner
               (Just _vlVideoCategoryId)
+              _vlMaxWidth
               _vlId
               _vlPageToken
               (Just _vlMaxResults)

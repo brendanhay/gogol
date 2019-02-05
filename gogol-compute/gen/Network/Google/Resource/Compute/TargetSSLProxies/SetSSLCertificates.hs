@@ -33,6 +33,7 @@ module Network.Google.Resource.Compute.TargetSSLProxies.SetSSLCertificates
     , TargetSSLProxiesSetSSLCertificates
 
     -- * Request Lenses
+    , tspsscRequestId
     , tspsscProject
     , tspsscPayload
     , tspsscTargetSSLProxy
@@ -52,16 +53,18 @@ type TargetSSLProxiesSetSSLCertificatesResource =
                "targetSslProxies" :>
                  Capture "targetSslProxy" Text :>
                    "setSslCertificates" :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON]
-                         TargetSSLProxiesSetSSLCertificatesRequest
-                         :> Post '[JSON] Operation
+                     QueryParam "requestId" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON]
+                           TargetSSLProxiesSetSSLCertificatesRequest
+                           :> Post '[JSON] Operation
 
 -- | Changes SslCertificates for TargetSslProxy.
 --
 -- /See:/ 'targetSSLProxiesSetSSLCertificates' smart constructor.
 data TargetSSLProxiesSetSSLCertificates = TargetSSLProxiesSetSSLCertificates'
-    { _tspsscProject        :: !Text
+    { _tspsscRequestId      :: !(Maybe Text)
+    , _tspsscProject        :: !Text
     , _tspsscPayload        :: !TargetSSLProxiesSetSSLCertificatesRequest
     , _tspsscTargetSSLProxy :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -69,6 +72,8 @@ data TargetSSLProxiesSetSSLCertificates = TargetSSLProxiesSetSSLCertificates'
 -- | Creates a value of 'TargetSSLProxiesSetSSLCertificates' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tspsscRequestId'
 --
 -- * 'tspsscProject'
 --
@@ -82,10 +87,26 @@ targetSSLProxiesSetSSLCertificates
     -> TargetSSLProxiesSetSSLCertificates
 targetSSLProxiesSetSSLCertificates pTspsscProject_ pTspsscPayload_ pTspsscTargetSSLProxy_ =
     TargetSSLProxiesSetSSLCertificates'
-    { _tspsscProject = pTspsscProject_
+    { _tspsscRequestId = Nothing
+    , _tspsscProject = pTspsscProject_
     , _tspsscPayload = pTspsscPayload_
     , _tspsscTargetSSLProxy = pTspsscTargetSSLProxy_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+tspsscRequestId :: Lens' TargetSSLProxiesSetSSLCertificates (Maybe Text)
+tspsscRequestId
+  = lens _tspsscRequestId
+      (\ s a -> s{_tspsscRequestId = a})
 
 -- | Project ID for this request.
 tspsscProject :: Lens' TargetSSLProxiesSetSSLCertificates Text
@@ -115,6 +136,7 @@ instance GoogleRequest
                "https://www.googleapis.com/auth/compute"]
         requestClient TargetSSLProxiesSetSSLCertificates'{..}
           = go _tspsscProject _tspsscTargetSSLProxy
+              _tspsscRequestId
               (Just AltJSON)
               _tspsscPayload
               computeService

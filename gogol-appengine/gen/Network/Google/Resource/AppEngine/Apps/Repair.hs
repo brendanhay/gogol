@@ -20,13 +20,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Recreates the required App Engine features for the application in your
--- project, for example a Cloud Storage bucket or App Engine service
+-- Recreates the required App Engine features for the specified App Engine
+-- application, for example a Cloud Storage bucket or App Engine service
 -- account. Use this method if you receive an error message about a missing
--- feature, for example \"*Error retrieving the App Engine service
--- account*\".
+-- feature, for example, Error retrieving the App Engine service account.
 --
--- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ Google App Engine Admin API Reference> for @appengine.apps.repair@.
+-- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ App Engine Admin API Reference> for @appengine.apps.repair@.
 module Network.Google.Resource.AppEngine.Apps.Repair
     (
     -- * REST Resource
@@ -39,11 +38,9 @@ module Network.Google.Resource.AppEngine.Apps.Repair
     -- * Request Lenses
     , arXgafv
     , arUploadProtocol
-    , arPp
     , arAccessToken
     , arUploadType
     , arPayload
-    , arBearerToken
     , arAppsId
     , arCallback
     ) where
@@ -57,32 +54,27 @@ type AppsRepairResource =
      "v1" :>
        "apps" :>
          CaptureMode "appsId" "repair" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] RepairApplicationRequest :>
-                             Post '[JSON] Operation
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] RepairApplicationRequest :>
+                         Post '[JSON] Operation
 
--- | Recreates the required App Engine features for the application in your
--- project, for example a Cloud Storage bucket or App Engine service
+-- | Recreates the required App Engine features for the specified App Engine
+-- application, for example a Cloud Storage bucket or App Engine service
 -- account. Use this method if you receive an error message about a missing
--- feature, for example \"*Error retrieving the App Engine service
--- account*\".
+-- feature, for example, Error retrieving the App Engine service account.
 --
 -- /See:/ 'appsRepair' smart constructor.
 data AppsRepair = AppsRepair'
-    { _arXgafv          :: !(Maybe Text)
+    { _arXgafv          :: !(Maybe Xgafv)
     , _arUploadProtocol :: !(Maybe Text)
-    , _arPp             :: !Bool
     , _arAccessToken    :: !(Maybe Text)
     , _arUploadType     :: !(Maybe Text)
     , _arPayload        :: !RepairApplicationRequest
-    , _arBearerToken    :: !(Maybe Text)
     , _arAppsId         :: !Text
     , _arCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -95,15 +87,11 @@ data AppsRepair = AppsRepair'
 --
 -- * 'arUploadProtocol'
 --
--- * 'arPp'
---
 -- * 'arAccessToken'
 --
 -- * 'arUploadType'
 --
 -- * 'arPayload'
---
--- * 'arBearerToken'
 --
 -- * 'arAppsId'
 --
@@ -116,17 +104,15 @@ appsRepair pArPayload_ pArAppsId_ =
     AppsRepair'
     { _arXgafv = Nothing
     , _arUploadProtocol = Nothing
-    , _arPp = True
     , _arAccessToken = Nothing
     , _arUploadType = Nothing
     , _arPayload = pArPayload_
-    , _arBearerToken = Nothing
     , _arAppsId = pArAppsId_
     , _arCallback = Nothing
     }
 
 -- | V1 error format.
-arXgafv :: Lens' AppsRepair (Maybe Text)
+arXgafv :: Lens' AppsRepair (Maybe Xgafv)
 arXgafv = lens _arXgafv (\ s a -> s{_arXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -134,10 +120,6 @@ arUploadProtocol :: Lens' AppsRepair (Maybe Text)
 arUploadProtocol
   = lens _arUploadProtocol
       (\ s a -> s{_arUploadProtocol = a})
-
--- | Pretty-print response.
-arPp :: Lens' AppsRepair Bool
-arPp = lens _arPp (\ s a -> s{_arPp = a})
 
 -- | OAuth access token.
 arAccessToken :: Lens' AppsRepair (Maybe Text)
@@ -155,14 +137,8 @@ arPayload :: Lens' AppsRepair RepairApplicationRequest
 arPayload
   = lens _arPayload (\ s a -> s{_arPayload = a})
 
--- | OAuth bearer token.
-arBearerToken :: Lens' AppsRepair (Maybe Text)
-arBearerToken
-  = lens _arBearerToken
-      (\ s a -> s{_arBearerToken = a})
-
 -- | Part of \`name\`. Name of the application to repair. Example:
--- \`apps\/myapp\`
+-- apps\/myapp
 arAppsId :: Lens' AppsRepair Text
 arAppsId = lens _arAppsId (\ s a -> s{_arAppsId = a})
 
@@ -177,10 +153,8 @@ instance GoogleRequest AppsRepair where
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient AppsRepair'{..}
           = go _arAppsId _arXgafv _arUploadProtocol
-              (Just _arPp)
               _arAccessToken
               _arUploadType
-              _arBearerToken
               _arCallback
               (Just AltJSON)
               _arPayload

@@ -33,6 +33,7 @@ module Network.Google.Resource.Compute.Firewalls.Delete
     , FirewallsDelete
 
     -- * Request Lenses
+    , fdRequestId
     , fdProject
     , fdFirewall
     ) where
@@ -50,19 +51,23 @@ type FirewallsDeleteResource =
              "global" :>
                "firewalls" :>
                  Capture "firewall" Text :>
-                   QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+                   QueryParam "requestId" Text :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified firewall.
 --
 -- /See:/ 'firewallsDelete' smart constructor.
 data FirewallsDelete = FirewallsDelete'
-    { _fdProject  :: !Text
-    , _fdFirewall :: !Text
+    { _fdRequestId :: !(Maybe Text)
+    , _fdProject   :: !Text
+    , _fdFirewall  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FirewallsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'fdRequestId'
 --
 -- * 'fdProject'
 --
@@ -73,9 +78,24 @@ firewallsDelete
     -> FirewallsDelete
 firewallsDelete pFdProject_ pFdFirewall_ =
     FirewallsDelete'
-    { _fdProject = pFdProject_
+    { _fdRequestId = Nothing
+    , _fdProject = pFdProject_
     , _fdFirewall = pFdFirewall_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+fdRequestId :: Lens' FirewallsDelete (Maybe Text)
+fdRequestId
+  = lens _fdRequestId (\ s a -> s{_fdRequestId = a})
 
 -- | Project ID for this request.
 fdProject :: Lens' FirewallsDelete Text
@@ -93,7 +113,8 @@ instance GoogleRequest FirewallsDelete where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient FirewallsDelete'{..}
-          = go _fdProject _fdFirewall (Just AltJSON)
+          = go _fdProject _fdFirewall _fdRequestId
+              (Just AltJSON)
               computeService
           where go
                   = buildClient

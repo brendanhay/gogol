@@ -34,9 +34,10 @@ module Network.Google.Resource.Compute.Images.Deprecate
     , ImagesDeprecate
 
     -- * Request Lenses
-    , imamImage
-    , imamProject
-    , imamPayload
+    , id1RequestId
+    , id1Image
+    , id1Project
+    , id1Payload
     ) where
 
 import           Network.Google.Compute.Types
@@ -53,55 +54,73 @@ type ImagesDeprecateResource =
                "images" :>
                  Capture "image" Text :>
                    "deprecate" :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] DeprecationStatus :>
-                         Post '[JSON] Operation
+                     QueryParam "requestId" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] DeprecationStatus :>
+                           Post '[JSON] Operation
 
 -- | Sets the deprecation status of an image. If an empty request body is
 -- given, clears the deprecation status instead.
 --
 -- /See:/ 'imagesDeprecate' smart constructor.
 data ImagesDeprecate = ImagesDeprecate'
-    { _imamImage   :: !Text
-    , _imamProject :: !Text
-    , _imamPayload :: !DeprecationStatus
+    { _id1RequestId :: !(Maybe Text)
+    , _id1Image     :: !Text
+    , _id1Project   :: !Text
+    , _id1Payload   :: !DeprecationStatus
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ImagesDeprecate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'imamImage'
+-- * 'id1RequestId'
 --
--- * 'imamProject'
+-- * 'id1Image'
 --
--- * 'imamPayload'
+-- * 'id1Project'
+--
+-- * 'id1Payload'
 imagesDeprecate
-    :: Text -- ^ 'imamImage'
-    -> Text -- ^ 'imamProject'
-    -> DeprecationStatus -- ^ 'imamPayload'
+    :: Text -- ^ 'id1Image'
+    -> Text -- ^ 'id1Project'
+    -> DeprecationStatus -- ^ 'id1Payload'
     -> ImagesDeprecate
-imagesDeprecate pImamImage_ pImamProject_ pImamPayload_ =
+imagesDeprecate pId1Image_ pId1Project_ pId1Payload_ =
     ImagesDeprecate'
-    { _imamImage = pImamImage_
-    , _imamProject = pImamProject_
-    , _imamPayload = pImamPayload_
+    { _id1RequestId = Nothing
+    , _id1Image = pId1Image_
+    , _id1Project = pId1Project_
+    , _id1Payload = pId1Payload_
     }
 
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+id1RequestId :: Lens' ImagesDeprecate (Maybe Text)
+id1RequestId
+  = lens _id1RequestId (\ s a -> s{_id1RequestId = a})
+
 -- | Image name.
-imamImage :: Lens' ImagesDeprecate Text
-imamImage
-  = lens _imamImage (\ s a -> s{_imamImage = a})
+id1Image :: Lens' ImagesDeprecate Text
+id1Image = lens _id1Image (\ s a -> s{_id1Image = a})
 
 -- | Project ID for this request.
-imamProject :: Lens' ImagesDeprecate Text
-imamProject
-  = lens _imamProject (\ s a -> s{_imamProject = a})
+id1Project :: Lens' ImagesDeprecate Text
+id1Project
+  = lens _id1Project (\ s a -> s{_id1Project = a})
 
 -- | Multipart request metadata.
-imamPayload :: Lens' ImagesDeprecate DeprecationStatus
-imamPayload
-  = lens _imamPayload (\ s a -> s{_imamPayload = a})
+id1Payload :: Lens' ImagesDeprecate DeprecationStatus
+id1Payload
+  = lens _id1Payload (\ s a -> s{_id1Payload = a})
 
 instance GoogleRequest ImagesDeprecate where
         type Rs ImagesDeprecate = Operation
@@ -109,8 +128,9 @@ instance GoogleRequest ImagesDeprecate where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient ImagesDeprecate'{..}
-          = go _imamProject _imamImage (Just AltJSON)
-              _imamPayload
+          = go _id1Project _id1Image _id1RequestId
+              (Just AltJSON)
+              _id1Payload
               computeService
           where go
                   = buildClient

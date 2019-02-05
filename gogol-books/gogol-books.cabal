@@ -1,5 +1,5 @@
 name:                  gogol-books
-version:               0.1.1
+version:               0.4.0
 synopsis:              Google Books SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -11,7 +11,7 @@ copyright:             Copyright (c) 2015-2016 Brendan Hay
 category:              Network, Google, Cloud
 build-type:            Simple
 cabal-version:         >= 1.10
-extra-source-files:    README.md
+extra-source-files:    README.md src/.gitkeep
 
 description:
     Searches for books and manages your Google Books library.
@@ -42,6 +42,9 @@ library
         , Network.Google.Resource.Books.CloudLoading.DeleteBook
         , Network.Google.Resource.Books.CloudLoading.UpdateBook
         , Network.Google.Resource.Books.Dictionary.ListOfflineMetadata
+        , Network.Google.Resource.Books.Familysharing.GetFamilyInfo
+        , Network.Google.Resource.Books.Familysharing.Share
+        , Network.Google.Resource.Books.Familysharing.Unshare
         , Network.Google.Resource.Books.Layers.AnnotationData.Get
         , Network.Google.Resource.Books.Layers.AnnotationData.List
         , Network.Google.Resource.Books.Layers.Get
@@ -89,5 +92,5 @@ library
         , Network.Google.Books.Types.Sum
 
     build-depends:
-          gogol-core == 0.1.1.*
+          gogol-core == 0.4.0.*
         , base       >= 4.7 && < 5

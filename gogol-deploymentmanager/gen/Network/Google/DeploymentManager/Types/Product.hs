@@ -104,12 +104,28 @@ instance ToJSON ConfigFile where
         toJSON ConfigFile'{..}
           = object (catMaybes [("content" .=) <$> _cfContent])
 
--- | Enables \"data access\" audit logging for a service and specifies a list
--- of members that are log-exempted.
+-- | Specifies the audit configuration for a service. The configuration
+-- determines which permission types are logged, and what identities, if
+-- any, are exempted from logging. An AuditConfig must have one or more
+-- AuditLogConfigs. If there are AuditConfigs for both \`allServices\` and
+-- a specific service, the union of the two AuditConfigs is used for that
+-- service: the log_types specified in each AuditConfig are enabled, and
+-- the exempted_members in each AuditLogConfig are exempted. Example Policy
+-- with multiple AuditConfigs: { \"audit_configs\": [ { \"service\":
+-- \"allServices\" \"audit_log_configs\": [ { \"log_type\": \"DATA_READ\",
+-- \"exempted_members\": [ \"user:foo\'gmail.com\" ] }, { \"log_type\":
+-- \"DATA_WRITE\", }, { \"log_type\": \"ADMIN_READ\", } ] }, { \"service\":
+-- \"fooservice.googleapis.com\" \"audit_log_configs\": [ { \"log_type\":
+-- \"DATA_READ\", }, { \"log_type\": \"DATA_WRITE\", \"exempted_members\":
+-- [ \"user:bar\'gmail.com\" ] } ] } ] } For fooservice, this policy
+-- enables DATA_READ, DATA_WRITE and ADMIN_READ logging. It also exempts
+-- foo\'gmail.com from DATA_READ logging, and bar\'gmail.com from
+-- DATA_WRITE logging.
 --
 -- /See:/ 'auditConfig' smart constructor.
 data AuditConfig = AuditConfig'
     { _acService         :: !(Maybe Text)
+    , _acAuditLogConfigs :: !(Maybe [AuditLogConfig])
     , _acExemptedMembers :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -119,25 +135,34 @@ data AuditConfig = AuditConfig'
 --
 -- * 'acService'
 --
+-- * 'acAuditLogConfigs'
+--
 -- * 'acExemptedMembers'
 auditConfig
     :: AuditConfig
 auditConfig =
     AuditConfig'
     { _acService = Nothing
+    , _acAuditLogConfigs = Nothing
     , _acExemptedMembers = Nothing
     }
 
--- | Specifies a service that will be enabled for \"data access\" audit
--- logging. For example, \`resourcemanager\`, \`storage\`, \`compute\`.
--- \`allServices\` is a special value that covers all services.
+-- | Specifies a service that will be enabled for audit logging. For example,
+-- \`storage.googleapis.com\`, \`cloudsql.googleapis.com\`. \`allServices\`
+-- is a special value that covers all services.
 acService :: Lens' AuditConfig (Maybe Text)
 acService
   = lens _acService (\ s a -> s{_acService = a})
 
--- | Specifies the identities that are exempted from \"data access\" audit
--- logging for the \`service\` specified above. Follows the same format of
--- Binding.members.
+-- | The configuration for logging of each type of permission.
+acAuditLogConfigs :: Lens' AuditConfig [AuditLogConfig]
+acAuditLogConfigs
+  = lens _acAuditLogConfigs
+      (\ s a -> s{_acAuditLogConfigs = a})
+      . _Default
+      . _Coerce
+
+-- |
 acExemptedMembers :: Lens' AuditConfig [Text]
 acExemptedMembers
   = lens _acExemptedMembers
@@ -151,14 +176,92 @@ instance FromJSON AuditConfig where
               (\ o ->
                  AuditConfig' <$>
                    (o .:? "service") <*>
-                     (o .:? "exemptedMembers" .!= mempty))
+                     (o .:? "auditLogConfigs" .!= mempty)
+                     <*> (o .:? "exemptedMembers" .!= mempty))
 
 instance ToJSON AuditConfig where
         toJSON AuditConfig'{..}
           = object
               (catMaybes
                  [("service" .=) <$> _acService,
+                  ("auditLogConfigs" .=) <$> _acAuditLogConfigs,
                   ("exemptedMembers" .=) <$> _acExemptedMembers])
+
+-- | Represents an expression text. Example: title: \"User account presence\"
+-- description: \"Determines whether the request has a user account\"
+-- expression: \"size(request.user) > 0\"
+--
+-- /See:/ 'expr' smart constructor.
+data Expr = Expr'
+    { _eLocation    :: !(Maybe Text)
+    , _eExpression  :: !(Maybe Text)
+    , _eTitle       :: !(Maybe Text)
+    , _eDescription :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Expr' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eLocation'
+--
+-- * 'eExpression'
+--
+-- * 'eTitle'
+--
+-- * 'eDescription'
+expr
+    :: Expr
+expr =
+    Expr'
+    { _eLocation = Nothing
+    , _eExpression = Nothing
+    , _eTitle = Nothing
+    , _eDescription = Nothing
+    }
+
+-- | An optional string indicating the location of the expression for error
+-- reporting, e.g. a file name and a position in the file.
+eLocation :: Lens' Expr (Maybe Text)
+eLocation
+  = lens _eLocation (\ s a -> s{_eLocation = a})
+
+-- | Textual representation of an expression in Common Expression Language
+-- syntax. The application context of the containing message determines
+-- which well-known feature set of CEL is supported.
+eExpression :: Lens' Expr (Maybe Text)
+eExpression
+  = lens _eExpression (\ s a -> s{_eExpression = a})
+
+-- | An optional title for the expression, i.e. a short string describing its
+-- purpose. This can be used e.g. in UIs which allow to enter the
+-- expression.
+eTitle :: Lens' Expr (Maybe Text)
+eTitle = lens _eTitle (\ s a -> s{_eTitle = a})
+
+-- | An optional description of the expression. This is a longer text which
+-- describes the expression, e.g. when hovered over it in a UI.
+eDescription :: Lens' Expr (Maybe Text)
+eDescription
+  = lens _eDescription (\ s a -> s{_eDescription = a})
+
+instance FromJSON Expr where
+        parseJSON
+          = withObject "Expr"
+              (\ o ->
+                 Expr' <$>
+                   (o .:? "location") <*> (o .:? "expression") <*>
+                     (o .:? "title")
+                     <*> (o .:? "description"))
+
+instance ToJSON Expr where
+        toJSON Expr'{..}
+          = object
+              (catMaybes
+                 [("location" .=) <$> _eLocation,
+                  ("expression" .=) <$> _eExpression,
+                  ("title" .=) <$> _eTitle,
+                  ("description" .=) <$> _eDescription])
 
 -- | A response containing a partial list of operations and a page token used
 -- to build the next request if the request has been truncated.
@@ -184,13 +287,13 @@ operationsListResponse =
     , _olrOperations = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | Output only. A token used to continue a truncated list request.
 olrNextPageToken :: Lens' OperationsListResponse (Maybe Text)
 olrNextPageToken
   = lens _olrNextPageToken
       (\ s a -> s{_olrNextPageToken = a})
 
--- | [Output Only] Operations contained in this list response.
+-- | Output only. Operations contained in this list response.
 olrOperations :: Lens' OperationsListResponse [Operation]
 olrOperations
   = lens _olrOperations
@@ -296,7 +399,7 @@ tlrNextPageToken
   = lens _tlrNextPageToken
       (\ s a -> s{_tlrNextPageToken = a})
 
--- | [Output Only] A list of resource types supported by Deployment Manager.
+-- | Output only. A list of resource types supported by Deployment Manager.
 tlrTypes :: Lens' TypesListResponse [Type]
 tlrTypes
   = lens _tlrTypes (\ s a -> s{_tlrTypes = a}) .
@@ -318,7 +421,22 @@ instance ToJSON TypesListResponse where
                  [("nextPageToken" .=) <$> _tlrNextPageToken,
                   ("types" .=) <$> _tlrTypes])
 
--- | Options for counters
+-- | Increment a streamz counter with the specified metric and field names.
+-- Metric names should start with a \'\/\', generally be lowercase-only,
+-- and end in \"_count\". Field names should not contain an initial slash.
+-- The actual exported metric names will have \"\/iam\/policy\" prepended.
+-- Field names correspond to IAM request parameters and field values are
+-- their respective values. Supported field names: - \"authority\", which
+-- is \"[token]\" if IAMContext.token is present, otherwise the value of
+-- IAMContext.authority_selector if present, and otherwise a representation
+-- of IAMContext.principal; or - \"iam_principal\", a representation of
+-- IAMContext.principal even if a token or authority selector is present;
+-- or - \"\" (empty string), resulting in a counter with no fields.
+-- Examples: counter { metric: \"\/debug_access_count\" field:
+-- \"iam_principal\" } ==> increment counter
+-- \/iam\/policy\/backend_debug_access_count {iam_principal=[value of
+-- IAMContext.principal]} At this time we do not support multiple field
+-- names (though this may be supported in the future).
 --
 -- /See:/ 'logConfigCounterOptions' smart constructor.
 data LogConfigCounterOptions = LogConfigCounterOptions'
@@ -365,7 +483,11 @@ instance ToJSON LogConfigCounterOptions where
                  [("field" .=) <$> _lccoField,
                   ("metric" .=) <$> _lccoMetric])
 
--- | An Operation resource, used to manage asynchronous API requests.
+-- | An Operation resource, used to manage asynchronous API requests. (==
+-- resource_for v1.globalOperations ==) (== resource_for
+-- beta.globalOperations ==) (== resource_for v1.regionOperations ==) (==
+-- resource_for beta.regionOperations ==) (== resource_for
+-- v1.zoneOperations ==) (== resource_for beta.zoneOperations ==)
 --
 -- /See:/ 'operation' smart constructor.
 data Operation = Operation'
@@ -524,7 +646,9 @@ oHTTPErrorMessage
       (\ s a -> s{_oHTTPErrorMessage = a})
 
 -- | [Output Only] The URL of the zone where the operation resides. Only
--- available when performing per-zone operations.
+-- available when performing per-zone operations. You must specify this
+-- field as part of the HTTP request URL. It is not settable as a field in
+-- the request body.
 oZone :: Lens' Operation (Maybe Text)
 oZone = lens _oZone (\ s a -> s{_oZone = a})
 
@@ -566,7 +690,7 @@ oStatusMessage
   = lens _oStatusMessage
       (\ s a -> s{_oStatusMessage = a})
 
--- | [Output Only] Creation timestamp in RFC3339 text format.
+-- | [Deprecated] This field is deprecated.
 oCreationTimestamp :: Lens' Operation (Maybe Text)
 oCreationTimestamp
   = lens _oCreationTimestamp
@@ -591,7 +715,9 @@ oOperationType
       (\ s a -> s{_oOperationType = a})
 
 -- | [Output Only] The URL of the region where the operation resides. Only
--- available when performing regional operations.
+-- available when performing regional operations. You must specify this
+-- field as part of the HTTP request URL. It is not settable as a field in
+-- the request body.
 oRegion :: Lens' Operation (Maybe Text)
 oRegion = lens _oRegion (\ s a -> s{_oRegion = a})
 
@@ -601,14 +727,15 @@ oDescription :: Lens' Operation (Maybe Text)
 oDescription
   = lens _oDescription (\ s a -> s{_oDescription = a})
 
--- | [Output Only] The URL of the resource that the operation modifies. If
--- creating a persistent disk snapshot, this points to the persistent disk
--- that the snapshot was created from.
+-- | [Output Only] The URL of the resource that the operation modifies. For
+-- operations related to creating a snapshot, this points to the persistent
+-- disk that the snapshot was created from.
 oTargetLink :: Lens' Operation (Maybe Text)
 oTargetLink
   = lens _oTargetLink (\ s a -> s{_oTargetLink = a})
 
--- | [Output Only] Reserved for future use.
+-- | [Output Only] The value of \`requestId\` if you provided it in the
+-- request. Not present otherwise.
 oClientOperationId :: Lens' Operation (Maybe Text)
 oClientOperationId
   = lens _oClientOperationId
@@ -763,8 +890,9 @@ instance ToJSON ResourcesListResponse where
 --
 -- /See:/ 'deploymentUpdate' smart constructor.
 data DeploymentUpdate = DeploymentUpdate'
-    { _duManifest :: !(Maybe Text)
-    , _duLabels   :: !(Maybe [DeploymentUpdateLabelEntry])
+    { _duManifest    :: !(Maybe Text)
+    , _duLabels      :: !(Maybe [DeploymentUpdateLabelEntry])
+    , _duDescription :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeploymentUpdate' with the minimum fields required to make a request.
@@ -774,21 +902,24 @@ data DeploymentUpdate = DeploymentUpdate'
 -- * 'duManifest'
 --
 -- * 'duLabels'
+--
+-- * 'duDescription'
 deploymentUpdate
     :: DeploymentUpdate
 deploymentUpdate =
     DeploymentUpdate'
     { _duManifest = Nothing
     , _duLabels = Nothing
+    , _duDescription = Nothing
     }
 
--- | [Output Only] URL of the manifest representing the update configuration
+-- | Output only. URL of the manifest representing the update configuration
 -- of this deployment.
 duManifest :: Lens' DeploymentUpdate (Maybe Text)
 duManifest
   = lens _duManifest (\ s a -> s{_duManifest = a})
 
--- | [Output Only] Map of labels; provided by the client when the resource is
+-- | Output only. Map of labels; provided by the client when the resource is
 -- created or updated. Specifically: Label keys must be between 1 and 63
 -- characters long and must conform to the following regular expression:
 -- [a-z]([-a-z0-9]*[a-z0-9])? Label values must be between 0 and 63
@@ -800,19 +931,28 @@ duLabels
       _Default
       . _Coerce
 
+-- | Output only. An optional user-provided description of the deployment
+-- after the current update has been applied.
+duDescription :: Lens' DeploymentUpdate (Maybe Text)
+duDescription
+  = lens _duDescription
+      (\ s a -> s{_duDescription = a})
+
 instance FromJSON DeploymentUpdate where
         parseJSON
           = withObject "DeploymentUpdate"
               (\ o ->
                  DeploymentUpdate' <$>
-                   (o .:? "manifest") <*> (o .:? "labels" .!= mempty))
+                   (o .:? "manifest") <*> (o .:? "labels" .!= mempty)
+                     <*> (o .:? "description"))
 
 instance ToJSON DeploymentUpdate where
         toJSON DeploymentUpdate'{..}
           = object
               (catMaybes
                  [("manifest" .=) <$> _duManifest,
-                  ("labels" .=) <$> _duLabels])
+                  ("labels" .=) <$> _duLabels,
+                  ("description" .=) <$> _duDescription])
 
 -- |
 --
@@ -861,12 +1001,12 @@ resourceUpdate =
     , _ruProperties = Nothing
     }
 
--- | [Output Only] The state of the resource.
+-- | Output only. The state of the resource.
 ruState :: Lens' ResourceUpdate (Maybe Text)
 ruState = lens _ruState (\ s a -> s{_ruState = a})
 
--- | [Output Only] If errors are generated during update of the resource,
--- this field will be populated.
+-- | Output only. If errors are generated during update of the resource, this
+-- field will be populated.
 ruError :: Lens' ResourceUpdate (Maybe ResourceUpdateError)
 ruError = lens _ruError (\ s a -> s{_ruError = a})
 
@@ -877,32 +1017,32 @@ ruAccessControl
   = lens _ruAccessControl
       (\ s a -> s{_ruAccessControl = a})
 
--- | [Output Only] If warning messages are generated during processing of
--- this resource, this field will be populated.
+-- | Output only. If warning messages are generated during processing of this
+-- resource, this field will be populated.
 ruWarnings :: Lens' ResourceUpdate [ResourceUpdateWarningsItem]
 ruWarnings
   = lens _ruWarnings (\ s a -> s{_ruWarnings = a}) .
       _Default
       . _Coerce
 
--- | [Output Only] The intent of the resource: PREVIEW, UPDATE, or CANCEL.
+-- | Output only. The intent of the resource: PREVIEW, UPDATE, or CANCEL.
 ruIntent :: Lens' ResourceUpdate (Maybe Text)
 ruIntent = lens _ruIntent (\ s a -> s{_ruIntent = a})
 
--- | [Output Only] URL of the manifest representing the update configuration
+-- | Output only. URL of the manifest representing the update configuration
 -- of this resource.
 ruManifest :: Lens' ResourceUpdate (Maybe Text)
 ruManifest
   = lens _ruManifest (\ s a -> s{_ruManifest = a})
 
--- | [Output Only] The expanded properties of the resource with reference
+-- | Output only. The expanded properties of the resource with reference
 -- values expanded. Returned as serialized YAML.
 ruFinalProperties :: Lens' ResourceUpdate (Maybe Text)
 ruFinalProperties
   = lens _ruFinalProperties
       (\ s a -> s{_ruFinalProperties = a})
 
--- | [Output Only] The set of updated properties for this resource, before
+-- | Output only. The set of updated properties for this resource, before
 -- references are expanded. Returned as serialized YAML.
 ruProperties :: Lens' ResourceUpdate (Maybe Text)
 ruProperties
@@ -1044,7 +1184,8 @@ rLogConfigs
       _Default
       . _Coerce
 
--- | Additional restrictions that must be met
+-- | Additional restrictions that must be met. All conditions must pass for
+-- the rule to match.
 rConditions :: Lens' Rule [Condition]
 rConditions
   = lens _rConditions (\ s a -> s{_rConditions = a}) .
@@ -1173,44 +1314,42 @@ manifest =
     , _mId = Nothing
     }
 
--- | [Output Only] Timestamp when the manifest was created, in RFC3339 text
--- format.
+-- | Output only. Creation timestamp in RFC3339 text format.
 mInsertTime :: Lens' Manifest (Maybe Text)
 mInsertTime
   = lens _mInsertTime (\ s a -> s{_mInsertTime = a})
 
--- | [Output Only] The YAML layout for this manifest.
+-- | Output only. The YAML layout for this manifest.
 mLayout :: Lens' Manifest (Maybe Text)
 mLayout = lens _mLayout (\ s a -> s{_mLayout = a})
 
--- | [Output Only] The YAML configuration for this manifest.
+-- | Output only. The YAML configuration for this manifest.
 mConfig :: Lens' Manifest (Maybe ConfigFile)
 mConfig = lens _mConfig (\ s a -> s{_mConfig = a})
 
--- | [Output Only] The fully-expanded configuration file, including any
+-- | Output only. The fully-expanded configuration file, including any
 -- templates and references.
 mExpandedConfig :: Lens' Manifest (Maybe Text)
 mExpandedConfig
   = lens _mExpandedConfig
       (\ s a -> s{_mExpandedConfig = a})
 
--- | [Output Only] The imported files for this manifest.
+-- | Output only. The imported files for this manifest.
 mImports :: Lens' Manifest [ImportFile]
 mImports
   = lens _mImports (\ s a -> s{_mImports = a}) .
       _Default
       . _Coerce
 
--- | [Output Only] Self link for the manifest.
+-- | Output only. Self link for the manifest.
 mSelfLink :: Lens' Manifest (Maybe Text)
 mSelfLink
   = lens _mSelfLink (\ s a -> s{_mSelfLink = a})
 
--- | [Output Only] The name of the manifest.
+-- | Output only. The name of the manifest.
 mName :: Lens' Manifest (Maybe Text)
 mName = lens _mName (\ s a -> s{_mName = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
 mId :: Lens' Manifest (Maybe Word64)
 mId
   = lens _mId (\ s a -> s{_mId = a}) . mapping _Coerce
@@ -1305,7 +1444,7 @@ instance ToJSON ResourceUpdateWarningsItem where
 --
 -- /See:/ 'deploymentsCancelPreviewRequest' smart constructor.
 newtype DeploymentsCancelPreviewRequest = DeploymentsCancelPreviewRequest'
-    { _dcprFingerprint :: Maybe Base64
+    { _dcprFingerprint :: Maybe Bytes
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeploymentsCancelPreviewRequest' with the minimum fields required to make a request.
@@ -1333,7 +1472,7 @@ dcprFingerprint :: Lens' DeploymentsCancelPreviewRequest (Maybe ByteString)
 dcprFingerprint
   = lens _dcprFingerprint
       (\ s a -> s{_dcprFingerprint = a})
-      . mapping _Base64
+      . mapping _Bytes
 
 instance FromJSON DeploymentsCancelPreviewRequest
          where
@@ -1347,6 +1486,56 @@ instance ToJSON DeploymentsCancelPreviewRequest where
         toJSON DeploymentsCancelPreviewRequest'{..}
           = object
               (catMaybes [("fingerprint" .=) <$> _dcprFingerprint])
+
+-- | Write a Cloud Audit log
+--
+-- /See:/ 'logConfigCloudAuditOptions' smart constructor.
+data LogConfigCloudAuditOptions = LogConfigCloudAuditOptions'
+    { _lccaoAuthorizationLoggingOptions :: !(Maybe AuthorizationLoggingOptions)
+    , _lccaoLogName                     :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LogConfigCloudAuditOptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lccaoAuthorizationLoggingOptions'
+--
+-- * 'lccaoLogName'
+logConfigCloudAuditOptions
+    :: LogConfigCloudAuditOptions
+logConfigCloudAuditOptions =
+    LogConfigCloudAuditOptions'
+    { _lccaoAuthorizationLoggingOptions = Nothing
+    , _lccaoLogName = Nothing
+    }
+
+-- | Information used by the Cloud Audit Logging pipeline.
+lccaoAuthorizationLoggingOptions :: Lens' LogConfigCloudAuditOptions (Maybe AuthorizationLoggingOptions)
+lccaoAuthorizationLoggingOptions
+  = lens _lccaoAuthorizationLoggingOptions
+      (\ s a -> s{_lccaoAuthorizationLoggingOptions = a})
+
+-- | The log_name to populate in the Cloud Audit Record.
+lccaoLogName :: Lens' LogConfigCloudAuditOptions (Maybe Text)
+lccaoLogName
+  = lens _lccaoLogName (\ s a -> s{_lccaoLogName = a})
+
+instance FromJSON LogConfigCloudAuditOptions where
+        parseJSON
+          = withObject "LogConfigCloudAuditOptions"
+              (\ o ->
+                 LogConfigCloudAuditOptions' <$>
+                   (o .:? "authorizationLoggingOptions") <*>
+                     (o .:? "logName"))
+
+instance ToJSON LogConfigCloudAuditOptions where
+        toJSON LogConfigCloudAuditOptions'{..}
+          = object
+              (catMaybes
+                 [("authorizationLoggingOptions" .=) <$>
+                    _lccaoAuthorizationLoggingOptions,
+                  ("logName" .=) <$> _lccaoLogName])
 
 -- |
 --
@@ -1411,8 +1600,7 @@ resource =
     , _rProperties = Nothing
     }
 
--- | [Output Only] Timestamp when the resource was created or acquired, in
--- RFC3339 text format .
+-- | Output only. Creation timestamp in RFC3339 text format.
 rInsertTime :: Lens' Resource (Maybe Text)
 rInsertTime
   = lens _rInsertTime (\ s a -> s{_rInsertTime = a})
@@ -1423,57 +1611,55 @@ rAccessControl
   = lens _rAccessControl
       (\ s a -> s{_rAccessControl = a})
 
--- | [Output Only] The URL of the actual resource.
+-- | Output only. The URL of the actual resource.
 rURL :: Lens' Resource (Maybe Text)
 rURL = lens _rURL (\ s a -> s{_rURL = a})
 
--- | [Output Only] If warning messages are generated during processing of
--- this resource, this field will be populated.
+-- | Output only. If warning messages are generated during processing of this
+-- resource, this field will be populated.
 rWarnings :: Lens' Resource [ResourceWarningsItem]
 rWarnings
   = lens _rWarnings (\ s a -> s{_rWarnings = a}) .
       _Default
       . _Coerce
 
--- | [Output Only] Timestamp when the resource was updated, in RFC3339 text
--- format .
+-- | Output only. Update timestamp in RFC3339 text format.
 rUpdateTime :: Lens' Resource (Maybe Text)
 rUpdateTime
   = lens _rUpdateTime (\ s a -> s{_rUpdateTime = a})
 
--- | [Output Only] The name of the resource as it appears in the YAML config.
+-- | Output only. The name of the resource as it appears in the YAML config.
 rName :: Lens' Resource (Maybe Text)
 rName = lens _rName (\ s a -> s{_rName = a})
 
--- | [Output Only] URL of the manifest representing the current configuration
+-- | Output only. URL of the manifest representing the current configuration
 -- of this resource.
 rManifest :: Lens' Resource (Maybe Text)
 rManifest
   = lens _rManifest (\ s a -> s{_rManifest = a})
 
--- | [Output Only] The evaluated properties of the resource with references
+-- | Output only. The evaluated properties of the resource with references
 -- expanded. Returned as serialized YAML.
 rFinalProperties :: Lens' Resource (Maybe Text)
 rFinalProperties
   = lens _rFinalProperties
       (\ s a -> s{_rFinalProperties = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
 rId :: Lens' Resource (Maybe Word64)
 rId
   = lens _rId (\ s a -> s{_rId = a}) . mapping _Coerce
 
--- | [Output Only] The type of the resource, for example compute.v1.instance,
+-- | Output only. The type of the resource, for example compute.v1.instance,
 -- or cloudfunctions.v1beta1.function.
 rType :: Lens' Resource (Maybe Text)
 rType = lens _rType (\ s a -> s{_rType = a})
 
--- | [Output Only] If Deployment Manager is currently updating or previewing
+-- | Output only. If Deployment Manager is currently updating or previewing
 -- an update to this resource, the updated configuration appears here.
 rUpdate :: Lens' Resource (Maybe ResourceUpdate)
 rUpdate = lens _rUpdate (\ s a -> s{_rUpdate = a})
 
--- | [Output Only] The current properties of the resource before any
+-- | Output only. The current properties of the resource before any
 -- references have been filled in. Returned as serialized YAML.
 rProperties :: Lens' Resource (Maybe Text)
 rProperties
@@ -1510,6 +1696,46 @@ instance ToJSON Resource where
                   ("id" .=) <$> _rId, ("type" .=) <$> _rType,
                   ("update" .=) <$> _rUpdate,
                   ("properties" .=) <$> _rProperties])
+
+-- | Write a Data Access (Gin) log
+--
+-- /See:/ 'logConfigDataAccessOptions' smart constructor.
+newtype LogConfigDataAccessOptions = LogConfigDataAccessOptions'
+    { _lcdaoLogMode :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LogConfigDataAccessOptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lcdaoLogMode'
+logConfigDataAccessOptions
+    :: LogConfigDataAccessOptions
+logConfigDataAccessOptions =
+    LogConfigDataAccessOptions'
+    { _lcdaoLogMode = Nothing
+    }
+
+-- | Whether Gin logging should happen in a fail-closed manner at the caller.
+-- This is relevant only in the LocalIAM implementation, for now. NOTE:
+-- Logging to Gin in a fail-closed manner is currently unsupported while
+-- work is being done to satisfy the requirements of go\/345. Currently,
+-- setting LOG_FAIL_CLOSED mode will have no effect, but still exists
+-- because there is active work being done to support it (b\/115874152).
+lcdaoLogMode :: Lens' LogConfigDataAccessOptions (Maybe Text)
+lcdaoLogMode
+  = lens _lcdaoLogMode (\ s a -> s{_lcdaoLogMode = a})
+
+instance FromJSON LogConfigDataAccessOptions where
+        parseJSON
+          = withObject "LogConfigDataAccessOptions"
+              (\ o ->
+                 LogConfigDataAccessOptions' <$> (o .:? "logMode"))
+
+instance ToJSON LogConfigDataAccessOptions where
+        toJSON LogConfigDataAccessOptions'{..}
+          = object
+              (catMaybes [("logMode" .=) <$> _lcdaoLogMode])
 
 --
 -- /See:/ 'deploymentUpdateLabelEntry' smart constructor.
@@ -1637,13 +1863,13 @@ manifestsListResponse =
     , _mlrManifests = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | Output only. A token used to continue a truncated list request.
 mlrNextPageToken :: Lens' ManifestsListResponse (Maybe Text)
 mlrNextPageToken
   = lens _mlrNextPageToken
       (\ s a -> s{_mlrNextPageToken = a})
 
--- | [Output Only] Manifests contained in this list response.
+-- | Output only. Manifests contained in this list response.
 mlrManifests :: Lens' ManifestsListResponse [Manifest]
 mlrManifests
   = lens _mlrManifests (\ s a -> s{_mlrManifests = a})
@@ -1703,24 +1929,131 @@ instance ToJSON OperationError where
         toJSON OperationError'{..}
           = object (catMaybes [("errors" .=) <$> _oeErrors])
 
+--
+-- /See:/ 'globalSetPolicyRequest' smart constructor.
+data GlobalSetPolicyRequest = GlobalSetPolicyRequest'
+    { _gsprEtag     :: !(Maybe Bytes)
+    , _gsprBindings :: !(Maybe [Binding])
+    , _gsprPolicy   :: !(Maybe Policy)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GlobalSetPolicyRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gsprEtag'
+--
+-- * 'gsprBindings'
+--
+-- * 'gsprPolicy'
+globalSetPolicyRequest
+    :: GlobalSetPolicyRequest
+globalSetPolicyRequest =
+    GlobalSetPolicyRequest'
+    { _gsprEtag = Nothing
+    , _gsprBindings = Nothing
+    , _gsprPolicy = Nothing
+    }
+
+-- | Flatten Policy to create a backward compatible wire-format. Deprecated.
+-- Use \'policy\' to specify the etag.
+gsprEtag :: Lens' GlobalSetPolicyRequest (Maybe ByteString)
+gsprEtag
+  = lens _gsprEtag (\ s a -> s{_gsprEtag = a}) .
+      mapping _Bytes
+
+-- | Flatten Policy to create a backward compatible wire-format. Deprecated.
+-- Use \'policy\' to specify bindings.
+gsprBindings :: Lens' GlobalSetPolicyRequest [Binding]
+gsprBindings
+  = lens _gsprBindings (\ s a -> s{_gsprBindings = a})
+      . _Default
+      . _Coerce
+
+-- | REQUIRED: The complete policy to be applied to the \'resource\'. The
+-- size of the policy is limited to a few 10s of KB. An empty policy is in
+-- general a valid policy but certain services (like Projects) might reject
+-- them.
+gsprPolicy :: Lens' GlobalSetPolicyRequest (Maybe Policy)
+gsprPolicy
+  = lens _gsprPolicy (\ s a -> s{_gsprPolicy = a})
+
+instance FromJSON GlobalSetPolicyRequest where
+        parseJSON
+          = withObject "GlobalSetPolicyRequest"
+              (\ o ->
+                 GlobalSetPolicyRequest' <$>
+                   (o .:? "etag") <*> (o .:? "bindings" .!= mempty) <*>
+                     (o .:? "policy"))
+
+instance ToJSON GlobalSetPolicyRequest where
+        toJSON GlobalSetPolicyRequest'{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _gsprEtag,
+                  ("bindings" .=) <$> _gsprBindings,
+                  ("policy" .=) <$> _gsprPolicy])
+
+-- | Authorization-related information used by Cloud Audit Logging.
+--
+-- /See:/ 'authorizationLoggingOptions' smart constructor.
+newtype AuthorizationLoggingOptions = AuthorizationLoggingOptions'
+    { _aloPermissionType :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AuthorizationLoggingOptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aloPermissionType'
+authorizationLoggingOptions
+    :: AuthorizationLoggingOptions
+authorizationLoggingOptions =
+    AuthorizationLoggingOptions'
+    { _aloPermissionType = Nothing
+    }
+
+-- | The type of the permission that was checked.
+aloPermissionType :: Lens' AuthorizationLoggingOptions (Maybe Text)
+aloPermissionType
+  = lens _aloPermissionType
+      (\ s a -> s{_aloPermissionType = a})
+
+instance FromJSON AuthorizationLoggingOptions where
+        parseJSON
+          = withObject "AuthorizationLoggingOptions"
+              (\ o ->
+                 AuthorizationLoggingOptions' <$>
+                   (o .:? "permissionType"))
+
+instance ToJSON AuthorizationLoggingOptions where
+        toJSON AuthorizationLoggingOptions'{..}
+          = object
+              (catMaybes
+                 [("permissionType" .=) <$> _aloPermissionType])
+
 -- | Defines an Identity and Access Management (IAM) policy. It is used to
 -- specify access control policies for Cloud Platform resources. A
--- \`Policy\` consists of a list of \`bindings\`. A \`Binding\` binds a
+-- \`Policy\` consists of a list of \`bindings\`. A \`binding\` binds a
 -- list of \`members\` to a \`role\`, where the members can be user
 -- accounts, Google groups, Google domains, and service accounts. A
--- \`role\` is a named list of permissions defined by IAM. **Example** {
--- \"bindings\": [ { \"role\": \"roles\/owner\", \"members\": [
+-- \`role\` is a named list of permissions defined by IAM. **JSON Example**
+-- { \"bindings\": [ { \"role\": \"roles\/owner\", \"members\": [
 -- \"user:mike\'example.com\", \"group:admins\'example.com\",
 -- \"domain:google.com\",
--- \"serviceAccount:my-other-app\'appspot.gserviceaccount.com\", ] }, {
+-- \"serviceAccount:my-other-app\'appspot.gserviceaccount.com\" ] }, {
 -- \"role\": \"roles\/viewer\", \"members\": [\"user:sean\'example.com\"] }
--- ] } For a description of IAM and its features, see the [IAM developer\'s
--- guide](https:\/\/cloud.google.com\/iam).
+-- ] } **YAML Example** bindings: - members: - user:mike\'example.com -
+-- group:admins\'example.com - domain:google.com -
+-- serviceAccount:my-other-app\'appspot.gserviceaccount.com role:
+-- roles\/owner - members: - user:sean\'example.com role: roles\/viewer For
+-- a description of IAM and its features, see the [IAM developer\'s
+-- guide](https:\/\/cloud.google.com\/iam\/docs).
 --
 -- /See:/ 'policy' smart constructor.
 data Policy = Policy'
     { _pAuditConfigs :: !(Maybe [AuditConfig])
-    , _pEtag         :: !(Maybe Base64)
+    , _pEtag         :: !(Maybe Bytes)
     , _pRules        :: !(Maybe [Rule])
     , _pVersion      :: !(Maybe (Textual Int32))
     , _pBindings     :: !(Maybe [Binding])
@@ -1754,11 +2087,7 @@ policy =
     , _pIAMOwned = Nothing
     }
 
--- | Specifies audit logging configs for \"data access\". \"data access\":
--- generally refers to data reads\/writes and admin reads. \"admin
--- activity\": generally refers to admin writes. Note: \`AuditConfig\`
--- doesn\'t apply to \"admin activity\", which always enables audit
--- logging.
+-- | Specifies cloud audit logging configuration for this policy.
 pAuditConfigs :: Lens' Policy [AuditConfig]
 pAuditConfigs
   = lens _pAuditConfigs
@@ -1778,7 +2107,7 @@ pAuditConfigs
 pEtag :: Lens' Policy (Maybe ByteString)
 pEtag
   = lens _pEtag (\ s a -> s{_pEtag = a}) .
-      mapping _Base64
+      mapping _Bytes
 
 -- | If more than one rule is specified, the rules are applied in the
 -- following manner: - All matching LOG rules are always applied. - If any
@@ -1792,14 +2121,13 @@ pRules
   = lens _pRules (\ s a -> s{_pRules = a}) . _Default .
       _Coerce
 
--- | Version of the \`Policy\`. The default version is 0.
+-- | Deprecated.
 pVersion :: Lens' Policy (Maybe Int32)
 pVersion
   = lens _pVersion (\ s a -> s{_pVersion = a}) .
       mapping _Coerce
 
--- | Associates a list of \`members\` to a \`role\`. Multiple \`bindings\`
--- must not be specified for the same \`role\`. \`bindings\` with no
+-- | Associates a list of \`members\` to a \`role\`. \`bindings\` with no
 -- members will result in an error.
 pBindings :: Lens' Policy [Binding]
 pBindings
@@ -1868,19 +2196,18 @@ type' =
     , _tId = Nothing
     }
 
--- | [Output Only] Timestamp when the type was created, in RFC3339 text
--- format.
+-- | Output only. Creation timestamp in RFC3339 text format.
 tInsertTime :: Lens' Type (Maybe Text)
 tInsertTime
   = lens _tInsertTime (\ s a -> s{_tInsertTime = a})
 
--- | [Output Only] The Operation that most recently ran, or is currently
+-- | Output only. The Operation that most recently ran, or is currently
 -- running, on this type.
 tOperation :: Lens' Type (Maybe Operation)
 tOperation
   = lens _tOperation (\ s a -> s{_tOperation = a})
 
--- | [Output Only] Self link for the type.
+-- | Output only. Server defined URL for the resource.
 tSelfLink :: Lens' Type (Maybe Text)
 tSelfLink
   = lens _tSelfLink (\ s a -> s{_tSelfLink = a})
@@ -1889,7 +2216,6 @@ tSelfLink
 tName :: Lens' Type (Maybe Text)
 tName = lens _tName (\ s a -> s{_tName = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
 tId :: Lens' Type (Maybe Word64)
 tId
   = lens _tId (\ s a -> s{_tId = a}) . mapping _Coerce
@@ -2019,7 +2345,7 @@ instance ToJSON OperationErrorErrorsItem where
 --
 -- /See:/ 'deploymentsStopRequest' smart constructor.
 newtype DeploymentsStopRequest = DeploymentsStopRequest'
-    { _dsrFingerprint :: Maybe Base64
+    { _dsrFingerprint :: Maybe Bytes
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeploymentsStopRequest' with the minimum fields required to make a request.
@@ -2047,7 +2373,7 @@ dsrFingerprint :: Lens' DeploymentsStopRequest (Maybe ByteString)
 dsrFingerprint
   = lens _dsrFingerprint
       (\ s a -> s{_dsrFingerprint = a})
-      . mapping _Base64
+      . mapping _Bytes
 
 instance FromJSON DeploymentsStopRequest where
         parseJSON
@@ -2111,8 +2437,64 @@ instance ToJSON ResourceWarningsItemDataItem where
                  [("value" .=) <$> _rwidiValue,
                   ("key" .=) <$> _rwidiKey])
 
--- | [Output Only] If errors are generated during update of the resource,
--- this field will be populated.
+-- | Provides the configuration for logging a type of permissions. Example: {
+-- \"audit_log_configs\": [ { \"log_type\": \"DATA_READ\",
+-- \"exempted_members\": [ \"user:foo\'gmail.com\" ] }, { \"log_type\":
+-- \"DATA_WRITE\", } ] } This enables \'DATA_READ\' and \'DATA_WRITE\'
+-- logging, while exempting foo\'gmail.com from DATA_READ logging.
+--
+-- /See:/ 'auditLogConfig' smart constructor.
+data AuditLogConfig = AuditLogConfig'
+    { _alcLogType         :: !(Maybe Text)
+    , _alcExemptedMembers :: !(Maybe [Text])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AuditLogConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'alcLogType'
+--
+-- * 'alcExemptedMembers'
+auditLogConfig
+    :: AuditLogConfig
+auditLogConfig =
+    AuditLogConfig'
+    { _alcLogType = Nothing
+    , _alcExemptedMembers = Nothing
+    }
+
+-- | The log type that this config enables.
+alcLogType :: Lens' AuditLogConfig (Maybe Text)
+alcLogType
+  = lens _alcLogType (\ s a -> s{_alcLogType = a})
+
+-- | Specifies the identities that do not cause logging for this type of
+-- permission. Follows the same format of [Binding.members][].
+alcExemptedMembers :: Lens' AuditLogConfig [Text]
+alcExemptedMembers
+  = lens _alcExemptedMembers
+      (\ s a -> s{_alcExemptedMembers = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON AuditLogConfig where
+        parseJSON
+          = withObject "AuditLogConfig"
+              (\ o ->
+                 AuditLogConfig' <$>
+                   (o .:? "logType") <*>
+                     (o .:? "exemptedMembers" .!= mempty))
+
+instance ToJSON AuditLogConfig where
+        toJSON AuditLogConfig'{..}
+          = object
+              (catMaybes
+                 [("logType" .=) <$> _alcLogType,
+                  ("exemptedMembers" .=) <$> _alcExemptedMembers])
+
+-- | Output only. If errors are generated during update of the resource, this
+-- field will be populated.
 --
 -- /See:/ 'resourceUpdateError' smart constructor.
 newtype ResourceUpdateError = ResourceUpdateError'
@@ -2258,13 +2640,13 @@ deploymentsListResponse =
     , _dlrDeployments = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | Output only. A token used to continue a truncated list request.
 dlrNextPageToken :: Lens' DeploymentsListResponse (Maybe Text)
 dlrNextPageToken
   = lens _dlrNextPageToken
       (\ s a -> s{_dlrNextPageToken = a})
 
--- | [Output Only] The deployments contained in this response.
+-- | Output only. The deployments contained in this response.
 dlrDeployments :: Lens' DeploymentsListResponse [Deployment]
 dlrDeployments
   = lens _dlrDeployments
@@ -2349,21 +2731,39 @@ instance ToJSON ResourceWarningsItem where
 -- | Specifies what kind of log the caller must write
 --
 -- /See:/ 'logConfig' smart constructor.
-newtype LogConfig = LogConfig'
-    { _lcCounter :: Maybe LogConfigCounterOptions
+data LogConfig = LogConfig'
+    { _lcCloudAudit :: !(Maybe LogConfigCloudAuditOptions)
+    , _lcDataAccess :: !(Maybe LogConfigDataAccessOptions)
+    , _lcCounter    :: !(Maybe LogConfigCounterOptions)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LogConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'lcCloudAudit'
+--
+-- * 'lcDataAccess'
+--
 -- * 'lcCounter'
 logConfig
     :: LogConfig
 logConfig =
     LogConfig'
-    { _lcCounter = Nothing
+    { _lcCloudAudit = Nothing
+    , _lcDataAccess = Nothing
+    , _lcCounter = Nothing
     }
+
+-- | Cloud audit options.
+lcCloudAudit :: Lens' LogConfig (Maybe LogConfigCloudAuditOptions)
+lcCloudAudit
+  = lens _lcCloudAudit (\ s a -> s{_lcCloudAudit = a})
+
+-- | Data access options.
+lcDataAccess :: Lens' LogConfig (Maybe LogConfigDataAccessOptions)
+lcDataAccess
+  = lens _lcDataAccess (\ s a -> s{_lcDataAccess = a})
 
 -- | Counter options.
 lcCounter :: Lens' LogConfig (Maybe LogConfigCounterOptions)
@@ -2373,11 +2773,18 @@ lcCounter
 instance FromJSON LogConfig where
         parseJSON
           = withObject "LogConfig"
-              (\ o -> LogConfig' <$> (o .:? "counter"))
+              (\ o ->
+                 LogConfig' <$>
+                   (o .:? "cloudAudit") <*> (o .:? "dataAccess") <*>
+                     (o .:? "counter"))
 
 instance ToJSON LogConfig where
         toJSON LogConfig'{..}
-          = object (catMaybes [("counter" .=) <$> _lcCounter])
+          = object
+              (catMaybes
+                 [("cloudAudit" .=) <$> _lcCloudAudit,
+                  ("dataAccess" .=) <$> _lcDataAccess,
+                  ("counter" .=) <$> _lcCounter])
 
 -- | The access controls set on the resource.
 --
@@ -2529,8 +2936,9 @@ instance ToJSON OperationWarningsItem where
 --
 -- /See:/ 'binding' smart constructor.
 data Binding = Binding'
-    { _bMembers :: !(Maybe [Text])
-    , _bRole    :: !(Maybe Text)
+    { _bMembers   :: !(Maybe [Text])
+    , _bRole      :: !(Maybe Text)
+    , _bCondition :: !(Maybe Expr)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Binding' with the minimum fields required to make a request.
@@ -2540,12 +2948,15 @@ data Binding = Binding'
 -- * 'bMembers'
 --
 -- * 'bRole'
+--
+-- * 'bCondition'
 binding
     :: Binding
 binding =
     Binding'
     { _bMembers = Nothing
     , _bRole = Nothing
+    , _bCondition = Nothing
     }
 
 -- | Specifies the identities requesting access for a Cloud Platform
@@ -2555,13 +2966,13 @@ binding =
 -- identifier that represents anyone who is authenticated with a Google
 -- account or a service account. * \`user:{emailid}\`: An email address
 -- that represents a specific Google account. For example,
--- \`alice\'gmail.com\` or \`joe\'example.com\`. *
--- \`serviceAccount:{emailid}\`: An email address that represents a service
--- account. For example, \`my-other-app\'appspot.gserviceaccount.com\`. *
--- \`group:{emailid}\`: An email address that represents a Google group.
--- For example, \`admins\'example.com\`. * \`domain:{domain}\`: A Google
--- Apps domain name that represents all the users of that domain. For
--- example, \`google.com\` or \`example.com\`.
+-- \`alice\'gmail.com\` . * \`serviceAccount:{emailid}\`: An email address
+-- that represents a service account. For example,
+-- \`my-other-app\'appspot.gserviceaccount.com\`. * \`group:{emailid}\`: An
+-- email address that represents a Google group. For example,
+-- \`admins\'example.com\`. * \`domain:{domain}\`: A Google Apps domain
+-- name that represents all the users of that domain. For example,
+-- \`google.com\` or \`example.com\`.
 bMembers :: Lens' Binding [Text]
 bMembers
   = lens _bMembers (\ s a -> s{_bMembers = a}) .
@@ -2573,19 +2984,29 @@ bMembers
 bRole :: Lens' Binding (Maybe Text)
 bRole = lens _bRole (\ s a -> s{_bRole = a})
 
+-- | Unimplemented. The condition that is associated with this binding. NOTE:
+-- an unsatisfied condition will not allow user access via current binding.
+-- Different bindings, including their conditions, are examined
+-- independently.
+bCondition :: Lens' Binding (Maybe Expr)
+bCondition
+  = lens _bCondition (\ s a -> s{_bCondition = a})
+
 instance FromJSON Binding where
         parseJSON
           = withObject "Binding"
               (\ o ->
                  Binding' <$>
-                   (o .:? "members" .!= mempty) <*> (o .:? "role"))
+                   (o .:? "members" .!= mempty) <*> (o .:? "role") <*>
+                     (o .:? "condition"))
 
 instance ToJSON Binding where
         toJSON Binding'{..}
           = object
               (catMaybes
                  [("members" .=) <$> _bMembers,
-                  ("role" .=) <$> _bRole])
+                  ("role" .=) <$> _bRole,
+                  ("condition" .=) <$> _bCondition])
 
 -- |
 --
@@ -2593,7 +3014,8 @@ instance ToJSON Binding where
 data Deployment = Deployment'
     { _dInsertTime  :: !(Maybe Text)
     , _dOperation   :: !(Maybe Operation)
-    , _dFingerprint :: !(Maybe Base64)
+    , _dFingerprint :: !(Maybe Bytes)
+    , _dUpdateTime  :: !(Maybe Text)
     , _dSelfLink    :: !(Maybe Text)
     , _dName        :: !(Maybe Text)
     , _dManifest    :: !(Maybe Text)
@@ -2613,6 +3035,8 @@ data Deployment = Deployment'
 -- * 'dOperation'
 --
 -- * 'dFingerprint'
+--
+-- * 'dUpdateTime'
 --
 -- * 'dSelfLink'
 --
@@ -2636,6 +3060,7 @@ deployment =
     { _dInsertTime = Nothing
     , _dOperation = Nothing
     , _dFingerprint = Nothing
+    , _dUpdateTime = Nothing
     , _dSelfLink = Nothing
     , _dName = Nothing
     , _dManifest = Nothing
@@ -2646,13 +3071,12 @@ deployment =
     , _dTarget = Nothing
     }
 
--- | [Output Only] Timestamp when the deployment was created, in RFC3339 text
--- format .
+-- | Output only. Creation timestamp in RFC3339 text format.
 dInsertTime :: Lens' Deployment (Maybe Text)
 dInsertTime
   = lens _dInsertTime (\ s a -> s{_dInsertTime = a})
 
--- | [Output Only] The Operation that most recently ran, or is currently
+-- | Output only. The Operation that most recently ran, or is currently
 -- running, on this deployment.
 dOperation :: Lens' Deployment (Maybe Operation)
 dOperation
@@ -2669,9 +3093,14 @@ dOperation
 dFingerprint :: Lens' Deployment (Maybe ByteString)
 dFingerprint
   = lens _dFingerprint (\ s a -> s{_dFingerprint = a})
-      . mapping _Base64
+      . mapping _Bytes
 
--- | [Output Only] Self link for the deployment.
+-- | Output only. Update timestamp in RFC3339 text format.
+dUpdateTime :: Lens' Deployment (Maybe Text)
+dUpdateTime
+  = lens _dUpdateTime (\ s a -> s{_dUpdateTime = a})
+
+-- | Output only. Server defined URL for the resource.
 dSelfLink :: Lens' Deployment (Maybe Text)
 dSelfLink
   = lens _dSelfLink (\ s a -> s{_dSelfLink = a})
@@ -2686,13 +3115,12 @@ dSelfLink
 dName :: Lens' Deployment (Maybe Text)
 dName = lens _dName (\ s a -> s{_dName = a})
 
--- | [Output Only] URL of the manifest representing the last manifest that
--- was successfully deployed.
+-- | Output only. URL of the manifest representing the last manifest that was
+-- successfully deployed.
 dManifest :: Lens' Deployment (Maybe Text)
 dManifest
   = lens _dManifest (\ s a -> s{_dManifest = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
 dId :: Lens' Deployment (Maybe Word64)
 dId
   = lens _dId (\ s a -> s{_dId = a}) . mapping _Coerce
@@ -2713,7 +3141,7 @@ dDescription :: Lens' Deployment (Maybe Text)
 dDescription
   = lens _dDescription (\ s a -> s{_dDescription = a})
 
--- | [Output Only] If Deployment Manager is currently updating or previewing
+-- | Output only. If Deployment Manager is currently updating or previewing
 -- an update to this deployment, the updated configuration appears here.
 dUpdate :: Lens' Deployment (Maybe DeploymentUpdate)
 dUpdate = lens _dUpdate (\ s a -> s{_dUpdate = a})
@@ -2730,6 +3158,7 @@ instance FromJSON Deployment where
                  Deployment' <$>
                    (o .:? "insertTime") <*> (o .:? "operation") <*>
                      (o .:? "fingerprint")
+                     <*> (o .:? "updateTime")
                      <*> (o .:? "selfLink")
                      <*> (o .:? "name")
                      <*> (o .:? "manifest")
@@ -2746,6 +3175,7 @@ instance ToJSON Deployment where
                  [("insertTime" .=) <$> _dInsertTime,
                   ("operation" .=) <$> _dOperation,
                   ("fingerprint" .=) <$> _dFingerprint,
+                  ("updateTime" .=) <$> _dUpdateTime,
                   ("selfLink" .=) <$> _dSelfLink,
                   ("name" .=) <$> _dName,
                   ("manifest" .=) <$> _dManifest, ("id" .=) <$> _dId,

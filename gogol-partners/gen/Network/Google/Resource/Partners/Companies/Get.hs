@@ -38,12 +38,10 @@ module Network.Google.Resource.Partners.Companies.Get
     , cgUploadProtocol
     , cgCompanyId
     , cgOrderBy
-    , cgPp
     , cgAccessToken
     , cgUploadType
     , cgAddress
     , cgRequestMetadataPartnersSessionId
-    , cgBearerToken
     , cgRequestMetadataLocale
     , cgView
     , cgRequestMetadataExperimentIds
@@ -63,57 +61,52 @@ type CompaniesGetResource =
      "v2" :>
        "companies" :>
          Capture "companyId" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "currencyCode" Text :>
                QueryParam "upload_protocol" Text :>
                  QueryParam "orderBy" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "address" Text :>
-                           QueryParam "requestMetadata.partnersSessionId" Text
-                             :>
-                             QueryParam "bearer_token" Text :>
-                               QueryParam "requestMetadata.locale" Text :>
-                                 QueryParam "view" Text :>
-                                   QueryParams "requestMetadata.experimentIds"
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "address" Text :>
+                         QueryParam "requestMetadata.partnersSessionId" Text
+                           :>
+                           QueryParam "requestMetadata.locale" Text :>
+                             QueryParam "view" Text :>
+                               QueryParams "requestMetadata.experimentIds" Text
+                                 :>
+                                 QueryParam
+                                   "requestMetadata.userOverrides.ipAddress"
+                                   Text
+                                   :>
+                                   QueryParam
+                                     "requestMetadata.trafficSource.trafficSubId"
                                      Text
                                      :>
                                      QueryParam
-                                       "requestMetadata.userOverrides.ipAddress"
+                                       "requestMetadata.userOverrides.userId"
                                        Text
                                        :>
                                        QueryParam
-                                         "requestMetadata.trafficSource.trafficSubId"
+                                         "requestMetadata.trafficSource.trafficSourceId"
                                          Text
                                          :>
-                                         QueryParam
-                                           "requestMetadata.userOverrides.userId"
-                                           Text
-                                           :>
-                                           QueryParam
-                                             "requestMetadata.trafficSource.trafficSourceId"
-                                             Text
-                                             :>
-                                             QueryParam "callback" Text :>
-                                               QueryParam "alt" AltJSON :>
-                                                 Get '[JSON] GetCompanyResponse
+                                         QueryParam "callback" Text :>
+                                           QueryParam "alt" AltJSON :>
+                                             Get '[JSON] GetCompanyResponse
 
 -- | Gets a company.
 --
 -- /See:/ 'companiesGet' smart constructor.
 data CompaniesGet = CompaniesGet'
-    { _cgXgafv                                       :: !(Maybe Text)
+    { _cgXgafv                                       :: !(Maybe Xgafv)
     , _cgCurrencyCode                                :: !(Maybe Text)
     , _cgUploadProtocol                              :: !(Maybe Text)
     , _cgCompanyId                                   :: !Text
     , _cgOrderBy                                     :: !(Maybe Text)
-    , _cgPp                                          :: !Bool
     , _cgAccessToken                                 :: !(Maybe Text)
     , _cgUploadType                                  :: !(Maybe Text)
     , _cgAddress                                     :: !(Maybe Text)
     , _cgRequestMetadataPartnersSessionId            :: !(Maybe Text)
-    , _cgBearerToken                                 :: !(Maybe Text)
     , _cgRequestMetadataLocale                       :: !(Maybe Text)
     , _cgView                                        :: !(Maybe Text)
     , _cgRequestMetadataExperimentIds                :: !(Maybe [Text])
@@ -138,8 +131,6 @@ data CompaniesGet = CompaniesGet'
 --
 -- * 'cgOrderBy'
 --
--- * 'cgPp'
---
 -- * 'cgAccessToken'
 --
 -- * 'cgUploadType'
@@ -147,8 +138,6 @@ data CompaniesGet = CompaniesGet'
 -- * 'cgAddress'
 --
 -- * 'cgRequestMetadataPartnersSessionId'
---
--- * 'cgBearerToken'
 --
 -- * 'cgRequestMetadataLocale'
 --
@@ -175,12 +164,10 @@ companiesGet pCgCompanyId_ =
     , _cgUploadProtocol = Nothing
     , _cgCompanyId = pCgCompanyId_
     , _cgOrderBy = Nothing
-    , _cgPp = True
     , _cgAccessToken = Nothing
     , _cgUploadType = Nothing
     , _cgAddress = Nothing
     , _cgRequestMetadataPartnersSessionId = Nothing
-    , _cgBearerToken = Nothing
     , _cgRequestMetadataLocale = Nothing
     , _cgView = Nothing
     , _cgRequestMetadataExperimentIds = Nothing
@@ -192,7 +179,7 @@ companiesGet pCgCompanyId_ =
     }
 
 -- | V1 error format.
-cgXgafv :: Lens' CompaniesGet (Maybe Text)
+cgXgafv :: Lens' CompaniesGet (Maybe Xgafv)
 cgXgafv = lens _cgXgafv (\ s a -> s{_cgXgafv = a})
 
 -- | If the company\'s budget is in a different currency code than this one,
@@ -221,10 +208,6 @@ cgOrderBy :: Lens' CompaniesGet (Maybe Text)
 cgOrderBy
   = lens _cgOrderBy (\ s a -> s{_cgOrderBy = a})
 
--- | Pretty-print response.
-cgPp :: Lens' CompaniesGet Bool
-cgPp = lens _cgPp (\ s a -> s{_cgPp = a})
-
 -- | OAuth access token.
 cgAccessToken :: Lens' CompaniesGet (Maybe Text)
 cgAccessToken
@@ -248,12 +231,6 @@ cgRequestMetadataPartnersSessionId :: Lens' CompaniesGet (Maybe Text)
 cgRequestMetadataPartnersSessionId
   = lens _cgRequestMetadataPartnersSessionId
       (\ s a -> s{_cgRequestMetadataPartnersSessionId = a})
-
--- | OAuth bearer token.
-cgBearerToken :: Lens' CompaniesGet (Maybe Text)
-cgBearerToken
-  = lens _cgBearerToken
-      (\ s a -> s{_cgBearerToken = a})
 
 -- | Locale to use for the current request.
 cgRequestMetadataLocale :: Lens' CompaniesGet (Maybe Text)
@@ -318,12 +295,10 @@ instance GoogleRequest CompaniesGet where
           = go _cgCompanyId _cgXgafv _cgCurrencyCode
               _cgUploadProtocol
               _cgOrderBy
-              (Just _cgPp)
               _cgAccessToken
               _cgUploadType
               _cgAddress
               _cgRequestMetadataPartnersSessionId
-              _cgBearerToken
               _cgRequestMetadataLocale
               _cgView
               (_cgRequestMetadataExperimentIds ^. _Default)

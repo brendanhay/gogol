@@ -22,7 +22,7 @@
 --
 -- Lists all breakpoints for the debuggee.
 --
--- /See:/ <http://cloud.google.com/debugger Stackdriver Debugger API Reference> for @clouddebugger.debugger.debuggees.breakpoints.list@.
+-- /See:/ <https://cloud.google.com/debugger Stackdriver Debugger API Reference> for @clouddebugger.debugger.debuggees.breakpoints.list@.
 module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.List
     (
     -- * REST Resource
@@ -36,12 +36,10 @@ module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.List
     , ddblXgafv
     , ddblIncludeInactive
     , ddblUploadProtocol
-    , ddblPp
     , ddblAccessToken
     , ddblActionValue
     , ddblUploadType
     , ddblStripResults
-    , ddblBearerToken
     , ddblIncludeAllUsers
     , ddblWaitToken
     , ddblDebuggeeId
@@ -60,35 +58,31 @@ type DebuggerDebuggeesBreakpointsListResource =
          "debuggees" :>
            Capture "debuggeeId" Text :>
              "breakpoints" :>
-               QueryParam "$.xgafv" Text :>
+               QueryParam "$.xgafv" Xgafv :>
                  QueryParam "includeInactive" Bool :>
                    QueryParam "upload_protocol" Text :>
-                     QueryParam "pp" Bool :>
-                       QueryParam "access_token" Text :>
-                         QueryParam "action.value" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "stripResults" Bool :>
-                               QueryParam "bearer_token" Text :>
-                                 QueryParam "includeAllUsers" Bool :>
-                                   QueryParam "waitToken" Text :>
-                                     QueryParam "clientVersion" Text :>
-                                       QueryParam "callback" Text :>
-                                         QueryParam "alt" AltJSON :>
-                                           Get '[JSON] ListBreakpointsResponse
+                     QueryParam "access_token" Text :>
+                       QueryParam "action.value" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "stripResults" Bool :>
+                             QueryParam "includeAllUsers" Bool :>
+                               QueryParam "waitToken" Text :>
+                                 QueryParam "clientVersion" Text :>
+                                   QueryParam "callback" Text :>
+                                     QueryParam "alt" AltJSON :>
+                                       Get '[JSON] ListBreakpointsResponse
 
 -- | Lists all breakpoints for the debuggee.
 --
 -- /See:/ 'debuggerDebuggeesBreakpointsList' smart constructor.
 data DebuggerDebuggeesBreakpointsList = DebuggerDebuggeesBreakpointsList'
-    { _ddblXgafv           :: !(Maybe Text)
+    { _ddblXgafv           :: !(Maybe Xgafv)
     , _ddblIncludeInactive :: !(Maybe Bool)
     , _ddblUploadProtocol  :: !(Maybe Text)
-    , _ddblPp              :: !Bool
     , _ddblAccessToken     :: !(Maybe Text)
     , _ddblActionValue     :: !(Maybe Text)
     , _ddblUploadType      :: !(Maybe Text)
     , _ddblStripResults    :: !(Maybe Bool)
-    , _ddblBearerToken     :: !(Maybe Text)
     , _ddblIncludeAllUsers :: !(Maybe Bool)
     , _ddblWaitToken       :: !(Maybe Text)
     , _ddblDebuggeeId      :: !Text
@@ -106,8 +100,6 @@ data DebuggerDebuggeesBreakpointsList = DebuggerDebuggeesBreakpointsList'
 --
 -- * 'ddblUploadProtocol'
 --
--- * 'ddblPp'
---
 -- * 'ddblAccessToken'
 --
 -- * 'ddblActionValue'
@@ -115,8 +107,6 @@ data DebuggerDebuggeesBreakpointsList = DebuggerDebuggeesBreakpointsList'
 -- * 'ddblUploadType'
 --
 -- * 'ddblStripResults'
---
--- * 'ddblBearerToken'
 --
 -- * 'ddblIncludeAllUsers'
 --
@@ -135,12 +125,10 @@ debuggerDebuggeesBreakpointsList pDdblDebuggeeId_ =
     { _ddblXgafv = Nothing
     , _ddblIncludeInactive = Nothing
     , _ddblUploadProtocol = Nothing
-    , _ddblPp = True
     , _ddblAccessToken = Nothing
     , _ddblActionValue = Nothing
     , _ddblUploadType = Nothing
     , _ddblStripResults = Nothing
-    , _ddblBearerToken = Nothing
     , _ddblIncludeAllUsers = Nothing
     , _ddblWaitToken = Nothing
     , _ddblDebuggeeId = pDdblDebuggeeId_
@@ -149,7 +137,7 @@ debuggerDebuggeesBreakpointsList pDdblDebuggeeId_ =
     }
 
 -- | V1 error format.
-ddblXgafv :: Lens' DebuggerDebuggeesBreakpointsList (Maybe Text)
+ddblXgafv :: Lens' DebuggerDebuggeesBreakpointsList (Maybe Xgafv)
 ddblXgafv
   = lens _ddblXgafv (\ s a -> s{_ddblXgafv = a})
 
@@ -165,10 +153,6 @@ ddblUploadProtocol :: Lens' DebuggerDebuggeesBreakpointsList (Maybe Text)
 ddblUploadProtocol
   = lens _ddblUploadProtocol
       (\ s a -> s{_ddblUploadProtocol = a})
-
--- | Pretty-print response.
-ddblPp :: Lens' DebuggerDebuggeesBreakpointsList Bool
-ddblPp = lens _ddblPp (\ s a -> s{_ddblPp = a})
 
 -- | OAuth access token.
 ddblAccessToken :: Lens' DebuggerDebuggeesBreakpointsList (Maybe Text)
@@ -188,19 +172,13 @@ ddblUploadType
   = lens _ddblUploadType
       (\ s a -> s{_ddblUploadType = a})
 
--- | When set to \`true\`, the response breakpoints are stripped of the
--- results fields: \`stack_frames\`, \`evaluated_expressions\` and
+-- | This field is deprecated. The following fields are always stripped out
+-- of the result: \`stack_frames\`, \`evaluated_expressions\` and
 -- \`variable_table\`.
 ddblStripResults :: Lens' DebuggerDebuggeesBreakpointsList (Maybe Bool)
 ddblStripResults
   = lens _ddblStripResults
       (\ s a -> s{_ddblStripResults = a})
-
--- | OAuth bearer token.
-ddblBearerToken :: Lens' DebuggerDebuggeesBreakpointsList (Maybe Text)
-ddblBearerToken
-  = lens _ddblBearerToken
-      (\ s a -> s{_ddblBearerToken = a})
 
 -- | When set to \`true\`, the response includes the list of breakpoints set
 -- by any user. Otherwise, it includes only breakpoints set by the caller.
@@ -225,7 +203,7 @@ ddblDebuggeeId
   = lens _ddblDebuggeeId
       (\ s a -> s{_ddblDebuggeeId = a})
 
--- | The client version making the call. Following: \`domain\/type\/version\`
+-- | The client version making the call. Schema: \`domain\/type\/version\`
 -- (e.g., \`google.com\/intellij\/v1\`).
 ddblClientVersion :: Lens' DebuggerDebuggeesBreakpointsList (Maybe Text)
 ddblClientVersion
@@ -247,12 +225,10 @@ instance GoogleRequest
         requestClient DebuggerDebuggeesBreakpointsList'{..}
           = go _ddblDebuggeeId _ddblXgafv _ddblIncludeInactive
               _ddblUploadProtocol
-              (Just _ddblPp)
               _ddblAccessToken
               _ddblActionValue
               _ddblUploadType
               _ddblStripResults
-              _ddblBearerToken
               _ddblIncludeAllUsers
               _ddblWaitToken
               _ddblClientVersion

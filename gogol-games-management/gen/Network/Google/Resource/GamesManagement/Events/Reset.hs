@@ -83,8 +83,7 @@ erEventId
 instance GoogleRequest EventsReset where
         type Rs EventsReset = ()
         type Scopes EventsReset =
-             '["https://www.googleapis.com/auth/games",
-               "https://www.googleapis.com/auth/plus.login"]
+             '["https://www.googleapis.com/auth/games"]
         requestClient EventsReset'{..}
           = go _erEventId (Just AltJSON) gamesManagementService
           where go

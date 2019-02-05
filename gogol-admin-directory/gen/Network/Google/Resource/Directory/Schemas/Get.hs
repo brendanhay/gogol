@@ -77,12 +77,12 @@ schemasGet pSgCustomerId_ pSgSchemaKey_ =
     , _sgSchemaKey = pSgSchemaKey_
     }
 
--- | Immutable id of the Google Apps account
+-- | Immutable ID of the G Suite account
 sgCustomerId :: Lens' SchemasGet Text
 sgCustomerId
   = lens _sgCustomerId (\ s a -> s{_sgCustomerId = a})
 
--- | Name or immutable Id of the schema
+-- | Name or immutable ID of the schema
 sgSchemaKey :: Lens' SchemasGet Text
 sgSchemaKey
   = lens _sgSchemaKey (\ s a -> s{_sgSchemaKey = a})

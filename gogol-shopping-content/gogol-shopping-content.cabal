@@ -1,5 +1,5 @@
 name:                  gogol-shopping-content
-version:               0.1.1
+version:               0.4.0
 synopsis:              Google Content API for Shopping SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -11,7 +11,7 @@ copyright:             Copyright (c) 2015-2016 Brendan Hay
 category:              Network, Google, Cloud
 build-type:            Simple
 cabal-version:         >= 1.10
-extra-source-files:    README.md
+extra-source-files:    README.md src/.gitkeep
 
 description:
     Manages product items, inventory, and Merchant Center accounts for
@@ -20,7 +20,7 @@ description:
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
     .
-    This library is compatible with version @v2@
+    This library is compatible with version @v2.1@
     of the API.
 
 source-repository head
@@ -35,53 +35,77 @@ library
 
     exposed-modules:
           Network.Google.Resource.Content.Accounts.AuthInfo
+        , Network.Google.Resource.Content.Accounts.Claimwebsite
         , Network.Google.Resource.Content.Accounts.Custombatch
         , Network.Google.Resource.Content.Accounts.Delete
         , Network.Google.Resource.Content.Accounts.Get
         , Network.Google.Resource.Content.Accounts.Insert
+        , Network.Google.Resource.Content.Accounts.Link
         , Network.Google.Resource.Content.Accounts.List
-        , Network.Google.Resource.Content.Accounts.Patch
         , Network.Google.Resource.Content.Accounts.Update
-        , Network.Google.Resource.Content.Accountshipping.Custombatch
-        , Network.Google.Resource.Content.Accountshipping.Get
-        , Network.Google.Resource.Content.Accountshipping.List
-        , Network.Google.Resource.Content.Accountshipping.Patch
-        , Network.Google.Resource.Content.Accountshipping.Update
         , Network.Google.Resource.Content.Accountstatuses.Custombatch
         , Network.Google.Resource.Content.Accountstatuses.Get
         , Network.Google.Resource.Content.Accountstatuses.List
         , Network.Google.Resource.Content.Accounttax.Custombatch
         , Network.Google.Resource.Content.Accounttax.Get
         , Network.Google.Resource.Content.Accounttax.List
-        , Network.Google.Resource.Content.Accounttax.Patch
         , Network.Google.Resource.Content.Accounttax.Update
         , Network.Google.Resource.Content.Datafeeds.Custombatch
         , Network.Google.Resource.Content.Datafeeds.Delete
+        , Network.Google.Resource.Content.Datafeeds.Fetchnow
         , Network.Google.Resource.Content.Datafeeds.Get
         , Network.Google.Resource.Content.Datafeeds.Insert
         , Network.Google.Resource.Content.Datafeeds.List
-        , Network.Google.Resource.Content.Datafeeds.Patch
         , Network.Google.Resource.Content.Datafeeds.Update
         , Network.Google.Resource.Content.Datafeedstatuses.Custombatch
         , Network.Google.Resource.Content.Datafeedstatuses.Get
         , Network.Google.Resource.Content.Datafeedstatuses.List
-        , Network.Google.Resource.Content.Inventory.Custombatch
-        , Network.Google.Resource.Content.Inventory.Set
+        , Network.Google.Resource.Content.LiaSettings.Custombatch
+        , Network.Google.Resource.Content.LiaSettings.Get
+        , Network.Google.Resource.Content.LiaSettings.GetAccessiblegmbAccounts
+        , Network.Google.Resource.Content.LiaSettings.List
+        , Network.Google.Resource.Content.LiaSettings.ListposDataproviders
+        , Network.Google.Resource.Content.LiaSettings.RequestgmbAccess
+        , Network.Google.Resource.Content.LiaSettings.Requestinventoryverification
+        , Network.Google.Resource.Content.LiaSettings.Setinventoryverificationcontact
+        , Network.Google.Resource.Content.LiaSettings.SetposDataprovider
+        , Network.Google.Resource.Content.LiaSettings.Update
+        , Network.Google.Resource.Content.Orderinvoices.Createchargeinvoice
+        , Network.Google.Resource.Content.Orderinvoices.Createrefundinvoice
+        , Network.Google.Resource.Content.Orderpayments.NotifyauthApproved
+        , Network.Google.Resource.Content.Orderpayments.Notifyauthdeclined
+        , Network.Google.Resource.Content.Orderpayments.Notifycharge
+        , Network.Google.Resource.Content.Orderpayments.Notifyrefund
+        , Network.Google.Resource.Content.Orderreports.Listdisbursements
+        , Network.Google.Resource.Content.Orderreports.Listtransactions
+        , Network.Google.Resource.Content.Orderreturns.Get
+        , Network.Google.Resource.Content.Orderreturns.List
         , Network.Google.Resource.Content.Orders.Acknowledge
         , Network.Google.Resource.Content.Orders.AdvancetestOrder
         , Network.Google.Resource.Content.Orders.Cancel
         , Network.Google.Resource.Content.Orders.Cancellineitem
+        , Network.Google.Resource.Content.Orders.CanceltestOrderbycustomer
         , Network.Google.Resource.Content.Orders.CreatetestOrder
-        , Network.Google.Resource.Content.Orders.Custombatch
+        , Network.Google.Resource.Content.Orders.Createtestreturn
         , Network.Google.Resource.Content.Orders.Get
         , Network.Google.Resource.Content.Orders.GetbymerchantOrderid
         , Network.Google.Resource.Content.Orders.GettestOrdertemplate
+        , Network.Google.Resource.Content.Orders.Instorerefundlineitem
         , Network.Google.Resource.Content.Orders.List
-        , Network.Google.Resource.Content.Orders.Refund
-        , Network.Google.Resource.Content.Orders.Returnlineitem
+        , Network.Google.Resource.Content.Orders.Rejectreturnlineitem
+        , Network.Google.Resource.Content.Orders.Returnrefundlineitem
+        , Network.Google.Resource.Content.Orders.Setlineitemmetadata
         , Network.Google.Resource.Content.Orders.Shiplineitems
+        , Network.Google.Resource.Content.Orders.Updatelineitemshippingdetails
         , Network.Google.Resource.Content.Orders.UpdatemerchantOrderid
         , Network.Google.Resource.Content.Orders.Updateshipment
+        , Network.Google.Resource.Content.Pos.Custombatch
+        , Network.Google.Resource.Content.Pos.Delete
+        , Network.Google.Resource.Content.Pos.Get
+        , Network.Google.Resource.Content.Pos.Insert
+        , Network.Google.Resource.Content.Pos.Inventory
+        , Network.Google.Resource.Content.Pos.List
+        , Network.Google.Resource.Content.Pos.Sale
         , Network.Google.Resource.Content.Products.Custombatch
         , Network.Google.Resource.Content.Products.Delete
         , Network.Google.Resource.Content.Products.Get
@@ -93,8 +117,8 @@ library
         , Network.Google.Resource.Content.ShippingSettings.Custombatch
         , Network.Google.Resource.Content.ShippingSettings.Get
         , Network.Google.Resource.Content.ShippingSettings.Getsupportedcarriers
+        , Network.Google.Resource.Content.ShippingSettings.Getsupportedholidays
         , Network.Google.Resource.Content.ShippingSettings.List
-        , Network.Google.Resource.Content.ShippingSettings.Patch
         , Network.Google.Resource.Content.ShippingSettings.Update
         , Network.Google.ShoppingContent
         , Network.Google.ShoppingContent.Types
@@ -104,5 +128,5 @@ library
         , Network.Google.ShoppingContent.Types.Sum
 
     build-depends:
-          gogol-core == 0.1.1.*
+          gogol-core == 0.4.0.*
         , base       >= 4.7 && < 5

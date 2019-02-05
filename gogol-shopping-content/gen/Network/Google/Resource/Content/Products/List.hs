@@ -33,10 +33,9 @@ module Network.Google.Resource.Content.Products.List
     , ProductsList
 
     -- * Request Lenses
-    , proMerchantId
-    , proIncludeInvalidInsertedItems
-    , proPageToken
-    , proMaxResults
+    , pllMerchantId
+    , pllPageToken
+    , pllMaxResults
     ) where
 
 import           Network.Google.Prelude
@@ -46,73 +45,61 @@ import           Network.Google.ShoppingContent.Types
 -- 'ProductsList' request conforms to.
 type ProductsListResource =
      "content" :>
-       "v2" :>
+       "v2.1" :>
          Capture "merchantId" (Textual Word64) :>
            "products" :>
-             QueryParam "includeInvalidInsertedItems" Bool :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" (Textual Word32) :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] ProductsListResponse
+             QueryParam "pageToken" Text :>
+               QueryParam "maxResults" (Textual Word32) :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] ProductsListResponse
 
 -- | Lists the products in your Merchant Center account.
 --
 -- /See:/ 'productsList' smart constructor.
 data ProductsList = ProductsList'
-    { _proMerchantId                  :: !(Textual Word64)
-    , _proIncludeInvalidInsertedItems :: !(Maybe Bool)
-    , _proPageToken                   :: !(Maybe Text)
-    , _proMaxResults                  :: !(Maybe (Textual Word32))
+    { _pllMerchantId :: !(Textual Word64)
+    , _pllPageToken  :: !(Maybe Text)
+    , _pllMaxResults :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'proMerchantId'
+-- * 'pllMerchantId'
 --
--- * 'proIncludeInvalidInsertedItems'
+-- * 'pllPageToken'
 --
--- * 'proPageToken'
---
--- * 'proMaxResults'
+-- * 'pllMaxResults'
 productsList
-    :: Word64 -- ^ 'proMerchantId'
+    :: Word64 -- ^ 'pllMerchantId'
     -> ProductsList
-productsList pProMerchantId_ =
+productsList pPllMerchantId_ =
     ProductsList'
-    { _proMerchantId = _Coerce # pProMerchantId_
-    , _proIncludeInvalidInsertedItems = Nothing
-    , _proPageToken = Nothing
-    , _proMaxResults = Nothing
+    { _pllMerchantId = _Coerce # pPllMerchantId_
+    , _pllPageToken = Nothing
+    , _pllMaxResults = Nothing
     }
 
--- | The ID of the managing account.
-proMerchantId :: Lens' ProductsList Word64
-proMerchantId
-  = lens _proMerchantId
-      (\ s a -> s{_proMerchantId = a})
+-- | The ID of the account that contains the products. This account cannot be
+-- a multi-client account.
+pllMerchantId :: Lens' ProductsList Word64
+pllMerchantId
+  = lens _pllMerchantId
+      (\ s a -> s{_pllMerchantId = a})
       . _Coerce
 
--- | Flag to include the invalid inserted items in the result of the list
--- request. By default the invalid items are not shown (the default value
--- is false).
-proIncludeInvalidInsertedItems :: Lens' ProductsList (Maybe Bool)
-proIncludeInvalidInsertedItems
-  = lens _proIncludeInvalidInsertedItems
-      (\ s a -> s{_proIncludeInvalidInsertedItems = a})
-
 -- | The token returned by the previous request.
-proPageToken :: Lens' ProductsList (Maybe Text)
-proPageToken
-  = lens _proPageToken (\ s a -> s{_proPageToken = a})
+pllPageToken :: Lens' ProductsList (Maybe Text)
+pllPageToken
+  = lens _pllPageToken (\ s a -> s{_pllPageToken = a})
 
 -- | The maximum number of products to return in the response, used for
 -- paging.
-proMaxResults :: Lens' ProductsList (Maybe Word32)
-proMaxResults
-  = lens _proMaxResults
-      (\ s a -> s{_proMaxResults = a})
+pllMaxResults :: Lens' ProductsList (Maybe Word32)
+pllMaxResults
+  = lens _pllMaxResults
+      (\ s a -> s{_pllMaxResults = a})
       . mapping _Coerce
 
 instance GoogleRequest ProductsList where
@@ -120,9 +107,7 @@ instance GoogleRequest ProductsList where
         type Scopes ProductsList =
              '["https://www.googleapis.com/auth/content"]
         requestClient ProductsList'{..}
-          = go _proMerchantId _proIncludeInvalidInsertedItems
-              _proPageToken
-              _proMaxResults
+          = go _pllMerchantId _pllPageToken _pllMaxResults
               (Just AltJSON)
               shoppingContentService
           where go

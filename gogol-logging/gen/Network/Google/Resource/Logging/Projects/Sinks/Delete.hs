@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a sink.
+-- Deletes a sink. If the sink has a unique writer_identity, then that
+-- service account is also deleted.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.projects.sinks.delete@.
 module Network.Google.Resource.Logging.Projects.Sinks.Delete
@@ -35,10 +36,8 @@ module Network.Google.Resource.Logging.Projects.Sinks.Delete
     -- * Request Lenses
     , psdXgafv
     , psdUploadProtocol
-    , psdPp
     , psdAccessToken
     , psdUploadType
-    , psdBearerToken
     , psdSinkName
     , psdCallback
     ) where
@@ -53,23 +52,20 @@ type ProjectsSinksDeleteResource =
        Capture "sinkName" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :> Delete '[JSON] Empty
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
--- | Deletes a sink.
+-- | Deletes a sink. If the sink has a unique writer_identity, then that
+-- service account is also deleted.
 --
 -- /See:/ 'projectsSinksDelete' smart constructor.
 data ProjectsSinksDelete = ProjectsSinksDelete'
     { _psdXgafv          :: !(Maybe Xgafv)
     , _psdUploadProtocol :: !(Maybe Text)
-    , _psdPp             :: !Bool
     , _psdAccessToken    :: !(Maybe Text)
     , _psdUploadType     :: !(Maybe Text)
-    , _psdBearerToken    :: !(Maybe Text)
     , _psdSinkName       :: !Text
     , _psdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -82,13 +78,9 @@ data ProjectsSinksDelete = ProjectsSinksDelete'
 --
 -- * 'psdUploadProtocol'
 --
--- * 'psdPp'
---
 -- * 'psdAccessToken'
 --
 -- * 'psdUploadType'
---
--- * 'psdBearerToken'
 --
 -- * 'psdSinkName'
 --
@@ -100,10 +92,8 @@ projectsSinksDelete pPsdSinkName_ =
     ProjectsSinksDelete'
     { _psdXgafv = Nothing
     , _psdUploadProtocol = Nothing
-    , _psdPp = True
     , _psdAccessToken = Nothing
     , _psdUploadType = Nothing
-    , _psdBearerToken = Nothing
     , _psdSinkName = pPsdSinkName_
     , _psdCallback = Nothing
     }
@@ -118,10 +108,6 @@ psdUploadProtocol
   = lens _psdUploadProtocol
       (\ s a -> s{_psdUploadProtocol = a})
 
--- | Pretty-print response.
-psdPp :: Lens' ProjectsSinksDelete Bool
-psdPp = lens _psdPp (\ s a -> s{_psdPp = a})
-
 -- | OAuth access token.
 psdAccessToken :: Lens' ProjectsSinksDelete (Maybe Text)
 psdAccessToken
@@ -134,16 +120,13 @@ psdUploadType
   = lens _psdUploadType
       (\ s a -> s{_psdUploadType = a})
 
--- | OAuth bearer token.
-psdBearerToken :: Lens' ProjectsSinksDelete (Maybe Text)
-psdBearerToken
-  = lens _psdBearerToken
-      (\ s a -> s{_psdBearerToken = a})
-
--- | Required. The resource name of the sink to delete, including the parent
--- resource and the sink identifier. Example:
--- \`\"projects\/my-project-id\/sinks\/my-sink-id\"\`. It is an error if
--- the sink does not exist.
+-- | Required. The full resource name of the sink to delete, including the
+-- parent resource and the sink identifier:
+-- \"projects\/[PROJECT_ID]\/sinks\/[SINK_ID]\"
+-- \"organizations\/[ORGANIZATION_ID]\/sinks\/[SINK_ID]\"
+-- \"billingAccounts\/[BILLING_ACCOUNT_ID]\/sinks\/[SINK_ID]\"
+-- \"folders\/[FOLDER_ID]\/sinks\/[SINK_ID]\" Example:
+-- \"projects\/my-project-id\/sinks\/my-sink-id\".
 psdSinkName :: Lens' ProjectsSinksDelete Text
 psdSinkName
   = lens _psdSinkName (\ s a -> s{_psdSinkName = a})
@@ -160,10 +143,8 @@ instance GoogleRequest ProjectsSinksDelete where
                "https://www.googleapis.com/auth/logging.admin"]
         requestClient ProjectsSinksDelete'{..}
           = go _psdSinkName _psdXgafv _psdUploadProtocol
-              (Just _psdPp)
               _psdAccessToken
               _psdUploadType
-              _psdBearerToken
               _psdCallback
               (Just AltJSON)
               loggingService

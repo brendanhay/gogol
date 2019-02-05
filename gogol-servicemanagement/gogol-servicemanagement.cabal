@@ -1,5 +1,5 @@
 name:                  gogol-servicemanagement
-version:               0.1.1
+version:               0.4.0
 synopsis:              Google Service Management SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -11,7 +11,7 @@ copyright:             Copyright (c) 2015-2016 Brendan Hay
 category:              Network, Google, Cloud
 build-type:            Simple
 cabal-version:         >= 1.10
-extra-source-files:    README.md
+extra-source-files:    README.md src/.gitkeep
 
 description:
     Google Service Management allows service producers to publish their
@@ -36,10 +36,14 @@ library
 
     exposed-modules:
           Network.Google.Resource.ServiceManagement.Operations.Get
+        , Network.Google.Resource.ServiceManagement.Operations.List
         , Network.Google.Resource.ServiceManagement.Services.Configs.Create
         , Network.Google.Resource.ServiceManagement.Services.Configs.Get
         , Network.Google.Resource.ServiceManagement.Services.Configs.List
         , Network.Google.Resource.ServiceManagement.Services.Configs.Submit
+        , Network.Google.Resource.ServiceManagement.Services.Consumers.GetIAMPolicy
+        , Network.Google.Resource.ServiceManagement.Services.Consumers.SetIAMPolicy
+        , Network.Google.Resource.ServiceManagement.Services.Consumers.TestIAMPermissions
         , Network.Google.Resource.ServiceManagement.Services.Create
         , Network.Google.Resource.ServiceManagement.Services.Delete
         , Network.Google.Resource.ServiceManagement.Services.Disable
@@ -63,5 +67,5 @@ library
         , Network.Google.ServiceManagement.Types.Sum
 
     build-depends:
-          gogol-core == 0.1.1.*
+          gogol-core == 0.4.0.*
         , base       >= 4.7 && < 5

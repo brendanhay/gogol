@@ -36,6 +36,7 @@ module Network.Google.Resource.Calendar.ACL.Patch
     , apCalendarId
     , apRuleId
     , apPayload
+    , apSendNotifications
     ) where
 
 import           Network.Google.AppsCalendar.Types
@@ -50,16 +51,18 @@ type ACLPatchResource =
            Capture "calendarId" Text :>
              "acl" :>
                Capture "ruleId" Text :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] ACLRule :> Patch '[JSON] ACLRule
+                 QueryParam "sendNotifications" Bool :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] ACLRule :> Patch '[JSON] ACLRule
 
 -- | Updates an access control rule. This method supports patch semantics.
 --
 -- /See:/ 'aclPatch' smart constructor.
 data ACLPatch = ACLPatch'
-    { _apCalendarId :: !Text
-    , _apRuleId     :: !Text
-    , _apPayload    :: !ACLRule
+    { _apCalendarId        :: !Text
+    , _apRuleId            :: !Text
+    , _apPayload           :: !ACLRule
+    , _apSendNotifications :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ACLPatch' with the minimum fields required to make a request.
@@ -71,6 +74,8 @@ data ACLPatch = ACLPatch'
 -- * 'apRuleId'
 --
 -- * 'apPayload'
+--
+-- * 'apSendNotifications'
 aclPatch
     :: Text -- ^ 'apCalendarId'
     -> Text -- ^ 'apRuleId'
@@ -81,6 +86,7 @@ aclPatch pApCalendarId_ pApRuleId_ pApPayload_ =
     { _apCalendarId = pApCalendarId_
     , _apRuleId = pApRuleId_
     , _apPayload = pApPayload_
+    , _apSendNotifications = Nothing
     }
 
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
@@ -99,12 +105,21 @@ apPayload :: Lens' ACLPatch ACLRule
 apPayload
   = lens _apPayload (\ s a -> s{_apPayload = a})
 
+-- | Whether to send notifications about the calendar sharing change. Note
+-- that there are no notifications on access removal. Optional. The default
+-- is True.
+apSendNotifications :: Lens' ACLPatch (Maybe Bool)
+apSendNotifications
+  = lens _apSendNotifications
+      (\ s a -> s{_apSendNotifications = a})
+
 instance GoogleRequest ACLPatch where
         type Rs ACLPatch = ACLRule
         type Scopes ACLPatch =
              '["https://www.googleapis.com/auth/calendar"]
         requestClient ACLPatch'{..}
-          = go _apCalendarId _apRuleId (Just AltJSON)
+          = go _apCalendarId _apRuleId _apSendNotifications
+              (Just AltJSON)
               _apPayload
               appsCalendarService
           where go

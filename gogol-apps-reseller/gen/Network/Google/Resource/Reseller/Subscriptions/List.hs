@@ -20,8 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists subscriptions of a reseller, optionally filtered by a customer
--- name prefix.
+-- List of subscriptions managed by the reseller. The list can be all
+-- subscriptions, all of a customer\'s subscriptions, or all of a
+-- customer\'s transferable subscriptions.
 --
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @reseller.subscriptions.list@.
 module Network.Google.Resource.Reseller.Subscriptions.List
@@ -58,8 +59,9 @@ type SubscriptionsListResource =
                      QueryParam "maxResults" (Textual Word32) :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Subscriptions
 
--- | Lists subscriptions of a reseller, optionally filtered by a customer
--- name prefix.
+-- | List of subscriptions managed by the reseller. The list can be all
+-- subscriptions, all of a customer\'s subscriptions, or all of a
+-- customer\'s transferable subscriptions.
 --
 -- /See:/ 'subscriptionsList' smart constructor.
 data SubscriptionsList = SubscriptionsList'
@@ -94,21 +96,32 @@ subscriptionsList =
     , _slMaxResults = Nothing
     }
 
--- | Prefix of the customer\'s domain name by which the subscriptions should
--- be filtered. Optional
+-- | When retrieving all of your subscriptions and filtering for specific
+-- customers, you can enter a prefix for a customer name. Using an example
+-- customer group that includes exam.com, example20.com and example.com: -
+-- exa -- Returns all customer names that start with \'exa\' which could
+-- include exam.com, example20.com, and example.com. A name prefix is
+-- similar to using a regular expression\'s asterisk, exa*. - example --
+-- Returns example20.com and example.com.
 slCustomerNamePrefix :: Lens' SubscriptionsList (Maybe Text)
 slCustomerNamePrefix
   = lens _slCustomerNamePrefix
       (\ s a -> s{_slCustomerNamePrefix = a})
 
--- | Id of the Customer
+-- | Either the customer\'s primary domain name or the customer\'s unique
+-- identifier. If using the domain name, we do not recommend using a
+-- customerId as a key for persistent data. If the domain name for a
+-- customerId is changed, the Google system automatically updates.
 slCustomerId :: Lens' SubscriptionsList (Maybe Text)
 slCustomerId
   = lens _slCustomerId (\ s a -> s{_slCustomerId = a})
 
--- | An auth token needed if the customer is not a resold customer of this
--- reseller. Can be generated at
--- https:\/\/www.google.com\/a\/cpanel\/customer-domain\/TransferToken.Optional.
+-- | The customerAuthToken query string is required when creating a resold
+-- account that transfers a direct customer\'s subscription or transfers
+-- another reseller customer\'s subscription to your reseller management.
+-- This is a hexadecimal authentication token needed to complete the
+-- subscription transfer. For more information, see the administrator help
+-- center.
 slCustomerAuthToken :: Lens' SubscriptionsList (Maybe Text)
 slCustomerAuthToken
   = lens _slCustomerAuthToken
@@ -119,7 +132,9 @@ slPageToken :: Lens' SubscriptionsList (Maybe Text)
 slPageToken
   = lens _slPageToken (\ s a -> s{_slPageToken = a})
 
--- | Maximum number of results to return
+-- | When retrieving a large list, the maxResults is the maximum number of
+-- results per page. The nextPageToken value takes you to the next page.
+-- The default is 20.
 slMaxResults :: Lens' SubscriptionsList (Maybe Word32)
 slMaxResults
   = lens _slMaxResults (\ s a -> s{_slMaxResults = a})

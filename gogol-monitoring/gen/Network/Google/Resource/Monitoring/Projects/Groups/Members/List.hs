@@ -36,10 +36,8 @@ module Network.Google.Resource.Monitoring.Projects.Groups.Members.List
     , pgmlIntervalStartTime
     , pgmlXgafv
     , pgmlUploadProtocol
-    , pgmlPp
     , pgmlAccessToken
     , pgmlUploadType
-    , pgmlBearerToken
     , pgmlName
     , pgmlFilter
     , pgmlPageToken
@@ -60,17 +58,15 @@ type ProjectsGroupsMembersListResource =
            QueryParam "interval.startTime" DateTime' :>
              QueryParam "$.xgafv" Xgafv :>
                QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "filter" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "interval.endTime" DateTime' :>
-                               QueryParam "pageSize" (Textual Int32) :>
-                                 QueryParam "callback" Text :>
-                                   QueryParam "alt" AltJSON :>
-                                     Get '[JSON] ListGroupMembersResponse
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "filter" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "interval.endTime" DateTime' :>
+                           QueryParam "pageSize" (Textual Int32) :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] ListGroupMembersResponse
 
 -- | Lists the monitored resources that are members of a group.
 --
@@ -79,10 +75,8 @@ data ProjectsGroupsMembersList = ProjectsGroupsMembersList'
     { _pgmlIntervalStartTime :: !(Maybe DateTime')
     , _pgmlXgafv             :: !(Maybe Xgafv)
     , _pgmlUploadProtocol    :: !(Maybe Text)
-    , _pgmlPp                :: !Bool
     , _pgmlAccessToken       :: !(Maybe Text)
     , _pgmlUploadType        :: !(Maybe Text)
-    , _pgmlBearerToken       :: !(Maybe Text)
     , _pgmlName              :: !Text
     , _pgmlFilter            :: !(Maybe Text)
     , _pgmlPageToken         :: !(Maybe Text)
@@ -101,13 +95,9 @@ data ProjectsGroupsMembersList = ProjectsGroupsMembersList'
 --
 -- * 'pgmlUploadProtocol'
 --
--- * 'pgmlPp'
---
 -- * 'pgmlAccessToken'
 --
 -- * 'pgmlUploadType'
---
--- * 'pgmlBearerToken'
 --
 -- * 'pgmlName'
 --
@@ -128,10 +118,8 @@ projectsGroupsMembersList pPgmlName_ =
     { _pgmlIntervalStartTime = Nothing
     , _pgmlXgafv = Nothing
     , _pgmlUploadProtocol = Nothing
-    , _pgmlPp = True
     , _pgmlAccessToken = Nothing
     , _pgmlUploadType = Nothing
-    , _pgmlBearerToken = Nothing
     , _pgmlName = pPgmlName_
     , _pgmlFilter = Nothing
     , _pgmlPageToken = Nothing
@@ -160,10 +148,6 @@ pgmlUploadProtocol
   = lens _pgmlUploadProtocol
       (\ s a -> s{_pgmlUploadProtocol = a})
 
--- | Pretty-print response.
-pgmlPp :: Lens' ProjectsGroupsMembersList Bool
-pgmlPp = lens _pgmlPp (\ s a -> s{_pgmlPp = a})
-
 -- | OAuth access token.
 pgmlAccessToken :: Lens' ProjectsGroupsMembersList (Maybe Text)
 pgmlAccessToken
@@ -176,22 +160,16 @@ pgmlUploadType
   = lens _pgmlUploadType
       (\ s a -> s{_pgmlUploadType = a})
 
--- | OAuth bearer token.
-pgmlBearerToken :: Lens' ProjectsGroupsMembersList (Maybe Text)
-pgmlBearerToken
-  = lens _pgmlBearerToken
-      (\ s a -> s{_pgmlBearerToken = a})
-
 -- | The group whose members are listed. The format is
 -- \"projects\/{project_id_or_number}\/groups\/{group_id}\".
 pgmlName :: Lens' ProjectsGroupsMembersList Text
 pgmlName = lens _pgmlName (\ s a -> s{_pgmlName = a})
 
--- | An optional list filter (\/monitoring\/api\/learn_more#filtering)
--- describing the members to be returned. The filter may reference the
--- type, labels, and metadata of monitored resources that comprise the
--- group. For example, to return only resources representing Compute Engine
--- VM instances, use this filter: resource.type = \"gce_instance\"
+-- | An optional list filter describing the members to be returned. The
+-- filter may reference the type, labels, and metadata of monitored
+-- resources that comprise the group. For example, to return only resources
+-- representing Compute Engine VM instances, use this filter: resource.type
+-- = \"gce_instance\"
 pgmlFilter :: Lens' ProjectsGroupsMembersList (Maybe Text)
 pgmlFilter
   = lens _pgmlFilter (\ s a -> s{_pgmlFilter = a})
@@ -233,10 +211,8 @@ instance GoogleRequest ProjectsGroupsMembersList
         requestClient ProjectsGroupsMembersList'{..}
           = go _pgmlName _pgmlIntervalStartTime _pgmlXgafv
               _pgmlUploadProtocol
-              (Just _pgmlPp)
               _pgmlAccessToken
               _pgmlUploadType
-              _pgmlBearerToken
               _pgmlFilter
               _pgmlPageToken
               _pgmlIntervalEndTime

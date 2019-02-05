@@ -47,12 +47,10 @@ module Network.Google.Resource.Sheets.Spreadsheets.BatchUpdate
     -- * Request Lenses
     , sbuXgafv
     , sbuUploadProtocol
-    , sbuPp
     , sbuAccessToken
     , sbuSpreadsheetId
     , sbuUploadType
     , sbuPayload
-    , sbuBearerToken
     , sbuCallback
     ) where
 
@@ -67,14 +65,12 @@ type SpreadsheetsBatchUpdateResource =
          CaptureMode "spreadsheetId" "batchUpdate" Text :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] BatchUpdateSpreadsheetRequest :>
-                             Post '[JSON] BatchUpdateSpreadsheetResponse
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] BatchUpdateSpreadsheetRequest :>
+                         Post '[JSON] BatchUpdateSpreadsheetResponse
 
 -- | Applies one or more updates to the spreadsheet. Each request is
 -- validated before being applied. If any request is not valid then the
@@ -94,12 +90,10 @@ type SpreadsheetsBatchUpdateResource =
 data SpreadsheetsBatchUpdate = SpreadsheetsBatchUpdate'
     { _sbuXgafv          :: !(Maybe Xgafv)
     , _sbuUploadProtocol :: !(Maybe Text)
-    , _sbuPp             :: !Bool
     , _sbuAccessToken    :: !(Maybe Text)
     , _sbuSpreadsheetId  :: !Text
     , _sbuUploadType     :: !(Maybe Text)
     , _sbuPayload        :: !BatchUpdateSpreadsheetRequest
-    , _sbuBearerToken    :: !(Maybe Text)
     , _sbuCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -111,8 +105,6 @@ data SpreadsheetsBatchUpdate = SpreadsheetsBatchUpdate'
 --
 -- * 'sbuUploadProtocol'
 --
--- * 'sbuPp'
---
 -- * 'sbuAccessToken'
 --
 -- * 'sbuSpreadsheetId'
@@ -120,8 +112,6 @@ data SpreadsheetsBatchUpdate = SpreadsheetsBatchUpdate'
 -- * 'sbuUploadType'
 --
 -- * 'sbuPayload'
---
--- * 'sbuBearerToken'
 --
 -- * 'sbuCallback'
 spreadsheetsBatchUpdate
@@ -132,12 +122,10 @@ spreadsheetsBatchUpdate pSbuSpreadsheetId_ pSbuPayload_ =
     SpreadsheetsBatchUpdate'
     { _sbuXgafv = Nothing
     , _sbuUploadProtocol = Nothing
-    , _sbuPp = True
     , _sbuAccessToken = Nothing
     , _sbuSpreadsheetId = pSbuSpreadsheetId_
     , _sbuUploadType = Nothing
     , _sbuPayload = pSbuPayload_
-    , _sbuBearerToken = Nothing
     , _sbuCallback = Nothing
     }
 
@@ -150,10 +138,6 @@ sbuUploadProtocol :: Lens' SpreadsheetsBatchUpdate (Maybe Text)
 sbuUploadProtocol
   = lens _sbuUploadProtocol
       (\ s a -> s{_sbuUploadProtocol = a})
-
--- | Pretty-print response.
-sbuPp :: Lens' SpreadsheetsBatchUpdate Bool
-sbuPp = lens _sbuPp (\ s a -> s{_sbuPp = a})
 
 -- | OAuth access token.
 sbuAccessToken :: Lens' SpreadsheetsBatchUpdate (Maybe Text)
@@ -178,12 +162,6 @@ sbuPayload :: Lens' SpreadsheetsBatchUpdate BatchUpdateSpreadsheetRequest
 sbuPayload
   = lens _sbuPayload (\ s a -> s{_sbuPayload = a})
 
--- | OAuth bearer token.
-sbuBearerToken :: Lens' SpreadsheetsBatchUpdate (Maybe Text)
-sbuBearerToken
-  = lens _sbuBearerToken
-      (\ s a -> s{_sbuBearerToken = a})
-
 -- | JSONP
 sbuCallback :: Lens' SpreadsheetsBatchUpdate (Maybe Text)
 sbuCallback
@@ -194,13 +172,12 @@ instance GoogleRequest SpreadsheetsBatchUpdate where
              BatchUpdateSpreadsheetResponse
         type Scopes SpreadsheetsBatchUpdate =
              '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file",
                "https://www.googleapis.com/auth/spreadsheets"]
         requestClient SpreadsheetsBatchUpdate'{..}
           = go _sbuSpreadsheetId _sbuXgafv _sbuUploadProtocol
-              (Just _sbuPp)
               _sbuAccessToken
               _sbuUploadType
-              _sbuBearerToken
               _sbuCallback
               (Just AltJSON)
               _sbuPayload

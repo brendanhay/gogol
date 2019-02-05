@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'PurchasesSubscriptionsGet' request conforms to.
 type PurchasesSubscriptionsGetResource =
      "androidpublisher" :>
-       "v2" :>
+       "v3" :>
          "applications" :>
            Capture "packageName" Text :>
              "purchases" :>

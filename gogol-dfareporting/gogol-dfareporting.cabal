@@ -1,5 +1,5 @@
 name:                  gogol-dfareporting
-version:               0.1.1
+version:               0.4.0
 synopsis:              Google DCM/DFA Reporting And Trafficking SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -11,7 +11,7 @@ copyright:             Copyright (c) 2015-2016 Brendan Hay
 category:              Network, Google, Cloud
 build-type:            Simple
 cabal-version:         >= 1.10
-extra-source-files:    README.md
+extra-source-files:    README.md src/.gitkeep
 
 description:
     Manages your DoubleClick Campaign Manager ad campaigns and reports.
@@ -19,7 +19,7 @@ description:
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
     .
-    This library is compatible with version @v2.6@
+    This library is compatible with version @v3.2@
     of the API.
 
 source-repository head
@@ -60,6 +60,11 @@ library
         , Network.Google.Resource.DFAReporting.AdvertiserGroups.List
         , Network.Google.Resource.DFAReporting.AdvertiserGroups.Patch
         , Network.Google.Resource.DFAReporting.AdvertiserGroups.Update
+        , Network.Google.Resource.DFAReporting.AdvertiserLandingPages.Get
+        , Network.Google.Resource.DFAReporting.AdvertiserLandingPages.Insert
+        , Network.Google.Resource.DFAReporting.AdvertiserLandingPages.List
+        , Network.Google.Resource.DFAReporting.AdvertiserLandingPages.Patch
+        , Network.Google.Resource.DFAReporting.AdvertiserLandingPages.Update
         , Network.Google.Resource.DFAReporting.Advertisers.Get
         , Network.Google.Resource.DFAReporting.Advertisers.Insert
         , Network.Google.Resource.DFAReporting.Advertisers.List
@@ -85,6 +90,7 @@ library
         , Network.Google.Resource.DFAReporting.ContentCategories.Patch
         , Network.Google.Resource.DFAReporting.ContentCategories.Update
         , Network.Google.Resource.DFAReporting.Conversions.Batchinsert
+        , Network.Google.Resource.DFAReporting.Conversions.Batchupdate
         , Network.Google.Resource.DFAReporting.Countries.Get
         , Network.Google.Resource.DFAReporting.Countries.List
         , Network.Google.Resource.DFAReporting.CreativeAssets.Insert
@@ -145,14 +151,10 @@ library
         , Network.Google.Resource.DFAReporting.FloodlightConfigurations.Update
         , Network.Google.Resource.DFAReporting.InventoryItems.Get
         , Network.Google.Resource.DFAReporting.InventoryItems.List
-        , Network.Google.Resource.DFAReporting.LandingPages.Delete
-        , Network.Google.Resource.DFAReporting.LandingPages.Get
-        , Network.Google.Resource.DFAReporting.LandingPages.Insert
-        , Network.Google.Resource.DFAReporting.LandingPages.List
-        , Network.Google.Resource.DFAReporting.LandingPages.Patch
-        , Network.Google.Resource.DFAReporting.LandingPages.Update
         , Network.Google.Resource.DFAReporting.Languages.List
         , Network.Google.Resource.DFAReporting.Metros.List
+        , Network.Google.Resource.DFAReporting.MobileApps.Get
+        , Network.Google.Resource.DFAReporting.MobileApps.List
         , Network.Google.Resource.DFAReporting.MobileCarriers.Get
         , Network.Google.Resource.DFAReporting.MobileCarriers.List
         , Network.Google.Resource.DFAReporting.OperatingSystemVersions.Get
@@ -237,11 +239,13 @@ library
         , Network.Google.Resource.DFAReporting.UserRoles.List
         , Network.Google.Resource.DFAReporting.UserRoles.Patch
         , Network.Google.Resource.DFAReporting.UserRoles.Update
+        , Network.Google.Resource.DFAReporting.VideoFormats.Get
+        , Network.Google.Resource.DFAReporting.VideoFormats.List
 
     other-modules:
           Network.Google.DFAReporting.Types.Product
         , Network.Google.DFAReporting.Types.Sum
 
     build-depends:
-          gogol-core == 0.1.1.*
+          gogol-core == 0.4.0.*
         , base       >= 4.7 && < 5

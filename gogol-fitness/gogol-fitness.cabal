@@ -1,5 +1,5 @@
 name:                  gogol-fitness
-version:               0.1.1
+version:               0.4.0
 synopsis:              Google Fitness SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -11,7 +11,7 @@ copyright:             Copyright (c) 2015-2016 Brendan Hay
 category:              Network, Google, Cloud
 build-type:            Simple
 cabal-version:         >= 1.10
-extra-source-files:    README.md
+extra-source-files:    README.md src/.gitkeep
 
 description:
     Stores and accesses user data in the fitness store from apps on any
@@ -38,6 +38,7 @@ library
         , Network.Google.Fitness.Types
         , Network.Google.Resource.Fitness.Users.DataSet.Aggregate
         , Network.Google.Resource.Fitness.Users.DataSources.Create
+        , Network.Google.Resource.Fitness.Users.DataSources.DataPointChanges.List
         , Network.Google.Resource.Fitness.Users.DataSources.DataSets.Delete
         , Network.Google.Resource.Fitness.Users.DataSources.DataSets.Get
         , Network.Google.Resource.Fitness.Users.DataSources.DataSets.Patch
@@ -55,5 +56,5 @@ library
         , Network.Google.Fitness.Types.Sum
 
     build-depends:
-          gogol-core == 0.1.1.*
+          gogol-core == 0.4.0.*
         , base       >= 4.7 && < 5

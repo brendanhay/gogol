@@ -45,7 +45,7 @@ import           Network.Google.ShoppingContent.Types
 -- 'DatafeedstatusesList' request conforms to.
 type DatafeedstatusesListResource =
      "content" :>
-       "v2" :>
+       "v2.1" :>
          Capture "merchantId" (Textual Word64) :>
            "datafeedstatuses" :>
              QueryParam "pageToken" Text :>
@@ -81,7 +81,8 @@ datafeedstatusesList pDlMerchantId_ =
     , _dlMaxResults = Nothing
     }
 
--- | The ID of the managing account.
+-- | The ID of the account that manages the datafeeds. This account cannot be
+-- a multi-client account.
 dlMerchantId :: Lens' DatafeedstatusesList Word64
 dlMerchantId
   = lens _dlMerchantId (\ s a -> s{_dlMerchantId = a})

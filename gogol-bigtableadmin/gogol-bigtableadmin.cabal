@@ -1,0 +1,76 @@
+name:                  gogol-bigtableadmin
+version:               0.4.0
+synopsis:              Google Cloud Bigtable Admin SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               OtherLicense
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
+copyright:             Copyright (c) 2015-2016 Brendan Hay
+category:              Network, Google, Cloud
+build-type:            Simple
+cabal-version:         >= 1.10
+extra-source-files:    README.md src/.gitkeep
+
+description:
+
+    .
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
+    .
+    This library is compatible with version @v2@
+    of the API.
+
+source-repository head
+    type:     git
+    location: git://github.com/brendanhay/gogol.git
+
+library
+    default-language:  Haskell2010
+    hs-source-dirs:    src gen
+
+    ghc-options:       -Wall
+
+    exposed-modules:
+          Network.Google.BigtableAdmin
+        , Network.Google.BigtableAdmin.Types
+        , Network.Google.Resource.BigtableAdmin.Operations.Cancel
+        , Network.Google.Resource.BigtableAdmin.Operations.Delete
+        , Network.Google.Resource.BigtableAdmin.Operations.Get
+        , Network.Google.Resource.BigtableAdmin.Operations.Projects.Operations.List
+        , Network.Google.Resource.BigtableAdmin.Projects.Instances.AppProFiles.Create
+        , Network.Google.Resource.BigtableAdmin.Projects.Instances.AppProFiles.Delete
+        , Network.Google.Resource.BigtableAdmin.Projects.Instances.AppProFiles.Get
+        , Network.Google.Resource.BigtableAdmin.Projects.Instances.AppProFiles.List
+        , Network.Google.Resource.BigtableAdmin.Projects.Instances.AppProFiles.Patch
+        , Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.Create
+        , Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.Delete
+        , Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.Get
+        , Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.List
+        , Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.Update
+        , Network.Google.Resource.BigtableAdmin.Projects.Instances.Create
+        , Network.Google.Resource.BigtableAdmin.Projects.Instances.Delete
+        , Network.Google.Resource.BigtableAdmin.Projects.Instances.Get
+        , Network.Google.Resource.BigtableAdmin.Projects.Instances.GetIAMPolicy
+        , Network.Google.Resource.BigtableAdmin.Projects.Instances.List
+        , Network.Google.Resource.BigtableAdmin.Projects.Instances.PartialUpdateInstance
+        , Network.Google.Resource.BigtableAdmin.Projects.Instances.SetIAMPolicy
+        , Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.CheckConsistency
+        , Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.Create
+        , Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.Delete
+        , Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.DropRowRange
+        , Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.GenerateConsistencyToken
+        , Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.Get
+        , Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.List
+        , Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.ModifyColumnFamilies
+        , Network.Google.Resource.BigtableAdmin.Projects.Instances.TestIAMPermissions
+        , Network.Google.Resource.BigtableAdmin.Projects.Instances.Update
+
+    other-modules:
+          Network.Google.BigtableAdmin.Types.Product
+        , Network.Google.BigtableAdmin.Types.Sum
+
+    build-depends:
+          gogol-core == 0.4.0.*
+        , base       >= 4.7 && < 5

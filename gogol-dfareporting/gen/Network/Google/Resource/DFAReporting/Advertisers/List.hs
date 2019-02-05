@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves a list of advertisers, possibly filtered.
+-- Retrieves a list of advertisers, possibly filtered. This method supports
+-- paging.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.advertisers.list@.
 module Network.Google.Resource.DFAReporting.Advertisers.List
@@ -55,7 +56,7 @@ import           Network.Google.Prelude
 -- 'AdvertisersList' request conforms to.
 type AdvertisersListResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "advertisers" :>
@@ -78,7 +79,8 @@ type AdvertisersListResource =
                                        QueryParam "alt" AltJSON :>
                                          Get '[JSON] AdvertisersListResponse
 
--- | Retrieves a list of advertisers, possibly filtered.
+-- | Retrieves a list of advertisers, possibly filtered. This method supports
+-- paging.
 --
 -- /See:/ 'advertisersList' smart constructor.
 data AdvertisersList = AdvertisersList'
@@ -88,13 +90,13 @@ data AdvertisersList = AdvertisersList'
     , _allIds                                 :: !(Maybe [Textual Int64])
     , _allIncludeAdvertisersWithoutGroupsOnly :: !(Maybe Bool)
     , _allProFileId                           :: !(Textual Int64)
-    , _allSortOrder                           :: !(Maybe AdvertisersListSortOrder)
+    , _allSortOrder                           :: !AdvertisersListSortOrder
     , _allAdvertiserGroupIds                  :: !(Maybe [Textual Int64])
     , _allPageToken                           :: !(Maybe Text)
-    , _allSortField                           :: !(Maybe AdvertisersListSortField)
+    , _allSortField                           :: !AdvertisersListSortField
     , _allSubAccountId                        :: !(Maybe (Textual Int64))
     , _allFloodlightConfigurationIds          :: !(Maybe [Textual Int64])
-    , _allMaxResults                          :: !(Maybe (Textual Int32))
+    , _allMaxResults                          :: !(Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertisersList' with the minimum fields required to make a request.
@@ -137,13 +139,13 @@ advertisersList pAllProFileId_ =
     , _allIds = Nothing
     , _allIncludeAdvertisersWithoutGroupsOnly = Nothing
     , _allProFileId = _Coerce # pAllProFileId_
-    , _allSortOrder = Nothing
+    , _allSortOrder = ALSOAscending
     , _allAdvertiserGroupIds = Nothing
     , _allPageToken = Nothing
-    , _allSortField = Nothing
+    , _allSortField = ID
     , _allSubAccountId = Nothing
     , _allFloodlightConfigurationIds = Nothing
-    , _allMaxResults = Nothing
+    , _allMaxResults = 1000
     }
 
 -- | Select only advertisers with the specified status.
@@ -189,8 +191,8 @@ allProFileId
   = lens _allProFileId (\ s a -> s{_allProFileId = a})
       . _Coerce
 
--- | Order of sorted results, default is ASCENDING.
-allSortOrder :: Lens' AdvertisersList (Maybe AdvertisersListSortOrder)
+-- | Order of sorted results.
+allSortOrder :: Lens' AdvertisersList AdvertisersListSortOrder
 allSortOrder
   = lens _allSortOrder (\ s a -> s{_allSortOrder = a})
 
@@ -208,7 +210,7 @@ allPageToken
   = lens _allPageToken (\ s a -> s{_allPageToken = a})
 
 -- | Field by which to sort the list.
-allSortField :: Lens' AdvertisersList (Maybe AdvertisersListSortField)
+allSortField :: Lens' AdvertisersList AdvertisersListSortField
 allSortField
   = lens _allSortField (\ s a -> s{_allSortField = a})
 
@@ -228,11 +230,11 @@ allFloodlightConfigurationIds
       . _Coerce
 
 -- | Maximum number of results to return.
-allMaxResults :: Lens' AdvertisersList (Maybe Int32)
+allMaxResults :: Lens' AdvertisersList Int32
 allMaxResults
   = lens _allMaxResults
       (\ s a -> s{_allMaxResults = a})
-      . mapping _Coerce
+      . _Coerce
 
 instance GoogleRequest AdvertisersList where
         type Rs AdvertisersList = AdvertisersListResponse
@@ -243,13 +245,13 @@ instance GoogleRequest AdvertisersList where
               _allSearchString
               (_allIds ^. _Default)
               _allIncludeAdvertisersWithoutGroupsOnly
-              _allSortOrder
+              (Just _allSortOrder)
               (_allAdvertiserGroupIds ^. _Default)
               _allPageToken
-              _allSortField
+              (Just _allSortField)
               _allSubAccountId
               (_allFloodlightConfigurationIds ^. _Default)
-              _allMaxResults
+              (Just _allMaxResults)
               (Just AltJSON)
               dFAReportingService
           where go

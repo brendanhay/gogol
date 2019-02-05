@@ -37,12 +37,10 @@ module Network.Google.Resource.Sheets.Spreadsheets.Values.BatchUpdate
     -- * Request Lenses
     , svbuXgafv
     , svbuUploadProtocol
-    , svbuPp
     , svbuAccessToken
     , svbuSpreadsheetId
     , svbuUploadType
     , svbuPayload
-    , svbuBearerToken
     , svbuCallback
     ) where
 
@@ -58,14 +56,12 @@ type SpreadsheetsValuesBatchUpdateResource =
            "values:batchUpdate" :>
              QueryParam "$.xgafv" Xgafv :>
                QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "callback" Text :>
-                           QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] BatchUpdateValuesRequest :>
-                               Post '[JSON] BatchUpdateValuesResponse
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] BatchUpdateValuesRequest :>
+                           Post '[JSON] BatchUpdateValuesResponse
 
 -- | Sets values in one or more ranges of a spreadsheet. The caller must
 -- specify the spreadsheet ID, a valueInputOption, and one or more
@@ -75,12 +71,10 @@ type SpreadsheetsValuesBatchUpdateResource =
 data SpreadsheetsValuesBatchUpdate = SpreadsheetsValuesBatchUpdate'
     { _svbuXgafv          :: !(Maybe Xgafv)
     , _svbuUploadProtocol :: !(Maybe Text)
-    , _svbuPp             :: !Bool
     , _svbuAccessToken    :: !(Maybe Text)
     , _svbuSpreadsheetId  :: !Text
     , _svbuUploadType     :: !(Maybe Text)
     , _svbuPayload        :: !BatchUpdateValuesRequest
-    , _svbuBearerToken    :: !(Maybe Text)
     , _svbuCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -92,8 +86,6 @@ data SpreadsheetsValuesBatchUpdate = SpreadsheetsValuesBatchUpdate'
 --
 -- * 'svbuUploadProtocol'
 --
--- * 'svbuPp'
---
 -- * 'svbuAccessToken'
 --
 -- * 'svbuSpreadsheetId'
@@ -101,8 +93,6 @@ data SpreadsheetsValuesBatchUpdate = SpreadsheetsValuesBatchUpdate'
 -- * 'svbuUploadType'
 --
 -- * 'svbuPayload'
---
--- * 'svbuBearerToken'
 --
 -- * 'svbuCallback'
 spreadsheetsValuesBatchUpdate
@@ -113,12 +103,10 @@ spreadsheetsValuesBatchUpdate pSvbuSpreadsheetId_ pSvbuPayload_ =
     SpreadsheetsValuesBatchUpdate'
     { _svbuXgafv = Nothing
     , _svbuUploadProtocol = Nothing
-    , _svbuPp = True
     , _svbuAccessToken = Nothing
     , _svbuSpreadsheetId = pSvbuSpreadsheetId_
     , _svbuUploadType = Nothing
     , _svbuPayload = pSvbuPayload_
-    , _svbuBearerToken = Nothing
     , _svbuCallback = Nothing
     }
 
@@ -132,10 +120,6 @@ svbuUploadProtocol :: Lens' SpreadsheetsValuesBatchUpdate (Maybe Text)
 svbuUploadProtocol
   = lens _svbuUploadProtocol
       (\ s a -> s{_svbuUploadProtocol = a})
-
--- | Pretty-print response.
-svbuPp :: Lens' SpreadsheetsValuesBatchUpdate Bool
-svbuPp = lens _svbuPp (\ s a -> s{_svbuPp = a})
 
 -- | OAuth access token.
 svbuAccessToken :: Lens' SpreadsheetsValuesBatchUpdate (Maybe Text)
@@ -160,12 +144,6 @@ svbuPayload :: Lens' SpreadsheetsValuesBatchUpdate BatchUpdateValuesRequest
 svbuPayload
   = lens _svbuPayload (\ s a -> s{_svbuPayload = a})
 
--- | OAuth bearer token.
-svbuBearerToken :: Lens' SpreadsheetsValuesBatchUpdate (Maybe Text)
-svbuBearerToken
-  = lens _svbuBearerToken
-      (\ s a -> s{_svbuBearerToken = a})
-
 -- | JSONP
 svbuCallback :: Lens' SpreadsheetsValuesBatchUpdate (Maybe Text)
 svbuCallback
@@ -177,14 +155,13 @@ instance GoogleRequest SpreadsheetsValuesBatchUpdate
              BatchUpdateValuesResponse
         type Scopes SpreadsheetsValuesBatchUpdate =
              '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file",
                "https://www.googleapis.com/auth/spreadsheets"]
         requestClient SpreadsheetsValuesBatchUpdate'{..}
           = go _svbuSpreadsheetId _svbuXgafv
               _svbuUploadProtocol
-              (Just _svbuPp)
               _svbuAccessToken
               _svbuUploadType
-              _svbuBearerToken
               _svbuCallback
               (Just AltJSON)
               _svbuPayload

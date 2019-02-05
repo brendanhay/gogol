@@ -114,7 +114,7 @@ mdlOrderBy :: Lens' MobileDevicesList (Maybe MobileDevicesListOrderBy)
 mdlOrderBy
   = lens _mdlOrderBy (\ s a -> s{_mdlOrderBy = a})
 
--- | Immutable id of the Google Apps account
+-- | Immutable ID of the G Suite account
 mdlCustomerId :: Lens' MobileDevicesList Text
 mdlCustomerId
   = lens _mdlCustomerId
@@ -127,7 +127,7 @@ mdlSortOrder
   = lens _mdlSortOrder (\ s a -> s{_mdlSortOrder = a})
 
 -- | Search string in the format given at
--- http:\/\/support.google.com\/a\/bin\/answer.py?hl=en&answer=1408863#search
+-- http:\/\/support.google.com\/a\/bin\/answer.py?answer=1408863#search
 mdlQuery :: Lens' MobileDevicesList (Maybe Text)
 mdlQuery = lens _mdlQuery (\ s a -> s{_mdlQuery = a})
 

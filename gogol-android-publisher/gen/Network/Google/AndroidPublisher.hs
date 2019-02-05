@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lets Android application developers access their Google Play accounts.
+-- Accesses Android application developers\' Google Play accounts.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference>
 module Network.Google.AndroidPublisher
@@ -29,24 +29,6 @@ module Network.Google.AndroidPublisher
 
     -- * Resources
 
-    -- ** androidpublisher.edits.apklistings.delete
-    , module Network.Google.Resource.AndroidPublisher.Edits.APKListings.Delete
-
-    -- ** androidpublisher.edits.apklistings.deleteall
-    , module Network.Google.Resource.AndroidPublisher.Edits.APKListings.Deleteall
-
-    -- ** androidpublisher.edits.apklistings.get
-    , module Network.Google.Resource.AndroidPublisher.Edits.APKListings.Get
-
-    -- ** androidpublisher.edits.apklistings.list
-    , module Network.Google.Resource.AndroidPublisher.Edits.APKListings.List
-
-    -- ** androidpublisher.edits.apklistings.patch
-    , module Network.Google.Resource.AndroidPublisher.Edits.APKListings.Patch
-
-    -- ** androidpublisher.edits.apklistings.update
-    , module Network.Google.Resource.AndroidPublisher.Edits.APKListings.Update
-
     -- ** androidpublisher.edits.apks.addexternallyhosted
     , module Network.Google.Resource.AndroidPublisher.Edits.APKs.Addexternallyhosted
 
@@ -55,6 +37,12 @@ module Network.Google.AndroidPublisher
 
     -- ** androidpublisher.edits.apks.upload
     , module Network.Google.Resource.AndroidPublisher.Edits.APKs.Upload
+
+    -- ** androidpublisher.edits.bundles.list
+    , module Network.Google.Resource.AndroidPublisher.Edits.Bundles.List
+
+    -- ** androidpublisher.edits.bundles.upload
+    , module Network.Google.Resource.AndroidPublisher.Edits.Bundles.Upload
 
     -- ** androidpublisher.edits.commit
     , module Network.Google.Resource.AndroidPublisher.Edits.Commit
@@ -146,12 +134,6 @@ module Network.Google.AndroidPublisher
     -- ** androidpublisher.edits.validate
     , module Network.Google.Resource.AndroidPublisher.Edits.Validate
 
-    -- ** androidpublisher.entitlements.list
-    , module Network.Google.Resource.AndroidPublisher.Entitlements.List
-
-    -- ** androidpublisher.inappproducts.batch
-    , module Network.Google.Resource.AndroidPublisher.InAppProducts.Batch
-
     -- ** androidpublisher.inappproducts.delete
     , module Network.Google.Resource.AndroidPublisher.InAppProducts.Delete
 
@@ -169,6 +151,9 @@ module Network.Google.AndroidPublisher
 
     -- ** androidpublisher.inappproducts.update
     , module Network.Google.Resource.AndroidPublisher.InAppProducts.Update
+
+    -- ** androidpublisher.orders.refund
+    , module Network.Google.Resource.AndroidPublisher.Orders.Refund
 
     -- ** androidpublisher.purchases.products.get
     , module Network.Google.Resource.AndroidPublisher.Purchases.Products.Get
@@ -188,6 +173,9 @@ module Network.Google.AndroidPublisher
     -- ** androidpublisher.purchases.subscriptions.revoke
     , module Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Revoke
 
+    -- ** androidpublisher.purchases.voidedpurchases.list
+    , module Network.Google.Resource.AndroidPublisher.Purchases.Voidedpurchases.List
+
     -- ** androidpublisher.reviews.get
     , module Network.Google.Resource.AndroidPublisher.Reviews.Get
 
@@ -204,11 +192,6 @@ module Network.Google.AndroidPublisher
     , inAppProductListings
     , iaplAddtional
 
-    -- ** InAppProductsUpdateResponse
-    , InAppProductsUpdateResponse
-    , inAppProductsUpdateResponse
-    , iapurInAppProduct
-
     -- ** EditsImagesDeleteallImageType
     , EditsImagesDeleteallImageType (..)
 
@@ -221,9 +204,8 @@ module Network.Google.AndroidPublisher
     -- ** Track
     , Track
     , track
-    , tVersionCodes
     , tTrack
-    , tUserFraction
+    , tReleases
 
     -- ** Image
     , Image
@@ -231,14 +213,6 @@ module Network.Google.AndroidPublisher
     , iURL
     , iSha1
     , iId
-
-    -- ** InAppProductsBatchRequestEntry
-    , InAppProductsBatchRequestEntry
-    , inAppProductsBatchRequestEntry
-    , iapbreMethodName
-    , iapbreInAppProductsinsertrequest
-    , iapbreInAppProductsupdaterequest
-    , iapbreBatchId
 
     -- ** InAppProductListing
     , InAppProductListing
@@ -263,18 +237,19 @@ module Network.Google.AndroidPublisher
     , efFileSize
     , efReferencesVersion
 
-    -- ** EditsTracksPatchTrack
-    , EditsTracksPatchTrack (..)
-
     -- ** UserComment
     , UserComment
     , userComment
     , ucAndroidOSVersion
     , ucText
     , ucDevice
+    , ucThumbsUpCount
     , ucAppVersionCode
+    , ucThumbsDownCount
+    , ucOriginalText
     , ucAppVersionName
     , ucReviewerLanguage
+    , ucDeviceMetadata
     , ucStarRating
     , ucLastModified
 
@@ -284,8 +259,11 @@ module Network.Google.AndroidPublisher
     , tGooglePlusCommUnities
     , tGoogleGroups
 
-    -- ** EditsTracksGetTrack
-    , EditsTracksGetTrack (..)
+    -- ** SubscriptionCancelSurveyResult
+    , SubscriptionCancelSurveyResult
+    , subscriptionCancelSurveyResult
+    , scsrCancelSurveyReason
+    , scsrUserInputCancelReason
 
     -- ** Listing
     , Listing
@@ -312,9 +290,6 @@ module Network.Google.AndroidPublisher
     , tracksListResponse
     , tlrTracks
     , tlrKind
-
-    -- ** EditsTracksUpdateTrack
-    , EditsTracksUpdateTrack (..)
 
     -- ** Season
     , Season
@@ -348,7 +323,9 @@ module Network.Google.AndroidPublisher
     , ppConsumptionState
     , ppKind
     , ppPurchaseTimeMillis
+    , ppPurchaseType
     , ppDeveloperPayload
+    , ppOrderId
 
     -- ** ReviewsListResponse
     , ReviewsListResponse
@@ -362,25 +339,37 @@ module Network.Google.AndroidPublisher
     , subscriptionPurchasesDeferResponse
     , spdrNewExpiryTimeMillis
 
-    -- ** APKListing
-    , APKListing
-    , aPKListing
-    , apklLanguage
-    , apklRecentChanges
-
     -- ** SubscriptionPurchase
     , SubscriptionPurchase
     , subscriptionPurchase
+    , spGivenName
+    , spAutoResumeTimeMillis
+    , spUserCancellationTimeMillis
     , spPaymentState
     , spKind
+    , spPurchaseType
+    , spPriceChange
+    , spProFileId
+    , spLinkedPurchaseToken
+    , spFamilyName
+    , spProFileName
     , spExpiryTimeMillis
     , spAutoRenewing
     , spPriceCurrencyCode
+    , spEmailAddress
     , spCancelReason
     , spCountryCode
     , spDeveloperPayload
     , spPriceAmountMicros
     , spStartTimeMillis
+    , spOrderId
+    , spCancelSurveyResult
+
+    -- ** SubscriptionPriceChange
+    , SubscriptionPriceChange
+    , subscriptionPriceChange
+    , spcState
+    , spcNewPrice
 
     -- ** AppDetails
     , AppDetails
@@ -394,11 +383,6 @@ module Network.Google.AndroidPublisher
     , InAppProductPrices
     , inAppProductPrices
     , iAppAddtional
-
-    -- ** InAppProductsBatchRequest
-    , InAppProductsBatchRequest
-    , inAppProductsBatchRequest
-    , iapbrEntrys
 
     -- ** ExternallyHostedAPK
     , ExternallyHostedAPK
@@ -419,19 +403,36 @@ module Network.Google.AndroidPublisher
     , ehapkUsesPermissions
     , ehapkCertificateBase64s
 
+    -- ** TrackRelease
+    , TrackRelease
+    , trackRelease
+    , trVersionCodes
+    , trStatus
+    , trReleaseNotes
+    , trUserFraction
+    , trName
+
     -- ** EditsImagesListImageType
     , EditsImagesListImageType (..)
 
-    -- ** EditsTestersPatchTrack
-    , EditsTestersPatchTrack (..)
-
-    -- ** EditsTestersGetTrack
-    , EditsTestersGetTrack (..)
+    -- ** Bundle
+    , Bundle
+    , bundle
+    , bVersionCode
+    , bSha1
+    , bSha256
 
     -- ** DeobfuscationFile
     , DeobfuscationFile
     , deobfuscationFile
     , dfSymbolType
+
+    -- ** VoidedPurchasesListResponse
+    , VoidedPurchasesListResponse
+    , voidedPurchasesListResponse
+    , vplrTokenPagination
+    , vplrPageInfo
+    , vplrVoidedPurchases
 
     -- ** ExpansionFilesUploadResponse
     , ExpansionFilesUploadResponse
@@ -471,11 +472,11 @@ module Network.Google.AndroidPublisher
     -- ** EditsExpansionFilesUploadExpansionFileType
     , EditsExpansionFilesUploadExpansionFileType (..)
 
-    -- ** APKListingsListResponse
-    , APKListingsListResponse
-    , aPKListingsListResponse
-    , apkllrKind
-    , apkllrListings
+    -- ** LocalizedText
+    , LocalizedText
+    , localizedText
+    , ltText
+    , ltLanguage
 
     -- ** Review
     , Review
@@ -483,11 +484,6 @@ module Network.Google.AndroidPublisher
     , rReviewId
     , rAuthorName
     , rComments
-
-    -- ** InAppProductsInsertResponse
-    , InAppProductsInsertResponse
-    , inAppProductsInsertResponse
-    , iapirInAppProduct
 
     -- ** APKsAddExternallyHostedResponse
     , APKsAddExternallyHostedResponse
@@ -514,6 +510,21 @@ module Network.Google.AndroidPublisher
     -- ** EditsExpansionFilesUpdateExpansionFileType
     , EditsExpansionFilesUpdateExpansionFileType (..)
 
+    -- ** DeviceMetadata
+    , DeviceMetadata
+    , deviceMetadata
+    , dmProductName
+    , dmGlEsVersion
+    , dmManufacturer
+    , dmScreenWidthPx
+    , dmRamMb
+    , dmCPUMake
+    , dmScreenHeightPx
+    , dmNATivePlatform
+    , dmDeviceClass
+    , dmCPUModel
+    , dmScreenDensityDpi
+
     -- ** DeveloperComment
     , DeveloperComment
     , developerComment
@@ -524,6 +535,7 @@ module Network.Google.AndroidPublisher
     , InAppProduct
     , inAppProduct
     , iapStatus
+    , iapGracePeriod
     , iapTrialPeriod
     , iapPackageName
     , iapSeason
@@ -534,13 +546,6 @@ module Network.Google.AndroidPublisher
     , iapDefaultPrice
     , iapListings
     , iapDefaultLanguage
-
-    -- ** InAppProductsBatchResponseEntry
-    , InAppProductsBatchResponseEntry
-    , inAppProductsBatchResponseEntry
-    , iInAppProductsupdateresponse
-    , iInAppProductsinsertresponse
-    , iBatchId
 
     -- ** Price
     , Price
@@ -555,6 +560,7 @@ module Network.Google.AndroidPublisher
     , APKBinary
     , aPKBinary
     , apkbSha1
+    , apkbSha256
 
     -- ** APKsListResponse
     , APKsListResponse
@@ -584,31 +590,11 @@ module Network.Google.AndroidPublisher
     , aPKsAddExternallyHostedRequest
     , aExternallyHostedAPK
 
-    -- ** InAppProductsInsertRequest
-    , InAppProductsInsertRequest
-    , inAppProductsInsertRequest
-    , iInAppProduct
-
-    -- ** EntitlementsListResponse
-    , EntitlementsListResponse
-    , entitlementsListResponse
-    , elrTokenPagination
-    , elrPageInfo
-    , elrResources
-
     -- ** Comment
     , Comment
     , comment
     , cUserComment
     , cDeveloperComment
-
-    -- ** EditsTestersUpdateTrack
-    , EditsTestersUpdateTrack (..)
-
-    -- ** InAppProductsUpdateRequest
-    , InAppProductsUpdateRequest
-    , inAppProductsUpdateRequest
-    , inInAppProduct
 
     -- ** Timestamp
     , Timestamp
@@ -616,38 +602,34 @@ module Network.Google.AndroidPublisher
     , tNanos
     , tSeconds
 
+    -- ** VoidedPurchase
+    , VoidedPurchase
+    , voidedPurchase
+    , vpKind
+    , vpPurchaseTimeMillis
+    , vpPurchaseToken
+    , vpVoidedTimeMillis
+
+    -- ** BundlesListResponse
+    , BundlesListResponse
+    , bundlesListResponse
+    , blrBundles
+    , blrKind
+
     -- ** ReviewReplyResult
     , ReviewReplyResult
     , reviewReplyResult
     , rReplyText
     , rLastEdited
-
-    -- ** Entitlement
-    , Entitlement
-    , entitlement
-    , eKind
-    , eProductType
-    , eToken
-    , eProductId
-
-    -- ** InAppProductsBatchResponse
-    , InAppProductsBatchResponse
-    , inAppProductsBatchResponse
-    , iEntrys
-    , iKind
     ) where
 
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
-import           Network.Google.Resource.AndroidPublisher.Edits.APKListings.Delete
-import           Network.Google.Resource.AndroidPublisher.Edits.APKListings.Deleteall
-import           Network.Google.Resource.AndroidPublisher.Edits.APKListings.Get
-import           Network.Google.Resource.AndroidPublisher.Edits.APKListings.List
-import           Network.Google.Resource.AndroidPublisher.Edits.APKListings.Patch
-import           Network.Google.Resource.AndroidPublisher.Edits.APKListings.Update
 import           Network.Google.Resource.AndroidPublisher.Edits.APKs.Addexternallyhosted
 import           Network.Google.Resource.AndroidPublisher.Edits.APKs.List
 import           Network.Google.Resource.AndroidPublisher.Edits.APKs.Upload
+import           Network.Google.Resource.AndroidPublisher.Edits.Bundles.List
+import           Network.Google.Resource.AndroidPublisher.Edits.Bundles.Upload
 import           Network.Google.Resource.AndroidPublisher.Edits.Commit
 import           Network.Google.Resource.AndroidPublisher.Edits.Delete
 import           Network.Google.Resource.AndroidPublisher.Edits.DeobfuscationFiles.Upload
@@ -678,20 +660,20 @@ import           Network.Google.Resource.AndroidPublisher.Edits.Tracks.List
 import           Network.Google.Resource.AndroidPublisher.Edits.Tracks.Patch
 import           Network.Google.Resource.AndroidPublisher.Edits.Tracks.Update
 import           Network.Google.Resource.AndroidPublisher.Edits.Validate
-import           Network.Google.Resource.AndroidPublisher.Entitlements.List
-import           Network.Google.Resource.AndroidPublisher.InAppProducts.Batch
 import           Network.Google.Resource.AndroidPublisher.InAppProducts.Delete
 import           Network.Google.Resource.AndroidPublisher.InAppProducts.Get
 import           Network.Google.Resource.AndroidPublisher.InAppProducts.Insert
 import           Network.Google.Resource.AndroidPublisher.InAppProducts.List
 import           Network.Google.Resource.AndroidPublisher.InAppProducts.Patch
 import           Network.Google.Resource.AndroidPublisher.InAppProducts.Update
+import           Network.Google.Resource.AndroidPublisher.Orders.Refund
 import           Network.Google.Resource.AndroidPublisher.Purchases.Products.Get
 import           Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Cancel
 import           Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Defer
 import           Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Get
 import           Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Refund
 import           Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Revoke
+import           Network.Google.Resource.AndroidPublisher.Purchases.Voidedpurchases.List
 import           Network.Google.Resource.AndroidPublisher.Reviews.Get
 import           Network.Google.Resource.AndroidPublisher.Reviews.List
 import           Network.Google.Resource.AndroidPublisher.Reviews.Reply
@@ -702,9 +684,8 @@ TODO
 
 -- | Represents the entirety of the methods and resources available for the Google Play Developer API service.
 type AndroidPublisherAPI =
-     InAppProductsBatchResource :<|>
-       InAppProductsInsertResource
-       :<|> InAppProductsListResource
+     InAppProductsInsertResource :<|>
+       InAppProductsListResource
        :<|> InAppProductsPatchResource
        :<|> InAppProductsGetResource
        :<|> InAppProductsDeleteResource
@@ -725,18 +706,14 @@ type AndroidPublisherAPI =
        :<|> EditsTracksGetResource
        :<|> EditsTracksUpdateResource
        :<|> EditsDeobfuscationFilesUploadResource
+       :<|> EditsBundlesListResource
+       :<|> EditsBundlesUploadResource
        :<|> EditsTestersPatchResource
        :<|> EditsTestersGetResource
        :<|> EditsTestersUpdateResource
        :<|> EditsDetailsPatchResource
        :<|> EditsDetailsGetResource
        :<|> EditsDetailsUpdateResource
-       :<|> EditsAPKListingsListResource
-       :<|> EditsAPKListingsDeleteallResource
-       :<|> EditsAPKListingsPatchResource
-       :<|> EditsAPKListingsGetResource
-       :<|> EditsAPKListingsDeleteResource
-       :<|> EditsAPKListingsUpdateResource
        :<|> EditsAPKsListResource
        :<|> EditsAPKsAddexternallyhostedResource
        :<|> EditsAPKsUploadResource
@@ -751,7 +728,8 @@ type AndroidPublisherAPI =
        :<|> EditsValidateResource
        :<|> EditsDeleteResource
        :<|> EditsCommitResource
-       :<|> EntitlementsListResource
+       :<|> OrdersRefundResource
+       :<|> PurchasesVoidedpurchasesListResource
        :<|> PurchasesProductsGetResource
        :<|> PurchasesSubscriptionsDeferResource
        :<|> PurchasesSubscriptionsGetResource

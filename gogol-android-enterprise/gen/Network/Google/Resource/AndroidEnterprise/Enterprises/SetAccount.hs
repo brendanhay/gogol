@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Set the account that will be used to authenticate to the API as the
+-- Sets the account that will be used to authenticate to the API as the
 -- enterprise.
 --
 -- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.enterprises.setAccount@.
@@ -53,7 +53,7 @@ type EnterprisesSetAccountResource =
                  ReqBody '[JSON] EnterpriseAccount :>
                    Put '[JSON] EnterpriseAccount
 
--- | Set the account that will be used to authenticate to the API as the
+-- | Sets the account that will be used to authenticate to the API as the
 -- enterprise.
 --
 -- /See:/ 'enterprisesSetAccount' smart constructor.

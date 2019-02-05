@@ -31,7 +31,7 @@
 -- compare GenerateConfigReportRequest.new_value with the last pushed
 -- service configuration.
 --
--- /See:/ <https://cloud.google.com/service-management/ Google Service Management API Reference> for @servicemanagement.services.generateConfigReport@.
+-- /See:/ <https://cloud.google.com/service-management/ Service Management API Reference> for @servicemanagement.services.generateConfigReport@.
 module Network.Google.Resource.ServiceManagement.Services.GenerateConfigReport
     (
     -- * REST Resource
@@ -44,11 +44,9 @@ module Network.Google.Resource.ServiceManagement.Services.GenerateConfigReport
     -- * Request Lenses
     , sgcrXgafv
     , sgcrUploadProtocol
-    , sgcrPp
     , sgcrAccessToken
     , sgcrUploadType
     , sgcrPayload
-    , sgcrBearerToken
     , sgcrCallback
     ) where
 
@@ -62,14 +60,12 @@ type ServicesGenerateConfigReportResource =
        "services:generateConfigReport" :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] GenerateConfigReportRequest :>
-                           Post '[JSON] GenerateConfigReportResponse
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] GenerateConfigReportRequest :>
+                       Post '[JSON] GenerateConfigReportResponse
 
 -- | Generates and returns a report (errors, warnings and changes from
 -- existing configurations) associated with
@@ -86,11 +82,9 @@ type ServicesGenerateConfigReportResource =
 data ServicesGenerateConfigReport = ServicesGenerateConfigReport'
     { _sgcrXgafv          :: !(Maybe Xgafv)
     , _sgcrUploadProtocol :: !(Maybe Text)
-    , _sgcrPp             :: !Bool
     , _sgcrAccessToken    :: !(Maybe Text)
     , _sgcrUploadType     :: !(Maybe Text)
     , _sgcrPayload        :: !GenerateConfigReportRequest
-    , _sgcrBearerToken    :: !(Maybe Text)
     , _sgcrCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -102,15 +96,11 @@ data ServicesGenerateConfigReport = ServicesGenerateConfigReport'
 --
 -- * 'sgcrUploadProtocol'
 --
--- * 'sgcrPp'
---
 -- * 'sgcrAccessToken'
 --
 -- * 'sgcrUploadType'
 --
 -- * 'sgcrPayload'
---
--- * 'sgcrBearerToken'
 --
 -- * 'sgcrCallback'
 servicesGenerateConfigReport
@@ -120,11 +110,9 @@ servicesGenerateConfigReport pSgcrPayload_ =
     ServicesGenerateConfigReport'
     { _sgcrXgafv = Nothing
     , _sgcrUploadProtocol = Nothing
-    , _sgcrPp = True
     , _sgcrAccessToken = Nothing
     , _sgcrUploadType = Nothing
     , _sgcrPayload = pSgcrPayload_
-    , _sgcrBearerToken = Nothing
     , _sgcrCallback = Nothing
     }
 
@@ -138,10 +126,6 @@ sgcrUploadProtocol :: Lens' ServicesGenerateConfigReport (Maybe Text)
 sgcrUploadProtocol
   = lens _sgcrUploadProtocol
       (\ s a -> s{_sgcrUploadProtocol = a})
-
--- | Pretty-print response.
-sgcrPp :: Lens' ServicesGenerateConfigReport Bool
-sgcrPp = lens _sgcrPp (\ s a -> s{_sgcrPp = a})
 
 -- | OAuth access token.
 sgcrAccessToken :: Lens' ServicesGenerateConfigReport (Maybe Text)
@@ -160,12 +144,6 @@ sgcrPayload :: Lens' ServicesGenerateConfigReport GenerateConfigReportRequest
 sgcrPayload
   = lens _sgcrPayload (\ s a -> s{_sgcrPayload = a})
 
--- | OAuth bearer token.
-sgcrBearerToken :: Lens' ServicesGenerateConfigReport (Maybe Text)
-sgcrBearerToken
-  = lens _sgcrBearerToken
-      (\ s a -> s{_sgcrBearerToken = a})
-
 -- | JSONP
 sgcrCallback :: Lens' ServicesGenerateConfigReport (Maybe Text)
 sgcrCallback
@@ -179,10 +157,8 @@ instance GoogleRequest ServicesGenerateConfigReport
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/service.management"]
         requestClient ServicesGenerateConfigReport'{..}
-          = go _sgcrXgafv _sgcrUploadProtocol (Just _sgcrPp)
-              _sgcrAccessToken
+          = go _sgcrXgafv _sgcrUploadProtocol _sgcrAccessToken
               _sgcrUploadType
-              _sgcrBearerToken
               _sgcrCallback
               (Just AltJSON)
               _sgcrPayload

@@ -35,6 +35,7 @@ module Network.Google.Resource.Compute.InstanceGroups.Delete
     , InstanceGroupsDelete
 
     -- * Request Lenses
+    , igdRequestId
     , igdProject
     , igdZone
     , igdInstanceGroup
@@ -54,7 +55,8 @@ type InstanceGroupsDeleteResource =
                Capture "zone" Text :>
                  "instanceGroups" :>
                    Capture "instanceGroup" Text :>
-                     QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+                     QueryParam "requestId" Text :>
+                       QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified instance group. The instances in the group are not
 -- deleted. Note that instance group must not belong to a backend service.
@@ -62,7 +64,8 @@ type InstanceGroupsDeleteResource =
 --
 -- /See:/ 'instanceGroupsDelete' smart constructor.
 data InstanceGroupsDelete = InstanceGroupsDelete'
-    { _igdProject       :: !Text
+    { _igdRequestId     :: !(Maybe Text)
+    , _igdProject       :: !Text
     , _igdZone          :: !Text
     , _igdInstanceGroup :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,6 +73,8 @@ data InstanceGroupsDelete = InstanceGroupsDelete'
 -- | Creates a value of 'InstanceGroupsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'igdRequestId'
 --
 -- * 'igdProject'
 --
@@ -83,10 +88,25 @@ instanceGroupsDelete
     -> InstanceGroupsDelete
 instanceGroupsDelete pIgdProject_ pIgdZone_ pIgdInstanceGroup_ =
     InstanceGroupsDelete'
-    { _igdProject = pIgdProject_
+    { _igdRequestId = Nothing
+    , _igdProject = pIgdProject_
     , _igdZone = pIgdZone_
     , _igdInstanceGroup = pIgdInstanceGroup_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+igdRequestId :: Lens' InstanceGroupsDelete (Maybe Text)
+igdRequestId
+  = lens _igdRequestId (\ s a -> s{_igdRequestId = a})
 
 -- | Project ID for this request.
 igdProject :: Lens' InstanceGroupsDelete Text
@@ -110,6 +130,7 @@ instance GoogleRequest InstanceGroupsDelete where
                "https://www.googleapis.com/auth/compute"]
         requestClient InstanceGroupsDelete'{..}
           = go _igdProject _igdZone _igdInstanceGroup
+              _igdRequestId
               (Just AltJSON)
               computeService
           where go

@@ -44,7 +44,7 @@ import           Network.Google.ShoppingContent.Types
 -- 'AccountsGet' request conforms to.
 type AccountsGetResource =
      "content" :>
-       "v2" :>
+       "v2.1" :>
          Capture "merchantId" (Textual Word64) :>
            "accounts" :>
              Capture "accountId" (Textual Word64) :>
@@ -75,7 +75,9 @@ accountsGet pAgMerchantId_ pAgAccountId_ =
     , _agAccountId = _Coerce # pAgAccountId_
     }
 
--- | The ID of the managing account.
+-- | The ID of the managing account. If this parameter is not the same as
+-- accountId, then this account must be a multi-client account and
+-- accountId must be the ID of a sub-account of this account.
 agMerchantId :: Lens' AccountsGet Word64
 agMerchantId
   = lens _agMerchantId (\ s a -> s{_agMerchantId = a})

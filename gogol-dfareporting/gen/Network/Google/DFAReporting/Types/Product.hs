@@ -20,6 +20,146 @@ module Network.Google.DFAReporting.Types.Product where
 import           Network.Google.DFAReporting.Types.Sum
 import           Network.Google.Prelude
 
+-- | Video Offset
+--
+-- /See:/ 'videoOffSet' smart constructor.
+data VideoOffSet = VideoOffSet'
+    { _vosOffSetPercentage :: !(Maybe (Textual Int32))
+    , _vosOffSetSeconds    :: !(Maybe (Textual Int32))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VideoOffSet' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vosOffSetPercentage'
+--
+-- * 'vosOffSetSeconds'
+videoOffSet
+    :: VideoOffSet
+videoOffSet =
+    VideoOffSet'
+    { _vosOffSetPercentage = Nothing
+    , _vosOffSetSeconds = Nothing
+    }
+
+-- | Duration, as a percentage of video duration. Do not set when
+-- offsetSeconds is set. Acceptable values are 0 to 100, inclusive.
+vosOffSetPercentage :: Lens' VideoOffSet (Maybe Int32)
+vosOffSetPercentage
+  = lens _vosOffSetPercentage
+      (\ s a -> s{_vosOffSetPercentage = a})
+      . mapping _Coerce
+
+-- | Duration, in seconds. Do not set when offsetPercentage is set.
+-- Acceptable values are 0 to 86399, inclusive.
+vosOffSetSeconds :: Lens' VideoOffSet (Maybe Int32)
+vosOffSetSeconds
+  = lens _vosOffSetSeconds
+      (\ s a -> s{_vosOffSetSeconds = a})
+      . mapping _Coerce
+
+instance FromJSON VideoOffSet where
+        parseJSON
+          = withObject "VideoOffSet"
+              (\ o ->
+                 VideoOffSet' <$>
+                   (o .:? "offsetPercentage") <*>
+                     (o .:? "offsetSeconds"))
+
+instance ToJSON VideoOffSet where
+        toJSON VideoOffSet'{..}
+          = object
+              (catMaybes
+                 [("offsetPercentage" .=) <$> _vosOffSetPercentage,
+                  ("offsetSeconds" .=) <$> _vosOffSetSeconds])
+
+-- | Contains information about a landing page deep link.
+--
+-- /See:/ 'deepLink' smart constructor.
+data DeepLink = DeepLink'
+    { _dlRemarketingListIds :: !(Maybe [Textual Int64])
+    , _dlKind               :: !Text
+    , _dlFallbackURL        :: !(Maybe Text)
+    , _dlAppURL             :: !(Maybe Text)
+    , _dlMobileApp          :: !(Maybe MobileApp)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DeepLink' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dlRemarketingListIds'
+--
+-- * 'dlKind'
+--
+-- * 'dlFallbackURL'
+--
+-- * 'dlAppURL'
+--
+-- * 'dlMobileApp'
+deepLink
+    :: DeepLink
+deepLink =
+    DeepLink'
+    { _dlRemarketingListIds = Nothing
+    , _dlKind = "dfareporting#deepLink"
+    , _dlFallbackURL = Nothing
+    , _dlAppURL = Nothing
+    , _dlMobileApp = Nothing
+    }
+
+-- | Ads served to users on these remarketing lists will use this deep link.
+-- Applicable when mobileApp.directory is APPLE_APP_STORE.
+dlRemarketingListIds :: Lens' DeepLink [Int64]
+dlRemarketingListIds
+  = lens _dlRemarketingListIds
+      (\ s a -> s{_dlRemarketingListIds = a})
+      . _Default
+      . _Coerce
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"dfareporting#deepLink\".
+dlKind :: Lens' DeepLink Text
+dlKind = lens _dlKind (\ s a -> s{_dlKind = a})
+
+-- | The fallback URL. This URL will be served to users who do not have the
+-- mobile app installed.
+dlFallbackURL :: Lens' DeepLink (Maybe Text)
+dlFallbackURL
+  = lens _dlFallbackURL
+      (\ s a -> s{_dlFallbackURL = a})
+
+-- | The URL of the mobile app being linked to.
+dlAppURL :: Lens' DeepLink (Maybe Text)
+dlAppURL = lens _dlAppURL (\ s a -> s{_dlAppURL = a})
+
+-- | The mobile app targeted by this deep link.
+dlMobileApp :: Lens' DeepLink (Maybe MobileApp)
+dlMobileApp
+  = lens _dlMobileApp (\ s a -> s{_dlMobileApp = a})
+
+instance FromJSON DeepLink where
+        parseJSON
+          = withObject "DeepLink"
+              (\ o ->
+                 DeepLink' <$>
+                   (o .:? "remarketingListIds" .!= mempty) <*>
+                     (o .:? "kind" .!= "dfareporting#deepLink")
+                     <*> (o .:? "fallbackUrl")
+                     <*> (o .:? "appUrl")
+                     <*> (o .:? "mobileApp"))
+
+instance ToJSON DeepLink where
+        toJSON DeepLink'{..}
+          = object
+              (catMaybes
+                 [("remarketingListIds" .=) <$> _dlRemarketingListIds,
+                  Just ("kind" .= _dlKind),
+                  ("fallbackUrl" .=) <$> _dlFallbackURL,
+                  ("appUrl" .=) <$> _dlAppURL,
+                  ("mobileApp" .=) <$> _dlMobileApp])
+
 -- | Represents the list of File resources.
 --
 -- /See:/ 'fileList' smart constructor.
@@ -118,9 +258,9 @@ optimizationActivity =
     , _oaFloodlightActivityIdDimensionValue = Nothing
     }
 
--- | Weight associated with this optimization. Must be greater than 1. The
--- weight assigned will be understood in proportion to the weights assigned
--- to the other optimization activities.
+-- | Weight associated with this optimization. The weight assigned will be
+-- understood in proportion to the weights assigned to the other
+-- optimization activities. Value must be greater than or equal to 1.
 oaWeight :: Lens' OptimizationActivity (Maybe Int32)
 oaWeight
   = lens _oaWeight (\ s a -> s{_oaWeight = a}) .
@@ -198,6 +338,90 @@ instance ToJSON ListPopulationClause where
         toJSON ListPopulationClause'{..}
           = object (catMaybes [("terms" .=) <$> _lpcTerms])
 
+-- | Campaign ad blocking settings.
+--
+-- /See:/ 'adBlockingConfiguration' smart constructor.
+data AdBlockingConfiguration = AdBlockingConfiguration'
+    { _abcCreativeBundleId        :: !(Maybe (Textual Int64))
+    , _abcOverrideClickThroughURL :: !(Maybe Bool)
+    , _abcEnabled                 :: !(Maybe Bool)
+    , _abcClickThroughURL         :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AdBlockingConfiguration' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'abcCreativeBundleId'
+--
+-- * 'abcOverrideClickThroughURL'
+--
+-- * 'abcEnabled'
+--
+-- * 'abcClickThroughURL'
+adBlockingConfiguration
+    :: AdBlockingConfiguration
+adBlockingConfiguration =
+    AdBlockingConfiguration'
+    { _abcCreativeBundleId = Nothing
+    , _abcOverrideClickThroughURL = Nothing
+    , _abcEnabled = Nothing
+    , _abcClickThroughURL = Nothing
+    }
+
+-- | ID of a creative bundle to use for this campaign. If set, brand-neutral
+-- ads will select creatives from this bundle. Otherwise, a default
+-- transparent pixel will be used.
+abcCreativeBundleId :: Lens' AdBlockingConfiguration (Maybe Int64)
+abcCreativeBundleId
+  = lens _abcCreativeBundleId
+      (\ s a -> s{_abcCreativeBundleId = a})
+      . mapping _Coerce
+
+-- | Whether the brand-neutral ad\'s click-through URL comes from the
+-- campaign\'s creative bundle or the override URL. Must be set to true if
+-- ad blocking is enabled and no creative bundle is configured.
+abcOverrideClickThroughURL :: Lens' AdBlockingConfiguration (Maybe Bool)
+abcOverrideClickThroughURL
+  = lens _abcOverrideClickThroughURL
+      (\ s a -> s{_abcOverrideClickThroughURL = a})
+
+-- | Whether this campaign has enabled ad blocking. When true, ad blocking is
+-- enabled for placements in the campaign, but this may be overridden by
+-- site and placement settings. When false, ad blocking is disabled for all
+-- placements under the campaign, regardless of site and placement
+-- settings.
+abcEnabled :: Lens' AdBlockingConfiguration (Maybe Bool)
+abcEnabled
+  = lens _abcEnabled (\ s a -> s{_abcEnabled = a})
+
+-- | Click-through URL used by brand-neutral ads. This is a required field
+-- when overrideClickThroughUrl is set to true.
+abcClickThroughURL :: Lens' AdBlockingConfiguration (Maybe Text)
+abcClickThroughURL
+  = lens _abcClickThroughURL
+      (\ s a -> s{_abcClickThroughURL = a})
+
+instance FromJSON AdBlockingConfiguration where
+        parseJSON
+          = withObject "AdBlockingConfiguration"
+              (\ o ->
+                 AdBlockingConfiguration' <$>
+                   (o .:? "creativeBundleId") <*>
+                     (o .:? "overrideClickThroughUrl")
+                     <*> (o .:? "enabled")
+                     <*> (o .:? "clickThroughUrl"))
+
+instance ToJSON AdBlockingConfiguration where
+        toJSON AdBlockingConfiguration'{..}
+          = object
+              (catMaybes
+                 [("creativeBundleId" .=) <$> _abcCreativeBundleId,
+                  ("overrideClickThroughUrl" .=) <$>
+                    _abcOverrideClickThroughURL,
+                  ("enabled" .=) <$> _abcEnabled,
+                  ("clickThroughUrl" .=) <$> _abcClickThroughURL])
+
 -- | Creative Custom Event.
 --
 -- /See:/ 'creativeCustomEvent' smart constructor.
@@ -205,7 +429,7 @@ data CreativeCustomEvent = CreativeCustomEvent'
     { _cceAdvertiserCustomEventId   :: !(Maybe (Textual Int64))
     , _cceAdvertiserCustomEventType :: !(Maybe CreativeCustomEventAdvertiserCustomEventType)
     , _cceAdvertiserCustomEventName :: !(Maybe Text)
-    , _cceExitURL                   :: !(Maybe Text)
+    , _cceExitClickThroughURL       :: !(Maybe CreativeClickThroughURL)
     , _cceTargetType                :: !(Maybe CreativeCustomEventTargetType)
     , _ccePopupWindowProperties     :: !(Maybe PopupWindowProperties)
     , _cceVideoReportingId          :: !(Maybe Text)
@@ -224,7 +448,7 @@ data CreativeCustomEvent = CreativeCustomEvent'
 --
 -- * 'cceAdvertiserCustomEventName'
 --
--- * 'cceExitURL'
+-- * 'cceExitClickThroughURL'
 --
 -- * 'cceTargetType'
 --
@@ -244,7 +468,7 @@ creativeCustomEvent =
     { _cceAdvertiserCustomEventId = Nothing
     , _cceAdvertiserCustomEventType = Nothing
     , _cceAdvertiserCustomEventName = Nothing
-    , _cceExitURL = Nothing
+    , _cceExitClickThroughURL = Nothing
     , _cceTargetType = Nothing
     , _ccePopupWindowProperties = Nothing
     , _cceVideoReportingId = Nothing
@@ -253,8 +477,8 @@ creativeCustomEvent =
     , _cceArtworkType = Nothing
     }
 
--- | Unique ID of this event used by DDM Reporting and Data Transfer. This is
--- a read-only field.
+-- | Unique ID of this event used by Reporting and Data Transfer. This is a
+-- read-only field.
 cceAdvertiserCustomEventId :: Lens' CreativeCustomEvent (Maybe Int64)
 cceAdvertiserCustomEventId
   = lens _cceAdvertiserCustomEventId
@@ -273,10 +497,12 @@ cceAdvertiserCustomEventName
   = lens _cceAdvertiserCustomEventName
       (\ s a -> s{_cceAdvertiserCustomEventName = a})
 
--- | Exit URL of the event. This field is used only for exit events.
-cceExitURL :: Lens' CreativeCustomEvent (Maybe Text)
-cceExitURL
-  = lens _cceExitURL (\ s a -> s{_cceExitURL = a})
+-- | Exit click-through URL for the event. This field is used only for exit
+-- events.
+cceExitClickThroughURL :: Lens' CreativeCustomEvent (Maybe CreativeClickThroughURL)
+cceExitClickThroughURL
+  = lens _cceExitClickThroughURL
+      (\ s a -> s{_cceExitClickThroughURL = a})
 
 -- | Target type used by the event.
 cceTargetType :: Lens' CreativeCustomEvent (Maybe CreativeCustomEventTargetType)
@@ -305,9 +531,9 @@ cceId
   = lens _cceId (\ s a -> s{_cceId = a}) .
       mapping _Coerce
 
--- | Artwork label column, used to link events in DCM back to events in
--- Studio. This is a required field and should not be modified after
--- insertion.
+-- | Artwork label column, used to link events in Campaign Manager back to
+-- events in Studio. This is a required field and should not be modified
+-- after insertion.
 cceArtworkLabel :: Lens' CreativeCustomEvent (Maybe Text)
 cceArtworkLabel
   = lens _cceArtworkLabel
@@ -327,7 +553,7 @@ instance FromJSON CreativeCustomEvent where
                    (o .:? "advertiserCustomEventId") <*>
                      (o .:? "advertiserCustomEventType")
                      <*> (o .:? "advertiserCustomEventName")
-                     <*> (o .:? "exitUrl")
+                     <*> (o .:? "exitClickThroughUrl")
                      <*> (o .:? "targetType")
                      <*> (o .:? "popupWindowProperties")
                      <*> (o .:? "videoReportingId")
@@ -345,7 +571,8 @@ instance ToJSON CreativeCustomEvent where
                     _cceAdvertiserCustomEventType,
                   ("advertiserCustomEventName" .=) <$>
                     _cceAdvertiserCustomEventName,
-                  ("exitUrl" .=) <$> _cceExitURL,
+                  ("exitClickThroughUrl" .=) <$>
+                    _cceExitClickThroughURL,
                   ("targetType" .=) <$> _cceTargetType,
                   ("popupWindowProperties" .=) <$>
                     _ccePopupWindowProperties,
@@ -358,16 +585,16 @@ instance ToJSON CreativeCustomEvent where
 --
 -- /See:/ 'clickTag' smart constructor.
 data ClickTag = ClickTag'
-    { _ctValue     :: !(Maybe Text)
-    , _ctName      :: !(Maybe Text)
-    , _ctEventName :: !(Maybe Text)
+    { _ctClickThroughURL :: !(Maybe CreativeClickThroughURL)
+    , _ctName            :: !(Maybe Text)
+    , _ctEventName       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ClickTag' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ctValue'
+-- * 'ctClickThroughURL'
 --
 -- * 'ctName'
 --
@@ -376,15 +603,17 @@ clickTag
     :: ClickTag
 clickTag =
     ClickTag'
-    { _ctValue = Nothing
+    { _ctClickThroughURL = Nothing
     , _ctName = Nothing
     , _ctEventName = Nothing
     }
 
 -- | Parameter value for the specified click tag. This field contains a
 -- click-through url.
-ctValue :: Lens' ClickTag (Maybe Text)
-ctValue = lens _ctValue (\ s a -> s{_ctValue = a})
+ctClickThroughURL :: Lens' ClickTag (Maybe CreativeClickThroughURL)
+ctClickThroughURL
+  = lens _ctClickThroughURL
+      (\ s a -> s{_ctClickThroughURL = a})
 
 -- | Parameter name for the specified click tag. For DISPLAY_IMAGE_GALLERY
 -- creative assets, this field must match the value of the creative
@@ -404,14 +633,15 @@ instance FromJSON ClickTag where
           = withObject "ClickTag"
               (\ o ->
                  ClickTag' <$>
-                   (o .:? "value") <*> (o .:? "name") <*>
+                   (o .:? "clickThroughUrl") <*> (o .:? "name") <*>
                      (o .:? "eventName"))
 
 instance ToJSON ClickTag where
         toJSON ClickTag'{..}
           = object
               (catMaybes
-                 [("value" .=) <$> _ctValue, ("name" .=) <$> _ctName,
+                 [("clickThroughUrl" .=) <$> _ctClickThroughURL,
+                  ("name" .=) <$> _ctName,
                   ("eventName" .=) <$> _ctEventName])
 
 -- | Campaign List Response
@@ -598,6 +828,97 @@ instance ToJSON GeoTargeting where
                   ("metros" .=) <$> _gtMetros,
                   ("excludeCountries" .=) <$> _gtExcludeCountries,
                   ("postalCodes" .=) <$> _gtPostalCodes])
+
+-- | Video Settings
+--
+-- /See:/ 'videoSettings' smart constructor.
+data VideoSettings = VideoSettings'
+    { _vsKind              :: !Text
+    , _vsCompanionSettings :: !(Maybe CompanionSetting)
+    , _vsTranscodeSettings :: !(Maybe TranscodeSetting)
+    , _vsOrientation       :: !(Maybe VideoSettingsOrientation)
+    , _vsSkippableSettings :: !(Maybe SkippableSetting)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VideoSettings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vsKind'
+--
+-- * 'vsCompanionSettings'
+--
+-- * 'vsTranscodeSettings'
+--
+-- * 'vsOrientation'
+--
+-- * 'vsSkippableSettings'
+videoSettings
+    :: VideoSettings
+videoSettings =
+    VideoSettings'
+    { _vsKind = "dfareporting#videoSettings"
+    , _vsCompanionSettings = Nothing
+    , _vsTranscodeSettings = Nothing
+    , _vsOrientation = Nothing
+    , _vsSkippableSettings = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"dfareporting#videoSettings\".
+vsKind :: Lens' VideoSettings Text
+vsKind = lens _vsKind (\ s a -> s{_vsKind = a})
+
+-- | Settings for the companion creatives of video creatives served to this
+-- placement.
+vsCompanionSettings :: Lens' VideoSettings (Maybe CompanionSetting)
+vsCompanionSettings
+  = lens _vsCompanionSettings
+      (\ s a -> s{_vsCompanionSettings = a})
+
+-- | Settings for the transcodes of video creatives served to this placement.
+-- If this object is provided, the creative-level transcode settings will
+-- be overridden.
+vsTranscodeSettings :: Lens' VideoSettings (Maybe TranscodeSetting)
+vsTranscodeSettings
+  = lens _vsTranscodeSettings
+      (\ s a -> s{_vsTranscodeSettings = a})
+
+-- | Orientation of a video placement. If this value is set, placement will
+-- return assets matching the specified orientation.
+vsOrientation :: Lens' VideoSettings (Maybe VideoSettingsOrientation)
+vsOrientation
+  = lens _vsOrientation
+      (\ s a -> s{_vsOrientation = a})
+
+-- | Settings for the skippability of video creatives served to this
+-- placement. If this object is provided, the creative-level skippable
+-- settings will be overridden.
+vsSkippableSettings :: Lens' VideoSettings (Maybe SkippableSetting)
+vsSkippableSettings
+  = lens _vsSkippableSettings
+      (\ s a -> s{_vsSkippableSettings = a})
+
+instance FromJSON VideoSettings where
+        parseJSON
+          = withObject "VideoSettings"
+              (\ o ->
+                 VideoSettings' <$>
+                   (o .:? "kind" .!= "dfareporting#videoSettings") <*>
+                     (o .:? "companionSettings")
+                     <*> (o .:? "transcodeSettings")
+                     <*> (o .:? "orientation")
+                     <*> (o .:? "skippableSettings"))
+
+instance ToJSON VideoSettings where
+        toJSON VideoSettings'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _vsKind),
+                  ("companionSettings" .=) <$> _vsCompanionSettings,
+                  ("transcodeSettings" .=) <$> _vsTranscodeSettings,
+                  ("orientation" .=) <$> _vsOrientation,
+                  ("skippableSettings" .=) <$> _vsSkippableSettings])
 
 -- | Represents fields that are compatible to be selected for a report of
 -- type \"REACH\".
@@ -882,11 +1203,11 @@ instance ToJSON CreativeGroupAssignment where
 -- /See:/ 'directorySiteSettings' smart constructor.
 data DirectorySiteSettings = DirectorySiteSettings'
     { _dssInterstitialPlacementAccepted  :: !(Maybe Bool)
-    , _dssDfpSettings                    :: !(Maybe DfpSettings)
+    , _dssInstreamVideoPlacementAccepted :: !(Maybe Bool)
     , _dssVerificationTagOptOut          :: !(Maybe Bool)
     , _dssActiveViewOptOut               :: !(Maybe Bool)
+    , _dssDfpSettings                    :: !(Maybe DfpSettings)
     , _dssVideoActiveViewOptOut          :: !(Maybe Bool)
-    , _dssInstreamVideoPlacementAccepted :: !(Maybe Bool)
     , _dssNielsenOCROptOut               :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -896,15 +1217,15 @@ data DirectorySiteSettings = DirectorySiteSettings'
 --
 -- * 'dssInterstitialPlacementAccepted'
 --
--- * 'dssDfpSettings'
+-- * 'dssInstreamVideoPlacementAccepted'
 --
 -- * 'dssVerificationTagOptOut'
 --
 -- * 'dssActiveViewOptOut'
 --
--- * 'dssVideoActiveViewOptOut'
+-- * 'dssDfpSettings'
 --
--- * 'dssInstreamVideoPlacementAccepted'
+-- * 'dssVideoActiveViewOptOut'
 --
 -- * 'dssNielsenOCROptOut'
 directorySiteSettings
@@ -912,11 +1233,11 @@ directorySiteSettings
 directorySiteSettings =
     DirectorySiteSettings'
     { _dssInterstitialPlacementAccepted = Nothing
-    , _dssDfpSettings = Nothing
+    , _dssInstreamVideoPlacementAccepted = Nothing
     , _dssVerificationTagOptOut = Nothing
     , _dssActiveViewOptOut = Nothing
+    , _dssDfpSettings = Nothing
     , _dssVideoActiveViewOptOut = Nothing
-    , _dssInstreamVideoPlacementAccepted = Nothing
     , _dssNielsenOCROptOut = Nothing
     }
 
@@ -926,11 +1247,11 @@ dssInterstitialPlacementAccepted
   = lens _dssInterstitialPlacementAccepted
       (\ s a -> s{_dssInterstitialPlacementAccepted = a})
 
--- | Directory site DFP settings.
-dssDfpSettings :: Lens' DirectorySiteSettings (Maybe DfpSettings)
-dssDfpSettings
-  = lens _dssDfpSettings
-      (\ s a -> s{_dssDfpSettings = a})
+-- | Whether this site accepts in-stream video ads.
+dssInstreamVideoPlacementAccepted :: Lens' DirectorySiteSettings (Maybe Bool)
+dssInstreamVideoPlacementAccepted
+  = lens _dssInstreamVideoPlacementAccepted
+      (\ s a -> s{_dssInstreamVideoPlacementAccepted = a})
 
 -- | Whether this directory site has disabled generation of Verification ins
 -- tags.
@@ -945,18 +1266,18 @@ dssActiveViewOptOut
   = lens _dssActiveViewOptOut
       (\ s a -> s{_dssActiveViewOptOut = a})
 
+-- | Directory site Ad Manager settings.
+dssDfpSettings :: Lens' DirectorySiteSettings (Maybe DfpSettings)
+dssDfpSettings
+  = lens _dssDfpSettings
+      (\ s a -> s{_dssDfpSettings = a})
+
 -- | Whether this directory site has disabled active view for in-stream video
--- creatives.
+-- creatives. This is a read-only field.
 dssVideoActiveViewOptOut :: Lens' DirectorySiteSettings (Maybe Bool)
 dssVideoActiveViewOptOut
   = lens _dssVideoActiveViewOptOut
       (\ s a -> s{_dssVideoActiveViewOptOut = a})
-
--- | Whether this site accepts in-stream video ads.
-dssInstreamVideoPlacementAccepted :: Lens' DirectorySiteSettings (Maybe Bool)
-dssInstreamVideoPlacementAccepted
-  = lens _dssInstreamVideoPlacementAccepted
-      (\ s a -> s{_dssInstreamVideoPlacementAccepted = a})
 
 -- | Whether this directory site has disabled Nielsen OCR reach ratings.
 dssNielsenOCROptOut :: Lens' DirectorySiteSettings (Maybe Bool)
@@ -970,11 +1291,11 @@ instance FromJSON DirectorySiteSettings where
               (\ o ->
                  DirectorySiteSettings' <$>
                    (o .:? "interstitialPlacementAccepted") <*>
-                     (o .:? "dfp_settings")
+                     (o .:? "instreamVideoPlacementAccepted")
                      <*> (o .:? "verificationTagOptOut")
                      <*> (o .:? "activeViewOptOut")
+                     <*> (o .:? "dfpSettings")
                      <*> (o .:? "videoActiveViewOptOut")
-                     <*> (o .:? "instream_video_placement_accepted")
                      <*> (o .:? "nielsenOcrOptOut"))
 
 instance ToJSON DirectorySiteSettings where
@@ -983,14 +1304,14 @@ instance ToJSON DirectorySiteSettings where
               (catMaybes
                  [("interstitialPlacementAccepted" .=) <$>
                     _dssInterstitialPlacementAccepted,
-                  ("dfp_settings" .=) <$> _dssDfpSettings,
+                  ("instreamVideoPlacementAccepted" .=) <$>
+                    _dssInstreamVideoPlacementAccepted,
                   ("verificationTagOptOut" .=) <$>
                     _dssVerificationTagOptOut,
                   ("activeViewOptOut" .=) <$> _dssActiveViewOptOut,
+                  ("dfpSettings" .=) <$> _dssDfpSettings,
                   ("videoActiveViewOptOut" .=) <$>
                     _dssVideoActiveViewOptOut,
-                  ("instream_video_placement_accepted" .=) <$>
-                    _dssInstreamVideoPlacementAccepted,
                   ("nielsenOcrOptOut" .=) <$> _dssNielsenOCROptOut])
 
 -- | Remarketing List Population Rule.
@@ -1328,7 +1649,7 @@ instance ToJSON TechnologyTargeting where
                   ("connectionTypes" .=) <$> _ttConnectionTypes,
                   ("operatingSystems" .=) <$> _ttOperatingSystems])
 
--- | Represents a buy from the DoubleClick Planning inventory store.
+-- | Represents a buy from the Planning inventory store.
 --
 -- /See:/ 'inventoryItem' smart constructor.
 data InventoryItem = InventoryItem'
@@ -2211,6 +2532,90 @@ instance ToJSON FloodlightActivityDynamicTag where
                  [("tag" .=) <$> _fadtTag, ("name" .=) <$> _fadtName,
                   ("id" .=) <$> _fadtId])
 
+-- | Contains information about supported video formats.
+--
+-- /See:/ 'videoFormat' smart constructor.
+data VideoFormat = VideoFormat'
+    { _vfKind          :: !Text
+    , _vfFileType      :: !(Maybe VideoFormatFileType)
+    , _vfResolution    :: !(Maybe Size)
+    , _vfTargetBitRate :: !(Maybe (Textual Int32))
+    , _vfId            :: !(Maybe (Textual Int32))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VideoFormat' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vfKind'
+--
+-- * 'vfFileType'
+--
+-- * 'vfResolution'
+--
+-- * 'vfTargetBitRate'
+--
+-- * 'vfId'
+videoFormat
+    :: VideoFormat
+videoFormat =
+    VideoFormat'
+    { _vfKind = "dfareporting#videoFormat"
+    , _vfFileType = Nothing
+    , _vfResolution = Nothing
+    , _vfTargetBitRate = Nothing
+    , _vfId = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"dfareporting#videoFormat\".
+vfKind :: Lens' VideoFormat Text
+vfKind = lens _vfKind (\ s a -> s{_vfKind = a})
+
+-- | File type of the video format.
+vfFileType :: Lens' VideoFormat (Maybe VideoFormatFileType)
+vfFileType
+  = lens _vfFileType (\ s a -> s{_vfFileType = a})
+
+-- | The resolution of this video format.
+vfResolution :: Lens' VideoFormat (Maybe Size)
+vfResolution
+  = lens _vfResolution (\ s a -> s{_vfResolution = a})
+
+-- | The target bit rate of this video format.
+vfTargetBitRate :: Lens' VideoFormat (Maybe Int32)
+vfTargetBitRate
+  = lens _vfTargetBitRate
+      (\ s a -> s{_vfTargetBitRate = a})
+      . mapping _Coerce
+
+-- | ID of the video format.
+vfId :: Lens' VideoFormat (Maybe Int32)
+vfId
+  = lens _vfId (\ s a -> s{_vfId = a}) .
+      mapping _Coerce
+
+instance FromJSON VideoFormat where
+        parseJSON
+          = withObject "VideoFormat"
+              (\ o ->
+                 VideoFormat' <$>
+                   (o .:? "kind" .!= "dfareporting#videoFormat") <*>
+                     (o .:? "fileType")
+                     <*> (o .:? "resolution")
+                     <*> (o .:? "targetBitRate")
+                     <*> (o .:? "id"))
+
+instance ToJSON VideoFormat where
+        toJSON VideoFormat'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _vfKind),
+                  ("fileType" .=) <$> _vfFileType,
+                  ("resolution" .=) <$> _vfResolution,
+                  ("targetBitRate" .=) <$> _vfTargetBitRate,
+                  ("id" .=) <$> _vfId])
+
 -- | DirectorySites contains properties of a website from the Site Directory.
 -- Sites need to be added to an account via the Sites resource before they
 -- can be assigned to a placement.
@@ -2284,19 +2689,20 @@ directorySite =
     , _dsParentId = Nothing
     }
 
--- | Currency ID of this directory site. Possible values are: - \"1\" for USD
--- - \"2\" for GBP - \"3\" for ESP - \"4\" for SEK - \"5\" for CAD - \"6\"
--- for JPY - \"7\" for DEM - \"8\" for AUD - \"9\" for FRF - \"10\" for ITL
--- - \"11\" for DKK - \"12\" for NOK - \"13\" for FIM - \"14\" for ZAR -
--- \"15\" for IEP - \"16\" for NLG - \"17\" for EUR - \"18\" for KRW -
--- \"19\" for TWD - \"20\" for SGD - \"21\" for CNY - \"22\" for HKD -
--- \"23\" for NZD - \"24\" for MYR - \"25\" for BRL - \"26\" for PTE -
--- \"27\" for MXP - \"28\" for CLP - \"29\" for TRY - \"30\" for ARS -
--- \"31\" for PEN - \"32\" for ILS - \"33\" for CHF - \"34\" for VEF -
--- \"35\" for COP - \"36\" for GTQ - \"37\" for PLN - \"39\" for INR -
--- \"40\" for THB - \"41\" for IDR - \"42\" for CZK - \"43\" for RON -
--- \"44\" for HUF - \"45\" for RUB - \"46\" for AED - \"47\" for BGN -
--- \"48\" for HRK
+-- | Currency ID of this directory site. This is a read-only field. Possible
+-- values are: - \"1\" for USD - \"2\" for GBP - \"3\" for ESP - \"4\" for
+-- SEK - \"5\" for CAD - \"6\" for JPY - \"7\" for DEM - \"8\" for AUD -
+-- \"9\" for FRF - \"10\" for ITL - \"11\" for DKK - \"12\" for NOK -
+-- \"13\" for FIM - \"14\" for ZAR - \"15\" for IEP - \"16\" for NLG -
+-- \"17\" for EUR - \"18\" for KRW - \"19\" for TWD - \"20\" for SGD -
+-- \"21\" for CNY - \"22\" for HKD - \"23\" for NZD - \"24\" for MYR -
+-- \"25\" for BRL - \"26\" for PTE - \"27\" for MXP - \"28\" for CLP -
+-- \"29\" for TRY - \"30\" for ARS - \"31\" for PEN - \"32\" for ILS -
+-- \"33\" for CHF - \"34\" for VEF - \"35\" for COP - \"36\" for GTQ -
+-- \"37\" for PLN - \"39\" for INR - \"40\" for THB - \"41\" for IDR -
+-- \"42\" for CZK - \"43\" for RON - \"44\" for HUF - \"45\" for RUB -
+-- \"46\" for AED - \"47\" for BGN - \"48\" for HRK - \"49\" for MXN -
+-- \"50\" for NGN
 dsCurrencyId :: Lens' DirectorySite (Maybe Int64)
 dsCurrencyId
   = lens _dsCurrencyId (\ s a -> s{_dsCurrencyId = a})
@@ -2357,7 +2763,7 @@ dsId
   = lens _dsId (\ s a -> s{_dsId = a}) .
       mapping _Coerce
 
--- | Country ID of this directory site.
+-- | Country ID of this directory site. This is a read-only field.
 dsCountryId :: Lens' DirectorySite (Maybe Int64)
 dsCountryId
   = lens _dsCountryId (\ s a -> s{_dsCountryId = a}) .
@@ -2371,7 +2777,7 @@ dsContactAssignments
       . _Default
       . _Coerce
 
--- | Description of this directory site.
+-- | Description of this directory site. This is a read-only field.
 dsDescription :: Lens' DirectorySite (Maybe Text)
 dsDescription
   = lens _dsDescription
@@ -3399,13 +3805,15 @@ tdClickTag
 tdFormat :: Lens' TagData (Maybe TagDataFormat)
 tdFormat = lens _tdFormat (\ s a -> s{_tdFormat = a})
 
--- | Creative associated with this placement tag.
+-- | Creative associated with this placement tag. Applicable only when format
+-- is PLACEMENT_TAG_TRACKING.
 tdCreativeId :: Lens' TagData (Maybe Int64)
 tdCreativeId
   = lens _tdCreativeId (\ s a -> s{_tdCreativeId = a})
       . mapping _Coerce
 
--- | Ad associated with this placement tag.
+-- | Ad associated with this placement tag. Applicable only when format is
+-- PLACEMENT_TAG_TRACKING.
 tdAdId :: Lens' TagData (Maybe Int64)
 tdAdId
   = lens _tdAdId (\ s a -> s{_tdAdId = a}) .
@@ -3474,13 +3882,13 @@ dptDaysOfWeek
       . _Default
       . _Coerce
 
--- | Hours of the day when the ad will serve. Must be an integer between 0
--- and 23 (inclusive), where 0 is midnight to 1 AM, and 23 is 11 PM to
--- midnight. Can be specified with days of week, in which case the ad would
--- serve during these hours on the specified days. For example, if Monday,
--- Wednesday, Friday are the days of week specified and 9-10am, 3-5pm
--- (hours 9, 15, and 16) is specified, the ad would serve Monday,
--- Wednesdays, and Fridays at 9-10am and 3-5pm.
+-- | Hours of the day when the ad will serve, where 0 is midnight to 1 AM and
+-- 23 is 11 PM to midnight. Can be specified with days of week, in which
+-- case the ad would serve during these hours on the specified days. For
+-- example if Monday, Wednesday, Friday are the days of week specified and
+-- 9-10am, 3-5pm (hours 9, 15, and 16) is specified, the ad would serve
+-- Monday, Wednesdays, and Fridays at 9-10am and 3-5pm. Acceptable values
+-- are 0 to 23, inclusive.
 dptHoursOfDay :: Lens' DayPartTargeting [Int32]
 dptHoursOfDay
   = lens _dptHoursOfDay
@@ -3590,6 +3998,76 @@ instance ToJSON CreativeOptimizationConfiguration
                   ("optimizationActivitys" .=) <$>
                     _cocOptimizationActivitys,
                   ("id" .=) <$> _cocId])
+
+-- | Click-through URL
+--
+-- /See:/ 'creativeClickThroughURL' smart constructor.
+data CreativeClickThroughURL = CreativeClickThroughURL'
+    { _cctuComputedClickThroughURL :: !(Maybe Text)
+    , _cctuCustomClickThroughURL   :: !(Maybe Text)
+    , _cctuLandingPageId           :: !(Maybe (Textual Int64))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CreativeClickThroughURL' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cctuComputedClickThroughURL'
+--
+-- * 'cctuCustomClickThroughURL'
+--
+-- * 'cctuLandingPageId'
+creativeClickThroughURL
+    :: CreativeClickThroughURL
+creativeClickThroughURL =
+    CreativeClickThroughURL'
+    { _cctuComputedClickThroughURL = Nothing
+    , _cctuCustomClickThroughURL = Nothing
+    , _cctuLandingPageId = Nothing
+    }
+
+-- | Read-only convenience field representing the actual URL that will be
+-- used for this click-through. The URL is computed as follows: - If
+-- landingPageId is specified then that landing page\'s URL is assigned to
+-- this field. - Otherwise, the customClickThroughUrl is assigned to this
+-- field.
+cctuComputedClickThroughURL :: Lens' CreativeClickThroughURL (Maybe Text)
+cctuComputedClickThroughURL
+  = lens _cctuComputedClickThroughURL
+      (\ s a -> s{_cctuComputedClickThroughURL = a})
+
+-- | Custom click-through URL. Applicable if the landingPageId field is left
+-- unset.
+cctuCustomClickThroughURL :: Lens' CreativeClickThroughURL (Maybe Text)
+cctuCustomClickThroughURL
+  = lens _cctuCustomClickThroughURL
+      (\ s a -> s{_cctuCustomClickThroughURL = a})
+
+-- | ID of the landing page for the click-through URL.
+cctuLandingPageId :: Lens' CreativeClickThroughURL (Maybe Int64)
+cctuLandingPageId
+  = lens _cctuLandingPageId
+      (\ s a -> s{_cctuLandingPageId = a})
+      . mapping _Coerce
+
+instance FromJSON CreativeClickThroughURL where
+        parseJSON
+          = withObject "CreativeClickThroughURL"
+              (\ o ->
+                 CreativeClickThroughURL' <$>
+                   (o .:? "computedClickThroughUrl") <*>
+                     (o .:? "customClickThroughUrl")
+                     <*> (o .:? "landingPageId"))
+
+instance ToJSON CreativeClickThroughURL where
+        toJSON CreativeClickThroughURL'{..}
+          = object
+              (catMaybes
+                 [("computedClickThroughUrl" .=) <$>
+                    _cctuComputedClickThroughURL,
+                  ("customClickThroughUrl" .=) <$>
+                    _cctuCustomClickThroughURL,
+                  ("landingPageId" .=) <$> _cctuLandingPageId])
 
 -- | The report criteria for a report of type \"STANDARD\".
 --
@@ -3762,7 +4240,72 @@ instance ToJSON PlacementStrategiesListResponse where
                   ("nextPageToken" .=) <$> _pslrNextPageToken,
                   Just ("kind" .= _pslrKind)])
 
--- | Contains properties of a DCM subaccount.
+-- | Update Conversions Response.
+--
+-- /See:/ 'conversionsBatchUpdateResponse' smart constructor.
+data ConversionsBatchUpdateResponse = ConversionsBatchUpdateResponse'
+    { _cburStatus      :: !(Maybe [ConversionStatus])
+    , _cburKind        :: !Text
+    , _cburHasFailures :: !(Maybe Bool)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ConversionsBatchUpdateResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cburStatus'
+--
+-- * 'cburKind'
+--
+-- * 'cburHasFailures'
+conversionsBatchUpdateResponse
+    :: ConversionsBatchUpdateResponse
+conversionsBatchUpdateResponse =
+    ConversionsBatchUpdateResponse'
+    { _cburStatus = Nothing
+    , _cburKind = "dfareporting#conversionsBatchUpdateResponse"
+    , _cburHasFailures = Nothing
+    }
+
+-- | The update status of each conversion. Statuses are returned in the same
+-- order that conversions are updated.
+cburStatus :: Lens' ConversionsBatchUpdateResponse [ConversionStatus]
+cburStatus
+  = lens _cburStatus (\ s a -> s{_cburStatus = a}) .
+      _Default
+      . _Coerce
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"dfareporting#conversionsBatchUpdateResponse\".
+cburKind :: Lens' ConversionsBatchUpdateResponse Text
+cburKind = lens _cburKind (\ s a -> s{_cburKind = a})
+
+-- | Indicates that some or all conversions failed to update.
+cburHasFailures :: Lens' ConversionsBatchUpdateResponse (Maybe Bool)
+cburHasFailures
+  = lens _cburHasFailures
+      (\ s a -> s{_cburHasFailures = a})
+
+instance FromJSON ConversionsBatchUpdateResponse
+         where
+        parseJSON
+          = withObject "ConversionsBatchUpdateResponse"
+              (\ o ->
+                 ConversionsBatchUpdateResponse' <$>
+                   (o .:? "status" .!= mempty) <*>
+                     (o .:? "kind" .!=
+                        "dfareporting#conversionsBatchUpdateResponse")
+                     <*> (o .:? "hasFailures"))
+
+instance ToJSON ConversionsBatchUpdateResponse where
+        toJSON ConversionsBatchUpdateResponse'{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _cburStatus,
+                  Just ("kind" .= _cburKind),
+                  ("hasFailures" .=) <$> _cburHasFailures])
+
+-- | Contains properties of a Campaign Manager subaccount.
 --
 -- /See:/ 'subAccount' smart constructor.
 data SubAccount = SubAccount'
@@ -3914,7 +4457,56 @@ instance ToJSON InventoryItemsListResponse where
                   ("nextPageToken" .=) <$> _iilrNextPageToken,
                   Just ("kind" .= _iilrKind)])
 
--- | Contains properties of a DCM ad.
+-- | A Universal Ad ID as per the VAST 4.0 spec. Applicable to the following
+-- creative types: INSTREAM_AUDIO, INSTREAM_VIDEO and VPAID.
+--
+-- /See:/ 'universalAdId' smart constructor.
+data UniversalAdId = UniversalAdId'
+    { _uaiValue    :: !(Maybe Text)
+    , _uaiRegistry :: !(Maybe UniversalAdIdRegistry)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UniversalAdId' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'uaiValue'
+--
+-- * 'uaiRegistry'
+universalAdId
+    :: UniversalAdId
+universalAdId =
+    UniversalAdId'
+    { _uaiValue = Nothing
+    , _uaiRegistry = Nothing
+    }
+
+-- | ID value for this creative. Only alphanumeric characters and the
+-- following symbols are valid: \"_\/\\-\". Maximum length is 64
+-- characters. Read only when registry is DCM.
+uaiValue :: Lens' UniversalAdId (Maybe Text)
+uaiValue = lens _uaiValue (\ s a -> s{_uaiValue = a})
+
+-- | Registry used for the Ad ID value.
+uaiRegistry :: Lens' UniversalAdId (Maybe UniversalAdIdRegistry)
+uaiRegistry
+  = lens _uaiRegistry (\ s a -> s{_uaiRegistry = a})
+
+instance FromJSON UniversalAdId where
+        parseJSON
+          = withObject "UniversalAdId"
+              (\ o ->
+                 UniversalAdId' <$>
+                   (o .:? "value") <*> (o .:? "registry"))
+
+instance ToJSON UniversalAdId where
+        toJSON UniversalAdId'{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _uaiValue,
+                  ("registry" .=) <$> _uaiRegistry])
+
+-- | Contains properties of a Campaign Manager ad.
 --
 -- /See:/ 'ad' smart constructor.
 data Ad = Ad'
@@ -4236,7 +4828,7 @@ aEventTagOverrides
       . _Default
       . _Coerce
 
--- | Whether this ad is active.
+-- | Whether this ad is active. When true, archived must be false.
 aActive :: Lens' Ad (Maybe Bool)
 aActive = lens _aActive (\ s a -> s{_aActive = a})
 
@@ -4345,7 +4937,7 @@ aCompatibility
   = lens _aCompatibility
       (\ s a -> s{_aCompatibility = a})
 
--- | Whether this ad is archived.
+-- | Whether this ad is archived. When true, active must be false.
 aArchived :: Lens' Ad (Maybe Bool)
 aArchived
   = lens _aArchived (\ s a -> s{_aArchived = a})
@@ -4463,7 +5055,7 @@ instance ToJSON Ad where
                   ("placementAssignments" .=) <$>
                     _aPlacementAssignments])
 
--- | Contains properties of a DoubleClick Planning project.
+-- | Contains properties of a Planning project.
 --
 -- /See:/ 'project' smart constructor.
 data Project = Project'
@@ -4917,7 +5509,7 @@ size =
     , _sId = Nothing
     }
 
--- | Height of this size.
+-- | Height of this size. Acceptable values are 0 to 32767, inclusive.
 sHeight :: Lens' Size (Maybe Int32)
 sHeight
   = lens _sHeight (\ s a -> s{_sHeight = a}) .
@@ -4928,7 +5520,7 @@ sHeight
 sKind :: Lens' Size Text
 sKind = lens _sKind (\ s a -> s{_sKind = a})
 
--- | Width of this size.
+-- | Width of this size. Acceptable values are 0 to 32767, inclusive.
 sWidth :: Lens' Size (Maybe Int32)
 sWidth
   = lens _sWidth (\ s a -> s{_sWidth = a}) .
@@ -5024,6 +5616,78 @@ instance ToJSON ObjectFilter where
                  [("status" .=) <$> _ofStatus,
                   Just ("kind" .= _ofKind),
                   ("objectIds" .=) <$> _ofObjectIds])
+
+-- | Skippable Settings
+--
+-- /See:/ 'skippableSetting' smart constructor.
+data SkippableSetting = SkippableSetting'
+    { _ssSkipOffSet     :: !(Maybe VideoOffSet)
+    , _ssProgressOffSet :: !(Maybe VideoOffSet)
+    , _ssKind           :: !Text
+    , _ssSkippable      :: !(Maybe Bool)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SkippableSetting' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ssSkipOffSet'
+--
+-- * 'ssProgressOffSet'
+--
+-- * 'ssKind'
+--
+-- * 'ssSkippable'
+skippableSetting
+    :: SkippableSetting
+skippableSetting =
+    SkippableSetting'
+    { _ssSkipOffSet = Nothing
+    , _ssProgressOffSet = Nothing
+    , _ssKind = "dfareporting#skippableSetting"
+    , _ssSkippable = Nothing
+    }
+
+-- | Amount of time to play videos served to this placement before the skip
+-- button should appear. Applicable when skippable is true.
+ssSkipOffSet :: Lens' SkippableSetting (Maybe VideoOffSet)
+ssSkipOffSet
+  = lens _ssSkipOffSet (\ s a -> s{_ssSkipOffSet = a})
+
+-- | Amount of time to play videos served to this placement before counting a
+-- view. Applicable when skippable is true.
+ssProgressOffSet :: Lens' SkippableSetting (Maybe VideoOffSet)
+ssProgressOffSet
+  = lens _ssProgressOffSet
+      (\ s a -> s{_ssProgressOffSet = a})
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"dfareporting#skippableSetting\".
+ssKind :: Lens' SkippableSetting Text
+ssKind = lens _ssKind (\ s a -> s{_ssKind = a})
+
+-- | Whether the user can skip creatives served to this placement.
+ssSkippable :: Lens' SkippableSetting (Maybe Bool)
+ssSkippable
+  = lens _ssSkippable (\ s a -> s{_ssSkippable = a})
+
+instance FromJSON SkippableSetting where
+        parseJSON
+          = withObject "SkippableSetting"
+              (\ o ->
+                 SkippableSetting' <$>
+                   (o .:? "skipOffset") <*> (o .:? "progressOffset") <*>
+                     (o .:? "kind" .!= "dfareporting#skippableSetting")
+                     <*> (o .:? "skippable"))
+
+instance ToJSON SkippableSetting where
+        toJSON SkippableSetting'{..}
+          = object
+              (catMaybes
+                 [("skipOffset" .=) <$> _ssSkipOffSet,
+                  ("progressOffset" .=) <$> _ssProgressOffSet,
+                  Just ("kind" .= _ssKind),
+                  ("skippable" .=) <$> _ssSkippable])
 
 -- | Reporting Configuration
 --
@@ -6054,7 +6718,7 @@ rrcReachByFrequencyMetricNames
 
 -- | Whether to enable all reach dimension combinations in the report.
 -- Defaults to false. If enabled, the date range of the report should be
--- within the last three months.
+-- within the last 42 days.
 rrcEnableAllDimensionCombinations :: Lens' ReportReachCriteria (Maybe Bool)
 rrcEnableAllDimensionCombinations
   = lens _rrcEnableAllDimensionCombinations
@@ -6369,9 +7033,9 @@ instance ToJSON ChangeLogsListResponse where
                   Just ("kind" .= _cllrKind),
                   ("changeLogs" .=) <$> _cllrChangeLogs])
 
--- | AccountUserProfiles contains properties of a DCM user profile. This
--- resource is specifically for managing user profiles, whereas
--- UserProfiles is for accessing the API.
+-- | AccountUserProfiles contains properties of a Campaign Manager user
+-- profile. This resource is specifically for managing user profiles,
+-- whereas UserProfiles is for accessing the API.
 --
 -- /See:/ 'accountUserProFile' smart constructor.
 data AccountUserProFile = AccountUserProFile'
@@ -6498,7 +7162,7 @@ aupfSiteFilter
   = lens _aupfSiteFilter
       (\ s a -> s{_aupfSiteFilter = a})
 
--- | Trafficker type of this user profile.
+-- | Trafficker type of this user profile. This is a read-only field.
 aupfTraffickerType :: Lens' AccountUserProFile (Maybe AccountUserProFileTraffickerType)
 aupfTraffickerType
   = lens _aupfTraffickerType
@@ -6930,8 +7594,8 @@ instance ToJSON RemarketingListsListResponse where
 -- | Contains properties of a dynamic targeting key. Dynamic targeting keys
 -- are unique, user-friendly labels, created at the advertiser level in
 -- DCM, that can be assigned to ads, creatives, and placements and used for
--- targeting with DoubleClick Studio dynamic creatives. Use these labels
--- instead of numeric DCM IDs (such as placement IDs) to save time and
+-- targeting with Studio dynamic creatives. Use these labels instead of
+-- numeric Campaign Manager IDs (such as placement IDs) to save time and
 -- avoid errors in your dynamic feeds.
 --
 -- /See:/ 'dynamicTargetingKey' smart constructor.
@@ -7015,16 +7679,18 @@ data Creative = Creative'
     , _creBackupImageTargetWindow             :: !(Maybe TargetWindow)
     , _creRenderingIdDimensionValue           :: !(Maybe DimensionValue)
     , _creCustomKeyValues                     :: !(Maybe [Text])
-    , _creVideoDuration                       :: !(Maybe (Textual Double))
+    , _creSkipOffSet                          :: !(Maybe VideoOffSet)
     , _creRenderingId                         :: !(Maybe (Textual Int64))
     , _creThirdPartyBackupImageImpressionsURL :: !(Maybe Text)
     , _creFsCommand                           :: !(Maybe FsCommand)
     , _creAllowScriptAccess                   :: !(Maybe Bool)
     , _creHTMLCodeLocked                      :: !(Maybe Bool)
     , _creRequiredFlashPluginVersion          :: !(Maybe Text)
+    , _creUniversalAdId                       :: !(Maybe UniversalAdId)
     , _creAuthoringTool                       :: !(Maybe CreativeAuthoringTool)
     , _creSize                                :: !(Maybe Size)
     , _creThirdPartyURLs                      :: !(Maybe [ThirdPartyTrackingURL])
+    , _creProgressOffSet                      :: !(Maybe VideoOffSet)
     , _creCounterCustomEvents                 :: !(Maybe [CreativeCustomEvent])
     , _creKind                                :: !Text
     , _creSSLOverride                         :: !(Maybe Bool)
@@ -7041,19 +7707,22 @@ data Creative = Creative'
     , _creActive                              :: !(Maybe Bool)
     , _creExitCustomEvents                    :: !(Maybe [CreativeCustomEvent])
     , _creAccountId                           :: !(Maybe (Textual Int64))
-    , _creBackupImageClickThroughURL          :: !(Maybe Text)
+    , _creBackupImageClickThroughURL          :: !(Maybe CreativeClickThroughURL)
     , _creName                                :: !(Maybe Text)
     , _creOverrideCss                         :: !(Maybe Text)
-    , _creVideoDescription                    :: !(Maybe Text)
+    , _creAdditionalSizes                     :: !(Maybe [Size])
     , _creClickTags                           :: !(Maybe [ClickTag])
     , _creAdParameters                        :: !(Maybe Text)
     , _creVersion                             :: !(Maybe (Textual Int32))
+    , _creMediaDescription                    :: !(Maybe Text)
+    , _creMediaDuration                       :: !(Maybe (Textual Double))
     , _creLatestTraffickedCreativeId          :: !(Maybe (Textual Int64))
     , _creThirdPartyRichMediaImpressionsURL   :: !(Maybe Text)
     , _creDynamicAssetSelection               :: !(Maybe Bool)
     , _creLastModifiedInfo                    :: !(Maybe LastModifiedInfo)
     , _creId                                  :: !(Maybe (Textual Int64))
     , _creAuthoringSource                     :: !(Maybe CreativeAuthoringSource)
+    , _crePoliteLoadAssetId                   :: !(Maybe (Textual Int64))
     , _creStudioAdvertiserId                  :: !(Maybe (Textual Int64))
     , _creCreativeAssets                      :: !(Maybe [CreativeAsset])
     , _creSubAccountId                        :: !(Maybe (Textual Int64))
@@ -7068,8 +7737,8 @@ data Creative = Creative'
     , _creCompanionCreatives                  :: !(Maybe [Textual Int64])
     , _creTotalFileSize                       :: !(Maybe (Textual Int64))
     , _creStudioTraffickedCreativeId          :: !(Maybe (Textual Int64))
-    , _creRedirectURL                         :: !(Maybe Text)
     , _creAutoAdvanceImages                   :: !(Maybe Bool)
+    , _creRedirectURL                         :: !(Maybe Text)
     , _creCreativeFieldAssignments            :: !(Maybe [CreativeFieldAssignment])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -7085,7 +7754,7 @@ data Creative = Creative'
 --
 -- * 'creCustomKeyValues'
 --
--- * 'creVideoDuration'
+-- * 'creSkipOffSet'
 --
 -- * 'creRenderingId'
 --
@@ -7099,11 +7768,15 @@ data Creative = Creative'
 --
 -- * 'creRequiredFlashPluginVersion'
 --
+-- * 'creUniversalAdId'
+--
 -- * 'creAuthoringTool'
 --
 -- * 'creSize'
 --
 -- * 'creThirdPartyURLs'
+--
+-- * 'creProgressOffSet'
 --
 -- * 'creCounterCustomEvents'
 --
@@ -7143,13 +7816,17 @@ data Creative = Creative'
 --
 -- * 'creOverrideCss'
 --
--- * 'creVideoDescription'
+-- * 'creAdditionalSizes'
 --
 -- * 'creClickTags'
 --
 -- * 'creAdParameters'
 --
 -- * 'creVersion'
+--
+-- * 'creMediaDescription'
+--
+-- * 'creMediaDuration'
 --
 -- * 'creLatestTraffickedCreativeId'
 --
@@ -7162,6 +7839,8 @@ data Creative = Creative'
 -- * 'creId'
 --
 -- * 'creAuthoringSource'
+--
+-- * 'crePoliteLoadAssetId'
 --
 -- * 'creStudioAdvertiserId'
 --
@@ -7191,9 +7870,9 @@ data Creative = Creative'
 --
 -- * 'creStudioTraffickedCreativeId'
 --
--- * 'creRedirectURL'
---
 -- * 'creAutoAdvanceImages'
+--
+-- * 'creRedirectURL'
 --
 -- * 'creCreativeFieldAssignments'
 creative
@@ -7204,16 +7883,18 @@ creative =
     , _creBackupImageTargetWindow = Nothing
     , _creRenderingIdDimensionValue = Nothing
     , _creCustomKeyValues = Nothing
-    , _creVideoDuration = Nothing
+    , _creSkipOffSet = Nothing
     , _creRenderingId = Nothing
     , _creThirdPartyBackupImageImpressionsURL = Nothing
     , _creFsCommand = Nothing
     , _creAllowScriptAccess = Nothing
     , _creHTMLCodeLocked = Nothing
     , _creRequiredFlashPluginVersion = Nothing
+    , _creUniversalAdId = Nothing
     , _creAuthoringTool = Nothing
     , _creSize = Nothing
     , _creThirdPartyURLs = Nothing
+    , _creProgressOffSet = Nothing
     , _creCounterCustomEvents = Nothing
     , _creKind = "dfareporting#creative"
     , _creSSLOverride = Nothing
@@ -7233,16 +7914,19 @@ creative =
     , _creBackupImageClickThroughURL = Nothing
     , _creName = Nothing
     , _creOverrideCss = Nothing
-    , _creVideoDescription = Nothing
+    , _creAdditionalSizes = Nothing
     , _creClickTags = Nothing
     , _creAdParameters = Nothing
     , _creVersion = Nothing
+    , _creMediaDescription = Nothing
+    , _creMediaDuration = Nothing
     , _creLatestTraffickedCreativeId = Nothing
     , _creThirdPartyRichMediaImpressionsURL = Nothing
     , _creDynamicAssetSelection = Nothing
     , _creLastModifiedInfo = Nothing
     , _creId = Nothing
     , _creAuthoringSource = Nothing
+    , _crePoliteLoadAssetId = Nothing
     , _creStudioAdvertiserId = Nothing
     , _creCreativeAssets = Nothing
     , _creSubAccountId = Nothing
@@ -7257,8 +7941,8 @@ creative =
     , _creCompanionCreatives = Nothing
     , _creTotalFileSize = Nothing
     , _creStudioTraffickedCreativeId = Nothing
-    , _creRedirectURL = Nothing
     , _creAutoAdvanceImages = Nothing
+    , _creRedirectURL = Nothing
     , _creCreativeFieldAssignments = Nothing
     }
 
@@ -7300,14 +7984,12 @@ creCustomKeyValues
       . _Default
       . _Coerce
 
--- | Creative video duration in seconds. This is a read-only field.
--- Applicable to the following creative types: INSTREAM_VIDEO, all
--- RICH_MEDIA, and all VPAID.
-creVideoDuration :: Lens' Creative (Maybe Double)
-creVideoDuration
-  = lens _creVideoDuration
-      (\ s a -> s{_creVideoDuration = a})
-      . mapping _Coerce
+-- | Amount of time to play the video before the skip button appears.
+-- Applicable to the following creative types: all INSTREAM_VIDEO.
+creSkipOffSet :: Lens' Creative (Maybe VideoOffSet)
+creSkipOffSet
+  = lens _creSkipOffSet
+      (\ s a -> s{_creSkipOffSet = a})
 
 -- | ID of current rendering version. This is a read-only field. Applicable
 -- to all creative types.
@@ -7342,9 +8024,9 @@ creAllowScriptAccess
   = lens _creAllowScriptAccess
       (\ s a -> s{_creAllowScriptAccess = a})
 
--- | Whether HTML code is DCM-generated or manually entered. Set to true to
--- ignore changes to htmlCode. Applicable to the following creative types:
--- FLASH_INPAGE and HTML5_BANNER.
+-- | Whether HTML code is generated by Campaign Manager or manually entered.
+-- Set to true to ignore changes to htmlCode. Applicable to the following
+-- creative types: FLASH_INPAGE and HTML5_BANNER.
 creHTMLCodeLocked :: Lens' Creative (Maybe Bool)
 creHTMLCodeLocked
   = lens _creHTMLCodeLocked
@@ -7357,6 +8039,13 @@ creRequiredFlashPluginVersion :: Lens' Creative (Maybe Text)
 creRequiredFlashPluginVersion
   = lens _creRequiredFlashPluginVersion
       (\ s a -> s{_creRequiredFlashPluginVersion = a})
+
+-- | A Universal Ad ID as per the VAST 4.0 spec. Applicable to the following
+-- creative types: INSTREAM_AUDIO and INSTREAM_VIDEO and VPAID.
+creUniversalAdId :: Lens' Creative (Maybe UniversalAdId)
+creUniversalAdId
+  = lens _creUniversalAdId
+      (\ s a -> s{_creUniversalAdId = a})
 
 -- | Authoring tool for HTML5 banner creatives. This is a read-only field.
 -- Applicable to the following creative types: HTML5_BANNER.
@@ -7376,15 +8065,22 @@ creAuthoringTool
 creSize :: Lens' Creative (Maybe Size)
 creSize = lens _creSize (\ s a -> s{_creSize = a})
 
--- | Third-party URLs for tracking in-stream video creative events.
--- Applicable to the following creative types: all INSTREAM_VIDEO and all
--- VPAID.
+-- | Third-party URLs for tracking in-stream creative events. Applicable to
+-- the following creative types: all INSTREAM_VIDEO, all INSTREAM_AUDIO,
+-- and all VPAID.
 creThirdPartyURLs :: Lens' Creative [ThirdPartyTrackingURL]
 creThirdPartyURLs
   = lens _creThirdPartyURLs
       (\ s a -> s{_creThirdPartyURLs = a})
       . _Default
       . _Coerce
+
+-- | Amount of time to play the video before counting a view. Applicable to
+-- the following creative types: all INSTREAM_VIDEO.
+creProgressOffSet :: Lens' Creative (Maybe VideoOffSet)
+creProgressOffSet
+  = lens _creProgressOffSet
+      (\ s a -> s{_creProgressOffSet = a})
 
 -- | List of counter events configured for the creative. For
 -- DISPLAY_IMAGE_GALLERY creatives, these are read-only and auto-generated
@@ -7410,7 +8106,7 @@ creSSLOverride
       (\ s a -> s{_creSSLOverride = a})
 
 -- | HTML code for the creative. This is a required field when applicable.
--- This field is ignored if htmlCodeLocked is false. Applicable to the
+-- This field is ignored if htmlCodeLocked is true. Applicable to the
 -- following creative types: all CUSTOM, FLASH_INPAGE, and HTML5_BANNER,
 -- and all RICH_MEDIA.
 creHTMLCode :: Lens' Creative (Maybe Text)
@@ -7425,10 +8121,10 @@ creAdvertiserId
       (\ s a -> s{_creAdvertiserId = a})
       . mapping _Coerce
 
--- | The internal Flash version for this creative as calculated by
--- DoubleClick Studio. This is a read-only field. Applicable to the
--- following creative types: FLASH_INPAGE all RICH_MEDIA, and all VPAID.
--- Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.
+-- | The internal Flash version for this creative as calculated by Studio.
+-- This is a read-only field. Applicable to the following creative types:
+-- FLASH_INPAGE all RICH_MEDIA, and all VPAID. Applicable to DISPLAY when
+-- the primary asset type is not HTML_IMAGE.
 creRequiredFlashVersion :: Lens' Creative (Maybe Int32)
 creRequiredFlashVersion
   = lens _creRequiredFlashVersion
@@ -7483,8 +8179,7 @@ creBackupImageReportingLabel
       (\ s a -> s{_creBackupImageReportingLabel = a})
 
 -- | Industry standard ID assigned to creative for reach and frequency.
--- Applicable to the following creative types: all INSTREAM_VIDEO and all
--- VPAID.
+-- Applicable to INSTREAM_VIDEO_REDIRECT creatives.
 creCommercialId :: Lens' Creative (Maybe Text)
 creCommercialId
   = lens _creCommercialId
@@ -7516,10 +8211,9 @@ creAccountId
   = lens _creAccountId (\ s a -> s{_creAccountId = a})
       . mapping _Coerce
 
--- | Click-through URL for backup image. Applicable to the following creative
--- types: FLASH_INPAGE and HTML5_BANNER. Applicable to DISPLAY when the
--- primary asset type is not HTML_IMAGE.
-creBackupImageClickThroughURL :: Lens' Creative (Maybe Text)
+-- | Click-through URL for backup image. Applicable to ENHANCED_BANNER when
+-- the primary asset type is not HTML_IMAGE.
+creBackupImageClickThroughURL :: Lens' Creative (Maybe CreativeClickThroughURL)
 creBackupImageClickThroughURL
   = lens _creBackupImageClickThroughURL
       (\ s a -> s{_creBackupImageClickThroughURL = a})
@@ -7536,12 +8230,16 @@ creOverrideCss
   = lens _creOverrideCss
       (\ s a -> s{_creOverrideCss = a})
 
--- | Description of the video ad. Applicable to the following creative types:
--- all INSTREAM_VIDEO and all VPAID.
-creVideoDescription :: Lens' Creative (Maybe Text)
-creVideoDescription
-  = lens _creVideoDescription
-      (\ s a -> s{_creVideoDescription = a})
+-- | Additional sizes associated with a responsive creative. When inserting
+-- or updating a creative either the size ID field or size width and height
+-- fields can be used. Applicable to DISPLAY creatives when the primary
+-- asset type is HTML_IMAGE.
+creAdditionalSizes :: Lens' Creative [Size]
+creAdditionalSizes
+  = lens _creAdditionalSizes
+      (\ s a -> s{_creAdditionalSizes = a})
+      . _Default
+      . _Coerce
 
 -- | Click tags of the creative. For DISPLAY, FLASH_INPAGE, and HTML5_BANNER
 -- creatives, this is a subset of detected click tags for the assets
@@ -7580,6 +8278,22 @@ creVersion :: Lens' Creative (Maybe Int32)
 creVersion
   = lens _creVersion (\ s a -> s{_creVersion = a}) .
       mapping _Coerce
+
+-- | Description of the audio or video ad. Applicable to the following
+-- creative types: all INSTREAM_VIDEO, INSTREAM_AUDIO, and all VPAID.
+creMediaDescription :: Lens' Creative (Maybe Text)
+creMediaDescription
+  = lens _creMediaDescription
+      (\ s a -> s{_creMediaDescription = a})
+
+-- | Creative audio or video duration in seconds. This is a read-only field.
+-- Applicable to the following creative types: INSTREAM_VIDEO,
+-- INSTREAM_AUDIO, all RICH_MEDIA, and all VPAID.
+creMediaDuration :: Lens' Creative (Maybe Double)
+creMediaDuration
+  = lens _creMediaDuration
+      (\ s a -> s{_creMediaDuration = a})
+      . mapping _Coerce
 
 -- | Latest Studio trafficked creative ID associated with rich media and
 -- VPAID creatives. This is a read-only field. Applicable to the following
@@ -7629,6 +8343,14 @@ creAuthoringSource :: Lens' Creative (Maybe CreativeAuthoringSource)
 creAuthoringSource
   = lens _creAuthoringSource
       (\ s a -> s{_creAuthoringSource = a})
+
+-- | The asset ID of the polite load image asset. Applicable to the creative
+-- type: DISPLAY.
+crePoliteLoadAssetId :: Lens' Creative (Maybe Int64)
+crePoliteLoadAssetId
+  = lens _crePoliteLoadAssetId
+      (\ s a -> s{_crePoliteLoadAssetId = a})
+      . mapping _Coerce
 
 -- | Studio advertiser ID associated with rich media and VPAID creatives.
 -- This is a read-only field. Applicable to the following creative types:
@@ -7699,9 +8421,11 @@ creStudioCreativeId
 -- rendering in mobile apps. Only pre-existing creatives may have these
 -- compatibilities since new creatives will either be assigned DISPLAY or
 -- DISPLAY_INTERSTITIAL instead. IN_STREAM_VIDEO refers to rendering in
--- in-stream video ads developed with the VAST standard. Applicable to all
--- creative types. Acceptable values are: - \"APP\" - \"APP_INTERSTITIAL\"
--- - \"IN_STREAM_VIDEO\" - \"DISPLAY\" - \"DISPLAY_INTERSTITIAL\"
+-- in-stream video ads developed with the VAST standard. IN_STREAM_AUDIO
+-- refers to rendering in in-stream audio ads developed with the VAST
+-- standard. Applicable to all creative types. Acceptable values are: -
+-- \"APP\" - \"APP_INTERSTITIAL\" - \"IN_STREAM_VIDEO\" -
+-- \"IN_STREAM_AUDIO\" - \"DISPLAY\" - \"DISPLAY_INTERSTITIAL\"
 creCompatibility :: Lens' Creative [CreativeCompatibilityItem]
 creCompatibility
   = lens _creCompatibility
@@ -7713,11 +8437,12 @@ creCompatibility
 -- if the browser that serves the ad does not support them. Feature
 -- dependencies are features that a browser must be able to support in
 -- order to render your HTML5 creative asset correctly. This field is
--- initially auto-generated to contain all features detected by DCM for all
--- the assets of this creative and can then be modified by the client. To
--- reset this field, copy over all the creativeAssets\' detected features.
--- Applicable to the following creative types: HTML5_BANNER. Applicable to
--- DISPLAY when the primary asset type is not HTML_IMAGE.
+-- initially auto-generated to contain all features detected by Campaign
+-- Manager for all the assets of this creative and can then be modified by
+-- the client. To reset this field, copy over all the creativeAssets\'
+-- detected features. Applicable to the following creative types:
+-- HTML5_BANNER. Applicable to DISPLAY when the primary asset type is not
+-- HTML_IMAGE.
 creBackupImageFeatures :: Lens' Creative [CreativeBackupImageFeaturesItem]
 creBackupImageFeatures
   = lens _creBackupImageFeatures
@@ -7738,10 +8463,11 @@ creArchived :: Lens' Creative (Maybe Bool)
 creArchived
   = lens _creArchived (\ s a -> s{_creArchived = a})
 
--- | List of companion creatives assigned to an in-Stream videocreative.
+-- | List of companion creatives assigned to an in-Stream video creative.
 -- Acceptable values include IDs of existing flash and image creatives.
--- Applicable to the following creative types: all VPAID and all
--- INSTREAM_VIDEO with dynamicAssetSelection set to false.
+-- Applicable to the following creative types: all VPAID, all
+-- INSTREAM_AUDIO and all INSTREAM_VIDEO with dynamicAssetSelection set to
+-- false.
 creCompanionCreatives :: Lens' Creative [Int64]
 creCompanionCreatives
   = lens _creCompanionCreatives
@@ -7767,6 +8493,13 @@ creStudioTraffickedCreativeId
       (\ s a -> s{_creStudioTraffickedCreativeId = a})
       . mapping _Coerce
 
+-- | Whether images are automatically advanced for image gallery creatives.
+-- Applicable to the following creative types: DISPLAY_IMAGE_GALLERY.
+creAutoAdvanceImages :: Lens' Creative (Maybe Bool)
+creAutoAdvanceImages
+  = lens _creAutoAdvanceImages
+      (\ s a -> s{_creAutoAdvanceImages = a})
+
 -- | URL of hosted image or hosted video or another ad tag. For
 -- INSTREAM_VIDEO_REDIRECT creatives this is the in-stream video redirect
 -- URL. The standard for a VAST (Video Ad Serving Template) ad response
@@ -7778,13 +8511,6 @@ creRedirectURL :: Lens' Creative (Maybe Text)
 creRedirectURL
   = lens _creRedirectURL
       (\ s a -> s{_creRedirectURL = a})
-
--- | Whether images are automatically advanced for image gallery creatives.
--- Applicable to the following creative types: DISPLAY_IMAGE_GALLERY.
-creAutoAdvanceImages :: Lens' Creative (Maybe Bool)
-creAutoAdvanceImages
-  = lens _creAutoAdvanceImages
-      (\ s a -> s{_creAutoAdvanceImages = a})
 
 -- | Creative field assignments for this creative. Applicable to all creative
 -- types.
@@ -7804,16 +8530,18 @@ instance FromJSON Creative where
                      (o .:? "backupImageTargetWindow")
                      <*> (o .:? "renderingIdDimensionValue")
                      <*> (o .:? "customKeyValues" .!= mempty)
-                     <*> (o .:? "videoDuration")
+                     <*> (o .:? "skipOffset")
                      <*> (o .:? "renderingId")
                      <*> (o .:? "thirdPartyBackupImageImpressionsUrl")
                      <*> (o .:? "fsCommand")
                      <*> (o .:? "allowScriptAccess")
                      <*> (o .:? "htmlCodeLocked")
                      <*> (o .:? "requiredFlashPluginVersion")
+                     <*> (o .:? "universalAdId")
                      <*> (o .:? "authoringTool")
                      <*> (o .:? "size")
                      <*> (o .:? "thirdPartyUrls" .!= mempty)
+                     <*> (o .:? "progressOffset")
                      <*> (o .:? "counterCustomEvents" .!= mempty)
                      <*> (o .:? "kind" .!= "dfareporting#creative")
                      <*> (o .:? "sslOverride")
@@ -7833,16 +8561,19 @@ instance FromJSON Creative where
                      <*> (o .:? "backupImageClickThroughUrl")
                      <*> (o .:? "name")
                      <*> (o .:? "overrideCss")
-                     <*> (o .:? "videoDescription")
+                     <*> (o .:? "additionalSizes" .!= mempty)
                      <*> (o .:? "clickTags" .!= mempty)
                      <*> (o .:? "adParameters")
                      <*> (o .:? "version")
+                     <*> (o .:? "mediaDescription")
+                     <*> (o .:? "mediaDuration")
                      <*> (o .:? "latestTraffickedCreativeId")
                      <*> (o .:? "thirdPartyRichMediaImpressionsUrl")
                      <*> (o .:? "dynamicAssetSelection")
                      <*> (o .:? "lastModifiedInfo")
                      <*> (o .:? "id")
                      <*> (o .:? "authoringSource")
+                     <*> (o .:? "politeLoadAssetId")
                      <*> (o .:? "studioAdvertiserId")
                      <*> (o .:? "creativeAssets" .!= mempty)
                      <*> (o .:? "subaccountId")
@@ -7857,8 +8588,8 @@ instance FromJSON Creative where
                      <*> (o .:? "companionCreatives" .!= mempty)
                      <*> (o .:? "totalFileSize")
                      <*> (o .:? "studioTraffickedCreativeId")
+                     <*> (o .:? "autoAdvanceImages")
                      <*> (o .:? "redirectUrl")
-                     <*> (o .:? "auto_advance_images")
                      <*> (o .:? "creativeFieldAssignments" .!= mempty))
 
 instance ToJSON Creative where
@@ -7872,7 +8603,7 @@ instance ToJSON Creative where
                   ("renderingIdDimensionValue" .=) <$>
                     _creRenderingIdDimensionValue,
                   ("customKeyValues" .=) <$> _creCustomKeyValues,
-                  ("videoDuration" .=) <$> _creVideoDuration,
+                  ("skipOffset" .=) <$> _creSkipOffSet,
                   ("renderingId" .=) <$> _creRenderingId,
                   ("thirdPartyBackupImageImpressionsUrl" .=) <$>
                     _creThirdPartyBackupImageImpressionsURL,
@@ -7881,9 +8612,11 @@ instance ToJSON Creative where
                   ("htmlCodeLocked" .=) <$> _creHTMLCodeLocked,
                   ("requiredFlashPluginVersion" .=) <$>
                     _creRequiredFlashPluginVersion,
+                  ("universalAdId" .=) <$> _creUniversalAdId,
                   ("authoringTool" .=) <$> _creAuthoringTool,
                   ("size" .=) <$> _creSize,
                   ("thirdPartyUrls" .=) <$> _creThirdPartyURLs,
+                  ("progressOffset" .=) <$> _creProgressOffSet,
                   ("counterCustomEvents" .=) <$>
                     _creCounterCustomEvents,
                   Just ("kind" .= _creKind),
@@ -7907,10 +8640,12 @@ instance ToJSON Creative where
                     _creBackupImageClickThroughURL,
                   ("name" .=) <$> _creName,
                   ("overrideCss" .=) <$> _creOverrideCss,
-                  ("videoDescription" .=) <$> _creVideoDescription,
+                  ("additionalSizes" .=) <$> _creAdditionalSizes,
                   ("clickTags" .=) <$> _creClickTags,
                   ("adParameters" .=) <$> _creAdParameters,
                   ("version" .=) <$> _creVersion,
+                  ("mediaDescription" .=) <$> _creMediaDescription,
+                  ("mediaDuration" .=) <$> _creMediaDuration,
                   ("latestTraffickedCreativeId" .=) <$>
                     _creLatestTraffickedCreativeId,
                   ("thirdPartyRichMediaImpressionsUrl" .=) <$>
@@ -7920,6 +8655,7 @@ instance ToJSON Creative where
                   ("lastModifiedInfo" .=) <$> _creLastModifiedInfo,
                   ("id" .=) <$> _creId,
                   ("authoringSource" .=) <$> _creAuthoringSource,
+                  ("politeLoadAssetId" .=) <$> _crePoliteLoadAssetId,
                   ("studioAdvertiserId" .=) <$> _creStudioAdvertiserId,
                   ("creativeAssets" .=) <$> _creCreativeAssets,
                   ("subaccountId" .=) <$> _creSubAccountId,
@@ -7937,8 +8673,8 @@ instance ToJSON Creative where
                   ("totalFileSize" .=) <$> _creTotalFileSize,
                   ("studioTraffickedCreativeId" .=) <$>
                     _creStudioTraffickedCreativeId,
+                  ("autoAdvanceImages" .=) <$> _creAutoAdvanceImages,
                   ("redirectUrl" .=) <$> _creRedirectURL,
-                  ("auto_advance_images" .=) <$> _creAutoAdvanceImages,
                   ("creativeFieldAssignments" .=) <$>
                     _creCreativeFieldAssignments])
 
@@ -8490,11 +9226,12 @@ instance ToJSON Rule where
                   ("name" .=) <$> _rulName,
                   ("assetId" .=) <$> _rulAssetId])
 
--- | Contains properties of a DCM campaign.
+-- | Contains properties of a Campaign Manager campaign.
 --
 -- /See:/ 'campaign' smart constructor.
 data Campaign = Campaign'
-    { _camCreativeOptimizationConfiguration            :: !(Maybe CreativeOptimizationConfiguration)
+    { _camAdBlockingConfiguration                      :: !(Maybe AdBlockingConfiguration)
+    , _camCreativeOptimizationConfiguration            :: !(Maybe CreativeOptimizationConfiguration)
     , _camCreativeGroupIds                             :: !(Maybe [Textual Int64])
     , _camNielsenOCREnabled                            :: !(Maybe Bool)
     , _camKind                                         :: !Text
@@ -8510,6 +9247,7 @@ data Campaign = Campaign'
     , _camName                                         :: !(Maybe Text)
     , _camAdvertiserGroupId                            :: !(Maybe (Textual Int64))
     , _camBillingInvoiceCode                           :: !(Maybe Text)
+    , _camDefaultLandingPageId                         :: !(Maybe (Textual Int64))
     , _camCreateInfo                                   :: !(Maybe LastModifiedInfo)
     , _camLastModifiedInfo                             :: !(Maybe LastModifiedInfo)
     , _camId                                           :: !(Maybe (Textual Int64))
@@ -8526,6 +9264,8 @@ data Campaign = Campaign'
 -- | Creates a value of 'Campaign' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'camAdBlockingConfiguration'
 --
 -- * 'camCreativeOptimizationConfiguration'
 --
@@ -8559,6 +9299,8 @@ data Campaign = Campaign'
 --
 -- * 'camBillingInvoiceCode'
 --
+-- * 'camDefaultLandingPageId'
+--
 -- * 'camCreateInfo'
 --
 -- * 'camLastModifiedInfo'
@@ -8584,7 +9326,8 @@ campaign
     :: Campaign
 campaign =
     Campaign'
-    { _camCreativeOptimizationConfiguration = Nothing
+    { _camAdBlockingConfiguration = Nothing
+    , _camCreativeOptimizationConfiguration = Nothing
     , _camCreativeGroupIds = Nothing
     , _camNielsenOCREnabled = Nothing
     , _camKind = "dfareporting#campaign"
@@ -8600,6 +9343,7 @@ campaign =
     , _camName = Nothing
     , _camAdvertiserGroupId = Nothing
     , _camBillingInvoiceCode = Nothing
+    , _camDefaultLandingPageId = Nothing
     , _camCreateInfo = Nothing
     , _camLastModifiedInfo = Nothing
     , _camId = Nothing
@@ -8612,6 +9356,12 @@ campaign =
     , _camTraffickerEmails = Nothing
     , _camDefaultClickThroughEventTagProperties = Nothing
     }
+
+-- | Ad blocking settings for this campaign.
+camAdBlockingConfiguration :: Lens' Campaign (Maybe AdBlockingConfiguration)
+camAdBlockingConfiguration
+  = lens _camAdBlockingConfiguration
+      (\ s a -> s{_camAdBlockingConfiguration = a})
 
 -- | Creative optimization configuration for the campaign.
 camCreativeOptimizationConfiguration :: Lens' Campaign (Maybe CreativeOptimizationConfiguration)
@@ -8720,12 +9470,19 @@ camAdvertiserGroupId
       (\ s a -> s{_camAdvertiserGroupId = a})
       . mapping _Coerce
 
--- | Billing invoice code included in the DCM client billing invoices
--- associated with the campaign.
+-- | Billing invoice code included in the Campaign Manager client billing
+-- invoices associated with the campaign.
 camBillingInvoiceCode :: Lens' Campaign (Maybe Text)
 camBillingInvoiceCode
   = lens _camBillingInvoiceCode
       (\ s a -> s{_camBillingInvoiceCode = a})
+
+-- | The default landing page ID for this campaign.
+camDefaultLandingPageId :: Lens' Campaign (Maybe Int64)
+camDefaultLandingPageId
+  = lens _camDefaultLandingPageId
+      (\ s a -> s{_camDefaultLandingPageId = a})
+      . mapping _Coerce
 
 -- | Information about the creation of this campaign. This is a read-only
 -- field.
@@ -8812,8 +9569,9 @@ instance FromJSON Campaign where
           = withObject "Campaign"
               (\ o ->
                  Campaign' <$>
-                   (o .:? "creativeOptimizationConfiguration") <*>
-                     (o .:? "creativeGroupIds" .!= mempty)
+                   (o .:? "adBlockingConfiguration") <*>
+                     (o .:? "creativeOptimizationConfiguration")
+                     <*> (o .:? "creativeGroupIds" .!= mempty)
                      <*> (o .:? "nielsenOcrEnabled")
                      <*> (o .:? "kind" .!= "dfareporting#campaign")
                      <*> (o .:? "clickThroughUrlSuffixProperties")
@@ -8828,6 +9586,7 @@ instance FromJSON Campaign where
                      <*> (o .:? "name")
                      <*> (o .:? "advertiserGroupId")
                      <*> (o .:? "billingInvoiceCode")
+                     <*> (o .:? "defaultLandingPageId")
                      <*> (o .:? "createInfo")
                      <*> (o .:? "lastModifiedInfo")
                      <*> (o .:? "id")
@@ -8846,7 +9605,9 @@ instance ToJSON Campaign where
         toJSON Campaign'{..}
           = object
               (catMaybes
-                 [("creativeOptimizationConfiguration" .=) <$>
+                 [("adBlockingConfiguration" .=) <$>
+                    _camAdBlockingConfiguration,
+                  ("creativeOptimizationConfiguration" .=) <$>
                     _camCreativeOptimizationConfiguration,
                   ("creativeGroupIds" .=) <$> _camCreativeGroupIds,
                   ("nielsenOcrEnabled" .=) <$> _camNielsenOCREnabled,
@@ -8866,6 +9627,8 @@ instance ToJSON Campaign where
                   ("name" .=) <$> _camName,
                   ("advertiserGroupId" .=) <$> _camAdvertiserGroupId,
                   ("billingInvoiceCode" .=) <$> _camBillingInvoiceCode,
+                  ("defaultLandingPageId" .=) <$>
+                    _camDefaultLandingPageId,
                   ("createInfo" .=) <$> _camCreateInfo,
                   ("lastModifiedInfo" .=) <$> _camLastModifiedInfo,
                   ("id" .=) <$> _camId,
@@ -9069,13 +9832,14 @@ instance ToJSON BrowsersListResponse where
 --
 -- /See:/ 'siteSettings' smart constructor.
 data SiteSettings = SiteSettings'
-    { _ssDisableNewCookie      :: !(Maybe Bool)
-    , _ssDisableBrandSafeAds   :: !(Maybe Bool)
-    , _ssLookbackConfiguration :: !(Maybe LookbackConfiguration)
-    , _ssTagSetting            :: !(Maybe TagSetting)
-    , _ssActiveViewOptOut      :: !(Maybe Bool)
-    , _ssVideoActiveViewOptOut :: !(Maybe Bool)
-    , _ssCreativeSettings      :: !(Maybe CreativeSettings)
+    { _ssDisableNewCookie              :: !(Maybe Bool)
+    , _ssVideoActiveViewOptOutTemplate :: !(Maybe Bool)
+    , _ssAdBlockingOptOut              :: !(Maybe Bool)
+    , _ssLookbackConfiguration         :: !(Maybe LookbackConfiguration)
+    , _ssTagSetting                    :: !(Maybe TagSetting)
+    , _ssActiveViewOptOut              :: !(Maybe Bool)
+    , _ssVpaidAdapterChoiceTemplate    :: !(Maybe SiteSettingsVpaidAdapterChoiceTemplate)
+    , _ssCreativeSettings              :: !(Maybe CreativeSettings)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SiteSettings' with the minimum fields required to make a request.
@@ -9084,7 +9848,9 @@ data SiteSettings = SiteSettings'
 --
 -- * 'ssDisableNewCookie'
 --
--- * 'ssDisableBrandSafeAds'
+-- * 'ssVideoActiveViewOptOutTemplate'
+--
+-- * 'ssAdBlockingOptOut'
 --
 -- * 'ssLookbackConfiguration'
 --
@@ -9092,7 +9858,7 @@ data SiteSettings = SiteSettings'
 --
 -- * 'ssActiveViewOptOut'
 --
--- * 'ssVideoActiveViewOptOut'
+-- * 'ssVpaidAdapterChoiceTemplate'
 --
 -- * 'ssCreativeSettings'
 siteSettings
@@ -9100,11 +9866,12 @@ siteSettings
 siteSettings =
     SiteSettings'
     { _ssDisableNewCookie = Nothing
-    , _ssDisableBrandSafeAds = Nothing
+    , _ssVideoActiveViewOptOutTemplate = Nothing
+    , _ssAdBlockingOptOut = Nothing
     , _ssLookbackConfiguration = Nothing
     , _ssTagSetting = Nothing
     , _ssActiveViewOptOut = Nothing
-    , _ssVideoActiveViewOptOut = Nothing
+    , _ssVpaidAdapterChoiceTemplate = Nothing
     , _ssCreativeSettings = Nothing
     }
 
@@ -9114,11 +9881,23 @@ ssDisableNewCookie
   = lens _ssDisableNewCookie
       (\ s a -> s{_ssDisableNewCookie = a})
 
--- | Whether brand safe ads are disabled for this site.
-ssDisableBrandSafeAds :: Lens' SiteSettings (Maybe Bool)
-ssDisableBrandSafeAds
-  = lens _ssDisableBrandSafeAds
-      (\ s a -> s{_ssDisableBrandSafeAds = a})
+-- | Whether Verification and ActiveView for in-stream video creatives are
+-- disabled by default for new placements created under this site. This
+-- value will be used to populate the placement.videoActiveViewOptOut
+-- field, when no value is specified for the new placement.
+ssVideoActiveViewOptOutTemplate :: Lens' SiteSettings (Maybe Bool)
+ssVideoActiveViewOptOutTemplate
+  = lens _ssVideoActiveViewOptOutTemplate
+      (\ s a -> s{_ssVideoActiveViewOptOutTemplate = a})
+
+-- | Whether this site opts out of ad blocking. When true, ad blocking is
+-- disabled for all placements under the site, regardless of the individual
+-- placement settings. When false, the campaign and placement settings take
+-- effect.
+ssAdBlockingOptOut :: Lens' SiteSettings (Maybe Bool)
+ssAdBlockingOptOut
+  = lens _ssAdBlockingOptOut
+      (\ s a -> s{_ssAdBlockingOptOut = a})
 
 -- | Lookback window settings for this site.
 ssLookbackConfiguration :: Lens' SiteSettings (Maybe LookbackConfiguration)
@@ -9137,18 +9916,20 @@ ssActiveViewOptOut
   = lens _ssActiveViewOptOut
       (\ s a -> s{_ssActiveViewOptOut = a})
 
--- | Whether Verification and ActiveView are disabled for in-stream video
--- creatives on this site. The same setting videoActiveViewOptOut exists on
--- the directory site level -- the opt out occurs if either of these
--- settings are true. These settings are distinct from
--- DirectorySites.settings.activeViewOptOut or
--- Sites.siteSettings.activeViewOptOut which only apply to display ads.
--- However, Accounts.activeViewOptOut opts out both video traffic, as well
--- as display ads, from Verification and ActiveView.
-ssVideoActiveViewOptOut :: Lens' SiteSettings (Maybe Bool)
-ssVideoActiveViewOptOut
-  = lens _ssVideoActiveViewOptOut
-      (\ s a -> s{_ssVideoActiveViewOptOut = a})
+-- | Default VPAID adapter setting for new placements created under this
+-- site. This value will be used to populate the
+-- placements.vpaidAdapterChoice field, when no value is specified for the
+-- new placement. Controls which VPAID format the measurement adapter will
+-- use for in-stream video creatives assigned to the placement. The
+-- publisher\'s specifications will typically determine this setting. For
+-- VPAID creatives, the adapter format will match the VPAID format (HTML5
+-- VPAID creatives use the HTML5 adapter). Note: Flash is no longer
+-- supported. This field now defaults to HTML5 when the following values
+-- are provided: FLASH, BOTH.
+ssVpaidAdapterChoiceTemplate :: Lens' SiteSettings (Maybe SiteSettingsVpaidAdapterChoiceTemplate)
+ssVpaidAdapterChoiceTemplate
+  = lens _ssVpaidAdapterChoiceTemplate
+      (\ s a -> s{_ssVpaidAdapterChoiceTemplate = a})
 
 -- | Site-wide creative settings.
 ssCreativeSettings :: Lens' SiteSettings (Maybe CreativeSettings)
@@ -9162,11 +9943,12 @@ instance FromJSON SiteSettings where
               (\ o ->
                  SiteSettings' <$>
                    (o .:? "disableNewCookie") <*>
-                     (o .:? "disableBrandSafeAds")
+                     (o .:? "videoActiveViewOptOutTemplate")
+                     <*> (o .:? "adBlockingOptOut")
                      <*> (o .:? "lookbackConfiguration")
                      <*> (o .:? "tagSetting")
                      <*> (o .:? "activeViewOptOut")
-                     <*> (o .:? "videoActiveViewOptOut")
+                     <*> (o .:? "vpaidAdapterChoiceTemplate")
                      <*> (o .:? "creativeSettings"))
 
 instance ToJSON SiteSettings where
@@ -9174,14 +9956,15 @@ instance ToJSON SiteSettings where
           = object
               (catMaybes
                  [("disableNewCookie" .=) <$> _ssDisableNewCookie,
-                  ("disableBrandSafeAds" .=) <$>
-                    _ssDisableBrandSafeAds,
+                  ("videoActiveViewOptOutTemplate" .=) <$>
+                    _ssVideoActiveViewOptOutTemplate,
+                  ("adBlockingOptOut" .=) <$> _ssAdBlockingOptOut,
                   ("lookbackConfiguration" .=) <$>
                     _ssLookbackConfiguration,
                   ("tagSetting" .=) <$> _ssTagSetting,
                   ("activeViewOptOut" .=) <$> _ssActiveViewOptOut,
-                  ("videoActiveViewOptOut" .=) <$>
-                    _ssVideoActiveViewOptOut,
+                  ("vpaidAdapterChoiceTemplate" .=) <$>
+                    _ssVpaidAdapterChoiceTemplate,
                   ("creativeSettings" .=) <$> _ssCreativeSettings])
 
 -- | Content Category List Response
@@ -9312,7 +10095,7 @@ instance ToJSON CreativesListResponse where
                   Just ("kind" .= _clrlKind),
                   ("creatives" .=) <$> _clrlCreatives])
 
--- | Contains properties of a DCM account.
+-- | Contains properties of a Campaign Manager account.
 --
 -- /See:/ 'account' smart constructor.
 data Account = Account'
@@ -9411,7 +10194,8 @@ aaAccountPermissionIds
       . _Default
       . _Coerce
 
--- | Maximum image size allowed for this account.
+-- | Maximum image size allowed for this account, in kilobytes. Value must be
+-- greater than or equal to 1.
 aaMaximumImageSize :: Lens' Account (Maybe Int64)
 aaMaximumImageSize
   = lens _aaMaximumImageSize
@@ -9430,7 +10214,8 @@ aaMaximumImageSize
 -- \"33\" for CHF - \"34\" for VEF - \"35\" for COP - \"36\" for GTQ -
 -- \"37\" for PLN - \"39\" for INR - \"40\" for THB - \"41\" for IDR -
 -- \"42\" for CZK - \"43\" for RON - \"44\" for HUF - \"45\" for RUB -
--- \"46\" for AED - \"47\" for BGN - \"48\" for HRK
+-- \"46\" for AED - \"47\" for BGN - \"48\" for HRK - \"49\" for MXN -
+-- \"50\" for NGN
 aaCurrencyId :: Lens' Account (Maybe Int64)
 aaCurrencyId
   = lens _aaCurrencyId (\ s a -> s{_aaCurrencyId = a})
@@ -9475,8 +10260,8 @@ aaAvailablePermissionIds
       . _Default
       . _Coerce
 
--- | File size limit in kilobytes of Rich Media teaser creatives. Must be
--- between 1 and 10240.
+-- | File size limit in kilobytes of Rich Media teaser creatives. Acceptable
+-- values are 1 to 10240, inclusive.
 aaTeaserSizeLimit :: Lens' Account (Maybe Int64)
 aaTeaserSizeLimit
   = lens _aaTeaserSizeLimit
@@ -9946,8 +10731,9 @@ dsPriority
 
 -- | Impression ratio for this ad. This ratio determines how often each ad is
 -- served relative to the others. For example, if ad A has an impression
--- ratio of 1 and ad B has an impression ratio of 3, then DCM will serve ad
--- B three times as often as ad A. Must be between 1 and 10.
+-- ratio of 1 and ad B has an impression ratio of 3, then Campaign Manager
+-- will serve ad B three times as often as ad A. Acceptable values are 1 to
+-- 10, inclusive.
 dsImpressionRatio :: Lens' DeliverySchedule (Maybe Int64)
 dsImpressionRatio
   = lens _dsImpressionRatio
@@ -10065,7 +10851,7 @@ rlListPopulationRule
       (\ s a -> s{_rlListPopulationRule = a})
 
 -- | Number of days that a user should remain in the remarketing list without
--- an impression.
+-- an impression. Acceptable values are 1 to 540, inclusive.
 rlLifeSpan :: Lens' RemarketingList (Maybe Int64)
 rlLifeSpan
   = lens _rlLifeSpan (\ s a -> s{_rlLifeSpan = a}) .
@@ -10906,11 +11692,13 @@ instance ToJSON MobileCarrier where
 --
 -- /See:/ 'landingPage' smart constructor.
 data LandingPage = LandingPage'
-    { _lpKind    :: !Text
-    , _lpDefault :: !(Maybe Bool)
-    , _lpURL     :: !(Maybe Text)
-    , _lpName    :: !(Maybe Text)
-    , _lpId      :: !(Maybe (Textual Int64))
+    { _lpKind         :: !Text
+    , _lpAdvertiserId :: !(Maybe (Textual Int64))
+    , _lpURL          :: !(Maybe Text)
+    , _lpName         :: !(Maybe Text)
+    , _lpDeepLinks    :: !(Maybe [DeepLink])
+    , _lpId           :: !(Maybe (Textual Int64))
+    , _lpArchived     :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LandingPage' with the minimum fields required to make a request.
@@ -10919,22 +11707,28 @@ data LandingPage = LandingPage'
 --
 -- * 'lpKind'
 --
--- * 'lpDefault'
+-- * 'lpAdvertiserId'
 --
 -- * 'lpURL'
 --
 -- * 'lpName'
 --
+-- * 'lpDeepLinks'
+--
 -- * 'lpId'
+--
+-- * 'lpArchived'
 landingPage
     :: LandingPage
 landingPage =
     LandingPage'
     { _lpKind = "dfareporting#landingPage"
-    , _lpDefault = Nothing
+    , _lpAdvertiserId = Nothing
     , _lpURL = Nothing
     , _lpName = Nothing
+    , _lpDeepLinks = Nothing
     , _lpId = Nothing
+    , _lpArchived = Nothing
     }
 
 -- | Identifies what kind of resource this is. Value: the fixed string
@@ -10942,22 +11736,28 @@ landingPage =
 lpKind :: Lens' LandingPage Text
 lpKind = lens _lpKind (\ s a -> s{_lpKind = a})
 
--- | Whether or not this landing page will be assigned to any ads or
--- creatives that do not have a landing page assigned explicitly. Only one
--- default landing page is allowed per campaign.
-lpDefault :: Lens' LandingPage (Maybe Bool)
-lpDefault
-  = lens _lpDefault (\ s a -> s{_lpDefault = a})
+-- | Advertiser ID of this landing page. This is a required field.
+lpAdvertiserId :: Lens' LandingPage (Maybe Int64)
+lpAdvertiserId
+  = lens _lpAdvertiserId
+      (\ s a -> s{_lpAdvertiserId = a})
+      . mapping _Coerce
 
 -- | URL of this landing page. This is a required field.
 lpURL :: Lens' LandingPage (Maybe Text)
 lpURL = lens _lpURL (\ s a -> s{_lpURL = a})
 
 -- | Name of this landing page. This is a required field. It must be less
--- than 256 characters long, and must be unique among landing pages of the
--- same campaign.
+-- than 256 characters long.
 lpName :: Lens' LandingPage (Maybe Text)
 lpName = lens _lpName (\ s a -> s{_lpName = a})
+
+-- | Links that will direct the user to a mobile app, if installed.
+lpDeepLinks :: Lens' LandingPage [DeepLink]
+lpDeepLinks
+  = lens _lpDeepLinks (\ s a -> s{_lpDeepLinks = a}) .
+      _Default
+      . _Coerce
 
 -- | ID of this landing page. This is a read-only, auto-generated field.
 lpId :: Lens' LandingPage (Maybe Int64)
@@ -10965,24 +11765,34 @@ lpId
   = lens _lpId (\ s a -> s{_lpId = a}) .
       mapping _Coerce
 
+-- | Whether this landing page has been archived.
+lpArchived :: Lens' LandingPage (Maybe Bool)
+lpArchived
+  = lens _lpArchived (\ s a -> s{_lpArchived = a})
+
 instance FromJSON LandingPage where
         parseJSON
           = withObject "LandingPage"
               (\ o ->
                  LandingPage' <$>
                    (o .:? "kind" .!= "dfareporting#landingPage") <*>
-                     (o .:? "default")
+                     (o .:? "advertiserId")
                      <*> (o .:? "url")
                      <*> (o .:? "name")
-                     <*> (o .:? "id"))
+                     <*> (o .:? "deepLinks" .!= mempty)
+                     <*> (o .:? "id")
+                     <*> (o .:? "archived"))
 
 instance ToJSON LandingPage where
         toJSON LandingPage'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _lpKind),
-                  ("default" .=) <$> _lpDefault, ("url" .=) <$> _lpURL,
-                  ("name" .=) <$> _lpName, ("id" .=) <$> _lpId])
+                  ("advertiserId" .=) <$> _lpAdvertiserId,
+                  ("url" .=) <$> _lpURL, ("name" .=) <$> _lpName,
+                  ("deepLinks" .=) <$> _lpDeepLinks,
+                  ("id" .=) <$> _lpId,
+                  ("archived" .=) <$> _lpArchived])
 
 -- | Connection Type List Response
 --
@@ -11238,10 +12048,10 @@ cgAdvertiserIdDimensionValue
   = lens _cgAdvertiserIdDimensionValue
       (\ s a -> s{_cgAdvertiserIdDimensionValue = a})
 
--- | Subgroup of the creative group. Assign your creative groups to one of
--- the following subgroups in order to filter or manage them more easily.
--- This field is required on insertion and is read-only after insertion.
--- Acceptable values are: - 1 - 2
+-- | Subgroup of the creative group. Assign your creative groups to a
+-- subgroup in order to filter or manage them more easily. This field is
+-- required on insertion and is read-only after insertion. Acceptable
+-- values are 1 to 2, inclusive.
 cgGroupNumber :: Lens' CreativeGroup (Maybe Int32)
 cgGroupNumber
   = lens _cgGroupNumber
@@ -11442,7 +12252,8 @@ lookbackConfiguration =
 -- | Lookback window, in days, from the last time a given user clicked on one
 -- of your ads. If you enter 0, clicks will not be considered as triggering
 -- events for floodlight tracking. If you leave this field blank, the
--- default value for your account will be used.
+-- default value for your account will be used. Acceptable values are 0 to
+-- 90, inclusive.
 lcClickDuration :: Lens' LookbackConfiguration (Maybe Int32)
 lcClickDuration
   = lens _lcClickDuration
@@ -11452,7 +12263,8 @@ lcClickDuration
 -- | Lookback window, in days, from the last time a given user viewed one of
 -- your ads. If you enter 0, impressions will not be considered as
 -- triggering events for floodlight tracking. If you leave this field
--- blank, the default value for your account will be used.
+-- blank, the default value for your account will be used. Acceptable
+-- values are 0 to 90, inclusive.
 lcPostImpressionActivitiesDuration :: Lens' LookbackConfiguration (Maybe Int32)
 lcPostImpressionActivitiesDuration
   = lens _lcPostImpressionActivitiesDuration
@@ -12109,9 +12921,9 @@ asId
   = lens _asId (\ s a -> s{_asId = a}) .
       mapping _Coerce
 
--- | Weight allocated to this segment. Must be between 1 and 1000. The weight
--- assigned will be understood in proportion to the weights assigned to
--- other segments in the same segment group.
+-- | Weight allocated to this segment. The weight assigned will be understood
+-- in proportion to the weights assigned to other segments in the same
+-- segment group. Acceptable values are 1 to 1000, inclusive.
 asAllocation :: Lens' AudienceSegment (Maybe Int32)
 asAllocation
   = lens _asAllocation (\ s a -> s{_asAllocation = a})
@@ -12132,7 +12944,73 @@ instance ToJSON AudienceSegment where
                  [("name" .=) <$> _asName, ("id" .=) <$> _asId,
                   ("allocation" .=) <$> _asAllocation])
 
--- | DFP Settings
+-- | Update Conversions Request.
+--
+-- /See:/ 'conversionsBatchUpdateRequest' smart constructor.
+data ConversionsBatchUpdateRequest = ConversionsBatchUpdateRequest'
+    { _cburbKind           :: !Text
+    , _cburbConversions    :: !(Maybe [Conversion])
+    , _cburbEncryptionInfo :: !(Maybe EncryptionInfo)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ConversionsBatchUpdateRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cburbKind'
+--
+-- * 'cburbConversions'
+--
+-- * 'cburbEncryptionInfo'
+conversionsBatchUpdateRequest
+    :: ConversionsBatchUpdateRequest
+conversionsBatchUpdateRequest =
+    ConversionsBatchUpdateRequest'
+    { _cburbKind = "dfareporting#conversionsBatchUpdateRequest"
+    , _cburbConversions = Nothing
+    , _cburbEncryptionInfo = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"dfareporting#conversionsBatchUpdateRequest\".
+cburbKind :: Lens' ConversionsBatchUpdateRequest Text
+cburbKind
+  = lens _cburbKind (\ s a -> s{_cburbKind = a})
+
+-- | The set of conversions to update.
+cburbConversions :: Lens' ConversionsBatchUpdateRequest [Conversion]
+cburbConversions
+  = lens _cburbConversions
+      (\ s a -> s{_cburbConversions = a})
+      . _Default
+      . _Coerce
+
+-- | Describes how encryptedUserId is encrypted. This is a required field if
+-- encryptedUserId is used.
+cburbEncryptionInfo :: Lens' ConversionsBatchUpdateRequest (Maybe EncryptionInfo)
+cburbEncryptionInfo
+  = lens _cburbEncryptionInfo
+      (\ s a -> s{_cburbEncryptionInfo = a})
+
+instance FromJSON ConversionsBatchUpdateRequest where
+        parseJSON
+          = withObject "ConversionsBatchUpdateRequest"
+              (\ o ->
+                 ConversionsBatchUpdateRequest' <$>
+                   (o .:? "kind" .!=
+                      "dfareporting#conversionsBatchUpdateRequest")
+                     <*> (o .:? "conversions" .!= mempty)
+                     <*> (o .:? "encryptionInfo"))
+
+instance ToJSON ConversionsBatchUpdateRequest where
+        toJSON ConversionsBatchUpdateRequest'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _cburbKind),
+                  ("conversions" .=) <$> _cburbConversions,
+                  ("encryptionInfo" .=) <$> _cburbEncryptionInfo])
+
+-- | Google Ad Manager Settings
 --
 -- /See:/ 'dfpSettings' smart constructor.
 data DfpSettings = DfpSettings'
@@ -12173,14 +13051,13 @@ dsPubPaidPlacementAccepted
   = lens _dsPubPaidPlacementAccepted
       (\ s a -> s{_dsPubPaidPlacementAccepted = a})
 
--- | DFP network name for this directory site.
+-- | Ad Manager network name for this directory site.
 dsDfpNetworkName :: Lens' DfpSettings (Maybe Text)
 dsDfpNetworkName
   = lens _dsDfpNetworkName
       (\ s a -> s{_dsDfpNetworkName = a})
 
--- | Whether this directory site is available only via DoubleClick Publisher
--- Portal.
+-- | Whether this directory site is available only via Publisher Portal.
 dsPublisherPortalOnly :: Lens' DfpSettings (Maybe Bool)
 dsPublisherPortalOnly
   = lens _dsPublisherPortalOnly
@@ -12192,7 +13069,7 @@ dsProgrammaticPlacementAccepted
   = lens _dsProgrammaticPlacementAccepted
       (\ s a -> s{_dsProgrammaticPlacementAccepted = a})
 
--- | DFP network code for this directory site.
+-- | Ad Manager network code for this directory site.
 dsDfpNetworkCode :: Lens' DfpSettings (Maybe Text)
 dsDfpNetworkCode
   = lens _dsDfpNetworkCode
@@ -12204,10 +13081,10 @@ instance FromJSON DfpSettings where
               (\ o ->
                  DfpSettings' <$>
                    (o .:? "pubPaidPlacementAccepted") <*>
-                     (o .:? "dfp_network_name")
+                     (o .:? "dfpNetworkName")
                      <*> (o .:? "publisherPortalOnly")
                      <*> (o .:? "programmaticPlacementAccepted")
-                     <*> (o .:? "dfp_network_code"))
+                     <*> (o .:? "dfpNetworkCode"))
 
 instance ToJSON DfpSettings where
         toJSON DfpSettings'{..}
@@ -12215,12 +13092,12 @@ instance ToJSON DfpSettings where
               (catMaybes
                  [("pubPaidPlacementAccepted" .=) <$>
                     _dsPubPaidPlacementAccepted,
-                  ("dfp_network_name" .=) <$> _dsDfpNetworkName,
+                  ("dfpNetworkName" .=) <$> _dsDfpNetworkName,
                   ("publisherPortalOnly" .=) <$>
                     _dsPublisherPortalOnly,
                   ("programmaticPlacementAccepted" .=) <$>
                     _dsProgrammaticPlacementAccepted,
-                  ("dfp_network_code" .=) <$> _dsDfpNetworkCode])
+                  ("dfpNetworkCode" .=) <$> _dsDfpNetworkCode])
 
 -- | Represents fields that are compatible to be selected for a report of
 -- type \"PATH_TO_CONVERSION\".
@@ -13052,8 +13929,8 @@ instance ToJSON OperatingSystemVersion where
                   ("name" .=) <$> _osvName, ("id" .=) <$> _osvId])
 
 -- | AccountPermissions contains information about a particular account
--- permission. Some features of DCM require an account permission to be
--- present in the account.
+-- permission. Some features of Campaign Manager require an account
+-- permission to be present in the account.
 --
 -- /See:/ 'accountPermission' smart constructor.
 data AccountPermission = AccountPermission'
@@ -13978,7 +14855,6 @@ data FloodlightActivity = FloodlightActivity'
     , _faFloodlightActivityGroupTagString        :: !(Maybe Text)
     , _faFloodlightConfigurationId               :: !(Maybe (Textual Int64))
     , _faKind                                    :: !Text
-    , _faImageTagEnabled                         :: !(Maybe Bool)
     , _faAdvertiserId                            :: !(Maybe (Textual Int64))
     , _faAdvertiserIdDimensionValue              :: !(Maybe DimensionValue)
     , _faSSLCompliant                            :: !(Maybe Bool)
@@ -13992,6 +14868,7 @@ data FloodlightActivity = FloodlightActivity'
     , _faHidden                                  :: !(Maybe Bool)
     , _faFloodlightActivityGroupType             :: !(Maybe FloodlightActivityFloodlightActivityGroupType)
     , _faDefaultTags                             :: !(Maybe [FloodlightActivityDynamicTag])
+    , _faFloodlightTagType                       :: !(Maybe FloodlightActivityFloodlightTagType)
     , _faFloodlightActivityGroupName             :: !(Maybe Text)
     , _faId                                      :: !(Maybe (Textual Int64))
     , _faSSLRequired                             :: !(Maybe Bool)
@@ -14019,8 +14896,6 @@ data FloodlightActivity = FloodlightActivity'
 --
 -- * 'faKind'
 --
--- * 'faImageTagEnabled'
---
 -- * 'faAdvertiserId'
 --
 -- * 'faAdvertiserIdDimensionValue'
@@ -14047,6 +14922,8 @@ data FloodlightActivity = FloodlightActivity'
 --
 -- * 'faDefaultTags'
 --
+-- * 'faFloodlightTagType'
+--
 -- * 'faFloodlightActivityGroupName'
 --
 -- * 'faId'
@@ -14071,7 +14948,6 @@ floodlightActivity =
     , _faFloodlightActivityGroupTagString = Nothing
     , _faFloodlightConfigurationId = Nothing
     , _faKind = "dfareporting#floodlightActivity"
-    , _faImageTagEnabled = Nothing
     , _faAdvertiserId = Nothing
     , _faAdvertiserIdDimensionValue = Nothing
     , _faSSLCompliant = Nothing
@@ -14085,6 +14961,7 @@ floodlightActivity =
     , _faHidden = Nothing
     , _faFloodlightActivityGroupType = Nothing
     , _faDefaultTags = Nothing
+    , _faFloodlightTagType = Nothing
     , _faFloodlightActivityGroupName = Nothing
     , _faId = Nothing
     , _faSSLRequired = Nothing
@@ -14101,7 +14978,7 @@ faCountingMethod
   = lens _faCountingMethod
       (\ s a -> s{_faCountingMethod = a})
 
--- | Value of the cat= paramter in the floodlight tag, which the ad servers
+-- | Value of the cat= parameter in the floodlight tag, which the ad servers
 -- use to identify the activity. This is optional: if empty, a new tag
 -- string will be generated for you. This string must be 1 to 8 characters
 -- long, with valid characters being [a-z][A-Z][0-9][-][ _ ]. This tag
@@ -14144,12 +15021,6 @@ faFloodlightConfigurationId
 faKind :: Lens' FloodlightActivity Text
 faKind = lens _faKind (\ s a -> s{_faKind = a})
 
--- | Whether the image tag is enabled for this activity.
-faImageTagEnabled :: Lens' FloodlightActivity (Maybe Bool)
-faImageTagEnabled
-  = lens _faImageTagEnabled
-      (\ s a -> s{_faImageTagEnabled = a})
-
 -- | Advertiser ID of this floodlight activity. If this field is left blank,
 -- the value will be copied over either from the activity group\'s
 -- advertiser or the existing activity\'s advertiser.
@@ -14186,7 +15057,9 @@ faTagFormat :: Lens' FloodlightActivity (Maybe FloodlightActivityTagFormat)
 faTagFormat
   = lens _faTagFormat (\ s a -> s{_faTagFormat = a})
 
--- | Code type used for cache busting in the generated tag.
+-- | Code type used for cache busting in the generated tag. Applicable only
+-- when floodlightActivityGroupType is COUNTER and countingMethod is
+-- STANDARD_COUNTING or UNIQUE_COUNTING.
 faCacheBustingType :: Lens' FloodlightActivity (Maybe FloodlightActivityCacheBustingType)
 faCacheBustingType
   = lens _faCacheBustingType
@@ -14239,6 +15112,13 @@ faDefaultTags
       . _Default
       . _Coerce
 
+-- | The type of Floodlight tag this activity will generate. This is a
+-- required field.
+faFloodlightTagType :: Lens' FloodlightActivity (Maybe FloodlightActivityFloodlightTagType)
+faFloodlightTagType
+  = lens _faFloodlightTagType
+      (\ s a -> s{_faFloodlightTagType = a})
+
 -- | Name of the associated floodlight activity group. This is a read-only
 -- field.
 faFloodlightActivityGroupName :: Lens' FloodlightActivity (Maybe Text)
@@ -14260,11 +15140,8 @@ faSSLRequired
       (\ s a -> s{_faSSLRequired = a})
 
 -- | List of the user-defined variables used by this conversion tag. These
--- map to the \"u[1-20]=\" in the tags. Each of these can have a user
--- defined type. Acceptable values are: - \"U1\" - \"U2\" - \"U3\" - \"U4\"
--- - \"U5\" - \"U6\" - \"U7\" - \"U8\" - \"U9\" - \"U10\" - \"U11\" -
--- \"U12\" - \"U13\" - \"U14\" - \"U15\" - \"U16\" - \"U17\" - \"U18\" -
--- \"U19\" - \"U20\"
+-- map to the \"u[1-100]=\" in the tags. Each of these can have a user
+-- defined type. Acceptable values are U1 to U100, inclusive.
 faUserDefinedVariableTypes :: Lens' FloodlightActivity [FloodlightActivityUserDefinedVariableTypesItem]
 faUserDefinedVariableTypes
   = lens _faUserDefinedVariableTypes
@@ -14304,7 +15181,6 @@ instance FromJSON FloodlightActivity where
                      <*> (o .:? "floodlightConfigurationId")
                      <*>
                      (o .:? "kind" .!= "dfareporting#floodlightActivity")
-                     <*> (o .:? "imageTagEnabled")
                      <*> (o .:? "advertiserId")
                      <*> (o .:? "advertiserIdDimensionValue")
                      <*> (o .:? "sslCompliant")
@@ -14318,6 +15194,7 @@ instance FromJSON FloodlightActivity where
                      <*> (o .:? "hidden")
                      <*> (o .:? "floodlightActivityGroupType")
                      <*> (o .:? "defaultTags" .!= mempty)
+                     <*> (o .:? "floodlightTagType")
                      <*> (o .:? "floodlightActivityGroupName")
                      <*> (o .:? "id")
                      <*> (o .:? "sslRequired")
@@ -14340,7 +15217,6 @@ instance ToJSON FloodlightActivity where
                   ("floodlightConfigurationId" .=) <$>
                     _faFloodlightConfigurationId,
                   Just ("kind" .= _faKind),
-                  ("imageTagEnabled" .=) <$> _faImageTagEnabled,
                   ("advertiserId" .=) <$> _faAdvertiserId,
                   ("advertiserIdDimensionValue" .=) <$>
                     _faAdvertiserIdDimensionValue,
@@ -14357,6 +15233,7 @@ instance ToJSON FloodlightActivity where
                   ("floodlightActivityGroupType" .=) <$>
                     _faFloodlightActivityGroupType,
                   ("defaultTags" .=) <$> _faDefaultTags,
+                  ("floodlightTagType" .=) <$> _faFloodlightTagType,
                   ("floodlightActivityGroupName" .=) <$>
                     _faFloodlightActivityGroupName,
                   ("id" .=) <$> _faId,
@@ -14624,7 +15501,7 @@ instance ToJSON AccountPermissionGroup where
                  [Just ("kind" .= _apgpKind),
                   ("name" .=) <$> _apgpName, ("id" .=) <$> _apgpId])
 
--- | Contains properties of a DCM advertiser.
+-- | Contains properties of a Campaign Manager advertiser.
 --
 -- /See:/ 'advertiser' smart constructor.
 data Advertiser = Advertiser'
@@ -14993,6 +15870,58 @@ instance ToJSON UserRole where
                   ("permissions" .=) <$> _urPermissions,
                   ("subaccountId" .=) <$> _urSubAccountId])
 
+-- | Video Format List Response
+--
+-- /See:/ 'videoFormatsListResponse' smart constructor.
+data VideoFormatsListResponse = VideoFormatsListResponse'
+    { _vflrKind         :: !Text
+    , _vflrVideoFormats :: !(Maybe [VideoFormat])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VideoFormatsListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vflrKind'
+--
+-- * 'vflrVideoFormats'
+videoFormatsListResponse
+    :: VideoFormatsListResponse
+videoFormatsListResponse =
+    VideoFormatsListResponse'
+    { _vflrKind = "dfareporting#videoFormatsListResponse"
+    , _vflrVideoFormats = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"dfareporting#videoFormatsListResponse\".
+vflrKind :: Lens' VideoFormatsListResponse Text
+vflrKind = lens _vflrKind (\ s a -> s{_vflrKind = a})
+
+-- | Video format collection.
+vflrVideoFormats :: Lens' VideoFormatsListResponse [VideoFormat]
+vflrVideoFormats
+  = lens _vflrVideoFormats
+      (\ s a -> s{_vflrVideoFormats = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON VideoFormatsListResponse where
+        parseJSON
+          = withObject "VideoFormatsListResponse"
+              (\ o ->
+                 VideoFormatsListResponse' <$>
+                   (o .:? "kind" .!=
+                      "dfareporting#videoFormatsListResponse")
+                     <*> (o .:? "videoFormats" .!= mempty))
+
+instance ToJSON VideoFormatsListResponse where
+        toJSON VideoFormatsListResponse'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _vflrKind),
+                  ("videoFormats" .=) <$> _vflrVideoFormats])
+
 -- | Directory Site List Response
 --
 -- /See:/ 'directorySitesListResponse' smart constructor.
@@ -15162,7 +16091,8 @@ psppEndDate
   = lens _psppEndDate (\ s a -> s{_psppEndDate = a}) .
       mapping _Date
 
--- | Rate or cost of this pricing period.
+-- | Rate or cost of this pricing period in nanos (i.e., multipled by
+-- 1000000000). Acceptable values are 0 to 1000000000000000000, inclusive.
 psppRateOrCostNanos :: Lens' PricingSchedulePricingPeriod (Maybe Int64)
 psppRateOrCostNanos
   = lens _psppRateOrCostNanos
@@ -15178,7 +16108,8 @@ psppStartDate
       (\ s a -> s{_psppStartDate = a})
       . mapping _Date
 
--- | Units of this pricing period.
+-- | Units of this pricing period. Acceptable values are 0 to 10000000000,
+-- inclusive.
 psppUnits :: Lens' PricingSchedulePricingPeriod (Maybe Int64)
 psppUnits
   = lens _psppUnits (\ s a -> s{_psppUnits = a}) .
@@ -15521,18 +16452,18 @@ caStartTime
       mapping _DateTime
 
 -- | Weight of the creative assignment, applicable when the rotation type is
--- CREATIVE_ROTATION_TYPE_RANDOM.
+-- CREATIVE_ROTATION_TYPE_RANDOM. Value must be greater than or equal to 1.
 caWeight :: Lens' CreativeAssignment (Maybe Int32)
 caWeight
   = lens _caWeight (\ s a -> s{_caWeight = a}) .
       mapping _Coerce
 
 -- | Rich media exit overrides for this creative assignment. Applicable when
--- the creative type is any of the following: - RICH_MEDIA_INPAGE -
--- RICH_MEDIA_INPAGE_FLOATING - RICH_MEDIA_IM_EXPAND - RICH_MEDIA_EXPANDING
--- - RICH_MEDIA_INTERSTITIAL_FLOAT - RICH_MEDIA_MOBILE_IN_APP -
--- RICH_MEDIA_MULTI_FLOATING - RICH_MEDIA_PEEL_DOWN - ADVANCED_BANNER -
--- VPAID_LINEAR - VPAID_NON_LINEAR
+-- the creative type is any of the following: - DISPLAY - RICH_MEDIA_INPAGE
+-- - RICH_MEDIA_INPAGE_FLOATING - RICH_MEDIA_IM_EXPAND -
+-- RICH_MEDIA_EXPANDING - RICH_MEDIA_INTERSTITIAL_FLOAT -
+-- RICH_MEDIA_MOBILE_IN_APP - RICH_MEDIA_MULTI_FLOATING -
+-- RICH_MEDIA_PEEL_DOWN - VPAID_LINEAR - VPAID_NON_LINEAR
 caRichMediaExitOverrides :: Lens' CreativeAssignment [RichMediaExitOverride]
 caRichMediaExitOverrides
   = lens _caRichMediaExitOverrides
@@ -15575,7 +16506,8 @@ caActive :: Lens' CreativeAssignment (Maybe Bool)
 caActive = lens _caActive (\ s a -> s{_caActive = a})
 
 -- | Sequence number of the creative assignment, applicable when the rotation
--- type is CREATIVE_ROTATION_TYPE_SEQUENTIAL.
+-- type is CREATIVE_ROTATION_TYPE_SEQUENTIAL. Acceptable values are 1 to
+-- 65535, inclusive.
 caSequence :: Lens' CreativeAssignment (Maybe Int32)
 caSequence
   = lens _caSequence (\ s a -> s{_caSequence = a}) .
@@ -15782,7 +16714,6 @@ data FloodlightConfiguration = FloodlightConfiguration'
     , _fcSubAccountId                             :: !(Maybe (Textual Int64))
     , _fcFirstDayOfWeek                           :: !(Maybe FloodlightConfigurationFirstDayOfWeek)
     , _fcOmnitureSettings                         :: !(Maybe OmnitureSettings)
-    , _fcStandardVariableTypes                    :: !(Maybe [FloodlightConfigurationStandardVariableTypesItem])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightConfiguration' with the minimum fields required to make a request.
@@ -15822,8 +16753,6 @@ data FloodlightConfiguration = FloodlightConfiguration'
 -- * 'fcFirstDayOfWeek'
 --
 -- * 'fcOmnitureSettings'
---
--- * 'fcStandardVariableTypes'
 floodlightConfiguration
     :: FloodlightConfiguration
 floodlightConfiguration =
@@ -15845,7 +16774,6 @@ floodlightConfiguration =
     , _fcSubAccountId = Nothing
     , _fcFirstDayOfWeek = Nothing
     , _fcOmnitureSettings = Nothing
-    , _fcStandardVariableTypes = Nothing
     }
 
 -- | Configuration settings for dynamic and image floodlight tags.
@@ -15960,20 +16888,11 @@ fcFirstDayOfWeek
   = lens _fcFirstDayOfWeek
       (\ s a -> s{_fcFirstDayOfWeek = a})
 
--- | Settings for DCM Omniture integration.
+-- | Settings for Campaign Manager Omniture integration.
 fcOmnitureSettings :: Lens' FloodlightConfiguration (Maybe OmnitureSettings)
 fcOmnitureSettings
   = lens _fcOmnitureSettings
       (\ s a -> s{_fcOmnitureSettings = a})
-
--- | List of standard variables enabled for this configuration. Acceptable
--- values are: - \"ORD\" - \"NUM\"
-fcStandardVariableTypes :: Lens' FloodlightConfiguration [FloodlightConfigurationStandardVariableTypesItem]
-fcStandardVariableTypes
-  = lens _fcStandardVariableTypes
-      (\ s a -> s{_fcStandardVariableTypes = a})
-      . _Default
-      . _Coerce
 
 instance FromJSON FloodlightConfiguration where
         parseJSON
@@ -16002,8 +16921,7 @@ instance FromJSON FloodlightConfiguration where
                         mempty)
                      <*> (o .:? "subaccountId")
                      <*> (o .:? "firstDayOfWeek")
-                     <*> (o .:? "omnitureSettings")
-                     <*> (o .:? "standardVariableTypes" .!= mempty))
+                     <*> (o .:? "omnitureSettings"))
 
 instance ToJSON FloodlightConfiguration where
         toJSON FloodlightConfiguration'{..}
@@ -16033,9 +16951,82 @@ instance ToJSON FloodlightConfiguration where
                     _fcUserDefinedVariableConfigurations,
                   ("subaccountId" .=) <$> _fcSubAccountId,
                   ("firstDayOfWeek" .=) <$> _fcFirstDayOfWeek,
-                  ("omnitureSettings" .=) <$> _fcOmnitureSettings,
-                  ("standardVariableTypes" .=) <$>
-                    _fcStandardVariableTypes])
+                  ("omnitureSettings" .=) <$> _fcOmnitureSettings])
+
+-- | Companion Settings
+--
+-- /See:/ 'companionSetting' smart constructor.
+data CompanionSetting = CompanionSetting'
+    { _comKind               :: !Text
+    , _comImageOnly          :: !(Maybe Bool)
+    , _comCompanionsDisabled :: !(Maybe Bool)
+    , _comEnabledSizes       :: !(Maybe [Size])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CompanionSetting' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'comKind'
+--
+-- * 'comImageOnly'
+--
+-- * 'comCompanionsDisabled'
+--
+-- * 'comEnabledSizes'
+companionSetting
+    :: CompanionSetting
+companionSetting =
+    CompanionSetting'
+    { _comKind = "dfareporting#companionSetting"
+    , _comImageOnly = Nothing
+    , _comCompanionsDisabled = Nothing
+    , _comEnabledSizes = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"dfareporting#companionSetting\".
+comKind :: Lens' CompanionSetting Text
+comKind = lens _comKind (\ s a -> s{_comKind = a})
+
+-- | Whether to serve only static images as companions.
+comImageOnly :: Lens' CompanionSetting (Maybe Bool)
+comImageOnly
+  = lens _comImageOnly (\ s a -> s{_comImageOnly = a})
+
+-- | Whether companions are disabled for this placement.
+comCompanionsDisabled :: Lens' CompanionSetting (Maybe Bool)
+comCompanionsDisabled
+  = lens _comCompanionsDisabled
+      (\ s a -> s{_comCompanionsDisabled = a})
+
+-- | Whitelist of companion sizes to be served to this placement. Set this
+-- list to null or empty to serve all companion sizes.
+comEnabledSizes :: Lens' CompanionSetting [Size]
+comEnabledSizes
+  = lens _comEnabledSizes
+      (\ s a -> s{_comEnabledSizes = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON CompanionSetting where
+        parseJSON
+          = withObject "CompanionSetting"
+              (\ o ->
+                 CompanionSetting' <$>
+                   (o .:? "kind" .!= "dfareporting#companionSetting")
+                     <*> (o .:? "imageOnly")
+                     <*> (o .:? "companionsDisabled")
+                     <*> (o .:? "enabledSizes" .!= mempty))
+
+instance ToJSON CompanionSetting where
+        toJSON CompanionSetting'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _comKind),
+                  ("imageOnly" .=) <$> _comImageOnly,
+                  ("companionsDisabled" .=) <$> _comCompanionsDisabled,
+                  ("enabledSizes" .=) <$> _comEnabledSizes])
 
 -- | Floodlight Activity Group List Response
 --
@@ -16110,7 +17101,8 @@ instance ToJSON FloodlightActivityGroupsListResponse
 --
 -- /See:/ 'conversion' smart constructor.
 data Conversion = Conversion'
-    { _conoEncryptedUserIdCandidates :: !(Maybe [Text])
+    { _conoTreatmentForUnderage      :: !(Maybe Bool)
+    , _conoEncryptedUserIdCandidates :: !(Maybe [Text])
     , _conoTimestampMicros           :: !(Maybe (Textual Int64))
     , _conoLimitAdTracking           :: !(Maybe Bool)
     , _conoEncryptedUserId           :: !(Maybe Text)
@@ -16118,16 +17110,20 @@ data Conversion = Conversion'
     , _conoFloodlightConfigurationId :: !(Maybe (Textual Int64))
     , _conoKind                      :: !Text
     , _conoFloodlightActivityId      :: !(Maybe (Textual Int64))
+    , _conoNonPersonalizedAd         :: !(Maybe Bool)
     , _conoQuantity                  :: !(Maybe (Textual Int64))
     , _conoValue                     :: !(Maybe (Textual Double))
     , _conoCustomVariables           :: !(Maybe [CustomFloodlightVariable])
     , _conoChildDirectedTreatment    :: !(Maybe Bool)
+    , _conoGclid                     :: !(Maybe Text)
     , _conoOrdinal                   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Conversion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'conoTreatmentForUnderage'
 --
 -- * 'conoEncryptedUserIdCandidates'
 --
@@ -16145,6 +17141,8 @@ data Conversion = Conversion'
 --
 -- * 'conoFloodlightActivityId'
 --
+-- * 'conoNonPersonalizedAd'
+--
 -- * 'conoQuantity'
 --
 -- * 'conoValue'
@@ -16153,12 +17151,15 @@ data Conversion = Conversion'
 --
 -- * 'conoChildDirectedTreatment'
 --
+-- * 'conoGclid'
+--
 -- * 'conoOrdinal'
 conversion
     :: Conversion
 conversion =
     Conversion'
-    { _conoEncryptedUserIdCandidates = Nothing
+    { _conoTreatmentForUnderage = Nothing
+    , _conoEncryptedUserIdCandidates = Nothing
     , _conoTimestampMicros = Nothing
     , _conoLimitAdTracking = Nothing
     , _conoEncryptedUserId = Nothing
@@ -16166,21 +17167,31 @@ conversion =
     , _conoFloodlightConfigurationId = Nothing
     , _conoKind = "dfareporting#conversion"
     , _conoFloodlightActivityId = Nothing
+    , _conoNonPersonalizedAd = Nothing
     , _conoQuantity = Nothing
     , _conoValue = Nothing
     , _conoCustomVariables = Nothing
     , _conoChildDirectedTreatment = Nothing
+    , _conoGclid = Nothing
     , _conoOrdinal = Nothing
     }
+
+-- | Whether this particular request may come from a user under the age of 16
+-- (may differ by country), under compliance with the European Union\'s
+-- General Data Protection Regulation (GDPR).
+conoTreatmentForUnderage :: Lens' Conversion (Maybe Bool)
+conoTreatmentForUnderage
+  = lens _conoTreatmentForUnderage
+      (\ s a -> s{_conoTreatmentForUnderage = a})
 
 -- | A list of the alphanumeric encrypted user IDs. Any user ID with exposure
 -- prior to the conversion timestamp will be used in the inserted
 -- conversion. If no such user ID is found then the conversion will be
 -- rejected with NO_COOKIE_MATCH_FOUND error. When set, encryptionInfo
--- should also be specified. This field should only be used when calling
--- conversions.batchinsert. This field is mutually exclusive with
--- encryptedUserId and mobileDeviceId. This or encryptedUserId or
--- mobileDeviceId is a required field.
+-- should also be specified. This field may only be used when calling
+-- batchinsert; it is not supported by batchupdate. This field is mutually
+-- exclusive with encryptedUserId, mobileDeviceId and gclid. This or
+-- encryptedUserId or mobileDeviceId or gclid is a required field.
 conoEncryptedUserIdCandidates :: Lens' Conversion [Text]
 conoEncryptedUserIdCandidates
   = lens _conoEncryptedUserIdCandidates
@@ -16196,7 +17207,9 @@ conoTimestampMicros
       (\ s a -> s{_conoTimestampMicros = a})
       . mapping _Coerce
 
--- | Whether the user has Limit Ad Tracking set.
+-- | Whether Limit Ad Tracking is enabled. When set to true, the conversion
+-- will be used for reporting but not targeting. This will prevent
+-- remarketing.
 conoLimitAdTracking :: Lens' Conversion (Maybe Bool)
 conoLimitAdTracking
   = lens _conoLimitAdTracking
@@ -16204,16 +17217,18 @@ conoLimitAdTracking
 
 -- | The alphanumeric encrypted user ID. When set, encryptionInfo should also
 -- be specified. This field is mutually exclusive with
--- encryptedUserIdCandidates[] and mobileDeviceId. This or
--- encryptedUserIdCandidates[] or mobileDeviceId is a required field.
+-- encryptedUserIdCandidates[], mobileDeviceId and gclid. This or
+-- encryptedUserIdCandidates[] or mobileDeviceId or gclid is a required
+-- field.
 conoEncryptedUserId :: Lens' Conversion (Maybe Text)
 conoEncryptedUserId
   = lens _conoEncryptedUserId
       (\ s a -> s{_conoEncryptedUserId = a})
 
 -- | The mobile device ID. This field is mutually exclusive with
--- encryptedUserId and encryptedUserIdCandidates[]. This or encryptedUserId
--- or encryptedUserIdCandidates[] is a required field.
+-- encryptedUserId, encryptedUserIdCandidates[] and gclid. This or
+-- encryptedUserId or encryptedUserIdCandidates[] or gclid is a required
+-- field.
 conoMobileDeviceId :: Lens' Conversion (Maybe Text)
 conoMobileDeviceId
   = lens _conoMobileDeviceId
@@ -16239,6 +17254,12 @@ conoFloodlightActivityId
       (\ s a -> s{_conoFloodlightActivityId = a})
       . mapping _Coerce
 
+-- | Whether the conversion was for a non personalized ad.
+conoNonPersonalizedAd :: Lens' Conversion (Maybe Bool)
+conoNonPersonalizedAd
+  = lens _conoNonPersonalizedAd
+      (\ s a -> s{_conoNonPersonalizedAd = a})
+
 -- | The quantity of the conversion.
 conoQuantity :: Lens' Conversion (Maybe Int64)
 conoQuantity
@@ -16259,11 +17280,20 @@ conoCustomVariables
       . _Default
       . _Coerce
 
--- | Whether the conversion was directed toward children.
+-- | Whether this particular request may come from a user under the age of
+-- 13, under COPPA compliance.
 conoChildDirectedTreatment :: Lens' Conversion (Maybe Bool)
 conoChildDirectedTreatment
   = lens _conoChildDirectedTreatment
       (\ s a -> s{_conoChildDirectedTreatment = a})
+
+-- | The Google click ID. This field is mutually exclusive with
+-- encryptedUserId, encryptedUserIdCandidates[] and mobileDeviceId. This or
+-- encryptedUserId or encryptedUserIdCandidates[] or mobileDeviceId is a
+-- required field.
+conoGclid :: Lens' Conversion (Maybe Text)
+conoGclid
+  = lens _conoGclid (\ s a -> s{_conoGclid = a})
 
 -- | The ordinal of the conversion. Use this field to control how conversions
 -- of the same user and day are de-duplicated. This is a required field.
@@ -16276,25 +17306,30 @@ instance FromJSON Conversion where
           = withObject "Conversion"
               (\ o ->
                  Conversion' <$>
-                   (o .:? "encryptedUserIdCandidates" .!= mempty) <*>
-                     (o .:? "timestampMicros")
+                   (o .:? "treatmentForUnderage") <*>
+                     (o .:? "encryptedUserIdCandidates" .!= mempty)
+                     <*> (o .:? "timestampMicros")
                      <*> (o .:? "limitAdTracking")
                      <*> (o .:? "encryptedUserId")
                      <*> (o .:? "mobileDeviceId")
                      <*> (o .:? "floodlightConfigurationId")
                      <*> (o .:? "kind" .!= "dfareporting#conversion")
                      <*> (o .:? "floodlightActivityId")
+                     <*> (o .:? "nonPersonalizedAd")
                      <*> (o .:? "quantity")
                      <*> (o .:? "value")
                      <*> (o .:? "customVariables" .!= mempty)
                      <*> (o .:? "childDirectedTreatment")
+                     <*> (o .:? "gclid")
                      <*> (o .:? "ordinal"))
 
 instance ToJSON Conversion where
         toJSON Conversion'{..}
           = object
               (catMaybes
-                 [("encryptedUserIdCandidates" .=) <$>
+                 [("treatmentForUnderage" .=) <$>
+                    _conoTreatmentForUnderage,
+                  ("encryptedUserIdCandidates" .=) <$>
                     _conoEncryptedUserIdCandidates,
                   ("timestampMicros" .=) <$> _conoTimestampMicros,
                   ("limitAdTracking" .=) <$> _conoLimitAdTracking,
@@ -16305,11 +17340,13 @@ instance ToJSON Conversion where
                   Just ("kind" .= _conoKind),
                   ("floodlightActivityId" .=) <$>
                     _conoFloodlightActivityId,
+                  ("nonPersonalizedAd" .=) <$> _conoNonPersonalizedAd,
                   ("quantity" .=) <$> _conoQuantity,
                   ("value" .=) <$> _conoValue,
                   ("customVariables" .=) <$> _conoCustomVariables,
                   ("childDirectedTreatment" .=) <$>
                     _conoChildDirectedTreatment,
+                  ("gclid" .=) <$> _conoGclid,
                   ("ordinal" .=) <$> _conoOrdinal])
 
 -- | Creative Field Value List Response
@@ -16440,6 +17477,138 @@ instance ToJSON RichMediaExitOverride where
                  [("enabled" .=) <$> _rmeoEnabled,
                   ("clickThroughUrl" .=) <$> _rmeoClickThroughURL,
                   ("exitId" .=) <$> _rmeoExitId])
+
+-- | Landing Page List Response
+--
+-- /See:/ 'advertiserLandingPagesListResponse' smart constructor.
+data AdvertiserLandingPagesListResponse = AdvertiserLandingPagesListResponse'
+    { _alplrLandingPages  :: !(Maybe [LandingPage])
+    , _alplrNextPageToken :: !(Maybe Text)
+    , _alplrKind          :: !Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AdvertiserLandingPagesListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'alplrLandingPages'
+--
+-- * 'alplrNextPageToken'
+--
+-- * 'alplrKind'
+advertiserLandingPagesListResponse
+    :: AdvertiserLandingPagesListResponse
+advertiserLandingPagesListResponse =
+    AdvertiserLandingPagesListResponse'
+    { _alplrLandingPages = Nothing
+    , _alplrNextPageToken = Nothing
+    , _alplrKind = "dfareporting#advertiserLandingPagesListResponse"
+    }
+
+-- | Landing page collection
+alplrLandingPages :: Lens' AdvertiserLandingPagesListResponse [LandingPage]
+alplrLandingPages
+  = lens _alplrLandingPages
+      (\ s a -> s{_alplrLandingPages = a})
+      . _Default
+      . _Coerce
+
+-- | Pagination token to be used for the next list operation.
+alplrNextPageToken :: Lens' AdvertiserLandingPagesListResponse (Maybe Text)
+alplrNextPageToken
+  = lens _alplrNextPageToken
+      (\ s a -> s{_alplrNextPageToken = a})
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"dfareporting#advertiserLandingPagesListResponse\".
+alplrKind :: Lens' AdvertiserLandingPagesListResponse Text
+alplrKind
+  = lens _alplrKind (\ s a -> s{_alplrKind = a})
+
+instance FromJSON AdvertiserLandingPagesListResponse
+         where
+        parseJSON
+          = withObject "AdvertiserLandingPagesListResponse"
+              (\ o ->
+                 AdvertiserLandingPagesListResponse' <$>
+                   (o .:? "landingPages" .!= mempty) <*>
+                     (o .:? "nextPageToken")
+                     <*>
+                     (o .:? "kind" .!=
+                        "dfareporting#advertiserLandingPagesListResponse"))
+
+instance ToJSON AdvertiserLandingPagesListResponse
+         where
+        toJSON AdvertiserLandingPagesListResponse'{..}
+          = object
+              (catMaybes
+                 [("landingPages" .=) <$> _alplrLandingPages,
+                  ("nextPageToken" .=) <$> _alplrNextPageToken,
+                  Just ("kind" .= _alplrKind)])
+
+-- | Mobile app List Response
+--
+-- /See:/ 'mobileAppsListResponse' smart constructor.
+data MobileAppsListResponse = MobileAppsListResponse'
+    { _malrNextPageToken :: !(Maybe Text)
+    , _malrKind          :: !Text
+    , _malrMobileApps    :: !(Maybe [MobileApp])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'MobileAppsListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'malrNextPageToken'
+--
+-- * 'malrKind'
+--
+-- * 'malrMobileApps'
+mobileAppsListResponse
+    :: MobileAppsListResponse
+mobileAppsListResponse =
+    MobileAppsListResponse'
+    { _malrNextPageToken = Nothing
+    , _malrKind = "dfareporting#mobileAppsListResponse"
+    , _malrMobileApps = Nothing
+    }
+
+-- | Pagination token to be used for the next list operation.
+malrNextPageToken :: Lens' MobileAppsListResponse (Maybe Text)
+malrNextPageToken
+  = lens _malrNextPageToken
+      (\ s a -> s{_malrNextPageToken = a})
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"dfareporting#mobileAppsListResponse\".
+malrKind :: Lens' MobileAppsListResponse Text
+malrKind = lens _malrKind (\ s a -> s{_malrKind = a})
+
+-- | Mobile apps collection.
+malrMobileApps :: Lens' MobileAppsListResponse [MobileApp]
+malrMobileApps
+  = lens _malrMobileApps
+      (\ s a -> s{_malrMobileApps = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON MobileAppsListResponse where
+        parseJSON
+          = withObject "MobileAppsListResponse"
+              (\ o ->
+                 MobileAppsListResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!=
+                        "dfareporting#mobileAppsListResponse")
+                     <*> (o .:? "mobileApps" .!= mempty))
+
+instance ToJSON MobileAppsListResponse where
+        toJSON MobileAppsListResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _malrNextPageToken,
+                  Just ("kind" .= _malrKind),
+                  ("mobileApps" .=) <$> _malrMobileApps])
 
 -- | Represents a sorted dimension.
 --
@@ -16687,7 +17856,6 @@ instance ToJSON PlacementsGenerateTagsResponse where
 data CreativeAsset = CreativeAsset'
     { _caaZIndex                :: !(Maybe (Textual Int32))
     , _caaPushdown              :: !(Maybe Bool)
-    , _caaVideoDuration         :: !(Maybe (Textual Double))
     , _caaOriginalBackup        :: !(Maybe Bool)
     , _caaWindowMode            :: !(Maybe CreativeAssetWindowMode)
     , _caaFlashVersion          :: !(Maybe (Textual Int32))
@@ -16713,7 +17881,9 @@ data CreativeAsset = CreativeAsset'
     , _caaPositionLeftUnit      :: !(Maybe CreativeAssetPositionLeftUnit)
     , _caaAlignment             :: !(Maybe CreativeAssetAlignment)
     , _caaExpandedDimension     :: !(Maybe Size)
+    , _caaAdditionalSizes       :: !(Maybe [Size])
     , _caaZipFilename           :: !(Maybe Text)
+    , _caaMediaDuration         :: !(Maybe (Textual Double))
     , _caaActionScript3         :: !(Maybe Bool)
     , _caaDisplayType           :: !(Maybe CreativeAssetDisplayType)
     , _caaChildAssetType        :: !(Maybe CreativeAssetChildAssetType)
@@ -16723,6 +17893,7 @@ data CreativeAsset = CreativeAsset'
     , _caaCustomStartTimeValue  :: !(Maybe (Textual Int32))
     , _caaStartTimeType         :: !(Maybe CreativeAssetStartTimeType)
     , _caaDuration              :: !(Maybe (Textual Int32))
+    , _caaOrientation           :: !(Maybe CreativeAssetOrientation)
     , _caaArtworkType           :: !(Maybe CreativeAssetArtworkType)
     , _caaHideFlashObjects      :: !(Maybe Bool)
     , _caaDetectedFeatures      :: !(Maybe [CreativeAssetDetectedFeaturesItem])
@@ -16738,8 +17909,6 @@ data CreativeAsset = CreativeAsset'
 -- * 'caaZIndex'
 --
 -- * 'caaPushdown'
---
--- * 'caaVideoDuration'
 --
 -- * 'caaOriginalBackup'
 --
@@ -16791,7 +17960,11 @@ data CreativeAsset = CreativeAsset'
 --
 -- * 'caaExpandedDimension'
 --
+-- * 'caaAdditionalSizes'
+--
 -- * 'caaZipFilename'
+--
+-- * 'caaMediaDuration'
 --
 -- * 'caaActionScript3'
 --
@@ -16811,6 +17984,8 @@ data CreativeAsset = CreativeAsset'
 --
 -- * 'caaDuration'
 --
+-- * 'caaOrientation'
+--
 -- * 'caaArtworkType'
 --
 -- * 'caaHideFlashObjects'
@@ -16828,7 +18003,6 @@ creativeAsset =
     CreativeAsset'
     { _caaZIndex = Nothing
     , _caaPushdown = Nothing
-    , _caaVideoDuration = Nothing
     , _caaOriginalBackup = Nothing
     , _caaWindowMode = Nothing
     , _caaFlashVersion = Nothing
@@ -16854,7 +18028,9 @@ creativeAsset =
     , _caaPositionLeftUnit = Nothing
     , _caaAlignment = Nothing
     , _caaExpandedDimension = Nothing
+    , _caaAdditionalSizes = Nothing
     , _caaZipFilename = Nothing
+    , _caaMediaDuration = Nothing
     , _caaActionScript3 = Nothing
     , _caaDisplayType = Nothing
     , _caaChildAssetType = Nothing
@@ -16864,6 +18040,7 @@ creativeAsset =
     , _caaCustomStartTimeValue = Nothing
     , _caaStartTimeType = Nothing
     , _caaDuration = Nothing
+    , _caaOrientation = Nothing
     , _caaArtworkType = Nothing
     , _caaHideFlashObjects = Nothing
     , _caaDetectedFeatures = Nothing
@@ -16872,10 +18049,11 @@ creativeAsset =
     , _caaHorizontallyLocked = Nothing
     }
 
--- | zIndex value of an asset. This is a read-only field. Applicable to the
--- following creative types: all RICH_MEDIA.Additionally, only applicable
--- to assets whose displayType is NOT one of the following types:
--- ASSET_DISPLAY_TYPE_INPAGE or ASSET_DISPLAY_TYPE_OVERLAY.
+-- | zIndex value of an asset. Applicable to the following creative types:
+-- all RICH_MEDIA.Additionally, only applicable to assets whose displayType
+-- is NOT one of the following types: ASSET_DISPLAY_TYPE_INPAGE or
+-- ASSET_DISPLAY_TYPE_OVERLAY. Acceptable values are -999999999 to
+-- 999999999, inclusive.
 caaZIndex :: Lens' CreativeAsset (Maybe Int32)
 caaZIndex
   = lens _caaZIndex (\ s a -> s{_caaZIndex = a}) .
@@ -16889,17 +18067,8 @@ caaPushdown :: Lens' CreativeAsset (Maybe Bool)
 caaPushdown
   = lens _caaPushdown (\ s a -> s{_caaPushdown = a})
 
--- | Detected video duration for video asset. This is a read-only field.
--- Applicable to the following creative types: INSTREAM_VIDEO and all
--- VPAID.
-caaVideoDuration :: Lens' CreativeAsset (Maybe Double)
-caaVideoDuration
-  = lens _caaVideoDuration
-      (\ s a -> s{_caaVideoDuration = a})
-      . mapping _Coerce
-
--- | Whether the backup asset is original or changed by the user in DCM.
--- Applicable to the following creative types: all RICH_MEDIA.
+-- | Whether the backup asset is original or changed by the user in Campaign
+-- Manager. Applicable to the following creative types: all RICH_MEDIA.
 caaOriginalBackup :: Lens' CreativeAsset (Maybe Bool)
 caaOriginalBackup
   = lens _caaOriginalBackup
@@ -16923,11 +18092,11 @@ caaFlashVersion
       (\ s a -> s{_caaFlashVersion = a})
       . mapping _Coerce
 
--- | Pushdown duration in seconds for an asset. Must be between 0 and 9.99.
--- Applicable to the following creative types: all RICH_MEDIA.Additionally,
--- only applicable when the asset pushdown field is true, the offsets are
--- 0, the collapsedSize.width matches size.width, and the
--- collapsedSize.height is less than size.height.
+-- | Pushdown duration in seconds for an asset. Applicable to the following
+-- creative types: all RICH_MEDIA.Additionally, only applicable when the
+-- asset pushdown field is true, the offsets are 0, the collapsedSize.width
+-- matches size.width, and the collapsedSize.height is less than
+-- size.height. Acceptable values are 0 to 9.99, inclusive.
 caaPushdownDuration :: Lens' CreativeAsset (Maybe Double)
 caaPushdownDuration
   = lens _caaPushdownDuration
@@ -17043,9 +18212,9 @@ caaIdDimensionValue
   = lens _caaIdDimensionValue
       (\ s a -> s{_caaIdDimensionValue = a})
 
--- | Whether the video asset is active. This is a read-only field for
--- VPAID_NON_LINEAR_VIDEO assets. Applicable to the following creative
--- types: INSTREAM_VIDEO and all VPAID.
+-- | Whether the video or audio asset is active. This is a read-only field
+-- for VPAID_NON_LINEAR_VIDEO assets. Applicable to the following creative
+-- types: INSTREAM_AUDIO, INSTREAM_VIDEO and all VPAID.
 caaActive :: Lens' CreativeAsset (Maybe Bool)
 caaActive
   = lens _caaActive (\ s a -> s{_caaActive = a})
@@ -17058,25 +18227,30 @@ caaActive
 -- FLASH_INPAGE, HTML5_BANNER, all RICH_MEDIA, and all VPAID creatives.
 -- Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.
 -- ADDITIONAL_IMAGE and ADDITIONAL_FLASH apply to FLASH_INPAGE creatives.
--- OTHER refers to assets from sources other than DCM, such as Studio
--- uploaded assets, applicable to all RICH_MEDIA and all VPAID creatives.
--- PARENT_VIDEO refers to videos uploaded by the user in DCM and is
+-- OTHER refers to assets from sources other than Campaign Manager, such as
+-- Studio uploaded assets, applicable to all RICH_MEDIA and all VPAID
+-- creatives. PARENT_VIDEO refers to videos uploaded by the user in
+-- Campaign Manager and is applicable to INSTREAM_VIDEO and
+-- VPAID_LINEAR_VIDEO creatives. TRANSCODED_VIDEO refers to videos
+-- transcoded by Campaign Manager from PARENT_VIDEO assets and is
 -- applicable to INSTREAM_VIDEO and VPAID_LINEAR_VIDEO creatives.
--- TRANSCODED_VIDEO refers to videos transcoded by DCM from PARENT_VIDEO
--- assets and is applicable to INSTREAM_VIDEO and VPAID_LINEAR_VIDEO
--- creatives. ALTERNATE_VIDEO refers to the DCM representation of child
+-- ALTERNATE_VIDEO refers to the Campaign Manager representation of child
 -- asset videos from Studio, and is applicable to VPAID_LINEAR_VIDEO
--- creatives. These cannot be added or removed within DCM. For
+-- creatives. These cannot be added or removed within Campaign Manager. For
 -- VPAID_LINEAR_VIDEO creatives, PARENT_VIDEO, TRANSCODED_VIDEO and
 -- ALTERNATE_VIDEO assets that are marked active serve as backup in case
 -- the VPAID creative cannot be served. Only PARENT_VIDEO assets can be
 -- added or removed for an INSTREAM_VIDEO or VPAID_LINEAR_VIDEO creative.
+-- PARENT_AUDIO refers to audios uploaded by the user in Campaign Manager
+-- and is applicable to INSTREAM_AUDIO creatives. TRANSCODED_AUDIO refers
+-- to audios transcoded by Campaign Manager from PARENT_AUDIO assets and is
+-- applicable to INSTREAM_AUDIO creatives.
 caaRole :: Lens' CreativeAsset (Maybe CreativeAssetRole)
 caaRole = lens _caaRole (\ s a -> s{_caaRole = a})
 
--- | Detected MIME type for video asset. This is a read-only field.
--- Applicable to the following creative types: INSTREAM_VIDEO and all
--- VPAID.
+-- | Detected MIME type for audio or video asset. This is a read-only field.
+-- Applicable to the following creative types: INSTREAM_AUDIO,
+-- INSTREAM_VIDEO and all VPAID.
 caaMimeType :: Lens' CreativeAsset (Maybe Text)
 caaMimeType
   = lens _caaMimeType (\ s a -> s{_caaMimeType = a})
@@ -17111,12 +18285,31 @@ caaExpandedDimension
   = lens _caaExpandedDimension
       (\ s a -> s{_caaExpandedDimension = a})
 
+-- | Additional sizes associated with this creative asset. HTML5 asset
+-- generated by compatible software such as GWD will be able to support
+-- more sizes this creative asset can render.
+caaAdditionalSizes :: Lens' CreativeAsset [Size]
+caaAdditionalSizes
+  = lens _caaAdditionalSizes
+      (\ s a -> s{_caaAdditionalSizes = a})
+      . _Default
+      . _Coerce
+
 -- | File name of zip file. This is a read-only field. Applicable to the
 -- following creative types: HTML5_BANNER.
 caaZipFilename :: Lens' CreativeAsset (Maybe Text)
 caaZipFilename
   = lens _caaZipFilename
       (\ s a -> s{_caaZipFilename = a})
+
+-- | Detected duration for audio or video asset. This is a read-only field.
+-- Applicable to the following creative types: INSTREAM_AUDIO,
+-- INSTREAM_VIDEO and all VPAID.
+caaMediaDuration :: Lens' CreativeAsset (Maybe Double)
+caaMediaDuration
+  = lens _caaMediaDuration
+      (\ s a -> s{_caaMediaDuration = a})
+      . mapping _Coerce
 
 -- | Whether ActionScript3 is enabled for the flash asset. This is a
 -- read-only field. Applicable to the following creative type:
@@ -17158,15 +18351,17 @@ caaId
   = lens _caaId (\ s a -> s{_caaId = a}) .
       mapping _Coerce
 
--- | Detected bit-rate for video asset. This is a read-only field. Applicable
--- to the following creative types: INSTREAM_VIDEO and all VPAID.
+-- | Detected bit-rate for audio or video asset. This is a read-only field.
+-- Applicable to the following creative types: INSTREAM_AUDIO,
+-- INSTREAM_VIDEO and all VPAID.
 caaBitRate :: Lens' CreativeAsset (Maybe Int32)
 caaBitRate
   = lens _caaBitRate (\ s a -> s{_caaBitRate = a}) .
       mapping _Coerce
 
 -- | Custom start time in seconds for making the asset visible. Applicable to
--- the following creative types: all RICH_MEDIA.
+-- the following creative types: all RICH_MEDIA. Value must be greater than
+-- or equal to 0.
 caaCustomStartTimeValue :: Lens' CreativeAsset (Maybe Int32)
 caaCustomStartTimeValue
   = lens _caaCustomStartTimeValue
@@ -17181,11 +18376,18 @@ caaStartTimeType
       (\ s a -> s{_caaStartTimeType = a})
 
 -- | Duration in seconds for which an asset will be displayed. Applicable to
--- the following creative types: INSTREAM_VIDEO and VPAID_LINEAR_VIDEO.
+-- the following creative types: INSTREAM_AUDIO, INSTREAM_VIDEO and
+-- VPAID_LINEAR_VIDEO. Value must be greater than or equal to 1.
 caaDuration :: Lens' CreativeAsset (Maybe Int32)
 caaDuration
   = lens _caaDuration (\ s a -> s{_caaDuration = a}) .
       mapping _Coerce
+
+-- | Orientation of video asset. This is a read-only, auto-generated field.
+caaOrientation :: Lens' CreativeAsset (Maybe CreativeAssetOrientation)
+caaOrientation
+  = lens _caaOrientation
+      (\ s a -> s{_caaOrientation = a})
 
 -- | Artwork type of rich media creative. This is a read-only field.
 -- Applicable to the following creative types: all RICH_MEDIA.
@@ -17202,11 +18404,11 @@ caaHideFlashObjects
       (\ s a -> s{_caaHideFlashObjects = a})
 
 -- | List of feature dependencies for the creative asset that are detected by
--- DCM. Feature dependencies are features that a browser must be able to
--- support in order to render your HTML5 creative correctly. This is a
--- read-only, auto-generated field. Applicable to the following creative
--- types: HTML5_BANNER. Applicable to DISPLAY when the primary asset type
--- is not HTML_IMAGE.
+-- Campaign Manager. Feature dependencies are features that a browser must
+-- be able to support in order to render your HTML5 creative correctly.
+-- This is a read-only, auto-generated field. Applicable to the following
+-- creative types: HTML5_BANNER. Applicable to DISPLAY when the primary
+-- asset type is not HTML_IMAGE.
 caaDetectedFeatures :: Lens' CreativeAsset [CreativeAssetDetectedFeaturesItem]
 caaDetectedFeatures
   = lens _caaDetectedFeatures
@@ -17240,8 +18442,7 @@ instance FromJSON CreativeAsset where
               (\ o ->
                  CreativeAsset' <$>
                    (o .:? "zIndex") <*> (o .:? "pushdown") <*>
-                     (o .:? "videoDuration")
-                     <*> (o .:? "originalBackup")
+                     (o .:? "originalBackup")
                      <*> (o .:? "windowMode")
                      <*> (o .:? "flashVersion")
                      <*> (o .:? "pushdownDuration")
@@ -17266,7 +18467,9 @@ instance FromJSON CreativeAsset where
                      <*> (o .:? "positionLeftUnit")
                      <*> (o .:? "alignment")
                      <*> (o .:? "expandedDimension")
+                     <*> (o .:? "additionalSizes" .!= mempty)
                      <*> (o .:? "zipFilename")
+                     <*> (o .:? "mediaDuration")
                      <*> (o .:? "actionScript3")
                      <*> (o .:? "displayType")
                      <*> (o .:? "childAssetType")
@@ -17276,6 +18479,7 @@ instance FromJSON CreativeAsset where
                      <*> (o .:? "customStartTimeValue")
                      <*> (o .:? "startTimeType")
                      <*> (o .:? "duration")
+                     <*> (o .:? "orientation")
                      <*> (o .:? "artworkType")
                      <*> (o .:? "hideFlashObjects")
                      <*> (o .:? "detectedFeatures" .!= mempty)
@@ -17289,7 +18493,6 @@ instance ToJSON CreativeAsset where
               (catMaybes
                  [("zIndex" .=) <$> _caaZIndex,
                   ("pushdown" .=) <$> _caaPushdown,
-                  ("videoDuration" .=) <$> _caaVideoDuration,
                   ("originalBackup" .=) <$> _caaOriginalBackup,
                   ("windowMode" .=) <$> _caaWindowMode,
                   ("flashVersion" .=) <$> _caaFlashVersion,
@@ -17318,7 +18521,9 @@ instance ToJSON CreativeAsset where
                   ("positionLeftUnit" .=) <$> _caaPositionLeftUnit,
                   ("alignment" .=) <$> _caaAlignment,
                   ("expandedDimension" .=) <$> _caaExpandedDimension,
+                  ("additionalSizes" .=) <$> _caaAdditionalSizes,
                   ("zipFilename" .=) <$> _caaZipFilename,
+                  ("mediaDuration" .=) <$> _caaMediaDuration,
                   ("actionScript3" .=) <$> _caaActionScript3,
                   ("displayType" .=) <$> _caaDisplayType,
                   ("childAssetType" .=) <$> _caaChildAssetType,
@@ -17328,6 +18533,7 @@ instance ToJSON CreativeAsset where
                     _caaCustomStartTimeValue,
                   ("startTimeType" .=) <$> _caaStartTimeType,
                   ("duration" .=) <$> _caaDuration,
+                  ("orientation" .=) <$> _caaOrientation,
                   ("artworkType" .=) <$> _caaArtworkType,
                   ("hideFlashObjects" .=) <$> _caaHideFlashObjects,
                   ("detectedFeatures" .=) <$> _caaDetectedFeatures,
@@ -17849,8 +19055,8 @@ conversionsBatchInsertResponse =
     , _cbirbHasFailures = Nothing
     }
 
--- | The status of each conversion\'s insertion status. The status is
--- returned in the same order that conversions are inserted.
+-- | The insert status of each conversion. Statuses are returned in the same
+-- order that conversions are inserted.
 cbirbStatus :: Lens' ConversionsBatchInsertResponse [ConversionStatus]
 cbirbStatus
   = lens _cbirbStatus (\ s a -> s{_cbirbStatus = a}) .
@@ -18014,144 +19220,145 @@ instance ToJSON Recipient where
 --
 -- /See:/ 'site' smart constructor.
 data Site = Site'
-    { _ssKind                          :: !Text
-    , _ssKeyName                       :: !(Maybe Text)
-    , _ssSiteContacts                  :: !(Maybe [SiteContact])
-    , _ssSiteSettings                  :: !(Maybe SiteSettings)
-    , _ssIdDimensionValue              :: !(Maybe DimensionValue)
-    , _ssDirectorySiteIdDimensionValue :: !(Maybe DimensionValue)
-    , _ssAccountId                     :: !(Maybe (Textual Int64))
-    , _ssName                          :: !(Maybe Text)
-    , _ssDirectorySiteId               :: !(Maybe (Textual Int64))
-    , _ssId                            :: !(Maybe (Textual Int64))
-    , _ssSubAccountId                  :: !(Maybe (Textual Int64))
-    , _ssApproved                      :: !(Maybe Bool)
+    { _sitiKind                          :: !Text
+    , _sitiKeyName                       :: !(Maybe Text)
+    , _sitiSiteContacts                  :: !(Maybe [SiteContact])
+    , _sitiSiteSettings                  :: !(Maybe SiteSettings)
+    , _sitiIdDimensionValue              :: !(Maybe DimensionValue)
+    , _sitiDirectorySiteIdDimensionValue :: !(Maybe DimensionValue)
+    , _sitiAccountId                     :: !(Maybe (Textual Int64))
+    , _sitiName                          :: !(Maybe Text)
+    , _sitiDirectorySiteId               :: !(Maybe (Textual Int64))
+    , _sitiId                            :: !(Maybe (Textual Int64))
+    , _sitiSubAccountId                  :: !(Maybe (Textual Int64))
+    , _sitiApproved                      :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Site' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ssKind'
+-- * 'sitiKind'
 --
--- * 'ssKeyName'
+-- * 'sitiKeyName'
 --
--- * 'ssSiteContacts'
+-- * 'sitiSiteContacts'
 --
--- * 'ssSiteSettings'
+-- * 'sitiSiteSettings'
 --
--- * 'ssIdDimensionValue'
+-- * 'sitiIdDimensionValue'
 --
--- * 'ssDirectorySiteIdDimensionValue'
+-- * 'sitiDirectorySiteIdDimensionValue'
 --
--- * 'ssAccountId'
+-- * 'sitiAccountId'
 --
--- * 'ssName'
+-- * 'sitiName'
 --
--- * 'ssDirectorySiteId'
+-- * 'sitiDirectorySiteId'
 --
--- * 'ssId'
+-- * 'sitiId'
 --
--- * 'ssSubAccountId'
+-- * 'sitiSubAccountId'
 --
--- * 'ssApproved'
+-- * 'sitiApproved'
 site
     :: Site
 site =
     Site'
-    { _ssKind = "dfareporting#site"
-    , _ssKeyName = Nothing
-    , _ssSiteContacts = Nothing
-    , _ssSiteSettings = Nothing
-    , _ssIdDimensionValue = Nothing
-    , _ssDirectorySiteIdDimensionValue = Nothing
-    , _ssAccountId = Nothing
-    , _ssName = Nothing
-    , _ssDirectorySiteId = Nothing
-    , _ssId = Nothing
-    , _ssSubAccountId = Nothing
-    , _ssApproved = Nothing
+    { _sitiKind = "dfareporting#site"
+    , _sitiKeyName = Nothing
+    , _sitiSiteContacts = Nothing
+    , _sitiSiteSettings = Nothing
+    , _sitiIdDimensionValue = Nothing
+    , _sitiDirectorySiteIdDimensionValue = Nothing
+    , _sitiAccountId = Nothing
+    , _sitiName = Nothing
+    , _sitiDirectorySiteId = Nothing
+    , _sitiId = Nothing
+    , _sitiSubAccountId = Nothing
+    , _sitiApproved = Nothing
     }
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#site\".
-ssKind :: Lens' Site Text
-ssKind = lens _ssKind (\ s a -> s{_ssKind = a})
+sitiKind :: Lens' Site Text
+sitiKind = lens _sitiKind (\ s a -> s{_sitiKind = a})
 
 -- | Key name of this site. This is a read-only, auto-generated field.
-ssKeyName :: Lens' Site (Maybe Text)
-ssKeyName
-  = lens _ssKeyName (\ s a -> s{_ssKeyName = a})
+sitiKeyName :: Lens' Site (Maybe Text)
+sitiKeyName
+  = lens _sitiKeyName (\ s a -> s{_sitiKeyName = a})
 
 -- | Site contacts.
-ssSiteContacts :: Lens' Site [SiteContact]
-ssSiteContacts
-  = lens _ssSiteContacts
-      (\ s a -> s{_ssSiteContacts = a})
+sitiSiteContacts :: Lens' Site [SiteContact]
+sitiSiteContacts
+  = lens _sitiSiteContacts
+      (\ s a -> s{_sitiSiteContacts = a})
       . _Default
       . _Coerce
 
 -- | Site-wide settings.
-ssSiteSettings :: Lens' Site (Maybe SiteSettings)
-ssSiteSettings
-  = lens _ssSiteSettings
-      (\ s a -> s{_ssSiteSettings = a})
+sitiSiteSettings :: Lens' Site (Maybe SiteSettings)
+sitiSiteSettings
+  = lens _sitiSiteSettings
+      (\ s a -> s{_sitiSiteSettings = a})
 
 -- | Dimension value for the ID of this site. This is a read-only,
 -- auto-generated field.
-ssIdDimensionValue :: Lens' Site (Maybe DimensionValue)
-ssIdDimensionValue
-  = lens _ssIdDimensionValue
-      (\ s a -> s{_ssIdDimensionValue = a})
+sitiIdDimensionValue :: Lens' Site (Maybe DimensionValue)
+sitiIdDimensionValue
+  = lens _sitiIdDimensionValue
+      (\ s a -> s{_sitiIdDimensionValue = a})
 
 -- | Dimension value for the ID of the directory site. This is a read-only,
 -- auto-generated field.
-ssDirectorySiteIdDimensionValue :: Lens' Site (Maybe DimensionValue)
-ssDirectorySiteIdDimensionValue
-  = lens _ssDirectorySiteIdDimensionValue
-      (\ s a -> s{_ssDirectorySiteIdDimensionValue = a})
+sitiDirectorySiteIdDimensionValue :: Lens' Site (Maybe DimensionValue)
+sitiDirectorySiteIdDimensionValue
+  = lens _sitiDirectorySiteIdDimensionValue
+      (\ s a -> s{_sitiDirectorySiteIdDimensionValue = a})
 
 -- | Account ID of this site. This is a read-only field that can be left
 -- blank.
-ssAccountId :: Lens' Site (Maybe Int64)
-ssAccountId
-  = lens _ssAccountId (\ s a -> s{_ssAccountId = a}) .
-      mapping _Coerce
+sitiAccountId :: Lens' Site (Maybe Int64)
+sitiAccountId
+  = lens _sitiAccountId
+      (\ s a -> s{_sitiAccountId = a})
+      . mapping _Coerce
 
 -- | Name of this site.This is a required field. Must be less than 128
 -- characters long. If this site is under a subaccount, the name must be
 -- unique among sites of the same subaccount. Otherwise, this site is a
 -- top-level site, and the name must be unique among top-level sites of the
 -- same account.
-ssName :: Lens' Site (Maybe Text)
-ssName = lens _ssName (\ s a -> s{_ssName = a})
+sitiName :: Lens' Site (Maybe Text)
+sitiName = lens _sitiName (\ s a -> s{_sitiName = a})
 
 -- | Directory site associated with this site. This is a required field that
 -- is read-only after insertion.
-ssDirectorySiteId :: Lens' Site (Maybe Int64)
-ssDirectorySiteId
-  = lens _ssDirectorySiteId
-      (\ s a -> s{_ssDirectorySiteId = a})
+sitiDirectorySiteId :: Lens' Site (Maybe Int64)
+sitiDirectorySiteId
+  = lens _sitiDirectorySiteId
+      (\ s a -> s{_sitiDirectorySiteId = a})
       . mapping _Coerce
 
 -- | ID of this site. This is a read-only, auto-generated field.
-ssId :: Lens' Site (Maybe Int64)
-ssId
-  = lens _ssId (\ s a -> s{_ssId = a}) .
+sitiId :: Lens' Site (Maybe Int64)
+sitiId
+  = lens _sitiId (\ s a -> s{_sitiId = a}) .
       mapping _Coerce
 
 -- | Subaccount ID of this site. This is a read-only field that can be left
 -- blank.
-ssSubAccountId :: Lens' Site (Maybe Int64)
-ssSubAccountId
-  = lens _ssSubAccountId
-      (\ s a -> s{_ssSubAccountId = a})
+sitiSubAccountId :: Lens' Site (Maybe Int64)
+sitiSubAccountId
+  = lens _sitiSubAccountId
+      (\ s a -> s{_sitiSubAccountId = a})
       . mapping _Coerce
 
 -- | Whether this site is approved.
-ssApproved :: Lens' Site (Maybe Bool)
-ssApproved
-  = lens _ssApproved (\ s a -> s{_ssApproved = a})
+sitiApproved :: Lens' Site (Maybe Bool)
+sitiApproved
+  = lens _sitiApproved (\ s a -> s{_sitiApproved = a})
 
 instance FromJSON Site where
         parseJSON
@@ -18175,19 +19382,19 @@ instance ToJSON Site where
         toJSON Site'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _ssKind),
-                  ("keyName" .=) <$> _ssKeyName,
-                  ("siteContacts" .=) <$> _ssSiteContacts,
-                  ("siteSettings" .=) <$> _ssSiteSettings,
-                  ("idDimensionValue" .=) <$> _ssIdDimensionValue,
+                 [Just ("kind" .= _sitiKind),
+                  ("keyName" .=) <$> _sitiKeyName,
+                  ("siteContacts" .=) <$> _sitiSiteContacts,
+                  ("siteSettings" .=) <$> _sitiSiteSettings,
+                  ("idDimensionValue" .=) <$> _sitiIdDimensionValue,
                   ("directorySiteIdDimensionValue" .=) <$>
-                    _ssDirectorySiteIdDimensionValue,
-                  ("accountId" .=) <$> _ssAccountId,
-                  ("name" .=) <$> _ssName,
-                  ("directorySiteId" .=) <$> _ssDirectorySiteId,
-                  ("id" .=) <$> _ssId,
-                  ("subaccountId" .=) <$> _ssSubAccountId,
-                  ("approved" .=) <$> _ssApproved])
+                    _sitiDirectorySiteIdDimensionValue,
+                  ("accountId" .=) <$> _sitiAccountId,
+                  ("name" .=) <$> _sitiName,
+                  ("directorySiteId" .=) <$> _sitiDirectorySiteId,
+                  ("id" .=) <$> _sitiId,
+                  ("subaccountId" .=) <$> _sitiSubAccountId,
+                  ("approved" .=) <$> _sitiApproved])
 
 -- | User Defined Variable configuration.
 --
@@ -18488,7 +19695,7 @@ instance ToJSON
                   ("nextPageToken" .=) <$> _ccalrNextPageToken,
                   Just ("kind" .= _ccalrKind)])
 
--- | Describes properties of a DoubleClick Planning order.
+-- | Describes properties of a Planning order.
 --
 -- /See:/ 'order' smart constructor.
 data Order = Order'
@@ -18830,7 +20037,7 @@ frequencyCap =
     }
 
 -- | Number of times an individual user can be served the ad within the
--- specified duration. The maximum allowed is 15.
+-- specified duration. Acceptable values are 1 to 15, inclusive.
 fcImpressions :: Lens' FrequencyCap (Maybe Int64)
 fcImpressions
   = lens _fcImpressions
@@ -18838,7 +20045,7 @@ fcImpressions
       . mapping _Coerce
 
 -- | Duration of time, in seconds, for this frequency cap. The maximum
--- duration is 90 days in seconds, or 7,776,000.
+-- duration is 90 days. Acceptable values are 1 to 7776000, inclusive.
 fcDuration :: Lens' FrequencyCap (Maybe Int64)
 fcDuration
   = lens _fcDuration (\ s a -> s{_fcDuration = a}) .
@@ -19167,58 +20374,6 @@ instance ToJSON MobileCarriersListResponse where
                  [("mobileCarriers" .=) <$> _mclrMobileCarriers,
                   Just ("kind" .= _mclrKind)])
 
--- | Landing Page List Response
---
--- /See:/ 'landingPagesListResponse' smart constructor.
-data LandingPagesListResponse = LandingPagesListResponse'
-    { _lplrLandingPages :: !(Maybe [LandingPage])
-    , _lplrKind         :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'LandingPagesListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lplrLandingPages'
---
--- * 'lplrKind'
-landingPagesListResponse
-    :: LandingPagesListResponse
-landingPagesListResponse =
-    LandingPagesListResponse'
-    { _lplrLandingPages = Nothing
-    , _lplrKind = "dfareporting#landingPagesListResponse"
-    }
-
--- | Landing page collection
-lplrLandingPages :: Lens' LandingPagesListResponse [LandingPage]
-lplrLandingPages
-  = lens _lplrLandingPages
-      (\ s a -> s{_lplrLandingPages = a})
-      . _Default
-      . _Coerce
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"dfareporting#landingPagesListResponse\".
-lplrKind :: Lens' LandingPagesListResponse Text
-lplrKind = lens _lplrKind (\ s a -> s{_lplrKind = a})
-
-instance FromJSON LandingPagesListResponse where
-        parseJSON
-          = withObject "LandingPagesListResponse"
-              (\ o ->
-                 LandingPagesListResponse' <$>
-                   (o .:? "landingPages" .!= mempty) <*>
-                     (o .:? "kind" .!=
-                        "dfareporting#landingPagesListResponse"))
-
-instance ToJSON LandingPagesListResponse where
-        toJSON LandingPagesListResponse'{..}
-          = object
-              (catMaybes
-                 [("landingPages" .=) <$> _lplrLandingPages,
-                  Just ("kind" .= _lplrKind)])
-
 -- | CreativeAssets contains properties of a creative asset file which will
 -- be uploaded or has already been uploaded. Refer to the creative sample
 -- code for how to upload assets and insert a creative.
@@ -19318,9 +20473,9 @@ camaId
       mapping _Coerce
 
 -- | List of feature dependencies for the creative asset that are detected by
--- DCM. Feature dependencies are features that a browser must be able to
--- support in order to render your HTML5 creative correctly. This is a
--- read-only, auto-generated field.
+-- Campaign Manager. Feature dependencies are features that a browser must
+-- be able to support in order to render your HTML5 creative correctly.
+-- This is a read-only, auto-generated field.
 camaDetectedFeatures :: Lens' CreativeAssetMetadata [CreativeAssetMetadataDetectedFeaturesItem]
 camaDetectedFeatures
   = lens _camaDetectedFeatures
@@ -19942,8 +21097,8 @@ etStatus :: Lens' EventTag (Maybe EventTagStatus)
 etStatus = lens _etStatus (\ s a -> s{_etStatus = a})
 
 -- | Whether to remove this event tag from ads that are trafficked through
--- DoubleClick Bid Manager to Ad Exchange. This may be useful if the event
--- tag uses a pixel that is unapproved for Ad Exchange bids on one or more
+-- Display & Video 360 to Ad Exchange. This may be useful if the event tag
+-- uses a pixel that is unapproved for Ad Exchange bids on one or more
 -- networks, such as the Google Display Network.
 etExcludeFromAdxRequests :: Lens' EventTag (Maybe Bool)
 etExcludeFromAdxRequests
@@ -20282,17 +21437,73 @@ instance ToJSON OrderContact where
                   ("contactType" .=) <$> _ocContactType,
                   ("contactInfo" .=) <$> _ocContactInfo])
 
+-- | Transcode Settings
+--
+-- /See:/ 'transcodeSetting' smart constructor.
+data TranscodeSetting = TranscodeSetting'
+    { _tsKind                :: !Text
+    , _tsEnabledVideoFormats :: !(Maybe [Textual Int32])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TranscodeSetting' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tsKind'
+--
+-- * 'tsEnabledVideoFormats'
+transcodeSetting
+    :: TranscodeSetting
+transcodeSetting =
+    TranscodeSetting'
+    { _tsKind = "dfareporting#transcodeSetting"
+    , _tsEnabledVideoFormats = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"dfareporting#transcodeSetting\".
+tsKind :: Lens' TranscodeSetting Text
+tsKind = lens _tsKind (\ s a -> s{_tsKind = a})
+
+-- | Whitelist of video formats to be served to this placement. Set this list
+-- to null or empty to serve all video formats.
+tsEnabledVideoFormats :: Lens' TranscodeSetting [Int32]
+tsEnabledVideoFormats
+  = lens _tsEnabledVideoFormats
+      (\ s a -> s{_tsEnabledVideoFormats = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON TranscodeSetting where
+        parseJSON
+          = withObject "TranscodeSetting"
+              (\ o ->
+                 TranscodeSetting' <$>
+                   (o .:? "kind" .!= "dfareporting#transcodeSetting")
+                     <*> (o .:? "enabledVideoFormats" .!= mempty))
+
+instance ToJSON TranscodeSetting where
+        toJSON TranscodeSetting'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _tsKind),
+                  ("enabledVideoFormats" .=) <$>
+                    _tsEnabledVideoFormats])
+
 -- | Floodlight Activity GenerateTag Response
 --
 -- /See:/ 'floodlightActivitiesGenerateTagResponse' smart constructor.
 data FloodlightActivitiesGenerateTagResponse = FloodlightActivitiesGenerateTagResponse'
-    { _fagtrFloodlightActivityTag :: !(Maybe Text)
-    , _fagtrKind                  :: !Text
+    { _fagtrGlobalSiteTagGlobalSnippet :: !(Maybe Text)
+    , _fagtrFloodlightActivityTag      :: !(Maybe Text)
+    , _fagtrKind                       :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivitiesGenerateTagResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'fagtrGlobalSiteTagGlobalSnippet'
 --
 -- * 'fagtrFloodlightActivityTag'
 --
@@ -20301,11 +21512,22 @@ floodlightActivitiesGenerateTagResponse
     :: FloodlightActivitiesGenerateTagResponse
 floodlightActivitiesGenerateTagResponse =
     FloodlightActivitiesGenerateTagResponse'
-    { _fagtrFloodlightActivityTag = Nothing
+    { _fagtrGlobalSiteTagGlobalSnippet = Nothing
+    , _fagtrFloodlightActivityTag = Nothing
     , _fagtrKind = "dfareporting#floodlightActivitiesGenerateTagResponse"
     }
 
--- | Generated tag for this floodlight activity.
+-- | The global snippet section of a global site tag. The global site tag
+-- sets new cookies on your domain, which will store a unique identifier
+-- for a user or the ad click that brought the user to your site. Learn
+-- more.
+fagtrGlobalSiteTagGlobalSnippet :: Lens' FloodlightActivitiesGenerateTagResponse (Maybe Text)
+fagtrGlobalSiteTagGlobalSnippet
+  = lens _fagtrGlobalSiteTagGlobalSnippet
+      (\ s a -> s{_fagtrGlobalSiteTagGlobalSnippet = a})
+
+-- | Generated tag for this Floodlight activity. For global site tags, this
+-- is the event snippet.
 fagtrFloodlightActivityTag :: Lens' FloodlightActivitiesGenerateTagResponse (Maybe Text)
 fagtrFloodlightActivityTag
   = lens _fagtrFloodlightActivityTag
@@ -20324,7 +21546,9 @@ instance FromJSON
               "FloodlightActivitiesGenerateTagResponse"
               (\ o ->
                  FloodlightActivitiesGenerateTagResponse' <$>
-                   (o .:? "floodlightActivityTag") <*>
+                   (o .:? "globalSiteTagGlobalSnippet") <*>
+                     (o .:? "floodlightActivityTag")
+                     <*>
                      (o .:? "kind" .!=
                         "dfareporting#floodlightActivitiesGenerateTagResponse"))
 
@@ -20333,7 +21557,9 @@ instance ToJSON
         toJSON FloodlightActivitiesGenerateTagResponse'{..}
           = object
               (catMaybes
-                 [("floodlightActivityTag" .=) <$>
+                 [("globalSiteTagGlobalSnippet" .=) <$>
+                    _fagtrGlobalSiteTagGlobalSnippet,
+                  ("floodlightActivityTag" .=) <$>
                     _fagtrFloodlightActivityTag,
                   Just ("kind" .= _fagtrKind)])
 
@@ -20541,7 +21767,7 @@ thirdPartyTrackingURL =
 tptuURL :: Lens' ThirdPartyTrackingURL (Maybe Text)
 tptuURL = lens _tptuURL (\ s a -> s{_tptuURL = a})
 
--- | Third-party URL type for in-stream video creatives.
+-- | Third-party URL type for in-stream video and in-stream audio creatives.
 tptuThirdPartyURLType :: Lens' ThirdPartyTrackingURL (Maybe ThirdPartyTrackingURLThirdPartyURLType)
 tptuThirdPartyURLType
   = lens _tptuThirdPartyURLType
@@ -20561,7 +21787,7 @@ instance ToJSON ThirdPartyTrackingURL where
                  [("url" .=) <$> _tptuURL,
                   ("thirdPartyUrlType" .=) <$> _tptuThirdPartyURLType])
 
--- | Contains properties of a DoubleClick Planning order document.
+-- | Contains properties of a Planning order document.
 --
 -- /See:/ 'orderDocument' smart constructor.
 data OrderDocument = OrderDocument'
@@ -20903,11 +22129,92 @@ instance ToJSON Metro where
                   ("countryDartId" .=) <$> _metCountryDartId,
                   ("dartId" .=) <$> _metDartId])
 
+-- | Contains information about a mobile app. Used as a landing page deep
+-- link.
+--
+-- /See:/ 'mobileApp' smart constructor.
+data MobileApp = MobileApp'
+    { _maKind          :: !Text
+    , _maId            :: !(Maybe Text)
+    , _maTitle         :: !(Maybe Text)
+    , _maPublisherName :: !(Maybe Text)
+    , _maDirectory     :: !(Maybe MobileAppDirectory)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'MobileApp' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'maKind'
+--
+-- * 'maId'
+--
+-- * 'maTitle'
+--
+-- * 'maPublisherName'
+--
+-- * 'maDirectory'
+mobileApp
+    :: MobileApp
+mobileApp =
+    MobileApp'
+    { _maKind = "dfareporting#mobileApp"
+    , _maId = Nothing
+    , _maTitle = Nothing
+    , _maPublisherName = Nothing
+    , _maDirectory = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"dfareporting#mobileApp\".
+maKind :: Lens' MobileApp Text
+maKind = lens _maKind (\ s a -> s{_maKind = a})
+
+-- | ID of this mobile app.
+maId :: Lens' MobileApp (Maybe Text)
+maId = lens _maId (\ s a -> s{_maId = a})
+
+-- | Title of this mobile app.
+maTitle :: Lens' MobileApp (Maybe Text)
+maTitle = lens _maTitle (\ s a -> s{_maTitle = a})
+
+-- | Publisher name.
+maPublisherName :: Lens' MobileApp (Maybe Text)
+maPublisherName
+  = lens _maPublisherName
+      (\ s a -> s{_maPublisherName = a})
+
+-- | Mobile app directory.
+maDirectory :: Lens' MobileApp (Maybe MobileAppDirectory)
+maDirectory
+  = lens _maDirectory (\ s a -> s{_maDirectory = a})
+
+instance FromJSON MobileApp where
+        parseJSON
+          = withObject "MobileApp"
+              (\ o ->
+                 MobileApp' <$>
+                   (o .:? "kind" .!= "dfareporting#mobileApp") <*>
+                     (o .:? "id")
+                     <*> (o .:? "title")
+                     <*> (o .:? "publisherName")
+                     <*> (o .:? "directory"))
+
+instance ToJSON MobileApp where
+        toJSON MobileApp'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _maKind), ("id" .=) <$> _maId,
+                  ("title" .=) <$> _maTitle,
+                  ("publisherName" .=) <$> _maPublisherName,
+                  ("directory" .=) <$> _maDirectory])
+
 -- | Contains properties of a placement.
 --
 -- /See:/ 'placement' smart constructor.
 data Placement = Placement'
     { _p1Status                         :: !(Maybe PlacementStatus)
+    , _p1VideoSettings                  :: !(Maybe VideoSettings)
     , _p1PlacementStrategyId            :: !(Maybe (Textual Int64))
     , _p1TagFormats                     :: !(Maybe [PlacementTagFormatsItem])
     , _p1SiteIdDimensionValue           :: !(Maybe DimensionValue)
@@ -20920,6 +22227,8 @@ data Placement = Placement'
     , _p1AdvertiserIdDimensionValue     :: !(Maybe DimensionValue)
     , _p1CampaignId                     :: !(Maybe (Textual Int64))
     , _p1IdDimensionValue               :: !(Maybe DimensionValue)
+    , _p1VpaidAdapterChoice             :: !(Maybe PlacementVpaidAdapterChoice)
+    , _p1AdBlockingOptOut               :: !(Maybe Bool)
     , _p1Primary                        :: !(Maybe Bool)
     , _p1LookbackConfiguration          :: !(Maybe LookbackConfiguration)
     , _p1TagSetting                     :: !(Maybe TagSetting)
@@ -20928,8 +22237,10 @@ data Placement = Placement'
     , _p1AccountId                      :: !(Maybe (Textual Int64))
     , _p1PaymentSource                  :: !(Maybe PlacementPaymentSource)
     , _p1Name                           :: !(Maybe Text)
+    , _p1AdditionalSizes                :: !(Maybe [Size])
     , _p1DirectorySiteId                :: !(Maybe (Textual Int64))
     , _p1CreateInfo                     :: !(Maybe LastModifiedInfo)
+    , _p1VideoActiveViewOptOut          :: !(Maybe Bool)
     , _p1LastModifiedInfo               :: !(Maybe LastModifiedInfo)
     , _p1Id                             :: !(Maybe (Textual Int64))
     , _p1SSLRequired                    :: !(Maybe Bool)
@@ -20950,6 +22261,8 @@ data Placement = Placement'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'p1Status'
+--
+-- * 'p1VideoSettings'
 --
 -- * 'p1PlacementStrategyId'
 --
@@ -20975,6 +22288,10 @@ data Placement = Placement'
 --
 -- * 'p1IdDimensionValue'
 --
+-- * 'p1VpaidAdapterChoice'
+--
+-- * 'p1AdBlockingOptOut'
+--
 -- * 'p1Primary'
 --
 -- * 'p1LookbackConfiguration'
@@ -20991,9 +22308,13 @@ data Placement = Placement'
 --
 -- * 'p1Name'
 --
+-- * 'p1AdditionalSizes'
+--
 -- * 'p1DirectorySiteId'
 --
 -- * 'p1CreateInfo'
+--
+-- * 'p1VideoActiveViewOptOut'
 --
 -- * 'p1LastModifiedInfo'
 --
@@ -21025,6 +22346,7 @@ placement
 placement =
     Placement'
     { _p1Status = Nothing
+    , _p1VideoSettings = Nothing
     , _p1PlacementStrategyId = Nothing
     , _p1TagFormats = Nothing
     , _p1SiteIdDimensionValue = Nothing
@@ -21037,6 +22359,8 @@ placement =
     , _p1AdvertiserIdDimensionValue = Nothing
     , _p1CampaignId = Nothing
     , _p1IdDimensionValue = Nothing
+    , _p1VpaidAdapterChoice = Nothing
+    , _p1AdBlockingOptOut = Nothing
     , _p1Primary = Nothing
     , _p1LookbackConfiguration = Nothing
     , _p1TagSetting = Nothing
@@ -21045,8 +22369,10 @@ placement =
     , _p1AccountId = Nothing
     , _p1PaymentSource = Nothing
     , _p1Name = Nothing
+    , _p1AdditionalSizes = Nothing
     , _p1DirectorySiteId = Nothing
     , _p1CreateInfo = Nothing
+    , _p1VideoActiveViewOptOut = Nothing
     , _p1LastModifiedInfo = Nothing
     , _p1Id = Nothing
     , _p1SSLRequired = Nothing
@@ -21066,6 +22392,14 @@ placement =
 p1Status :: Lens' Placement (Maybe PlacementStatus)
 p1Status = lens _p1Status (\ s a -> s{_p1Status = a})
 
+-- | A collection of settings which affect video creatives served through
+-- this placement. Applicable to placements with IN_STREAM_VIDEO
+-- compatibility.
+p1VideoSettings :: Lens' Placement (Maybe VideoSettings)
+p1VideoSettings
+  = lens _p1VideoSettings
+      (\ s a -> s{_p1VideoSettings = a})
+
 -- | ID of the placement strategy assigned to this placement.
 p1PlacementStrategyId :: Lens' Placement (Maybe Int64)
 p1PlacementStrategyId
@@ -21081,8 +22415,10 @@ p1PlacementStrategyId
 -- \"PLACEMENT_TAG_INTERSTITIAL_INTERNAL_REDIRECT\" -
 -- \"PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT\" -
 -- \"PLACEMENT_TAG_CLICK_COMMANDS\" -
--- \"PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH\" - \"PLACEMENT_TAG_TRACKING\" -
--- \"PLACEMENT_TAG_TRACKING_IFRAME\" -
+-- \"PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH\" -
+-- \"PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3\" -
+-- \"PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_4\" -
+-- \"PLACEMENT_TAG_TRACKING\" - \"PLACEMENT_TAG_TRACKING_IFRAME\" -
 -- \"PLACEMENT_TAG_TRACKING_JAVASCRIPT\"
 p1TagFormats :: Lens' Placement [PlacementTagFormatsItem]
 p1TagFormats
@@ -21155,6 +22491,23 @@ p1IdDimensionValue
   = lens _p1IdDimensionValue
       (\ s a -> s{_p1IdDimensionValue = a})
 
+-- | VPAID adapter setting for this placement. Controls which VPAID format
+-- the measurement adapter will use for in-stream video creatives assigned
+-- to this placement. Note: Flash is no longer supported. This field now
+-- defaults to HTML5 when the following values are provided: FLASH, BOTH.
+p1VpaidAdapterChoice :: Lens' Placement (Maybe PlacementVpaidAdapterChoice)
+p1VpaidAdapterChoice
+  = lens _p1VpaidAdapterChoice
+      (\ s a -> s{_p1VpaidAdapterChoice = a})
+
+-- | Whether this placement opts out of ad blocking. When true, ad blocking
+-- is disabled for this placement. When false, the campaign and site
+-- settings take effect.
+p1AdBlockingOptOut :: Lens' Placement (Maybe Bool)
+p1AdBlockingOptOut
+  = lens _p1AdBlockingOptOut
+      (\ s a -> s{_p1AdBlockingOptOut = a})
+
 -- | Whether this placement is the primary placement of a roadblock
 -- (placement group). You cannot change this field from true to false.
 -- Setting this field to true will automatically set the primary field on
@@ -21208,6 +22561,15 @@ p1PaymentSource
 p1Name :: Lens' Placement (Maybe Text)
 p1Name = lens _p1Name (\ s a -> s{_p1Name = a})
 
+-- | Additional sizes associated with this placement. When inserting or
+-- updating a placement, only the size ID field is used.
+p1AdditionalSizes :: Lens' Placement [Size]
+p1AdditionalSizes
+  = lens _p1AdditionalSizes
+      (\ s a -> s{_p1AdditionalSizes = a})
+      . _Default
+      . _Coerce
+
 -- | Directory site ID of this placement. On insert, you must set either this
 -- field or the siteId field to specify the site associated with this
 -- placement. This is a required field that is read-only after insertion.
@@ -21222,6 +22584,19 @@ p1DirectorySiteId
 p1CreateInfo :: Lens' Placement (Maybe LastModifiedInfo)
 p1CreateInfo
   = lens _p1CreateInfo (\ s a -> s{_p1CreateInfo = a})
+
+-- | Whether Verification and ActiveView are disabled for in-stream video
+-- creatives for this placement. The same setting videoActiveViewOptOut
+-- exists on the site level -- the opt out occurs if either of these
+-- settings are true. These settings are distinct from
+-- DirectorySites.settings.activeViewOptOut or
+-- Sites.siteSettings.activeViewOptOut which only apply to display ads.
+-- However, Accounts.activeViewOptOut opts out both video traffic, as well
+-- as display ads, from Verification and ActiveView.
+p1VideoActiveViewOptOut :: Lens' Placement (Maybe Bool)
+p1VideoActiveViewOptOut
+  = lens _p1VideoActiveViewOptOut
+      (\ s a -> s{_p1VideoActiveViewOptOut = a})
 
 -- | Information about the most recent modification of this placement. This
 -- is a read-only field.
@@ -21317,7 +22692,8 @@ instance FromJSON Placement where
           = withObject "Placement"
               (\ o ->
                  Placement' <$>
-                   (o .:? "status") <*> (o .:? "placementStrategyId")
+                   (o .:? "status") <*> (o .:? "videoSettings") <*>
+                     (o .:? "placementStrategyId")
                      <*> (o .:? "tagFormats" .!= mempty)
                      <*> (o .:? "siteIdDimensionValue")
                      <*> (o .:? "pricingSchedule")
@@ -21329,6 +22705,8 @@ instance FromJSON Placement where
                      <*> (o .:? "advertiserIdDimensionValue")
                      <*> (o .:? "campaignId")
                      <*> (o .:? "idDimensionValue")
+                     <*> (o .:? "vpaidAdapterChoice")
+                     <*> (o .:? "adBlockingOptOut")
                      <*> (o .:? "primary")
                      <*> (o .:? "lookbackConfiguration")
                      <*> (o .:? "tagSetting")
@@ -21337,8 +22715,10 @@ instance FromJSON Placement where
                      <*> (o .:? "accountId")
                      <*> (o .:? "paymentSource")
                      <*> (o .:? "name")
+                     <*> (o .:? "additionalSizes" .!= mempty)
                      <*> (o .:? "directorySiteId")
                      <*> (o .:? "createInfo")
+                     <*> (o .:? "videoActiveViewOptOut")
                      <*> (o .:? "lastModifiedInfo")
                      <*> (o .:? "id")
                      <*> (o .:? "sslRequired")
@@ -21358,6 +22738,7 @@ instance ToJSON Placement where
           = object
               (catMaybes
                  [("status" .=) <$> _p1Status,
+                  ("videoSettings" .=) <$> _p1VideoSettings,
                   ("placementStrategyId" .=) <$>
                     _p1PlacementStrategyId,
                   ("tagFormats" .=) <$> _p1TagFormats,
@@ -21373,6 +22754,8 @@ instance ToJSON Placement where
                     _p1AdvertiserIdDimensionValue,
                   ("campaignId" .=) <$> _p1CampaignId,
                   ("idDimensionValue" .=) <$> _p1IdDimensionValue,
+                  ("vpaidAdapterChoice" .=) <$> _p1VpaidAdapterChoice,
+                  ("adBlockingOptOut" .=) <$> _p1AdBlockingOptOut,
                   ("primary" .=) <$> _p1Primary,
                   ("lookbackConfiguration" .=) <$>
                     _p1LookbackConfiguration,
@@ -21383,8 +22766,11 @@ instance ToJSON Placement where
                   ("accountId" .=) <$> _p1AccountId,
                   ("paymentSource" .=) <$> _p1PaymentSource,
                   ("name" .=) <$> _p1Name,
+                  ("additionalSizes" .=) <$> _p1AdditionalSizes,
                   ("directorySiteId" .=) <$> _p1DirectorySiteId,
                   ("createInfo" .=) <$> _p1CreateInfo,
+                  ("videoActiveViewOptOut" .=) <$>
+                    _p1VideoActiveViewOptOut,
                   ("lastModifiedInfo" .=) <$> _p1LastModifiedInfo,
                   ("id" .=) <$> _p1Id,
                   ("sslRequired" .=) <$> _p1SSLRequired,

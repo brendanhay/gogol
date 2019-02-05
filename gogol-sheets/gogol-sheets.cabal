@@ -1,5 +1,5 @@
 name:                  gogol-sheets
-version:               0.1.1
+version:               0.4.0
 synopsis:              Google Sheets SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -11,7 +11,7 @@ copyright:             Copyright (c) 2015-2016 Brendan Hay
 category:              Network, Google, Cloud
 build-type:            Simple
 cabal-version:         >= 1.10
-extra-source-files:    README.md
+extra-source-files:    README.md src/.gitkeep
 
 description:
     Reads and writes Google Sheets.
@@ -35,12 +35,18 @@ library
     exposed-modules:
           Network.Google.Resource.Sheets.Spreadsheets.BatchUpdate
         , Network.Google.Resource.Sheets.Spreadsheets.Create
+        , Network.Google.Resource.Sheets.Spreadsheets.DeveloperMetadata.Get
+        , Network.Google.Resource.Sheets.Spreadsheets.DeveloperMetadata.Search
         , Network.Google.Resource.Sheets.Spreadsheets.Get
+        , Network.Google.Resource.Sheets.Spreadsheets.GetByDataFilter
         , Network.Google.Resource.Sheets.Spreadsheets.Sheets.CopyTo
         , Network.Google.Resource.Sheets.Spreadsheets.Values.Append
         , Network.Google.Resource.Sheets.Spreadsheets.Values.BatchClear
+        , Network.Google.Resource.Sheets.Spreadsheets.Values.BatchClearByDataFilter
         , Network.Google.Resource.Sheets.Spreadsheets.Values.BatchGet
+        , Network.Google.Resource.Sheets.Spreadsheets.Values.BatchGetByDataFilter
         , Network.Google.Resource.Sheets.Spreadsheets.Values.BatchUpdate
+        , Network.Google.Resource.Sheets.Spreadsheets.Values.BatchUpdateByDataFilter
         , Network.Google.Resource.Sheets.Spreadsheets.Values.Clear
         , Network.Google.Resource.Sheets.Spreadsheets.Values.Get
         , Network.Google.Resource.Sheets.Spreadsheets.Values.Update
@@ -52,5 +58,5 @@ library
         , Network.Google.Sheets.Types.Sum
 
     build-depends:
-          gogol-core == 0.1.1.*
+          gogol-core == 0.4.0.*
         , base       >= 4.7 && < 5

@@ -35,6 +35,28 @@ module Network.Google.PubSub.Types
     , rmAckId
     , rmMessage
 
+    -- * Snapshot
+    , Snapshot
+    , snapshot
+    , sTopic
+    , sName
+    , sLabels
+    , sExpireTime
+
+    -- * ListTopicSnapshotsResponse
+    , ListTopicSnapshotsResponse
+    , listTopicSnapshotsResponse
+    , ltsrNextPageToken
+    , ltsrSnapshots
+
+    -- * Expr
+    , Expr
+    , expr
+    , eLocation
+    , eExpression
+    , eTitle
+    , eDescription
+
     -- * ModifyAckDeadlineRequest
     , ModifyAckDeadlineRequest
     , modifyAckDeadlineRequest
@@ -61,8 +83,8 @@ module Network.Google.PubSub.Types
     -- * ListTopicSubscriptionsResponse
     , ListTopicSubscriptionsResponse
     , listTopicSubscriptionsResponse
-    , ltsrNextPageToken
-    , ltsrSubscriptions
+    , lNextPageToken
+    , lSubscriptions
 
     -- * ListTopicsResponse
     , ListTopicsResponse
@@ -75,15 +97,50 @@ module Network.Google.PubSub.Types
     , pullResponse
     , prReceivedMessages
 
+    -- * ListSnapshotsResponse
+    , ListSnapshotsResponse
+    , listSnapshotsResponse
+    , lsrNextPageToken
+    , lsrSnapshots
+
     -- * SetIAMPolicyRequest
     , SetIAMPolicyRequest
     , setIAMPolicyRequest
     , siprPolicy
 
+    -- * CreateSnapshotRequest
+    , CreateSnapshotRequest
+    , createSnapshotRequest
+    , csrLabels
+    , csrSubscription
+
+    -- * SeekRequest
+    , SeekRequest
+    , seekRequest
+    , srSnapshot
+    , srTime
+
     -- * Topic
     , Topic
     , topic
     , tName
+    , tLabels
+
+    -- * TopicLabels
+    , TopicLabels
+    , topicLabels
+    , tlAddtional
+
+    -- * CreateSnapshotRequestLabels
+    , CreateSnapshotRequestLabels
+    , createSnapshotRequestLabels
+    , csrlAddtional
+
+    -- * UpdateSnapshotRequest
+    , UpdateSnapshotRequest
+    , updateSnapshotRequest
+    , usrSnapshot
+    , usrUpdateMask
 
     -- * PullRequest
     , PullRequest
@@ -95,6 +152,9 @@ module Network.Google.PubSub.Types
     , PubsubMessageAttributes
     , pubsubMessageAttributes
     , pmaAddtional
+
+    -- * Xgafv
+    , Xgafv (..)
 
     -- * TestIAMPermissionsRequest
     , TestIAMPermissionsRequest
@@ -123,6 +183,15 @@ module Network.Google.PubSub.Types
     , pVersion
     , pBindings
 
+    -- * SeekResponse
+    , SeekResponse
+    , seekResponse
+
+    -- * ExpirationPolicy
+    , ExpirationPolicy
+    , expirationPolicy
+    , epTtl
+
     -- * PushConfigAttributes
     , PushConfigAttributes
     , pushConfigAttributes
@@ -131,22 +200,49 @@ module Network.Google.PubSub.Types
     -- * Subscription
     , Subscription
     , subscription
-    , sPushConfig
-    , sTopic
-    , sName
-    , sAckDeadlineSeconds
+    , subPushConfig
+    , subMessageRetentionDuration
+    , subTopic
+    , subName
+    , subLabels
+    , subRetainAckedMessages
+    , subAckDeadlineSeconds
+    , subExpirationPolicy
+
+    -- * UpdateSubscriptionRequest
+    , UpdateSubscriptionRequest
+    , updateSubscriptionRequest
+    , uUpdateMask
+    , uSubscription
+
+    -- * SubscriptionLabels
+    , SubscriptionLabels
+    , subscriptionLabels
+    , slAddtional
+
+    -- * SnapshotLabels
+    , SnapshotLabels
+    , snapshotLabels
+    , sAddtional
 
     -- * ListSubscriptionsResponse
     , ListSubscriptionsResponse
     , listSubscriptionsResponse
-    , lsrNextPageToken
-    , lsrSubscriptions
+    , lisNextPageToken
+    , lisSubscriptions
 
     -- * Binding
     , Binding
     , binding
     , bMembers
     , bRole
+    , bCondition
+
+    -- * UpdateTopicRequest
+    , UpdateTopicRequest
+    , updateTopicRequest
+    , utrUpdateMask
+    , utrTopic
 
     -- * AcknowledgeRequest
     , AcknowledgeRequest
@@ -158,7 +254,7 @@ import           Network.Google.Prelude
 import           Network.Google.PubSub.Types.Product
 import           Network.Google.PubSub.Types.Sum
 
--- | Default request referring to version 'v1' of the Google Cloud Pub/Sub API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v1' of the Cloud Pub/Sub API. This contains the host and root path used as a starting point for constructing service requests.
 pubSubService :: ServiceConfig
 pubSubService
   = defaultService (ServiceId "pubsub:v1")

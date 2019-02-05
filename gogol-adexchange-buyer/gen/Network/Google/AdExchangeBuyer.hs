@@ -165,6 +165,7 @@ module Network.Google.AdExchangeBuyer
     , cnataImage
     , cnataAppIcon
     , cnataClickTrackingURL
+    , cnataClickLinkURL
     , cnataBody
     , cnataHeadline
     , cnataImpressionTrackingURL
@@ -181,6 +182,11 @@ module Network.Google.AdExchangeBuyer
     , editAllOrderDealsResponse
     , eaodrDeals
     , eaodrOrderRevisionNumber
+
+    -- ** TargetingValueDemogGenderCriteria
+    , TargetingValueDemogGenderCriteria
+    , targetingValueDemogGenderCriteria
+    , tvdgcDemogGenderCriteriaIds
 
     -- ** CreativesList
     , CreativesList
@@ -302,6 +308,7 @@ module Network.Google.AdExchangeBuyer
     , DealServingMetadata
     , dealServingMetadata
     , dsmDealPauseStatus
+    , dsmAlcoholAdsAllowed
 
     -- ** AddOrderDealsResponse
     , AddOrderDealsResponse
@@ -319,6 +326,7 @@ module Network.Google.AdExchangeBuyer
     -- ** PricePerBuyer
     , PricePerBuyer
     , pricePerBuyer
+    , ppbBilledBuyer
     , ppbPrice
     , ppbAuctionTier
     , ppbBuyer
@@ -335,6 +343,7 @@ module Network.Google.AdExchangeBuyer
     , cAgencyId
     , cCorrections
     , cProductCategories
+    , cVideoVastXML
     , cKind
     , cHTMLSnippet
     , cAdvertiserId
@@ -354,6 +363,7 @@ module Network.Google.AdExchangeBuyer
     , cServingRestrictions
     , cDetectedDomains
     , cOpenAuctionStatus
+    , cCreativeStatusIdentityType
 
     -- ** TargetingValueDayPartTargetingDayPart
     , TargetingValueDayPartTargetingDayPart
@@ -376,6 +386,11 @@ module Network.Google.AdExchangeBuyer
     , pretargetingConfigList
     , pclKind
     , pclItems
+
+    -- ** TargetingValueDemogAgeCriteria
+    , TargetingValueDemogAgeCriteria
+    , targetingValueDemogAgeCriteria
+    , tvdacDemogAgeCriteriaIds
 
     -- ** DealTermsNonGuaranteedFixedPriceTerms
     , DealTermsNonGuaranteedFixedPriceTerms
@@ -423,6 +438,7 @@ module Network.Google.AdExchangeBuyer
     -- ** Account
     , Account
     , account
+    , aApplyPretargetingToNonGuaranteedDeals
     , aMaximumTotalQps
     , aKind
     , aCookieMatchingURL
@@ -477,6 +493,8 @@ module Network.Google.AdExchangeBuyer
     , pcUserLists
     , pcKind
     , pcExcludedPlacements
+    , pcUserIdentifierDataRequired
+    , pcMinimumViewabilityDecile
     , pcMobileDevices
     , pcLanguages
     , pcVerticals
@@ -507,6 +525,8 @@ module Network.Google.AdExchangeBuyer
     , tvcsCompanionSizes
     , tvcsSkippableAdType
     , tvcsCreativeSizeType
+    , tvcsAllowedFormats
+    , tvcsNATiveTemplate
 
     -- ** DealTermsGuaranteedFixedPriceTermsBillingInfo
     , DealTermsGuaranteedFixedPriceTermsBillingInfo
@@ -597,10 +617,12 @@ module Network.Google.AdExchangeBuyer
     -- ** TargetingValue
     , TargetingValue
     , targetingValue
+    , tvDemogAgeCriteriaValue
     , tvCreativeSizeValue
     , tvStringValue
     , tvLongValue
     , tvDayPartTargetingValue
+    , tvDemogGenderCriteriaValue
 
     -- ** CreativeNATiveAdAppIcon
     , CreativeNATiveAdAppIcon
@@ -671,6 +693,7 @@ module Network.Google.AdExchangeBuyer
     , proLastUpdateTimeMs
     , proKind
     , proRevisionNumber
+    , proBilledBuyer
     , proPrivateAuctionId
     , proDeliveryControl
     , proHasCreatorSignedOff
@@ -681,11 +704,14 @@ module Network.Google.AdExchangeBuyer
     , proFlightEndTimeMs
     , proName
     , proCreatorContacts
+    , proMarketplacePublisherProFileId
     , proPublisherProvidedForecast
     , proLabels
+    , proCreatorRole
     , proPublisherProFileId
     , proLegacyOfferId
     , proProductId
+    , proBuyer
 
     -- ** CreativeServingRestrictionsItem
     , CreativeServingRestrictionsItem
@@ -722,7 +748,6 @@ module Network.Google.AdExchangeBuyer
     , ppfapProFileId
     , ppfapIsParent
     , ppfapSeller
-    , ppfapAccountId
     , ppfapName
     , ppfapBuyerPitchStatement
     , ppfapPublisherProvidedForecast
@@ -738,6 +763,7 @@ module Network.Google.AdExchangeBuyer
     , marketplaceDeal
     , mdExternalDealId
     , mdBuyerPrivateData
+    , mdIsSetupComplete
     , mdWebPropertyCode
     , mdCreationTimeMs
     , mdTerms

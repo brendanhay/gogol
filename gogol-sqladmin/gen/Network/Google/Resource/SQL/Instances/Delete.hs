@@ -22,7 +22,7 @@
 --
 -- Deletes a Cloud SQL instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.instances.delete@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.instances.delete@.
 module Network.Google.Resource.SQL.Instances.Delete
     (
     -- * REST Resource

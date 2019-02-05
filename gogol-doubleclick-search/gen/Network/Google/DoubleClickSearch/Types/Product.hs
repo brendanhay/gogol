@@ -160,14 +160,16 @@ rrTimeRange
   = lens _rrTimeRange (\ s a -> s{_rrTimeRange = a})
 
 -- | Synchronous report only. A list of columns and directions defining
--- sorting to be performed on the report rows.
+-- sorting to be performed on the report rows. The maximum number of
+-- orderings per request is 300.
 rrOrderBy :: Lens' ReportRequest [ReportRequestOrderByItem]
 rrOrderBy
   = lens _rrOrderBy (\ s a -> s{_rrOrderBy = a}) .
       _Default
       . _Coerce
 
--- | A list of filters to be applied to the report.
+-- | A list of filters to be applied to the report. The maximum number of
+-- filters per request is 300.
 rrFilters :: Lens' ReportRequest [ReportRequestFiltersItem]
 rrFilters
   = lens _rrFilters (\ s a -> s{_rrFilters = a}) .
@@ -207,7 +209,8 @@ rrStartRow
 -- Search columns and saved columns. For DoubleClick Search columns, only
 -- the columnName parameter is required. For saved columns only the
 -- savedColumnName parameter is required. Both columnName and
--- savedColumnName cannot be set in the same stanza.
+-- savedColumnName cannot be set in the same stanza. The maximum number of
+-- columns per request is 300.
 rrColumns :: Lens' ReportRequest [ReportAPIColumnSpec]
 rrColumns
   = lens _rrColumns (\ s a -> s{_rrColumns = a}) .
@@ -229,7 +232,7 @@ rrVerifySingleTimeZone
   = lens _rrVerifySingleTimeZone
       (\ s a -> s{_rrVerifySingleTimeZone = a})
 
--- | Synchronous report only. The maxinum number of rows to return;
+-- | Synchronous report only. The maximum number of rows to return;
 -- additional rows are dropped. Acceptable values are 0 to 10000,
 -- inclusive. Defaults to 10000.
 rrRowCount :: Lens' ReportRequest Int32
@@ -544,7 +547,8 @@ rrfiOperator :: Lens' ReportRequestFiltersItem (Maybe Text)
 rrfiOperator
   = lens _rrfiOperator (\ s a -> s{_rrfiOperator = a})
 
--- | A list of values to filter the column value against.
+-- | A list of values to filter the column value against. The maximum number
+-- of filter values per request is 300.
 rrfiValues :: Lens' ReportRequestFiltersItem [JSONValue]
 rrfiValues
   = lens _rrfiValues (\ s a -> s{_rrfiValues = a}) .
@@ -1260,11 +1264,12 @@ cDsConversionId
       (\ s a -> s{_cDsConversionId = a})
       . mapping _Coerce
 
--- | For offline conversions, this is an ID that advertisers are required to
--- provide. Advertisers can specify any ID that is meaningful to them. For
--- online conversions, DS copies the dsConversionId or floodlightOrderId
--- into this property depending on the advertiser\'s Floodlight
--- instructions.
+-- | For offline conversions, advertisers provide this ID. Advertisers can
+-- specify any ID that is meaningful to them. Each conversion in a request
+-- must specify a unique ID, and the combination of ID and timestamp must
+-- be unique amongst all conversions within the advertiser. For online
+-- conversions, DS copies the dsConversionId or floodlightOrderId into this
+-- property depending on the advertiser\'s Floodlight instructions.
 cConversionId :: Lens' Conversion (Maybe Text)
 cConversionId
   = lens _cConversionId

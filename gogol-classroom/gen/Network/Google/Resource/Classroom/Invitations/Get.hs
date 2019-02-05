@@ -38,10 +38,8 @@ module Network.Google.Resource.Classroom.Invitations.Get
     -- * Request Lenses
     , igXgafv
     , igUploadProtocol
-    , igPp
     , igAccessToken
     , igUploadType
-    , igBearerToken
     , igId
     , igCallback
     ) where
@@ -55,14 +53,12 @@ type InvitationsGetResource =
      "v1" :>
        "invitations" :>
          Capture "id" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] Invitation
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] Invitation
 
 -- | Returns an invitation. This method returns the following error codes: *
 -- \`PERMISSION_DENIED\` if the requesting user is not permitted to view
@@ -71,12 +67,10 @@ type InvitationsGetResource =
 --
 -- /See:/ 'invitationsGet' smart constructor.
 data InvitationsGet = InvitationsGet'
-    { _igXgafv          :: !(Maybe Text)
+    { _igXgafv          :: !(Maybe Xgafv)
     , _igUploadProtocol :: !(Maybe Text)
-    , _igPp             :: !Bool
     , _igAccessToken    :: !(Maybe Text)
     , _igUploadType     :: !(Maybe Text)
-    , _igBearerToken    :: !(Maybe Text)
     , _igId             :: !Text
     , _igCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -89,13 +83,9 @@ data InvitationsGet = InvitationsGet'
 --
 -- * 'igUploadProtocol'
 --
--- * 'igPp'
---
 -- * 'igAccessToken'
 --
 -- * 'igUploadType'
---
--- * 'igBearerToken'
 --
 -- * 'igId'
 --
@@ -107,16 +97,14 @@ invitationsGet pIgId_ =
     InvitationsGet'
     { _igXgafv = Nothing
     , _igUploadProtocol = Nothing
-    , _igPp = True
     , _igAccessToken = Nothing
     , _igUploadType = Nothing
-    , _igBearerToken = Nothing
     , _igId = pIgId_
     , _igCallback = Nothing
     }
 
 -- | V1 error format.
-igXgafv :: Lens' InvitationsGet (Maybe Text)
+igXgafv :: Lens' InvitationsGet (Maybe Xgafv)
 igXgafv = lens _igXgafv (\ s a -> s{_igXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -124,10 +112,6 @@ igUploadProtocol :: Lens' InvitationsGet (Maybe Text)
 igUploadProtocol
   = lens _igUploadProtocol
       (\ s a -> s{_igUploadProtocol = a})
-
--- | Pretty-print response.
-igPp :: Lens' InvitationsGet Bool
-igPp = lens _igPp (\ s a -> s{_igPp = a})
 
 -- | OAuth access token.
 igAccessToken :: Lens' InvitationsGet (Maybe Text)
@@ -139,12 +123,6 @@ igAccessToken
 igUploadType :: Lens' InvitationsGet (Maybe Text)
 igUploadType
   = lens _igUploadType (\ s a -> s{_igUploadType = a})
-
--- | OAuth bearer token.
-igBearerToken :: Lens' InvitationsGet (Maybe Text)
-igBearerToken
-  = lens _igBearerToken
-      (\ s a -> s{_igBearerToken = a})
 
 -- | Identifier of the invitation to return.
 igId :: Lens' InvitationsGet Text
@@ -161,10 +139,8 @@ instance GoogleRequest InvitationsGet where
              '["https://www.googleapis.com/auth/classroom.rosters",
                "https://www.googleapis.com/auth/classroom.rosters.readonly"]
         requestClient InvitationsGet'{..}
-          = go _igId _igXgafv _igUploadProtocol (Just _igPp)
-              _igAccessToken
+          = go _igId _igXgafv _igUploadProtocol _igAccessToken
               _igUploadType
-              _igBearerToken
               _igCallback
               (Just AltJSON)
               classroomService

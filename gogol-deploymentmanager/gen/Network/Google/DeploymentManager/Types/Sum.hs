@@ -16,7 +16,7 @@
 --
 module Network.Google.DeploymentManager.Types.Sum where
 
-import           Network.Google.Prelude
+import           Network.Google.Prelude hiding (Bytes)
 
 -- | Sets the policy to use for creating new resources.
 data DeploymentsUpdateCreatePolicy
@@ -46,10 +46,37 @@ instance ToJSON DeploymentsUpdateCreatePolicy where
     toJSON = toJSONText
 
 -- | Sets the policy to use for deleting resources.
-data DeploymentsUpdateDeletePolicy
+data DeploymentsDeleteDeletePolicy
     = Abandon
       -- ^ @ABANDON@
     | Delete'
+      -- ^ @DELETE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable DeploymentsDeleteDeletePolicy
+
+instance FromHttpApiData DeploymentsDeleteDeletePolicy where
+    parseQueryParam = \case
+        "ABANDON" -> Right Abandon
+        "DELETE" -> Right Delete'
+        x -> Left ("Unable to parse DeploymentsDeleteDeletePolicy from: " <> x)
+
+instance ToHttpApiData DeploymentsDeleteDeletePolicy where
+    toQueryParam = \case
+        Abandon -> "ABANDON"
+        Delete' -> "DELETE"
+
+instance FromJSON DeploymentsDeleteDeletePolicy where
+    parseJSON = parseJSONText "DeploymentsDeleteDeletePolicy"
+
+instance ToJSON DeploymentsDeleteDeletePolicy where
+    toJSON = toJSONText
+
+-- | Sets the policy to use for deleting resources.
+data DeploymentsUpdateDeletePolicy
+    = DUDPAbandon
+      -- ^ @ABANDON@
+    | DUDPDelete'
       -- ^ @DELETE@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
@@ -57,14 +84,14 @@ instance Hashable DeploymentsUpdateDeletePolicy
 
 instance FromHttpApiData DeploymentsUpdateDeletePolicy where
     parseQueryParam = \case
-        "ABANDON" -> Right Abandon
-        "DELETE" -> Right Delete'
+        "ABANDON" -> Right DUDPAbandon
+        "DELETE" -> Right DUDPDelete'
         x -> Left ("Unable to parse DeploymentsUpdateDeletePolicy from: " <> x)
 
 instance ToHttpApiData DeploymentsUpdateDeletePolicy where
     toQueryParam = \case
-        Abandon -> "ABANDON"
-        Delete' -> "DELETE"
+        DUDPAbandon -> "ABANDON"
+        DUDPDelete' -> "DELETE"
 
 instance FromJSON DeploymentsUpdateDeletePolicy where
     parseJSON = parseJSONText "DeploymentsUpdateDeletePolicy"
@@ -124,4 +151,31 @@ instance FromJSON DeploymentsPatchCreatePolicy where
     parseJSON = parseJSONText "DeploymentsPatchCreatePolicy"
 
 instance ToJSON DeploymentsPatchCreatePolicy where
+    toJSON = toJSONText
+
+-- | Sets the policy to use for creating new resources.
+data DeploymentsInsertCreatePolicy
+    = DICPAcquire
+      -- ^ @ACQUIRE@
+    | DICPCreateOrAcquire
+      -- ^ @CREATE_OR_ACQUIRE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable DeploymentsInsertCreatePolicy
+
+instance FromHttpApiData DeploymentsInsertCreatePolicy where
+    parseQueryParam = \case
+        "ACQUIRE" -> Right DICPAcquire
+        "CREATE_OR_ACQUIRE" -> Right DICPCreateOrAcquire
+        x -> Left ("Unable to parse DeploymentsInsertCreatePolicy from: " <> x)
+
+instance ToHttpApiData DeploymentsInsertCreatePolicy where
+    toQueryParam = \case
+        DICPAcquire -> "ACQUIRE"
+        DICPCreateOrAcquire -> "CREATE_OR_ACQUIRE"
+
+instance FromJSON DeploymentsInsertCreatePolicy where
+    parseJSON = parseJSONText "DeploymentsInsertCreatePolicy"
+
+instance ToJSON DeploymentsInsertCreatePolicy where
     toJSON = toJSONText

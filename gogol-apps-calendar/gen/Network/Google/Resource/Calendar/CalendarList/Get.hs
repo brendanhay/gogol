@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns an entry on the user\'s calendar list.
+-- Returns a calendar from the user\'s calendar list.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.calendarList.get@.
 module Network.Google.Resource.Calendar.CalendarList.Get
@@ -51,7 +51,7 @@ type CalendarListGetResource =
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] CalendarListEntry
 
--- | Returns an entry on the user\'s calendar list.
+-- | Returns a calendar from the user\'s calendar list.
 --
 -- /See:/ 'calendarListGet' smart constructor.
 newtype CalendarListGet = CalendarListGet'

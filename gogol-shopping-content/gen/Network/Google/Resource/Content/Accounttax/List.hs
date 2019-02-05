@@ -34,9 +34,9 @@ module Network.Google.Resource.Content.Accounttax.List
     , AccounttaxList
 
     -- * Request Lenses
-    , allMerchantId
-    , allPageToken
-    , allMaxResults
+    , al1MerchantId
+    , al1PageToken
+    , al1MaxResults
     ) where
 
 import           Network.Google.Prelude
@@ -46,7 +46,7 @@ import           Network.Google.ShoppingContent.Types
 -- 'AccounttaxList' request conforms to.
 type AccounttaxListResource =
      "content" :>
-       "v2" :>
+       "v2.1" :>
          Capture "merchantId" (Textual Word64) :>
            "accounttax" :>
              QueryParam "pageToken" Text :>
@@ -59,48 +59,48 @@ type AccounttaxListResource =
 --
 -- /See:/ 'accounttaxList' smart constructor.
 data AccounttaxList = AccounttaxList'
-    { _allMerchantId :: !(Textual Word64)
-    , _allPageToken  :: !(Maybe Text)
-    , _allMaxResults :: !(Maybe (Textual Word32))
+    { _al1MerchantId :: !(Textual Word64)
+    , _al1PageToken  :: !(Maybe Text)
+    , _al1MaxResults :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccounttaxList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'allMerchantId'
+-- * 'al1MerchantId'
 --
--- * 'allPageToken'
+-- * 'al1PageToken'
 --
--- * 'allMaxResults'
+-- * 'al1MaxResults'
 accounttaxList
-    :: Word64 -- ^ 'allMerchantId'
+    :: Word64 -- ^ 'al1MerchantId'
     -> AccounttaxList
-accounttaxList pAllMerchantId_ =
+accounttaxList pAl1MerchantId_ =
     AccounttaxList'
-    { _allMerchantId = _Coerce # pAllMerchantId_
-    , _allPageToken = Nothing
-    , _allMaxResults = Nothing
+    { _al1MerchantId = _Coerce # pAl1MerchantId_
+    , _al1PageToken = Nothing
+    , _al1MaxResults = Nothing
     }
 
--- | The ID of the managing account.
-allMerchantId :: Lens' AccounttaxList Word64
-allMerchantId
-  = lens _allMerchantId
-      (\ s a -> s{_allMerchantId = a})
+-- | The ID of the managing account. This must be a multi-client account.
+al1MerchantId :: Lens' AccounttaxList Word64
+al1MerchantId
+  = lens _al1MerchantId
+      (\ s a -> s{_al1MerchantId = a})
       . _Coerce
 
 -- | The token returned by the previous request.
-allPageToken :: Lens' AccounttaxList (Maybe Text)
-allPageToken
-  = lens _allPageToken (\ s a -> s{_allPageToken = a})
+al1PageToken :: Lens' AccounttaxList (Maybe Text)
+al1PageToken
+  = lens _al1PageToken (\ s a -> s{_al1PageToken = a})
 
 -- | The maximum number of tax settings to return in the response, used for
 -- paging.
-allMaxResults :: Lens' AccounttaxList (Maybe Word32)
-allMaxResults
-  = lens _allMaxResults
-      (\ s a -> s{_allMaxResults = a})
+al1MaxResults :: Lens' AccounttaxList (Maybe Word32)
+al1MaxResults
+  = lens _al1MaxResults
+      (\ s a -> s{_al1MaxResults = a})
       . mapping _Coerce
 
 instance GoogleRequest AccounttaxList where
@@ -108,7 +108,7 @@ instance GoogleRequest AccounttaxList where
         type Scopes AccounttaxList =
              '["https://www.googleapis.com/auth/content"]
         requestClient AccounttaxList'{..}
-          = go _allMerchantId _allPageToken _allMaxResults
+          = go _al1MerchantId _al1PageToken _al1MaxResults
               (Just AltJSON)
               shoppingContentService
           where go

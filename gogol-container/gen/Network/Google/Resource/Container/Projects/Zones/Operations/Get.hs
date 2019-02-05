@@ -22,7 +22,7 @@
 --
 -- Gets the specified operation.
 --
--- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @container.projects.zones.operations.get@.
+-- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.zones.operations.get@.
 module Network.Google.Resource.Container.Projects.Zones.Operations.Get
     (
     -- * REST Resource
@@ -35,11 +35,10 @@ module Network.Google.Resource.Container.Projects.Zones.Operations.Get
     -- * Request Lenses
     , pzogXgafv
     , pzogUploadProtocol
-    , pzogPp
     , pzogAccessToken
     , pzogUploadType
     , pzogZone
-    , pzogBearerToken
+    , pzogName
     , pzogProjectId
     , pzogOperationId
     , pzogCallback
@@ -58,27 +57,24 @@ type ProjectsZonesOperationsGetResource =
              Capture "zone" Text :>
                "operations" :>
                  Capture "operationId" Text :>
-                   QueryParam "$.xgafv" Text :>
+                   QueryParam "$.xgafv" Xgafv :>
                      QueryParam "upload_protocol" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "access_token" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "bearer_token" Text :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" AltJSON :>
-                                   Get '[JSON] Operation
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "name" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :> Get '[JSON] Operation
 
 -- | Gets the specified operation.
 --
 -- /See:/ 'projectsZonesOperationsGet' smart constructor.
 data ProjectsZonesOperationsGet = ProjectsZonesOperationsGet'
-    { _pzogXgafv          :: !(Maybe Text)
+    { _pzogXgafv          :: !(Maybe Xgafv)
     , _pzogUploadProtocol :: !(Maybe Text)
-    , _pzogPp             :: !Bool
     , _pzogAccessToken    :: !(Maybe Text)
     , _pzogUploadType     :: !(Maybe Text)
     , _pzogZone           :: !Text
-    , _pzogBearerToken    :: !(Maybe Text)
+    , _pzogName           :: !(Maybe Text)
     , _pzogProjectId      :: !Text
     , _pzogOperationId    :: !Text
     , _pzogCallback       :: !(Maybe Text)
@@ -92,15 +88,13 @@ data ProjectsZonesOperationsGet = ProjectsZonesOperationsGet'
 --
 -- * 'pzogUploadProtocol'
 --
--- * 'pzogPp'
---
 -- * 'pzogAccessToken'
 --
 -- * 'pzogUploadType'
 --
 -- * 'pzogZone'
 --
--- * 'pzogBearerToken'
+-- * 'pzogName'
 --
 -- * 'pzogProjectId'
 --
@@ -116,18 +110,17 @@ projectsZonesOperationsGet pPzogZone_ pPzogProjectId_ pPzogOperationId_ =
     ProjectsZonesOperationsGet'
     { _pzogXgafv = Nothing
     , _pzogUploadProtocol = Nothing
-    , _pzogPp = True
     , _pzogAccessToken = Nothing
     , _pzogUploadType = Nothing
     , _pzogZone = pPzogZone_
-    , _pzogBearerToken = Nothing
+    , _pzogName = Nothing
     , _pzogProjectId = pPzogProjectId_
     , _pzogOperationId = pPzogOperationId_
     , _pzogCallback = Nothing
     }
 
 -- | V1 error format.
-pzogXgafv :: Lens' ProjectsZonesOperationsGet (Maybe Text)
+pzogXgafv :: Lens' ProjectsZonesOperationsGet (Maybe Xgafv)
 pzogXgafv
   = lens _pzogXgafv (\ s a -> s{_pzogXgafv = a})
 
@@ -136,10 +129,6 @@ pzogUploadProtocol :: Lens' ProjectsZonesOperationsGet (Maybe Text)
 pzogUploadProtocol
   = lens _pzogUploadProtocol
       (\ s a -> s{_pzogUploadProtocol = a})
-
--- | Pretty-print response.
-pzogPp :: Lens' ProjectsZonesOperationsGet Bool
-pzogPp = lens _pzogPp (\ s a -> s{_pzogPp = a})
 
 -- | OAuth access token.
 pzogAccessToken :: Lens' ProjectsZonesOperationsGet (Maybe Text)
@@ -153,25 +142,27 @@ pzogUploadType
   = lens _pzogUploadType
       (\ s a -> s{_pzogUploadType = a})
 
--- | The name of the Google Compute Engine
+-- | Deprecated. The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
+-- This field has been deprecated and replaced by the name field.
 pzogZone :: Lens' ProjectsZonesOperationsGet Text
 pzogZone = lens _pzogZone (\ s a -> s{_pzogZone = a})
 
--- | OAuth bearer token.
-pzogBearerToken :: Lens' ProjectsZonesOperationsGet (Maybe Text)
-pzogBearerToken
-  = lens _pzogBearerToken
-      (\ s a -> s{_pzogBearerToken = a})
+-- | The name (project, location, operation id) of the operation to get.
+-- Specified in the format \'projects\/*\/locations\/*\/operations\/*\'.
+pzogName :: Lens' ProjectsZonesOperationsGet (Maybe Text)
+pzogName = lens _pzogName (\ s a -> s{_pzogName = a})
 
--- | The Google Developers Console [project ID or project
--- number](https:\/\/support.google.com\/cloud\/answer\/6158840).
+-- | Deprecated. The Google Developers Console [project ID or project
+-- number](https:\/\/support.google.com\/cloud\/answer\/6158840). This
+-- field has been deprecated and replaced by the name field.
 pzogProjectId :: Lens' ProjectsZonesOperationsGet Text
 pzogProjectId
   = lens _pzogProjectId
       (\ s a -> s{_pzogProjectId = a})
 
--- | The server-assigned \`name\` of the operation.
+-- | Deprecated. The server-assigned \`name\` of the operation. This field
+-- has been deprecated and replaced by the name field.
 pzogOperationId :: Lens' ProjectsZonesOperationsGet Text
 pzogOperationId
   = lens _pzogOperationId
@@ -191,10 +182,9 @@ instance GoogleRequest ProjectsZonesOperationsGet
           = go _pzogProjectId _pzogZone _pzogOperationId
               _pzogXgafv
               _pzogUploadProtocol
-              (Just _pzogPp)
               _pzogAccessToken
               _pzogUploadType
-              _pzogBearerToken
+              _pzogName
               _pzogCallback
               (Just AltJSON)
               containerService

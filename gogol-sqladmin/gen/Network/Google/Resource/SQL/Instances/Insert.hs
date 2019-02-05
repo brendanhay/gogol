@@ -22,7 +22,7 @@
 --
 -- Creates a new Cloud SQL instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.instances.insert@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.instances.insert@.
 module Network.Google.Resource.SQL.Instances.Insert
     (
     -- * REST Resource
@@ -33,8 +33,8 @@ module Network.Google.Resource.SQL.Instances.Insert
     , InstancesInsert
 
     -- * Request Lenses
-    , insProject
-    , insPayload
+    , iiiProject
+    , iiiPayload
     ) where
 
 import           Network.Google.Prelude
@@ -56,37 +56,37 @@ type InstancesInsertResource =
 --
 -- /See:/ 'instancesInsert' smart constructor.
 data InstancesInsert = InstancesInsert'
-    { _insProject :: !Text
-    , _insPayload :: !DatabaseInstance
+    { _iiiProject :: !Text
+    , _iiiPayload :: !DatabaseInstance
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'insProject'
+-- * 'iiiProject'
 --
--- * 'insPayload'
+-- * 'iiiPayload'
 instancesInsert
-    :: Text -- ^ 'insProject'
-    -> DatabaseInstance -- ^ 'insPayload'
+    :: Text -- ^ 'iiiProject'
+    -> DatabaseInstance -- ^ 'iiiPayload'
     -> InstancesInsert
-instancesInsert pInsProject_ pInsPayload_ =
+instancesInsert pIiiProject_ pIiiPayload_ =
     InstancesInsert'
-    { _insProject = pInsProject_
-    , _insPayload = pInsPayload_
+    { _iiiProject = pIiiProject_
+    , _iiiPayload = pIiiPayload_
     }
 
 -- | Project ID of the project to which the newly created Cloud SQL instances
 -- should belong.
-insProject :: Lens' InstancesInsert Text
-insProject
-  = lens _insProject (\ s a -> s{_insProject = a})
+iiiProject :: Lens' InstancesInsert Text
+iiiProject
+  = lens _iiiProject (\ s a -> s{_iiiProject = a})
 
 -- | Multipart request metadata.
-insPayload :: Lens' InstancesInsert DatabaseInstance
-insPayload
-  = lens _insPayload (\ s a -> s{_insPayload = a})
+iiiPayload :: Lens' InstancesInsert DatabaseInstance
+iiiPayload
+  = lens _iiiPayload (\ s a -> s{_iiiPayload = a})
 
 instance GoogleRequest InstancesInsert where
         type Rs InstancesInsert = Operation
@@ -94,7 +94,7 @@ instance GoogleRequest InstancesInsert where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient InstancesInsert'{..}
-          = go _insProject (Just AltJSON) _insPayload
+          = go _iiiProject (Just AltJSON) _iiiPayload
               sQLAdminService
           where go
                   = buildClient

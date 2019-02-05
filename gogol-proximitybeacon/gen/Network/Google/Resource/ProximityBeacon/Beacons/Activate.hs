@@ -28,7 +28,7 @@
 -- from a signed-in user with **Is owner** or **Can edit** permissions in
 -- the Google Developers Console project.
 --
--- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @proximitybeacon.beacons.activate@.
+-- /See:/ <https://developers.google.com/beacons/proximity/ Proximity Beacon API Reference> for @proximitybeacon.beacons.activate@.
 module Network.Google.Resource.ProximityBeacon.Beacons.Activate
     (
     -- * REST Resource
@@ -41,11 +41,9 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Activate
     -- * Request Lenses
     , baXgafv
     , baUploadProtocol
-    , baPp
     , baAccessToken
     , baBeaconName
     , baUploadType
-    , baBearerToken
     , baProjectId
     , baCallback
     ) where
@@ -58,15 +56,13 @@ import           Network.Google.ProximityBeacon.Types
 type BeaconsActivateResource =
      "v1beta1" :>
        CaptureMode "beaconName" "activate" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "projectId" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :> Post '[JSON] Empty
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "projectId" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :> Post '[JSON] Empty
 
 -- | Activates a beacon. A beacon that is active will return information and
 -- attachment data when queried via \`beaconinfo.getforobserved\`. Calling
@@ -78,13 +74,11 @@ type BeaconsActivateResource =
 --
 -- /See:/ 'beaconsActivate' smart constructor.
 data BeaconsActivate = BeaconsActivate'
-    { _baXgafv          :: !(Maybe Text)
+    { _baXgafv          :: !(Maybe Xgafv)
     , _baUploadProtocol :: !(Maybe Text)
-    , _baPp             :: !Bool
     , _baAccessToken    :: !(Maybe Text)
     , _baBeaconName     :: !Text
     , _baUploadType     :: !(Maybe Text)
-    , _baBearerToken    :: !(Maybe Text)
     , _baProjectId      :: !(Maybe Text)
     , _baCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -97,15 +91,11 @@ data BeaconsActivate = BeaconsActivate'
 --
 -- * 'baUploadProtocol'
 --
--- * 'baPp'
---
 -- * 'baAccessToken'
 --
 -- * 'baBeaconName'
 --
 -- * 'baUploadType'
---
--- * 'baBearerToken'
 --
 -- * 'baProjectId'
 --
@@ -117,17 +107,15 @@ beaconsActivate pBaBeaconName_ =
     BeaconsActivate'
     { _baXgafv = Nothing
     , _baUploadProtocol = Nothing
-    , _baPp = True
     , _baAccessToken = Nothing
     , _baBeaconName = pBaBeaconName_
     , _baUploadType = Nothing
-    , _baBearerToken = Nothing
     , _baProjectId = Nothing
     , _baCallback = Nothing
     }
 
 -- | V1 error format.
-baXgafv :: Lens' BeaconsActivate (Maybe Text)
+baXgafv :: Lens' BeaconsActivate (Maybe Xgafv)
 baXgafv = lens _baXgafv (\ s a -> s{_baXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -135,10 +123,6 @@ baUploadProtocol :: Lens' BeaconsActivate (Maybe Text)
 baUploadProtocol
   = lens _baUploadProtocol
       (\ s a -> s{_baUploadProtocol = a})
-
--- | Pretty-print response.
-baPp :: Lens' BeaconsActivate Bool
-baPp = lens _baPp (\ s a -> s{_baPp = a})
 
 -- | OAuth access token.
 baAccessToken :: Lens' BeaconsActivate (Maybe Text)
@@ -161,12 +145,6 @@ baUploadType :: Lens' BeaconsActivate (Maybe Text)
 baUploadType
   = lens _baUploadType (\ s a -> s{_baUploadType = a})
 
--- | OAuth bearer token.
-baBearerToken :: Lens' BeaconsActivate (Maybe Text)
-baBearerToken
-  = lens _baBearerToken
-      (\ s a -> s{_baBearerToken = a})
-
 -- | The project id of the beacon to activate. If the project id is not
 -- specified then the project making the request is used. The project id
 -- must match the project that owns the beacon. Optional.
@@ -185,10 +163,8 @@ instance GoogleRequest BeaconsActivate where
              '["https://www.googleapis.com/auth/userlocation.beacon.registry"]
         requestClient BeaconsActivate'{..}
           = go _baBeaconName _baXgafv _baUploadProtocol
-              (Just _baPp)
               _baAccessToken
               _baUploadType
-              _baBearerToken
               _baProjectId
               _baCallback
               (Just AltJSON)

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the monitored resource descriptors used by Stackdriver Logging.
+-- Lists the descriptors for monitored resource types used by Logging.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.monitoredResourceDescriptors.list@.
 module Network.Google.Resource.Logging.MonitoredResourceDescriptors.List
@@ -35,10 +35,8 @@ module Network.Google.Resource.Logging.MonitoredResourceDescriptors.List
     -- * Request Lenses
     , mrdlXgafv
     , mrdlUploadProtocol
-    , mrdlPp
     , mrdlAccessToken
     , mrdlUploadType
-    , mrdlBearerToken
     , mrdlPageToken
     , mrdlPageSize
     , mrdlCallback
@@ -54,27 +52,22 @@ type MonitoredResourceDescriptorsListResource =
        "monitoredResourceDescriptors" :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "pageSize" (Textual Int32) :>
-                         QueryParam "callback" Text :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON]
-                               ListMonitoredResourceDescriptorsResponse
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "pageSize" (Textual Int32) :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] ListMonitoredResourceDescriptorsResponse
 
--- | Lists the monitored resource descriptors used by Stackdriver Logging.
+-- | Lists the descriptors for monitored resource types used by Logging.
 --
 -- /See:/ 'monitoredResourceDescriptorsList' smart constructor.
 data MonitoredResourceDescriptorsList = MonitoredResourceDescriptorsList'
     { _mrdlXgafv          :: !(Maybe Xgafv)
     , _mrdlUploadProtocol :: !(Maybe Text)
-    , _mrdlPp             :: !Bool
     , _mrdlAccessToken    :: !(Maybe Text)
     , _mrdlUploadType     :: !(Maybe Text)
-    , _mrdlBearerToken    :: !(Maybe Text)
     , _mrdlPageToken      :: !(Maybe Text)
     , _mrdlPageSize       :: !(Maybe (Textual Int32))
     , _mrdlCallback       :: !(Maybe Text)
@@ -88,13 +81,9 @@ data MonitoredResourceDescriptorsList = MonitoredResourceDescriptorsList'
 --
 -- * 'mrdlUploadProtocol'
 --
--- * 'mrdlPp'
---
 -- * 'mrdlAccessToken'
 --
 -- * 'mrdlUploadType'
---
--- * 'mrdlBearerToken'
 --
 -- * 'mrdlPageToken'
 --
@@ -107,10 +96,8 @@ monitoredResourceDescriptorsList =
     MonitoredResourceDescriptorsList'
     { _mrdlXgafv = Nothing
     , _mrdlUploadProtocol = Nothing
-    , _mrdlPp = True
     , _mrdlAccessToken = Nothing
     , _mrdlUploadType = Nothing
-    , _mrdlBearerToken = Nothing
     , _mrdlPageToken = Nothing
     , _mrdlPageSize = Nothing
     , _mrdlCallback = Nothing
@@ -127,10 +114,6 @@ mrdlUploadProtocol
   = lens _mrdlUploadProtocol
       (\ s a -> s{_mrdlUploadProtocol = a})
 
--- | Pretty-print response.
-mrdlPp :: Lens' MonitoredResourceDescriptorsList Bool
-mrdlPp = lens _mrdlPp (\ s a -> s{_mrdlPp = a})
-
 -- | OAuth access token.
 mrdlAccessToken :: Lens' MonitoredResourceDescriptorsList (Maybe Text)
 mrdlAccessToken
@@ -143,15 +126,9 @@ mrdlUploadType
   = lens _mrdlUploadType
       (\ s a -> s{_mrdlUploadType = a})
 
--- | OAuth bearer token.
-mrdlBearerToken :: Lens' MonitoredResourceDescriptorsList (Maybe Text)
-mrdlBearerToken
-  = lens _mrdlBearerToken
-      (\ s a -> s{_mrdlBearerToken = a})
-
 -- | Optional. If present, then retrieve the next batch of results from the
--- preceding call to this method. \`pageToken\` must be the value of
--- \`nextPageToken\` from the previous response. The values of other method
+-- preceding call to this method. pageToken must be the value of
+-- nextPageToken from the previous response. The values of other method
 -- parameters should be identical to those in the previous call.
 mrdlPageToken :: Lens' MonitoredResourceDescriptorsList (Maybe Text)
 mrdlPageToken
@@ -159,8 +136,8 @@ mrdlPageToken
       (\ s a -> s{_mrdlPageToken = a})
 
 -- | Optional. The maximum number of results to return from this request.
--- Non-positive values are ignored. The presence of \`nextPageToken\` in
--- the response indicates that more results might be available.
+-- Non-positive values are ignored. The presence of nextPageToken in the
+-- response indicates that more results might be available.
 mrdlPageSize :: Lens' MonitoredResourceDescriptorsList (Maybe Int32)
 mrdlPageSize
   = lens _mrdlPageSize (\ s a -> s{_mrdlPageSize = a})
@@ -181,10 +158,8 @@ instance GoogleRequest
                "https://www.googleapis.com/auth/logging.admin",
                "https://www.googleapis.com/auth/logging.read"]
         requestClient MonitoredResourceDescriptorsList'{..}
-          = go _mrdlXgafv _mrdlUploadProtocol (Just _mrdlPp)
-              _mrdlAccessToken
+          = go _mrdlXgafv _mrdlUploadProtocol _mrdlAccessToken
               _mrdlUploadType
-              _mrdlBearerToken
               _mrdlPageToken
               _mrdlPageSize
               _mrdlCallback

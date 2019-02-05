@@ -86,13 +86,13 @@ chromeosDevicesGet pCdgCustomerId_ pCdgDeviceId_ =
     , _cdgProjection = Nothing
     }
 
--- | Immutable id of the Google Apps account
+-- | Immutable ID of the G Suite account
 cdgCustomerId :: Lens' ChromeosDevicesGet Text
 cdgCustomerId
   = lens _cdgCustomerId
       (\ s a -> s{_cdgCustomerId = a})
 
--- | Immutable id of Chrome OS Device
+-- | Immutable ID of Chrome OS Device
 cdgDeviceId :: Lens' ChromeosDevicesGet Text
 cdgDeviceId
   = lens _cdgDeviceId (\ s a -> s{_cdgDeviceId = a})

@@ -41,11 +41,11 @@ module Network.Google.DNS
     -- ** dns.changes.list
     , module Network.Google.Resource.DNS.Changes.List
 
-    -- ** dns.dnskeys.get
-    , module Network.Google.Resource.DNS.DNSkeys.Get
+    -- ** dns.dnsKeys.get
+    , module Network.Google.Resource.DNS.DNSKeys.Get
 
-    -- ** dns.dnskeys.list
-    , module Network.Google.Resource.DNS.DNSkeys.List
+    -- ** dns.dnsKeys.list
+    , module Network.Google.Resource.DNS.DNSKeys.List
 
     -- ** dns.managedZoneOperations.get
     , module Network.Google.Resource.DNS.ManagedZoneOperations.Get
@@ -109,11 +109,6 @@ module Network.Google.DNS
 
     -- ** ManagedZoneDNSSecConfigState
     , ManagedZoneDNSSecConfigState (..)
-
-    -- ** ManagedZonesDeleteResponse
-    , ManagedZonesDeleteResponse
-    , managedZonesDeleteResponse
-    , mzdrHeader
 
     -- ** Project
     , Project
@@ -240,10 +235,16 @@ module Network.Google.DNS
     , mzNameServerSet
     , mzName
     , mzId
+    , mzLabels
     , mzDNSName
     , mzDescription
     , mzDNSsecConfig
     , mzNameServers
+
+    -- ** ManagedZoneLabels
+    , ManagedZoneLabels
+    , managedZoneLabels
+    , mzlAddtional
 
     -- ** Quota
     , Quota
@@ -284,8 +285,8 @@ import           Network.Google.Prelude
 import           Network.Google.Resource.DNS.Changes.Create
 import           Network.Google.Resource.DNS.Changes.Get
 import           Network.Google.Resource.DNS.Changes.List
-import           Network.Google.Resource.DNS.DNSkeys.Get
-import           Network.Google.Resource.DNS.DNSkeys.List
+import           Network.Google.Resource.DNS.DNSKeys.Get
+import           Network.Google.Resource.DNS.DNSKeys.List
 import           Network.Google.Resource.DNS.ManagedZoneOperations.Get
 import           Network.Google.Resource.DNS.ManagedZoneOperations.List
 import           Network.Google.Resource.DNS.ManagedZones.Create
@@ -303,7 +304,7 @@ TODO
 
 -- | Represents the entirety of the methods and resources available for the Google Cloud DNS API service.
 type DNSAPI =
-     DNSkeysListResource :<|> DNSkeysGetResource :<|>
+     DNSKeysListResource :<|> DNSKeysGetResource :<|>
        ChangesListResource
        :<|> ChangesGetResource
        :<|> ChangesCreateResource

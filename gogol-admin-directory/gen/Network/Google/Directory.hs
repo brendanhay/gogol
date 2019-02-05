@@ -13,9 +13,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Admin SDK Directory API lets you view and manage enterprise
--- resources such as users and groups, administrative notifications,
--- security features, and more.
+-- Manages enterprise resources such as users and groups, administrative
+-- notifications, security features, and more.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference>
 module Network.Google.Directory
@@ -77,6 +76,9 @@ module Network.Google.Directory
 
     -- ** directory.chromeosdevices.list
     , module Network.Google.Resource.Directory.ChromeosDevices.List
+
+    -- ** directory.chromeosdevices.moveDevicesToOu
+    , module Network.Google.Resource.Directory.ChromeosDevices.MoveDevicesToOu
 
     -- ** directory.chromeosdevices.patch
     , module Network.Google.Resource.Directory.ChromeosDevices.Patch
@@ -150,6 +152,9 @@ module Network.Google.Directory
     -- ** directory.members.get
     , module Network.Google.Resource.Directory.Members.Get
 
+    -- ** directory.members.hasMember
+    , module Network.Google.Resource.Directory.Members.HasMember
+
     -- ** directory.members.insert
     , module Network.Google.Resource.Directory.Members.Insert
 
@@ -210,6 +215,30 @@ module Network.Google.Directory
     -- ** directory.privileges.list
     , module Network.Google.Resource.Directory.Privileges.List
 
+    -- ** directory.resolvedAppAccessSettings.GetSettings
+    , module Network.Google.Resource.Directory.ResolvedAppAccessSettings.GetSettings
+
+    -- ** directory.resolvedAppAccessSettings.ListTrustedApps
+    , module Network.Google.Resource.Directory.ResolvedAppAccessSettings.ListTrustedApps
+
+    -- ** directory.resources.buildings.delete
+    , module Network.Google.Resource.Directory.Resources.Buildings.Delete
+
+    -- ** directory.resources.buildings.get
+    , module Network.Google.Resource.Directory.Resources.Buildings.Get
+
+    -- ** directory.resources.buildings.insert
+    , module Network.Google.Resource.Directory.Resources.Buildings.Insert
+
+    -- ** directory.resources.buildings.list
+    , module Network.Google.Resource.Directory.Resources.Buildings.List
+
+    -- ** directory.resources.buildings.patch
+    , module Network.Google.Resource.Directory.Resources.Buildings.Patch
+
+    -- ** directory.resources.buildings.update
+    , module Network.Google.Resource.Directory.Resources.Buildings.Update
+
     -- ** directory.resources.calendars.delete
     , module Network.Google.Resource.Directory.Resources.Calendars.Delete
 
@@ -227,6 +256,27 @@ module Network.Google.Directory
 
     -- ** directory.resources.calendars.update
     , module Network.Google.Resource.Directory.Resources.Calendars.Update
+
+    -- ** directory.resources.features.delete
+    , module Network.Google.Resource.Directory.Resources.Features.Delete
+
+    -- ** directory.resources.features.get
+    , module Network.Google.Resource.Directory.Resources.Features.Get
+
+    -- ** directory.resources.features.insert
+    , module Network.Google.Resource.Directory.Resources.Features.Insert
+
+    -- ** directory.resources.features.list
+    , module Network.Google.Resource.Directory.Resources.Features.List
+
+    -- ** directory.resources.features.patch
+    , module Network.Google.Resource.Directory.Resources.Features.Patch
+
+    -- ** directory.resources.features.rename
+    , module Network.Google.Resource.Directory.Resources.Features.Rename
+
+    -- ** directory.resources.features.update
+    , module Network.Google.Resource.Directory.Resources.Features.Update
 
     -- ** directory.roleAssignments.delete
     , module Network.Google.Resource.Directory.RoleAssignments.Delete
@@ -347,6 +397,17 @@ module Network.Google.Directory
 
     -- * Types
 
+    -- ** UserLocation
+    , UserLocation
+    , userLocation
+    , ulArea
+    , ulBuildingId
+    , ulDeskCode
+    , ulFloorName
+    , ulType
+    , ulCustomType
+    , ulFloorSection
+
     -- ** VerificationCode
     , VerificationCode
     , verificationCode
@@ -354,6 +415,13 @@ module Network.Google.Directory
     , vcEtag
     , vcKind
     , vcUserId
+
+    -- ** Feature
+    , Feature
+    , feature
+    , fEtags
+    , fKind
+    , fName
 
     -- ** OrgUnit
     , OrgUnit
@@ -433,6 +501,11 @@ module Network.Google.Directory
     -- ** UsersWatchEvent
     , UsersWatchEvent (..)
 
+    -- ** ChromeOSDeviceDiskVolumeReportsItem
+    , ChromeOSDeviceDiskVolumeReportsItem
+    , chromeOSDeviceDiskVolumeReportsItem
+    , coddvriVolumeInfo
+
     -- ** UserAddress
     , UserAddress
     , userAddress
@@ -493,7 +566,9 @@ module Network.Google.Directory
     , chromeOSDevice
     , codStatus
     , codEtag
+    , codCPUStatusReports
     , codAnnotatedUser
+    , codSystemRamFreeReports
     , codPlatformVersion
     , codLastSync
     , codActiveTimeRanges
@@ -508,14 +583,18 @@ module Network.Google.Directory
     , codModel
     , codWillAutoRenew
     , codMeid
+    , codDeviceFiles
     , codDeviceId
     , codBootMode
+    , codTpmVersionInfo
     , codOrderNumber
+    , codDiskVolumeReports
     , codAnnotatedAssetId
     , codNotes
     , codSerialNumber
     , codFirmwareVersion
     , codOSVersion
+    , codSystemRamTotal
 
     -- ** ChromeosDevicesPatchProjection
     , ChromeosDevicesPatchProjection (..)
@@ -550,8 +629,24 @@ module Network.Google.Directory
     , sSchemas
     , sKind
 
+    -- ** ChromeOSDeviceDeviceFilesItem
+    , ChromeOSDeviceDeviceFilesItem
+    , chromeOSDeviceDeviceFilesItem
+    , coddfiName
+    , coddfiDownloadURL
+    , coddfiType
+    , coddfiCreateTime
+
     -- ** UsersListViewType
     , UsersListViewType (..)
+
+    -- ** Buildings
+    , Buildings
+    , buildings
+    , bEtag
+    , bNextPageToken
+    , bBuildings
+    , bKind
 
     -- ** OrgUnitsListType
     , OrgUnitsListType (..)
@@ -596,6 +691,13 @@ module Network.Google.Directory
     , userCustomSchemas
     , ucsAddtional
 
+    -- ** UserKeyword
+    , UserKeyword
+    , userKeyword
+    , ukValue
+    , ukType
+    , ukCustomType
+
     -- ** DomainAliases
     , DomainAliases
     , domainAliases
@@ -618,8 +720,19 @@ module Network.Google.Directory
     , crResourceType
     , crResourceName
     , crKind
+    , crBuildingId
+    , crFeatureInstances
     , crResourceEmail
+    , crCapacity
     , crResourceDescription
+    , crFloorName
+    , crGeneratedResourceName
+    , crResourceCategory
+    , crFloorSection
+    , crUserVisibleDescription
+
+    -- ** GroupsListOrderBy
+    , GroupsListOrderBy (..)
 
     -- ** UserUndelete
     , UserUndelete
@@ -678,6 +791,17 @@ module Network.Google.Directory
     -- ** UsersWatchViewType
     , UsersWatchViewType (..)
 
+    -- ** Building
+    , Building
+    , building
+    , buiEtags
+    , buiKind
+    , buiBuildingId
+    , buiCoordinates
+    , buiBuildingName
+    , buiFloorNames
+    , buiDescription
+
     -- ** ChromeOSDeviceRecentUsersItem
     , ChromeOSDeviceRecentUsersItem
     , chromeOSDeviceRecentUsersItem
@@ -693,6 +817,13 @@ module Network.Google.Directory
     , dVerified
     , dDomainAliasName
     , dParentDomainName
+
+    -- ** UserGender
+    , UserGender
+    , userGender
+    , ugAddressMeAs
+    , ugCustomGender
+    , ugType
 
     -- ** Alias
     , Alias
@@ -713,7 +844,13 @@ module Network.Google.Directory
     , schKind
     , schSchemaName
     , schSchemaId
+    , schDisplayName
     , schFields
+
+    -- ** ChromeOSMoveDevicesToOu
+    , ChromeOSMoveDevicesToOu
+    , chromeOSMoveDevicesToOu
+    , comdtoDeviceIds
 
     -- ** User
     , User
@@ -722,8 +859,10 @@ module Network.Google.Directory
     , useLastLoginTime
     , useThumbnailPhotoEtag
     , useEtag
+    , usePosixAccounts
     , useIPWhiteListed
     , useRelations
+    , useSSHPublicKeys
     , useHashFunction
     , useKind
     , useChangePasswordAtNextLogin
@@ -738,18 +877,25 @@ module Network.Google.Directory
     , useNonEditableAliases
     , useOrgUnitPath
     , useCustomerId
+    , useLanguages
     , useIncludeInGlobalAddressList
+    , useGender
     , usePhones
     , useName
     , usePassword
     , useEmails
     , useIms
+    , useKeywords
     , useIsAdmin
+    , useIsEnrolledIn2Sv
     , useId
     , useOrganizations
     , usePrimaryEmail
+    , useIsEnforcedIn2Sv
     , useNotes
     , useIsDelegatedAdmin
+    , useLocations
+    , useArchived
     , useIsMailboxSetup
     , useCustomSchemas
     , useSuspensionReason
@@ -762,6 +908,11 @@ module Network.Google.Directory
     , chromeOSDeviceAction
     , codaAction
     , codaDeprovisionReason
+
+    -- ** FeatureRename
+    , FeatureRename
+    , featureRename
+    , frNewName
 
     -- ** Role
     , Role
@@ -797,6 +948,13 @@ module Network.Google.Directory
     , mdaiDisplayName
     , mdaiPermission
 
+    -- ** ChromeOSDeviceDiskVolumeReportsItemVolumeInfoItem
+    , ChromeOSDeviceDiskVolumeReportsItemVolumeInfoItem
+    , chromeOSDeviceDiskVolumeReportsItemVolumeInfoItem
+    , coddvriviiStorageFree
+    , coddvriviiStorageTotal
+    , coddvriviiVolumeId
+
     -- ** MobileDevicesListOrderBy
     , MobileDevicesListOrderBy (..)
 
@@ -810,12 +968,25 @@ module Network.Google.Directory
     , oKind
     , oOrganizationUnits
 
+    -- ** UserSSHPublicKey
+    , UserSSHPublicKey
+    , userSSHPublicKey
+    , uspkFingerprint
+    , uspkKey
+    , uspkExpirationTimeUsec
+
     -- ** VerificationCodes
     , VerificationCodes
     , verificationCodes
     , vEtag
     , vKind
     , vItems
+
+    -- ** BuildingCoordinates
+    , BuildingCoordinates
+    , buildingCoordinates
+    , bcLatitude
+    , bcLongitude
 
     -- ** ChromeosDevicesListSortOrder
     , ChromeosDevicesListSortOrder (..)
@@ -827,13 +998,39 @@ module Network.Google.Directory
     , urType
     , urCustomType
 
+    -- ** TrustedApps
+    , TrustedApps
+    , trustedApps
+    , taEtag
+    , taNextPageToken
+    , taKind
+    , taTrustedApps
+
     -- ** UsersWatchSortOrder
     , UsersWatchSortOrder (..)
+
+    -- ** Features
+    , Features
+    , features
+    , feaEtag
+    , feaNextPageToken
+    , feaKind
+    , feaFeatures
 
     -- ** ChannelParams
     , ChannelParams
     , channelParams
     , cpAddtional
+
+    -- ** ChromeOSDeviceTpmVersionInfo
+    , ChromeOSDeviceTpmVersionInfo
+    , chromeOSDeviceTpmVersionInfo
+    , codtviVendorSpecific
+    , codtviManufacturer
+    , codtviSpecLevel
+    , codtviTpmModel
+    , codtviFamily
+    , codtviFirmwareVersion
 
     -- ** UserOrganization
     , UserOrganization
@@ -845,6 +1042,7 @@ module Network.Google.Directory
     , uoSymbol
     , uoPrimary
     , uoName
+    , uoFullTimeEquivalent
     , uoTitle
     , uoType
     , uoCustomType
@@ -857,6 +1055,9 @@ module Network.Google.Directory
     , uwPrimary
     , uwType
     , uwCustomType
+
+    -- ** GroupsListSortOrder
+    , GroupsListSortOrder (..)
 
     -- ** ChromeOSDeviceActiveTimeRangesItem
     , ChromeOSDeviceActiveTimeRangesItem
@@ -892,8 +1093,33 @@ module Network.Google.Directory
     , upId
     , upPrimaryEmail
 
+    -- ** ChromeOSDeviceSystemRamFreeReportsItem
+    , ChromeOSDeviceSystemRamFreeReportsItem
+    , chromeOSDeviceSystemRamFreeReportsItem
+    , codsrfriReportTime
+    , codsrfriSystemRamFreeInfo
+
+    -- ** UserPosixAccount
+    , UserPosixAccount
+    , userPosixAccount
+    , upaGecos
+    , upaUid
+    , upaUsername
+    , upaShell
+    , upaPrimary
+    , upaAccountId
+    , upaGid
+    , upaOperatingSystemType
+    , upaSystemId
+    , upaHomeDirectory
+
     -- ** UsersListProjection
     , UsersListProjection (..)
+
+    -- ** FeatureInstance
+    , FeatureInstance
+    , featureInstance
+    , fiFeature
 
     -- ** ChromeosDevicesUpdateProjection
     , ChromeosDevicesUpdateProjection (..)
@@ -945,6 +1171,13 @@ module Network.Google.Directory
     , mobApplications
     , mobDefaultLanguage
 
+    -- ** ChromeOSDeviceCPUStatusReportsItem
+    , ChromeOSDeviceCPUStatusReportsItem
+    , chromeOSDeviceCPUStatusReportsItem
+    , codcsriCPUUtilizationPercentageInfo
+    , codcsriCPUTemperatureInfo
+    , codcsriReportTime
+
     -- ** Member
     , Member
     , member
@@ -952,14 +1185,33 @@ module Network.Google.Directory
     , memStatus
     , memEtag
     , memKind
+    , memDeliverySettings
     , memRole
     , memId
     , memType
+
+    -- ** AppAccessCollections
+    , AppAccessCollections
+    , appAccessCollections
+    , aacEtag
+    , aacResourceId
+    , aacEnforceSettingsForAndroidDrive
+    , aacResourceName
+    , aacKind
+    , aacTrustDomainOwnedApps
+    , aacBlockedAPIAccessBuckets
+    , aacErrorMessage
 
     -- ** UserCustomProperties
     , UserCustomProperties
     , userCustomProperties
     , ucpAddtional
+
+    -- ** UserLanguage
+    , UserLanguage
+    , userLanguage
+    , ulLanguageCode
+    , ulCustomLanguage
 
     -- ** Domains
     , Domains
@@ -1023,6 +1275,7 @@ module Network.Google.Directory
     , sfsIndexed
     , sfsFieldType
     , sfsFieldName
+    , sfsDisplayName
     , sfsMultiValued
 
     -- ** ChromeOSDevices
@@ -1032,6 +1285,20 @@ module Network.Google.Directory
     , cosdNextPageToken
     , cosdKind
     , cosdChromeosDevices
+
+    -- ** MembersHasMember
+    , MembersHasMember
+    , membersHasMember
+    , mhmIsMember
+
+    -- ** TrustedAppId
+    , TrustedAppId
+    , trustedAppId
+    , taiCertificateHashSHA256
+    , taiEtag
+    , taiKind
+    , taiCertificateHashSHA1
+    , taiAndroidPackageName
 
     -- ** UserExternalId
     , UserExternalId
@@ -1046,6 +1313,12 @@ module Network.Google.Directory
     , aspEtag
     , aspKind
     , aspItems
+
+    -- ** ChromeOSDeviceCPUStatusReportsItemCPUTemperatureInfoItem
+    , ChromeOSDeviceCPUStatusReportsItemCPUTemperatureInfoItem
+    , chromeOSDeviceCPUStatusReportsItemCPUTemperatureInfoItem
+    , codcsrictiiTemperature
+    , codcsrictiiLabel
 
     -- ** UsersGetViewType
     , UsersGetViewType (..)
@@ -1073,6 +1346,7 @@ import           Network.Google.Resource.Directory.Asps.List
 import           Network.Google.Resource.Directory.ChromeosDevices.Action
 import           Network.Google.Resource.Directory.ChromeosDevices.Get
 import           Network.Google.Resource.Directory.ChromeosDevices.List
+import           Network.Google.Resource.Directory.ChromeosDevices.MoveDevicesToOu
 import           Network.Google.Resource.Directory.ChromeosDevices.Patch
 import           Network.Google.Resource.Directory.ChromeosDevices.Update
 import           Network.Google.Resource.Directory.Customers.Get
@@ -1097,6 +1371,7 @@ import           Network.Google.Resource.Directory.Groups.Patch
 import           Network.Google.Resource.Directory.Groups.Update
 import           Network.Google.Resource.Directory.Members.Delete
 import           Network.Google.Resource.Directory.Members.Get
+import           Network.Google.Resource.Directory.Members.HasMember
 import           Network.Google.Resource.Directory.Members.Insert
 import           Network.Google.Resource.Directory.Members.List
 import           Network.Google.Resource.Directory.Members.Patch
@@ -1117,12 +1392,27 @@ import           Network.Google.Resource.Directory.OrgUnits.List
 import           Network.Google.Resource.Directory.OrgUnits.Patch
 import           Network.Google.Resource.Directory.OrgUnits.Update
 import           Network.Google.Resource.Directory.Privileges.List
+import           Network.Google.Resource.Directory.ResolvedAppAccessSettings.GetSettings
+import           Network.Google.Resource.Directory.ResolvedAppAccessSettings.ListTrustedApps
+import           Network.Google.Resource.Directory.Resources.Buildings.Delete
+import           Network.Google.Resource.Directory.Resources.Buildings.Get
+import           Network.Google.Resource.Directory.Resources.Buildings.Insert
+import           Network.Google.Resource.Directory.Resources.Buildings.List
+import           Network.Google.Resource.Directory.Resources.Buildings.Patch
+import           Network.Google.Resource.Directory.Resources.Buildings.Update
 import           Network.Google.Resource.Directory.Resources.Calendars.Delete
 import           Network.Google.Resource.Directory.Resources.Calendars.Get
 import           Network.Google.Resource.Directory.Resources.Calendars.Insert
 import           Network.Google.Resource.Directory.Resources.Calendars.List
 import           Network.Google.Resource.Directory.Resources.Calendars.Patch
 import           Network.Google.Resource.Directory.Resources.Calendars.Update
+import           Network.Google.Resource.Directory.Resources.Features.Delete
+import           Network.Google.Resource.Directory.Resources.Features.Get
+import           Network.Google.Resource.Directory.Resources.Features.Insert
+import           Network.Google.Resource.Directory.Resources.Features.List
+import           Network.Google.Resource.Directory.Resources.Features.Patch
+import           Network.Google.Resource.Directory.Resources.Features.Rename
+import           Network.Google.Resource.Directory.Resources.Features.Update
 import           Network.Google.Resource.Directory.RoleAssignments.Delete
 import           Network.Google.Resource.Directory.RoleAssignments.Get
 import           Network.Google.Resource.Directory.RoleAssignments.Insert
@@ -1215,6 +1505,8 @@ type DirectoryAPI =
        :<|> SchemasGetResource
        :<|> SchemasDeleteResource
        :<|> SchemasUpdateResource
+       :<|> ResolvedAppAccessSettingsListTrustedAppsResource
+       :<|> ResolvedAppAccessSettingsGetSettingsResource
        :<|> TokensListResource
        :<|> TokensGetResource
        :<|> TokensDeleteResource
@@ -1225,6 +1517,7 @@ type DirectoryAPI =
        :<|> ChannelsStopResource
        :<|> MembersInsertResource
        :<|> MembersListResource
+       :<|> MembersHasMemberResource
        :<|> MembersPatchResource
        :<|> MembersGetResource
        :<|> MembersDeleteResource
@@ -1233,12 +1526,25 @@ type DirectoryAPI =
        :<|> MobileDevicesGetResource
        :<|> MobileDevicesActionResource
        :<|> MobileDevicesDeleteResource
+       :<|> ResourcesBuildingsInsertResource
+       :<|> ResourcesBuildingsListResource
+       :<|> ResourcesBuildingsPatchResource
+       :<|> ResourcesBuildingsGetResource
+       :<|> ResourcesBuildingsDeleteResource
+       :<|> ResourcesBuildingsUpdateResource
        :<|> ResourcesCalendarsInsertResource
        :<|> ResourcesCalendarsListResource
        :<|> ResourcesCalendarsPatchResource
        :<|> ResourcesCalendarsGetResource
        :<|> ResourcesCalendarsDeleteResource
        :<|> ResourcesCalendarsUpdateResource
+       :<|> ResourcesFeaturesInsertResource
+       :<|> ResourcesFeaturesListResource
+       :<|> ResourcesFeaturesPatchResource
+       :<|> ResourcesFeaturesGetResource
+       :<|> ResourcesFeaturesRenameResource
+       :<|> ResourcesFeaturesDeleteResource
+       :<|> ResourcesFeaturesUpdateResource
        :<|> OrgUnitsInsertResource
        :<|> OrgUnitsListResource
        :<|> OrgUnitsPatchResource
@@ -1258,6 +1564,7 @@ type DirectoryAPI =
        :<|> NotificationsDeleteResource
        :<|> NotificationsUpdateResource
        :<|> ChromeosDevicesListResource
+       :<|> ChromeosDevicesMoveDevicesToOuResource
        :<|> ChromeosDevicesPatchResource
        :<|> ChromeosDevicesGetResource
        :<|> ChromeosDevicesActionResource

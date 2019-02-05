@@ -33,9 +33,10 @@ module Network.Google.Resource.Content.Accountstatuses.List
     , AccountstatusesList
 
     -- * Request Lenses
-    , acc3MerchantId
-    , acc3PageToken
-    , acc3MaxResults
+    , a2MerchantId
+    , a2Destinations
+    , a2PageToken
+    , a2MaxResults
     ) where
 
 import           Network.Google.Prelude
@@ -45,61 +46,72 @@ import           Network.Google.ShoppingContent.Types
 -- 'AccountstatusesList' request conforms to.
 type AccountstatusesListResource =
      "content" :>
-       "v2" :>
+       "v2.1" :>
          Capture "merchantId" (Textual Word64) :>
            "accountstatuses" :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" (Textual Word32) :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] AccountstatusesListResponse
+             QueryParams "destinations" Text :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" (Textual Word32) :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] AccountstatusesListResponse
 
 -- | Lists the statuses of the sub-accounts in your Merchant Center account.
 --
 -- /See:/ 'accountstatusesList' smart constructor.
 data AccountstatusesList = AccountstatusesList'
-    { _acc3MerchantId :: !(Textual Word64)
-    , _acc3PageToken  :: !(Maybe Text)
-    , _acc3MaxResults :: !(Maybe (Textual Word32))
+    { _a2MerchantId   :: !(Textual Word64)
+    , _a2Destinations :: !(Maybe [Text])
+    , _a2PageToken    :: !(Maybe Text)
+    , _a2MaxResults   :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountstatusesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acc3MerchantId'
+-- * 'a2MerchantId'
 --
--- * 'acc3PageToken'
+-- * 'a2Destinations'
 --
--- * 'acc3MaxResults'
+-- * 'a2PageToken'
+--
+-- * 'a2MaxResults'
 accountstatusesList
-    :: Word64 -- ^ 'acc3MerchantId'
+    :: Word64 -- ^ 'a2MerchantId'
     -> AccountstatusesList
-accountstatusesList pAcc3MerchantId_ =
+accountstatusesList pA2MerchantId_ =
     AccountstatusesList'
-    { _acc3MerchantId = _Coerce # pAcc3MerchantId_
-    , _acc3PageToken = Nothing
-    , _acc3MaxResults = Nothing
+    { _a2MerchantId = _Coerce # pA2MerchantId_
+    , _a2Destinations = Nothing
+    , _a2PageToken = Nothing
+    , _a2MaxResults = Nothing
     }
 
--- | The ID of the managing account.
-acc3MerchantId :: Lens' AccountstatusesList Word64
-acc3MerchantId
-  = lens _acc3MerchantId
-      (\ s a -> s{_acc3MerchantId = a})
+-- | The ID of the managing account. This must be a multi-client account.
+a2MerchantId :: Lens' AccountstatusesList Word64
+a2MerchantId
+  = lens _a2MerchantId (\ s a -> s{_a2MerchantId = a})
+      . _Coerce
+
+-- | If set, only issues for the specified destinations are returned,
+-- otherwise only issues for the Shopping destination.
+a2Destinations :: Lens' AccountstatusesList [Text]
+a2Destinations
+  = lens _a2Destinations
+      (\ s a -> s{_a2Destinations = a})
+      . _Default
       . _Coerce
 
 -- | The token returned by the previous request.
-acc3PageToken :: Lens' AccountstatusesList (Maybe Text)
-acc3PageToken
-  = lens _acc3PageToken
-      (\ s a -> s{_acc3PageToken = a})
+a2PageToken :: Lens' AccountstatusesList (Maybe Text)
+a2PageToken
+  = lens _a2PageToken (\ s a -> s{_a2PageToken = a})
 
 -- | The maximum number of account statuses to return in the response, used
 -- for paging.
-acc3MaxResults :: Lens' AccountstatusesList (Maybe Word32)
-acc3MaxResults
-  = lens _acc3MaxResults
-      (\ s a -> s{_acc3MaxResults = a})
+a2MaxResults :: Lens' AccountstatusesList (Maybe Word32)
+a2MaxResults
+  = lens _a2MaxResults (\ s a -> s{_a2MaxResults = a})
       . mapping _Coerce
 
 instance GoogleRequest AccountstatusesList where
@@ -108,7 +120,9 @@ instance GoogleRequest AccountstatusesList where
         type Scopes AccountstatusesList =
              '["https://www.googleapis.com/auth/content"]
         requestClient AccountstatusesList'{..}
-          = go _acc3MerchantId _acc3PageToken _acc3MaxResults
+          = go _a2MerchantId (_a2Destinations ^. _Default)
+              _a2PageToken
+              _a2MaxResults
               (Just AltJSON)
               shoppingContentService
           where go

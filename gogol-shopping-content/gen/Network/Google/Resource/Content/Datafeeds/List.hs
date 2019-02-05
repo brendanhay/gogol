@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the datafeeds in your Merchant Center account.
+-- Lists the configurations for datafeeds in your Merchant Center account.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.datafeeds.list@.
 module Network.Google.Resource.Content.Datafeeds.List
@@ -45,7 +45,7 @@ import           Network.Google.ShoppingContent.Types
 -- 'DatafeedsList' request conforms to.
 type DatafeedsListResource =
      "content" :>
-       "v2" :>
+       "v2.1" :>
          Capture "merchantId" (Textual Word64) :>
            "datafeeds" :>
              QueryParam "pageToken" Text :>
@@ -53,7 +53,7 @@ type DatafeedsListResource =
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] DatafeedsListResponse
 
--- | Lists the datafeeds in your Merchant Center account.
+-- | Lists the configurations for datafeeds in your Merchant Center account.
 --
 -- /See:/ 'datafeedsList' smart constructor.
 data DatafeedsList = DatafeedsList'
@@ -81,7 +81,8 @@ datafeedsList pDatMerchantId_ =
     , _datMaxResults = Nothing
     }
 
--- | The ID of the managing account.
+-- | The ID of the account that manages the datafeeds. This account cannot be
+-- a multi-client account.
 datMerchantId :: Lens' DatafeedsList Word64
 datMerchantId
   = lens _datMerchantId

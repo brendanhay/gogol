@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'SizesInsert' request conforms to.
 type SizesInsertResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "sizes" :>

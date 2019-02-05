@@ -16,4 +16,4 @@
 --
 module Network.Google.DoubleClickSearch.Types.Sum where
 
-import           Network.Google.Prelude
+import           Network.Google.Prelude hiding (Bytes)

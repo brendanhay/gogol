@@ -1,0 +1,72 @@
+name:                  gogol-androiddeviceprovisioning
+version:               0.4.0
+synopsis:              Google Android Device Provisioning Partner SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               OtherLicense
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
+copyright:             Copyright (c) 2015-2016 Brendan Hay
+category:              Network, Google, Cloud
+build-type:            Simple
+cabal-version:         >= 1.10
+extra-source-files:    README.md src/.gitkeep
+
+description:
+    Automates Android zero-touch enrollment for device resellers, customers,
+    and EMMs.
+    .
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
+    .
+    This library is compatible with version @v1@
+    of the API.
+
+source-repository head
+    type:     git
+    location: git://github.com/brendanhay/gogol.git
+
+library
+    default-language:  Haskell2010
+    hs-source-dirs:    src gen
+
+    ghc-options:       -Wall
+
+    exposed-modules:
+          Network.Google.AndroidDeviceProvisioning
+        , Network.Google.AndroidDeviceProvisioning.Types
+        , Network.Google.Resource.AndroidDeviceProvisioning.Customers.Configurations.Create
+        , Network.Google.Resource.AndroidDeviceProvisioning.Customers.Configurations.Delete
+        , Network.Google.Resource.AndroidDeviceProvisioning.Customers.Configurations.Get
+        , Network.Google.Resource.AndroidDeviceProvisioning.Customers.Configurations.List
+        , Network.Google.Resource.AndroidDeviceProvisioning.Customers.Configurations.Patch
+        , Network.Google.Resource.AndroidDeviceProvisioning.Customers.Devices.ApplyConfiguration
+        , Network.Google.Resource.AndroidDeviceProvisioning.Customers.Devices.Get
+        , Network.Google.Resource.AndroidDeviceProvisioning.Customers.Devices.List
+        , Network.Google.Resource.AndroidDeviceProvisioning.Customers.Devices.RemoveConfiguration
+        , Network.Google.Resource.AndroidDeviceProvisioning.Customers.Devices.Unclaim
+        , Network.Google.Resource.AndroidDeviceProvisioning.Customers.Dpcs.List
+        , Network.Google.Resource.AndroidDeviceProvisioning.Customers.List
+        , Network.Google.Resource.AndroidDeviceProvisioning.Operations.Get
+        , Network.Google.Resource.AndroidDeviceProvisioning.Partners.Customers.Create
+        , Network.Google.Resource.AndroidDeviceProvisioning.Partners.Customers.List
+        , Network.Google.Resource.AndroidDeviceProvisioning.Partners.Devices.Claim
+        , Network.Google.Resource.AndroidDeviceProvisioning.Partners.Devices.ClaimAsync
+        , Network.Google.Resource.AndroidDeviceProvisioning.Partners.Devices.FindByIdentifier
+        , Network.Google.Resource.AndroidDeviceProvisioning.Partners.Devices.FindByOwner
+        , Network.Google.Resource.AndroidDeviceProvisioning.Partners.Devices.Get
+        , Network.Google.Resource.AndroidDeviceProvisioning.Partners.Devices.Metadata
+        , Network.Google.Resource.AndroidDeviceProvisioning.Partners.Devices.Unclaim
+        , Network.Google.Resource.AndroidDeviceProvisioning.Partners.Devices.UnclaimAsync
+        , Network.Google.Resource.AndroidDeviceProvisioning.Partners.Devices.UpdateMetadataAsync
+        , Network.Google.Resource.AndroidDeviceProvisioning.Partners.Vendors.Customers.List
+        , Network.Google.Resource.AndroidDeviceProvisioning.Partners.Vendors.List
+
+    other-modules:
+          Network.Google.AndroidDeviceProvisioning.Types.Product
+        , Network.Google.AndroidDeviceProvisioning.Types.Sum
+
+    build-depends:
+          gogol-core == 0.4.0.*
+        , base       >= 4.7 && < 5

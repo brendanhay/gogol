@@ -22,7 +22,7 @@
 --
 -- Retrieves a resource containing information about a Cloud SQL instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.instances.get@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.instances.get@.
 module Network.Google.Resource.SQL.Instances.Get
     (
     -- * REST Resource

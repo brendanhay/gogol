@@ -35,6 +35,7 @@ module Network.Google.Resource.Compute.InstanceGroups.AddInstances
     , InstanceGroupsAddInstances
 
     -- * Request Lenses
+    , igaiRequestId
     , igaiProject
     , igaiZone
     , igaiPayload
@@ -56,9 +57,10 @@ type InstanceGroupsAddInstancesResource =
                  "instanceGroups" :>
                    Capture "instanceGroup" Text :>
                      "addInstances" :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] InstanceGroupsAddInstancesRequest :>
-                           Post '[JSON] Operation
+                       QueryParam "requestId" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] InstanceGroupsAddInstancesRequest :>
+                             Post '[JSON] Operation
 
 -- | Adds a list of instances to the specified instance group. All of the
 -- instances in the instance group must be in the same network\/subnetwork.
@@ -66,7 +68,8 @@ type InstanceGroupsAddInstancesResource =
 --
 -- /See:/ 'instanceGroupsAddInstances' smart constructor.
 data InstanceGroupsAddInstances = InstanceGroupsAddInstances'
-    { _igaiProject       :: !Text
+    { _igaiRequestId     :: !(Maybe Text)
+    , _igaiProject       :: !Text
     , _igaiZone          :: !Text
     , _igaiPayload       :: !InstanceGroupsAddInstancesRequest
     , _igaiInstanceGroup :: !Text
@@ -75,6 +78,8 @@ data InstanceGroupsAddInstances = InstanceGroupsAddInstances'
 -- | Creates a value of 'InstanceGroupsAddInstances' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'igaiRequestId'
 --
 -- * 'igaiProject'
 --
@@ -91,11 +96,27 @@ instanceGroupsAddInstances
     -> InstanceGroupsAddInstances
 instanceGroupsAddInstances pIgaiProject_ pIgaiZone_ pIgaiPayload_ pIgaiInstanceGroup_ =
     InstanceGroupsAddInstances'
-    { _igaiProject = pIgaiProject_
+    { _igaiRequestId = Nothing
+    , _igaiProject = pIgaiProject_
     , _igaiZone = pIgaiZone_
     , _igaiPayload = pIgaiPayload_
     , _igaiInstanceGroup = pIgaiInstanceGroup_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+igaiRequestId :: Lens' InstanceGroupsAddInstances (Maybe Text)
+igaiRequestId
+  = lens _igaiRequestId
+      (\ s a -> s{_igaiRequestId = a})
 
 -- | Project ID for this request.
 igaiProject :: Lens' InstanceGroupsAddInstances Text
@@ -125,6 +146,7 @@ instance GoogleRequest InstanceGroupsAddInstances
                "https://www.googleapis.com/auth/compute"]
         requestClient InstanceGroupsAddInstances'{..}
           = go _igaiProject _igaiZone _igaiInstanceGroup
+              _igaiRequestId
               (Just AltJSON)
               _igaiPayload
               computeService

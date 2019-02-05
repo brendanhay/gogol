@@ -1,5 +1,5 @@
 name:                  gogol-identity-toolkit
-version:               0.1.1
+version:               0.4.0
 synopsis:              Google Identity Toolkit SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -11,7 +11,7 @@ copyright:             Copyright (c) 2015-2016 Brendan Hay
 category:              Network, Google, Cloud
 build-type:            Simple
 cabal-version:         >= 1.10
-extra-source-files:    README.md
+extra-source-files:    README.md src/.gitkeep
 
 description:
     Help the third party sites to implement federated login.
@@ -38,12 +38,14 @@ library
         , Network.Google.Resource.IdentityToolkit.RelyingParty.CreateAuthURI
         , Network.Google.Resource.IdentityToolkit.RelyingParty.DeleteAccount
         , Network.Google.Resource.IdentityToolkit.RelyingParty.DownloadAccount
+        , Network.Google.Resource.IdentityToolkit.RelyingParty.EmailLinkSignin
         , Network.Google.Resource.IdentityToolkit.RelyingParty.GetAccountInfo
         , Network.Google.Resource.IdentityToolkit.RelyingParty.GetOOBConfirmationCode
         , Network.Google.Resource.IdentityToolkit.RelyingParty.GetProjectConfig
         , Network.Google.Resource.IdentityToolkit.RelyingParty.GetPublicKeys
         , Network.Google.Resource.IdentityToolkit.RelyingParty.GetRecaptchaParam
         , Network.Google.Resource.IdentityToolkit.RelyingParty.ResetPassword
+        , Network.Google.Resource.IdentityToolkit.RelyingParty.SendVerificationCode
         , Network.Google.Resource.IdentityToolkit.RelyingParty.SetAccountInfo
         , Network.Google.Resource.IdentityToolkit.RelyingParty.SetProjectConfig
         , Network.Google.Resource.IdentityToolkit.RelyingParty.SignOutUser
@@ -52,11 +54,12 @@ library
         , Network.Google.Resource.IdentityToolkit.RelyingParty.VerifyAssertion
         , Network.Google.Resource.IdentityToolkit.RelyingParty.VerifyCustomToken
         , Network.Google.Resource.IdentityToolkit.RelyingParty.VerifyPassword
+        , Network.Google.Resource.IdentityToolkit.RelyingParty.VerifyPhoneNumber
 
     other-modules:
           Network.Google.IdentityToolkit.Types.Product
         , Network.Google.IdentityToolkit.Types.Sum
 
     build-depends:
-          gogol-core == 0.1.1.*
+          gogol-core == 0.4.0.*
         , base       >= 4.7 && < 5

@@ -1,0 +1,56 @@
+name:                  gogol-serviceusage
+version:               0.4.0
+synopsis:              Google Service Usage SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               OtherLicense
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
+copyright:             Copyright (c) 2015-2016 Brendan Hay
+category:              Network, Google, Cloud
+build-type:            Simple
+cabal-version:         >= 1.10
+extra-source-files:    README.md src/.gitkeep
+
+description:
+    Enables services that service consumers want to use on Google Cloud
+    Platform, lists the available or enabled services, or disables services
+    that service consumers no longer use.
+    .
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
+    .
+    This library is compatible with version @v1@
+    of the API.
+
+source-repository head
+    type:     git
+    location: git://github.com/brendanhay/gogol.git
+
+library
+    default-language:  Haskell2010
+    hs-source-dirs:    src gen
+
+    ghc-options:       -Wall
+
+    exposed-modules:
+          Network.Google.Resource.ServiceUsage.Operations.Cancel
+        , Network.Google.Resource.ServiceUsage.Operations.Delete
+        , Network.Google.Resource.ServiceUsage.Operations.Get
+        , Network.Google.Resource.ServiceUsage.Operations.List
+        , Network.Google.Resource.ServiceUsage.Services.BatchEnable
+        , Network.Google.Resource.ServiceUsage.Services.Disable
+        , Network.Google.Resource.ServiceUsage.Services.Enable
+        , Network.Google.Resource.ServiceUsage.Services.Get
+        , Network.Google.Resource.ServiceUsage.Services.List
+        , Network.Google.ServiceUsage
+        , Network.Google.ServiceUsage.Types
+
+    other-modules:
+          Network.Google.ServiceUsage.Types.Product
+        , Network.Google.ServiceUsage.Types.Sum
+
+    build-depends:
+          gogol-core == 0.4.0.*
+        , base       >= 4.7 && < 5

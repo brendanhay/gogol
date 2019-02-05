@@ -15,7 +15,7 @@
 --
 -- Retrieves your YouTube Analytics data.
 --
--- /See:/ <http://developers.google.com/youtube/analytics/ YouTube Analytics API Reference>
+-- /See:/ <https://developers.google.com/youtube/analytics YouTube Analytics API Reference>
 module Network.Google.YouTubeAnalytics
     (
     -- * Service Configuration
@@ -32,12 +32,6 @@ module Network.Google.YouTubeAnalytics
     , YouTubeAnalyticsAPI
 
     -- * Resources
-
-    -- ** youtubeAnalytics.batchReportDefinitions.list
-    , module Network.Google.Resource.YouTubeAnalytics.BatchReportDefinitions.List
-
-    -- ** youtubeAnalytics.batchReports.list
-    , module Network.Google.Resource.YouTubeAnalytics.BatchReports.List
 
     -- ** youtubeAnalytics.groupItems.delete
     , module Network.Google.Resource.YouTubeAnalytics.GroupItems.Delete
@@ -79,6 +73,24 @@ module Network.Google.YouTubeAnalytics
     , gKind
     , gContentDetails
     , gId
+    , gErrors
+
+    -- ** ListGroupsResponse
+    , ListGroupsResponse
+    , listGroupsResponse
+    , lgrEtag
+    , lgrNextPageToken
+    , lgrKind
+    , lgrItems
+    , lgrErrors
+
+    -- ** ListGroupItemsResponse
+    , ListGroupItemsResponse
+    , listGroupItemsResponse
+    , lgirEtag
+    , lgirKind
+    , lgirItems
+    , lgirErrors
 
     -- ** GroupItemResource
     , GroupItemResource
@@ -86,38 +98,8 @@ module Network.Google.YouTubeAnalytics
     , girKind
     , girId
 
-    -- ** ResultTableColumnHeadersItem
-    , ResultTableColumnHeadersItem
-    , resultTableColumnHeadersItem
-    , rtchiColumnType
-    , rtchiName
-    , rtchiDataType
-
-    -- ** ResultTable
-    , ResultTable
-    , resultTable
-    , rtKind
-    , rtRows
-    , rtColumnHeaders
-
-    -- ** BatchReportDefinition
-    , BatchReportDefinition
-    , batchReportDefinition
-    , brdStatus
-    , brdKind
-    , brdName
-    , brdId
-    , brdType
-
-    -- ** BatchReport
-    , BatchReport
-    , batchReport
-    , brTimeUpdated
-    , brKind
-    , brReportId
-    , brTimeSpan
-    , brOutputs
-    , brId
+    -- ** Xgafv
+    , Xgafv (..)
 
     -- ** GroupSnippet
     , GroupSnippet
@@ -133,51 +115,54 @@ module Network.Google.YouTubeAnalytics
     , giResource
     , giGroupId
     , giId
+    , giErrors
 
-    -- ** BatchReportDefinitionList
-    , BatchReportDefinitionList
-    , batchReportDefinitionList
-    , brdlKind
-    , brdlItems
+    -- ** Errors
+    , Errors
+    , errors
+    , eRequestId
+    , eError
+    , eCode
 
-    -- ** BatchReportList
-    , BatchReportList
-    , batchReportList
-    , brlKind
-    , brlItems
+    -- ** ErrorProtoLocationType
+    , ErrorProtoLocationType (..)
 
-    -- ** BatchReportOutputsItem
-    , BatchReportOutputsItem
-    , batchReportOutputsItem
-    , broiFormat
-    , broiDownloadURL
-    , broiType
+    -- ** ErrorsCode
+    , ErrorsCode (..)
 
-    -- ** BatchReportTimeSpan
-    , BatchReportTimeSpan
-    , batchReportTimeSpan
-    , brtsStartTime
-    , brtsEndTime
+    -- ** ResultTableColumnHeader
+    , ResultTableColumnHeader
+    , resultTableColumnHeader
+    , rtchColumnType
+    , rtchName
+    , rtchDataType
 
-    -- ** GroupItemListResponse
-    , GroupItemListResponse
-    , groupItemListResponse
-    , gilrEtag
-    , gilrKind
-    , gilrItems
+    -- ** ErrorProto
+    , ErrorProto
+    , errorProto
+    , epDebugInfo
+    , epLocation
+    , epDomain
+    , epArgument
+    , epExternalErrorMessage
+    , epCode
+    , epLocationType
 
-    -- ** GroupListResponse
-    , GroupListResponse
-    , groupListResponse
-    , glrEtag
-    , glrNextPageToken
-    , glrKind
-    , glrItems
+    -- ** EmptyResponse
+    , EmptyResponse
+    , emptyResponse
+    , erErrors
+
+    -- ** QueryResponse
+    , QueryResponse
+    , queryResponse
+    , qrKind
+    , qrRows
+    , qrColumnHeaders
+    , qrErrors
     ) where
 
 import           Network.Google.Prelude
-import           Network.Google.Resource.YouTubeAnalytics.BatchReportDefinitions.List
-import           Network.Google.Resource.YouTubeAnalytics.BatchReports.List
 import           Network.Google.Resource.YouTubeAnalytics.GroupItems.Delete
 import           Network.Google.Resource.YouTubeAnalytics.GroupItems.Insert
 import           Network.Google.Resource.YouTubeAnalytics.GroupItems.List
@@ -198,8 +183,6 @@ type YouTubeAnalyticsAPI =
        GroupsDeleteResource
        :<|> GroupsUpdateResource
        :<|> ReportsQueryResource
-       :<|> BatchReportsListResource
        :<|> GroupItemsInsertResource
        :<|> GroupItemsListResource
        :<|> GroupItemsDeleteResource
-       :<|> BatchReportDefinitionsListResource

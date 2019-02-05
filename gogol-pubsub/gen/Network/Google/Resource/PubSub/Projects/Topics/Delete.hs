@@ -27,7 +27,7 @@
 -- topic are not deleted, but their \`topic\` field is set to
 -- \`_deleted-topic_\`.
 --
--- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.topics.delete@.
+-- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference> for @pubsub.projects.topics.delete@.
 module Network.Google.Resource.PubSub.Projects.Topics.Delete
     (
     -- * REST Resource
@@ -40,11 +40,9 @@ module Network.Google.Resource.PubSub.Projects.Topics.Delete
     -- * Request Lenses
     , ptdXgafv
     , ptdUploadProtocol
-    , ptdPp
     , ptdAccessToken
     , ptdUploadType
     , ptdTopic
-    , ptdBearerToken
     , ptdCallback
     ) where
 
@@ -56,14 +54,12 @@ import           Network.Google.PubSub.Types
 type ProjectsTopicsDeleteResource =
      "v1" :>
        Capture "topic" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :> Delete '[JSON] Empty
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
 -- | Deletes the topic with the given name. Returns \`NOT_FOUND\` if the
 -- topic does not exist. After a topic is deleted, a new topic may be
@@ -74,13 +70,11 @@ type ProjectsTopicsDeleteResource =
 --
 -- /See:/ 'projectsTopicsDelete' smart constructor.
 data ProjectsTopicsDelete = ProjectsTopicsDelete'
-    { _ptdXgafv          :: !(Maybe Text)
+    { _ptdXgafv          :: !(Maybe Xgafv)
     , _ptdUploadProtocol :: !(Maybe Text)
-    , _ptdPp             :: !Bool
     , _ptdAccessToken    :: !(Maybe Text)
     , _ptdUploadType     :: !(Maybe Text)
     , _ptdTopic          :: !Text
-    , _ptdBearerToken    :: !(Maybe Text)
     , _ptdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -92,15 +86,11 @@ data ProjectsTopicsDelete = ProjectsTopicsDelete'
 --
 -- * 'ptdUploadProtocol'
 --
--- * 'ptdPp'
---
 -- * 'ptdAccessToken'
 --
 -- * 'ptdUploadType'
 --
 -- * 'ptdTopic'
---
--- * 'ptdBearerToken'
 --
 -- * 'ptdCallback'
 projectsTopicsDelete
@@ -110,16 +100,14 @@ projectsTopicsDelete pPtdTopic_ =
     ProjectsTopicsDelete'
     { _ptdXgafv = Nothing
     , _ptdUploadProtocol = Nothing
-    , _ptdPp = True
     , _ptdAccessToken = Nothing
     , _ptdUploadType = Nothing
     , _ptdTopic = pPtdTopic_
-    , _ptdBearerToken = Nothing
     , _ptdCallback = Nothing
     }
 
 -- | V1 error format.
-ptdXgafv :: Lens' ProjectsTopicsDelete (Maybe Text)
+ptdXgafv :: Lens' ProjectsTopicsDelete (Maybe Xgafv)
 ptdXgafv = lens _ptdXgafv (\ s a -> s{_ptdXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -127,10 +115,6 @@ ptdUploadProtocol :: Lens' ProjectsTopicsDelete (Maybe Text)
 ptdUploadProtocol
   = lens _ptdUploadProtocol
       (\ s a -> s{_ptdUploadProtocol = a})
-
--- | Pretty-print response.
-ptdPp :: Lens' ProjectsTopicsDelete Bool
-ptdPp = lens _ptdPp (\ s a -> s{_ptdPp = a})
 
 -- | OAuth access token.
 ptdAccessToken :: Lens' ProjectsTopicsDelete (Maybe Text)
@@ -144,15 +128,10 @@ ptdUploadType
   = lens _ptdUploadType
       (\ s a -> s{_ptdUploadType = a})
 
--- | Name of the topic to delete.
+-- | Name of the topic to delete. Format is
+-- \`projects\/{project}\/topics\/{topic}\`.
 ptdTopic :: Lens' ProjectsTopicsDelete Text
 ptdTopic = lens _ptdTopic (\ s a -> s{_ptdTopic = a})
-
--- | OAuth bearer token.
-ptdBearerToken :: Lens' ProjectsTopicsDelete (Maybe Text)
-ptdBearerToken
-  = lens _ptdBearerToken
-      (\ s a -> s{_ptdBearerToken = a})
 
 -- | JSONP
 ptdCallback :: Lens' ProjectsTopicsDelete (Maybe Text)
@@ -166,10 +145,8 @@ instance GoogleRequest ProjectsTopicsDelete where
                "https://www.googleapis.com/auth/pubsub"]
         requestClient ProjectsTopicsDelete'{..}
           = go _ptdTopic _ptdXgafv _ptdUploadProtocol
-              (Just _ptdPp)
               _ptdAccessToken
               _ptdUploadType
-              _ptdBearerToken
               _ptdCallback
               (Just AltJSON)
               pubSubService

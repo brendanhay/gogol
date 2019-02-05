@@ -29,7 +29,7 @@
 -- from a signed-in user with **Is owner** or **Can edit** permissions in
 -- the Google Developers Console project.
 --
--- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @proximitybeacon.beacons.attachments.delete@.
+-- /See:/ <https://developers.google.com/beacons/proximity/ Proximity Beacon API Reference> for @proximitybeacon.beacons.attachments.delete@.
 module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.Delete
     (
     -- * REST Resource
@@ -42,11 +42,9 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.Delete
     -- * Request Lenses
     , badXgafv
     , badUploadProtocol
-    , badPp
     , badAccessToken
     , badUploadType
     , badAttachmentName
-    , badBearerToken
     , badProjectId
     , badCallback
     ) where
@@ -59,15 +57,13 @@ import           Network.Google.ProximityBeacon.Types
 type BeaconsAttachmentsDeleteResource =
      "v1beta1" :>
        Capture "attachmentName" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "projectId" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :> Delete '[JSON] Empty
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "projectId" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
 -- | Deletes the specified attachment for the given beacon. Each attachment
 -- has a unique attachment name (\`attachmentName\`) which is returned when
@@ -80,13 +76,11 @@ type BeaconsAttachmentsDeleteResource =
 --
 -- /See:/ 'beaconsAttachmentsDelete' smart constructor.
 data BeaconsAttachmentsDelete = BeaconsAttachmentsDelete'
-    { _badXgafv          :: !(Maybe Text)
+    { _badXgafv          :: !(Maybe Xgafv)
     , _badUploadProtocol :: !(Maybe Text)
-    , _badPp             :: !Bool
     , _badAccessToken    :: !(Maybe Text)
     , _badUploadType     :: !(Maybe Text)
     , _badAttachmentName :: !Text
-    , _badBearerToken    :: !(Maybe Text)
     , _badProjectId      :: !(Maybe Text)
     , _badCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -99,15 +93,11 @@ data BeaconsAttachmentsDelete = BeaconsAttachmentsDelete'
 --
 -- * 'badUploadProtocol'
 --
--- * 'badPp'
---
 -- * 'badAccessToken'
 --
 -- * 'badUploadType'
 --
 -- * 'badAttachmentName'
---
--- * 'badBearerToken'
 --
 -- * 'badProjectId'
 --
@@ -119,17 +109,15 @@ beaconsAttachmentsDelete pBadAttachmentName_ =
     BeaconsAttachmentsDelete'
     { _badXgafv = Nothing
     , _badUploadProtocol = Nothing
-    , _badPp = True
     , _badAccessToken = Nothing
     , _badUploadType = Nothing
     , _badAttachmentName = pBadAttachmentName_
-    , _badBearerToken = Nothing
     , _badProjectId = Nothing
     , _badCallback = Nothing
     }
 
 -- | V1 error format.
-badXgafv :: Lens' BeaconsAttachmentsDelete (Maybe Text)
+badXgafv :: Lens' BeaconsAttachmentsDelete (Maybe Xgafv)
 badXgafv = lens _badXgafv (\ s a -> s{_badXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -137,10 +125,6 @@ badUploadProtocol :: Lens' BeaconsAttachmentsDelete (Maybe Text)
 badUploadProtocol
   = lens _badUploadProtocol
       (\ s a -> s{_badUploadProtocol = a})
-
--- | Pretty-print response.
-badPp :: Lens' BeaconsAttachmentsDelete Bool
-badPp = lens _badPp (\ s a -> s{_badPp = a})
 
 -- | OAuth access token.
 badAccessToken :: Lens' BeaconsAttachmentsDelete (Maybe Text)
@@ -164,12 +148,6 @@ badAttachmentName
   = lens _badAttachmentName
       (\ s a -> s{_badAttachmentName = a})
 
--- | OAuth bearer token.
-badBearerToken :: Lens' BeaconsAttachmentsDelete (Maybe Text)
-badBearerToken
-  = lens _badBearerToken
-      (\ s a -> s{_badBearerToken = a})
-
 -- | The project id of the attachment to delete. If not provided, the project
 -- that is making the request is used. Optional.
 badProjectId :: Lens' BeaconsAttachmentsDelete (Maybe Text)
@@ -187,10 +165,8 @@ instance GoogleRequest BeaconsAttachmentsDelete where
              '["https://www.googleapis.com/auth/userlocation.beacon.registry"]
         requestClient BeaconsAttachmentsDelete'{..}
           = go _badAttachmentName _badXgafv _badUploadProtocol
-              (Just _badPp)
               _badAccessToken
               _badUploadType
-              _badBearerToken
               _badProjectId
               _badCallback
               (Just AltJSON)

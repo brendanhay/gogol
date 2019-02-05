@@ -23,7 +23,7 @@
 -- Cancels a transfer. Use the get method to check whether the cancellation
 -- succeeded or whether the operation completed despite cancellation.
 --
--- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @storagetransfer.transferOperations.cancel@.
+-- /See:/ <https://cloud.google.com/storage/transfer Storage Transfer API Reference> for @storagetransfer.transferOperations.cancel@.
 module Network.Google.Resource.StorageTransfer.TransferOperations.Cancel
     (
     -- * REST Resource
@@ -36,10 +36,8 @@ module Network.Google.Resource.StorageTransfer.TransferOperations.Cancel
     -- * Request Lenses
     , tocXgafv
     , tocUploadProtocol
-    , tocPp
     , tocAccessToken
     , tocUploadType
-    , tocBearerToken
     , tocName
     , tocCallback
     ) where
@@ -52,26 +50,22 @@ import           Network.Google.StorageTransfer.Types
 type TransferOperationsCancelResource =
      "v1" :>
        CaptureMode "name" "cancel" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :> Post '[JSON] Empty
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :> Post '[JSON] Empty
 
 -- | Cancels a transfer. Use the get method to check whether the cancellation
 -- succeeded or whether the operation completed despite cancellation.
 --
 -- /See:/ 'transferOperationsCancel' smart constructor.
 data TransferOperationsCancel = TransferOperationsCancel'
-    { _tocXgafv          :: !(Maybe Text)
+    { _tocXgafv          :: !(Maybe Xgafv)
     , _tocUploadProtocol :: !(Maybe Text)
-    , _tocPp             :: !Bool
     , _tocAccessToken    :: !(Maybe Text)
     , _tocUploadType     :: !(Maybe Text)
-    , _tocBearerToken    :: !(Maybe Text)
     , _tocName           :: !Text
     , _tocCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -84,13 +78,9 @@ data TransferOperationsCancel = TransferOperationsCancel'
 --
 -- * 'tocUploadProtocol'
 --
--- * 'tocPp'
---
 -- * 'tocAccessToken'
 --
 -- * 'tocUploadType'
---
--- * 'tocBearerToken'
 --
 -- * 'tocName'
 --
@@ -102,16 +92,14 @@ transferOperationsCancel pTocName_ =
     TransferOperationsCancel'
     { _tocXgafv = Nothing
     , _tocUploadProtocol = Nothing
-    , _tocPp = True
     , _tocAccessToken = Nothing
     , _tocUploadType = Nothing
-    , _tocBearerToken = Nothing
     , _tocName = pTocName_
     , _tocCallback = Nothing
     }
 
 -- | V1 error format.
-tocXgafv :: Lens' TransferOperationsCancel (Maybe Text)
+tocXgafv :: Lens' TransferOperationsCancel (Maybe Xgafv)
 tocXgafv = lens _tocXgafv (\ s a -> s{_tocXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -119,10 +107,6 @@ tocUploadProtocol :: Lens' TransferOperationsCancel (Maybe Text)
 tocUploadProtocol
   = lens _tocUploadProtocol
       (\ s a -> s{_tocUploadProtocol = a})
-
--- | Pretty-print response.
-tocPp :: Lens' TransferOperationsCancel Bool
-tocPp = lens _tocPp (\ s a -> s{_tocPp = a})
 
 -- | OAuth access token.
 tocAccessToken :: Lens' TransferOperationsCancel (Maybe Text)
@@ -135,12 +119,6 @@ tocUploadType :: Lens' TransferOperationsCancel (Maybe Text)
 tocUploadType
   = lens _tocUploadType
       (\ s a -> s{_tocUploadType = a})
-
--- | OAuth bearer token.
-tocBearerToken :: Lens' TransferOperationsCancel (Maybe Text)
-tocBearerToken
-  = lens _tocBearerToken
-      (\ s a -> s{_tocBearerToken = a})
 
 -- | The name of the operation resource to be cancelled.
 tocName :: Lens' TransferOperationsCancel Text
@@ -157,10 +135,8 @@ instance GoogleRequest TransferOperationsCancel where
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient TransferOperationsCancel'{..}
           = go _tocName _tocXgafv _tocUploadProtocol
-              (Just _tocPp)
               _tocAccessToken
               _tocUploadType
-              _tocBearerToken
               _tocCallback
               (Just AltJSON)
               storageTransferService

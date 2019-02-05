@@ -39,11 +39,9 @@ module Network.Google.Resource.FirebaseRules.Projects.Rulesets.Create
     -- * Request Lenses
     , prcXgafv
     , prcUploadProtocol
-    , prcPp
     , prcAccessToken
     , prcUploadType
     , prcPayload
-    , prcBearerToken
     , prcName
     , prcCallback
     ) where
@@ -59,13 +57,11 @@ type ProjectsRulesetsCreateResource =
          "rulesets" :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Ruleset :> Post '[JSON] Ruleset
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Ruleset :> Post '[JSON] Ruleset
 
 -- | Create a \`Ruleset\` from \`Source\`. The \`Ruleset\` is given a unique
 -- generated name which is returned to the caller. \`Source\` containing
@@ -77,11 +73,9 @@ type ProjectsRulesetsCreateResource =
 data ProjectsRulesetsCreate = ProjectsRulesetsCreate'
     { _prcXgafv          :: !(Maybe Xgafv)
     , _prcUploadProtocol :: !(Maybe Text)
-    , _prcPp             :: !Bool
     , _prcAccessToken    :: !(Maybe Text)
     , _prcUploadType     :: !(Maybe Text)
     , _prcPayload        :: !Ruleset
-    , _prcBearerToken    :: !(Maybe Text)
     , _prcName           :: !Text
     , _prcCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -94,15 +88,11 @@ data ProjectsRulesetsCreate = ProjectsRulesetsCreate'
 --
 -- * 'prcUploadProtocol'
 --
--- * 'prcPp'
---
 -- * 'prcAccessToken'
 --
 -- * 'prcUploadType'
 --
 -- * 'prcPayload'
---
--- * 'prcBearerToken'
 --
 -- * 'prcName'
 --
@@ -115,11 +105,9 @@ projectsRulesetsCreate pPrcPayload_ pPrcName_ =
     ProjectsRulesetsCreate'
     { _prcXgafv = Nothing
     , _prcUploadProtocol = Nothing
-    , _prcPp = True
     , _prcAccessToken = Nothing
     , _prcUploadType = Nothing
     , _prcPayload = pPrcPayload_
-    , _prcBearerToken = Nothing
     , _prcName = pPrcName_
     , _prcCallback = Nothing
     }
@@ -133,10 +121,6 @@ prcUploadProtocol :: Lens' ProjectsRulesetsCreate (Maybe Text)
 prcUploadProtocol
   = lens _prcUploadProtocol
       (\ s a -> s{_prcUploadProtocol = a})
-
--- | Pretty-print response.
-prcPp :: Lens' ProjectsRulesetsCreate Bool
-prcPp = lens _prcPp (\ s a -> s{_prcPp = a})
 
 -- | OAuth access token.
 prcAccessToken :: Lens' ProjectsRulesetsCreate (Maybe Text)
@@ -155,12 +139,6 @@ prcPayload :: Lens' ProjectsRulesetsCreate Ruleset
 prcPayload
   = lens _prcPayload (\ s a -> s{_prcPayload = a})
 
--- | OAuth bearer token.
-prcBearerToken :: Lens' ProjectsRulesetsCreate (Maybe Text)
-prcBearerToken
-  = lens _prcBearerToken
-      (\ s a -> s{_prcBearerToken = a})
-
 -- | Resource name for Project which owns this \`Ruleset\`. Format:
 -- \`projects\/{project_id}\`
 prcName :: Lens' ProjectsRulesetsCreate Text
@@ -178,10 +156,8 @@ instance GoogleRequest ProjectsRulesetsCreate where
                "https://www.googleapis.com/auth/firebase"]
         requestClient ProjectsRulesetsCreate'{..}
           = go _prcName _prcXgafv _prcUploadProtocol
-              (Just _prcPp)
               _prcAccessToken
               _prcUploadType
-              _prcBearerToken
               _prcCallback
               (Just AltJSON)
               _prcPayload

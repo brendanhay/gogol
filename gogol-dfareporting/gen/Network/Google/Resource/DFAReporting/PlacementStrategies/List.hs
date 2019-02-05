@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves a list of placement strategies, possibly filtered.
+-- Retrieves a list of placement strategies, possibly filtered. This method
+-- supports paging.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.placementStrategies.list@.
 module Network.Google.Resource.DFAReporting.PlacementStrategies.List
@@ -49,7 +50,7 @@ import           Network.Google.Prelude
 -- 'PlacementStrategiesList' request conforms to.
 type PlacementStrategiesListResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placementStrategies" :>
@@ -66,17 +67,18 @@ type PlacementStrategiesListResource =
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] PlacementStrategiesListResponse
 
--- | Retrieves a list of placement strategies, possibly filtered.
+-- | Retrieves a list of placement strategies, possibly filtered. This method
+-- supports paging.
 --
 -- /See:/ 'placementStrategiesList' smart constructor.
 data PlacementStrategiesList = PlacementStrategiesList'
     { _pslSearchString :: !(Maybe Text)
     , _pslIds          :: !(Maybe [Textual Int64])
     , _pslProFileId    :: !(Textual Int64)
-    , _pslSortOrder    :: !(Maybe PlacementStrategiesListSortOrder)
+    , _pslSortOrder    :: !PlacementStrategiesListSortOrder
     , _pslPageToken    :: !(Maybe Text)
-    , _pslSortField    :: !(Maybe PlacementStrategiesListSortField)
-    , _pslMaxResults   :: !(Maybe (Textual Int32))
+    , _pslSortField    :: !PlacementStrategiesListSortField
+    , _pslMaxResults   :: !(Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementStrategiesList' with the minimum fields required to make a request.
@@ -104,10 +106,10 @@ placementStrategiesList pPslProFileId_ =
     { _pslSearchString = Nothing
     , _pslIds = Nothing
     , _pslProFileId = _Coerce # pPslProFileId_
-    , _pslSortOrder = Nothing
+    , _pslSortOrder = PSLSOAscending
     , _pslPageToken = Nothing
-    , _pslSortField = Nothing
-    , _pslMaxResults = Nothing
+    , _pslSortField = PSLSFID
+    , _pslMaxResults = 1000
     }
 
 -- | Allows searching for objects by name or ID. Wildcards (*) are allowed.
@@ -135,8 +137,8 @@ pslProFileId
   = lens _pslProFileId (\ s a -> s{_pslProFileId = a})
       . _Coerce
 
--- | Order of sorted results, default is ASCENDING.
-pslSortOrder :: Lens' PlacementStrategiesList (Maybe PlacementStrategiesListSortOrder)
+-- | Order of sorted results.
+pslSortOrder :: Lens' PlacementStrategiesList PlacementStrategiesListSortOrder
 pslSortOrder
   = lens _pslSortOrder (\ s a -> s{_pslSortOrder = a})
 
@@ -146,16 +148,16 @@ pslPageToken
   = lens _pslPageToken (\ s a -> s{_pslPageToken = a})
 
 -- | Field by which to sort the list.
-pslSortField :: Lens' PlacementStrategiesList (Maybe PlacementStrategiesListSortField)
+pslSortField :: Lens' PlacementStrategiesList PlacementStrategiesListSortField
 pslSortField
   = lens _pslSortField (\ s a -> s{_pslSortField = a})
 
 -- | Maximum number of results to return.
-pslMaxResults :: Lens' PlacementStrategiesList (Maybe Int32)
+pslMaxResults :: Lens' PlacementStrategiesList Int32
 pslMaxResults
   = lens _pslMaxResults
       (\ s a -> s{_pslMaxResults = a})
-      . mapping _Coerce
+      . _Coerce
 
 instance GoogleRequest PlacementStrategiesList where
         type Rs PlacementStrategiesList =
@@ -165,10 +167,10 @@ instance GoogleRequest PlacementStrategiesList where
         requestClient PlacementStrategiesList'{..}
           = go _pslProFileId _pslSearchString
               (_pslIds ^. _Default)
-              _pslSortOrder
+              (Just _pslSortOrder)
               _pslPageToken
-              _pslSortField
-              _pslMaxResults
+              (Just _pslSortField)
+              (Just _pslMaxResults)
               (Just AltJSON)
               dFAReportingService
           where go

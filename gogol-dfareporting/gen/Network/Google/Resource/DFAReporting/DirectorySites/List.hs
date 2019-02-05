@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves a list of directory sites, possibly filtered.
+-- Retrieves a list of directory sites, possibly filtered. This method
+-- supports paging.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.directorySites.list@.
 module Network.Google.Resource.DFAReporting.DirectorySites.List
@@ -56,7 +57,7 @@ import           Network.Google.Prelude
 -- 'DirectorySitesList' request conforms to.
 type DirectorySitesListResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "directorySites" :>
@@ -76,12 +77,13 @@ type DirectorySitesListResource =
                                    :>
                                    QueryParam "maxResults" (Textual Int32) :>
                                      QueryParam "parentId" (Textual Int64) :>
-                                       QueryParam "dfp_network_code" Text :>
+                                       QueryParam "dfpNetworkCode" Text :>
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON]
                                              DirectorySitesListResponse
 
--- | Retrieves a list of directory sites, possibly filtered.
+-- | Retrieves a list of directory sites, possibly filtered. This method
+-- supports paging.
 --
 -- /See:/ 'directorySitesList' smart constructor.
 data DirectorySitesList = DirectorySitesList'
@@ -90,13 +92,13 @@ data DirectorySitesList = DirectorySitesList'
     , _dslAcceptsPublisherPaidPlacements :: !(Maybe Bool)
     , _dslIds                            :: !(Maybe [Textual Int64])
     , _dslProFileId                      :: !(Textual Int64)
-    , _dslSortOrder                      :: !(Maybe DirectorySitesListSortOrder)
+    , _dslSortOrder                      :: !DirectorySitesListSortOrder
     , _dslActive                         :: !(Maybe Bool)
     , _dslCountryId                      :: !(Maybe (Textual Int64))
     , _dslPageToken                      :: !(Maybe Text)
-    , _dslSortField                      :: !(Maybe DirectorySitesListSortField)
+    , _dslSortField                      :: !DirectorySitesListSortField
     , _dslAcceptsInStreamVideoPlacements :: !(Maybe Bool)
-    , _dslMaxResults                     :: !(Maybe (Textual Int32))
+    , _dslMaxResults                     :: !(Textual Int32)
     , _dslParentId                       :: !(Maybe (Textual Int64))
     , _dslDfpNetworkCode                 :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -142,13 +144,13 @@ directorySitesList pDslProFileId_ =
     , _dslAcceptsPublisherPaidPlacements = Nothing
     , _dslIds = Nothing
     , _dslProFileId = _Coerce # pDslProFileId_
-    , _dslSortOrder = Nothing
+    , _dslSortOrder = DSLSOAscending
     , _dslActive = Nothing
     , _dslCountryId = Nothing
     , _dslPageToken = Nothing
-    , _dslSortField = Nothing
+    , _dslSortField = DSLSFID
     , _dslAcceptsInStreamVideoPlacements = Nothing
-    , _dslMaxResults = Nothing
+    , _dslMaxResults = 1000
     , _dslParentId = Nothing
     , _dslDfpNetworkCode = Nothing
     }
@@ -192,8 +194,8 @@ dslProFileId
   = lens _dslProFileId (\ s a -> s{_dslProFileId = a})
       . _Coerce
 
--- | Order of sorted results, default is ASCENDING.
-dslSortOrder :: Lens' DirectorySitesList (Maybe DirectorySitesListSortOrder)
+-- | Order of sorted results.
+dslSortOrder :: Lens' DirectorySitesList DirectorySitesListSortOrder
 dslSortOrder
   = lens _dslSortOrder (\ s a -> s{_dslSortOrder = a})
 
@@ -215,7 +217,7 @@ dslPageToken
   = lens _dslPageToken (\ s a -> s{_dslPageToken = a})
 
 -- | Field by which to sort the list.
-dslSortField :: Lens' DirectorySitesList (Maybe DirectorySitesListSortField)
+dslSortField :: Lens' DirectorySitesList DirectorySitesListSortField
 dslSortField
   = lens _dslSortField (\ s a -> s{_dslSortField = a})
 
@@ -227,11 +229,11 @@ dslAcceptsInStreamVideoPlacements
       (\ s a -> s{_dslAcceptsInStreamVideoPlacements = a})
 
 -- | Maximum number of results to return.
-dslMaxResults :: Lens' DirectorySitesList (Maybe Int32)
+dslMaxResults :: Lens' DirectorySitesList Int32
 dslMaxResults
   = lens _dslMaxResults
       (\ s a -> s{_dslMaxResults = a})
-      . mapping _Coerce
+      . _Coerce
 
 -- | Select only directory sites with this parent ID.
 dslParentId :: Lens' DirectorySitesList (Maybe Int64)
@@ -239,7 +241,7 @@ dslParentId
   = lens _dslParentId (\ s a -> s{_dslParentId = a}) .
       mapping _Coerce
 
--- | Select only directory sites with this DFP network code.
+-- | Select only directory sites with this Ad Manager network code.
 dslDfpNetworkCode :: Lens' DirectorySitesList (Maybe Text)
 dslDfpNetworkCode
   = lens _dslDfpNetworkCode
@@ -255,13 +257,13 @@ instance GoogleRequest DirectorySitesList where
               _dslAcceptsInterstitialPlacements
               _dslAcceptsPublisherPaidPlacements
               (_dslIds ^. _Default)
-              _dslSortOrder
+              (Just _dslSortOrder)
               _dslActive
               _dslCountryId
               _dslPageToken
-              _dslSortField
+              (Just _dslSortField)
               _dslAcceptsInStreamVideoPlacements
-              _dslMaxResults
+              (Just _dslMaxResults)
               _dslParentId
               _dslDfpNetworkCode
               (Just AltJSON)

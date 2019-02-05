@@ -1,6 +1,6 @@
 name:                  gogol-safebrowsing
-version:               0.1.1
-synopsis:              Google Safe Browsing APIs SDK.
+version:               0.4.0
+synopsis:              Google Safe Browsing SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -11,7 +11,7 @@ copyright:             Copyright (c) 2015-2016 Brendan Hay
 category:              Network, Google, Cloud
 build-type:            Simple
 cabal-version:         >= 1.10
-extra-source-files:    README.md
+extra-source-files:    README.md src/.gitkeep
 
 description:
     Enables client applications to check web resources (most commonly URLs)
@@ -34,7 +34,10 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Resource.SafeBrowsing.FullHashes.Find
+          Network.Google.Resource.SafeBrowsing.EncodedFullHashes.Get
+        , Network.Google.Resource.SafeBrowsing.EncodedUpdates.Get
+        , Network.Google.Resource.SafeBrowsing.FullHashes.Find
+        , Network.Google.Resource.SafeBrowsing.ThreatHits.Create
         , Network.Google.Resource.SafeBrowsing.ThreatListUpdates.Fetch
         , Network.Google.Resource.SafeBrowsing.ThreatLists.List
         , Network.Google.Resource.SafeBrowsing.ThreatMatches.Find
@@ -46,5 +49,5 @@ library
         , Network.Google.SafeBrowsing.Types.Sum
 
     build-depends:
-          gogol-core == 0.1.1.*
+          gogol-core == 0.4.0.*
         , base       >= 4.7 && < 5

@@ -1,5 +1,5 @@
 name:                  gogol-iam
-version:               0.1.1
+version:               0.4.0
 synopsis:              Google Identity and Access Management (IAM) SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -11,7 +11,7 @@ copyright:             Copyright (c) 2015-2016 Brendan Hay
 category:              Network, Google, Cloud
 build-type:            Simple
 cabal-version:         >= 1.10
-extra-source-files:    README.md
+extra-source-files:    README.md src/.gitkeep
 
 description:
     Manages identity and access control for Google Cloud Platform resources,
@@ -37,6 +37,21 @@ library
     exposed-modules:
           Network.Google.IAM
         , Network.Google.IAM.Types
+        , Network.Google.Resource.IAM.IAMPolicies.LintPolicy
+        , Network.Google.Resource.IAM.IAMPolicies.QueryAuditableServices
+        , Network.Google.Resource.IAM.Organizations.Roles.Create
+        , Network.Google.Resource.IAM.Organizations.Roles.Delete
+        , Network.Google.Resource.IAM.Organizations.Roles.Get
+        , Network.Google.Resource.IAM.Organizations.Roles.List
+        , Network.Google.Resource.IAM.Organizations.Roles.Patch
+        , Network.Google.Resource.IAM.Organizations.Roles.Undelete
+        , Network.Google.Resource.IAM.Permissions.QueryTestablePermissions
+        , Network.Google.Resource.IAM.Projects.Roles.Create
+        , Network.Google.Resource.IAM.Projects.Roles.Delete
+        , Network.Google.Resource.IAM.Projects.Roles.Get
+        , Network.Google.Resource.IAM.Projects.Roles.List
+        , Network.Google.Resource.IAM.Projects.Roles.Patch
+        , Network.Google.Resource.IAM.Projects.Roles.Undelete
         , Network.Google.Resource.IAM.Projects.ServiceAccounts.Create
         , Network.Google.Resource.IAM.Projects.ServiceAccounts.Delete
         , Network.Google.Resource.IAM.Projects.ServiceAccounts.Get
@@ -48,8 +63,11 @@ library
         , Network.Google.Resource.IAM.Projects.ServiceAccounts.List
         , Network.Google.Resource.IAM.Projects.ServiceAccounts.SetIAMPolicy
         , Network.Google.Resource.IAM.Projects.ServiceAccounts.SignBlob
+        , Network.Google.Resource.IAM.Projects.ServiceAccounts.SignJwt
         , Network.Google.Resource.IAM.Projects.ServiceAccounts.TestIAMPermissions
         , Network.Google.Resource.IAM.Projects.ServiceAccounts.Update
+        , Network.Google.Resource.IAM.Roles.Get
+        , Network.Google.Resource.IAM.Roles.List
         , Network.Google.Resource.IAM.Roles.QueryGrantableRoles
 
     other-modules:
@@ -57,5 +75,5 @@ library
         , Network.Google.IAM.Types.Sum
 
     build-depends:
-          gogol-core == 0.1.1.*
+          gogol-core == 0.4.0.*
         , base       >= 4.7 && < 5

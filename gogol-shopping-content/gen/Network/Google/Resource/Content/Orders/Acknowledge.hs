@@ -45,7 +45,7 @@ import           Network.Google.ShoppingContent.Types
 -- 'OrdersAcknowledge' request conforms to.
 type OrdersAcknowledgeResource =
      "content" :>
-       "v2" :>
+       "v2.1" :>
          Capture "merchantId" (Textual Word64) :>
            "orders" :>
              Capture "orderId" Text :>
@@ -84,7 +84,8 @@ ordersAcknowledge pOaMerchantId_ pOaPayload_ pOaOrderId_ =
     , _oaOrderId = pOaOrderId_
     }
 
--- | The ID of the managing account.
+-- | The ID of the account that manages the order. This cannot be a
+-- multi-client account.
 oaMerchantId :: Lens' OrdersAcknowledge Word64
 oaMerchantId
   = lens _oaMerchantId (\ s a -> s{_oaMerchantId = a})

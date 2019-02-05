@@ -13,223 +13,264 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- [Deprecated. Please use Instance Group Manager in Compute API] Provides
--- groups of homogenous Compute Engine instances.
+-- The Replica Pool API allows users to declaratively provision and manage
+-- groups of Google Compute Engine instances based on a common template.
 --
--- /See:/ <https://developers.google.com/compute/docs/instance-groups/manager/v1beta2 Google Compute Engine Instance Group Manager API Reference>
+-- /See:/ <https://developers.google.com/compute/docs/replica-pool/ Replica Pool API Reference>
 module Network.Google.ReplicaPool
     (
     -- * Service Configuration
       replicaPoolService
 
     -- * OAuth Scopes
-    , computeScope
     , cloudPlatformReadOnlyScope
     , cloudPlatformScope
-    , computeReadOnlyScope
+    , ndevCloudmanScope
+    , ndevCloudmanReadOnlyScope
+    , replicaPoolScope
+    , replicaPoolReadOnlyScope
 
     -- * API Declaration
     , ReplicaPoolAPI
 
     -- * Resources
 
-    -- ** replicapool.instanceGroupManagers.abandonInstances
-    , module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.AbandonInstances
+    -- ** replicapool.pools.delete
+    , module Network.Google.Resource.ReplicaPool.Pools.Delete
 
-    -- ** replicapool.instanceGroupManagers.delete
-    , module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.Delete
+    -- ** replicapool.pools.get
+    , module Network.Google.Resource.ReplicaPool.Pools.Get
 
-    -- ** replicapool.instanceGroupManagers.deleteInstances
-    , module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.DeleteInstances
+    -- ** replicapool.pools.insert
+    , module Network.Google.Resource.ReplicaPool.Pools.Insert
 
-    -- ** replicapool.instanceGroupManagers.get
-    , module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.Get
+    -- ** replicapool.pools.list
+    , module Network.Google.Resource.ReplicaPool.Pools.List
 
-    -- ** replicapool.instanceGroupManagers.insert
-    , module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.Insert
+    -- ** replicapool.pools.resize
+    , module Network.Google.Resource.ReplicaPool.Pools.Resize
 
-    -- ** replicapool.instanceGroupManagers.list
-    , module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.List
+    -- ** replicapool.pools.updatetemplate
+    , module Network.Google.Resource.ReplicaPool.Pools.Updatetemplate
 
-    -- ** replicapool.instanceGroupManagers.recreateInstances
-    , module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.RecreateInstances
+    -- ** replicapool.replicas.delete
+    , module Network.Google.Resource.ReplicaPool.Replicas.Delete
 
-    -- ** replicapool.instanceGroupManagers.resize
-    , module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.Resize
+    -- ** replicapool.replicas.get
+    , module Network.Google.Resource.ReplicaPool.Replicas.Get
 
-    -- ** replicapool.instanceGroupManagers.setInstanceTemplate
-    , module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.SetInstanceTemplate
+    -- ** replicapool.replicas.list
+    , module Network.Google.Resource.ReplicaPool.Replicas.List
 
-    -- ** replicapool.instanceGroupManagers.setTargetPools
-    , module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.SetTargetPools
-
-    -- ** replicapool.zoneOperations.get
-    , module Network.Google.Resource.ReplicaPool.ZoneOperations.Get
-
-    -- ** replicapool.zoneOperations.list
-    , module Network.Google.Resource.ReplicaPool.ZoneOperations.List
+    -- ** replicapool.replicas.restart
+    , module Network.Google.Resource.ReplicaPool.Replicas.Restart
 
     -- * Types
 
-    -- ** OperationWarningsItemDataItem
-    , OperationWarningsItemDataItem
-    , operationWarningsItemDataItem
-    , owidiValue
-    , owidiKey
+    -- ** ReplicaStatus
+    , ReplicaStatus
+    , replicaStatus
+    , rsState
+    , rsTemplateVersion
+    , rsVMLink
+    , rsVMStartTime
+    , rsDetails
 
-    -- ** InstanceGroupManagersAbandonInstancesRequest
-    , InstanceGroupManagersAbandonInstancesRequest
-    , instanceGroupManagersAbandonInstancesRequest
-    , igmairInstances
+    -- ** DiskAttachment
+    , DiskAttachment
+    , diskAttachment
+    , daDeviceName
+    , daIndex
 
-    -- ** InstanceGroupManagersSetInstanceTemplateRequest
-    , InstanceGroupManagersSetInstanceTemplateRequest
-    , instanceGroupManagersSetInstanceTemplateRequest
-    , igmsitrInstanceTemplate
+    -- ** PoolsDeleteRequest
+    , PoolsDeleteRequest
+    , poolsDeleteRequest
+    , pdrAbandonInstances
 
-    -- ** OperationWarningsItemCode
-    , OperationWarningsItemCode (..)
+    -- ** HealthCheck
+    , HealthCheck
+    , healthCheck
+    , hcHealthyThreshold
+    , hcPath
+    , hcCheckIntervalSec
+    , hcName
+    , hcHost
+    , hcTimeoutSec
+    , hcDescription
+    , hcUnhealthyThreshold
+    , hcPort
 
-    -- ** OperationList
-    , OperationList
-    , operationList
-    , olNextPageToken
-    , olKind
-    , olItems
-    , olSelfLink
-    , olId
+    -- ** Tag
+    , Tag
+    , tag
+    , tFingerPrint
+    , tItems
 
-    -- ** InstanceGroupManagerList
-    , InstanceGroupManagerList
-    , instanceGroupManagerList
-    , igmlNextPageToken
-    , igmlKind
-    , igmlItems
-    , igmlSelfLink
-    , igmlId
+    -- ** NewDiskInitializeParams
+    , NewDiskInitializeParams
+    , newDiskInitializeParams
+    , ndipSourceImage
+    , ndipDiskSizeGb
+    , ndipDiskType
 
-    -- ** ReplicaPoolAutoHealingPolicyActionType
-    , ReplicaPoolAutoHealingPolicyActionType (..)
+    -- ** MetadataItem
+    , MetadataItem
+    , metadataItem
+    , miValue
+    , miKey
 
-    -- ** Operation
-    , Operation
-    , operation
-    , oTargetId
-    , oStatus
-    , oInsertTime
-    , oProgress
-    , oStartTime
-    , oKind
-    , oError
-    , oHTTPErrorMessage
-    , oZone
-    , oWarnings
-    , oHTTPErrorStatusCode
-    , oUser
-    , oSelfLink
-    , oName
-    , oStatusMessage
-    , oCreationTimestamp
-    , oEndTime
-    , oId
-    , oOperationType
-    , oRegion
-    , oTargetLink
-    , oClientOperationId
+    -- ** Replica
+    , Replica
+    , replica
+    , rStatus
+    , rSelfLink
+    , rName
 
-    -- ** InstanceGroupManager
-    , InstanceGroupManager
-    , instanceGroupManager
-    , igmCurrentSize
-    , igmGroup
-    , igmKind
-    , igmFingerprint
-    , igmBaseInstanceName
-    , igmAutoHealingPolicies
-    , igmInstanceTemplate
-    , igmTargetSize
-    , igmSelfLink
-    , igmName
-    , igmCreationTimestamp
-    , igmId
-    , igmTargetPools
-    , igmDescription
+    -- ** NetworkInterface
+    , NetworkInterface
+    , networkInterface
+    , niNetwork
+    , niNetworkIP
+    , niAccessConfigs
 
-    -- ** ReplicaPoolAutoHealingPolicy
-    , ReplicaPoolAutoHealingPolicy
-    , replicaPoolAutoHealingPolicy
-    , rpahpHealthCheck
-    , rpahpActionType
+    -- ** ExistingDisk
+    , ExistingDisk
+    , existingDisk
+    , edAttachment
+    , edSource
 
-    -- ** InstanceGroupManagersRecreateInstancesRequest
-    , InstanceGroupManagersRecreateInstancesRequest
-    , instanceGroupManagersRecreateInstancesRequest
-    , igmrirInstances
+    -- ** Action
+    , Action
+    , action
+    , aCommands
+    , aTimeoutMilliSeconds
+    , aEnvVariables
 
-    -- ** OperationStatus
-    , OperationStatus (..)
+    -- ** Pool
+    , Pool
+    , pool
+    , pResourceViews
+    , pNumReplicas
+    , pTargetPool
+    , pAutoRestart
+    , pBaseInstanceName
+    , pInitialNumReplicas
+    , pCurrentNumReplicas
+    , pSelfLink
+    , pName
+    , pLabels
+    , pType
+    , pTemplate
+    , pTargetPools
+    , pDescription
+    , pHealthChecks
 
-    -- ** InstanceGroupManagersDeleteInstancesRequest
-    , InstanceGroupManagersDeleteInstancesRequest
-    , instanceGroupManagersDeleteInstancesRequest
-    , igmdirInstances
+    -- ** ServiceAccount
+    , ServiceAccount
+    , serviceAccount
+    , saEmail
+    , saScopes
 
-    -- ** OperationError
-    , OperationError
-    , operationError
-    , oeErrors
+    -- ** VMParams
+    , VMParams
+    , vMParams
+    , vmpServiceAccounts
+    , vmpNetworkInterfaces
+    , vmpBaseInstanceName
+    , vmpOnHostMaintenance
+    , vmpMachineType
+    , vmpMetadata
+    , vmpDisksToAttach
+    , vmpCanIPForward
+    , vmpDescription
+    , vmpDisksToCreate
+    , vmpTags
 
-    -- ** InstanceGroupManagersSetTargetPoolsRequest
-    , InstanceGroupManagersSetTargetPoolsRequest
-    , instanceGroupManagersSetTargetPoolsRequest
-    , igmstprFingerprint
-    , igmstprTargetPools
+    -- ** ReplicasListResponse
+    , ReplicasListResponse
+    , replicasListResponse
+    , rlrNextPageToken
+    , rlrResources
 
-    -- ** OperationErrorErrorsItem
-    , OperationErrorErrorsItem
-    , operationErrorErrorsItem
-    , oeeiLocation
-    , oeeiCode
-    , oeeiMessage
+    -- ** Metadata
+    , Metadata
+    , metadata
+    , mFingerPrint
+    , mItems
 
-    -- ** OperationWarningsItem
-    , OperationWarningsItem
-    , operationWarningsItem
-    , owiData
-    , owiCode
-    , owiMessage
+    -- ** Template
+    , Template
+    , template
+    , tAction
+    , tVMParams
+    , tVersion
+    , tHealthChecks
+
+    -- ** EnvVariable
+    , EnvVariable
+    , envVariable
+    , evValue
+    , evName
+    , evHidden
+
+    -- ** ReplicasDeleteRequest
+    , ReplicasDeleteRequest
+    , replicasDeleteRequest
+    , rdrAbandonInstance
+
+    -- ** AccessConfig
+    , AccessConfig
+    , accessConfig
+    , acName
+    , acNATIP
+    , acType
+
+    -- ** Label
+    , Label
+    , label
+    , lValue
+    , lKey
+
+    -- ** PoolsListResponse
+    , PoolsListResponse
+    , poolsListResponse
+    , plrNextPageToken
+    , plrResources
+
+    -- ** NewDisk
+    , NewDisk
+    , newDisk
+    , ndBoot
+    , ndAutoDelete
+    , ndAttachment
+    , ndInitializeParams
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.ReplicaPool.Types
-import           Network.Google.Resource.ReplicaPool.InstanceGroupManagers.AbandonInstances
-import           Network.Google.Resource.ReplicaPool.InstanceGroupManagers.Delete
-import           Network.Google.Resource.ReplicaPool.InstanceGroupManagers.DeleteInstances
-import           Network.Google.Resource.ReplicaPool.InstanceGroupManagers.Get
-import           Network.Google.Resource.ReplicaPool.InstanceGroupManagers.Insert
-import           Network.Google.Resource.ReplicaPool.InstanceGroupManagers.List
-import           Network.Google.Resource.ReplicaPool.InstanceGroupManagers.RecreateInstances
-import           Network.Google.Resource.ReplicaPool.InstanceGroupManagers.Resize
-import           Network.Google.Resource.ReplicaPool.InstanceGroupManagers.SetInstanceTemplate
-import           Network.Google.Resource.ReplicaPool.InstanceGroupManagers.SetTargetPools
-import           Network.Google.Resource.ReplicaPool.ZoneOperations.Get
-import           Network.Google.Resource.ReplicaPool.ZoneOperations.List
+import           Network.Google.Resource.ReplicaPool.Pools.Delete
+import           Network.Google.Resource.ReplicaPool.Pools.Get
+import           Network.Google.Resource.ReplicaPool.Pools.Insert
+import           Network.Google.Resource.ReplicaPool.Pools.List
+import           Network.Google.Resource.ReplicaPool.Pools.Resize
+import           Network.Google.Resource.ReplicaPool.Pools.Updatetemplate
+import           Network.Google.Resource.ReplicaPool.Replicas.Delete
+import           Network.Google.Resource.ReplicaPool.Replicas.Get
+import           Network.Google.Resource.ReplicaPool.Replicas.List
+import           Network.Google.Resource.ReplicaPool.Replicas.Restart
 
 {- $resources
 TODO
 -}
 
--- | Represents the entirety of the methods and resources available for the Google Compute Engine Instance Group Manager API service.
+-- | Represents the entirety of the methods and resources available for the Replica Pool API service.
 type ReplicaPoolAPI =
-     ZoneOperationsListResource :<|>
-       ZoneOperationsGetResource
-       :<|> InstanceGroupManagersSetTargetPoolsResource
-       :<|> InstanceGroupManagersInsertResource
-       :<|> InstanceGroupManagersResizeResource
-       :<|> InstanceGroupManagersListResource
-       :<|> InstanceGroupManagersAbandonInstancesResource
-       :<|> InstanceGroupManagersSetInstanceTemplateResource
-       :<|> InstanceGroupManagersGetResource
-       :<|> InstanceGroupManagersDeleteInstancesResource
-       :<|> InstanceGroupManagersDeleteResource
-       :<|> InstanceGroupManagersRecreateInstancesResource
+     PoolsInsertResource :<|> PoolsResizeResource :<|>
+       PoolsListResource
+       :<|> PoolsGetResource
+       :<|> PoolsUpdatetemplateResource
+       :<|> PoolsDeleteResource
+       :<|> ReplicasListResource
+       :<|> ReplicasGetResource
+       :<|> ReplicasRestartResource
+       :<|> ReplicasDeleteResource

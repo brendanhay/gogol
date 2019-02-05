@@ -24,37 +24,40 @@
 --
 module Network.Google.Types where
 
-import           Control.Applicative
-import           Control.Exception.Lens       (exception)
-import           Control.Lens
-import           Control.Monad.Catch
-import           Control.Monad.Trans.Resource
-import           Data.Aeson
-import           Data.ByteString              (ByteString)
-import qualified Data.ByteString.Char8        as BS8
-import qualified Data.ByteString.Lazy         as LBS
-import qualified Data.CaseInsensitive         as CI
-import           Data.Coerce
-import           Data.Conduit
-import qualified Data.Conduit.List            as CL
-import           Data.Data
-import           Data.DList                   (DList)
-import qualified Data.DList                   as DList
-import           Data.Foldable                (foldMap, foldl')
-import           Data.Monoid
-import           Data.String
-import           Data.Text                    (Text)
-import qualified Data.Text.Encoding           as Text
-import           Data.Text.Lazy.Builder       (Builder)
-import qualified Data.Text.Lazy.Builder       as Build
-import           GHC.Generics
-import           GHC.TypeLits
-import           Network.HTTP.Client          (HttpException, RequestBody (..))
-import           Network.HTTP.Media           hiding (Accept)
-import           Network.HTTP.Types           hiding (Header)
-import qualified Network.HTTP.Types           as HTTP
-import           Servant.API
-import           Web.HttpApiData
+import Control.Exception.Lens       (exception)
+import Control.Lens
+import Control.Monad.Catch
+import Control.Monad.Trans.Resource
+
+import Data.Aeson
+import Data.ByteString        (ByteString)
+import Data.Coerce
+import Data.Conduit
+import Data.Data
+import Data.DList             (DList)
+import Data.Foldable          (foldMap, foldl')
+import Data.String
+import Data.Semigroup
+import Data.Text              (Text)
+import Data.Text.Lazy.Builder (Builder)
+
+import GHC.Generics
+import GHC.TypeLits
+
+import Network.HTTP.Client (HttpException, RequestBody (..))
+import Network.HTTP.Media  hiding (Accept)
+import Network.HTTP.Types  hiding (Header)
+
+import Servant.API hiding (Stream)
+
+import qualified Data.ByteString.Char8    as BS8
+import qualified Data.ByteString.Lazy     as LBS
+import qualified Data.CaseInsensitive     as CI
+import qualified Data.Conduit.Combinators as Conduit
+import qualified Data.DList               as DList
+import qualified Data.Text.Encoding       as Text
+import qualified Data.Text.Lazy.Builder   as Build
+import qualified Network.HTTP.Types       as HTTP
 
 data AltJSON   = AltJSON   deriving (Eq, Ord, Show, Read, Generic, Typeable)
 data AltMedia  = AltMedia  deriving (Eq, Ord, Show, Read, Generic, Typeable)
@@ -145,7 +148,7 @@ newtype ServiceId = ServiceId Text
         )
 
 -- | An opaque client secret.
-newtype Secret = Secret Text
+newtype GSecret = GSecret Text
     deriving
         ( Eq
         , Ord
@@ -159,11 +162,12 @@ newtype Secret = Secret Text
         , ToJSON
         )
 
-instance Show Secret where
+instance Show GSecret where
     show = const "*****"
 
 newtype MediaDownload a = MediaDownload a
-data    MediaUpload   a = MediaUpload   a Body
+
+data MediaUpload a = MediaUpload a Body
 
 _Coerce :: (Coercible a b, Coercible b a) => Iso' a b
 _Coerce = iso coerce coerce
@@ -176,7 +180,7 @@ _Default = iso f Just
     f (Just x) = x
     f Nothing  = mempty
 
-type Stream = ResumableSource (ResourceT IO) ByteString
+type Stream = ConduitM () ByteString (ResourceT IO) ()
 
 data Error
     = TransportError HttpException
@@ -305,7 +309,10 @@ data Request = Request
 
 instance Monoid Request where
     mempty      = Request mempty mempty mempty mempty
-    mappend a b = Request
+    mappend     = (<>)
+
+instance Semigroup Request where
+    a <> b = Request
         (_rqPath    a <> "/" <> _rqPath b)
         (_rqQuery   a <> _rqQuery b)
         (_rqHeaders a <> _rqHeaders b)
@@ -332,7 +339,7 @@ setBody :: Request -> [Body] -> Request
 setBody rq bs = rq { _rqBody = bs }
 
 -- | A materialised 'http-client' request and associated response parser.
-data Client a = Client
+data GClient a = GClient
     { _cliAccept   :: !(Maybe MediaType)
     , _cliMethod   :: !Method
     , _cliCheck    :: !(Status -> Bool)
@@ -341,7 +348,7 @@ data Client a = Client
     , _cliResponse :: !(Stream -> ResourceT IO (Either (String, LBS.ByteString) a))
     }
 
-clientService :: Lens' (Client a) ServiceConfig
+clientService :: Lens' (GClient a) ServiceConfig
 clientService = lens _cliService (\s a -> s { _cliService = a })
 
 mime :: FromStream c a
@@ -350,27 +357,27 @@ mime :: FromStream c a
      -> [Int]
      -> Request
      -> ServiceConfig
-     -> Client a
-mime p = client (fromStream p) (Just (contentType p))
+     -> GClient a
+mime p = gClient (fromStream p) (Just (contentType p))
 
 discard :: Method
         -> [Int]
         -> Request
         -> ServiceConfig
-        -> Client ()
-discard = client (\b -> closeResumableSource b >> pure (Right ())) Nothing
+        -> GClient ()
+discard = gClient (\b -> runConduit (b .| Conduit.sinkNull) >> pure (Right ())) Nothing
 
-client :: (Stream -> ResourceT IO (Either (String, LBS.ByteString) a))
+gClient :: (Stream -> ResourceT IO (Either (String, LBS.ByteString) a))
        -> Maybe MediaType
        -> Method
        -> [Int]
        -> Request
        -> ServiceConfig
-       -> Client a
-client f cs m ns rq s = Client
+       -> GClient a
+gClient f cs m statuses rq s = GClient
     { _cliAccept   = cs
     , _cliMethod   = m
-    , _cliCheck    = (`elem` ns) . fromEnum
+    , _cliCheck    = \status -> fromEnum status `elem` statuses
     , _cliService  = s
     , _cliRequest  = rq
     , _cliResponse = f
@@ -413,7 +420,7 @@ class GoogleRequest a where
     type Rs     a :: *
     type Scopes a :: [Symbol]
 
-    requestClient :: a -> Client (Rs a)
+    requestClient :: a -> GClient (Rs a)
 
 class GoogleClient fn where
     type Fn fn :: *
@@ -541,66 +548,66 @@ instance ( ToBody c a
 
 instance {-# OVERLAPPABLE #-}
   FromStream c a => GoogleClient (Get (c ': cs) a) where
-    type Fn (Get (c ': cs) a) = ServiceConfig -> Client a
+    type Fn (Get (c ': cs) a) = ServiceConfig -> GClient a
 
     buildClient Proxy = mime (Proxy :: Proxy c) methodGet [200, 203]
 
 instance {-# OVERLAPPING #-}
   GoogleClient (Get (c ': cs) ()) where
-    type Fn (Get (c ': cs) ()) = ServiceConfig -> Client ()
+    type Fn (Get (c ': cs) ()) = ServiceConfig -> GClient ()
 
     buildClient Proxy = discard methodGet [204]
 
 instance {-# OVERLAPPABLE #-}
   (FromStream c a, cs' ~ (c ': cs)) => GoogleClient (Post cs' a) where
-    type Fn (Post cs' a) = ServiceConfig -> Client a
+    type Fn (Post cs' a) = ServiceConfig -> GClient a
 
     buildClient Proxy = mime (Proxy :: Proxy c) methodPost [200, 201]
 
 instance {-# OVERLAPPING #-}
   GoogleClient (Post cs ()) where
-    type Fn (Post cs ()) = ServiceConfig -> Client ()
+    type Fn (Post cs ()) = ServiceConfig -> GClient ()
 
     buildClient Proxy = discard methodPost [204]
 
 instance {-# OVERLAPPABLE #-}
   FromStream c a => GoogleClient (Put (c ': cs) a) where
-    type Fn (Put (c ': cs) a) = ServiceConfig -> Client a
+    type Fn (Put (c ': cs) a) = ServiceConfig -> GClient a
 
     buildClient Proxy = mime (Proxy :: Proxy c) methodPut [200, 201]
 
 instance {-# OVERLAPPING #-}
   GoogleClient (Put (c ': cs) ()) where
-    type Fn (Put (c ': cs) ()) = ServiceConfig -> Client ()
+    type Fn (Put (c ': cs) ()) = ServiceConfig -> GClient ()
 
     buildClient Proxy = discard methodPut [204]
 
 instance {-# OVERLAPPABLE #-}
   FromStream c a => GoogleClient (Patch (c ': cs) a) where
-    type Fn (Patch (c ': cs) a) = ServiceConfig -> Client a
+    type Fn (Patch (c ': cs) a) = ServiceConfig -> GClient a
 
     buildClient Proxy = mime (Proxy :: Proxy c) methodPatch [200, 201]
 
 instance {-# OVERLAPPING #-}
   GoogleClient (Patch (c ': cs) ()) where
-    type Fn (Patch (c ': cs) ()) = ServiceConfig -> Client ()
+    type Fn (Patch (c ': cs) ()) = ServiceConfig -> GClient ()
 
     buildClient Proxy = discard methodPatch [204]
 
 instance {-# OVERLAPPABLE #-}
   FromStream c a => GoogleClient (Delete (c ': cs) a) where
-    type Fn (Delete (c ': cs) a) = ServiceConfig -> Client a
+    type Fn (Delete (c ': cs) a) = ServiceConfig -> GClient a
 
     buildClient Proxy = mime (Proxy :: Proxy c) methodDelete [200, 202]
 
 instance {-# OVERLAPPING #-}
   GoogleClient (Delete (c ': cs) ()) where
-    type Fn (Delete (c ': cs) ()) = ServiceConfig -> Client ()
+    type Fn (Delete (c ': cs) ()) = ServiceConfig -> GClient ()
 
     buildClient Proxy = discard methodDelete [204]
 
 sinkLBS :: Stream -> ResourceT IO LBS.ByteString
-sinkLBS = fmap LBS.fromChunks . ($$+- CL.consume)
+sinkLBS = runConduit . (.| Conduit.sinkLazy)
 
 buildText :: ToHttpApiData a => a -> Builder
 buildText = Build.fromText . toQueryParam
@@ -636,7 +643,7 @@ seconds (Seconds n)
 microseconds :: Seconds -> Int
 microseconds =  (1000000 *) . seconds
 
-newtype FieldMask = FieldMask Text
+newtype GFieldMask = GFieldMask Text
     deriving
         ( Eq
         , Ord

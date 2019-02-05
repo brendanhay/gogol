@@ -22,7 +22,7 @@
 --
 -- Gets the configuration of a topic.
 --
--- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.topics.get@.
+-- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference> for @pubsub.projects.topics.get@.
 module Network.Google.Resource.PubSub.Projects.Topics.Get
     (
     -- * REST Resource
@@ -35,11 +35,9 @@ module Network.Google.Resource.PubSub.Projects.Topics.Get
     -- * Request Lenses
     , ptgXgafv
     , ptgUploadProtocol
-    , ptgPp
     , ptgAccessToken
     , ptgUploadType
     , ptgTopic
-    , ptgBearerToken
     , ptgCallback
     ) where
 
@@ -51,26 +49,22 @@ import           Network.Google.PubSub.Types
 type ProjectsTopicsGetResource =
      "v1" :>
        Capture "topic" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] Topic
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Topic
 
 -- | Gets the configuration of a topic.
 --
 -- /See:/ 'projectsTopicsGet' smart constructor.
 data ProjectsTopicsGet = ProjectsTopicsGet'
-    { _ptgXgafv          :: !(Maybe Text)
+    { _ptgXgafv          :: !(Maybe Xgafv)
     , _ptgUploadProtocol :: !(Maybe Text)
-    , _ptgPp             :: !Bool
     , _ptgAccessToken    :: !(Maybe Text)
     , _ptgUploadType     :: !(Maybe Text)
     , _ptgTopic          :: !Text
-    , _ptgBearerToken    :: !(Maybe Text)
     , _ptgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -82,15 +76,11 @@ data ProjectsTopicsGet = ProjectsTopicsGet'
 --
 -- * 'ptgUploadProtocol'
 --
--- * 'ptgPp'
---
 -- * 'ptgAccessToken'
 --
 -- * 'ptgUploadType'
 --
 -- * 'ptgTopic'
---
--- * 'ptgBearerToken'
 --
 -- * 'ptgCallback'
 projectsTopicsGet
@@ -100,16 +90,14 @@ projectsTopicsGet pPtgTopic_ =
     ProjectsTopicsGet'
     { _ptgXgafv = Nothing
     , _ptgUploadProtocol = Nothing
-    , _ptgPp = True
     , _ptgAccessToken = Nothing
     , _ptgUploadType = Nothing
     , _ptgTopic = pPtgTopic_
-    , _ptgBearerToken = Nothing
     , _ptgCallback = Nothing
     }
 
 -- | V1 error format.
-ptgXgafv :: Lens' ProjectsTopicsGet (Maybe Text)
+ptgXgafv :: Lens' ProjectsTopicsGet (Maybe Xgafv)
 ptgXgafv = lens _ptgXgafv (\ s a -> s{_ptgXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -117,10 +105,6 @@ ptgUploadProtocol :: Lens' ProjectsTopicsGet (Maybe Text)
 ptgUploadProtocol
   = lens _ptgUploadProtocol
       (\ s a -> s{_ptgUploadProtocol = a})
-
--- | Pretty-print response.
-ptgPp :: Lens' ProjectsTopicsGet Bool
-ptgPp = lens _ptgPp (\ s a -> s{_ptgPp = a})
 
 -- | OAuth access token.
 ptgAccessToken :: Lens' ProjectsTopicsGet (Maybe Text)
@@ -134,15 +118,10 @@ ptgUploadType
   = lens _ptgUploadType
       (\ s a -> s{_ptgUploadType = a})
 
--- | The name of the topic to get.
+-- | The name of the topic to get. Format is
+-- \`projects\/{project}\/topics\/{topic}\`.
 ptgTopic :: Lens' ProjectsTopicsGet Text
 ptgTopic = lens _ptgTopic (\ s a -> s{_ptgTopic = a})
-
--- | OAuth bearer token.
-ptgBearerToken :: Lens' ProjectsTopicsGet (Maybe Text)
-ptgBearerToken
-  = lens _ptgBearerToken
-      (\ s a -> s{_ptgBearerToken = a})
 
 -- | JSONP
 ptgCallback :: Lens' ProjectsTopicsGet (Maybe Text)
@@ -156,10 +135,8 @@ instance GoogleRequest ProjectsTopicsGet where
                "https://www.googleapis.com/auth/pubsub"]
         requestClient ProjectsTopicsGet'{..}
           = go _ptgTopic _ptgXgafv _ptgUploadProtocol
-              (Just _ptgPp)
               _ptgAccessToken
               _ptgUploadType
-              _ptgBearerToken
               _ptgCallback
               (Just AltJSON)
               pubSubService

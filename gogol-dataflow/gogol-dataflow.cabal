@@ -1,5 +1,5 @@
 name:                  gogol-dataflow
-version:               0.1.1
+version:               0.4.0
 synopsis:              Google Dataflow SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -11,11 +11,10 @@ copyright:             Copyright (c) 2015-2016 Brendan Hay
 category:              Network, Google, Cloud
 build-type:            Simple
 cabal-version:         >= 1.10
-extra-source-files:    README.md
+extra-source-files:    README.md src/.gitkeep
 
 description:
-    Develops and executes data processing patterns like ETL, batch
-    computation, and continuous computation.
+    Manages Google Cloud Dataflow projects on Google Cloud Platform.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -36,6 +35,7 @@ library
     exposed-modules:
           Network.Google.Dataflow
         , Network.Google.Dataflow.Types
+        , Network.Google.Resource.Dataflow.Projects.Jobs.Aggregated
         , Network.Google.Resource.Dataflow.Projects.Jobs.Create
         , Network.Google.Resource.Dataflow.Projects.Jobs.Debug.GetConfig
         , Network.Google.Resource.Dataflow.Projects.Jobs.Debug.SendCapture
@@ -43,10 +43,28 @@ library
         , Network.Google.Resource.Dataflow.Projects.Jobs.GetMetrics
         , Network.Google.Resource.Dataflow.Projects.Jobs.List
         , Network.Google.Resource.Dataflow.Projects.Jobs.Messages.List
+        , Network.Google.Resource.Dataflow.Projects.Jobs.Snapshot
         , Network.Google.Resource.Dataflow.Projects.Jobs.Update
         , Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.Lease
         , Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.ReportStatus
+        , Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Create
+        , Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Debug.GetConfig
+        , Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Debug.SendCapture
+        , Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Get
+        , Network.Google.Resource.Dataflow.Projects.Locations.Jobs.GetMetrics
+        , Network.Google.Resource.Dataflow.Projects.Locations.Jobs.List
+        , Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Messages.List
+        , Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Snapshot
+        , Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Update
+        , Network.Google.Resource.Dataflow.Projects.Locations.Jobs.WorkItems.Lease
+        , Network.Google.Resource.Dataflow.Projects.Locations.Jobs.WorkItems.ReportStatus
+        , Network.Google.Resource.Dataflow.Projects.Locations.Templates.Create
+        , Network.Google.Resource.Dataflow.Projects.Locations.Templates.Get
+        , Network.Google.Resource.Dataflow.Projects.Locations.Templates.Launch
+        , Network.Google.Resource.Dataflow.Projects.Locations.WorkerMessages
         , Network.Google.Resource.Dataflow.Projects.Templates.Create
+        , Network.Google.Resource.Dataflow.Projects.Templates.Get
+        , Network.Google.Resource.Dataflow.Projects.Templates.Launch
         , Network.Google.Resource.Dataflow.Projects.WorkerMessages
 
     other-modules:
@@ -54,5 +72,5 @@ library
         , Network.Google.Dataflow.Types.Sum
 
     build-depends:
-          gogol-core == 0.1.1.*
+          gogol-core == 0.4.0.*
         , base       >= 4.7 && < 5

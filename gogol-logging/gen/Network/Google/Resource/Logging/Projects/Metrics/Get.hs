@@ -35,11 +35,9 @@ module Network.Google.Resource.Logging.Projects.Metrics.Get
     -- * Request Lenses
     , pmgXgafv
     , pmgUploadProtocol
-    , pmgPp
     , pmgAccessToken
     , pmgMetricName
     , pmgUploadType
-    , pmgBearerToken
     , pmgCallback
     ) where
 
@@ -53,12 +51,10 @@ type ProjectsMetricsGetResource =
        Capture "metricName" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] LogMetric
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] LogMetric
 
 -- | Gets a logs-based metric.
 --
@@ -66,11 +62,9 @@ type ProjectsMetricsGetResource =
 data ProjectsMetricsGet = ProjectsMetricsGet'
     { _pmgXgafv          :: !(Maybe Xgafv)
     , _pmgUploadProtocol :: !(Maybe Text)
-    , _pmgPp             :: !Bool
     , _pmgAccessToken    :: !(Maybe Text)
     , _pmgMetricName     :: !Text
     , _pmgUploadType     :: !(Maybe Text)
-    , _pmgBearerToken    :: !(Maybe Text)
     , _pmgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -82,15 +76,11 @@ data ProjectsMetricsGet = ProjectsMetricsGet'
 --
 -- * 'pmgUploadProtocol'
 --
--- * 'pmgPp'
---
 -- * 'pmgAccessToken'
 --
 -- * 'pmgMetricName'
 --
 -- * 'pmgUploadType'
---
--- * 'pmgBearerToken'
 --
 -- * 'pmgCallback'
 projectsMetricsGet
@@ -100,11 +90,9 @@ projectsMetricsGet pPmgMetricName_ =
     ProjectsMetricsGet'
     { _pmgXgafv = Nothing
     , _pmgUploadProtocol = Nothing
-    , _pmgPp = True
     , _pmgAccessToken = Nothing
     , _pmgMetricName = pPmgMetricName_
     , _pmgUploadType = Nothing
-    , _pmgBearerToken = Nothing
     , _pmgCallback = Nothing
     }
 
@@ -118,18 +106,14 @@ pmgUploadProtocol
   = lens _pmgUploadProtocol
       (\ s a -> s{_pmgUploadProtocol = a})
 
--- | Pretty-print response.
-pmgPp :: Lens' ProjectsMetricsGet Bool
-pmgPp = lens _pmgPp (\ s a -> s{_pmgPp = a})
-
 -- | OAuth access token.
 pmgAccessToken :: Lens' ProjectsMetricsGet (Maybe Text)
 pmgAccessToken
   = lens _pmgAccessToken
       (\ s a -> s{_pmgAccessToken = a})
 
--- | The resource name of the desired metric. Example:
--- \`\"projects\/my-project-id\/metrics\/my-metric-id\"\`.
+-- | The resource name of the desired metric:
+-- \"projects\/[PROJECT_ID]\/metrics\/[METRIC_ID]\"
 pmgMetricName :: Lens' ProjectsMetricsGet Text
 pmgMetricName
   = lens _pmgMetricName
@@ -140,12 +124,6 @@ pmgUploadType :: Lens' ProjectsMetricsGet (Maybe Text)
 pmgUploadType
   = lens _pmgUploadType
       (\ s a -> s{_pmgUploadType = a})
-
--- | OAuth bearer token.
-pmgBearerToken :: Lens' ProjectsMetricsGet (Maybe Text)
-pmgBearerToken
-  = lens _pmgBearerToken
-      (\ s a -> s{_pmgBearerToken = a})
 
 -- | JSONP
 pmgCallback :: Lens' ProjectsMetricsGet (Maybe Text)
@@ -161,10 +139,8 @@ instance GoogleRequest ProjectsMetricsGet where
                "https://www.googleapis.com/auth/logging.read"]
         requestClient ProjectsMetricsGet'{..}
           = go _pmgMetricName _pmgXgafv _pmgUploadProtocol
-              (Just _pmgPp)
               _pmgAccessToken
               _pmgUploadType
-              _pmgBearerToken
               _pmgCallback
               (Just AltJSON)
               loggingService

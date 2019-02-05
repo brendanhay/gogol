@@ -43,13 +43,11 @@ module Network.Google.Resource.Classroom.Courses.Students.Create
     -- * Request Lenses
     , cscXgafv
     , cscUploadProtocol
-    , cscPp
     , cscCourseId
     , cscAccessToken
     , cscUploadType
     , cscPayload
     , cscEnrollmentCode
-    , cscBearerToken
     , cscCallback
     ) where
 
@@ -63,16 +61,14 @@ type CoursesStudentsCreateResource =
        "courses" :>
          Capture "courseId" Text :>
            "students" :>
-             QueryParam "$.xgafv" Text :>
+             QueryParam "$.xgafv" Xgafv :>
                QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "enrollmentCode" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :>
-                               ReqBody '[JSON] Student :> Post '[JSON] Student
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "enrollmentCode" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Student :> Post '[JSON] Student
 
 -- | Adds a user as a student of a course. This method returns the following
 -- error codes: * \`PERMISSION_DENIED\` if the requesting user is not
@@ -86,15 +82,13 @@ type CoursesStudentsCreateResource =
 --
 -- /See:/ 'coursesStudentsCreate' smart constructor.
 data CoursesStudentsCreate = CoursesStudentsCreate'
-    { _cscXgafv          :: !(Maybe Text)
+    { _cscXgafv          :: !(Maybe Xgafv)
     , _cscUploadProtocol :: !(Maybe Text)
-    , _cscPp             :: !Bool
     , _cscCourseId       :: !Text
     , _cscAccessToken    :: !(Maybe Text)
     , _cscUploadType     :: !(Maybe Text)
     , _cscPayload        :: !Student
     , _cscEnrollmentCode :: !(Maybe Text)
-    , _cscBearerToken    :: !(Maybe Text)
     , _cscCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -106,8 +100,6 @@ data CoursesStudentsCreate = CoursesStudentsCreate'
 --
 -- * 'cscUploadProtocol'
 --
--- * 'cscPp'
---
 -- * 'cscCourseId'
 --
 -- * 'cscAccessToken'
@@ -118,8 +110,6 @@ data CoursesStudentsCreate = CoursesStudentsCreate'
 --
 -- * 'cscEnrollmentCode'
 --
--- * 'cscBearerToken'
---
 -- * 'cscCallback'
 coursesStudentsCreate
     :: Text -- ^ 'cscCourseId'
@@ -129,18 +119,16 @@ coursesStudentsCreate pCscCourseId_ pCscPayload_ =
     CoursesStudentsCreate'
     { _cscXgafv = Nothing
     , _cscUploadProtocol = Nothing
-    , _cscPp = True
     , _cscCourseId = pCscCourseId_
     , _cscAccessToken = Nothing
     , _cscUploadType = Nothing
     , _cscPayload = pCscPayload_
     , _cscEnrollmentCode = Nothing
-    , _cscBearerToken = Nothing
     , _cscCallback = Nothing
     }
 
 -- | V1 error format.
-cscXgafv :: Lens' CoursesStudentsCreate (Maybe Text)
+cscXgafv :: Lens' CoursesStudentsCreate (Maybe Xgafv)
 cscXgafv = lens _cscXgafv (\ s a -> s{_cscXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -148,10 +136,6 @@ cscUploadProtocol :: Lens' CoursesStudentsCreate (Maybe Text)
 cscUploadProtocol
   = lens _cscUploadProtocol
       (\ s a -> s{_cscUploadProtocol = a})
-
--- | Pretty-print response.
-cscPp :: Lens' CoursesStudentsCreate Bool
-cscPp = lens _cscPp (\ s a -> s{_cscPp = a})
 
 -- | Identifier of the course to create the student in. This identifier can
 -- be either the Classroom-assigned identifier or an alias.
@@ -185,12 +169,6 @@ cscEnrollmentCode
   = lens _cscEnrollmentCode
       (\ s a -> s{_cscEnrollmentCode = a})
 
--- | OAuth bearer token.
-cscBearerToken :: Lens' CoursesStudentsCreate (Maybe Text)
-cscBearerToken
-  = lens _cscBearerToken
-      (\ s a -> s{_cscBearerToken = a})
-
 -- | JSONP
 cscCallback :: Lens' CoursesStudentsCreate (Maybe Text)
 cscCallback
@@ -204,11 +182,9 @@ instance GoogleRequest CoursesStudentsCreate where
                "https://www.googleapis.com/auth/classroom.rosters"]
         requestClient CoursesStudentsCreate'{..}
           = go _cscCourseId _cscXgafv _cscUploadProtocol
-              (Just _cscPp)
               _cscAccessToken
               _cscUploadType
               _cscEnrollmentCode
-              _cscBearerToken
               _cscCallback
               (Just AltJSON)
               _cscPayload

@@ -496,8 +496,8 @@ instance ToJSON DownloadLineItemsRequest where
                   ("fileSpec" .=) <$> _dlirFileSpec,
                   ("filterIds" .=) <$> _dlirFilterIds])
 
--- | Request to fetch stored insertion orders, line items, TrueView ad groups
--- and ads.
+-- | Request to fetch stored campaigns, insertion orders, line items,
+-- TrueView ad groups and ads.
 --
 -- /See:/ 'downloadRequest' smart constructor.
 data DownloadRequest = DownloadRequest'
@@ -528,28 +528,27 @@ downloadRequest =
     , _drFilterIds = Nothing
     }
 
--- | File types that will be returned.
+-- | File types that will be returned. Acceptable values are: - \"AD\" -
+-- \"AD_GROUP\" - \"CAMPAIGN\" - \"INSERTION_ORDER\" - \"LINE_ITEM\"
 drFileTypes :: Lens' DownloadRequest [DownloadRequestFileTypesItem]
 drFileTypes
   = lens _drFileTypes (\ s a -> s{_drFileTypes = a}) .
       _Default
       . _Coerce
 
--- | Filter type used to filter line items to fetch.
+-- | Filter type used to filter entities to fetch.
 drFilterType :: Lens' DownloadRequest (Maybe DownloadRequestFilterType)
 drFilterType
   = lens _drFilterType (\ s a -> s{_drFilterType = a})
 
 -- | SDF Version (column names, types, order) in which the entities will be
--- returned. Default to 3.
+-- returned. Default to 3.1.
 drVersion :: Lens' DownloadRequest (Maybe Text)
 drVersion
   = lens _drVersion (\ s a -> s{_drVersion = a})
 
 -- | The IDs of the specified filter type. This is used to filter entities to
--- fetch. At least one ID must be specified. Only one ID is allowed for the
--- ADVERTISER_ID filter type. For INSERTION_ORDER_ID or LINE_ITEM_ID filter
--- types all IDs must be from the same Advertiser.
+-- fetch. At least one ID must be specified.
 drFilterIds :: Lens' DownloadRequest [Int64]
 drFilterIds
   = lens _drFilterIds (\ s a -> s{_drFilterIds = a}) .
@@ -1087,8 +1086,8 @@ downloadLineItemsResponse =
     { _dlirLineItems = Nothing
     }
 
--- | Retrieved line items in CSV format. Refer to Entity Write File Format or
--- Structured Data File Format for more information on file formats.
+-- | Retrieved line items in CSV format. For more information about file
+-- formats, see Entity Write File Format.
 dlirLineItems :: Lens' DownloadLineItemsResponse (Maybe Text)
 dlirLineItems
   = lens _dlirLineItems
@@ -1110,6 +1109,7 @@ instance ToJSON DownloadLineItemsResponse where
 -- /See:/ 'downloadResponse' smart constructor.
 data DownloadResponse = DownloadResponse'
     { _drInsertionOrders :: !(Maybe Text)
+    , _drCampaigns       :: !(Maybe Text)
     , _drLineItems       :: !(Maybe Text)
     , _drAdGroups        :: !(Maybe Text)
     , _drAds             :: !(Maybe Text)
@@ -1121,6 +1121,8 @@ data DownloadResponse = DownloadResponse'
 --
 -- * 'drInsertionOrders'
 --
+-- * 'drCampaigns'
+--
 -- * 'drLineItems'
 --
 -- * 'drAdGroups'
@@ -1131,6 +1133,7 @@ downloadResponse
 downloadResponse =
     DownloadResponse'
     { _drInsertionOrders = Nothing
+    , _drCampaigns = Nothing
     , _drLineItems = Nothing
     , _drAdGroups = Nothing
     , _drAds = Nothing
@@ -1141,6 +1144,11 @@ drInsertionOrders :: Lens' DownloadResponse (Maybe Text)
 drInsertionOrders
   = lens _drInsertionOrders
       (\ s a -> s{_drInsertionOrders = a})
+
+-- | Retrieved campaigns in SDF format.
+drCampaigns :: Lens' DownloadResponse (Maybe Text)
+drCampaigns
+  = lens _drCampaigns (\ s a -> s{_drCampaigns = a})
 
 -- | Retrieved line items in SDF format.
 drLineItems :: Lens' DownloadResponse (Maybe Text)
@@ -1161,8 +1169,9 @@ instance FromJSON DownloadResponse where
           = withObject "DownloadResponse"
               (\ o ->
                  DownloadResponse' <$>
-                   (o .:? "insertionOrders") <*> (o .:? "lineItems") <*>
-                     (o .:? "adGroups")
+                   (o .:? "insertionOrders") <*> (o .:? "campaigns") <*>
+                     (o .:? "lineItems")
+                     <*> (o .:? "adGroups")
                      <*> (o .:? "ads"))
 
 instance ToJSON DownloadResponse where
@@ -1170,6 +1179,7 @@ instance ToJSON DownloadResponse where
           = object
               (catMaybes
                  [("insertionOrders" .=) <$> _drInsertionOrders,
+                  ("campaigns" .=) <$> _drCampaigns,
                   ("lineItems" .=) <$> _drLineItems,
                   ("adGroups" .=) <$> _drAdGroups,
                   ("ads" .=) <$> _drAds])

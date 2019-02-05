@@ -1,3 +1,4 @@
+{-# LANGUAGE OverloadedStrings          #-}
 {-# LANGUAGE DeriveDataTypeable         #-}
 {-# LANGUAGE DeriveGeneric              #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
@@ -13,15 +14,16 @@
 module Network.Google.Data.Time
     ( Time'
     , Date'
-    , DateTime'
-    , Duration
+    , DateTime' (..)
+    , GDuration
 
     , _Time
     , _Date
     , _DateTime
-    , _Duration
+    , _GDuration
     ) where
 
+import           Data.Monoid                      ((<>))
 import           Control.Lens
 import           Data.Aeson
 import qualified Data.Aeson.Types                  as Aeson
@@ -77,26 +79,26 @@ _DateTime = iso unDateTime DateTime'
 -- | A duration in seconds with up to nine fractional digits, terminated by 's'.
 --
 -- /Example/: @"3.5s"@.
-newtype Duration = Duration { unDuration :: Scientific }
+newtype GDuration = GDuration { unGDuration :: Scientific }
     deriving (Eq, Ord, Show, Read, Generic, Data, Typeable)
 
-_Duration :: Iso' Duration Scientific
-_Duration = iso unDuration Duration
+_GDuration :: Iso' GDuration Scientific
+_GDuration = iso unGDuration GDuration
 
-instance ToHttpApiData Duration where
+instance ToHttpApiData GDuration where
     toQueryParam =
           LText.toStrict
-        . Build.toLazyText
+        . (\seconds -> Build.toLazyText seconds <> "s")
         . Sci.formatScientificBuilder Sci.Fixed (Just 9)
-        . unDuration
+        . unGDuration
 
-instance FromHttpApiData Duration where
-    parseQueryParam = second Duration . parseText durationParser
+instance FromHttpApiData GDuration where
+    parseQueryParam = second GDuration . parseText durationParser
 
 instance ToJSON Time'     where toJSON = String . toQueryParam
 instance ToJSON Date'     where toJSON = String . toQueryParam
 instance ToJSON DateTime' where toJSON = toJSON . unDateTime
-instance ToJSON Duration  where toJSON = String . toQueryParam
+instance ToJSON GDuration  where toJSON = String . toQueryParam
 
 instance FromJSON Time' where
     parseJSON = fmap Time' . withText "time" (run timeParser)
@@ -107,8 +109,8 @@ instance FromJSON Date' where
 instance FromJSON DateTime' where
     parseJSON = fmap DateTime' . parseJSON
 
-instance FromJSON Duration where
-    parseJSON = fmap Duration . withText "duration" (run durationParser)
+instance FromJSON GDuration where
+    parseJSON = fmap GDuration . withText "duration" (run durationParser)
 
 parseText :: Parser a -> Text -> Either Text a
 parseText p = first Text.pack . parseOnly p

@@ -1,3 +1,4 @@
+{-# LANGUAGE FlexibleContexts    #-}
 {-# LANGUAGE OverloadedStrings   #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 
@@ -11,13 +12,19 @@
 --
 module Example.Storage where
 
-import Control.Lens           ((&), (.~), (<&>), (?~))
-import Data.Text              (Text)
-import Network.Google
-import Network.Google.Storage
-import System.IO              (stdout)
+import Control.Lens                 ((&), (.~), (<&>), (?~))
+import Control.Monad.Trans.Resource (liftResourceT, runResourceT)
 
-import qualified Data.Text as Text
+import Data.Conduit (runConduit, (.|))
+import Data.Text    (Text)
+
+import System.IO (stdout)
+
+import qualified Data.Conduit.Binary    as Conduit
+import qualified Data.Text              as Text
+import qualified Network.Google         as Google
+import qualified Network.Google.Storage as Storage
+
 
 -- This will calculate the MIME type (and therefore Content-Type) of
 -- the stored object based on the file extension.
@@ -30,15 +37,32 @@ import qualified Data.Text as Text
 -- ...
 --
 -- -}
-example :: Text -> FilePath -> IO ()
-example bkt f = do
-    l <- newLogger Debug stdout
-    e <- newEnv <&> (envLogger .~ l) . (envScopes .~ storageReadWriteScope)
-    b <- sourceBody f
+--example :: Text -> FilePath -> IO ()
+example bucket input output = do
+    -- Setup a logger to emit 'Debug' (or higher) log statements to 'stdout':
+    lgr  <- Google.newLogger Google.Debug stdout
 
-    let key = Text.pack f
+    -- Create a new environment which will discover the appropriate
+    -- AuthN/AuthZ credentials, and explicitly state the OAuth scopes
+    -- we will be using below, which will be enforced by the compiler:
+    env  <- Google.newEnv <&>
+          (Google.envLogger .~ lgr)
+        . (Google.envScopes .~ Storage.storageReadWriteScope)
 
-    runResourceT . runGoogle e $ do
-        _ <- upload (objectsInsert bkt object' & oiName ?~ key) b
-        _ <- download (objectsGet bkt key)
-        pure ()
+    -- Create a streaming 'Conduit' source of the input file contents:
+    body <- Google.sourceBody input
+
+    let key = Text.pack input
+
+    runResourceT . Google.runGoogle env $ do
+        -- Upload the 'input' file contents to the specified bucket, using
+        -- the file path as the key:
+        _     <- Google.upload (Storage.objectsInsert bucket Storage.object' & Storage.oiName ?~ key) body
+
+        -- Download from the bucket/key and create a source of the HTTP stream:
+        stream <- Google.download (Storage.objectsGet bucket key)
+
+        -- 'Conduit' actions such as '.|' need to be lifted into the 'Google'
+        -- monad using 'liftResourceT', this will stream the received bytes
+        -- into the 'output' file:
+        liftResourceT (runConduit (stream .| Conduit.sinkFile output))

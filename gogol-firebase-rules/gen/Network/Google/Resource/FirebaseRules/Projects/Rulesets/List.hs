@@ -21,7 +21,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- List \`Ruleset\` metadata only and optionally filter the results by
--- Ruleset name. The full \`Source\` contents of a \`Ruleset\` may be
+-- \`Ruleset\` name. The full \`Source\` contents of a \`Ruleset\` may be
 -- retrieved with GetRuleset.
 --
 -- /See:/ <https://firebase.google.com/docs/storage/security Firebase Rules API Reference> for @firebaserules.projects.rulesets.list@.
@@ -37,11 +37,10 @@ module Network.Google.Resource.FirebaseRules.Projects.Rulesets.List
     -- * Request Lenses
     , prlXgafv
     , prlUploadProtocol
-    , prlPp
     , prlAccessToken
     , prlUploadType
-    , prlBearerToken
     , prlName
+    , prlFilter
     , prlPageToken
     , prlPageSize
     , prlCallback
@@ -58,29 +57,27 @@ type ProjectsRulesetsListResource =
          "rulesets" :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" (Textual Int32) :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] ListRulesetsResponse
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "pageSize" (Textual Int32) :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] ListRulesetsResponse
 
 -- | List \`Ruleset\` metadata only and optionally filter the results by
--- Ruleset name. The full \`Source\` contents of a \`Ruleset\` may be
+-- \`Ruleset\` name. The full \`Source\` contents of a \`Ruleset\` may be
 -- retrieved with GetRuleset.
 --
 -- /See:/ 'projectsRulesetsList' smart constructor.
 data ProjectsRulesetsList = ProjectsRulesetsList'
     { _prlXgafv          :: !(Maybe Xgafv)
     , _prlUploadProtocol :: !(Maybe Text)
-    , _prlPp             :: !Bool
     , _prlAccessToken    :: !(Maybe Text)
     , _prlUploadType     :: !(Maybe Text)
-    , _prlBearerToken    :: !(Maybe Text)
     , _prlName           :: !Text
+    , _prlFilter         :: !(Maybe Text)
     , _prlPageToken      :: !(Maybe Text)
     , _prlPageSize       :: !(Maybe (Textual Int32))
     , _prlCallback       :: !(Maybe Text)
@@ -94,15 +91,13 @@ data ProjectsRulesetsList = ProjectsRulesetsList'
 --
 -- * 'prlUploadProtocol'
 --
--- * 'prlPp'
---
 -- * 'prlAccessToken'
 --
 -- * 'prlUploadType'
 --
--- * 'prlBearerToken'
---
 -- * 'prlName'
+--
+-- * 'prlFilter'
 --
 -- * 'prlPageToken'
 --
@@ -116,11 +111,10 @@ projectsRulesetsList pPrlName_ =
     ProjectsRulesetsList'
     { _prlXgafv = Nothing
     , _prlUploadProtocol = Nothing
-    , _prlPp = True
     , _prlAccessToken = Nothing
     , _prlUploadType = Nothing
-    , _prlBearerToken = Nothing
     , _prlName = pPrlName_
+    , _prlFilter = Nothing
     , _prlPageToken = Nothing
     , _prlPageSize = Nothing
     , _prlCallback = Nothing
@@ -136,10 +130,6 @@ prlUploadProtocol
   = lens _prlUploadProtocol
       (\ s a -> s{_prlUploadProtocol = a})
 
--- | Pretty-print response.
-prlPp :: Lens' ProjectsRulesetsList Bool
-prlPp = lens _prlPp (\ s a -> s{_prlPp = a})
-
 -- | OAuth access token.
 prlAccessToken :: Lens' ProjectsRulesetsList (Maybe Text)
 prlAccessToken
@@ -152,15 +142,18 @@ prlUploadType
   = lens _prlUploadType
       (\ s a -> s{_prlUploadType = a})
 
--- | OAuth bearer token.
-prlBearerToken :: Lens' ProjectsRulesetsList (Maybe Text)
-prlBearerToken
-  = lens _prlBearerToken
-      (\ s a -> s{_prlBearerToken = a})
-
 -- | Resource name for the project. Format: \`projects\/{project_id}\`
 prlName :: Lens' ProjectsRulesetsList Text
 prlName = lens _prlName (\ s a -> s{_prlName = a})
+
+-- | \`Ruleset\` filter. The list method supports filters with restrictions
+-- on \`Ruleset.name\`. Filters on \`Ruleset.create_time\` should use the
+-- \`date\` function which parses strings that conform to the RFC 3339
+-- date\/time specifications. Example: \`create_time > date(\"2017-01-01\")
+-- AND name=UUID-*\`
+prlFilter :: Lens' ProjectsRulesetsList (Maybe Text)
+prlFilter
+  = lens _prlFilter (\ s a -> s{_prlFilter = a})
 
 -- | Next page token for loading the next batch of \`Ruleset\` instances.
 prlPageToken :: Lens' ProjectsRulesetsList (Maybe Text)
@@ -189,10 +182,9 @@ instance GoogleRequest ProjectsRulesetsList where
                "https://www.googleapis.com/auth/firebase.readonly"]
         requestClient ProjectsRulesetsList'{..}
           = go _prlName _prlXgafv _prlUploadProtocol
-              (Just _prlPp)
               _prlAccessToken
               _prlUploadType
-              _prlBearerToken
+              _prlFilter
               _prlPageToken
               _prlPageSize
               _prlCallback

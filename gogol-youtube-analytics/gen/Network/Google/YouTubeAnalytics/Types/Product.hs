@@ -20,6 +20,7 @@ module Network.Google.YouTubeAnalytics.Types.Product where
 import           Network.Google.Prelude
 import           Network.Google.YouTubeAnalytics.Types.Sum
 
+-- | A group\'s content details.
 --
 -- /See:/ 'groupContentDetails' smart constructor.
 data GroupContentDetails = GroupContentDetails'
@@ -42,10 +43,14 @@ groupContentDetails =
     , _gcdItemCount = Nothing
     }
 
+-- | The type of resources that the group contains. Valid values for this
+-- property are: * \`youtube#channel\` * \`youtube#playlist\` *
+-- \`youtube#video\` * \`youtubePartner#asset\`
 gcdItemType :: Lens' GroupContentDetails (Maybe Text)
 gcdItemType
   = lens _gcdItemType (\ s a -> s{_gcdItemType = a})
 
+-- | The number of items in the group.
 gcdItemCount :: Lens' GroupContentDetails (Maybe Word64)
 gcdItemCount
   = lens _gcdItemCount (\ s a -> s{_gcdItemCount = a})
@@ -65,14 +70,16 @@ instance ToJSON GroupContentDetails where
                  [("itemType" .=) <$> _gcdItemType,
                   ("itemCount" .=) <$> _gcdItemCount])
 
+-- | A group.
 --
 -- /See:/ 'group'' smart constructor.
 data Group = Group'
     { _gEtag           :: !(Maybe Text)
     , _gSnippet        :: !(Maybe GroupSnippet)
-    , _gKind           :: !Text
+    , _gKind           :: !(Maybe Text)
     , _gContentDetails :: !(Maybe GroupContentDetails)
     , _gId             :: !(Maybe Text)
+    , _gErrors         :: !(Maybe Errors)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Group' with the minimum fields required to make a request.
@@ -88,33 +95,48 @@ data Group = Group'
 -- * 'gContentDetails'
 --
 -- * 'gId'
+--
+-- * 'gErrors'
 group'
     :: Group
 group' =
     Group'
     { _gEtag = Nothing
     , _gSnippet = Nothing
-    , _gKind = "youtube#group"
+    , _gKind = Nothing
     , _gContentDetails = Nothing
     , _gId = Nothing
+    , _gErrors = Nothing
     }
 
+-- | The Etag of this resource.
 gEtag :: Lens' Group (Maybe Text)
 gEtag = lens _gEtag (\ s a -> s{_gEtag = a})
 
+-- | The \`snippet\` object contains basic information about the group,
+-- including its creation date and name.
 gSnippet :: Lens' Group (Maybe GroupSnippet)
 gSnippet = lens _gSnippet (\ s a -> s{_gSnippet = a})
 
-gKind :: Lens' Group Text
+-- | Identifies the API resource\'s type. The value will be
+-- \`youtube#group\`.
+gKind :: Lens' Group (Maybe Text)
 gKind = lens _gKind (\ s a -> s{_gKind = a})
 
+-- | The \`contentDetails\` object contains additional information about the
+-- group, such as the number and type of items that it contains.
 gContentDetails :: Lens' Group (Maybe GroupContentDetails)
 gContentDetails
   = lens _gContentDetails
       (\ s a -> s{_gContentDetails = a})
 
+-- | The ID that YouTube uses to uniquely identify the group.
 gId :: Lens' Group (Maybe Text)
 gId = lens _gId (\ s a -> s{_gId = a})
+
+-- | Apiary error details
+gErrors :: Lens' Group (Maybe Errors)
+gErrors = lens _gErrors (\ s a -> s{_gErrors = a})
 
 instance FromJSON Group where
         parseJSON
@@ -122,19 +144,173 @@ instance FromJSON Group where
               (\ o ->
                  Group' <$>
                    (o .:? "etag") <*> (o .:? "snippet") <*>
-                     (o .:? "kind" .!= "youtube#group")
+                     (o .:? "kind")
                      <*> (o .:? "contentDetails")
-                     <*> (o .:? "id"))
+                     <*> (o .:? "id")
+                     <*> (o .:? "errors"))
 
 instance ToJSON Group where
         toJSON Group'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _gEtag,
-                  ("snippet" .=) <$> _gSnippet,
-                  Just ("kind" .= _gKind),
+                  ("snippet" .=) <$> _gSnippet, ("kind" .=) <$> _gKind,
                   ("contentDetails" .=) <$> _gContentDetails,
-                  ("id" .=) <$> _gId])
+                  ("id" .=) <$> _gId, ("errors" .=) <$> _gErrors])
+
+-- | Response message for GroupsService.ListGroups.
+--
+-- /See:/ 'listGroupsResponse' smart constructor.
+data ListGroupsResponse = ListGroupsResponse'
+    { _lgrEtag          :: !(Maybe Text)
+    , _lgrNextPageToken :: !(Maybe Text)
+    , _lgrKind          :: !(Maybe Text)
+    , _lgrItems         :: !(Maybe [Group])
+    , _lgrErrors        :: !(Maybe Errors)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListGroupsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lgrEtag'
+--
+-- * 'lgrNextPageToken'
+--
+-- * 'lgrKind'
+--
+-- * 'lgrItems'
+--
+-- * 'lgrErrors'
+listGroupsResponse
+    :: ListGroupsResponse
+listGroupsResponse =
+    ListGroupsResponse'
+    { _lgrEtag = Nothing
+    , _lgrNextPageToken = Nothing
+    , _lgrKind = Nothing
+    , _lgrItems = Nothing
+    , _lgrErrors = Nothing
+    }
+
+-- | The Etag of this resource.
+lgrEtag :: Lens' ListGroupsResponse (Maybe Text)
+lgrEtag = lens _lgrEtag (\ s a -> s{_lgrEtag = a})
+
+-- | The token that can be used as the value of the \`pageToken\` parameter
+-- to retrieve the next page in the result set.
+lgrNextPageToken :: Lens' ListGroupsResponse (Maybe Text)
+lgrNextPageToken
+  = lens _lgrNextPageToken
+      (\ s a -> s{_lgrNextPageToken = a})
+
+-- | Identifies the API resource\'s type. The value will be
+-- \`youtube#groupListResponse\`.
+lgrKind :: Lens' ListGroupsResponse (Maybe Text)
+lgrKind = lens _lgrKind (\ s a -> s{_lgrKind = a})
+
+-- | A list of groups that match the API request parameters. Each item in the
+-- list represents a \`group\` resource.
+lgrItems :: Lens' ListGroupsResponse [Group]
+lgrItems
+  = lens _lgrItems (\ s a -> s{_lgrItems = a}) .
+      _Default
+      . _Coerce
+
+-- | Apiary error details
+lgrErrors :: Lens' ListGroupsResponse (Maybe Errors)
+lgrErrors
+  = lens _lgrErrors (\ s a -> s{_lgrErrors = a})
+
+instance FromJSON ListGroupsResponse where
+        parseJSON
+          = withObject "ListGroupsResponse"
+              (\ o ->
+                 ListGroupsResponse' <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "errors"))
+
+instance ToJSON ListGroupsResponse where
+        toJSON ListGroupsResponse'{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _lgrEtag,
+                  ("nextPageToken" .=) <$> _lgrNextPageToken,
+                  ("kind" .=) <$> _lgrKind, ("items" .=) <$> _lgrItems,
+                  ("errors" .=) <$> _lgrErrors])
+
+-- | Response message for GroupsService.ListGroupItems.
+--
+-- /See:/ 'listGroupItemsResponse' smart constructor.
+data ListGroupItemsResponse = ListGroupItemsResponse'
+    { _lgirEtag   :: !(Maybe Text)
+    , _lgirKind   :: !(Maybe Text)
+    , _lgirItems  :: !(Maybe [GroupItem])
+    , _lgirErrors :: !(Maybe Errors)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListGroupItemsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lgirEtag'
+--
+-- * 'lgirKind'
+--
+-- * 'lgirItems'
+--
+-- * 'lgirErrors'
+listGroupItemsResponse
+    :: ListGroupItemsResponse
+listGroupItemsResponse =
+    ListGroupItemsResponse'
+    { _lgirEtag = Nothing
+    , _lgirKind = Nothing
+    , _lgirItems = Nothing
+    , _lgirErrors = Nothing
+    }
+
+-- | The Etag of this resource.
+lgirEtag :: Lens' ListGroupItemsResponse (Maybe Text)
+lgirEtag = lens _lgirEtag (\ s a -> s{_lgirEtag = a})
+
+-- | Identifies the API resource\'s type. The value will be
+-- \`youtube#groupItemListResponse\`.
+lgirKind :: Lens' ListGroupItemsResponse (Maybe Text)
+lgirKind = lens _lgirKind (\ s a -> s{_lgirKind = a})
+
+-- | A list of groups that match the API request parameters. Each item in the
+-- list represents a \`groupItem\` resource.
+lgirItems :: Lens' ListGroupItemsResponse [GroupItem]
+lgirItems
+  = lens _lgirItems (\ s a -> s{_lgirItems = a}) .
+      _Default
+      . _Coerce
+
+-- | Apiary error details
+lgirErrors :: Lens' ListGroupItemsResponse (Maybe Errors)
+lgirErrors
+  = lens _lgirErrors (\ s a -> s{_lgirErrors = a})
+
+instance FromJSON ListGroupItemsResponse where
+        parseJSON
+          = withObject "ListGroupItemsResponse"
+              (\ o ->
+                 ListGroupItemsResponse' <$>
+                   (o .:? "etag") <*> (o .:? "kind") <*>
+                     (o .:? "items" .!= mempty)
+                     <*> (o .:? "errors"))
+
+instance ToJSON ListGroupItemsResponse where
+        toJSON ListGroupItemsResponse'{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _lgirEtag,
+                  ("kind" .=) <$> _lgirKind,
+                  ("items" .=) <$> _lgirItems,
+                  ("errors" .=) <$> _lgirErrors])
 
 --
 -- /See:/ 'groupItemResource' smart constructor.
@@ -158,9 +334,14 @@ groupItemResource =
     , _girId = Nothing
     }
 
+-- | Identifies the type of resource being added to the group. Valid values
+-- for this property are: * \`youtube#channel\` * \`youtube#playlist\` *
+-- \`youtube#video\` * \`youtubePartner#asset\`
 girKind :: Lens' GroupItemResource (Maybe Text)
 girKind = lens _girKind (\ s a -> s{_girKind = a})
 
+-- | The channel, video, playlist, or asset ID that YouTube uses to uniquely
+-- identify the item that is being added to the group.
 girId :: Lens' GroupItemResource (Maybe Text)
 girId = lens _girId (\ s a -> s{_girId = a})
 
@@ -177,320 +358,7 @@ instance ToJSON GroupItemResource where
               (catMaybes
                  [("kind" .=) <$> _girKind, ("id" .=) <$> _girId])
 
---
--- /See:/ 'resultTableColumnHeadersItem' smart constructor.
-data ResultTableColumnHeadersItem = ResultTableColumnHeadersItem'
-    { _rtchiColumnType :: !(Maybe Text)
-    , _rtchiName       :: !(Maybe Text)
-    , _rtchiDataType   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ResultTableColumnHeadersItem' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rtchiColumnType'
---
--- * 'rtchiName'
---
--- * 'rtchiDataType'
-resultTableColumnHeadersItem
-    :: ResultTableColumnHeadersItem
-resultTableColumnHeadersItem =
-    ResultTableColumnHeadersItem'
-    { _rtchiColumnType = Nothing
-    , _rtchiName = Nothing
-    , _rtchiDataType = Nothing
-    }
-
--- | The type of the column (DIMENSION or METRIC).
-rtchiColumnType :: Lens' ResultTableColumnHeadersItem (Maybe Text)
-rtchiColumnType
-  = lens _rtchiColumnType
-      (\ s a -> s{_rtchiColumnType = a})
-
--- | The name of the dimension or metric.
-rtchiName :: Lens' ResultTableColumnHeadersItem (Maybe Text)
-rtchiName
-  = lens _rtchiName (\ s a -> s{_rtchiName = a})
-
--- | The type of the data in the column (STRING, INTEGER, FLOAT, etc.).
-rtchiDataType :: Lens' ResultTableColumnHeadersItem (Maybe Text)
-rtchiDataType
-  = lens _rtchiDataType
-      (\ s a -> s{_rtchiDataType = a})
-
-instance FromJSON ResultTableColumnHeadersItem where
-        parseJSON
-          = withObject "ResultTableColumnHeadersItem"
-              (\ o ->
-                 ResultTableColumnHeadersItem' <$>
-                   (o .:? "columnType") <*> (o .:? "name") <*>
-                     (o .:? "dataType"))
-
-instance ToJSON ResultTableColumnHeadersItem where
-        toJSON ResultTableColumnHeadersItem'{..}
-          = object
-              (catMaybes
-                 [("columnType" .=) <$> _rtchiColumnType,
-                  ("name" .=) <$> _rtchiName,
-                  ("dataType" .=) <$> _rtchiDataType])
-
--- | Contains a single result table. The table is returned as an array of
--- rows that contain the values for the cells of the table. Depending on
--- the metric or dimension, the cell can contain a string (video ID,
--- country code) or a number (number of views or number of likes).
---
--- /See:/ 'resultTable' smart constructor.
-data ResultTable = ResultTable'
-    { _rtKind          :: !Text
-    , _rtRows          :: !(Maybe [[JSONValue]])
-    , _rtColumnHeaders :: !(Maybe [ResultTableColumnHeadersItem])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ResultTable' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rtKind'
---
--- * 'rtRows'
---
--- * 'rtColumnHeaders'
-resultTable
-    :: ResultTable
-resultTable =
-    ResultTable'
-    { _rtKind = "youtubeAnalytics#resultTable"
-    , _rtRows = Nothing
-    , _rtColumnHeaders = Nothing
-    }
-
--- | This value specifies the type of data included in the API response. For
--- the query method, the kind property value will be
--- youtubeAnalytics#resultTable.
-rtKind :: Lens' ResultTable Text
-rtKind = lens _rtKind (\ s a -> s{_rtKind = a})
-
--- | The list contains all rows of the result table. Each item in the list is
--- an array that contains comma-delimited data corresponding to a single
--- row of data. The order of the comma-delimited data fields will match the
--- order of the columns listed in the columnHeaders field. If no data is
--- available for the given query, the rows element will be omitted from the
--- response. The response for a query with the day dimension will not
--- contain rows for the most recent days.
-rtRows :: Lens' ResultTable [[JSONValue]]
-rtRows
-  = lens _rtRows (\ s a -> s{_rtRows = a}) . _Default .
-      _Coerce
-
--- | This value specifies information about the data returned in the rows
--- fields. Each item in the columnHeaders list identifies a field returned
--- in the rows value, which contains a list of comma-delimited data. The
--- columnHeaders list will begin with the dimensions specified in the API
--- request, which will be followed by the metrics specified in the API
--- request. The order of both dimensions and metrics will match the
--- ordering in the API request. For example, if the API request contains
--- the parameters dimensions=ageGroup,gender&metrics=viewerPercentage, the
--- API response will return columns in this order:
--- ageGroup,gender,viewerPercentage.
-rtColumnHeaders :: Lens' ResultTable [ResultTableColumnHeadersItem]
-rtColumnHeaders
-  = lens _rtColumnHeaders
-      (\ s a -> s{_rtColumnHeaders = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON ResultTable where
-        parseJSON
-          = withObject "ResultTable"
-              (\ o ->
-                 ResultTable' <$>
-                   (o .:? "kind" .!= "youtubeAnalytics#resultTable") <*>
-                     (o .:? "rows" .!= mempty)
-                     <*> (o .:? "columnHeaders" .!= mempty))
-
-instance ToJSON ResultTable where
-        toJSON ResultTable'{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _rtKind), ("rows" .=) <$> _rtRows,
-                  ("columnHeaders" .=) <$> _rtColumnHeaders])
-
--- | Contains single batchReportDefinition resource.
---
--- /See:/ 'batchReportDefinition' smart constructor.
-data BatchReportDefinition = BatchReportDefinition'
-    { _brdStatus :: !(Maybe Text)
-    , _brdKind   :: !Text
-    , _brdName   :: !(Maybe Text)
-    , _brdId     :: !(Maybe Text)
-    , _brdType   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'BatchReportDefinition' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'brdStatus'
---
--- * 'brdKind'
---
--- * 'brdName'
---
--- * 'brdId'
---
--- * 'brdType'
-batchReportDefinition
-    :: BatchReportDefinition
-batchReportDefinition =
-    BatchReportDefinition'
-    { _brdStatus = Nothing
-    , _brdKind = "youtubeAnalytics#batchReportDefinition"
-    , _brdName = Nothing
-    , _brdId = Nothing
-    , _brdType = Nothing
-    }
-
--- | Status of the report definition.
-brdStatus :: Lens' BatchReportDefinition (Maybe Text)
-brdStatus
-  = lens _brdStatus (\ s a -> s{_brdStatus = a})
-
--- | This value specifies the type of data of this item. For batch report
--- definition the kind property value is
--- youtubeAnalytics#batchReportDefinition.
-brdKind :: Lens' BatchReportDefinition Text
-brdKind = lens _brdKind (\ s a -> s{_brdKind = a})
-
--- | Name of the report definition.
-brdName :: Lens' BatchReportDefinition (Maybe Text)
-brdName = lens _brdName (\ s a -> s{_brdName = a})
-
--- | The ID that YouTube assigns and uses to uniquely identify the report
--- definition.
-brdId :: Lens' BatchReportDefinition (Maybe Text)
-brdId = lens _brdId (\ s a -> s{_brdId = a})
-
--- | Type of the report definition.
-brdType :: Lens' BatchReportDefinition (Maybe Text)
-brdType = lens _brdType (\ s a -> s{_brdType = a})
-
-instance FromJSON BatchReportDefinition where
-        parseJSON
-          = withObject "BatchReportDefinition"
-              (\ o ->
-                 BatchReportDefinition' <$>
-                   (o .:? "status") <*>
-                     (o .:? "kind" .!=
-                        "youtubeAnalytics#batchReportDefinition")
-                     <*> (o .:? "name")
-                     <*> (o .:? "id")
-                     <*> (o .:? "type"))
-
-instance ToJSON BatchReportDefinition where
-        toJSON BatchReportDefinition'{..}
-          = object
-              (catMaybes
-                 [("status" .=) <$> _brdStatus,
-                  Just ("kind" .= _brdKind), ("name" .=) <$> _brdName,
-                  ("id" .=) <$> _brdId, ("type" .=) <$> _brdType])
-
--- | Contains single batchReport resource.
---
--- /See:/ 'batchReport' smart constructor.
-data BatchReport = BatchReport'
-    { _brTimeUpdated :: !(Maybe DateTime')
-    , _brKind        :: !Text
-    , _brReportId    :: !(Maybe Text)
-    , _brTimeSpan    :: !(Maybe BatchReportTimeSpan)
-    , _brOutputs     :: !(Maybe [BatchReportOutputsItem])
-    , _brId          :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'BatchReport' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'brTimeUpdated'
---
--- * 'brKind'
---
--- * 'brReportId'
---
--- * 'brTimeSpan'
---
--- * 'brOutputs'
---
--- * 'brId'
-batchReport
-    :: BatchReport
-batchReport =
-    BatchReport'
-    { _brTimeUpdated = Nothing
-    , _brKind = "youtubeAnalytics#batchReport"
-    , _brReportId = Nothing
-    , _brTimeSpan = Nothing
-    , _brOutputs = Nothing
-    , _brId = Nothing
-    }
-
--- | The time when the report was updated.
-brTimeUpdated :: Lens' BatchReport (Maybe UTCTime)
-brTimeUpdated
-  = lens _brTimeUpdated
-      (\ s a -> s{_brTimeUpdated = a})
-      . mapping _DateTime
-
--- | This value specifies the type of data of this item. For batch report the
--- kind property value is youtubeAnalytics#batchReport.
-brKind :: Lens' BatchReport Text
-brKind = lens _brKind (\ s a -> s{_brKind = a})
-
--- | The ID of the the report definition.
-brReportId :: Lens' BatchReport (Maybe Text)
-brReportId
-  = lens _brReportId (\ s a -> s{_brReportId = a})
-
--- | Period included in the report. For reports containing all entities
--- endTime is not set. Both startTime and endTime are inclusive.
-brTimeSpan :: Lens' BatchReport (Maybe BatchReportTimeSpan)
-brTimeSpan
-  = lens _brTimeSpan (\ s a -> s{_brTimeSpan = a})
-
--- | Report outputs.
-brOutputs :: Lens' BatchReport [BatchReportOutputsItem]
-brOutputs
-  = lens _brOutputs (\ s a -> s{_brOutputs = a}) .
-      _Default
-      . _Coerce
-
--- | The ID that YouTube assigns and uses to uniquely identify the report.
-brId :: Lens' BatchReport (Maybe Text)
-brId = lens _brId (\ s a -> s{_brId = a})
-
-instance FromJSON BatchReport where
-        parseJSON
-          = withObject "BatchReport"
-              (\ o ->
-                 BatchReport' <$>
-                   (o .:? "timeUpdated") <*>
-                     (o .:? "kind" .!= "youtubeAnalytics#batchReport")
-                     <*> (o .:? "reportId")
-                     <*> (o .:? "timeSpan")
-                     <*> (o .:? "outputs" .!= mempty)
-                     <*> (o .:? "id"))
-
-instance ToJSON BatchReport where
-        toJSON BatchReport'{..}
-          = object
-              (catMaybes
-                 [("timeUpdated" .=) <$> _brTimeUpdated,
-                  Just ("kind" .= _brKind),
-                  ("reportId" .=) <$> _brReportId,
-                  ("timeSpan" .=) <$> _brTimeSpan,
-                  ("outputs" .=) <$> _brOutputs, ("id" .=) <$> _brId])
-
+-- | A group snippet.
 --
 -- /See:/ 'groupSnippet' smart constructor.
 data GroupSnippet = GroupSnippet'
@@ -513,12 +381,15 @@ groupSnippet =
     , _gsTitle = Nothing
     }
 
+-- | The date and time that the group was created. The value is specified in
+-- ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
 gsPublishedAt :: Lens' GroupSnippet (Maybe UTCTime)
 gsPublishedAt
   = lens _gsPublishedAt
       (\ s a -> s{_gsPublishedAt = a})
       . mapping _DateTime
 
+-- | The group name. The value must be a non-empty string.
 gsTitle :: Lens' GroupSnippet (Maybe Text)
 gsTitle = lens _gsTitle (\ s a -> s{_gsTitle = a})
 
@@ -536,14 +407,16 @@ instance ToJSON GroupSnippet where
                  [("publishedAt" .=) <$> _gsPublishedAt,
                   ("title" .=) <$> _gsTitle])
 
+-- | A group item.
 --
 -- /See:/ 'groupItem' smart constructor.
 data GroupItem = GroupItem'
     { _giEtag     :: !(Maybe Text)
-    , _giKind     :: !Text
+    , _giKind     :: !(Maybe Text)
     , _giResource :: !(Maybe GroupItemResource)
     , _giGroupId  :: !(Maybe Text)
     , _giId       :: !(Maybe Text)
+    , _giErrors   :: !(Maybe Errors)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupItem' with the minimum fields required to make a request.
@@ -559,389 +432,430 @@ data GroupItem = GroupItem'
 -- * 'giGroupId'
 --
 -- * 'giId'
+--
+-- * 'giErrors'
 groupItem
     :: GroupItem
 groupItem =
     GroupItem'
     { _giEtag = Nothing
-    , _giKind = "youtube#groupItem"
+    , _giKind = Nothing
     , _giResource = Nothing
     , _giGroupId = Nothing
     , _giId = Nothing
+    , _giErrors = Nothing
     }
 
+-- | The Etag of this resource.
 giEtag :: Lens' GroupItem (Maybe Text)
 giEtag = lens _giEtag (\ s a -> s{_giEtag = a})
 
-giKind :: Lens' GroupItem Text
+-- | Identifies the API resource\'s type. The value will be
+-- \`youtube#groupItem\`.
+giKind :: Lens' GroupItem (Maybe Text)
 giKind = lens _giKind (\ s a -> s{_giKind = a})
 
+-- | The \`resource\` object contains information that identifies the item
+-- being added to the group.
 giResource :: Lens' GroupItem (Maybe GroupItemResource)
 giResource
   = lens _giResource (\ s a -> s{_giResource = a})
 
+-- | The ID that YouTube uses to uniquely identify the group that contains
+-- the item.
 giGroupId :: Lens' GroupItem (Maybe Text)
 giGroupId
   = lens _giGroupId (\ s a -> s{_giGroupId = a})
 
+-- | The ID that YouTube uses to uniquely identify the \`channel\`,
+-- \`video\`, \`playlist\`, or \`asset\` resource that is included in the
+-- group. Note that this ID refers specifically to the inclusion of that
+-- resource in a particular group and is different than the channel ID,
+-- video ID, playlist ID, or asset ID that uniquely identifies the resource
+-- itself. The \`resource.id\` property\'s value specifies the unique
+-- channel, video, playlist, or asset ID.
 giId :: Lens' GroupItem (Maybe Text)
 giId = lens _giId (\ s a -> s{_giId = a})
+
+-- | Apiary error details
+giErrors :: Lens' GroupItem (Maybe Errors)
+giErrors = lens _giErrors (\ s a -> s{_giErrors = a})
 
 instance FromJSON GroupItem where
         parseJSON
           = withObject "GroupItem"
               (\ o ->
                  GroupItem' <$>
-                   (o .:? "etag") <*>
-                     (o .:? "kind" .!= "youtube#groupItem")
-                     <*> (o .:? "resource")
+                   (o .:? "etag") <*> (o .:? "kind") <*>
+                     (o .:? "resource")
                      <*> (o .:? "groupId")
-                     <*> (o .:? "id"))
+                     <*> (o .:? "id")
+                     <*> (o .:? "errors"))
 
 instance ToJSON GroupItem where
         toJSON GroupItem'{..}
           = object
               (catMaybes
-                 [("etag" .=) <$> _giEtag, Just ("kind" .= _giKind),
+                 [("etag" .=) <$> _giEtag, ("kind" .=) <$> _giKind,
                   ("resource" .=) <$> _giResource,
-                  ("groupId" .=) <$> _giGroupId, ("id" .=) <$> _giId])
+                  ("groupId" .=) <$> _giGroupId, ("id" .=) <$> _giId,
+                  ("errors" .=) <$> _giErrors])
 
--- | A paginated list of batchReportDefinition resources returned in response
--- to a youtubeAnalytics.batchReportDefinitions.list request.
+-- | Request Error information. The presence of an error field signals that
+-- the operation has failed.
 --
--- /See:/ 'batchReportDefinitionList' smart constructor.
-data BatchReportDefinitionList = BatchReportDefinitionList'
-    { _brdlKind  :: !Text
-    , _brdlItems :: !(Maybe [BatchReportDefinition])
+-- /See:/ 'errors' smart constructor.
+data Errors = Errors'
+    { _eRequestId :: !(Maybe Text)
+    , _eError     :: !(Maybe [ErrorProto])
+    , _eCode      :: !(Maybe ErrorsCode)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BatchReportDefinitionList' with the minimum fields required to make a request.
+-- | Creates a value of 'Errors' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'brdlKind'
+-- * 'eRequestId'
 --
--- * 'brdlItems'
-batchReportDefinitionList
-    :: BatchReportDefinitionList
-batchReportDefinitionList =
-    BatchReportDefinitionList'
-    { _brdlKind = "youtubeAnalytics#batchReportDefinitionList"
-    , _brdlItems = Nothing
+-- * 'eError'
+--
+-- * 'eCode'
+errors
+    :: Errors
+errors =
+    Errors'
+    { _eRequestId = Nothing
+    , _eError = Nothing
+    , _eCode = Nothing
+    }
+
+-- | Request identifier generated by the service, which can be used to
+-- identify the error in the logs
+eRequestId :: Lens' Errors (Maybe Text)
+eRequestId
+  = lens _eRequestId (\ s a -> s{_eRequestId = a})
+
+-- | Specific error description and codes
+eError :: Lens' Errors [ErrorProto]
+eError
+  = lens _eError (\ s a -> s{_eError = a}) . _Default .
+      _Coerce
+
+-- | Global error code. Deprecated and ignored. Set custom error codes in
+-- ErrorProto.domain and ErrorProto.code instead.
+eCode :: Lens' Errors (Maybe ErrorsCode)
+eCode = lens _eCode (\ s a -> s{_eCode = a})
+
+instance FromJSON Errors where
+        parseJSON
+          = withObject "Errors"
+              (\ o ->
+                 Errors' <$>
+                   (o .:? "requestId") <*> (o .:? "error" .!= mempty)
+                     <*> (o .:? "code"))
+
+instance ToJSON Errors where
+        toJSON Errors'{..}
+          = object
+              (catMaybes
+                 [("requestId" .=) <$> _eRequestId,
+                  ("error" .=) <$> _eError, ("code" .=) <$> _eCode])
+
+-- | The description of a column of the result table.
+--
+-- /See:/ 'resultTableColumnHeader' smart constructor.
+data ResultTableColumnHeader = ResultTableColumnHeader'
+    { _rtchColumnType :: !(Maybe Text)
+    , _rtchName       :: !(Maybe Text)
+    , _rtchDataType   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ResultTableColumnHeader' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rtchColumnType'
+--
+-- * 'rtchName'
+--
+-- * 'rtchDataType'
+resultTableColumnHeader
+    :: ResultTableColumnHeader
+resultTableColumnHeader =
+    ResultTableColumnHeader'
+    { _rtchColumnType = Nothing
+    , _rtchName = Nothing
+    , _rtchDataType = Nothing
+    }
+
+-- | The type of the column (\`DIMENSION\` or \`METRIC\`).
+rtchColumnType :: Lens' ResultTableColumnHeader (Maybe Text)
+rtchColumnType
+  = lens _rtchColumnType
+      (\ s a -> s{_rtchColumnType = a})
+
+-- | The name of the dimension or metric.
+rtchName :: Lens' ResultTableColumnHeader (Maybe Text)
+rtchName = lens _rtchName (\ s a -> s{_rtchName = a})
+
+-- | The type of the data in the column (\`STRING\`, \`INTEGER\`, \`FLOAT\`,
+-- etc.).
+rtchDataType :: Lens' ResultTableColumnHeader (Maybe Text)
+rtchDataType
+  = lens _rtchDataType (\ s a -> s{_rtchDataType = a})
+
+instance FromJSON ResultTableColumnHeader where
+        parseJSON
+          = withObject "ResultTableColumnHeader"
+              (\ o ->
+                 ResultTableColumnHeader' <$>
+                   (o .:? "columnType") <*> (o .:? "name") <*>
+                     (o .:? "dataType"))
+
+instance ToJSON ResultTableColumnHeader where
+        toJSON ResultTableColumnHeader'{..}
+          = object
+              (catMaybes
+                 [("columnType" .=) <$> _rtchColumnType,
+                  ("name" .=) <$> _rtchName,
+                  ("dataType" .=) <$> _rtchDataType])
+
+-- | Describes one specific error.
+--
+-- /See:/ 'errorProto' smart constructor.
+data ErrorProto = ErrorProto'
+    { _epDebugInfo            :: !(Maybe Text)
+    , _epLocation             :: !(Maybe Text)
+    , _epDomain               :: !(Maybe Text)
+    , _epArgument             :: !(Maybe [Text])
+    , _epExternalErrorMessage :: !(Maybe Text)
+    , _epCode                 :: !(Maybe Text)
+    , _epLocationType         :: !(Maybe ErrorProtoLocationType)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ErrorProto' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'epDebugInfo'
+--
+-- * 'epLocation'
+--
+-- * 'epDomain'
+--
+-- * 'epArgument'
+--
+-- * 'epExternalErrorMessage'
+--
+-- * 'epCode'
+--
+-- * 'epLocationType'
+errorProto
+    :: ErrorProto
+errorProto =
+    ErrorProto'
+    { _epDebugInfo = Nothing
+    , _epLocation = Nothing
+    , _epDomain = Nothing
+    , _epArgument = Nothing
+    , _epExternalErrorMessage = Nothing
+    , _epCode = Nothing
+    , _epLocationType = Nothing
+    }
+
+-- | Debugging information, which should not be shared externally.
+epDebugInfo :: Lens' ErrorProto (Maybe Text)
+epDebugInfo
+  = lens _epDebugInfo (\ s a -> s{_epDebugInfo = a})
+
+-- | Location of the error, as specified by the location type. If
+-- location_type is PATH, this should be a path to a field that\'s relative
+-- to the request, using FieldPath notation
+-- (net\/proto2\/util\/public\/field_path.h). Examples:
+-- authenticated_user.gaia_id resource.address[2].country
+epLocation :: Lens' ErrorProto (Maybe Text)
+epLocation
+  = lens _epLocation (\ s a -> s{_epLocation = a})
+
+-- | Error domain. RoSy services can define their own domain and error codes.
+-- This should normally be the name of an enum type, such as:
+-- gdata.CoreErrorDomain
+epDomain :: Lens' ErrorProto (Maybe Text)
+epDomain = lens _epDomain (\ s a -> s{_epDomain = a})
+
+-- | Error arguments, to be used when building user-friendly error messages
+-- given the error domain and code. Different error codes require different
+-- arguments.
+epArgument :: Lens' ErrorProto [Text]
+epArgument
+  = lens _epArgument (\ s a -> s{_epArgument = a}) .
+      _Default
+      . _Coerce
+
+-- | A short explanation for the error, which can be shared outside Google.
+-- Please set domain, code and arguments whenever possible instead of this
+-- error message so that external APIs can build safe error messages
+-- themselves. External messages built in a RoSy interface will most likely
+-- refer to information and concepts that are not available externally and
+-- should not be exposed. It is safer if external APIs can understand the
+-- errors and decide what the error message should look like.
+epExternalErrorMessage :: Lens' ErrorProto (Maybe Text)
+epExternalErrorMessage
+  = lens _epExternalErrorMessage
+      (\ s a -> s{_epExternalErrorMessage = a})
+
+-- | Error code in the error domain. This should correspond to a value of the
+-- enum type whose name is in domain. See the core error domain in
+-- error_domain.proto.
+epCode :: Lens' ErrorProto (Maybe Text)
+epCode = lens _epCode (\ s a -> s{_epCode = a})
+
+epLocationType :: Lens' ErrorProto (Maybe ErrorProtoLocationType)
+epLocationType
+  = lens _epLocationType
+      (\ s a -> s{_epLocationType = a})
+
+instance FromJSON ErrorProto where
+        parseJSON
+          = withObject "ErrorProto"
+              (\ o ->
+                 ErrorProto' <$>
+                   (o .:? "debugInfo") <*> (o .:? "location") <*>
+                     (o .:? "domain")
+                     <*> (o .:? "argument" .!= mempty)
+                     <*> (o .:? "externalErrorMessage")
+                     <*> (o .:? "code")
+                     <*> (o .:? "locationType"))
+
+instance ToJSON ErrorProto where
+        toJSON ErrorProto'{..}
+          = object
+              (catMaybes
+                 [("debugInfo" .=) <$> _epDebugInfo,
+                  ("location" .=) <$> _epLocation,
+                  ("domain" .=) <$> _epDomain,
+                  ("argument" .=) <$> _epArgument,
+                  ("externalErrorMessage" .=) <$>
+                    _epExternalErrorMessage,
+                  ("code" .=) <$> _epCode,
+                  ("locationType" .=) <$> _epLocationType])
+
+-- | Empty response.
+--
+-- /See:/ 'emptyResponse' smart constructor.
+newtype EmptyResponse = EmptyResponse'
+    { _erErrors :: Maybe Errors
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'EmptyResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'erErrors'
+emptyResponse
+    :: EmptyResponse
+emptyResponse =
+    EmptyResponse'
+    { _erErrors = Nothing
+    }
+
+-- | Apiary error details
+erErrors :: Lens' EmptyResponse (Maybe Errors)
+erErrors = lens _erErrors (\ s a -> s{_erErrors = a})
+
+instance FromJSON EmptyResponse where
+        parseJSON
+          = withObject "EmptyResponse"
+              (\ o -> EmptyResponse' <$> (o .:? "errors"))
+
+instance ToJSON EmptyResponse where
+        toJSON EmptyResponse'{..}
+          = object (catMaybes [("errors" .=) <$> _erErrors])
+
+-- | Response message for TargetedQueriesService.Query.
+--
+-- /See:/ 'queryResponse' smart constructor.
+data QueryResponse = QueryResponse'
+    { _qrKind          :: !(Maybe Text)
+    , _qrRows          :: !(Maybe [[JSONValue]])
+    , _qrColumnHeaders :: !(Maybe [ResultTableColumnHeader])
+    , _qrErrors        :: !(Maybe Errors)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'QueryResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'qrKind'
+--
+-- * 'qrRows'
+--
+-- * 'qrColumnHeaders'
+--
+-- * 'qrErrors'
+queryResponse
+    :: QueryResponse
+queryResponse =
+    QueryResponse'
+    { _qrKind = Nothing
+    , _qrRows = Nothing
+    , _qrColumnHeaders = Nothing
+    , _qrErrors = Nothing
     }
 
 -- | This value specifies the type of data included in the API response. For
--- the list method, the kind property value is
--- youtubeAnalytics#batchReportDefinitionList.
-brdlKind :: Lens' BatchReportDefinitionList Text
-brdlKind = lens _brdlKind (\ s a -> s{_brdlKind = a})
+-- the query method, the kind property value will be
+-- \`youtubeAnalytics#resultTable\`.
+qrKind :: Lens' QueryResponse (Maybe Text)
+qrKind = lens _qrKind (\ s a -> s{_qrKind = a})
 
--- | A list of batchReportDefinition resources that match the request
--- criteria.
-brdlItems :: Lens' BatchReportDefinitionList [BatchReportDefinition]
-brdlItems
-  = lens _brdlItems (\ s a -> s{_brdlItems = a}) .
-      _Default
+-- | The list contains all rows of the result table. Each item in the list is
+-- an array that contains comma-delimited data corresponding to a single
+-- row of data. The order of the comma-delimited data fields will match the
+-- order of the columns listed in the \`columnHeaders\` field. If no data
+-- is available for the given query, the \`rows\` element will be omitted
+-- from the response. The response for a query with the \`day\` dimension
+-- will not contain rows for the most recent days.
+qrRows :: Lens' QueryResponse [[JSONValue]]
+qrRows
+  = lens _qrRows (\ s a -> s{_qrRows = a}) . _Default .
+      _Coerce
+
+-- | This value specifies information about the data returned in the \`rows\`
+-- fields. Each item in the \`columnHeaders\` list identifies a field
+-- returned in the \`rows\` value, which contains a list of comma-delimited
+-- data. The \`columnHeaders\` list will begin with the dimensions
+-- specified in the API request, which will be followed by the metrics
+-- specified in the API request. The order of both dimensions and metrics
+-- will match the ordering in the API request. For example, if the API
+-- request contains the parameters
+-- \`dimensions=ageGroup,gender&metrics=viewerPercentage\`, the API
+-- response will return columns in this order: \`ageGroup\`, \`gender\`,
+-- \`viewerPercentage\`.
+qrColumnHeaders :: Lens' QueryResponse [ResultTableColumnHeader]
+qrColumnHeaders
+  = lens _qrColumnHeaders
+      (\ s a -> s{_qrColumnHeaders = a})
+      . _Default
       . _Coerce
 
-instance FromJSON BatchReportDefinitionList where
-        parseJSON
-          = withObject "BatchReportDefinitionList"
-              (\ o ->
-                 BatchReportDefinitionList' <$>
-                   (o .:? "kind" .!=
-                      "youtubeAnalytics#batchReportDefinitionList")
-                     <*> (o .:? "items" .!= mempty))
+-- | When set, indicates that the operation failed.
+qrErrors :: Lens' QueryResponse (Maybe Errors)
+qrErrors = lens _qrErrors (\ s a -> s{_qrErrors = a})
 
-instance ToJSON BatchReportDefinitionList where
-        toJSON BatchReportDefinitionList'{..}
+instance FromJSON QueryResponse where
+        parseJSON
+          = withObject "QueryResponse"
+              (\ o ->
+                 QueryResponse' <$>
+                   (o .:? "kind") <*> (o .:? "rows" .!= mempty) <*>
+                     (o .:? "columnHeaders" .!= mempty)
+                     <*> (o .:? "errors"))
+
+instance ToJSON QueryResponse where
+        toJSON QueryResponse'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _brdlKind),
-                  ("items" .=) <$> _brdlItems])
-
--- | A paginated list of batchReport resources returned in response to a
--- youtubeAnalytics.batchReport.list request.
---
--- /See:/ 'batchReportList' smart constructor.
-data BatchReportList = BatchReportList'
-    { _brlKind  :: !Text
-    , _brlItems :: !(Maybe [BatchReport])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'BatchReportList' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'brlKind'
---
--- * 'brlItems'
-batchReportList
-    :: BatchReportList
-batchReportList =
-    BatchReportList'
-    { _brlKind = "youtubeAnalytics#batchReportList"
-    , _brlItems = Nothing
-    }
-
--- | This value specifies the type of data included in the API response. For
--- the list method, the kind property value is
--- youtubeAnalytics#batchReportList.
-brlKind :: Lens' BatchReportList Text
-brlKind = lens _brlKind (\ s a -> s{_brlKind = a})
-
--- | A list of batchReport resources that match the request criteria.
-brlItems :: Lens' BatchReportList [BatchReport]
-brlItems
-  = lens _brlItems (\ s a -> s{_brlItems = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON BatchReportList where
-        parseJSON
-          = withObject "BatchReportList"
-              (\ o ->
-                 BatchReportList' <$>
-                   (o .:? "kind" .!= "youtubeAnalytics#batchReportList")
-                     <*> (o .:? "items" .!= mempty))
-
-instance ToJSON BatchReportList where
-        toJSON BatchReportList'{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _brlKind),
-                  ("items" .=) <$> _brlItems])
-
---
--- /See:/ 'batchReportOutputsItem' smart constructor.
-data BatchReportOutputsItem = BatchReportOutputsItem'
-    { _broiFormat      :: !(Maybe Text)
-    , _broiDownloadURL :: !(Maybe Text)
-    , _broiType        :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'BatchReportOutputsItem' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'broiFormat'
---
--- * 'broiDownloadURL'
---
--- * 'broiType'
-batchReportOutputsItem
-    :: BatchReportOutputsItem
-batchReportOutputsItem =
-    BatchReportOutputsItem'
-    { _broiFormat = Nothing
-    , _broiDownloadURL = Nothing
-    , _broiType = "cloudStorageOutput"
-    }
-
--- | Format of the output.
-broiFormat :: Lens' BatchReportOutputsItem (Maybe Text)
-broiFormat
-  = lens _broiFormat (\ s a -> s{_broiFormat = a})
-
--- | Cloud storage URL to download this report. This URL is valid for 30
--- minutes.
-broiDownloadURL :: Lens' BatchReportOutputsItem (Maybe Text)
-broiDownloadURL
-  = lens _broiDownloadURL
-      (\ s a -> s{_broiDownloadURL = a})
-
--- | Type of the output.
-broiType :: Lens' BatchReportOutputsItem Text
-broiType = lens _broiType (\ s a -> s{_broiType = a})
-
-instance FromJSON BatchReportOutputsItem where
-        parseJSON
-          = withObject "BatchReportOutputsItem"
-              (\ o ->
-                 BatchReportOutputsItem' <$>
-                   (o .:? "format") <*> (o .:? "downloadUrl") <*>
-                     (o .:? "type" .!= "cloudStorageOutput"))
-
-instance ToJSON BatchReportOutputsItem where
-        toJSON BatchReportOutputsItem'{..}
-          = object
-              (catMaybes
-                 [("format" .=) <$> _broiFormat,
-                  ("downloadUrl" .=) <$> _broiDownloadURL,
-                  Just ("type" .= _broiType)])
-
--- | Period included in the report. For reports containing all entities
--- endTime is not set. Both startTime and endTime are inclusive.
---
--- /See:/ 'batchReportTimeSpan' smart constructor.
-data BatchReportTimeSpan = BatchReportTimeSpan'
-    { _brtsStartTime :: !(Maybe DateTime')
-    , _brtsEndTime   :: !(Maybe DateTime')
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'BatchReportTimeSpan' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'brtsStartTime'
---
--- * 'brtsEndTime'
-batchReportTimeSpan
-    :: BatchReportTimeSpan
-batchReportTimeSpan =
-    BatchReportTimeSpan'
-    { _brtsStartTime = Nothing
-    , _brtsEndTime = Nothing
-    }
-
--- | Start of the period included in the report. Inclusive.
-brtsStartTime :: Lens' BatchReportTimeSpan (Maybe UTCTime)
-brtsStartTime
-  = lens _brtsStartTime
-      (\ s a -> s{_brtsStartTime = a})
-      . mapping _DateTime
-
--- | End of the period included in the report. Inclusive. For reports
--- containing all entities endTime is not set.
-brtsEndTime :: Lens' BatchReportTimeSpan (Maybe UTCTime)
-brtsEndTime
-  = lens _brtsEndTime (\ s a -> s{_brtsEndTime = a}) .
-      mapping _DateTime
-
-instance FromJSON BatchReportTimeSpan where
-        parseJSON
-          = withObject "BatchReportTimeSpan"
-              (\ o ->
-                 BatchReportTimeSpan' <$>
-                   (o .:? "startTime") <*> (o .:? "endTime"))
-
-instance ToJSON BatchReportTimeSpan where
-        toJSON BatchReportTimeSpan'{..}
-          = object
-              (catMaybes
-                 [("startTime" .=) <$> _brtsStartTime,
-                  ("endTime" .=) <$> _brtsEndTime])
-
--- | A paginated list of grouList resources returned in response to a
--- youtubeAnalytics.groupApi.list request.
---
--- /See:/ 'groupItemListResponse' smart constructor.
-data GroupItemListResponse = GroupItemListResponse'
-    { _gilrEtag  :: !(Maybe Text)
-    , _gilrKind  :: !Text
-    , _gilrItems :: !(Maybe [GroupItem])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'GroupItemListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'gilrEtag'
---
--- * 'gilrKind'
---
--- * 'gilrItems'
-groupItemListResponse
-    :: GroupItemListResponse
-groupItemListResponse =
-    GroupItemListResponse'
-    { _gilrEtag = Nothing
-    , _gilrKind = "youtube#groupItemListResponse"
-    , _gilrItems = Nothing
-    }
-
-gilrEtag :: Lens' GroupItemListResponse (Maybe Text)
-gilrEtag = lens _gilrEtag (\ s a -> s{_gilrEtag = a})
-
-gilrKind :: Lens' GroupItemListResponse Text
-gilrKind = lens _gilrKind (\ s a -> s{_gilrKind = a})
-
-gilrItems :: Lens' GroupItemListResponse [GroupItem]
-gilrItems
-  = lens _gilrItems (\ s a -> s{_gilrItems = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON GroupItemListResponse where
-        parseJSON
-          = withObject "GroupItemListResponse"
-              (\ o ->
-                 GroupItemListResponse' <$>
-                   (o .:? "etag") <*>
-                     (o .:? "kind" .!= "youtube#groupItemListResponse")
-                     <*> (o .:? "items" .!= mempty))
-
-instance ToJSON GroupItemListResponse where
-        toJSON GroupItemListResponse'{..}
-          = object
-              (catMaybes
-                 [("etag" .=) <$> _gilrEtag,
-                  Just ("kind" .= _gilrKind),
-                  ("items" .=) <$> _gilrItems])
-
--- | A paginated list of grouList resources returned in response to a
--- youtubeAnalytics.groupApi.list request.
---
--- /See:/ 'groupListResponse' smart constructor.
-data GroupListResponse = GroupListResponse'
-    { _glrEtag          :: !(Maybe Text)
-    , _glrNextPageToken :: !(Maybe Text)
-    , _glrKind          :: !Text
-    , _glrItems         :: !(Maybe [Group])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'GroupListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'glrEtag'
---
--- * 'glrNextPageToken'
---
--- * 'glrKind'
---
--- * 'glrItems'
-groupListResponse
-    :: GroupListResponse
-groupListResponse =
-    GroupListResponse'
-    { _glrEtag = Nothing
-    , _glrNextPageToken = Nothing
-    , _glrKind = "youtube#groupListResponse"
-    , _glrItems = Nothing
-    }
-
-glrEtag :: Lens' GroupListResponse (Maybe Text)
-glrEtag = lens _glrEtag (\ s a -> s{_glrEtag = a})
-
-glrNextPageToken :: Lens' GroupListResponse (Maybe Text)
-glrNextPageToken
-  = lens _glrNextPageToken
-      (\ s a -> s{_glrNextPageToken = a})
-
-glrKind :: Lens' GroupListResponse Text
-glrKind = lens _glrKind (\ s a -> s{_glrKind = a})
-
-glrItems :: Lens' GroupListResponse [Group]
-glrItems
-  = lens _glrItems (\ s a -> s{_glrItems = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON GroupListResponse where
-        parseJSON
-          = withObject "GroupListResponse"
-              (\ o ->
-                 GroupListResponse' <$>
-                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!= "youtube#groupListResponse")
-                     <*> (o .:? "items" .!= mempty))
-
-instance ToJSON GroupListResponse where
-        toJSON GroupListResponse'{..}
-          = object
-              (catMaybes
-                 [("etag" .=) <$> _glrEtag,
-                  ("nextPageToken" .=) <$> _glrNextPageToken,
-                  Just ("kind" .= _glrKind),
-                  ("items" .=) <$> _glrItems])
+                 [("kind" .=) <$> _qrKind, ("rows" .=) <$> _qrRows,
+                  ("columnHeaders" .=) <$> _qrColumnHeaders,
+                  ("errors" .=) <$> _qrErrors])

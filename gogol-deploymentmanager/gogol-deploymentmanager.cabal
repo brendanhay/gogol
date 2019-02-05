@@ -1,5 +1,5 @@
 name:                  gogol-deploymentmanager
-version:               0.1.1
+version:               0.4.0
 synopsis:              Google Cloud Deployment Manager SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -11,7 +11,7 @@ copyright:             Copyright (c) 2015-2016 Brendan Hay
 category:              Network, Google, Cloud
 build-type:            Simple
 cabal-version:         >= 1.10
-extra-source-files:    README.md
+extra-source-files:    README.md src/.gitkeep
 
 description:
     Declares, configures, and deploys complex solutions on Google Cloud
@@ -60,5 +60,5 @@ library
         , Network.Google.DeploymentManager.Types.Sum
 
     build-depends:
-          gogol-core == 0.1.1.*
+          gogol-core == 0.4.0.*
         , base       >= 4.7 && < 5

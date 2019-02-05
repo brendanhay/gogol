@@ -25,10 +25,10 @@
 -- While in \"debug mode\", the instance continues to serve live traffic.
 -- You should delete the instance when you are done debugging and then
 -- allow the system to take over and determine if another instance should
--- be started. Only applicable for instances in App Engine flexible
+-- be started.Only applicable for instances in App Engine flexible
 -- environment.
 --
--- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ Google App Engine Admin API Reference> for @appengine.apps.services.versions.instances.debug@.
+-- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ App Engine Admin API Reference> for @appengine.apps.services.versions.instances.debug@.
 module Network.Google.Resource.AppEngine.Apps.Services.Versions.Instances.Debug
     (
     -- * REST Resource
@@ -42,12 +42,10 @@ module Network.Google.Resource.AppEngine.Apps.Services.Versions.Instances.Debug
     , asvidXgafv
     , asvidInstancesId
     , asvidUploadProtocol
-    , asvidPp
     , asvidAccessToken
     , asvidUploadType
     , asvidPayload
     , asvidVersionsId
-    , asvidBearerToken
     , asvidAppsId
     , asvidServicesId
     , asvidCallback
@@ -68,36 +66,32 @@ type AppsServicesVersionsInstancesDebugResource =
                  Capture "versionsId" Text :>
                    "instances" :>
                      CaptureMode "instancesId" "debug" Text :>
-                       QueryParam "$.xgafv" Text :>
+                       QueryParam "$.xgafv" Xgafv :>
                          QueryParam "upload_protocol" Text :>
-                           QueryParam "pp" Bool :>
-                             QueryParam "access_token" Text :>
-                               QueryParam "uploadType" Text :>
-                                 QueryParam "bearer_token" Text :>
-                                   QueryParam "callback" Text :>
-                                     QueryParam "alt" AltJSON :>
-                                       ReqBody '[JSON] DebugInstanceRequest :>
-                                         Post '[JSON] Operation
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] DebugInstanceRequest :>
+                                     Post '[JSON] Operation
 
 -- | Enables debugging on a VM instance. This allows you to use the SSH
 -- command to connect to the virtual machine where the instance lives.
 -- While in \"debug mode\", the instance continues to serve live traffic.
 -- You should delete the instance when you are done debugging and then
 -- allow the system to take over and determine if another instance should
--- be started. Only applicable for instances in App Engine flexible
+-- be started.Only applicable for instances in App Engine flexible
 -- environment.
 --
 -- /See:/ 'appsServicesVersionsInstancesDebug' smart constructor.
 data AppsServicesVersionsInstancesDebug = AppsServicesVersionsInstancesDebug'
-    { _asvidXgafv          :: !(Maybe Text)
+    { _asvidXgafv          :: !(Maybe Xgafv)
     , _asvidInstancesId    :: !Text
     , _asvidUploadProtocol :: !(Maybe Text)
-    , _asvidPp             :: !Bool
     , _asvidAccessToken    :: !(Maybe Text)
     , _asvidUploadType     :: !(Maybe Text)
     , _asvidPayload        :: !DebugInstanceRequest
     , _asvidVersionsId     :: !Text
-    , _asvidBearerToken    :: !(Maybe Text)
     , _asvidAppsId         :: !Text
     , _asvidServicesId     :: !Text
     , _asvidCallback       :: !(Maybe Text)
@@ -113,8 +107,6 @@ data AppsServicesVersionsInstancesDebug = AppsServicesVersionsInstancesDebug'
 --
 -- * 'asvidUploadProtocol'
 --
--- * 'asvidPp'
---
 -- * 'asvidAccessToken'
 --
 -- * 'asvidUploadType'
@@ -122,8 +114,6 @@ data AppsServicesVersionsInstancesDebug = AppsServicesVersionsInstancesDebug'
 -- * 'asvidPayload'
 --
 -- * 'asvidVersionsId'
---
--- * 'asvidBearerToken'
 --
 -- * 'asvidAppsId'
 --
@@ -142,19 +132,17 @@ appsServicesVersionsInstancesDebug pAsvidInstancesId_ pAsvidPayload_ pAsvidVersi
     { _asvidXgafv = Nothing
     , _asvidInstancesId = pAsvidInstancesId_
     , _asvidUploadProtocol = Nothing
-    , _asvidPp = True
     , _asvidAccessToken = Nothing
     , _asvidUploadType = Nothing
     , _asvidPayload = pAsvidPayload_
     , _asvidVersionsId = pAsvidVersionsId_
-    , _asvidBearerToken = Nothing
     , _asvidAppsId = pAsvidAppsId_
     , _asvidServicesId = pAsvidServicesId_
     , _asvidCallback = Nothing
     }
 
 -- | V1 error format.
-asvidXgafv :: Lens' AppsServicesVersionsInstancesDebug (Maybe Text)
+asvidXgafv :: Lens' AppsServicesVersionsInstancesDebug (Maybe Xgafv)
 asvidXgafv
   = lens _asvidXgafv (\ s a -> s{_asvidXgafv = a})
 
@@ -169,10 +157,6 @@ asvidUploadProtocol :: Lens' AppsServicesVersionsInstancesDebug (Maybe Text)
 asvidUploadProtocol
   = lens _asvidUploadProtocol
       (\ s a -> s{_asvidUploadProtocol = a})
-
--- | Pretty-print response.
-asvidPp :: Lens' AppsServicesVersionsInstancesDebug Bool
-asvidPp = lens _asvidPp (\ s a -> s{_asvidPp = a})
 
 -- | OAuth access token.
 asvidAccessToken :: Lens' AppsServicesVersionsInstancesDebug (Maybe Text)
@@ -197,14 +181,8 @@ asvidVersionsId
   = lens _asvidVersionsId
       (\ s a -> s{_asvidVersionsId = a})
 
--- | OAuth bearer token.
-asvidBearerToken :: Lens' AppsServicesVersionsInstancesDebug (Maybe Text)
-asvidBearerToken
-  = lens _asvidBearerToken
-      (\ s a -> s{_asvidBearerToken = a})
-
 -- | Part of \`name\`. Name of the resource requested. Example:
--- \`apps\/myapp\/services\/default\/versions\/v1\/instances\/instance-1\`.
+-- apps\/myapp\/services\/default\/versions\/v1\/instances\/instance-1.
 asvidAppsId :: Lens' AppsServicesVersionsInstancesDebug Text
 asvidAppsId
   = lens _asvidAppsId (\ s a -> s{_asvidAppsId = a})
@@ -232,10 +210,8 @@ instance GoogleRequest
               _asvidInstancesId
               _asvidXgafv
               _asvidUploadProtocol
-              (Just _asvidPp)
               _asvidAccessToken
               _asvidUploadType
-              _asvidBearerToken
               _asvidCallback
               (Just AltJSON)
               _asvidPayload

@@ -16,7 +16,7 @@
 --
 module Network.Google.Games.Types.Sum where
 
-import           Network.Google.Prelude
+import           Network.Google.Prelude hiding (Bytes)
 
 -- | Collection of players being retrieved
 data PlayersListCollection

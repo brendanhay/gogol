@@ -42,6 +42,9 @@ module Network.Google.StorageTransfer.Types
     , lorNextPageToken
     , lorOperations
 
+    -- * TransferOperationStatus
+    , TransferOperationStatus (..)
+
     -- * Schedule
     , Schedule
     , schedule
@@ -136,11 +139,17 @@ module Network.Google.StorageTransfer.Types
     , gcsData
     , gdBucketName
 
+    -- * Xgafv
+    , Xgafv (..)
+
     -- * AwsS3Data
     , AwsS3Data
     , awsS3Data
     , asdBucketName
     , asdAwsAccessKey
+
+    -- * TransferJobStatus
+    , TransferJobStatus (..)
 
     -- * HTTPData
     , HTTPData
@@ -216,13 +225,16 @@ module Network.Google.StorageTransfer.Types
     , awsAccessKey
     , aakSecretAccessKey
     , aakAccessKeyId
+
+    -- * ErrorSummaryErrorCode
+    , ErrorSummaryErrorCode (..)
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types.Product
 import           Network.Google.StorageTransfer.Types.Sum
 
--- | Default request referring to version 'v1' of the Google Storage Transfer API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v1' of the Storage Transfer API. This contains the host and root path used as a starting point for constructing service requests.
 storageTransferService :: ServiceConfig
 storageTransferService
   = defaultService (ServiceId "storagetransfer:v1")

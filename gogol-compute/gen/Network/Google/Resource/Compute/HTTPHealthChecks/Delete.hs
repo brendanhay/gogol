@@ -33,6 +33,7 @@ module Network.Google.Resource.Compute.HTTPHealthChecks.Delete
     , HTTPHealthChecksDelete
 
     -- * Request Lenses
+    , httphcdRequestId
     , httphcdProject
     , httphcdHTTPHealthCheck
     ) where
@@ -50,19 +51,23 @@ type HTTPHealthChecksDeleteResource =
              "global" :>
                "httpHealthChecks" :>
                  Capture "httpHealthCheck" Text :>
-                   QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+                   QueryParam "requestId" Text :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified HttpHealthCheck resource.
 --
 -- /See:/ 'hTTPHealthChecksDelete' smart constructor.
 data HTTPHealthChecksDelete = HTTPHealthChecksDelete'
-    { _httphcdProject         :: !Text
+    { _httphcdRequestId       :: !(Maybe Text)
+    , _httphcdProject         :: !Text
     , _httphcdHTTPHealthCheck :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HTTPHealthChecksDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'httphcdRequestId'
 --
 -- * 'httphcdProject'
 --
@@ -73,9 +78,25 @@ hTTPHealthChecksDelete
     -> HTTPHealthChecksDelete
 hTTPHealthChecksDelete pHttphcdProject_ pHttphcdHTTPHealthCheck_ =
     HTTPHealthChecksDelete'
-    { _httphcdProject = pHttphcdProject_
+    { _httphcdRequestId = Nothing
+    , _httphcdProject = pHttphcdProject_
     , _httphcdHTTPHealthCheck = pHttphcdHTTPHealthCheck_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+httphcdRequestId :: Lens' HTTPHealthChecksDelete (Maybe Text)
+httphcdRequestId
+  = lens _httphcdRequestId
+      (\ s a -> s{_httphcdRequestId = a})
 
 -- | Project ID for this request.
 httphcdProject :: Lens' HTTPHealthChecksDelete Text
@@ -96,6 +117,7 @@ instance GoogleRequest HTTPHealthChecksDelete where
                "https://www.googleapis.com/auth/compute"]
         requestClient HTTPHealthChecksDelete'{..}
           = go _httphcdProject _httphcdHTTPHealthCheck
+              _httphcdRequestId
               (Just AltJSON)
               computeService
           where go

@@ -44,7 +44,7 @@ import           Network.Google.ShoppingContent.Types
 -- 'ProductsGet' request conforms to.
 type ProductsGetResource =
      "content" :>
-       "v2" :>
+       "v2.1" :>
          Capture "merchantId" (Textual Word64) :>
            "products" :>
              Capture "productId" Text :>
@@ -75,14 +75,15 @@ productsGet pPggMerchantId_ pPggProductId_ =
     , _pggProductId = pPggProductId_
     }
 
--- | The ID of the managing account.
+-- | The ID of the account that contains the product. This account cannot be
+-- a multi-client account.
 pggMerchantId :: Lens' ProductsGet Word64
 pggMerchantId
   = lens _pggMerchantId
       (\ s a -> s{_pggMerchantId = a})
       . _Coerce
 
--- | The ID of the product.
+-- | The REST id of the product.
 pggProductId :: Lens' ProductsGet Text
 pggProductId
   = lens _pggProductId (\ s a -> s{_pggProductId = a})

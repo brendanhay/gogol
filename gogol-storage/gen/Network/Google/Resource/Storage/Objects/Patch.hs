@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates an object\'s metadata. This method supports patch semantics.
+-- Patches an object\'s metadata.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.objects.patch@.
 module Network.Google.Resource.Storage.Objects.Patch
@@ -39,6 +39,7 @@ module Network.Google.Resource.Storage.Objects.Patch
     , opPredefinedACL
     , opBucket
     , opPayload
+    , opUserProject
     , opIfMetagenerationNotMatch
     , opObject
     , opProjection
@@ -62,14 +63,16 @@ type ObjectsPatchResource =
                      QueryParam "ifGenerationMatch" (Textual Int64) :>
                        QueryParam "predefinedAcl" ObjectsPatchPredefinedACL
                          :>
-                         QueryParam "ifMetagenerationNotMatch" (Textual Int64)
-                           :>
-                           QueryParam "projection" ObjectsPatchProjection :>
-                             QueryParam "generation" (Textual Int64) :>
-                               QueryParam "alt" AltJSON :>
-                                 ReqBody '[JSON] Object :> Patch '[JSON] Object
+                         QueryParam "userProject" Text :>
+                           QueryParam "ifMetagenerationNotMatch" (Textual Int64)
+                             :>
+                             QueryParam "projection" ObjectsPatchProjection :>
+                               QueryParam "generation" (Textual Int64) :>
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] Object :>
+                                     Patch '[JSON] Object
 
--- | Updates an object\'s metadata. This method supports patch semantics.
+-- | Patches an object\'s metadata.
 --
 -- /See:/ 'objectsPatch' smart constructor.
 data ObjectsPatch = ObjectsPatch'
@@ -79,6 +82,7 @@ data ObjectsPatch = ObjectsPatch'
     , _opPredefinedACL            :: !(Maybe ObjectsPatchPredefinedACL)
     , _opBucket                   :: !Text
     , _opPayload                  :: !Object
+    , _opUserProject              :: !(Maybe Text)
     , _opIfMetagenerationNotMatch :: !(Maybe (Textual Int64))
     , _opObject                   :: !Text
     , _opProjection               :: !(Maybe ObjectsPatchProjection)
@@ -101,6 +105,8 @@ data ObjectsPatch = ObjectsPatch'
 --
 -- * 'opPayload'
 --
+-- * 'opUserProject'
+--
 -- * 'opIfMetagenerationNotMatch'
 --
 -- * 'opObject'
@@ -121,6 +127,7 @@ objectsPatch pOpBucket_ pOpPayload_ pOpObject_ =
     , _opPredefinedACL = Nothing
     , _opBucket = pOpBucket_
     , _opPayload = pOpPayload_
+    , _opUserProject = Nothing
     , _opIfMetagenerationNotMatch = Nothing
     , _opObject = pOpObject_
     , _opProjection = Nothing
@@ -136,7 +143,9 @@ opIfMetagenerationMatch
       . mapping _Coerce
 
 -- | Makes the operation conditional on whether the object\'s current
--- generation does not match the given value.
+-- generation does not match the given value. If no live object exists, the
+-- precondition fails. Setting to 0 makes the operation succeed only if
+-- there is a live version of the object.
 opIfGenerationNotMatch :: Lens' ObjectsPatch (Maybe Int64)
 opIfGenerationNotMatch
   = lens _opIfGenerationNotMatch
@@ -144,7 +153,8 @@ opIfGenerationNotMatch
       . mapping _Coerce
 
 -- | Makes the operation conditional on whether the object\'s current
--- generation matches the given value.
+-- generation matches the given value. Setting to 0 makes the operation
+-- succeed only if there are no live versions of the object.
 opIfGenerationMatch :: Lens' ObjectsPatch (Maybe Int64)
 opIfGenerationMatch
   = lens _opIfGenerationMatch
@@ -165,6 +175,12 @@ opBucket = lens _opBucket (\ s a -> s{_opBucket = a})
 opPayload :: Lens' ObjectsPatch Object
 opPayload
   = lens _opPayload (\ s a -> s{_opPayload = a})
+
+-- | The project to be billed for this request, for Requester Pays buckets.
+opUserProject :: Lens' ObjectsPatch (Maybe Text)
+opUserProject
+  = lens _opUserProject
+      (\ s a -> s{_opUserProject = a})
 
 -- | Makes the operation conditional on whether the object\'s current
 -- metageneration does not match the given value.
@@ -201,6 +217,7 @@ instance GoogleRequest ObjectsPatch where
               _opIfGenerationNotMatch
               _opIfGenerationMatch
               _opPredefinedACL
+              _opUserProject
               _opIfMetagenerationNotMatch
               _opProjection
               _opGeneration

@@ -185,8 +185,8 @@ uwSortOrder :: Lens' UsersWatch (Maybe UsersWatchSortOrder)
 uwSortOrder
   = lens _uwSortOrder (\ s a -> s{_uwSortOrder = a})
 
--- | Immutable id of the Google Apps account. In case of multi-domain, to
--- fetch all users for a customer, fill this field instead of domain.
+-- | Immutable ID of the G Suite account. In case of multi-domain, to fetch
+-- all users for a customer, fill this field instead of domain.
 uwCustomer :: Lens' UsersWatch (Maybe Text)
 uwCustomer
   = lens _uwCustomer (\ s a -> s{_uwCustomer = a})

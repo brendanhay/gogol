@@ -23,7 +23,9 @@
 -- Creates a forwarding address. If ownership verification is required, a
 -- message will be sent to the recipient and the resource\'s verification
 -- status will be set to pending; otherwise, the resource will be created
--- with verification status set to accepted.
+-- with verification status set to accepted. This method is only available
+-- to service account clients that have been delegated domain-wide
+-- authority.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @gmail.users.settings.forwardingAddresses.create@.
 module Network.Google.Resource.Gmail.Users.Settings.ForwardingAddresses.Create
@@ -59,7 +61,9 @@ type UsersSettingsForwardingAddressesCreateResource =
 -- | Creates a forwarding address. If ownership verification is required, a
 -- message will be sent to the recipient and the resource\'s verification
 -- status will be set to pending; otherwise, the resource will be created
--- with verification status set to accepted.
+-- with verification status set to accepted. This method is only available
+-- to service account clients that have been delegated domain-wide
+-- authority.
 --
 -- /See:/ 'usersSettingsForwardingAddressesCreate' smart constructor.
 data UsersSettingsForwardingAddressesCreate = UsersSettingsForwardingAddressesCreate'

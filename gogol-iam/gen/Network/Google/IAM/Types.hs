@@ -22,14 +22,68 @@ module Network.Google.IAM.Types
     -- * OAuth Scopes
     , cloudPlatformScope
 
+    -- * LintPolicyResponse
+    , LintPolicyResponse
+    , lintPolicyResponse
+    , lprLintResults
+
+    -- * CreateServiceAccountKeyRequestPrivateKeyType
+    , CreateServiceAccountKeyRequestPrivateKeyType (..)
+
+    -- * UndeleteRoleRequest
+    , UndeleteRoleRequest
+    , undeleteRoleRequest
+    , urrEtag
+
+    -- * AuditConfig
+    , AuditConfig
+    , auditConfig
+    , acService
+    , acAuditLogConfigs
+
+    -- * Expr
+    , Expr
+    , expr
+    , eLocation
+    , eExpression
+    , eTitle
+    , eDescription
+
+    -- * PermissionStage
+    , PermissionStage (..)
+
+    -- * AuditableService
+    , AuditableService
+    , auditableService
+    , asName
+
+    -- * QueryAuditableServicesRequest
+    , QueryAuditableServicesRequest
+    , queryAuditableServicesRequest
+    , qasrFullResourceName
+
+    -- * QueryGrantableRolesRequestView
+    , QueryGrantableRolesRequestView (..)
+
     -- * Empty
     , Empty
     , empty
+
+    -- * QueryTestablePermissionsResponse
+    , QueryTestablePermissionsResponse
+    , queryTestablePermissionsResponse
+    , qtprNextPageToken
+    , qtprPermissions
 
     -- * AuditData
     , AuditData
     , auditData
     , adPolicyDelta
+
+    -- * QueryAuditableServicesResponse
+    , QueryAuditableServicesResponse
+    , queryAuditableServicesResponse
+    , qasrServices
 
     -- * ServiceAccountKey
     , ServiceAccountKey
@@ -42,6 +96,17 @@ module Network.Google.IAM.Types
     , sakValidBeforeTime
     , sakKeyAlgorithm
 
+    -- * LintResult
+    , LintResult
+    , lintResult
+    , lrValidationUnitName
+    , lrDebugMessage
+    , lrLocationOffSet
+    , lrSeverity
+    , lrBindingOrdinal
+    , lrFieldName
+    , lrLevel
+
     -- * CreateServiceAccountKeyRequest
     , CreateServiceAccountKeyRequest
     , createServiceAccountKeyRequest
@@ -51,7 +116,14 @@ module Network.Google.IAM.Types
     -- * SetIAMPolicyRequest
     , SetIAMPolicyRequest
     , setIAMPolicyRequest
+    , siprUpdateMask
     , siprPolicy
+
+    -- * SignJwtResponse
+    , SignJwtResponse
+    , signJwtResponse
+    , sjrKeyId
+    , sjrSignedJwt
 
     -- * BindingDelta
     , BindingDelta
@@ -59,6 +131,12 @@ module Network.Google.IAM.Types
     , bdAction
     , bdRole
     , bdMember
+    , bdCondition
+
+    -- * LintPolicyRequestContext
+    , LintPolicyRequestContext
+    , lintPolicyRequestContext
+    , lprcAddtional
 
     -- * SignBlobRequest
     , SignBlobRequest
@@ -73,7 +151,11 @@ module Network.Google.IAM.Types
     -- * Role
     , Role
     , role'
+    , rStage
+    , rEtag
+    , rIncludedPermissions
     , rName
+    , rDeleted
     , rTitle
     , rDescription
 
@@ -88,27 +170,54 @@ module Network.Google.IAM.Types
     , saProjectId
     , saOAuth2ClientId
 
+    -- * QueryTestablePermissionsRequest
+    , QueryTestablePermissionsRequest
+    , queryTestablePermissionsRequest
+    , qtprFullResourceName
+    , qtprPageToken
+    , qtprPageSize
+
+    -- * BindingDeltaAction
+    , BindingDeltaAction (..)
+
+    -- * AuditLogConfigLogType
+    , AuditLogConfigLogType (..)
+
     -- * QueryGrantableRolesResponse
     , QueryGrantableRolesResponse
     , queryGrantableRolesResponse
     , qgrrRoles
+    , qgrrNextPageToken
+
+    -- * Xgafv
+    , Xgafv (..)
 
     -- * TestIAMPermissionsRequest
     , TestIAMPermissionsRequest
     , testIAMPermissionsRequest
     , tiprPermissions
 
+    -- * LintResultSeverity
+    , LintResultSeverity (..)
+
     -- * TestIAMPermissionsResponse
     , TestIAMPermissionsResponse
     , testIAMPermissionsResponse
     , tiamprPermissions
 
+    -- * LintResultLevel
+    , LintResultLevel (..)
+
     -- * Policy
     , Policy
     , policy
+    , pAuditConfigs
     , pEtag
     , pVersion
     , pBindings
+
+    -- * RoleStage
+    , RoleStage (..)
 
     -- * PolicyDelta
     , PolicyDelta
@@ -119,6 +228,34 @@ module Network.Google.IAM.Types
     , QueryGrantableRolesRequest
     , queryGrantableRolesRequest
     , qgrrFullResourceName
+    , qgrrView
+    , qgrrPageToken
+    , qgrrPageSize
+
+    -- * SignJwtRequest
+    , SignJwtRequest
+    , signJwtRequest
+    , sjrPayload
+
+    -- * ServiceAccountKeyKeyAlgorithm
+    , ServiceAccountKeyKeyAlgorithm (..)
+
+    -- * AuditLogConfig
+    , AuditLogConfig
+    , auditLogConfig
+    , alcLogType
+    , alcExemptedMembers
+
+    -- * Permission
+    , Permission
+    , permission
+    , pStage
+    , pOnlyInPredefinedRoles
+    , pCustomRolesSupportLevel
+    , pName
+    , pTitle
+    , pAPIdisabled
+    , pDescription
 
     -- * SignBlobResponse
     , SignBlobResponse
@@ -132,24 +269,55 @@ module Network.Google.IAM.Types
     , lsarNextPageToken
     , lsarAccounts
 
+    -- * LintPolicyRequest
+    , LintPolicyRequest
+    , lintPolicyRequest
+    , lprContext
+    , lprFullResourceName
+    , lprPolicy
+    , lprCondition
+    , lprBinding
+
+    -- * ListRolesResponse
+    , ListRolesResponse
+    , listRolesResponse
+    , lrrRoles
+    , lrrNextPageToken
+
+    -- * CreateServiceAccountKeyRequestKeyAlgorithm
+    , CreateServiceAccountKeyRequestKeyAlgorithm (..)
+
+    -- * PermissionCustomRolesSupportLevel
+    , PermissionCustomRolesSupportLevel (..)
+
     -- * CreateServiceAccountRequest
     , CreateServiceAccountRequest
     , createServiceAccountRequest
     , csarServiceAccount
     , csarAccountId
 
+    -- * CreateRoleRequest
+    , CreateRoleRequest
+    , createRoleRequest
+    , crrRoleId
+    , crrRole
+
+    -- * ServiceAccountKeyPrivateKeyType
+    , ServiceAccountKeyPrivateKeyType (..)
+
     -- * Binding
     , Binding
     , binding
     , bMembers
     , bRole
+    , bCondition
     ) where
 
 import           Network.Google.IAM.Types.Product
 import           Network.Google.IAM.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v1' of the Google Identity and Access Management (IAM) API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v1' of the Identity and Access Management (IAM) API. This contains the host and root path used as a starting point for constructing service requests.
 iAMService :: ServiceConfig
 iAMService
   = defaultService (ServiceId "iam:v1")

@@ -22,7 +22,7 @@
 --
 -- Gets information about an application.
 --
--- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ Google App Engine Admin API Reference> for @appengine.apps.get@.
+-- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ App Engine Admin API Reference> for @appengine.apps.get@.
 module Network.Google.Resource.AppEngine.Apps.Get
     (
     -- * REST Resource
@@ -35,10 +35,8 @@ module Network.Google.Resource.AppEngine.Apps.Get
     -- * Request Lenses
     , agXgafv
     , agUploadProtocol
-    , agPp
     , agAccessToken
     , agUploadType
-    , agBearerToken
     , agAppsId
     , agCallback
     ) where
@@ -52,25 +50,21 @@ type AppsGetResource =
      "v1" :>
        "apps" :>
          Capture "appsId" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] Application
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] Application
 
 -- | Gets information about an application.
 --
 -- /See:/ 'appsGet' smart constructor.
 data AppsGet = AppsGet'
-    { _agXgafv          :: !(Maybe Text)
+    { _agXgafv          :: !(Maybe Xgafv)
     , _agUploadProtocol :: !(Maybe Text)
-    , _agPp             :: !Bool
     , _agAccessToken    :: !(Maybe Text)
     , _agUploadType     :: !(Maybe Text)
-    , _agBearerToken    :: !(Maybe Text)
     , _agAppsId         :: !Text
     , _agCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -83,13 +77,9 @@ data AppsGet = AppsGet'
 --
 -- * 'agUploadProtocol'
 --
--- * 'agPp'
---
 -- * 'agAccessToken'
 --
 -- * 'agUploadType'
---
--- * 'agBearerToken'
 --
 -- * 'agAppsId'
 --
@@ -101,16 +91,14 @@ appsGet pAgAppsId_ =
     AppsGet'
     { _agXgafv = Nothing
     , _agUploadProtocol = Nothing
-    , _agPp = True
     , _agAccessToken = Nothing
     , _agUploadType = Nothing
-    , _agBearerToken = Nothing
     , _agAppsId = pAgAppsId_
     , _agCallback = Nothing
     }
 
 -- | V1 error format.
-agXgafv :: Lens' AppsGet (Maybe Text)
+agXgafv :: Lens' AppsGet (Maybe Xgafv)
 agXgafv = lens _agXgafv (\ s a -> s{_agXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -118,10 +106,6 @@ agUploadProtocol :: Lens' AppsGet (Maybe Text)
 agUploadProtocol
   = lens _agUploadProtocol
       (\ s a -> s{_agUploadProtocol = a})
-
--- | Pretty-print response.
-agPp :: Lens' AppsGet Bool
-agPp = lens _agPp (\ s a -> s{_agPp = a})
 
 -- | OAuth access token.
 agAccessToken :: Lens' AppsGet (Maybe Text)
@@ -134,14 +118,8 @@ agUploadType :: Lens' AppsGet (Maybe Text)
 agUploadType
   = lens _agUploadType (\ s a -> s{_agUploadType = a})
 
--- | OAuth bearer token.
-agBearerToken :: Lens' AppsGet (Maybe Text)
-agBearerToken
-  = lens _agBearerToken
-      (\ s a -> s{_agBearerToken = a})
-
 -- | Part of \`name\`. Name of the Application resource to get. Example:
--- \`apps\/myapp\`.
+-- apps\/myapp.
 agAppsId :: Lens' AppsGet Text
 agAppsId = lens _agAppsId (\ s a -> s{_agAppsId = a})
 
@@ -153,13 +131,13 @@ agCallback
 instance GoogleRequest AppsGet where
         type Rs AppsGet = Application
         type Scopes AppsGet =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/appengine.admin",
+               "https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
         requestClient AppsGet'{..}
           = go _agAppsId _agXgafv _agUploadProtocol
-              (Just _agPp)
               _agAccessToken
               _agUploadType
-              _agBearerToken
               _agCallback
               (Just AltJSON)
               appEngineService

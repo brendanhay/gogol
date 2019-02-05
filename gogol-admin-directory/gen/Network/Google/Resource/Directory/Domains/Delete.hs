@@ -77,7 +77,7 @@ domainsDelete pDdCustomer_ pDdDomainName_ =
     , _ddDomainName = pDdDomainName_
     }
 
--- | Immutable id of the Google Apps account.
+-- | Immutable ID of the G Suite account.
 ddCustomer :: Lens' DomainsDelete Text
 ddCustomer
   = lens _ddCustomer (\ s a -> s{_ddCustomer = a})

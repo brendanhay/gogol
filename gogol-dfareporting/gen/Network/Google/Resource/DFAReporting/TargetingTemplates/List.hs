@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves a list of targeting templates, optionally filtered.
+-- Retrieves a list of targeting templates, optionally filtered. This
+-- method supports paging.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.targetingTemplates.list@.
 module Network.Google.Resource.DFAReporting.TargetingTemplates.List
@@ -50,7 +51,7 @@ import           Network.Google.Prelude
 -- 'TargetingTemplatesList' request conforms to.
 type TargetingTemplatesListResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "targetingTemplates" :>
@@ -68,7 +69,8 @@ type TargetingTemplatesListResource =
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] TargetingTemplatesListResponse
 
--- | Retrieves a list of targeting templates, optionally filtered.
+-- | Retrieves a list of targeting templates, optionally filtered. This
+-- method supports paging.
 --
 -- /See:/ 'targetingTemplatesList' smart constructor.
 data TargetingTemplatesList = TargetingTemplatesList'
@@ -76,10 +78,10 @@ data TargetingTemplatesList = TargetingTemplatesList'
     , _ttlSearchString :: !(Maybe Text)
     , _ttlIds          :: !(Maybe [Textual Int64])
     , _ttlProFileId    :: !(Textual Int64)
-    , _ttlSortOrder    :: !(Maybe TargetingTemplatesListSortOrder)
+    , _ttlSortOrder    :: !TargetingTemplatesListSortOrder
     , _ttlPageToken    :: !(Maybe Text)
-    , _ttlSortField    :: !(Maybe TargetingTemplatesListSortField)
-    , _ttlMaxResults   :: !(Maybe (Textual Int32))
+    , _ttlSortField    :: !TargetingTemplatesListSortField
+    , _ttlMaxResults   :: !(Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetingTemplatesList' with the minimum fields required to make a request.
@@ -110,10 +112,10 @@ targetingTemplatesList pTtlProFileId_ =
     , _ttlSearchString = Nothing
     , _ttlIds = Nothing
     , _ttlProFileId = _Coerce # pTtlProFileId_
-    , _ttlSortOrder = Nothing
+    , _ttlSortOrder = TTLSOAscending
     , _ttlPageToken = Nothing
-    , _ttlSortField = Nothing
-    , _ttlMaxResults = Nothing
+    , _ttlSortField = TTLSFID
+    , _ttlMaxResults = 1000
     }
 
 -- | Select only targeting templates with this advertiser ID.
@@ -147,8 +149,8 @@ ttlProFileId
   = lens _ttlProFileId (\ s a -> s{_ttlProFileId = a})
       . _Coerce
 
--- | Order of sorted results, default is ASCENDING.
-ttlSortOrder :: Lens' TargetingTemplatesList (Maybe TargetingTemplatesListSortOrder)
+-- | Order of sorted results.
+ttlSortOrder :: Lens' TargetingTemplatesList TargetingTemplatesListSortOrder
 ttlSortOrder
   = lens _ttlSortOrder (\ s a -> s{_ttlSortOrder = a})
 
@@ -158,16 +160,16 @@ ttlPageToken
   = lens _ttlPageToken (\ s a -> s{_ttlPageToken = a})
 
 -- | Field by which to sort the list.
-ttlSortField :: Lens' TargetingTemplatesList (Maybe TargetingTemplatesListSortField)
+ttlSortField :: Lens' TargetingTemplatesList TargetingTemplatesListSortField
 ttlSortField
   = lens _ttlSortField (\ s a -> s{_ttlSortField = a})
 
 -- | Maximum number of results to return.
-ttlMaxResults :: Lens' TargetingTemplatesList (Maybe Int32)
+ttlMaxResults :: Lens' TargetingTemplatesList Int32
 ttlMaxResults
   = lens _ttlMaxResults
       (\ s a -> s{_ttlMaxResults = a})
-      . mapping _Coerce
+      . _Coerce
 
 instance GoogleRequest TargetingTemplatesList where
         type Rs TargetingTemplatesList =
@@ -177,10 +179,10 @@ instance GoogleRequest TargetingTemplatesList where
         requestClient TargetingTemplatesList'{..}
           = go _ttlProFileId _ttlAdvertiserId _ttlSearchString
               (_ttlIds ^. _Default)
-              _ttlSortOrder
+              (Just _ttlSortOrder)
               _ttlPageToken
-              _ttlSortField
-              _ttlMaxResults
+              (Just _ttlSortField)
+              (Just _ttlMaxResults)
               (Just AltJSON)
               dFAReportingService
           where go

@@ -1,0 +1,54 @@
+name:                  gogol-remotebuildexecution
+version:               0.4.0
+synopsis:              Google Remote Build Execution SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               OtherLicense
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
+copyright:             Copyright (c) 2015-2016 Brendan Hay
+category:              Network, Google, Cloud
+build-type:            Simple
+cabal-version:         >= 1.10
+extra-source-files:    README.md src/.gitkeep
+
+description:
+    Supplies a Remote Execution API service for tools such as bazel.
+    .
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
+    .
+    This library is compatible with version @v2@
+    of the API.
+
+source-repository head
+    type:     git
+    location: git://github.com/brendanhay/gogol.git
+
+library
+    default-language:  Haskell2010
+    hs-source-dirs:    src gen
+
+    ghc-options:       -Wall
+
+    exposed-modules:
+          Network.Google.RemoteBuildExecution
+        , Network.Google.RemoteBuildExecution.Types
+        , Network.Google.Resource.RemoteBuildExecution.ActionResults.Get
+        , Network.Google.Resource.RemoteBuildExecution.ActionResults.Update
+        , Network.Google.Resource.RemoteBuildExecution.Actions.Execute
+        , Network.Google.Resource.RemoteBuildExecution.Blobs.BatchRead
+        , Network.Google.Resource.RemoteBuildExecution.Blobs.BatchUpdate
+        , Network.Google.Resource.RemoteBuildExecution.Blobs.FindMissing
+        , Network.Google.Resource.RemoteBuildExecution.Blobs.GetTree
+        , Network.Google.Resource.RemoteBuildExecution.GetCapabilities
+        , Network.Google.Resource.RemoteBuildExecution.Operations.WaitExecution
+
+    other-modules:
+          Network.Google.RemoteBuildExecution.Types.Product
+        , Network.Google.RemoteBuildExecution.Types.Sum
+
+    build-depends:
+          gogol-core == 0.4.0.*
+        , base       >= 4.7 && < 5

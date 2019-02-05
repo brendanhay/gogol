@@ -33,8 +33,8 @@ module Network.Google.Resource.Content.Orders.CreatetestOrder
     , OrdersCreatetestOrder
 
     -- * Request Lenses
-    , ocoMerchantId
-    , ocoPayload
+    , ococMerchantId
+    , ococPayload
     ) where
 
 import           Network.Google.Prelude
@@ -44,7 +44,7 @@ import           Network.Google.ShoppingContent.Types
 -- 'OrdersCreatetestOrder' request conforms to.
 type OrdersCreatetestOrderResource =
      "content" :>
-       "v2" :>
+       "v2.1" :>
          Capture "merchantId" (Textual Word64) :>
            "testorders" :>
              QueryParam "alt" AltJSON :>
@@ -55,38 +55,39 @@ type OrdersCreatetestOrderResource =
 --
 -- /See:/ 'ordersCreatetestOrder' smart constructor.
 data OrdersCreatetestOrder = OrdersCreatetestOrder'
-    { _ocoMerchantId :: !(Textual Word64)
-    , _ocoPayload    :: !OrdersCreateTestOrderRequest
+    { _ococMerchantId :: !(Textual Word64)
+    , _ococPayload    :: !OrdersCreateTestOrderRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersCreatetestOrder' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ocoMerchantId'
+-- * 'ococMerchantId'
 --
--- * 'ocoPayload'
+-- * 'ococPayload'
 ordersCreatetestOrder
-    :: Word64 -- ^ 'ocoMerchantId'
-    -> OrdersCreateTestOrderRequest -- ^ 'ocoPayload'
+    :: Word64 -- ^ 'ococMerchantId'
+    -> OrdersCreateTestOrderRequest -- ^ 'ococPayload'
     -> OrdersCreatetestOrder
-ordersCreatetestOrder pOcoMerchantId_ pOcoPayload_ =
+ordersCreatetestOrder pOcocMerchantId_ pOcocPayload_ =
     OrdersCreatetestOrder'
-    { _ocoMerchantId = _Coerce # pOcoMerchantId_
-    , _ocoPayload = pOcoPayload_
+    { _ococMerchantId = _Coerce # pOcocMerchantId_
+    , _ococPayload = pOcocPayload_
     }
 
--- | The ID of the managing account.
-ocoMerchantId :: Lens' OrdersCreatetestOrder Word64
-ocoMerchantId
-  = lens _ocoMerchantId
-      (\ s a -> s{_ocoMerchantId = a})
+-- | The ID of the account that should manage the order. This cannot be a
+-- multi-client account.
+ococMerchantId :: Lens' OrdersCreatetestOrder Word64
+ococMerchantId
+  = lens _ococMerchantId
+      (\ s a -> s{_ococMerchantId = a})
       . _Coerce
 
 -- | Multipart request metadata.
-ocoPayload :: Lens' OrdersCreatetestOrder OrdersCreateTestOrderRequest
-ocoPayload
-  = lens _ocoPayload (\ s a -> s{_ocoPayload = a})
+ococPayload :: Lens' OrdersCreatetestOrder OrdersCreateTestOrderRequest
+ococPayload
+  = lens _ococPayload (\ s a -> s{_ococPayload = a})
 
 instance GoogleRequest OrdersCreatetestOrder where
         type Rs OrdersCreatetestOrder =
@@ -94,7 +95,7 @@ instance GoogleRequest OrdersCreatetestOrder where
         type Scopes OrdersCreatetestOrder =
              '["https://www.googleapis.com/auth/content"]
         requestClient OrdersCreatetestOrder'{..}
-          = go _ocoMerchantId (Just AltJSON) _ocoPayload
+          = go _ococMerchantId (Just AltJSON) _ococPayload
               shoppingContentService
           where go
                   = buildClient

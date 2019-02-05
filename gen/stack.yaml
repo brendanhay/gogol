@@ -1,8 +1,11 @@
-compiler:   ghc-8.0.1
-resolver:   nightly-2016-08-11
-flags:      {}
+resolver: lts-8.18
+
+flags: {}
+
 extra-deps:
   - text-regex-replace-0.1.1.1
-  - ede-0.2.8.5
+  - haskell-src-exts-1.17.1
+  - hindent-4.6.4
+
 packages:
   - '.'

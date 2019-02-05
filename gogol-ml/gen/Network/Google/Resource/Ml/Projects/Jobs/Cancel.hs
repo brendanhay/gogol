@@ -22,7 +22,7 @@
 --
 -- Cancels a running job.
 --
--- /See:/ <https://cloud.google.com/ml/ Google Cloud Machine Learning Reference> for @ml.projects.jobs.cancel@.
+-- /See:/ <https://cloud.google.com/ml/ Cloud Machine Learning Engine Reference> for @ml.projects.jobs.cancel@.
 module Network.Google.Resource.Ml.Projects.Jobs.Cancel
     (
     -- * REST Resource
@@ -35,11 +35,9 @@ module Network.Google.Resource.Ml.Projects.Jobs.Cancel
     -- * Request Lenses
     , pjcXgafv
     , pjcUploadProtocol
-    , pjcPp
     , pjcAccessToken
     , pjcUploadType
     , pjcPayload
-    , pjcBearerToken
     , pjcName
     , pjcCallback
     ) where
@@ -50,19 +48,16 @@ import           Network.Google.Prelude
 -- | A resource alias for @ml.projects.jobs.cancel@ method which the
 -- 'ProjectsJobsCancel' request conforms to.
 type ProjectsJobsCancelResource =
-     "v1beta1" :>
+     "v1" :>
        CaptureMode "name" "cancel" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON]
-                           GoogleCloudMlV1beta1__CancelJobRequest
-                           :> Post '[JSON] GoogleProtobuf__Empty
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] GoogleCloudMlV1__CancelJobRequest :>
+                       Post '[JSON] GoogleProtobuf__Empty
 
 -- | Cancels a running job.
 --
@@ -70,11 +65,9 @@ type ProjectsJobsCancelResource =
 data ProjectsJobsCancel = ProjectsJobsCancel'
     { _pjcXgafv          :: !(Maybe Xgafv)
     , _pjcUploadProtocol :: !(Maybe Text)
-    , _pjcPp             :: !Bool
     , _pjcAccessToken    :: !(Maybe Text)
     , _pjcUploadType     :: !(Maybe Text)
-    , _pjcPayload        :: !GoogleCloudMlV1beta1__CancelJobRequest
-    , _pjcBearerToken    :: !(Maybe Text)
+    , _pjcPayload        :: !GoogleCloudMlV1__CancelJobRequest
     , _pjcName           :: !Text
     , _pjcCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -87,32 +80,26 @@ data ProjectsJobsCancel = ProjectsJobsCancel'
 --
 -- * 'pjcUploadProtocol'
 --
--- * 'pjcPp'
---
 -- * 'pjcAccessToken'
 --
 -- * 'pjcUploadType'
 --
 -- * 'pjcPayload'
 --
--- * 'pjcBearerToken'
---
 -- * 'pjcName'
 --
 -- * 'pjcCallback'
 projectsJobsCancel
-    :: GoogleCloudMlV1beta1__CancelJobRequest -- ^ 'pjcPayload'
+    :: GoogleCloudMlV1__CancelJobRequest -- ^ 'pjcPayload'
     -> Text -- ^ 'pjcName'
     -> ProjectsJobsCancel
 projectsJobsCancel pPjcPayload_ pPjcName_ =
     ProjectsJobsCancel'
     { _pjcXgafv = Nothing
     , _pjcUploadProtocol = Nothing
-    , _pjcPp = True
     , _pjcAccessToken = Nothing
     , _pjcUploadType = Nothing
     , _pjcPayload = pPjcPayload_
-    , _pjcBearerToken = Nothing
     , _pjcName = pPjcName_
     , _pjcCallback = Nothing
     }
@@ -127,10 +114,6 @@ pjcUploadProtocol
   = lens _pjcUploadProtocol
       (\ s a -> s{_pjcUploadProtocol = a})
 
--- | Pretty-print response.
-pjcPp :: Lens' ProjectsJobsCancel Bool
-pjcPp = lens _pjcPp (\ s a -> s{_pjcPp = a})
-
 -- | OAuth access token.
 pjcAccessToken :: Lens' ProjectsJobsCancel (Maybe Text)
 pjcAccessToken
@@ -144,18 +127,11 @@ pjcUploadType
       (\ s a -> s{_pjcUploadType = a})
 
 -- | Multipart request metadata.
-pjcPayload :: Lens' ProjectsJobsCancel GoogleCloudMlV1beta1__CancelJobRequest
+pjcPayload :: Lens' ProjectsJobsCancel GoogleCloudMlV1__CancelJobRequest
 pjcPayload
   = lens _pjcPayload (\ s a -> s{_pjcPayload = a})
 
--- | OAuth bearer token.
-pjcBearerToken :: Lens' ProjectsJobsCancel (Maybe Text)
-pjcBearerToken
-  = lens _pjcBearerToken
-      (\ s a -> s{_pjcBearerToken = a})
-
--- | Required. The name of the job to cancel. Authorization: requires
--- \`Editor\` role on the parent project.
+-- | Required. The name of the job to cancel.
 pjcName :: Lens' ProjectsJobsCancel Text
 pjcName = lens _pjcName (\ s a -> s{_pjcName = a})
 
@@ -170,10 +146,8 @@ instance GoogleRequest ProjectsJobsCancel where
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsJobsCancel'{..}
           = go _pjcName _pjcXgafv _pjcUploadProtocol
-              (Just _pjcPp)
               _pjcAccessToken
               _pjcUploadType
-              _pjcBearerToken
               _pjcCallback
               (Just AltJSON)
               _pjcPayload

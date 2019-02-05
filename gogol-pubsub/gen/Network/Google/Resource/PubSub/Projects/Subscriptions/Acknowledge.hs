@@ -27,7 +27,7 @@
 -- later. Acknowledging a message more than once will not result in an
 -- error.
 --
--- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.acknowledge@.
+-- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.acknowledge@.
 module Network.Google.Resource.PubSub.Projects.Subscriptions.Acknowledge
     (
     -- * REST Resource
@@ -40,11 +40,9 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.Acknowledge
     -- * Request Lenses
     , psaXgafv
     , psaUploadProtocol
-    , psaPp
     , psaAccessToken
     , psaUploadType
     , psaPayload
-    , psaBearerToken
     , psaSubscription
     , psaCallback
     ) where
@@ -57,16 +55,14 @@ import           Network.Google.PubSub.Types
 type ProjectsSubscriptionsAcknowledgeResource =
      "v1" :>
        CaptureMode "subscription" "acknowledge" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] AcknowledgeRequest :>
-                           Post '[JSON] Empty
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] AcknowledgeRequest :>
+                       Post '[JSON] Empty
 
 -- | Acknowledges the messages associated with the \`ack_ids\` in the
 -- \`AcknowledgeRequest\`. The Pub\/Sub system can remove the relevant
@@ -77,13 +73,11 @@ type ProjectsSubscriptionsAcknowledgeResource =
 --
 -- /See:/ 'projectsSubscriptionsAcknowledge' smart constructor.
 data ProjectsSubscriptionsAcknowledge = ProjectsSubscriptionsAcknowledge'
-    { _psaXgafv          :: !(Maybe Text)
+    { _psaXgafv          :: !(Maybe Xgafv)
     , _psaUploadProtocol :: !(Maybe Text)
-    , _psaPp             :: !Bool
     , _psaAccessToken    :: !(Maybe Text)
     , _psaUploadType     :: !(Maybe Text)
     , _psaPayload        :: !AcknowledgeRequest
-    , _psaBearerToken    :: !(Maybe Text)
     , _psaSubscription   :: !Text
     , _psaCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -96,15 +90,11 @@ data ProjectsSubscriptionsAcknowledge = ProjectsSubscriptionsAcknowledge'
 --
 -- * 'psaUploadProtocol'
 --
--- * 'psaPp'
---
 -- * 'psaAccessToken'
 --
 -- * 'psaUploadType'
 --
 -- * 'psaPayload'
---
--- * 'psaBearerToken'
 --
 -- * 'psaSubscription'
 --
@@ -117,17 +107,15 @@ projectsSubscriptionsAcknowledge pPsaPayload_ pPsaSubscription_ =
     ProjectsSubscriptionsAcknowledge'
     { _psaXgafv = Nothing
     , _psaUploadProtocol = Nothing
-    , _psaPp = True
     , _psaAccessToken = Nothing
     , _psaUploadType = Nothing
     , _psaPayload = pPsaPayload_
-    , _psaBearerToken = Nothing
     , _psaSubscription = pPsaSubscription_
     , _psaCallback = Nothing
     }
 
 -- | V1 error format.
-psaXgafv :: Lens' ProjectsSubscriptionsAcknowledge (Maybe Text)
+psaXgafv :: Lens' ProjectsSubscriptionsAcknowledge (Maybe Xgafv)
 psaXgafv = lens _psaXgafv (\ s a -> s{_psaXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -135,10 +123,6 @@ psaUploadProtocol :: Lens' ProjectsSubscriptionsAcknowledge (Maybe Text)
 psaUploadProtocol
   = lens _psaUploadProtocol
       (\ s a -> s{_psaUploadProtocol = a})
-
--- | Pretty-print response.
-psaPp :: Lens' ProjectsSubscriptionsAcknowledge Bool
-psaPp = lens _psaPp (\ s a -> s{_psaPp = a})
 
 -- | OAuth access token.
 psaAccessToken :: Lens' ProjectsSubscriptionsAcknowledge (Maybe Text)
@@ -157,13 +141,8 @@ psaPayload :: Lens' ProjectsSubscriptionsAcknowledge AcknowledgeRequest
 psaPayload
   = lens _psaPayload (\ s a -> s{_psaPayload = a})
 
--- | OAuth bearer token.
-psaBearerToken :: Lens' ProjectsSubscriptionsAcknowledge (Maybe Text)
-psaBearerToken
-  = lens _psaBearerToken
-      (\ s a -> s{_psaBearerToken = a})
-
--- | The subscription whose message is being acknowledged.
+-- | The subscription whose message is being acknowledged. Format is
+-- \`projects\/{project}\/subscriptions\/{sub}\`.
 psaSubscription :: Lens' ProjectsSubscriptionsAcknowledge Text
 psaSubscription
   = lens _psaSubscription
@@ -182,10 +161,8 @@ instance GoogleRequest
                "https://www.googleapis.com/auth/pubsub"]
         requestClient ProjectsSubscriptionsAcknowledge'{..}
           = go _psaSubscription _psaXgafv _psaUploadProtocol
-              (Just _psaPp)
               _psaAccessToken
               _psaUploadType
-              _psaBearerToken
               _psaCallback
               (Just AltJSON)
               _psaPayload

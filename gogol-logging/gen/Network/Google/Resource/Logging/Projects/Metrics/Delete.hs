@@ -35,11 +35,9 @@ module Network.Google.Resource.Logging.Projects.Metrics.Delete
     -- * Request Lenses
     , pmdXgafv
     , pmdUploadProtocol
-    , pmdPp
     , pmdAccessToken
     , pmdMetricName
     , pmdUploadType
-    , pmdBearerToken
     , pmdCallback
     ) where
 
@@ -53,12 +51,10 @@ type ProjectsMetricsDeleteResource =
        Capture "metricName" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :> Delete '[JSON] Empty
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
 -- | Deletes a logs-based metric.
 --
@@ -66,11 +62,9 @@ type ProjectsMetricsDeleteResource =
 data ProjectsMetricsDelete = ProjectsMetricsDelete'
     { _pmdXgafv          :: !(Maybe Xgafv)
     , _pmdUploadProtocol :: !(Maybe Text)
-    , _pmdPp             :: !Bool
     , _pmdAccessToken    :: !(Maybe Text)
     , _pmdMetricName     :: !Text
     , _pmdUploadType     :: !(Maybe Text)
-    , _pmdBearerToken    :: !(Maybe Text)
     , _pmdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -82,15 +76,11 @@ data ProjectsMetricsDelete = ProjectsMetricsDelete'
 --
 -- * 'pmdUploadProtocol'
 --
--- * 'pmdPp'
---
 -- * 'pmdAccessToken'
 --
 -- * 'pmdMetricName'
 --
 -- * 'pmdUploadType'
---
--- * 'pmdBearerToken'
 --
 -- * 'pmdCallback'
 projectsMetricsDelete
@@ -100,11 +90,9 @@ projectsMetricsDelete pPmdMetricName_ =
     ProjectsMetricsDelete'
     { _pmdXgafv = Nothing
     , _pmdUploadProtocol = Nothing
-    , _pmdPp = True
     , _pmdAccessToken = Nothing
     , _pmdMetricName = pPmdMetricName_
     , _pmdUploadType = Nothing
-    , _pmdBearerToken = Nothing
     , _pmdCallback = Nothing
     }
 
@@ -118,18 +106,14 @@ pmdUploadProtocol
   = lens _pmdUploadProtocol
       (\ s a -> s{_pmdUploadProtocol = a})
 
--- | Pretty-print response.
-pmdPp :: Lens' ProjectsMetricsDelete Bool
-pmdPp = lens _pmdPp (\ s a -> s{_pmdPp = a})
-
 -- | OAuth access token.
 pmdAccessToken :: Lens' ProjectsMetricsDelete (Maybe Text)
 pmdAccessToken
   = lens _pmdAccessToken
       (\ s a -> s{_pmdAccessToken = a})
 
--- | The resource name of the metric to delete. Example:
--- \`\"projects\/my-project-id\/metrics\/my-metric-id\"\`.
+-- | The resource name of the metric to delete:
+-- \"projects\/[PROJECT_ID]\/metrics\/[METRIC_ID]\"
 pmdMetricName :: Lens' ProjectsMetricsDelete Text
 pmdMetricName
   = lens _pmdMetricName
@@ -140,12 +124,6 @@ pmdUploadType :: Lens' ProjectsMetricsDelete (Maybe Text)
 pmdUploadType
   = lens _pmdUploadType
       (\ s a -> s{_pmdUploadType = a})
-
--- | OAuth bearer token.
-pmdBearerToken :: Lens' ProjectsMetricsDelete (Maybe Text)
-pmdBearerToken
-  = lens _pmdBearerToken
-      (\ s a -> s{_pmdBearerToken = a})
 
 -- | JSONP
 pmdCallback :: Lens' ProjectsMetricsDelete (Maybe Text)
@@ -160,10 +138,8 @@ instance GoogleRequest ProjectsMetricsDelete where
                "https://www.googleapis.com/auth/logging.write"]
         requestClient ProjectsMetricsDelete'{..}
           = go _pmdMetricName _pmdXgafv _pmdUploadProtocol
-              (Just _pmdPp)
               _pmdAccessToken
               _pmdUploadType
-              _pmdBearerToken
               _pmdCallback
               (Just AltJSON)
               loggingService

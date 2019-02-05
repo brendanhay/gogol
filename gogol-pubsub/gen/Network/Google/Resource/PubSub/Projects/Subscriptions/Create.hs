@@ -20,14 +20,18 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a subscription to a given topic. If the subscription already
--- exists, returns \`ALREADY_EXISTS\`. If the corresponding topic doesn\'t
--- exist, returns \`NOT_FOUND\`. If the name is not provided in the
--- request, the server will assign a random name for this subscription on
--- the same project as the topic. Note that for REST API requests, you must
--- specify a name.
+-- Creates a subscription to a given topic. See the
+-- <https://cloud.google.com/pubsub/docs/admin#resource_names resource name rules>.
+-- If the subscription already exists, returns \`ALREADY_EXISTS\`. If the
+-- corresponding topic doesn\'t exist, returns \`NOT_FOUND\`. If the name
+-- is not provided in the request, the server will assign a random name for
+-- this subscription on the same project as the topic, conforming to the
+-- [resource name
+-- format](https:\/\/cloud.google.com\/pubsub\/docs\/overview#names). The
+-- generated name is populated in the returned Subscription object. Note
+-- that for REST API requests, you must specify a name in the request.
 --
--- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.create@.
+-- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.create@.
 module Network.Google.Resource.PubSub.Projects.Subscriptions.Create
     (
     -- * REST Resource
@@ -40,11 +44,9 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.Create
     -- * Request Lenses
     , pscXgafv
     , pscUploadProtocol
-    , pscPp
     , pscAccessToken
     , pscUploadType
     , pscPayload
-    , pscBearerToken
     , pscName
     , pscCallback
     ) where
@@ -57,33 +59,33 @@ import           Network.Google.PubSub.Types
 type ProjectsSubscriptionsCreateResource =
      "v1" :>
        Capture "name" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Subscription :>
-                           Put '[JSON] Subscription
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Subscription :>
+                       Put '[JSON] Subscription
 
--- | Creates a subscription to a given topic. If the subscription already
--- exists, returns \`ALREADY_EXISTS\`. If the corresponding topic doesn\'t
--- exist, returns \`NOT_FOUND\`. If the name is not provided in the
--- request, the server will assign a random name for this subscription on
--- the same project as the topic. Note that for REST API requests, you must
--- specify a name.
+-- | Creates a subscription to a given topic. See the
+-- <https://cloud.google.com/pubsub/docs/admin#resource_names resource name rules>.
+-- If the subscription already exists, returns \`ALREADY_EXISTS\`. If the
+-- corresponding topic doesn\'t exist, returns \`NOT_FOUND\`. If the name
+-- is not provided in the request, the server will assign a random name for
+-- this subscription on the same project as the topic, conforming to the
+-- [resource name
+-- format](https:\/\/cloud.google.com\/pubsub\/docs\/overview#names). The
+-- generated name is populated in the returned Subscription object. Note
+-- that for REST API requests, you must specify a name in the request.
 --
 -- /See:/ 'projectsSubscriptionsCreate' smart constructor.
 data ProjectsSubscriptionsCreate = ProjectsSubscriptionsCreate'
-    { _pscXgafv          :: !(Maybe Text)
+    { _pscXgafv          :: !(Maybe Xgafv)
     , _pscUploadProtocol :: !(Maybe Text)
-    , _pscPp             :: !Bool
     , _pscAccessToken    :: !(Maybe Text)
     , _pscUploadType     :: !(Maybe Text)
     , _pscPayload        :: !Subscription
-    , _pscBearerToken    :: !(Maybe Text)
     , _pscName           :: !Text
     , _pscCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -96,15 +98,11 @@ data ProjectsSubscriptionsCreate = ProjectsSubscriptionsCreate'
 --
 -- * 'pscUploadProtocol'
 --
--- * 'pscPp'
---
 -- * 'pscAccessToken'
 --
 -- * 'pscUploadType'
 --
 -- * 'pscPayload'
---
--- * 'pscBearerToken'
 --
 -- * 'pscName'
 --
@@ -117,17 +115,15 @@ projectsSubscriptionsCreate pPscPayload_ pPscName_ =
     ProjectsSubscriptionsCreate'
     { _pscXgafv = Nothing
     , _pscUploadProtocol = Nothing
-    , _pscPp = True
     , _pscAccessToken = Nothing
     , _pscUploadType = Nothing
     , _pscPayload = pPscPayload_
-    , _pscBearerToken = Nothing
     , _pscName = pPscName_
     , _pscCallback = Nothing
     }
 
 -- | V1 error format.
-pscXgafv :: Lens' ProjectsSubscriptionsCreate (Maybe Text)
+pscXgafv :: Lens' ProjectsSubscriptionsCreate (Maybe Xgafv)
 pscXgafv = lens _pscXgafv (\ s a -> s{_pscXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -135,10 +131,6 @@ pscUploadProtocol :: Lens' ProjectsSubscriptionsCreate (Maybe Text)
 pscUploadProtocol
   = lens _pscUploadProtocol
       (\ s a -> s{_pscUploadProtocol = a})
-
--- | Pretty-print response.
-pscPp :: Lens' ProjectsSubscriptionsCreate Bool
-pscPp = lens _pscPp (\ s a -> s{_pscPp = a})
 
 -- | OAuth access token.
 pscAccessToken :: Lens' ProjectsSubscriptionsCreate (Maybe Text)
@@ -156,12 +148,6 @@ pscUploadType
 pscPayload :: Lens' ProjectsSubscriptionsCreate Subscription
 pscPayload
   = lens _pscPayload (\ s a -> s{_pscPayload = a})
-
--- | OAuth bearer token.
-pscBearerToken :: Lens' ProjectsSubscriptionsCreate (Maybe Text)
-pscBearerToken
-  = lens _pscBearerToken
-      (\ s a -> s{_pscBearerToken = a})
 
 -- | The name of the subscription. It must have the format
 -- \`\"projects\/{project}\/subscriptions\/{subscription}\"\`.
@@ -186,10 +172,8 @@ instance GoogleRequest ProjectsSubscriptionsCreate
                "https://www.googleapis.com/auth/pubsub"]
         requestClient ProjectsSubscriptionsCreate'{..}
           = go _pscName _pscXgafv _pscUploadProtocol
-              (Just _pscPp)
               _pscAccessToken
               _pscUploadType
-              _pscBearerToken
               _pscCallback
               (Just AltJSON)
               _pscPayload

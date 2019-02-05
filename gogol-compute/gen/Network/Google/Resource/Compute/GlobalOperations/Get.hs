@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves the specified Operations resource. Get a list of operations by
--- making a list() request.
+-- Retrieves the specified Operations resource. Gets a list of operations
+-- by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.globalOperations.get@.
 module Network.Google.Resource.Compute.GlobalOperations.Get
@@ -53,8 +53,8 @@ type GlobalOperationsGetResource =
                  Capture "operation" Text :>
                    QueryParam "alt" AltJSON :> Get '[JSON] Operation
 
--- | Retrieves the specified Operations resource. Get a list of operations by
--- making a list() request.
+-- | Retrieves the specified Operations resource. Gets a list of operations
+-- by making a list() request.
 --
 -- /See:/ 'globalOperationsGet' smart constructor.
 data GlobalOperationsGet = GlobalOperationsGet'

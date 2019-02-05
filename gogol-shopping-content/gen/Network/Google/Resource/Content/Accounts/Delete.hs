@@ -34,8 +34,8 @@ module Network.Google.Resource.Content.Accounts.Delete
 
     -- * Request Lenses
     , adMerchantId
+    , adForce
     , adAccountId
-    , adDryRun
     ) where
 
 import           Network.Google.Prelude
@@ -45,11 +45,11 @@ import           Network.Google.ShoppingContent.Types
 -- 'AccountsDelete' request conforms to.
 type AccountsDeleteResource =
      "content" :>
-       "v2" :>
+       "v2.1" :>
          Capture "merchantId" (Textual Word64) :>
            "accounts" :>
              Capture "accountId" (Textual Word64) :>
-               QueryParam "dryRun" Bool :>
+               QueryParam "force" Bool :>
                  QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a Merchant Center sub-account.
@@ -57,8 +57,8 @@ type AccountsDeleteResource =
 -- /See:/ 'accountsDelete' smart constructor.
 data AccountsDelete = AccountsDelete'
     { _adMerchantId :: !(Textual Word64)
+    , _adForce      :: !Bool
     , _adAccountId  :: !(Textual Word64)
-    , _adDryRun     :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsDelete' with the minimum fields required to make a request.
@@ -67,9 +67,9 @@ data AccountsDelete = AccountsDelete'
 --
 -- * 'adMerchantId'
 --
--- * 'adAccountId'
+-- * 'adForce'
 --
--- * 'adDryRun'
+-- * 'adAccountId'
 accountsDelete
     :: Word64 -- ^ 'adMerchantId'
     -> Word64 -- ^ 'adAccountId'
@@ -77,15 +77,20 @@ accountsDelete
 accountsDelete pAdMerchantId_ pAdAccountId_ =
     AccountsDelete'
     { _adMerchantId = _Coerce # pAdMerchantId_
+    , _adForce = False
     , _adAccountId = _Coerce # pAdAccountId_
-    , _adDryRun = Nothing
     }
 
--- | The ID of the managing account.
+-- | The ID of the managing account. This must be a multi-client account, and
+-- accountId must be the ID of a sub-account of this account.
 adMerchantId :: Lens' AccountsDelete Word64
 adMerchantId
   = lens _adMerchantId (\ s a -> s{_adMerchantId = a})
       . _Coerce
+
+-- | Flag to delete sub-accounts with products. The default value is false.
+adForce :: Lens' AccountsDelete Bool
+adForce = lens _adForce (\ s a -> s{_adForce = a})
 
 -- | The ID of the account.
 adAccountId :: Lens' AccountsDelete Word64
@@ -93,16 +98,12 @@ adAccountId
   = lens _adAccountId (\ s a -> s{_adAccountId = a}) .
       _Coerce
 
--- | Flag to run the request in dry-run mode.
-adDryRun :: Lens' AccountsDelete (Maybe Bool)
-adDryRun = lens _adDryRun (\ s a -> s{_adDryRun = a})
-
 instance GoogleRequest AccountsDelete where
         type Rs AccountsDelete = ()
         type Scopes AccountsDelete =
              '["https://www.googleapis.com/auth/content"]
         requestClient AccountsDelete'{..}
-          = go _adMerchantId _adAccountId _adDryRun
+          = go _adMerchantId _adAccountId (Just _adForce)
               (Just AltJSON)
               shoppingContentService
           where go

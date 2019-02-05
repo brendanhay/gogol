@@ -22,7 +22,7 @@
 --
 -- Updates a Container Version.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.containers.versions.update@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v2/ Tag Manager API Reference> for @tagmanager.accounts.containers.versions.update@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Update
     (
     -- * REST Resource
@@ -33,11 +33,9 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Update
     , AccountsContainersVersionsUpdate
 
     -- * Request Lenses
-    , acccContainerId
-    , acccFingerprint
-    , acccContainerVersionId
-    , acccPayload
-    , acccAccountId
+    , acvucPath
+    , acvucFingerprint
+    , acvucPayload
     ) where
 
 import           Network.Google.Prelude
@@ -47,86 +45,59 @@ import           Network.Google.TagManager.Types
 -- 'AccountsContainersVersionsUpdate' request conforms to.
 type AccountsContainersVersionsUpdateResource =
      "tagmanager" :>
-       "v1" :>
-         "accounts" :>
-           Capture "accountId" Text :>
-             "containers" :>
-               Capture "containerId" Text :>
-                 "versions" :>
-                   Capture "containerVersionId" Text :>
-                     QueryParam "fingerprint" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] ContainerVersion :>
-                           Put '[JSON] ContainerVersion
+       "v2" :>
+         Capture "path" Text :>
+           QueryParam "fingerprint" Text :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] ContainerVersion :>
+                 Put '[JSON] ContainerVersion
 
 -- | Updates a Container Version.
 --
 -- /See:/ 'accountsContainersVersionsUpdate' smart constructor.
 data AccountsContainersVersionsUpdate = AccountsContainersVersionsUpdate'
-    { _acccContainerId        :: !Text
-    , _acccFingerprint        :: !(Maybe Text)
-    , _acccContainerVersionId :: !Text
-    , _acccPayload            :: !ContainerVersion
-    , _acccAccountId          :: !Text
+    { _acvucPath        :: !Text
+    , _acvucFingerprint :: !(Maybe Text)
+    , _acvucPayload     :: !ContainerVersion
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersVersionsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acccContainerId'
+-- * 'acvucPath'
 --
--- * 'acccFingerprint'
+-- * 'acvucFingerprint'
 --
--- * 'acccContainerVersionId'
---
--- * 'acccPayload'
---
--- * 'acccAccountId'
+-- * 'acvucPayload'
 accountsContainersVersionsUpdate
-    :: Text -- ^ 'acccContainerId'
-    -> Text -- ^ 'acccContainerVersionId'
-    -> ContainerVersion -- ^ 'acccPayload'
-    -> Text -- ^ 'acccAccountId'
+    :: Text -- ^ 'acvucPath'
+    -> ContainerVersion -- ^ 'acvucPayload'
     -> AccountsContainersVersionsUpdate
-accountsContainersVersionsUpdate pAcccContainerId_ pAcccContainerVersionId_ pAcccPayload_ pAcccAccountId_ =
+accountsContainersVersionsUpdate pAcvucPath_ pAcvucPayload_ =
     AccountsContainersVersionsUpdate'
-    { _acccContainerId = pAcccContainerId_
-    , _acccFingerprint = Nothing
-    , _acccContainerVersionId = pAcccContainerVersionId_
-    , _acccPayload = pAcccPayload_
-    , _acccAccountId = pAcccAccountId_
+    { _acvucPath = pAcvucPath_
+    , _acvucFingerprint = Nothing
+    , _acvucPayload = pAcvucPayload_
     }
 
--- | The GTM Container ID.
-acccContainerId :: Lens' AccountsContainersVersionsUpdate Text
-acccContainerId
-  = lens _acccContainerId
-      (\ s a -> s{_acccContainerId = a})
+-- | GTM ContainerVersion\'s API relative path. Example:
+-- accounts\/{account_id}\/containers\/{container_id}\/versions\/{version_id}
+acvucPath :: Lens' AccountsContainersVersionsUpdate Text
+acvucPath
+  = lens _acvucPath (\ s a -> s{_acvucPath = a})
 
 -- | When provided, this fingerprint must match the fingerprint of the
 -- container version in storage.
-acccFingerprint :: Lens' AccountsContainersVersionsUpdate (Maybe Text)
-acccFingerprint
-  = lens _acccFingerprint
-      (\ s a -> s{_acccFingerprint = a})
-
--- | The GTM Container Version ID.
-acccContainerVersionId :: Lens' AccountsContainersVersionsUpdate Text
-acccContainerVersionId
-  = lens _acccContainerVersionId
-      (\ s a -> s{_acccContainerVersionId = a})
+acvucFingerprint :: Lens' AccountsContainersVersionsUpdate (Maybe Text)
+acvucFingerprint
+  = lens _acvucFingerprint
+      (\ s a -> s{_acvucFingerprint = a})
 
 -- | Multipart request metadata.
-acccPayload :: Lens' AccountsContainersVersionsUpdate ContainerVersion
-acccPayload
-  = lens _acccPayload (\ s a -> s{_acccPayload = a})
-
--- | The GTM Account ID.
-acccAccountId :: Lens' AccountsContainersVersionsUpdate Text
-acccAccountId
-  = lens _acccAccountId
-      (\ s a -> s{_acccAccountId = a})
+acvucPayload :: Lens' AccountsContainersVersionsUpdate ContainerVersion
+acvucPayload
+  = lens _acvucPayload (\ s a -> s{_acvucPayload = a})
 
 instance GoogleRequest
          AccountsContainersVersionsUpdate where
@@ -135,11 +106,8 @@ instance GoogleRequest
         type Scopes AccountsContainersVersionsUpdate =
              '["https://www.googleapis.com/auth/tagmanager.edit.containerversions"]
         requestClient AccountsContainersVersionsUpdate'{..}
-          = go _acccAccountId _acccContainerId
-              _acccContainerVersionId
-              _acccFingerprint
-              (Just AltJSON)
-              _acccPayload
+          = go _acvucPath _acvucFingerprint (Just AltJSON)
+              _acvucPayload
               tagManagerService
           where go
                   = buildClient

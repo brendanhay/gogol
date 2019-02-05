@@ -33,6 +33,7 @@ module Network.Google.Resource.DeploymentManager.Deployments.List
     , DeploymentsList
 
     -- * Request Lenses
+    , dlOrderBy
     , dlProject
     , dlFilter
     , dlPageToken
@@ -51,17 +52,19 @@ type DeploymentsListResource =
            Capture "project" Text :>
              "global" :>
                "deployments" :>
-                 QueryParam "filter" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (Textual Word32) :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] DeploymentsListResponse
+                 QueryParam "orderBy" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" (Textual Word32) :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] DeploymentsListResponse
 
 -- | Lists all deployments for a given project.
 --
 -- /See:/ 'deploymentsList' smart constructor.
 data DeploymentsList = DeploymentsList'
-    { _dlProject    :: !Text
+    { _dlOrderBy    :: !(Maybe Text)
+    , _dlProject    :: !Text
     , _dlFilter     :: !(Maybe Text)
     , _dlPageToken  :: !(Maybe Text)
     , _dlMaxResults :: !(Textual Word32)
@@ -70,6 +73,8 @@ data DeploymentsList = DeploymentsList'
 -- | Creates a value of 'DeploymentsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dlOrderBy'
 --
 -- * 'dlProject'
 --
@@ -83,37 +88,46 @@ deploymentsList
     -> DeploymentsList
 deploymentsList pDlProject_ =
     DeploymentsList'
-    { _dlProject = pDlProject_
+    { _dlOrderBy = Nothing
+    , _dlProject = pDlProject_
     , _dlFilter = Nothing
     , _dlPageToken = Nothing
     , _dlMaxResults = 500
     }
+
+-- | Sorts list results by a certain order. By default, results are returned
+-- in alphanumerical order based on the resource name. You can also sort
+-- results in descending order based on the creation timestamp using
+-- orderBy=\"creationTimestamp desc\". This sorts results based on the
+-- creationTimestamp field in reverse chronological order (newest result
+-- first). Use this to sort resources like operations so that the newest
+-- operation is returned first. Currently, only sorting by name or
+-- creationTimestamp desc is supported.
+dlOrderBy :: Lens' DeploymentsList (Maybe Text)
+dlOrderBy
+  = lens _dlOrderBy (\ s a -> s{_dlOrderBy = a})
 
 -- | The project ID for this request.
 dlProject :: Lens' DeploymentsList Text
 dlProject
   = lens _dlProject (\ s a -> s{_dlProject = a})
 
--- | Sets a filter expression for filtering listed resources, in the form
--- filter={expression}. Your {expression} must be in the format: field_name
--- comparison_string literal_string. The field_name is the name of the
--- field you want to compare. Only atomic field types are supported
--- (string, number, boolean). The comparison_string must be either eq
--- (equals) or ne (not equals). The literal_string is the string value to
--- filter to. The literal value must be valid for the type of field you are
--- filtering by (string, number, boolean). For string fields, the literal
--- value is interpreted as a regular expression using RE2 syntax. The
--- literal value must match the entire field. For example, to filter for
--- instances that do not have a name of example-instance, you would use
--- filter=name ne example-instance. You can filter on nested fields. For
--- example, you could filter on instances that have set the
--- scheduling.automaticRestart field to true. Use filtering on nested
--- fields to take advantage of labels to organize and search for results
--- based on label values. To filter on multiple expressions, provide each
--- separate expression within parentheses. For example,
--- (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple
--- expressions are treated as AND expressions, meaning that resources must
--- match all expressions to pass the filters.
+-- | A filter expression that filters resources listed in the response. The
+-- expression must specify the field name, a comparison operator, and the
+-- value that you want to use for filtering. The value must be a string, a
+-- number, or a boolean. The comparison operator must be either =, !=, >,
+-- or \<. For example, if you are filtering Compute Engine instances, you
+-- can exclude instances named example-instance by specifying name !=
+-- example-instance. You can also filter nested fields. For example, you
+-- could specify scheduling.automaticRestart = false to include instances
+-- only if they are not scheduled for automatic restarts. You can use
+-- filtering on nested fields to filter based on resource labels. To filter
+-- on multiple expressions, provide each separate expression within
+-- parentheses. For example, (scheduling.automaticRestart = true)
+-- (cpuPlatform = \"Intel Skylake\"). By default, each expression is an AND
+-- expression. However, you can include AND and OR expressions explicitly.
+-- For example, (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel
+-- Broadwell\") AND (scheduling.automaticRestart = true).
 dlFilter :: Lens' DeploymentsList (Maybe Text)
 dlFilter = lens _dlFilter (\ s a -> s{_dlFilter = a})
 
@@ -126,7 +140,8 @@ dlPageToken
 -- | The maximum number of results per page that should be returned. If the
 -- number of available results is larger than maxResults, Compute Engine
 -- returns a nextPageToken that can be used to get the next page of results
--- in subsequent list requests.
+-- in subsequent list requests. Acceptable values are 0 to 500, inclusive.
+-- (Default: 500)
 dlMaxResults :: Lens' DeploymentsList Word32
 dlMaxResults
   = lens _dlMaxResults (\ s a -> s{_dlMaxResults = a})
@@ -140,7 +155,7 @@ instance GoogleRequest DeploymentsList where
                "https://www.googleapis.com/auth/ndev.cloudman",
                "https://www.googleapis.com/auth/ndev.cloudman.readonly"]
         requestClient DeploymentsList'{..}
-          = go _dlProject _dlFilter _dlPageToken
+          = go _dlProject _dlOrderBy _dlFilter _dlPageToken
               (Just _dlMaxResults)
               (Just AltJSON)
               deploymentManagerService

@@ -1,5 +1,5 @@
 name:                  gogol-monitoring
-version:               0.1.1
+version:               0.4.0
 synopsis:              Google Stackdriver Monitoring SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -11,7 +11,7 @@ copyright:             Copyright (c) 2015-2016 Brendan Hay
 category:              Network, Google, Cloud
 build-type:            Simple
 cabal-version:         >= 1.10
-extra-source-files:    README.md
+extra-source-files:    README.md src/.gitkeep
 
 description:
     Manages your Stackdriver Monitoring data and configurations. Most
@@ -37,6 +37,11 @@ library
     exposed-modules:
           Network.Google.Monitoring
         , Network.Google.Monitoring.Types
+        , Network.Google.Resource.Monitoring.Projects.AlertPolicies.Create
+        , Network.Google.Resource.Monitoring.Projects.AlertPolicies.Delete
+        , Network.Google.Resource.Monitoring.Projects.AlertPolicies.Get
+        , Network.Google.Resource.Monitoring.Projects.AlertPolicies.List
+        , Network.Google.Resource.Monitoring.Projects.AlertPolicies.Patch
         , Network.Google.Resource.Monitoring.Projects.CollectdTimeSeries.Create
         , Network.Google.Resource.Monitoring.Projects.Groups.Create
         , Network.Google.Resource.Monitoring.Projects.Groups.Delete
@@ -50,13 +55,29 @@ library
         , Network.Google.Resource.Monitoring.Projects.MetricDescriptors.List
         , Network.Google.Resource.Monitoring.Projects.MonitoredResourceDescriptors.Get
         , Network.Google.Resource.Monitoring.Projects.MonitoredResourceDescriptors.List
+        , Network.Google.Resource.Monitoring.Projects.NotificationChannelDescriptors.Get
+        , Network.Google.Resource.Monitoring.Projects.NotificationChannelDescriptors.List
+        , Network.Google.Resource.Monitoring.Projects.NotificationChannels.Create
+        , Network.Google.Resource.Monitoring.Projects.NotificationChannels.Delete
+        , Network.Google.Resource.Monitoring.Projects.NotificationChannels.Get
+        , Network.Google.Resource.Monitoring.Projects.NotificationChannels.GetVerificationCode
+        , Network.Google.Resource.Monitoring.Projects.NotificationChannels.List
+        , Network.Google.Resource.Monitoring.Projects.NotificationChannels.Patch
+        , Network.Google.Resource.Monitoring.Projects.NotificationChannels.SendVerificationCode
+        , Network.Google.Resource.Monitoring.Projects.NotificationChannels.Verify
         , Network.Google.Resource.Monitoring.Projects.TimeSeries.Create
         , Network.Google.Resource.Monitoring.Projects.TimeSeries.List
+        , Network.Google.Resource.Monitoring.Projects.UptimeCheckConfigs.Create
+        , Network.Google.Resource.Monitoring.Projects.UptimeCheckConfigs.Delete
+        , Network.Google.Resource.Monitoring.Projects.UptimeCheckConfigs.Get
+        , Network.Google.Resource.Monitoring.Projects.UptimeCheckConfigs.List
+        , Network.Google.Resource.Monitoring.Projects.UptimeCheckConfigs.Patch
+        , Network.Google.Resource.Monitoring.UptimeCheckIPs.List
 
     other-modules:
           Network.Google.Monitoring.Types.Product
         , Network.Google.Monitoring.Types.Sum
 
     build-depends:
-          gogol-core == 0.1.1.*
+          gogol-core == 0.4.0.*
         , base       >= 4.7 && < 5

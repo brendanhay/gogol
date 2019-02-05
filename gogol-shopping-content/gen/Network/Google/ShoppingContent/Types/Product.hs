@@ -55,7 +55,8 @@ instance ToJSON OrdersAcknowledgeRequest where
           = object
               (catMaybes [("operationId" .=) <$> _oarOperationId])
 
--- | The tax settings of a merchant account.
+-- | The tax settings of a merchant account. All methods require the admin
+-- role.
 --
 -- /See:/ 'accountTax' smart constructor.
 data AccountTax = AccountTax'
@@ -117,6 +118,59 @@ instance ToJSON AccountTax where
                   ("accountId" .=) <$> _atAccountId])
 
 --
+-- /See:/ 'orderinvoicesCreateRefundInvoiceResponse' smart constructor.
+data OrderinvoicesCreateRefundInvoiceResponse = OrderinvoicesCreateRefundInvoiceResponse'
+    { _ocrirKind            :: !Text
+    , _ocrirExecutionStatus :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OrderinvoicesCreateRefundInvoiceResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ocrirKind'
+--
+-- * 'ocrirExecutionStatus'
+orderinvoicesCreateRefundInvoiceResponse
+    :: OrderinvoicesCreateRefundInvoiceResponse
+orderinvoicesCreateRefundInvoiceResponse =
+    OrderinvoicesCreateRefundInvoiceResponse'
+    { _ocrirKind = "content#orderinvoicesCreateRefundInvoiceResponse"
+    , _ocrirExecutionStatus = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"content#orderinvoicesCreateRefundInvoiceResponse\".
+ocrirKind :: Lens' OrderinvoicesCreateRefundInvoiceResponse Text
+ocrirKind
+  = lens _ocrirKind (\ s a -> s{_ocrirKind = a})
+
+-- | The status of the execution.
+ocrirExecutionStatus :: Lens' OrderinvoicesCreateRefundInvoiceResponse (Maybe Text)
+ocrirExecutionStatus
+  = lens _ocrirExecutionStatus
+      (\ s a -> s{_ocrirExecutionStatus = a})
+
+instance FromJSON
+         OrderinvoicesCreateRefundInvoiceResponse where
+        parseJSON
+          = withObject
+              "OrderinvoicesCreateRefundInvoiceResponse"
+              (\ o ->
+                 OrderinvoicesCreateRefundInvoiceResponse' <$>
+                   (o .:? "kind" .!=
+                      "content#orderinvoicesCreateRefundInvoiceResponse")
+                     <*> (o .:? "executionStatus"))
+
+instance ToJSON
+         OrderinvoicesCreateRefundInvoiceResponse where
+        toJSON OrderinvoicesCreateRefundInvoiceResponse'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _ocrirKind),
+                  ("executionStatus" .=) <$> _ocrirExecutionStatus])
+
+--
 -- /See:/ 'ordersUpdateMerchantOrderIdRequest' smart constructor.
 data OrdersUpdateMerchantOrderIdRequest = OrdersUpdateMerchantOrderIdRequest'
     { _oumoirMerchantOrderId :: !(Maybe Text)
@@ -166,6 +220,140 @@ instance ToJSON OrdersUpdateMerchantOrderIdRequest
               (catMaybes
                  [("merchantOrderId" .=) <$> _oumoirMerchantOrderId,
                   ("operationId" .=) <$> _oumoirOperationId])
+
+--
+-- /See:/ 'orderReportTransaction' smart constructor.
+data OrderReportTransaction = OrderReportTransaction'
+    { _ortMerchantId               :: !(Maybe (Textual Word64))
+    , _ortDisbursementId           :: !(Maybe Text)
+    , _ortDisbursementCreationDate :: !(Maybe Text)
+    , _ortTransactionDate          :: !(Maybe Text)
+    , _ortDisbursementDate         :: !(Maybe Text)
+    , _ortMerchantOrderId          :: !(Maybe Text)
+    , _ortProductAmount            :: !(Maybe Amount)
+    , _ortOrderId                  :: !(Maybe Text)
+    , _ortDisbursementAmount       :: !(Maybe Price)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OrderReportTransaction' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ortMerchantId'
+--
+-- * 'ortDisbursementId'
+--
+-- * 'ortDisbursementCreationDate'
+--
+-- * 'ortTransactionDate'
+--
+-- * 'ortDisbursementDate'
+--
+-- * 'ortMerchantOrderId'
+--
+-- * 'ortProductAmount'
+--
+-- * 'ortOrderId'
+--
+-- * 'ortDisbursementAmount'
+orderReportTransaction
+    :: OrderReportTransaction
+orderReportTransaction =
+    OrderReportTransaction'
+    { _ortMerchantId = Nothing
+    , _ortDisbursementId = Nothing
+    , _ortDisbursementCreationDate = Nothing
+    , _ortTransactionDate = Nothing
+    , _ortDisbursementDate = Nothing
+    , _ortMerchantOrderId = Nothing
+    , _ortProductAmount = Nothing
+    , _ortOrderId = Nothing
+    , _ortDisbursementAmount = Nothing
+    }
+
+-- | The ID of the managing account.
+ortMerchantId :: Lens' OrderReportTransaction (Maybe Word64)
+ortMerchantId
+  = lens _ortMerchantId
+      (\ s a -> s{_ortMerchantId = a})
+      . mapping _Coerce
+
+-- | The ID of the disbursement.
+ortDisbursementId :: Lens' OrderReportTransaction (Maybe Text)
+ortDisbursementId
+  = lens _ortDisbursementId
+      (\ s a -> s{_ortDisbursementId = a})
+
+-- | The date the disbursement was created, in ISO 8601 format.
+ortDisbursementCreationDate :: Lens' OrderReportTransaction (Maybe Text)
+ortDisbursementCreationDate
+  = lens _ortDisbursementCreationDate
+      (\ s a -> s{_ortDisbursementCreationDate = a})
+
+-- | The date of the transaction, in ISO 8601 format.
+ortTransactionDate :: Lens' OrderReportTransaction (Maybe Text)
+ortTransactionDate
+  = lens _ortTransactionDate
+      (\ s a -> s{_ortTransactionDate = a})
+
+-- | The date the disbursement was initiated, in ISO 8601 format.
+ortDisbursementDate :: Lens' OrderReportTransaction (Maybe Text)
+ortDisbursementDate
+  = lens _ortDisbursementDate
+      (\ s a -> s{_ortDisbursementDate = a})
+
+-- | Merchant-provided id of the order.
+ortMerchantOrderId :: Lens' OrderReportTransaction (Maybe Text)
+ortMerchantOrderId
+  = lens _ortMerchantOrderId
+      (\ s a -> s{_ortMerchantOrderId = a})
+
+-- | Total amount for the items.
+ortProductAmount :: Lens' OrderReportTransaction (Maybe Amount)
+ortProductAmount
+  = lens _ortProductAmount
+      (\ s a -> s{_ortProductAmount = a})
+
+-- | The id of the order.
+ortOrderId :: Lens' OrderReportTransaction (Maybe Text)
+ortOrderId
+  = lens _ortOrderId (\ s a -> s{_ortOrderId = a})
+
+-- | The disbursement amount.
+ortDisbursementAmount :: Lens' OrderReportTransaction (Maybe Price)
+ortDisbursementAmount
+  = lens _ortDisbursementAmount
+      (\ s a -> s{_ortDisbursementAmount = a})
+
+instance FromJSON OrderReportTransaction where
+        parseJSON
+          = withObject "OrderReportTransaction"
+              (\ o ->
+                 OrderReportTransaction' <$>
+                   (o .:? "merchantId") <*> (o .:? "disbursementId") <*>
+                     (o .:? "disbursementCreationDate")
+                     <*> (o .:? "transactionDate")
+                     <*> (o .:? "disbursementDate")
+                     <*> (o .:? "merchantOrderId")
+                     <*> (o .:? "productAmount")
+                     <*> (o .:? "orderId")
+                     <*> (o .:? "disbursementAmount"))
+
+instance ToJSON OrderReportTransaction where
+        toJSON OrderReportTransaction'{..}
+          = object
+              (catMaybes
+                 [("merchantId" .=) <$> _ortMerchantId,
+                  ("disbursementId" .=) <$> _ortDisbursementId,
+                  ("disbursementCreationDate" .=) <$>
+                    _ortDisbursementCreationDate,
+                  ("transactionDate" .=) <$> _ortTransactionDate,
+                  ("disbursementDate" .=) <$> _ortDisbursementDate,
+                  ("merchantOrderId" .=) <$> _ortMerchantOrderId,
+                  ("productAmount" .=) <$> _ortProductAmount,
+                  ("orderId" .=) <$> _ortOrderId,
+                  ("disbursementAmount" .=) <$>
+                    _ortDisbursementAmount])
 
 --
 -- /See:/ 'ordersAdvanceTestOrderResponse' smart constructor.
@@ -255,11 +443,59 @@ instance ToJSON ProductsCustomBatchResponse where
                   Just ("kind" .= _pcbrKind)])
 
 --
+-- /See:/ 'orderMerchantProvidedAnnotation' smart constructor.
+data OrderMerchantProvidedAnnotation = OrderMerchantProvidedAnnotation'
+    { _ompaValue :: !(Maybe Text)
+    , _ompaKey   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OrderMerchantProvidedAnnotation' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ompaValue'
+--
+-- * 'ompaKey'
+orderMerchantProvidedAnnotation
+    :: OrderMerchantProvidedAnnotation
+orderMerchantProvidedAnnotation =
+    OrderMerchantProvidedAnnotation'
+    { _ompaValue = Nothing
+    , _ompaKey = Nothing
+    }
+
+-- | Value for additional merchant provided (as key-value pairs) annotation
+-- about the line item.
+ompaValue :: Lens' OrderMerchantProvidedAnnotation (Maybe Text)
+ompaValue
+  = lens _ompaValue (\ s a -> s{_ompaValue = a})
+
+-- | Key for additional merchant provided (as key-value pairs) annotation
+-- about the line item.
+ompaKey :: Lens' OrderMerchantProvidedAnnotation (Maybe Text)
+ompaKey = lens _ompaKey (\ s a -> s{_ompaKey = a})
+
+instance FromJSON OrderMerchantProvidedAnnotation
+         where
+        parseJSON
+          = withObject "OrderMerchantProvidedAnnotation"
+              (\ o ->
+                 OrderMerchantProvidedAnnotation' <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON OrderMerchantProvidedAnnotation where
+        toJSON OrderMerchantProvidedAnnotation'{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _ompaValue,
+                  ("key" .=) <$> _ompaKey])
+
+--
 -- /See:/ 'testOrderCustomer' smart constructor.
 data TestOrderCustomer = TestOrderCustomer'
-    { _tocFullName                    :: !(Maybe Text)
-    , _tocEmail                       :: !(Maybe Text)
-    , _tocExplicitMarketingPreference :: !(Maybe Bool)
+    { _tocFullName            :: !(Maybe Text)
+    , _tocEmail               :: !(Maybe Text)
+    , _tocMarketingRightsInfo :: !(Maybe TestOrderCustomerMarketingRightsInfo)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TestOrderCustomer' with the minimum fields required to make a request.
@@ -270,14 +506,14 @@ data TestOrderCustomer = TestOrderCustomer'
 --
 -- * 'tocEmail'
 --
--- * 'tocExplicitMarketingPreference'
+-- * 'tocMarketingRightsInfo'
 testOrderCustomer
     :: TestOrderCustomer
 testOrderCustomer =
     TestOrderCustomer'
     { _tocFullName = Nothing
     , _tocEmail = Nothing
-    , _tocExplicitMarketingPreference = Nothing
+    , _tocMarketingRightsInfo = Nothing
     }
 
 -- | Full name of the customer.
@@ -285,19 +521,15 @@ tocFullName :: Lens' TestOrderCustomer (Maybe Text)
 tocFullName
   = lens _tocFullName (\ s a -> s{_tocFullName = a})
 
--- | Email address of the customer.
+-- | Deprecated.
 tocEmail :: Lens' TestOrderCustomer (Maybe Text)
 tocEmail = lens _tocEmail (\ s a -> s{_tocEmail = a})
 
--- | If set, this indicates the user explicitly chose to opt in or out of
--- providing marketing rights to the merchant. If unset, this indicates the
--- user has already made this choice in a previous purchase, and was thus
--- not shown the marketing right opt in\/out checkbox during the Purchases
--- on Google checkout flow. Optional.
-tocExplicitMarketingPreference :: Lens' TestOrderCustomer (Maybe Bool)
-tocExplicitMarketingPreference
-  = lens _tocExplicitMarketingPreference
-      (\ s a -> s{_tocExplicitMarketingPreference = a})
+-- | Customer\'s marketing preferences.
+tocMarketingRightsInfo :: Lens' TestOrderCustomer (Maybe TestOrderCustomerMarketingRightsInfo)
+tocMarketingRightsInfo
+  = lens _tocMarketingRightsInfo
+      (\ s a -> s{_tocMarketingRightsInfo = a})
 
 instance FromJSON TestOrderCustomer where
         parseJSON
@@ -305,7 +537,7 @@ instance FromJSON TestOrderCustomer where
               (\ o ->
                  TestOrderCustomer' <$>
                    (o .:? "fullName") <*> (o .:? "email") <*>
-                     (o .:? "explicitMarketingPreference"))
+                     (o .:? "marketingRightsInfo"))
 
 instance ToJSON TestOrderCustomer where
         toJSON TestOrderCustomer'{..}
@@ -313,8 +545,8 @@ instance ToJSON TestOrderCustomer where
               (catMaybes
                  [("fullName" .=) <$> _tocFullName,
                   ("email" .=) <$> _tocEmail,
-                  ("explicitMarketingPreference" .=) <$>
-                    _tocExplicitMarketingPreference])
+                  ("marketingRightsInfo" .=) <$>
+                    _tocMarketingRightsInfo])
 
 --
 -- /See:/ 'datafeedstatusesCustomBatchResponse' smart constructor.
@@ -524,41 +756,183 @@ instance ToJSON AccounttaxCustomBatchResponseEntry
                   ("batchId" .=) <$> _acbreBatchId])
 
 --
--- /See:/ 'inventoryCustomBatchRequest' smart constructor.
-newtype InventoryCustomBatchRequest = InventoryCustomBatchRequest'
-    { _icbrEntries :: Maybe [InventoryCustomBatchRequestEntry]
+-- /See:/ 'posSaleResponse' smart constructor.
+data PosSaleResponse = PosSaleResponse'
+    { _psrStoreCode       :: !(Maybe Text)
+    , _psrKind            :: !Text
+    , _psrItemId          :: !(Maybe Text)
+    , _psrQuantity        :: !(Maybe (Textual Int64))
+    , _psrTargetCountry   :: !(Maybe Text)
+    , _psrGtin            :: !(Maybe Text)
+    , _psrPrice           :: !(Maybe Price)
+    , _psrContentLanguage :: !(Maybe Text)
+    , _psrTimestamp       :: !(Maybe Text)
+    , _psrSaleId          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InventoryCustomBatchRequest' with the minimum fields required to make a request.
+-- | Creates a value of 'PosSaleResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'icbrEntries'
-inventoryCustomBatchRequest
-    :: InventoryCustomBatchRequest
-inventoryCustomBatchRequest =
-    InventoryCustomBatchRequest'
-    { _icbrEntries = Nothing
+-- * 'psrStoreCode'
+--
+-- * 'psrKind'
+--
+-- * 'psrItemId'
+--
+-- * 'psrQuantity'
+--
+-- * 'psrTargetCountry'
+--
+-- * 'psrGtin'
+--
+-- * 'psrPrice'
+--
+-- * 'psrContentLanguage'
+--
+-- * 'psrTimestamp'
+--
+-- * 'psrSaleId'
+posSaleResponse
+    :: PosSaleResponse
+posSaleResponse =
+    PosSaleResponse'
+    { _psrStoreCode = Nothing
+    , _psrKind = "content#posSaleResponse"
+    , _psrItemId = Nothing
+    , _psrQuantity = Nothing
+    , _psrTargetCountry = Nothing
+    , _psrGtin = Nothing
+    , _psrPrice = Nothing
+    , _psrContentLanguage = Nothing
+    , _psrTimestamp = Nothing
+    , _psrSaleId = Nothing
     }
 
--- | The request entries to be processed in the batch.
-icbrEntries :: Lens' InventoryCustomBatchRequest [InventoryCustomBatchRequestEntry]
-icbrEntries
-  = lens _icbrEntries (\ s a -> s{_icbrEntries = a}) .
-      _Default
-      . _Coerce
+-- | The identifier of the merchant\'s store. Either a storeCode inserted via
+-- the API or the code of the store in Google My Business.
+psrStoreCode :: Lens' PosSaleResponse (Maybe Text)
+psrStoreCode
+  = lens _psrStoreCode (\ s a -> s{_psrStoreCode = a})
 
-instance FromJSON InventoryCustomBatchRequest where
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"content#posSaleResponse\".
+psrKind :: Lens' PosSaleResponse Text
+psrKind = lens _psrKind (\ s a -> s{_psrKind = a})
+
+-- | A unique identifier for the item.
+psrItemId :: Lens' PosSaleResponse (Maybe Text)
+psrItemId
+  = lens _psrItemId (\ s a -> s{_psrItemId = a})
+
+-- | The relative change of the available quantity. Negative for items
+-- returned.
+psrQuantity :: Lens' PosSaleResponse (Maybe Int64)
+psrQuantity
+  = lens _psrQuantity (\ s a -> s{_psrQuantity = a}) .
+      mapping _Coerce
+
+-- | The CLDR territory code for the item.
+psrTargetCountry :: Lens' PosSaleResponse (Maybe Text)
+psrTargetCountry
+  = lens _psrTargetCountry
+      (\ s a -> s{_psrTargetCountry = a})
+
+-- | Global Trade Item Number.
+psrGtin :: Lens' PosSaleResponse (Maybe Text)
+psrGtin = lens _psrGtin (\ s a -> s{_psrGtin = a})
+
+-- | The price of the item.
+psrPrice :: Lens' PosSaleResponse (Maybe Price)
+psrPrice = lens _psrPrice (\ s a -> s{_psrPrice = a})
+
+-- | The two-letter ISO 639-1 language code for the item.
+psrContentLanguage :: Lens' PosSaleResponse (Maybe Text)
+psrContentLanguage
+  = lens _psrContentLanguage
+      (\ s a -> s{_psrContentLanguage = a})
+
+-- | The inventory timestamp, in ISO 8601 format.
+psrTimestamp :: Lens' PosSaleResponse (Maybe Text)
+psrTimestamp
+  = lens _psrTimestamp (\ s a -> s{_psrTimestamp = a})
+
+-- | A unique ID to group items from the same sale event.
+psrSaleId :: Lens' PosSaleResponse (Maybe Text)
+psrSaleId
+  = lens _psrSaleId (\ s a -> s{_psrSaleId = a})
+
+instance FromJSON PosSaleResponse where
         parseJSON
-          = withObject "InventoryCustomBatchRequest"
+          = withObject "PosSaleResponse"
               (\ o ->
-                 InventoryCustomBatchRequest' <$>
-                   (o .:? "entries" .!= mempty))
+                 PosSaleResponse' <$>
+                   (o .:? "storeCode") <*>
+                     (o .:? "kind" .!= "content#posSaleResponse")
+                     <*> (o .:? "itemId")
+                     <*> (o .:? "quantity")
+                     <*> (o .:? "targetCountry")
+                     <*> (o .:? "gtin")
+                     <*> (o .:? "price")
+                     <*> (o .:? "contentLanguage")
+                     <*> (o .:? "timestamp")
+                     <*> (o .:? "saleId"))
 
-instance ToJSON InventoryCustomBatchRequest where
-        toJSON InventoryCustomBatchRequest'{..}
+instance ToJSON PosSaleResponse where
+        toJSON PosSaleResponse'{..}
           = object
-              (catMaybes [("entries" .=) <$> _icbrEntries])
+              (catMaybes
+                 [("storeCode" .=) <$> _psrStoreCode,
+                  Just ("kind" .= _psrKind),
+                  ("itemId" .=) <$> _psrItemId,
+                  ("quantity" .=) <$> _psrQuantity,
+                  ("targetCountry" .=) <$> _psrTargetCountry,
+                  ("gtin" .=) <$> _psrGtin, ("price" .=) <$> _psrPrice,
+                  ("contentLanguage" .=) <$> _psrContentLanguage,
+                  ("timestamp" .=) <$> _psrTimestamp,
+                  ("saleId" .=) <$> _psrSaleId])
+
+--
+-- /See:/ 'amount' smart constructor.
+data Amount = Amount'
+    { _aPretax :: !(Maybe Price)
+    , _aTax    :: !(Maybe Price)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Amount' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aPretax'
+--
+-- * 'aTax'
+amount
+    :: Amount
+amount =
+    Amount'
+    { _aPretax = Nothing
+    , _aTax = Nothing
+    }
+
+-- | [required] Value before taxes.
+aPretax :: Lens' Amount (Maybe Price)
+aPretax = lens _aPretax (\ s a -> s{_aPretax = a})
+
+-- | [required] Tax value.
+aTax :: Lens' Amount (Maybe Price)
+aTax = lens _aTax (\ s a -> s{_aTax = a})
+
+instance FromJSON Amount where
+        parseJSON
+          = withObject "Amount"
+              (\ o ->
+                 Amount' <$> (o .:? "pretax") <*> (o .:? "tax"))
+
+instance ToJSON Amount where
+        toJSON Amount'{..}
+          = object
+              (catMaybes
+                 [("pretax" .=) <$> _aPretax, ("tax" .=) <$> _aTax])
 
 --
 -- /See:/ 'accountsAuthInfoResponse' smart constructor.
@@ -614,12 +988,470 @@ instance ToJSON AccountsAuthInfoResponse where
                   ("accountIdentifiers" .=) <$>
                     _aairAccountIdentifiers])
 
+-- | Order disbursement. All methods require the payment analyst role.
+--
+-- /See:/ 'orderReportDisbursement' smart constructor.
+data OrderReportDisbursement = OrderReportDisbursement'
+    { _ordMerchantId               :: !(Maybe (Textual Word64))
+    , _ordDisbursementId           :: !(Maybe Text)
+    , _ordDisbursementCreationDate :: !(Maybe Text)
+    , _ordDisbursementDate         :: !(Maybe Text)
+    , _ordDisbursementAmount       :: !(Maybe Price)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OrderReportDisbursement' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ordMerchantId'
+--
+-- * 'ordDisbursementId'
+--
+-- * 'ordDisbursementCreationDate'
+--
+-- * 'ordDisbursementDate'
+--
+-- * 'ordDisbursementAmount'
+orderReportDisbursement
+    :: OrderReportDisbursement
+orderReportDisbursement =
+    OrderReportDisbursement'
+    { _ordMerchantId = Nothing
+    , _ordDisbursementId = Nothing
+    , _ordDisbursementCreationDate = Nothing
+    , _ordDisbursementDate = Nothing
+    , _ordDisbursementAmount = Nothing
+    }
+
+-- | The ID of the managing account.
+ordMerchantId :: Lens' OrderReportDisbursement (Maybe Word64)
+ordMerchantId
+  = lens _ordMerchantId
+      (\ s a -> s{_ordMerchantId = a})
+      . mapping _Coerce
+
+-- | The ID of the disbursement.
+ordDisbursementId :: Lens' OrderReportDisbursement (Maybe Text)
+ordDisbursementId
+  = lens _ordDisbursementId
+      (\ s a -> s{_ordDisbursementId = a})
+
+-- | The disbursement date, in ISO 8601 format.
+ordDisbursementCreationDate :: Lens' OrderReportDisbursement (Maybe Text)
+ordDisbursementCreationDate
+  = lens _ordDisbursementCreationDate
+      (\ s a -> s{_ordDisbursementCreationDate = a})
+
+-- | The date the disbursement was initiated, in ISO 8601 format.
+ordDisbursementDate :: Lens' OrderReportDisbursement (Maybe Text)
+ordDisbursementDate
+  = lens _ordDisbursementDate
+      (\ s a -> s{_ordDisbursementDate = a})
+
+-- | The disbursement amount.
+ordDisbursementAmount :: Lens' OrderReportDisbursement (Maybe Price)
+ordDisbursementAmount
+  = lens _ordDisbursementAmount
+      (\ s a -> s{_ordDisbursementAmount = a})
+
+instance FromJSON OrderReportDisbursement where
+        parseJSON
+          = withObject "OrderReportDisbursement"
+              (\ o ->
+                 OrderReportDisbursement' <$>
+                   (o .:? "merchantId") <*> (o .:? "disbursementId") <*>
+                     (o .:? "disbursementCreationDate")
+                     <*> (o .:? "disbursementDate")
+                     <*> (o .:? "disbursementAmount"))
+
+instance ToJSON OrderReportDisbursement where
+        toJSON OrderReportDisbursement'{..}
+          = object
+              (catMaybes
+                 [("merchantId" .=) <$> _ordMerchantId,
+                  ("disbursementId" .=) <$> _ordDisbursementId,
+                  ("disbursementCreationDate" .=) <$>
+                    _ordDisbursementCreationDate,
+                  ("disbursementDate" .=) <$> _ordDisbursementDate,
+                  ("disbursementAmount" .=) <$>
+                    _ordDisbursementAmount])
+
+--
+-- /See:/ 'unitInvoice' smart constructor.
+data UnitInvoice = UnitInvoice'
+    { _uiUnitPriceTaxes    :: !(Maybe [UnitInvoiceTaxLine])
+    , _uiPromotions        :: !(Maybe [Promotion])
+    , _uiAdditionalCharges :: !(Maybe [UnitInvoiceAdditionalCharge])
+    , _uiUnitPricePretax   :: !(Maybe Price)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UnitInvoice' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'uiUnitPriceTaxes'
+--
+-- * 'uiPromotions'
+--
+-- * 'uiAdditionalCharges'
+--
+-- * 'uiUnitPricePretax'
+unitInvoice
+    :: UnitInvoice
+unitInvoice =
+    UnitInvoice'
+    { _uiUnitPriceTaxes = Nothing
+    , _uiPromotions = Nothing
+    , _uiAdditionalCharges = Nothing
+    , _uiUnitPricePretax = Nothing
+    }
+
+-- | Tax amounts to apply to the unit price.
+uiUnitPriceTaxes :: Lens' UnitInvoice [UnitInvoiceTaxLine]
+uiUnitPriceTaxes
+  = lens _uiUnitPriceTaxes
+      (\ s a -> s{_uiUnitPriceTaxes = a})
+      . _Default
+      . _Coerce
+
+-- | Promotions applied to a unit.
+uiPromotions :: Lens' UnitInvoice [Promotion]
+uiPromotions
+  = lens _uiPromotions (\ s a -> s{_uiPromotions = a})
+      . _Default
+      . _Coerce
+
+-- | Additional charges for a unit, e.g. shipping costs.
+uiAdditionalCharges :: Lens' UnitInvoice [UnitInvoiceAdditionalCharge]
+uiAdditionalCharges
+  = lens _uiAdditionalCharges
+      (\ s a -> s{_uiAdditionalCharges = a})
+      . _Default
+      . _Coerce
+
+-- | [required] Price of the unit, before applying taxes.
+uiUnitPricePretax :: Lens' UnitInvoice (Maybe Price)
+uiUnitPricePretax
+  = lens _uiUnitPricePretax
+      (\ s a -> s{_uiUnitPricePretax = a})
+
+instance FromJSON UnitInvoice where
+        parseJSON
+          = withObject "UnitInvoice"
+              (\ o ->
+                 UnitInvoice' <$>
+                   (o .:? "unitPriceTaxes" .!= mempty) <*>
+                     (o .:? "promotions" .!= mempty)
+                     <*> (o .:? "additionalCharges" .!= mempty)
+                     <*> (o .:? "unitPricePretax"))
+
+instance ToJSON UnitInvoice where
+        toJSON UnitInvoice'{..}
+          = object
+              (catMaybes
+                 [("unitPriceTaxes" .=) <$> _uiUnitPriceTaxes,
+                  ("promotions" .=) <$> _uiPromotions,
+                  ("additionalCharges" .=) <$> _uiAdditionalCharges,
+                  ("unitPricePretax" .=) <$> _uiUnitPricePretax])
+
+-- | The change of the available quantity of an item at the given store.
+--
+-- /See:/ 'posSale' smart constructor.
+data PosSale = PosSale'
+    { _psStoreCode       :: !(Maybe Text)
+    , _psKind            :: !Text
+    , _psItemId          :: !(Maybe Text)
+    , _psQuantity        :: !(Maybe (Textual Int64))
+    , _psTargetCountry   :: !(Maybe Text)
+    , _psGtin            :: !(Maybe Text)
+    , _psPrice           :: !(Maybe Price)
+    , _psContentLanguage :: !(Maybe Text)
+    , _psTimestamp       :: !(Maybe Text)
+    , _psSaleId          :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PosSale' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'psStoreCode'
+--
+-- * 'psKind'
+--
+-- * 'psItemId'
+--
+-- * 'psQuantity'
+--
+-- * 'psTargetCountry'
+--
+-- * 'psGtin'
+--
+-- * 'psPrice'
+--
+-- * 'psContentLanguage'
+--
+-- * 'psTimestamp'
+--
+-- * 'psSaleId'
+posSale
+    :: PosSale
+posSale =
+    PosSale'
+    { _psStoreCode = Nothing
+    , _psKind = "content#posSale"
+    , _psItemId = Nothing
+    , _psQuantity = Nothing
+    , _psTargetCountry = Nothing
+    , _psGtin = Nothing
+    , _psPrice = Nothing
+    , _psContentLanguage = Nothing
+    , _psTimestamp = Nothing
+    , _psSaleId = Nothing
+    }
+
+-- | The identifier of the merchant\'s store. Either a storeCode inserted via
+-- the API or the code of the store in Google My Business.
+psStoreCode :: Lens' PosSale (Maybe Text)
+psStoreCode
+  = lens _psStoreCode (\ s a -> s{_psStoreCode = a})
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"content#posSale\".
+psKind :: Lens' PosSale Text
+psKind = lens _psKind (\ s a -> s{_psKind = a})
+
+-- | A unique identifier for the item.
+psItemId :: Lens' PosSale (Maybe Text)
+psItemId = lens _psItemId (\ s a -> s{_psItemId = a})
+
+-- | The relative change of the available quantity. Negative for items
+-- returned.
+psQuantity :: Lens' PosSale (Maybe Int64)
+psQuantity
+  = lens _psQuantity (\ s a -> s{_psQuantity = a}) .
+      mapping _Coerce
+
+-- | The CLDR territory code for the item.
+psTargetCountry :: Lens' PosSale (Maybe Text)
+psTargetCountry
+  = lens _psTargetCountry
+      (\ s a -> s{_psTargetCountry = a})
+
+-- | Global Trade Item Number.
+psGtin :: Lens' PosSale (Maybe Text)
+psGtin = lens _psGtin (\ s a -> s{_psGtin = a})
+
+-- | The price of the item.
+psPrice :: Lens' PosSale (Maybe Price)
+psPrice = lens _psPrice (\ s a -> s{_psPrice = a})
+
+-- | The two-letter ISO 639-1 language code for the item.
+psContentLanguage :: Lens' PosSale (Maybe Text)
+psContentLanguage
+  = lens _psContentLanguage
+      (\ s a -> s{_psContentLanguage = a})
+
+-- | The inventory timestamp, in ISO 8601 format.
+psTimestamp :: Lens' PosSale (Maybe Text)
+psTimestamp
+  = lens _psTimestamp (\ s a -> s{_psTimestamp = a})
+
+-- | A unique ID to group items from the same sale event.
+psSaleId :: Lens' PosSale (Maybe Text)
+psSaleId = lens _psSaleId (\ s a -> s{_psSaleId = a})
+
+instance FromJSON PosSale where
+        parseJSON
+          = withObject "PosSale"
+              (\ o ->
+                 PosSale' <$>
+                   (o .:? "storeCode") <*>
+                     (o .:? "kind" .!= "content#posSale")
+                     <*> (o .:? "itemId")
+                     <*> (o .:? "quantity")
+                     <*> (o .:? "targetCountry")
+                     <*> (o .:? "gtin")
+                     <*> (o .:? "price")
+                     <*> (o .:? "contentLanguage")
+                     <*> (o .:? "timestamp")
+                     <*> (o .:? "saleId"))
+
+instance ToJSON PosSale where
+        toJSON PosSale'{..}
+          = object
+              (catMaybes
+                 [("storeCode" .=) <$> _psStoreCode,
+                  Just ("kind" .= _psKind),
+                  ("itemId" .=) <$> _psItemId,
+                  ("quantity" .=) <$> _psQuantity,
+                  ("targetCountry" .=) <$> _psTargetCountry,
+                  ("gtin" .=) <$> _psGtin, ("price" .=) <$> _psPrice,
+                  ("contentLanguage" .=) <$> _psContentLanguage,
+                  ("timestamp" .=) <$> _psTimestamp,
+                  ("saleId" .=) <$> _psSaleId])
+
+--
+-- /See:/ 'accountStatusItemLevelIssue' smart constructor.
+data AccountStatusItemLevelIssue = AccountStatusItemLevelIssue'
+    { _asiliNumItems      :: !(Maybe (Textual Int64))
+    , _asiliResolution    :: !(Maybe Text)
+    , _asiliDocumentation :: !(Maybe Text)
+    , _asiliCode          :: !(Maybe Text)
+    , _asiliServability   :: !(Maybe Text)
+    , _asiliAttributeName :: !(Maybe Text)
+    , _asiliDescription   :: !(Maybe Text)
+    , _asiliDetail        :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AccountStatusItemLevelIssue' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'asiliNumItems'
+--
+-- * 'asiliResolution'
+--
+-- * 'asiliDocumentation'
+--
+-- * 'asiliCode'
+--
+-- * 'asiliServability'
+--
+-- * 'asiliAttributeName'
+--
+-- * 'asiliDescription'
+--
+-- * 'asiliDetail'
+accountStatusItemLevelIssue
+    :: AccountStatusItemLevelIssue
+accountStatusItemLevelIssue =
+    AccountStatusItemLevelIssue'
+    { _asiliNumItems = Nothing
+    , _asiliResolution = Nothing
+    , _asiliDocumentation = Nothing
+    , _asiliCode = Nothing
+    , _asiliServability = Nothing
+    , _asiliAttributeName = Nothing
+    , _asiliDescription = Nothing
+    , _asiliDetail = Nothing
+    }
+
+-- | Number of items with this issue.
+asiliNumItems :: Lens' AccountStatusItemLevelIssue (Maybe Int64)
+asiliNumItems
+  = lens _asiliNumItems
+      (\ s a -> s{_asiliNumItems = a})
+      . mapping _Coerce
+
+-- | Whether the issue can be resolved by the merchant.
+asiliResolution :: Lens' AccountStatusItemLevelIssue (Maybe Text)
+asiliResolution
+  = lens _asiliResolution
+      (\ s a -> s{_asiliResolution = a})
+
+-- | The URL of a web page to help with resolving this issue.
+asiliDocumentation :: Lens' AccountStatusItemLevelIssue (Maybe Text)
+asiliDocumentation
+  = lens _asiliDocumentation
+      (\ s a -> s{_asiliDocumentation = a})
+
+-- | The error code of the issue.
+asiliCode :: Lens' AccountStatusItemLevelIssue (Maybe Text)
+asiliCode
+  = lens _asiliCode (\ s a -> s{_asiliCode = a})
+
+-- | How this issue affects serving of the offer.
+asiliServability :: Lens' AccountStatusItemLevelIssue (Maybe Text)
+asiliServability
+  = lens _asiliServability
+      (\ s a -> s{_asiliServability = a})
+
+-- | The attribute\'s name, if the issue is caused by a single attribute.
+asiliAttributeName :: Lens' AccountStatusItemLevelIssue (Maybe Text)
+asiliAttributeName
+  = lens _asiliAttributeName
+      (\ s a -> s{_asiliAttributeName = a})
+
+-- | A short issue description in English.
+asiliDescription :: Lens' AccountStatusItemLevelIssue (Maybe Text)
+asiliDescription
+  = lens _asiliDescription
+      (\ s a -> s{_asiliDescription = a})
+
+-- | A detailed issue description in English.
+asiliDetail :: Lens' AccountStatusItemLevelIssue (Maybe Text)
+asiliDetail
+  = lens _asiliDetail (\ s a -> s{_asiliDetail = a})
+
+instance FromJSON AccountStatusItemLevelIssue where
+        parseJSON
+          = withObject "AccountStatusItemLevelIssue"
+              (\ o ->
+                 AccountStatusItemLevelIssue' <$>
+                   (o .:? "numItems") <*> (o .:? "resolution") <*>
+                     (o .:? "documentation")
+                     <*> (o .:? "code")
+                     <*> (o .:? "servability")
+                     <*> (o .:? "attributeName")
+                     <*> (o .:? "description")
+                     <*> (o .:? "detail"))
+
+instance ToJSON AccountStatusItemLevelIssue where
+        toJSON AccountStatusItemLevelIssue'{..}
+          = object
+              (catMaybes
+                 [("numItems" .=) <$> _asiliNumItems,
+                  ("resolution" .=) <$> _asiliResolution,
+                  ("documentation" .=) <$> _asiliDocumentation,
+                  ("code" .=) <$> _asiliCode,
+                  ("servability" .=) <$> _asiliServability,
+                  ("attributeName" .=) <$> _asiliAttributeName,
+                  ("description" .=) <$> _asiliDescription,
+                  ("detail" .=) <$> _asiliDetail])
+
+--
+-- /See:/ 'liaSettingsRequestGmbAccessResponse' smart constructor.
+newtype LiaSettingsRequestGmbAccessResponse = LiaSettingsRequestGmbAccessResponse'
+    { _lsrgarKind :: Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LiaSettingsRequestGmbAccessResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lsrgarKind'
+liaSettingsRequestGmbAccessResponse
+    :: LiaSettingsRequestGmbAccessResponse
+liaSettingsRequestGmbAccessResponse =
+    LiaSettingsRequestGmbAccessResponse'
+    { _lsrgarKind = "content#liasettingsRequestGmbAccessResponse"
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"content#liasettingsRequestGmbAccessResponse\".
+lsrgarKind :: Lens' LiaSettingsRequestGmbAccessResponse Text
+lsrgarKind
+  = lens _lsrgarKind (\ s a -> s{_lsrgarKind = a})
+
+instance FromJSON LiaSettingsRequestGmbAccessResponse
+         where
+        parseJSON
+          = withObject "LiaSettingsRequestGmbAccessResponse"
+              (\ o ->
+                 LiaSettingsRequestGmbAccessResponse' <$>
+                   (o .:? "kind" .!=
+                      "content#liasettingsRequestGmbAccessResponse"))
+
+instance ToJSON LiaSettingsRequestGmbAccessResponse
+         where
+        toJSON LiaSettingsRequestGmbAccessResponse'{..}
+          = object (catMaybes [Just ("kind" .= _lsrgarKind)])
+
 --
 -- /See:/ 'productStatusDestinationStatus' smart constructor.
 data ProductStatusDestinationStatus = ProductStatusDestinationStatus'
-    { _psdsDestination    :: !(Maybe Text)
-    , _psdsIntention      :: !(Maybe Text)
-    , _psdsApprovalStatus :: !(Maybe Text)
+    { _psdsDestination :: !(Maybe Text)
+    , _psdsStatus      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductStatusDestinationStatus' with the minimum fields required to make a request.
@@ -628,16 +1460,13 @@ data ProductStatusDestinationStatus = ProductStatusDestinationStatus'
 --
 -- * 'psdsDestination'
 --
--- * 'psdsIntention'
---
--- * 'psdsApprovalStatus'
+-- * 'psdsStatus'
 productStatusDestinationStatus
     :: ProductStatusDestinationStatus
 productStatusDestinationStatus =
     ProductStatusDestinationStatus'
     { _psdsDestination = Nothing
-    , _psdsIntention = Nothing
-    , _psdsApprovalStatus = Nothing
+    , _psdsStatus = Nothing
     }
 
 -- | The name of the destination
@@ -646,18 +1475,9 @@ psdsDestination
   = lens _psdsDestination
       (\ s a -> s{_psdsDestination = a})
 
--- | Whether the destination is required, excluded, selected by default or
--- should be validated.
-psdsIntention :: Lens' ProductStatusDestinationStatus (Maybe Text)
-psdsIntention
-  = lens _psdsIntention
-      (\ s a -> s{_psdsIntention = a})
-
--- | The destination\'s approval status.
-psdsApprovalStatus :: Lens' ProductStatusDestinationStatus (Maybe Text)
-psdsApprovalStatus
-  = lens _psdsApprovalStatus
-      (\ s a -> s{_psdsApprovalStatus = a})
+psdsStatus :: Lens' ProductStatusDestinationStatus (Maybe Text)
+psdsStatus
+  = lens _psdsStatus (\ s a -> s{_psdsStatus = a})
 
 instance FromJSON ProductStatusDestinationStatus
          where
@@ -665,16 +1485,14 @@ instance FromJSON ProductStatusDestinationStatus
           = withObject "ProductStatusDestinationStatus"
               (\ o ->
                  ProductStatusDestinationStatus' <$>
-                   (o .:? "destination") <*> (o .:? "intention") <*>
-                     (o .:? "approvalStatus"))
+                   (o .:? "destination") <*> (o .:? "status"))
 
 instance ToJSON ProductStatusDestinationStatus where
         toJSON ProductStatusDestinationStatus'{..}
           = object
               (catMaybes
                  [("destination" .=) <$> _psdsDestination,
-                  ("intention" .=) <$> _psdsIntention,
-                  ("approvalStatus" .=) <$> _psdsApprovalStatus])
+                  ("status" .=) <$> _psdsStatus])
 
 -- | Tax calculation rule to apply in a state or province (USA only).
 --
@@ -826,53 +1644,6 @@ instance ToJSON PostalCodeGroup where
                   ("name" .=) <$> _pcgName])
 
 --
--- /See:/ 'productDestination' smart constructor.
-data ProductDestination = ProductDestination'
-    { _pdIntention       :: !(Maybe Text)
-    , _pdDestinationName :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ProductDestination' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'pdIntention'
---
--- * 'pdDestinationName'
-productDestination
-    :: ProductDestination
-productDestination =
-    ProductDestination'
-    { _pdIntention = Nothing
-    , _pdDestinationName = Nothing
-    }
-
--- | Whether the destination is required, excluded or should be validated.
-pdIntention :: Lens' ProductDestination (Maybe Text)
-pdIntention
-  = lens _pdIntention (\ s a -> s{_pdIntention = a})
-
--- | The name of the destination.
-pdDestinationName :: Lens' ProductDestination (Maybe Text)
-pdDestinationName
-  = lens _pdDestinationName
-      (\ s a -> s{_pdDestinationName = a})
-
-instance FromJSON ProductDestination where
-        parseJSON
-          = withObject "ProductDestination"
-              (\ o ->
-                 ProductDestination' <$>
-                   (o .:? "intention") <*> (o .:? "destinationName"))
-
-instance ToJSON ProductDestination where
-        toJSON ProductDestination'{..}
-          = object
-              (catMaybes
-                 [("intention" .=) <$> _pdIntention,
-                  ("destinationName" .=) <$> _pdDestinationName])
-
---
 -- /See:/ 'datafeedsCustomBatchRequest' smart constructor.
 newtype DatafeedsCustomBatchRequest = DatafeedsCustomBatchRequest'
     { _dEntries :: Maybe [DatafeedsCustomBatchRequestEntry]
@@ -909,424 +1680,373 @@ instance ToJSON DatafeedsCustomBatchRequest where
           = object (catMaybes [("entries" .=) <$> _dEntries])
 
 --
--- /See:/ 'ordersCustomBatchRequestEntry' smart constructor.
-data OrdersCustomBatchRequestEntry = OrdersCustomBatchRequestEntry'
-    { _ocbreMerchantId      :: !(Maybe (Textual Word64))
-    , _ocbreCancelLineItem  :: !(Maybe OrdersCustomBatchRequestEntryCancelLineItem)
-    , _ocbreRefund          :: !(Maybe OrdersCustomBatchRequestEntryRefund)
-    , _ocbreUpdateShipment  :: !(Maybe OrdersCustomBatchRequestEntryUpdateShipment)
-    , _ocbreReturnLineItem  :: !(Maybe OrdersCustomBatchRequestEntryReturnLineItem)
-    , _ocbreMerchantOrderId :: !(Maybe Text)
-    , _ocbreMethod          :: !(Maybe Text)
-    , _ocbreShipLineItems   :: !(Maybe OrdersCustomBatchRequestEntryShipLineItems)
-    , _ocbreOperationId     :: !(Maybe Text)
-    , _ocbreOrderId         :: !(Maybe Text)
-    , _ocbreCancel          :: !(Maybe OrdersCustomBatchRequestEntryCancel)
-    , _ocbreBatchId         :: !(Maybe (Textual Word32))
+-- /See:/ 'orderpaymentsNotifyChargeRequest' smart constructor.
+data OrderpaymentsNotifyChargeRequest = OrderpaymentsNotifyChargeRequest'
+    { _oncrInvoiceIds  :: !(Maybe [Text])
+    , _oncrChargeState :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrdersCustomBatchRequestEntry' with the minimum fields required to make a request.
+-- | Creates a value of 'OrderpaymentsNotifyChargeRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ocbreMerchantId'
+-- * 'oncrInvoiceIds'
 --
--- * 'ocbreCancelLineItem'
---
--- * 'ocbreRefund'
---
--- * 'ocbreUpdateShipment'
---
--- * 'ocbreReturnLineItem'
---
--- * 'ocbreMerchantOrderId'
---
--- * 'ocbreMethod'
---
--- * 'ocbreShipLineItems'
---
--- * 'ocbreOperationId'
---
--- * 'ocbreOrderId'
---
--- * 'ocbreCancel'
---
--- * 'ocbreBatchId'
-ordersCustomBatchRequestEntry
-    :: OrdersCustomBatchRequestEntry
-ordersCustomBatchRequestEntry =
-    OrdersCustomBatchRequestEntry'
-    { _ocbreMerchantId = Nothing
-    , _ocbreCancelLineItem = Nothing
-    , _ocbreRefund = Nothing
-    , _ocbreUpdateShipment = Nothing
-    , _ocbreReturnLineItem = Nothing
-    , _ocbreMerchantOrderId = Nothing
-    , _ocbreMethod = Nothing
-    , _ocbreShipLineItems = Nothing
-    , _ocbreOperationId = Nothing
-    , _ocbreOrderId = Nothing
-    , _ocbreCancel = Nothing
-    , _ocbreBatchId = Nothing
+-- * 'oncrChargeState'
+orderpaymentsNotifyChargeRequest
+    :: OrderpaymentsNotifyChargeRequest
+orderpaymentsNotifyChargeRequest =
+    OrderpaymentsNotifyChargeRequest'
+    { _oncrInvoiceIds = Nothing
+    , _oncrChargeState = Nothing
     }
 
--- | The ID of the managing account.
-ocbreMerchantId :: Lens' OrdersCustomBatchRequestEntry (Maybe Word64)
-ocbreMerchantId
-  = lens _ocbreMerchantId
-      (\ s a -> s{_ocbreMerchantId = a})
-      . mapping _Coerce
+-- | Invoice IDs from the orderinvoices service that correspond to the
+-- charge.
+oncrInvoiceIds :: Lens' OrderpaymentsNotifyChargeRequest [Text]
+oncrInvoiceIds
+  = lens _oncrInvoiceIds
+      (\ s a -> s{_oncrInvoiceIds = a})
+      . _Default
+      . _Coerce
 
--- | Required for cancelLineItem method.
-ocbreCancelLineItem :: Lens' OrdersCustomBatchRequestEntry (Maybe OrdersCustomBatchRequestEntryCancelLineItem)
-ocbreCancelLineItem
-  = lens _ocbreCancelLineItem
-      (\ s a -> s{_ocbreCancelLineItem = a})
+-- | Whether charge was successful.
+oncrChargeState :: Lens' OrderpaymentsNotifyChargeRequest (Maybe Text)
+oncrChargeState
+  = lens _oncrChargeState
+      (\ s a -> s{_oncrChargeState = a})
 
--- | Required for refund method.
-ocbreRefund :: Lens' OrdersCustomBatchRequestEntry (Maybe OrdersCustomBatchRequestEntryRefund)
-ocbreRefund
-  = lens _ocbreRefund (\ s a -> s{_ocbreRefund = a})
-
--- | Required for updateShipment method.
-ocbreUpdateShipment :: Lens' OrdersCustomBatchRequestEntry (Maybe OrdersCustomBatchRequestEntryUpdateShipment)
-ocbreUpdateShipment
-  = lens _ocbreUpdateShipment
-      (\ s a -> s{_ocbreUpdateShipment = a})
-
--- | Required for returnLineItem method.
-ocbreReturnLineItem :: Lens' OrdersCustomBatchRequestEntry (Maybe OrdersCustomBatchRequestEntryReturnLineItem)
-ocbreReturnLineItem
-  = lens _ocbreReturnLineItem
-      (\ s a -> s{_ocbreReturnLineItem = a})
-
--- | The merchant order id. Required for updateMerchantOrderId and
--- getByMerchantOrderId methods.
-ocbreMerchantOrderId :: Lens' OrdersCustomBatchRequestEntry (Maybe Text)
-ocbreMerchantOrderId
-  = lens _ocbreMerchantOrderId
-      (\ s a -> s{_ocbreMerchantOrderId = a})
-
--- | The method to apply.
-ocbreMethod :: Lens' OrdersCustomBatchRequestEntry (Maybe Text)
-ocbreMethod
-  = lens _ocbreMethod (\ s a -> s{_ocbreMethod = a})
-
--- | Required for shipLineItems method.
-ocbreShipLineItems :: Lens' OrdersCustomBatchRequestEntry (Maybe OrdersCustomBatchRequestEntryShipLineItems)
-ocbreShipLineItems
-  = lens _ocbreShipLineItems
-      (\ s a -> s{_ocbreShipLineItems = a})
-
--- | The ID of the operation. Unique across all operations for a given order.
--- Required for all methods beside get and getByMerchantOrderId.
-ocbreOperationId :: Lens' OrdersCustomBatchRequestEntry (Maybe Text)
-ocbreOperationId
-  = lens _ocbreOperationId
-      (\ s a -> s{_ocbreOperationId = a})
-
--- | The ID of the order. Required for all methods beside
--- getByMerchantOrderId.
-ocbreOrderId :: Lens' OrdersCustomBatchRequestEntry (Maybe Text)
-ocbreOrderId
-  = lens _ocbreOrderId (\ s a -> s{_ocbreOrderId = a})
-
--- | Required for cancel method.
-ocbreCancel :: Lens' OrdersCustomBatchRequestEntry (Maybe OrdersCustomBatchRequestEntryCancel)
-ocbreCancel
-  = lens _ocbreCancel (\ s a -> s{_ocbreCancel = a})
-
--- | An entry ID, unique within the batch request.
-ocbreBatchId :: Lens' OrdersCustomBatchRequestEntry (Maybe Word32)
-ocbreBatchId
-  = lens _ocbreBatchId (\ s a -> s{_ocbreBatchId = a})
-      . mapping _Coerce
-
-instance FromJSON OrdersCustomBatchRequestEntry where
+instance FromJSON OrderpaymentsNotifyChargeRequest
+         where
         parseJSON
-          = withObject "OrdersCustomBatchRequestEntry"
+          = withObject "OrderpaymentsNotifyChargeRequest"
               (\ o ->
-                 OrdersCustomBatchRequestEntry' <$>
-                   (o .:? "merchantId") <*> (o .:? "cancelLineItem") <*>
-                     (o .:? "refund")
-                     <*> (o .:? "updateShipment")
-                     <*> (o .:? "returnLineItem")
-                     <*> (o .:? "merchantOrderId")
-                     <*> (o .:? "method")
-                     <*> (o .:? "shipLineItems")
-                     <*> (o .:? "operationId")
-                     <*> (o .:? "orderId")
-                     <*> (o .:? "cancel")
-                     <*> (o .:? "batchId"))
+                 OrderpaymentsNotifyChargeRequest' <$>
+                   (o .:? "invoiceIds" .!= mempty) <*>
+                     (o .:? "chargeState"))
 
-instance ToJSON OrdersCustomBatchRequestEntry where
-        toJSON OrdersCustomBatchRequestEntry'{..}
+instance ToJSON OrderpaymentsNotifyChargeRequest
+         where
+        toJSON OrderpaymentsNotifyChargeRequest'{..}
           = object
               (catMaybes
-                 [("merchantId" .=) <$> _ocbreMerchantId,
-                  ("cancelLineItem" .=) <$> _ocbreCancelLineItem,
-                  ("refund" .=) <$> _ocbreRefund,
-                  ("updateShipment" .=) <$> _ocbreUpdateShipment,
-                  ("returnLineItem" .=) <$> _ocbreReturnLineItem,
-                  ("merchantOrderId" .=) <$> _ocbreMerchantOrderId,
-                  ("method" .=) <$> _ocbreMethod,
-                  ("shipLineItems" .=) <$> _ocbreShipLineItems,
-                  ("operationId" .=) <$> _ocbreOperationId,
-                  ("orderId" .=) <$> _ocbreOrderId,
-                  ("cancel" .=) <$> _ocbreCancel,
-                  ("batchId" .=) <$> _ocbreBatchId])
+                 [("invoiceIds" .=) <$> _oncrInvoiceIds,
+                  ("chargeState" .=) <$> _oncrChargeState])
 
 --
--- /See:/ 'ordersRefundRequest' smart constructor.
-data OrdersRefundRequest = OrdersRefundRequest'
-    { _orrAmount      :: !(Maybe Price)
-    , _orrReason      :: !(Maybe Text)
-    , _orrOperationId :: !(Maybe Text)
-    , _orrReasonText  :: !(Maybe Text)
+-- /See:/ 'ordersCancelTestOrderByCustomerResponse' smart constructor.
+newtype OrdersCancelTestOrderByCustomerResponse = OrdersCancelTestOrderByCustomerResponse'
+    { _octobcrKind :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrdersRefundRequest' with the minimum fields required to make a request.
+-- | Creates a value of 'OrdersCancelTestOrderByCustomerResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'orrAmount'
---
--- * 'orrReason'
---
--- * 'orrOperationId'
---
--- * 'orrReasonText'
-ordersRefundRequest
-    :: OrdersRefundRequest
-ordersRefundRequest =
-    OrdersRefundRequest'
-    { _orrAmount = Nothing
-    , _orrReason = Nothing
-    , _orrOperationId = Nothing
-    , _orrReasonText = Nothing
+-- * 'octobcrKind'
+ordersCancelTestOrderByCustomerResponse
+    :: OrdersCancelTestOrderByCustomerResponse
+ordersCancelTestOrderByCustomerResponse =
+    OrdersCancelTestOrderByCustomerResponse'
+    { _octobcrKind = "content#ordersCancelTestOrderByCustomerResponse"
     }
 
--- | The amount that is refunded.
-orrAmount :: Lens' OrdersRefundRequest (Maybe Price)
-orrAmount
-  = lens _orrAmount (\ s a -> s{_orrAmount = a})
-
--- | The reason for the refund.
-orrReason :: Lens' OrdersRefundRequest (Maybe Text)
-orrReason
-  = lens _orrReason (\ s a -> s{_orrReason = a})
-
--- | The ID of the operation. Unique across all operations for a given order.
-orrOperationId :: Lens' OrdersRefundRequest (Maybe Text)
-orrOperationId
-  = lens _orrOperationId
-      (\ s a -> s{_orrOperationId = a})
-
--- | The explanation of the reason.
-orrReasonText :: Lens' OrdersRefundRequest (Maybe Text)
-orrReasonText
-  = lens _orrReasonText
-      (\ s a -> s{_orrReasonText = a})
-
-instance FromJSON OrdersRefundRequest where
-        parseJSON
-          = withObject "OrdersRefundRequest"
-              (\ o ->
-                 OrdersRefundRequest' <$>
-                   (o .:? "amount") <*> (o .:? "reason") <*>
-                     (o .:? "operationId")
-                     <*> (o .:? "reasonText"))
-
-instance ToJSON OrdersRefundRequest where
-        toJSON OrdersRefundRequest'{..}
-          = object
-              (catMaybes
-                 [("amount" .=) <$> _orrAmount,
-                  ("reason" .=) <$> _orrReason,
-                  ("operationId" .=) <$> _orrOperationId,
-                  ("reasonText" .=) <$> _orrReasonText])
-
--- | Shipping cost calculation method. Exactly one of the field is set.
---
--- /See:/ 'accountShippingShippingServiceCalculationMethod' smart constructor.
-data AccountShippingShippingServiceCalculationMethod = AccountShippingShippingServiceCalculationMethod'
-    { _assscmPercentageRate :: !(Maybe Text)
-    , _assscmCarrierRate    :: !(Maybe Text)
-    , _assscmRateTable      :: !(Maybe Text)
-    , _assscmExcluded       :: !(Maybe Bool)
-    , _assscmFlatRate       :: !(Maybe Price)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AccountShippingShippingServiceCalculationMethod' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'assscmPercentageRate'
---
--- * 'assscmCarrierRate'
---
--- * 'assscmRateTable'
---
--- * 'assscmExcluded'
---
--- * 'assscmFlatRate'
-accountShippingShippingServiceCalculationMethod
-    :: AccountShippingShippingServiceCalculationMethod
-accountShippingShippingServiceCalculationMethod =
-    AccountShippingShippingServiceCalculationMethod'
-    { _assscmPercentageRate = Nothing
-    , _assscmCarrierRate = Nothing
-    , _assscmRateTable = Nothing
-    , _assscmExcluded = Nothing
-    , _assscmFlatRate = Nothing
-    }
-
--- | Percentage of the price, represented as a floating point number without
--- the percentage character.
-assscmPercentageRate :: Lens' AccountShippingShippingServiceCalculationMethod (Maybe Text)
-assscmPercentageRate
-  = lens _assscmPercentageRate
-      (\ s a -> s{_assscmPercentageRate = a})
-
--- | Name of the carrier rate to use for the calculation.
-assscmCarrierRate :: Lens' AccountShippingShippingServiceCalculationMethod (Maybe Text)
-assscmCarrierRate
-  = lens _assscmCarrierRate
-      (\ s a -> s{_assscmCarrierRate = a})
-
--- | Name of the rate table to use for the calculation.
-assscmRateTable :: Lens' AccountShippingShippingServiceCalculationMethod (Maybe Text)
-assscmRateTable
-  = lens _assscmRateTable
-      (\ s a -> s{_assscmRateTable = a})
-
--- | Delivery is excluded. Valid only within cost rules tree.
-assscmExcluded :: Lens' AccountShippingShippingServiceCalculationMethod (Maybe Bool)
-assscmExcluded
-  = lens _assscmExcluded
-      (\ s a -> s{_assscmExcluded = a})
-
--- | Fixed price shipping, represented as a floating point number associated
--- with a currency.
-assscmFlatRate :: Lens' AccountShippingShippingServiceCalculationMethod (Maybe Price)
-assscmFlatRate
-  = lens _assscmFlatRate
-      (\ s a -> s{_assscmFlatRate = a})
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"content#ordersCancelTestOrderByCustomerResponse\".
+octobcrKind :: Lens' OrdersCancelTestOrderByCustomerResponse Text
+octobcrKind
+  = lens _octobcrKind (\ s a -> s{_octobcrKind = a})
 
 instance FromJSON
-         AccountShippingShippingServiceCalculationMethod where
+         OrdersCancelTestOrderByCustomerResponse where
         parseJSON
           = withObject
-              "AccountShippingShippingServiceCalculationMethod"
+              "OrdersCancelTestOrderByCustomerResponse"
               (\ o ->
-                 AccountShippingShippingServiceCalculationMethod' <$>
-                   (o .:? "percentageRate") <*> (o .:? "carrierRate")
-                     <*> (o .:? "rateTable")
-                     <*> (o .:? "excluded")
-                     <*> (o .:? "flatRate"))
+                 OrdersCancelTestOrderByCustomerResponse' <$>
+                   (o .:? "kind" .!=
+                      "content#ordersCancelTestOrderByCustomerResponse"))
 
 instance ToJSON
-         AccountShippingShippingServiceCalculationMethod where
-        toJSON
-          AccountShippingShippingServiceCalculationMethod'{..}
-          = object
-              (catMaybes
-                 [("percentageRate" .=) <$> _assscmPercentageRate,
-                  ("carrierRate" .=) <$> _assscmCarrierRate,
-                  ("rateTable" .=) <$> _assscmRateTable,
-                  ("excluded" .=) <$> _assscmExcluded,
-                  ("flatRate" .=) <$> _assscmFlatRate])
+         OrdersCancelTestOrderByCustomerResponse where
+        toJSON OrdersCancelTestOrderByCustomerResponse'{..}
+          = object (catMaybes [Just ("kind" .= _octobcrKind)])
 
 --
--- /See:/ 'ordersCustomBatchRequestEntryCancelLineItem' smart constructor.
-data OrdersCustomBatchRequestEntryCancelLineItem = OrdersCustomBatchRequestEntryCancelLineItem'
-    { _ocbrecliAmount     :: !(Maybe Price)
-    , _ocbrecliQuantity   :: !(Maybe (Textual Word32))
-    , _ocbrecliLineItemId :: !(Maybe Text)
-    , _ocbrecliReason     :: !(Maybe Text)
-    , _ocbrecliReasonText :: !(Maybe Text)
+-- /See:/ 'liaOnDisplayToOrderSettings' smart constructor.
+data LiaOnDisplayToOrderSettings = LiaOnDisplayToOrderSettings'
+    { _lodtosStatus                :: !(Maybe Text)
+    , _lodtosShippingCostPolicyURL :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrdersCustomBatchRequestEntryCancelLineItem' with the minimum fields required to make a request.
+-- | Creates a value of 'LiaOnDisplayToOrderSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ocbrecliAmount'
+-- * 'lodtosStatus'
 --
--- * 'ocbrecliQuantity'
---
--- * 'ocbrecliLineItemId'
---
--- * 'ocbrecliReason'
---
--- * 'ocbrecliReasonText'
-ordersCustomBatchRequestEntryCancelLineItem
-    :: OrdersCustomBatchRequestEntryCancelLineItem
-ordersCustomBatchRequestEntryCancelLineItem =
-    OrdersCustomBatchRequestEntryCancelLineItem'
-    { _ocbrecliAmount = Nothing
-    , _ocbrecliQuantity = Nothing
-    , _ocbrecliLineItemId = Nothing
-    , _ocbrecliReason = Nothing
-    , _ocbrecliReasonText = Nothing
+-- * 'lodtosShippingCostPolicyURL'
+liaOnDisplayToOrderSettings
+    :: LiaOnDisplayToOrderSettings
+liaOnDisplayToOrderSettings =
+    LiaOnDisplayToOrderSettings'
+    { _lodtosStatus = Nothing
+    , _lodtosShippingCostPolicyURL = Nothing
     }
 
--- | Amount to refund for the cancelation. Optional. If not set, Google will
--- calculate the default based on the price and tax of the items involved.
--- The amount must not be larger than the net amount left on the order.
-ocbrecliAmount :: Lens' OrdersCustomBatchRequestEntryCancelLineItem (Maybe Price)
-ocbrecliAmount
-  = lens _ocbrecliAmount
-      (\ s a -> s{_ocbrecliAmount = a})
+-- | The status of the ?On display to order? feature.
+lodtosStatus :: Lens' LiaOnDisplayToOrderSettings (Maybe Text)
+lodtosStatus
+  = lens _lodtosStatus (\ s a -> s{_lodtosStatus = a})
 
--- | The quantity to cancel.
-ocbrecliQuantity :: Lens' OrdersCustomBatchRequestEntryCancelLineItem (Maybe Word32)
-ocbrecliQuantity
-  = lens _ocbrecliQuantity
-      (\ s a -> s{_ocbrecliQuantity = a})
-      . mapping _Coerce
+-- | Shipping cost and policy URL.
+lodtosShippingCostPolicyURL :: Lens' LiaOnDisplayToOrderSettings (Maybe Text)
+lodtosShippingCostPolicyURL
+  = lens _lodtosShippingCostPolicyURL
+      (\ s a -> s{_lodtosShippingCostPolicyURL = a})
 
--- | The ID of the line item to cancel.
-ocbrecliLineItemId :: Lens' OrdersCustomBatchRequestEntryCancelLineItem (Maybe Text)
-ocbrecliLineItemId
-  = lens _ocbrecliLineItemId
-      (\ s a -> s{_ocbrecliLineItemId = a})
-
--- | The reason for the cancellation.
-ocbrecliReason :: Lens' OrdersCustomBatchRequestEntryCancelLineItem (Maybe Text)
-ocbrecliReason
-  = lens _ocbrecliReason
-      (\ s a -> s{_ocbrecliReason = a})
-
--- | The explanation of the reason.
-ocbrecliReasonText :: Lens' OrdersCustomBatchRequestEntryCancelLineItem (Maybe Text)
-ocbrecliReasonText
-  = lens _ocbrecliReasonText
-      (\ s a -> s{_ocbrecliReasonText = a})
-
-instance FromJSON
-         OrdersCustomBatchRequestEntryCancelLineItem where
+instance FromJSON LiaOnDisplayToOrderSettings where
         parseJSON
-          = withObject
-              "OrdersCustomBatchRequestEntryCancelLineItem"
+          = withObject "LiaOnDisplayToOrderSettings"
               (\ o ->
-                 OrdersCustomBatchRequestEntryCancelLineItem' <$>
-                   (o .:? "amount") <*> (o .:? "quantity") <*>
-                     (o .:? "lineItemId")
-                     <*> (o .:? "reason")
-                     <*> (o .:? "reasonText"))
+                 LiaOnDisplayToOrderSettings' <$>
+                   (o .:? "status") <*> (o .:? "shippingCostPolicyUrl"))
 
-instance ToJSON
-         OrdersCustomBatchRequestEntryCancelLineItem where
-        toJSON
-          OrdersCustomBatchRequestEntryCancelLineItem'{..}
+instance ToJSON LiaOnDisplayToOrderSettings where
+        toJSON LiaOnDisplayToOrderSettings'{..}
           = object
               (catMaybes
-                 [("amount" .=) <$> _ocbrecliAmount,
-                  ("quantity" .=) <$> _ocbrecliQuantity,
-                  ("lineItemId" .=) <$> _ocbrecliLineItemId,
-                  ("reason" .=) <$> _ocbrecliReason,
-                  ("reasonText" .=) <$> _ocbrecliReasonText])
+                 [("status" .=) <$> _lodtosStatus,
+                  ("shippingCostPolicyUrl" .=) <$>
+                    _lodtosShippingCostPolicyURL])
+
+--
+-- /See:/ 'orderpaymentsNotifyAuthDeclinedResponse' smart constructor.
+data OrderpaymentsNotifyAuthDeclinedResponse = OrderpaymentsNotifyAuthDeclinedResponse'
+    { _onadrKind            :: !Text
+    , _onadrExecutionStatus :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OrderpaymentsNotifyAuthDeclinedResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'onadrKind'
+--
+-- * 'onadrExecutionStatus'
+orderpaymentsNotifyAuthDeclinedResponse
+    :: OrderpaymentsNotifyAuthDeclinedResponse
+orderpaymentsNotifyAuthDeclinedResponse =
+    OrderpaymentsNotifyAuthDeclinedResponse'
+    { _onadrKind = "content#orderpaymentsNotifyAuthDeclinedResponse"
+    , _onadrExecutionStatus = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"content#orderpaymentsNotifyAuthDeclinedResponse\".
+onadrKind :: Lens' OrderpaymentsNotifyAuthDeclinedResponse Text
+onadrKind
+  = lens _onadrKind (\ s a -> s{_onadrKind = a})
+
+-- | The status of the execution.
+onadrExecutionStatus :: Lens' OrderpaymentsNotifyAuthDeclinedResponse (Maybe Text)
+onadrExecutionStatus
+  = lens _onadrExecutionStatus
+      (\ s a -> s{_onadrExecutionStatus = a})
+
+instance FromJSON
+         OrderpaymentsNotifyAuthDeclinedResponse where
+        parseJSON
+          = withObject
+              "OrderpaymentsNotifyAuthDeclinedResponse"
+              (\ o ->
+                 OrderpaymentsNotifyAuthDeclinedResponse' <$>
+                   (o .:? "kind" .!=
+                      "content#orderpaymentsNotifyAuthDeclinedResponse")
+                     <*> (o .:? "executionStatus"))
+
+instance ToJSON
+         OrderpaymentsNotifyAuthDeclinedResponse where
+        toJSON OrderpaymentsNotifyAuthDeclinedResponse'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _onadrKind),
+                  ("executionStatus" .=) <$> _onadrExecutionStatus])
+
+--
+-- /See:/ 'accountAddress' smart constructor.
+data AccountAddress = AccountAddress'
+    { _aaStreetAddress :: !(Maybe Text)
+    , _aaCountry       :: !(Maybe Text)
+    , _aaPostalCode    :: !(Maybe Text)
+    , _aaLocality      :: !(Maybe Text)
+    , _aaRegion        :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AccountAddress' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aaStreetAddress'
+--
+-- * 'aaCountry'
+--
+-- * 'aaPostalCode'
+--
+-- * 'aaLocality'
+--
+-- * 'aaRegion'
+accountAddress
+    :: AccountAddress
+accountAddress =
+    AccountAddress'
+    { _aaStreetAddress = Nothing
+    , _aaCountry = Nothing
+    , _aaPostalCode = Nothing
+    , _aaLocality = Nothing
+    , _aaRegion = Nothing
+    }
+
+-- | Street-level part of the address.
+aaStreetAddress :: Lens' AccountAddress (Maybe Text)
+aaStreetAddress
+  = lens _aaStreetAddress
+      (\ s a -> s{_aaStreetAddress = a})
+
+-- | CLDR country code (e.g. \"US\").
+aaCountry :: Lens' AccountAddress (Maybe Text)
+aaCountry
+  = lens _aaCountry (\ s a -> s{_aaCountry = a})
+
+-- | Postal code or ZIP (e.g. \"94043\").
+aaPostalCode :: Lens' AccountAddress (Maybe Text)
+aaPostalCode
+  = lens _aaPostalCode (\ s a -> s{_aaPostalCode = a})
+
+-- | City, town or commune. May also include dependent localities or
+-- sublocalities (e.g. neighborhoods or suburbs).
+aaLocality :: Lens' AccountAddress (Maybe Text)
+aaLocality
+  = lens _aaLocality (\ s a -> s{_aaLocality = a})
+
+-- | Top-level administrative subdivision of the country. For example, a
+-- state like California (\"CA\") or a province like Quebec (\"QC\").
+aaRegion :: Lens' AccountAddress (Maybe Text)
+aaRegion = lens _aaRegion (\ s a -> s{_aaRegion = a})
+
+instance FromJSON AccountAddress where
+        parseJSON
+          = withObject "AccountAddress"
+              (\ o ->
+                 AccountAddress' <$>
+                   (o .:? "streetAddress") <*> (o .:? "country") <*>
+                     (o .:? "postalCode")
+                     <*> (o .:? "locality")
+                     <*> (o .:? "region"))
+
+instance ToJSON AccountAddress where
+        toJSON AccountAddress'{..}
+          = object
+              (catMaybes
+                 [("streetAddress" .=) <$> _aaStreetAddress,
+                  ("country" .=) <$> _aaCountry,
+                  ("postalCode" .=) <$> _aaPostalCode,
+                  ("locality" .=) <$> _aaLocality,
+                  ("region" .=) <$> _aaRegion])
+
+--
+-- /See:/ 'invoiceSummaryAdditionalChargeSummary' smart constructor.
+data InvoiceSummaryAdditionalChargeSummary = InvoiceSummaryAdditionalChargeSummary'
+    { _isacsTotalAmount :: !(Maybe Amount)
+    , _isacsType        :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InvoiceSummaryAdditionalChargeSummary' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'isacsTotalAmount'
+--
+-- * 'isacsType'
+invoiceSummaryAdditionalChargeSummary
+    :: InvoiceSummaryAdditionalChargeSummary
+invoiceSummaryAdditionalChargeSummary =
+    InvoiceSummaryAdditionalChargeSummary'
+    { _isacsTotalAmount = Nothing
+    , _isacsType = Nothing
+    }
+
+-- | [required] Total additional charge for this type.
+isacsTotalAmount :: Lens' InvoiceSummaryAdditionalChargeSummary (Maybe Amount)
+isacsTotalAmount
+  = lens _isacsTotalAmount
+      (\ s a -> s{_isacsTotalAmount = a})
+
+-- | [required] Type of the additional charge.
+isacsType :: Lens' InvoiceSummaryAdditionalChargeSummary (Maybe Text)
+isacsType
+  = lens _isacsType (\ s a -> s{_isacsType = a})
+
+instance FromJSON
+         InvoiceSummaryAdditionalChargeSummary where
+        parseJSON
+          = withObject "InvoiceSummaryAdditionalChargeSummary"
+              (\ o ->
+                 InvoiceSummaryAdditionalChargeSummary' <$>
+                   (o .:? "totalAmount") <*> (o .:? "type"))
+
+instance ToJSON InvoiceSummaryAdditionalChargeSummary
+         where
+        toJSON InvoiceSummaryAdditionalChargeSummary'{..}
+          = object
+              (catMaybes
+                 [("totalAmount" .=) <$> _isacsTotalAmount,
+                  ("type" .=) <$> _isacsType])
+
+--
+-- /See:/ 'refundReason' smart constructor.
+data RefundReason = RefundReason'
+    { _rrReasonCode  :: !(Maybe Text)
+    , _rrDescription :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RefundReason' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rrReasonCode'
+--
+-- * 'rrDescription'
+refundReason
+    :: RefundReason
+refundReason =
+    RefundReason'
+    { _rrReasonCode = Nothing
+    , _rrDescription = Nothing
+    }
+
+rrReasonCode :: Lens' RefundReason (Maybe Text)
+rrReasonCode
+  = lens _rrReasonCode (\ s a -> s{_rrReasonCode = a})
+
+rrDescription :: Lens' RefundReason (Maybe Text)
+rrDescription
+  = lens _rrDescription
+      (\ s a -> s{_rrDescription = a})
+
+instance FromJSON RefundReason where
+        parseJSON
+          = withObject "RefundReason"
+              (\ o ->
+                 RefundReason' <$>
+                   (o .:? "reasonCode") <*> (o .:? "description"))
+
+instance ToJSON RefundReason where
+        toJSON RefundReason'{..}
+          = object
+              (catMaybes
+                 [("reasonCode" .=) <$> _rrReasonCode,
+                  ("description" .=) <$> _rrDescription])
 
 --
 -- /See:/ 'orderLineItemShippingDetailsMethod' smart constructor.
@@ -1358,7 +2078,8 @@ orderLineItemShippingDetailsMethod =
     , _olisdmMinDaysInTransit = Nothing
     }
 
--- | The carrier for the shipping. Optional.
+-- | The carrier for the shipping. Optional. See shipments[].carrier for a
+-- list of acceptable values.
 olisdmCarrier :: Lens' OrderLineItemShippingDetailsMethod (Maybe Text)
 olisdmCarrier
   = lens _olisdmCarrier
@@ -1404,21 +2125,19 @@ instance ToJSON OrderLineItemShippingDetailsMethod
                   ("maxDaysInTransit" .=) <$> _olisdmMaxDaysInTransit,
                   ("minDaysInTransit" .=) <$> _olisdmMinDaysInTransit])
 
--- | Datafeed data.
+-- | Datafeed configuration data.
 --
 -- /See:/ 'datafeed' smart constructor.
 data Datafeed = Datafeed'
-    { _dKind                 :: !Text
-    , _dFormat               :: !(Maybe DatafeedFormat)
-    , _dAttributeLanguage    :: !(Maybe Text)
-    , _dTargetCountry        :: !(Maybe Text)
-    , _dFetchSchedule        :: !(Maybe DatafeedFetchSchedule)
-    , _dName                 :: !(Maybe Text)
-    , _dIntendedDestinations :: !(Maybe [Text])
-    , _dId                   :: !(Maybe (Textual Int64))
-    , _dContentLanguage      :: !(Maybe Text)
-    , _dContentType          :: !(Maybe Text)
-    , _dFileName             :: !(Maybe Text)
+    { _dKind              :: !Text
+    , _dFormat            :: !(Maybe DatafeedFormat)
+    , _dAttributeLanguage :: !(Maybe Text)
+    , _dFetchSchedule     :: !(Maybe DatafeedFetchSchedule)
+    , _dName              :: !(Maybe Text)
+    , _dTargets           :: !(Maybe [DatafeedTarget])
+    , _dId                :: !(Maybe (Textual Int64))
+    , _dContentType       :: !(Maybe Text)
+    , _dFileName          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Datafeed' with the minimum fields required to make a request.
@@ -1431,17 +2150,13 @@ data Datafeed = Datafeed'
 --
 -- * 'dAttributeLanguage'
 --
--- * 'dTargetCountry'
---
 -- * 'dFetchSchedule'
 --
 -- * 'dName'
 --
--- * 'dIntendedDestinations'
+-- * 'dTargets'
 --
 -- * 'dId'
---
--- * 'dContentLanguage'
 --
 -- * 'dContentType'
 --
@@ -1453,12 +2168,10 @@ datafeed =
     { _dKind = "content#datafeed"
     , _dFormat = Nothing
     , _dAttributeLanguage = Nothing
-    , _dTargetCountry = Nothing
     , _dFetchSchedule = Nothing
     , _dName = Nothing
-    , _dIntendedDestinations = Nothing
+    , _dTargets = Nothing
     , _dId = Nothing
-    , _dContentLanguage = Nothing
     , _dContentType = Nothing
     , _dFileName = Nothing
     }
@@ -1479,13 +2192,6 @@ dAttributeLanguage
   = lens _dAttributeLanguage
       (\ s a -> s{_dAttributeLanguage = a})
 
--- | The country where the items in the feed will be included in the search
--- index, represented as a CLDR territory code.
-dTargetCountry :: Lens' Datafeed (Maybe Text)
-dTargetCountry
-  = lens _dTargetCountry
-      (\ s a -> s{_dTargetCountry = a})
-
 -- | Fetch schedule for the feed file.
 dFetchSchedule :: Lens' Datafeed (Maybe DatafeedFetchSchedule)
 dFetchSchedule
@@ -1496,13 +2202,11 @@ dFetchSchedule
 dName :: Lens' Datafeed (Maybe Text)
 dName = lens _dName (\ s a -> s{_dName = a})
 
--- | The list of intended destinations (corresponds to checked check boxes in
--- Merchant Center).
-dIntendedDestinations :: Lens' Datafeed [Text]
-dIntendedDestinations
-  = lens _dIntendedDestinations
-      (\ s a -> s{_dIntendedDestinations = a})
-      . _Default
+-- | The targets this feed should apply to (country, language, destinations).
+dTargets :: Lens' Datafeed [DatafeedTarget]
+dTargets
+  = lens _dTargets (\ s a -> s{_dTargets = a}) .
+      _Default
       . _Coerce
 
 -- | The ID of the data feed.
@@ -1510,14 +2214,8 @@ dId :: Lens' Datafeed (Maybe Int64)
 dId
   = lens _dId (\ s a -> s{_dId = a}) . mapping _Coerce
 
--- | The two-letter ISO 639-1 language of the items in the feed. Must be a
--- valid language for targetCountry.
-dContentLanguage :: Lens' Datafeed (Maybe Text)
-dContentLanguage
-  = lens _dContentLanguage
-      (\ s a -> s{_dContentLanguage = a})
-
--- | The type of data feed.
+-- | The type of data feed. For product inventory feeds, only feeds for local
+-- stores, not online stores, are supported.
 dContentType :: Lens' Datafeed (Maybe Text)
 dContentType
   = lens _dContentType (\ s a -> s{_dContentType = a})
@@ -1535,12 +2233,10 @@ instance FromJSON Datafeed where
                    (o .:? "kind" .!= "content#datafeed") <*>
                      (o .:? "format")
                      <*> (o .:? "attributeLanguage")
-                     <*> (o .:? "targetCountry")
                      <*> (o .:? "fetchSchedule")
                      <*> (o .:? "name")
-                     <*> (o .:? "intendedDestinations" .!= mempty)
+                     <*> (o .:? "targets" .!= mempty)
                      <*> (o .:? "id")
-                     <*> (o .:? "contentLanguage")
                      <*> (o .:? "contentType")
                      <*> (o .:? "fileName"))
 
@@ -1550,13 +2246,9 @@ instance ToJSON Datafeed where
               (catMaybes
                  [Just ("kind" .= _dKind), ("format" .=) <$> _dFormat,
                   ("attributeLanguage" .=) <$> _dAttributeLanguage,
-                  ("targetCountry" .=) <$> _dTargetCountry,
                   ("fetchSchedule" .=) <$> _dFetchSchedule,
-                  ("name" .=) <$> _dName,
-                  ("intendedDestinations" .=) <$>
-                    _dIntendedDestinations,
+                  ("name" .=) <$> _dName, ("targets" .=) <$> _dTargets,
                   ("id" .=) <$> _dId,
-                  ("contentLanguage" .=) <$> _dContentLanguage,
                   ("contentType" .=) <$> _dContentType,
                   ("fileName" .=) <$> _dFileName])
 
@@ -1646,7 +2338,7 @@ aKind :: Lens' AccountsCustomBatchResponseEntry Text
 aKind = lens _aKind (\ s a -> s{_aKind = a})
 
 -- | The retrieved, created, or updated account. Not defined if the method
--- was delete.
+-- was delete, claimwebsite or link.
 aAccount :: Lens' AccountsCustomBatchResponseEntry (Maybe Account)
 aAccount = lens _aAccount (\ s a -> s{_aAccount = a})
 
@@ -1681,6 +2373,103 @@ instance ToJSON AccountsCustomBatchResponseEntry
                   ("account" .=) <$> _aAccount,
                   ("errors" .=) <$> _aErrors,
                   ("batchId" .=) <$> _aBatchId])
+
+--
+-- /See:/ 'gmbAccounts' smart constructor.
+data GmbAccounts = GmbAccounts'
+    { _gaGmbAccounts :: !(Maybe [GmbAccountsGmbAccount])
+    , _gaAccountId   :: !(Maybe (Textual Word64))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GmbAccounts' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gaGmbAccounts'
+--
+-- * 'gaAccountId'
+gmbAccounts
+    :: GmbAccounts
+gmbAccounts =
+    GmbAccounts'
+    { _gaGmbAccounts = Nothing
+    , _gaAccountId = Nothing
+    }
+
+-- | A list of GMB accounts which are available to the merchant.
+gaGmbAccounts :: Lens' GmbAccounts [GmbAccountsGmbAccount]
+gaGmbAccounts
+  = lens _gaGmbAccounts
+      (\ s a -> s{_gaGmbAccounts = a})
+      . _Default
+      . _Coerce
+
+-- | The ID of the account.
+gaAccountId :: Lens' GmbAccounts (Maybe Word64)
+gaAccountId
+  = lens _gaAccountId (\ s a -> s{_gaAccountId = a}) .
+      mapping _Coerce
+
+instance FromJSON GmbAccounts where
+        parseJSON
+          = withObject "GmbAccounts"
+              (\ o ->
+                 GmbAccounts' <$>
+                   (o .:? "gmbAccounts" .!= mempty) <*>
+                     (o .:? "accountId"))
+
+instance ToJSON GmbAccounts where
+        toJSON GmbAccounts'{..}
+          = object
+              (catMaybes
+                 [("gmbAccounts" .=) <$> _gaGmbAccounts,
+                  ("accountId" .=) <$> _gaAccountId])
+
+--
+-- /See:/ 'customerReturnReason' smart constructor.
+data CustomerReturnReason = CustomerReturnReason'
+    { _crrReasonCode  :: !(Maybe Text)
+    , _crrDescription :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CustomerReturnReason' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'crrReasonCode'
+--
+-- * 'crrDescription'
+customerReturnReason
+    :: CustomerReturnReason
+customerReturnReason =
+    CustomerReturnReason'
+    { _crrReasonCode = Nothing
+    , _crrDescription = Nothing
+    }
+
+crrReasonCode :: Lens' CustomerReturnReason (Maybe Text)
+crrReasonCode
+  = lens _crrReasonCode
+      (\ s a -> s{_crrReasonCode = a})
+
+crrDescription :: Lens' CustomerReturnReason (Maybe Text)
+crrDescription
+  = lens _crrDescription
+      (\ s a -> s{_crrDescription = a})
+
+instance FromJSON CustomerReturnReason where
+        parseJSON
+          = withObject "CustomerReturnReason"
+              (\ o ->
+                 CustomerReturnReason' <$>
+                   (o .:? "reasonCode") <*> (o .:? "description"))
+
+instance ToJSON CustomerReturnReason where
+        toJSON CustomerReturnReason'{..}
+          = object
+              (catMaybes
+                 [("reasonCode" .=) <$> _crrReasonCode,
+                  ("description" .=) <$> _crrDescription])
 
 --
 -- /See:/ 'accountIdentifier' smart constructor.
@@ -1733,96 +2522,137 @@ instance ToJSON AccountIdentifier where
                   ("aggregatorId" .=) <$> _aiAggregatorId])
 
 --
--- /See:/ 'testOrderPaymentMethod' smart constructor.
-data TestOrderPaymentMethod = TestOrderPaymentMethod'
-    { _topmExpirationMonth          :: !(Maybe (Textual Int32))
-    , _topmExpirationYear           :: !(Maybe (Textual Int32))
-    , _topmLastFourDigits           :: !(Maybe Text)
-    , _topmType                     :: !(Maybe Text)
-    , _topmPredefinedBillingAddress :: !(Maybe Text)
+-- /See:/ 'posCustomBatchRequest' smart constructor.
+newtype PosCustomBatchRequest = PosCustomBatchRequest'
+    { _pEntries :: Maybe [PosCustomBatchRequestEntry]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TestOrderPaymentMethod' with the minimum fields required to make a request.
+-- | Creates a value of 'PosCustomBatchRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'topmExpirationMonth'
---
--- * 'topmExpirationYear'
---
--- * 'topmLastFourDigits'
---
--- * 'topmType'
---
--- * 'topmPredefinedBillingAddress'
-testOrderPaymentMethod
-    :: TestOrderPaymentMethod
-testOrderPaymentMethod =
-    TestOrderPaymentMethod'
-    { _topmExpirationMonth = Nothing
-    , _topmExpirationYear = Nothing
-    , _topmLastFourDigits = Nothing
-    , _topmType = Nothing
-    , _topmPredefinedBillingAddress = Nothing
+-- * 'pEntries'
+posCustomBatchRequest
+    :: PosCustomBatchRequest
+posCustomBatchRequest =
+    PosCustomBatchRequest'
+    { _pEntries = Nothing
     }
 
--- | The card expiration month (January = 1, February = 2 etc.).
-topmExpirationMonth :: Lens' TestOrderPaymentMethod (Maybe Int32)
-topmExpirationMonth
-  = lens _topmExpirationMonth
-      (\ s a -> s{_topmExpirationMonth = a})
-      . mapping _Coerce
+-- | The request entries to be processed in the batch.
+pEntries :: Lens' PosCustomBatchRequest [PosCustomBatchRequestEntry]
+pEntries
+  = lens _pEntries (\ s a -> s{_pEntries = a}) .
+      _Default
+      . _Coerce
 
--- | The card expiration year (4-digit, e.g. 2015).
-topmExpirationYear :: Lens' TestOrderPaymentMethod (Maybe Int32)
-topmExpirationYear
-  = lens _topmExpirationYear
-      (\ s a -> s{_topmExpirationYear = a})
-      . mapping _Coerce
-
--- | The last four digits of the card number.
-topmLastFourDigits :: Lens' TestOrderPaymentMethod (Maybe Text)
-topmLastFourDigits
-  = lens _topmLastFourDigits
-      (\ s a -> s{_topmLastFourDigits = a})
-
--- | The type of instrument. Note that real orders might have different
--- values than the four values accepted by createTestOrder.
-topmType :: Lens' TestOrderPaymentMethod (Maybe Text)
-topmType = lens _topmType (\ s a -> s{_topmType = a})
-
--- | The billing address.
-topmPredefinedBillingAddress :: Lens' TestOrderPaymentMethod (Maybe Text)
-topmPredefinedBillingAddress
-  = lens _topmPredefinedBillingAddress
-      (\ s a -> s{_topmPredefinedBillingAddress = a})
-
-instance FromJSON TestOrderPaymentMethod where
+instance FromJSON PosCustomBatchRequest where
         parseJSON
-          = withObject "TestOrderPaymentMethod"
+          = withObject "PosCustomBatchRequest"
               (\ o ->
-                 TestOrderPaymentMethod' <$>
-                   (o .:? "expirationMonth") <*>
-                     (o .:? "expirationYear")
-                     <*> (o .:? "lastFourDigits")
-                     <*> (o .:? "type")
-                     <*> (o .:? "predefinedBillingAddress"))
+                 PosCustomBatchRequest' <$>
+                   (o .:? "entries" .!= mempty))
 
-instance ToJSON TestOrderPaymentMethod where
-        toJSON TestOrderPaymentMethod'{..}
+instance ToJSON PosCustomBatchRequest where
+        toJSON PosCustomBatchRequest'{..}
+          = object (catMaybes [("entries" .=) <$> _pEntries])
+
+--
+-- /See:/ 'orderinvoicesCreateChargeInvoiceRequest' smart constructor.
+data OrderinvoicesCreateChargeInvoiceRequest = OrderinvoicesCreateChargeInvoiceRequest'
+    { _occirShipmentGroupId  :: !(Maybe Text)
+    , _occirLineItemInvoices :: !(Maybe [ShipmentInvoiceLineItemInvoice])
+    , _occirInvoiceId        :: !(Maybe Text)
+    , _occirInvoiceSummary   :: !(Maybe InvoiceSummary)
+    , _occirOperationId      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OrderinvoicesCreateChargeInvoiceRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'occirShipmentGroupId'
+--
+-- * 'occirLineItemInvoices'
+--
+-- * 'occirInvoiceId'
+--
+-- * 'occirInvoiceSummary'
+--
+-- * 'occirOperationId'
+orderinvoicesCreateChargeInvoiceRequest
+    :: OrderinvoicesCreateChargeInvoiceRequest
+orderinvoicesCreateChargeInvoiceRequest =
+    OrderinvoicesCreateChargeInvoiceRequest'
+    { _occirShipmentGroupId = Nothing
+    , _occirLineItemInvoices = Nothing
+    , _occirInvoiceId = Nothing
+    , _occirInvoiceSummary = Nothing
+    , _occirOperationId = Nothing
+    }
+
+-- | [required] ID of the shipment group.
+occirShipmentGroupId :: Lens' OrderinvoicesCreateChargeInvoiceRequest (Maybe Text)
+occirShipmentGroupId
+  = lens _occirShipmentGroupId
+      (\ s a -> s{_occirShipmentGroupId = a})
+
+-- | [required] Invoice details per line item.
+occirLineItemInvoices :: Lens' OrderinvoicesCreateChargeInvoiceRequest [ShipmentInvoiceLineItemInvoice]
+occirLineItemInvoices
+  = lens _occirLineItemInvoices
+      (\ s a -> s{_occirLineItemInvoices = a})
+      . _Default
+      . _Coerce
+
+-- | [required] The ID of the invoice.
+occirInvoiceId :: Lens' OrderinvoicesCreateChargeInvoiceRequest (Maybe Text)
+occirInvoiceId
+  = lens _occirInvoiceId
+      (\ s a -> s{_occirInvoiceId = a})
+
+-- | [required] Invoice summary.
+occirInvoiceSummary :: Lens' OrderinvoicesCreateChargeInvoiceRequest (Maybe InvoiceSummary)
+occirInvoiceSummary
+  = lens _occirInvoiceSummary
+      (\ s a -> s{_occirInvoiceSummary = a})
+
+-- | [required] The ID of the operation, unique across all operations for a
+-- given order.
+occirOperationId :: Lens' OrderinvoicesCreateChargeInvoiceRequest (Maybe Text)
+occirOperationId
+  = lens _occirOperationId
+      (\ s a -> s{_occirOperationId = a})
+
+instance FromJSON
+         OrderinvoicesCreateChargeInvoiceRequest where
+        parseJSON
+          = withObject
+              "OrderinvoicesCreateChargeInvoiceRequest"
+              (\ o ->
+                 OrderinvoicesCreateChargeInvoiceRequest' <$>
+                   (o .:? "shipmentGroupId") <*>
+                     (o .:? "lineItemInvoices" .!= mempty)
+                     <*> (o .:? "invoiceId")
+                     <*> (o .:? "invoiceSummary")
+                     <*> (o .:? "operationId"))
+
+instance ToJSON
+         OrderinvoicesCreateChargeInvoiceRequest where
+        toJSON OrderinvoicesCreateChargeInvoiceRequest'{..}
           = object
               (catMaybes
-                 [("expirationMonth" .=) <$> _topmExpirationMonth,
-                  ("expirationYear" .=) <$> _topmExpirationYear,
-                  ("lastFourDigits" .=) <$> _topmLastFourDigits,
-                  ("type" .=) <$> _topmType,
-                  ("predefinedBillingAddress" .=) <$>
-                    _topmPredefinedBillingAddress])
+                 [("shipmentGroupId" .=) <$> _occirShipmentGroupId,
+                  ("lineItemInvoices" .=) <$> _occirLineItemInvoices,
+                  ("invoiceId" .=) <$> _occirInvoiceId,
+                  ("invoiceSummary" .=) <$> _occirInvoiceSummary,
+                  ("operationId" .=) <$> _occirOperationId])
 
 --
 -- /See:/ 'orderLineItem' smart constructor.
 data OrderLineItem = OrderLineItem'
-    { _oliQuantityOrdered   :: !(Maybe (Textual Word32))
+    { _oliAnnotations       :: !(Maybe [OrderMerchantProvidedAnnotation])
+    , _oliQuantityOrdered   :: !(Maybe (Textual Word32))
     , _oliReturnInfo        :: !(Maybe OrderLineItemReturnInfo)
     , _oliQuantityDelivered :: !(Maybe (Textual Word32))
     , _oliShippingDetails   :: !(Maybe OrderLineItemShippingDetails)
@@ -1841,6 +2671,8 @@ data OrderLineItem = OrderLineItem'
 -- | Creates a value of 'OrderLineItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oliAnnotations'
 --
 -- * 'oliQuantityOrdered'
 --
@@ -1873,7 +2705,8 @@ orderLineItem
     :: OrderLineItem
 orderLineItem =
     OrderLineItem'
-    { _oliQuantityOrdered = Nothing
+    { _oliAnnotations = Nothing
+    , _oliQuantityOrdered = Nothing
     , _oliReturnInfo = Nothing
     , _oliQuantityDelivered = Nothing
     , _oliShippingDetails = Nothing
@@ -1888,6 +2721,14 @@ orderLineItem =
     , _oliProduct = Nothing
     , _oliReturns = Nothing
     }
+
+-- | Annotations that are attached to the line item.
+oliAnnotations :: Lens' OrderLineItem [OrderMerchantProvidedAnnotation]
+oliAnnotations
+  = lens _oliAnnotations
+      (\ s a -> s{_oliAnnotations = a})
+      . _Default
+      . _Coerce
 
 -- | Number of items ordered.
 oliQuantityOrdered :: Lens' OrderLineItem (Maybe Word32)
@@ -1966,7 +2807,9 @@ oliQuantityReturned
       (\ s a -> s{_oliQuantityReturned = a})
       . mapping _Coerce
 
--- | Product data from the time of the order placement.
+-- | Product data as seen by customer from the time of the order placement.
+-- Note that certain attributes values (e.g. title or gtin) might be
+-- reformatted and no longer match values submitted via product feed.
 oliProduct :: Lens' OrderLineItem (Maybe OrderLineItemProduct)
 oliProduct
   = lens _oliProduct (\ s a -> s{_oliProduct = a})
@@ -1983,7 +2826,9 @@ instance FromJSON OrderLineItem where
           = withObject "OrderLineItem"
               (\ o ->
                  OrderLineItem' <$>
-                   (o .:? "quantityOrdered") <*> (o .:? "returnInfo")
+                   (o .:? "annotations" .!= mempty) <*>
+                     (o .:? "quantityOrdered")
+                     <*> (o .:? "returnInfo")
                      <*> (o .:? "quantityDelivered")
                      <*> (o .:? "shippingDetails")
                      <*> (o .:? "quantityPending")
@@ -2001,7 +2846,8 @@ instance ToJSON OrderLineItem where
         toJSON OrderLineItem'{..}
           = object
               (catMaybes
-                 [("quantityOrdered" .=) <$> _oliQuantityOrdered,
+                 [("annotations" .=) <$> _oliAnnotations,
+                  ("quantityOrdered" .=) <$> _oliQuantityOrdered,
                   ("returnInfo" .=) <$> _oliReturnInfo,
                   ("quantityDelivered" .=) <$> _oliQuantityDelivered,
                   ("shippingDetails" .=) <$> _oliShippingDetails,
@@ -2018,12 +2864,14 @@ instance ToJSON OrderLineItem where
 --
 -- /See:/ 'service' smart constructor.
 data Service = Service'
-    { _sDeliveryCountry :: !(Maybe Text)
-    , _sRateGroups      :: !(Maybe [RateGroup])
-    , _sDeliveryTime    :: !(Maybe DeliveryTime)
-    , _sActive          :: !(Maybe Bool)
-    , _sName            :: !(Maybe Text)
-    , _sCurrency        :: !(Maybe Text)
+    { _sDeliveryCountry   :: !(Maybe Text)
+    , _sRateGroups        :: !(Maybe [RateGroup])
+    , _sDeliveryTime      :: !(Maybe DeliveryTime)
+    , _sActive            :: !(Maybe Bool)
+    , _sName              :: !(Maybe Text)
+    , _sCurrency          :: !(Maybe Text)
+    , _sEligibility       :: !(Maybe Text)
+    , _sMinimumOrderValue :: !(Maybe Price)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Service' with the minimum fields required to make a request.
@@ -2041,6 +2889,10 @@ data Service = Service'
 -- * 'sName'
 --
 -- * 'sCurrency'
+--
+-- * 'sEligibility'
+--
+-- * 'sMinimumOrderValue'
 service
     :: Service
 service =
@@ -2051,6 +2903,8 @@ service =
     , _sActive = Nothing
     , _sName = Nothing
     , _sCurrency = Nothing
+    , _sEligibility = Nothing
+    , _sMinimumOrderValue = Nothing
     }
 
 -- | The CLDR territory code of the country to which the service applies.
@@ -2091,6 +2945,19 @@ sCurrency :: Lens' Service (Maybe Text)
 sCurrency
   = lens _sCurrency (\ s a -> s{_sCurrency = a})
 
+-- | Eligibility for this service.
+sEligibility :: Lens' Service (Maybe Text)
+sEligibility
+  = lens _sEligibility (\ s a -> s{_sEligibility = a})
+
+-- | Minimum order value for this service. If set, indicates that customers
+-- will have to spend at least this amount. All prices within a service
+-- must have the same currency.
+sMinimumOrderValue :: Lens' Service (Maybe Price)
+sMinimumOrderValue
+  = lens _sMinimumOrderValue
+      (\ s a -> s{_sMinimumOrderValue = a})
+
 instance FromJSON Service where
         parseJSON
           = withObject "Service"
@@ -2101,7 +2968,9 @@ instance FromJSON Service where
                      <*> (o .:? "deliveryTime")
                      <*> (o .:? "active")
                      <*> (o .:? "name")
-                     <*> (o .:? "currency"))
+                     <*> (o .:? "currency")
+                     <*> (o .:? "eligibility")
+                     <*> (o .:? "minimumOrderValue"))
 
 instance ToJSON Service where
         toJSON Service'{..}
@@ -2111,41 +2980,43 @@ instance ToJSON Service where
                   ("rateGroups" .=) <$> _sRateGroups,
                   ("deliveryTime" .=) <$> _sDeliveryTime,
                   ("active" .=) <$> _sActive, ("name" .=) <$> _sName,
-                  ("currency" .=) <$> _sCurrency])
+                  ("currency" .=) <$> _sCurrency,
+                  ("eligibility" .=) <$> _sEligibility,
+                  ("minimumOrderValue" .=) <$> _sMinimumOrderValue])
 
 --
 -- /See:/ 'productstatusesCustomBatchResponse' smart constructor.
 data ProductstatusesCustomBatchResponse = ProductstatusesCustomBatchResponse'
-    { _pEntries :: !(Maybe [ProductstatusesCustomBatchResponseEntry])
-    , _pKind    :: !Text
+    { _proEntries :: !(Maybe [ProductstatusesCustomBatchResponseEntry])
+    , _proKind    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductstatusesCustomBatchResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pEntries'
+-- * 'proEntries'
 --
--- * 'pKind'
+-- * 'proKind'
 productstatusesCustomBatchResponse
     :: ProductstatusesCustomBatchResponse
 productstatusesCustomBatchResponse =
     ProductstatusesCustomBatchResponse'
-    { _pEntries = Nothing
-    , _pKind = "content#productstatusesCustomBatchResponse"
+    { _proEntries = Nothing
+    , _proKind = "content#productstatusesCustomBatchResponse"
     }
 
 -- | The result of the execution of the batch requests.
-pEntries :: Lens' ProductstatusesCustomBatchResponse [ProductstatusesCustomBatchResponseEntry]
-pEntries
-  = lens _pEntries (\ s a -> s{_pEntries = a}) .
+proEntries :: Lens' ProductstatusesCustomBatchResponse [ProductstatusesCustomBatchResponseEntry]
+proEntries
+  = lens _proEntries (\ s a -> s{_proEntries = a}) .
       _Default
       . _Coerce
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#productstatusesCustomBatchResponse\".
-pKind :: Lens' ProductstatusesCustomBatchResponse Text
-pKind = lens _pKind (\ s a -> s{_pKind = a})
+proKind :: Lens' ProductstatusesCustomBatchResponse Text
+proKind = lens _proKind (\ s a -> s{_proKind = a})
 
 instance FromJSON ProductstatusesCustomBatchResponse
          where
@@ -2162,8 +3033,8 @@ instance ToJSON ProductstatusesCustomBatchResponse
         toJSON ProductstatusesCustomBatchResponse'{..}
           = object
               (catMaybes
-                 [("entries" .=) <$> _pEntries,
-                  Just ("kind" .= _pKind)])
+                 [("entries" .=) <$> _proEntries,
+                  Just ("kind" .= _proKind)])
 
 --
 -- /See:/ 'productUnitPricingMeasure' smart constructor.
@@ -2214,11 +3085,12 @@ instance ToJSON ProductUnitPricingMeasure where
 --
 -- /See:/ 'ordersUpdateShipmentRequest' smart constructor.
 data OrdersUpdateShipmentRequest = OrdersUpdateShipmentRequest'
-    { _ousrCarrier     :: !(Maybe Text)
-    , _ousrStatus      :: !(Maybe Text)
-    , _ousrTrackingId  :: !(Maybe Text)
-    , _ousrShipmentId  :: !(Maybe Text)
-    , _ousrOperationId :: !(Maybe Text)
+    { _ousrCarrier      :: !(Maybe Text)
+    , _ousrStatus       :: !(Maybe Text)
+    , _ousrTrackingId   :: !(Maybe Text)
+    , _ousrShipmentId   :: !(Maybe Text)
+    , _ousrDeliveryDate :: !(Maybe Text)
+    , _ousrOperationId  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersUpdateShipmentRequest' with the minimum fields required to make a request.
@@ -2233,6 +3105,8 @@ data OrdersUpdateShipmentRequest = OrdersUpdateShipmentRequest'
 --
 -- * 'ousrShipmentId'
 --
+-- * 'ousrDeliveryDate'
+--
 -- * 'ousrOperationId'
 ordersUpdateShipmentRequest
     :: OrdersUpdateShipmentRequest
@@ -2242,10 +3116,13 @@ ordersUpdateShipmentRequest =
     , _ousrStatus = Nothing
     , _ousrTrackingId = Nothing
     , _ousrShipmentId = Nothing
+    , _ousrDeliveryDate = Nothing
     , _ousrOperationId = Nothing
     }
 
--- | The carrier handling the shipment. Not updated if missing.
+-- | The carrier handling the shipment. Not updated if missing. See
+-- shipments[].carrier in the Orders resource representation for a list of
+-- acceptable values.
 ousrCarrier :: Lens' OrdersUpdateShipmentRequest (Maybe Text)
 ousrCarrier
   = lens _ousrCarrier (\ s a -> s{_ousrCarrier = a})
@@ -2267,6 +3144,13 @@ ousrShipmentId
   = lens _ousrShipmentId
       (\ s a -> s{_ousrShipmentId = a})
 
+-- | Date on which the shipment has been delivered, in ISO 8601 format.
+-- Optional and can be provided only if status is delivered.
+ousrDeliveryDate :: Lens' OrdersUpdateShipmentRequest (Maybe Text)
+ousrDeliveryDate
+  = lens _ousrDeliveryDate
+      (\ s a -> s{_ousrDeliveryDate = a})
+
 -- | The ID of the operation. Unique across all operations for a given order.
 ousrOperationId :: Lens' OrdersUpdateShipmentRequest (Maybe Text)
 ousrOperationId
@@ -2281,6 +3165,7 @@ instance FromJSON OrdersUpdateShipmentRequest where
                    (o .:? "carrier") <*> (o .:? "status") <*>
                      (o .:? "trackingId")
                      <*> (o .:? "shipmentId")
+                     <*> (o .:? "deliveryDate")
                      <*> (o .:? "operationId"))
 
 instance ToJSON OrdersUpdateShipmentRequest where
@@ -2291,6 +3176,7 @@ instance ToJSON OrdersUpdateShipmentRequest where
                   ("status" .=) <$> _ousrStatus,
                   ("trackingId" .=) <$> _ousrTrackingId,
                   ("shipmentId" .=) <$> _ousrShipmentId,
+                  ("deliveryDate" .=) <$> _ousrDeliveryDate,
                   ("operationId" .=) <$> _ousrOperationId])
 
 --
@@ -2298,6 +3184,7 @@ instance ToJSON OrdersUpdateShipmentRequest where
 data OrderShipmentLineItemShipment = OrderShipmentLineItemShipment'
     { _oslisQuantity   :: !(Maybe (Textual Word32))
     , _oslisLineItemId :: !(Maybe Text)
+    , _oslisProductId  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrderShipmentLineItemShipment' with the minimum fields required to make a request.
@@ -2307,12 +3194,15 @@ data OrderShipmentLineItemShipment = OrderShipmentLineItemShipment'
 -- * 'oslisQuantity'
 --
 -- * 'oslisLineItemId'
+--
+-- * 'oslisProductId'
 orderShipmentLineItemShipment
     :: OrderShipmentLineItemShipment
 orderShipmentLineItemShipment =
     OrderShipmentLineItemShipment'
     { _oslisQuantity = Nothing
     , _oslisLineItemId = Nothing
+    , _oslisProductId = Nothing
     }
 
 -- | The quantity that is shipped.
@@ -2322,25 +3212,153 @@ oslisQuantity
       (\ s a -> s{_oslisQuantity = a})
       . mapping _Coerce
 
--- | The id of the line item that is shipped.
+-- | The id of the line item that is shipped. Either lineItemId or productId
+-- is required.
 oslisLineItemId :: Lens' OrderShipmentLineItemShipment (Maybe Text)
 oslisLineItemId
   = lens _oslisLineItemId
       (\ s a -> s{_oslisLineItemId = a})
+
+-- | The ID of the product to ship. This is the REST ID used in the products
+-- service. Either lineItemId or productId is required.
+oslisProductId :: Lens' OrderShipmentLineItemShipment (Maybe Text)
+oslisProductId
+  = lens _oslisProductId
+      (\ s a -> s{_oslisProductId = a})
 
 instance FromJSON OrderShipmentLineItemShipment where
         parseJSON
           = withObject "OrderShipmentLineItemShipment"
               (\ o ->
                  OrderShipmentLineItemShipment' <$>
-                   (o .:? "quantity") <*> (o .:? "lineItemId"))
+                   (o .:? "quantity") <*> (o .:? "lineItemId") <*>
+                     (o .:? "productId"))
 
 instance ToJSON OrderShipmentLineItemShipment where
         toJSON OrderShipmentLineItemShipment'{..}
           = object
               (catMaybes
                  [("quantity" .=) <$> _oslisQuantity,
-                  ("lineItemId" .=) <$> _oslisLineItemId])
+                  ("lineItemId" .=) <$> _oslisLineItemId,
+                  ("productId" .=) <$> _oslisProductId])
+
+--
+-- /See:/ 'orderreportsListTransactionsResponse' smart constructor.
+data OrderreportsListTransactionsResponse = OrderreportsListTransactionsResponse'
+    { _oltrNextPageToken :: !(Maybe Text)
+    , _oltrTransactions  :: !(Maybe [OrderReportTransaction])
+    , _oltrKind          :: !Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OrderreportsListTransactionsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oltrNextPageToken'
+--
+-- * 'oltrTransactions'
+--
+-- * 'oltrKind'
+orderreportsListTransactionsResponse
+    :: OrderreportsListTransactionsResponse
+orderreportsListTransactionsResponse =
+    OrderreportsListTransactionsResponse'
+    { _oltrNextPageToken = Nothing
+    , _oltrTransactions = Nothing
+    , _oltrKind = "content#orderreportsListTransactionsResponse"
+    }
+
+-- | The token for the retrieval of the next page of transactions.
+oltrNextPageToken :: Lens' OrderreportsListTransactionsResponse (Maybe Text)
+oltrNextPageToken
+  = lens _oltrNextPageToken
+      (\ s a -> s{_oltrNextPageToken = a})
+
+-- | The list of transactions.
+oltrTransactions :: Lens' OrderreportsListTransactionsResponse [OrderReportTransaction]
+oltrTransactions
+  = lens _oltrTransactions
+      (\ s a -> s{_oltrTransactions = a})
+      . _Default
+      . _Coerce
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"content#orderreportsListTransactionsResponse\".
+oltrKind :: Lens' OrderreportsListTransactionsResponse Text
+oltrKind = lens _oltrKind (\ s a -> s{_oltrKind = a})
+
+instance FromJSON
+         OrderreportsListTransactionsResponse where
+        parseJSON
+          = withObject "OrderreportsListTransactionsResponse"
+              (\ o ->
+                 OrderreportsListTransactionsResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "transactions" .!= mempty)
+                     <*>
+                     (o .:? "kind" .!=
+                        "content#orderreportsListTransactionsResponse"))
+
+instance ToJSON OrderreportsListTransactionsResponse
+         where
+        toJSON OrderreportsListTransactionsResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _oltrNextPageToken,
+                  ("transactions" .=) <$> _oltrTransactions,
+                  Just ("kind" .= _oltrKind)])
+
+--
+-- /See:/ 'liaSettingsCustomBatchResponse' smart constructor.
+data LiaSettingsCustomBatchResponse = LiaSettingsCustomBatchResponse'
+    { _lscbrEntries :: !(Maybe [LiaSettingsCustomBatchResponseEntry])
+    , _lscbrKind    :: !Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LiaSettingsCustomBatchResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lscbrEntries'
+--
+-- * 'lscbrKind'
+liaSettingsCustomBatchResponse
+    :: LiaSettingsCustomBatchResponse
+liaSettingsCustomBatchResponse =
+    LiaSettingsCustomBatchResponse'
+    { _lscbrEntries = Nothing
+    , _lscbrKind = "content#liasettingsCustomBatchResponse"
+    }
+
+-- | The result of the execution of the batch requests.
+lscbrEntries :: Lens' LiaSettingsCustomBatchResponse [LiaSettingsCustomBatchResponseEntry]
+lscbrEntries
+  = lens _lscbrEntries (\ s a -> s{_lscbrEntries = a})
+      . _Default
+      . _Coerce
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"content#liasettingsCustomBatchResponse\".
+lscbrKind :: Lens' LiaSettingsCustomBatchResponse Text
+lscbrKind
+  = lens _lscbrKind (\ s a -> s{_lscbrKind = a})
+
+instance FromJSON LiaSettingsCustomBatchResponse
+         where
+        parseJSON
+          = withObject "LiaSettingsCustomBatchResponse"
+              (\ o ->
+                 LiaSettingsCustomBatchResponse' <$>
+                   (o .:? "entries" .!= mempty) <*>
+                     (o .:? "kind" .!=
+                        "content#liasettingsCustomBatchResponse"))
+
+instance ToJSON LiaSettingsCustomBatchResponse where
+        toJSON LiaSettingsCustomBatchResponse'{..}
+          = object
+              (catMaybes
+                 [("entries" .=) <$> _lscbrEntries,
+                  Just ("kind" .= _lscbrKind)])
 
 --
 -- /See:/ 'loyaltyPoints' smart constructor.
@@ -2405,155 +3423,84 @@ instance ToJSON LoyaltyPoints where
                   ("name" .=) <$> _lpName])
 
 --
--- /See:/ 'accountshippingCustomBatchRequest' smart constructor.
-newtype AccountshippingCustomBatchRequest = AccountshippingCustomBatchRequest'
-    { _acbrEntries :: Maybe [AccountshippingCustomBatchRequestEntry]
+-- /See:/ 'liaSettingsSetPosDataProviderResponse' smart constructor.
+newtype LiaSettingsSetPosDataProviderResponse = LiaSettingsSetPosDataProviderResponse'
+    { _lsspdprKind :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountshippingCustomBatchRequest' with the minimum fields required to make a request.
+-- | Creates a value of 'LiaSettingsSetPosDataProviderResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acbrEntries'
-accountshippingCustomBatchRequest
-    :: AccountshippingCustomBatchRequest
-accountshippingCustomBatchRequest =
-    AccountshippingCustomBatchRequest'
-    { _acbrEntries = Nothing
+-- * 'lsspdprKind'
+liaSettingsSetPosDataProviderResponse
+    :: LiaSettingsSetPosDataProviderResponse
+liaSettingsSetPosDataProviderResponse =
+    LiaSettingsSetPosDataProviderResponse'
+    { _lsspdprKind = "content#liasettingsSetPosDataProviderResponse"
     }
 
--- | The request entries to be processed in the batch.
-acbrEntries :: Lens' AccountshippingCustomBatchRequest [AccountshippingCustomBatchRequestEntry]
-acbrEntries
-  = lens _acbrEntries (\ s a -> s{_acbrEntries = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON AccountshippingCustomBatchRequest
-         where
-        parseJSON
-          = withObject "AccountshippingCustomBatchRequest"
-              (\ o ->
-                 AccountshippingCustomBatchRequest' <$>
-                   (o .:? "entries" .!= mempty))
-
-instance ToJSON AccountshippingCustomBatchRequest
-         where
-        toJSON AccountshippingCustomBatchRequest'{..}
-          = object
-              (catMaybes [("entries" .=) <$> _acbrEntries])
-
---
--- /See:/ 'ordersCustomBatchRequestEntryShipLineItems' smart constructor.
-data OrdersCustomBatchRequestEntryShipLineItems = OrdersCustomBatchRequestEntryShipLineItems'
-    { _ocbresliCarrier    :: !(Maybe Text)
-    , _ocbresliTrackingId :: !(Maybe Text)
-    , _ocbresliShipmentId :: !(Maybe Text)
-    , _ocbresliLineItems  :: !(Maybe [OrderShipmentLineItemShipment])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'OrdersCustomBatchRequestEntryShipLineItems' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ocbresliCarrier'
---
--- * 'ocbresliTrackingId'
---
--- * 'ocbresliShipmentId'
---
--- * 'ocbresliLineItems'
-ordersCustomBatchRequestEntryShipLineItems
-    :: OrdersCustomBatchRequestEntryShipLineItems
-ordersCustomBatchRequestEntryShipLineItems =
-    OrdersCustomBatchRequestEntryShipLineItems'
-    { _ocbresliCarrier = Nothing
-    , _ocbresliTrackingId = Nothing
-    , _ocbresliShipmentId = Nothing
-    , _ocbresliLineItems = Nothing
-    }
-
--- | The carrier handling the shipment.
-ocbresliCarrier :: Lens' OrdersCustomBatchRequestEntryShipLineItems (Maybe Text)
-ocbresliCarrier
-  = lens _ocbresliCarrier
-      (\ s a -> s{_ocbresliCarrier = a})
-
--- | The tracking id for the shipment.
-ocbresliTrackingId :: Lens' OrdersCustomBatchRequestEntryShipLineItems (Maybe Text)
-ocbresliTrackingId
-  = lens _ocbresliTrackingId
-      (\ s a -> s{_ocbresliTrackingId = a})
-
--- | The ID of the shipment.
-ocbresliShipmentId :: Lens' OrdersCustomBatchRequestEntryShipLineItems (Maybe Text)
-ocbresliShipmentId
-  = lens _ocbresliShipmentId
-      (\ s a -> s{_ocbresliShipmentId = a})
-
--- | Line items to ship.
-ocbresliLineItems :: Lens' OrdersCustomBatchRequestEntryShipLineItems [OrderShipmentLineItemShipment]
-ocbresliLineItems
-  = lens _ocbresliLineItems
-      (\ s a -> s{_ocbresliLineItems = a})
-      . _Default
-      . _Coerce
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"content#liasettingsSetPosDataProviderResponse\".
+lsspdprKind :: Lens' LiaSettingsSetPosDataProviderResponse Text
+lsspdprKind
+  = lens _lsspdprKind (\ s a -> s{_lsspdprKind = a})
 
 instance FromJSON
-         OrdersCustomBatchRequestEntryShipLineItems where
+         LiaSettingsSetPosDataProviderResponse where
         parseJSON
-          = withObject
-              "OrdersCustomBatchRequestEntryShipLineItems"
+          = withObject "LiaSettingsSetPosDataProviderResponse"
               (\ o ->
-                 OrdersCustomBatchRequestEntryShipLineItems' <$>
-                   (o .:? "carrier") <*> (o .:? "trackingId") <*>
-                     (o .:? "shipmentId")
-                     <*> (o .:? "lineItems" .!= mempty))
+                 LiaSettingsSetPosDataProviderResponse' <$>
+                   (o .:? "kind" .!=
+                      "content#liasettingsSetPosDataProviderResponse"))
 
-instance ToJSON
-         OrdersCustomBatchRequestEntryShipLineItems where
-        toJSON
-          OrdersCustomBatchRequestEntryShipLineItems'{..}
-          = object
-              (catMaybes
-                 [("carrier" .=) <$> _ocbresliCarrier,
-                  ("trackingId" .=) <$> _ocbresliTrackingId,
-                  ("shipmentId" .=) <$> _ocbresliShipmentId,
-                  ("lineItems" .=) <$> _ocbresliLineItems])
+instance ToJSON LiaSettingsSetPosDataProviderResponse
+         where
+        toJSON LiaSettingsSetPosDataProviderResponse'{..}
+          = object (catMaybes [Just ("kind" .= _lsspdprKind)])
 
 -- | The status of an account, i.e., information about its products, which is
 -- computed offline and not returned immediately at insertion time.
 --
 -- /See:/ 'accountStatus' smart constructor.
 data AccountStatus = AccountStatus'
-    { _asDataQualityIssues :: !(Maybe [AccountStatusDataQualityIssue])
-    , _asKind              :: !Text
-    , _asAccountId         :: !(Maybe Text)
+    { _asAccountLevelIssues :: !(Maybe [AccountStatusAccountLevelIssue])
+    , _asKind               :: !Text
+    , _asAccountId          :: !(Maybe Text)
+    , _asProducts           :: !(Maybe [AccountStatusProducts])
+    , _asWebsiteClaimed     :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'asDataQualityIssues'
+-- * 'asAccountLevelIssues'
 --
 -- * 'asKind'
 --
 -- * 'asAccountId'
+--
+-- * 'asProducts'
+--
+-- * 'asWebsiteClaimed'
 accountStatus
     :: AccountStatus
 accountStatus =
     AccountStatus'
-    { _asDataQualityIssues = Nothing
+    { _asAccountLevelIssues = Nothing
     , _asKind = "content#accountStatus"
     , _asAccountId = Nothing
+    , _asProducts = Nothing
+    , _asWebsiteClaimed = Nothing
     }
 
--- | A list of data quality issues.
-asDataQualityIssues :: Lens' AccountStatus [AccountStatusDataQualityIssue]
-asDataQualityIssues
-  = lens _asDataQualityIssues
-      (\ s a -> s{_asDataQualityIssues = a})
+-- | A list of account level issues.
+asAccountLevelIssues :: Lens' AccountStatus [AccountStatusAccountLevelIssue]
+asAccountLevelIssues
+  = lens _asAccountLevelIssues
+      (\ s a -> s{_asAccountLevelIssues = a})
       . _Default
       . _Coerce
 
@@ -2567,108 +3514,42 @@ asAccountId :: Lens' AccountStatus (Maybe Text)
 asAccountId
   = lens _asAccountId (\ s a -> s{_asAccountId = a})
 
+-- | List of product-related data by channel, destination, and country. Data
+-- in this field may be delayed by up to 30 minutes.
+asProducts :: Lens' AccountStatus [AccountStatusProducts]
+asProducts
+  = lens _asProducts (\ s a -> s{_asProducts = a}) .
+      _Default
+      . _Coerce
+
+-- | Whether the account\'s website is claimed or not.
+asWebsiteClaimed :: Lens' AccountStatus (Maybe Bool)
+asWebsiteClaimed
+  = lens _asWebsiteClaimed
+      (\ s a -> s{_asWebsiteClaimed = a})
+
 instance FromJSON AccountStatus where
         parseJSON
           = withObject "AccountStatus"
               (\ o ->
                  AccountStatus' <$>
-                   (o .:? "dataQualityIssues" .!= mempty) <*>
+                   (o .:? "accountLevelIssues" .!= mempty) <*>
                      (o .:? "kind" .!= "content#accountStatus")
-                     <*> (o .:? "accountId"))
+                     <*> (o .:? "accountId")
+                     <*> (o .:? "products" .!= mempty)
+                     <*> (o .:? "websiteClaimed"))
 
 instance ToJSON AccountStatus where
         toJSON AccountStatus'{..}
           = object
               (catMaybes
-                 [("dataQualityIssues" .=) <$> _asDataQualityIssues,
+                 [("accountLevelIssues" .=) <$> _asAccountLevelIssues,
                   Just ("kind" .= _asKind),
-                  ("accountId" .=) <$> _asAccountId])
+                  ("accountId" .=) <$> _asAccountId,
+                  ("products" .=) <$> _asProducts,
+                  ("websiteClaimed" .=) <$> _asWebsiteClaimed])
 
---
--- /See:/ 'ordersReturnLineItemRequest' smart constructor.
-data OrdersReturnLineItemRequest = OrdersReturnLineItemRequest'
-    { _orlirQuantity    :: !(Maybe (Textual Word32))
-    , _orlirLineItemId  :: !(Maybe Text)
-    , _orlirReason      :: !(Maybe Text)
-    , _orlirOperationId :: !(Maybe Text)
-    , _orlirReasonText  :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'OrdersReturnLineItemRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'orlirQuantity'
---
--- * 'orlirLineItemId'
---
--- * 'orlirReason'
---
--- * 'orlirOperationId'
---
--- * 'orlirReasonText'
-ordersReturnLineItemRequest
-    :: OrdersReturnLineItemRequest
-ordersReturnLineItemRequest =
-    OrdersReturnLineItemRequest'
-    { _orlirQuantity = Nothing
-    , _orlirLineItemId = Nothing
-    , _orlirReason = Nothing
-    , _orlirOperationId = Nothing
-    , _orlirReasonText = Nothing
-    }
-
--- | The quantity to return.
-orlirQuantity :: Lens' OrdersReturnLineItemRequest (Maybe Word32)
-orlirQuantity
-  = lens _orlirQuantity
-      (\ s a -> s{_orlirQuantity = a})
-      . mapping _Coerce
-
--- | The ID of the line item to return.
-orlirLineItemId :: Lens' OrdersReturnLineItemRequest (Maybe Text)
-orlirLineItemId
-  = lens _orlirLineItemId
-      (\ s a -> s{_orlirLineItemId = a})
-
--- | The reason for the return.
-orlirReason :: Lens' OrdersReturnLineItemRequest (Maybe Text)
-orlirReason
-  = lens _orlirReason (\ s a -> s{_orlirReason = a})
-
--- | The ID of the operation. Unique across all operations for a given order.
-orlirOperationId :: Lens' OrdersReturnLineItemRequest (Maybe Text)
-orlirOperationId
-  = lens _orlirOperationId
-      (\ s a -> s{_orlirOperationId = a})
-
--- | The explanation of the reason.
-orlirReasonText :: Lens' OrdersReturnLineItemRequest (Maybe Text)
-orlirReasonText
-  = lens _orlirReasonText
-      (\ s a -> s{_orlirReasonText = a})
-
-instance FromJSON OrdersReturnLineItemRequest where
-        parseJSON
-          = withObject "OrdersReturnLineItemRequest"
-              (\ o ->
-                 OrdersReturnLineItemRequest' <$>
-                   (o .:? "quantity") <*> (o .:? "lineItemId") <*>
-                     (o .:? "reason")
-                     <*> (o .:? "operationId")
-                     <*> (o .:? "reasonText"))
-
-instance ToJSON OrdersReturnLineItemRequest where
-        toJSON OrdersReturnLineItemRequest'{..}
-          = object
-              (catMaybes
-                 [("quantity" .=) <$> _orlirQuantity,
-                  ("lineItemId" .=) <$> _orlirLineItemId,
-                  ("reason" .=) <$> _orlirReason,
-                  ("operationId" .=) <$> _orlirOperationId,
-                  ("reasonText" .=) <$> _orlirReasonText])
-
--- | A batch entry encoding a single non-batch accountshipping request.
+-- | A batch entry encoding a single non-batch shippingsettings request.
 --
 -- /See:/ 'shippingSettingsCustomBatchRequestEntry' smart constructor.
 data ShippingSettingsCustomBatchRequestEntry = ShippingSettingsCustomBatchRequestEntry'
@@ -2760,27 +3641,152 @@ instance ToJSON
                   ("batchId" .=) <$> _sscbreBatchId])
 
 --
+-- /See:/ 'posInventoryResponse' smart constructor.
+data PosInventoryResponse = PosInventoryResponse'
+    { _pirStoreCode       :: !(Maybe Text)
+    , _pirKind            :: !Text
+    , _pirItemId          :: !(Maybe Text)
+    , _pirQuantity        :: !(Maybe (Textual Int64))
+    , _pirTargetCountry   :: !(Maybe Text)
+    , _pirGtin            :: !(Maybe Text)
+    , _pirPrice           :: !(Maybe Price)
+    , _pirContentLanguage :: !(Maybe Text)
+    , _pirTimestamp       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PosInventoryResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pirStoreCode'
+--
+-- * 'pirKind'
+--
+-- * 'pirItemId'
+--
+-- * 'pirQuantity'
+--
+-- * 'pirTargetCountry'
+--
+-- * 'pirGtin'
+--
+-- * 'pirPrice'
+--
+-- * 'pirContentLanguage'
+--
+-- * 'pirTimestamp'
+posInventoryResponse
+    :: PosInventoryResponse
+posInventoryResponse =
+    PosInventoryResponse'
+    { _pirStoreCode = Nothing
+    , _pirKind = "content#posInventoryResponse"
+    , _pirItemId = Nothing
+    , _pirQuantity = Nothing
+    , _pirTargetCountry = Nothing
+    , _pirGtin = Nothing
+    , _pirPrice = Nothing
+    , _pirContentLanguage = Nothing
+    , _pirTimestamp = Nothing
+    }
+
+-- | The identifier of the merchant\'s store. Either a storeCode inserted via
+-- the API or the code of the store in Google My Business.
+pirStoreCode :: Lens' PosInventoryResponse (Maybe Text)
+pirStoreCode
+  = lens _pirStoreCode (\ s a -> s{_pirStoreCode = a})
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"content#posInventoryResponse\".
+pirKind :: Lens' PosInventoryResponse Text
+pirKind = lens _pirKind (\ s a -> s{_pirKind = a})
+
+-- | A unique identifier for the item.
+pirItemId :: Lens' PosInventoryResponse (Maybe Text)
+pirItemId
+  = lens _pirItemId (\ s a -> s{_pirItemId = a})
+
+-- | The available quantity of the item.
+pirQuantity :: Lens' PosInventoryResponse (Maybe Int64)
+pirQuantity
+  = lens _pirQuantity (\ s a -> s{_pirQuantity = a}) .
+      mapping _Coerce
+
+-- | The CLDR territory code for the item.
+pirTargetCountry :: Lens' PosInventoryResponse (Maybe Text)
+pirTargetCountry
+  = lens _pirTargetCountry
+      (\ s a -> s{_pirTargetCountry = a})
+
+-- | Global Trade Item Number.
+pirGtin :: Lens' PosInventoryResponse (Maybe Text)
+pirGtin = lens _pirGtin (\ s a -> s{_pirGtin = a})
+
+-- | The current price of the item.
+pirPrice :: Lens' PosInventoryResponse (Maybe Price)
+pirPrice = lens _pirPrice (\ s a -> s{_pirPrice = a})
+
+-- | The two-letter ISO 639-1 language code for the item.
+pirContentLanguage :: Lens' PosInventoryResponse (Maybe Text)
+pirContentLanguage
+  = lens _pirContentLanguage
+      (\ s a -> s{_pirContentLanguage = a})
+
+-- | The inventory timestamp, in ISO 8601 format.
+pirTimestamp :: Lens' PosInventoryResponse (Maybe Text)
+pirTimestamp
+  = lens _pirTimestamp (\ s a -> s{_pirTimestamp = a})
+
+instance FromJSON PosInventoryResponse where
+        parseJSON
+          = withObject "PosInventoryResponse"
+              (\ o ->
+                 PosInventoryResponse' <$>
+                   (o .:? "storeCode") <*>
+                     (o .:? "kind" .!= "content#posInventoryResponse")
+                     <*> (o .:? "itemId")
+                     <*> (o .:? "quantity")
+                     <*> (o .:? "targetCountry")
+                     <*> (o .:? "gtin")
+                     <*> (o .:? "price")
+                     <*> (o .:? "contentLanguage")
+                     <*> (o .:? "timestamp"))
+
+instance ToJSON PosInventoryResponse where
+        toJSON PosInventoryResponse'{..}
+          = object
+              (catMaybes
+                 [("storeCode" .=) <$> _pirStoreCode,
+                  Just ("kind" .= _pirKind),
+                  ("itemId" .=) <$> _pirItemId,
+                  ("quantity" .=) <$> _pirQuantity,
+                  ("targetCountry" .=) <$> _pirTargetCountry,
+                  ("gtin" .=) <$> _pirGtin, ("price" .=) <$> _pirPrice,
+                  ("contentLanguage" .=) <$> _pirContentLanguage,
+                  ("timestamp" .=) <$> _pirTimestamp])
+
+--
 -- /See:/ 'accountstatusesCustomBatchRequest' smart constructor.
 newtype AccountstatusesCustomBatchRequest = AccountstatusesCustomBatchRequest'
-    { _aEntries :: Maybe [AccountstatusesCustomBatchRequestEntry]
+    { _acbrEntries :: Maybe [AccountstatusesCustomBatchRequestEntry]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountstatusesCustomBatchRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aEntries'
+-- * 'acbrEntries'
 accountstatusesCustomBatchRequest
     :: AccountstatusesCustomBatchRequest
 accountstatusesCustomBatchRequest =
     AccountstatusesCustomBatchRequest'
-    { _aEntries = Nothing
+    { _acbrEntries = Nothing
     }
 
 -- | The request entries to be processed in the batch.
-aEntries :: Lens' AccountstatusesCustomBatchRequest [AccountstatusesCustomBatchRequestEntry]
-aEntries
-  = lens _aEntries (\ s a -> s{_aEntries = a}) .
+acbrEntries :: Lens' AccountstatusesCustomBatchRequest [AccountstatusesCustomBatchRequestEntry]
+acbrEntries
+  = lens _acbrEntries (\ s a -> s{_acbrEntries = a}) .
       _Default
       . _Coerce
 
@@ -2795,7 +3801,8 @@ instance FromJSON AccountstatusesCustomBatchRequest
 instance ToJSON AccountstatusesCustomBatchRequest
          where
         toJSON AccountstatusesCustomBatchRequest'{..}
-          = object (catMaybes [("entries" .=) <$> _aEntries])
+          = object
+              (catMaybes [("entries" .=) <$> _acbrEntries])
 
 --
 -- /See:/ 'accounttaxListResponse' smart constructor.
@@ -2858,6 +3865,134 @@ instance ToJSON AccounttaxListResponse where
                   ("resources" .=) <$> _alrResources])
 
 --
+-- /See:/ 'liaSettingsRequestInventoryVerificationResponse' smart constructor.
+newtype LiaSettingsRequestInventoryVerificationResponse = LiaSettingsRequestInventoryVerificationResponse'
+    { _lsrivrKind :: Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LiaSettingsRequestInventoryVerificationResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lsrivrKind'
+liaSettingsRequestInventoryVerificationResponse
+    :: LiaSettingsRequestInventoryVerificationResponse
+liaSettingsRequestInventoryVerificationResponse =
+    LiaSettingsRequestInventoryVerificationResponse'
+    { _lsrivrKind = "content#liasettingsRequestInventoryVerificationResponse"
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"content#liasettingsRequestInventoryVerificationResponse\".
+lsrivrKind :: Lens' LiaSettingsRequestInventoryVerificationResponse Text
+lsrivrKind
+  = lens _lsrivrKind (\ s a -> s{_lsrivrKind = a})
+
+instance FromJSON
+         LiaSettingsRequestInventoryVerificationResponse where
+        parseJSON
+          = withObject
+              "LiaSettingsRequestInventoryVerificationResponse"
+              (\ o ->
+                 LiaSettingsRequestInventoryVerificationResponse' <$>
+                   (o .:? "kind" .!=
+                      "content#liasettingsRequestInventoryVerificationResponse"))
+
+instance ToJSON
+         LiaSettingsRequestInventoryVerificationResponse where
+        toJSON
+          LiaSettingsRequestInventoryVerificationResponse'{..}
+          = object (catMaybes [Just ("kind" .= _lsrivrKind)])
+
+--
+-- /See:/ 'orderinvoicesCreateChargeInvoiceResponse' smart constructor.
+data OrderinvoicesCreateChargeInvoiceResponse = OrderinvoicesCreateChargeInvoiceResponse'
+    { _occirKind            :: !Text
+    , _occirExecutionStatus :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OrderinvoicesCreateChargeInvoiceResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'occirKind'
+--
+-- * 'occirExecutionStatus'
+orderinvoicesCreateChargeInvoiceResponse
+    :: OrderinvoicesCreateChargeInvoiceResponse
+orderinvoicesCreateChargeInvoiceResponse =
+    OrderinvoicesCreateChargeInvoiceResponse'
+    { _occirKind = "content#orderinvoicesCreateChargeInvoiceResponse"
+    , _occirExecutionStatus = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"content#orderinvoicesCreateChargeInvoiceResponse\".
+occirKind :: Lens' OrderinvoicesCreateChargeInvoiceResponse Text
+occirKind
+  = lens _occirKind (\ s a -> s{_occirKind = a})
+
+-- | The status of the execution.
+occirExecutionStatus :: Lens' OrderinvoicesCreateChargeInvoiceResponse (Maybe Text)
+occirExecutionStatus
+  = lens _occirExecutionStatus
+      (\ s a -> s{_occirExecutionStatus = a})
+
+instance FromJSON
+         OrderinvoicesCreateChargeInvoiceResponse where
+        parseJSON
+          = withObject
+              "OrderinvoicesCreateChargeInvoiceResponse"
+              (\ o ->
+                 OrderinvoicesCreateChargeInvoiceResponse' <$>
+                   (o .:? "kind" .!=
+                      "content#orderinvoicesCreateChargeInvoiceResponse")
+                     <*> (o .:? "executionStatus"))
+
+instance ToJSON
+         OrderinvoicesCreateChargeInvoiceResponse where
+        toJSON OrderinvoicesCreateChargeInvoiceResponse'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _occirKind),
+                  ("executionStatus" .=) <$> _occirExecutionStatus])
+
+--
+-- /See:/ 'datafeedsFetchNowResponse' smart constructor.
+newtype DatafeedsFetchNowResponse = DatafeedsFetchNowResponse'
+    { _dfnrKind :: Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DatafeedsFetchNowResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dfnrKind'
+datafeedsFetchNowResponse
+    :: DatafeedsFetchNowResponse
+datafeedsFetchNowResponse =
+    DatafeedsFetchNowResponse'
+    { _dfnrKind = "content#datafeedsFetchNowResponse"
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"content#datafeedsFetchNowResponse\".
+dfnrKind :: Lens' DatafeedsFetchNowResponse Text
+dfnrKind = lens _dfnrKind (\ s a -> s{_dfnrKind = a})
+
+instance FromJSON DatafeedsFetchNowResponse where
+        parseJSON
+          = withObject "DatafeedsFetchNowResponse"
+              (\ o ->
+                 DatafeedsFetchNowResponse' <$>
+                   (o .:? "kind" .!=
+                      "content#datafeedsFetchNowResponse"))
+
+instance ToJSON DatafeedsFetchNowResponse where
+        toJSON DatafeedsFetchNowResponse'{..}
+          = object (catMaybes [Just ("kind" .= _dfnrKind)])
+
+--
 -- /See:/ 'ordersGetTestOrderTemplateResponse' smart constructor.
 data OrdersGetTestOrderTemplateResponse = OrdersGetTestOrderTemplateResponse'
     { _ogtotrKind     :: !Text
@@ -2913,11 +4048,14 @@ instance ToJSON OrdersGetTestOrderTemplateResponse
 --
 -- /See:/ 'accountsCustomBatchRequestEntry' smart constructor.
 data AccountsCustomBatchRequestEntry = AccountsCustomBatchRequestEntry'
-    { _accMerchantId :: !(Maybe (Textual Word64))
-    , _accAccount    :: !(Maybe Account)
-    , _accAccountId  :: !(Maybe (Textual Word64))
-    , _accMethod     :: !(Maybe Text)
-    , _accBatchId    :: !(Maybe (Textual Word32))
+    { _accMerchantId  :: !(Maybe (Textual Word64))
+    , _accForce       :: !(Maybe Bool)
+    , _accAccount     :: !(Maybe Account)
+    , _accAccountId   :: !(Maybe (Textual Word64))
+    , _accMethod      :: !(Maybe Text)
+    , _accOverwrite   :: !(Maybe Bool)
+    , _accBatchId     :: !(Maybe (Textual Word32))
+    , _accLinkRequest :: !(Maybe AccountsCustomBatchRequestEntryLinkRequest)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsCustomBatchRequestEntry' with the minimum fields required to make a request.
@@ -2926,22 +4064,31 @@ data AccountsCustomBatchRequestEntry = AccountsCustomBatchRequestEntry'
 --
 -- * 'accMerchantId'
 --
+-- * 'accForce'
+--
 -- * 'accAccount'
 --
 -- * 'accAccountId'
 --
 -- * 'accMethod'
 --
+-- * 'accOverwrite'
+--
 -- * 'accBatchId'
+--
+-- * 'accLinkRequest'
 accountsCustomBatchRequestEntry
     :: AccountsCustomBatchRequestEntry
 accountsCustomBatchRequestEntry =
     AccountsCustomBatchRequestEntry'
     { _accMerchantId = Nothing
+    , _accForce = Nothing
     , _accAccount = Nothing
     , _accAccountId = Nothing
     , _accMethod = Nothing
+    , _accOverwrite = Nothing
     , _accBatchId = Nothing
+    , _accLinkRequest = Nothing
     }
 
 -- | The ID of the managing account.
@@ -2951,22 +4098,34 @@ accMerchantId
       (\ s a -> s{_accMerchantId = a})
       . mapping _Coerce
 
+-- | Whether the account should be deleted if the account has offers. Only
+-- applicable if the method is delete.
+accForce :: Lens' AccountsCustomBatchRequestEntry (Maybe Bool)
+accForce = lens _accForce (\ s a -> s{_accForce = a})
+
 -- | The account to create or update. Only defined if the method is insert or
 -- update.
 accAccount :: Lens' AccountsCustomBatchRequestEntry (Maybe Account)
 accAccount
   = lens _accAccount (\ s a -> s{_accAccount = a})
 
--- | The ID of the account to get or delete. Only defined if the method is
--- get or delete.
+-- | The ID of the targeted account. Only defined if the method is not
+-- insert.
 accAccountId :: Lens' AccountsCustomBatchRequestEntry (Maybe Word64)
 accAccountId
   = lens _accAccountId (\ s a -> s{_accAccountId = a})
       . mapping _Coerce
 
+-- | The method of the batch entry.
 accMethod :: Lens' AccountsCustomBatchRequestEntry (Maybe Text)
 accMethod
   = lens _accMethod (\ s a -> s{_accMethod = a})
+
+-- | Only applicable if the method is claimwebsite. Indicates whether or not
+-- to take the claim from another account in case there is a conflict.
+accOverwrite :: Lens' AccountsCustomBatchRequestEntry (Maybe Bool)
+accOverwrite
+  = lens _accOverwrite (\ s a -> s{_accOverwrite = a})
 
 -- | An entry ID, unique within the batch request.
 accBatchId :: Lens' AccountsCustomBatchRequestEntry (Maybe Word32)
@@ -2974,26 +4133,38 @@ accBatchId
   = lens _accBatchId (\ s a -> s{_accBatchId = a}) .
       mapping _Coerce
 
+-- | Details about the link request.
+accLinkRequest :: Lens' AccountsCustomBatchRequestEntry (Maybe AccountsCustomBatchRequestEntryLinkRequest)
+accLinkRequest
+  = lens _accLinkRequest
+      (\ s a -> s{_accLinkRequest = a})
+
 instance FromJSON AccountsCustomBatchRequestEntry
          where
         parseJSON
           = withObject "AccountsCustomBatchRequestEntry"
               (\ o ->
                  AccountsCustomBatchRequestEntry' <$>
-                   (o .:? "merchantId") <*> (o .:? "account") <*>
-                     (o .:? "accountId")
+                   (o .:? "merchantId") <*> (o .:? "force") <*>
+                     (o .:? "account")
+                     <*> (o .:? "accountId")
                      <*> (o .:? "method")
-                     <*> (o .:? "batchId"))
+                     <*> (o .:? "overwrite")
+                     <*> (o .:? "batchId")
+                     <*> (o .:? "linkRequest"))
 
 instance ToJSON AccountsCustomBatchRequestEntry where
         toJSON AccountsCustomBatchRequestEntry'{..}
           = object
               (catMaybes
                  [("merchantId" .=) <$> _accMerchantId,
+                  ("force" .=) <$> _accForce,
                   ("account" .=) <$> _accAccount,
                   ("accountId" .=) <$> _accAccountId,
                   ("method" .=) <$> _accMethod,
-                  ("batchId" .=) <$> _accBatchId])
+                  ("overwrite" .=) <$> _accOverwrite,
+                  ("batchId" .=) <$> _accBatchId,
+                  ("linkRequest" .=) <$> _accLinkRequest])
 
 --
 -- /See:/ 'weight' smart constructor.
@@ -3036,6 +4207,121 @@ instance ToJSON Weight where
           = object
               (catMaybes
                  [("value" .=) <$> _wValue, ("unit" .=) <$> _wUnit])
+
+--
+-- /See:/ 'orderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption' smart constructor.
+data OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption = OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption'
+    { _ocbrecriroReason      :: !(Maybe Text)
+    , _ocbrecriroDescription :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ocbrecriroReason'
+--
+-- * 'ocbrecriroDescription'
+orderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption
+    :: OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption
+orderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption =
+    OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption'
+    { _ocbrecriroReason = Nothing
+    , _ocbrecriroDescription = Nothing
+    }
+
+-- | [required] Reason for the refund.
+ocbrecriroReason :: Lens' OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption (Maybe Text)
+ocbrecriroReason
+  = lens _ocbrecriroReason
+      (\ s a -> s{_ocbrecriroReason = a})
+
+-- | Optional description of the refund reason.
+ocbrecriroDescription :: Lens' OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption (Maybe Text)
+ocbrecriroDescription
+  = lens _ocbrecriroDescription
+      (\ s a -> s{_ocbrecriroDescription = a})
+
+instance FromJSON
+         OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption
+         where
+        parseJSON
+          = withObject
+              "OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption"
+              (\ o ->
+                 OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption'
+                   <$> (o .:? "reason") <*> (o .:? "description"))
+
+instance ToJSON
+         OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption
+         where
+        toJSON
+          OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption'{..}
+          = object
+              (catMaybes
+                 [("reason" .=) <$> _ocbrecriroReason,
+                  ("description" .=) <$> _ocbrecriroDescription])
+
+--
+-- /See:/ 'liaSettingsListResponse' smart constructor.
+data LiaSettingsListResponse = LiaSettingsListResponse'
+    { _lslrNextPageToken :: !(Maybe Text)
+    , _lslrKind          :: !Text
+    , _lslrResources     :: !(Maybe [LiaSettings])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LiaSettingsListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lslrNextPageToken'
+--
+-- * 'lslrKind'
+--
+-- * 'lslrResources'
+liaSettingsListResponse
+    :: LiaSettingsListResponse
+liaSettingsListResponse =
+    LiaSettingsListResponse'
+    { _lslrNextPageToken = Nothing
+    , _lslrKind = "content#liasettingsListResponse"
+    , _lslrResources = Nothing
+    }
+
+-- | The token for the retrieval of the next page of LIA settings.
+lslrNextPageToken :: Lens' LiaSettingsListResponse (Maybe Text)
+lslrNextPageToken
+  = lens _lslrNextPageToken
+      (\ s a -> s{_lslrNextPageToken = a})
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"content#liasettingsListResponse\".
+lslrKind :: Lens' LiaSettingsListResponse Text
+lslrKind = lens _lslrKind (\ s a -> s{_lslrKind = a})
+
+lslrResources :: Lens' LiaSettingsListResponse [LiaSettings]
+lslrResources
+  = lens _lslrResources
+      (\ s a -> s{_lslrResources = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON LiaSettingsListResponse where
+        parseJSON
+          = withObject "LiaSettingsListResponse"
+              (\ o ->
+                 LiaSettingsListResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "content#liasettingsListResponse")
+                     <*> (o .:? "resources" .!= mempty))
+
+instance ToJSON LiaSettingsListResponse where
+        toJSON LiaSettingsListResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lslrNextPageToken,
+                  Just ("kind" .= _lslrKind),
+                  ("resources" .=) <$> _lslrResources])
 
 -- | An error returned by the API.
 --
@@ -3154,57 +4440,116 @@ instance ToJSON ProductstatusesListResponse where
                   ("resources" .=) <$> _plrResources])
 
 --
--- /See:/ 'ordersRefundResponse' smart constructor.
-data OrdersRefundResponse = OrdersRefundResponse'
-    { _orrKind            :: !Text
-    , _orrExecutionStatus :: !(Maybe Text)
+-- /See:/ 'orderPromotionItem' smart constructor.
+data OrderPromotionItem = OrderPromotionItem'
+    { _opiQuantity   :: !(Maybe (Textual Int32))
+    , _opiLineItemId :: !(Maybe Text)
+    , _opiProductId  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrdersRefundResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'OrderPromotionItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'orrKind'
+-- * 'opiQuantity'
 --
--- * 'orrExecutionStatus'
-ordersRefundResponse
-    :: OrdersRefundResponse
-ordersRefundResponse =
-    OrdersRefundResponse'
-    { _orrKind = "content#ordersRefundResponse"
-    , _orrExecutionStatus = Nothing
+-- * 'opiLineItemId'
+--
+-- * 'opiProductId'
+orderPromotionItem
+    :: OrderPromotionItem
+orderPromotionItem =
+    OrderPromotionItem'
+    { _opiQuantity = Nothing
+    , _opiLineItemId = Nothing
+    , _opiProductId = Nothing
     }
 
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"content#ordersRefundResponse\".
-orrKind :: Lens' OrdersRefundResponse Text
-orrKind = lens _orrKind (\ s a -> s{_orrKind = a})
+-- | The quantity of the associated product.
+opiQuantity :: Lens' OrderPromotionItem (Maybe Int32)
+opiQuantity
+  = lens _opiQuantity (\ s a -> s{_opiQuantity = a}) .
+      mapping _Coerce
 
--- | The status of the execution.
-orrExecutionStatus :: Lens' OrdersRefundResponse (Maybe Text)
-orrExecutionStatus
-  = lens _orrExecutionStatus
-      (\ s a -> s{_orrExecutionStatus = a})
+opiLineItemId :: Lens' OrderPromotionItem (Maybe Text)
+opiLineItemId
+  = lens _opiLineItemId
+      (\ s a -> s{_opiLineItemId = a})
 
-instance FromJSON OrdersRefundResponse where
+opiProductId :: Lens' OrderPromotionItem (Maybe Text)
+opiProductId
+  = lens _opiProductId (\ s a -> s{_opiProductId = a})
+
+instance FromJSON OrderPromotionItem where
         parseJSON
-          = withObject "OrdersRefundResponse"
+          = withObject "OrderPromotionItem"
               (\ o ->
-                 OrdersRefundResponse' <$>
-                   (o .:? "kind" .!= "content#ordersRefundResponse") <*>
-                     (o .:? "executionStatus"))
+                 OrderPromotionItem' <$>
+                   (o .:? "quantity") <*> (o .:? "lineItemId") <*>
+                     (o .:? "productId"))
 
-instance ToJSON OrdersRefundResponse where
-        toJSON OrdersRefundResponse'{..}
+instance ToJSON OrderPromotionItem where
+        toJSON OrderPromotionItem'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _orrKind),
-                  ("executionStatus" .=) <$> _orrExecutionStatus])
+                 [("quantity" .=) <$> _opiQuantity,
+                  ("lineItemId" .=) <$> _opiLineItemId,
+                  ("productId" .=) <$> _opiProductId])
+
+--
+-- /See:/ 'posCustomBatchResponse' smart constructor.
+data PosCustomBatchResponse = PosCustomBatchResponse'
+    { _posEntries :: !(Maybe [PosCustomBatchResponseEntry])
+    , _posKind    :: !Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PosCustomBatchResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'posEntries'
+--
+-- * 'posKind'
+posCustomBatchResponse
+    :: PosCustomBatchResponse
+posCustomBatchResponse =
+    PosCustomBatchResponse'
+    { _posEntries = Nothing
+    , _posKind = "content#posCustomBatchResponse"
+    }
+
+-- | The result of the execution of the batch requests.
+posEntries :: Lens' PosCustomBatchResponse [PosCustomBatchResponseEntry]
+posEntries
+  = lens _posEntries (\ s a -> s{_posEntries = a}) .
+      _Default
+      . _Coerce
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"content#posCustomBatchResponse\".
+posKind :: Lens' PosCustomBatchResponse Text
+posKind = lens _posKind (\ s a -> s{_posKind = a})
+
+instance FromJSON PosCustomBatchResponse where
+        parseJSON
+          = withObject "PosCustomBatchResponse"
+              (\ o ->
+                 PosCustomBatchResponse' <$>
+                   (o .:? "entries" .!= mempty) <*>
+                     (o .:? "kind" .!= "content#posCustomBatchResponse"))
+
+instance ToJSON PosCustomBatchResponse where
+        toJSON PosCustomBatchResponse'{..}
+          = object
+              (catMaybes
+                 [("entries" .=) <$> _posEntries,
+                  Just ("kind" .= _posKind)])
 
 --
 -- /See:/ 'ordersCreateTestOrderRequest' smart constructor.
 data OrdersCreateTestOrderRequest = OrdersCreateTestOrderRequest'
     { _octorTemplateName :: !(Maybe Text)
+    , _octorCountry      :: !(Maybe Text)
     , _octorTestOrder    :: !(Maybe TestOrder)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3214,12 +4559,15 @@ data OrdersCreateTestOrderRequest = OrdersCreateTestOrderRequest'
 --
 -- * 'octorTemplateName'
 --
+-- * 'octorCountry'
+--
 -- * 'octorTestOrder'
 ordersCreateTestOrderRequest
     :: OrdersCreateTestOrderRequest
 ordersCreateTestOrderRequest =
     OrdersCreateTestOrderRequest'
     { _octorTemplateName = Nothing
+    , _octorCountry = Nothing
     , _octorTestOrder = Nothing
     }
 
@@ -3230,6 +4578,14 @@ octorTemplateName :: Lens' OrdersCreateTestOrderRequest (Maybe Text)
 octorTemplateName
   = lens _octorTemplateName
       (\ s a -> s{_octorTemplateName = a})
+
+-- | The CLDR territory code of the country of the test order to create.
+-- Affects the currency and addresses of orders created via template_name,
+-- or the addresses of orders created via test_order. Acceptable values
+-- are: - \"US\" - \"FR\" Defaults to US.
+octorCountry :: Lens' OrdersCreateTestOrderRequest (Maybe Text)
+octorCountry
+  = lens _octorCountry (\ s a -> s{_octorCountry = a})
 
 -- | The test order to create.
 octorTestOrder :: Lens' OrdersCreateTestOrderRequest (Maybe TestOrder)
@@ -3242,13 +4598,15 @@ instance FromJSON OrdersCreateTestOrderRequest where
           = withObject "OrdersCreateTestOrderRequest"
               (\ o ->
                  OrdersCreateTestOrderRequest' <$>
-                   (o .:? "templateName") <*> (o .:? "testOrder"))
+                   (o .:? "templateName") <*> (o .:? "country") <*>
+                     (o .:? "testOrder"))
 
 instance ToJSON OrdersCreateTestOrderRequest where
         toJSON OrdersCreateTestOrderRequest'{..}
           = object
               (catMaybes
                  [("templateName" .=) <$> _octorTemplateName,
+                  ("country" .=) <$> _octorCountry,
                   ("testOrder" .=) <$> _octorTestOrder])
 
 --
@@ -3297,88 +4655,180 @@ instance ToJSON AccountUser where
                  [("admin" .=) <$> _auAdmin,
                   ("emailAddress" .=) <$> _auEmailAddress])
 
--- | An example of an item that has poor data quality. An item value on the
--- landing page differs from what is submitted, or conflicts with a policy.
 --
--- /See:/ 'accountStatusExampleItem' smart constructor.
-data AccountStatusExampleItem = AccountStatusExampleItem'
-    { _aseiSubmittedValue     :: !(Maybe Text)
-    , _aseiLink               :: !(Maybe Text)
-    , _aseiItemId             :: !(Maybe Text)
-    , _aseiTitle              :: !(Maybe Text)
-    , _aseiValueOnLandingPage :: !(Maybe Text)
+-- /See:/ 'accountCustomerService' smart constructor.
+data AccountCustomerService = AccountCustomerService'
+    { _acsEmail       :: !(Maybe Text)
+    , _acsURL         :: !(Maybe Text)
+    , _acsPhoneNumber :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountStatusExampleItem' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountCustomerService' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aseiSubmittedValue'
+-- * 'acsEmail'
 --
--- * 'aseiLink'
+-- * 'acsURL'
 --
--- * 'aseiItemId'
---
--- * 'aseiTitle'
---
--- * 'aseiValueOnLandingPage'
-accountStatusExampleItem
-    :: AccountStatusExampleItem
-accountStatusExampleItem =
-    AccountStatusExampleItem'
-    { _aseiSubmittedValue = Nothing
-    , _aseiLink = Nothing
-    , _aseiItemId = Nothing
-    , _aseiTitle = Nothing
-    , _aseiValueOnLandingPage = Nothing
+-- * 'acsPhoneNumber'
+accountCustomerService
+    :: AccountCustomerService
+accountCustomerService =
+    AccountCustomerService'
+    { _acsEmail = Nothing
+    , _acsURL = Nothing
+    , _acsPhoneNumber = Nothing
     }
 
--- | The item value that was submitted.
-aseiSubmittedValue :: Lens' AccountStatusExampleItem (Maybe Text)
-aseiSubmittedValue
-  = lens _aseiSubmittedValue
-      (\ s a -> s{_aseiSubmittedValue = a})
+-- | Customer service email.
+acsEmail :: Lens' AccountCustomerService (Maybe Text)
+acsEmail = lens _acsEmail (\ s a -> s{_acsEmail = a})
 
--- | Landing page of the item.
-aseiLink :: Lens' AccountStatusExampleItem (Maybe Text)
-aseiLink = lens _aseiLink (\ s a -> s{_aseiLink = a})
+-- | Customer service URL.
+acsURL :: Lens' AccountCustomerService (Maybe Text)
+acsURL = lens _acsURL (\ s a -> s{_acsURL = a})
 
--- | Unique item ID as specified in the uploaded product data.
-aseiItemId :: Lens' AccountStatusExampleItem (Maybe Text)
-aseiItemId
-  = lens _aseiItemId (\ s a -> s{_aseiItemId = a})
+-- | Customer service phone number.
+acsPhoneNumber :: Lens' AccountCustomerService (Maybe Text)
+acsPhoneNumber
+  = lens _acsPhoneNumber
+      (\ s a -> s{_acsPhoneNumber = a})
 
--- | Title of the item.
-aseiTitle :: Lens' AccountStatusExampleItem (Maybe Text)
-aseiTitle
-  = lens _aseiTitle (\ s a -> s{_aseiTitle = a})
-
--- | The actual value on the landing page.
-aseiValueOnLandingPage :: Lens' AccountStatusExampleItem (Maybe Text)
-aseiValueOnLandingPage
-  = lens _aseiValueOnLandingPage
-      (\ s a -> s{_aseiValueOnLandingPage = a})
-
-instance FromJSON AccountStatusExampleItem where
+instance FromJSON AccountCustomerService where
         parseJSON
-          = withObject "AccountStatusExampleItem"
+          = withObject "AccountCustomerService"
               (\ o ->
-                 AccountStatusExampleItem' <$>
-                   (o .:? "submittedValue") <*> (o .:? "link") <*>
-                     (o .:? "itemId")
-                     <*> (o .:? "title")
-                     <*> (o .:? "valueOnLandingPage"))
+                 AccountCustomerService' <$>
+                   (o .:? "email") <*> (o .:? "url") <*>
+                     (o .:? "phoneNumber"))
 
-instance ToJSON AccountStatusExampleItem where
-        toJSON AccountStatusExampleItem'{..}
+instance ToJSON AccountCustomerService where
+        toJSON AccountCustomerService'{..}
           = object
               (catMaybes
-                 [("submittedValue" .=) <$> _aseiSubmittedValue,
-                  ("link" .=) <$> _aseiLink,
-                  ("itemId" .=) <$> _aseiItemId,
-                  ("title" .=) <$> _aseiTitle,
-                  ("valueOnLandingPage" .=) <$>
-                    _aseiValueOnLandingPage])
+                 [("email" .=) <$> _acsEmail, ("url" .=) <$> _acsURL,
+                  ("phoneNumber" .=) <$> _acsPhoneNumber])
+
+--
+-- /See:/ 'gmbAccountsGmbAccount' smart constructor.
+data GmbAccountsGmbAccount = GmbAccountsGmbAccount'
+    { _gagaEmail        :: !(Maybe Text)
+    , _gagaListingCount :: !(Maybe (Textual Word64))
+    , _gagaName         :: !(Maybe Text)
+    , _gagaType         :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GmbAccountsGmbAccount' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gagaEmail'
+--
+-- * 'gagaListingCount'
+--
+-- * 'gagaName'
+--
+-- * 'gagaType'
+gmbAccountsGmbAccount
+    :: GmbAccountsGmbAccount
+gmbAccountsGmbAccount =
+    GmbAccountsGmbAccount'
+    { _gagaEmail = Nothing
+    , _gagaListingCount = Nothing
+    , _gagaName = Nothing
+    , _gagaType = Nothing
+    }
+
+-- | The email which identifies the GMB account.
+gagaEmail :: Lens' GmbAccountsGmbAccount (Maybe Text)
+gagaEmail
+  = lens _gagaEmail (\ s a -> s{_gagaEmail = a})
+
+-- | Number of listings under this account.
+gagaListingCount :: Lens' GmbAccountsGmbAccount (Maybe Word64)
+gagaListingCount
+  = lens _gagaListingCount
+      (\ s a -> s{_gagaListingCount = a})
+      . mapping _Coerce
+
+-- | The name of the GMB account.
+gagaName :: Lens' GmbAccountsGmbAccount (Maybe Text)
+gagaName = lens _gagaName (\ s a -> s{_gagaName = a})
+
+-- | The type of the GMB account (User or Business).
+gagaType :: Lens' GmbAccountsGmbAccount (Maybe Text)
+gagaType = lens _gagaType (\ s a -> s{_gagaType = a})
+
+instance FromJSON GmbAccountsGmbAccount where
+        parseJSON
+          = withObject "GmbAccountsGmbAccount"
+              (\ o ->
+                 GmbAccountsGmbAccount' <$>
+                   (o .:? "email") <*> (o .:? "listingCount") <*>
+                     (o .:? "name")
+                     <*> (o .:? "type"))
+
+instance ToJSON GmbAccountsGmbAccount where
+        toJSON GmbAccountsGmbAccount'{..}
+          = object
+              (catMaybes
+                 [("email" .=) <$> _gagaEmail,
+                  ("listingCount" .=) <$> _gagaListingCount,
+                  ("name" .=) <$> _gagaName,
+                  ("type" .=) <$> _gagaType])
+
+--
+-- /See:/ 'ordersInStoreRefundLineItemResponse' smart constructor.
+data OrdersInStoreRefundLineItemResponse = OrdersInStoreRefundLineItemResponse'
+    { _oisrlirKind            :: !Text
+    , _oisrlirExecutionStatus :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OrdersInStoreRefundLineItemResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oisrlirKind'
+--
+-- * 'oisrlirExecutionStatus'
+ordersInStoreRefundLineItemResponse
+    :: OrdersInStoreRefundLineItemResponse
+ordersInStoreRefundLineItemResponse =
+    OrdersInStoreRefundLineItemResponse'
+    { _oisrlirKind = "content#ordersInStoreRefundLineItemResponse"
+    , _oisrlirExecutionStatus = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"content#ordersInStoreRefundLineItemResponse\".
+oisrlirKind :: Lens' OrdersInStoreRefundLineItemResponse Text
+oisrlirKind
+  = lens _oisrlirKind (\ s a -> s{_oisrlirKind = a})
+
+-- | The status of the execution.
+oisrlirExecutionStatus :: Lens' OrdersInStoreRefundLineItemResponse (Maybe Text)
+oisrlirExecutionStatus
+  = lens _oisrlirExecutionStatus
+      (\ s a -> s{_oisrlirExecutionStatus = a})
+
+instance FromJSON OrdersInStoreRefundLineItemResponse
+         where
+        parseJSON
+          = withObject "OrdersInStoreRefundLineItemResponse"
+              (\ o ->
+                 OrdersInStoreRefundLineItemResponse' <$>
+                   (o .:? "kind" .!=
+                      "content#ordersInStoreRefundLineItemResponse")
+                     <*> (o .:? "executionStatus"))
+
+instance ToJSON OrdersInStoreRefundLineItemResponse
+         where
+        toJSON OrdersInStoreRefundLineItemResponse'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _oisrlirKind),
+                  ("executionStatus" .=) <$> _oisrlirExecutionStatus])
 
 -- | A batch entry encoding a single non-batch datafeeds request.
 --
@@ -3432,7 +4882,7 @@ dcbreMethod :: Lens' DatafeedsCustomBatchRequestEntry (Maybe Text)
 dcbreMethod
   = lens _dcbreMethod (\ s a -> s{_dcbreMethod = a})
 
--- | The ID of the data feed to get or delete.
+-- | The ID of the data feed to get, delete or fetch.
 dcbreDatafeedId :: Lens' DatafeedsCustomBatchRequestEntry (Maybe Word64)
 dcbreDatafeedId
   = lens _dcbreDatafeedId
@@ -3466,6 +4916,270 @@ instance ToJSON DatafeedsCustomBatchRequestEntry
                   ("method" .=) <$> _dcbreMethod,
                   ("datafeedId" .=) <$> _dcbreDatafeedId,
                   ("batchId" .=) <$> _dcbreBatchId])
+
+--
+-- /See:/ 'orderCustomerMarketingRightsInfo' smart constructor.
+data OrderCustomerMarketingRightsInfo = OrderCustomerMarketingRightsInfo'
+    { _ocmriExplicitMarketingPreference :: !(Maybe Text)
+    , _ocmriMarketingEmailAddress       :: !(Maybe Text)
+    , _ocmriLastUpdatedTimestamp        :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OrderCustomerMarketingRightsInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ocmriExplicitMarketingPreference'
+--
+-- * 'ocmriMarketingEmailAddress'
+--
+-- * 'ocmriLastUpdatedTimestamp'
+orderCustomerMarketingRightsInfo
+    :: OrderCustomerMarketingRightsInfo
+orderCustomerMarketingRightsInfo =
+    OrderCustomerMarketingRightsInfo'
+    { _ocmriExplicitMarketingPreference = Nothing
+    , _ocmriMarketingEmailAddress = Nothing
+    , _ocmriLastUpdatedTimestamp = Nothing
+    }
+
+-- | Last known user selection regarding marketing preferences. In certain
+-- cases this selection might not be known, so this field would be empty.
+ocmriExplicitMarketingPreference :: Lens' OrderCustomerMarketingRightsInfo (Maybe Text)
+ocmriExplicitMarketingPreference
+  = lens _ocmriExplicitMarketingPreference
+      (\ s a -> s{_ocmriExplicitMarketingPreference = a})
+
+-- | Email address that can be used for marketing purposes. This field is
+-- only filled when explicitMarketingPreference is equal to \'granted\'.
+ocmriMarketingEmailAddress :: Lens' OrderCustomerMarketingRightsInfo (Maybe Text)
+ocmriMarketingEmailAddress
+  = lens _ocmriMarketingEmailAddress
+      (\ s a -> s{_ocmriMarketingEmailAddress = a})
+
+-- | Timestamp when last time marketing preference was updated. Could be
+-- empty, if user wasn\'t offered a selection yet.
+ocmriLastUpdatedTimestamp :: Lens' OrderCustomerMarketingRightsInfo (Maybe Text)
+ocmriLastUpdatedTimestamp
+  = lens _ocmriLastUpdatedTimestamp
+      (\ s a -> s{_ocmriLastUpdatedTimestamp = a})
+
+instance FromJSON OrderCustomerMarketingRightsInfo
+         where
+        parseJSON
+          = withObject "OrderCustomerMarketingRightsInfo"
+              (\ o ->
+                 OrderCustomerMarketingRightsInfo' <$>
+                   (o .:? "explicitMarketingPreference") <*>
+                     (o .:? "marketingEmailAddress")
+                     <*> (o .:? "lastUpdatedTimestamp"))
+
+instance ToJSON OrderCustomerMarketingRightsInfo
+         where
+        toJSON OrderCustomerMarketingRightsInfo'{..}
+          = object
+              (catMaybes
+                 [("explicitMarketingPreference" .=) <$>
+                    _ocmriExplicitMarketingPreference,
+                  ("marketingEmailAddress" .=) <$>
+                    _ocmriMarketingEmailAddress,
+                  ("lastUpdatedTimestamp" .=) <$>
+                    _ocmriLastUpdatedTimestamp])
+
+--
+-- /See:/ 'merchantOrderReturnItem' smart constructor.
+data MerchantOrderReturnItem = MerchantOrderReturnItem'
+    { _moriReturnShipmentIds    :: !(Maybe [Text])
+    , _moriMerchantReturnReason :: !(Maybe RefundReason)
+    , _moriState                :: !(Maybe Text)
+    , _moriCustomerReturnReason :: !(Maybe CustomerReturnReason)
+    , _moriItemId               :: !(Maybe Text)
+    , _moriProduct              :: !(Maybe OrderLineItemProduct)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'MerchantOrderReturnItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'moriReturnShipmentIds'
+--
+-- * 'moriMerchantReturnReason'
+--
+-- * 'moriState'
+--
+-- * 'moriCustomerReturnReason'
+--
+-- * 'moriItemId'
+--
+-- * 'moriProduct'
+merchantOrderReturnItem
+    :: MerchantOrderReturnItem
+merchantOrderReturnItem =
+    MerchantOrderReturnItem'
+    { _moriReturnShipmentIds = Nothing
+    , _moriMerchantReturnReason = Nothing
+    , _moriState = Nothing
+    , _moriCustomerReturnReason = Nothing
+    , _moriItemId = Nothing
+    , _moriProduct = Nothing
+    }
+
+moriReturnShipmentIds :: Lens' MerchantOrderReturnItem [Text]
+moriReturnShipmentIds
+  = lens _moriReturnShipmentIds
+      (\ s a -> s{_moriReturnShipmentIds = a})
+      . _Default
+      . _Coerce
+
+moriMerchantReturnReason :: Lens' MerchantOrderReturnItem (Maybe RefundReason)
+moriMerchantReturnReason
+  = lens _moriMerchantReturnReason
+      (\ s a -> s{_moriMerchantReturnReason = a})
+
+moriState :: Lens' MerchantOrderReturnItem (Maybe Text)
+moriState
+  = lens _moriState (\ s a -> s{_moriState = a})
+
+moriCustomerReturnReason :: Lens' MerchantOrderReturnItem (Maybe CustomerReturnReason)
+moriCustomerReturnReason
+  = lens _moriCustomerReturnReason
+      (\ s a -> s{_moriCustomerReturnReason = a})
+
+moriItemId :: Lens' MerchantOrderReturnItem (Maybe Text)
+moriItemId
+  = lens _moriItemId (\ s a -> s{_moriItemId = a})
+
+moriProduct :: Lens' MerchantOrderReturnItem (Maybe OrderLineItemProduct)
+moriProduct
+  = lens _moriProduct (\ s a -> s{_moriProduct = a})
+
+instance FromJSON MerchantOrderReturnItem where
+        parseJSON
+          = withObject "MerchantOrderReturnItem"
+              (\ o ->
+                 MerchantOrderReturnItem' <$>
+                   (o .:? "returnShipmentIds" .!= mempty) <*>
+                     (o .:? "merchantReturnReason")
+                     <*> (o .:? "state")
+                     <*> (o .:? "customerReturnReason")
+                     <*> (o .:? "itemId")
+                     <*> (o .:? "product"))
+
+instance ToJSON MerchantOrderReturnItem where
+        toJSON MerchantOrderReturnItem'{..}
+          = object
+              (catMaybes
+                 [("returnShipmentIds" .=) <$> _moriReturnShipmentIds,
+                  ("merchantReturnReason" .=) <$>
+                    _moriMerchantReturnReason,
+                  ("state" .=) <$> _moriState,
+                  ("customerReturnReason" .=) <$>
+                    _moriCustomerReturnReason,
+                  ("itemId" .=) <$> _moriItemId,
+                  ("product" .=) <$> _moriProduct])
+
+--
+-- /See:/ 'accountStatusAccountLevelIssue' smart constructor.
+data AccountStatusAccountLevelIssue = AccountStatusAccountLevelIssue'
+    { _asaliDestination   :: !(Maybe Text)
+    , _asaliCountry       :: !(Maybe Text)
+    , _asaliSeverity      :: !(Maybe Text)
+    , _asaliDocumentation :: !(Maybe Text)
+    , _asaliId            :: !(Maybe Text)
+    , _asaliTitle         :: !(Maybe Text)
+    , _asaliDetail        :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AccountStatusAccountLevelIssue' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'asaliDestination'
+--
+-- * 'asaliCountry'
+--
+-- * 'asaliSeverity'
+--
+-- * 'asaliDocumentation'
+--
+-- * 'asaliId'
+--
+-- * 'asaliTitle'
+--
+-- * 'asaliDetail'
+accountStatusAccountLevelIssue
+    :: AccountStatusAccountLevelIssue
+accountStatusAccountLevelIssue =
+    AccountStatusAccountLevelIssue'
+    { _asaliDestination = Nothing
+    , _asaliCountry = Nothing
+    , _asaliSeverity = Nothing
+    , _asaliDocumentation = Nothing
+    , _asaliId = Nothing
+    , _asaliTitle = Nothing
+    , _asaliDetail = Nothing
+    }
+
+-- | The destination the issue applies to.
+asaliDestination :: Lens' AccountStatusAccountLevelIssue (Maybe Text)
+asaliDestination
+  = lens _asaliDestination
+      (\ s a -> s{_asaliDestination = a})
+
+-- | Country for which this issue is reported.
+asaliCountry :: Lens' AccountStatusAccountLevelIssue (Maybe Text)
+asaliCountry
+  = lens _asaliCountry (\ s a -> s{_asaliCountry = a})
+
+-- | Severity of the issue.
+asaliSeverity :: Lens' AccountStatusAccountLevelIssue (Maybe Text)
+asaliSeverity
+  = lens _asaliSeverity
+      (\ s a -> s{_asaliSeverity = a})
+
+-- | The URL of a web page to help resolving this issue.
+asaliDocumentation :: Lens' AccountStatusAccountLevelIssue (Maybe Text)
+asaliDocumentation
+  = lens _asaliDocumentation
+      (\ s a -> s{_asaliDocumentation = a})
+
+-- | Issue identifier.
+asaliId :: Lens' AccountStatusAccountLevelIssue (Maybe Text)
+asaliId = lens _asaliId (\ s a -> s{_asaliId = a})
+
+-- | Short description of the issue.
+asaliTitle :: Lens' AccountStatusAccountLevelIssue (Maybe Text)
+asaliTitle
+  = lens _asaliTitle (\ s a -> s{_asaliTitle = a})
+
+-- | Additional details about the issue.
+asaliDetail :: Lens' AccountStatusAccountLevelIssue (Maybe Text)
+asaliDetail
+  = lens _asaliDetail (\ s a -> s{_asaliDetail = a})
+
+instance FromJSON AccountStatusAccountLevelIssue
+         where
+        parseJSON
+          = withObject "AccountStatusAccountLevelIssue"
+              (\ o ->
+                 AccountStatusAccountLevelIssue' <$>
+                   (o .:? "destination") <*> (o .:? "country") <*>
+                     (o .:? "severity")
+                     <*> (o .:? "documentation")
+                     <*> (o .:? "id")
+                     <*> (o .:? "title")
+                     <*> (o .:? "detail"))
+
+instance ToJSON AccountStatusAccountLevelIssue where
+        toJSON AccountStatusAccountLevelIssue'{..}
+          = object
+              (catMaybes
+                 [("destination" .=) <$> _asaliDestination,
+                  ("country" .=) <$> _asaliCountry,
+                  ("severity" .=) <$> _asaliSeverity,
+                  ("documentation" .=) <$> _asaliDocumentation,
+                  ("id" .=) <$> _asaliId, ("title" .=) <$> _asaliTitle,
+                  ("detail" .=) <$> _asaliDetail])
 
 -- | The single value of a rate group or the value of a rate group table\'s
 -- cell. Exactly one of noShipping, flatRate, pricePercentage,
@@ -3618,6 +5332,7 @@ data DatafeedFetchSchedule = DatafeedFetchSchedule'
     , _dfsHour         :: !(Maybe (Textual Word32))
     , _dfsWeekday      :: !(Maybe Text)
     , _dfsTimeZone     :: !(Maybe Text)
+    , _dfsPaused       :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatafeedFetchSchedule' with the minimum fields required to make a request.
@@ -3639,6 +5354,8 @@ data DatafeedFetchSchedule = DatafeedFetchSchedule'
 -- * 'dfsWeekday'
 --
 -- * 'dfsTimeZone'
+--
+-- * 'dfsPaused'
 datafeedFetchSchedule
     :: DatafeedFetchSchedule
 datafeedFetchSchedule =
@@ -3651,6 +5368,7 @@ datafeedFetchSchedule =
     , _dfsHour = Nothing
     , _dfsWeekday = Nothing
     , _dfsTimeZone = Nothing
+    , _dfsPaused = Nothing
     }
 
 -- | The URL where the feed file can be fetched. Google Merchant Center will
@@ -3703,6 +5421,11 @@ dfsTimeZone :: Lens' DatafeedFetchSchedule (Maybe Text)
 dfsTimeZone
   = lens _dfsTimeZone (\ s a -> s{_dfsTimeZone = a})
 
+-- | Whether the scheduled fetch is paused or not.
+dfsPaused :: Lens' DatafeedFetchSchedule (Maybe Bool)
+dfsPaused
+  = lens _dfsPaused (\ s a -> s{_dfsPaused = a})
+
 instance FromJSON DatafeedFetchSchedule where
         parseJSON
           = withObject "DatafeedFetchSchedule"
@@ -3714,7 +5437,8 @@ instance FromJSON DatafeedFetchSchedule where
                      <*> (o .:? "dayOfMonth")
                      <*> (o .:? "hour")
                      <*> (o .:? "weekday")
-                     <*> (o .:? "timeZone"))
+                     <*> (o .:? "timeZone")
+                     <*> (o .:? "paused"))
 
 instance ToJSON DatafeedFetchSchedule where
         toJSON DatafeedFetchSchedule'{..}
@@ -3727,44 +5451,111 @@ instance ToJSON DatafeedFetchSchedule where
                   ("dayOfMonth" .=) <$> _dfsDayOfMonth,
                   ("hour" .=) <$> _dfsHour,
                   ("weekday" .=) <$> _dfsWeekday,
-                  ("timeZone" .=) <$> _dfsTimeZone])
+                  ("timeZone" .=) <$> _dfsTimeZone,
+                  ("paused" .=) <$> _dfsPaused])
 
+-- | Store resource.
 --
--- /See:/ 'ordersCustomBatchRequest' smart constructor.
-newtype OrdersCustomBatchRequest = OrdersCustomBatchRequest'
-    { _ocbrEntries :: Maybe [OrdersCustomBatchRequestEntry]
+-- /See:/ 'posStore' smart constructor.
+data PosStore = PosStore'
+    { _pssStoreCode    :: !(Maybe Text)
+    , _pssKind         :: !Text
+    , _pssStoreAddress :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrdersCustomBatchRequest' with the minimum fields required to make a request.
+-- | Creates a value of 'PosStore' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ocbrEntries'
-ordersCustomBatchRequest
-    :: OrdersCustomBatchRequest
-ordersCustomBatchRequest =
-    OrdersCustomBatchRequest'
-    { _ocbrEntries = Nothing
+-- * 'pssStoreCode'
+--
+-- * 'pssKind'
+--
+-- * 'pssStoreAddress'
+posStore
+    :: PosStore
+posStore =
+    PosStore'
+    { _pssStoreCode = Nothing
+    , _pssKind = "content#posStore"
+    , _pssStoreAddress = Nothing
     }
 
--- | The request entries to be processed in the batch.
-ocbrEntries :: Lens' OrdersCustomBatchRequest [OrdersCustomBatchRequestEntry]
-ocbrEntries
-  = lens _ocbrEntries (\ s a -> s{_ocbrEntries = a}) .
-      _Default
-      . _Coerce
+-- | A store identifier that is unique for the given merchant.
+pssStoreCode :: Lens' PosStore (Maybe Text)
+pssStoreCode
+  = lens _pssStoreCode (\ s a -> s{_pssStoreCode = a})
 
-instance FromJSON OrdersCustomBatchRequest where
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"content#posStore\".
+pssKind :: Lens' PosStore Text
+pssKind = lens _pssKind (\ s a -> s{_pssKind = a})
+
+-- | The street address of the store.
+pssStoreAddress :: Lens' PosStore (Maybe Text)
+pssStoreAddress
+  = lens _pssStoreAddress
+      (\ s a -> s{_pssStoreAddress = a})
+
+instance FromJSON PosStore where
         parseJSON
-          = withObject "OrdersCustomBatchRequest"
+          = withObject "PosStore"
               (\ o ->
-                 OrdersCustomBatchRequest' <$>
-                   (o .:? "entries" .!= mempty))
+                 PosStore' <$>
+                   (o .:? "storeCode") <*>
+                     (o .:? "kind" .!= "content#posStore")
+                     <*> (o .:? "storeAddress"))
 
-instance ToJSON OrdersCustomBatchRequest where
-        toJSON OrdersCustomBatchRequest'{..}
+instance ToJSON PosStore where
+        toJSON PosStore'{..}
           = object
-              (catMaybes [("entries" .=) <$> _ocbrEntries])
+              (catMaybes
+                 [("storeCode" .=) <$> _pssStoreCode,
+                  Just ("kind" .= _pssKind),
+                  ("storeAddress" .=) <$> _pssStoreAddress])
+
+--
+-- /See:/ 'liaSettingsSetInventoryVerificationContactResponse' smart constructor.
+newtype LiaSettingsSetInventoryVerificationContactResponse = LiaSettingsSetInventoryVerificationContactResponse'
+    { _lssivcrKind :: Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LiaSettingsSetInventoryVerificationContactResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lssivcrKind'
+liaSettingsSetInventoryVerificationContactResponse
+    :: LiaSettingsSetInventoryVerificationContactResponse
+liaSettingsSetInventoryVerificationContactResponse =
+    LiaSettingsSetInventoryVerificationContactResponse'
+    { _lssivcrKind = "content#liasettingsSetInventoryVerificationContactResponse"
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"content#liasettingsSetInventoryVerificationContactResponse\".
+lssivcrKind :: Lens' LiaSettingsSetInventoryVerificationContactResponse Text
+lssivcrKind
+  = lens _lssivcrKind (\ s a -> s{_lssivcrKind = a})
+
+instance FromJSON
+         LiaSettingsSetInventoryVerificationContactResponse
+         where
+        parseJSON
+          = withObject
+              "LiaSettingsSetInventoryVerificationContactResponse"
+              (\ o ->
+                 LiaSettingsSetInventoryVerificationContactResponse'
+                   <$>
+                   (o .:? "kind" .!=
+                      "content#liasettingsSetInventoryVerificationContactResponse"))
+
+instance ToJSON
+         LiaSettingsSetInventoryVerificationContactResponse
+         where
+        toJSON
+          LiaSettingsSetInventoryVerificationContactResponse'{..}
+          = object (catMaybes [Just ("kind" .= _lssivcrKind)])
 
 --
 -- /See:/ 'shippingSettingsGetSupportedCarriersResponse' smart constructor.
@@ -3821,6 +5612,169 @@ instance ToJSON
               (catMaybes
                  [Just ("kind" .= _ssgscrKind),
                   ("carriers" .=) <$> _ssgscrCarriers])
+
+--
+-- /See:/ 'posDataProvidersPosDataProvider' smart constructor.
+data PosDataProvidersPosDataProvider = PosDataProvidersPosDataProvider'
+    { _pdppdpProviderId  :: !(Maybe (Textual Word64))
+    , _pdppdpFullName    :: !(Maybe Text)
+    , _pdppdpDisplayName :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PosDataProvidersPosDataProvider' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pdppdpProviderId'
+--
+-- * 'pdppdpFullName'
+--
+-- * 'pdppdpDisplayName'
+posDataProvidersPosDataProvider
+    :: PosDataProvidersPosDataProvider
+posDataProvidersPosDataProvider =
+    PosDataProvidersPosDataProvider'
+    { _pdppdpProviderId = Nothing
+    , _pdppdpFullName = Nothing
+    , _pdppdpDisplayName = Nothing
+    }
+
+-- | The ID of the account.
+pdppdpProviderId :: Lens' PosDataProvidersPosDataProvider (Maybe Word64)
+pdppdpProviderId
+  = lens _pdppdpProviderId
+      (\ s a -> s{_pdppdpProviderId = a})
+      . mapping _Coerce
+
+-- | The full name of this POS data Provider.
+pdppdpFullName :: Lens' PosDataProvidersPosDataProvider (Maybe Text)
+pdppdpFullName
+  = lens _pdppdpFullName
+      (\ s a -> s{_pdppdpFullName = a})
+
+-- | The display name of Pos data Provider.
+pdppdpDisplayName :: Lens' PosDataProvidersPosDataProvider (Maybe Text)
+pdppdpDisplayName
+  = lens _pdppdpDisplayName
+      (\ s a -> s{_pdppdpDisplayName = a})
+
+instance FromJSON PosDataProvidersPosDataProvider
+         where
+        parseJSON
+          = withObject "PosDataProvidersPosDataProvider"
+              (\ o ->
+                 PosDataProvidersPosDataProvider' <$>
+                   (o .:? "providerId") <*> (o .:? "fullName") <*>
+                     (o .:? "displayName"))
+
+instance ToJSON PosDataProvidersPosDataProvider where
+        toJSON PosDataProvidersPosDataProvider'{..}
+          = object
+              (catMaybes
+                 [("providerId" .=) <$> _pdppdpProviderId,
+                  ("fullName" .=) <$> _pdppdpFullName,
+                  ("displayName" .=) <$> _pdppdpDisplayName])
+
+--
+-- /See:/ 'holidaysHoliday' smart constructor.
+data HolidaysHoliday = HolidaysHoliday'
+    { _hhDeliveryGuaranteeHour :: !(Maybe (Textual Word64))
+    , _hhDate                  :: !(Maybe Text)
+    , _hhDeliveryGuaranteeDate :: !(Maybe Text)
+    , _hhCountryCode           :: !(Maybe Text)
+    , _hhId                    :: !(Maybe Text)
+    , _hhType                  :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'HolidaysHoliday' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'hhDeliveryGuaranteeHour'
+--
+-- * 'hhDate'
+--
+-- * 'hhDeliveryGuaranteeDate'
+--
+-- * 'hhCountryCode'
+--
+-- * 'hhId'
+--
+-- * 'hhType'
+holidaysHoliday
+    :: HolidaysHoliday
+holidaysHoliday =
+    HolidaysHoliday'
+    { _hhDeliveryGuaranteeHour = Nothing
+    , _hhDate = Nothing
+    , _hhDeliveryGuaranteeDate = Nothing
+    , _hhCountryCode = Nothing
+    , _hhId = Nothing
+    , _hhType = Nothing
+    }
+
+-- | Hour of the day in the delivery location\'s timezone on the guaranteed
+-- delivery date by which the order has to arrive at the customer\'s.
+-- Possible values are: 0 (midnight), 1, ..., 12 (noon), 13, ..., 23.
+-- Always present.
+hhDeliveryGuaranteeHour :: Lens' HolidaysHoliday (Maybe Word64)
+hhDeliveryGuaranteeHour
+  = lens _hhDeliveryGuaranteeHour
+      (\ s a -> s{_hhDeliveryGuaranteeHour = a})
+      . mapping _Coerce
+
+-- | Date of the holiday, in ISO 8601 format. E.g. \"2016-12-25\" for
+-- Christmas 2016. Always present.
+hhDate :: Lens' HolidaysHoliday (Maybe Text)
+hhDate = lens _hhDate (\ s a -> s{_hhDate = a})
+
+-- | Date on which the order has to arrive at the customer\'s, in ISO 8601
+-- format. E.g. \"2016-12-24\" for 24th December 2016. Always present.
+hhDeliveryGuaranteeDate :: Lens' HolidaysHoliday (Maybe Text)
+hhDeliveryGuaranteeDate
+  = lens _hhDeliveryGuaranteeDate
+      (\ s a -> s{_hhDeliveryGuaranteeDate = a})
+
+-- | The CLDR territory code of the country in which the holiday is
+-- available. E.g. \"US\", \"DE\", \"GB\". A holiday cutoff can only be
+-- configured in a shipping settings service with matching delivery
+-- country. Always present.
+hhCountryCode :: Lens' HolidaysHoliday (Maybe Text)
+hhCountryCode
+  = lens _hhCountryCode
+      (\ s a -> s{_hhCountryCode = a})
+
+-- | Unique identifier for the holiday to be used when configuring holiday
+-- cutoffs. Always present.
+hhId :: Lens' HolidaysHoliday (Maybe Text)
+hhId = lens _hhId (\ s a -> s{_hhId = a})
+
+-- | The holiday type. Always present.
+hhType :: Lens' HolidaysHoliday (Maybe Text)
+hhType = lens _hhType (\ s a -> s{_hhType = a})
+
+instance FromJSON HolidaysHoliday where
+        parseJSON
+          = withObject "HolidaysHoliday"
+              (\ o ->
+                 HolidaysHoliday' <$>
+                   (o .:? "deliveryGuaranteeHour") <*> (o .:? "date")
+                     <*> (o .:? "deliveryGuaranteeDate")
+                     <*> (o .:? "countryCode")
+                     <*> (o .:? "id")
+                     <*> (o .:? "type"))
+
+instance ToJSON HolidaysHoliday where
+        toJSON HolidaysHoliday'{..}
+          = object
+              (catMaybes
+                 [("deliveryGuaranteeHour" .=) <$>
+                    _hhDeliveryGuaranteeHour,
+                  ("date" .=) <$> _hhDate,
+                  ("deliveryGuaranteeDate" .=) <$>
+                    _hhDeliveryGuaranteeDate,
+                  ("countryCode" .=) <$> _hhCountryCode,
+                  ("id" .=) <$> _hhId, ("type" .=) <$> _hhType])
 
 --
 -- /See:/ 'accountsListResponse' smart constructor.
@@ -3883,122 +5837,117 @@ instance ToJSON AccountsListResponse where
                   ("resources" .=) <$> _accResources])
 
 --
--- /See:/ 'productStatusDataQualityIssue' smart constructor.
-data ProductStatusDataQualityIssue = ProductStatusDataQualityIssue'
-    { _psdqiLocation           :: !(Maybe Text)
-    , _psdqiFetchStatus        :: !(Maybe Text)
-    , _psdqiSeverity           :: !(Maybe Text)
-    , _psdqiValueProvided      :: !(Maybe Text)
-    , _psdqiId                 :: !(Maybe Text)
-    , _psdqiValueOnLandingPage :: !(Maybe Text)
-    , _psdqiTimestamp          :: !(Maybe Text)
-    , _psdqiDetail             :: !(Maybe Text)
+-- /See:/ 'orderpaymentsNotifyRefundRequest' smart constructor.
+data OrderpaymentsNotifyRefundRequest = OrderpaymentsNotifyRefundRequest'
+    { _onrrInvoiceIds  :: !(Maybe [Text])
+    , _onrrRefundState :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProductStatusDataQualityIssue' with the minimum fields required to make a request.
+-- | Creates a value of 'OrderpaymentsNotifyRefundRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'psdqiLocation'
+-- * 'onrrInvoiceIds'
 --
--- * 'psdqiFetchStatus'
---
--- * 'psdqiSeverity'
---
--- * 'psdqiValueProvided'
---
--- * 'psdqiId'
---
--- * 'psdqiValueOnLandingPage'
---
--- * 'psdqiTimestamp'
---
--- * 'psdqiDetail'
-productStatusDataQualityIssue
-    :: ProductStatusDataQualityIssue
-productStatusDataQualityIssue =
-    ProductStatusDataQualityIssue'
-    { _psdqiLocation = Nothing
-    , _psdqiFetchStatus = Nothing
-    , _psdqiSeverity = Nothing
-    , _psdqiValueProvided = Nothing
-    , _psdqiId = Nothing
-    , _psdqiValueOnLandingPage = Nothing
-    , _psdqiTimestamp = Nothing
-    , _psdqiDetail = Nothing
+-- * 'onrrRefundState'
+orderpaymentsNotifyRefundRequest
+    :: OrderpaymentsNotifyRefundRequest
+orderpaymentsNotifyRefundRequest =
+    OrderpaymentsNotifyRefundRequest'
+    { _onrrInvoiceIds = Nothing
+    , _onrrRefundState = Nothing
     }
 
--- | The attribute name that is relevant for the issue.
-psdqiLocation :: Lens' ProductStatusDataQualityIssue (Maybe Text)
-psdqiLocation
-  = lens _psdqiLocation
-      (\ s a -> s{_psdqiLocation = a})
+-- | Invoice IDs from the orderinvoices service that correspond to the
+-- refund.
+onrrInvoiceIds :: Lens' OrderpaymentsNotifyRefundRequest [Text]
+onrrInvoiceIds
+  = lens _onrrInvoiceIds
+      (\ s a -> s{_onrrInvoiceIds = a})
+      . _Default
+      . _Coerce
 
--- | The fetch status for landing_page_errors.
-psdqiFetchStatus :: Lens' ProductStatusDataQualityIssue (Maybe Text)
-psdqiFetchStatus
-  = lens _psdqiFetchStatus
-      (\ s a -> s{_psdqiFetchStatus = a})
+-- | Whether refund was successful.
+onrrRefundState :: Lens' OrderpaymentsNotifyRefundRequest (Maybe Text)
+onrrRefundState
+  = lens _onrrRefundState
+      (\ s a -> s{_onrrRefundState = a})
 
--- | The severity of the data quality issue.
-psdqiSeverity :: Lens' ProductStatusDataQualityIssue (Maybe Text)
-psdqiSeverity
-  = lens _psdqiSeverity
-      (\ s a -> s{_psdqiSeverity = a})
-
--- | The value the attribute had at time of evaluation.
-psdqiValueProvided :: Lens' ProductStatusDataQualityIssue (Maybe Text)
-psdqiValueProvided
-  = lens _psdqiValueProvided
-      (\ s a -> s{_psdqiValueProvided = a})
-
--- | The id of the data quality issue.
-psdqiId :: Lens' ProductStatusDataQualityIssue (Maybe Text)
-psdqiId = lens _psdqiId (\ s a -> s{_psdqiId = a})
-
--- | The value of that attribute that was found on the landing page
-psdqiValueOnLandingPage :: Lens' ProductStatusDataQualityIssue (Maybe Text)
-psdqiValueOnLandingPage
-  = lens _psdqiValueOnLandingPage
-      (\ s a -> s{_psdqiValueOnLandingPage = a})
-
--- | The time stamp of the data quality issue.
-psdqiTimestamp :: Lens' ProductStatusDataQualityIssue (Maybe Text)
-psdqiTimestamp
-  = lens _psdqiTimestamp
-      (\ s a -> s{_psdqiTimestamp = a})
-
--- | A more detailed error string.
-psdqiDetail :: Lens' ProductStatusDataQualityIssue (Maybe Text)
-psdqiDetail
-  = lens _psdqiDetail (\ s a -> s{_psdqiDetail = a})
-
-instance FromJSON ProductStatusDataQualityIssue where
+instance FromJSON OrderpaymentsNotifyRefundRequest
+         where
         parseJSON
-          = withObject "ProductStatusDataQualityIssue"
+          = withObject "OrderpaymentsNotifyRefundRequest"
               (\ o ->
-                 ProductStatusDataQualityIssue' <$>
-                   (o .:? "location") <*> (o .:? "fetchStatus") <*>
-                     (o .:? "severity")
-                     <*> (o .:? "valueProvided")
-                     <*> (o .:? "id")
-                     <*> (o .:? "valueOnLandingPage")
-                     <*> (o .:? "timestamp")
-                     <*> (o .:? "detail"))
+                 OrderpaymentsNotifyRefundRequest' <$>
+                   (o .:? "invoiceIds" .!= mempty) <*>
+                     (o .:? "refundState"))
 
-instance ToJSON ProductStatusDataQualityIssue where
-        toJSON ProductStatusDataQualityIssue'{..}
+instance ToJSON OrderpaymentsNotifyRefundRequest
+         where
+        toJSON OrderpaymentsNotifyRefundRequest'{..}
           = object
               (catMaybes
-                 [("location" .=) <$> _psdqiLocation,
-                  ("fetchStatus" .=) <$> _psdqiFetchStatus,
-                  ("severity" .=) <$> _psdqiSeverity,
-                  ("valueProvided" .=) <$> _psdqiValueProvided,
-                  ("id" .=) <$> _psdqiId,
-                  ("valueOnLandingPage" .=) <$>
-                    _psdqiValueOnLandingPage,
-                  ("timestamp" .=) <$> _psdqiTimestamp,
-                  ("detail" .=) <$> _psdqiDetail])
+                 [("invoiceIds" .=) <$> _onrrInvoiceIds,
+                  ("refundState" .=) <$> _onrrRefundState])
+
+--
+-- /See:/ 'accountBusinessInformation' smart constructor.
+data AccountBusinessInformation = AccountBusinessInformation'
+    { _abiAddress         :: !(Maybe AccountAddress)
+    , _abiPhoneNumber     :: !(Maybe Text)
+    , _abiCustomerService :: !(Maybe AccountCustomerService)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AccountBusinessInformation' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'abiAddress'
+--
+-- * 'abiPhoneNumber'
+--
+-- * 'abiCustomerService'
+accountBusinessInformation
+    :: AccountBusinessInformation
+accountBusinessInformation =
+    AccountBusinessInformation'
+    { _abiAddress = Nothing
+    , _abiPhoneNumber = Nothing
+    , _abiCustomerService = Nothing
+    }
+
+-- | The address of the business.
+abiAddress :: Lens' AccountBusinessInformation (Maybe AccountAddress)
+abiAddress
+  = lens _abiAddress (\ s a -> s{_abiAddress = a})
+
+-- | The phone number of the business.
+abiPhoneNumber :: Lens' AccountBusinessInformation (Maybe Text)
+abiPhoneNumber
+  = lens _abiPhoneNumber
+      (\ s a -> s{_abiPhoneNumber = a})
+
+-- | The customer service information of the business.
+abiCustomerService :: Lens' AccountBusinessInformation (Maybe AccountCustomerService)
+abiCustomerService
+  = lens _abiCustomerService
+      (\ s a -> s{_abiCustomerService = a})
+
+instance FromJSON AccountBusinessInformation where
+        parseJSON
+          = withObject "AccountBusinessInformation"
+              (\ o ->
+                 AccountBusinessInformation' <$>
+                   (o .:? "address") <*> (o .:? "phoneNumber") <*>
+                     (o .:? "customerService"))
+
+instance ToJSON AccountBusinessInformation where
+        toJSON AccountBusinessInformation'{..}
+          = object
+              (catMaybes
+                 [("address" .=) <$> _abiAddress,
+                  ("phoneNumber" .=) <$> _abiPhoneNumber,
+                  ("customerService" .=) <$> _abiCustomerService])
 
 --
 -- /See:/ 'carriersCarrier' smart constructor.
@@ -4226,24 +6175,72 @@ instance ToJSON ShippingSettingsListResponse where
                   ("resources" .=) <$> _sslrResources])
 
 --
+-- /See:/ 'ordersCreateTestReturnResponse' smart constructor.
+data OrdersCreateTestReturnResponse = OrdersCreateTestReturnResponse'
+    { _octrrKind     :: !Text
+    , _octrrReturnId :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OrdersCreateTestReturnResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'octrrKind'
+--
+-- * 'octrrReturnId'
+ordersCreateTestReturnResponse
+    :: OrdersCreateTestReturnResponse
+ordersCreateTestReturnResponse =
+    OrdersCreateTestReturnResponse'
+    { _octrrKind = "content#ordersCreateTestReturnResponse"
+    , _octrrReturnId = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"content#ordersCreateTestReturnResponse\".
+octrrKind :: Lens' OrdersCreateTestReturnResponse Text
+octrrKind
+  = lens _octrrKind (\ s a -> s{_octrrKind = a})
+
+-- | The ID of the newly created test order return.
+octrrReturnId :: Lens' OrdersCreateTestReturnResponse (Maybe Text)
+octrrReturnId
+  = lens _octrrReturnId
+      (\ s a -> s{_octrrReturnId = a})
+
+instance FromJSON OrdersCreateTestReturnResponse
+         where
+        parseJSON
+          = withObject "OrdersCreateTestReturnResponse"
+              (\ o ->
+                 OrdersCreateTestReturnResponse' <$>
+                   (o .:? "kind" .!=
+                      "content#ordersCreateTestReturnResponse")
+                     <*> (o .:? "returnId"))
+
+instance ToJSON OrdersCreateTestReturnResponse where
+        toJSON OrdersCreateTestReturnResponse'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _octrrKind),
+                  ("returnId" .=) <$> _octrrReturnId])
+
+--
 -- /See:/ 'ordersShipLineItemsRequest' smart constructor.
 data OrdersShipLineItemsRequest = OrdersShipLineItemsRequest'
-    { _oslirCarrier     :: !(Maybe Text)
-    , _oslirTrackingId  :: !(Maybe Text)
-    , _oslirShipmentId  :: !(Maybe Text)
-    , _oslirLineItems   :: !(Maybe [OrderShipmentLineItemShipment])
-    , _oslirOperationId :: !(Maybe Text)
+    { _oslirShipmentGroupId :: !(Maybe Text)
+    , _oslirShipmentInfos   :: !(Maybe [OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo])
+    , _oslirLineItems       :: !(Maybe [OrderShipmentLineItemShipment])
+    , _oslirOperationId     :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersShipLineItemsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'oslirCarrier'
+-- * 'oslirShipmentGroupId'
 --
--- * 'oslirTrackingId'
---
--- * 'oslirShipmentId'
+-- * 'oslirShipmentInfos'
 --
 -- * 'oslirLineItems'
 --
@@ -4252,29 +6249,27 @@ ordersShipLineItemsRequest
     :: OrdersShipLineItemsRequest
 ordersShipLineItemsRequest =
     OrdersShipLineItemsRequest'
-    { _oslirCarrier = Nothing
-    , _oslirTrackingId = Nothing
-    , _oslirShipmentId = Nothing
+    { _oslirShipmentGroupId = Nothing
+    , _oslirShipmentInfos = Nothing
     , _oslirLineItems = Nothing
     , _oslirOperationId = Nothing
     }
 
--- | The carrier handling the shipment.
-oslirCarrier :: Lens' OrdersShipLineItemsRequest (Maybe Text)
-oslirCarrier
-  = lens _oslirCarrier (\ s a -> s{_oslirCarrier = a})
+-- | ID of the shipment group. Required for orders that use the orderinvoices
+-- service.
+oslirShipmentGroupId :: Lens' OrdersShipLineItemsRequest (Maybe Text)
+oslirShipmentGroupId
+  = lens _oslirShipmentGroupId
+      (\ s a -> s{_oslirShipmentGroupId = a})
 
--- | The tracking id for the shipment.
-oslirTrackingId :: Lens' OrdersShipLineItemsRequest (Maybe Text)
-oslirTrackingId
-  = lens _oslirTrackingId
-      (\ s a -> s{_oslirTrackingId = a})
-
--- | The ID of the shipment.
-oslirShipmentId :: Lens' OrdersShipLineItemsRequest (Maybe Text)
-oslirShipmentId
-  = lens _oslirShipmentId
-      (\ s a -> s{_oslirShipmentId = a})
+-- | Shipment information. This field is repeated because a single line item
+-- can be shipped in several packages (and have several tracking IDs).
+oslirShipmentInfos :: Lens' OrdersShipLineItemsRequest [OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo]
+oslirShipmentInfos
+  = lens _oslirShipmentInfos
+      (\ s a -> s{_oslirShipmentInfos = a})
+      . _Default
+      . _Coerce
 
 -- | Line items to ship.
 oslirLineItems :: Lens' OrdersShipLineItemsRequest [OrderShipmentLineItemShipment]
@@ -4295,8 +6290,8 @@ instance FromJSON OrdersShipLineItemsRequest where
           = withObject "OrdersShipLineItemsRequest"
               (\ o ->
                  OrdersShipLineItemsRequest' <$>
-                   (o .:? "carrier") <*> (o .:? "trackingId") <*>
-                     (o .:? "shipmentId")
+                   (o .:? "shipmentGroupId") <*>
+                     (o .:? "shipmentInfos" .!= mempty)
                      <*> (o .:? "lineItems" .!= mempty)
                      <*> (o .:? "operationId"))
 
@@ -4304,11 +6299,70 @@ instance ToJSON OrdersShipLineItemsRequest where
         toJSON OrdersShipLineItemsRequest'{..}
           = object
               (catMaybes
-                 [("carrier" .=) <$> _oslirCarrier,
-                  ("trackingId" .=) <$> _oslirTrackingId,
-                  ("shipmentId" .=) <$> _oslirShipmentId,
+                 [("shipmentGroupId" .=) <$> _oslirShipmentGroupId,
+                  ("shipmentInfos" .=) <$> _oslirShipmentInfos,
                   ("lineItems" .=) <$> _oslirLineItems,
                   ("operationId" .=) <$> _oslirOperationId])
+
+--
+-- /See:/ 'orderreturnsListResponse' smart constructor.
+data OrderreturnsListResponse = OrderreturnsListResponse'
+    { _olrNextPageToken :: !(Maybe Text)
+    , _olrKind          :: !Text
+    , _olrResources     :: !(Maybe [MerchantOrderReturn])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OrderreturnsListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'olrNextPageToken'
+--
+-- * 'olrKind'
+--
+-- * 'olrResources'
+orderreturnsListResponse
+    :: OrderreturnsListResponse
+orderreturnsListResponse =
+    OrderreturnsListResponse'
+    { _olrNextPageToken = Nothing
+    , _olrKind = "content#orderreturnsListResponse"
+    , _olrResources = Nothing
+    }
+
+-- | The token for the retrieval of the next page of returns.
+olrNextPageToken :: Lens' OrderreturnsListResponse (Maybe Text)
+olrNextPageToken
+  = lens _olrNextPageToken
+      (\ s a -> s{_olrNextPageToken = a})
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"content#orderreturnsListResponse\".
+olrKind :: Lens' OrderreturnsListResponse Text
+olrKind = lens _olrKind (\ s a -> s{_olrKind = a})
+
+olrResources :: Lens' OrderreturnsListResponse [MerchantOrderReturn]
+olrResources
+  = lens _olrResources (\ s a -> s{_olrResources = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON OrderreturnsListResponse where
+        parseJSON
+          = withObject "OrderreturnsListResponse"
+              (\ o ->
+                 OrderreturnsListResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "content#orderreturnsListResponse")
+                     <*> (o .:? "resources" .!= mempty))
+
+instance ToJSON OrderreturnsListResponse where
+        toJSON OrderreturnsListResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _olrNextPageToken,
+                  Just ("kind" .= _olrKind),
+                  ("resources" .=) <$> _olrResources])
 
 --
 -- /See:/ 'accountsCustomBatchResponse' smart constructor.
@@ -4360,6 +6414,241 @@ instance ToJSON AccountsCustomBatchResponse where
               (catMaybes
                  [("entries" .=) <$> _acbrcEntries,
                   Just ("kind" .= _acbrcKind)])
+
+--
+-- /See:/ 'orderpaymentsNotifyAuthApprovedRequest' smart constructor.
+data OrderpaymentsNotifyAuthApprovedRequest = OrderpaymentsNotifyAuthApprovedRequest'
+    { _onaarAuthAmountPretax :: !(Maybe Price)
+    , _onaarAuthAmountTax    :: !(Maybe Price)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OrderpaymentsNotifyAuthApprovedRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'onaarAuthAmountPretax'
+--
+-- * 'onaarAuthAmountTax'
+orderpaymentsNotifyAuthApprovedRequest
+    :: OrderpaymentsNotifyAuthApprovedRequest
+orderpaymentsNotifyAuthApprovedRequest =
+    OrderpaymentsNotifyAuthApprovedRequest'
+    { _onaarAuthAmountPretax = Nothing
+    , _onaarAuthAmountTax = Nothing
+    }
+
+onaarAuthAmountPretax :: Lens' OrderpaymentsNotifyAuthApprovedRequest (Maybe Price)
+onaarAuthAmountPretax
+  = lens _onaarAuthAmountPretax
+      (\ s a -> s{_onaarAuthAmountPretax = a})
+
+onaarAuthAmountTax :: Lens' OrderpaymentsNotifyAuthApprovedRequest (Maybe Price)
+onaarAuthAmountTax
+  = lens _onaarAuthAmountTax
+      (\ s a -> s{_onaarAuthAmountTax = a})
+
+instance FromJSON
+         OrderpaymentsNotifyAuthApprovedRequest where
+        parseJSON
+          = withObject "OrderpaymentsNotifyAuthApprovedRequest"
+              (\ o ->
+                 OrderpaymentsNotifyAuthApprovedRequest' <$>
+                   (o .:? "authAmountPretax") <*>
+                     (o .:? "authAmountTax"))
+
+instance ToJSON
+         OrderpaymentsNotifyAuthApprovedRequest where
+        toJSON OrderpaymentsNotifyAuthApprovedRequest'{..}
+          = object
+              (catMaybes
+                 [("authAmountPretax" .=) <$> _onaarAuthAmountPretax,
+                  ("authAmountTax" .=) <$> _onaarAuthAmountTax])
+
+--
+-- /See:/ 'ordersUpdateLineItemShippingDetailsRequest' smart constructor.
+data OrdersUpdateLineItemShippingDetailsRequest = OrdersUpdateLineItemShippingDetailsRequest'
+    { _oulisdrShipByDate    :: !(Maybe Text)
+    , _oulisdrLineItemId    :: !(Maybe Text)
+    , _oulisdrDeliverByDate :: !(Maybe Text)
+    , _oulisdrOperationId   :: !(Maybe Text)
+    , _oulisdrProductId     :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OrdersUpdateLineItemShippingDetailsRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oulisdrShipByDate'
+--
+-- * 'oulisdrLineItemId'
+--
+-- * 'oulisdrDeliverByDate'
+--
+-- * 'oulisdrOperationId'
+--
+-- * 'oulisdrProductId'
+ordersUpdateLineItemShippingDetailsRequest
+    :: OrdersUpdateLineItemShippingDetailsRequest
+ordersUpdateLineItemShippingDetailsRequest =
+    OrdersUpdateLineItemShippingDetailsRequest'
+    { _oulisdrShipByDate = Nothing
+    , _oulisdrLineItemId = Nothing
+    , _oulisdrDeliverByDate = Nothing
+    , _oulisdrOperationId = Nothing
+    , _oulisdrProductId = Nothing
+    }
+
+-- | Updated ship by date, in ISO 8601 format. If not specified only deliver
+-- by date is updated.
+oulisdrShipByDate :: Lens' OrdersUpdateLineItemShippingDetailsRequest (Maybe Text)
+oulisdrShipByDate
+  = lens _oulisdrShipByDate
+      (\ s a -> s{_oulisdrShipByDate = a})
+
+-- | The ID of the line item to set metadata. Either lineItemId or productId
+-- is required.
+oulisdrLineItemId :: Lens' OrdersUpdateLineItemShippingDetailsRequest (Maybe Text)
+oulisdrLineItemId
+  = lens _oulisdrLineItemId
+      (\ s a -> s{_oulisdrLineItemId = a})
+
+-- | Updated delivery by date, in ISO 8601 format. If not specified only ship
+-- by date is updated.
+oulisdrDeliverByDate :: Lens' OrdersUpdateLineItemShippingDetailsRequest (Maybe Text)
+oulisdrDeliverByDate
+  = lens _oulisdrDeliverByDate
+      (\ s a -> s{_oulisdrDeliverByDate = a})
+
+-- | The ID of the operation. Unique across all operations for a given order.
+oulisdrOperationId :: Lens' OrdersUpdateLineItemShippingDetailsRequest (Maybe Text)
+oulisdrOperationId
+  = lens _oulisdrOperationId
+      (\ s a -> s{_oulisdrOperationId = a})
+
+-- | The ID of the product to set metadata. This is the REST ID used in the
+-- products service. Either lineItemId or productId is required.
+oulisdrProductId :: Lens' OrdersUpdateLineItemShippingDetailsRequest (Maybe Text)
+oulisdrProductId
+  = lens _oulisdrProductId
+      (\ s a -> s{_oulisdrProductId = a})
+
+instance FromJSON
+         OrdersUpdateLineItemShippingDetailsRequest where
+        parseJSON
+          = withObject
+              "OrdersUpdateLineItemShippingDetailsRequest"
+              (\ o ->
+                 OrdersUpdateLineItemShippingDetailsRequest' <$>
+                   (o .:? "shipByDate") <*> (o .:? "lineItemId") <*>
+                     (o .:? "deliverByDate")
+                     <*> (o .:? "operationId")
+                     <*> (o .:? "productId"))
+
+instance ToJSON
+         OrdersUpdateLineItemShippingDetailsRequest where
+        toJSON
+          OrdersUpdateLineItemShippingDetailsRequest'{..}
+          = object
+              (catMaybes
+                 [("shipByDate" .=) <$> _oulisdrShipByDate,
+                  ("lineItemId" .=) <$> _oulisdrLineItemId,
+                  ("deliverByDate" .=) <$> _oulisdrDeliverByDate,
+                  ("operationId" .=) <$> _oulisdrOperationId,
+                  ("productId" .=) <$> _oulisdrProductId])
+
+--
+-- /See:/ 'merchantOrderReturn' smart constructor.
+data MerchantOrderReturn = MerchantOrderReturn'
+    { _morReturnShipments :: !(Maybe [ReturnShipment])
+    , _morMerchantOrderId :: !(Maybe Text)
+    , _morReturnItems     :: !(Maybe [MerchantOrderReturnItem])
+    , _morCreationDate    :: !(Maybe Text)
+    , _morOrderId         :: !(Maybe Text)
+    , _morOrderReturnId   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'MerchantOrderReturn' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'morReturnShipments'
+--
+-- * 'morMerchantOrderId'
+--
+-- * 'morReturnItems'
+--
+-- * 'morCreationDate'
+--
+-- * 'morOrderId'
+--
+-- * 'morOrderReturnId'
+merchantOrderReturn
+    :: MerchantOrderReturn
+merchantOrderReturn =
+    MerchantOrderReturn'
+    { _morReturnShipments = Nothing
+    , _morMerchantOrderId = Nothing
+    , _morReturnItems = Nothing
+    , _morCreationDate = Nothing
+    , _morOrderId = Nothing
+    , _morOrderReturnId = Nothing
+    }
+
+morReturnShipments :: Lens' MerchantOrderReturn [ReturnShipment]
+morReturnShipments
+  = lens _morReturnShipments
+      (\ s a -> s{_morReturnShipments = a})
+      . _Default
+      . _Coerce
+
+morMerchantOrderId :: Lens' MerchantOrderReturn (Maybe Text)
+morMerchantOrderId
+  = lens _morMerchantOrderId
+      (\ s a -> s{_morMerchantOrderId = a})
+
+morReturnItems :: Lens' MerchantOrderReturn [MerchantOrderReturnItem]
+morReturnItems
+  = lens _morReturnItems
+      (\ s a -> s{_morReturnItems = a})
+      . _Default
+      . _Coerce
+
+morCreationDate :: Lens' MerchantOrderReturn (Maybe Text)
+morCreationDate
+  = lens _morCreationDate
+      (\ s a -> s{_morCreationDate = a})
+
+morOrderId :: Lens' MerchantOrderReturn (Maybe Text)
+morOrderId
+  = lens _morOrderId (\ s a -> s{_morOrderId = a})
+
+morOrderReturnId :: Lens' MerchantOrderReturn (Maybe Text)
+morOrderReturnId
+  = lens _morOrderReturnId
+      (\ s a -> s{_morOrderReturnId = a})
+
+instance FromJSON MerchantOrderReturn where
+        parseJSON
+          = withObject "MerchantOrderReturn"
+              (\ o ->
+                 MerchantOrderReturn' <$>
+                   (o .:? "returnShipments" .!= mempty) <*>
+                     (o .:? "merchantOrderId")
+                     <*> (o .:? "returnItems" .!= mempty)
+                     <*> (o .:? "creationDate")
+                     <*> (o .:? "orderId")
+                     <*> (o .:? "orderReturnId"))
+
+instance ToJSON MerchantOrderReturn where
+        toJSON MerchantOrderReturn'{..}
+          = object
+              (catMaybes
+                 [("returnShipments" .=) <$> _morReturnShipments,
+                  ("merchantOrderId" .=) <$> _morMerchantOrderId,
+                  ("returnItems" .=) <$> _morReturnItems,
+                  ("creationDate" .=) <$> _morCreationDate,
+                  ("orderId" .=) <$> _morOrderId,
+                  ("orderReturnId" .=) <$> _morOrderReturnId])
 
 --
 -- /See:/ 'productTax' smart constructor.
@@ -4457,6 +6746,124 @@ instance ToJSON ProductTax where
                   ("locationId" .=) <$> _ptLocationId])
 
 --
+-- /See:/ 'posCustomBatchRequestEntry' smart constructor.
+data PosCustomBatchRequestEntry = PosCustomBatchRequestEntry'
+    { _pcbreMerchantId       :: !(Maybe (Textual Word64))
+    , _pcbreStoreCode        :: !(Maybe Text)
+    , _pcbreTargetMerchantId :: !(Maybe (Textual Word64))
+    , _pcbreMethod           :: !(Maybe Text)
+    , _pcbreStore            :: !(Maybe PosStore)
+    , _pcbreInventory        :: !(Maybe PosInventory)
+    , _pcbreSale             :: !(Maybe PosSale)
+    , _pcbreBatchId          :: !(Maybe (Textual Word32))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PosCustomBatchRequestEntry' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pcbreMerchantId'
+--
+-- * 'pcbreStoreCode'
+--
+-- * 'pcbreTargetMerchantId'
+--
+-- * 'pcbreMethod'
+--
+-- * 'pcbreStore'
+--
+-- * 'pcbreInventory'
+--
+-- * 'pcbreSale'
+--
+-- * 'pcbreBatchId'
+posCustomBatchRequestEntry
+    :: PosCustomBatchRequestEntry
+posCustomBatchRequestEntry =
+    PosCustomBatchRequestEntry'
+    { _pcbreMerchantId = Nothing
+    , _pcbreStoreCode = Nothing
+    , _pcbreTargetMerchantId = Nothing
+    , _pcbreMethod = Nothing
+    , _pcbreStore = Nothing
+    , _pcbreInventory = Nothing
+    , _pcbreSale = Nothing
+    , _pcbreBatchId = Nothing
+    }
+
+-- | The ID of the POS data provider.
+pcbreMerchantId :: Lens' PosCustomBatchRequestEntry (Maybe Word64)
+pcbreMerchantId
+  = lens _pcbreMerchantId
+      (\ s a -> s{_pcbreMerchantId = a})
+      . mapping _Coerce
+
+-- | The store code. Set this only if the method is delete or get.
+pcbreStoreCode :: Lens' PosCustomBatchRequestEntry (Maybe Text)
+pcbreStoreCode
+  = lens _pcbreStoreCode
+      (\ s a -> s{_pcbreStoreCode = a})
+
+-- | The ID of the account for which to get\/submit data.
+pcbreTargetMerchantId :: Lens' PosCustomBatchRequestEntry (Maybe Word64)
+pcbreTargetMerchantId
+  = lens _pcbreTargetMerchantId
+      (\ s a -> s{_pcbreTargetMerchantId = a})
+      . mapping _Coerce
+
+pcbreMethod :: Lens' PosCustomBatchRequestEntry (Maybe Text)
+pcbreMethod
+  = lens _pcbreMethod (\ s a -> s{_pcbreMethod = a})
+
+-- | The store information to submit. Set this only if the method is insert.
+pcbreStore :: Lens' PosCustomBatchRequestEntry (Maybe PosStore)
+pcbreStore
+  = lens _pcbreStore (\ s a -> s{_pcbreStore = a})
+
+-- | The inventory to submit. Set this only if the method is inventory.
+pcbreInventory :: Lens' PosCustomBatchRequestEntry (Maybe PosInventory)
+pcbreInventory
+  = lens _pcbreInventory
+      (\ s a -> s{_pcbreInventory = a})
+
+-- | The sale information to submit. Set this only if the method is sale.
+pcbreSale :: Lens' PosCustomBatchRequestEntry (Maybe PosSale)
+pcbreSale
+  = lens _pcbreSale (\ s a -> s{_pcbreSale = a})
+
+-- | An entry ID, unique within the batch request.
+pcbreBatchId :: Lens' PosCustomBatchRequestEntry (Maybe Word32)
+pcbreBatchId
+  = lens _pcbreBatchId (\ s a -> s{_pcbreBatchId = a})
+      . mapping _Coerce
+
+instance FromJSON PosCustomBatchRequestEntry where
+        parseJSON
+          = withObject "PosCustomBatchRequestEntry"
+              (\ o ->
+                 PosCustomBatchRequestEntry' <$>
+                   (o .:? "merchantId") <*> (o .:? "storeCode") <*>
+                     (o .:? "targetMerchantId")
+                     <*> (o .:? "method")
+                     <*> (o .:? "store")
+                     <*> (o .:? "inventory")
+                     <*> (o .:? "sale")
+                     <*> (o .:? "batchId"))
+
+instance ToJSON PosCustomBatchRequestEntry where
+        toJSON PosCustomBatchRequestEntry'{..}
+          = object
+              (catMaybes
+                 [("merchantId" .=) <$> _pcbreMerchantId,
+                  ("storeCode" .=) <$> _pcbreStoreCode,
+                  ("targetMerchantId" .=) <$> _pcbreTargetMerchantId,
+                  ("method" .=) <$> _pcbreMethod,
+                  ("store" .=) <$> _pcbreStore,
+                  ("inventory" .=) <$> _pcbreInventory,
+                  ("sale" .=) <$> _pcbreSale,
+                  ("batchId" .=) <$> _pcbreBatchId])
+
+--
 -- /See:/ 'orderShipment' smart constructor.
 data OrderShipment = OrderShipment'
     { _osCarrier      :: !(Maybe Text)
@@ -4498,7 +6905,11 @@ orderShipment =
     , _osDeliveryDate = Nothing
     }
 
--- | The carrier handling the shipment.
+-- | The carrier handling the shipment. Acceptable values for US are: -
+-- \"gsx\" - \"ups\" - \"usps\" - \"fedex\" - \"dhl\" - \"ecourier\" -
+-- \"cxt\" - \"google\" - \"ontrac\" - \"emsy\" - \"ont\" - \"deliv\" -
+-- \"dynamex\" - \"lasership\" - \"mpx\" - \"uds\" Acceptable values for FR
+-- are: - \"colissimo\" - \"chronopost\"
 osCarrier :: Lens' OrderShipment (Maybe Text)
 osCarrier
   = lens _osCarrier (\ s a -> s{_osCarrier = a})
@@ -4530,7 +6941,7 @@ osCreationDate
       (\ s a -> s{_osCreationDate = a})
 
 -- | Date on which the shipment has been delivered, in ISO 8601 format.
--- Present only if status is delievered
+-- Present only if status is delivered
 osDeliveryDate :: Lens' OrderShipment (Maybe Text)
 osDeliveryDate
   = lens _osDeliveryDate
@@ -4559,6 +6970,40 @@ instance ToJSON OrderShipment where
                   ("id" .=) <$> _osId,
                   ("creationDate" .=) <$> _osCreationDate,
                   ("deliveryDate" .=) <$> _osDeliveryDate])
+
+--
+-- /See:/ 'accountsLinkResponse' smart constructor.
+newtype AccountsLinkResponse = AccountsLinkResponse'
+    { _alrlKind :: Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AccountsLinkResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'alrlKind'
+accountsLinkResponse
+    :: AccountsLinkResponse
+accountsLinkResponse =
+    AccountsLinkResponse'
+    { _alrlKind = "content#accountsLinkResponse"
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"content#accountsLinkResponse\".
+alrlKind :: Lens' AccountsLinkResponse Text
+alrlKind = lens _alrlKind (\ s a -> s{_alrlKind = a})
+
+instance FromJSON AccountsLinkResponse where
+        parseJSON
+          = withObject "AccountsLinkResponse"
+              (\ o ->
+                 AccountsLinkResponse' <$>
+                   (o .:? "kind" .!= "content#accountsLinkResponse"))
+
+instance ToJSON AccountsLinkResponse where
+        toJSON AccountsLinkResponse'{..}
+          = object (catMaybes [Just ("kind" .= _alrlKind)])
 
 --
 -- /See:/ 'orderLineItemReturnInfo' smart constructor.
@@ -4621,70 +7066,23 @@ instance ToJSON OrderLineItemReturnInfo where
                   ("policyUrl" .=) <$> _oliriPolicyURL,
                   ("daysToReturn" .=) <$> _oliriDaysToReturn])
 
---
--- /See:/ 'accountShippingRateTableCell' smart constructor.
-data AccountShippingRateTableCell = AccountShippingRateTableCell'
-    { _asrtcRate      :: !(Maybe Price)
-    , _asrtcCondition :: !(Maybe AccountShippingCondition)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AccountShippingRateTableCell' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'asrtcRate'
---
--- * 'asrtcCondition'
-accountShippingRateTableCell
-    :: AccountShippingRateTableCell
-accountShippingRateTableCell =
-    AccountShippingRateTableCell'
-    { _asrtcRate = Nothing
-    , _asrtcCondition = Nothing
-    }
-
--- | The rate applicable if the cell conditions are matched.
-asrtcRate :: Lens' AccountShippingRateTableCell (Maybe Price)
-asrtcRate
-  = lens _asrtcRate (\ s a -> s{_asrtcRate = a})
-
--- | Conditions for which the cell is valid. All cells in a table must use
--- the same dimension or pair of dimensions among price, weight, shipping
--- label or delivery location. If no condition is specified, the cell acts
--- as a catch-all and matches all the elements that are not matched by
--- other cells in this dimension.
-asrtcCondition :: Lens' AccountShippingRateTableCell (Maybe AccountShippingCondition)
-asrtcCondition
-  = lens _asrtcCondition
-      (\ s a -> s{_asrtcCondition = a})
-
-instance FromJSON AccountShippingRateTableCell where
-        parseJSON
-          = withObject "AccountShippingRateTableCell"
-              (\ o ->
-                 AccountShippingRateTableCell' <$>
-                   (o .:? "rate") <*> (o .:? "condition"))
-
-instance ToJSON AccountShippingRateTableCell where
-        toJSON AccountShippingRateTableCell'{..}
-          = object
-              (catMaybes
-                 [("rate" .=) <$> _asrtcRate,
-                  ("condition" .=) <$> _asrtcCondition])
-
--- | Account data.
+-- | Account data. After the creation of a new account it may take a few
+-- minutes before it is fully operational. The methods delete, insert,
+-- patch, and update require the admin role.
 --
 -- /See:/ 'account' smart constructor.
 data Account = Account'
-    { _aaUsers        :: !(Maybe [AccountUser])
-    , _aaKind         :: !Text
-    , _aaSellerId     :: !(Maybe Text)
-    , _aaName         :: !(Maybe Text)
-    , _aaReviewsURL   :: !(Maybe Text)
-    , _aaId           :: !(Maybe (Textual Word64))
-    , _aaWebsiteURL   :: !(Maybe Text)
-    , _aaAdwordsLinks :: !(Maybe [AccountAdwordsLink])
-    , _aaAdultContent :: !(Maybe Bool)
+    { _aaUsers                :: !(Maybe [AccountUser])
+    , _aaYouTubeChannelLinks  :: !(Maybe [AccountYouTubeChannelLink])
+    , _aaKind                 :: !Text
+    , _aaSellerId             :: !(Maybe Text)
+    , _aaName                 :: !(Maybe Text)
+    , _aaBusinessInformation  :: !(Maybe AccountBusinessInformation)
+    , _aaId                   :: !(Maybe (Textual Word64))
+    , _aaAdsLinks             :: !(Maybe [AccountAdsLink])
+    , _aaWebsiteURL           :: !(Maybe Text)
+    , _aaGoogleMyBusinessLink :: !(Maybe AccountGoogleMyBusinessLink)
+    , _aaAdultContent         :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Account' with the minimum fields required to make a request.
@@ -4693,19 +7091,23 @@ data Account = Account'
 --
 -- * 'aaUsers'
 --
+-- * 'aaYouTubeChannelLinks'
+--
 -- * 'aaKind'
 --
 -- * 'aaSellerId'
 --
 -- * 'aaName'
 --
--- * 'aaReviewsURL'
+-- * 'aaBusinessInformation'
 --
 -- * 'aaId'
 --
+-- * 'aaAdsLinks'
+--
 -- * 'aaWebsiteURL'
 --
--- * 'aaAdwordsLinks'
+-- * 'aaGoogleMyBusinessLink'
 --
 -- * 'aaAdultContent'
 account
@@ -4713,13 +7115,15 @@ account
 account =
     Account'
     { _aaUsers = Nothing
+    , _aaYouTubeChannelLinks = Nothing
     , _aaKind = "content#account"
     , _aaSellerId = Nothing
     , _aaName = Nothing
-    , _aaReviewsURL = Nothing
+    , _aaBusinessInformation = Nothing
     , _aaId = Nothing
+    , _aaAdsLinks = Nothing
     , _aaWebsiteURL = Nothing
-    , _aaAdwordsLinks = Nothing
+    , _aaGoogleMyBusinessLink = Nothing
     , _aaAdultContent = Nothing
     }
 
@@ -4728,6 +7132,18 @@ account =
 aaUsers :: Lens' Account [AccountUser]
 aaUsers
   = lens _aaUsers (\ s a -> s{_aaUsers = a}) . _Default
+      . _Coerce
+
+-- | List of linked YouTube channels that are active or pending approval. To
+-- create a new link request, add a new link with status active to the
+-- list. It will remain in a pending state until approved or rejected in
+-- the YT Creator Studio interface. To delete an active link, or to cancel
+-- a link request, remove it from the list.
+aaYouTubeChannelLinks :: Lens' Account [AccountYouTubeChannelLink]
+aaYouTubeChannelLinks
+  = lens _aaYouTubeChannelLinks
+      (\ s a -> s{_aaYouTubeChannelLinks = a})
+      . _Default
       . _Coerce
 
 -- | Identifies what kind of resource this is. Value: the fixed string
@@ -4744,10 +7160,11 @@ aaSellerId
 aaName :: Lens' Account (Maybe Text)
 aaName = lens _aaName (\ s a -> s{_aaName = a})
 
--- | URL for individual seller reviews, i.e., reviews for each child account.
-aaReviewsURL :: Lens' Account (Maybe Text)
-aaReviewsURL
-  = lens _aaReviewsURL (\ s a -> s{_aaReviewsURL = a})
+-- | The business information of the account.
+aaBusinessInformation :: Lens' Account (Maybe AccountBusinessInformation)
+aaBusinessInformation
+  = lens _aaBusinessInformation
+      (\ s a -> s{_aaBusinessInformation = a})
 
 -- | Merchant Center account ID.
 aaId :: Lens' Account (Maybe Word64)
@@ -4755,22 +7172,28 @@ aaId
   = lens _aaId (\ s a -> s{_aaId = a}) .
       mapping _Coerce
 
+-- | List of linked Ads accounts that are active or pending approval. To
+-- create a new link request, add a new link with status active to the
+-- list. It will remain in a pending state until approved or rejected
+-- either in the Ads interface or through the AdWords API. To delete an
+-- active link, or to cancel a link request, remove it from the list.
+aaAdsLinks :: Lens' Account [AccountAdsLink]
+aaAdsLinks
+  = lens _aaAdsLinks (\ s a -> s{_aaAdsLinks = a}) .
+      _Default
+      . _Coerce
+
 -- | The merchant\'s website.
 aaWebsiteURL :: Lens' Account (Maybe Text)
 aaWebsiteURL
   = lens _aaWebsiteURL (\ s a -> s{_aaWebsiteURL = a})
 
--- | List of linked AdWords accounts, active or pending approval. To create a
--- new link request, add a new link with status active to the list. It will
--- remain is state pending until approved or rejected in the AdWords
--- interface. To delete an active link or to cancel a link request, remove
--- it from the list.
-aaAdwordsLinks :: Lens' Account [AccountAdwordsLink]
-aaAdwordsLinks
-  = lens _aaAdwordsLinks
-      (\ s a -> s{_aaAdwordsLinks = a})
-      . _Default
-      . _Coerce
+-- | The GMB account which is linked or in the process of being linked with
+-- the Merchant Center account.
+aaGoogleMyBusinessLink :: Lens' Account (Maybe AccountGoogleMyBusinessLink)
+aaGoogleMyBusinessLink
+  = lens _aaGoogleMyBusinessLink
+      (\ s a -> s{_aaGoogleMyBusinessLink = a})
 
 -- | Indicates whether the merchant sells adult content.
 aaAdultContent :: Lens' Account (Maybe Bool)
@@ -4784,245 +7207,94 @@ instance FromJSON Account where
               (\ o ->
                  Account' <$>
                    (o .:? "users" .!= mempty) <*>
-                     (o .:? "kind" .!= "content#account")
+                     (o .:? "youtubeChannelLinks" .!= mempty)
+                     <*> (o .:? "kind" .!= "content#account")
                      <*> (o .:? "sellerId")
                      <*> (o .:? "name")
-                     <*> (o .:? "reviewsUrl")
+                     <*> (o .:? "businessInformation")
                      <*> (o .:? "id")
+                     <*> (o .:? "adsLinks" .!= mempty)
                      <*> (o .:? "websiteUrl")
-                     <*> (o .:? "adwordsLinks" .!= mempty)
+                     <*> (o .:? "googleMyBusinessLink")
                      <*> (o .:? "adultContent"))
 
 instance ToJSON Account where
         toJSON Account'{..}
           = object
               (catMaybes
-                 [("users" .=) <$> _aaUsers, Just ("kind" .= _aaKind),
+                 [("users" .=) <$> _aaUsers,
+                  ("youtubeChannelLinks" .=) <$>
+                    _aaYouTubeChannelLinks,
+                  Just ("kind" .= _aaKind),
                   ("sellerId" .=) <$> _aaSellerId,
                   ("name" .=) <$> _aaName,
-                  ("reviewsUrl" .=) <$> _aaReviewsURL,
-                  ("id" .=) <$> _aaId,
+                  ("businessInformation" .=) <$>
+                    _aaBusinessInformation,
+                  ("id" .=) <$> _aaId, ("adsLinks" .=) <$> _aaAdsLinks,
                   ("websiteUrl" .=) <$> _aaWebsiteURL,
-                  ("adwordsLinks" .=) <$> _aaAdwordsLinks,
+                  ("googleMyBusinessLink" .=) <$>
+                    _aaGoogleMyBusinessLink,
                   ("adultContent" .=) <$> _aaAdultContent])
 
 --
--- /See:/ 'inventorySetRequest' smart constructor.
-data InventorySetRequest = InventorySetRequest'
-    { _isrLoyaltyPoints          :: !(Maybe LoyaltyPoints)
-    , _isrQuantity               :: !(Maybe (Textual Word32))
-    , _isrInstallment            :: !(Maybe Installment)
-    , _isrSalePrice              :: !(Maybe Price)
-    , _isrAvailability           :: !(Maybe Text)
-    , _isrSalePriceEffectiveDate :: !(Maybe Text)
-    , _isrSellOnGoogleQuantity   :: !(Maybe (Textual Word32))
-    , _isrPrice                  :: !(Maybe Price)
+-- /See:/ 'shipmentTrackingInfo' smart constructor.
+data ShipmentTrackingInfo = ShipmentTrackingInfo'
+    { _stiCarrier        :: !(Maybe Text)
+    , _stiTrackingNumber :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InventorySetRequest' with the minimum fields required to make a request.
+-- | Creates a value of 'ShipmentTrackingInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'isrLoyaltyPoints'
+-- * 'stiCarrier'
 --
--- * 'isrQuantity'
---
--- * 'isrInstallment'
---
--- * 'isrSalePrice'
---
--- * 'isrAvailability'
---
--- * 'isrSalePriceEffectiveDate'
---
--- * 'isrSellOnGoogleQuantity'
---
--- * 'isrPrice'
-inventorySetRequest
-    :: InventorySetRequest
-inventorySetRequest =
-    InventorySetRequest'
-    { _isrLoyaltyPoints = Nothing
-    , _isrQuantity = Nothing
-    , _isrInstallment = Nothing
-    , _isrSalePrice = Nothing
-    , _isrAvailability = Nothing
-    , _isrSalePriceEffectiveDate = Nothing
-    , _isrSellOnGoogleQuantity = Nothing
-    , _isrPrice = Nothing
+-- * 'stiTrackingNumber'
+shipmentTrackingInfo
+    :: ShipmentTrackingInfo
+shipmentTrackingInfo =
+    ShipmentTrackingInfo'
+    { _stiCarrier = Nothing
+    , _stiTrackingNumber = Nothing
     }
 
--- | Loyalty points that users receive after purchasing the item. Japan only.
-isrLoyaltyPoints :: Lens' InventorySetRequest (Maybe LoyaltyPoints)
-isrLoyaltyPoints
-  = lens _isrLoyaltyPoints
-      (\ s a -> s{_isrLoyaltyPoints = a})
+stiCarrier :: Lens' ShipmentTrackingInfo (Maybe Text)
+stiCarrier
+  = lens _stiCarrier (\ s a -> s{_stiCarrier = a})
 
--- | The quantity of the product. Must be equal to or greater than zero.
--- Supported only for local products.
-isrQuantity :: Lens' InventorySetRequest (Maybe Word32)
-isrQuantity
-  = lens _isrQuantity (\ s a -> s{_isrQuantity = a}) .
-      mapping _Coerce
+stiTrackingNumber :: Lens' ShipmentTrackingInfo (Maybe Text)
+stiTrackingNumber
+  = lens _stiTrackingNumber
+      (\ s a -> s{_stiTrackingNumber = a})
 
--- | Number and amount of installments to pay for an item. Brazil only.
-isrInstallment :: Lens' InventorySetRequest (Maybe Installment)
-isrInstallment
-  = lens _isrInstallment
-      (\ s a -> s{_isrInstallment = a})
-
--- | The sale price of the product. Mandatory if sale_price_effective_date is
--- defined.
-isrSalePrice :: Lens' InventorySetRequest (Maybe Price)
-isrSalePrice
-  = lens _isrSalePrice (\ s a -> s{_isrSalePrice = a})
-
--- | The availability of the product.
-isrAvailability :: Lens' InventorySetRequest (Maybe Text)
-isrAvailability
-  = lens _isrAvailability
-      (\ s a -> s{_isrAvailability = a})
-
--- | A date range represented by a pair of ISO 8601 dates separated by a
--- space, comma, or slash. Both dates might be specified as \'null\' if
--- undecided.
-isrSalePriceEffectiveDate :: Lens' InventorySetRequest (Maybe Text)
-isrSalePriceEffectiveDate
-  = lens _isrSalePriceEffectiveDate
-      (\ s a -> s{_isrSalePriceEffectiveDate = a})
-
--- | The quantity of the product that is reserved for sell-on-google ads.
--- Supported only for online products.
-isrSellOnGoogleQuantity :: Lens' InventorySetRequest (Maybe Word32)
-isrSellOnGoogleQuantity
-  = lens _isrSellOnGoogleQuantity
-      (\ s a -> s{_isrSellOnGoogleQuantity = a})
-      . mapping _Coerce
-
--- | The price of the product.
-isrPrice :: Lens' InventorySetRequest (Maybe Price)
-isrPrice = lens _isrPrice (\ s a -> s{_isrPrice = a})
-
-instance FromJSON InventorySetRequest where
+instance FromJSON ShipmentTrackingInfo where
         parseJSON
-          = withObject "InventorySetRequest"
+          = withObject "ShipmentTrackingInfo"
               (\ o ->
-                 InventorySetRequest' <$>
-                   (o .:? "loyaltyPoints") <*> (o .:? "quantity") <*>
-                     (o .:? "installment")
-                     <*> (o .:? "salePrice")
-                     <*> (o .:? "availability")
-                     <*> (o .:? "salePriceEffectiveDate")
-                     <*> (o .:? "sellOnGoogleQuantity")
-                     <*> (o .:? "price"))
+                 ShipmentTrackingInfo' <$>
+                   (o .:? "carrier") <*> (o .:? "trackingNumber"))
 
-instance ToJSON InventorySetRequest where
-        toJSON InventorySetRequest'{..}
+instance ToJSON ShipmentTrackingInfo where
+        toJSON ShipmentTrackingInfo'{..}
           = object
               (catMaybes
-                 [("loyaltyPoints" .=) <$> _isrLoyaltyPoints,
-                  ("quantity" .=) <$> _isrQuantity,
-                  ("installment" .=) <$> _isrInstallment,
-                  ("salePrice" .=) <$> _isrSalePrice,
-                  ("availability" .=) <$> _isrAvailability,
-                  ("salePriceEffectiveDate" .=) <$>
-                    _isrSalePriceEffectiveDate,
-                  ("sellOnGoogleQuantity" .=) <$>
-                    _isrSellOnGoogleQuantity,
-                  ("price" .=) <$> _isrPrice])
-
--- | Building block of the cost calculation decision tree. - The tree root
--- should have no condition and no calculation method. - All the children
--- must have a condition on the same dimension. The first child matching a
--- condition is entered, therefore, price and weight conditions form
--- contiguous intervals. - The last child of an element must have no
--- condition and matches all elements not previously matched. - Children
--- and calculation method are mutually exclusive, and exactly one of them
--- must be defined; the root must only have children.
---
--- /See:/ 'accountShippingShippingServiceCostRule' smart constructor.
-data AccountShippingShippingServiceCostRule = AccountShippingShippingServiceCostRule'
-    { _assscrChildren          :: !(Maybe [AccountShippingShippingServiceCostRule])
-    , _assscrCalculationMethod :: !(Maybe AccountShippingShippingServiceCalculationMethod)
-    , _assscrCondition         :: !(Maybe AccountShippingCondition)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AccountShippingShippingServiceCostRule' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'assscrChildren'
---
--- * 'assscrCalculationMethod'
---
--- * 'assscrCondition'
-accountShippingShippingServiceCostRule
-    :: AccountShippingShippingServiceCostRule
-accountShippingShippingServiceCostRule =
-    AccountShippingShippingServiceCostRule'
-    { _assscrChildren = Nothing
-    , _assscrCalculationMethod = Nothing
-    , _assscrCondition = Nothing
-    }
-
--- | Subsequent rules to be applied, only for inner nodes. The last child
--- must not specify a condition and acts as a catch-all.
-assscrChildren :: Lens' AccountShippingShippingServiceCostRule [AccountShippingShippingServiceCostRule]
-assscrChildren
-  = lens _assscrChildren
-      (\ s a -> s{_assscrChildren = a})
-      . _Default
-      . _Coerce
-
--- | Final calculation method to be used only in leaf nodes.
-assscrCalculationMethod :: Lens' AccountShippingShippingServiceCostRule (Maybe AccountShippingShippingServiceCalculationMethod)
-assscrCalculationMethod
-  = lens _assscrCalculationMethod
-      (\ s a -> s{_assscrCalculationMethod = a})
-
--- | Condition for this rule to be applicable. If no condition is specified,
--- the rule acts as a catch-all.
-assscrCondition :: Lens' AccountShippingShippingServiceCostRule (Maybe AccountShippingCondition)
-assscrCondition
-  = lens _assscrCondition
-      (\ s a -> s{_assscrCondition = a})
-
-instance FromJSON
-         AccountShippingShippingServiceCostRule where
-        parseJSON
-          = withObject "AccountShippingShippingServiceCostRule"
-              (\ o ->
-                 AccountShippingShippingServiceCostRule' <$>
-                   (o .:? "children" .!= mempty) <*>
-                     (o .:? "calculationMethod")
-                     <*> (o .:? "condition"))
-
-instance ToJSON
-         AccountShippingShippingServiceCostRule where
-        toJSON AccountShippingShippingServiceCostRule'{..}
-          = object
-              (catMaybes
-                 [("children" .=) <$> _assscrChildren,
-                  ("calculationMethod" .=) <$>
-                    _assscrCalculationMethod,
-                  ("condition" .=) <$> _assscrCondition])
+                 [("carrier" .=) <$> _stiCarrier,
+                  ("trackingNumber" .=) <$> _stiTrackingNumber])
 
 --
 -- /See:/ 'ordersCancelLineItemRequest' smart constructor.
 data OrdersCancelLineItemRequest = OrdersCancelLineItemRequest'
-    { _oclirAmount      :: !(Maybe Price)
-    , _oclirQuantity    :: !(Maybe (Textual Word32))
+    { _oclirQuantity    :: !(Maybe (Textual Word32))
     , _oclirLineItemId  :: !(Maybe Text)
     , _oclirReason      :: !(Maybe Text)
     , _oclirOperationId :: !(Maybe Text)
+    , _oclirProductId   :: !(Maybe Text)
     , _oclirReasonText  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersCancelLineItemRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
---
--- * 'oclirAmount'
 --
 -- * 'oclirQuantity'
 --
@@ -5032,25 +7304,20 @@ data OrdersCancelLineItemRequest = OrdersCancelLineItemRequest'
 --
 -- * 'oclirOperationId'
 --
+-- * 'oclirProductId'
+--
 -- * 'oclirReasonText'
 ordersCancelLineItemRequest
     :: OrdersCancelLineItemRequest
 ordersCancelLineItemRequest =
     OrdersCancelLineItemRequest'
-    { _oclirAmount = Nothing
-    , _oclirQuantity = Nothing
+    { _oclirQuantity = Nothing
     , _oclirLineItemId = Nothing
     , _oclirReason = Nothing
     , _oclirOperationId = Nothing
+    , _oclirProductId = Nothing
     , _oclirReasonText = Nothing
     }
-
--- | Amount to refund for the cancelation. Optional. If not set, Google will
--- calculate the default based on the price and tax of the items involved.
--- The amount must not be larger than the net amount left on the order.
-oclirAmount :: Lens' OrdersCancelLineItemRequest (Maybe Price)
-oclirAmount
-  = lens _oclirAmount (\ s a -> s{_oclirAmount = a})
 
 -- | The quantity to cancel.
 oclirQuantity :: Lens' OrdersCancelLineItemRequest (Maybe Word32)
@@ -5059,7 +7326,8 @@ oclirQuantity
       (\ s a -> s{_oclirQuantity = a})
       . mapping _Coerce
 
--- | The ID of the line item to cancel.
+-- | The ID of the line item to cancel. Either lineItemId or productId is
+-- required.
 oclirLineItemId :: Lens' OrdersCancelLineItemRequest (Maybe Text)
 oclirLineItemId
   = lens _oclirLineItemId
@@ -5076,6 +7344,13 @@ oclirOperationId
   = lens _oclirOperationId
       (\ s a -> s{_oclirOperationId = a})
 
+-- | The ID of the product to cancel. This is the REST ID used in the
+-- products service. Either lineItemId or productId is required.
+oclirProductId :: Lens' OrdersCancelLineItemRequest (Maybe Text)
+oclirProductId
+  = lens _oclirProductId
+      (\ s a -> s{_oclirProductId = a})
+
 -- | The explanation of the reason.
 oclirReasonText :: Lens' OrdersCancelLineItemRequest (Maybe Text)
 oclirReasonText
@@ -5087,21 +7362,21 @@ instance FromJSON OrdersCancelLineItemRequest where
           = withObject "OrdersCancelLineItemRequest"
               (\ o ->
                  OrdersCancelLineItemRequest' <$>
-                   (o .:? "amount") <*> (o .:? "quantity") <*>
-                     (o .:? "lineItemId")
-                     <*> (o .:? "reason")
+                   (o .:? "quantity") <*> (o .:? "lineItemId") <*>
+                     (o .:? "reason")
                      <*> (o .:? "operationId")
+                     <*> (o .:? "productId")
                      <*> (o .:? "reasonText"))
 
 instance ToJSON OrdersCancelLineItemRequest where
         toJSON OrdersCancelLineItemRequest'{..}
           = object
               (catMaybes
-                 [("amount" .=) <$> _oclirAmount,
-                  ("quantity" .=) <$> _oclirQuantity,
+                 [("quantity" .=) <$> _oclirQuantity,
                   ("lineItemId" .=) <$> _oclirLineItemId,
                   ("reason" .=) <$> _oclirReason,
                   ("operationId" .=) <$> _oclirOperationId,
+                  ("productId" .=) <$> _oclirProductId,
                   ("reasonText" .=) <$> _oclirReasonText])
 
 --
@@ -5155,10 +7430,11 @@ instance ToJSON ProductShippingWeight where
 --
 -- /See:/ 'accountstatusesCustomBatchRequestEntry' smart constructor.
 data AccountstatusesCustomBatchRequestEntry = AccountstatusesCustomBatchRequestEntry'
-    { _acbrecMerchantId :: !(Maybe (Textual Word64))
-    , _acbrecAccountId  :: !(Maybe (Textual Word64))
-    , _acbrecMethod     :: !(Maybe Text)
-    , _acbrecBatchId    :: !(Maybe (Textual Word32))
+    { _acbrecMerchantId   :: !(Maybe (Textual Word64))
+    , _acbrecAccountId    :: !(Maybe (Textual Word64))
+    , _acbrecDestinations :: !(Maybe [Text])
+    , _acbrecMethod       :: !(Maybe Text)
+    , _acbrecBatchId      :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountstatusesCustomBatchRequestEntry' with the minimum fields required to make a request.
@@ -5169,6 +7445,8 @@ data AccountstatusesCustomBatchRequestEntry = AccountstatusesCustomBatchRequestE
 --
 -- * 'acbrecAccountId'
 --
+-- * 'acbrecDestinations'
+--
 -- * 'acbrecMethod'
 --
 -- * 'acbrecBatchId'
@@ -5178,6 +7456,7 @@ accountstatusesCustomBatchRequestEntry =
     AccountstatusesCustomBatchRequestEntry'
     { _acbrecMerchantId = Nothing
     , _acbrecAccountId = Nothing
+    , _acbrecDestinations = Nothing
     , _acbrecMethod = Nothing
     , _acbrecBatchId = Nothing
     }
@@ -5195,6 +7474,15 @@ acbrecAccountId
   = lens _acbrecAccountId
       (\ s a -> s{_acbrecAccountId = a})
       . mapping _Coerce
+
+-- | If set, only issues for the specified destinations are returned,
+-- otherwise only issues for the Shopping destination.
+acbrecDestinations :: Lens' AccountstatusesCustomBatchRequestEntry [Text]
+acbrecDestinations
+  = lens _acbrecDestinations
+      (\ s a -> s{_acbrecDestinations = a})
+      . _Default
+      . _Coerce
 
 -- | The method (get).
 acbrecMethod :: Lens' AccountstatusesCustomBatchRequestEntry (Maybe Text)
@@ -5215,7 +7503,8 @@ instance FromJSON
               (\ o ->
                  AccountstatusesCustomBatchRequestEntry' <$>
                    (o .:? "merchantId") <*> (o .:? "accountId") <*>
-                     (o .:? "method")
+                     (o .:? "destinations" .!= mempty)
+                     <*> (o .:? "method")
                      <*> (o .:? "batchId"))
 
 instance ToJSON
@@ -5225,30 +7514,56 @@ instance ToJSON
               (catMaybes
                  [("merchantId" .=) <$> _acbrecMerchantId,
                   ("accountId" .=) <$> _acbrecAccountId,
+                  ("destinations" .=) <$> _acbrecDestinations,
                   ("method" .=) <$> _acbrecMethod,
                   ("batchId" .=) <$> _acbrecBatchId])
 
 --
 -- /See:/ 'deliveryTime' smart constructor.
 data DeliveryTime = DeliveryTime'
-    { _dtMinTransitTimeInDays :: !(Maybe (Textual Word32))
-    , _dtMaxTransitTimeInDays :: !(Maybe (Textual Word32))
+    { _dtHolidayCutoffs        :: !(Maybe [HolidayCutoff])
+    , _dtMinTransitTimeInDays  :: !(Maybe (Textual Word32))
+    , _dtCutoffTime            :: !(Maybe CutoffTime)
+    , _dtMinHandlingTimeInDays :: !(Maybe (Textual Word32))
+    , _dtMaxTransitTimeInDays  :: !(Maybe (Textual Word32))
+    , _dtMaxHandlingTimeInDays :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeliveryTime' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'dtHolidayCutoffs'
+--
 -- * 'dtMinTransitTimeInDays'
 --
+-- * 'dtCutoffTime'
+--
+-- * 'dtMinHandlingTimeInDays'
+--
 -- * 'dtMaxTransitTimeInDays'
+--
+-- * 'dtMaxHandlingTimeInDays'
 deliveryTime
     :: DeliveryTime
 deliveryTime =
     DeliveryTime'
-    { _dtMinTransitTimeInDays = Nothing
+    { _dtHolidayCutoffs = Nothing
+    , _dtMinTransitTimeInDays = Nothing
+    , _dtCutoffTime = Nothing
+    , _dtMinHandlingTimeInDays = Nothing
     , _dtMaxTransitTimeInDays = Nothing
+    , _dtMaxHandlingTimeInDays = Nothing
     }
+
+-- | Holiday cutoff definitions. If configured, they specify order cutoff
+-- times for holiday-specific shipping.
+dtHolidayCutoffs :: Lens' DeliveryTime [HolidayCutoff]
+dtHolidayCutoffs
+  = lens _dtHolidayCutoffs
+      (\ s a -> s{_dtHolidayCutoffs = a})
+      . _Default
+      . _Coerce
 
 -- | Minimum number of business days that is spent in transit. 0 means same
 -- day delivery, 1 means next day delivery. Required.
@@ -5256,6 +7571,20 @@ dtMinTransitTimeInDays :: Lens' DeliveryTime (Maybe Word32)
 dtMinTransitTimeInDays
   = lens _dtMinTransitTimeInDays
       (\ s a -> s{_dtMinTransitTimeInDays = a})
+      . mapping _Coerce
+
+-- | Business days cutoff time definition. If not configured the cutoff time
+-- will be defaulted to 8AM PST.
+dtCutoffTime :: Lens' DeliveryTime (Maybe CutoffTime)
+dtCutoffTime
+  = lens _dtCutoffTime (\ s a -> s{_dtCutoffTime = a})
+
+-- | Minimum number of business days spent before an order is shipped. 0
+-- means same day shipped, 1 means next day shipped.
+dtMinHandlingTimeInDays :: Lens' DeliveryTime (Maybe Word32)
+dtMinHandlingTimeInDays
+  = lens _dtMinHandlingTimeInDays
+      (\ s a -> s{_dtMinHandlingTimeInDays = a})
       . mapping _Coerce
 
 -- | Maximum number of business days that is spent in transit. 0 means same
@@ -5267,77 +7596,251 @@ dtMaxTransitTimeInDays
       (\ s a -> s{_dtMaxTransitTimeInDays = a})
       . mapping _Coerce
 
+-- | Maximum number of business days spent before an order is shipped. 0
+-- means same day shipped, 1 means next day shipped. Must be greater than
+-- or equal to minHandlingTimeInDays.
+dtMaxHandlingTimeInDays :: Lens' DeliveryTime (Maybe Word32)
+dtMaxHandlingTimeInDays
+  = lens _dtMaxHandlingTimeInDays
+      (\ s a -> s{_dtMaxHandlingTimeInDays = a})
+      . mapping _Coerce
+
 instance FromJSON DeliveryTime where
         parseJSON
           = withObject "DeliveryTime"
               (\ o ->
                  DeliveryTime' <$>
-                   (o .:? "minTransitTimeInDays") <*>
-                     (o .:? "maxTransitTimeInDays"))
+                   (o .:? "holidayCutoffs" .!= mempty) <*>
+                     (o .:? "minTransitTimeInDays")
+                     <*> (o .:? "cutoffTime")
+                     <*> (o .:? "minHandlingTimeInDays")
+                     <*> (o .:? "maxTransitTimeInDays")
+                     <*> (o .:? "maxHandlingTimeInDays"))
 
 instance ToJSON DeliveryTime where
         toJSON DeliveryTime'{..}
           = object
               (catMaybes
-                 [("minTransitTimeInDays" .=) <$>
+                 [("holidayCutoffs" .=) <$> _dtHolidayCutoffs,
+                  ("minTransitTimeInDays" .=) <$>
                     _dtMinTransitTimeInDays,
+                  ("cutoffTime" .=) <$> _dtCutoffTime,
+                  ("minHandlingTimeInDays" .=) <$>
+                    _dtMinHandlingTimeInDays,
                   ("maxTransitTimeInDays" .=) <$>
-                    _dtMaxTransitTimeInDays])
+                    _dtMaxTransitTimeInDays,
+                  ("maxHandlingTimeInDays" .=) <$>
+                    _dtMaxHandlingTimeInDays])
+
+--
+-- /See:/ 'liaCountrySettings' smart constructor.
+data LiaCountrySettings = LiaCountrySettings'
+    { _lcsPosDataProvider             :: !(Maybe LiaPosDataProvider)
+    , _lcsCountry                     :: !(Maybe Text)
+    , _lcsStorePickupActive           :: !(Maybe Bool)
+    , _lcsInventory                   :: !(Maybe LiaInventorySettings)
+    , _lcsAbout                       :: !(Maybe LiaAboutPageSettings)
+    , _lcsHostedLocalStorefrontActive :: !(Maybe Bool)
+    , _lcsOnDisplayToOrder            :: !(Maybe LiaOnDisplayToOrderSettings)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LiaCountrySettings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lcsPosDataProvider'
+--
+-- * 'lcsCountry'
+--
+-- * 'lcsStorePickupActive'
+--
+-- * 'lcsInventory'
+--
+-- * 'lcsAbout'
+--
+-- * 'lcsHostedLocalStorefrontActive'
+--
+-- * 'lcsOnDisplayToOrder'
+liaCountrySettings
+    :: LiaCountrySettings
+liaCountrySettings =
+    LiaCountrySettings'
+    { _lcsPosDataProvider = Nothing
+    , _lcsCountry = Nothing
+    , _lcsStorePickupActive = Nothing
+    , _lcsInventory = Nothing
+    , _lcsAbout = Nothing
+    , _lcsHostedLocalStorefrontActive = Nothing
+    , _lcsOnDisplayToOrder = Nothing
+    }
+
+-- | The POS data provider linked with this country.
+lcsPosDataProvider :: Lens' LiaCountrySettings (Maybe LiaPosDataProvider)
+lcsPosDataProvider
+  = lens _lcsPosDataProvider
+      (\ s a -> s{_lcsPosDataProvider = a})
+
+-- | CLDR country code (e.g. \"US\").
+lcsCountry :: Lens' LiaCountrySettings (Maybe Text)
+lcsCountry
+  = lens _lcsCountry (\ s a -> s{_lcsCountry = a})
+
+-- | The status of the \"Store pickup\" feature.
+lcsStorePickupActive :: Lens' LiaCountrySettings (Maybe Bool)
+lcsStorePickupActive
+  = lens _lcsStorePickupActive
+      (\ s a -> s{_lcsStorePickupActive = a})
+
+-- | LIA inventory verification settings.
+lcsInventory :: Lens' LiaCountrySettings (Maybe LiaInventorySettings)
+lcsInventory
+  = lens _lcsInventory (\ s a -> s{_lcsInventory = a})
+
+-- | The settings for the About page.
+lcsAbout :: Lens' LiaCountrySettings (Maybe LiaAboutPageSettings)
+lcsAbout = lens _lcsAbout (\ s a -> s{_lcsAbout = a})
+
+-- | The status of the \"Merchant hosted local storefront\" feature.
+lcsHostedLocalStorefrontActive :: Lens' LiaCountrySettings (Maybe Bool)
+lcsHostedLocalStorefrontActive
+  = lens _lcsHostedLocalStorefrontActive
+      (\ s a -> s{_lcsHostedLocalStorefrontActive = a})
+
+-- | LIA \"On Display To Order\" settings.
+lcsOnDisplayToOrder :: Lens' LiaCountrySettings (Maybe LiaOnDisplayToOrderSettings)
+lcsOnDisplayToOrder
+  = lens _lcsOnDisplayToOrder
+      (\ s a -> s{_lcsOnDisplayToOrder = a})
+
+instance FromJSON LiaCountrySettings where
+        parseJSON
+          = withObject "LiaCountrySettings"
+              (\ o ->
+                 LiaCountrySettings' <$>
+                   (o .:? "posDataProvider") <*> (o .:? "country") <*>
+                     (o .:? "storePickupActive")
+                     <*> (o .:? "inventory")
+                     <*> (o .:? "about")
+                     <*> (o .:? "hostedLocalStorefrontActive")
+                     <*> (o .:? "onDisplayToOrder"))
+
+instance ToJSON LiaCountrySettings where
+        toJSON LiaCountrySettings'{..}
+          = object
+              (catMaybes
+                 [("posDataProvider" .=) <$> _lcsPosDataProvider,
+                  ("country" .=) <$> _lcsCountry,
+                  ("storePickupActive" .=) <$> _lcsStorePickupActive,
+                  ("inventory" .=) <$> _lcsInventory,
+                  ("about" .=) <$> _lcsAbout,
+                  ("hostedLocalStorefrontActive" .=) <$>
+                    _lcsHostedLocalStorefrontActive,
+                  ("onDisplayToOrder" .=) <$> _lcsOnDisplayToOrder])
+
+--
+-- /See:/ 'ordersReturnRefundLineItemResponse' smart constructor.
+data OrdersReturnRefundLineItemResponse = OrdersReturnRefundLineItemResponse'
+    { _orrlirKind            :: !Text
+    , _orrlirExecutionStatus :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OrdersReturnRefundLineItemResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'orrlirKind'
+--
+-- * 'orrlirExecutionStatus'
+ordersReturnRefundLineItemResponse
+    :: OrdersReturnRefundLineItemResponse
+ordersReturnRefundLineItemResponse =
+    OrdersReturnRefundLineItemResponse'
+    { _orrlirKind = "content#ordersReturnRefundLineItemResponse"
+    , _orrlirExecutionStatus = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"content#ordersReturnRefundLineItemResponse\".
+orrlirKind :: Lens' OrdersReturnRefundLineItemResponse Text
+orrlirKind
+  = lens _orrlirKind (\ s a -> s{_orrlirKind = a})
+
+-- | The status of the execution.
+orrlirExecutionStatus :: Lens' OrdersReturnRefundLineItemResponse (Maybe Text)
+orrlirExecutionStatus
+  = lens _orrlirExecutionStatus
+      (\ s a -> s{_orrlirExecutionStatus = a})
+
+instance FromJSON OrdersReturnRefundLineItemResponse
+         where
+        parseJSON
+          = withObject "OrdersReturnRefundLineItemResponse"
+              (\ o ->
+                 OrdersReturnRefundLineItemResponse' <$>
+                   (o .:? "kind" .!=
+                      "content#ordersReturnRefundLineItemResponse")
+                     <*> (o .:? "executionStatus"))
+
+instance ToJSON OrdersReturnRefundLineItemResponse
+         where
+        toJSON OrdersReturnRefundLineItemResponse'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _orrlirKind),
+                  ("executionStatus" .=) <$> _orrlirExecutionStatus])
 
 -- | A batch entry encoding a single non-batch productstatuses response.
 --
 -- /See:/ 'productstatusesCustomBatchResponseEntry' smart constructor.
 data ProductstatusesCustomBatchResponseEntry = ProductstatusesCustomBatchResponseEntry'
-    { _pcbreKind          :: !Text
-    , _pcbreProductStatus :: !(Maybe ProductStatus)
-    , _pcbreErrors        :: !(Maybe Errors)
-    , _pcbreBatchId       :: !(Maybe (Textual Word32))
+    { _pKind          :: !Text
+    , _pProductStatus :: !(Maybe ProductStatus)
+    , _pErrors        :: !(Maybe Errors)
+    , _pBatchId       :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductstatusesCustomBatchResponseEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pcbreKind'
+-- * 'pKind'
 --
--- * 'pcbreProductStatus'
+-- * 'pProductStatus'
 --
--- * 'pcbreErrors'
+-- * 'pErrors'
 --
--- * 'pcbreBatchId'
+-- * 'pBatchId'
 productstatusesCustomBatchResponseEntry
     :: ProductstatusesCustomBatchResponseEntry
 productstatusesCustomBatchResponseEntry =
     ProductstatusesCustomBatchResponseEntry'
-    { _pcbreKind = "content#productstatusesCustomBatchResponseEntry"
-    , _pcbreProductStatus = Nothing
-    , _pcbreErrors = Nothing
-    , _pcbreBatchId = Nothing
+    { _pKind = "content#productstatusesCustomBatchResponseEntry"
+    , _pProductStatus = Nothing
+    , _pErrors = Nothing
+    , _pBatchId = Nothing
     }
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#productstatusesCustomBatchResponseEntry\".
-pcbreKind :: Lens' ProductstatusesCustomBatchResponseEntry Text
-pcbreKind
-  = lens _pcbreKind (\ s a -> s{_pcbreKind = a})
+pKind :: Lens' ProductstatusesCustomBatchResponseEntry Text
+pKind = lens _pKind (\ s a -> s{_pKind = a})
 
 -- | The requested product status. Only defined if the request was
 -- successful.
-pcbreProductStatus :: Lens' ProductstatusesCustomBatchResponseEntry (Maybe ProductStatus)
-pcbreProductStatus
-  = lens _pcbreProductStatus
-      (\ s a -> s{_pcbreProductStatus = a})
+pProductStatus :: Lens' ProductstatusesCustomBatchResponseEntry (Maybe ProductStatus)
+pProductStatus
+  = lens _pProductStatus
+      (\ s a -> s{_pProductStatus = a})
 
 -- | A list of errors, if the request failed.
-pcbreErrors :: Lens' ProductstatusesCustomBatchResponseEntry (Maybe Errors)
-pcbreErrors
-  = lens _pcbreErrors (\ s a -> s{_pcbreErrors = a})
+pErrors :: Lens' ProductstatusesCustomBatchResponseEntry (Maybe Errors)
+pErrors = lens _pErrors (\ s a -> s{_pErrors = a})
 
 -- | The ID of the request entry this entry responds to.
-pcbreBatchId :: Lens' ProductstatusesCustomBatchResponseEntry (Maybe Word32)
-pcbreBatchId
-  = lens _pcbreBatchId (\ s a -> s{_pcbreBatchId = a})
-      . mapping _Coerce
+pBatchId :: Lens' ProductstatusesCustomBatchResponseEntry (Maybe Word32)
+pBatchId
+  = lens _pBatchId (\ s a -> s{_pBatchId = a}) .
+      mapping _Coerce
 
 instance FromJSON
          ProductstatusesCustomBatchResponseEntry where
@@ -5357,59 +7860,117 @@ instance ToJSON
         toJSON ProductstatusesCustomBatchResponseEntry'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _pcbreKind),
-                  ("productStatus" .=) <$> _pcbreProductStatus,
-                  ("errors" .=) <$> _pcbreErrors,
-                  ("batchId" .=) <$> _pcbreBatchId])
+                 [Just ("kind" .= _pKind),
+                  ("productStatus" .=) <$> _pProductStatus,
+                  ("errors" .=) <$> _pErrors,
+                  ("batchId" .=) <$> _pBatchId])
 
 --
--- /See:/ 'ordersCustomBatchRequestEntryCancel' smart constructor.
-data OrdersCustomBatchRequestEntryCancel = OrdersCustomBatchRequestEntryCancel'
-    { _ocbrecReason     :: !(Maybe Text)
-    , _ocbrecReasonText :: !(Maybe Text)
+-- /See:/ 'shippingSettingsGetSupportedHolidaysResponse' smart constructor.
+data ShippingSettingsGetSupportedHolidaysResponse = ShippingSettingsGetSupportedHolidaysResponse'
+    { _ssgshrKind     :: !Text
+    , _ssgshrHolidays :: !(Maybe [HolidaysHoliday])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrdersCustomBatchRequestEntryCancel' with the minimum fields required to make a request.
+-- | Creates a value of 'ShippingSettingsGetSupportedHolidaysResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ocbrecReason'
+-- * 'ssgshrKind'
 --
--- * 'ocbrecReasonText'
-ordersCustomBatchRequestEntryCancel
-    :: OrdersCustomBatchRequestEntryCancel
-ordersCustomBatchRequestEntryCancel =
-    OrdersCustomBatchRequestEntryCancel'
-    { _ocbrecReason = Nothing
-    , _ocbrecReasonText = Nothing
+-- * 'ssgshrHolidays'
+shippingSettingsGetSupportedHolidaysResponse
+    :: ShippingSettingsGetSupportedHolidaysResponse
+shippingSettingsGetSupportedHolidaysResponse =
+    ShippingSettingsGetSupportedHolidaysResponse'
+    { _ssgshrKind = "content#shippingsettingsGetSupportedHolidaysResponse"
+    , _ssgshrHolidays = Nothing
     }
 
--- | The reason for the cancellation.
-ocbrecReason :: Lens' OrdersCustomBatchRequestEntryCancel (Maybe Text)
-ocbrecReason
-  = lens _ocbrecReason (\ s a -> s{_ocbrecReason = a})
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"content#shippingsettingsGetSupportedHolidaysResponse\".
+ssgshrKind :: Lens' ShippingSettingsGetSupportedHolidaysResponse Text
+ssgshrKind
+  = lens _ssgshrKind (\ s a -> s{_ssgshrKind = a})
 
--- | The explanation of the reason.
-ocbrecReasonText :: Lens' OrdersCustomBatchRequestEntryCancel (Maybe Text)
-ocbrecReasonText
-  = lens _ocbrecReasonText
-      (\ s a -> s{_ocbrecReasonText = a})
+-- | A list of holidays applicable for delivery guarantees. May be empty.
+ssgshrHolidays :: Lens' ShippingSettingsGetSupportedHolidaysResponse [HolidaysHoliday]
+ssgshrHolidays
+  = lens _ssgshrHolidays
+      (\ s a -> s{_ssgshrHolidays = a})
+      . _Default
+      . _Coerce
 
-instance FromJSON OrdersCustomBatchRequestEntryCancel
-         where
+instance FromJSON
+         ShippingSettingsGetSupportedHolidaysResponse where
         parseJSON
-          = withObject "OrdersCustomBatchRequestEntryCancel"
+          = withObject
+              "ShippingSettingsGetSupportedHolidaysResponse"
               (\ o ->
-                 OrdersCustomBatchRequestEntryCancel' <$>
-                   (o .:? "reason") <*> (o .:? "reasonText"))
+                 ShippingSettingsGetSupportedHolidaysResponse' <$>
+                   (o .:? "kind" .!=
+                      "content#shippingsettingsGetSupportedHolidaysResponse")
+                     <*> (o .:? "holidays" .!= mempty))
 
-instance ToJSON OrdersCustomBatchRequestEntryCancel
-         where
-        toJSON OrdersCustomBatchRequestEntryCancel'{..}
+instance ToJSON
+         ShippingSettingsGetSupportedHolidaysResponse where
+        toJSON
+          ShippingSettingsGetSupportedHolidaysResponse'{..}
           = object
               (catMaybes
-                 [("reason" .=) <$> _ocbrecReason,
-                  ("reasonText" .=) <$> _ocbrecReasonText])
+                 [Just ("kind" .= _ssgshrKind),
+                  ("holidays" .=) <$> _ssgshrHolidays])
+
+--
+-- /See:/ 'liaPosDataProvider' smart constructor.
+data LiaPosDataProvider = LiaPosDataProvider'
+    { _lpdpPosExternalAccountId :: !(Maybe Text)
+    , _lpdpPosDataProviderId    :: !(Maybe (Textual Word64))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LiaPosDataProvider' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lpdpPosExternalAccountId'
+--
+-- * 'lpdpPosDataProviderId'
+liaPosDataProvider
+    :: LiaPosDataProvider
+liaPosDataProvider =
+    LiaPosDataProvider'
+    { _lpdpPosExternalAccountId = Nothing
+    , _lpdpPosDataProviderId = Nothing
+    }
+
+-- | The account ID by which this merchant is known to the POS data provider.
+lpdpPosExternalAccountId :: Lens' LiaPosDataProvider (Maybe Text)
+lpdpPosExternalAccountId
+  = lens _lpdpPosExternalAccountId
+      (\ s a -> s{_lpdpPosExternalAccountId = a})
+
+-- | The ID of the POS data provider.
+lpdpPosDataProviderId :: Lens' LiaPosDataProvider (Maybe Word64)
+lpdpPosDataProviderId
+  = lens _lpdpPosDataProviderId
+      (\ s a -> s{_lpdpPosDataProviderId = a})
+      . mapping _Coerce
+
+instance FromJSON LiaPosDataProvider where
+        parseJSON
+          = withObject "LiaPosDataProvider"
+              (\ o ->
+                 LiaPosDataProvider' <$>
+                   (o .:? "posExternalAccountId") <*>
+                     (o .:? "posDataProviderId"))
+
+instance ToJSON LiaPosDataProvider where
+        toJSON LiaPosDataProvider'{..}
+          = object
+              (catMaybes
+                 [("posExternalAccountId" .=) <$>
+                    _lpdpPosExternalAccountId,
+                  ("posDataProviderId" .=) <$> _lpdpPosDataProviderId])
 
 --
 -- /See:/ 'datafeedFormat' smart constructor.
@@ -5475,86 +8036,149 @@ instance ToJSON DatafeedFormat where
                   ("fileEncoding" .=) <$> _dfFileEncoding,
                   ("columnDelimiter" .=) <$> _dfColumnDelimiter])
 
+-- | Local Inventory ads (LIA) settings. All methods except
+-- listposdataproviders require the admin role.
+--
+-- /See:/ 'liaSettings' smart constructor.
+data LiaSettings = LiaSettings'
+    { _lsCountrySettings :: !(Maybe [LiaCountrySettings])
+    , _lsKind            :: !Text
+    , _lsAccountId       :: !(Maybe (Textual Word64))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LiaSettings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lsCountrySettings'
+--
+-- * 'lsKind'
+--
+-- * 'lsAccountId'
+liaSettings
+    :: LiaSettings
+liaSettings =
+    LiaSettings'
+    { _lsCountrySettings = Nothing
+    , _lsKind = "content#liaSettings"
+    , _lsAccountId = Nothing
+    }
+
+-- | The LIA settings for each country.
+lsCountrySettings :: Lens' LiaSettings [LiaCountrySettings]
+lsCountrySettings
+  = lens _lsCountrySettings
+      (\ s a -> s{_lsCountrySettings = a})
+      . _Default
+      . _Coerce
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"content#liaSettings\".
+lsKind :: Lens' LiaSettings Text
+lsKind = lens _lsKind (\ s a -> s{_lsKind = a})
+
+-- | The ID of the account to which these LIA settings belong. Ignored upon
+-- update, always present in get request responses.
+lsAccountId :: Lens' LiaSettings (Maybe Word64)
+lsAccountId
+  = lens _lsAccountId (\ s a -> s{_lsAccountId = a}) .
+      mapping _Coerce
+
+instance FromJSON LiaSettings where
+        parseJSON
+          = withObject "LiaSettings"
+              (\ o ->
+                 LiaSettings' <$>
+                   (o .:? "countrySettings" .!= mempty) <*>
+                     (o .:? "kind" .!= "content#liaSettings")
+                     <*> (o .:? "accountId"))
+
+instance ToJSON LiaSettings where
+        toJSON LiaSettings'{..}
+          = object
+              (catMaybes
+                 [("countrySettings" .=) <$> _lsCountrySettings,
+                  Just ("kind" .= _lsKind),
+                  ("accountId" .=) <$> _lsAccountId])
+
 --
 -- /See:/ 'productShipping' smart constructor.
 data ProductShipping = ProductShipping'
-    { _psService           :: !(Maybe Text)
-    , _psLocationGroupName :: !(Maybe Text)
-    , _psCountry           :: !(Maybe Text)
-    , _psPostalCode        :: !(Maybe Text)
-    , _psPrice             :: !(Maybe Price)
-    , _psRegion            :: !(Maybe Text)
-    , _psLocationId        :: !(Maybe (Textual Int64))
+    { _pService           :: !(Maybe Text)
+    , _pLocationGroupName :: !(Maybe Text)
+    , _pCountry           :: !(Maybe Text)
+    , _pPostalCode        :: !(Maybe Text)
+    , _pPrice             :: !(Maybe Price)
+    , _pRegion            :: !(Maybe Text)
+    , _pLocationId        :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductShipping' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'psService'
+-- * 'pService'
 --
--- * 'psLocationGroupName'
+-- * 'pLocationGroupName'
 --
--- * 'psCountry'
+-- * 'pCountry'
 --
--- * 'psPostalCode'
+-- * 'pPostalCode'
 --
--- * 'psPrice'
+-- * 'pPrice'
 --
--- * 'psRegion'
+-- * 'pRegion'
 --
--- * 'psLocationId'
+-- * 'pLocationId'
 productShipping
     :: ProductShipping
 productShipping =
     ProductShipping'
-    { _psService = Nothing
-    , _psLocationGroupName = Nothing
-    , _psCountry = Nothing
-    , _psPostalCode = Nothing
-    , _psPrice = Nothing
-    , _psRegion = Nothing
-    , _psLocationId = Nothing
+    { _pService = Nothing
+    , _pLocationGroupName = Nothing
+    , _pCountry = Nothing
+    , _pPostalCode = Nothing
+    , _pPrice = Nothing
+    , _pRegion = Nothing
+    , _pLocationId = Nothing
     }
 
 -- | A free-form description of the service class or delivery speed.
-psService :: Lens' ProductShipping (Maybe Text)
-psService
-  = lens _psService (\ s a -> s{_psService = a})
+pService :: Lens' ProductShipping (Maybe Text)
+pService = lens _pService (\ s a -> s{_pService = a})
 
 -- | The location where the shipping is applicable, represented by a location
 -- group name.
-psLocationGroupName :: Lens' ProductShipping (Maybe Text)
-psLocationGroupName
-  = lens _psLocationGroupName
-      (\ s a -> s{_psLocationGroupName = a})
+pLocationGroupName :: Lens' ProductShipping (Maybe Text)
+pLocationGroupName
+  = lens _pLocationGroupName
+      (\ s a -> s{_pLocationGroupName = a})
 
 -- | The CLDR territory code of the country to which an item will ship.
-psCountry :: Lens' ProductShipping (Maybe Text)
-psCountry
-  = lens _psCountry (\ s a -> s{_psCountry = a})
+pCountry :: Lens' ProductShipping (Maybe Text)
+pCountry = lens _pCountry (\ s a -> s{_pCountry = a})
 
 -- | The postal code range that the shipping rate applies to, represented by
 -- a postal code, a postal code prefix followed by a * wildcard, a range
 -- between two postal codes or two postal code prefixes of equal length.
-psPostalCode :: Lens' ProductShipping (Maybe Text)
-psPostalCode
-  = lens _psPostalCode (\ s a -> s{_psPostalCode = a})
+pPostalCode :: Lens' ProductShipping (Maybe Text)
+pPostalCode
+  = lens _pPostalCode (\ s a -> s{_pPostalCode = a})
 
 -- | Fixed shipping price, represented as a number.
-psPrice :: Lens' ProductShipping (Maybe Price)
-psPrice = lens _psPrice (\ s a -> s{_psPrice = a})
+pPrice :: Lens' ProductShipping (Maybe Price)
+pPrice = lens _pPrice (\ s a -> s{_pPrice = a})
 
--- | The geographic region to which a shipping rate applies (e.g. zip code).
-psRegion :: Lens' ProductShipping (Maybe Text)
-psRegion = lens _psRegion (\ s a -> s{_psRegion = a})
+-- | The geographic region to which a shipping rate applies.
+pRegion :: Lens' ProductShipping (Maybe Text)
+pRegion = lens _pRegion (\ s a -> s{_pRegion = a})
 
 -- | The numeric id of a location that the shipping rate applies to as
 -- defined in the AdWords API.
-psLocationId :: Lens' ProductShipping (Maybe Int64)
-psLocationId
-  = lens _psLocationId (\ s a -> s{_psLocationId = a})
-      . mapping _Coerce
+pLocationId :: Lens' ProductShipping (Maybe Int64)
+pLocationId
+  = lens _pLocationId (\ s a -> s{_pLocationId = a}) .
+      mapping _Coerce
 
 instance FromJSON ProductShipping where
         parseJSON
@@ -5572,13 +8196,12 @@ instance ToJSON ProductShipping where
         toJSON ProductShipping'{..}
           = object
               (catMaybes
-                 [("service" .=) <$> _psService,
-                  ("locationGroupName" .=) <$> _psLocationGroupName,
-                  ("country" .=) <$> _psCountry,
-                  ("postalCode" .=) <$> _psPostalCode,
-                  ("price" .=) <$> _psPrice,
-                  ("region" .=) <$> _psRegion,
-                  ("locationId" .=) <$> _psLocationId])
+                 [("service" .=) <$> _pService,
+                  ("locationGroupName" .=) <$> _pLocationGroupName,
+                  ("country" .=) <$> _pCountry,
+                  ("postalCode" .=) <$> _pPostalCode,
+                  ("price" .=) <$> _pPrice, ("region" .=) <$> _pRegion,
+                  ("locationId" .=) <$> _pLocationId])
 
 --
 -- /See:/ 'shippingSettingsCustomBatchRequest' smart constructor.
@@ -5619,114 +8242,130 @@ instance ToJSON ShippingSettingsCustomBatchRequest
           = object
               (catMaybes [("entries" .=) <$> _sscbrEntries])
 
--- | A batch entry encoding a single non-batch accountshipping request.
 --
--- /See:/ 'accountshippingCustomBatchRequestEntry' smart constructor.
-data AccountshippingCustomBatchRequestEntry = AccountshippingCustomBatchRequestEntry'
-    { _aaMerchantId      :: !(Maybe (Textual Word64))
-    , _aaAccountId       :: !(Maybe (Textual Word64))
-    , _aaMethod          :: !(Maybe Text)
-    , _aaAccountShipping :: !(Maybe AccountShipping)
-    , _aaBatchId         :: !(Maybe (Textual Word32))
+-- /See:/ 'liaSettingsCustomBatchResponseEntry' smart constructor.
+data LiaSettingsCustomBatchResponseEntry = LiaSettingsCustomBatchResponseEntry'
+    { _lscbreGmbAccounts      :: !(Maybe GmbAccounts)
+    , _lscbreKind             :: !Text
+    , _lscbreLiaSettings      :: !(Maybe LiaSettings)
+    , _lscbreErrors           :: !(Maybe Errors)
+    , _lscbrePosDataProviders :: !(Maybe [PosDataProviders])
+    , _lscbreBatchId          :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountshippingCustomBatchRequestEntry' with the minimum fields required to make a request.
+-- | Creates a value of 'LiaSettingsCustomBatchResponseEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aaMerchantId'
+-- * 'lscbreGmbAccounts'
 --
--- * 'aaAccountId'
+-- * 'lscbreKind'
 --
--- * 'aaMethod'
+-- * 'lscbreLiaSettings'
 --
--- * 'aaAccountShipping'
+-- * 'lscbreErrors'
 --
--- * 'aaBatchId'
-accountshippingCustomBatchRequestEntry
-    :: AccountshippingCustomBatchRequestEntry
-accountshippingCustomBatchRequestEntry =
-    AccountshippingCustomBatchRequestEntry'
-    { _aaMerchantId = Nothing
-    , _aaAccountId = Nothing
-    , _aaMethod = Nothing
-    , _aaAccountShipping = Nothing
-    , _aaBatchId = Nothing
+-- * 'lscbrePosDataProviders'
+--
+-- * 'lscbreBatchId'
+liaSettingsCustomBatchResponseEntry
+    :: LiaSettingsCustomBatchResponseEntry
+liaSettingsCustomBatchResponseEntry =
+    LiaSettingsCustomBatchResponseEntry'
+    { _lscbreGmbAccounts = Nothing
+    , _lscbreKind = "content#liasettingsCustomBatchResponseEntry"
+    , _lscbreLiaSettings = Nothing
+    , _lscbreErrors = Nothing
+    , _lscbrePosDataProviders = Nothing
+    , _lscbreBatchId = Nothing
     }
 
--- | The ID of the managing account.
-aaMerchantId :: Lens' AccountshippingCustomBatchRequestEntry (Maybe Word64)
-aaMerchantId
-  = lens _aaMerchantId (\ s a -> s{_aaMerchantId = a})
+-- | The the list of accessible GMB accounts.
+lscbreGmbAccounts :: Lens' LiaSettingsCustomBatchResponseEntry (Maybe GmbAccounts)
+lscbreGmbAccounts
+  = lens _lscbreGmbAccounts
+      (\ s a -> s{_lscbreGmbAccounts = a})
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"content#liasettingsCustomBatchResponseEntry\".
+lscbreKind :: Lens' LiaSettingsCustomBatchResponseEntry Text
+lscbreKind
+  = lens _lscbreKind (\ s a -> s{_lscbreKind = a})
+
+-- | The retrieved or updated Lia settings.
+lscbreLiaSettings :: Lens' LiaSettingsCustomBatchResponseEntry (Maybe LiaSettings)
+lscbreLiaSettings
+  = lens _lscbreLiaSettings
+      (\ s a -> s{_lscbreLiaSettings = a})
+
+-- | A list of errors defined if, and only if, the request failed.
+lscbreErrors :: Lens' LiaSettingsCustomBatchResponseEntry (Maybe Errors)
+lscbreErrors
+  = lens _lscbreErrors (\ s a -> s{_lscbreErrors = a})
+
+-- | The list of POS data providers.
+lscbrePosDataProviders :: Lens' LiaSettingsCustomBatchResponseEntry [PosDataProviders]
+lscbrePosDataProviders
+  = lens _lscbrePosDataProviders
+      (\ s a -> s{_lscbrePosDataProviders = a})
+      . _Default
+      . _Coerce
+
+-- | The ID of the request entry to which this entry responds.
+lscbreBatchId :: Lens' LiaSettingsCustomBatchResponseEntry (Maybe Word32)
+lscbreBatchId
+  = lens _lscbreBatchId
+      (\ s a -> s{_lscbreBatchId = a})
       . mapping _Coerce
 
--- | The ID of the account for which to get\/update account shipping
--- settings.
-aaAccountId :: Lens' AccountshippingCustomBatchRequestEntry (Maybe Word64)
-aaAccountId
-  = lens _aaAccountId (\ s a -> s{_aaAccountId = a}) .
-      mapping _Coerce
-
-aaMethod :: Lens' AccountshippingCustomBatchRequestEntry (Maybe Text)
-aaMethod = lens _aaMethod (\ s a -> s{_aaMethod = a})
-
--- | The account shipping settings to update. Only defined if the method is
--- update.
-aaAccountShipping :: Lens' AccountshippingCustomBatchRequestEntry (Maybe AccountShipping)
-aaAccountShipping
-  = lens _aaAccountShipping
-      (\ s a -> s{_aaAccountShipping = a})
-
--- | An entry ID, unique within the batch request.
-aaBatchId :: Lens' AccountshippingCustomBatchRequestEntry (Maybe Word32)
-aaBatchId
-  = lens _aaBatchId (\ s a -> s{_aaBatchId = a}) .
-      mapping _Coerce
-
-instance FromJSON
-         AccountshippingCustomBatchRequestEntry where
+instance FromJSON LiaSettingsCustomBatchResponseEntry
+         where
         parseJSON
-          = withObject "AccountshippingCustomBatchRequestEntry"
+          = withObject "LiaSettingsCustomBatchResponseEntry"
               (\ o ->
-                 AccountshippingCustomBatchRequestEntry' <$>
-                   (o .:? "merchantId") <*> (o .:? "accountId") <*>
-                     (o .:? "method")
-                     <*> (o .:? "accountShipping")
+                 LiaSettingsCustomBatchResponseEntry' <$>
+                   (o .:? "gmbAccounts") <*>
+                     (o .:? "kind" .!=
+                        "content#liasettingsCustomBatchResponseEntry")
+                     <*> (o .:? "liaSettings")
+                     <*> (o .:? "errors")
+                     <*> (o .:? "posDataProviders" .!= mempty)
                      <*> (o .:? "batchId"))
 
-instance ToJSON
-         AccountshippingCustomBatchRequestEntry where
-        toJSON AccountshippingCustomBatchRequestEntry'{..}
+instance ToJSON LiaSettingsCustomBatchResponseEntry
+         where
+        toJSON LiaSettingsCustomBatchResponseEntry'{..}
           = object
               (catMaybes
-                 [("merchantId" .=) <$> _aaMerchantId,
-                  ("accountId" .=) <$> _aaAccountId,
-                  ("method" .=) <$> _aaMethod,
-                  ("accountShipping" .=) <$> _aaAccountShipping,
-                  ("batchId" .=) <$> _aaBatchId])
+                 [("gmbAccounts" .=) <$> _lscbreGmbAccounts,
+                  Just ("kind" .= _lscbreKind),
+                  ("liaSettings" .=) <$> _lscbreLiaSettings,
+                  ("errors" .=) <$> _lscbreErrors,
+                  ("posDataProviders" .=) <$> _lscbrePosDataProviders,
+                  ("batchId" .=) <$> _lscbreBatchId])
 
 --
 -- /See:/ 'accountsCustomBatchRequest' smart constructor.
 newtype AccountsCustomBatchRequest = AccountsCustomBatchRequest'
-    { _accEntries :: Maybe [AccountsCustomBatchRequestEntry]
+    { _aEntries :: Maybe [AccountsCustomBatchRequestEntry]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsCustomBatchRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'accEntries'
+-- * 'aEntries'
 accountsCustomBatchRequest
     :: AccountsCustomBatchRequest
 accountsCustomBatchRequest =
     AccountsCustomBatchRequest'
-    { _accEntries = Nothing
+    { _aEntries = Nothing
     }
 
 -- | The request entries to be processed in the batch.
-accEntries :: Lens' AccountsCustomBatchRequest [AccountsCustomBatchRequestEntry]
-accEntries
-  = lens _accEntries (\ s a -> s{_accEntries = a}) .
+aEntries :: Lens' AccountsCustomBatchRequest [AccountsCustomBatchRequestEntry]
+aEntries
+  = lens _aEntries (\ s a -> s{_aEntries = a}) .
       _Default
       . _Coerce
 
@@ -5739,163 +8378,249 @@ instance FromJSON AccountsCustomBatchRequest where
 
 instance ToJSON AccountsCustomBatchRequest where
         toJSON AccountsCustomBatchRequest'{..}
-          = object (catMaybes [("entries" .=) <$> _accEntries])
+          = object (catMaybes [("entries" .=) <$> _aEntries])
 
 --
--- /See:/ 'productCustomAttribute' smart constructor.
-data ProductCustomAttribute = ProductCustomAttribute'
-    { _pcaValue :: !(Maybe Text)
-    , _pcaName  :: !(Maybe Text)
-    , _pcaType  :: !(Maybe Text)
-    , _pcaUnit  :: !(Maybe Text)
+-- /See:/ 'posCustomBatchResponseEntry' smart constructor.
+data PosCustomBatchResponseEntry = PosCustomBatchResponseEntry'
+    { _pcbrecKind      :: !Text
+    , _pcbrecStore     :: !(Maybe PosStore)
+    , _pcbrecInventory :: !(Maybe PosInventory)
+    , _pcbrecErrors    :: !(Maybe Errors)
+    , _pcbrecSale      :: !(Maybe PosSale)
+    , _pcbrecBatchId   :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProductCustomAttribute' with the minimum fields required to make a request.
+-- | Creates a value of 'PosCustomBatchResponseEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pcaValue'
+-- * 'pcbrecKind'
 --
--- * 'pcaName'
+-- * 'pcbrecStore'
 --
--- * 'pcaType'
+-- * 'pcbrecInventory'
 --
--- * 'pcaUnit'
-productCustomAttribute
-    :: ProductCustomAttribute
-productCustomAttribute =
-    ProductCustomAttribute'
-    { _pcaValue = Nothing
-    , _pcaName = Nothing
-    , _pcaType = Nothing
-    , _pcaUnit = Nothing
+-- * 'pcbrecErrors'
+--
+-- * 'pcbrecSale'
+--
+-- * 'pcbrecBatchId'
+posCustomBatchResponseEntry
+    :: PosCustomBatchResponseEntry
+posCustomBatchResponseEntry =
+    PosCustomBatchResponseEntry'
+    { _pcbrecKind = "content#posCustomBatchResponseEntry"
+    , _pcbrecStore = Nothing
+    , _pcbrecInventory = Nothing
+    , _pcbrecErrors = Nothing
+    , _pcbrecSale = Nothing
+    , _pcbrecBatchId = Nothing
     }
 
--- | The value of the attribute.
-pcaValue :: Lens' ProductCustomAttribute (Maybe Text)
-pcaValue = lens _pcaValue (\ s a -> s{_pcaValue = a})
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"content#posCustomBatchResponseEntry\".
+pcbrecKind :: Lens' PosCustomBatchResponseEntry Text
+pcbrecKind
+  = lens _pcbrecKind (\ s a -> s{_pcbrecKind = a})
 
--- | The name of the attribute. Underscores will be replaced by spaces upon
--- insertion.
-pcaName :: Lens' ProductCustomAttribute (Maybe Text)
-pcaName = lens _pcaName (\ s a -> s{_pcaName = a})
+-- | The retrieved or updated store information.
+pcbrecStore :: Lens' PosCustomBatchResponseEntry (Maybe PosStore)
+pcbrecStore
+  = lens _pcbrecStore (\ s a -> s{_pcbrecStore = a})
 
--- | The type of the attribute.
-pcaType :: Lens' ProductCustomAttribute (Maybe Text)
-pcaType = lens _pcaType (\ s a -> s{_pcaType = a})
+-- | The updated inventory information.
+pcbrecInventory :: Lens' PosCustomBatchResponseEntry (Maybe PosInventory)
+pcbrecInventory
+  = lens _pcbrecInventory
+      (\ s a -> s{_pcbrecInventory = a})
 
--- | Free-form unit of the attribute. Unit can only be used for values of
--- type INT or FLOAT.
-pcaUnit :: Lens' ProductCustomAttribute (Maybe Text)
-pcaUnit = lens _pcaUnit (\ s a -> s{_pcaUnit = a})
+-- | A list of errors defined if, and only if, the request failed.
+pcbrecErrors :: Lens' PosCustomBatchResponseEntry (Maybe Errors)
+pcbrecErrors
+  = lens _pcbrecErrors (\ s a -> s{_pcbrecErrors = a})
 
-instance FromJSON ProductCustomAttribute where
+-- | The updated sale information.
+pcbrecSale :: Lens' PosCustomBatchResponseEntry (Maybe PosSale)
+pcbrecSale
+  = lens _pcbrecSale (\ s a -> s{_pcbrecSale = a})
+
+-- | The ID of the request entry to which this entry responds.
+pcbrecBatchId :: Lens' PosCustomBatchResponseEntry (Maybe Word32)
+pcbrecBatchId
+  = lens _pcbrecBatchId
+      (\ s a -> s{_pcbrecBatchId = a})
+      . mapping _Coerce
+
+instance FromJSON PosCustomBatchResponseEntry where
         parseJSON
-          = withObject "ProductCustomAttribute"
+          = withObject "PosCustomBatchResponseEntry"
               (\ o ->
-                 ProductCustomAttribute' <$>
-                   (o .:? "value") <*> (o .:? "name") <*> (o .:? "type")
-                     <*> (o .:? "unit"))
+                 PosCustomBatchResponseEntry' <$>
+                   (o .:? "kind" .!=
+                      "content#posCustomBatchResponseEntry")
+                     <*> (o .:? "store")
+                     <*> (o .:? "inventory")
+                     <*> (o .:? "errors")
+                     <*> (o .:? "sale")
+                     <*> (o .:? "batchId"))
 
-instance ToJSON ProductCustomAttribute where
-        toJSON ProductCustomAttribute'{..}
+instance ToJSON PosCustomBatchResponseEntry where
+        toJSON PosCustomBatchResponseEntry'{..}
           = object
               (catMaybes
-                 [("value" .=) <$> _pcaValue,
-                  ("name" .=) <$> _pcaName, ("type" .=) <$> _pcaType,
-                  ("unit" .=) <$> _pcaUnit])
+                 [Just ("kind" .= _pcbrecKind),
+                  ("store" .=) <$> _pcbrecStore,
+                  ("inventory" .=) <$> _pcbrecInventory,
+                  ("errors" .=) <$> _pcbrecErrors,
+                  ("sale" .=) <$> _pcbrecSale,
+                  ("batchId" .=) <$> _pcbrecBatchId])
 
--- | A postal code range, that can be either: - A range of postal codes
--- (e.g., start=12340, end=12359) - A range of postal codes prefixes (e.g.,
--- start=1234* end=1235*). Prefixes must be of the same length (e.g.,
--- start=12* end=2* is invalid).
 --
--- /See:/ 'accountShippingPostalCodeRange' smart constructor.
-data AccountShippingPostalCodeRange = AccountShippingPostalCodeRange'
-    { _aspcrStart :: !(Maybe Text)
-    , _aspcrEnd   :: !(Maybe Text)
+-- /See:/ 'orderpaymentsNotifyAuthApprovedResponse' smart constructor.
+data OrderpaymentsNotifyAuthApprovedResponse = OrderpaymentsNotifyAuthApprovedResponse'
+    { _onaarKind            :: !Text
+    , _onaarExecutionStatus :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountShippingPostalCodeRange' with the minimum fields required to make a request.
+-- | Creates a value of 'OrderpaymentsNotifyAuthApprovedResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aspcrStart'
+-- * 'onaarKind'
 --
--- * 'aspcrEnd'
-accountShippingPostalCodeRange
-    :: AccountShippingPostalCodeRange
-accountShippingPostalCodeRange =
-    AccountShippingPostalCodeRange'
-    { _aspcrStart = Nothing
-    , _aspcrEnd = Nothing
+-- * 'onaarExecutionStatus'
+orderpaymentsNotifyAuthApprovedResponse
+    :: OrderpaymentsNotifyAuthApprovedResponse
+orderpaymentsNotifyAuthApprovedResponse =
+    OrderpaymentsNotifyAuthApprovedResponse'
+    { _onaarKind = "content#orderpaymentsNotifyAuthApprovedResponse"
+    , _onaarExecutionStatus = Nothing
     }
 
--- | The first (inclusive) postal code or prefix of the range.
-aspcrStart :: Lens' AccountShippingPostalCodeRange (Maybe Text)
-aspcrStart
-  = lens _aspcrStart (\ s a -> s{_aspcrStart = a})
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"content#orderpaymentsNotifyAuthApprovedResponse\".
+onaarKind :: Lens' OrderpaymentsNotifyAuthApprovedResponse Text
+onaarKind
+  = lens _onaarKind (\ s a -> s{_onaarKind = a})
 
--- | The last (inclusive) postal code or prefix of the range.
-aspcrEnd :: Lens' AccountShippingPostalCodeRange (Maybe Text)
-aspcrEnd = lens _aspcrEnd (\ s a -> s{_aspcrEnd = a})
+-- | The status of the execution.
+onaarExecutionStatus :: Lens' OrderpaymentsNotifyAuthApprovedResponse (Maybe Text)
+onaarExecutionStatus
+  = lens _onaarExecutionStatus
+      (\ s a -> s{_onaarExecutionStatus = a})
 
-instance FromJSON AccountShippingPostalCodeRange
+instance FromJSON
+         OrderpaymentsNotifyAuthApprovedResponse where
+        parseJSON
+          = withObject
+              "OrderpaymentsNotifyAuthApprovedResponse"
+              (\ o ->
+                 OrderpaymentsNotifyAuthApprovedResponse' <$>
+                   (o .:? "kind" .!=
+                      "content#orderpaymentsNotifyAuthApprovedResponse")
+                     <*> (o .:? "executionStatus"))
+
+instance ToJSON
+         OrderpaymentsNotifyAuthApprovedResponse where
+        toJSON OrderpaymentsNotifyAuthApprovedResponse'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _onaarKind),
+                  ("executionStatus" .=) <$> _onaarExecutionStatus])
+
+--
+-- /See:/ 'orderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption' smart constructor.
+data OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption = OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption'
+    { _oReason      :: !(Maybe Text)
+    , _oDescription :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oReason'
+--
+-- * 'oDescription'
+orderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption
+    :: OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption
+orderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption =
+    OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption'
+    { _oReason = Nothing
+    , _oDescription = Nothing
+    }
+
+-- | [required] Reason for the return.
+oReason :: Lens' OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption (Maybe Text)
+oReason = lens _oReason (\ s a -> s{_oReason = a})
+
+-- | Optional description of the return reason.
+oDescription :: Lens' OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption (Maybe Text)
+oDescription
+  = lens _oDescription (\ s a -> s{_oDescription = a})
+
+instance FromJSON
+         OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption
          where
         parseJSON
-          = withObject "AccountShippingPostalCodeRange"
+          = withObject
+              "OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption"
               (\ o ->
-                 AccountShippingPostalCodeRange' <$>
-                   (o .:? "start") <*> (o .:? "end"))
+                 OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption'
+                   <$> (o .:? "reason") <*> (o .:? "description"))
 
-instance ToJSON AccountShippingPostalCodeRange where
-        toJSON AccountShippingPostalCodeRange'{..}
+instance ToJSON
+         OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption
+         where
+        toJSON
+          OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption'{..}
           = object
               (catMaybes
-                 [("start" .=) <$> _aspcrStart,
-                  ("end" .=) <$> _aspcrEnd])
+                 [("reason" .=) <$> _oReason,
+                  ("description" .=) <$> _oDescription])
 
 --
 -- /See:/ 'ordersListResponse' smart constructor.
 data OrdersListResponse = OrdersListResponse'
-    { _olrNextPageToken :: !(Maybe Text)
-    , _olrKind          :: !Text
-    , _olrResources     :: !(Maybe [Order])
+    { _oNextPageToken :: !(Maybe Text)
+    , _oKind          :: !Text
+    , _oResources     :: !(Maybe [Order])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'olrNextPageToken'
+-- * 'oNextPageToken'
 --
--- * 'olrKind'
+-- * 'oKind'
 --
--- * 'olrResources'
+-- * 'oResources'
 ordersListResponse
     :: OrdersListResponse
 ordersListResponse =
     OrdersListResponse'
-    { _olrNextPageToken = Nothing
-    , _olrKind = "content#ordersListResponse"
-    , _olrResources = Nothing
+    { _oNextPageToken = Nothing
+    , _oKind = "content#ordersListResponse"
+    , _oResources = Nothing
     }
 
 -- | The token for the retrieval of the next page of orders.
-olrNextPageToken :: Lens' OrdersListResponse (Maybe Text)
-olrNextPageToken
-  = lens _olrNextPageToken
-      (\ s a -> s{_olrNextPageToken = a})
+oNextPageToken :: Lens' OrdersListResponse (Maybe Text)
+oNextPageToken
+  = lens _oNextPageToken
+      (\ s a -> s{_oNextPageToken = a})
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#ordersListResponse\".
-olrKind :: Lens' OrdersListResponse Text
-olrKind = lens _olrKind (\ s a -> s{_olrKind = a})
+oKind :: Lens' OrdersListResponse Text
+oKind = lens _oKind (\ s a -> s{_oKind = a})
 
-olrResources :: Lens' OrdersListResponse [Order]
-olrResources
-  = lens _olrResources (\ s a -> s{_olrResources = a})
-      . _Default
+oResources :: Lens' OrdersListResponse [Order]
+oResources
+  = lens _oResources (\ s a -> s{_oResources = a}) .
+      _Default
       . _Coerce
 
 instance FromJSON OrdersListResponse where
@@ -5911,9 +8636,63 @@ instance ToJSON OrdersListResponse where
         toJSON OrdersListResponse'{..}
           = object
               (catMaybes
-                 [("nextPageToken" .=) <$> _olrNextPageToken,
-                  Just ("kind" .= _olrKind),
-                  ("resources" .=) <$> _olrResources])
+                 [("nextPageToken" .=) <$> _oNextPageToken,
+                  Just ("kind" .= _oKind),
+                  ("resources" .=) <$> _oResources])
+
+--
+-- /See:/ 'ordersUpdateLineItemShippingDetailsResponse' smart constructor.
+data OrdersUpdateLineItemShippingDetailsResponse = OrdersUpdateLineItemShippingDetailsResponse'
+    { _oulisdrKind            :: !Text
+    , _oulisdrExecutionStatus :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OrdersUpdateLineItemShippingDetailsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oulisdrKind'
+--
+-- * 'oulisdrExecutionStatus'
+ordersUpdateLineItemShippingDetailsResponse
+    :: OrdersUpdateLineItemShippingDetailsResponse
+ordersUpdateLineItemShippingDetailsResponse =
+    OrdersUpdateLineItemShippingDetailsResponse'
+    { _oulisdrKind = "content#ordersUpdateLineItemShippingDetailsResponse"
+    , _oulisdrExecutionStatus = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"content#ordersUpdateLineItemShippingDetailsResponse\".
+oulisdrKind :: Lens' OrdersUpdateLineItemShippingDetailsResponse Text
+oulisdrKind
+  = lens _oulisdrKind (\ s a -> s{_oulisdrKind = a})
+
+-- | The status of the execution.
+oulisdrExecutionStatus :: Lens' OrdersUpdateLineItemShippingDetailsResponse (Maybe Text)
+oulisdrExecutionStatus
+  = lens _oulisdrExecutionStatus
+      (\ s a -> s{_oulisdrExecutionStatus = a})
+
+instance FromJSON
+         OrdersUpdateLineItemShippingDetailsResponse where
+        parseJSON
+          = withObject
+              "OrdersUpdateLineItemShippingDetailsResponse"
+              (\ o ->
+                 OrdersUpdateLineItemShippingDetailsResponse' <$>
+                   (o .:? "kind" .!=
+                      "content#ordersUpdateLineItemShippingDetailsResponse")
+                     <*> (o .:? "executionStatus"))
+
+instance ToJSON
+         OrdersUpdateLineItemShippingDetailsResponse where
+        toJSON
+          OrdersUpdateLineItemShippingDetailsResponse'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _oulisdrKind),
+                  ("executionStatus" .=) <$> _oulisdrExecutionStatus])
 
 -- | A non-empty list of row or column headers for a table. Exactly one of
 -- prices, weights, numItems, postalCodeGroupNames, or locations must be
@@ -5975,7 +8754,8 @@ hPostalCodeGroupNames
       . _Default
       . _Coerce
 
--- | be \"infinity\". For example [{\"value\": \"10\", \"currency\":
+-- | A list of inclusive order price upper bounds. The last price\'s value
+-- can be \"infinity\". For example [{\"value\": \"10\", \"currency\":
 -- \"USD\"}, {\"value\": \"500\", \"currency\": \"USD\"}, {\"value\":
 -- \"infinity\", \"currency\": \"USD\"}] represents the headers \"\<=
 -- $10\", \" $500\". All prices within a service must have the same
@@ -5986,7 +8766,8 @@ hPrices
   = lens _hPrices (\ s a -> s{_hPrices = a}) . _Default
       . _Coerce
 
--- | be \"infinity\". For example [{\"value\": \"10\", \"unit\": \"kg\"},
+-- | A list of inclusive order weight upper bounds. The last weight\'s value
+-- can be \"infinity\". For example [{\"value\": \"10\", \"unit\": \"kg\"},
 -- {\"value\": \"50\", \"unit\": \"kg\"}, {\"value\": \"infinity\",
 -- \"unit\": \"kg\"}] represents the headers \"\<= 10kg\", \" 50kg\". All
 -- weights within a service must have the same unit. Must be non-empty. Can
@@ -6026,6 +8807,69 @@ instance ToJSON Headers where
                   ("prices" .=) <$> _hPrices,
                   ("weights" .=) <$> _hWeights,
                   ("locations" .=) <$> _hLocations])
+
+--
+-- /See:/ 'unitInvoiceAdditionalCharge' smart constructor.
+data UnitInvoiceAdditionalCharge = UnitInvoiceAdditionalCharge'
+    { _uiacAdditionalChargePromotions :: !(Maybe [Promotion])
+    , _uiacAdditionalChargeAmount     :: !(Maybe Amount)
+    , _uiacType                       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UnitInvoiceAdditionalCharge' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'uiacAdditionalChargePromotions'
+--
+-- * 'uiacAdditionalChargeAmount'
+--
+-- * 'uiacType'
+unitInvoiceAdditionalCharge
+    :: UnitInvoiceAdditionalCharge
+unitInvoiceAdditionalCharge =
+    UnitInvoiceAdditionalCharge'
+    { _uiacAdditionalChargePromotions = Nothing
+    , _uiacAdditionalChargeAmount = Nothing
+    , _uiacType = Nothing
+    }
+
+-- | Promotions applied to the additional charge.
+uiacAdditionalChargePromotions :: Lens' UnitInvoiceAdditionalCharge [Promotion]
+uiacAdditionalChargePromotions
+  = lens _uiacAdditionalChargePromotions
+      (\ s a -> s{_uiacAdditionalChargePromotions = a})
+      . _Default
+      . _Coerce
+
+-- | [required] Amount of the additional charge.
+uiacAdditionalChargeAmount :: Lens' UnitInvoiceAdditionalCharge (Maybe Amount)
+uiacAdditionalChargeAmount
+  = lens _uiacAdditionalChargeAmount
+      (\ s a -> s{_uiacAdditionalChargeAmount = a})
+
+-- | [required] Type of the additional charge.
+uiacType :: Lens' UnitInvoiceAdditionalCharge (Maybe Text)
+uiacType = lens _uiacType (\ s a -> s{_uiacType = a})
+
+instance FromJSON UnitInvoiceAdditionalCharge where
+        parseJSON
+          = withObject "UnitInvoiceAdditionalCharge"
+              (\ o ->
+                 UnitInvoiceAdditionalCharge' <$>
+                   (o .:? "additionalChargePromotions" .!= mempty) <*>
+                     (o .:? "additionalChargeAmount")
+                     <*> (o .:? "type"))
+
+instance ToJSON UnitInvoiceAdditionalCharge where
+        toJSON UnitInvoiceAdditionalCharge'{..}
+          = object
+              (catMaybes
+                 [("additionalChargePromotions" .=) <$>
+                    _uiacAdditionalChargePromotions,
+                  ("additionalChargeAmount" .=) <$>
+                    _uiacAdditionalChargeAmount,
+                  ("type" .=) <$> _uiacType])
 
 --
 -- /See:/ 'ordersShipLineItemsResponse' smart constructor.
@@ -6077,238 +8921,103 @@ instance ToJSON OrdersShipLineItemsResponse where
                  [Just ("kind" .= _oslirKind),
                   ("executionStatus" .=) <$> _oslirExecutionStatus])
 
--- | Shipping services provided in a country.
 --
--- /See:/ 'accountShippingShippingService' smart constructor.
-data AccountShippingShippingService = AccountShippingShippingService'
-    { _asssCostRuleTree      :: !(Maybe AccountShippingShippingServiceCostRule)
-    , _asssSaleCountry       :: !(Maybe Text)
-    , _asssMaxDaysInTransit  :: !(Maybe (Textual Word64))
-    , _asssCalculationMethod :: !(Maybe AccountShippingShippingServiceCalculationMethod)
-    , _asssActive            :: !(Maybe Bool)
-    , _asssName              :: !(Maybe Text)
-    , _asssMinDaysInTransit  :: !(Maybe (Textual Word64))
+-- /See:/ 'unitInvoiceTaxLine' smart constructor.
+data UnitInvoiceTaxLine = UnitInvoiceTaxLine'
+    { _uitlTaxName   :: !(Maybe Text)
+    , _uitlTaxType   :: !(Maybe Text)
+    , _uitlTaxAmount :: !(Maybe Price)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountShippingShippingService' with the minimum fields required to make a request.
+-- | Creates a value of 'UnitInvoiceTaxLine' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'asssCostRuleTree'
+-- * 'uitlTaxName'
 --
--- * 'asssSaleCountry'
+-- * 'uitlTaxType'
 --
--- * 'asssMaxDaysInTransit'
---
--- * 'asssCalculationMethod'
---
--- * 'asssActive'
---
--- * 'asssName'
---
--- * 'asssMinDaysInTransit'
-accountShippingShippingService
-    :: AccountShippingShippingService
-accountShippingShippingService =
-    AccountShippingShippingService'
-    { _asssCostRuleTree = Nothing
-    , _asssSaleCountry = Nothing
-    , _asssMaxDaysInTransit = Nothing
-    , _asssCalculationMethod = Nothing
-    , _asssActive = Nothing
-    , _asssName = Nothing
-    , _asssMinDaysInTransit = Nothing
+-- * 'uitlTaxAmount'
+unitInvoiceTaxLine
+    :: UnitInvoiceTaxLine
+unitInvoiceTaxLine =
+    UnitInvoiceTaxLine'
+    { _uitlTaxName = Nothing
+    , _uitlTaxType = Nothing
+    , _uitlTaxAmount = Nothing
     }
 
--- | Decision tree for \"complicated\" shipping cost calculation.
-asssCostRuleTree :: Lens' AccountShippingShippingService (Maybe AccountShippingShippingServiceCostRule)
-asssCostRuleTree
-  = lens _asssCostRuleTree
-      (\ s a -> s{_asssCostRuleTree = a})
+-- | Optional name of the tax type. This should only be provided if taxType
+-- is otherFeeTax.
+uitlTaxName :: Lens' UnitInvoiceTaxLine (Maybe Text)
+uitlTaxName
+  = lens _uitlTaxName (\ s a -> s{_uitlTaxName = a})
 
--- | The CLDR territory code of the sale country for which this service can
--- be used.
-asssSaleCountry :: Lens' AccountShippingShippingService (Maybe Text)
-asssSaleCountry
-  = lens _asssSaleCountry
-      (\ s a -> s{_asssSaleCountry = a})
+-- | [required] Type of the tax.
+uitlTaxType :: Lens' UnitInvoiceTaxLine (Maybe Text)
+uitlTaxType
+  = lens _uitlTaxType (\ s a -> s{_uitlTaxType = a})
 
--- | The maximum number of days in transit. Must be a value between 0 and 250
--- included. A value of 0 means same day delivery.
-asssMaxDaysInTransit :: Lens' AccountShippingShippingService (Maybe Word64)
-asssMaxDaysInTransit
-  = lens _asssMaxDaysInTransit
-      (\ s a -> s{_asssMaxDaysInTransit = a})
-      . mapping _Coerce
+-- | [required] Tax amount for the tax type.
+uitlTaxAmount :: Lens' UnitInvoiceTaxLine (Maybe Price)
+uitlTaxAmount
+  = lens _uitlTaxAmount
+      (\ s a -> s{_uitlTaxAmount = a})
 
--- | Calculation method for the \"simple\" case that needs no rules.
-asssCalculationMethod :: Lens' AccountShippingShippingService (Maybe AccountShippingShippingServiceCalculationMethod)
-asssCalculationMethod
-  = lens _asssCalculationMethod
-      (\ s a -> s{_asssCalculationMethod = a})
-
--- | Whether the shipping service is available.
-asssActive :: Lens' AccountShippingShippingService (Maybe Bool)
-asssActive
-  = lens _asssActive (\ s a -> s{_asssActive = a})
-
--- | The name of this shipping service.
-asssName :: Lens' AccountShippingShippingService (Maybe Text)
-asssName = lens _asssName (\ s a -> s{_asssName = a})
-
--- | The minimum number of days in transit. Must be a value between 0 and
--- maxDaysIntransit included. A value of 0 means same day delivery.
-asssMinDaysInTransit :: Lens' AccountShippingShippingService (Maybe Word64)
-asssMinDaysInTransit
-  = lens _asssMinDaysInTransit
-      (\ s a -> s{_asssMinDaysInTransit = a})
-      . mapping _Coerce
-
-instance FromJSON AccountShippingShippingService
-         where
+instance FromJSON UnitInvoiceTaxLine where
         parseJSON
-          = withObject "AccountShippingShippingService"
+          = withObject "UnitInvoiceTaxLine"
               (\ o ->
-                 AccountShippingShippingService' <$>
-                   (o .:? "costRuleTree") <*> (o .:? "saleCountry") <*>
-                     (o .:? "maxDaysInTransit")
-                     <*> (o .:? "calculationMethod")
-                     <*> (o .:? "active")
-                     <*> (o .:? "name")
-                     <*> (o .:? "minDaysInTransit"))
+                 UnitInvoiceTaxLine' <$>
+                   (o .:? "taxName") <*> (o .:? "taxType") <*>
+                     (o .:? "taxAmount"))
 
-instance ToJSON AccountShippingShippingService where
-        toJSON AccountShippingShippingService'{..}
+instance ToJSON UnitInvoiceTaxLine where
+        toJSON UnitInvoiceTaxLine'{..}
           = object
               (catMaybes
-                 [("costRuleTree" .=) <$> _asssCostRuleTree,
-                  ("saleCountry" .=) <$> _asssSaleCountry,
-                  ("maxDaysInTransit" .=) <$> _asssMaxDaysInTransit,
-                  ("calculationMethod" .=) <$> _asssCalculationMethod,
-                  ("active" .=) <$> _asssActive,
-                  ("name" .=) <$> _asssName,
-                  ("minDaysInTransit" .=) <$> _asssMinDaysInTransit])
+                 [("taxName" .=) <$> _uitlTaxName,
+                  ("taxType" .=) <$> _uitlTaxType,
+                  ("taxAmount" .=) <$> _uitlTaxAmount])
 
--- | A single or bi-dimensional table of shipping rates. Each dimension is
--- defined in terms of consecutive price\/weight ranges, delivery
--- locations, or shipping labels.
 --
--- /See:/ 'accountShippingRateTable' smart constructor.
-data AccountShippingRateTable = AccountShippingRateTable'
-    { _asrtSaleCountry :: !(Maybe Text)
-    , _asrtContent     :: !(Maybe [AccountShippingRateTableCell])
-    , _asrtName        :: !(Maybe Text)
+-- /See:/ 'ordersCreateTestReturnRequest' smart constructor.
+newtype OrdersCreateTestReturnRequest = OrdersCreateTestReturnRequest'
+    { _octrrItems :: Maybe [OrdersCustomBatchRequestEntryCreateTestReturnReturnItem]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountShippingRateTable' with the minimum fields required to make a request.
+-- | Creates a value of 'OrdersCreateTestReturnRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'asrtSaleCountry'
---
--- * 'asrtContent'
---
--- * 'asrtName'
-accountShippingRateTable
-    :: AccountShippingRateTable
-accountShippingRateTable =
-    AccountShippingRateTable'
-    { _asrtSaleCountry = Nothing
-    , _asrtContent = Nothing
-    , _asrtName = Nothing
+-- * 'octrrItems'
+ordersCreateTestReturnRequest
+    :: OrdersCreateTestReturnRequest
+ordersCreateTestReturnRequest =
+    OrdersCreateTestReturnRequest'
+    { _octrrItems = Nothing
     }
 
--- | The sale country for which this table is valid, represented as a CLDR
--- territory code.
-asrtSaleCountry :: Lens' AccountShippingRateTable (Maybe Text)
-asrtSaleCountry
-  = lens _asrtSaleCountry
-      (\ s a -> s{_asrtSaleCountry = a})
-
--- | One-dimensional table cells define one condition along the same
--- dimension. Bi-dimensional table cells use two dimensions with
--- respectively M and N distinct values and must contain exactly M * N
--- cells with distinct conditions (for each possible value pairs).
-asrtContent :: Lens' AccountShippingRateTable [AccountShippingRateTableCell]
-asrtContent
-  = lens _asrtContent (\ s a -> s{_asrtContent = a}) .
+-- | Returned items.
+octrrItems :: Lens' OrdersCreateTestReturnRequest [OrdersCustomBatchRequestEntryCreateTestReturnReturnItem]
+octrrItems
+  = lens _octrrItems (\ s a -> s{_octrrItems = a}) .
       _Default
       . _Coerce
 
--- | The name of the rate table.
-asrtName :: Lens' AccountShippingRateTable (Maybe Text)
-asrtName = lens _asrtName (\ s a -> s{_asrtName = a})
-
-instance FromJSON AccountShippingRateTable where
+instance FromJSON OrdersCreateTestReturnRequest where
         parseJSON
-          = withObject "AccountShippingRateTable"
+          = withObject "OrdersCreateTestReturnRequest"
               (\ o ->
-                 AccountShippingRateTable' <$>
-                   (o .:? "saleCountry") <*>
-                     (o .:? "content" .!= mempty)
-                     <*> (o .:? "name"))
+                 OrdersCreateTestReturnRequest' <$>
+                   (o .:? "items" .!= mempty))
 
-instance ToJSON AccountShippingRateTable where
-        toJSON AccountShippingRateTable'{..}
-          = object
-              (catMaybes
-                 [("saleCountry" .=) <$> _asrtSaleCountry,
-                  ("content" .=) <$> _asrtContent,
-                  ("name" .=) <$> _asrtName])
+instance ToJSON OrdersCreateTestReturnRequest where
+        toJSON OrdersCreateTestReturnRequest'{..}
+          = object (catMaybes [("items" .=) <$> _octrrItems])
 
---
--- /See:/ 'accountshippingCustomBatchResponse' smart constructor.
-data AccountshippingCustomBatchResponse = AccountshippingCustomBatchResponse'
-    { _acccEntries :: !(Maybe [AccountshippingCustomBatchResponseEntry])
-    , _acccKind    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AccountshippingCustomBatchResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'acccEntries'
---
--- * 'acccKind'
-accountshippingCustomBatchResponse
-    :: AccountshippingCustomBatchResponse
-accountshippingCustomBatchResponse =
-    AccountshippingCustomBatchResponse'
-    { _acccEntries = Nothing
-    , _acccKind = "content#accountshippingCustomBatchResponse"
-    }
-
--- | The result of the execution of the batch requests.
-acccEntries :: Lens' AccountshippingCustomBatchResponse [AccountshippingCustomBatchResponseEntry]
-acccEntries
-  = lens _acccEntries (\ s a -> s{_acccEntries = a}) .
-      _Default
-      . _Coerce
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"content#accountshippingCustomBatchResponse\".
-acccKind :: Lens' AccountshippingCustomBatchResponse Text
-acccKind = lens _acccKind (\ s a -> s{_acccKind = a})
-
-instance FromJSON AccountshippingCustomBatchResponse
-         where
-        parseJSON
-          = withObject "AccountshippingCustomBatchResponse"
-              (\ o ->
-                 AccountshippingCustomBatchResponse' <$>
-                   (o .:? "entries" .!= mempty) <*>
-                     (o .:? "kind" .!=
-                        "content#accountshippingCustomBatchResponse"))
-
-instance ToJSON AccountshippingCustomBatchResponse
-         where
-        toJSON AccountshippingCustomBatchResponse'{..}
-          = object
-              (catMaybes
-                 [("entries" .=) <$> _acccEntries,
-                  Just ("kind" .= _acccKind)])
-
--- | The merchant account\'s shipping settings.
+-- | The merchant account\'s shipping settings. All methods except
+-- getsupportedcarriers and getsupportedholidays require the admin role.
 --
 -- /See:/ 'shippingSettings' smart constructor.
 data ShippingSettings = ShippingSettings'
@@ -6486,26 +9195,26 @@ instance ToJSON OrdersUpdateShipmentResponse where
 --
 -- /See:/ 'productstatusesCustomBatchRequest' smart constructor.
 newtype ProductstatusesCustomBatchRequest = ProductstatusesCustomBatchRequest'
-    { _proEntries :: Maybe [ProductstatusesCustomBatchRequestEntry]
+    { _pcbrcEntries :: Maybe [ProductstatusesCustomBatchRequestEntry]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductstatusesCustomBatchRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'proEntries'
+-- * 'pcbrcEntries'
 productstatusesCustomBatchRequest
     :: ProductstatusesCustomBatchRequest
 productstatusesCustomBatchRequest =
     ProductstatusesCustomBatchRequest'
-    { _proEntries = Nothing
+    { _pcbrcEntries = Nothing
     }
 
 -- | The request entries to be processed in the batch.
-proEntries :: Lens' ProductstatusesCustomBatchRequest [ProductstatusesCustomBatchRequestEntry]
-proEntries
-  = lens _proEntries (\ s a -> s{_proEntries = a}) .
-      _Default
+pcbrcEntries :: Lens' ProductstatusesCustomBatchRequest [ProductstatusesCustomBatchRequestEntry]
+pcbrcEntries
+  = lens _pcbrcEntries (\ s a -> s{_pcbrcEntries = a})
+      . _Default
       . _Coerce
 
 instance FromJSON ProductstatusesCustomBatchRequest
@@ -6519,140 +9228,407 @@ instance FromJSON ProductstatusesCustomBatchRequest
 instance ToJSON ProductstatusesCustomBatchRequest
          where
         toJSON ProductstatusesCustomBatchRequest'{..}
-          = object (catMaybes [("entries" .=) <$> _proEntries])
+          = object
+              (catMaybes [("entries" .=) <$> _pcbrcEntries])
 
 --
--- /See:/ 'ordersReturnLineItemResponse' smart constructor.
-data OrdersReturnLineItemResponse = OrdersReturnLineItemResponse'
-    { _orlirKind            :: !Text
-    , _orlirExecutionStatus :: !(Maybe Text)
+-- /See:/ 'accountYouTubeChannelLink' smart constructor.
+data AccountYouTubeChannelLink = AccountYouTubeChannelLink'
+    { _aytclStatus    :: !(Maybe Text)
+    , _aytclChannelId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrdersReturnLineItemResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountYouTubeChannelLink' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'orlirKind'
+-- * 'aytclStatus'
 --
--- * 'orlirExecutionStatus'
-ordersReturnLineItemResponse
-    :: OrdersReturnLineItemResponse
-ordersReturnLineItemResponse =
-    OrdersReturnLineItemResponse'
-    { _orlirKind = "content#ordersReturnLineItemResponse"
-    , _orlirExecutionStatus = Nothing
+-- * 'aytclChannelId'
+accountYouTubeChannelLink
+    :: AccountYouTubeChannelLink
+accountYouTubeChannelLink =
+    AccountYouTubeChannelLink'
+    { _aytclStatus = Nothing
+    , _aytclChannelId = Nothing
     }
 
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"content#ordersReturnLineItemResponse\".
-orlirKind :: Lens' OrdersReturnLineItemResponse Text
-orlirKind
-  = lens _orlirKind (\ s a -> s{_orlirKind = a})
+-- | Status of the link between this Merchant Center account and the YouTube
+-- channel. Upon retrieval, it represents the actual status of the link and
+-- can be either active if it was approved in YT Creator Studio or pending
+-- if it\'s pending approval. Upon insertion, it represents the intended
+-- status of the link. Re-uploading a link with status active when it\'s
+-- still pending or with status pending when it\'s already active will have
+-- no effect: the status will remain unchanged. Re-uploading a link with
+-- deprecated status inactive is equivalent to not submitting the link at
+-- all and will delete the link if it was active or cancel the link request
+-- if it was pending.
+aytclStatus :: Lens' AccountYouTubeChannelLink (Maybe Text)
+aytclStatus
+  = lens _aytclStatus (\ s a -> s{_aytclStatus = a})
 
--- | The status of the execution.
-orlirExecutionStatus :: Lens' OrdersReturnLineItemResponse (Maybe Text)
-orlirExecutionStatus
-  = lens _orlirExecutionStatus
-      (\ s a -> s{_orlirExecutionStatus = a})
+-- | Channel ID.
+aytclChannelId :: Lens' AccountYouTubeChannelLink (Maybe Text)
+aytclChannelId
+  = lens _aytclChannelId
+      (\ s a -> s{_aytclChannelId = a})
 
-instance FromJSON OrdersReturnLineItemResponse where
+instance FromJSON AccountYouTubeChannelLink where
         parseJSON
-          = withObject "OrdersReturnLineItemResponse"
+          = withObject "AccountYouTubeChannelLink"
               (\ o ->
-                 OrdersReturnLineItemResponse' <$>
-                   (o .:? "kind" .!=
-                      "content#ordersReturnLineItemResponse")
-                     <*> (o .:? "executionStatus"))
+                 AccountYouTubeChannelLink' <$>
+                   (o .:? "status") <*> (o .:? "channelId"))
 
-instance ToJSON OrdersReturnLineItemResponse where
-        toJSON OrdersReturnLineItemResponse'{..}
+instance ToJSON AccountYouTubeChannelLink where
+        toJSON AccountYouTubeChannelLink'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _orlirKind),
-                  ("executionStatus" .=) <$> _orlirExecutionStatus])
+                 [("status" .=) <$> _aytclStatus,
+                  ("channelId" .=) <$> _aytclChannelId])
 
 --
--- /See:/ 'productCustomGroup' smart constructor.
-data ProductCustomGroup = ProductCustomGroup'
-    { _pName       :: !(Maybe Text)
-    , _pAttributes :: !(Maybe [ProductCustomAttribute])
+-- /See:/ 'accountAdsLink' smart constructor.
+data AccountAdsLink = AccountAdsLink'
+    { _aalStatus :: !(Maybe Text)
+    , _aalAdsId  :: !(Maybe (Textual Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProductCustomGroup' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountAdsLink' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pName'
+-- * 'aalStatus'
 --
--- * 'pAttributes'
-productCustomGroup
-    :: ProductCustomGroup
-productCustomGroup =
-    ProductCustomGroup'
-    { _pName = Nothing
-    , _pAttributes = Nothing
+-- * 'aalAdsId'
+accountAdsLink
+    :: AccountAdsLink
+accountAdsLink =
+    AccountAdsLink'
+    { _aalStatus = Nothing
+    , _aalAdsId = Nothing
     }
 
--- | The name of the group. Underscores will be replaced by spaces upon
--- insertion.
-pName :: Lens' ProductCustomGroup (Maybe Text)
-pName = lens _pName (\ s a -> s{_pName = a})
+-- | Status of the link between this Merchant Center account and the Ads
+-- account. Upon retrieval, it represents the actual status of the link and
+-- can be either active if it was approved in Google Ads or pending if
+-- it\'s pending approval. Upon insertion, it represents the intended
+-- status of the link. Re-uploading a link with status active when it\'s
+-- still pending or with status pending when it\'s already active will have
+-- no effect: the status will remain unchanged. Re-uploading a link with
+-- deprecated status inactive is equivalent to not submitting the link at
+-- all and will delete the link if it was active or cancel the link request
+-- if it was pending.
+aalStatus :: Lens' AccountAdsLink (Maybe Text)
+aalStatus
+  = lens _aalStatus (\ s a -> s{_aalStatus = a})
 
--- | The sub-attributes.
-pAttributes :: Lens' ProductCustomGroup [ProductCustomAttribute]
-pAttributes
-  = lens _pAttributes (\ s a -> s{_pAttributes = a}) .
+-- | Customer ID of the Ads account.
+aalAdsId :: Lens' AccountAdsLink (Maybe Word64)
+aalAdsId
+  = lens _aalAdsId (\ s a -> s{_aalAdsId = a}) .
+      mapping _Coerce
+
+instance FromJSON AccountAdsLink where
+        parseJSON
+          = withObject "AccountAdsLink"
+              (\ o ->
+                 AccountAdsLink' <$>
+                   (o .:? "status") <*> (o .:? "adsId"))
+
+instance ToJSON AccountAdsLink where
+        toJSON AccountAdsLink'{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _aalStatus,
+                  ("adsId" .=) <$> _aalAdsId])
+
+--
+-- /See:/ 'liaAboutPageSettings' smart constructor.
+data LiaAboutPageSettings = LiaAboutPageSettings'
+    { _lapsStatus :: !(Maybe Text)
+    , _lapsURL    :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LiaAboutPageSettings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lapsStatus'
+--
+-- * 'lapsURL'
+liaAboutPageSettings
+    :: LiaAboutPageSettings
+liaAboutPageSettings =
+    LiaAboutPageSettings'
+    { _lapsStatus = Nothing
+    , _lapsURL = Nothing
+    }
+
+-- | The status of the verification process for the About page.
+lapsStatus :: Lens' LiaAboutPageSettings (Maybe Text)
+lapsStatus
+  = lens _lapsStatus (\ s a -> s{_lapsStatus = a})
+
+-- | The URL for the About page.
+lapsURL :: Lens' LiaAboutPageSettings (Maybe Text)
+lapsURL = lens _lapsURL (\ s a -> s{_lapsURL = a})
+
+instance FromJSON LiaAboutPageSettings where
+        parseJSON
+          = withObject "LiaAboutPageSettings"
+              (\ o ->
+                 LiaAboutPageSettings' <$>
+                   (o .:? "status") <*> (o .:? "url"))
+
+instance ToJSON LiaAboutPageSettings where
+        toJSON LiaAboutPageSettings'{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _lapsStatus,
+                  ("url" .=) <$> _lapsURL])
+
+--
+-- /See:/ 'liaSettingsCustomBatchRequest' smart constructor.
+newtype LiaSettingsCustomBatchRequest = LiaSettingsCustomBatchRequest'
+    { _lEntries :: Maybe [LiaSettingsCustomBatchRequestEntry]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LiaSettingsCustomBatchRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lEntries'
+liaSettingsCustomBatchRequest
+    :: LiaSettingsCustomBatchRequest
+liaSettingsCustomBatchRequest =
+    LiaSettingsCustomBatchRequest'
+    { _lEntries = Nothing
+    }
+
+-- | The request entries to be processed in the batch.
+lEntries :: Lens' LiaSettingsCustomBatchRequest [LiaSettingsCustomBatchRequestEntry]
+lEntries
+  = lens _lEntries (\ s a -> s{_lEntries = a}) .
       _Default
       . _Coerce
 
-instance FromJSON ProductCustomGroup where
+instance FromJSON LiaSettingsCustomBatchRequest where
         parseJSON
-          = withObject "ProductCustomGroup"
+          = withObject "LiaSettingsCustomBatchRequest"
               (\ o ->
-                 ProductCustomGroup' <$>
-                   (o .:? "name") <*> (o .:? "attributes" .!= mempty))
+                 LiaSettingsCustomBatchRequest' <$>
+                   (o .:? "entries" .!= mempty))
 
-instance ToJSON ProductCustomGroup where
-        toJSON ProductCustomGroup'{..}
+instance ToJSON LiaSettingsCustomBatchRequest where
+        toJSON LiaSettingsCustomBatchRequest'{..}
+          = object (catMaybes [("entries" .=) <$> _lEntries])
+
+--
+-- /See:/ 'customAttribute' smart constructor.
+data CustomAttribute = CustomAttribute'
+    { _caGroupValues :: !(Maybe [CustomAttribute])
+    , _caValue       :: !(Maybe Text)
+    , _caName        :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CustomAttribute' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'caGroupValues'
+--
+-- * 'caValue'
+--
+-- * 'caName'
+customAttribute
+    :: CustomAttribute
+customAttribute =
+    CustomAttribute'
+    { _caGroupValues = Nothing
+    , _caValue = Nothing
+    , _caName = Nothing
+    }
+
+-- | Subattributes within this attribute group. Exactly one of value or
+-- groupValues must be provided.
+caGroupValues :: Lens' CustomAttribute [CustomAttribute]
+caGroupValues
+  = lens _caGroupValues
+      (\ s a -> s{_caGroupValues = a})
+      . _Default
+      . _Coerce
+
+-- | The value of the attribute.
+caValue :: Lens' CustomAttribute (Maybe Text)
+caValue = lens _caValue (\ s a -> s{_caValue = a})
+
+-- | The name of the attribute. Underscores will be replaced by spaces upon
+-- insertion.
+caName :: Lens' CustomAttribute (Maybe Text)
+caName = lens _caName (\ s a -> s{_caName = a})
+
+instance FromJSON CustomAttribute where
+        parseJSON
+          = withObject "CustomAttribute"
+              (\ o ->
+                 CustomAttribute' <$>
+                   (o .:? "groupValues" .!= mempty) <*> (o .:? "value")
+                     <*> (o .:? "name"))
+
+instance ToJSON CustomAttribute where
+        toJSON CustomAttribute'{..}
           = object
               (catMaybes
-                 [("name" .=) <$> _pName,
-                  ("attributes" .=) <$> _pAttributes])
+                 [("groupValues" .=) <$> _caGroupValues,
+                  ("value" .=) <$> _caValue, ("name" .=) <$> _caName])
+
+--
+-- /See:/ 'posInventoryRequest' smart constructor.
+data PosInventoryRequest = PosInventoryRequest'
+    { _posStoreCode       :: !(Maybe Text)
+    , _posItemId          :: !(Maybe Text)
+    , _posQuantity        :: !(Maybe (Textual Int64))
+    , _posTargetCountry   :: !(Maybe Text)
+    , _posGtin            :: !(Maybe Text)
+    , _posPrice           :: !(Maybe Price)
+    , _posContentLanguage :: !(Maybe Text)
+    , _posTimestamp       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PosInventoryRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'posStoreCode'
+--
+-- * 'posItemId'
+--
+-- * 'posQuantity'
+--
+-- * 'posTargetCountry'
+--
+-- * 'posGtin'
+--
+-- * 'posPrice'
+--
+-- * 'posContentLanguage'
+--
+-- * 'posTimestamp'
+posInventoryRequest
+    :: PosInventoryRequest
+posInventoryRequest =
+    PosInventoryRequest'
+    { _posStoreCode = Nothing
+    , _posItemId = Nothing
+    , _posQuantity = Nothing
+    , _posTargetCountry = Nothing
+    , _posGtin = Nothing
+    , _posPrice = Nothing
+    , _posContentLanguage = Nothing
+    , _posTimestamp = Nothing
+    }
+
+-- | The identifier of the merchant\'s store. Either a storeCode inserted via
+-- the API or the code of the store in Google My Business.
+posStoreCode :: Lens' PosInventoryRequest (Maybe Text)
+posStoreCode
+  = lens _posStoreCode (\ s a -> s{_posStoreCode = a})
+
+-- | A unique identifier for the item.
+posItemId :: Lens' PosInventoryRequest (Maybe Text)
+posItemId
+  = lens _posItemId (\ s a -> s{_posItemId = a})
+
+-- | The available quantity of the item.
+posQuantity :: Lens' PosInventoryRequest (Maybe Int64)
+posQuantity
+  = lens _posQuantity (\ s a -> s{_posQuantity = a}) .
+      mapping _Coerce
+
+-- | The CLDR territory code for the item.
+posTargetCountry :: Lens' PosInventoryRequest (Maybe Text)
+posTargetCountry
+  = lens _posTargetCountry
+      (\ s a -> s{_posTargetCountry = a})
+
+-- | Global Trade Item Number.
+posGtin :: Lens' PosInventoryRequest (Maybe Text)
+posGtin = lens _posGtin (\ s a -> s{_posGtin = a})
+
+-- | The current price of the item.
+posPrice :: Lens' PosInventoryRequest (Maybe Price)
+posPrice = lens _posPrice (\ s a -> s{_posPrice = a})
+
+-- | The two-letter ISO 639-1 language code for the item.
+posContentLanguage :: Lens' PosInventoryRequest (Maybe Text)
+posContentLanguage
+  = lens _posContentLanguage
+      (\ s a -> s{_posContentLanguage = a})
+
+-- | The inventory timestamp, in ISO 8601 format.
+posTimestamp :: Lens' PosInventoryRequest (Maybe Text)
+posTimestamp
+  = lens _posTimestamp (\ s a -> s{_posTimestamp = a})
+
+instance FromJSON PosInventoryRequest where
+        parseJSON
+          = withObject "PosInventoryRequest"
+              (\ o ->
+                 PosInventoryRequest' <$>
+                   (o .:? "storeCode") <*> (o .:? "itemId") <*>
+                     (o .:? "quantity")
+                     <*> (o .:? "targetCountry")
+                     <*> (o .:? "gtin")
+                     <*> (o .:? "price")
+                     <*> (o .:? "contentLanguage")
+                     <*> (o .:? "timestamp"))
+
+instance ToJSON PosInventoryRequest where
+        toJSON PosInventoryRequest'{..}
+          = object
+              (catMaybes
+                 [("storeCode" .=) <$> _posStoreCode,
+                  ("itemId" .=) <$> _posItemId,
+                  ("quantity" .=) <$> _posQuantity,
+                  ("targetCountry" .=) <$> _posTargetCountry,
+                  ("gtin" .=) <$> _posGtin, ("price" .=) <$> _posPrice,
+                  ("contentLanguage" .=) <$> _posContentLanguage,
+                  ("timestamp" .=) <$> _posTimestamp])
 
 --
 -- /See:/ 'accountstatusesCustomBatchResponse' smart constructor.
 data AccountstatusesCustomBatchResponse = AccountstatusesCustomBatchResponse'
-    { _acbr1Entries :: !(Maybe [AccountstatusesCustomBatchResponseEntry])
-    , _acbr1Kind    :: !Text
+    { _acccEntries :: !(Maybe [AccountstatusesCustomBatchResponseEntry])
+    , _acccKind    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountstatusesCustomBatchResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acbr1Entries'
+-- * 'acccEntries'
 --
--- * 'acbr1Kind'
+-- * 'acccKind'
 accountstatusesCustomBatchResponse
     :: AccountstatusesCustomBatchResponse
 accountstatusesCustomBatchResponse =
     AccountstatusesCustomBatchResponse'
-    { _acbr1Entries = Nothing
-    , _acbr1Kind = "content#accountstatusesCustomBatchResponse"
+    { _acccEntries = Nothing
+    , _acccKind = "content#accountstatusesCustomBatchResponse"
     }
 
 -- | The result of the execution of the batch requests.
-acbr1Entries :: Lens' AccountstatusesCustomBatchResponse [AccountstatusesCustomBatchResponseEntry]
-acbr1Entries
-  = lens _acbr1Entries (\ s a -> s{_acbr1Entries = a})
-      . _Default
+acccEntries :: Lens' AccountstatusesCustomBatchResponse [AccountstatusesCustomBatchResponseEntry]
+acccEntries
+  = lens _acccEntries (\ s a -> s{_acccEntries = a}) .
+      _Default
       . _Coerce
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#accountstatusesCustomBatchResponse\".
-acbr1Kind :: Lens' AccountstatusesCustomBatchResponse Text
-acbr1Kind
-  = lens _acbr1Kind (\ s a -> s{_acbr1Kind = a})
+acccKind :: Lens' AccountstatusesCustomBatchResponse Text
+acccKind = lens _acccKind (\ s a -> s{_acccKind = a})
 
 instance FromJSON AccountstatusesCustomBatchResponse
          where
@@ -6669,8 +9645,8 @@ instance ToJSON AccountstatusesCustomBatchResponse
         toJSON AccountstatusesCustomBatchResponse'{..}
           = object
               (catMaybes
-                 [("entries" .=) <$> _acbr1Entries,
-                  Just ("kind" .= _acbr1Kind)])
+                 [("entries" .=) <$> _acccEntries,
+                  Just ("kind" .= _acccKind)])
 
 -- | A batch entry encoding a single non-batch shipping settings response.
 --
@@ -6752,176 +9728,176 @@ instance ToJSON
 --
 -- /See:/ 'productStatus' smart constructor.
 data ProductStatus = ProductStatus'
-    { _psDataQualityIssues    :: !(Maybe [ProductStatusDataQualityIssue])
-    , _psKind                 :: !Text
-    , _psLink                 :: !(Maybe Text)
-    , _psDestinationStatuses  :: !(Maybe [ProductStatusDestinationStatus])
-    , _psLastUpdateDate       :: !(Maybe Text)
-    , _psCreationDate         :: !(Maybe Text)
-    , _psTitle                :: !(Maybe Text)
-    , _psGoogleExpirationDate :: !(Maybe Text)
-    , _psProductId            :: !(Maybe Text)
+    { _ppKind                 :: !Text
+    , _ppLink                 :: !(Maybe Text)
+    , _ppDestinationStatuses  :: !(Maybe [ProductStatusDestinationStatus])
+    , _ppLastUpdateDate       :: !(Maybe Text)
+    , _ppCreationDate         :: !(Maybe Text)
+    , _ppTitle                :: !(Maybe Text)
+    , _ppGoogleExpirationDate :: !(Maybe Text)
+    , _ppProductId            :: !(Maybe Text)
+    , _ppItemLevelIssues      :: !(Maybe [ProductStatusItemLevelIssue])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'psDataQualityIssues'
+-- * 'ppKind'
 --
--- * 'psKind'
+-- * 'ppLink'
 --
--- * 'psLink'
+-- * 'ppDestinationStatuses'
 --
--- * 'psDestinationStatuses'
+-- * 'ppLastUpdateDate'
 --
--- * 'psLastUpdateDate'
+-- * 'ppCreationDate'
 --
--- * 'psCreationDate'
+-- * 'ppTitle'
 --
--- * 'psTitle'
+-- * 'ppGoogleExpirationDate'
 --
--- * 'psGoogleExpirationDate'
+-- * 'ppProductId'
 --
--- * 'psProductId'
+-- * 'ppItemLevelIssues'
 productStatus
     :: ProductStatus
 productStatus =
     ProductStatus'
-    { _psDataQualityIssues = Nothing
-    , _psKind = "content#productStatus"
-    , _psLink = Nothing
-    , _psDestinationStatuses = Nothing
-    , _psLastUpdateDate = Nothing
-    , _psCreationDate = Nothing
-    , _psTitle = Nothing
-    , _psGoogleExpirationDate = Nothing
-    , _psProductId = Nothing
+    { _ppKind = "content#productStatus"
+    , _ppLink = Nothing
+    , _ppDestinationStatuses = Nothing
+    , _ppLastUpdateDate = Nothing
+    , _ppCreationDate = Nothing
+    , _ppTitle = Nothing
+    , _ppGoogleExpirationDate = Nothing
+    , _ppProductId = Nothing
+    , _ppItemLevelIssues = Nothing
     }
-
--- | A list of data quality issues associated with the product.
-psDataQualityIssues :: Lens' ProductStatus [ProductStatusDataQualityIssue]
-psDataQualityIssues
-  = lens _psDataQualityIssues
-      (\ s a -> s{_psDataQualityIssues = a})
-      . _Default
-      . _Coerce
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#productStatus\".
-psKind :: Lens' ProductStatus Text
-psKind = lens _psKind (\ s a -> s{_psKind = a})
+ppKind :: Lens' ProductStatus Text
+ppKind = lens _ppKind (\ s a -> s{_ppKind = a})
 
 -- | The link to the product.
-psLink :: Lens' ProductStatus (Maybe Text)
-psLink = lens _psLink (\ s a -> s{_psLink = a})
+ppLink :: Lens' ProductStatus (Maybe Text)
+ppLink = lens _ppLink (\ s a -> s{_ppLink = a})
 
 -- | The intended destinations for the product.
-psDestinationStatuses :: Lens' ProductStatus [ProductStatusDestinationStatus]
-psDestinationStatuses
-  = lens _psDestinationStatuses
-      (\ s a -> s{_psDestinationStatuses = a})
+ppDestinationStatuses :: Lens' ProductStatus [ProductStatusDestinationStatus]
+ppDestinationStatuses
+  = lens _ppDestinationStatuses
+      (\ s a -> s{_ppDestinationStatuses = a})
       . _Default
       . _Coerce
 
 -- | Date on which the item has been last updated, in ISO 8601 format.
-psLastUpdateDate :: Lens' ProductStatus (Maybe Text)
-psLastUpdateDate
-  = lens _psLastUpdateDate
-      (\ s a -> s{_psLastUpdateDate = a})
+ppLastUpdateDate :: Lens' ProductStatus (Maybe Text)
+ppLastUpdateDate
+  = lens _ppLastUpdateDate
+      (\ s a -> s{_ppLastUpdateDate = a})
 
 -- | Date on which the item has been created, in ISO 8601 format.
-psCreationDate :: Lens' ProductStatus (Maybe Text)
-psCreationDate
-  = lens _psCreationDate
-      (\ s a -> s{_psCreationDate = a})
+ppCreationDate :: Lens' ProductStatus (Maybe Text)
+ppCreationDate
+  = lens _ppCreationDate
+      (\ s a -> s{_ppCreationDate = a})
 
 -- | The title of the product.
-psTitle :: Lens' ProductStatus (Maybe Text)
-psTitle = lens _psTitle (\ s a -> s{_psTitle = a})
+ppTitle :: Lens' ProductStatus (Maybe Text)
+ppTitle = lens _ppTitle (\ s a -> s{_ppTitle = a})
 
 -- | Date on which the item expires in Google Shopping, in ISO 8601 format.
-psGoogleExpirationDate :: Lens' ProductStatus (Maybe Text)
-psGoogleExpirationDate
-  = lens _psGoogleExpirationDate
-      (\ s a -> s{_psGoogleExpirationDate = a})
+ppGoogleExpirationDate :: Lens' ProductStatus (Maybe Text)
+ppGoogleExpirationDate
+  = lens _ppGoogleExpirationDate
+      (\ s a -> s{_ppGoogleExpirationDate = a})
 
 -- | The id of the product for which status is reported.
-psProductId :: Lens' ProductStatus (Maybe Text)
-psProductId
-  = lens _psProductId (\ s a -> s{_psProductId = a})
+ppProductId :: Lens' ProductStatus (Maybe Text)
+ppProductId
+  = lens _ppProductId (\ s a -> s{_ppProductId = a})
+
+-- | A list of all issues associated with the product.
+ppItemLevelIssues :: Lens' ProductStatus [ProductStatusItemLevelIssue]
+ppItemLevelIssues
+  = lens _ppItemLevelIssues
+      (\ s a -> s{_ppItemLevelIssues = a})
+      . _Default
+      . _Coerce
 
 instance FromJSON ProductStatus where
         parseJSON
           = withObject "ProductStatus"
               (\ o ->
                  ProductStatus' <$>
-                   (o .:? "dataQualityIssues" .!= mempty) <*>
-                     (o .:? "kind" .!= "content#productStatus")
-                     <*> (o .:? "link")
+                   (o .:? "kind" .!= "content#productStatus") <*>
+                     (o .:? "link")
                      <*> (o .:? "destinationStatuses" .!= mempty)
                      <*> (o .:? "lastUpdateDate")
                      <*> (o .:? "creationDate")
                      <*> (o .:? "title")
                      <*> (o .:? "googleExpirationDate")
-                     <*> (o .:? "productId"))
+                     <*> (o .:? "productId")
+                     <*> (o .:? "itemLevelIssues" .!= mempty))
 
 instance ToJSON ProductStatus where
         toJSON ProductStatus'{..}
           = object
               (catMaybes
-                 [("dataQualityIssues" .=) <$> _psDataQualityIssues,
-                  Just ("kind" .= _psKind), ("link" .=) <$> _psLink,
+                 [Just ("kind" .= _ppKind), ("link" .=) <$> _ppLink,
                   ("destinationStatuses" .=) <$>
-                    _psDestinationStatuses,
-                  ("lastUpdateDate" .=) <$> _psLastUpdateDate,
-                  ("creationDate" .=) <$> _psCreationDate,
-                  ("title" .=) <$> _psTitle,
+                    _ppDestinationStatuses,
+                  ("lastUpdateDate" .=) <$> _ppLastUpdateDate,
+                  ("creationDate" .=) <$> _ppCreationDate,
+                  ("title" .=) <$> _ppTitle,
                   ("googleExpirationDate" .=) <$>
-                    _psGoogleExpirationDate,
-                  ("productId" .=) <$> _psProductId])
+                    _ppGoogleExpirationDate,
+                  ("productId" .=) <$> _ppProductId,
+                  ("itemLevelIssues" .=) <$> _ppItemLevelIssues])
 
 --
 -- /See:/ 'accountstatusesListResponse' smart constructor.
 data AccountstatusesListResponse = AccountstatusesListResponse'
-    { _alrlNextPageToken :: !(Maybe Text)
-    , _alrlKind          :: !Text
-    , _alrlResources     :: !(Maybe [AccountStatus])
+    { _alr1NextPageToken :: !(Maybe Text)
+    , _alr1Kind          :: !Text
+    , _alr1Resources     :: !(Maybe [AccountStatus])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountstatusesListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'alrlNextPageToken'
+-- * 'alr1NextPageToken'
 --
--- * 'alrlKind'
+-- * 'alr1Kind'
 --
--- * 'alrlResources'
+-- * 'alr1Resources'
 accountstatusesListResponse
     :: AccountstatusesListResponse
 accountstatusesListResponse =
     AccountstatusesListResponse'
-    { _alrlNextPageToken = Nothing
-    , _alrlKind = "content#accountstatusesListResponse"
-    , _alrlResources = Nothing
+    { _alr1NextPageToken = Nothing
+    , _alr1Kind = "content#accountstatusesListResponse"
+    , _alr1Resources = Nothing
     }
 
 -- | The token for the retrieval of the next page of account statuses.
-alrlNextPageToken :: Lens' AccountstatusesListResponse (Maybe Text)
-alrlNextPageToken
-  = lens _alrlNextPageToken
-      (\ s a -> s{_alrlNextPageToken = a})
+alr1NextPageToken :: Lens' AccountstatusesListResponse (Maybe Text)
+alr1NextPageToken
+  = lens _alr1NextPageToken
+      (\ s a -> s{_alr1NextPageToken = a})
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#accountstatusesListResponse\".
-alrlKind :: Lens' AccountstatusesListResponse Text
-alrlKind = lens _alrlKind (\ s a -> s{_alrlKind = a})
+alr1Kind :: Lens' AccountstatusesListResponse Text
+alr1Kind = lens _alr1Kind (\ s a -> s{_alr1Kind = a})
 
-alrlResources :: Lens' AccountstatusesListResponse [AccountStatus]
-alrlResources
-  = lens _alrlResources
-      (\ s a -> s{_alrlResources = a})
+alr1Resources :: Lens' AccountstatusesListResponse [AccountStatus]
+alr1Resources
+  = lens _alr1Resources
+      (\ s a -> s{_alr1Resources = a})
       . _Default
       . _Coerce
 
@@ -6939,32 +9915,84 @@ instance ToJSON AccountstatusesListResponse where
         toJSON AccountstatusesListResponse'{..}
           = object
               (catMaybes
-                 [("nextPageToken" .=) <$> _alrlNextPageToken,
-                  Just ("kind" .= _alrlKind),
-                  ("resources" .=) <$> _alrlResources])
+                 [("nextPageToken" .=) <$> _alr1NextPageToken,
+                  Just ("kind" .= _alr1Kind),
+                  ("resources" .=) <$> _alr1Resources])
+
+--
+-- /See:/ 'ordersSetLineItemMetadataResponse' smart constructor.
+data OrdersSetLineItemMetadataResponse = OrdersSetLineItemMetadataResponse'
+    { _oslimrKind            :: !Text
+    , _oslimrExecutionStatus :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OrdersSetLineItemMetadataResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oslimrKind'
+--
+-- * 'oslimrExecutionStatus'
+ordersSetLineItemMetadataResponse
+    :: OrdersSetLineItemMetadataResponse
+ordersSetLineItemMetadataResponse =
+    OrdersSetLineItemMetadataResponse'
+    { _oslimrKind = "content#ordersSetLineItemMetadataResponse"
+    , _oslimrExecutionStatus = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"content#ordersSetLineItemMetadataResponse\".
+oslimrKind :: Lens' OrdersSetLineItemMetadataResponse Text
+oslimrKind
+  = lens _oslimrKind (\ s a -> s{_oslimrKind = a})
+
+-- | The status of the execution.
+oslimrExecutionStatus :: Lens' OrdersSetLineItemMetadataResponse (Maybe Text)
+oslimrExecutionStatus
+  = lens _oslimrExecutionStatus
+      (\ s a -> s{_oslimrExecutionStatus = a})
+
+instance FromJSON OrdersSetLineItemMetadataResponse
+         where
+        parseJSON
+          = withObject "OrdersSetLineItemMetadataResponse"
+              (\ o ->
+                 OrdersSetLineItemMetadataResponse' <$>
+                   (o .:? "kind" .!=
+                      "content#ordersSetLineItemMetadataResponse")
+                     <*> (o .:? "executionStatus"))
+
+instance ToJSON OrdersSetLineItemMetadataResponse
+         where
+        toJSON OrdersSetLineItemMetadataResponse'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _oslimrKind),
+                  ("executionStatus" .=) <$> _oslimrExecutionStatus])
 
 --
 -- /See:/ 'accounttaxCustomBatchRequest' smart constructor.
 newtype AccounttaxCustomBatchRequest = AccounttaxCustomBatchRequest'
-    { _aaEntries :: Maybe [AccounttaxCustomBatchRequestEntry]
+    { _accEntries :: Maybe [AccounttaxCustomBatchRequestEntry]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccounttaxCustomBatchRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aaEntries'
+-- * 'accEntries'
 accounttaxCustomBatchRequest
     :: AccounttaxCustomBatchRequest
 accounttaxCustomBatchRequest =
     AccounttaxCustomBatchRequest'
-    { _aaEntries = Nothing
+    { _accEntries = Nothing
     }
 
 -- | The request entries to be processed in the batch.
-aaEntries :: Lens' AccounttaxCustomBatchRequest [AccounttaxCustomBatchRequestEntry]
-aaEntries
-  = lens _aaEntries (\ s a -> s{_aaEntries = a}) .
+accEntries :: Lens' AccounttaxCustomBatchRequest [AccounttaxCustomBatchRequestEntry]
+accEntries
+  = lens _accEntries (\ s a -> s{_accEntries = a}) .
       _Default
       . _Coerce
 
@@ -6977,66 +10005,70 @@ instance FromJSON AccounttaxCustomBatchRequest where
 
 instance ToJSON AccounttaxCustomBatchRequest where
         toJSON AccounttaxCustomBatchRequest'{..}
-          = object (catMaybes [("entries" .=) <$> _aaEntries])
+          = object (catMaybes [("entries" .=) <$> _accEntries])
 
 -- | A batch entry encoding a single non-batch products request.
 --
 -- /See:/ 'productsCustomBatchRequestEntry' smart constructor.
 data ProductsCustomBatchRequestEntry = ProductsCustomBatchRequestEntry'
-    { _pMerchantId :: !(Maybe (Textual Word64))
-    , _pMethod     :: !(Maybe Text)
-    , _pProduct    :: !(Maybe Product)
-    , _pProductId  :: !(Maybe Text)
-    , _pBatchId    :: !(Maybe (Textual Word32))
+    { _prorMerchantId :: !(Maybe (Textual Word64))
+    , _prorMethod     :: !(Maybe Text)
+    , _prorProduct    :: !(Maybe Product)
+    , _prorProductId  :: !(Maybe Text)
+    , _prorBatchId    :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductsCustomBatchRequestEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pMerchantId'
+-- * 'prorMerchantId'
 --
--- * 'pMethod'
+-- * 'prorMethod'
 --
--- * 'pProduct'
+-- * 'prorProduct'
 --
--- * 'pProductId'
+-- * 'prorProductId'
 --
--- * 'pBatchId'
+-- * 'prorBatchId'
 productsCustomBatchRequestEntry
     :: ProductsCustomBatchRequestEntry
 productsCustomBatchRequestEntry =
     ProductsCustomBatchRequestEntry'
-    { _pMerchantId = Nothing
-    , _pMethod = Nothing
-    , _pProduct = Nothing
-    , _pProductId = Nothing
-    , _pBatchId = Nothing
+    { _prorMerchantId = Nothing
+    , _prorMethod = Nothing
+    , _prorProduct = Nothing
+    , _prorProductId = Nothing
+    , _prorBatchId = Nothing
     }
 
 -- | The ID of the managing account.
-pMerchantId :: Lens' ProductsCustomBatchRequestEntry (Maybe Word64)
-pMerchantId
-  = lens _pMerchantId (\ s a -> s{_pMerchantId = a}) .
-      mapping _Coerce
+prorMerchantId :: Lens' ProductsCustomBatchRequestEntry (Maybe Word64)
+prorMerchantId
+  = lens _prorMerchantId
+      (\ s a -> s{_prorMerchantId = a})
+      . mapping _Coerce
 
-pMethod :: Lens' ProductsCustomBatchRequestEntry (Maybe Text)
-pMethod = lens _pMethod (\ s a -> s{_pMethod = a})
+prorMethod :: Lens' ProductsCustomBatchRequestEntry (Maybe Text)
+prorMethod
+  = lens _prorMethod (\ s a -> s{_prorMethod = a})
 
 -- | The product to insert. Only required if the method is insert.
-pProduct :: Lens' ProductsCustomBatchRequestEntry (Maybe Product)
-pProduct = lens _pProduct (\ s a -> s{_pProduct = a})
+prorProduct :: Lens' ProductsCustomBatchRequestEntry (Maybe Product)
+prorProduct
+  = lens _prorProduct (\ s a -> s{_prorProduct = a})
 
 -- | The ID of the product to get or delete. Only defined if the method is
 -- get or delete.
-pProductId :: Lens' ProductsCustomBatchRequestEntry (Maybe Text)
-pProductId
-  = lens _pProductId (\ s a -> s{_pProductId = a})
+prorProductId :: Lens' ProductsCustomBatchRequestEntry (Maybe Text)
+prorProductId
+  = lens _prorProductId
+      (\ s a -> s{_prorProductId = a})
 
 -- | An entry ID, unique within the batch request.
-pBatchId :: Lens' ProductsCustomBatchRequestEntry (Maybe Word32)
-pBatchId
-  = lens _pBatchId (\ s a -> s{_pBatchId = a}) .
+prorBatchId :: Lens' ProductsCustomBatchRequestEntry (Maybe Word32)
+prorBatchId
+  = lens _prorBatchId (\ s a -> s{_prorBatchId = a}) .
       mapping _Coerce
 
 instance FromJSON ProductsCustomBatchRequestEntry
@@ -7054,19 +10086,71 @@ instance ToJSON ProductsCustomBatchRequestEntry where
         toJSON ProductsCustomBatchRequestEntry'{..}
           = object
               (catMaybes
-                 [("merchantId" .=) <$> _pMerchantId,
-                  ("method" .=) <$> _pMethod,
-                  ("product" .=) <$> _pProduct,
-                  ("productId" .=) <$> _pProductId,
-                  ("batchId" .=) <$> _pBatchId])
+                 [("merchantId" .=) <$> _prorMerchantId,
+                  ("method" .=) <$> _prorMethod,
+                  ("product" .=) <$> _prorProduct,
+                  ("productId" .=) <$> _prorProductId,
+                  ("batchId" .=) <$> _prorBatchId])
+
+--
+-- /See:/ 'accountGoogleMyBusinessLink' smart constructor.
+data AccountGoogleMyBusinessLink = AccountGoogleMyBusinessLink'
+    { _agmblGmbEmail :: !(Maybe Text)
+    , _agmblStatus   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AccountGoogleMyBusinessLink' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'agmblGmbEmail'
+--
+-- * 'agmblStatus'
+accountGoogleMyBusinessLink
+    :: AccountGoogleMyBusinessLink
+accountGoogleMyBusinessLink =
+    AccountGoogleMyBusinessLink'
+    { _agmblGmbEmail = Nothing
+    , _agmblStatus = Nothing
+    }
+
+-- | The GMB email address of which a specific account within a GMB account.
+-- A sample account within a GMB account could be a business account with
+-- set of locations, managed under the GMB account.
+agmblGmbEmail :: Lens' AccountGoogleMyBusinessLink (Maybe Text)
+agmblGmbEmail
+  = lens _agmblGmbEmail
+      (\ s a -> s{_agmblGmbEmail = a})
+
+-- | Status of the link between this Merchant Center account and the GMB
+-- account.
+agmblStatus :: Lens' AccountGoogleMyBusinessLink (Maybe Text)
+agmblStatus
+  = lens _agmblStatus (\ s a -> s{_agmblStatus = a})
+
+instance FromJSON AccountGoogleMyBusinessLink where
+        parseJSON
+          = withObject "AccountGoogleMyBusinessLink"
+              (\ o ->
+                 AccountGoogleMyBusinessLink' <$>
+                   (o .:? "gmbEmail") <*> (o .:? "status"))
+
+instance ToJSON AccountGoogleMyBusinessLink where
+        toJSON AccountGoogleMyBusinessLink'{..}
+          = object
+              (catMaybes
+                 [("gmbEmail" .=) <$> _agmblGmbEmail,
+                  ("status" .=) <$> _agmblStatus])
 
 -- | A batch entry encoding a single non-batch datafeedstatuses request.
 --
 -- /See:/ 'datafeedstatusesCustomBatchRequestEntry' smart constructor.
 data DatafeedstatusesCustomBatchRequestEntry = DatafeedstatusesCustomBatchRequestEntry'
     { _dMerchantId :: !(Maybe (Textual Word64))
+    , _dCountry    :: !(Maybe Text)
     , _dMethod     :: !(Maybe Text)
     , _dDatafeedId :: !(Maybe (Textual Word64))
+    , _dLanguage   :: !(Maybe Text)
     , _dBatchId    :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -7076,9 +10160,13 @@ data DatafeedstatusesCustomBatchRequestEntry = DatafeedstatusesCustomBatchReques
 --
 -- * 'dMerchantId'
 --
+-- * 'dCountry'
+--
 -- * 'dMethod'
 --
 -- * 'dDatafeedId'
+--
+-- * 'dLanguage'
 --
 -- * 'dBatchId'
 datafeedstatusesCustomBatchRequestEntry
@@ -7086,8 +10174,10 @@ datafeedstatusesCustomBatchRequestEntry
 datafeedstatusesCustomBatchRequestEntry =
     DatafeedstatusesCustomBatchRequestEntry'
     { _dMerchantId = Nothing
+    , _dCountry = Nothing
     , _dMethod = Nothing
     , _dDatafeedId = Nothing
+    , _dLanguage = Nothing
     , _dBatchId = Nothing
     }
 
@@ -7097,14 +10187,27 @@ dMerchantId
   = lens _dMerchantId (\ s a -> s{_dMerchantId = a}) .
       mapping _Coerce
 
+-- | The country for which to get the datafeed status. If this parameter is
+-- provided then language must also be provided. Note that for multi-target
+-- datafeeds this parameter is required.
+dCountry :: Lens' DatafeedstatusesCustomBatchRequestEntry (Maybe Text)
+dCountry = lens _dCountry (\ s a -> s{_dCountry = a})
+
 dMethod :: Lens' DatafeedstatusesCustomBatchRequestEntry (Maybe Text)
 dMethod = lens _dMethod (\ s a -> s{_dMethod = a})
 
--- | The ID of the data feed to get or delete.
+-- | The ID of the data feed to get.
 dDatafeedId :: Lens' DatafeedstatusesCustomBatchRequestEntry (Maybe Word64)
 dDatafeedId
   = lens _dDatafeedId (\ s a -> s{_dDatafeedId = a}) .
       mapping _Coerce
+
+-- | The language for which to get the datafeed status. If this parameter is
+-- provided then country must also be provided. Note that for multi-target
+-- datafeeds this parameter is required.
+dLanguage :: Lens' DatafeedstatusesCustomBatchRequestEntry (Maybe Text)
+dLanguage
+  = lens _dLanguage (\ s a -> s{_dLanguage = a})
 
 -- | An entry ID, unique within the batch request.
 dBatchId :: Lens' DatafeedstatusesCustomBatchRequestEntry (Maybe Word32)
@@ -7119,8 +10222,10 @@ instance FromJSON
               "DatafeedstatusesCustomBatchRequestEntry"
               (\ o ->
                  DatafeedstatusesCustomBatchRequestEntry' <$>
-                   (o .:? "merchantId") <*> (o .:? "method") <*>
-                     (o .:? "datafeedId")
+                   (o .:? "merchantId") <*> (o .:? "country") <*>
+                     (o .:? "method")
+                     <*> (o .:? "datafeedId")
+                     <*> (o .:? "language")
                      <*> (o .:? "batchId"))
 
 instance ToJSON
@@ -7129,16 +10234,18 @@ instance ToJSON
           = object
               (catMaybes
                  [("merchantId" .=) <$> _dMerchantId,
+                  ("country" .=) <$> _dCountry,
                   ("method" .=) <$> _dMethod,
                   ("datafeedId" .=) <$> _dDatafeedId,
+                  ("language" .=) <$> _dLanguage,
                   ("batchId" .=) <$> _dBatchId])
 
 --
 -- /See:/ 'orderCustomer' smart constructor.
 data OrderCustomer = OrderCustomer'
-    { _ocFullName                    :: !(Maybe Text)
-    , _ocEmail                       :: !(Maybe Text)
-    , _ocExplicitMarketingPreference :: !(Maybe Bool)
+    { _ocFullName            :: !(Maybe Text)
+    , _ocEmail               :: !(Maybe Text)
+    , _ocMarketingRightsInfo :: !(Maybe OrderCustomerMarketingRightsInfo)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrderCustomer' with the minimum fields required to make a request.
@@ -7149,14 +10256,14 @@ data OrderCustomer = OrderCustomer'
 --
 -- * 'ocEmail'
 --
--- * 'ocExplicitMarketingPreference'
+-- * 'ocMarketingRightsInfo'
 orderCustomer
     :: OrderCustomer
 orderCustomer =
     OrderCustomer'
     { _ocFullName = Nothing
     , _ocEmail = Nothing
-    , _ocExplicitMarketingPreference = Nothing
+    , _ocMarketingRightsInfo = Nothing
     }
 
 -- | Full name of the customer.
@@ -7164,19 +10271,15 @@ ocFullName :: Lens' OrderCustomer (Maybe Text)
 ocFullName
   = lens _ocFullName (\ s a -> s{_ocFullName = a})
 
--- | Email address of the customer.
+-- | Deprecated.
 ocEmail :: Lens' OrderCustomer (Maybe Text)
 ocEmail = lens _ocEmail (\ s a -> s{_ocEmail = a})
 
--- | If set, this indicates the user explicitly chose to opt in or out of
--- providing marketing rights to the merchant. If unset, this indicates the
--- user has already made this choice in a previous purchase, and was thus
--- not shown the marketing right opt in\/out checkbox during the Purchases
--- on Google checkout flow.
-ocExplicitMarketingPreference :: Lens' OrderCustomer (Maybe Bool)
-ocExplicitMarketingPreference
-  = lens _ocExplicitMarketingPreference
-      (\ s a -> s{_ocExplicitMarketingPreference = a})
+-- | Customer\'s marketing preferences.
+ocMarketingRightsInfo :: Lens' OrderCustomer (Maybe OrderCustomerMarketingRightsInfo)
+ocMarketingRightsInfo
+  = lens _ocMarketingRightsInfo
+      (\ s a -> s{_ocMarketingRightsInfo = a})
 
 instance FromJSON OrderCustomer where
         parseJSON
@@ -7184,7 +10287,7 @@ instance FromJSON OrderCustomer where
               (\ o ->
                  OrderCustomer' <$>
                    (o .:? "fullName") <*> (o .:? "email") <*>
-                     (o .:? "explicitMarketingPreference"))
+                     (o .:? "marketingRightsInfo"))
 
 instance ToJSON OrderCustomer where
         toJSON OrderCustomer'{..}
@@ -7192,135 +10295,8 @@ instance ToJSON OrderCustomer where
               (catMaybes
                  [("fullName" .=) <$> _ocFullName,
                   ("email" .=) <$> _ocEmail,
-                  ("explicitMarketingPreference" .=) <$>
-                    _ocExplicitMarketingPreference])
-
--- | A batch entry encoding a single non-batch inventory response.
---
--- /See:/ 'inventoryCustomBatchResponseEntry' smart constructor.
-data InventoryCustomBatchResponseEntry = InventoryCustomBatchResponseEntry'
-    { _icbreKind    :: !Text
-    , _icbreErrors  :: !(Maybe Errors)
-    , _icbreBatchId :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'InventoryCustomBatchResponseEntry' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'icbreKind'
---
--- * 'icbreErrors'
---
--- * 'icbreBatchId'
-inventoryCustomBatchResponseEntry
-    :: InventoryCustomBatchResponseEntry
-inventoryCustomBatchResponseEntry =
-    InventoryCustomBatchResponseEntry'
-    { _icbreKind = "content#inventoryCustomBatchResponseEntry"
-    , _icbreErrors = Nothing
-    , _icbreBatchId = Nothing
-    }
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"content#inventoryCustomBatchResponseEntry\".
-icbreKind :: Lens' InventoryCustomBatchResponseEntry Text
-icbreKind
-  = lens _icbreKind (\ s a -> s{_icbreKind = a})
-
--- | A list of errors defined if and only if the request failed.
-icbreErrors :: Lens' InventoryCustomBatchResponseEntry (Maybe Errors)
-icbreErrors
-  = lens _icbreErrors (\ s a -> s{_icbreErrors = a})
-
--- | The ID of the request entry this entry responds to.
-icbreBatchId :: Lens' InventoryCustomBatchResponseEntry (Maybe Word32)
-icbreBatchId
-  = lens _icbreBatchId (\ s a -> s{_icbreBatchId = a})
-      . mapping _Coerce
-
-instance FromJSON InventoryCustomBatchResponseEntry
-         where
-        parseJSON
-          = withObject "InventoryCustomBatchResponseEntry"
-              (\ o ->
-                 InventoryCustomBatchResponseEntry' <$>
-                   (o .:? "kind" .!=
-                      "content#inventoryCustomBatchResponseEntry")
-                     <*> (o .:? "errors")
-                     <*> (o .:? "batchId"))
-
-instance ToJSON InventoryCustomBatchResponseEntry
-         where
-        toJSON InventoryCustomBatchResponseEntry'{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _icbreKind),
-                  ("errors" .=) <$> _icbreErrors,
-                  ("batchId" .=) <$> _icbreBatchId])
-
---
--- /See:/ 'accountshippingListResponse' smart constructor.
-data AccountshippingListResponse = AccountshippingListResponse'
-    { _alr1NextPageToken :: !(Maybe Text)
-    , _alr1Kind          :: !Text
-    , _alr1Resources     :: !(Maybe [AccountShipping])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AccountshippingListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'alr1NextPageToken'
---
--- * 'alr1Kind'
---
--- * 'alr1Resources'
-accountshippingListResponse
-    :: AccountshippingListResponse
-accountshippingListResponse =
-    AccountshippingListResponse'
-    { _alr1NextPageToken = Nothing
-    , _alr1Kind = "content#accountshippingListResponse"
-    , _alr1Resources = Nothing
-    }
-
--- | The token for the retrieval of the next page of account shipping
--- settings.
-alr1NextPageToken :: Lens' AccountshippingListResponse (Maybe Text)
-alr1NextPageToken
-  = lens _alr1NextPageToken
-      (\ s a -> s{_alr1NextPageToken = a})
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"content#accountshippingListResponse\".
-alr1Kind :: Lens' AccountshippingListResponse Text
-alr1Kind = lens _alr1Kind (\ s a -> s{_alr1Kind = a})
-
-alr1Resources :: Lens' AccountshippingListResponse [AccountShipping]
-alr1Resources
-  = lens _alr1Resources
-      (\ s a -> s{_alr1Resources = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON AccountshippingListResponse where
-        parseJSON
-          = withObject "AccountshippingListResponse"
-              (\ o ->
-                 AccountshippingListResponse' <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!=
-                        "content#accountshippingListResponse")
-                     <*> (o .:? "resources" .!= mempty))
-
-instance ToJSON AccountshippingListResponse where
-        toJSON AccountshippingListResponse'{..}
-          = object
-              (catMaybes
-                 [("nextPageToken" .=) <$> _alr1NextPageToken,
-                  Just ("kind" .= _alr1Kind),
-                  ("resources" .=) <$> _alr1Resources])
+                  ("marketingRightsInfo" .=) <$>
+                    _ocMarketingRightsInfo])
 
 --
 -- /See:/ 'locationIdSet' smart constructor.
@@ -7396,142 +10372,6 @@ instance ToJSON Row where
           = object (catMaybes [("cells" .=) <$> _rCells])
 
 --
--- /See:/ 'inventory' smart constructor.
-data Inventory = Inventory'
-    { _iLoyaltyPoints          :: !(Maybe LoyaltyPoints)
-    , _iKind                   :: !Text
-    , _iQuantity               :: !(Maybe (Textual Word32))
-    , _iInstallment            :: !(Maybe Installment)
-    , _iSalePrice              :: !(Maybe Price)
-    , _iAvailability           :: !(Maybe Text)
-    , _iSalePriceEffectiveDate :: !(Maybe Text)
-    , _iSellOnGoogleQuantity   :: !(Maybe (Textual Word32))
-    , _iPrice                  :: !(Maybe Price)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Inventory' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'iLoyaltyPoints'
---
--- * 'iKind'
---
--- * 'iQuantity'
---
--- * 'iInstallment'
---
--- * 'iSalePrice'
---
--- * 'iAvailability'
---
--- * 'iSalePriceEffectiveDate'
---
--- * 'iSellOnGoogleQuantity'
---
--- * 'iPrice'
-inventory
-    :: Inventory
-inventory =
-    Inventory'
-    { _iLoyaltyPoints = Nothing
-    , _iKind = "content#inventory"
-    , _iQuantity = Nothing
-    , _iInstallment = Nothing
-    , _iSalePrice = Nothing
-    , _iAvailability = Nothing
-    , _iSalePriceEffectiveDate = Nothing
-    , _iSellOnGoogleQuantity = Nothing
-    , _iPrice = Nothing
-    }
-
--- | Loyalty points that users receive after purchasing the item. Japan only.
-iLoyaltyPoints :: Lens' Inventory (Maybe LoyaltyPoints)
-iLoyaltyPoints
-  = lens _iLoyaltyPoints
-      (\ s a -> s{_iLoyaltyPoints = a})
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"content#inventory\".
-iKind :: Lens' Inventory Text
-iKind = lens _iKind (\ s a -> s{_iKind = a})
-
--- | The quantity of the product. Must be equal to or greater than zero.
--- Supported only for local products.
-iQuantity :: Lens' Inventory (Maybe Word32)
-iQuantity
-  = lens _iQuantity (\ s a -> s{_iQuantity = a}) .
-      mapping _Coerce
-
--- | Number and amount of installments to pay for an item. Brazil only.
-iInstallment :: Lens' Inventory (Maybe Installment)
-iInstallment
-  = lens _iInstallment (\ s a -> s{_iInstallment = a})
-
--- | The sale price of the product. Mandatory if sale_price_effective_date is
--- defined.
-iSalePrice :: Lens' Inventory (Maybe Price)
-iSalePrice
-  = lens _iSalePrice (\ s a -> s{_iSalePrice = a})
-
--- | The availability of the product.
-iAvailability :: Lens' Inventory (Maybe Text)
-iAvailability
-  = lens _iAvailability
-      (\ s a -> s{_iAvailability = a})
-
--- | A date range represented by a pair of ISO 8601 dates separated by a
--- space, comma, or slash. Both dates might be specified as \'null\' if
--- undecided.
-iSalePriceEffectiveDate :: Lens' Inventory (Maybe Text)
-iSalePriceEffectiveDate
-  = lens _iSalePriceEffectiveDate
-      (\ s a -> s{_iSalePriceEffectiveDate = a})
-
--- | The quantity of the product that is reserved for sell-on-google ads.
--- Supported only for online products.
-iSellOnGoogleQuantity :: Lens' Inventory (Maybe Word32)
-iSellOnGoogleQuantity
-  = lens _iSellOnGoogleQuantity
-      (\ s a -> s{_iSellOnGoogleQuantity = a})
-      . mapping _Coerce
-
--- | The price of the product.
-iPrice :: Lens' Inventory (Maybe Price)
-iPrice = lens _iPrice (\ s a -> s{_iPrice = a})
-
-instance FromJSON Inventory where
-        parseJSON
-          = withObject "Inventory"
-              (\ o ->
-                 Inventory' <$>
-                   (o .:? "loyaltyPoints") <*>
-                     (o .:? "kind" .!= "content#inventory")
-                     <*> (o .:? "quantity")
-                     <*> (o .:? "installment")
-                     <*> (o .:? "salePrice")
-                     <*> (o .:? "availability")
-                     <*> (o .:? "salePriceEffectiveDate")
-                     <*> (o .:? "sellOnGoogleQuantity")
-                     <*> (o .:? "price"))
-
-instance ToJSON Inventory where
-        toJSON Inventory'{..}
-          = object
-              (catMaybes
-                 [("loyaltyPoints" .=) <$> _iLoyaltyPoints,
-                  Just ("kind" .= _iKind),
-                  ("quantity" .=) <$> _iQuantity,
-                  ("installment" .=) <$> _iInstallment,
-                  ("salePrice" .=) <$> _iSalePrice,
-                  ("availability" .=) <$> _iAvailability,
-                  ("salePriceEffectiveDate" .=) <$>
-                    _iSalePriceEffectiveDate,
-                  ("sellOnGoogleQuantity" .=) <$>
-                    _iSellOnGoogleQuantity,
-                  ("price" .=) <$> _iPrice])
-
---
 -- /See:/ 'ordersGetByMerchantOrderIdResponse' smart constructor.
 data OrdersGetByMerchantOrderIdResponse = OrdersGetByMerchantOrderIdResponse'
     { _ogbmoirKind  :: !Text
@@ -7583,87 +10423,104 @@ instance ToJSON OrdersGetByMerchantOrderIdResponse
                   ("order" .=) <$> _ogbmoirOrder])
 
 --
--- /See:/ 'orderPromotionBenefit' smart constructor.
-data OrderPromotionBenefit = OrderPromotionBenefit'
-    { _opbTaxImpact :: !(Maybe Price)
-    , _opbDiscount  :: !(Maybe Price)
-    , _opbOfferIds  :: !(Maybe [Text])
-    , _opbSubType   :: !(Maybe Text)
-    , _opbType      :: !(Maybe Text)
+-- /See:/ 'ordersRejectReturnLineItemRequest' smart constructor.
+data OrdersRejectReturnLineItemRequest = OrdersRejectReturnLineItemRequest'
+    { _orrlirQuantity    :: !(Maybe (Textual Word32))
+    , _orrlirLineItemId  :: !(Maybe Text)
+    , _orrlirReason      :: !(Maybe Text)
+    , _orrlirOperationId :: !(Maybe Text)
+    , _orrlirProductId   :: !(Maybe Text)
+    , _orrlirReasonText  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrderPromotionBenefit' with the minimum fields required to make a request.
+-- | Creates a value of 'OrdersRejectReturnLineItemRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'opbTaxImpact'
+-- * 'orrlirQuantity'
 --
--- * 'opbDiscount'
+-- * 'orrlirLineItemId'
 --
--- * 'opbOfferIds'
+-- * 'orrlirReason'
 --
--- * 'opbSubType'
+-- * 'orrlirOperationId'
 --
--- * 'opbType'
-orderPromotionBenefit
-    :: OrderPromotionBenefit
-orderPromotionBenefit =
-    OrderPromotionBenefit'
-    { _opbTaxImpact = Nothing
-    , _opbDiscount = Nothing
-    , _opbOfferIds = Nothing
-    , _opbSubType = Nothing
-    , _opbType = Nothing
+-- * 'orrlirProductId'
+--
+-- * 'orrlirReasonText'
+ordersRejectReturnLineItemRequest
+    :: OrdersRejectReturnLineItemRequest
+ordersRejectReturnLineItemRequest =
+    OrdersRejectReturnLineItemRequest'
+    { _orrlirQuantity = Nothing
+    , _orrlirLineItemId = Nothing
+    , _orrlirReason = Nothing
+    , _orrlirOperationId = Nothing
+    , _orrlirProductId = Nothing
+    , _orrlirReasonText = Nothing
     }
 
--- | The impact on tax when the promotion is applied.
-opbTaxImpact :: Lens' OrderPromotionBenefit (Maybe Price)
-opbTaxImpact
-  = lens _opbTaxImpact (\ s a -> s{_opbTaxImpact = a})
+-- | The quantity to return and refund.
+orrlirQuantity :: Lens' OrdersRejectReturnLineItemRequest (Maybe Word32)
+orrlirQuantity
+  = lens _orrlirQuantity
+      (\ s a -> s{_orrlirQuantity = a})
+      . mapping _Coerce
 
--- | The discount in the order price when the promotion is applied.
-opbDiscount :: Lens' OrderPromotionBenefit (Maybe Price)
-opbDiscount
-  = lens _opbDiscount (\ s a -> s{_opbDiscount = a})
+-- | The ID of the line item to return. Either lineItemId or productId is
+-- required.
+orrlirLineItemId :: Lens' OrdersRejectReturnLineItemRequest (Maybe Text)
+orrlirLineItemId
+  = lens _orrlirLineItemId
+      (\ s a -> s{_orrlirLineItemId = a})
 
--- | The OfferId(s) that were purchased in this order and map to this
--- specific benefit of the promotion.
-opbOfferIds :: Lens' OrderPromotionBenefit [Text]
-opbOfferIds
-  = lens _opbOfferIds (\ s a -> s{_opbOfferIds = a}) .
-      _Default
-      . _Coerce
+-- | The reason for the return.
+orrlirReason :: Lens' OrdersRejectReturnLineItemRequest (Maybe Text)
+orrlirReason
+  = lens _orrlirReason (\ s a -> s{_orrlirReason = a})
 
--- | Further describes the benefit of the promotion. Note that we will expand
--- on this enumeration as we support new promotion sub-types.
-opbSubType :: Lens' OrderPromotionBenefit (Maybe Text)
-opbSubType
-  = lens _opbSubType (\ s a -> s{_opbSubType = a})
+-- | The ID of the operation. Unique across all operations for a given order.
+orrlirOperationId :: Lens' OrdersRejectReturnLineItemRequest (Maybe Text)
+orrlirOperationId
+  = lens _orrlirOperationId
+      (\ s a -> s{_orrlirOperationId = a})
 
--- | Describes whether the promotion applies to products (e.g. 20% off) or to
--- shipping (e.g. Free Shipping).
-opbType :: Lens' OrderPromotionBenefit (Maybe Text)
-opbType = lens _opbType (\ s a -> s{_opbType = a})
+-- | The ID of the product to return. This is the REST ID used in the
+-- products service. Either lineItemId or productId is required.
+orrlirProductId :: Lens' OrdersRejectReturnLineItemRequest (Maybe Text)
+orrlirProductId
+  = lens _orrlirProductId
+      (\ s a -> s{_orrlirProductId = a})
 
-instance FromJSON OrderPromotionBenefit where
+-- | The explanation of the reason.
+orrlirReasonText :: Lens' OrdersRejectReturnLineItemRequest (Maybe Text)
+orrlirReasonText
+  = lens _orrlirReasonText
+      (\ s a -> s{_orrlirReasonText = a})
+
+instance FromJSON OrdersRejectReturnLineItemRequest
+         where
         parseJSON
-          = withObject "OrderPromotionBenefit"
+          = withObject "OrdersRejectReturnLineItemRequest"
               (\ o ->
-                 OrderPromotionBenefit' <$>
-                   (o .:? "taxImpact") <*> (o .:? "discount") <*>
-                     (o .:? "offerIds" .!= mempty)
-                     <*> (o .:? "subType")
-                     <*> (o .:? "type"))
+                 OrdersRejectReturnLineItemRequest' <$>
+                   (o .:? "quantity") <*> (o .:? "lineItemId") <*>
+                     (o .:? "reason")
+                     <*> (o .:? "operationId")
+                     <*> (o .:? "productId")
+                     <*> (o .:? "reasonText"))
 
-instance ToJSON OrderPromotionBenefit where
-        toJSON OrderPromotionBenefit'{..}
+instance ToJSON OrdersRejectReturnLineItemRequest
+         where
+        toJSON OrdersRejectReturnLineItemRequest'{..}
           = object
               (catMaybes
-                 [("taxImpact" .=) <$> _opbTaxImpact,
-                  ("discount" .=) <$> _opbDiscount,
-                  ("offerIds" .=) <$> _opbOfferIds,
-                  ("subType" .=) <$> _opbSubType,
-                  ("type" .=) <$> _opbType])
+                 [("quantity" .=) <$> _orrlirQuantity,
+                  ("lineItemId" .=) <$> _orrlirLineItemId,
+                  ("reason" .=) <$> _orrlirReason,
+                  ("operationId" .=) <$> _orrlirOperationId,
+                  ("productId" .=) <$> _orrlirProductId,
+                  ("reasonText" .=) <$> _orrlirReasonText])
 
 --
 -- /See:/ 'ordersCancelRequest' smart constructor.
@@ -7725,6 +10582,288 @@ instance ToJSON OrdersCancelRequest where
                   ("reasonText" .=) <$> _ocrReasonText])
 
 --
+-- /See:/ 'returnShipment' smart constructor.
+data ReturnShipment = ReturnShipment'
+    { _rsShipmentTrackingInfos :: !(Maybe [ShipmentTrackingInfo])
+    , _rsReturnMethodType      :: !(Maybe Text)
+    , _rsShipmentId            :: !(Maybe Text)
+    , _rsCreationDate          :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ReturnShipment' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rsShipmentTrackingInfos'
+--
+-- * 'rsReturnMethodType'
+--
+-- * 'rsShipmentId'
+--
+-- * 'rsCreationDate'
+returnShipment
+    :: ReturnShipment
+returnShipment =
+    ReturnShipment'
+    { _rsShipmentTrackingInfos = Nothing
+    , _rsReturnMethodType = Nothing
+    , _rsShipmentId = Nothing
+    , _rsCreationDate = Nothing
+    }
+
+rsShipmentTrackingInfos :: Lens' ReturnShipment [ShipmentTrackingInfo]
+rsShipmentTrackingInfos
+  = lens _rsShipmentTrackingInfos
+      (\ s a -> s{_rsShipmentTrackingInfos = a})
+      . _Default
+      . _Coerce
+
+rsReturnMethodType :: Lens' ReturnShipment (Maybe Text)
+rsReturnMethodType
+  = lens _rsReturnMethodType
+      (\ s a -> s{_rsReturnMethodType = a})
+
+rsShipmentId :: Lens' ReturnShipment (Maybe Text)
+rsShipmentId
+  = lens _rsShipmentId (\ s a -> s{_rsShipmentId = a})
+
+rsCreationDate :: Lens' ReturnShipment (Maybe Text)
+rsCreationDate
+  = lens _rsCreationDate
+      (\ s a -> s{_rsCreationDate = a})
+
+instance FromJSON ReturnShipment where
+        parseJSON
+          = withObject "ReturnShipment"
+              (\ o ->
+                 ReturnShipment' <$>
+                   (o .:? "shipmentTrackingInfos" .!= mempty) <*>
+                     (o .:? "returnMethodType")
+                     <*> (o .:? "shipmentId")
+                     <*> (o .:? "creationDate"))
+
+instance ToJSON ReturnShipment where
+        toJSON ReturnShipment'{..}
+          = object
+              (catMaybes
+                 [("shipmentTrackingInfos" .=) <$>
+                    _rsShipmentTrackingInfos,
+                  ("returnMethodType" .=) <$> _rsReturnMethodType,
+                  ("shipmentId" .=) <$> _rsShipmentId,
+                  ("creationDate" .=) <$> _rsCreationDate])
+
+--
+-- /See:/ 'ordersCancelTestOrderByCustomerRequest' smart constructor.
+newtype OrdersCancelTestOrderByCustomerRequest = OrdersCancelTestOrderByCustomerRequest'
+    { _octobcrReason :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OrdersCancelTestOrderByCustomerRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'octobcrReason'
+ordersCancelTestOrderByCustomerRequest
+    :: OrdersCancelTestOrderByCustomerRequest
+ordersCancelTestOrderByCustomerRequest =
+    OrdersCancelTestOrderByCustomerRequest'
+    { _octobcrReason = Nothing
+    }
+
+-- | The reason for the cancellation.
+octobcrReason :: Lens' OrdersCancelTestOrderByCustomerRequest (Maybe Text)
+octobcrReason
+  = lens _octobcrReason
+      (\ s a -> s{_octobcrReason = a})
+
+instance FromJSON
+         OrdersCancelTestOrderByCustomerRequest where
+        parseJSON
+          = withObject "OrdersCancelTestOrderByCustomerRequest"
+              (\ o ->
+                 OrdersCancelTestOrderByCustomerRequest' <$>
+                   (o .:? "reason"))
+
+instance ToJSON
+         OrdersCancelTestOrderByCustomerRequest where
+        toJSON OrdersCancelTestOrderByCustomerRequest'{..}
+          = object
+              (catMaybes [("reason" .=) <$> _octobcrReason])
+
+--
+-- /See:/ 'testOrderCustomerMarketingRightsInfo' smart constructor.
+data TestOrderCustomerMarketingRightsInfo = TestOrderCustomerMarketingRightsInfo'
+    { _tocmriExplicitMarketingPreference :: !(Maybe Text)
+    , _tocmriLastUpdatedTimestamp        :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TestOrderCustomerMarketingRightsInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tocmriExplicitMarketingPreference'
+--
+-- * 'tocmriLastUpdatedTimestamp'
+testOrderCustomerMarketingRightsInfo
+    :: TestOrderCustomerMarketingRightsInfo
+testOrderCustomerMarketingRightsInfo =
+    TestOrderCustomerMarketingRightsInfo'
+    { _tocmriExplicitMarketingPreference = Nothing
+    , _tocmriLastUpdatedTimestamp = Nothing
+    }
+
+-- | Last know user use selection regards marketing preferences. In certain
+-- cases selection might not be known, so this field would be empty.
+tocmriExplicitMarketingPreference :: Lens' TestOrderCustomerMarketingRightsInfo (Maybe Text)
+tocmriExplicitMarketingPreference
+  = lens _tocmriExplicitMarketingPreference
+      (\ s a -> s{_tocmriExplicitMarketingPreference = a})
+
+-- | Timestamp when last time marketing preference was updated. Could be
+-- empty, if user wasn\'t offered a selection yet.
+tocmriLastUpdatedTimestamp :: Lens' TestOrderCustomerMarketingRightsInfo (Maybe Text)
+tocmriLastUpdatedTimestamp
+  = lens _tocmriLastUpdatedTimestamp
+      (\ s a -> s{_tocmriLastUpdatedTimestamp = a})
+
+instance FromJSON
+         TestOrderCustomerMarketingRightsInfo where
+        parseJSON
+          = withObject "TestOrderCustomerMarketingRightsInfo"
+              (\ o ->
+                 TestOrderCustomerMarketingRightsInfo' <$>
+                   (o .:? "explicitMarketingPreference") <*>
+                     (o .:? "lastUpdatedTimestamp"))
+
+instance ToJSON TestOrderCustomerMarketingRightsInfo
+         where
+        toJSON TestOrderCustomerMarketingRightsInfo'{..}
+          = object
+              (catMaybes
+                 [("explicitMarketingPreference" .=) <$>
+                    _tocmriExplicitMarketingPreference,
+                  ("lastUpdatedTimestamp" .=) <$>
+                    _tocmriLastUpdatedTimestamp])
+
+--
+-- /See:/ 'productStatusItemLevelIssue' smart constructor.
+data ProductStatusItemLevelIssue = ProductStatusItemLevelIssue'
+    { _psiliDestination   :: !(Maybe Text)
+    , _psiliResolution    :: !(Maybe Text)
+    , _psiliDocumentation :: !(Maybe Text)
+    , _psiliCode          :: !(Maybe Text)
+    , _psiliServability   :: !(Maybe Text)
+    , _psiliAttributeName :: !(Maybe Text)
+    , _psiliDescription   :: !(Maybe Text)
+    , _psiliDetail        :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ProductStatusItemLevelIssue' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'psiliDestination'
+--
+-- * 'psiliResolution'
+--
+-- * 'psiliDocumentation'
+--
+-- * 'psiliCode'
+--
+-- * 'psiliServability'
+--
+-- * 'psiliAttributeName'
+--
+-- * 'psiliDescription'
+--
+-- * 'psiliDetail'
+productStatusItemLevelIssue
+    :: ProductStatusItemLevelIssue
+productStatusItemLevelIssue =
+    ProductStatusItemLevelIssue'
+    { _psiliDestination = Nothing
+    , _psiliResolution = Nothing
+    , _psiliDocumentation = Nothing
+    , _psiliCode = Nothing
+    , _psiliServability = Nothing
+    , _psiliAttributeName = Nothing
+    , _psiliDescription = Nothing
+    , _psiliDetail = Nothing
+    }
+
+-- | The destination the issue applies to.
+psiliDestination :: Lens' ProductStatusItemLevelIssue (Maybe Text)
+psiliDestination
+  = lens _psiliDestination
+      (\ s a -> s{_psiliDestination = a})
+
+-- | Whether the issue can be resolved by the merchant.
+psiliResolution :: Lens' ProductStatusItemLevelIssue (Maybe Text)
+psiliResolution
+  = lens _psiliResolution
+      (\ s a -> s{_psiliResolution = a})
+
+-- | The URL of a web page to help with resolving this issue.
+psiliDocumentation :: Lens' ProductStatusItemLevelIssue (Maybe Text)
+psiliDocumentation
+  = lens _psiliDocumentation
+      (\ s a -> s{_psiliDocumentation = a})
+
+-- | The error code of the issue.
+psiliCode :: Lens' ProductStatusItemLevelIssue (Maybe Text)
+psiliCode
+  = lens _psiliCode (\ s a -> s{_psiliCode = a})
+
+-- | How this issue affects serving of the offer.
+psiliServability :: Lens' ProductStatusItemLevelIssue (Maybe Text)
+psiliServability
+  = lens _psiliServability
+      (\ s a -> s{_psiliServability = a})
+
+-- | The attribute\'s name, if the issue is caused by a single attribute.
+psiliAttributeName :: Lens' ProductStatusItemLevelIssue (Maybe Text)
+psiliAttributeName
+  = lens _psiliAttributeName
+      (\ s a -> s{_psiliAttributeName = a})
+
+-- | A short issue description in English.
+psiliDescription :: Lens' ProductStatusItemLevelIssue (Maybe Text)
+psiliDescription
+  = lens _psiliDescription
+      (\ s a -> s{_psiliDescription = a})
+
+-- | A detailed issue description in English.
+psiliDetail :: Lens' ProductStatusItemLevelIssue (Maybe Text)
+psiliDetail
+  = lens _psiliDetail (\ s a -> s{_psiliDetail = a})
+
+instance FromJSON ProductStatusItemLevelIssue where
+        parseJSON
+          = withObject "ProductStatusItemLevelIssue"
+              (\ o ->
+                 ProductStatusItemLevelIssue' <$>
+                   (o .:? "destination") <*> (o .:? "resolution") <*>
+                     (o .:? "documentation")
+                     <*> (o .:? "code")
+                     <*> (o .:? "servability")
+                     <*> (o .:? "attributeName")
+                     <*> (o .:? "description")
+                     <*> (o .:? "detail"))
+
+instance ToJSON ProductStatusItemLevelIssue where
+        toJSON ProductStatusItemLevelIssue'{..}
+          = object
+              (catMaybes
+                 [("destination" .=) <$> _psiliDestination,
+                  ("resolution" .=) <$> _psiliResolution,
+                  ("documentation" .=) <$> _psiliDocumentation,
+                  ("code" .=) <$> _psiliCode,
+                  ("servability" .=) <$> _psiliServability,
+                  ("attributeName" .=) <$> _psiliAttributeName,
+                  ("description" .=) <$> _psiliDescription,
+                  ("detail" .=) <$> _psiliDetail])
+
+--
 -- /See:/ 'orderLineItemProductVariantAttribute' smart constructor.
 data OrderLineItemProductVariantAttribute = OrderLineItemProductVariantAttribute'
     { _olipvaDimension :: !(Maybe Text)
@@ -7774,201 +10913,10 @@ instance ToJSON OrderLineItemProductVariantAttribute
                   ("value" .=) <$> _olipvaValue])
 
 --
--- /See:/ 'ordersCustomBatchResponseEntry' smart constructor.
-data OrdersCustomBatchResponseEntry = OrdersCustomBatchResponseEntry'
-    { _oKind            :: !Text
-    , _oExecutionStatus :: !(Maybe Text)
-    , _oErrors          :: !(Maybe Errors)
-    , _oOrder           :: !(Maybe Order)
-    , _oBatchId         :: !(Maybe (Textual Word32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'OrdersCustomBatchResponseEntry' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'oKind'
---
--- * 'oExecutionStatus'
---
--- * 'oErrors'
---
--- * 'oOrder'
---
--- * 'oBatchId'
-ordersCustomBatchResponseEntry
-    :: OrdersCustomBatchResponseEntry
-ordersCustomBatchResponseEntry =
-    OrdersCustomBatchResponseEntry'
-    { _oKind = "content#ordersCustomBatchResponseEntry"
-    , _oExecutionStatus = Nothing
-    , _oErrors = Nothing
-    , _oOrder = Nothing
-    , _oBatchId = Nothing
-    }
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"content#ordersCustomBatchResponseEntry\".
-oKind :: Lens' OrdersCustomBatchResponseEntry Text
-oKind = lens _oKind (\ s a -> s{_oKind = a})
-
--- | The status of the execution. Only defined if the method is not get or
--- getByMerchantOrderId and if the request was successful.
-oExecutionStatus :: Lens' OrdersCustomBatchResponseEntry (Maybe Text)
-oExecutionStatus
-  = lens _oExecutionStatus
-      (\ s a -> s{_oExecutionStatus = a})
-
--- | A list of errors defined if and only if the request failed.
-oErrors :: Lens' OrdersCustomBatchResponseEntry (Maybe Errors)
-oErrors = lens _oErrors (\ s a -> s{_oErrors = a})
-
--- | The retrieved order. Only defined if the method is get and if the
--- request was successful.
-oOrder :: Lens' OrdersCustomBatchResponseEntry (Maybe Order)
-oOrder = lens _oOrder (\ s a -> s{_oOrder = a})
-
--- | The ID of the request entry this entry responds to.
-oBatchId :: Lens' OrdersCustomBatchResponseEntry (Maybe Word32)
-oBatchId
-  = lens _oBatchId (\ s a -> s{_oBatchId = a}) .
-      mapping _Coerce
-
-instance FromJSON OrdersCustomBatchResponseEntry
-         where
-        parseJSON
-          = withObject "OrdersCustomBatchResponseEntry"
-              (\ o ->
-                 OrdersCustomBatchResponseEntry' <$>
-                   (o .:? "kind" .!=
-                      "content#ordersCustomBatchResponseEntry")
-                     <*> (o .:? "executionStatus")
-                     <*> (o .:? "errors")
-                     <*> (o .:? "order")
-                     <*> (o .:? "batchId"))
-
-instance ToJSON OrdersCustomBatchResponseEntry where
-        toJSON OrdersCustomBatchResponseEntry'{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _oKind),
-                  ("executionStatus" .=) <$> _oExecutionStatus,
-                  ("errors" .=) <$> _oErrors, ("order" .=) <$> _oOrder,
-                  ("batchId" .=) <$> _oBatchId])
-
--- | A carrier-calculated shipping rate.
---
--- /See:/ 'accountShippingCarrierRate' smart constructor.
-data AccountShippingCarrierRate = AccountShippingCarrierRate'
-    { _ascrCarrier          :: !(Maybe Text)
-    , _ascrSaleCountry      :: !(Maybe Text)
-    , _ascrShippingOrigin   :: !(Maybe Text)
-    , _ascrCarrierService   :: !(Maybe Text)
-    , _ascrModifierPercent  :: !(Maybe Text)
-    , _ascrName             :: !(Maybe Text)
-    , _ascrModifierFlatRate :: !(Maybe Price)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AccountShippingCarrierRate' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ascrCarrier'
---
--- * 'ascrSaleCountry'
---
--- * 'ascrShippingOrigin'
---
--- * 'ascrCarrierService'
---
--- * 'ascrModifierPercent'
---
--- * 'ascrName'
---
--- * 'ascrModifierFlatRate'
-accountShippingCarrierRate
-    :: AccountShippingCarrierRate
-accountShippingCarrierRate =
-    AccountShippingCarrierRate'
-    { _ascrCarrier = Nothing
-    , _ascrSaleCountry = Nothing
-    , _ascrShippingOrigin = Nothing
-    , _ascrCarrierService = Nothing
-    , _ascrModifierPercent = Nothing
-    , _ascrName = Nothing
-    , _ascrModifierFlatRate = Nothing
-    }
-
--- | The carrier that is responsible for the shipping, such as \"UPS\",
--- \"FedEx\", or \"USPS\".
-ascrCarrier :: Lens' AccountShippingCarrierRate (Maybe Text)
-ascrCarrier
-  = lens _ascrCarrier (\ s a -> s{_ascrCarrier = a})
-
--- | The sale country for which this carrier rate is valid, represented as a
--- CLDR territory code.
-ascrSaleCountry :: Lens' AccountShippingCarrierRate (Maybe Text)
-ascrSaleCountry
-  = lens _ascrSaleCountry
-      (\ s a -> s{_ascrSaleCountry = a})
-
--- | Shipping origin represented as a postal code.
-ascrShippingOrigin :: Lens' AccountShippingCarrierRate (Maybe Text)
-ascrShippingOrigin
-  = lens _ascrShippingOrigin
-      (\ s a -> s{_ascrShippingOrigin = a})
-
--- | The carrier service, such as \"Ground\" or \"2Day\".
-ascrCarrierService :: Lens' AccountShippingCarrierRate (Maybe Text)
-ascrCarrierService
-  = lens _ascrCarrierService
-      (\ s a -> s{_ascrCarrierService = a})
-
--- | Multiplicative shipping rate modifier in percent. Represented as a
--- floating point number without the percentage character.
-ascrModifierPercent :: Lens' AccountShippingCarrierRate (Maybe Text)
-ascrModifierPercent
-  = lens _ascrModifierPercent
-      (\ s a -> s{_ascrModifierPercent = a})
-
--- | The name of the carrier rate.
-ascrName :: Lens' AccountShippingCarrierRate (Maybe Text)
-ascrName = lens _ascrName (\ s a -> s{_ascrName = a})
-
--- | Additive shipping rate modifier.
-ascrModifierFlatRate :: Lens' AccountShippingCarrierRate (Maybe Price)
-ascrModifierFlatRate
-  = lens _ascrModifierFlatRate
-      (\ s a -> s{_ascrModifierFlatRate = a})
-
-instance FromJSON AccountShippingCarrierRate where
-        parseJSON
-          = withObject "AccountShippingCarrierRate"
-              (\ o ->
-                 AccountShippingCarrierRate' <$>
-                   (o .:? "carrier") <*> (o .:? "saleCountry") <*>
-                     (o .:? "shippingOrigin")
-                     <*> (o .:? "carrierService")
-                     <*> (o .:? "modifierPercent")
-                     <*> (o .:? "name")
-                     <*> (o .:? "modifierFlatRate"))
-
-instance ToJSON AccountShippingCarrierRate where
-        toJSON AccountShippingCarrierRate'{..}
-          = object
-              (catMaybes
-                 [("carrier" .=) <$> _ascrCarrier,
-                  ("saleCountry" .=) <$> _ascrSaleCountry,
-                  ("shippingOrigin" .=) <$> _ascrShippingOrigin,
-                  ("carrierService" .=) <$> _ascrCarrierService,
-                  ("modifierPercent" .=) <$> _ascrModifierPercent,
-                  ("name" .=) <$> _ascrName,
-                  ("modifierFlatRate" .=) <$> _ascrModifierFlatRate])
-
---
 -- /See:/ 'rateGroup' smart constructor.
 data RateGroup = RateGroup'
     { _rgCarrierRates             :: !(Maybe [CarrierRate])
+    , _rgName                     :: !(Maybe Text)
     , _rgApplicableShippingLabels :: !(Maybe [Text])
     , _rgMainTable                :: !(Maybe Table)
     , _rgSingleValue              :: !(Maybe Value)
@@ -7980,6 +10928,8 @@ data RateGroup = RateGroup'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'rgCarrierRates'
+--
+-- * 'rgName'
 --
 -- * 'rgApplicableShippingLabels'
 --
@@ -7993,6 +10943,7 @@ rateGroup
 rateGroup =
     RateGroup'
     { _rgCarrierRates = Nothing
+    , _rgName = Nothing
     , _rgApplicableShippingLabels = Nothing
     , _rgMainTable = Nothing
     , _rgSingleValue = Nothing
@@ -8007,6 +10958,11 @@ rgCarrierRates
       (\ s a -> s{_rgCarrierRates = a})
       . _Default
       . _Coerce
+
+-- | Name of the rate group. Optional. If set has to be unique within
+-- shipping service.
+rgName :: Lens' RateGroup (Maybe Text)
+rgName = lens _rgName (\ s a -> s{_rgName = a})
 
 -- | A list of shipping labels defining the products to which this rate group
 -- applies to. This is a disjunction: only one of the labels has to match
@@ -8045,8 +11001,8 @@ instance FromJSON RateGroup where
           = withObject "RateGroup"
               (\ o ->
                  RateGroup' <$>
-                   (o .:? "carrierRates" .!= mempty) <*>
-                     (o .:? "applicableShippingLabels" .!= mempty)
+                   (o .:? "carrierRates" .!= mempty) <*> (o .:? "name")
+                     <*> (o .:? "applicableShippingLabels" .!= mempty)
                      <*> (o .:? "mainTable")
                      <*> (o .:? "singleValue")
                      <*> (o .:? "subtables" .!= mempty))
@@ -8056,6 +11012,7 @@ instance ToJSON RateGroup where
           = object
               (catMaybes
                  [("carrierRates" .=) <$> _rgCarrierRates,
+                  ("name" .=) <$> _rgName,
                   ("applicableShippingLabels" .=) <$>
                     _rgApplicableShippingLabels,
                   ("mainTable" .=) <$> _rgMainTable,
@@ -8065,119 +11022,228 @@ instance ToJSON RateGroup where
 --
 -- /See:/ 'orderPromotion' smart constructor.
 data OrderPromotion = OrderPromotion'
-    { _opEffectiveDates        :: !(Maybe Text)
-    , _opGenericRedemptionCode :: !(Maybe Text)
-    , _opRedemptionChannel     :: !(Maybe Text)
-    , _opBenefits              :: !(Maybe [OrderPromotionBenefit])
-    , _opLongTitle             :: !(Maybe Text)
-    , _opId                    :: !(Maybe Text)
-    , _opProductApplicability  :: !(Maybe Text)
+    { _opShortTitle          :: !(Maybe Text)
+    , _opAppliedItems        :: !(Maybe [OrderPromotionItem])
+    , _opPretaxValue         :: !(Maybe Price)
+    , _opMerchantPromotionId :: !(Maybe Text)
+    , _opSubtype             :: !(Maybe Text)
+    , _opTitle               :: !(Maybe Text)
+    , _opType                :: !(Maybe Text)
+    , _opApplicableItems     :: !(Maybe [OrderPromotionItem])
+    , _opTaxValue            :: !(Maybe Price)
+    , _opFunder              :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrderPromotion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'opEffectiveDates'
+-- * 'opShortTitle'
 --
--- * 'opGenericRedemptionCode'
+-- * 'opAppliedItems'
 --
--- * 'opRedemptionChannel'
+-- * 'opPretaxValue'
 --
--- * 'opBenefits'
+-- * 'opMerchantPromotionId'
 --
--- * 'opLongTitle'
+-- * 'opSubtype'
 --
--- * 'opId'
+-- * 'opTitle'
 --
--- * 'opProductApplicability'
+-- * 'opType'
+--
+-- * 'opApplicableItems'
+--
+-- * 'opTaxValue'
+--
+-- * 'opFunder'
 orderPromotion
     :: OrderPromotion
 orderPromotion =
     OrderPromotion'
-    { _opEffectiveDates = Nothing
-    , _opGenericRedemptionCode = Nothing
-    , _opRedemptionChannel = Nothing
-    , _opBenefits = Nothing
-    , _opLongTitle = Nothing
-    , _opId = Nothing
-    , _opProductApplicability = Nothing
+    { _opShortTitle = Nothing
+    , _opAppliedItems = Nothing
+    , _opPretaxValue = Nothing
+    , _opMerchantPromotionId = Nothing
+    , _opSubtype = Nothing
+    , _opTitle = Nothing
+    , _opType = Nothing
+    , _opApplicableItems = Nothing
+    , _opTaxValue = Nothing
+    , _opFunder = Nothing
     }
 
--- | The date and time frame when the promotion is active and ready for
--- validation review. Note that the promotion live time may be delayed for
--- a few hours due to the validation review. Start date and end date are
--- separated by a forward slash (\/). The start date is specified by the
--- format (YYYY-MM-DD), followed by the letter ?T?, the time of the day
--- when the sale starts (in Greenwich Mean Time, GMT), followed by an
--- expression of the time zone for the sale. The end date is in the same
--- format.
-opEffectiveDates :: Lens' OrderPromotion (Maybe Text)
-opEffectiveDates
-  = lens _opEffectiveDates
-      (\ s a -> s{_opEffectiveDates = a})
+-- | A short title of the promotion to be shown on the checkout page.
+opShortTitle :: Lens' OrderPromotion (Maybe Text)
+opShortTitle
+  = lens _opShortTitle (\ s a -> s{_opShortTitle = a})
 
--- | Optional. The text code that corresponds to the promotion when applied
--- on the retailer?s website.
-opGenericRedemptionCode :: Lens' OrderPromotion (Maybe Text)
-opGenericRedemptionCode
-  = lens _opGenericRedemptionCode
-      (\ s a -> s{_opGenericRedemptionCode = a})
-
--- | Indicates that the promotion is valid online.
-opRedemptionChannel :: Lens' OrderPromotion (Maybe Text)
-opRedemptionChannel
-  = lens _opRedemptionChannel
-      (\ s a -> s{_opRedemptionChannel = a})
-
-opBenefits :: Lens' OrderPromotion [OrderPromotionBenefit]
-opBenefits
-  = lens _opBenefits (\ s a -> s{_opBenefits = a}) .
-      _Default
+-- | Items which this promotion have been applied to.
+opAppliedItems :: Lens' OrderPromotion [OrderPromotionItem]
+opAppliedItems
+  = lens _opAppliedItems
+      (\ s a -> s{_opAppliedItems = a})
+      . _Default
       . _Coerce
 
--- | The full title of the promotion.
-opLongTitle :: Lens' OrderPromotion (Maybe Text)
-opLongTitle
-  = lens _opLongTitle (\ s a -> s{_opLongTitle = a})
+-- | Estimated discount applied to pre-tax amount.
+opPretaxValue :: Lens' OrderPromotion (Maybe Price)
+opPretaxValue
+  = lens _opPretaxValue
+      (\ s a -> s{_opPretaxValue = a})
 
--- | The unique ID of the promotion.
-opId :: Lens' OrderPromotion (Maybe Text)
-opId = lens _opId (\ s a -> s{_opId = a})
+-- | This field is used to identify promotions within merchants\' own
+-- systems.
+opMerchantPromotionId :: Lens' OrderPromotion (Maybe Text)
+opMerchantPromotionId
+  = lens _opMerchantPromotionId
+      (\ s a -> s{_opMerchantPromotionId = a})
 
--- | Whether the promotion is applicable to all products or only specific
--- products.
-opProductApplicability :: Lens' OrderPromotion (Maybe Text)
-opProductApplicability
-  = lens _opProductApplicability
-      (\ s a -> s{_opProductApplicability = a})
+-- | The category of the promotion.
+opSubtype :: Lens' OrderPromotion (Maybe Text)
+opSubtype
+  = lens _opSubtype (\ s a -> s{_opSubtype = a})
+
+-- | The title of the promotion.
+opTitle :: Lens' OrderPromotion (Maybe Text)
+opTitle = lens _opTitle (\ s a -> s{_opTitle = a})
+
+-- | The scope of the promotion.
+opType :: Lens' OrderPromotion (Maybe Text)
+opType = lens _opType (\ s a -> s{_opType = a})
+
+-- | Items which this promotion may be applied to. If empty, there are no
+-- restrictions on applicable items and quantity.
+opApplicableItems :: Lens' OrderPromotion [OrderPromotionItem]
+opApplicableItems
+  = lens _opApplicableItems
+      (\ s a -> s{_opApplicableItems = a})
+      . _Default
+      . _Coerce
+
+-- | Estimated discount applied to tax (if allowed by law).
+opTaxValue :: Lens' OrderPromotion (Maybe Price)
+opTaxValue
+  = lens _opTaxValue (\ s a -> s{_opTaxValue = a})
+
+-- | The party funding the promotion.
+opFunder :: Lens' OrderPromotion (Maybe Text)
+opFunder = lens _opFunder (\ s a -> s{_opFunder = a})
 
 instance FromJSON OrderPromotion where
         parseJSON
           = withObject "OrderPromotion"
               (\ o ->
                  OrderPromotion' <$>
-                   (o .:? "effectiveDates") <*>
-                     (o .:? "genericRedemptionCode")
-                     <*> (o .:? "redemptionChannel")
-                     <*> (o .:? "benefits" .!= mempty)
-                     <*> (o .:? "longTitle")
-                     <*> (o .:? "id")
-                     <*> (o .:? "productApplicability"))
+                   (o .:? "shortTitle") <*>
+                     (o .:? "appliedItems" .!= mempty)
+                     <*> (o .:? "pretaxValue")
+                     <*> (o .:? "merchantPromotionId")
+                     <*> (o .:? "subtype")
+                     <*> (o .:? "title")
+                     <*> (o .:? "type")
+                     <*> (o .:? "applicableItems" .!= mempty)
+                     <*> (o .:? "taxValue")
+                     <*> (o .:? "funder"))
 
 instance ToJSON OrderPromotion where
         toJSON OrderPromotion'{..}
           = object
               (catMaybes
-                 [("effectiveDates" .=) <$> _opEffectiveDates,
-                  ("genericRedemptionCode" .=) <$>
-                    _opGenericRedemptionCode,
-                  ("redemptionChannel" .=) <$> _opRedemptionChannel,
-                  ("benefits" .=) <$> _opBenefits,
-                  ("longTitle" .=) <$> _opLongTitle,
-                  ("id" .=) <$> _opId,
-                  ("productApplicability" .=) <$>
-                    _opProductApplicability])
+                 [("shortTitle" .=) <$> _opShortTitle,
+                  ("appliedItems" .=) <$> _opAppliedItems,
+                  ("pretaxValue" .=) <$> _opPretaxValue,
+                  ("merchantPromotionId" .=) <$>
+                    _opMerchantPromotionId,
+                  ("subtype" .=) <$> _opSubtype,
+                  ("title" .=) <$> _opTitle, ("type" .=) <$> _opType,
+                  ("applicableItems" .=) <$> _opApplicableItems,
+                  ("taxValue" .=) <$> _opTaxValue,
+                  ("funder" .=) <$> _opFunder])
+
+--
+-- /See:/ 'accountStatusProducts' smart constructor.
+data AccountStatusProducts = AccountStatusProducts'
+    { _aspDestination     :: !(Maybe Text)
+    , _aspCountry         :: !(Maybe Text)
+    , _aspChannel         :: !(Maybe Text)
+    , _aspStatistics      :: !(Maybe AccountStatusStatistics)
+    , _aspItemLevelIssues :: !(Maybe [AccountStatusItemLevelIssue])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AccountStatusProducts' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aspDestination'
+--
+-- * 'aspCountry'
+--
+-- * 'aspChannel'
+--
+-- * 'aspStatistics'
+--
+-- * 'aspItemLevelIssues'
+accountStatusProducts
+    :: AccountStatusProducts
+accountStatusProducts =
+    AccountStatusProducts'
+    { _aspDestination = Nothing
+    , _aspCountry = Nothing
+    , _aspChannel = Nothing
+    , _aspStatistics = Nothing
+    , _aspItemLevelIssues = Nothing
+    }
+
+-- | The destination the data applies to.
+aspDestination :: Lens' AccountStatusProducts (Maybe Text)
+aspDestination
+  = lens _aspDestination
+      (\ s a -> s{_aspDestination = a})
+
+-- | The country the data applies to.
+aspCountry :: Lens' AccountStatusProducts (Maybe Text)
+aspCountry
+  = lens _aspCountry (\ s a -> s{_aspCountry = a})
+
+-- | The channel the data applies to.
+aspChannel :: Lens' AccountStatusProducts (Maybe Text)
+aspChannel
+  = lens _aspChannel (\ s a -> s{_aspChannel = a})
+
+-- | Aggregated product statistics.
+aspStatistics :: Lens' AccountStatusProducts (Maybe AccountStatusStatistics)
+aspStatistics
+  = lens _aspStatistics
+      (\ s a -> s{_aspStatistics = a})
+
+-- | List of item-level issues.
+aspItemLevelIssues :: Lens' AccountStatusProducts [AccountStatusItemLevelIssue]
+aspItemLevelIssues
+  = lens _aspItemLevelIssues
+      (\ s a -> s{_aspItemLevelIssues = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON AccountStatusProducts where
+        parseJSON
+          = withObject "AccountStatusProducts"
+              (\ o ->
+                 AccountStatusProducts' <$>
+                   (o .:? "destination") <*> (o .:? "country") <*>
+                     (o .:? "channel")
+                     <*> (o .:? "statistics")
+                     <*> (o .:? "itemLevelIssues" .!= mempty))
+
+instance ToJSON AccountStatusProducts where
+        toJSON AccountStatusProducts'{..}
+          = object
+              (catMaybes
+                 [("destination" .=) <$> _aspDestination,
+                  ("country" .=) <$> _aspCountry,
+                  ("channel" .=) <$> _aspChannel,
+                  ("statistics" .=) <$> _aspStatistics,
+                  ("itemLevelIssues" .=) <$> _aspItemLevelIssues])
 
 --
 -- /See:/ 'price' smart constructor.
@@ -8333,6 +11399,258 @@ instance ToJSON DatafeedsCustomBatchResponse where
                   Just ("kind" .= _datKind)])
 
 --
+-- /See:/ 'invoiceSummary' smart constructor.
+data InvoiceSummary = InvoiceSummary'
+    { _isMerchantBalance           :: !(Maybe Amount)
+    , _isCustomerBalance           :: !(Maybe Amount)
+    , _isGoogleBalance             :: !(Maybe Amount)
+    , _isProductTotal              :: !(Maybe Amount)
+    , _isAdditionalChargeSummaries :: !(Maybe [InvoiceSummaryAdditionalChargeSummary])
+    , _isPromotionSummaries        :: !(Maybe [Promotion])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InvoiceSummary' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'isMerchantBalance'
+--
+-- * 'isCustomerBalance'
+--
+-- * 'isGoogleBalance'
+--
+-- * 'isProductTotal'
+--
+-- * 'isAdditionalChargeSummaries'
+--
+-- * 'isPromotionSummaries'
+invoiceSummary
+    :: InvoiceSummary
+invoiceSummary =
+    InvoiceSummary'
+    { _isMerchantBalance = Nothing
+    , _isCustomerBalance = Nothing
+    , _isGoogleBalance = Nothing
+    , _isProductTotal = Nothing
+    , _isAdditionalChargeSummaries = Nothing
+    , _isPromotionSummaries = Nothing
+    }
+
+-- | [required] Merchant balance on this invoice. A negative amount means the
+-- merchant is paying, a positive one means the merchant is receiving
+-- money. Note: the sum of merchant_balance, customer_balance and
+-- google_balance must always be zero.
+isMerchantBalance :: Lens' InvoiceSummary (Maybe Amount)
+isMerchantBalance
+  = lens _isMerchantBalance
+      (\ s a -> s{_isMerchantBalance = a})
+
+-- | [required] Customer balance on this invoice. A negative amount means the
+-- customer is paying, a positive one means the customer is receiving
+-- money. Note: the sum of merchant_balance, customer_balance and
+-- google_balance must always be zero. Furthermore the absolute value of
+-- this amount is expected to be equal to the sum of product amount and
+-- additional charges, minus promotions.
+isCustomerBalance :: Lens' InvoiceSummary (Maybe Amount)
+isCustomerBalance
+  = lens _isCustomerBalance
+      (\ s a -> s{_isCustomerBalance = a})
+
+-- | [required] Google balance on this invoice. A negative amount means
+-- Google is paying, a positive one means Google is receiving money. Note:
+-- the sum of merchant_balance, customer_balance and google_balance must
+-- always be zero.
+isGoogleBalance :: Lens' InvoiceSummary (Maybe Amount)
+isGoogleBalance
+  = lens _isGoogleBalance
+      (\ s a -> s{_isGoogleBalance = a})
+
+-- | [required] Total price for the product.
+isProductTotal :: Lens' InvoiceSummary (Maybe Amount)
+isProductTotal
+  = lens _isProductTotal
+      (\ s a -> s{_isProductTotal = a})
+
+-- | Summary of the total amounts of the additional charges.
+isAdditionalChargeSummaries :: Lens' InvoiceSummary [InvoiceSummaryAdditionalChargeSummary]
+isAdditionalChargeSummaries
+  = lens _isAdditionalChargeSummaries
+      (\ s a -> s{_isAdditionalChargeSummaries = a})
+      . _Default
+      . _Coerce
+
+-- | Summary for each promotion.
+isPromotionSummaries :: Lens' InvoiceSummary [Promotion]
+isPromotionSummaries
+  = lens _isPromotionSummaries
+      (\ s a -> s{_isPromotionSummaries = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON InvoiceSummary where
+        parseJSON
+          = withObject "InvoiceSummary"
+              (\ o ->
+                 InvoiceSummary' <$>
+                   (o .:? "merchantBalance") <*>
+                     (o .:? "customerBalance")
+                     <*> (o .:? "googleBalance")
+                     <*> (o .:? "productTotal")
+                     <*> (o .:? "additionalChargeSummaries" .!= mempty)
+                     <*> (o .:? "promotionSummaries" .!= mempty))
+
+instance ToJSON InvoiceSummary where
+        toJSON InvoiceSummary'{..}
+          = object
+              (catMaybes
+                 [("merchantBalance" .=) <$> _isMerchantBalance,
+                  ("customerBalance" .=) <$> _isCustomerBalance,
+                  ("googleBalance" .=) <$> _isGoogleBalance,
+                  ("productTotal" .=) <$> _isProductTotal,
+                  ("additionalChargeSummaries" .=) <$>
+                    _isAdditionalChargeSummaries,
+                  ("promotionSummaries" .=) <$> _isPromotionSummaries])
+
+--
+-- /See:/ 'orderpaymentsNotifyChargeResponse' smart constructor.
+data OrderpaymentsNotifyChargeResponse = OrderpaymentsNotifyChargeResponse'
+    { _oncrKind            :: !Text
+    , _oncrExecutionStatus :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OrderpaymentsNotifyChargeResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oncrKind'
+--
+-- * 'oncrExecutionStatus'
+orderpaymentsNotifyChargeResponse
+    :: OrderpaymentsNotifyChargeResponse
+orderpaymentsNotifyChargeResponse =
+    OrderpaymentsNotifyChargeResponse'
+    { _oncrKind = "content#orderpaymentsNotifyChargeResponse"
+    , _oncrExecutionStatus = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"content#orderpaymentsNotifyChargeResponse\".
+oncrKind :: Lens' OrderpaymentsNotifyChargeResponse Text
+oncrKind = lens _oncrKind (\ s a -> s{_oncrKind = a})
+
+-- | The status of the execution.
+oncrExecutionStatus :: Lens' OrderpaymentsNotifyChargeResponse (Maybe Text)
+oncrExecutionStatus
+  = lens _oncrExecutionStatus
+      (\ s a -> s{_oncrExecutionStatus = a})
+
+instance FromJSON OrderpaymentsNotifyChargeResponse
+         where
+        parseJSON
+          = withObject "OrderpaymentsNotifyChargeResponse"
+              (\ o ->
+                 OrderpaymentsNotifyChargeResponse' <$>
+                   (o .:? "kind" .!=
+                      "content#orderpaymentsNotifyChargeResponse")
+                     <*> (o .:? "executionStatus"))
+
+instance ToJSON OrderpaymentsNotifyChargeResponse
+         where
+        toJSON OrderpaymentsNotifyChargeResponse'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _oncrKind),
+                  ("executionStatus" .=) <$> _oncrExecutionStatus])
+
+--
+-- /See:/ 'orderpaymentsNotifyAuthDeclinedRequest' smart constructor.
+newtype OrderpaymentsNotifyAuthDeclinedRequest = OrderpaymentsNotifyAuthDeclinedRequest'
+    { _onadrDeclineReason :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OrderpaymentsNotifyAuthDeclinedRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'onadrDeclineReason'
+orderpaymentsNotifyAuthDeclinedRequest
+    :: OrderpaymentsNotifyAuthDeclinedRequest
+orderpaymentsNotifyAuthDeclinedRequest =
+    OrderpaymentsNotifyAuthDeclinedRequest'
+    { _onadrDeclineReason = Nothing
+    }
+
+-- | Reason why payment authorization was declined.
+onadrDeclineReason :: Lens' OrderpaymentsNotifyAuthDeclinedRequest (Maybe Text)
+onadrDeclineReason
+  = lens _onadrDeclineReason
+      (\ s a -> s{_onadrDeclineReason = a})
+
+instance FromJSON
+         OrderpaymentsNotifyAuthDeclinedRequest where
+        parseJSON
+          = withObject "OrderpaymentsNotifyAuthDeclinedRequest"
+              (\ o ->
+                 OrderpaymentsNotifyAuthDeclinedRequest' <$>
+                   (o .:? "declineReason"))
+
+instance ToJSON
+         OrderpaymentsNotifyAuthDeclinedRequest where
+        toJSON OrderpaymentsNotifyAuthDeclinedRequest'{..}
+          = object
+              (catMaybes
+                 [("declineReason" .=) <$> _onadrDeclineReason])
+
+--
+-- /See:/ 'posListResponse' smart constructor.
+data PosListResponse = PosListResponse'
+    { _plrlKind      :: !Text
+    , _plrlResources :: !(Maybe [PosStore])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PosListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'plrlKind'
+--
+-- * 'plrlResources'
+posListResponse
+    :: PosListResponse
+posListResponse =
+    PosListResponse'
+    { _plrlKind = "content#posListResponse"
+    , _plrlResources = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"content#posListResponse\".
+plrlKind :: Lens' PosListResponse Text
+plrlKind = lens _plrlKind (\ s a -> s{_plrlKind = a})
+
+plrlResources :: Lens' PosListResponse [PosStore]
+plrlResources
+  = lens _plrlResources
+      (\ s a -> s{_plrlResources = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON PosListResponse where
+        parseJSON
+          = withObject "PosListResponse"
+              (\ o ->
+                 PosListResponse' <$>
+                   (o .:? "kind" .!= "content#posListResponse") <*>
+                     (o .:? "resources" .!= mempty))
+
+instance ToJSON PosListResponse where
+        toJSON PosListResponse'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _plrlKind),
+                  ("resources" .=) <$> _plrlResources])
+
+--
 -- /See:/ 'orderDeliveryDetails' smart constructor.
 data OrderDeliveryDetails = OrderDeliveryDetails'
     { _oddAddress     :: !(Maybe OrderAddress)
@@ -8378,6 +11696,52 @@ instance ToJSON OrderDeliveryDetails where
               (catMaybes
                  [("address" .=) <$> _oddAddress,
                   ("phoneNumber" .=) <$> _oddPhoneNumber])
+
+--
+-- /See:/ 'orderLineItemProductFee' smart constructor.
+data OrderLineItemProductFee = OrderLineItemProductFee'
+    { _olipfAmount :: !(Maybe Price)
+    , _olipfName   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OrderLineItemProductFee' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'olipfAmount'
+--
+-- * 'olipfName'
+orderLineItemProductFee
+    :: OrderLineItemProductFee
+orderLineItemProductFee =
+    OrderLineItemProductFee'
+    { _olipfAmount = Nothing
+    , _olipfName = Nothing
+    }
+
+-- | Amount of the fee.
+olipfAmount :: Lens' OrderLineItemProductFee (Maybe Price)
+olipfAmount
+  = lens _olipfAmount (\ s a -> s{_olipfAmount = a})
+
+-- | Name of the fee.
+olipfName :: Lens' OrderLineItemProductFee (Maybe Text)
+olipfName
+  = lens _olipfName (\ s a -> s{_olipfName = a})
+
+instance FromJSON OrderLineItemProductFee where
+        parseJSON
+          = withObject "OrderLineItemProductFee"
+              (\ o ->
+                 OrderLineItemProductFee' <$>
+                   (o .:? "amount") <*> (o .:? "name"))
+
+instance ToJSON OrderLineItemProductFee where
+        toJSON OrderLineItemProductFee'{..}
+          = object
+              (catMaybes
+                 [("amount" .=) <$> _olipfAmount,
+                  ("name" .=) <$> _olipfName])
 
 --
 -- /See:/ 'ordersCancelResponse' smart constructor.
@@ -8428,6 +11792,135 @@ instance ToJSON OrdersCancelResponse where
                   ("executionStatus" .=) <$> _ocrExecutionStatus])
 
 --
+-- /See:/ 'ordersSetLineItemMetadataRequest' smart constructor.
+data OrdersSetLineItemMetadataRequest = OrdersSetLineItemMetadataRequest'
+    { _oslimrAnnotations :: !(Maybe [OrderMerchantProvidedAnnotation])
+    , _oslimrLineItemId  :: !(Maybe Text)
+    , _oslimrOperationId :: !(Maybe Text)
+    , _oslimrProductId   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OrdersSetLineItemMetadataRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oslimrAnnotations'
+--
+-- * 'oslimrLineItemId'
+--
+-- * 'oslimrOperationId'
+--
+-- * 'oslimrProductId'
+ordersSetLineItemMetadataRequest
+    :: OrdersSetLineItemMetadataRequest
+ordersSetLineItemMetadataRequest =
+    OrdersSetLineItemMetadataRequest'
+    { _oslimrAnnotations = Nothing
+    , _oslimrLineItemId = Nothing
+    , _oslimrOperationId = Nothing
+    , _oslimrProductId = Nothing
+    }
+
+oslimrAnnotations :: Lens' OrdersSetLineItemMetadataRequest [OrderMerchantProvidedAnnotation]
+oslimrAnnotations
+  = lens _oslimrAnnotations
+      (\ s a -> s{_oslimrAnnotations = a})
+      . _Default
+      . _Coerce
+
+-- | The ID of the line item to set metadata. Either lineItemId or productId
+-- is required.
+oslimrLineItemId :: Lens' OrdersSetLineItemMetadataRequest (Maybe Text)
+oslimrLineItemId
+  = lens _oslimrLineItemId
+      (\ s a -> s{_oslimrLineItemId = a})
+
+-- | The ID of the operation. Unique across all operations for a given order.
+oslimrOperationId :: Lens' OrdersSetLineItemMetadataRequest (Maybe Text)
+oslimrOperationId
+  = lens _oslimrOperationId
+      (\ s a -> s{_oslimrOperationId = a})
+
+-- | The ID of the product to set metadata. This is the REST ID used in the
+-- products service. Either lineItemId or productId is required.
+oslimrProductId :: Lens' OrdersSetLineItemMetadataRequest (Maybe Text)
+oslimrProductId
+  = lens _oslimrProductId
+      (\ s a -> s{_oslimrProductId = a})
+
+instance FromJSON OrdersSetLineItemMetadataRequest
+         where
+        parseJSON
+          = withObject "OrdersSetLineItemMetadataRequest"
+              (\ o ->
+                 OrdersSetLineItemMetadataRequest' <$>
+                   (o .:? "annotations" .!= mempty) <*>
+                     (o .:? "lineItemId")
+                     <*> (o .:? "operationId")
+                     <*> (o .:? "productId"))
+
+instance ToJSON OrdersSetLineItemMetadataRequest
+         where
+        toJSON OrdersSetLineItemMetadataRequest'{..}
+          = object
+              (catMaybes
+                 [("annotations" .=) <$> _oslimrAnnotations,
+                  ("lineItemId" .=) <$> _oslimrLineItemId,
+                  ("operationId" .=) <$> _oslimrOperationId,
+                  ("productId" .=) <$> _oslimrProductId])
+
+--
+-- /See:/ 'ordersRejectReturnLineItemResponse' smart constructor.
+data OrdersRejectReturnLineItemResponse = OrdersRejectReturnLineItemResponse'
+    { _ordKind            :: !Text
+    , _ordExecutionStatus :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OrdersRejectReturnLineItemResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ordKind'
+--
+-- * 'ordExecutionStatus'
+ordersRejectReturnLineItemResponse
+    :: OrdersRejectReturnLineItemResponse
+ordersRejectReturnLineItemResponse =
+    OrdersRejectReturnLineItemResponse'
+    { _ordKind = "content#ordersRejectReturnLineItemResponse"
+    , _ordExecutionStatus = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"content#ordersRejectReturnLineItemResponse\".
+ordKind :: Lens' OrdersRejectReturnLineItemResponse Text
+ordKind = lens _ordKind (\ s a -> s{_ordKind = a})
+
+-- | The status of the execution.
+ordExecutionStatus :: Lens' OrdersRejectReturnLineItemResponse (Maybe Text)
+ordExecutionStatus
+  = lens _ordExecutionStatus
+      (\ s a -> s{_ordExecutionStatus = a})
+
+instance FromJSON OrdersRejectReturnLineItemResponse
+         where
+        parseJSON
+          = withObject "OrdersRejectReturnLineItemResponse"
+              (\ o ->
+                 OrdersRejectReturnLineItemResponse' <$>
+                   (o .:? "kind" .!=
+                      "content#ordersRejectReturnLineItemResponse")
+                     <*> (o .:? "executionStatus"))
+
+instance ToJSON OrdersRejectReturnLineItemResponse
+         where
+        toJSON OrdersRejectReturnLineItemResponse'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _ordKind),
+                  ("executionStatus" .=) <$> _ordExecutionStatus])
+
+--
 -- /See:/ 'testOrder' smart constructor.
 data TestOrder = TestOrder'
     { _toKind                      :: !Text
@@ -8436,8 +11929,10 @@ data TestOrder = TestOrder'
     , _toPredefinedDeliveryAddress :: !(Maybe Text)
     , _toShippingCostTax           :: !(Maybe Price)
     , _toCustomer                  :: !(Maybe TestOrderCustomer)
-    , _toPaymentMethod             :: !(Maybe TestOrderPaymentMethod)
+    , _toEnableOrderinvoices       :: !(Maybe Bool)
     , _toPromotions                :: !(Maybe [OrderPromotion])
+    , _toPredefinedBillingAddress  :: !(Maybe Text)
+    , _toNotificationMode          :: !(Maybe Text)
     , _toShippingCost              :: !(Maybe Price)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -8457,9 +11952,13 @@ data TestOrder = TestOrder'
 --
 -- * 'toCustomer'
 --
--- * 'toPaymentMethod'
+-- * 'toEnableOrderinvoices'
 --
 -- * 'toPromotions'
+--
+-- * 'toPredefinedBillingAddress'
+--
+-- * 'toNotificationMode'
 --
 -- * 'toShippingCost'
 testOrder
@@ -8472,8 +11971,10 @@ testOrder =
     , _toPredefinedDeliveryAddress = Nothing
     , _toShippingCostTax = Nothing
     , _toCustomer = Nothing
-    , _toPaymentMethod = Nothing
+    , _toEnableOrderinvoices = Nothing
     , _toPromotions = Nothing
+    , _toPredefinedBillingAddress = Nothing
+    , _toNotificationMode = Nothing
     , _toShippingCost = Nothing
     }
 
@@ -8512,19 +12013,31 @@ toCustomer :: Lens' TestOrder (Maybe TestOrderCustomer)
 toCustomer
   = lens _toCustomer (\ s a -> s{_toCustomer = a})
 
--- | The details of the payment method.
-toPaymentMethod :: Lens' TestOrder (Maybe TestOrderPaymentMethod)
-toPaymentMethod
-  = lens _toPaymentMethod
-      (\ s a -> s{_toPaymentMethod = a})
+-- | Whether the orderinvoices service should support this order.
+toEnableOrderinvoices :: Lens' TestOrder (Maybe Bool)
+toEnableOrderinvoices
+  = lens _toEnableOrderinvoices
+      (\ s a -> s{_toEnableOrderinvoices = a})
 
--- | The details of the merchant provided promotions applied to the order.
--- More details about the program are here.
+-- | Promotions associated with the order.
 toPromotions :: Lens' TestOrder [OrderPromotion]
 toPromotions
   = lens _toPromotions (\ s a -> s{_toPromotions = a})
       . _Default
       . _Coerce
+
+-- | The billing address.
+toPredefinedBillingAddress :: Lens' TestOrder (Maybe Text)
+toPredefinedBillingAddress
+  = lens _toPredefinedBillingAddress
+      (\ s a -> s{_toPredefinedBillingAddress = a})
+
+-- | Determines if test order must be pulled by merchant or pushed to
+-- merchant via push integration.
+toNotificationMode :: Lens' TestOrder (Maybe Text)
+toNotificationMode
+  = lens _toNotificationMode
+      (\ s a -> s{_toNotificationMode = a})
 
 -- | The total cost of shipping for all items.
 toShippingCost :: Lens' TestOrder (Maybe Price)
@@ -8543,8 +12056,10 @@ instance FromJSON TestOrder where
                      <*> (o .:? "predefinedDeliveryAddress")
                      <*> (o .:? "shippingCostTax")
                      <*> (o .:? "customer")
-                     <*> (o .:? "paymentMethod")
+                     <*> (o .:? "enableOrderinvoices")
                      <*> (o .:? "promotions" .!= mempty)
+                     <*> (o .:? "predefinedBillingAddress")
+                     <*> (o .:? "notificationMode")
                      <*> (o .:? "shippingCost"))
 
 instance ToJSON TestOrder where
@@ -8558,9 +12073,76 @@ instance ToJSON TestOrder where
                     _toPredefinedDeliveryAddress,
                   ("shippingCostTax" .=) <$> _toShippingCostTax,
                   ("customer" .=) <$> _toCustomer,
-                  ("paymentMethod" .=) <$> _toPaymentMethod,
+                  ("enableOrderinvoices" .=) <$>
+                    _toEnableOrderinvoices,
                   ("promotions" .=) <$> _toPromotions,
+                  ("predefinedBillingAddress" .=) <$>
+                    _toPredefinedBillingAddress,
+                  ("notificationMode" .=) <$> _toNotificationMode,
                   ("shippingCost" .=) <$> _toShippingCost])
+
+--
+-- /See:/ 'cutoffTime' smart constructor.
+data CutoffTime = CutoffTime'
+    { _ctHour     :: !(Maybe (Textual Word32))
+    , _ctTimezone :: !(Maybe Text)
+    , _ctMinute   :: !(Maybe (Textual Word32))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CutoffTime' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ctHour'
+--
+-- * 'ctTimezone'
+--
+-- * 'ctMinute'
+cutoffTime
+    :: CutoffTime
+cutoffTime =
+    CutoffTime'
+    { _ctHour = Nothing
+    , _ctTimezone = Nothing
+    , _ctMinute = Nothing
+    }
+
+-- | Hour of the cutoff time until which an order has to be placed to be
+-- processed in the same day. Required.
+ctHour :: Lens' CutoffTime (Maybe Word32)
+ctHour
+  = lens _ctHour (\ s a -> s{_ctHour = a}) .
+      mapping _Coerce
+
+-- | Timezone identifier for the cutoff time. A list of identifiers can be
+-- found in the AdWords API documentation. E.g. \"Europe\/Zurich\".
+-- Required.
+ctTimezone :: Lens' CutoffTime (Maybe Text)
+ctTimezone
+  = lens _ctTimezone (\ s a -> s{_ctTimezone = a})
+
+-- | Minute of the cutoff time until which an order has to be placed to be
+-- processed in the same day. Required.
+ctMinute :: Lens' CutoffTime (Maybe Word32)
+ctMinute
+  = lens _ctMinute (\ s a -> s{_ctMinute = a}) .
+      mapping _Coerce
+
+instance FromJSON CutoffTime where
+        parseJSON
+          = withObject "CutoffTime"
+              (\ o ->
+                 CutoffTime' <$>
+                   (o .:? "hour") <*> (o .:? "timezone") <*>
+                     (o .:? "minute"))
+
+instance ToJSON CutoffTime where
+        toJSON CutoffTime'{..}
+          = object
+              (catMaybes
+                 [("hour" .=) <$> _ctHour,
+                  ("timezone" .=) <$> _ctTimezone,
+                  ("minute" .=) <$> _ctMinute])
 
 -- | A batch entry encoding a single non-batch datafeedstatuses response.
 --
@@ -8629,59 +12211,62 @@ instance ToJSON
 --
 -- /See:/ 'orderRefund' smart constructor.
 data OrderRefund = OrderRefund'
-    { _oAmount       :: !(Maybe Price)
-    , _oActor        :: !(Maybe Text)
-    , _oReason       :: !(Maybe Text)
-    , _oCreationDate :: !(Maybe Text)
-    , _oReasonText   :: !(Maybe Text)
+    { _ordAmount       :: !(Maybe Price)
+    , _ordActor        :: !(Maybe Text)
+    , _ordReason       :: !(Maybe Text)
+    , _ordCreationDate :: !(Maybe Text)
+    , _ordReasonText   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrderRefund' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'oAmount'
+-- * 'ordAmount'
 --
--- * 'oActor'
+-- * 'ordActor'
 --
--- * 'oReason'
+-- * 'ordReason'
 --
--- * 'oCreationDate'
+-- * 'ordCreationDate'
 --
--- * 'oReasonText'
+-- * 'ordReasonText'
 orderRefund
     :: OrderRefund
 orderRefund =
     OrderRefund'
-    { _oAmount = Nothing
-    , _oActor = Nothing
-    , _oReason = Nothing
-    , _oCreationDate = Nothing
-    , _oReasonText = Nothing
+    { _ordAmount = Nothing
+    , _ordActor = Nothing
+    , _ordReason = Nothing
+    , _ordCreationDate = Nothing
+    , _ordReasonText = Nothing
     }
 
 -- | The amount that is refunded.
-oAmount :: Lens' OrderRefund (Maybe Price)
-oAmount = lens _oAmount (\ s a -> s{_oAmount = a})
+ordAmount :: Lens' OrderRefund (Maybe Price)
+ordAmount
+  = lens _ordAmount (\ s a -> s{_ordAmount = a})
 
 -- | The actor that created the refund.
-oActor :: Lens' OrderRefund (Maybe Text)
-oActor = lens _oActor (\ s a -> s{_oActor = a})
+ordActor :: Lens' OrderRefund (Maybe Text)
+ordActor = lens _ordActor (\ s a -> s{_ordActor = a})
 
 -- | The reason for the refund.
-oReason :: Lens' OrderRefund (Maybe Text)
-oReason = lens _oReason (\ s a -> s{_oReason = a})
+ordReason :: Lens' OrderRefund (Maybe Text)
+ordReason
+  = lens _ordReason (\ s a -> s{_ordReason = a})
 
 -- | Date on which the item has been created, in ISO 8601 format.
-oCreationDate :: Lens' OrderRefund (Maybe Text)
-oCreationDate
-  = lens _oCreationDate
-      (\ s a -> s{_oCreationDate = a})
+ordCreationDate :: Lens' OrderRefund (Maybe Text)
+ordCreationDate
+  = lens _ordCreationDate
+      (\ s a -> s{_ordCreationDate = a})
 
 -- | The explanation of the reason.
-oReasonText :: Lens' OrderRefund (Maybe Text)
-oReasonText
-  = lens _oReasonText (\ s a -> s{_oReasonText = a})
+ordReasonText :: Lens' OrderRefund (Maybe Text)
+ordReasonText
+  = lens _ordReasonText
+      (\ s a -> s{_ordReasonText = a})
 
 instance FromJSON OrderRefund where
         parseJSON
@@ -8697,10 +12282,11 @@ instance ToJSON OrderRefund where
         toJSON OrderRefund'{..}
           = object
               (catMaybes
-                 [("amount" .=) <$> _oAmount,
-                  ("actor" .=) <$> _oActor, ("reason" .=) <$> _oReason,
-                  ("creationDate" .=) <$> _oCreationDate,
-                  ("reasonText" .=) <$> _oReasonText])
+                 [("amount" .=) <$> _ordAmount,
+                  ("actor" .=) <$> _ordActor,
+                  ("reason" .=) <$> _ordReason,
+                  ("creationDate" .=) <$> _ordCreationDate,
+                  ("reasonText" .=) <$> _ordReasonText])
 
 --
 -- /See:/ 'testOrderLineItemProduct' smart constructor.
@@ -8879,36 +12465,37 @@ instance ToJSON TestOrderLineItemProduct where
 --
 -- /See:/ 'accounttaxCustomBatchResponse' smart constructor.
 data AccounttaxCustomBatchResponse = AccounttaxCustomBatchResponse'
-    { _a2Entries :: !(Maybe [AccounttaxCustomBatchResponseEntry])
-    , _a2Kind    :: !Text
+    { _acbr1Entries :: !(Maybe [AccounttaxCustomBatchResponseEntry])
+    , _acbr1Kind    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccounttaxCustomBatchResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'a2Entries'
+-- * 'acbr1Entries'
 --
--- * 'a2Kind'
+-- * 'acbr1Kind'
 accounttaxCustomBatchResponse
     :: AccounttaxCustomBatchResponse
 accounttaxCustomBatchResponse =
     AccounttaxCustomBatchResponse'
-    { _a2Entries = Nothing
-    , _a2Kind = "content#accounttaxCustomBatchResponse"
+    { _acbr1Entries = Nothing
+    , _acbr1Kind = "content#accounttaxCustomBatchResponse"
     }
 
 -- | The result of the execution of the batch requests.
-a2Entries :: Lens' AccounttaxCustomBatchResponse [AccounttaxCustomBatchResponseEntry]
-a2Entries
-  = lens _a2Entries (\ s a -> s{_a2Entries = a}) .
-      _Default
+acbr1Entries :: Lens' AccounttaxCustomBatchResponse [AccounttaxCustomBatchResponseEntry]
+acbr1Entries
+  = lens _acbr1Entries (\ s a -> s{_acbr1Entries = a})
+      . _Default
       . _Coerce
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#accounttaxCustomBatchResponse\".
-a2Kind :: Lens' AccounttaxCustomBatchResponse Text
-a2Kind = lens _a2Kind (\ s a -> s{_a2Kind = a})
+acbr1Kind :: Lens' AccounttaxCustomBatchResponse Text
+acbr1Kind
+  = lens _acbr1Kind (\ s a -> s{_acbr1Kind = a})
 
 instance FromJSON AccounttaxCustomBatchResponse where
         parseJSON
@@ -8923,93 +12510,43 @@ instance ToJSON AccounttaxCustomBatchResponse where
         toJSON AccounttaxCustomBatchResponse'{..}
           = object
               (catMaybes
-                 [("entries" .=) <$> _a2Entries,
-                  Just ("kind" .= _a2Kind)])
+                 [("entries" .=) <$> _acbr1Entries,
+                  Just ("kind" .= _acbr1Kind)])
 
--- | A batch entry encoding a single non-batch inventory request.
 --
--- /See:/ 'inventoryCustomBatchRequestEntry' smart constructor.
-data InventoryCustomBatchRequestEntry = InventoryCustomBatchRequestEntry'
-    { _iMerchantId :: !(Maybe (Textual Word64))
-    , _iStoreCode  :: !(Maybe Text)
-    , _iInventory  :: !(Maybe Inventory)
-    , _iProductId  :: !(Maybe Text)
-    , _iBatchId    :: !(Maybe (Textual Word32))
+-- /See:/ 'accountsClaimWebsiteResponse' smart constructor.
+newtype AccountsClaimWebsiteResponse = AccountsClaimWebsiteResponse'
+    { _acwrKind :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InventoryCustomBatchRequestEntry' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsClaimWebsiteResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'iMerchantId'
---
--- * 'iStoreCode'
---
--- * 'iInventory'
---
--- * 'iProductId'
---
--- * 'iBatchId'
-inventoryCustomBatchRequestEntry
-    :: InventoryCustomBatchRequestEntry
-inventoryCustomBatchRequestEntry =
-    InventoryCustomBatchRequestEntry'
-    { _iMerchantId = Nothing
-    , _iStoreCode = Nothing
-    , _iInventory = Nothing
-    , _iProductId = Nothing
-    , _iBatchId = Nothing
+-- * 'acwrKind'
+accountsClaimWebsiteResponse
+    :: AccountsClaimWebsiteResponse
+accountsClaimWebsiteResponse =
+    AccountsClaimWebsiteResponse'
+    { _acwrKind = "content#accountsClaimWebsiteResponse"
     }
 
--- | The ID of the managing account.
-iMerchantId :: Lens' InventoryCustomBatchRequestEntry (Maybe Word64)
-iMerchantId
-  = lens _iMerchantId (\ s a -> s{_iMerchantId = a}) .
-      mapping _Coerce
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"content#accountsClaimWebsiteResponse\".
+acwrKind :: Lens' AccountsClaimWebsiteResponse Text
+acwrKind = lens _acwrKind (\ s a -> s{_acwrKind = a})
 
--- | The code of the store for which to update price and availability. Use
--- online to update price and availability of an online product.
-iStoreCode :: Lens' InventoryCustomBatchRequestEntry (Maybe Text)
-iStoreCode
-  = lens _iStoreCode (\ s a -> s{_iStoreCode = a})
-
--- | Price and availability of the product.
-iInventory :: Lens' InventoryCustomBatchRequestEntry (Maybe Inventory)
-iInventory
-  = lens _iInventory (\ s a -> s{_iInventory = a})
-
--- | The ID of the product for which to update price and availability.
-iProductId :: Lens' InventoryCustomBatchRequestEntry (Maybe Text)
-iProductId
-  = lens _iProductId (\ s a -> s{_iProductId = a})
-
--- | An entry ID, unique within the batch request.
-iBatchId :: Lens' InventoryCustomBatchRequestEntry (Maybe Word32)
-iBatchId
-  = lens _iBatchId (\ s a -> s{_iBatchId = a}) .
-      mapping _Coerce
-
-instance FromJSON InventoryCustomBatchRequestEntry
-         where
+instance FromJSON AccountsClaimWebsiteResponse where
         parseJSON
-          = withObject "InventoryCustomBatchRequestEntry"
+          = withObject "AccountsClaimWebsiteResponse"
               (\ o ->
-                 InventoryCustomBatchRequestEntry' <$>
-                   (o .:? "merchantId") <*> (o .:? "storeCode") <*>
-                     (o .:? "inventory")
-                     <*> (o .:? "productId")
-                     <*> (o .:? "batchId"))
+                 AccountsClaimWebsiteResponse' <$>
+                   (o .:? "kind" .!=
+                      "content#accountsClaimWebsiteResponse"))
 
-instance ToJSON InventoryCustomBatchRequestEntry
-         where
-        toJSON InventoryCustomBatchRequestEntry'{..}
-          = object
-              (catMaybes
-                 [("merchantId" .=) <$> _iMerchantId,
-                  ("storeCode" .=) <$> _iStoreCode,
-                  ("inventory" .=) <$> _iInventory,
-                  ("productId" .=) <$> _iProductId,
-                  ("batchId" .=) <$> _iBatchId])
+instance ToJSON AccountsClaimWebsiteResponse where
+        toJSON AccountsClaimWebsiteResponse'{..}
+          = object (catMaybes [Just ("kind" .= _acwrKind)])
 
 --
 -- /See:/ 'orderAddress' smart constructor.
@@ -9103,7 +12640,8 @@ oaFullAddress
       . _Default
       . _Coerce
 
--- | Top-level administrative subdivision of the country (e.g. \"CA\").
+-- | Top-level administrative subdivision of the country. For example, a
+-- state like California (\"CA\") or a province like Quebec (\"QC\").
 oaRegion :: Lens' OrderAddress (Maybe Text)
 oaRegion = lens _oaRegion (\ s a -> s{_oaRegion = a})
 
@@ -9133,6 +12671,61 @@ instance ToJSON OrderAddress where
                   ("isPostOfficeBox" .=) <$> _oaIsPostOfficeBox,
                   ("fullAddress" .=) <$> _oaFullAddress,
                   ("region" .=) <$> _oaRegion])
+
+--
+-- /See:/ 'ordersCustomBatchRequestEntryCreateTestReturnReturnItem' smart constructor.
+data OrdersCustomBatchRequestEntryCreateTestReturnReturnItem = OrdersCustomBatchRequestEntryCreateTestReturnReturnItem'
+    { _ocbrectrriQuantity   :: !(Maybe (Textual Word32))
+    , _ocbrectrriLineItemId :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OrdersCustomBatchRequestEntryCreateTestReturnReturnItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ocbrectrriQuantity'
+--
+-- * 'ocbrectrriLineItemId'
+ordersCustomBatchRequestEntryCreateTestReturnReturnItem
+    :: OrdersCustomBatchRequestEntryCreateTestReturnReturnItem
+ordersCustomBatchRequestEntryCreateTestReturnReturnItem =
+    OrdersCustomBatchRequestEntryCreateTestReturnReturnItem'
+    { _ocbrectrriQuantity = Nothing
+    , _ocbrectrriLineItemId = Nothing
+    }
+
+-- | Quantity that is returned.
+ocbrectrriQuantity :: Lens' OrdersCustomBatchRequestEntryCreateTestReturnReturnItem (Maybe Word32)
+ocbrectrriQuantity
+  = lens _ocbrectrriQuantity
+      (\ s a -> s{_ocbrectrriQuantity = a})
+      . mapping _Coerce
+
+-- | The ID of the line item to return.
+ocbrectrriLineItemId :: Lens' OrdersCustomBatchRequestEntryCreateTestReturnReturnItem (Maybe Text)
+ocbrectrriLineItemId
+  = lens _ocbrectrriLineItemId
+      (\ s a -> s{_ocbrectrriLineItemId = a})
+
+instance FromJSON
+         OrdersCustomBatchRequestEntryCreateTestReturnReturnItem
+         where
+        parseJSON
+          = withObject
+              "OrdersCustomBatchRequestEntryCreateTestReturnReturnItem"
+              (\ o ->
+                 OrdersCustomBatchRequestEntryCreateTestReturnReturnItem'
+                   <$> (o .:? "quantity") <*> (o .:? "lineItemId"))
+
+instance ToJSON
+         OrdersCustomBatchRequestEntryCreateTestReturnReturnItem
+         where
+        toJSON
+          OrdersCustomBatchRequestEntryCreateTestReturnReturnItem'{..}
+          = object
+              (catMaybes
+                 [("quantity" .=) <$> _ocbrectrriQuantity,
+                  ("lineItemId" .=) <$> _ocbrectrriLineItemId])
 
 --
 -- /See:/ 'productUnitPricingBaseMeasure' smart constructor.
@@ -9182,117 +12775,73 @@ instance ToJSON ProductUnitPricingBaseMeasure where
                   ("unit" .=) <$> _pupbmUnit])
 
 --
--- /See:/ 'accountShippingCondition' smart constructor.
-data AccountShippingCondition = AccountShippingCondition'
-    { _ascWeightMax               :: !(Maybe Weight)
-    , _ascDeliveryPostalCode      :: !(Maybe Text)
-    , _ascDeliveryLocationGroup   :: !(Maybe Text)
-    , _ascPriceMax                :: !(Maybe Price)
-    , _ascShippingLabel           :: !(Maybe Text)
-    , _ascDeliveryLocationId      :: !(Maybe (Textual Int64))
-    , _ascDeliveryPostalCodeRange :: !(Maybe AccountShippingPostalCodeRange)
+-- /See:/ 'liaSettingsGetAccessibleGmbAccountsResponse' smart constructor.
+data LiaSettingsGetAccessibleGmbAccountsResponse = LiaSettingsGetAccessibleGmbAccountsResponse'
+    { _lsgagarGmbAccounts :: !(Maybe [GmbAccountsGmbAccount])
+    , _lsgagarKind        :: !Text
+    , _lsgagarAccountId   :: !(Maybe (Textual Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountShippingCondition' with the minimum fields required to make a request.
+-- | Creates a value of 'LiaSettingsGetAccessibleGmbAccountsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ascWeightMax'
+-- * 'lsgagarGmbAccounts'
 --
--- * 'ascDeliveryPostalCode'
+-- * 'lsgagarKind'
 --
--- * 'ascDeliveryLocationGroup'
---
--- * 'ascPriceMax'
---
--- * 'ascShippingLabel'
---
--- * 'ascDeliveryLocationId'
---
--- * 'ascDeliveryPostalCodeRange'
-accountShippingCondition
-    :: AccountShippingCondition
-accountShippingCondition =
-    AccountShippingCondition'
-    { _ascWeightMax = Nothing
-    , _ascDeliveryPostalCode = Nothing
-    , _ascDeliveryLocationGroup = Nothing
-    , _ascPriceMax = Nothing
-    , _ascShippingLabel = Nothing
-    , _ascDeliveryLocationId = Nothing
-    , _ascDeliveryPostalCodeRange = Nothing
+-- * 'lsgagarAccountId'
+liaSettingsGetAccessibleGmbAccountsResponse
+    :: LiaSettingsGetAccessibleGmbAccountsResponse
+liaSettingsGetAccessibleGmbAccountsResponse =
+    LiaSettingsGetAccessibleGmbAccountsResponse'
+    { _lsgagarGmbAccounts = Nothing
+    , _lsgagarKind = "content#liasettingsGetAccessibleGmbAccountsResponse"
+    , _lsgagarAccountId = Nothing
     }
 
--- | Maximum shipping weight. Forms an interval between the maximum of
--- smaller weight (exclusive) and this weight (inclusive).
-ascWeightMax :: Lens' AccountShippingCondition (Maybe Weight)
-ascWeightMax
-  = lens _ascWeightMax (\ s a -> s{_ascWeightMax = a})
+-- | A list of GMB accounts which are available to the merchant.
+lsgagarGmbAccounts :: Lens' LiaSettingsGetAccessibleGmbAccountsResponse [GmbAccountsGmbAccount]
+lsgagarGmbAccounts
+  = lens _lsgagarGmbAccounts
+      (\ s a -> s{_lsgagarGmbAccounts = a})
+      . _Default
+      . _Coerce
 
--- | Delivery location in terms of a postal code.
-ascDeliveryPostalCode :: Lens' AccountShippingCondition (Maybe Text)
-ascDeliveryPostalCode
-  = lens _ascDeliveryPostalCode
-      (\ s a -> s{_ascDeliveryPostalCode = a})
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"content#liasettingsGetAccessibleGmbAccountsResponse\".
+lsgagarKind :: Lens' LiaSettingsGetAccessibleGmbAccountsResponse Text
+lsgagarKind
+  = lens _lsgagarKind (\ s a -> s{_lsgagarKind = a})
 
--- | Delivery location in terms of a location group name. A location group
--- with this name must be specified among location groups.
-ascDeliveryLocationGroup :: Lens' AccountShippingCondition (Maybe Text)
-ascDeliveryLocationGroup
-  = lens _ascDeliveryLocationGroup
-      (\ s a -> s{_ascDeliveryLocationGroup = a})
-
--- | Maximum shipping price. Forms an interval between the maximum of smaller
--- prices (exclusive) and this price (inclusive).
-ascPriceMax :: Lens' AccountShippingCondition (Maybe Price)
-ascPriceMax
-  = lens _ascPriceMax (\ s a -> s{_ascPriceMax = a})
-
--- | Shipping label of the product. The products with the label are matched.
-ascShippingLabel :: Lens' AccountShippingCondition (Maybe Text)
-ascShippingLabel
-  = lens _ascShippingLabel
-      (\ s a -> s{_ascShippingLabel = a})
-
--- | Delivery location in terms of a location ID. Can be used to represent
--- administrative areas, smaller country subdivisions, or cities.
-ascDeliveryLocationId :: Lens' AccountShippingCondition (Maybe Int64)
-ascDeliveryLocationId
-  = lens _ascDeliveryLocationId
-      (\ s a -> s{_ascDeliveryLocationId = a})
+-- | The ID of the account.
+lsgagarAccountId :: Lens' LiaSettingsGetAccessibleGmbAccountsResponse (Maybe Word64)
+lsgagarAccountId
+  = lens _lsgagarAccountId
+      (\ s a -> s{_lsgagarAccountId = a})
       . mapping _Coerce
 
--- | Delivery location in terms of a postal code range.
-ascDeliveryPostalCodeRange :: Lens' AccountShippingCondition (Maybe AccountShippingPostalCodeRange)
-ascDeliveryPostalCodeRange
-  = lens _ascDeliveryPostalCodeRange
-      (\ s a -> s{_ascDeliveryPostalCodeRange = a})
-
-instance FromJSON AccountShippingCondition where
+instance FromJSON
+         LiaSettingsGetAccessibleGmbAccountsResponse where
         parseJSON
-          = withObject "AccountShippingCondition"
+          = withObject
+              "LiaSettingsGetAccessibleGmbAccountsResponse"
               (\ o ->
-                 AccountShippingCondition' <$>
-                   (o .:? "weightMax") <*> (o .:? "deliveryPostalCode")
-                     <*> (o .:? "deliveryLocationGroup")
-                     <*> (o .:? "priceMax")
-                     <*> (o .:? "shippingLabel")
-                     <*> (o .:? "deliveryLocationId")
-                     <*> (o .:? "deliveryPostalCodeRange"))
+                 LiaSettingsGetAccessibleGmbAccountsResponse' <$>
+                   (o .:? "gmbAccounts" .!= mempty) <*>
+                     (o .:? "kind" .!=
+                        "content#liasettingsGetAccessibleGmbAccountsResponse")
+                     <*> (o .:? "accountId"))
 
-instance ToJSON AccountShippingCondition where
-        toJSON AccountShippingCondition'{..}
+instance ToJSON
+         LiaSettingsGetAccessibleGmbAccountsResponse where
+        toJSON
+          LiaSettingsGetAccessibleGmbAccountsResponse'{..}
           = object
               (catMaybes
-                 [("weightMax" .=) <$> _ascWeightMax,
-                  ("deliveryPostalCode" .=) <$> _ascDeliveryPostalCode,
-                  ("deliveryLocationGroup" .=) <$>
-                    _ascDeliveryLocationGroup,
-                  ("priceMax" .=) <$> _ascPriceMax,
-                  ("shippingLabel" .=) <$> _ascShippingLabel,
-                  ("deliveryLocationId" .=) <$> _ascDeliveryLocationId,
-                  ("deliveryPostalCodeRange" .=) <$>
-                    _ascDeliveryPostalCodeRange])
+                 [("gmbAccounts" .=) <$> _lsgagarGmbAccounts,
+                  Just ("kind" .= _lsgagarKind),
+                  ("accountId" .=) <$> _lsgagarAccountId])
 
 --
 -- /See:/ 'datafeedsListResponse' smart constructor.
@@ -9354,58 +12903,134 @@ instance ToJSON DatafeedsListResponse where
                   Just ("kind" .= _dlrKind),
                   ("resources" .=) <$> _dlrResources])
 
+--
+-- /See:/ 'accountStatusStatistics' smart constructor.
+data AccountStatusStatistics = AccountStatusStatistics'
+    { _assPending     :: !(Maybe (Textual Int64))
+    , _assExpiring    :: !(Maybe (Textual Int64))
+    , _assActive      :: !(Maybe (Textual Int64))
+    , _assDisApproved :: !(Maybe (Textual Int64))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AccountStatusStatistics' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'assPending'
+--
+-- * 'assExpiring'
+--
+-- * 'assActive'
+--
+-- * 'assDisApproved'
+accountStatusStatistics
+    :: AccountStatusStatistics
+accountStatusStatistics =
+    AccountStatusStatistics'
+    { _assPending = Nothing
+    , _assExpiring = Nothing
+    , _assActive = Nothing
+    , _assDisApproved = Nothing
+    }
+
+-- | Number of pending offers.
+assPending :: Lens' AccountStatusStatistics (Maybe Int64)
+assPending
+  = lens _assPending (\ s a -> s{_assPending = a}) .
+      mapping _Coerce
+
+-- | Number of expiring offers.
+assExpiring :: Lens' AccountStatusStatistics (Maybe Int64)
+assExpiring
+  = lens _assExpiring (\ s a -> s{_assExpiring = a}) .
+      mapping _Coerce
+
+-- | Number of active offers.
+assActive :: Lens' AccountStatusStatistics (Maybe Int64)
+assActive
+  = lens _assActive (\ s a -> s{_assActive = a}) .
+      mapping _Coerce
+
+-- | Number of disapproved offers.
+assDisApproved :: Lens' AccountStatusStatistics (Maybe Int64)
+assDisApproved
+  = lens _assDisApproved
+      (\ s a -> s{_assDisApproved = a})
+      . mapping _Coerce
+
+instance FromJSON AccountStatusStatistics where
+        parseJSON
+          = withObject "AccountStatusStatistics"
+              (\ o ->
+                 AccountStatusStatistics' <$>
+                   (o .:? "pending") <*> (o .:? "expiring") <*>
+                     (o .:? "active")
+                     <*> (o .:? "disapproved"))
+
+instance ToJSON AccountStatusStatistics where
+        toJSON AccountStatusStatistics'{..}
+          = object
+              (catMaybes
+                 [("pending" .=) <$> _assPending,
+                  ("expiring" .=) <$> _assExpiring,
+                  ("active" .=) <$> _assActive,
+                  ("disapproved" .=) <$> _assDisApproved])
+
 -- | A batch entry encoding a single non-batch products response.
 --
 -- /See:/ 'productsCustomBatchResponseEntry' smart constructor.
 data ProductsCustomBatchResponseEntry = ProductsCustomBatchResponseEntry'
-    { _proKind    :: !Text
-    , _proProduct :: !(Maybe Product)
-    , _proErrors  :: !(Maybe Errors)
-    , _proBatchId :: !(Maybe (Textual Word32))
+    { _pcbre1Kind    :: !Text
+    , _pcbre1Product :: !(Maybe Product)
+    , _pcbre1Errors  :: !(Maybe Errors)
+    , _pcbre1BatchId :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductsCustomBatchResponseEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'proKind'
+-- * 'pcbre1Kind'
 --
--- * 'proProduct'
+-- * 'pcbre1Product'
 --
--- * 'proErrors'
+-- * 'pcbre1Errors'
 --
--- * 'proBatchId'
+-- * 'pcbre1BatchId'
 productsCustomBatchResponseEntry
     :: ProductsCustomBatchResponseEntry
 productsCustomBatchResponseEntry =
     ProductsCustomBatchResponseEntry'
-    { _proKind = "content#productsCustomBatchResponseEntry"
-    , _proProduct = Nothing
-    , _proErrors = Nothing
-    , _proBatchId = Nothing
+    { _pcbre1Kind = "content#productsCustomBatchResponseEntry"
+    , _pcbre1Product = Nothing
+    , _pcbre1Errors = Nothing
+    , _pcbre1BatchId = Nothing
     }
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#productsCustomBatchResponseEntry\".
-proKind :: Lens' ProductsCustomBatchResponseEntry Text
-proKind = lens _proKind (\ s a -> s{_proKind = a})
+pcbre1Kind :: Lens' ProductsCustomBatchResponseEntry Text
+pcbre1Kind
+  = lens _pcbre1Kind (\ s a -> s{_pcbre1Kind = a})
 
 -- | The inserted product. Only defined if the method is insert and if the
 -- request was successful.
-proProduct :: Lens' ProductsCustomBatchResponseEntry (Maybe Product)
-proProduct
-  = lens _proProduct (\ s a -> s{_proProduct = a})
+pcbre1Product :: Lens' ProductsCustomBatchResponseEntry (Maybe Product)
+pcbre1Product
+  = lens _pcbre1Product
+      (\ s a -> s{_pcbre1Product = a})
 
 -- | A list of errors defined if and only if the request failed.
-proErrors :: Lens' ProductsCustomBatchResponseEntry (Maybe Errors)
-proErrors
-  = lens _proErrors (\ s a -> s{_proErrors = a})
+pcbre1Errors :: Lens' ProductsCustomBatchResponseEntry (Maybe Errors)
+pcbre1Errors
+  = lens _pcbre1Errors (\ s a -> s{_pcbre1Errors = a})
 
 -- | The ID of the request entry this entry responds to.
-proBatchId :: Lens' ProductsCustomBatchResponseEntry (Maybe Word32)
-proBatchId
-  = lens _proBatchId (\ s a -> s{_proBatchId = a}) .
-      mapping _Coerce
+pcbre1BatchId :: Lens' ProductsCustomBatchResponseEntry (Maybe Word32)
+pcbre1BatchId
+  = lens _pcbre1BatchId
+      (\ s a -> s{_pcbre1BatchId = a})
+      . mapping _Coerce
 
 instance FromJSON ProductsCustomBatchResponseEntry
          where
@@ -9424,852 +13049,785 @@ instance ToJSON ProductsCustomBatchResponseEntry
         toJSON ProductsCustomBatchResponseEntry'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _proKind),
-                  ("product" .=) <$> _proProduct,
-                  ("errors" .=) <$> _proErrors,
-                  ("batchId" .=) <$> _proBatchId])
+                 [Just ("kind" .= _pcbre1Kind),
+                  ("product" .=) <$> _pcbre1Product,
+                  ("errors" .=) <$> _pcbre1Errors,
+                  ("batchId" .=) <$> _pcbre1BatchId])
 
---
--- /See:/ 'orderPaymentMethod' smart constructor.
-data OrderPaymentMethod = OrderPaymentMethod'
-    { _opmExpirationMonth :: !(Maybe (Textual Int32))
-    , _opmExpirationYear  :: !(Maybe (Textual Int32))
-    , _opmPhoneNumber     :: !(Maybe Text)
-    , _opmBillingAddress  :: !(Maybe OrderAddress)
-    , _opmLastFourDigits  :: !(Maybe Text)
-    , _opmType            :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'OrderPaymentMethod' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'opmExpirationMonth'
---
--- * 'opmExpirationYear'
---
--- * 'opmPhoneNumber'
---
--- * 'opmBillingAddress'
---
--- * 'opmLastFourDigits'
---
--- * 'opmType'
-orderPaymentMethod
-    :: OrderPaymentMethod
-orderPaymentMethod =
-    OrderPaymentMethod'
-    { _opmExpirationMonth = Nothing
-    , _opmExpirationYear = Nothing
-    , _opmPhoneNumber = Nothing
-    , _opmBillingAddress = Nothing
-    , _opmLastFourDigits = Nothing
-    , _opmType = Nothing
-    }
-
--- | The card expiration month (January = 1, February = 2 etc.).
-opmExpirationMonth :: Lens' OrderPaymentMethod (Maybe Int32)
-opmExpirationMonth
-  = lens _opmExpirationMonth
-      (\ s a -> s{_opmExpirationMonth = a})
-      . mapping _Coerce
-
--- | The card expiration year (4-digit, e.g. 2015).
-opmExpirationYear :: Lens' OrderPaymentMethod (Maybe Int32)
-opmExpirationYear
-  = lens _opmExpirationYear
-      (\ s a -> s{_opmExpirationYear = a})
-      . mapping _Coerce
-
--- | The billing phone number.
-opmPhoneNumber :: Lens' OrderPaymentMethod (Maybe Text)
-opmPhoneNumber
-  = lens _opmPhoneNumber
-      (\ s a -> s{_opmPhoneNumber = a})
-
--- | The billing address.
-opmBillingAddress :: Lens' OrderPaymentMethod (Maybe OrderAddress)
-opmBillingAddress
-  = lens _opmBillingAddress
-      (\ s a -> s{_opmBillingAddress = a})
-
--- | The last four digits of the card number.
-opmLastFourDigits :: Lens' OrderPaymentMethod (Maybe Text)
-opmLastFourDigits
-  = lens _opmLastFourDigits
-      (\ s a -> s{_opmLastFourDigits = a})
-
--- | The type of instrument (VISA, Mastercard, etc).
-opmType :: Lens' OrderPaymentMethod (Maybe Text)
-opmType = lens _opmType (\ s a -> s{_opmType = a})
-
-instance FromJSON OrderPaymentMethod where
-        parseJSON
-          = withObject "OrderPaymentMethod"
-              (\ o ->
-                 OrderPaymentMethod' <$>
-                   (o .:? "expirationMonth") <*>
-                     (o .:? "expirationYear")
-                     <*> (o .:? "phoneNumber")
-                     <*> (o .:? "billingAddress")
-                     <*> (o .:? "lastFourDigits")
-                     <*> (o .:? "type"))
-
-instance ToJSON OrderPaymentMethod where
-        toJSON OrderPaymentMethod'{..}
-          = object
-              (catMaybes
-                 [("expirationMonth" .=) <$> _opmExpirationMonth,
-                  ("expirationYear" .=) <$> _opmExpirationYear,
-                  ("phoneNumber" .=) <$> _opmPhoneNumber,
-                  ("billingAddress" .=) <$> _opmBillingAddress,
-                  ("lastFourDigits" .=) <$> _opmLastFourDigits,
-                  ("type" .=) <$> _opmType])
-
--- | Product data.
+-- | Product data. After inserting, updating, or deleting a product, it may
+-- take several minutes before changes take effect.
 --
 -- /See:/ 'product' smart constructor.
 data Product = Product'
-    { _ppDisplayAdsLink         :: !(Maybe Text)
-    , _ppCustomLabel1           :: !(Maybe Text)
-    , _ppShippingWidth          :: !(Maybe ProductShippingDimension)
-    , _ppCustomGroups           :: !(Maybe [ProductCustomGroup])
-    , _ppImageLink              :: !(Maybe Text)
-    , _ppDisplayAdsValue        :: !(Maybe (Textual Double))
-    , _ppLoyaltyPoints          :: !(Maybe LoyaltyPoints)
-    , _ppAdditionalImageLinks   :: !(Maybe [Text])
-    , _ppValidatedDestinations  :: !(Maybe [Text])
-    , _ppColor                  :: !(Maybe Text)
-    , _ppCustomLabel0           :: !(Maybe Text)
-    , _ppKind                   :: !Text
-    , _ppMultipack              :: !(Maybe (Textual Int64))
-    , _ppPattern                :: !(Maybe Text)
-    , _ppLink                   :: !(Maybe Text)
-    , _ppSizeSystem             :: !(Maybe Text)
-    , _ppUnitPricingBaseMeasure :: !(Maybe ProductUnitPricingBaseMeasure)
-    , _ppTaxes                  :: !(Maybe [ProductTax])
-    , _ppMaterial               :: !(Maybe Text)
-    , _ppInstallment            :: !(Maybe Installment)
-    , _ppChannel                :: !(Maybe Text)
-    , _ppProductType            :: !(Maybe Text)
-    , _ppIdentifierExists       :: !(Maybe Bool)
-    , _ppOnlineOnly             :: !(Maybe Bool)
-    , _ppBrand                  :: !(Maybe Text)
-    , _ppUnitPricingMeasure     :: !(Maybe ProductUnitPricingMeasure)
-    , _ppSalePrice              :: !(Maybe Price)
-    , _ppShippingLength         :: !(Maybe ProductShippingDimension)
-    , _ppCustomLabel3           :: !(Maybe Text)
-    , _ppWarnings               :: !(Maybe [Error'])
-    , _ppAdditionalProductTypes :: !(Maybe [Text])
-    , _ppAvailability           :: !(Maybe Text)
-    , _ppTargetCountry          :: !(Maybe Text)
-    , _ppShippingLabel          :: !(Maybe Text)
-    , _ppCustomAttributes       :: !(Maybe [ProductCustomAttribute])
-    , _ppGtin                   :: !(Maybe Text)
-    , _ppAgeGroup               :: !(Maybe Text)
-    , _ppDisplayAdsTitle        :: !(Maybe Text)
-    , _ppGender                 :: !(Maybe Text)
-    , _ppDestinations           :: !(Maybe [ProductDestination])
-    , _ppExpirationDate         :: !(Maybe Text)
-    , _ppItemGroupId            :: !(Maybe Text)
-    , _ppAdwordsGrouping        :: !(Maybe Text)
-    , _ppSalePriceEffectiveDate :: !(Maybe Text)
-    , _ppCustomLabel2           :: !(Maybe Text)
-    , _ppGoogleProductCategory  :: !(Maybe Text)
-    , _ppShipping               :: !(Maybe [ProductShipping])
-    , _ppAdwordsRedirect        :: !(Maybe Text)
-    , _ppShippingWeight         :: !(Maybe ProductShippingWeight)
-    , _ppSellOnGoogleQuantity   :: !(Maybe (Textual Int64))
-    , _ppShippingHeight         :: !(Maybe ProductShippingDimension)
-    , _ppAvailabilityDate       :: !(Maybe Text)
-    , _ppOfferId                :: !(Maybe Text)
-    , _ppId                     :: !(Maybe Text)
-    , _ppAdwordsLabels          :: !(Maybe [Text])
-    , _ppPrice                  :: !(Maybe Price)
-    , _ppPromotionIds           :: !(Maybe [Text])
-    , _ppSizeType               :: !(Maybe Text)
-    , _ppMobileLink             :: !(Maybe Text)
-    , _ppTitle                  :: !(Maybe Text)
-    , _ppAdult                  :: !(Maybe Bool)
-    , _ppContentLanguage        :: !(Maybe Text)
-    , _ppAspects                :: !(Maybe [ProductAspect])
-    , _ppEnergyEfficiencyClass  :: !(Maybe Text)
-    , _ppDisplayAdsSimilarIds   :: !(Maybe [Text])
-    , _ppMpn                    :: !(Maybe Text)
-    , _ppCondition              :: !(Maybe Text)
-    , _ppSizes                  :: !(Maybe [Text])
-    , _ppIsBundle               :: !(Maybe Bool)
-    , _ppDescription            :: !(Maybe Text)
-    , _ppCustomLabel4           :: !(Maybe Text)
-    , _ppDisplayAdsId           :: !(Maybe Text)
+    { _prorDisplayAdsLink           :: !(Maybe Text)
+    , _prorCustomLabel1             :: !(Maybe Text)
+    , _prorShippingWidth            :: !(Maybe ProductShippingDimension)
+    , _prorImageLink                :: !(Maybe Text)
+    , _prorIncludedDestinations     :: !(Maybe [Text])
+    , _prorDisplayAdsValue          :: !(Maybe (Textual Double))
+    , _prorLoyaltyPoints            :: !(Maybe LoyaltyPoints)
+    , _prorAdditionalImageLinks     :: !(Maybe [Text])
+    , _prorExcludedDestinations     :: !(Maybe [Text])
+    , _prorColor                    :: !(Maybe Text)
+    , _prorCustomLabel0             :: !(Maybe Text)
+    , _prorKind                     :: !Text
+    , _prorMinHandlingTime          :: !(Maybe (Textual Int64))
+    , _prorMultipack                :: !(Maybe (Textual Int64))
+    , _prorPattern                  :: !(Maybe Text)
+    , _prorLink                     :: !(Maybe Text)
+    , _prorProductTypes             :: !(Maybe [Text])
+    , _prorSizeSystem               :: !(Maybe Text)
+    , _prorUnitPricingBaseMeasure   :: !(Maybe ProductUnitPricingBaseMeasure)
+    , _prorTaxes                    :: !(Maybe [ProductTax])
+    , _prorMaterial                 :: !(Maybe Text)
+    , _prorInstallment              :: !(Maybe Installment)
+    , _prorChannel                  :: !(Maybe Text)
+    , _prorIdentifierExists         :: !(Maybe Bool)
+    , _prorBrand                    :: !(Maybe Text)
+    , _prorUnitPricingMeasure       :: !(Maybe ProductUnitPricingMeasure)
+    , _prorSalePrice                :: !(Maybe Price)
+    , _prorCostOfGoodsSold          :: !(Maybe Price)
+    , _prorShippingLength           :: !(Maybe ProductShippingDimension)
+    , _prorCustomLabel3             :: !(Maybe Text)
+    , _prorMaxHandlingTime          :: !(Maybe (Textual Int64))
+    , _prorAvailability             :: !(Maybe Text)
+    , _prorMinEnergyEfficiencyClass :: !(Maybe Text)
+    , _prorTargetCountry            :: !(Maybe Text)
+    , _prorShippingLabel            :: !(Maybe Text)
+    , _prorAdsRedirect              :: !(Maybe Text)
+    , _prorCustomAttributes         :: !(Maybe [CustomAttribute])
+    , _prorGtin                     :: !(Maybe Text)
+    , _prorAgeGroup                 :: !(Maybe Text)
+    , _prorDisplayAdsTitle          :: !(Maybe Text)
+    , _prorMaxEnergyEfficiencyClass :: !(Maybe Text)
+    , _prorGender                   :: !(Maybe Text)
+    , _prorExpirationDate           :: !(Maybe Text)
+    , _prorItemGroupId              :: !(Maybe Text)
+    , _prorSalePriceEffectiveDate   :: !(Maybe Text)
+    , _prorCustomLabel2             :: !(Maybe Text)
+    , _prorGoogleProductCategory    :: !(Maybe Text)
+    , _prorShipping                 :: !(Maybe [ProductShipping])
+    , _prorShippingWeight           :: !(Maybe ProductShippingWeight)
+    , _prorSellOnGoogleQuantity     :: !(Maybe (Textual Int64))
+    , _prorShippingHeight           :: !(Maybe ProductShippingDimension)
+    , _prorAvailabilityDate         :: !(Maybe Text)
+    , _prorSource                   :: !(Maybe Text)
+    , _prorOfferId                  :: !(Maybe Text)
+    , _prorId                       :: !(Maybe Text)
+    , _prorPrice                    :: !(Maybe Price)
+    , _prorPromotionIds             :: !(Maybe [Text])
+    , _prorSizeType                 :: !(Maybe Text)
+    , _prorMobileLink               :: !(Maybe Text)
+    , _prorTitle                    :: !(Maybe Text)
+    , _prorAdult                    :: !(Maybe Bool)
+    , _prorContentLanguage          :: !(Maybe Text)
+    , _prorAdsLabels                :: !(Maybe [Text])
+    , _prorEnergyEfficiencyClass    :: !(Maybe Text)
+    , _prorDisplayAdsSimilarIds     :: !(Maybe [Text])
+    , _prorMpn                      :: !(Maybe Text)
+    , _prorCondition                :: !(Maybe Text)
+    , _prorSizes                    :: !(Maybe [Text])
+    , _prorIsBundle                 :: !(Maybe Bool)
+    , _prorDescription              :: !(Maybe Text)
+    , _prorCustomLabel4             :: !(Maybe Text)
+    , _prorDisplayAdsId             :: !(Maybe Text)
+    , _prorAdsGrouping              :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Product' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ppDisplayAdsLink'
+-- * 'prorDisplayAdsLink'
 --
--- * 'ppCustomLabel1'
+-- * 'prorCustomLabel1'
 --
--- * 'ppShippingWidth'
+-- * 'prorShippingWidth'
 --
--- * 'ppCustomGroups'
+-- * 'prorImageLink'
 --
--- * 'ppImageLink'
+-- * 'prorIncludedDestinations'
 --
--- * 'ppDisplayAdsValue'
+-- * 'prorDisplayAdsValue'
 --
--- * 'ppLoyaltyPoints'
+-- * 'prorLoyaltyPoints'
 --
--- * 'ppAdditionalImageLinks'
+-- * 'prorAdditionalImageLinks'
 --
--- * 'ppValidatedDestinations'
+-- * 'prorExcludedDestinations'
 --
--- * 'ppColor'
+-- * 'prorColor'
 --
--- * 'ppCustomLabel0'
+-- * 'prorCustomLabel0'
 --
--- * 'ppKind'
+-- * 'prorKind'
 --
--- * 'ppMultipack'
+-- * 'prorMinHandlingTime'
 --
--- * 'ppPattern'
+-- * 'prorMultipack'
 --
--- * 'ppLink'
+-- * 'prorPattern'
 --
--- * 'ppSizeSystem'
+-- * 'prorLink'
 --
--- * 'ppUnitPricingBaseMeasure'
+-- * 'prorProductTypes'
 --
--- * 'ppTaxes'
+-- * 'prorSizeSystem'
 --
--- * 'ppMaterial'
+-- * 'prorUnitPricingBaseMeasure'
 --
--- * 'ppInstallment'
+-- * 'prorTaxes'
 --
--- * 'ppChannel'
+-- * 'prorMaterial'
 --
--- * 'ppProductType'
+-- * 'prorInstallment'
 --
--- * 'ppIdentifierExists'
+-- * 'prorChannel'
 --
--- * 'ppOnlineOnly'
+-- * 'prorIdentifierExists'
 --
--- * 'ppBrand'
+-- * 'prorBrand'
 --
--- * 'ppUnitPricingMeasure'
+-- * 'prorUnitPricingMeasure'
 --
--- * 'ppSalePrice'
+-- * 'prorSalePrice'
 --
--- * 'ppShippingLength'
+-- * 'prorCostOfGoodsSold'
 --
--- * 'ppCustomLabel3'
+-- * 'prorShippingLength'
 --
--- * 'ppWarnings'
+-- * 'prorCustomLabel3'
 --
--- * 'ppAdditionalProductTypes'
+-- * 'prorMaxHandlingTime'
 --
--- * 'ppAvailability'
+-- * 'prorAvailability'
 --
--- * 'ppTargetCountry'
+-- * 'prorMinEnergyEfficiencyClass'
 --
--- * 'ppShippingLabel'
+-- * 'prorTargetCountry'
 --
--- * 'ppCustomAttributes'
+-- * 'prorShippingLabel'
 --
--- * 'ppGtin'
+-- * 'prorAdsRedirect'
 --
--- * 'ppAgeGroup'
+-- * 'prorCustomAttributes'
 --
--- * 'ppDisplayAdsTitle'
+-- * 'prorGtin'
 --
--- * 'ppGender'
+-- * 'prorAgeGroup'
 --
--- * 'ppDestinations'
+-- * 'prorDisplayAdsTitle'
 --
--- * 'ppExpirationDate'
+-- * 'prorMaxEnergyEfficiencyClass'
 --
--- * 'ppItemGroupId'
+-- * 'prorGender'
 --
--- * 'ppAdwordsGrouping'
+-- * 'prorExpirationDate'
 --
--- * 'ppSalePriceEffectiveDate'
+-- * 'prorItemGroupId'
 --
--- * 'ppCustomLabel2'
+-- * 'prorSalePriceEffectiveDate'
 --
--- * 'ppGoogleProductCategory'
+-- * 'prorCustomLabel2'
 --
--- * 'ppShipping'
+-- * 'prorGoogleProductCategory'
 --
--- * 'ppAdwordsRedirect'
+-- * 'prorShipping'
 --
--- * 'ppShippingWeight'
+-- * 'prorShippingWeight'
 --
--- * 'ppSellOnGoogleQuantity'
+-- * 'prorSellOnGoogleQuantity'
 --
--- * 'ppShippingHeight'
+-- * 'prorShippingHeight'
 --
--- * 'ppAvailabilityDate'
+-- * 'prorAvailabilityDate'
 --
--- * 'ppOfferId'
+-- * 'prorSource'
 --
--- * 'ppId'
+-- * 'prorOfferId'
 --
--- * 'ppAdwordsLabels'
+-- * 'prorId'
 --
--- * 'ppPrice'
+-- * 'prorPrice'
 --
--- * 'ppPromotionIds'
+-- * 'prorPromotionIds'
 --
--- * 'ppSizeType'
+-- * 'prorSizeType'
 --
--- * 'ppMobileLink'
+-- * 'prorMobileLink'
 --
--- * 'ppTitle'
+-- * 'prorTitle'
 --
--- * 'ppAdult'
+-- * 'prorAdult'
 --
--- * 'ppContentLanguage'
+-- * 'prorContentLanguage'
 --
--- * 'ppAspects'
+-- * 'prorAdsLabels'
 --
--- * 'ppEnergyEfficiencyClass'
+-- * 'prorEnergyEfficiencyClass'
 --
--- * 'ppDisplayAdsSimilarIds'
+-- * 'prorDisplayAdsSimilarIds'
 --
--- * 'ppMpn'
+-- * 'prorMpn'
 --
--- * 'ppCondition'
+-- * 'prorCondition'
 --
--- * 'ppSizes'
+-- * 'prorSizes'
 --
--- * 'ppIsBundle'
+-- * 'prorIsBundle'
 --
--- * 'ppDescription'
+-- * 'prorDescription'
 --
--- * 'ppCustomLabel4'
+-- * 'prorCustomLabel4'
 --
--- * 'ppDisplayAdsId'
+-- * 'prorDisplayAdsId'
+--
+-- * 'prorAdsGrouping'
 product
     :: Product
 product =
     Product'
-    { _ppDisplayAdsLink = Nothing
-    , _ppCustomLabel1 = Nothing
-    , _ppShippingWidth = Nothing
-    , _ppCustomGroups = Nothing
-    , _ppImageLink = Nothing
-    , _ppDisplayAdsValue = Nothing
-    , _ppLoyaltyPoints = Nothing
-    , _ppAdditionalImageLinks = Nothing
-    , _ppValidatedDestinations = Nothing
-    , _ppColor = Nothing
-    , _ppCustomLabel0 = Nothing
-    , _ppKind = "content#product"
-    , _ppMultipack = Nothing
-    , _ppPattern = Nothing
-    , _ppLink = Nothing
-    , _ppSizeSystem = Nothing
-    , _ppUnitPricingBaseMeasure = Nothing
-    , _ppTaxes = Nothing
-    , _ppMaterial = Nothing
-    , _ppInstallment = Nothing
-    , _ppChannel = Nothing
-    , _ppProductType = Nothing
-    , _ppIdentifierExists = Nothing
-    , _ppOnlineOnly = Nothing
-    , _ppBrand = Nothing
-    , _ppUnitPricingMeasure = Nothing
-    , _ppSalePrice = Nothing
-    , _ppShippingLength = Nothing
-    , _ppCustomLabel3 = Nothing
-    , _ppWarnings = Nothing
-    , _ppAdditionalProductTypes = Nothing
-    , _ppAvailability = Nothing
-    , _ppTargetCountry = Nothing
-    , _ppShippingLabel = Nothing
-    , _ppCustomAttributes = Nothing
-    , _ppGtin = Nothing
-    , _ppAgeGroup = Nothing
-    , _ppDisplayAdsTitle = Nothing
-    , _ppGender = Nothing
-    , _ppDestinations = Nothing
-    , _ppExpirationDate = Nothing
-    , _ppItemGroupId = Nothing
-    , _ppAdwordsGrouping = Nothing
-    , _ppSalePriceEffectiveDate = Nothing
-    , _ppCustomLabel2 = Nothing
-    , _ppGoogleProductCategory = Nothing
-    , _ppShipping = Nothing
-    , _ppAdwordsRedirect = Nothing
-    , _ppShippingWeight = Nothing
-    , _ppSellOnGoogleQuantity = Nothing
-    , _ppShippingHeight = Nothing
-    , _ppAvailabilityDate = Nothing
-    , _ppOfferId = Nothing
-    , _ppId = Nothing
-    , _ppAdwordsLabels = Nothing
-    , _ppPrice = Nothing
-    , _ppPromotionIds = Nothing
-    , _ppSizeType = Nothing
-    , _ppMobileLink = Nothing
-    , _ppTitle = Nothing
-    , _ppAdult = Nothing
-    , _ppContentLanguage = Nothing
-    , _ppAspects = Nothing
-    , _ppEnergyEfficiencyClass = Nothing
-    , _ppDisplayAdsSimilarIds = Nothing
-    , _ppMpn = Nothing
-    , _ppCondition = Nothing
-    , _ppSizes = Nothing
-    , _ppIsBundle = Nothing
-    , _ppDescription = Nothing
-    , _ppCustomLabel4 = Nothing
-    , _ppDisplayAdsId = Nothing
+    { _prorDisplayAdsLink = Nothing
+    , _prorCustomLabel1 = Nothing
+    , _prorShippingWidth = Nothing
+    , _prorImageLink = Nothing
+    , _prorIncludedDestinations = Nothing
+    , _prorDisplayAdsValue = Nothing
+    , _prorLoyaltyPoints = Nothing
+    , _prorAdditionalImageLinks = Nothing
+    , _prorExcludedDestinations = Nothing
+    , _prorColor = Nothing
+    , _prorCustomLabel0 = Nothing
+    , _prorKind = "content#product"
+    , _prorMinHandlingTime = Nothing
+    , _prorMultipack = Nothing
+    , _prorPattern = Nothing
+    , _prorLink = Nothing
+    , _prorProductTypes = Nothing
+    , _prorSizeSystem = Nothing
+    , _prorUnitPricingBaseMeasure = Nothing
+    , _prorTaxes = Nothing
+    , _prorMaterial = Nothing
+    , _prorInstallment = Nothing
+    , _prorChannel = Nothing
+    , _prorIdentifierExists = Nothing
+    , _prorBrand = Nothing
+    , _prorUnitPricingMeasure = Nothing
+    , _prorSalePrice = Nothing
+    , _prorCostOfGoodsSold = Nothing
+    , _prorShippingLength = Nothing
+    , _prorCustomLabel3 = Nothing
+    , _prorMaxHandlingTime = Nothing
+    , _prorAvailability = Nothing
+    , _prorMinEnergyEfficiencyClass = Nothing
+    , _prorTargetCountry = Nothing
+    , _prorShippingLabel = Nothing
+    , _prorAdsRedirect = Nothing
+    , _prorCustomAttributes = Nothing
+    , _prorGtin = Nothing
+    , _prorAgeGroup = Nothing
+    , _prorDisplayAdsTitle = Nothing
+    , _prorMaxEnergyEfficiencyClass = Nothing
+    , _prorGender = Nothing
+    , _prorExpirationDate = Nothing
+    , _prorItemGroupId = Nothing
+    , _prorSalePriceEffectiveDate = Nothing
+    , _prorCustomLabel2 = Nothing
+    , _prorGoogleProductCategory = Nothing
+    , _prorShipping = Nothing
+    , _prorShippingWeight = Nothing
+    , _prorSellOnGoogleQuantity = Nothing
+    , _prorShippingHeight = Nothing
+    , _prorAvailabilityDate = Nothing
+    , _prorSource = Nothing
+    , _prorOfferId = Nothing
+    , _prorId = Nothing
+    , _prorPrice = Nothing
+    , _prorPromotionIds = Nothing
+    , _prorSizeType = Nothing
+    , _prorMobileLink = Nothing
+    , _prorTitle = Nothing
+    , _prorAdult = Nothing
+    , _prorContentLanguage = Nothing
+    , _prorAdsLabels = Nothing
+    , _prorEnergyEfficiencyClass = Nothing
+    , _prorDisplayAdsSimilarIds = Nothing
+    , _prorMpn = Nothing
+    , _prorCondition = Nothing
+    , _prorSizes = Nothing
+    , _prorIsBundle = Nothing
+    , _prorDescription = Nothing
+    , _prorCustomLabel4 = Nothing
+    , _prorDisplayAdsId = Nothing
+    , _prorAdsGrouping = Nothing
     }
 
 -- | URL directly to your item\'s landing page for dynamic remarketing
 -- campaigns.
-ppDisplayAdsLink :: Lens' Product (Maybe Text)
-ppDisplayAdsLink
-  = lens _ppDisplayAdsLink
-      (\ s a -> s{_ppDisplayAdsLink = a})
+prorDisplayAdsLink :: Lens' Product (Maybe Text)
+prorDisplayAdsLink
+  = lens _prorDisplayAdsLink
+      (\ s a -> s{_prorDisplayAdsLink = a})
 
 -- | Custom label 1 for custom grouping of items in a Shopping campaign.
-ppCustomLabel1 :: Lens' Product (Maybe Text)
-ppCustomLabel1
-  = lens _ppCustomLabel1
-      (\ s a -> s{_ppCustomLabel1 = a})
+prorCustomLabel1 :: Lens' Product (Maybe Text)
+prorCustomLabel1
+  = lens _prorCustomLabel1
+      (\ s a -> s{_prorCustomLabel1 = a})
 
 -- | Width of the item for shipping.
-ppShippingWidth :: Lens' Product (Maybe ProductShippingDimension)
-ppShippingWidth
-  = lens _ppShippingWidth
-      (\ s a -> s{_ppShippingWidth = a})
+prorShippingWidth :: Lens' Product (Maybe ProductShippingDimension)
+prorShippingWidth
+  = lens _prorShippingWidth
+      (\ s a -> s{_prorShippingWidth = a})
 
--- | A list of custom (merchant-provided) custom attribute groups.
-ppCustomGroups :: Lens' Product [ProductCustomGroup]
-ppCustomGroups
-  = lens _ppCustomGroups
-      (\ s a -> s{_ppCustomGroups = a})
+-- | URL of an image of the item.
+prorImageLink :: Lens' Product (Maybe Text)
+prorImageLink
+  = lens _prorImageLink
+      (\ s a -> s{_prorImageLink = a})
+
+-- | The list of destinations to include for this target (corresponds to
+-- checked check boxes in Merchant Center). Default destinations are always
+-- included unless provided in the excluded_destination field.
+prorIncludedDestinations :: Lens' Product [Text]
+prorIncludedDestinations
+  = lens _prorIncludedDestinations
+      (\ s a -> s{_prorIncludedDestinations = a})
       . _Default
       . _Coerce
 
--- | URL of an image of the item.
-ppImageLink :: Lens' Product (Maybe Text)
-ppImageLink
-  = lens _ppImageLink (\ s a -> s{_ppImageLink = a})
-
 -- | Offer margin for dynamic remarketing campaigns.
-ppDisplayAdsValue :: Lens' Product (Maybe Double)
-ppDisplayAdsValue
-  = lens _ppDisplayAdsValue
-      (\ s a -> s{_ppDisplayAdsValue = a})
+prorDisplayAdsValue :: Lens' Product (Maybe Double)
+prorDisplayAdsValue
+  = lens _prorDisplayAdsValue
+      (\ s a -> s{_prorDisplayAdsValue = a})
       . mapping _Coerce
 
 -- | Loyalty points that users receive after purchasing the item. Japan only.
-ppLoyaltyPoints :: Lens' Product (Maybe LoyaltyPoints)
-ppLoyaltyPoints
-  = lens _ppLoyaltyPoints
-      (\ s a -> s{_ppLoyaltyPoints = a})
+prorLoyaltyPoints :: Lens' Product (Maybe LoyaltyPoints)
+prorLoyaltyPoints
+  = lens _prorLoyaltyPoints
+      (\ s a -> s{_prorLoyaltyPoints = a})
 
 -- | Additional URLs of images of the item.
-ppAdditionalImageLinks :: Lens' Product [Text]
-ppAdditionalImageLinks
-  = lens _ppAdditionalImageLinks
-      (\ s a -> s{_ppAdditionalImageLinks = a})
+prorAdditionalImageLinks :: Lens' Product [Text]
+prorAdditionalImageLinks
+  = lens _prorAdditionalImageLinks
+      (\ s a -> s{_prorAdditionalImageLinks = a})
       . _Default
       . _Coerce
 
--- | The read-only list of intended destinations which passed validation.
-ppValidatedDestinations :: Lens' Product [Text]
-ppValidatedDestinations
-  = lens _ppValidatedDestinations
-      (\ s a -> s{_ppValidatedDestinations = a})
+-- | The list of destinations to exclude for this target (corresponds to
+-- unchecked check boxes in Merchant Center).
+prorExcludedDestinations :: Lens' Product [Text]
+prorExcludedDestinations
+  = lens _prorExcludedDestinations
+      (\ s a -> s{_prorExcludedDestinations = a})
       . _Default
       . _Coerce
 
 -- | Color of the item.
-ppColor :: Lens' Product (Maybe Text)
-ppColor = lens _ppColor (\ s a -> s{_ppColor = a})
+prorColor :: Lens' Product (Maybe Text)
+prorColor
+  = lens _prorColor (\ s a -> s{_prorColor = a})
 
 -- | Custom label 0 for custom grouping of items in a Shopping campaign.
-ppCustomLabel0 :: Lens' Product (Maybe Text)
-ppCustomLabel0
-  = lens _ppCustomLabel0
-      (\ s a -> s{_ppCustomLabel0 = a})
+prorCustomLabel0 :: Lens' Product (Maybe Text)
+prorCustomLabel0
+  = lens _prorCustomLabel0
+      (\ s a -> s{_prorCustomLabel0 = a})
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#product\".
-ppKind :: Lens' Product Text
-ppKind = lens _ppKind (\ s a -> s{_ppKind = a})
+prorKind :: Lens' Product Text
+prorKind = lens _prorKind (\ s a -> s{_prorKind = a})
+
+-- | Minimal product handling time (in business days).
+prorMinHandlingTime :: Lens' Product (Maybe Int64)
+prorMinHandlingTime
+  = lens _prorMinHandlingTime
+      (\ s a -> s{_prorMinHandlingTime = a})
+      . mapping _Coerce
 
 -- | The number of identical products in a merchant-defined multipack.
-ppMultipack :: Lens' Product (Maybe Int64)
-ppMultipack
-  = lens _ppMultipack (\ s a -> s{_ppMultipack = a}) .
-      mapping _Coerce
+prorMultipack :: Lens' Product (Maybe Int64)
+prorMultipack
+  = lens _prorMultipack
+      (\ s a -> s{_prorMultipack = a})
+      . mapping _Coerce
 
 -- | The item\'s pattern (e.g. polka dots).
-ppPattern :: Lens' Product (Maybe Text)
-ppPattern
-  = lens _ppPattern (\ s a -> s{_ppPattern = a})
+prorPattern :: Lens' Product (Maybe Text)
+prorPattern
+  = lens _prorPattern (\ s a -> s{_prorPattern = a})
 
 -- | URL directly linking to your item\'s page on your website.
-ppLink :: Lens' Product (Maybe Text)
-ppLink = lens _ppLink (\ s a -> s{_ppLink = a})
+prorLink :: Lens' Product (Maybe Text)
+prorLink = lens _prorLink (\ s a -> s{_prorLink = a})
+
+-- | Categories of the item (formatted as in products feed specification).
+prorProductTypes :: Lens' Product [Text]
+prorProductTypes
+  = lens _prorProductTypes
+      (\ s a -> s{_prorProductTypes = a})
+      . _Default
+      . _Coerce
 
 -- | System in which the size is specified. Recommended for apparel items.
-ppSizeSystem :: Lens' Product (Maybe Text)
-ppSizeSystem
-  = lens _ppSizeSystem (\ s a -> s{_ppSizeSystem = a})
+prorSizeSystem :: Lens' Product (Maybe Text)
+prorSizeSystem
+  = lens _prorSizeSystem
+      (\ s a -> s{_prorSizeSystem = a})
 
 -- | The preference of the denominator of the unit price.
-ppUnitPricingBaseMeasure :: Lens' Product (Maybe ProductUnitPricingBaseMeasure)
-ppUnitPricingBaseMeasure
-  = lens _ppUnitPricingBaseMeasure
-      (\ s a -> s{_ppUnitPricingBaseMeasure = a})
+prorUnitPricingBaseMeasure :: Lens' Product (Maybe ProductUnitPricingBaseMeasure)
+prorUnitPricingBaseMeasure
+  = lens _prorUnitPricingBaseMeasure
+      (\ s a -> s{_prorUnitPricingBaseMeasure = a})
 
 -- | Tax information.
-ppTaxes :: Lens' Product [ProductTax]
-ppTaxes
-  = lens _ppTaxes (\ s a -> s{_ppTaxes = a}) . _Default
+prorTaxes :: Lens' Product [ProductTax]
+prorTaxes
+  = lens _prorTaxes (\ s a -> s{_prorTaxes = a}) .
+      _Default
       . _Coerce
 
 -- | The material of which the item is made.
-ppMaterial :: Lens' Product (Maybe Text)
-ppMaterial
-  = lens _ppMaterial (\ s a -> s{_ppMaterial = a})
+prorMaterial :: Lens' Product (Maybe Text)
+prorMaterial
+  = lens _prorMaterial (\ s a -> s{_prorMaterial = a})
 
 -- | Number and amount of installments to pay for an item. Brazil only.
-ppInstallment :: Lens' Product (Maybe Installment)
-ppInstallment
-  = lens _ppInstallment
-      (\ s a -> s{_ppInstallment = a})
+prorInstallment :: Lens' Product (Maybe Installment)
+prorInstallment
+  = lens _prorInstallment
+      (\ s a -> s{_prorInstallment = a})
 
 -- | The item\'s channel (online or local).
-ppChannel :: Lens' Product (Maybe Text)
-ppChannel
-  = lens _ppChannel (\ s a -> s{_ppChannel = a})
-
--- | Your category of the item (formatted as in products feed specification).
-ppProductType :: Lens' Product (Maybe Text)
-ppProductType
-  = lens _ppProductType
-      (\ s a -> s{_ppProductType = a})
+prorChannel :: Lens' Product (Maybe Text)
+prorChannel
+  = lens _prorChannel (\ s a -> s{_prorChannel = a})
 
 -- | False when the item does not have unique product identifiers appropriate
 -- to its category, such as GTIN, MPN, and brand. Required according to the
 -- Unique Product Identifier Rules for all target countries except for
 -- Canada.
-ppIdentifierExists :: Lens' Product (Maybe Bool)
-ppIdentifierExists
-  = lens _ppIdentifierExists
-      (\ s a -> s{_ppIdentifierExists = a})
-
--- | Whether an item is available for purchase only online.
-ppOnlineOnly :: Lens' Product (Maybe Bool)
-ppOnlineOnly
-  = lens _ppOnlineOnly (\ s a -> s{_ppOnlineOnly = a})
+prorIdentifierExists :: Lens' Product (Maybe Bool)
+prorIdentifierExists
+  = lens _prorIdentifierExists
+      (\ s a -> s{_prorIdentifierExists = a})
 
 -- | Brand of the item.
-ppBrand :: Lens' Product (Maybe Text)
-ppBrand = lens _ppBrand (\ s a -> s{_ppBrand = a})
+prorBrand :: Lens' Product (Maybe Text)
+prorBrand
+  = lens _prorBrand (\ s a -> s{_prorBrand = a})
 
 -- | The measure and dimension of an item.
-ppUnitPricingMeasure :: Lens' Product (Maybe ProductUnitPricingMeasure)
-ppUnitPricingMeasure
-  = lens _ppUnitPricingMeasure
-      (\ s a -> s{_ppUnitPricingMeasure = a})
+prorUnitPricingMeasure :: Lens' Product (Maybe ProductUnitPricingMeasure)
+prorUnitPricingMeasure
+  = lens _prorUnitPricingMeasure
+      (\ s a -> s{_prorUnitPricingMeasure = a})
 
 -- | Advertised sale price of the item.
-ppSalePrice :: Lens' Product (Maybe Price)
-ppSalePrice
-  = lens _ppSalePrice (\ s a -> s{_ppSalePrice = a})
+prorSalePrice :: Lens' Product (Maybe Price)
+prorSalePrice
+  = lens _prorSalePrice
+      (\ s a -> s{_prorSalePrice = a})
+
+-- | Cost of goods sold. Used for gross profit reporting.
+prorCostOfGoodsSold :: Lens' Product (Maybe Price)
+prorCostOfGoodsSold
+  = lens _prorCostOfGoodsSold
+      (\ s a -> s{_prorCostOfGoodsSold = a})
 
 -- | Length of the item for shipping.
-ppShippingLength :: Lens' Product (Maybe ProductShippingDimension)
-ppShippingLength
-  = lens _ppShippingLength
-      (\ s a -> s{_ppShippingLength = a})
+prorShippingLength :: Lens' Product (Maybe ProductShippingDimension)
+prorShippingLength
+  = lens _prorShippingLength
+      (\ s a -> s{_prorShippingLength = a})
 
 -- | Custom label 3 for custom grouping of items in a Shopping campaign.
-ppCustomLabel3 :: Lens' Product (Maybe Text)
-ppCustomLabel3
-  = lens _ppCustomLabel3
-      (\ s a -> s{_ppCustomLabel3 = a})
+prorCustomLabel3 :: Lens' Product (Maybe Text)
+prorCustomLabel3
+  = lens _prorCustomLabel3
+      (\ s a -> s{_prorCustomLabel3 = a})
 
--- | Read-only warnings.
-ppWarnings :: Lens' Product [Error']
-ppWarnings
-  = lens _ppWarnings (\ s a -> s{_ppWarnings = a}) .
-      _Default
-      . _Coerce
-
--- | Additional categories of the item (formatted as in products feed
--- specification).
-ppAdditionalProductTypes :: Lens' Product [Text]
-ppAdditionalProductTypes
-  = lens _ppAdditionalProductTypes
-      (\ s a -> s{_ppAdditionalProductTypes = a})
-      . _Default
-      . _Coerce
+-- | Maximal product handling time (in business days).
+prorMaxHandlingTime :: Lens' Product (Maybe Int64)
+prorMaxHandlingTime
+  = lens _prorMaxHandlingTime
+      (\ s a -> s{_prorMaxHandlingTime = a})
+      . mapping _Coerce
 
 -- | Availability status of the item.
-ppAvailability :: Lens' Product (Maybe Text)
-ppAvailability
-  = lens _ppAvailability
-      (\ s a -> s{_ppAvailability = a})
+prorAvailability :: Lens' Product (Maybe Text)
+prorAvailability
+  = lens _prorAvailability
+      (\ s a -> s{_prorAvailability = a})
+
+-- | The energy efficiency class as defined in EU directive 2010\/30\/EU.
+prorMinEnergyEfficiencyClass :: Lens' Product (Maybe Text)
+prorMinEnergyEfficiencyClass
+  = lens _prorMinEnergyEfficiencyClass
+      (\ s a -> s{_prorMinEnergyEfficiencyClass = a})
 
 -- | The CLDR territory code for the item.
-ppTargetCountry :: Lens' Product (Maybe Text)
-ppTargetCountry
-  = lens _ppTargetCountry
-      (\ s a -> s{_ppTargetCountry = a})
+prorTargetCountry :: Lens' Product (Maybe Text)
+prorTargetCountry
+  = lens _prorTargetCountry
+      (\ s a -> s{_prorTargetCountry = a})
 
 -- | The shipping label of the product, used to group product in
 -- account-level shipping rules.
-ppShippingLabel :: Lens' Product (Maybe Text)
-ppShippingLabel
-  = lens _ppShippingLabel
-      (\ s a -> s{_ppShippingLabel = a})
+prorShippingLabel :: Lens' Product (Maybe Text)
+prorShippingLabel
+  = lens _prorShippingLabel
+      (\ s a -> s{_prorShippingLabel = a})
+
+-- | Allows advertisers to override the item URL when the product is shown
+-- within the context of Product Ads.
+prorAdsRedirect :: Lens' Product (Maybe Text)
+prorAdsRedirect
+  = lens _prorAdsRedirect
+      (\ s a -> s{_prorAdsRedirect = a})
 
 -- | A list of custom (merchant-provided) attributes. It can also be used for
 -- submitting any attribute of the feed specification in its generic form
 -- (e.g., { \"name\": \"size type\", \"type\": \"text\", \"value\":
 -- \"regular\" }). This is useful for submitting attributes not explicitly
 -- exposed by the API.
-ppCustomAttributes :: Lens' Product [ProductCustomAttribute]
-ppCustomAttributes
-  = lens _ppCustomAttributes
-      (\ s a -> s{_ppCustomAttributes = a})
+prorCustomAttributes :: Lens' Product [CustomAttribute]
+prorCustomAttributes
+  = lens _prorCustomAttributes
+      (\ s a -> s{_prorCustomAttributes = a})
       . _Default
       . _Coerce
 
 -- | Global Trade Item Number (GTIN) of the item.
-ppGtin :: Lens' Product (Maybe Text)
-ppGtin = lens _ppGtin (\ s a -> s{_ppGtin = a})
+prorGtin :: Lens' Product (Maybe Text)
+prorGtin = lens _prorGtin (\ s a -> s{_prorGtin = a})
 
 -- | Target age group of the item.
-ppAgeGroup :: Lens' Product (Maybe Text)
-ppAgeGroup
-  = lens _ppAgeGroup (\ s a -> s{_ppAgeGroup = a})
+prorAgeGroup :: Lens' Product (Maybe Text)
+prorAgeGroup
+  = lens _prorAgeGroup (\ s a -> s{_prorAgeGroup = a})
 
 -- | Title of an item for dynamic remarketing campaigns.
-ppDisplayAdsTitle :: Lens' Product (Maybe Text)
-ppDisplayAdsTitle
-  = lens _ppDisplayAdsTitle
-      (\ s a -> s{_ppDisplayAdsTitle = a})
+prorDisplayAdsTitle :: Lens' Product (Maybe Text)
+prorDisplayAdsTitle
+  = lens _prorDisplayAdsTitle
+      (\ s a -> s{_prorDisplayAdsTitle = a})
+
+-- | The energy efficiency class as defined in EU directive 2010\/30\/EU.
+prorMaxEnergyEfficiencyClass :: Lens' Product (Maybe Text)
+prorMaxEnergyEfficiencyClass
+  = lens _prorMaxEnergyEfficiencyClass
+      (\ s a -> s{_prorMaxEnergyEfficiencyClass = a})
 
 -- | Target gender of the item.
-ppGender :: Lens' Product (Maybe Text)
-ppGender = lens _ppGender (\ s a -> s{_ppGender = a})
-
--- | Specifies the intended destinations for the product.
-ppDestinations :: Lens' Product [ProductDestination]
-ppDestinations
-  = lens _ppDestinations
-      (\ s a -> s{_ppDestinations = a})
-      . _Default
-      . _Coerce
+prorGender :: Lens' Product (Maybe Text)
+prorGender
+  = lens _prorGender (\ s a -> s{_prorGender = a})
 
 -- | Date on which the item should expire, as specified upon insertion, in
 -- ISO 8601 format. The actual expiration date in Google Shopping is
 -- exposed in productstatuses as googleExpirationDate and might be earlier
 -- if expirationDate is too far in the future.
-ppExpirationDate :: Lens' Product (Maybe Text)
-ppExpirationDate
-  = lens _ppExpirationDate
-      (\ s a -> s{_ppExpirationDate = a})
+prorExpirationDate :: Lens' Product (Maybe Text)
+prorExpirationDate
+  = lens _prorExpirationDate
+      (\ s a -> s{_prorExpirationDate = a})
 
 -- | Shared identifier for all variants of the same product.
-ppItemGroupId :: Lens' Product (Maybe Text)
-ppItemGroupId
-  = lens _ppItemGroupId
-      (\ s a -> s{_ppItemGroupId = a})
-
--- | Used to group items in an arbitrary way. Only for CPA%, discouraged
--- otherwise.
-ppAdwordsGrouping :: Lens' Product (Maybe Text)
-ppAdwordsGrouping
-  = lens _ppAdwordsGrouping
-      (\ s a -> s{_ppAdwordsGrouping = a})
+prorItemGroupId :: Lens' Product (Maybe Text)
+prorItemGroupId
+  = lens _prorItemGroupId
+      (\ s a -> s{_prorItemGroupId = a})
 
 -- | Date range during which the item is on sale (see products feed
 -- specification).
-ppSalePriceEffectiveDate :: Lens' Product (Maybe Text)
-ppSalePriceEffectiveDate
-  = lens _ppSalePriceEffectiveDate
-      (\ s a -> s{_ppSalePriceEffectiveDate = a})
+prorSalePriceEffectiveDate :: Lens' Product (Maybe Text)
+prorSalePriceEffectiveDate
+  = lens _prorSalePriceEffectiveDate
+      (\ s a -> s{_prorSalePriceEffectiveDate = a})
 
 -- | Custom label 2 for custom grouping of items in a Shopping campaign.
-ppCustomLabel2 :: Lens' Product (Maybe Text)
-ppCustomLabel2
-  = lens _ppCustomLabel2
-      (\ s a -> s{_ppCustomLabel2 = a})
+prorCustomLabel2 :: Lens' Product (Maybe Text)
+prorCustomLabel2
+  = lens _prorCustomLabel2
+      (\ s a -> s{_prorCustomLabel2 = a})
 
 -- | Google\'s category of the item (see Google product taxonomy).
-ppGoogleProductCategory :: Lens' Product (Maybe Text)
-ppGoogleProductCategory
-  = lens _ppGoogleProductCategory
-      (\ s a -> s{_ppGoogleProductCategory = a})
+prorGoogleProductCategory :: Lens' Product (Maybe Text)
+prorGoogleProductCategory
+  = lens _prorGoogleProductCategory
+      (\ s a -> s{_prorGoogleProductCategory = a})
 
 -- | Shipping rules.
-ppShipping :: Lens' Product [ProductShipping]
-ppShipping
-  = lens _ppShipping (\ s a -> s{_ppShipping = a}) .
-      _Default
-      . _Coerce
-
--- | Allows advertisers to override the item URL when the product is shown
--- within the context of Product Ads.
-ppAdwordsRedirect :: Lens' Product (Maybe Text)
-ppAdwordsRedirect
-  = lens _ppAdwordsRedirect
-      (\ s a -> s{_ppAdwordsRedirect = a})
-
--- | Weight of the item for shipping.
-ppShippingWeight :: Lens' Product (Maybe ProductShippingWeight)
-ppShippingWeight
-  = lens _ppShippingWeight
-      (\ s a -> s{_ppShippingWeight = a})
-
--- | The quantity of the product that is reserved for sell-on-google ads.
-ppSellOnGoogleQuantity :: Lens' Product (Maybe Int64)
-ppSellOnGoogleQuantity
-  = lens _ppSellOnGoogleQuantity
-      (\ s a -> s{_ppSellOnGoogleQuantity = a})
-      . mapping _Coerce
-
--- | Height of the item for shipping.
-ppShippingHeight :: Lens' Product (Maybe ProductShippingDimension)
-ppShippingHeight
-  = lens _ppShippingHeight
-      (\ s a -> s{_ppShippingHeight = a})
-
--- | The day a pre-ordered product becomes available for delivery, in ISO
--- 8601 format.
-ppAvailabilityDate :: Lens' Product (Maybe Text)
-ppAvailabilityDate
-  = lens _ppAvailabilityDate
-      (\ s a -> s{_ppAvailabilityDate = a})
-
--- | An identifier of the item. Leading and trailing whitespaces are stripped
--- and multiple whitespaces are replaced by a single whitespace upon
--- submission. Only valid unicode characters are accepted. See the products
--- feed specification for details.
-ppOfferId :: Lens' Product (Maybe Text)
-ppOfferId
-  = lens _ppOfferId (\ s a -> s{_ppOfferId = a})
-
--- | The REST id of the product.
-ppId :: Lens' Product (Maybe Text)
-ppId = lens _ppId (\ s a -> s{_ppId = a})
-
--- | Similar to adwords_grouping, but only works on CPC.
-ppAdwordsLabels :: Lens' Product [Text]
-ppAdwordsLabels
-  = lens _ppAdwordsLabels
-      (\ s a -> s{_ppAdwordsLabels = a})
+prorShipping :: Lens' Product [ProductShipping]
+prorShipping
+  = lens _prorShipping (\ s a -> s{_prorShipping = a})
       . _Default
       . _Coerce
 
+-- | Weight of the item for shipping.
+prorShippingWeight :: Lens' Product (Maybe ProductShippingWeight)
+prorShippingWeight
+  = lens _prorShippingWeight
+      (\ s a -> s{_prorShippingWeight = a})
+
+-- | The quantity of the product that is available for selling on Google.
+-- Supported only for online products.
+prorSellOnGoogleQuantity :: Lens' Product (Maybe Int64)
+prorSellOnGoogleQuantity
+  = lens _prorSellOnGoogleQuantity
+      (\ s a -> s{_prorSellOnGoogleQuantity = a})
+      . mapping _Coerce
+
+-- | Height of the item for shipping.
+prorShippingHeight :: Lens' Product (Maybe ProductShippingDimension)
+prorShippingHeight
+  = lens _prorShippingHeight
+      (\ s a -> s{_prorShippingHeight = a})
+
+-- | The day a pre-ordered product becomes available for delivery, in ISO
+-- 8601 format.
+prorAvailabilityDate :: Lens' Product (Maybe Text)
+prorAvailabilityDate
+  = lens _prorAvailabilityDate
+      (\ s a -> s{_prorAvailabilityDate = a})
+
+-- | The source of the offer, i.e., how the offer was created.
+prorSource :: Lens' Product (Maybe Text)
+prorSource
+  = lens _prorSource (\ s a -> s{_prorSource = a})
+
+-- | A unique identifier for the item. Leading and trailing whitespaces are
+-- stripped and multiple whitespaces are replaced by a single whitespace
+-- upon submission. Only valid unicode characters are accepted. See the
+-- products feed specification for details. Note: Content API methods that
+-- operate on products take the REST id of the product, not this
+-- identifier.
+prorOfferId :: Lens' Product (Maybe Text)
+prorOfferId
+  = lens _prorOfferId (\ s a -> s{_prorOfferId = a})
+
+-- | The REST id of the product. Content API methods that operate on products
+-- take this as their productId parameter. The REST id for a product is of
+-- the form channel:contentLanguage:targetCountry:offerId.
+prorId :: Lens' Product (Maybe Text)
+prorId = lens _prorId (\ s a -> s{_prorId = a})
+
 -- | Price of the item.
-ppPrice :: Lens' Product (Maybe Price)
-ppPrice = lens _ppPrice (\ s a -> s{_ppPrice = a})
+prorPrice :: Lens' Product (Maybe Price)
+prorPrice
+  = lens _prorPrice (\ s a -> s{_prorPrice = a})
 
 -- | The unique ID of a promotion.
-ppPromotionIds :: Lens' Product [Text]
-ppPromotionIds
-  = lens _ppPromotionIds
-      (\ s a -> s{_ppPromotionIds = a})
+prorPromotionIds :: Lens' Product [Text]
+prorPromotionIds
+  = lens _prorPromotionIds
+      (\ s a -> s{_prorPromotionIds = a})
       . _Default
       . _Coerce
 
 -- | The cut of the item. Recommended for apparel items.
-ppSizeType :: Lens' Product (Maybe Text)
-ppSizeType
-  = lens _ppSizeType (\ s a -> s{_ppSizeType = a})
+prorSizeType :: Lens' Product (Maybe Text)
+prorSizeType
+  = lens _prorSizeType (\ s a -> s{_prorSizeType = a})
 
 -- | Link to a mobile-optimized version of the landing page.
-ppMobileLink :: Lens' Product (Maybe Text)
-ppMobileLink
-  = lens _ppMobileLink (\ s a -> s{_ppMobileLink = a})
+prorMobileLink :: Lens' Product (Maybe Text)
+prorMobileLink
+  = lens _prorMobileLink
+      (\ s a -> s{_prorMobileLink = a})
 
 -- | Title of the item.
-ppTitle :: Lens' Product (Maybe Text)
-ppTitle = lens _ppTitle (\ s a -> s{_ppTitle = a})
+prorTitle :: Lens' Product (Maybe Text)
+prorTitle
+  = lens _prorTitle (\ s a -> s{_prorTitle = a})
 
 -- | Set to true if the item is targeted towards adults.
-ppAdult :: Lens' Product (Maybe Bool)
-ppAdult = lens _ppAdult (\ s a -> s{_ppAdult = a})
+prorAdult :: Lens' Product (Maybe Bool)
+prorAdult
+  = lens _prorAdult (\ s a -> s{_prorAdult = a})
 
 -- | The two-letter ISO 639-1 language code for the item.
-ppContentLanguage :: Lens' Product (Maybe Text)
-ppContentLanguage
-  = lens _ppContentLanguage
-      (\ s a -> s{_ppContentLanguage = a})
+prorContentLanguage :: Lens' Product (Maybe Text)
+prorContentLanguage
+  = lens _prorContentLanguage
+      (\ s a -> s{_prorContentLanguage = a})
 
--- | Specifies the intended aspects for the product.
-ppAspects :: Lens' Product [ProductAspect]
-ppAspects
-  = lens _ppAspects (\ s a -> s{_ppAspects = a}) .
-      _Default
+-- | Similar to ads_grouping, but only works on CPC.
+prorAdsLabels :: Lens' Product [Text]
+prorAdsLabels
+  = lens _prorAdsLabels
+      (\ s a -> s{_prorAdsLabels = a})
+      . _Default
       . _Coerce
 
 -- | The energy efficiency class as defined in EU directive 2010\/30\/EU.
-ppEnergyEfficiencyClass :: Lens' Product (Maybe Text)
-ppEnergyEfficiencyClass
-  = lens _ppEnergyEfficiencyClass
-      (\ s a -> s{_ppEnergyEfficiencyClass = a})
+prorEnergyEfficiencyClass :: Lens' Product (Maybe Text)
+prorEnergyEfficiencyClass
+  = lens _prorEnergyEfficiencyClass
+      (\ s a -> s{_prorEnergyEfficiencyClass = a})
 
 -- | Advertiser-specified recommendations.
-ppDisplayAdsSimilarIds :: Lens' Product [Text]
-ppDisplayAdsSimilarIds
-  = lens _ppDisplayAdsSimilarIds
-      (\ s a -> s{_ppDisplayAdsSimilarIds = a})
+prorDisplayAdsSimilarIds :: Lens' Product [Text]
+prorDisplayAdsSimilarIds
+  = lens _prorDisplayAdsSimilarIds
+      (\ s a -> s{_prorDisplayAdsSimilarIds = a})
       . _Default
       . _Coerce
 
 -- | Manufacturer Part Number (MPN) of the item.
-ppMpn :: Lens' Product (Maybe Text)
-ppMpn = lens _ppMpn (\ s a -> s{_ppMpn = a})
+prorMpn :: Lens' Product (Maybe Text)
+prorMpn = lens _prorMpn (\ s a -> s{_prorMpn = a})
 
 -- | Condition or state of the item.
-ppCondition :: Lens' Product (Maybe Text)
-ppCondition
-  = lens _ppCondition (\ s a -> s{_ppCondition = a})
+prorCondition :: Lens' Product (Maybe Text)
+prorCondition
+  = lens _prorCondition
+      (\ s a -> s{_prorCondition = a})
 
 -- | Size of the item.
-ppSizes :: Lens' Product [Text]
-ppSizes
-  = lens _ppSizes (\ s a -> s{_ppSizes = a}) . _Default
+prorSizes :: Lens' Product [Text]
+prorSizes
+  = lens _prorSizes (\ s a -> s{_prorSizes = a}) .
+      _Default
       . _Coerce
 
 -- | Whether the item is a merchant-defined bundle. A bundle is a custom
 -- grouping of different products sold by a merchant for a single price.
-ppIsBundle :: Lens' Product (Maybe Bool)
-ppIsBundle
-  = lens _ppIsBundle (\ s a -> s{_ppIsBundle = a})
+prorIsBundle :: Lens' Product (Maybe Bool)
+prorIsBundle
+  = lens _prorIsBundle (\ s a -> s{_prorIsBundle = a})
 
 -- | Description of the item.
-ppDescription :: Lens' Product (Maybe Text)
-ppDescription
-  = lens _ppDescription
-      (\ s a -> s{_ppDescription = a})
+prorDescription :: Lens' Product (Maybe Text)
+prorDescription
+  = lens _prorDescription
+      (\ s a -> s{_prorDescription = a})
 
 -- | Custom label 4 for custom grouping of items in a Shopping campaign.
-ppCustomLabel4 :: Lens' Product (Maybe Text)
-ppCustomLabel4
-  = lens _ppCustomLabel4
-      (\ s a -> s{_ppCustomLabel4 = a})
+prorCustomLabel4 :: Lens' Product (Maybe Text)
+prorCustomLabel4
+  = lens _prorCustomLabel4
+      (\ s a -> s{_prorCustomLabel4 = a})
 
 -- | An identifier for an item for dynamic remarketing campaigns.
-ppDisplayAdsId :: Lens' Product (Maybe Text)
-ppDisplayAdsId
-  = lens _ppDisplayAdsId
-      (\ s a -> s{_ppDisplayAdsId = a})
+prorDisplayAdsId :: Lens' Product (Maybe Text)
+prorDisplayAdsId
+  = lens _prorDisplayAdsId
+      (\ s a -> s{_prorDisplayAdsId = a})
+
+-- | Used to group items in an arbitrary way. Only for CPA%, discouraged
+-- otherwise.
+prorAdsGrouping :: Lens' Product (Maybe Text)
+prorAdsGrouping
+  = lens _prorAdsGrouping
+      (\ s a -> s{_prorAdsGrouping = a})
 
 instance FromJSON Product where
         parseJSON
@@ -10278,58 +13836,58 @@ instance FromJSON Product where
                  Product' <$>
                    (o .:? "displayAdsLink") <*> (o .:? "customLabel1")
                      <*> (o .:? "shippingWidth")
-                     <*> (o .:? "customGroups" .!= mempty)
                      <*> (o .:? "imageLink")
+                     <*> (o .:? "includedDestinations" .!= mempty)
                      <*> (o .:? "displayAdsValue")
                      <*> (o .:? "loyaltyPoints")
                      <*> (o .:? "additionalImageLinks" .!= mempty)
-                     <*> (o .:? "validatedDestinations" .!= mempty)
+                     <*> (o .:? "excludedDestinations" .!= mempty)
                      <*> (o .:? "color")
                      <*> (o .:? "customLabel0")
                      <*> (o .:? "kind" .!= "content#product")
+                     <*> (o .:? "minHandlingTime")
                      <*> (o .:? "multipack")
                      <*> (o .:? "pattern")
                      <*> (o .:? "link")
+                     <*> (o .:? "productTypes" .!= mempty)
                      <*> (o .:? "sizeSystem")
                      <*> (o .:? "unitPricingBaseMeasure")
                      <*> (o .:? "taxes" .!= mempty)
                      <*> (o .:? "material")
                      <*> (o .:? "installment")
                      <*> (o .:? "channel")
-                     <*> (o .:? "productType")
                      <*> (o .:? "identifierExists")
-                     <*> (o .:? "onlineOnly")
                      <*> (o .:? "brand")
                      <*> (o .:? "unitPricingMeasure")
                      <*> (o .:? "salePrice")
+                     <*> (o .:? "costOfGoodsSold")
                      <*> (o .:? "shippingLength")
                      <*> (o .:? "customLabel3")
-                     <*> (o .:? "warnings" .!= mempty)
-                     <*> (o .:? "additionalProductTypes" .!= mempty)
+                     <*> (o .:? "maxHandlingTime")
                      <*> (o .:? "availability")
+                     <*> (o .:? "minEnergyEfficiencyClass")
                      <*> (o .:? "targetCountry")
                      <*> (o .:? "shippingLabel")
+                     <*> (o .:? "adsRedirect")
                      <*> (o .:? "customAttributes" .!= mempty)
                      <*> (o .:? "gtin")
                      <*> (o .:? "ageGroup")
                      <*> (o .:? "displayAdsTitle")
+                     <*> (o .:? "maxEnergyEfficiencyClass")
                      <*> (o .:? "gender")
-                     <*> (o .:? "destinations" .!= mempty)
                      <*> (o .:? "expirationDate")
                      <*> (o .:? "itemGroupId")
-                     <*> (o .:? "adwordsGrouping")
                      <*> (o .:? "salePriceEffectiveDate")
                      <*> (o .:? "customLabel2")
                      <*> (o .:? "googleProductCategory")
                      <*> (o .:? "shipping" .!= mempty)
-                     <*> (o .:? "adwordsRedirect")
                      <*> (o .:? "shippingWeight")
                      <*> (o .:? "sellOnGoogleQuantity")
                      <*> (o .:? "shippingHeight")
                      <*> (o .:? "availabilityDate")
+                     <*> (o .:? "source")
                      <*> (o .:? "offerId")
                      <*> (o .:? "id")
-                     <*> (o .:? "adwordsLabels" .!= mempty)
                      <*> (o .:? "price")
                      <*> (o .:? "promotionIds" .!= mempty)
                      <*> (o .:? "sizeType")
@@ -10337,7 +13895,7 @@ instance FromJSON Product where
                      <*> (o .:? "title")
                      <*> (o .:? "adult")
                      <*> (o .:? "contentLanguage")
-                     <*> (o .:? "aspects" .!= mempty)
+                     <*> (o .:? "adsLabels" .!= mempty)
                      <*> (o .:? "energyEfficiencyClass")
                      <*> (o .:? "displayAdsSimilarIds" .!= mempty)
                      <*> (o .:? "mpn")
@@ -10346,91 +13904,253 @@ instance FromJSON Product where
                      <*> (o .:? "isBundle")
                      <*> (o .:? "description")
                      <*> (o .:? "customLabel4")
-                     <*> (o .:? "displayAdsId"))
+                     <*> (o .:? "displayAdsId")
+                     <*> (o .:? "adsGrouping"))
 
 instance ToJSON Product where
         toJSON Product'{..}
           = object
               (catMaybes
-                 [("displayAdsLink" .=) <$> _ppDisplayAdsLink,
-                  ("customLabel1" .=) <$> _ppCustomLabel1,
-                  ("shippingWidth" .=) <$> _ppShippingWidth,
-                  ("customGroups" .=) <$> _ppCustomGroups,
-                  ("imageLink" .=) <$> _ppImageLink,
-                  ("displayAdsValue" .=) <$> _ppDisplayAdsValue,
-                  ("loyaltyPoints" .=) <$> _ppLoyaltyPoints,
+                 [("displayAdsLink" .=) <$> _prorDisplayAdsLink,
+                  ("customLabel1" .=) <$> _prorCustomLabel1,
+                  ("shippingWidth" .=) <$> _prorShippingWidth,
+                  ("imageLink" .=) <$> _prorImageLink,
+                  ("includedDestinations" .=) <$>
+                    _prorIncludedDestinations,
+                  ("displayAdsValue" .=) <$> _prorDisplayAdsValue,
+                  ("loyaltyPoints" .=) <$> _prorLoyaltyPoints,
                   ("additionalImageLinks" .=) <$>
-                    _ppAdditionalImageLinks,
-                  ("validatedDestinations" .=) <$>
-                    _ppValidatedDestinations,
-                  ("color" .=) <$> _ppColor,
-                  ("customLabel0" .=) <$> _ppCustomLabel0,
-                  Just ("kind" .= _ppKind),
-                  ("multipack" .=) <$> _ppMultipack,
-                  ("pattern" .=) <$> _ppPattern,
-                  ("link" .=) <$> _ppLink,
-                  ("sizeSystem" .=) <$> _ppSizeSystem,
+                    _prorAdditionalImageLinks,
+                  ("excludedDestinations" .=) <$>
+                    _prorExcludedDestinations,
+                  ("color" .=) <$> _prorColor,
+                  ("customLabel0" .=) <$> _prorCustomLabel0,
+                  Just ("kind" .= _prorKind),
+                  ("minHandlingTime" .=) <$> _prorMinHandlingTime,
+                  ("multipack" .=) <$> _prorMultipack,
+                  ("pattern" .=) <$> _prorPattern,
+                  ("link" .=) <$> _prorLink,
+                  ("productTypes" .=) <$> _prorProductTypes,
+                  ("sizeSystem" .=) <$> _prorSizeSystem,
                   ("unitPricingBaseMeasure" .=) <$>
-                    _ppUnitPricingBaseMeasure,
-                  ("taxes" .=) <$> _ppTaxes,
-                  ("material" .=) <$> _ppMaterial,
-                  ("installment" .=) <$> _ppInstallment,
-                  ("channel" .=) <$> _ppChannel,
-                  ("productType" .=) <$> _ppProductType,
-                  ("identifierExists" .=) <$> _ppIdentifierExists,
-                  ("onlineOnly" .=) <$> _ppOnlineOnly,
-                  ("brand" .=) <$> _ppBrand,
-                  ("unitPricingMeasure" .=) <$> _ppUnitPricingMeasure,
-                  ("salePrice" .=) <$> _ppSalePrice,
-                  ("shippingLength" .=) <$> _ppShippingLength,
-                  ("customLabel3" .=) <$> _ppCustomLabel3,
-                  ("warnings" .=) <$> _ppWarnings,
-                  ("additionalProductTypes" .=) <$>
-                    _ppAdditionalProductTypes,
-                  ("availability" .=) <$> _ppAvailability,
-                  ("targetCountry" .=) <$> _ppTargetCountry,
-                  ("shippingLabel" .=) <$> _ppShippingLabel,
-                  ("customAttributes" .=) <$> _ppCustomAttributes,
-                  ("gtin" .=) <$> _ppGtin,
-                  ("ageGroup" .=) <$> _ppAgeGroup,
-                  ("displayAdsTitle" .=) <$> _ppDisplayAdsTitle,
-                  ("gender" .=) <$> _ppGender,
-                  ("destinations" .=) <$> _ppDestinations,
-                  ("expirationDate" .=) <$> _ppExpirationDate,
-                  ("itemGroupId" .=) <$> _ppItemGroupId,
-                  ("adwordsGrouping" .=) <$> _ppAdwordsGrouping,
+                    _prorUnitPricingBaseMeasure,
+                  ("taxes" .=) <$> _prorTaxes,
+                  ("material" .=) <$> _prorMaterial,
+                  ("installment" .=) <$> _prorInstallment,
+                  ("channel" .=) <$> _prorChannel,
+                  ("identifierExists" .=) <$> _prorIdentifierExists,
+                  ("brand" .=) <$> _prorBrand,
+                  ("unitPricingMeasure" .=) <$>
+                    _prorUnitPricingMeasure,
+                  ("salePrice" .=) <$> _prorSalePrice,
+                  ("costOfGoodsSold" .=) <$> _prorCostOfGoodsSold,
+                  ("shippingLength" .=) <$> _prorShippingLength,
+                  ("customLabel3" .=) <$> _prorCustomLabel3,
+                  ("maxHandlingTime" .=) <$> _prorMaxHandlingTime,
+                  ("availability" .=) <$> _prorAvailability,
+                  ("minEnergyEfficiencyClass" .=) <$>
+                    _prorMinEnergyEfficiencyClass,
+                  ("targetCountry" .=) <$> _prorTargetCountry,
+                  ("shippingLabel" .=) <$> _prorShippingLabel,
+                  ("adsRedirect" .=) <$> _prorAdsRedirect,
+                  ("customAttributes" .=) <$> _prorCustomAttributes,
+                  ("gtin" .=) <$> _prorGtin,
+                  ("ageGroup" .=) <$> _prorAgeGroup,
+                  ("displayAdsTitle" .=) <$> _prorDisplayAdsTitle,
+                  ("maxEnergyEfficiencyClass" .=) <$>
+                    _prorMaxEnergyEfficiencyClass,
+                  ("gender" .=) <$> _prorGender,
+                  ("expirationDate" .=) <$> _prorExpirationDate,
+                  ("itemGroupId" .=) <$> _prorItemGroupId,
                   ("salePriceEffectiveDate" .=) <$>
-                    _ppSalePriceEffectiveDate,
-                  ("customLabel2" .=) <$> _ppCustomLabel2,
+                    _prorSalePriceEffectiveDate,
+                  ("customLabel2" .=) <$> _prorCustomLabel2,
                   ("googleProductCategory" .=) <$>
-                    _ppGoogleProductCategory,
-                  ("shipping" .=) <$> _ppShipping,
-                  ("adwordsRedirect" .=) <$> _ppAdwordsRedirect,
-                  ("shippingWeight" .=) <$> _ppShippingWeight,
+                    _prorGoogleProductCategory,
+                  ("shipping" .=) <$> _prorShipping,
+                  ("shippingWeight" .=) <$> _prorShippingWeight,
                   ("sellOnGoogleQuantity" .=) <$>
-                    _ppSellOnGoogleQuantity,
-                  ("shippingHeight" .=) <$> _ppShippingHeight,
-                  ("availabilityDate" .=) <$> _ppAvailabilityDate,
-                  ("offerId" .=) <$> _ppOfferId, ("id" .=) <$> _ppId,
-                  ("adwordsLabels" .=) <$> _ppAdwordsLabels,
-                  ("price" .=) <$> _ppPrice,
-                  ("promotionIds" .=) <$> _ppPromotionIds,
-                  ("sizeType" .=) <$> _ppSizeType,
-                  ("mobileLink" .=) <$> _ppMobileLink,
-                  ("title" .=) <$> _ppTitle, ("adult" .=) <$> _ppAdult,
-                  ("contentLanguage" .=) <$> _ppContentLanguage,
-                  ("aspects" .=) <$> _ppAspects,
+                    _prorSellOnGoogleQuantity,
+                  ("shippingHeight" .=) <$> _prorShippingHeight,
+                  ("availabilityDate" .=) <$> _prorAvailabilityDate,
+                  ("source" .=) <$> _prorSource,
+                  ("offerId" .=) <$> _prorOfferId,
+                  ("id" .=) <$> _prorId, ("price" .=) <$> _prorPrice,
+                  ("promotionIds" .=) <$> _prorPromotionIds,
+                  ("sizeType" .=) <$> _prorSizeType,
+                  ("mobileLink" .=) <$> _prorMobileLink,
+                  ("title" .=) <$> _prorTitle,
+                  ("adult" .=) <$> _prorAdult,
+                  ("contentLanguage" .=) <$> _prorContentLanguage,
+                  ("adsLabels" .=) <$> _prorAdsLabels,
                   ("energyEfficiencyClass" .=) <$>
-                    _ppEnergyEfficiencyClass,
+                    _prorEnergyEfficiencyClass,
                   ("displayAdsSimilarIds" .=) <$>
-                    _ppDisplayAdsSimilarIds,
-                  ("mpn" .=) <$> _ppMpn,
-                  ("condition" .=) <$> _ppCondition,
-                  ("sizes" .=) <$> _ppSizes,
-                  ("isBundle" .=) <$> _ppIsBundle,
-                  ("description" .=) <$> _ppDescription,
-                  ("customLabel4" .=) <$> _ppCustomLabel4,
-                  ("displayAdsId" .=) <$> _ppDisplayAdsId])
+                    _prorDisplayAdsSimilarIds,
+                  ("mpn" .=) <$> _prorMpn,
+                  ("condition" .=) <$> _prorCondition,
+                  ("sizes" .=) <$> _prorSizes,
+                  ("isBundle" .=) <$> _prorIsBundle,
+                  ("description" .=) <$> _prorDescription,
+                  ("customLabel4" .=) <$> _prorCustomLabel4,
+                  ("displayAdsId" .=) <$> _prorDisplayAdsId,
+                  ("adsGrouping" .=) <$> _prorAdsGrouping])
+
+--
+-- /See:/ 'liaSettingsCustomBatchRequestEntry' smart constructor.
+data LiaSettingsCustomBatchRequestEntry = LiaSettingsCustomBatchRequestEntry'
+    { _lGmbEmail             :: !(Maybe Text)
+    , _lContactEmail         :: !(Maybe Text)
+    , _lMerchantId           :: !(Maybe (Textual Word64))
+    , _lCountry              :: !(Maybe Text)
+    , _lLiaSettings          :: !(Maybe LiaSettings)
+    , _lAccountId            :: !(Maybe (Textual Word64))
+    , _lMethod               :: !(Maybe Text)
+    , _lContactName          :: !(Maybe Text)
+    , _lPosExternalAccountId :: !(Maybe Text)
+    , _lPosDataProviderId    :: !(Maybe (Textual Word64))
+    , _lBatchId              :: !(Maybe (Textual Word32))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LiaSettingsCustomBatchRequestEntry' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lGmbEmail'
+--
+-- * 'lContactEmail'
+--
+-- * 'lMerchantId'
+--
+-- * 'lCountry'
+--
+-- * 'lLiaSettings'
+--
+-- * 'lAccountId'
+--
+-- * 'lMethod'
+--
+-- * 'lContactName'
+--
+-- * 'lPosExternalAccountId'
+--
+-- * 'lPosDataProviderId'
+--
+-- * 'lBatchId'
+liaSettingsCustomBatchRequestEntry
+    :: LiaSettingsCustomBatchRequestEntry
+liaSettingsCustomBatchRequestEntry =
+    LiaSettingsCustomBatchRequestEntry'
+    { _lGmbEmail = Nothing
+    , _lContactEmail = Nothing
+    , _lMerchantId = Nothing
+    , _lCountry = Nothing
+    , _lLiaSettings = Nothing
+    , _lAccountId = Nothing
+    , _lMethod = Nothing
+    , _lContactName = Nothing
+    , _lPosExternalAccountId = Nothing
+    , _lPosDataProviderId = Nothing
+    , _lBatchId = Nothing
+    }
+
+-- | The GMB account. Required only for RequestGmbAccess.
+lGmbEmail :: Lens' LiaSettingsCustomBatchRequestEntry (Maybe Text)
+lGmbEmail
+  = lens _lGmbEmail (\ s a -> s{_lGmbEmail = a})
+
+-- | Inventory validation contact email. Required only for
+-- SetInventoryValidationContact.
+lContactEmail :: Lens' LiaSettingsCustomBatchRequestEntry (Maybe Text)
+lContactEmail
+  = lens _lContactEmail
+      (\ s a -> s{_lContactEmail = a})
+
+-- | The ID of the managing account.
+lMerchantId :: Lens' LiaSettingsCustomBatchRequestEntry (Maybe Word64)
+lMerchantId
+  = lens _lMerchantId (\ s a -> s{_lMerchantId = a}) .
+      mapping _Coerce
+
+-- | The country code. Required only for RequestInventoryVerification.
+lCountry :: Lens' LiaSettingsCustomBatchRequestEntry (Maybe Text)
+lCountry = lens _lCountry (\ s a -> s{_lCountry = a})
+
+-- | The account Lia settings to update. Only defined if the method is
+-- update.
+lLiaSettings :: Lens' LiaSettingsCustomBatchRequestEntry (Maybe LiaSettings)
+lLiaSettings
+  = lens _lLiaSettings (\ s a -> s{_lLiaSettings = a})
+
+-- | The ID of the account for which to get\/update account shipping
+-- settings.
+lAccountId :: Lens' LiaSettingsCustomBatchRequestEntry (Maybe Word64)
+lAccountId
+  = lens _lAccountId (\ s a -> s{_lAccountId = a}) .
+      mapping _Coerce
+
+lMethod :: Lens' LiaSettingsCustomBatchRequestEntry (Maybe Text)
+lMethod = lens _lMethod (\ s a -> s{_lMethod = a})
+
+-- | Inventory validation contact name. Required only for
+-- SetInventoryValidationContact.
+lContactName :: Lens' LiaSettingsCustomBatchRequestEntry (Maybe Text)
+lContactName
+  = lens _lContactName (\ s a -> s{_lContactName = a})
+
+-- | The account ID by which this merchant is known to the POS provider.
+lPosExternalAccountId :: Lens' LiaSettingsCustomBatchRequestEntry (Maybe Text)
+lPosExternalAccountId
+  = lens _lPosExternalAccountId
+      (\ s a -> s{_lPosExternalAccountId = a})
+
+-- | The ID of POS data provider. Required only for SetPosProvider.
+lPosDataProviderId :: Lens' LiaSettingsCustomBatchRequestEntry (Maybe Word64)
+lPosDataProviderId
+  = lens _lPosDataProviderId
+      (\ s a -> s{_lPosDataProviderId = a})
+      . mapping _Coerce
+
+-- | An entry ID, unique within the batch request.
+lBatchId :: Lens' LiaSettingsCustomBatchRequestEntry (Maybe Word32)
+lBatchId
+  = lens _lBatchId (\ s a -> s{_lBatchId = a}) .
+      mapping _Coerce
+
+instance FromJSON LiaSettingsCustomBatchRequestEntry
+         where
+        parseJSON
+          = withObject "LiaSettingsCustomBatchRequestEntry"
+              (\ o ->
+                 LiaSettingsCustomBatchRequestEntry' <$>
+                   (o .:? "gmbEmail") <*> (o .:? "contactEmail") <*>
+                     (o .:? "merchantId")
+                     <*> (o .:? "country")
+                     <*> (o .:? "liaSettings")
+                     <*> (o .:? "accountId")
+                     <*> (o .:? "method")
+                     <*> (o .:? "contactName")
+                     <*> (o .:? "posExternalAccountId")
+                     <*> (o .:? "posDataProviderId")
+                     <*> (o .:? "batchId"))
+
+instance ToJSON LiaSettingsCustomBatchRequestEntry
+         where
+        toJSON LiaSettingsCustomBatchRequestEntry'{..}
+          = object
+              (catMaybes
+                 [("gmbEmail" .=) <$> _lGmbEmail,
+                  ("contactEmail" .=) <$> _lContactEmail,
+                  ("merchantId" .=) <$> _lMerchantId,
+                  ("country" .=) <$> _lCountry,
+                  ("liaSettings" .=) <$> _lLiaSettings,
+                  ("accountId" .=) <$> _lAccountId,
+                  ("method" .=) <$> _lMethod,
+                  ("contactName" .=) <$> _lContactName,
+                  ("posExternalAccountId" .=) <$>
+                    _lPosExternalAccountId,
+                  ("posDataProviderId" .=) <$> _lPosDataProviderId,
+                  ("batchId" .=) <$> _lBatchId])
 
 -- | A list of errors returned by a failed batch entry.
 --
@@ -10493,49 +14213,126 @@ instance ToJSON Errors where
                   ("message" .=) <$> _errMessage,
                   ("errors" .=) <$> _errErrors])
 
+--
+-- /See:/ 'liaInventorySettings' smart constructor.
+data LiaInventorySettings = LiaInventorySettings'
+    { _lisInventoryVerificationContactName   :: !(Maybe Text)
+    , _lisStatus                             :: !(Maybe Text)
+    , _lisInventoryVerificationContactEmail  :: !(Maybe Text)
+    , _lisInventoryVerificationContactStatus :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LiaInventorySettings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lisInventoryVerificationContactName'
+--
+-- * 'lisStatus'
+--
+-- * 'lisInventoryVerificationContactEmail'
+--
+-- * 'lisInventoryVerificationContactStatus'
+liaInventorySettings
+    :: LiaInventorySettings
+liaInventorySettings =
+    LiaInventorySettings'
+    { _lisInventoryVerificationContactName = Nothing
+    , _lisStatus = Nothing
+    , _lisInventoryVerificationContactEmail = Nothing
+    , _lisInventoryVerificationContactStatus = Nothing
+    }
+
+-- | The name of the contact for the inventory verification process.
+lisInventoryVerificationContactName :: Lens' LiaInventorySettings (Maybe Text)
+lisInventoryVerificationContactName
+  = lens _lisInventoryVerificationContactName
+      (\ s a ->
+         s{_lisInventoryVerificationContactName = a})
+
+-- | The status of the inventory verification process.
+lisStatus :: Lens' LiaInventorySettings (Maybe Text)
+lisStatus
+  = lens _lisStatus (\ s a -> s{_lisStatus = a})
+
+-- | The email of the contact for the inventory verification process.
+lisInventoryVerificationContactEmail :: Lens' LiaInventorySettings (Maybe Text)
+lisInventoryVerificationContactEmail
+  = lens _lisInventoryVerificationContactEmail
+      (\ s a ->
+         s{_lisInventoryVerificationContactEmail = a})
+
+-- | The status of the verification contact.
+lisInventoryVerificationContactStatus :: Lens' LiaInventorySettings (Maybe Text)
+lisInventoryVerificationContactStatus
+  = lens _lisInventoryVerificationContactStatus
+      (\ s a ->
+         s{_lisInventoryVerificationContactStatus = a})
+
+instance FromJSON LiaInventorySettings where
+        parseJSON
+          = withObject "LiaInventorySettings"
+              (\ o ->
+                 LiaInventorySettings' <$>
+                   (o .:? "inventoryVerificationContactName") <*>
+                     (o .:? "status")
+                     <*> (o .:? "inventoryVerificationContactEmail")
+                     <*> (o .:? "inventoryVerificationContactStatus"))
+
+instance ToJSON LiaInventorySettings where
+        toJSON LiaInventorySettings'{..}
+          = object
+              (catMaybes
+                 [("inventoryVerificationContactName" .=) <$>
+                    _lisInventoryVerificationContactName,
+                  ("status" .=) <$> _lisStatus,
+                  ("inventoryVerificationContactEmail" .=) <$>
+                    _lisInventoryVerificationContactEmail,
+                  ("inventoryVerificationContactStatus" .=) <$>
+                    _lisInventoryVerificationContactStatus])
+
 -- | A batch entry encoding a single non-batch accountstatuses response.
 --
 -- /See:/ 'accountstatusesCustomBatchResponseEntry' smart constructor.
 data AccountstatusesCustomBatchResponseEntry = AccountstatusesCustomBatchResponseEntry'
-    { _acccAccountStatus :: !(Maybe AccountStatus)
-    , _acccErrors        :: !(Maybe Errors)
-    , _acccBatchId       :: !(Maybe (Textual Word32))
+    { _aaAccountStatus :: !(Maybe AccountStatus)
+    , _aaErrors        :: !(Maybe Errors)
+    , _aaBatchId       :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountstatusesCustomBatchResponseEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acccAccountStatus'
+-- * 'aaAccountStatus'
 --
--- * 'acccErrors'
+-- * 'aaErrors'
 --
--- * 'acccBatchId'
+-- * 'aaBatchId'
 accountstatusesCustomBatchResponseEntry
     :: AccountstatusesCustomBatchResponseEntry
 accountstatusesCustomBatchResponseEntry =
     AccountstatusesCustomBatchResponseEntry'
-    { _acccAccountStatus = Nothing
-    , _acccErrors = Nothing
-    , _acccBatchId = Nothing
+    { _aaAccountStatus = Nothing
+    , _aaErrors = Nothing
+    , _aaBatchId = Nothing
     }
 
 -- | The requested account status. Defined if and only if the request was
 -- successful.
-acccAccountStatus :: Lens' AccountstatusesCustomBatchResponseEntry (Maybe AccountStatus)
-acccAccountStatus
-  = lens _acccAccountStatus
-      (\ s a -> s{_acccAccountStatus = a})
+aaAccountStatus :: Lens' AccountstatusesCustomBatchResponseEntry (Maybe AccountStatus)
+aaAccountStatus
+  = lens _aaAccountStatus
+      (\ s a -> s{_aaAccountStatus = a})
 
 -- | A list of errors defined if and only if the request failed.
-acccErrors :: Lens' AccountstatusesCustomBatchResponseEntry (Maybe Errors)
-acccErrors
-  = lens _acccErrors (\ s a -> s{_acccErrors = a})
+aaErrors :: Lens' AccountstatusesCustomBatchResponseEntry (Maybe Errors)
+aaErrors = lens _aaErrors (\ s a -> s{_aaErrors = a})
 
 -- | The ID of the request entry this entry responds to.
-acccBatchId :: Lens' AccountstatusesCustomBatchResponseEntry (Maybe Word32)
-acccBatchId
-  = lens _acccBatchId (\ s a -> s{_acccBatchId = a}) .
+aaBatchId :: Lens' AccountstatusesCustomBatchResponseEntry (Maybe Word32)
+aaBatchId
+  = lens _aaBatchId (\ s a -> s{_aaBatchId = a}) .
       mapping _Coerce
 
 instance FromJSON
@@ -10553,43 +14350,9 @@ instance ToJSON
         toJSON AccountstatusesCustomBatchResponseEntry'{..}
           = object
               (catMaybes
-                 [("accountStatus" .=) <$> _acccAccountStatus,
-                  ("errors" .=) <$> _acccErrors,
-                  ("batchId" .=) <$> _acccBatchId])
-
---
--- /See:/ 'inventorySetResponse' smart constructor.
-newtype InventorySetResponse = InventorySetResponse'
-    { _isrKind :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'InventorySetResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'isrKind'
-inventorySetResponse
-    :: InventorySetResponse
-inventorySetResponse =
-    InventorySetResponse'
-    { _isrKind = "content#inventorySetResponse"
-    }
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"content#inventorySetResponse\".
-isrKind :: Lens' InventorySetResponse Text
-isrKind = lens _isrKind (\ s a -> s{_isrKind = a})
-
-instance FromJSON InventorySetResponse where
-        parseJSON
-          = withObject "InventorySetResponse"
-              (\ o ->
-                 InventorySetResponse' <$>
-                   (o .:? "kind" .!= "content#inventorySetResponse"))
-
-instance ToJSON InventorySetResponse where
-        toJSON InventorySetResponse'{..}
-          = object (catMaybes [Just ("kind" .= _isrKind)])
+                 [("accountStatus" .=) <$> _aaAccountStatus,
+                  ("errors" .=) <$> _aaErrors,
+                  ("batchId" .=) <$> _aaBatchId])
 
 --
 -- /See:/ 'ordersCancelLineItemResponse' smart constructor.
@@ -10640,6 +14403,96 @@ instance ToJSON OrdersCancelLineItemResponse where
               (catMaybes
                  [Just ("kind" .= _oclirKind),
                   ("executionStatus" .=) <$> _oclirExecutionStatus])
+
+--
+-- /See:/ 'holidayCutoff' smart constructor.
+data HolidayCutoff = HolidayCutoff'
+    { _hcDeadlineHour     :: !(Maybe (Textual Word32))
+    , _hcDeadlineTimezone :: !(Maybe Text)
+    , _hcVisibleFromDate  :: !(Maybe Text)
+    , _hcHolidayId        :: !(Maybe Text)
+    , _hcDeadlineDate     :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'HolidayCutoff' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'hcDeadlineHour'
+--
+-- * 'hcDeadlineTimezone'
+--
+-- * 'hcVisibleFromDate'
+--
+-- * 'hcHolidayId'
+--
+-- * 'hcDeadlineDate'
+holidayCutoff
+    :: HolidayCutoff
+holidayCutoff =
+    HolidayCutoff'
+    { _hcDeadlineHour = Nothing
+    , _hcDeadlineTimezone = Nothing
+    , _hcVisibleFromDate = Nothing
+    , _hcHolidayId = Nothing
+    , _hcDeadlineDate = Nothing
+    }
+
+-- | Hour of the day on the deadline date until which the order has to be
+-- placed to qualify for the delivery guarantee. Possible values are: 0
+-- (midnight), 1, ..., 12 (noon), 13, ..., 23. Required.
+hcDeadlineHour :: Lens' HolidayCutoff (Maybe Word32)
+hcDeadlineHour
+  = lens _hcDeadlineHour
+      (\ s a -> s{_hcDeadlineHour = a})
+      . mapping _Coerce
+
+-- | Timezone identifier for the deadline hour. A list of identifiers can be
+-- found in the AdWords API documentation. E.g. \"Europe\/Zurich\".
+-- Required.
+hcDeadlineTimezone :: Lens' HolidayCutoff (Maybe Text)
+hcDeadlineTimezone
+  = lens _hcDeadlineTimezone
+      (\ s a -> s{_hcDeadlineTimezone = a})
+
+-- | Date on which the deadline will become visible to consumers in ISO 8601
+-- format. E.g. \"2016-10-31\" for 31st October 2016. Required.
+hcVisibleFromDate :: Lens' HolidayCutoff (Maybe Text)
+hcVisibleFromDate
+  = lens _hcVisibleFromDate
+      (\ s a -> s{_hcVisibleFromDate = a})
+
+-- | Unique identifier for the holiday. Required.
+hcHolidayId :: Lens' HolidayCutoff (Maybe Text)
+hcHolidayId
+  = lens _hcHolidayId (\ s a -> s{_hcHolidayId = a})
+
+-- | Date of the order deadline, in ISO 8601 format. E.g. \"2016-11-29\" for
+-- 29th November 2016. Required.
+hcDeadlineDate :: Lens' HolidayCutoff (Maybe Text)
+hcDeadlineDate
+  = lens _hcDeadlineDate
+      (\ s a -> s{_hcDeadlineDate = a})
+
+instance FromJSON HolidayCutoff where
+        parseJSON
+          = withObject "HolidayCutoff"
+              (\ o ->
+                 HolidayCutoff' <$>
+                   (o .:? "deadlineHour") <*> (o .:? "deadlineTimezone")
+                     <*> (o .:? "visibleFromDate")
+                     <*> (o .:? "holidayId")
+                     <*> (o .:? "deadlineDate"))
+
+instance ToJSON HolidayCutoff where
+        toJSON HolidayCutoff'{..}
+          = object
+              (catMaybes
+                 [("deadlineHour" .=) <$> _hcDeadlineHour,
+                  ("deadlineTimezone" .=) <$> _hcDeadlineTimezone,
+                  ("visibleFromDate" .=) <$> _hcVisibleFromDate,
+                  ("holidayId" .=) <$> _hcHolidayId,
+                  ("deadlineDate" .=) <$> _hcDeadlineDate])
 
 --
 -- /See:/ 'testOrderLineItem' smart constructor.
@@ -10728,56 +14581,74 @@ instance ToJSON TestOrderLineItem where
 --
 -- /See:/ 'productstatusesCustomBatchRequestEntry' smart constructor.
 data ProductstatusesCustomBatchRequestEntry = ProductstatusesCustomBatchRequestEntry'
-    { _pcbrecMerchantId :: !(Maybe (Textual Word64))
-    , _pcbrecMethod     :: !(Maybe Text)
-    , _pcbrecProductId  :: !(Maybe Text)
-    , _pcbrecBatchId    :: !(Maybe (Textual Word32))
+    { _p2MerchantId        :: !(Maybe (Textual Word64))
+    , _p2Destinations      :: !(Maybe [Text])
+    , _p2Method            :: !(Maybe Text)
+    , _p2IncludeAttributes :: !(Maybe Bool)
+    , _p2ProductId         :: !(Maybe Text)
+    , _p2BatchId           :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductstatusesCustomBatchRequestEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pcbrecMerchantId'
+-- * 'p2MerchantId'
 --
--- * 'pcbrecMethod'
+-- * 'p2Destinations'
 --
--- * 'pcbrecProductId'
+-- * 'p2Method'
 --
--- * 'pcbrecBatchId'
+-- * 'p2IncludeAttributes'
+--
+-- * 'p2ProductId'
+--
+-- * 'p2BatchId'
 productstatusesCustomBatchRequestEntry
     :: ProductstatusesCustomBatchRequestEntry
 productstatusesCustomBatchRequestEntry =
     ProductstatusesCustomBatchRequestEntry'
-    { _pcbrecMerchantId = Nothing
-    , _pcbrecMethod = Nothing
-    , _pcbrecProductId = Nothing
-    , _pcbrecBatchId = Nothing
+    { _p2MerchantId = Nothing
+    , _p2Destinations = Nothing
+    , _p2Method = Nothing
+    , _p2IncludeAttributes = Nothing
+    , _p2ProductId = Nothing
+    , _p2BatchId = Nothing
     }
 
 -- | The ID of the managing account.
-pcbrecMerchantId :: Lens' ProductstatusesCustomBatchRequestEntry (Maybe Word64)
-pcbrecMerchantId
-  = lens _pcbrecMerchantId
-      (\ s a -> s{_pcbrecMerchantId = a})
+p2MerchantId :: Lens' ProductstatusesCustomBatchRequestEntry (Maybe Word64)
+p2MerchantId
+  = lens _p2MerchantId (\ s a -> s{_p2MerchantId = a})
       . mapping _Coerce
 
-pcbrecMethod :: Lens' ProductstatusesCustomBatchRequestEntry (Maybe Text)
-pcbrecMethod
-  = lens _pcbrecMethod (\ s a -> s{_pcbrecMethod = a})
+-- | If set, only issues for the specified destinations are returned,
+-- otherwise only issues for the Shopping destination.
+p2Destinations :: Lens' ProductstatusesCustomBatchRequestEntry [Text]
+p2Destinations
+  = lens _p2Destinations
+      (\ s a -> s{_p2Destinations = a})
+      . _Default
+      . _Coerce
+
+p2Method :: Lens' ProductstatusesCustomBatchRequestEntry (Maybe Text)
+p2Method = lens _p2Method (\ s a -> s{_p2Method = a})
+
+p2IncludeAttributes :: Lens' ProductstatusesCustomBatchRequestEntry (Maybe Bool)
+p2IncludeAttributes
+  = lens _p2IncludeAttributes
+      (\ s a -> s{_p2IncludeAttributes = a})
 
 -- | The ID of the product whose status to get.
-pcbrecProductId :: Lens' ProductstatusesCustomBatchRequestEntry (Maybe Text)
-pcbrecProductId
-  = lens _pcbrecProductId
-      (\ s a -> s{_pcbrecProductId = a})
+p2ProductId :: Lens' ProductstatusesCustomBatchRequestEntry (Maybe Text)
+p2ProductId
+  = lens _p2ProductId (\ s a -> s{_p2ProductId = a})
 
 -- | An entry ID, unique within the batch request.
-pcbrecBatchId :: Lens' ProductstatusesCustomBatchRequestEntry (Maybe Word32)
-pcbrecBatchId
-  = lens _pcbrecBatchId
-      (\ s a -> s{_pcbrecBatchId = a})
-      . mapping _Coerce
+p2BatchId :: Lens' ProductstatusesCustomBatchRequestEntry (Maybe Word32)
+p2BatchId
+  = lens _p2BatchId (\ s a -> s{_p2BatchId = a}) .
+      mapping _Coerce
 
 instance FromJSON
          ProductstatusesCustomBatchRequestEntry where
@@ -10785,8 +14656,11 @@ instance FromJSON
           = withObject "ProductstatusesCustomBatchRequestEntry"
               (\ o ->
                  ProductstatusesCustomBatchRequestEntry' <$>
-                   (o .:? "merchantId") <*> (o .:? "method") <*>
-                     (o .:? "productId")
+                   (o .:? "merchantId") <*>
+                     (o .:? "destinations" .!= mempty)
+                     <*> (o .:? "method")
+                     <*> (o .:? "includeAttributes")
+                     <*> (o .:? "productId")
                      <*> (o .:? "batchId"))
 
 instance ToJSON
@@ -10794,10 +14668,12 @@ instance ToJSON
         toJSON ProductstatusesCustomBatchRequestEntry'{..}
           = object
               (catMaybes
-                 [("merchantId" .=) <$> _pcbrecMerchantId,
-                  ("method" .=) <$> _pcbrecMethod,
-                  ("productId" .=) <$> _pcbrecProductId,
-                  ("batchId" .=) <$> _pcbrecBatchId])
+                 [("merchantId" .=) <$> _p2MerchantId,
+                  ("destinations" .=) <$> _p2Destinations,
+                  ("method" .=) <$> _p2Method,
+                  ("includeAttributes" .=) <$> _p2IncludeAttributes,
+                  ("productId" .=) <$> _p2ProductId,
+                  ("batchId" .=) <$> _p2BatchId])
 
 --
 -- /See:/ 'shippingSettingsCustomBatchResponse' smart constructor.
@@ -10851,245 +14727,466 @@ instance ToJSON ShippingSettingsCustomBatchResponse
                  [("entries" .=) <$> _shiEntries,
                   Just ("kind" .= _shiKind)])
 
--- | A batch entry encoding a single non-batch accountshipping response.
 --
--- /See:/ 'accountshippingCustomBatchResponseEntry' smart constructor.
-data AccountshippingCustomBatchResponseEntry = AccountshippingCustomBatchResponseEntry'
-    { _acbre1Kind            :: !Text
-    , _acbre1Errors          :: !(Maybe Errors)
-    , _acbre1AccountShipping :: !(Maybe AccountShipping)
-    , _acbre1BatchId         :: !(Maybe (Textual Word32))
+-- /See:/ 'ordersReturnRefundLineItemRequest' smart constructor.
+data OrdersReturnRefundLineItemRequest = OrdersReturnRefundLineItemRequest'
+    { _orrlirrQuantity    :: !(Maybe (Textual Word32))
+    , _orrlirrLineItemId  :: !(Maybe Text)
+    , _orrlirrReason      :: !(Maybe Text)
+    , _orrlirrOperationId :: !(Maybe Text)
+    , _orrlirrProductId   :: !(Maybe Text)
+    , _orrlirrTaxAmount   :: !(Maybe Price)
+    , _orrlirrPriceAmount :: !(Maybe Price)
+    , _orrlirrReasonText  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountshippingCustomBatchResponseEntry' with the minimum fields required to make a request.
+-- | Creates a value of 'OrdersReturnRefundLineItemRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acbre1Kind'
+-- * 'orrlirrQuantity'
 --
--- * 'acbre1Errors'
+-- * 'orrlirrLineItemId'
 --
--- * 'acbre1AccountShipping'
+-- * 'orrlirrReason'
 --
--- * 'acbre1BatchId'
-accountshippingCustomBatchResponseEntry
-    :: AccountshippingCustomBatchResponseEntry
-accountshippingCustomBatchResponseEntry =
-    AccountshippingCustomBatchResponseEntry'
-    { _acbre1Kind = "content#accountshippingCustomBatchResponseEntry"
-    , _acbre1Errors = Nothing
-    , _acbre1AccountShipping = Nothing
-    , _acbre1BatchId = Nothing
+-- * 'orrlirrOperationId'
+--
+-- * 'orrlirrProductId'
+--
+-- * 'orrlirrTaxAmount'
+--
+-- * 'orrlirrPriceAmount'
+--
+-- * 'orrlirrReasonText'
+ordersReturnRefundLineItemRequest
+    :: OrdersReturnRefundLineItemRequest
+ordersReturnRefundLineItemRequest =
+    OrdersReturnRefundLineItemRequest'
+    { _orrlirrQuantity = Nothing
+    , _orrlirrLineItemId = Nothing
+    , _orrlirrReason = Nothing
+    , _orrlirrOperationId = Nothing
+    , _orrlirrProductId = Nothing
+    , _orrlirrTaxAmount = Nothing
+    , _orrlirrPriceAmount = Nothing
+    , _orrlirrReasonText = Nothing
     }
 
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"content#accountshippingCustomBatchResponseEntry\".
-acbre1Kind :: Lens' AccountshippingCustomBatchResponseEntry Text
-acbre1Kind
-  = lens _acbre1Kind (\ s a -> s{_acbre1Kind = a})
-
--- | A list of errors defined if and only if the request failed.
-acbre1Errors :: Lens' AccountshippingCustomBatchResponseEntry (Maybe Errors)
-acbre1Errors
-  = lens _acbre1Errors (\ s a -> s{_acbre1Errors = a})
-
--- | The retrieved or updated account shipping settings.
-acbre1AccountShipping :: Lens' AccountshippingCustomBatchResponseEntry (Maybe AccountShipping)
-acbre1AccountShipping
-  = lens _acbre1AccountShipping
-      (\ s a -> s{_acbre1AccountShipping = a})
-
--- | The ID of the request entry this entry responds to.
-acbre1BatchId :: Lens' AccountshippingCustomBatchResponseEntry (Maybe Word32)
-acbre1BatchId
-  = lens _acbre1BatchId
-      (\ s a -> s{_acbre1BatchId = a})
+-- | The quantity to return and refund.
+orrlirrQuantity :: Lens' OrdersReturnRefundLineItemRequest (Maybe Word32)
+orrlirrQuantity
+  = lens _orrlirrQuantity
+      (\ s a -> s{_orrlirrQuantity = a})
       . mapping _Coerce
+
+-- | The ID of the line item to return. Either lineItemId or productId is
+-- required.
+orrlirrLineItemId :: Lens' OrdersReturnRefundLineItemRequest (Maybe Text)
+orrlirrLineItemId
+  = lens _orrlirrLineItemId
+      (\ s a -> s{_orrlirrLineItemId = a})
+
+-- | The reason for the return.
+orrlirrReason :: Lens' OrdersReturnRefundLineItemRequest (Maybe Text)
+orrlirrReason
+  = lens _orrlirrReason
+      (\ s a -> s{_orrlirrReason = a})
+
+-- | The ID of the operation. Unique across all operations for a given order.
+orrlirrOperationId :: Lens' OrdersReturnRefundLineItemRequest (Maybe Text)
+orrlirrOperationId
+  = lens _orrlirrOperationId
+      (\ s a -> s{_orrlirrOperationId = a})
+
+-- | The ID of the product to return. This is the REST ID used in the
+-- products service. Either lineItemId or productId is required.
+orrlirrProductId :: Lens' OrdersReturnRefundLineItemRequest (Maybe Text)
+orrlirrProductId
+  = lens _orrlirrProductId
+      (\ s a -> s{_orrlirrProductId = a})
+
+-- | The amount of tax to be refunded.
+orrlirrTaxAmount :: Lens' OrdersReturnRefundLineItemRequest (Maybe Price)
+orrlirrTaxAmount
+  = lens _orrlirrTaxAmount
+      (\ s a -> s{_orrlirrTaxAmount = a})
+
+-- | The amount to be refunded. This may be pre-tax or post-tax depending on
+-- the location of the order. If omitted, refundless return is assumed.
+-- Optional, but if filled then both priceAmount and taxAmount must be set.
+orrlirrPriceAmount :: Lens' OrdersReturnRefundLineItemRequest (Maybe Price)
+orrlirrPriceAmount
+  = lens _orrlirrPriceAmount
+      (\ s a -> s{_orrlirrPriceAmount = a})
+
+-- | The explanation of the reason.
+orrlirrReasonText :: Lens' OrdersReturnRefundLineItemRequest (Maybe Text)
+orrlirrReasonText
+  = lens _orrlirrReasonText
+      (\ s a -> s{_orrlirrReasonText = a})
+
+instance FromJSON OrdersReturnRefundLineItemRequest
+         where
+        parseJSON
+          = withObject "OrdersReturnRefundLineItemRequest"
+              (\ o ->
+                 OrdersReturnRefundLineItemRequest' <$>
+                   (o .:? "quantity") <*> (o .:? "lineItemId") <*>
+                     (o .:? "reason")
+                     <*> (o .:? "operationId")
+                     <*> (o .:? "productId")
+                     <*> (o .:? "taxAmount")
+                     <*> (o .:? "priceAmount")
+                     <*> (o .:? "reasonText"))
+
+instance ToJSON OrdersReturnRefundLineItemRequest
+         where
+        toJSON OrdersReturnRefundLineItemRequest'{..}
+          = object
+              (catMaybes
+                 [("quantity" .=) <$> _orrlirrQuantity,
+                  ("lineItemId" .=) <$> _orrlirrLineItemId,
+                  ("reason" .=) <$> _orrlirrReason,
+                  ("operationId" .=) <$> _orrlirrOperationId,
+                  ("productId" .=) <$> _orrlirrProductId,
+                  ("taxAmount" .=) <$> _orrlirrTaxAmount,
+                  ("priceAmount" .=) <$> _orrlirrPriceAmount,
+                  ("reasonText" .=) <$> _orrlirrReasonText])
+
+--
+-- /See:/ 'shipmentInvoiceLineItemInvoice' smart constructor.
+data ShipmentInvoiceLineItemInvoice = ShipmentInvoiceLineItemInvoice'
+    { _siliiUnitInvoice     :: !(Maybe UnitInvoice)
+    , _siliiShipmentUnitIds :: !(Maybe [Text])
+    , _siliiLineItemId      :: !(Maybe Text)
+    , _siliiProductId       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ShipmentInvoiceLineItemInvoice' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'siliiUnitInvoice'
+--
+-- * 'siliiShipmentUnitIds'
+--
+-- * 'siliiLineItemId'
+--
+-- * 'siliiProductId'
+shipmentInvoiceLineItemInvoice
+    :: ShipmentInvoiceLineItemInvoice
+shipmentInvoiceLineItemInvoice =
+    ShipmentInvoiceLineItemInvoice'
+    { _siliiUnitInvoice = Nothing
+    , _siliiShipmentUnitIds = Nothing
+    , _siliiLineItemId = Nothing
+    , _siliiProductId = Nothing
+    }
+
+-- | [required] Invoice details for a single unit.
+siliiUnitInvoice :: Lens' ShipmentInvoiceLineItemInvoice (Maybe UnitInvoice)
+siliiUnitInvoice
+  = lens _siliiUnitInvoice
+      (\ s a -> s{_siliiUnitInvoice = a})
+
+-- | [required] Unit IDs to define specific units within the line item.
+siliiShipmentUnitIds :: Lens' ShipmentInvoiceLineItemInvoice [Text]
+siliiShipmentUnitIds
+  = lens _siliiShipmentUnitIds
+      (\ s a -> s{_siliiShipmentUnitIds = a})
+      . _Default
+      . _Coerce
+
+-- | ID of the line item. Either lineItemId or productId must be set.
+siliiLineItemId :: Lens' ShipmentInvoiceLineItemInvoice (Maybe Text)
+siliiLineItemId
+  = lens _siliiLineItemId
+      (\ s a -> s{_siliiLineItemId = a})
+
+-- | ID of the product. This is the REST ID used in the products service.
+-- Either lineItemId or productId must be set.
+siliiProductId :: Lens' ShipmentInvoiceLineItemInvoice (Maybe Text)
+siliiProductId
+  = lens _siliiProductId
+      (\ s a -> s{_siliiProductId = a})
+
+instance FromJSON ShipmentInvoiceLineItemInvoice
+         where
+        parseJSON
+          = withObject "ShipmentInvoiceLineItemInvoice"
+              (\ o ->
+                 ShipmentInvoiceLineItemInvoice' <$>
+                   (o .:? "unitInvoice") <*>
+                     (o .:? "shipmentUnitIds" .!= mempty)
+                     <*> (o .:? "lineItemId")
+                     <*> (o .:? "productId"))
+
+instance ToJSON ShipmentInvoiceLineItemInvoice where
+        toJSON ShipmentInvoiceLineItemInvoice'{..}
+          = object
+              (catMaybes
+                 [("unitInvoice" .=) <$> _siliiUnitInvoice,
+                  ("shipmentUnitIds" .=) <$> _siliiShipmentUnitIds,
+                  ("lineItemId" .=) <$> _siliiLineItemId,
+                  ("productId" .=) <$> _siliiProductId])
+
+--
+-- /See:/ 'ordersCustomBatchRequestEntryShipLineItemsShipmentInfo' smart constructor.
+data OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo = OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo'
+    { _ocbreslisiCarrier    :: !(Maybe Text)
+    , _ocbreslisiTrackingId :: !(Maybe Text)
+    , _ocbreslisiShipmentId :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ocbreslisiCarrier'
+--
+-- * 'ocbreslisiTrackingId'
+--
+-- * 'ocbreslisiShipmentId'
+ordersCustomBatchRequestEntryShipLineItemsShipmentInfo
+    :: OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo
+ordersCustomBatchRequestEntryShipLineItemsShipmentInfo =
+    OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo'
+    { _ocbreslisiCarrier = Nothing
+    , _ocbreslisiTrackingId = Nothing
+    , _ocbreslisiShipmentId = Nothing
+    }
+
+-- | The carrier handling the shipment. See shipments[].carrier in the Orders
+-- resource representation for a list of acceptable values.
+ocbreslisiCarrier :: Lens' OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo (Maybe Text)
+ocbreslisiCarrier
+  = lens _ocbreslisiCarrier
+      (\ s a -> s{_ocbreslisiCarrier = a})
+
+-- | The tracking id for the shipment.
+ocbreslisiTrackingId :: Lens' OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo (Maybe Text)
+ocbreslisiTrackingId
+  = lens _ocbreslisiTrackingId
+      (\ s a -> s{_ocbreslisiTrackingId = a})
+
+-- | The ID of the shipment.
+ocbreslisiShipmentId :: Lens' OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo (Maybe Text)
+ocbreslisiShipmentId
+  = lens _ocbreslisiShipmentId
+      (\ s a -> s{_ocbreslisiShipmentId = a})
 
 instance FromJSON
-         AccountshippingCustomBatchResponseEntry where
+         OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo
+         where
         parseJSON
           = withObject
-              "AccountshippingCustomBatchResponseEntry"
+              "OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo"
               (\ o ->
-                 AccountshippingCustomBatchResponseEntry' <$>
-                   (o .:? "kind" .!=
-                      "content#accountshippingCustomBatchResponseEntry")
-                     <*> (o .:? "errors")
-                     <*> (o .:? "accountShipping")
-                     <*> (o .:? "batchId"))
+                 OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo'
+                   <$>
+                   (o .:? "carrier") <*> (o .:? "trackingId") <*>
+                     (o .:? "shipmentId"))
 
 instance ToJSON
-         AccountshippingCustomBatchResponseEntry where
-        toJSON AccountshippingCustomBatchResponseEntry'{..}
+         OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo
+         where
+        toJSON
+          OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _acbre1Kind),
-                  ("errors" .=) <$> _acbre1Errors,
-                  ("accountShipping" .=) <$> _acbre1AccountShipping,
-                  ("batchId" .=) <$> _acbre1BatchId])
+                 [("carrier" .=) <$> _ocbreslisiCarrier,
+                  ("trackingId" .=) <$> _ocbreslisiTrackingId,
+                  ("shipmentId" .=) <$> _ocbreslisiShipmentId])
 
 --
--- /See:/ 'productAspect' smart constructor.
-data ProductAspect = ProductAspect'
-    { _paIntention       :: !(Maybe Text)
-    , _paAspectName      :: !(Maybe Text)
-    , _paDestinationName :: !(Maybe Text)
+-- /See:/ 'accountsLinkRequest' smart constructor.
+data AccountsLinkRequest = AccountsLinkRequest'
+    { _alrAction          :: !(Maybe Text)
+    , _alrLinkedAccountId :: !(Maybe Text)
+    , _alrLinkType        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProductAspect' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsLinkRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'paIntention'
+-- * 'alrAction'
 --
--- * 'paAspectName'
+-- * 'alrLinkedAccountId'
 --
--- * 'paDestinationName'
-productAspect
-    :: ProductAspect
-productAspect =
-    ProductAspect'
-    { _paIntention = Nothing
-    , _paAspectName = Nothing
-    , _paDestinationName = Nothing
+-- * 'alrLinkType'
+accountsLinkRequest
+    :: AccountsLinkRequest
+accountsLinkRequest =
+    AccountsLinkRequest'
+    { _alrAction = Nothing
+    , _alrLinkedAccountId = Nothing
+    , _alrLinkType = Nothing
     }
 
--- | Whether the aspect is required, excluded or should be validated.
-paIntention :: Lens' ProductAspect (Maybe Text)
-paIntention
-  = lens _paIntention (\ s a -> s{_paIntention = a})
+-- | Action to perform for this link. The \"request\" action is only
+-- available to select merchants.
+alrAction :: Lens' AccountsLinkRequest (Maybe Text)
+alrAction
+  = lens _alrAction (\ s a -> s{_alrAction = a})
 
--- | The name of the aspect.
-paAspectName :: Lens' ProductAspect (Maybe Text)
-paAspectName
-  = lens _paAspectName (\ s a -> s{_paAspectName = a})
+-- | The ID of the linked account.
+alrLinkedAccountId :: Lens' AccountsLinkRequest (Maybe Text)
+alrLinkedAccountId
+  = lens _alrLinkedAccountId
+      (\ s a -> s{_alrLinkedAccountId = a})
 
--- | The name of the destination. Leave out to apply to all destinations.
-paDestinationName :: Lens' ProductAspect (Maybe Text)
-paDestinationName
-  = lens _paDestinationName
-      (\ s a -> s{_paDestinationName = a})
+-- | Type of the link between the two accounts.
+alrLinkType :: Lens' AccountsLinkRequest (Maybe Text)
+alrLinkType
+  = lens _alrLinkType (\ s a -> s{_alrLinkType = a})
 
-instance FromJSON ProductAspect where
+instance FromJSON AccountsLinkRequest where
         parseJSON
-          = withObject "ProductAspect"
+          = withObject "AccountsLinkRequest"
               (\ o ->
-                 ProductAspect' <$>
-                   (o .:? "intention") <*> (o .:? "aspectName") <*>
-                     (o .:? "destinationName"))
+                 AccountsLinkRequest' <$>
+                   (o .:? "action") <*> (o .:? "linkedAccountId") <*>
+                     (o .:? "linkType"))
 
-instance ToJSON ProductAspect where
-        toJSON ProductAspect'{..}
+instance ToJSON AccountsLinkRequest where
+        toJSON AccountsLinkRequest'{..}
           = object
               (catMaybes
-                 [("intention" .=) <$> _paIntention,
-                  ("aspectName" .=) <$> _paAspectName,
-                  ("destinationName" .=) <$> _paDestinationName])
+                 [("action" .=) <$> _alrAction,
+                  ("linkedAccountId" .=) <$> _alrLinkedAccountId,
+                  ("linkType" .=) <$> _alrLinkType])
 
--- | The shipping settings of a merchant account.
 --
--- /See:/ 'accountShipping' smart constructor.
-data AccountShipping = AccountShipping'
-    { _assRateTables     :: !(Maybe [AccountShippingRateTable])
-    , _assCarrierRates   :: !(Maybe [AccountShippingCarrierRate])
-    , _assKind           :: !Text
-    , _assLocationGroups :: !(Maybe [AccountShippingLocationGroup])
-    , _assAccountId      :: !(Maybe (Textual Word64))
-    , _assServices       :: !(Maybe [AccountShippingShippingService])
+-- /See:/ 'promotion' smart constructor.
+data Promotion = Promotion'
+    { _pPromotionAmount :: !(Maybe Amount)
+    , _pPromotionId     :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountShipping' with the minimum fields required to make a request.
+-- | Creates a value of 'Promotion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'assRateTables'
+-- * 'pPromotionAmount'
 --
--- * 'assCarrierRates'
---
--- * 'assKind'
---
--- * 'assLocationGroups'
---
--- * 'assAccountId'
---
--- * 'assServices'
-accountShipping
-    :: AccountShipping
-accountShipping =
-    AccountShipping'
-    { _assRateTables = Nothing
-    , _assCarrierRates = Nothing
-    , _assKind = "content#accountShipping"
-    , _assLocationGroups = Nothing
-    , _assAccountId = Nothing
-    , _assServices = Nothing
+-- * 'pPromotionId'
+promotion
+    :: Promotion
+promotion =
+    Promotion'
+    { _pPromotionAmount = Nothing
+    , _pPromotionId = Nothing
     }
 
--- | Rate tables definitions.
-assRateTables :: Lens' AccountShipping [AccountShippingRateTable]
-assRateTables
-  = lens _assRateTables
-      (\ s a -> s{_assRateTables = a})
-      . _Default
-      . _Coerce
+-- | [required] Amount of the promotion. The values here are the promotion
+-- applied to the unit price pretax and to the total of the tax amounts.
+pPromotionAmount :: Lens' Promotion (Maybe Amount)
+pPromotionAmount
+  = lens _pPromotionAmount
+      (\ s a -> s{_pPromotionAmount = a})
 
--- | Carrier-based shipping calculations.
-assCarrierRates :: Lens' AccountShipping [AccountShippingCarrierRate]
-assCarrierRates
-  = lens _assCarrierRates
-      (\ s a -> s{_assCarrierRates = a})
-      . _Default
-      . _Coerce
+-- | [required] ID of the promotion.
+pPromotionId :: Lens' Promotion (Maybe Text)
+pPromotionId
+  = lens _pPromotionId (\ s a -> s{_pPromotionId = a})
 
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"content#accountShipping\".
-assKind :: Lens' AccountShipping Text
-assKind = lens _assKind (\ s a -> s{_assKind = a})
-
--- | Location groups for shipping.
-assLocationGroups :: Lens' AccountShipping [AccountShippingLocationGroup]
-assLocationGroups
-  = lens _assLocationGroups
-      (\ s a -> s{_assLocationGroups = a})
-      . _Default
-      . _Coerce
-
--- | The ID of the account to which these account shipping settings belong.
-assAccountId :: Lens' AccountShipping (Maybe Word64)
-assAccountId
-  = lens _assAccountId (\ s a -> s{_assAccountId = a})
-      . mapping _Coerce
-
--- | Shipping services describing shipping fees calculation.
-assServices :: Lens' AccountShipping [AccountShippingShippingService]
-assServices
-  = lens _assServices (\ s a -> s{_assServices = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON AccountShipping where
+instance FromJSON Promotion where
         parseJSON
-          = withObject "AccountShipping"
+          = withObject "Promotion"
               (\ o ->
-                 AccountShipping' <$>
-                   (o .:? "rateTables" .!= mempty) <*>
-                     (o .:? "carrierRates" .!= mempty)
-                     <*> (o .:? "kind" .!= "content#accountShipping")
-                     <*> (o .:? "locationGroups" .!= mempty)
-                     <*> (o .:? "accountId")
-                     <*> (o .:? "services" .!= mempty))
+                 Promotion' <$>
+                   (o .:? "promotionAmount") <*> (o .:? "promotionId"))
 
-instance ToJSON AccountShipping where
-        toJSON AccountShipping'{..}
+instance ToJSON Promotion where
+        toJSON Promotion'{..}
           = object
               (catMaybes
-                 [("rateTables" .=) <$> _assRateTables,
-                  ("carrierRates" .=) <$> _assCarrierRates,
-                  Just ("kind" .= _assKind),
-                  ("locationGroups" .=) <$> _assLocationGroups,
-                  ("accountId" .=) <$> _assAccountId,
-                  ("services" .=) <$> _assServices])
+                 [("promotionAmount" .=) <$> _pPromotionAmount,
+                  ("promotionId" .=) <$> _pPromotionId])
+
+--
+-- /See:/ 'datafeedTarget' smart constructor.
+data DatafeedTarget = DatafeedTarget'
+    { _dtIncludedDestinations :: !(Maybe [Text])
+    , _dtExcludedDestinations :: !(Maybe [Text])
+    , _dtCountry              :: !(Maybe Text)
+    , _dtLanguage             :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DatafeedTarget' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dtIncludedDestinations'
+--
+-- * 'dtExcludedDestinations'
+--
+-- * 'dtCountry'
+--
+-- * 'dtLanguage'
+datafeedTarget
+    :: DatafeedTarget
+datafeedTarget =
+    DatafeedTarget'
+    { _dtIncludedDestinations = Nothing
+    , _dtExcludedDestinations = Nothing
+    , _dtCountry = Nothing
+    , _dtLanguage = Nothing
+    }
+
+-- | The list of destinations to include for this target (corresponds to
+-- checked check boxes in Merchant Center). Default destinations are always
+-- included unless provided in the excluded_destination field.
+dtIncludedDestinations :: Lens' DatafeedTarget [Text]
+dtIncludedDestinations
+  = lens _dtIncludedDestinations
+      (\ s a -> s{_dtIncludedDestinations = a})
+      . _Default
+      . _Coerce
+
+-- | The list of destinations to exclude for this target (corresponds to
+-- unchecked check boxes in Merchant Center).
+dtExcludedDestinations :: Lens' DatafeedTarget [Text]
+dtExcludedDestinations
+  = lens _dtExcludedDestinations
+      (\ s a -> s{_dtExcludedDestinations = a})
+      . _Default
+      . _Coerce
+
+-- | The country where the items in the feed will be included in the search
+-- index, represented as a CLDR territory code.
+dtCountry :: Lens' DatafeedTarget (Maybe Text)
+dtCountry
+  = lens _dtCountry (\ s a -> s{_dtCountry = a})
+
+-- | The two-letter ISO 639-1 language of the items in the feed. Must be a
+-- valid language for targets[].country.
+dtLanguage :: Lens' DatafeedTarget (Maybe Text)
+dtLanguage
+  = lens _dtLanguage (\ s a -> s{_dtLanguage = a})
+
+instance FromJSON DatafeedTarget where
+        parseJSON
+          = withObject "DatafeedTarget"
+              (\ o ->
+                 DatafeedTarget' <$>
+                   (o .:? "includedDestinations" .!= mempty) <*>
+                     (o .:? "excludedDestinations" .!= mempty)
+                     <*> (o .:? "country")
+                     <*> (o .:? "language"))
+
+instance ToJSON DatafeedTarget where
+        toJSON DatafeedTarget'{..}
+          = object
+              (catMaybes
+                 [("includedDestinations" .=) <$>
+                    _dtIncludedDestinations,
+                  ("excludedDestinations" .=) <$>
+                    _dtExcludedDestinations,
+                  ("country" .=) <$> _dtCountry,
+                  ("language" .=) <$> _dtLanguage])
 
 --
 -- /See:/ 'ordersUpdateMerchantOrderIdResponse' smart constructor.
@@ -11142,6 +15239,71 @@ instance ToJSON OrdersUpdateMerchantOrderIdResponse
               (catMaybes
                  [Just ("kind" .= _oumoirKind),
                   ("executionStatus" .=) <$> _oumoirExecutionStatus])
+
+--
+-- /See:/ 'orderreportsListDisbursementsResponse' smart constructor.
+data OrderreportsListDisbursementsResponse = OrderreportsListDisbursementsResponse'
+    { _oldrNextPageToken :: !(Maybe Text)
+    , _oldrKind          :: !Text
+    , _oldrDisbursements :: !(Maybe [OrderReportDisbursement])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OrderreportsListDisbursementsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oldrNextPageToken'
+--
+-- * 'oldrKind'
+--
+-- * 'oldrDisbursements'
+orderreportsListDisbursementsResponse
+    :: OrderreportsListDisbursementsResponse
+orderreportsListDisbursementsResponse =
+    OrderreportsListDisbursementsResponse'
+    { _oldrNextPageToken = Nothing
+    , _oldrKind = "content#orderreportsListDisbursementsResponse"
+    , _oldrDisbursements = Nothing
+    }
+
+-- | The token for the retrieval of the next page of disbursements.
+oldrNextPageToken :: Lens' OrderreportsListDisbursementsResponse (Maybe Text)
+oldrNextPageToken
+  = lens _oldrNextPageToken
+      (\ s a -> s{_oldrNextPageToken = a})
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"content#orderreportsListDisbursementsResponse\".
+oldrKind :: Lens' OrderreportsListDisbursementsResponse Text
+oldrKind = lens _oldrKind (\ s a -> s{_oldrKind = a})
+
+-- | The list of disbursements.
+oldrDisbursements :: Lens' OrderreportsListDisbursementsResponse [OrderReportDisbursement]
+oldrDisbursements
+  = lens _oldrDisbursements
+      (\ s a -> s{_oldrDisbursements = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON
+         OrderreportsListDisbursementsResponse where
+        parseJSON
+          = withObject "OrderreportsListDisbursementsResponse"
+              (\ o ->
+                 OrderreportsListDisbursementsResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!=
+                        "content#orderreportsListDisbursementsResponse")
+                     <*> (o .:? "disbursements" .!= mempty))
+
+instance ToJSON OrderreportsListDisbursementsResponse
+         where
+        toJSON OrderreportsListDisbursementsResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _oldrNextPageToken,
+                  Just ("kind" .= _oldrKind),
+                  ("disbursements" .=) <$> _oldrDisbursements])
 
 -- | An example occurrence for a particular error.
 --
@@ -11252,6 +15414,135 @@ instance ToJSON OrdersAcknowledgeResponse where
                   ("executionStatus" .=) <$> _oarExecutionStatus])
 
 --
+-- /See:/ 'posSaleRequest' smart constructor.
+data PosSaleRequest = PosSaleRequest'
+    { _psrsStoreCode       :: !(Maybe Text)
+    , _psrsItemId          :: !(Maybe Text)
+    , _psrsQuantity        :: !(Maybe (Textual Int64))
+    , _psrsTargetCountry   :: !(Maybe Text)
+    , _psrsGtin            :: !(Maybe Text)
+    , _psrsPrice           :: !(Maybe Price)
+    , _psrsContentLanguage :: !(Maybe Text)
+    , _psrsTimestamp       :: !(Maybe Text)
+    , _psrsSaleId          :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PosSaleRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'psrsStoreCode'
+--
+-- * 'psrsItemId'
+--
+-- * 'psrsQuantity'
+--
+-- * 'psrsTargetCountry'
+--
+-- * 'psrsGtin'
+--
+-- * 'psrsPrice'
+--
+-- * 'psrsContentLanguage'
+--
+-- * 'psrsTimestamp'
+--
+-- * 'psrsSaleId'
+posSaleRequest
+    :: PosSaleRequest
+posSaleRequest =
+    PosSaleRequest'
+    { _psrsStoreCode = Nothing
+    , _psrsItemId = Nothing
+    , _psrsQuantity = Nothing
+    , _psrsTargetCountry = Nothing
+    , _psrsGtin = Nothing
+    , _psrsPrice = Nothing
+    , _psrsContentLanguage = Nothing
+    , _psrsTimestamp = Nothing
+    , _psrsSaleId = Nothing
+    }
+
+-- | The identifier of the merchant\'s store. Either a storeCode inserted via
+-- the API or the code of the store in Google My Business.
+psrsStoreCode :: Lens' PosSaleRequest (Maybe Text)
+psrsStoreCode
+  = lens _psrsStoreCode
+      (\ s a -> s{_psrsStoreCode = a})
+
+-- | A unique identifier for the item.
+psrsItemId :: Lens' PosSaleRequest (Maybe Text)
+psrsItemId
+  = lens _psrsItemId (\ s a -> s{_psrsItemId = a})
+
+-- | The relative change of the available quantity. Negative for items
+-- returned.
+psrsQuantity :: Lens' PosSaleRequest (Maybe Int64)
+psrsQuantity
+  = lens _psrsQuantity (\ s a -> s{_psrsQuantity = a})
+      . mapping _Coerce
+
+-- | The CLDR territory code for the item.
+psrsTargetCountry :: Lens' PosSaleRequest (Maybe Text)
+psrsTargetCountry
+  = lens _psrsTargetCountry
+      (\ s a -> s{_psrsTargetCountry = a})
+
+-- | Global Trade Item Number.
+psrsGtin :: Lens' PosSaleRequest (Maybe Text)
+psrsGtin = lens _psrsGtin (\ s a -> s{_psrsGtin = a})
+
+-- | The price of the item.
+psrsPrice :: Lens' PosSaleRequest (Maybe Price)
+psrsPrice
+  = lens _psrsPrice (\ s a -> s{_psrsPrice = a})
+
+-- | The two-letter ISO 639-1 language code for the item.
+psrsContentLanguage :: Lens' PosSaleRequest (Maybe Text)
+psrsContentLanguage
+  = lens _psrsContentLanguage
+      (\ s a -> s{_psrsContentLanguage = a})
+
+-- | The inventory timestamp, in ISO 8601 format.
+psrsTimestamp :: Lens' PosSaleRequest (Maybe Text)
+psrsTimestamp
+  = lens _psrsTimestamp
+      (\ s a -> s{_psrsTimestamp = a})
+
+-- | A unique ID to group items from the same sale event.
+psrsSaleId :: Lens' PosSaleRequest (Maybe Text)
+psrsSaleId
+  = lens _psrsSaleId (\ s a -> s{_psrsSaleId = a})
+
+instance FromJSON PosSaleRequest where
+        parseJSON
+          = withObject "PosSaleRequest"
+              (\ o ->
+                 PosSaleRequest' <$>
+                   (o .:? "storeCode") <*> (o .:? "itemId") <*>
+                     (o .:? "quantity")
+                     <*> (o .:? "targetCountry")
+                     <*> (o .:? "gtin")
+                     <*> (o .:? "price")
+                     <*> (o .:? "contentLanguage")
+                     <*> (o .:? "timestamp")
+                     <*> (o .:? "saleId"))
+
+instance ToJSON PosSaleRequest where
+        toJSON PosSaleRequest'{..}
+          = object
+              (catMaybes
+                 [("storeCode" .=) <$> _psrsStoreCode,
+                  ("itemId" .=) <$> _psrsItemId,
+                  ("quantity" .=) <$> _psrsQuantity,
+                  ("targetCountry" .=) <$> _psrsTargetCountry,
+                  ("gtin" .=) <$> _psrsGtin,
+                  ("price" .=) <$> _psrsPrice,
+                  ("contentLanguage" .=) <$> _psrsContentLanguage,
+                  ("timestamp" .=) <$> _psrsTimestamp,
+                  ("saleId" .=) <$> _psrsSaleId])
+
+--
 -- /See:/ 'table' smart constructor.
 data Table = Table'
     { _tRows          :: !(Maybe [Row])
@@ -11321,218 +15612,218 @@ instance ToJSON Table where
                   ("columnHeaders" .=) <$> _tColumnHeaders,
                   ("rowHeaders" .=) <$> _tRowHeaders])
 
+-- | Order. All methods require the order manager role.
 --
 -- /See:/ 'order' smart constructor.
 data Order = Order'
-    { _ooStatus          :: !(Maybe Text)
-    , _ooMerchantId      :: !(Maybe (Textual Word64))
-    , _ooRefunds         :: !(Maybe [OrderRefund])
-    , _ooKind            :: !Text
-    , _ooLineItems       :: !(Maybe [OrderLineItem])
-    , _ooShipments       :: !(Maybe [OrderShipment])
-    , _ooNetAmount       :: !(Maybe Price)
-    , _ooPlacedDate      :: !(Maybe Text)
-    , _ooDeliveryDetails :: !(Maybe OrderDeliveryDetails)
-    , _ooShippingOption  :: !(Maybe Text)
-    , _ooMerchantOrderId :: !(Maybe Text)
-    , _ooAcknowledged    :: !(Maybe Bool)
-    , _ooShippingCostTax :: !(Maybe Price)
-    , _ooCustomer        :: !(Maybe OrderCustomer)
-    , _ooId              :: !(Maybe Text)
-    , _ooPaymentMethod   :: !(Maybe OrderPaymentMethod)
-    , _ooPromotions      :: !(Maybe [OrderPromotion])
-    , _ooChannelType     :: !(Maybe Text)
-    , _ooPaymentStatus   :: !(Maybe Text)
-    , _ooShippingCost    :: !(Maybe Price)
+    { _o1Status          :: !(Maybe Text)
+    , _o1MerchantId      :: !(Maybe (Textual Word64))
+    , _o1Refunds         :: !(Maybe [OrderRefund])
+    , _o1Kind            :: !Text
+    , _o1LineItems       :: !(Maybe [OrderLineItem])
+    , _o1Shipments       :: !(Maybe [OrderShipment])
+    , _o1NetAmount       :: !(Maybe Price)
+    , _o1PlacedDate      :: !(Maybe Text)
+    , _o1DeliveryDetails :: !(Maybe OrderDeliveryDetails)
+    , _o1ShippingOption  :: !(Maybe Text)
+    , _o1MerchantOrderId :: !(Maybe Text)
+    , _o1Acknowledged    :: !(Maybe Bool)
+    , _o1ShippingCostTax :: !(Maybe Price)
+    , _o1Customer        :: !(Maybe OrderCustomer)
+    , _o1BillingAddress  :: !(Maybe OrderAddress)
+    , _o1Id              :: !(Maybe Text)
+    , _o1Promotions      :: !(Maybe [OrderPromotion])
+    , _o1ChannelType     :: !(Maybe Text)
+    , _o1PaymentStatus   :: !(Maybe Text)
+    , _o1ShippingCost    :: !(Maybe Price)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Order' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ooStatus'
+-- * 'o1Status'
 --
--- * 'ooMerchantId'
+-- * 'o1MerchantId'
 --
--- * 'ooRefunds'
+-- * 'o1Refunds'
 --
--- * 'ooKind'
+-- * 'o1Kind'
 --
--- * 'ooLineItems'
+-- * 'o1LineItems'
 --
--- * 'ooShipments'
+-- * 'o1Shipments'
 --
--- * 'ooNetAmount'
+-- * 'o1NetAmount'
 --
--- * 'ooPlacedDate'
+-- * 'o1PlacedDate'
 --
--- * 'ooDeliveryDetails'
+-- * 'o1DeliveryDetails'
 --
--- * 'ooShippingOption'
+-- * 'o1ShippingOption'
 --
--- * 'ooMerchantOrderId'
+-- * 'o1MerchantOrderId'
 --
--- * 'ooAcknowledged'
+-- * 'o1Acknowledged'
 --
--- * 'ooShippingCostTax'
+-- * 'o1ShippingCostTax'
 --
--- * 'ooCustomer'
+-- * 'o1Customer'
 --
--- * 'ooId'
+-- * 'o1BillingAddress'
 --
--- * 'ooPaymentMethod'
+-- * 'o1Id'
 --
--- * 'ooPromotions'
+-- * 'o1Promotions'
 --
--- * 'ooChannelType'
+-- * 'o1ChannelType'
 --
--- * 'ooPaymentStatus'
+-- * 'o1PaymentStatus'
 --
--- * 'ooShippingCost'
+-- * 'o1ShippingCost'
 order
     :: Order
 order =
     Order'
-    { _ooStatus = Nothing
-    , _ooMerchantId = Nothing
-    , _ooRefunds = Nothing
-    , _ooKind = "content#order"
-    , _ooLineItems = Nothing
-    , _ooShipments = Nothing
-    , _ooNetAmount = Nothing
-    , _ooPlacedDate = Nothing
-    , _ooDeliveryDetails = Nothing
-    , _ooShippingOption = Nothing
-    , _ooMerchantOrderId = Nothing
-    , _ooAcknowledged = Nothing
-    , _ooShippingCostTax = Nothing
-    , _ooCustomer = Nothing
-    , _ooId = Nothing
-    , _ooPaymentMethod = Nothing
-    , _ooPromotions = Nothing
-    , _ooChannelType = Nothing
-    , _ooPaymentStatus = Nothing
-    , _ooShippingCost = Nothing
+    { _o1Status = Nothing
+    , _o1MerchantId = Nothing
+    , _o1Refunds = Nothing
+    , _o1Kind = "content#order"
+    , _o1LineItems = Nothing
+    , _o1Shipments = Nothing
+    , _o1NetAmount = Nothing
+    , _o1PlacedDate = Nothing
+    , _o1DeliveryDetails = Nothing
+    , _o1ShippingOption = Nothing
+    , _o1MerchantOrderId = Nothing
+    , _o1Acknowledged = Nothing
+    , _o1ShippingCostTax = Nothing
+    , _o1Customer = Nothing
+    , _o1BillingAddress = Nothing
+    , _o1Id = Nothing
+    , _o1Promotions = Nothing
+    , _o1ChannelType = Nothing
+    , _o1PaymentStatus = Nothing
+    , _o1ShippingCost = Nothing
     }
 
 -- | The status of the order.
-ooStatus :: Lens' Order (Maybe Text)
-ooStatus = lens _ooStatus (\ s a -> s{_ooStatus = a})
+o1Status :: Lens' Order (Maybe Text)
+o1Status = lens _o1Status (\ s a -> s{_o1Status = a})
 
-ooMerchantId :: Lens' Order (Maybe Word64)
-ooMerchantId
-  = lens _ooMerchantId (\ s a -> s{_ooMerchantId = a})
+o1MerchantId :: Lens' Order (Maybe Word64)
+o1MerchantId
+  = lens _o1MerchantId (\ s a -> s{_o1MerchantId = a})
       . mapping _Coerce
 
 -- | Refunds for the order.
-ooRefunds :: Lens' Order [OrderRefund]
-ooRefunds
-  = lens _ooRefunds (\ s a -> s{_ooRefunds = a}) .
+o1Refunds :: Lens' Order [OrderRefund]
+o1Refunds
+  = lens _o1Refunds (\ s a -> s{_o1Refunds = a}) .
       _Default
       . _Coerce
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#order\".
-ooKind :: Lens' Order Text
-ooKind = lens _ooKind (\ s a -> s{_ooKind = a})
+o1Kind :: Lens' Order Text
+o1Kind = lens _o1Kind (\ s a -> s{_o1Kind = a})
 
 -- | Line items that are ordered.
-ooLineItems :: Lens' Order [OrderLineItem]
-ooLineItems
-  = lens _ooLineItems (\ s a -> s{_ooLineItems = a}) .
+o1LineItems :: Lens' Order [OrderLineItem]
+o1LineItems
+  = lens _o1LineItems (\ s a -> s{_o1LineItems = a}) .
       _Default
       . _Coerce
 
 -- | Shipments of the order.
-ooShipments :: Lens' Order [OrderShipment]
-ooShipments
-  = lens _ooShipments (\ s a -> s{_ooShipments = a}) .
+o1Shipments :: Lens' Order [OrderShipment]
+o1Shipments
+  = lens _o1Shipments (\ s a -> s{_o1Shipments = a}) .
       _Default
       . _Coerce
 
 -- | The net amount for the order. For example, if an order was originally
 -- for a grand total of $100 and a refund was issued for $20, the net
 -- amount will be $80.
-ooNetAmount :: Lens' Order (Maybe Price)
-ooNetAmount
-  = lens _ooNetAmount (\ s a -> s{_ooNetAmount = a})
+o1NetAmount :: Lens' Order (Maybe Price)
+o1NetAmount
+  = lens _o1NetAmount (\ s a -> s{_o1NetAmount = a})
 
 -- | The date when the order was placed, in ISO 8601 format.
-ooPlacedDate :: Lens' Order (Maybe Text)
-ooPlacedDate
-  = lens _ooPlacedDate (\ s a -> s{_ooPlacedDate = a})
+o1PlacedDate :: Lens' Order (Maybe Text)
+o1PlacedDate
+  = lens _o1PlacedDate (\ s a -> s{_o1PlacedDate = a})
 
 -- | The details for the delivery.
-ooDeliveryDetails :: Lens' Order (Maybe OrderDeliveryDetails)
-ooDeliveryDetails
-  = lens _ooDeliveryDetails
-      (\ s a -> s{_ooDeliveryDetails = a})
+o1DeliveryDetails :: Lens' Order (Maybe OrderDeliveryDetails)
+o1DeliveryDetails
+  = lens _o1DeliveryDetails
+      (\ s a -> s{_o1DeliveryDetails = a})
 
 -- | The requested shipping option.
-ooShippingOption :: Lens' Order (Maybe Text)
-ooShippingOption
-  = lens _ooShippingOption
-      (\ s a -> s{_ooShippingOption = a})
+o1ShippingOption :: Lens' Order (Maybe Text)
+o1ShippingOption
+  = lens _o1ShippingOption
+      (\ s a -> s{_o1ShippingOption = a})
 
 -- | Merchant-provided id of the order.
-ooMerchantOrderId :: Lens' Order (Maybe Text)
-ooMerchantOrderId
-  = lens _ooMerchantOrderId
-      (\ s a -> s{_ooMerchantOrderId = a})
+o1MerchantOrderId :: Lens' Order (Maybe Text)
+o1MerchantOrderId
+  = lens _o1MerchantOrderId
+      (\ s a -> s{_o1MerchantOrderId = a})
 
 -- | Whether the order was acknowledged.
-ooAcknowledged :: Lens' Order (Maybe Bool)
-ooAcknowledged
-  = lens _ooAcknowledged
-      (\ s a -> s{_ooAcknowledged = a})
+o1Acknowledged :: Lens' Order (Maybe Bool)
+o1Acknowledged
+  = lens _o1Acknowledged
+      (\ s a -> s{_o1Acknowledged = a})
 
 -- | The tax for the total shipping cost.
-ooShippingCostTax :: Lens' Order (Maybe Price)
-ooShippingCostTax
-  = lens _ooShippingCostTax
-      (\ s a -> s{_ooShippingCostTax = a})
+o1ShippingCostTax :: Lens' Order (Maybe Price)
+o1ShippingCostTax
+  = lens _o1ShippingCostTax
+      (\ s a -> s{_o1ShippingCostTax = a})
 
 -- | The details of the customer who placed the order.
-ooCustomer :: Lens' Order (Maybe OrderCustomer)
-ooCustomer
-  = lens _ooCustomer (\ s a -> s{_ooCustomer = a})
+o1Customer :: Lens' Order (Maybe OrderCustomer)
+o1Customer
+  = lens _o1Customer (\ s a -> s{_o1Customer = a})
+
+-- | The billing address.
+o1BillingAddress :: Lens' Order (Maybe OrderAddress)
+o1BillingAddress
+  = lens _o1BillingAddress
+      (\ s a -> s{_o1BillingAddress = a})
 
 -- | The REST id of the order. Globally unique.
-ooId :: Lens' Order (Maybe Text)
-ooId = lens _ooId (\ s a -> s{_ooId = a})
+o1Id :: Lens' Order (Maybe Text)
+o1Id = lens _o1Id (\ s a -> s{_o1Id = a})
 
--- | The details of the payment method.
-ooPaymentMethod :: Lens' Order (Maybe OrderPaymentMethod)
-ooPaymentMethod
-  = lens _ooPaymentMethod
-      (\ s a -> s{_ooPaymentMethod = a})
-
--- | The details of the merchant provided promotions applied to the order.
--- More details about the program are here.
-ooPromotions :: Lens' Order [OrderPromotion]
-ooPromotions
-  = lens _ooPromotions (\ s a -> s{_ooPromotions = a})
+-- | Promotions associated with the order.
+o1Promotions :: Lens' Order [OrderPromotion]
+o1Promotions
+  = lens _o1Promotions (\ s a -> s{_o1Promotions = a})
       . _Default
       . _Coerce
 
 -- | The channel type of the order: \"purchaseOnGoogle\" or
 -- \"googleExpress\".
-ooChannelType :: Lens' Order (Maybe Text)
-ooChannelType
-  = lens _ooChannelType
-      (\ s a -> s{_ooChannelType = a})
+o1ChannelType :: Lens' Order (Maybe Text)
+o1ChannelType
+  = lens _o1ChannelType
+      (\ s a -> s{_o1ChannelType = a})
 
 -- | The status of the payment.
-ooPaymentStatus :: Lens' Order (Maybe Text)
-ooPaymentStatus
-  = lens _ooPaymentStatus
-      (\ s a -> s{_ooPaymentStatus = a})
+o1PaymentStatus :: Lens' Order (Maybe Text)
+o1PaymentStatus
+  = lens _o1PaymentStatus
+      (\ s a -> s{_o1PaymentStatus = a})
 
 -- | The total cost of shipping for all items.
-ooShippingCost :: Lens' Order (Maybe Price)
-ooShippingCost
-  = lens _ooShippingCost
-      (\ s a -> s{_ooShippingCost = a})
+o1ShippingCost :: Lens' Order (Maybe Price)
+o1ShippingCost
+  = lens _o1ShippingCost
+      (\ s a -> s{_o1ShippingCost = a})
 
 instance FromJSON Order where
         parseJSON
@@ -11552,8 +15843,8 @@ instance FromJSON Order where
                      <*> (o .:? "acknowledged")
                      <*> (o .:? "shippingCostTax")
                      <*> (o .:? "customer")
+                     <*> (o .:? "billingAddress")
                      <*> (o .:? "id")
-                     <*> (o .:? "paymentMethod")
                      <*> (o .:? "promotions" .!= mempty)
                      <*> (o .:? "channelType")
                      <*> (o .:? "paymentStatus")
@@ -11563,81 +15854,33 @@ instance ToJSON Order where
         toJSON Order'{..}
           = object
               (catMaybes
-                 [("status" .=) <$> _ooStatus,
-                  ("merchantId" .=) <$> _ooMerchantId,
-                  ("refunds" .=) <$> _ooRefunds,
-                  Just ("kind" .= _ooKind),
-                  ("lineItems" .=) <$> _ooLineItems,
-                  ("shipments" .=) <$> _ooShipments,
-                  ("netAmount" .=) <$> _ooNetAmount,
-                  ("placedDate" .=) <$> _ooPlacedDate,
-                  ("deliveryDetails" .=) <$> _ooDeliveryDetails,
-                  ("shippingOption" .=) <$> _ooShippingOption,
-                  ("merchantOrderId" .=) <$> _ooMerchantOrderId,
-                  ("acknowledged" .=) <$> _ooAcknowledged,
-                  ("shippingCostTax" .=) <$> _ooShippingCostTax,
-                  ("customer" .=) <$> _ooCustomer, ("id" .=) <$> _ooId,
-                  ("paymentMethod" .=) <$> _ooPaymentMethod,
-                  ("promotions" .=) <$> _ooPromotions,
-                  ("channelType" .=) <$> _ooChannelType,
-                  ("paymentStatus" .=) <$> _ooPaymentStatus,
-                  ("shippingCost" .=) <$> _ooShippingCost])
-
---
--- /See:/ 'inventoryCustomBatchResponse' smart constructor.
-data InventoryCustomBatchResponse = InventoryCustomBatchResponse'
-    { _invEntries :: !(Maybe [InventoryCustomBatchResponseEntry])
-    , _invKind    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'InventoryCustomBatchResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'invEntries'
---
--- * 'invKind'
-inventoryCustomBatchResponse
-    :: InventoryCustomBatchResponse
-inventoryCustomBatchResponse =
-    InventoryCustomBatchResponse'
-    { _invEntries = Nothing
-    , _invKind = "content#inventoryCustomBatchResponse"
-    }
-
--- | The result of the execution of the batch requests.
-invEntries :: Lens' InventoryCustomBatchResponse [InventoryCustomBatchResponseEntry]
-invEntries
-  = lens _invEntries (\ s a -> s{_invEntries = a}) .
-      _Default
-      . _Coerce
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"content#inventoryCustomBatchResponse\".
-invKind :: Lens' InventoryCustomBatchResponse Text
-invKind = lens _invKind (\ s a -> s{_invKind = a})
-
-instance FromJSON InventoryCustomBatchResponse where
-        parseJSON
-          = withObject "InventoryCustomBatchResponse"
-              (\ o ->
-                 InventoryCustomBatchResponse' <$>
-                   (o .:? "entries" .!= mempty) <*>
-                     (o .:? "kind" .!=
-                        "content#inventoryCustomBatchResponse"))
-
-instance ToJSON InventoryCustomBatchResponse where
-        toJSON InventoryCustomBatchResponse'{..}
-          = object
-              (catMaybes
-                 [("entries" .=) <$> _invEntries,
-                  Just ("kind" .= _invKind)])
+                 [("status" .=) <$> _o1Status,
+                  ("merchantId" .=) <$> _o1MerchantId,
+                  ("refunds" .=) <$> _o1Refunds,
+                  Just ("kind" .= _o1Kind),
+                  ("lineItems" .=) <$> _o1LineItems,
+                  ("shipments" .=) <$> _o1Shipments,
+                  ("netAmount" .=) <$> _o1NetAmount,
+                  ("placedDate" .=) <$> _o1PlacedDate,
+                  ("deliveryDetails" .=) <$> _o1DeliveryDetails,
+                  ("shippingOption" .=) <$> _o1ShippingOption,
+                  ("merchantOrderId" .=) <$> _o1MerchantOrderId,
+                  ("acknowledged" .=) <$> _o1Acknowledged,
+                  ("shippingCostTax" .=) <$> _o1ShippingCostTax,
+                  ("customer" .=) <$> _o1Customer,
+                  ("billingAddress" .=) <$> _o1BillingAddress,
+                  ("id" .=) <$> _o1Id,
+                  ("promotions" .=) <$> _o1Promotions,
+                  ("channelType" .=) <$> _o1ChannelType,
+                  ("paymentStatus" .=) <$> _o1PaymentStatus,
+                  ("shippingCost" .=) <$> _o1ShippingCost])
 
 --
 -- /See:/ 'orderLineItemProduct' smart constructor.
 data OrderLineItemProduct = OrderLineItemProduct'
     { _olipImageLink         :: !(Maybe Text)
     , _olipShownImage        :: !(Maybe Text)
+    , _olipFees              :: !(Maybe [OrderLineItemProductFee])
     , _olipChannel           :: !(Maybe Text)
     , _olipBrand             :: !(Maybe Text)
     , _olipTargetCountry     :: !(Maybe Text)
@@ -11660,6 +15903,8 @@ data OrderLineItemProduct = OrderLineItemProduct'
 -- * 'olipImageLink'
 --
 -- * 'olipShownImage'
+--
+-- * 'olipFees'
 --
 -- * 'olipChannel'
 --
@@ -11692,6 +15937,7 @@ orderLineItemProduct =
     OrderLineItemProduct'
     { _olipImageLink = Nothing
     , _olipShownImage = Nothing
+    , _olipFees = Nothing
     , _olipChannel = Nothing
     , _olipBrand = Nothing
     , _olipTargetCountry = Nothing
@@ -11718,6 +15964,13 @@ olipShownImage :: Lens' OrderLineItemProduct (Maybe Text)
 olipShownImage
   = lens _olipShownImage
       (\ s a -> s{_olipShownImage = a})
+
+-- | Associated fees at order creation time.
+olipFees :: Lens' OrderLineItemProduct [OrderLineItemProductFee]
+olipFees
+  = lens _olipFees (\ s a -> s{_olipFees = a}) .
+      _Default
+      . _Coerce
 
 -- | The item\'s channel (online or local).
 olipChannel :: Lens' OrderLineItemProduct (Maybe Text)
@@ -11796,7 +16049,8 @@ instance FromJSON OrderLineItemProduct where
               (\ o ->
                  OrderLineItemProduct' <$>
                    (o .:? "imageLink") <*> (o .:? "shownImage") <*>
-                     (o .:? "channel")
+                     (o .:? "fees" .!= mempty)
+                     <*> (o .:? "channel")
                      <*> (o .:? "brand")
                      <*> (o .:? "targetCountry")
                      <*> (o .:? "gtin")
@@ -11816,6 +16070,7 @@ instance ToJSON OrderLineItemProduct where
               (catMaybes
                  [("imageLink" .=) <$> _olipImageLink,
                   ("shownImage" .=) <$> _olipShownImage,
+                  ("fees" .=) <$> _olipFees,
                   ("channel" .=) <$> _olipChannel,
                   ("brand" .=) <$> _olipBrand,
                   ("targetCountry" .=) <$> _olipTargetCountry,
@@ -11833,62 +16088,66 @@ instance ToJSON OrderLineItemProduct where
 --
 -- /See:/ 'accounttaxCustomBatchRequestEntry' smart constructor.
 data AccounttaxCustomBatchRequestEntry = AccounttaxCustomBatchRequestEntry'
-    { _a2AccountTax :: !(Maybe AccountTax)
-    , _a2MerchantId :: !(Maybe (Textual Word64))
-    , _a2AccountId  :: !(Maybe (Textual Word64))
-    , _a2Method     :: !(Maybe Text)
-    , _a2BatchId    :: !(Maybe (Textual Word32))
+    { _acccAccountTax :: !(Maybe AccountTax)
+    , _acccMerchantId :: !(Maybe (Textual Word64))
+    , _acccAccountId  :: !(Maybe (Textual Word64))
+    , _acccMethod     :: !(Maybe Text)
+    , _acccBatchId    :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccounttaxCustomBatchRequestEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'a2AccountTax'
+-- * 'acccAccountTax'
 --
--- * 'a2MerchantId'
+-- * 'acccMerchantId'
 --
--- * 'a2AccountId'
+-- * 'acccAccountId'
 --
--- * 'a2Method'
+-- * 'acccMethod'
 --
--- * 'a2BatchId'
+-- * 'acccBatchId'
 accounttaxCustomBatchRequestEntry
     :: AccounttaxCustomBatchRequestEntry
 accounttaxCustomBatchRequestEntry =
     AccounttaxCustomBatchRequestEntry'
-    { _a2AccountTax = Nothing
-    , _a2MerchantId = Nothing
-    , _a2AccountId = Nothing
-    , _a2Method = Nothing
-    , _a2BatchId = Nothing
+    { _acccAccountTax = Nothing
+    , _acccMerchantId = Nothing
+    , _acccAccountId = Nothing
+    , _acccMethod = Nothing
+    , _acccBatchId = Nothing
     }
 
 -- | The account tax settings to update. Only defined if the method is
 -- update.
-a2AccountTax :: Lens' AccounttaxCustomBatchRequestEntry (Maybe AccountTax)
-a2AccountTax
-  = lens _a2AccountTax (\ s a -> s{_a2AccountTax = a})
+acccAccountTax :: Lens' AccounttaxCustomBatchRequestEntry (Maybe AccountTax)
+acccAccountTax
+  = lens _acccAccountTax
+      (\ s a -> s{_acccAccountTax = a})
 
 -- | The ID of the managing account.
-a2MerchantId :: Lens' AccounttaxCustomBatchRequestEntry (Maybe Word64)
-a2MerchantId
-  = lens _a2MerchantId (\ s a -> s{_a2MerchantId = a})
+acccMerchantId :: Lens' AccounttaxCustomBatchRequestEntry (Maybe Word64)
+acccMerchantId
+  = lens _acccMerchantId
+      (\ s a -> s{_acccMerchantId = a})
       . mapping _Coerce
 
 -- | The ID of the account for which to get\/update account tax settings.
-a2AccountId :: Lens' AccounttaxCustomBatchRequestEntry (Maybe Word64)
-a2AccountId
-  = lens _a2AccountId (\ s a -> s{_a2AccountId = a}) .
-      mapping _Coerce
+acccAccountId :: Lens' AccounttaxCustomBatchRequestEntry (Maybe Word64)
+acccAccountId
+  = lens _acccAccountId
+      (\ s a -> s{_acccAccountId = a})
+      . mapping _Coerce
 
-a2Method :: Lens' AccounttaxCustomBatchRequestEntry (Maybe Text)
-a2Method = lens _a2Method (\ s a -> s{_a2Method = a})
+acccMethod :: Lens' AccounttaxCustomBatchRequestEntry (Maybe Text)
+acccMethod
+  = lens _acccMethod (\ s a -> s{_acccMethod = a})
 
 -- | An entry ID, unique within the batch request.
-a2BatchId :: Lens' AccounttaxCustomBatchRequestEntry (Maybe Word32)
-a2BatchId
-  = lens _a2BatchId (\ s a -> s{_a2BatchId = a}) .
+acccBatchId :: Lens' AccounttaxCustomBatchRequestEntry (Maybe Word32)
+acccBatchId
+  = lens _acccBatchId (\ s a -> s{_acccBatchId = a}) .
       mapping _Coerce
 
 instance FromJSON AccounttaxCustomBatchRequestEntry
@@ -11907,11 +16166,11 @@ instance ToJSON AccounttaxCustomBatchRequestEntry
         toJSON AccounttaxCustomBatchRequestEntry'{..}
           = object
               (catMaybes
-                 [("accountTax" .=) <$> _a2AccountTax,
-                  ("merchantId" .=) <$> _a2MerchantId,
-                  ("accountId" .=) <$> _a2AccountId,
-                  ("method" .=) <$> _a2Method,
-                  ("batchId" .=) <$> _a2BatchId])
+                 [("accountTax" .=) <$> _acccAccountTax,
+                  ("merchantId" .=) <$> _acccMerchantId,
+                  ("accountId" .=) <$> _acccAccountId,
+                  ("method" .=) <$> _acccMethod,
+                  ("batchId" .=) <$> _acccBatchId])
 
 -- | An error occurring in the feed, like \"invalid price\".
 --
@@ -11987,26 +16246,26 @@ instance ToJSON DatafeedStatusError where
 --
 -- /See:/ 'productsCustomBatchRequest' smart constructor.
 newtype ProductsCustomBatchRequest = ProductsCustomBatchRequest'
-    { _pcbrcEntries :: Maybe [ProductsCustomBatchRequestEntry]
+    { _ppEntries :: Maybe [ProductsCustomBatchRequestEntry]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductsCustomBatchRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pcbrcEntries'
+-- * 'ppEntries'
 productsCustomBatchRequest
     :: ProductsCustomBatchRequest
 productsCustomBatchRequest =
     ProductsCustomBatchRequest'
-    { _pcbrcEntries = Nothing
+    { _ppEntries = Nothing
     }
 
 -- | The request entries to be processed in the batch.
-pcbrcEntries :: Lens' ProductsCustomBatchRequest [ProductsCustomBatchRequestEntry]
-pcbrcEntries
-  = lens _pcbrcEntries (\ s a -> s{_pcbrcEntries = a})
-      . _Default
+ppEntries :: Lens' ProductsCustomBatchRequest [ProductsCustomBatchRequestEntry]
+ppEntries
+  = lens _ppEntries (\ s a -> s{_ppEntries = a}) .
+      _Default
       . _Coerce
 
 instance FromJSON ProductsCustomBatchRequest where
@@ -12018,161 +16277,331 @@ instance FromJSON ProductsCustomBatchRequest where
 
 instance ToJSON ProductsCustomBatchRequest where
         toJSON ProductsCustomBatchRequest'{..}
-          = object
-              (catMaybes [("entries" .=) <$> _pcbrcEntries])
+          = object (catMaybes [("entries" .=) <$> _ppEntries])
 
 --
--- /See:/ 'ordersCustomBatchRequestEntryReturnLineItem' smart constructor.
-data OrdersCustomBatchRequestEntryReturnLineItem = OrdersCustomBatchRequestEntryReturnLineItem'
-    { _ocbrerliQuantity   :: !(Maybe (Textual Word32))
-    , _ocbrerliLineItemId :: !(Maybe Text)
-    , _ocbrerliReason     :: !(Maybe Text)
-    , _ocbrerliReasonText :: !(Maybe Text)
+-- /See:/ 'posDataProviders' smart constructor.
+data PosDataProviders = PosDataProviders'
+    { _pdpCountry          :: !(Maybe Text)
+    , _pdpPosDataProviders :: !(Maybe [PosDataProvidersPosDataProvider])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrdersCustomBatchRequestEntryReturnLineItem' with the minimum fields required to make a request.
+-- | Creates a value of 'PosDataProviders' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ocbrerliQuantity'
+-- * 'pdpCountry'
 --
--- * 'ocbrerliLineItemId'
---
--- * 'ocbrerliReason'
---
--- * 'ocbrerliReasonText'
-ordersCustomBatchRequestEntryReturnLineItem
-    :: OrdersCustomBatchRequestEntryReturnLineItem
-ordersCustomBatchRequestEntryReturnLineItem =
-    OrdersCustomBatchRequestEntryReturnLineItem'
-    { _ocbrerliQuantity = Nothing
-    , _ocbrerliLineItemId = Nothing
-    , _ocbrerliReason = Nothing
-    , _ocbrerliReasonText = Nothing
+-- * 'pdpPosDataProviders'
+posDataProviders
+    :: PosDataProviders
+posDataProviders =
+    PosDataProviders'
+    { _pdpCountry = Nothing
+    , _pdpPosDataProviders = Nothing
     }
 
--- | The quantity to return.
-ocbrerliQuantity :: Lens' OrdersCustomBatchRequestEntryReturnLineItem (Maybe Word32)
-ocbrerliQuantity
-  = lens _ocbrerliQuantity
-      (\ s a -> s{_ocbrerliQuantity = a})
-      . mapping _Coerce
+-- | Country code.
+pdpCountry :: Lens' PosDataProviders (Maybe Text)
+pdpCountry
+  = lens _pdpCountry (\ s a -> s{_pdpCountry = a})
 
--- | The ID of the line item to return.
-ocbrerliLineItemId :: Lens' OrdersCustomBatchRequestEntryReturnLineItem (Maybe Text)
-ocbrerliLineItemId
-  = lens _ocbrerliLineItemId
-      (\ s a -> s{_ocbrerliLineItemId = a})
+-- | A list of POS data providers.
+pdpPosDataProviders :: Lens' PosDataProviders [PosDataProvidersPosDataProvider]
+pdpPosDataProviders
+  = lens _pdpPosDataProviders
+      (\ s a -> s{_pdpPosDataProviders = a})
+      . _Default
+      . _Coerce
 
--- | The reason for the return.
-ocbrerliReason :: Lens' OrdersCustomBatchRequestEntryReturnLineItem (Maybe Text)
-ocbrerliReason
-  = lens _ocbrerliReason
-      (\ s a -> s{_ocbrerliReason = a})
-
--- | The explanation of the reason.
-ocbrerliReasonText :: Lens' OrdersCustomBatchRequestEntryReturnLineItem (Maybe Text)
-ocbrerliReasonText
-  = lens _ocbrerliReasonText
-      (\ s a -> s{_ocbrerliReasonText = a})
-
-instance FromJSON
-         OrdersCustomBatchRequestEntryReturnLineItem where
+instance FromJSON PosDataProviders where
         parseJSON
-          = withObject
-              "OrdersCustomBatchRequestEntryReturnLineItem"
+          = withObject "PosDataProviders"
               (\ o ->
-                 OrdersCustomBatchRequestEntryReturnLineItem' <$>
-                   (o .:? "quantity") <*> (o .:? "lineItemId") <*>
-                     (o .:? "reason")
-                     <*> (o .:? "reasonText"))
+                 PosDataProviders' <$>
+                   (o .:? "country") <*>
+                     (o .:? "posDataProviders" .!= mempty))
 
-instance ToJSON
-         OrdersCustomBatchRequestEntryReturnLineItem where
-        toJSON
-          OrdersCustomBatchRequestEntryReturnLineItem'{..}
+instance ToJSON PosDataProviders where
+        toJSON PosDataProviders'{..}
           = object
               (catMaybes
-                 [("quantity" .=) <$> _ocbrerliQuantity,
-                  ("lineItemId" .=) <$> _ocbrerliLineItemId,
-                  ("reason" .=) <$> _ocbrerliReason,
-                  ("reasonText" .=) <$> _ocbrerliReasonText])
+                 [("country" .=) <$> _pdpCountry,
+                  ("posDataProviders" .=) <$> _pdpPosDataProviders])
 
+-- | The absolute quantity of an item available at the given store.
 --
--- /See:/ 'ordersCustomBatchRequestEntryUpdateShipment' smart constructor.
-data OrdersCustomBatchRequestEntryUpdateShipment = OrdersCustomBatchRequestEntryUpdateShipment'
-    { _ocbreusCarrier    :: !(Maybe Text)
-    , _ocbreusStatus     :: !(Maybe Text)
-    , _ocbreusTrackingId :: !(Maybe Text)
-    , _ocbreusShipmentId :: !(Maybe Text)
+-- /See:/ 'posInventory' smart constructor.
+data PosInventory = PosInventory'
+    { _piStoreCode       :: !(Maybe Text)
+    , _piKind            :: !Text
+    , _piItemId          :: !(Maybe Text)
+    , _piQuantity        :: !(Maybe (Textual Int64))
+    , _piTargetCountry   :: !(Maybe Text)
+    , _piGtin            :: !(Maybe Text)
+    , _piPrice           :: !(Maybe Price)
+    , _piContentLanguage :: !(Maybe Text)
+    , _piTimestamp       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrdersCustomBatchRequestEntryUpdateShipment' with the minimum fields required to make a request.
+-- | Creates a value of 'PosInventory' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ocbreusCarrier'
+-- * 'piStoreCode'
 --
--- * 'ocbreusStatus'
+-- * 'piKind'
 --
--- * 'ocbreusTrackingId'
+-- * 'piItemId'
 --
--- * 'ocbreusShipmentId'
-ordersCustomBatchRequestEntryUpdateShipment
-    :: OrdersCustomBatchRequestEntryUpdateShipment
-ordersCustomBatchRequestEntryUpdateShipment =
-    OrdersCustomBatchRequestEntryUpdateShipment'
-    { _ocbreusCarrier = Nothing
-    , _ocbreusStatus = Nothing
-    , _ocbreusTrackingId = Nothing
-    , _ocbreusShipmentId = Nothing
+-- * 'piQuantity'
+--
+-- * 'piTargetCountry'
+--
+-- * 'piGtin'
+--
+-- * 'piPrice'
+--
+-- * 'piContentLanguage'
+--
+-- * 'piTimestamp'
+posInventory
+    :: PosInventory
+posInventory =
+    PosInventory'
+    { _piStoreCode = Nothing
+    , _piKind = "content#posInventory"
+    , _piItemId = Nothing
+    , _piQuantity = Nothing
+    , _piTargetCountry = Nothing
+    , _piGtin = Nothing
+    , _piPrice = Nothing
+    , _piContentLanguage = Nothing
+    , _piTimestamp = Nothing
     }
 
--- | The carrier handling the shipment. Not updated if missing.
-ocbreusCarrier :: Lens' OrdersCustomBatchRequestEntryUpdateShipment (Maybe Text)
-ocbreusCarrier
-  = lens _ocbreusCarrier
-      (\ s a -> s{_ocbreusCarrier = a})
+-- | The identifier of the merchant\'s store. Either a storeCode inserted via
+-- the API or the code of the store in Google My Business.
+piStoreCode :: Lens' PosInventory (Maybe Text)
+piStoreCode
+  = lens _piStoreCode (\ s a -> s{_piStoreCode = a})
 
--- | New status for the shipment. Not updated if missing.
-ocbreusStatus :: Lens' OrdersCustomBatchRequestEntryUpdateShipment (Maybe Text)
-ocbreusStatus
-  = lens _ocbreusStatus
-      (\ s a -> s{_ocbreusStatus = a})
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"content#posInventory\".
+piKind :: Lens' PosInventory Text
+piKind = lens _piKind (\ s a -> s{_piKind = a})
 
--- | The tracking id for the shipment. Not updated if missing.
-ocbreusTrackingId :: Lens' OrdersCustomBatchRequestEntryUpdateShipment (Maybe Text)
-ocbreusTrackingId
-  = lens _ocbreusTrackingId
-      (\ s a -> s{_ocbreusTrackingId = a})
+-- | A unique identifier for the item.
+piItemId :: Lens' PosInventory (Maybe Text)
+piItemId = lens _piItemId (\ s a -> s{_piItemId = a})
 
--- | The ID of the shipment.
-ocbreusShipmentId :: Lens' OrdersCustomBatchRequestEntryUpdateShipment (Maybe Text)
-ocbreusShipmentId
-  = lens _ocbreusShipmentId
-      (\ s a -> s{_ocbreusShipmentId = a})
+-- | The available quantity of the item.
+piQuantity :: Lens' PosInventory (Maybe Int64)
+piQuantity
+  = lens _piQuantity (\ s a -> s{_piQuantity = a}) .
+      mapping _Coerce
 
-instance FromJSON
-         OrdersCustomBatchRequestEntryUpdateShipment where
+-- | The CLDR territory code for the item.
+piTargetCountry :: Lens' PosInventory (Maybe Text)
+piTargetCountry
+  = lens _piTargetCountry
+      (\ s a -> s{_piTargetCountry = a})
+
+-- | Global Trade Item Number.
+piGtin :: Lens' PosInventory (Maybe Text)
+piGtin = lens _piGtin (\ s a -> s{_piGtin = a})
+
+-- | The current price of the item.
+piPrice :: Lens' PosInventory (Maybe Price)
+piPrice = lens _piPrice (\ s a -> s{_piPrice = a})
+
+-- | The two-letter ISO 639-1 language code for the item.
+piContentLanguage :: Lens' PosInventory (Maybe Text)
+piContentLanguage
+  = lens _piContentLanguage
+      (\ s a -> s{_piContentLanguage = a})
+
+-- | The inventory timestamp, in ISO 8601 format.
+piTimestamp :: Lens' PosInventory (Maybe Text)
+piTimestamp
+  = lens _piTimestamp (\ s a -> s{_piTimestamp = a})
+
+instance FromJSON PosInventory where
         parseJSON
-          = withObject
-              "OrdersCustomBatchRequestEntryUpdateShipment"
+          = withObject "PosInventory"
               (\ o ->
-                 OrdersCustomBatchRequestEntryUpdateShipment' <$>
-                   (o .:? "carrier") <*> (o .:? "status") <*>
-                     (o .:? "trackingId")
-                     <*> (o .:? "shipmentId"))
+                 PosInventory' <$>
+                   (o .:? "storeCode") <*>
+                     (o .:? "kind" .!= "content#posInventory")
+                     <*> (o .:? "itemId")
+                     <*> (o .:? "quantity")
+                     <*> (o .:? "targetCountry")
+                     <*> (o .:? "gtin")
+                     <*> (o .:? "price")
+                     <*> (o .:? "contentLanguage")
+                     <*> (o .:? "timestamp"))
 
-instance ToJSON
-         OrdersCustomBatchRequestEntryUpdateShipment where
-        toJSON
-          OrdersCustomBatchRequestEntryUpdateShipment'{..}
+instance ToJSON PosInventory where
+        toJSON PosInventory'{..}
           = object
               (catMaybes
-                 [("carrier" .=) <$> _ocbreusCarrier,
-                  ("status" .=) <$> _ocbreusStatus,
-                  ("trackingId" .=) <$> _ocbreusTrackingId,
-                  ("shipmentId" .=) <$> _ocbreusShipmentId])
+                 [("storeCode" .=) <$> _piStoreCode,
+                  Just ("kind" .= _piKind),
+                  ("itemId" .=) <$> _piItemId,
+                  ("quantity" .=) <$> _piQuantity,
+                  ("targetCountry" .=) <$> _piTargetCountry,
+                  ("gtin" .=) <$> _piGtin, ("price" .=) <$> _piPrice,
+                  ("contentLanguage" .=) <$> _piContentLanguage,
+                  ("timestamp" .=) <$> _piTimestamp])
+
+--
+-- /See:/ 'liaSettingsListPosDataProvidersResponse' smart constructor.
+data LiaSettingsListPosDataProvidersResponse = LiaSettingsListPosDataProvidersResponse'
+    { _lslpdprKind             :: !Text
+    , _lslpdprPosDataProviders :: !(Maybe [PosDataProviders])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LiaSettingsListPosDataProvidersResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lslpdprKind'
+--
+-- * 'lslpdprPosDataProviders'
+liaSettingsListPosDataProvidersResponse
+    :: LiaSettingsListPosDataProvidersResponse
+liaSettingsListPosDataProvidersResponse =
+    LiaSettingsListPosDataProvidersResponse'
+    { _lslpdprKind = "content#liasettingsListPosDataProvidersResponse"
+    , _lslpdprPosDataProviders = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"content#liasettingsListPosDataProvidersResponse\".
+lslpdprKind :: Lens' LiaSettingsListPosDataProvidersResponse Text
+lslpdprKind
+  = lens _lslpdprKind (\ s a -> s{_lslpdprKind = a})
+
+-- | The list of POS data providers for each eligible country
+lslpdprPosDataProviders :: Lens' LiaSettingsListPosDataProvidersResponse [PosDataProviders]
+lslpdprPosDataProviders
+  = lens _lslpdprPosDataProviders
+      (\ s a -> s{_lslpdprPosDataProviders = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON
+         LiaSettingsListPosDataProvidersResponse where
+        parseJSON
+          = withObject
+              "LiaSettingsListPosDataProvidersResponse"
+              (\ o ->
+                 LiaSettingsListPosDataProvidersResponse' <$>
+                   (o .:? "kind" .!=
+                      "content#liasettingsListPosDataProvidersResponse")
+                     <*> (o .:? "posDataProviders" .!= mempty))
+
+instance ToJSON
+         LiaSettingsListPosDataProvidersResponse where
+        toJSON LiaSettingsListPosDataProvidersResponse'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _lslpdprKind),
+                  ("posDataProviders" .=) <$>
+                    _lslpdprPosDataProviders])
+
+--
+-- /See:/ 'orderinvoicesCreateRefundInvoiceRequest' smart constructor.
+data OrderinvoicesCreateRefundInvoiceRequest = OrderinvoicesCreateRefundInvoiceRequest'
+    { _ocrirRefundOnlyOption :: !(Maybe OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption)
+    , _ocrirInvoiceId        :: !(Maybe Text)
+    , _ocrirShipmentInvoices :: !(Maybe [ShipmentInvoice])
+    , _ocrirOperationId      :: !(Maybe Text)
+    , _ocrirReturnOption     :: !(Maybe OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OrderinvoicesCreateRefundInvoiceRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ocrirRefundOnlyOption'
+--
+-- * 'ocrirInvoiceId'
+--
+-- * 'ocrirShipmentInvoices'
+--
+-- * 'ocrirOperationId'
+--
+-- * 'ocrirReturnOption'
+orderinvoicesCreateRefundInvoiceRequest
+    :: OrderinvoicesCreateRefundInvoiceRequest
+orderinvoicesCreateRefundInvoiceRequest =
+    OrderinvoicesCreateRefundInvoiceRequest'
+    { _ocrirRefundOnlyOption = Nothing
+    , _ocrirInvoiceId = Nothing
+    , _ocrirShipmentInvoices = Nothing
+    , _ocrirOperationId = Nothing
+    , _ocrirReturnOption = Nothing
+    }
+
+-- | Option to create a refund-only invoice. Exactly one of refundOnlyOption
+-- or returnOption must be provided.
+ocrirRefundOnlyOption :: Lens' OrderinvoicesCreateRefundInvoiceRequest (Maybe OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption)
+ocrirRefundOnlyOption
+  = lens _ocrirRefundOnlyOption
+      (\ s a -> s{_ocrirRefundOnlyOption = a})
+
+-- | [required] The ID of the invoice.
+ocrirInvoiceId :: Lens' OrderinvoicesCreateRefundInvoiceRequest (Maybe Text)
+ocrirInvoiceId
+  = lens _ocrirInvoiceId
+      (\ s a -> s{_ocrirInvoiceId = a})
+
+-- | Invoice details for different shipment groups.
+ocrirShipmentInvoices :: Lens' OrderinvoicesCreateRefundInvoiceRequest [ShipmentInvoice]
+ocrirShipmentInvoices
+  = lens _ocrirShipmentInvoices
+      (\ s a -> s{_ocrirShipmentInvoices = a})
+      . _Default
+      . _Coerce
+
+-- | [required] The ID of the operation, unique across all operations for a
+-- given order.
+ocrirOperationId :: Lens' OrderinvoicesCreateRefundInvoiceRequest (Maybe Text)
+ocrirOperationId
+  = lens _ocrirOperationId
+      (\ s a -> s{_ocrirOperationId = a})
+
+-- | Option to create an invoice for a refund and mark all items within the
+-- invoice as returned. Exactly one of refundOnlyOption or returnOption
+-- must be provided.
+ocrirReturnOption :: Lens' OrderinvoicesCreateRefundInvoiceRequest (Maybe OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption)
+ocrirReturnOption
+  = lens _ocrirReturnOption
+      (\ s a -> s{_ocrirReturnOption = a})
+
+instance FromJSON
+         OrderinvoicesCreateRefundInvoiceRequest where
+        parseJSON
+          = withObject
+              "OrderinvoicesCreateRefundInvoiceRequest"
+              (\ o ->
+                 OrderinvoicesCreateRefundInvoiceRequest' <$>
+                   (o .:? "refundOnlyOption") <*> (o .:? "invoiceId")
+                     <*> (o .:? "shipmentInvoices" .!= mempty)
+                     <*> (o .:? "operationId")
+                     <*> (o .:? "returnOption"))
+
+instance ToJSON
+         OrderinvoicesCreateRefundInvoiceRequest where
+        toJSON OrderinvoicesCreateRefundInvoiceRequest'{..}
+          = object
+              (catMaybes
+                 [("refundOnlyOption" .=) <$> _ocrirRefundOnlyOption,
+                  ("invoiceId" .=) <$> _ocrirInvoiceId,
+                  ("shipmentInvoices" .=) <$> _ocrirShipmentInvoices,
+                  ("operationId" .=) <$> _ocrirOperationId,
+                  ("returnOption" .=) <$> _ocrirReturnOption])
 
 -- | The status of a datafeed, i.e., the result of the last retrieval of the
 -- datafeed computed asynchronously when the feed processing is finished.
@@ -12180,10 +16609,12 @@ instance ToJSON
 -- /See:/ 'datafeedStatus' smart constructor.
 data DatafeedStatus = DatafeedStatus'
     { _dsItemsTotal       :: !(Maybe (Textual Word64))
+    , _dsCountry          :: !(Maybe Text)
     , _dsKind             :: !Text
     , _dsWarnings         :: !(Maybe [DatafeedStatusError])
     , _dsDatafeedId       :: !(Maybe (Textual Word64))
     , _dsProcessingStatus :: !(Maybe Text)
+    , _dsLanguage         :: !(Maybe Text)
     , _dsLastUploadDate   :: !(Maybe Text)
     , _dsItemsValid       :: !(Maybe (Textual Word64))
     , _dsErrors           :: !(Maybe [DatafeedStatusError])
@@ -12195,6 +16626,8 @@ data DatafeedStatus = DatafeedStatus'
 --
 -- * 'dsItemsTotal'
 --
+-- * 'dsCountry'
+--
 -- * 'dsKind'
 --
 -- * 'dsWarnings'
@@ -12202,6 +16635,8 @@ data DatafeedStatus = DatafeedStatus'
 -- * 'dsDatafeedId'
 --
 -- * 'dsProcessingStatus'
+--
+-- * 'dsLanguage'
 --
 -- * 'dsLastUploadDate'
 --
@@ -12213,10 +16648,12 @@ datafeedStatus
 datafeedStatus =
     DatafeedStatus'
     { _dsItemsTotal = Nothing
+    , _dsCountry = Nothing
     , _dsKind = "content#datafeedStatus"
     , _dsWarnings = Nothing
     , _dsDatafeedId = Nothing
     , _dsProcessingStatus = Nothing
+    , _dsLanguage = Nothing
     , _dsLastUploadDate = Nothing
     , _dsItemsValid = Nothing
     , _dsErrors = Nothing
@@ -12227,6 +16664,12 @@ dsItemsTotal :: Lens' DatafeedStatus (Maybe Word64)
 dsItemsTotal
   = lens _dsItemsTotal (\ s a -> s{_dsItemsTotal = a})
       . mapping _Coerce
+
+-- | The country for which the status is reported, represented as a CLDR
+-- territory code.
+dsCountry :: Lens' DatafeedStatus (Maybe Text)
+dsCountry
+  = lens _dsCountry (\ s a -> s{_dsCountry = a})
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#datafeedStatus\".
@@ -12252,6 +16695,11 @@ dsProcessingStatus
   = lens _dsProcessingStatus
       (\ s a -> s{_dsProcessingStatus = a})
 
+-- | The two-letter ISO 639-1 language for which the status is reported.
+dsLanguage :: Lens' DatafeedStatus (Maybe Text)
+dsLanguage
+  = lens _dsLanguage (\ s a -> s{_dsLanguage = a})
+
 -- | The last date at which the feed was uploaded.
 dsLastUploadDate :: Lens' DatafeedStatus (Maybe Text)
 dsLastUploadDate
@@ -12276,11 +16724,12 @@ instance FromJSON DatafeedStatus where
           = withObject "DatafeedStatus"
               (\ o ->
                  DatafeedStatus' <$>
-                   (o .:? "itemsTotal") <*>
+                   (o .:? "itemsTotal") <*> (o .:? "country") <*>
                      (o .:? "kind" .!= "content#datafeedStatus")
                      <*> (o .:? "warnings" .!= mempty)
                      <*> (o .:? "datafeedId")
                      <*> (o .:? "processingStatus")
+                     <*> (o .:? "language")
                      <*> (o .:? "lastUploadDate")
                      <*> (o .:? "itemsValid")
                      <*> (o .:? "errors" .!= mempty))
@@ -12290,10 +16739,12 @@ instance ToJSON DatafeedStatus where
           = object
               (catMaybes
                  [("itemsTotal" .=) <$> _dsItemsTotal,
+                  ("country" .=) <$> _dsCountry,
                   Just ("kind" .= _dsKind),
                   ("warnings" .=) <$> _dsWarnings,
                   ("datafeedId" .=) <$> _dsDatafeedId,
                   ("processingStatus" .=) <$> _dsProcessingStatus,
+                  ("language" .=) <$> _dsLanguage,
                   ("lastUploadDate" .=) <$> _dsLastUploadDate,
                   ("itemsValid" .=) <$> _dsItemsValid,
                   ("errors" .=) <$> _dsErrors])
@@ -12337,218 +16788,247 @@ instance ToJSON DatafeedstatusesCustomBatchRequest
           = object
               (catMaybes [("entries" .=) <$> _dcbrcEntries])
 
--- | A user-defined locations group in a given country. All the locations of
--- the group must be of the same type.
 --
--- /See:/ 'accountShippingLocationGroup' smart constructor.
-data AccountShippingLocationGroup = AccountShippingLocationGroup'
-    { _aslgCountry          :: !(Maybe Text)
-    , _aslgLocationIds      :: !(Maybe [Textual Int64])
-    , _aslgPostalCodeRanges :: !(Maybe [AccountShippingPostalCodeRange])
-    , _aslgName             :: !(Maybe Text)
-    , _aslgPostalCodes      :: !(Maybe [Text])
+-- /See:/ 'orderpaymentsNotifyRefundResponse' smart constructor.
+data OrderpaymentsNotifyRefundResponse = OrderpaymentsNotifyRefundResponse'
+    { _onrrKind            :: !Text
+    , _onrrExecutionStatus :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountShippingLocationGroup' with the minimum fields required to make a request.
+-- | Creates a value of 'OrderpaymentsNotifyRefundResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aslgCountry'
+-- * 'onrrKind'
 --
--- * 'aslgLocationIds'
---
--- * 'aslgPostalCodeRanges'
---
--- * 'aslgName'
---
--- * 'aslgPostalCodes'
-accountShippingLocationGroup
-    :: AccountShippingLocationGroup
-accountShippingLocationGroup =
-    AccountShippingLocationGroup'
-    { _aslgCountry = Nothing
-    , _aslgLocationIds = Nothing
-    , _aslgPostalCodeRanges = Nothing
-    , _aslgName = Nothing
-    , _aslgPostalCodes = Nothing
+-- * 'onrrExecutionStatus'
+orderpaymentsNotifyRefundResponse
+    :: OrderpaymentsNotifyRefundResponse
+orderpaymentsNotifyRefundResponse =
+    OrderpaymentsNotifyRefundResponse'
+    { _onrrKind = "content#orderpaymentsNotifyRefundResponse"
+    , _onrrExecutionStatus = Nothing
     }
 
--- | The CLDR territory code of the country in which this location group is.
-aslgCountry :: Lens' AccountShippingLocationGroup (Maybe Text)
-aslgCountry
-  = lens _aslgCountry (\ s a -> s{_aslgCountry = a})
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"content#orderpaymentsNotifyRefundResponse\".
+onrrKind :: Lens' OrderpaymentsNotifyRefundResponse Text
+onrrKind = lens _onrrKind (\ s a -> s{_onrrKind = a})
 
--- | A location ID (also called criteria ID) representing administrative
--- areas, smaller country subdivisions (counties), or cities.
-aslgLocationIds :: Lens' AccountShippingLocationGroup [Int64]
-aslgLocationIds
-  = lens _aslgLocationIds
-      (\ s a -> s{_aslgLocationIds = a})
-      . _Default
-      . _Coerce
+-- | The status of the execution.
+onrrExecutionStatus :: Lens' OrderpaymentsNotifyRefundResponse (Maybe Text)
+onrrExecutionStatus
+  = lens _onrrExecutionStatus
+      (\ s a -> s{_onrrExecutionStatus = a})
 
--- | A postal code range representing a city or a set of cities.
-aslgPostalCodeRanges :: Lens' AccountShippingLocationGroup [AccountShippingPostalCodeRange]
-aslgPostalCodeRanges
-  = lens _aslgPostalCodeRanges
-      (\ s a -> s{_aslgPostalCodeRanges = a})
-      . _Default
-      . _Coerce
-
--- | The name of the location group.
-aslgName :: Lens' AccountShippingLocationGroup (Maybe Text)
-aslgName = lens _aslgName (\ s a -> s{_aslgName = a})
-
--- | A postal code representing a city or a set of cities. - A single postal
--- code (e.g., 12345) - A postal code prefix followed by a star (e.g.,
--- 1234*)
-aslgPostalCodes :: Lens' AccountShippingLocationGroup [Text]
-aslgPostalCodes
-  = lens _aslgPostalCodes
-      (\ s a -> s{_aslgPostalCodes = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON AccountShippingLocationGroup where
+instance FromJSON OrderpaymentsNotifyRefundResponse
+         where
         parseJSON
-          = withObject "AccountShippingLocationGroup"
+          = withObject "OrderpaymentsNotifyRefundResponse"
               (\ o ->
-                 AccountShippingLocationGroup' <$>
-                   (o .:? "country") <*>
-                     (o .:? "locationIds" .!= mempty)
-                     <*> (o .:? "postalCodeRanges" .!= mempty)
-                     <*> (o .:? "name")
-                     <*> (o .:? "postalCodes" .!= mempty))
+                 OrderpaymentsNotifyRefundResponse' <$>
+                   (o .:? "kind" .!=
+                      "content#orderpaymentsNotifyRefundResponse")
+                     <*> (o .:? "executionStatus"))
 
-instance ToJSON AccountShippingLocationGroup where
-        toJSON AccountShippingLocationGroup'{..}
+instance ToJSON OrderpaymentsNotifyRefundResponse
+         where
+        toJSON OrderpaymentsNotifyRefundResponse'{..}
           = object
               (catMaybes
-                 [("country" .=) <$> _aslgCountry,
-                  ("locationIds" .=) <$> _aslgLocationIds,
-                  ("postalCodeRanges" .=) <$> _aslgPostalCodeRanges,
-                  ("name" .=) <$> _aslgName,
-                  ("postalCodes" .=) <$> _aslgPostalCodes])
+                 [Just ("kind" .= _onrrKind),
+                  ("executionStatus" .=) <$> _onrrExecutionStatus])
 
 --
--- /See:/ 'accountStatusDataQualityIssue' smart constructor.
-data AccountStatusDataQualityIssue = AccountStatusDataQualityIssue'
-    { _asdqiSubmittedValue :: !(Maybe Text)
-    , _asdqiCountry        :: !(Maybe Text)
-    , _asdqiDisplayedValue :: !(Maybe Text)
-    , _asdqiNumItems       :: !(Maybe (Textual Word32))
-    , _asdqiSeverity       :: !(Maybe Text)
-    , _asdqiExampleItems   :: !(Maybe [AccountStatusExampleItem])
-    , _asdqiLastChecked    :: !(Maybe Text)
-    , _asdqiId             :: !(Maybe Text)
+-- /See:/ 'ordersInStoreRefundLineItemRequest' smart constructor.
+data OrdersInStoreRefundLineItemRequest = OrdersInStoreRefundLineItemRequest'
+    { _oisrlirQuantity    :: !(Maybe (Textual Word32))
+    , _oisrlirLineItemId  :: !(Maybe Text)
+    , _oisrlirReason      :: !(Maybe Text)
+    , _oisrlirOperationId :: !(Maybe Text)
+    , _oisrlirProductId   :: !(Maybe Text)
+    , _oisrlirTaxAmount   :: !(Maybe Price)
+    , _oisrlirPriceAmount :: !(Maybe Price)
+    , _oisrlirReasonText  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountStatusDataQualityIssue' with the minimum fields required to make a request.
+-- | Creates a value of 'OrdersInStoreRefundLineItemRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'asdqiSubmittedValue'
+-- * 'oisrlirQuantity'
 --
--- * 'asdqiCountry'
+-- * 'oisrlirLineItemId'
 --
--- * 'asdqiDisplayedValue'
+-- * 'oisrlirReason'
 --
--- * 'asdqiNumItems'
+-- * 'oisrlirOperationId'
 --
--- * 'asdqiSeverity'
+-- * 'oisrlirProductId'
 --
--- * 'asdqiExampleItems'
+-- * 'oisrlirTaxAmount'
 --
--- * 'asdqiLastChecked'
+-- * 'oisrlirPriceAmount'
 --
--- * 'asdqiId'
-accountStatusDataQualityIssue
-    :: AccountStatusDataQualityIssue
-accountStatusDataQualityIssue =
-    AccountStatusDataQualityIssue'
-    { _asdqiSubmittedValue = Nothing
-    , _asdqiCountry = Nothing
-    , _asdqiDisplayedValue = Nothing
-    , _asdqiNumItems = Nothing
-    , _asdqiSeverity = Nothing
-    , _asdqiExampleItems = Nothing
-    , _asdqiLastChecked = Nothing
-    , _asdqiId = Nothing
+-- * 'oisrlirReasonText'
+ordersInStoreRefundLineItemRequest
+    :: OrdersInStoreRefundLineItemRequest
+ordersInStoreRefundLineItemRequest =
+    OrdersInStoreRefundLineItemRequest'
+    { _oisrlirQuantity = Nothing
+    , _oisrlirLineItemId = Nothing
+    , _oisrlirReason = Nothing
+    , _oisrlirOperationId = Nothing
+    , _oisrlirProductId = Nothing
+    , _oisrlirTaxAmount = Nothing
+    , _oisrlirPriceAmount = Nothing
+    , _oisrlirReasonText = Nothing
     }
 
--- | Submitted value that causes the issue.
-asdqiSubmittedValue :: Lens' AccountStatusDataQualityIssue (Maybe Text)
-asdqiSubmittedValue
-  = lens _asdqiSubmittedValue
-      (\ s a -> s{_asdqiSubmittedValue = a})
-
--- | Country for which this issue is reported.
-asdqiCountry :: Lens' AccountStatusDataQualityIssue (Maybe Text)
-asdqiCountry
-  = lens _asdqiCountry (\ s a -> s{_asdqiCountry = a})
-
--- | Actual value displayed on the landing page.
-asdqiDisplayedValue :: Lens' AccountStatusDataQualityIssue (Maybe Text)
-asdqiDisplayedValue
-  = lens _asdqiDisplayedValue
-      (\ s a -> s{_asdqiDisplayedValue = a})
-
--- | Number of items in the account found to have the said issue.
-asdqiNumItems :: Lens' AccountStatusDataQualityIssue (Maybe Word32)
-asdqiNumItems
-  = lens _asdqiNumItems
-      (\ s a -> s{_asdqiNumItems = a})
+-- | The quantity to return and refund.
+oisrlirQuantity :: Lens' OrdersInStoreRefundLineItemRequest (Maybe Word32)
+oisrlirQuantity
+  = lens _oisrlirQuantity
+      (\ s a -> s{_oisrlirQuantity = a})
       . mapping _Coerce
 
--- | Severity of the problem.
-asdqiSeverity :: Lens' AccountStatusDataQualityIssue (Maybe Text)
-asdqiSeverity
-  = lens _asdqiSeverity
-      (\ s a -> s{_asdqiSeverity = a})
+-- | The ID of the line item to return. Either lineItemId or productId is
+-- required.
+oisrlirLineItemId :: Lens' OrdersInStoreRefundLineItemRequest (Maybe Text)
+oisrlirLineItemId
+  = lens _oisrlirLineItemId
+      (\ s a -> s{_oisrlirLineItemId = a})
 
--- | Example items featuring the issue.
-asdqiExampleItems :: Lens' AccountStatusDataQualityIssue [AccountStatusExampleItem]
-asdqiExampleItems
-  = lens _asdqiExampleItems
-      (\ s a -> s{_asdqiExampleItems = a})
-      . _Default
-      . _Coerce
+-- | The reason for the return.
+oisrlirReason :: Lens' OrdersInStoreRefundLineItemRequest (Maybe Text)
+oisrlirReason
+  = lens _oisrlirReason
+      (\ s a -> s{_oisrlirReason = a})
 
--- | Last time the account was checked for this issue.
-asdqiLastChecked :: Lens' AccountStatusDataQualityIssue (Maybe Text)
-asdqiLastChecked
-  = lens _asdqiLastChecked
-      (\ s a -> s{_asdqiLastChecked = a})
+-- | The ID of the operation. Unique across all operations for a given order.
+oisrlirOperationId :: Lens' OrdersInStoreRefundLineItemRequest (Maybe Text)
+oisrlirOperationId
+  = lens _oisrlirOperationId
+      (\ s a -> s{_oisrlirOperationId = a})
 
--- | Issue identifier.
-asdqiId :: Lens' AccountStatusDataQualityIssue (Maybe Text)
-asdqiId = lens _asdqiId (\ s a -> s{_asdqiId = a})
+-- | The ID of the product to return. This is the REST ID used in the
+-- products service. Either lineItemId or productId is required.
+oisrlirProductId :: Lens' OrdersInStoreRefundLineItemRequest (Maybe Text)
+oisrlirProductId
+  = lens _oisrlirProductId
+      (\ s a -> s{_oisrlirProductId = a})
 
-instance FromJSON AccountStatusDataQualityIssue where
+-- | The amount of tax to be refunded. Required.
+oisrlirTaxAmount :: Lens' OrdersInStoreRefundLineItemRequest (Maybe Price)
+oisrlirTaxAmount
+  = lens _oisrlirTaxAmount
+      (\ s a -> s{_oisrlirTaxAmount = a})
+
+-- | The amount to be refunded. This may be pre-tax or post-tax depending on
+-- the location of the order. Required.
+oisrlirPriceAmount :: Lens' OrdersInStoreRefundLineItemRequest (Maybe Price)
+oisrlirPriceAmount
+  = lens _oisrlirPriceAmount
+      (\ s a -> s{_oisrlirPriceAmount = a})
+
+-- | The explanation of the reason.
+oisrlirReasonText :: Lens' OrdersInStoreRefundLineItemRequest (Maybe Text)
+oisrlirReasonText
+  = lens _oisrlirReasonText
+      (\ s a -> s{_oisrlirReasonText = a})
+
+instance FromJSON OrdersInStoreRefundLineItemRequest
+         where
         parseJSON
-          = withObject "AccountStatusDataQualityIssue"
+          = withObject "OrdersInStoreRefundLineItemRequest"
               (\ o ->
-                 AccountStatusDataQualityIssue' <$>
-                   (o .:? "submittedValue") <*> (o .:? "country") <*>
-                     (o .:? "displayedValue")
-                     <*> (o .:? "numItems")
-                     <*> (o .:? "severity")
-                     <*> (o .:? "exampleItems" .!= mempty)
-                     <*> (o .:? "lastChecked")
-                     <*> (o .:? "id"))
+                 OrdersInStoreRefundLineItemRequest' <$>
+                   (o .:? "quantity") <*> (o .:? "lineItemId") <*>
+                     (o .:? "reason")
+                     <*> (o .:? "operationId")
+                     <*> (o .:? "productId")
+                     <*> (o .:? "taxAmount")
+                     <*> (o .:? "priceAmount")
+                     <*> (o .:? "reasonText"))
 
-instance ToJSON AccountStatusDataQualityIssue where
-        toJSON AccountStatusDataQualityIssue'{..}
+instance ToJSON OrdersInStoreRefundLineItemRequest
+         where
+        toJSON OrdersInStoreRefundLineItemRequest'{..}
           = object
               (catMaybes
-                 [("submittedValue" .=) <$> _asdqiSubmittedValue,
-                  ("country" .=) <$> _asdqiCountry,
-                  ("displayedValue" .=) <$> _asdqiDisplayedValue,
-                  ("numItems" .=) <$> _asdqiNumItems,
-                  ("severity" .=) <$> _asdqiSeverity,
-                  ("exampleItems" .=) <$> _asdqiExampleItems,
-                  ("lastChecked" .=) <$> _asdqiLastChecked,
-                  ("id" .=) <$> _asdqiId])
+                 [("quantity" .=) <$> _oisrlirQuantity,
+                  ("lineItemId" .=) <$> _oisrlirLineItemId,
+                  ("reason" .=) <$> _oisrlirReason,
+                  ("operationId" .=) <$> _oisrlirOperationId,
+                  ("productId" .=) <$> _oisrlirProductId,
+                  ("taxAmount" .=) <$> _oisrlirTaxAmount,
+                  ("priceAmount" .=) <$> _oisrlirPriceAmount,
+                  ("reasonText" .=) <$> _oisrlirReasonText])
+
+--
+-- /See:/ 'accountsCustomBatchRequestEntryLinkRequest' smart constructor.
+data AccountsCustomBatchRequestEntryLinkRequest = AccountsCustomBatchRequestEntryLinkRequest'
+    { _acbrelrAction          :: !(Maybe Text)
+    , _acbrelrLinkedAccountId :: !(Maybe Text)
+    , _acbrelrLinkType        :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AccountsCustomBatchRequestEntryLinkRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'acbrelrAction'
+--
+-- * 'acbrelrLinkedAccountId'
+--
+-- * 'acbrelrLinkType'
+accountsCustomBatchRequestEntryLinkRequest
+    :: AccountsCustomBatchRequestEntryLinkRequest
+accountsCustomBatchRequestEntryLinkRequest =
+    AccountsCustomBatchRequestEntryLinkRequest'
+    { _acbrelrAction = Nothing
+    , _acbrelrLinkedAccountId = Nothing
+    , _acbrelrLinkType = Nothing
+    }
+
+-- | Action to perform for this link. The \"request\" action is only
+-- available to select merchants.
+acbrelrAction :: Lens' AccountsCustomBatchRequestEntryLinkRequest (Maybe Text)
+acbrelrAction
+  = lens _acbrelrAction
+      (\ s a -> s{_acbrelrAction = a})
+
+-- | The ID of the linked account.
+acbrelrLinkedAccountId :: Lens' AccountsCustomBatchRequestEntryLinkRequest (Maybe Text)
+acbrelrLinkedAccountId
+  = lens _acbrelrLinkedAccountId
+      (\ s a -> s{_acbrelrLinkedAccountId = a})
+
+-- | Type of the link between the two accounts.
+acbrelrLinkType :: Lens' AccountsCustomBatchRequestEntryLinkRequest (Maybe Text)
+acbrelrLinkType
+  = lens _acbrelrLinkType
+      (\ s a -> s{_acbrelrLinkType = a})
+
+instance FromJSON
+         AccountsCustomBatchRequestEntryLinkRequest where
+        parseJSON
+          = withObject
+              "AccountsCustomBatchRequestEntryLinkRequest"
+              (\ o ->
+                 AccountsCustomBatchRequestEntryLinkRequest' <$>
+                   (o .:? "action") <*> (o .:? "linkedAccountId") <*>
+                     (o .:? "linkType"))
+
+instance ToJSON
+         AccountsCustomBatchRequestEntryLinkRequest where
+        toJSON
+          AccountsCustomBatchRequestEntryLinkRequest'{..}
+          = object
+              (catMaybes
+                 [("action" .=) <$> _acbrelrAction,
+                  ("linkedAccountId" .=) <$> _acbrelrLinkedAccountId,
+                  ("linkType" .=) <$> _acbrelrLinkType])
 
 --
 -- /See:/ 'productShippingDimension' smart constructor.
@@ -12579,7 +17059,7 @@ psdValue
   = lens _psdValue (\ s a -> s{_psdValue = a}) .
       mapping _Coerce
 
--- | The unit of value. Acceptable values are: - \"cm\" - \"in\"
+-- | The unit of value.
 psdUnit :: Lens' ProductShippingDimension (Maybe Text)
 psdUnit = lens _psdUnit (\ s a -> s{_psdUnit = a})
 
@@ -12662,66 +17142,6 @@ instance ToJSON DatafeedsCustomBatchResponseEntry
                   ("batchId" .=) <$> _dcbrecBatchId])
 
 --
--- /See:/ 'ordersCustomBatchRequestEntryRefund' smart constructor.
-data OrdersCustomBatchRequestEntryRefund = OrdersCustomBatchRequestEntryRefund'
-    { _ocbrerAmount     :: !(Maybe Price)
-    , _ocbrerReason     :: !(Maybe Text)
-    , _ocbrerReasonText :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'OrdersCustomBatchRequestEntryRefund' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ocbrerAmount'
---
--- * 'ocbrerReason'
---
--- * 'ocbrerReasonText'
-ordersCustomBatchRequestEntryRefund
-    :: OrdersCustomBatchRequestEntryRefund
-ordersCustomBatchRequestEntryRefund =
-    OrdersCustomBatchRequestEntryRefund'
-    { _ocbrerAmount = Nothing
-    , _ocbrerReason = Nothing
-    , _ocbrerReasonText = Nothing
-    }
-
--- | The amount that is refunded.
-ocbrerAmount :: Lens' OrdersCustomBatchRequestEntryRefund (Maybe Price)
-ocbrerAmount
-  = lens _ocbrerAmount (\ s a -> s{_ocbrerAmount = a})
-
--- | The reason for the refund.
-ocbrerReason :: Lens' OrdersCustomBatchRequestEntryRefund (Maybe Text)
-ocbrerReason
-  = lens _ocbrerReason (\ s a -> s{_ocbrerReason = a})
-
--- | The explanation of the reason.
-ocbrerReasonText :: Lens' OrdersCustomBatchRequestEntryRefund (Maybe Text)
-ocbrerReasonText
-  = lens _ocbrerReasonText
-      (\ s a -> s{_ocbrerReasonText = a})
-
-instance FromJSON OrdersCustomBatchRequestEntryRefund
-         where
-        parseJSON
-          = withObject "OrdersCustomBatchRequestEntryRefund"
-              (\ o ->
-                 OrdersCustomBatchRequestEntryRefund' <$>
-                   (o .:? "amount") <*> (o .:? "reason") <*>
-                     (o .:? "reasonText"))
-
-instance ToJSON OrdersCustomBatchRequestEntryRefund
-         where
-        toJSON OrdersCustomBatchRequestEntryRefund'{..}
-          = object
-              (catMaybes
-                 [("amount" .=) <$> _ocbrerAmount,
-                  ("reason" .=) <$> _ocbrerReason,
-                  ("reasonText" .=) <$> _ocbrerReasonText])
-
---
 -- /See:/ 'datafeedstatusesListResponse' smart constructor.
 data DatafeedstatusesListResponse = DatafeedstatusesListResponse'
     { _dlrlNextPageToken :: !(Maybe Text)
@@ -12786,44 +17206,44 @@ instance ToJSON DatafeedstatusesListResponse where
 --
 -- /See:/ 'productsListResponse' smart constructor.
 data ProductsListResponse = ProductsListResponse'
-    { _plrlNextPageToken :: !(Maybe Text)
-    , _plrlKind          :: !Text
-    , _plrlResources     :: !(Maybe [Product])
+    { _plr1NextPageToken :: !(Maybe Text)
+    , _plr1Kind          :: !Text
+    , _plr1Resources     :: !(Maybe [Product])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'plrlNextPageToken'
+-- * 'plr1NextPageToken'
 --
--- * 'plrlKind'
+-- * 'plr1Kind'
 --
--- * 'plrlResources'
+-- * 'plr1Resources'
 productsListResponse
     :: ProductsListResponse
 productsListResponse =
     ProductsListResponse'
-    { _plrlNextPageToken = Nothing
-    , _plrlKind = "content#productsListResponse"
-    , _plrlResources = Nothing
+    { _plr1NextPageToken = Nothing
+    , _plr1Kind = "content#productsListResponse"
+    , _plr1Resources = Nothing
     }
 
 -- | The token for the retrieval of the next page of products.
-plrlNextPageToken :: Lens' ProductsListResponse (Maybe Text)
-plrlNextPageToken
-  = lens _plrlNextPageToken
-      (\ s a -> s{_plrlNextPageToken = a})
+plr1NextPageToken :: Lens' ProductsListResponse (Maybe Text)
+plr1NextPageToken
+  = lens _plr1NextPageToken
+      (\ s a -> s{_plr1NextPageToken = a})
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#productsListResponse\".
-plrlKind :: Lens' ProductsListResponse Text
-plrlKind = lens _plrlKind (\ s a -> s{_plrlKind = a})
+plr1Kind :: Lens' ProductsListResponse Text
+plr1Kind = lens _plr1Kind (\ s a -> s{_plr1Kind = a})
 
-plrlResources :: Lens' ProductsListResponse [Product]
-plrlResources
-  = lens _plrlResources
-      (\ s a -> s{_plrlResources = a})
+plr1Resources :: Lens' ProductsListResponse [Product]
+plr1Resources
+  = lens _plr1Resources
+      (\ s a -> s{_plr1Resources = a})
       . _Default
       . _Coerce
 
@@ -12840,65 +17260,72 @@ instance ToJSON ProductsListResponse where
         toJSON ProductsListResponse'{..}
           = object
               (catMaybes
-                 [("nextPageToken" .=) <$> _plrlNextPageToken,
-                  Just ("kind" .= _plrlKind),
-                  ("resources" .=) <$> _plrlResources])
+                 [("nextPageToken" .=) <$> _plr1NextPageToken,
+                  Just ("kind" .= _plr1Kind),
+                  ("resources" .=) <$> _plr1Resources])
 
 --
--- /See:/ 'accountAdwordsLink' smart constructor.
-data AccountAdwordsLink = AccountAdwordsLink'
-    { _aalStatus    :: !(Maybe Text)
-    , _aalAdwordsId :: !(Maybe (Textual Word64))
+-- /See:/ 'shipmentInvoice' smart constructor.
+data ShipmentInvoice = ShipmentInvoice'
+    { _siShipmentGroupId  :: !(Maybe Text)
+    , _siLineItemInvoices :: !(Maybe [ShipmentInvoiceLineItemInvoice])
+    , _siInvoiceSummary   :: !(Maybe InvoiceSummary)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountAdwordsLink' with the minimum fields required to make a request.
+-- | Creates a value of 'ShipmentInvoice' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aalStatus'
+-- * 'siShipmentGroupId'
 --
--- * 'aalAdwordsId'
-accountAdwordsLink
-    :: AccountAdwordsLink
-accountAdwordsLink =
-    AccountAdwordsLink'
-    { _aalStatus = Nothing
-    , _aalAdwordsId = Nothing
+-- * 'siLineItemInvoices'
+--
+-- * 'siInvoiceSummary'
+shipmentInvoice
+    :: ShipmentInvoice
+shipmentInvoice =
+    ShipmentInvoice'
+    { _siShipmentGroupId = Nothing
+    , _siLineItemInvoices = Nothing
+    , _siInvoiceSummary = Nothing
     }
 
--- | Status of the link between this Merchant Center account and the AdWords
--- account. Upon retrieval, it represents the actual status of the link and
--- can be either active if it was approved in Google AdWords or pending if
--- it\'s pending approval. Upon insertion, it represents the intended
--- status of the link. Re-uploading a link with status active when it\'s
--- still pending or with status pending when it\'s already active will have
--- no effect: the status will remain unchanged. Re-uploading a link with
--- deprecated status inactive is equivalent to not submitting the link at
--- all and will delete the link if it was active or cancel the link request
--- if it was pending.
-aalStatus :: Lens' AccountAdwordsLink (Maybe Text)
-aalStatus
-  = lens _aalStatus (\ s a -> s{_aalStatus = a})
+-- | [required] ID of the shipment group.
+siShipmentGroupId :: Lens' ShipmentInvoice (Maybe Text)
+siShipmentGroupId
+  = lens _siShipmentGroupId
+      (\ s a -> s{_siShipmentGroupId = a})
 
--- | Customer ID of the AdWords account.
-aalAdwordsId :: Lens' AccountAdwordsLink (Maybe Word64)
-aalAdwordsId
-  = lens _aalAdwordsId (\ s a -> s{_aalAdwordsId = a})
-      . mapping _Coerce
+-- | [required] Invoice details per line item.
+siLineItemInvoices :: Lens' ShipmentInvoice [ShipmentInvoiceLineItemInvoice]
+siLineItemInvoices
+  = lens _siLineItemInvoices
+      (\ s a -> s{_siLineItemInvoices = a})
+      . _Default
+      . _Coerce
 
-instance FromJSON AccountAdwordsLink where
+-- | [required] Invoice summary.
+siInvoiceSummary :: Lens' ShipmentInvoice (Maybe InvoiceSummary)
+siInvoiceSummary
+  = lens _siInvoiceSummary
+      (\ s a -> s{_siInvoiceSummary = a})
+
+instance FromJSON ShipmentInvoice where
         parseJSON
-          = withObject "AccountAdwordsLink"
+          = withObject "ShipmentInvoice"
               (\ o ->
-                 AccountAdwordsLink' <$>
-                   (o .:? "status") <*> (o .:? "adwordsId"))
+                 ShipmentInvoice' <$>
+                   (o .:? "shipmentGroupId") <*>
+                     (o .:? "lineItemInvoices" .!= mempty)
+                     <*> (o .:? "invoiceSummary"))
 
-instance ToJSON AccountAdwordsLink where
-        toJSON AccountAdwordsLink'{..}
+instance ToJSON ShipmentInvoice where
+        toJSON ShipmentInvoice'{..}
           = object
               (catMaybes
-                 [("status" .=) <$> _aalStatus,
-                  ("adwordsId" .=) <$> _aalAdwordsId])
+                 [("shipmentGroupId" .=) <$> _siShipmentGroupId,
+                  ("lineItemInvoices" .=) <$> _siLineItemInvoices,
+                  ("invoiceSummary" .=) <$> _siInvoiceSummary])
 
 --
 -- /See:/ 'orderCancellation' smart constructor.
@@ -12945,9 +17372,9 @@ ocActor :: Lens' OrderCancellation (Maybe Text)
 ocActor = lens _ocActor (\ s a -> s{_ocActor = a})
 
 -- | The reason for the cancellation. Orders that are cancelled with a
--- noInventory reason will lead to the removal of the product from POG
--- until you make an update to that product. This will not affect your
--- Shopping ads.
+-- noInventory reason will lead to the removal of the product from Shopping
+-- Actions until you make an update to that product. This will not affect
+-- your Shopping ads.
 ocReason :: Lens' OrderCancellation (Maybe Text)
 ocReason = lens _ocReason (\ s a -> s{_ocReason = a})
 
@@ -12981,53 +17408,3 @@ instance ToJSON OrderCancellation where
                   ("reason" .=) <$> _ocReason,
                   ("creationDate" .=) <$> _ocCreationDate,
                   ("reasonText" .=) <$> _ocReasonText])
-
---
--- /See:/ 'ordersCustomBatchResponse' smart constructor.
-data OrdersCustomBatchResponse = OrdersCustomBatchResponse'
-    { _ordEntries :: !(Maybe [OrdersCustomBatchResponseEntry])
-    , _ordKind    :: !Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'OrdersCustomBatchResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ordEntries'
---
--- * 'ordKind'
-ordersCustomBatchResponse
-    :: OrdersCustomBatchResponse
-ordersCustomBatchResponse =
-    OrdersCustomBatchResponse'
-    { _ordEntries = Nothing
-    , _ordKind = "content#ordersCustomBatchResponse"
-    }
-
--- | The result of the execution of the batch requests.
-ordEntries :: Lens' OrdersCustomBatchResponse [OrdersCustomBatchResponseEntry]
-ordEntries
-  = lens _ordEntries (\ s a -> s{_ordEntries = a}) .
-      _Default
-      . _Coerce
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"content#ordersCustomBatchResponse\".
-ordKind :: Lens' OrdersCustomBatchResponse Text
-ordKind = lens _ordKind (\ s a -> s{_ordKind = a})
-
-instance FromJSON OrdersCustomBatchResponse where
-        parseJSON
-          = withObject "OrdersCustomBatchResponse"
-              (\ o ->
-                 OrdersCustomBatchResponse' <$>
-                   (o .:? "entries" .!= mempty) <*>
-                     (o .:? "kind" .!=
-                        "content#ordersCustomBatchResponse"))
-
-instance ToJSON OrdersCustomBatchResponse where
-        toJSON OrdersCustomBatchResponse'{..}
-          = object
-              (catMaybes
-                 [("entries" .=) <$> _ordEntries,
-                  Just ("kind" .= _ordKind)])

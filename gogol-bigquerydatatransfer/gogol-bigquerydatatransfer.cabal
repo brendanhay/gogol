@@ -1,0 +1,74 @@
+name:                  gogol-bigquerydatatransfer
+version:               0.4.0
+synopsis:              Google BigQuery Data Transfer SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               OtherLicense
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
+copyright:             Copyright (c) 2015-2016 Brendan Hay
+category:              Network, Google, Cloud
+build-type:            Simple
+cabal-version:         >= 1.10
+extra-source-files:    README.md src/.gitkeep
+
+description:
+    Transfers data from partner SaaS applications to Google BigQuery on a
+    scheduled, managed basis.
+    .
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
+    .
+    This library is compatible with version @v1@
+    of the API.
+
+source-repository head
+    type:     git
+    location: git://github.com/brendanhay/gogol.git
+
+library
+    default-language:  Haskell2010
+    hs-source-dirs:    src gen
+
+    ghc-options:       -Wall
+
+    exposed-modules:
+          Network.Google.BigQueryDataTransfer
+        , Network.Google.BigQueryDataTransfer.Types
+        , Network.Google.Resource.BigQueryDataTransfer.Projects.DataSources.CheckValidCreds
+        , Network.Google.Resource.BigQueryDataTransfer.Projects.DataSources.Get
+        , Network.Google.Resource.BigQueryDataTransfer.Projects.DataSources.List
+        , Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.DataSources.CheckValidCreds
+        , Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.DataSources.Get
+        , Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.DataSources.List
+        , Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.Get
+        , Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.List
+        , Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Create
+        , Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Delete
+        , Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Get
+        , Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.List
+        , Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Patch
+        , Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Runs.Delete
+        , Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Runs.Get
+        , Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Runs.List
+        , Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Runs.TransferLogs.List
+        , Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.ScheduleRuns
+        , Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Create
+        , Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Delete
+        , Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Get
+        , Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.List
+        , Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Patch
+        , Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Runs.Delete
+        , Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Runs.Get
+        , Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Runs.List
+        , Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Runs.TransferLogs.List
+        , Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.ScheduleRuns
+
+    other-modules:
+          Network.Google.BigQueryDataTransfer.Types.Product
+        , Network.Google.BigQueryDataTransfer.Types.Sum
+
+    build-depends:
+          gogol-core == 0.4.0.*
+        , base       >= 4.7 && < 5

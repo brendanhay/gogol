@@ -40,7 +40,7 @@ can be found [here](http://brendanhay.nz/gogol-doc).
 This repository is organised into the following directory structure:
 
 * [`gogol`](gogol): Actual operational logic, you'll need to import this to send requests etc.
-* `gogol-*`: Data types for each of the individual Amazon Web Service libraries.
+* `gogol-*`: Data types for each of the individual Google Compute Engine Service libraries.
 * [`core`](core): The `gogol-core` library upon which each of the services depends.
 * [`examples`](examples): A currently sparse collection of examples for the various services.
 * [`gen`](gen): The code generation binary, along with configuration, templates, and assets.
@@ -64,5 +64,5 @@ For any problems, comments, or feedback please create an issue [here on GitHub](
 
 Gogol is released under the [Mozilla Public License Version 2.0](http://www.mozilla.org/MPL/).
 
-Parts of the code are derived from AWS service descriptions, licensed under Apache 2.0.
+Parts of the code are derived from Google Compute Engine service descriptions, licensed under Apache 2.0.
 Source files subject to this contain an additional licensing clause in their header.

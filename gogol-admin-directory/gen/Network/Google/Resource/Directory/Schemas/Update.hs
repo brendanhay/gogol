@@ -89,12 +89,12 @@ suPayload :: Lens' SchemasUpdate Schema
 suPayload
   = lens _suPayload (\ s a -> s{_suPayload = a})
 
--- | Immutable id of the Google Apps account
+-- | Immutable ID of the G Suite account
 suCustomerId :: Lens' SchemasUpdate Text
 suCustomerId
   = lens _suCustomerId (\ s a -> s{_suCustomerId = a})
 
--- | Name or immutable Id of the schema.
+-- | Name or immutable ID of the schema.
 suSchemaKey :: Lens' SchemasUpdate Text
 suSchemaKey
   = lens _suSchemaKey (\ s a -> s{_suSchemaKey = a})

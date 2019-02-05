@@ -69,7 +69,7 @@ groupsGet pGgGroupKey_ =
     { _ggGroupKey = pGgGroupKey_
     }
 
--- | Email or immutable Id of the group
+-- | Email or immutable ID of the group
 ggGroupKey :: Lens' GroupsGet Text
 ggGroupKey
   = lens _ggGroupKey (\ s a -> s{_ggGroupKey = a})

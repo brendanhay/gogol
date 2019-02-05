@@ -16,7 +16,68 @@
 --
 module Network.Google.ContainerBuilder.Types.Sum where
 
-import           Network.Google.Prelude
+import           Network.Google.Prelude hiding (Bytes)
+
+-- | Output only. Status of the build step. At this time, build step status
+-- is only updated on build completion; step status is not updated in
+-- real-time as the build progresses.
+data BuildStepStatus
+    = StatusUnknown
+      -- ^ @STATUS_UNKNOWN@
+      -- Status of the build is unknown.
+    | Queued
+      -- ^ @QUEUED@
+      -- Build or step is queued; work has not yet begun.
+    | Working
+      -- ^ @WORKING@
+      -- Build or step is being executed.
+    | Success
+      -- ^ @SUCCESS@
+      -- Build or step finished successfully.
+    | Failure
+      -- ^ @FAILURE@
+      -- Build or step failed to complete successfully.
+    | InternalError
+      -- ^ @INTERNAL_ERROR@
+      -- Build or step failed due to an internal cause.
+    | Timeout
+      -- ^ @TIMEOUT@
+      -- Build or step took longer than was allowed.
+    | Cancelled
+      -- ^ @CANCELLED@
+      -- Build or step was canceled by a user.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable BuildStepStatus
+
+instance FromHttpApiData BuildStepStatus where
+    parseQueryParam = \case
+        "STATUS_UNKNOWN" -> Right StatusUnknown
+        "QUEUED" -> Right Queued
+        "WORKING" -> Right Working
+        "SUCCESS" -> Right Success
+        "FAILURE" -> Right Failure
+        "INTERNAL_ERROR" -> Right InternalError
+        "TIMEOUT" -> Right Timeout
+        "CANCELLED" -> Right Cancelled
+        x -> Left ("Unable to parse BuildStepStatus from: " <> x)
+
+instance ToHttpApiData BuildStepStatus where
+    toQueryParam = \case
+        StatusUnknown -> "STATUS_UNKNOWN"
+        Queued -> "QUEUED"
+        Working -> "WORKING"
+        Success -> "SUCCESS"
+        Failure -> "FAILURE"
+        InternalError -> "INTERNAL_ERROR"
+        Timeout -> "TIMEOUT"
+        Cancelled -> "CANCELLED"
+
+instance FromJSON BuildStepStatus where
+    parseJSON = parseJSONText "BuildStepStatus"
+
+instance ToJSON BuildStepStatus where
+    toJSON = toJSONText
 
 -- | Requested verifiability options.
 data BuildOptionsRequestedVerifyOption
@@ -76,68 +137,94 @@ instance FromJSON Xgafv where
 instance ToJSON Xgafv where
     toJSON = toJSONText
 
--- | Status of the build. \'OutputOnly
+-- | Output only. Status of the build.
 data BuildStatus
-    = StatusUnknown
+    = BSStatusUnknown
       -- ^ @STATUS_UNKNOWN@
       -- Status of the build is unknown.
-    | Queuing
-      -- ^ @QUEUING@
-      -- Build has been received and is being queued.
-    | Queued
+    | BSQueued
       -- ^ @QUEUED@
-      -- Build is queued; work has not yet begun.
-    | Working
+      -- Build or step is queued; work has not yet begun.
+    | BSWorking
       -- ^ @WORKING@
-      -- Build is being executed.
-    | Success
+      -- Build or step is being executed.
+    | BSSuccess
       -- ^ @SUCCESS@
-      -- Build finished successfully.
-    | Failure
+      -- Build or step finished successfully.
+    | BSFailure
       -- ^ @FAILURE@
-      -- Build failed to complete successfully.
-    | InternalError
+      -- Build or step failed to complete successfully.
+    | BSInternalError
       -- ^ @INTERNAL_ERROR@
-      -- Build failed due to an internal cause.
-    | Timeout
+      -- Build or step failed due to an internal cause.
+    | BSTimeout
       -- ^ @TIMEOUT@
-      -- Build took longer than was allowed.
-    | Cancelled
+      -- Build or step took longer than was allowed.
+    | BSCancelled
       -- ^ @CANCELLED@
-      -- Build was canceled by a user.
+      -- Build or step was canceled by a user.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BuildStatus
 
 instance FromHttpApiData BuildStatus where
     parseQueryParam = \case
-        "STATUS_UNKNOWN" -> Right StatusUnknown
-        "QUEUING" -> Right Queuing
-        "QUEUED" -> Right Queued
-        "WORKING" -> Right Working
-        "SUCCESS" -> Right Success
-        "FAILURE" -> Right Failure
-        "INTERNAL_ERROR" -> Right InternalError
-        "TIMEOUT" -> Right Timeout
-        "CANCELLED" -> Right Cancelled
+        "STATUS_UNKNOWN" -> Right BSStatusUnknown
+        "QUEUED" -> Right BSQueued
+        "WORKING" -> Right BSWorking
+        "SUCCESS" -> Right BSSuccess
+        "FAILURE" -> Right BSFailure
+        "INTERNAL_ERROR" -> Right BSInternalError
+        "TIMEOUT" -> Right BSTimeout
+        "CANCELLED" -> Right BSCancelled
         x -> Left ("Unable to parse BuildStatus from: " <> x)
 
 instance ToHttpApiData BuildStatus where
     toQueryParam = \case
-        StatusUnknown -> "STATUS_UNKNOWN"
-        Queuing -> "QUEUING"
-        Queued -> "QUEUED"
-        Working -> "WORKING"
-        Success -> "SUCCESS"
-        Failure -> "FAILURE"
-        InternalError -> "INTERNAL_ERROR"
-        Timeout -> "TIMEOUT"
-        Cancelled -> "CANCELLED"
+        BSStatusUnknown -> "STATUS_UNKNOWN"
+        BSQueued -> "QUEUED"
+        BSWorking -> "WORKING"
+        BSSuccess -> "SUCCESS"
+        BSFailure -> "FAILURE"
+        BSInternalError -> "INTERNAL_ERROR"
+        BSTimeout -> "TIMEOUT"
+        BSCancelled -> "CANCELLED"
 
 instance FromJSON BuildStatus where
     parseJSON = parseJSONText "BuildStatus"
 
 instance ToJSON BuildStatus where
+    toJSON = toJSONText
+
+-- | Option to specify behavior when there is an error in the substitution
+-- checks.
+data BuildOptionsSubstitutionOption
+    = MustMatch
+      -- ^ @MUST_MATCH@
+      -- Fails the build if error in substitutions checks, like missing a
+      -- substitution in the template or in the map.
+    | AllowLoose
+      -- ^ @ALLOW_LOOSE@
+      -- Do not fail the build if error in substitutions checks.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable BuildOptionsSubstitutionOption
+
+instance FromHttpApiData BuildOptionsSubstitutionOption where
+    parseQueryParam = \case
+        "MUST_MATCH" -> Right MustMatch
+        "ALLOW_LOOSE" -> Right AllowLoose
+        x -> Left ("Unable to parse BuildOptionsSubstitutionOption from: " <> x)
+
+instance ToHttpApiData BuildOptionsSubstitutionOption where
+    toQueryParam = \case
+        MustMatch -> "MUST_MATCH"
+        AllowLoose -> "ALLOW_LOOSE"
+
+instance FromJSON BuildOptionsSubstitutionOption where
+    parseJSON = parseJSONText "BuildOptionsSubstitutionOption"
+
+instance ToJSON BuildOptionsSubstitutionOption where
     toJSON = toJSONText
 
 -- | The type of hash that was performed.
@@ -148,6 +235,9 @@ data HashType
     | SHA256
       -- ^ @SHA256@
       -- Use a sha256 hash.
+    | MD5
+      -- ^ @MD5@
+      -- Use a md5 hash.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable HashType
@@ -156,15 +246,122 @@ instance FromHttpApiData HashType where
     parseQueryParam = \case
         "NONE" -> Right None
         "SHA256" -> Right SHA256
+        "MD5" -> Right MD5
         x -> Left ("Unable to parse HashType from: " <> x)
 
 instance ToHttpApiData HashType where
     toQueryParam = \case
         None -> "NONE"
         SHA256 -> "SHA256"
+        MD5 -> "MD5"
 
 instance FromJSON HashType where
     parseJSON = parseJSONText "HashType"
 
 instance ToJSON HashType where
+    toJSON = toJSONText
+
+-- | Option to define build log streaming behavior to Google Cloud Storage.
+data BuildOptionsLogStreamingOption
+    = StreamDefault
+      -- ^ @STREAM_DEFAULT@
+      -- Service may automatically determine build log streaming behavior.
+    | StreamOn
+      -- ^ @STREAM_ON@
+      -- Build logs should be streamed to Google Cloud Storage.
+    | StreamOff
+      -- ^ @STREAM_OFF@
+      -- Build logs should not be streamed to Google Cloud Storage; they will be
+      -- written when the build is completed.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable BuildOptionsLogStreamingOption
+
+instance FromHttpApiData BuildOptionsLogStreamingOption where
+    parseQueryParam = \case
+        "STREAM_DEFAULT" -> Right StreamDefault
+        "STREAM_ON" -> Right StreamOn
+        "STREAM_OFF" -> Right StreamOff
+        x -> Left ("Unable to parse BuildOptionsLogStreamingOption from: " <> x)
+
+instance ToHttpApiData BuildOptionsLogStreamingOption where
+    toQueryParam = \case
+        StreamDefault -> "STREAM_DEFAULT"
+        StreamOn -> "STREAM_ON"
+        StreamOff -> "STREAM_OFF"
+
+instance FromJSON BuildOptionsLogStreamingOption where
+    parseJSON = parseJSONText "BuildOptionsLogStreamingOption"
+
+instance ToJSON BuildOptionsLogStreamingOption where
+    toJSON = toJSONText
+
+-- | Option to specify the logging mode, which determines where the logs are
+-- stored.
+data BuildOptionsLogging
+    = LoggingUnspecified
+      -- ^ @LOGGING_UNSPECIFIED@
+      -- The service determines the logging mode. The default is \`LEGACY\`. Do
+      -- not rely on the default logging behavior as it may change in the future.
+    | Legacy
+      -- ^ @LEGACY@
+      -- Stackdriver logging and Cloud Storage logging are enabled.
+    | GcsOnly
+      -- ^ @GCS_ONLY@
+      -- Only Cloud Storage logging is enabled.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable BuildOptionsLogging
+
+instance FromHttpApiData BuildOptionsLogging where
+    parseQueryParam = \case
+        "LOGGING_UNSPECIFIED" -> Right LoggingUnspecified
+        "LEGACY" -> Right Legacy
+        "GCS_ONLY" -> Right GcsOnly
+        x -> Left ("Unable to parse BuildOptionsLogging from: " <> x)
+
+instance ToHttpApiData BuildOptionsLogging where
+    toQueryParam = \case
+        LoggingUnspecified -> "LOGGING_UNSPECIFIED"
+        Legacy -> "LEGACY"
+        GcsOnly -> "GCS_ONLY"
+
+instance FromJSON BuildOptionsLogging where
+    parseJSON = parseJSONText "BuildOptionsLogging"
+
+instance ToJSON BuildOptionsLogging where
+    toJSON = toJSONText
+
+-- | Compute Engine machine type on which to run the build.
+data BuildOptionsMachineType
+    = Unspecified
+      -- ^ @UNSPECIFIED@
+      -- Standard machine type.
+    | N1Highcpu8
+      -- ^ @N1_HIGHCPU_8@
+      -- Highcpu machine with 8 CPUs.
+    | N1Highcpu32
+      -- ^ @N1_HIGHCPU_32@
+      -- Highcpu machine with 32 CPUs.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable BuildOptionsMachineType
+
+instance FromHttpApiData BuildOptionsMachineType where
+    parseQueryParam = \case
+        "UNSPECIFIED" -> Right Unspecified
+        "N1_HIGHCPU_8" -> Right N1Highcpu8
+        "N1_HIGHCPU_32" -> Right N1Highcpu32
+        x -> Left ("Unable to parse BuildOptionsMachineType from: " <> x)
+
+instance ToHttpApiData BuildOptionsMachineType where
+    toQueryParam = \case
+        Unspecified -> "UNSPECIFIED"
+        N1Highcpu8 -> "N1_HIGHCPU_8"
+        N1Highcpu32 -> "N1_HIGHCPU_32"
+
+instance FromJSON BuildOptionsMachineType where
+    parseJSON = parseJSONText "BuildOptionsMachineType"
+
+instance ToJSON BuildOptionsMachineType where
     toJSON = toJSONText

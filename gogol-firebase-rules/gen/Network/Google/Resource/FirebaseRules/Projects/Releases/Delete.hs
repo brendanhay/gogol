@@ -35,10 +35,8 @@ module Network.Google.Resource.FirebaseRules.Projects.Releases.Delete
     -- * Request Lenses
     , prdXgafv
     , prdUploadProtocol
-    , prdPp
     , prdAccessToken
     , prdUploadType
-    , prdBearerToken
     , prdName
     , prdCallback
     ) where
@@ -53,12 +51,10 @@ type ProjectsReleasesDeleteResource =
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :> Delete '[JSON] Empty
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
 -- | Delete a \`Release\` by resource name.
 --
@@ -66,10 +62,8 @@ type ProjectsReleasesDeleteResource =
 data ProjectsReleasesDelete = ProjectsReleasesDelete'
     { _prdXgafv          :: !(Maybe Xgafv)
     , _prdUploadProtocol :: !(Maybe Text)
-    , _prdPp             :: !Bool
     , _prdAccessToken    :: !(Maybe Text)
     , _prdUploadType     :: !(Maybe Text)
-    , _prdBearerToken    :: !(Maybe Text)
     , _prdName           :: !Text
     , _prdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -82,13 +76,9 @@ data ProjectsReleasesDelete = ProjectsReleasesDelete'
 --
 -- * 'prdUploadProtocol'
 --
--- * 'prdPp'
---
 -- * 'prdAccessToken'
 --
 -- * 'prdUploadType'
---
--- * 'prdBearerToken'
 --
 -- * 'prdName'
 --
@@ -100,10 +90,8 @@ projectsReleasesDelete pPrdName_ =
     ProjectsReleasesDelete'
     { _prdXgafv = Nothing
     , _prdUploadProtocol = Nothing
-    , _prdPp = True
     , _prdAccessToken = Nothing
     , _prdUploadType = Nothing
-    , _prdBearerToken = Nothing
     , _prdName = pPrdName_
     , _prdCallback = Nothing
     }
@@ -118,10 +106,6 @@ prdUploadProtocol
   = lens _prdUploadProtocol
       (\ s a -> s{_prdUploadProtocol = a})
 
--- | Pretty-print response.
-prdPp :: Lens' ProjectsReleasesDelete Bool
-prdPp = lens _prdPp (\ s a -> s{_prdPp = a})
-
 -- | OAuth access token.
 prdAccessToken :: Lens' ProjectsReleasesDelete (Maybe Text)
 prdAccessToken
@@ -133,12 +117,6 @@ prdUploadType :: Lens' ProjectsReleasesDelete (Maybe Text)
 prdUploadType
   = lens _prdUploadType
       (\ s a -> s{_prdUploadType = a})
-
--- | OAuth bearer token.
-prdBearerToken :: Lens' ProjectsReleasesDelete (Maybe Text)
-prdBearerToken
-  = lens _prdBearerToken
-      (\ s a -> s{_prdBearerToken = a})
 
 -- | Resource name for the \`Release\` to delete. Format:
 -- \`projects\/{project_id}\/releases\/{release_id}\`
@@ -157,10 +135,8 @@ instance GoogleRequest ProjectsReleasesDelete where
                "https://www.googleapis.com/auth/firebase"]
         requestClient ProjectsReleasesDelete'{..}
           = go _prdName _prdXgafv _prdUploadProtocol
-              (Just _prdPp)
               _prdAccessToken
               _prdUploadType
-              _prdBearerToken
               _prdCallback
               (Just AltJSON)
               firebaseRulesService

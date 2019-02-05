@@ -88,7 +88,7 @@ notificationsList pNlCustomer_ =
     , _nlMaxResults = Nothing
     }
 
--- | The unique ID for the customer\'s Google account.
+-- | The unique ID for the customer\'s G Suite account.
 nlCustomer :: Lens' NotificationsList Text
 nlCustomer
   = lens _nlCustomer (\ s a -> s{_nlCustomer = a})

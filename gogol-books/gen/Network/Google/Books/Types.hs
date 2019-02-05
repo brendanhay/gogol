@@ -263,6 +263,11 @@ module Network.Google.Books.Types
     , booksVolumesRecommendedRateResponse
     , bvrrrConsistencyToken
 
+    -- * UserSettingsNotificationPriceDrop
+    , UserSettingsNotificationPriceDrop
+    , userSettingsNotificationPriceDrop
+    , usnpdOptedState
+
     -- * VolumeseriesInfo
     , VolumeseriesInfo
     , volumeseriesInfo
@@ -297,8 +302,10 @@ module Network.Google.Books.Types
     , nCrmExperimentIds
     , nPcampaignId
     , nReason
+    , nIsDocumentMature
     , nDontShowNotification
     , nNotificationType
+    , nNotificationGroup
     , nIconURL
     , nTitle
 
@@ -493,6 +500,11 @@ module Network.Google.Books.Types
     , dddwisidieiText
     , dddwisidieiSource
 
+    -- * UserSettingsNotificationRewardExpirations
+    , UserSettingsNotificationRewardExpirations
+    , userSettingsNotificationRewardExpirations
+    , usnreOptedState
+
     -- * DictlayerData
     , DictlayerData
     , dictlayerData
@@ -522,6 +534,9 @@ module Network.Google.Books.Types
     -- * UserSettingsNotification
     , UserSettingsNotification
     , userSettingsNotification
+    , usnRewardExpirations
+    , usnPriceDrop
+    , usnMatchMyInterests
     , usnMoreFromAuthors
     , usnMoreFromSeries
 
@@ -594,6 +609,15 @@ module Network.Google.Books.Types
     , dictlayerDataDictWordsItemSensesItemConjugationsItem
     , dddwisiciValue
     , dddwisiciType
+
+    -- * FamilyInfoMembership
+    , FamilyInfoMembership
+    , familyInfoMembership
+    , fimAllowedMaturityRating
+    , fimAcquirePermission
+    , fimRole
+    , fimAgeGroup
+    , fimIsInFamily
 
     -- * Volume2
     , Volume2
@@ -670,6 +694,12 @@ module Network.Google.Books.Types
     , raConcurrentAccess
     , raKind
     , raDownloadAccess
+
+    -- * FamilyInfo
+    , FamilyInfo
+    , familyInfo
+    , fiMembership
+    , fiKind
 
     -- * AnnotationClientVersionRanges
     , AnnotationClientVersionRanges
@@ -825,6 +855,11 @@ module Network.Google.Books.Types
     , v1Kind
     , v1Items
 
+    -- * UserSettingsNotificationMatchMyInterests
+    , UserSettingsNotificationMatchMyInterests
+    , userSettingsNotificationMatchMyInterests
+    , usnmmiOptedState
+
     -- * Bookshelves
     , Bookshelves
     , bookshelves
@@ -872,6 +907,7 @@ module Network.Google.Books.Types
     , vviSamplePageCount
     , vviCategories
     , vviAuthors
+    , vviComicsContent
     , vviAllowAnonLogging
     , vviSubtitle
     , vviPublishedDate

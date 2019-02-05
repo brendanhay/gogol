@@ -1,5 +1,5 @@
 name:                  gogol-datastore
-version:               0.1.1
+version:               0.4.0
 synopsis:              Google Cloud Datastore SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -11,7 +11,7 @@ copyright:             Copyright (c) 2015-2016 Brendan Hay
 category:              Network, Google, Cloud
 build-type:            Simple
 cabal-version:         >= 1.10
-extra-source-files:    README.md
+extra-source-files:    README.md src/.gitkeep
 
 description:
     Accesses the schemaless NoSQL database to provide fully managed, robust,
@@ -39,7 +39,16 @@ library
         , Network.Google.Resource.Datastore.Projects.AllocateIds
         , Network.Google.Resource.Datastore.Projects.BeginTransaction
         , Network.Google.Resource.Datastore.Projects.Commit
+        , Network.Google.Resource.Datastore.Projects.Export
+        , Network.Google.Resource.Datastore.Projects.Import
+        , Network.Google.Resource.Datastore.Projects.Indexes.Get
+        , Network.Google.Resource.Datastore.Projects.Indexes.List
         , Network.Google.Resource.Datastore.Projects.Lookup
+        , Network.Google.Resource.Datastore.Projects.Operations.Cancel
+        , Network.Google.Resource.Datastore.Projects.Operations.Delete
+        , Network.Google.Resource.Datastore.Projects.Operations.Get
+        , Network.Google.Resource.Datastore.Projects.Operations.List
+        , Network.Google.Resource.Datastore.Projects.ReserveIds
         , Network.Google.Resource.Datastore.Projects.Rollback
         , Network.Google.Resource.Datastore.Projects.RunQuery
 
@@ -48,5 +57,5 @@ library
         , Network.Google.Datastore.Types.Sum
 
     build-depends:
-          gogol-core == 0.1.1.*
+          gogol-core == 0.4.0.*
         , base       >= 4.7 && < 5

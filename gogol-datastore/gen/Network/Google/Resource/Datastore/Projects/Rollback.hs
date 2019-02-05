@@ -22,7 +22,7 @@
 --
 -- Rolls back a transaction.
 --
--- /See:/ <https://cloud.google.com/datastore/ Google Cloud Datastore API Reference> for @datastore.projects.rollback@.
+-- /See:/ <https://cloud.google.com/datastore/ Cloud Datastore API Reference> for @datastore.projects.rollback@.
 module Network.Google.Resource.Datastore.Projects.Rollback
     (
     -- * REST Resource
@@ -35,11 +35,9 @@ module Network.Google.Resource.Datastore.Projects.Rollback
     -- * Request Lenses
     , prXgafv
     , prUploadProtocol
-    , prPp
     , prAccessToken
     , prUploadType
     , prPayload
-    , prBearerToken
     , prProjectId
     , prCallback
     ) where
@@ -55,14 +53,12 @@ type ProjectsRollbackResource =
          CaptureMode "projectId" "rollback" Text :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] RollbackRequest :>
-                             Post '[JSON] RollbackResponse
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] RollbackRequest :>
+                         Post '[JSON] RollbackResponse
 
 -- | Rolls back a transaction.
 --
@@ -70,11 +66,9 @@ type ProjectsRollbackResource =
 data ProjectsRollback = ProjectsRollback'
     { _prXgafv          :: !(Maybe Xgafv)
     , _prUploadProtocol :: !(Maybe Text)
-    , _prPp             :: !Bool
     , _prAccessToken    :: !(Maybe Text)
     , _prUploadType     :: !(Maybe Text)
     , _prPayload        :: !RollbackRequest
-    , _prBearerToken    :: !(Maybe Text)
     , _prProjectId      :: !Text
     , _prCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -87,15 +81,11 @@ data ProjectsRollback = ProjectsRollback'
 --
 -- * 'prUploadProtocol'
 --
--- * 'prPp'
---
 -- * 'prAccessToken'
 --
 -- * 'prUploadType'
 --
 -- * 'prPayload'
---
--- * 'prBearerToken'
 --
 -- * 'prProjectId'
 --
@@ -108,11 +98,9 @@ projectsRollback pPrPayload_ pPrProjectId_ =
     ProjectsRollback'
     { _prXgafv = Nothing
     , _prUploadProtocol = Nothing
-    , _prPp = True
     , _prAccessToken = Nothing
     , _prUploadType = Nothing
     , _prPayload = pPrPayload_
-    , _prBearerToken = Nothing
     , _prProjectId = pPrProjectId_
     , _prCallback = Nothing
     }
@@ -126,10 +114,6 @@ prUploadProtocol :: Lens' ProjectsRollback (Maybe Text)
 prUploadProtocol
   = lens _prUploadProtocol
       (\ s a -> s{_prUploadProtocol = a})
-
--- | Pretty-print response.
-prPp :: Lens' ProjectsRollback Bool
-prPp = lens _prPp (\ s a -> s{_prPp = a})
 
 -- | OAuth access token.
 prAccessToken :: Lens' ProjectsRollback (Maybe Text)
@@ -146,12 +130,6 @@ prUploadType
 prPayload :: Lens' ProjectsRollback RollbackRequest
 prPayload
   = lens _prPayload (\ s a -> s{_prPayload = a})
-
--- | OAuth bearer token.
-prBearerToken :: Lens' ProjectsRollback (Maybe Text)
-prBearerToken
-  = lens _prBearerToken
-      (\ s a -> s{_prBearerToken = a})
 
 -- | The ID of the project against which to make the request.
 prProjectId :: Lens' ProjectsRollback Text
@@ -170,10 +148,8 @@ instance GoogleRequest ProjectsRollback where
                "https://www.googleapis.com/auth/datastore"]
         requestClient ProjectsRollback'{..}
           = go _prProjectId _prXgafv _prUploadProtocol
-              (Just _prPp)
               _prAccessToken
               _prUploadType
-              _prBearerToken
               _prCallback
               (Just AltJSON)
               _prPayload

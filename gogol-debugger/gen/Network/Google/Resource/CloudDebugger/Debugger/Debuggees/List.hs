@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists all the debuggees that the user can set breakpoints to.
+-- Lists all the debuggees that the user has access to.
 --
--- /See:/ <http://cloud.google.com/debugger Stackdriver Debugger API Reference> for @clouddebugger.debugger.debuggees.list@.
+-- /See:/ <https://cloud.google.com/debugger Stackdriver Debugger API Reference> for @clouddebugger.debugger.debuggees.list@.
 module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.List
     (
     -- * REST Resource
@@ -37,10 +37,8 @@ module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.List
     , ddlIncludeInactive
     , ddlUploadProtocol
     , ddlProject
-    , ddlPp
     , ddlAccessToken
     , ddlUploadType
-    , ddlBearerToken
     , ddlClientVersion
     , ddlCallback
     ) where
@@ -54,31 +52,27 @@ type DebuggerDebuggeesListResource =
      "v2" :>
        "debugger" :>
          "debuggees" :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "includeInactive" Bool :>
                QueryParam "upload_protocol" Text :>
                  QueryParam "project" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "clientVersion" Text :>
-                             QueryParam "callback" Text :>
-                               QueryParam "alt" AltJSON :>
-                                 Get '[JSON] ListDebuggeesResponse
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "clientVersion" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] ListDebuggeesResponse
 
--- | Lists all the debuggees that the user can set breakpoints to.
+-- | Lists all the debuggees that the user has access to.
 --
 -- /See:/ 'debuggerDebuggeesList' smart constructor.
 data DebuggerDebuggeesList = DebuggerDebuggeesList'
-    { _ddlXgafv           :: !(Maybe Text)
+    { _ddlXgafv           :: !(Maybe Xgafv)
     , _ddlIncludeInactive :: !(Maybe Bool)
     , _ddlUploadProtocol  :: !(Maybe Text)
     , _ddlProject         :: !(Maybe Text)
-    , _ddlPp              :: !Bool
     , _ddlAccessToken     :: !(Maybe Text)
     , _ddlUploadType      :: !(Maybe Text)
-    , _ddlBearerToken     :: !(Maybe Text)
     , _ddlClientVersion   :: !(Maybe Text)
     , _ddlCallback        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -95,13 +89,9 @@ data DebuggerDebuggeesList = DebuggerDebuggeesList'
 --
 -- * 'ddlProject'
 --
--- * 'ddlPp'
---
 -- * 'ddlAccessToken'
 --
 -- * 'ddlUploadType'
---
--- * 'ddlBearerToken'
 --
 -- * 'ddlClientVersion'
 --
@@ -114,16 +104,14 @@ debuggerDebuggeesList =
     , _ddlIncludeInactive = Nothing
     , _ddlUploadProtocol = Nothing
     , _ddlProject = Nothing
-    , _ddlPp = True
     , _ddlAccessToken = Nothing
     , _ddlUploadType = Nothing
-    , _ddlBearerToken = Nothing
     , _ddlClientVersion = Nothing
     , _ddlCallback = Nothing
     }
 
 -- | V1 error format.
-ddlXgafv :: Lens' DebuggerDebuggeesList (Maybe Text)
+ddlXgafv :: Lens' DebuggerDebuggeesList (Maybe Xgafv)
 ddlXgafv = lens _ddlXgafv (\ s a -> s{_ddlXgafv = a})
 
 -- | When set to \`true\`, the result includes all debuggees. Otherwise, the
@@ -144,10 +132,6 @@ ddlProject :: Lens' DebuggerDebuggeesList (Maybe Text)
 ddlProject
   = lens _ddlProject (\ s a -> s{_ddlProject = a})
 
--- | Pretty-print response.
-ddlPp :: Lens' DebuggerDebuggeesList Bool
-ddlPp = lens _ddlPp (\ s a -> s{_ddlPp = a})
-
 -- | OAuth access token.
 ddlAccessToken :: Lens' DebuggerDebuggeesList (Maybe Text)
 ddlAccessToken
@@ -160,13 +144,7 @@ ddlUploadType
   = lens _ddlUploadType
       (\ s a -> s{_ddlUploadType = a})
 
--- | OAuth bearer token.
-ddlBearerToken :: Lens' DebuggerDebuggeesList (Maybe Text)
-ddlBearerToken
-  = lens _ddlBearerToken
-      (\ s a -> s{_ddlBearerToken = a})
-
--- | The client version making the call. Following: \`domain\/type\/version\`
+-- | The client version making the call. Schema: \`domain\/type\/version\`
 -- (e.g., \`google.com\/intellij\/v1\`).
 ddlClientVersion :: Lens' DebuggerDebuggeesList (Maybe Text)
 ddlClientVersion
@@ -186,10 +164,8 @@ instance GoogleRequest DebuggerDebuggeesList where
         requestClient DebuggerDebuggeesList'{..}
           = go _ddlXgafv _ddlIncludeInactive _ddlUploadProtocol
               _ddlProject
-              (Just _ddlPp)
               _ddlAccessToken
               _ddlUploadType
-              _ddlBearerToken
               _ddlClientVersion
               _ddlCallback
               (Just AltJSON)

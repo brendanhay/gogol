@@ -1,0 +1,53 @@
+name:                  gogol-language
+version:               0.4.0
+synopsis:              Google Cloud Natural Language SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               OtherLicense
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
+copyright:             Copyright (c) 2015-2016 Brendan Hay
+category:              Network, Google, Cloud
+build-type:            Simple
+cabal-version:         >= 1.10
+extra-source-files:    README.md src/.gitkeep
+
+description:
+    Provides natural language understanding technologies, such as sentiment
+    analysis, entity recognition, entity sentiment analysis, and other text
+    annotations, to developers.
+    .
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
+    .
+    This library is compatible with version @v1@
+    of the API.
+
+source-repository head
+    type:     git
+    location: git://github.com/brendanhay/gogol.git
+
+library
+    default-language:  Haskell2010
+    hs-source-dirs:    src gen
+
+    ghc-options:       -Wall
+
+    exposed-modules:
+          Network.Google.Language
+        , Network.Google.Language.Types
+        , Network.Google.Resource.Language.Documents.AnalyzeEntities
+        , Network.Google.Resource.Language.Documents.AnalyzeEntitySentiment
+        , Network.Google.Resource.Language.Documents.AnalyzeSentiment
+        , Network.Google.Resource.Language.Documents.AnalyzeSyntax
+        , Network.Google.Resource.Language.Documents.AnnotateText
+        , Network.Google.Resource.Language.Documents.ClassifyText
+
+    other-modules:
+          Network.Google.Language.Types.Product
+        , Network.Google.Language.Types.Sum
+
+    build-depends:
+          gogol-core == 0.4.0.*
+        , base       >= 4.7 && < 5

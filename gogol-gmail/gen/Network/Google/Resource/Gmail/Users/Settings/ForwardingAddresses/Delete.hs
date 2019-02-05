@@ -21,7 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Deletes the specified forwarding address and revokes any verification
--- that may have been required.
+-- that may have been required. This method is only available to service
+-- account clients that have been delegated domain-wide authority.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @gmail.users.settings.forwardingAddresses.delete@.
 module Network.Google.Resource.Gmail.Users.Settings.ForwardingAddresses.Delete
@@ -54,7 +55,8 @@ type UsersSettingsForwardingAddressesDeleteResource =
                    QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes the specified forwarding address and revokes any verification
--- that may have been required.
+-- that may have been required. This method is only available to service
+-- account clients that have been delegated domain-wide authority.
 --
 -- /See:/ 'usersSettingsForwardingAddressesDelete' smart constructor.
 data UsersSettingsForwardingAddressesDelete = UsersSettingsForwardingAddressesDelete'

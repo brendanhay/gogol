@@ -1,5 +1,5 @@
 name:                  gogol-genomics
-version:               0.1.1
+version:               0.4.0
 synopsis:              Google Genomics SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -11,15 +11,15 @@ copyright:             Copyright (c) 2015-2016 Brendan Hay
 category:              Network, Google, Cloud
 build-type:            Simple
 cabal-version:         >= 1.10
-extra-source-files:    README.md
+extra-source-files:    README.md src/.gitkeep
 
 description:
-    Stores, processes, explores and shares genomic data.
+    Uploads, processes, queries, and searches Genomics data in the cloud.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
     .
-    This library is compatible with version @v1@
+    This library is compatible with version @v2alpha1@
     of the API.
 
 source-repository head
@@ -35,67 +35,16 @@ library
     exposed-modules:
           Network.Google.Genomics
         , Network.Google.Genomics.Types
-        , Network.Google.Resource.Genomics.AnnotationSets.Create
-        , Network.Google.Resource.Genomics.AnnotationSets.Delete
-        , Network.Google.Resource.Genomics.AnnotationSets.Get
-        , Network.Google.Resource.Genomics.AnnotationSets.Search
-        , Network.Google.Resource.Genomics.AnnotationSets.Update
-        , Network.Google.Resource.Genomics.Annotations.BatchCreate
-        , Network.Google.Resource.Genomics.Annotations.Create
-        , Network.Google.Resource.Genomics.Annotations.Delete
-        , Network.Google.Resource.Genomics.Annotations.Get
-        , Network.Google.Resource.Genomics.Annotations.Search
-        , Network.Google.Resource.Genomics.Annotations.Update
-        , Network.Google.Resource.Genomics.CallSets.Create
-        , Network.Google.Resource.Genomics.CallSets.Delete
-        , Network.Google.Resource.Genomics.CallSets.Get
-        , Network.Google.Resource.Genomics.CallSets.Patch
-        , Network.Google.Resource.Genomics.CallSets.Search
-        , Network.Google.Resource.Genomics.DataSets.Create
-        , Network.Google.Resource.Genomics.DataSets.Delete
-        , Network.Google.Resource.Genomics.DataSets.Get
-        , Network.Google.Resource.Genomics.DataSets.GetIAMPolicy
-        , Network.Google.Resource.Genomics.DataSets.List
-        , Network.Google.Resource.Genomics.DataSets.Patch
-        , Network.Google.Resource.Genomics.DataSets.SetIAMPolicy
-        , Network.Google.Resource.Genomics.DataSets.TestIAMPermissions
-        , Network.Google.Resource.Genomics.DataSets.Undelete
-        , Network.Google.Resource.Genomics.Operations.Cancel
-        , Network.Google.Resource.Genomics.Operations.Get
-        , Network.Google.Resource.Genomics.Operations.List
-        , Network.Google.Resource.Genomics.ReadGroupSets.CoverageBuckets.List
-        , Network.Google.Resource.Genomics.ReadGroupSets.Delete
-        , Network.Google.Resource.Genomics.ReadGroupSets.Export
-        , Network.Google.Resource.Genomics.ReadGroupSets.Get
-        , Network.Google.Resource.Genomics.ReadGroupSets.Import
-        , Network.Google.Resource.Genomics.ReadGroupSets.Patch
-        , Network.Google.Resource.Genomics.ReadGroupSets.Search
-        , Network.Google.Resource.Genomics.Reads.Search
-        , Network.Google.Resource.Genomics.Reads.Stream
-        , Network.Google.Resource.Genomics.References.Bases.List
-        , Network.Google.Resource.Genomics.References.Get
-        , Network.Google.Resource.Genomics.References.Search
-        , Network.Google.Resource.Genomics.Referencesets.Get
-        , Network.Google.Resource.Genomics.Referencesets.Search
-        , Network.Google.Resource.Genomics.VariantSets.Create
-        , Network.Google.Resource.Genomics.VariantSets.Delete
-        , Network.Google.Resource.Genomics.VariantSets.Export
-        , Network.Google.Resource.Genomics.VariantSets.Get
-        , Network.Google.Resource.Genomics.VariantSets.Patch
-        , Network.Google.Resource.Genomics.VariantSets.Search
-        , Network.Google.Resource.Genomics.Variants.Create
-        , Network.Google.Resource.Genomics.Variants.Delete
-        , Network.Google.Resource.Genomics.Variants.Get
-        , Network.Google.Resource.Genomics.Variants.Import
-        , Network.Google.Resource.Genomics.Variants.Merge
-        , Network.Google.Resource.Genomics.Variants.Patch
-        , Network.Google.Resource.Genomics.Variants.Search
-        , Network.Google.Resource.Genomics.Variants.Stream
+        , Network.Google.Resource.Genomics.Pipelines.Run
+        , Network.Google.Resource.Genomics.Projects.Operations.Cancel
+        , Network.Google.Resource.Genomics.Projects.Operations.Get
+        , Network.Google.Resource.Genomics.Projects.Operations.List
+        , Network.Google.Resource.Genomics.Workers.CheckIn
 
     other-modules:
           Network.Google.Genomics.Types.Product
         , Network.Google.Genomics.Types.Sum
 
     build-depends:
-          gogol-core == 0.1.1.*
+          gogol-core == 0.4.0.*
         , base       >= 4.7 && < 5

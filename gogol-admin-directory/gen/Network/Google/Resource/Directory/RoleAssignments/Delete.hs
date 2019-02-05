@@ -77,7 +77,7 @@ roleAssignmentsDelete pRadCustomer_ pRadRoleAssignmentId_ =
     , _radRoleAssignmentId = pRadRoleAssignmentId_
     }
 
--- | Immutable ID of the Google Apps account.
+-- | Immutable ID of the G Suite account.
 radCustomer :: Lens' RoleAssignmentsDelete Text
 radCustomer
   = lens _radCustomer (\ s a -> s{_radCustomer = a})

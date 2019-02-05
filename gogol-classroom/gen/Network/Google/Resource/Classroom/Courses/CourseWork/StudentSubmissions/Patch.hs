@@ -47,12 +47,10 @@ module Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.P
     , ccwsspXgafv
     , ccwsspUploadProtocol
     , ccwsspUpdateMask
-    , ccwsspPp
     , ccwsspCourseId
     , ccwsspAccessToken
     , ccwsspUploadType
     , ccwsspPayload
-    , ccwsspBearerToken
     , ccwsspId
     , ccwsspCallback
     , ccwsspCourseWorkId
@@ -72,17 +70,15 @@ type CoursesCourseWorkStudentSubmissionsPatchResource
              Capture "courseWorkId" Text :>
                "studentSubmissions" :>
                  Capture "id" Text :>
-                   QueryParam "$.xgafv" Text :>
+                   QueryParam "$.xgafv" Xgafv :>
                      QueryParam "upload_protocol" Text :>
-                       QueryParam "updateMask" Text :>
-                         QueryParam "pp" Bool :>
-                           QueryParam "access_token" Text :>
-                             QueryParam "uploadType" Text :>
-                               QueryParam "bearer_token" Text :>
-                                 QueryParam "callback" Text :>
-                                   QueryParam "alt" AltJSON :>
-                                     ReqBody '[JSON] StudentSubmission :>
-                                       Patch '[JSON] StudentSubmission
+                       QueryParam "updateMask" GFieldMask :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] StudentSubmission :>
+                                   Patch '[JSON] StudentSubmission
 
 -- | Updates one or more fields of a student submission. See
 -- google.classroom.v1.StudentSubmission for details of which fields may be
@@ -99,15 +95,13 @@ type CoursesCourseWorkStudentSubmissionsPatchResource
 --
 -- /See:/ 'coursesCourseWorkStudentSubmissionsPatch' smart constructor.
 data CoursesCourseWorkStudentSubmissionsPatch = CoursesCourseWorkStudentSubmissionsPatch'
-    { _ccwsspXgafv          :: !(Maybe Text)
+    { _ccwsspXgafv          :: !(Maybe Xgafv)
     , _ccwsspUploadProtocol :: !(Maybe Text)
-    , _ccwsspUpdateMask     :: !(Maybe Text)
-    , _ccwsspPp             :: !Bool
+    , _ccwsspUpdateMask     :: !(Maybe GFieldMask)
     , _ccwsspCourseId       :: !Text
     , _ccwsspAccessToken    :: !(Maybe Text)
     , _ccwsspUploadType     :: !(Maybe Text)
     , _ccwsspPayload        :: !StudentSubmission
-    , _ccwsspBearerToken    :: !(Maybe Text)
     , _ccwsspId             :: !Text
     , _ccwsspCallback       :: !(Maybe Text)
     , _ccwsspCourseWorkId   :: !Text
@@ -123,8 +117,6 @@ data CoursesCourseWorkStudentSubmissionsPatch = CoursesCourseWorkStudentSubmissi
 --
 -- * 'ccwsspUpdateMask'
 --
--- * 'ccwsspPp'
---
 -- * 'ccwsspCourseId'
 --
 -- * 'ccwsspAccessToken'
@@ -132,8 +124,6 @@ data CoursesCourseWorkStudentSubmissionsPatch = CoursesCourseWorkStudentSubmissi
 -- * 'ccwsspUploadType'
 --
 -- * 'ccwsspPayload'
---
--- * 'ccwsspBearerToken'
 --
 -- * 'ccwsspId'
 --
@@ -151,19 +141,17 @@ coursesCourseWorkStudentSubmissionsPatch pCcwsspCourseId_ pCcwsspPayload_ pCcwss
     { _ccwsspXgafv = Nothing
     , _ccwsspUploadProtocol = Nothing
     , _ccwsspUpdateMask = Nothing
-    , _ccwsspPp = True
     , _ccwsspCourseId = pCcwsspCourseId_
     , _ccwsspAccessToken = Nothing
     , _ccwsspUploadType = Nothing
     , _ccwsspPayload = pCcwsspPayload_
-    , _ccwsspBearerToken = Nothing
     , _ccwsspId = pCcwsspId_
     , _ccwsspCallback = Nothing
     , _ccwsspCourseWorkId = pCcwsspCourseWorkId_
     }
 
 -- | V1 error format.
-ccwsspXgafv :: Lens' CoursesCourseWorkStudentSubmissionsPatch (Maybe Text)
+ccwsspXgafv :: Lens' CoursesCourseWorkStudentSubmissionsPatch (Maybe Xgafv)
 ccwsspXgafv
   = lens _ccwsspXgafv (\ s a -> s{_ccwsspXgafv = a})
 
@@ -177,14 +165,10 @@ ccwsspUploadProtocol
 -- This field is required to do an update. The update fails if invalid
 -- fields are specified. The following fields may be specified by teachers:
 -- * \`draft_grade\` * \`assigned_grade\`
-ccwsspUpdateMask :: Lens' CoursesCourseWorkStudentSubmissionsPatch (Maybe Text)
+ccwsspUpdateMask :: Lens' CoursesCourseWorkStudentSubmissionsPatch (Maybe GFieldMask)
 ccwsspUpdateMask
   = lens _ccwsspUpdateMask
       (\ s a -> s{_ccwsspUpdateMask = a})
-
--- | Pretty-print response.
-ccwsspPp :: Lens' CoursesCourseWorkStudentSubmissionsPatch Bool
-ccwsspPp = lens _ccwsspPp (\ s a -> s{_ccwsspPp = a})
 
 -- | Identifier of the course. This identifier can be either the
 -- Classroom-assigned identifier or an alias.
@@ -210,12 +194,6 @@ ccwsspPayload :: Lens' CoursesCourseWorkStudentSubmissionsPatch StudentSubmissio
 ccwsspPayload
   = lens _ccwsspPayload
       (\ s a -> s{_ccwsspPayload = a})
-
--- | OAuth bearer token.
-ccwsspBearerToken :: Lens' CoursesCourseWorkStudentSubmissionsPatch (Maybe Text)
-ccwsspBearerToken
-  = lens _ccwsspBearerToken
-      (\ s a -> s{_ccwsspBearerToken = a})
 
 -- | Identifier of the student submission.
 ccwsspId :: Lens' CoursesCourseWorkStudentSubmissionsPatch Text
@@ -247,10 +225,8 @@ instance GoogleRequest
               _ccwsspXgafv
               _ccwsspUploadProtocol
               _ccwsspUpdateMask
-              (Just _ccwsspPp)
               _ccwsspAccessToken
               _ccwsspUploadType
-              _ccwsspBearerToken
               _ccwsspCallback
               (Just AltJSON)
               _ccwsspPayload

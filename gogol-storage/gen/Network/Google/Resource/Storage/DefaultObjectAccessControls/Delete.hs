@@ -35,6 +35,7 @@ module Network.Google.Resource.Storage.DefaultObjectAccessControls.Delete
 
     -- * Request Lenses
     , doacdBucket
+    , doacdUserProject
     , doacdEntity
     ) where
 
@@ -50,15 +51,17 @@ type DefaultObjectAccessControlsDeleteResource =
            Capture "bucket" Text :>
              "defaultObjectAcl" :>
                Capture "entity" Text :>
-                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
+                 QueryParam "userProject" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Permanently deletes the default object ACL entry for the specified
 -- entity on the specified bucket.
 --
 -- /See:/ 'defaultObjectAccessControlsDelete' smart constructor.
 data DefaultObjectAccessControlsDelete = DefaultObjectAccessControlsDelete'
-    { _doacdBucket :: !Text
-    , _doacdEntity :: !Text
+    { _doacdBucket      :: !Text
+    , _doacdUserProject :: !(Maybe Text)
+    , _doacdEntity      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DefaultObjectAccessControlsDelete' with the minimum fields required to make a request.
@@ -66,6 +69,8 @@ data DefaultObjectAccessControlsDelete = DefaultObjectAccessControlsDelete'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'doacdBucket'
+--
+-- * 'doacdUserProject'
 --
 -- * 'doacdEntity'
 defaultObjectAccessControlsDelete
@@ -75,6 +80,7 @@ defaultObjectAccessControlsDelete
 defaultObjectAccessControlsDelete pDoacdBucket_ pDoacdEntity_ =
     DefaultObjectAccessControlsDelete'
     { _doacdBucket = pDoacdBucket_
+    , _doacdUserProject = Nothing
     , _doacdEntity = pDoacdEntity_
     }
 
@@ -82,6 +88,13 @@ defaultObjectAccessControlsDelete pDoacdBucket_ pDoacdEntity_ =
 doacdBucket :: Lens' DefaultObjectAccessControlsDelete Text
 doacdBucket
   = lens _doacdBucket (\ s a -> s{_doacdBucket = a})
+
+-- | The project to be billed for this request. Required for Requester Pays
+-- buckets.
+doacdUserProject :: Lens' DefaultObjectAccessControlsDelete (Maybe Text)
+doacdUserProject
+  = lens _doacdUserProject
+      (\ s a -> s{_doacdUserProject = a})
 
 -- | The entity holding the permission. Can be user-userId,
 -- user-emailAddress, group-groupId, group-emailAddress, allUsers, or
@@ -97,7 +110,8 @@ instance GoogleRequest
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/devstorage.full_control"]
         requestClient DefaultObjectAccessControlsDelete'{..}
-          = go _doacdBucket _doacdEntity (Just AltJSON)
+          = go _doacdBucket _doacdEntity _doacdUserProject
+              (Just AltJSON)
               storageService
           where go
                   = buildClient

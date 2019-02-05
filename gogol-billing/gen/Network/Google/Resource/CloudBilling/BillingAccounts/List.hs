@@ -20,10 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the billing accounts that the current authenticated user
--- [owns](https:\/\/support.google.com\/cloud\/answer\/4430947).
+-- Lists the billing accounts that the current authenticated user has
+-- permission to
+-- [view](https:\/\/cloud.google.com\/billing\/docs\/how-to\/billing-access).
 --
--- /See:/ <https://cloud.google.com/billing/ Google Cloud Billing API Reference> for @cloudbilling.billingAccounts.list@.
+-- /See:/ <https://cloud.google.com/billing/ Cloud Billing API Reference> for @cloudbilling.billingAccounts.list@.
 module Network.Google.Resource.CloudBilling.BillingAccounts.List
     (
     -- * REST Resource
@@ -36,10 +37,9 @@ module Network.Google.Resource.CloudBilling.BillingAccounts.List
     -- * Request Lenses
     , balXgafv
     , balUploadProtocol
-    , balPp
     , balAccessToken
     , balUploadType
-    , balBearerToken
+    , balFilter
     , balPageToken
     , balPageSize
     , balCallback
@@ -53,29 +53,28 @@ import           Network.Google.Prelude
 type BillingAccountsListResource =
      "v1" :>
        "billingAccounts" :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "pageSize" (Textual Int32) :>
-                         QueryParam "callback" Text :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON] ListBillingAccountsResponse
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "filter" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "pageSize" (Textual Int32) :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] ListBillingAccountsResponse
 
--- | Lists the billing accounts that the current authenticated user
--- [owns](https:\/\/support.google.com\/cloud\/answer\/4430947).
+-- | Lists the billing accounts that the current authenticated user has
+-- permission to
+-- [view](https:\/\/cloud.google.com\/billing\/docs\/how-to\/billing-access).
 --
 -- /See:/ 'billingAccountsList' smart constructor.
 data BillingAccountsList = BillingAccountsList'
-    { _balXgafv          :: !(Maybe Text)
+    { _balXgafv          :: !(Maybe Xgafv)
     , _balUploadProtocol :: !(Maybe Text)
-    , _balPp             :: !Bool
     , _balAccessToken    :: !(Maybe Text)
     , _balUploadType     :: !(Maybe Text)
-    , _balBearerToken    :: !(Maybe Text)
+    , _balFilter         :: !(Maybe Text)
     , _balPageToken      :: !(Maybe Text)
     , _balPageSize       :: !(Maybe (Textual Int32))
     , _balCallback       :: !(Maybe Text)
@@ -89,13 +88,11 @@ data BillingAccountsList = BillingAccountsList'
 --
 -- * 'balUploadProtocol'
 --
--- * 'balPp'
---
 -- * 'balAccessToken'
 --
 -- * 'balUploadType'
 --
--- * 'balBearerToken'
+-- * 'balFilter'
 --
 -- * 'balPageToken'
 --
@@ -108,17 +105,16 @@ billingAccountsList =
     BillingAccountsList'
     { _balXgafv = Nothing
     , _balUploadProtocol = Nothing
-    , _balPp = True
     , _balAccessToken = Nothing
     , _balUploadType = Nothing
-    , _balBearerToken = Nothing
+    , _balFilter = Nothing
     , _balPageToken = Nothing
     , _balPageSize = Nothing
     , _balCallback = Nothing
     }
 
 -- | V1 error format.
-balXgafv :: Lens' BillingAccountsList (Maybe Text)
+balXgafv :: Lens' BillingAccountsList (Maybe Xgafv)
 balXgafv = lens _balXgafv (\ s a -> s{_balXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -126,10 +122,6 @@ balUploadProtocol :: Lens' BillingAccountsList (Maybe Text)
 balUploadProtocol
   = lens _balUploadProtocol
       (\ s a -> s{_balUploadProtocol = a})
-
--- | Pretty-print response.
-balPp :: Lens' BillingAccountsList Bool
-balPp = lens _balPp (\ s a -> s{_balPp = a})
 
 -- | OAuth access token.
 balAccessToken :: Lens' BillingAccountsList (Maybe Text)
@@ -143,11 +135,15 @@ balUploadType
   = lens _balUploadType
       (\ s a -> s{_balUploadType = a})
 
--- | OAuth bearer token.
-balBearerToken :: Lens' BillingAccountsList (Maybe Text)
-balBearerToken
-  = lens _balBearerToken
-      (\ s a -> s{_balBearerToken = a})
+-- | Options for how to filter the returned billing accounts. Currently this
+-- only supports filtering for
+-- [subaccounts](https:\/\/cloud.google.com\/billing\/docs\/concepts) under
+-- a single provided reseller billing account. (e.g.
+-- \"master_billing_account=billingAccounts\/012345-678901-ABCDEF\").
+-- Boolean algebra and other fields are not currently supported.
+balFilter :: Lens' BillingAccountsList (Maybe Text)
+balFilter
+  = lens _balFilter (\ s a -> s{_balFilter = a})
 
 -- | A token identifying a page of results to return. This should be a
 -- \`next_page_token\` value returned from a previous
@@ -175,10 +171,9 @@ instance GoogleRequest BillingAccountsList where
         type Scopes BillingAccountsList =
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient BillingAccountsList'{..}
-          = go _balXgafv _balUploadProtocol (Just _balPp)
-              _balAccessToken
+          = go _balXgafv _balUploadProtocol _balAccessToken
               _balUploadType
-              _balBearerToken
+              _balFilter
               _balPageToken
               _balPageSize
               _balCallback

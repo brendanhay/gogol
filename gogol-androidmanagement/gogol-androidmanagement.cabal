@@ -1,0 +1,67 @@
+name:                  gogol-androidmanagement
+version:               0.4.0
+synopsis:              Google Android Management SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               OtherLicense
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
+copyright:             Copyright (c) 2015-2016 Brendan Hay
+category:              Network, Google, Cloud
+build-type:            Simple
+cabal-version:         >= 1.10
+extra-source-files:    README.md src/.gitkeep
+
+description:
+    The Android Management API provides remote enterprise management of
+    Android devices and apps.
+    .
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
+    .
+    This library is compatible with version @v1@
+    of the API.
+
+source-repository head
+    type:     git
+    location: git://github.com/brendanhay/gogol.git
+
+library
+    default-language:  Haskell2010
+    hs-source-dirs:    src gen
+
+    ghc-options:       -Wall
+
+    exposed-modules:
+          Network.Google.AndroidManagement
+        , Network.Google.AndroidManagement.Types
+        , Network.Google.Resource.AndroidManagement.Enterprises.Applications.Get
+        , Network.Google.Resource.AndroidManagement.Enterprises.Create
+        , Network.Google.Resource.AndroidManagement.Enterprises.Devices.Delete
+        , Network.Google.Resource.AndroidManagement.Enterprises.Devices.Get
+        , Network.Google.Resource.AndroidManagement.Enterprises.Devices.IssueCommand
+        , Network.Google.Resource.AndroidManagement.Enterprises.Devices.List
+        , Network.Google.Resource.AndroidManagement.Enterprises.Devices.Operations.Cancel
+        , Network.Google.Resource.AndroidManagement.Enterprises.Devices.Operations.Delete
+        , Network.Google.Resource.AndroidManagement.Enterprises.Devices.Operations.Get
+        , Network.Google.Resource.AndroidManagement.Enterprises.Devices.Operations.List
+        , Network.Google.Resource.AndroidManagement.Enterprises.Devices.Patch
+        , Network.Google.Resource.AndroidManagement.Enterprises.EnrollmentTokens.Create
+        , Network.Google.Resource.AndroidManagement.Enterprises.EnrollmentTokens.Delete
+        , Network.Google.Resource.AndroidManagement.Enterprises.Get
+        , Network.Google.Resource.AndroidManagement.Enterprises.Patch
+        , Network.Google.Resource.AndroidManagement.Enterprises.Policies.Delete
+        , Network.Google.Resource.AndroidManagement.Enterprises.Policies.Get
+        , Network.Google.Resource.AndroidManagement.Enterprises.Policies.List
+        , Network.Google.Resource.AndroidManagement.Enterprises.Policies.Patch
+        , Network.Google.Resource.AndroidManagement.Enterprises.WebTokens.Create
+        , Network.Google.Resource.AndroidManagement.SignupURLs.Create
+
+    other-modules:
+          Network.Google.AndroidManagement.Types.Product
+        , Network.Google.AndroidManagement.Types.Sum
+
+    build-depends:
+          gogol-core == 0.4.0.*
+        , base       >= 4.7 && < 5

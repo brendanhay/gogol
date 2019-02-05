@@ -1,5 +1,5 @@
 name:                  gogol-youtube
-version:               0.1.1
+version:               0.4.0
 synopsis:              Google YouTube Data SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -11,7 +11,7 @@ copyright:             Copyright (c) 2015-2016 Brendan Hay
 category:              Network, Google, Cloud
 build-type:            Simple
 cabal-version:         >= 1.10
-extra-source-files:    README.md
+extra-source-files:    README.md src/.gitkeep
 
 description:
     Supports core YouTube features, such as uploading videos, creating and
@@ -57,7 +57,6 @@ library
         , Network.Google.Resource.YouTube.Comments.MarkAsSpam
         , Network.Google.Resource.YouTube.Comments.SetModerationStatus
         , Network.Google.Resource.YouTube.Comments.Update
-        , Network.Google.Resource.YouTube.FanFundingEvents.List
         , Network.Google.Resource.YouTube.GuideCategories.List
         , Network.Google.Resource.YouTube.I18nLanguages.List
         , Network.Google.Resource.YouTube.I18nRegions.List
@@ -93,6 +92,7 @@ library
         , Network.Google.Resource.YouTube.Subscriptions.Delete
         , Network.Google.Resource.YouTube.Subscriptions.Insert
         , Network.Google.Resource.YouTube.Subscriptions.List
+        , Network.Google.Resource.YouTube.SuperChatEvents.List
         , Network.Google.Resource.YouTube.Thumbnails.Set
         , Network.Google.Resource.YouTube.VideoAbuseReportReasons.List
         , Network.Google.Resource.YouTube.VideoCategories.List
@@ -113,5 +113,5 @@ library
         , Network.Google.YouTube.Types.Sum
 
     build-depends:
-          gogol-core == 0.1.1.*
+          gogol-core == 0.4.0.*
         , base       >= 4.7 && < 5

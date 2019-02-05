@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified Router resource. Get a list of available routers
+-- Returns the specified Router resource. Gets a list of available routers
 -- by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.routers.get@.
@@ -55,7 +55,7 @@ type RoutersGetResource =
                    Capture "router" Text :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Router
 
--- | Returns the specified Router resource. Get a list of available routers
+-- | Returns the specified Router resource. Gets a list of available routers
 -- by making a list() request.
 --
 -- /See:/ 'routersGet' smart constructor.

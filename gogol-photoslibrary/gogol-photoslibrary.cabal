@@ -1,0 +1,55 @@
+name:                  gogol-photoslibrary
+version:               0.4.0
+synopsis:              Google Photos Library SDK.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               OtherLicense
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
+copyright:             Copyright (c) 2015-2016 Brendan Hay
+category:              Network, Google, Cloud
+build-type:            Simple
+cabal-version:         >= 1.10
+extra-source-files:    README.md src/.gitkeep
+
+description:
+    Manage photos, videos, and albums in Google Photos
+    .
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
+    .
+    This library is compatible with version @v1@
+    of the API.
+
+source-repository head
+    type:     git
+    location: git://github.com/brendanhay/gogol.git
+
+library
+    default-language:  Haskell2010
+    hs-source-dirs:    src gen
+
+    ghc-options:       -Wall
+
+    exposed-modules:
+          Network.Google.PhotosLibrary
+        , Network.Google.PhotosLibrary.Types
+        , Network.Google.Resource.PhotosLibrary.Albums.AddEnrichment
+        , Network.Google.Resource.PhotosLibrary.Albums.Create
+        , Network.Google.Resource.PhotosLibrary.Albums.Get
+        , Network.Google.Resource.PhotosLibrary.Albums.List
+        , Network.Google.Resource.PhotosLibrary.Albums.Share
+        , Network.Google.Resource.PhotosLibrary.MediaItems.BatchCreate
+        , Network.Google.Resource.PhotosLibrary.MediaItems.Get
+        , Network.Google.Resource.PhotosLibrary.MediaItems.Search
+        , Network.Google.Resource.PhotosLibrary.SharedAlbums.Join
+        , Network.Google.Resource.PhotosLibrary.SharedAlbums.List
+
+    other-modules:
+          Network.Google.PhotosLibrary.Types.Product
+        , Network.Google.PhotosLibrary.Types.Sum
+
+    build-depends:
+          gogol-core == 0.4.0.*
+        , base       >= 4.7 && < 5

@@ -23,10 +23,10 @@
 -- Given one or more beacon observations, returns any beacon information
 -- and attachments accessible to your application. Authorize by using the
 -- [API
--- key](https:\/\/developers.google.com\/beacons\/proximity\/how-tos\/authorizing#APIKey)
+-- key](https:\/\/developers.google.com\/beacons\/proximity\/get-started#request_a_browser_api_key)
 -- for the application.
 --
--- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @proximitybeacon.beaconinfo.getforobserved@.
+-- /See:/ <https://developers.google.com/beacons/proximity/ Proximity Beacon API Reference> for @proximitybeacon.beaconinfo.getforobserved@.
 module Network.Google.Resource.ProximityBeacon.BeaconInfo.GetforObserved
     (
     -- * REST Resource
@@ -39,11 +39,9 @@ module Network.Google.Resource.ProximityBeacon.BeaconInfo.GetforObserved
     -- * Request Lenses
     , bigoXgafv
     , bigoUploadProtocol
-    , bigoPp
     , bigoAccessToken
     , bigoUploadType
     , bigoPayload
-    , bigoBearerToken
     , bigoCallback
     ) where
 
@@ -55,32 +53,28 @@ import           Network.Google.ProximityBeacon.Types
 type BeaconInfoGetforObservedResource =
      "v1beta1" :>
        "beaconinfo:getforobserved" :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] GetInfoForObservedBeaconsRequest :>
-                           Post '[JSON] GetInfoForObservedBeaconsResponse
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] GetInfoForObservedBeaconsRequest :>
+                       Post '[JSON] GetInfoForObservedBeaconsResponse
 
 -- | Given one or more beacon observations, returns any beacon information
 -- and attachments accessible to your application. Authorize by using the
 -- [API
--- key](https:\/\/developers.google.com\/beacons\/proximity\/how-tos\/authorizing#APIKey)
+-- key](https:\/\/developers.google.com\/beacons\/proximity\/get-started#request_a_browser_api_key)
 -- for the application.
 --
 -- /See:/ 'beaconInfoGetforObserved' smart constructor.
 data BeaconInfoGetforObserved = BeaconInfoGetforObserved'
-    { _bigoXgafv          :: !(Maybe Text)
+    { _bigoXgafv          :: !(Maybe Xgafv)
     , _bigoUploadProtocol :: !(Maybe Text)
-    , _bigoPp             :: !Bool
     , _bigoAccessToken    :: !(Maybe Text)
     , _bigoUploadType     :: !(Maybe Text)
     , _bigoPayload        :: !GetInfoForObservedBeaconsRequest
-    , _bigoBearerToken    :: !(Maybe Text)
     , _bigoCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -92,15 +86,11 @@ data BeaconInfoGetforObserved = BeaconInfoGetforObserved'
 --
 -- * 'bigoUploadProtocol'
 --
--- * 'bigoPp'
---
 -- * 'bigoAccessToken'
 --
 -- * 'bigoUploadType'
 --
 -- * 'bigoPayload'
---
--- * 'bigoBearerToken'
 --
 -- * 'bigoCallback'
 beaconInfoGetforObserved
@@ -110,16 +100,14 @@ beaconInfoGetforObserved pBigoPayload_ =
     BeaconInfoGetforObserved'
     { _bigoXgafv = Nothing
     , _bigoUploadProtocol = Nothing
-    , _bigoPp = True
     , _bigoAccessToken = Nothing
     , _bigoUploadType = Nothing
     , _bigoPayload = pBigoPayload_
-    , _bigoBearerToken = Nothing
     , _bigoCallback = Nothing
     }
 
 -- | V1 error format.
-bigoXgafv :: Lens' BeaconInfoGetforObserved (Maybe Text)
+bigoXgafv :: Lens' BeaconInfoGetforObserved (Maybe Xgafv)
 bigoXgafv
   = lens _bigoXgafv (\ s a -> s{_bigoXgafv = a})
 
@@ -128,10 +116,6 @@ bigoUploadProtocol :: Lens' BeaconInfoGetforObserved (Maybe Text)
 bigoUploadProtocol
   = lens _bigoUploadProtocol
       (\ s a -> s{_bigoUploadProtocol = a})
-
--- | Pretty-print response.
-bigoPp :: Lens' BeaconInfoGetforObserved Bool
-bigoPp = lens _bigoPp (\ s a -> s{_bigoPp = a})
 
 -- | OAuth access token.
 bigoAccessToken :: Lens' BeaconInfoGetforObserved (Maybe Text)
@@ -150,12 +134,6 @@ bigoPayload :: Lens' BeaconInfoGetforObserved GetInfoForObservedBeaconsRequest
 bigoPayload
   = lens _bigoPayload (\ s a -> s{_bigoPayload = a})
 
--- | OAuth bearer token.
-bigoBearerToken :: Lens' BeaconInfoGetforObserved (Maybe Text)
-bigoBearerToken
-  = lens _bigoBearerToken
-      (\ s a -> s{_bigoBearerToken = a})
-
 -- | JSONP
 bigoCallback :: Lens' BeaconInfoGetforObserved (Maybe Text)
 bigoCallback
@@ -166,10 +144,8 @@ instance GoogleRequest BeaconInfoGetforObserved where
              GetInfoForObservedBeaconsResponse
         type Scopes BeaconInfoGetforObserved = '[]
         requestClient BeaconInfoGetforObserved'{..}
-          = go _bigoXgafv _bigoUploadProtocol (Just _bigoPp)
-              _bigoAccessToken
+          = go _bigoXgafv _bigoUploadProtocol _bigoAccessToken
               _bigoUploadType
-              _bigoBearerToken
               _bigoCallback
               (Just AltJSON)
               _bigoPayload

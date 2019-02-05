@@ -20,12 +20,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a managed service. This method will change the serivce in the
+-- Deletes a managed service. This method will change the service to the
 -- \`Soft-Delete\` state for 30 days. Within this period, service producers
 -- may call UndeleteService to restore the service. After 30 days, the
 -- service will be permanently deleted. Operation
 --
--- /See:/ <https://cloud.google.com/service-management/ Google Service Management API Reference> for @servicemanagement.services.delete@.
+-- /See:/ <https://cloud.google.com/service-management/ Service Management API Reference> for @servicemanagement.services.delete@.
 module Network.Google.Resource.ServiceManagement.Services.Delete
     (
     -- * REST Resource
@@ -38,10 +38,8 @@ module Network.Google.Resource.ServiceManagement.Services.Delete
     -- * Request Lenses
     , sdXgafv
     , sdUploadProtocol
-    , sdPp
     , sdAccessToken
     , sdUploadType
-    , sdBearerToken
     , sdServiceName
     , sdCallback
     ) where
@@ -57,14 +55,12 @@ type ServicesDeleteResource =
          Capture "serviceName" Text :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
--- | Deletes a managed service. This method will change the serivce in the
+-- | Deletes a managed service. This method will change the service to the
 -- \`Soft-Delete\` state for 30 days. Within this period, service producers
 -- may call UndeleteService to restore the service. After 30 days, the
 -- service will be permanently deleted. Operation
@@ -73,10 +69,8 @@ type ServicesDeleteResource =
 data ServicesDelete = ServicesDelete'
     { _sdXgafv          :: !(Maybe Xgafv)
     , _sdUploadProtocol :: !(Maybe Text)
-    , _sdPp             :: !Bool
     , _sdAccessToken    :: !(Maybe Text)
     , _sdUploadType     :: !(Maybe Text)
-    , _sdBearerToken    :: !(Maybe Text)
     , _sdServiceName    :: !Text
     , _sdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -89,13 +83,9 @@ data ServicesDelete = ServicesDelete'
 --
 -- * 'sdUploadProtocol'
 --
--- * 'sdPp'
---
 -- * 'sdAccessToken'
 --
 -- * 'sdUploadType'
---
--- * 'sdBearerToken'
 --
 -- * 'sdServiceName'
 --
@@ -107,10 +97,8 @@ servicesDelete pSdServiceName_ =
     ServicesDelete'
     { _sdXgafv = Nothing
     , _sdUploadProtocol = Nothing
-    , _sdPp = True
     , _sdAccessToken = Nothing
     , _sdUploadType = Nothing
-    , _sdBearerToken = Nothing
     , _sdServiceName = pSdServiceName_
     , _sdCallback = Nothing
     }
@@ -125,10 +113,6 @@ sdUploadProtocol
   = lens _sdUploadProtocol
       (\ s a -> s{_sdUploadProtocol = a})
 
--- | Pretty-print response.
-sdPp :: Lens' ServicesDelete Bool
-sdPp = lens _sdPp (\ s a -> s{_sdPp = a})
-
 -- | OAuth access token.
 sdAccessToken :: Lens' ServicesDelete (Maybe Text)
 sdAccessToken
@@ -139,12 +123,6 @@ sdAccessToken
 sdUploadType :: Lens' ServicesDelete (Maybe Text)
 sdUploadType
   = lens _sdUploadType (\ s a -> s{_sdUploadType = a})
-
--- | OAuth bearer token.
-sdBearerToken :: Lens' ServicesDelete (Maybe Text)
-sdBearerToken
-  = lens _sdBearerToken
-      (\ s a -> s{_sdBearerToken = a})
 
 -- | The name of the service. See the
 -- [overview](\/service-management\/overview) for naming requirements. For
@@ -166,10 +144,8 @@ instance GoogleRequest ServicesDelete where
                "https://www.googleapis.com/auth/service.management"]
         requestClient ServicesDelete'{..}
           = go _sdServiceName _sdXgafv _sdUploadProtocol
-              (Just _sdPp)
               _sdAccessToken
               _sdUploadType
-              _sdBearerToken
               _sdCallback
               (Just AltJSON)
               serviceManagementService

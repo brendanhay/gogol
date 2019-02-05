@@ -32,7 +32,6 @@ module Network.Google.Resource.Content.Datafeeds.Custombatch
 
     -- * Request Lenses
     , dPayload
-    , dDryRun
     ) where
 
 import           Network.Google.Prelude
@@ -42,19 +41,17 @@ import           Network.Google.ShoppingContent.Types
 -- 'DatafeedsCustombatch' request conforms to.
 type DatafeedsCustombatchResource =
      "content" :>
-       "v2" :>
+       "v2.1" :>
          "datafeeds" :>
            "batch" :>
-             QueryParam "dryRun" Bool :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] DatafeedsCustomBatchRequest :>
-                   Post '[JSON] DatafeedsCustomBatchResponse
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] DatafeedsCustomBatchRequest :>
+                 Post '[JSON] DatafeedsCustomBatchResponse
 
 --
 -- /See:/ 'datafeedsCustombatch' smart constructor.
-data DatafeedsCustombatch = DatafeedsCustombatch'
-    { _dPayload :: !DatafeedsCustomBatchRequest
-    , _dDryRun  :: !(Maybe Bool)
+newtype DatafeedsCustombatch = DatafeedsCustombatch'
+    { _dPayload :: DatafeedsCustomBatchRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatafeedsCustombatch' with the minimum fields required to make a request.
@@ -62,24 +59,17 @@ data DatafeedsCustombatch = DatafeedsCustombatch'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'dPayload'
---
--- * 'dDryRun'
 datafeedsCustombatch
     :: DatafeedsCustomBatchRequest -- ^ 'dPayload'
     -> DatafeedsCustombatch
 datafeedsCustombatch pDPayload_ =
     DatafeedsCustombatch'
     { _dPayload = pDPayload_
-    , _dDryRun = Nothing
     }
 
 -- | Multipart request metadata.
 dPayload :: Lens' DatafeedsCustombatch DatafeedsCustomBatchRequest
 dPayload = lens _dPayload (\ s a -> s{_dPayload = a})
-
--- | Flag to run the request in dry-run mode.
-dDryRun :: Lens' DatafeedsCustombatch (Maybe Bool)
-dDryRun = lens _dDryRun (\ s a -> s{_dDryRun = a})
 
 instance GoogleRequest DatafeedsCustombatch where
         type Rs DatafeedsCustombatch =
@@ -87,8 +77,7 @@ instance GoogleRequest DatafeedsCustombatch where
         type Scopes DatafeedsCustombatch =
              '["https://www.googleapis.com/auth/content"]
         requestClient DatafeedsCustombatch'{..}
-          = go _dDryRun (Just AltJSON) _dPayload
-              shoppingContentService
+          = go (Just AltJSON) _dPayload shoppingContentService
           where go
                   = buildClient
                       (Proxy :: Proxy DatafeedsCustombatchResource)

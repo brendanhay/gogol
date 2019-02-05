@@ -77,12 +77,12 @@ schemasDelete pSdCustomerId_ pSdSchemaKey_ =
     , _sdSchemaKey = pSdSchemaKey_
     }
 
--- | Immutable id of the Google Apps account
+-- | Immutable ID of the G Suite account
 sdCustomerId :: Lens' SchemasDelete Text
 sdCustomerId
   = lens _sdCustomerId (\ s a -> s{_sdCustomerId = a})
 
--- | Name or immutable Id of the schema
+-- | Name or immutable ID of the schema
 sdSchemaKey :: Lens' SchemasDelete Text
 sdSchemaKey
   = lens _sdSchemaKey (\ s a -> s{_sdSchemaKey = a})

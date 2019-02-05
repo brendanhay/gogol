@@ -1,5 +1,5 @@
 name:                  gogol-admin-reports
-version:               0.1.1
+version:               0.4.0
 synopsis:              Google Admin Reports SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -11,11 +11,11 @@ copyright:             Copyright (c) 2015-2016 Brendan Hay
 category:              Network, Google, Cloud
 build-type:            Simple
 cabal-version:         >= 1.10
-extra-source-files:    README.md
+extra-source-files:    README.md src/.gitkeep
 
 description:
-    Fetches reports for the administrators of Google Apps customers about
-    the usage, collaboration, security, and risk for their users.
+    Fetches reports for the administrators of G Suite customers about the
+    usage, collaboration, security, and risk for their users.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -40,6 +40,7 @@ library
         , Network.Google.Resource.Reports.Activities.List
         , Network.Google.Resource.Reports.Activities.Watch
         , Network.Google.Resource.Reports.CustomerUsageReports.Get
+        , Network.Google.Resource.Reports.EntityUsageReports.Get
         , Network.Google.Resource.Reports.UserUsageReport.Get
 
     other-modules:
@@ -47,5 +48,5 @@ library
         , Network.Google.Reports.Types.Sum
 
     build-depends:
-          gogol-core == 0.1.1.*
+          gogol-core == 0.4.0.*
         , base       >= 4.7 && < 5

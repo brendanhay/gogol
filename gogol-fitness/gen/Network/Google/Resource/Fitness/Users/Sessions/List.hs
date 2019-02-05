@@ -112,9 +112,14 @@ uslEndTime :: Lens' UsersSessionsList (Maybe Text)
 uslEndTime
   = lens _uslEndTime (\ s a -> s{_uslEndTime = a})
 
--- | The continuation token, which is used to page through large result sets.
--- To get the next page of results, set this parameter to the value of
--- nextPageToken from the previous response.
+-- | The continuation token, which is used for incremental syncing. To get
+-- the next batch of changes, set this parameter to the value of
+-- nextPageToken from the previous response. This token is treated as a
+-- timestamp (in millis since epoch). If specified, the API returns
+-- sessions modified since this time. The page token is ignored if either
+-- start or end time is specified. If none of start time, end time, and the
+-- page token is specified, sessions modified in the last 7 days are
+-- returned.
 uslPageToken :: Lens' UsersSessionsList (Maybe Text)
 uslPageToken
   = lens _uslPageToken (\ s a -> s{_uslPageToken = a})
@@ -132,12 +137,22 @@ instance GoogleRequest UsersSessionsList where
         type Scopes UsersSessionsList =
              '["https://www.googleapis.com/auth/fitness.activity.read",
                "https://www.googleapis.com/auth/fitness.activity.write",
+               "https://www.googleapis.com/auth/fitness.blood_glucose.read",
+               "https://www.googleapis.com/auth/fitness.blood_glucose.write",
+               "https://www.googleapis.com/auth/fitness.blood_pressure.read",
+               "https://www.googleapis.com/auth/fitness.blood_pressure.write",
                "https://www.googleapis.com/auth/fitness.body.read",
                "https://www.googleapis.com/auth/fitness.body.write",
+               "https://www.googleapis.com/auth/fitness.body_temperature.read",
+               "https://www.googleapis.com/auth/fitness.body_temperature.write",
                "https://www.googleapis.com/auth/fitness.location.read",
                "https://www.googleapis.com/auth/fitness.location.write",
                "https://www.googleapis.com/auth/fitness.nutrition.read",
-               "https://www.googleapis.com/auth/fitness.nutrition.write"]
+               "https://www.googleapis.com/auth/fitness.nutrition.write",
+               "https://www.googleapis.com/auth/fitness.oxygen_saturation.read",
+               "https://www.googleapis.com/auth/fitness.oxygen_saturation.write",
+               "https://www.googleapis.com/auth/fitness.reproductive_health.read",
+               "https://www.googleapis.com/auth/fitness.reproductive_health.write"]
         requestClient UsersSessionsList'{..}
           = go _uslUserId _uslStartTime _uslEndTime
               _uslPageToken

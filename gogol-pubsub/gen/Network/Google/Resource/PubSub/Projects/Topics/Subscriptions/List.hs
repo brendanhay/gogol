@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the name of the subscriptions for this topic.
+-- Lists the names of the subscriptions on this topic.
 --
--- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.topics.subscriptions.list@.
+-- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference> for @pubsub.projects.topics.subscriptions.list@.
 module Network.Google.Resource.PubSub.Projects.Topics.Subscriptions.List
     (
     -- * REST Resource
@@ -35,11 +35,9 @@ module Network.Google.Resource.PubSub.Projects.Topics.Subscriptions.List
     -- * Request Lenses
     , ptslXgafv
     , ptslUploadProtocol
-    , ptslPp
     , ptslAccessToken
     , ptslUploadType
     , ptslTopic
-    , ptslBearerToken
     , ptslPageToken
     , ptslPageSize
     , ptslCallback
@@ -54,29 +52,25 @@ type ProjectsTopicsSubscriptionsListResource =
      "v1" :>
        Capture "topic" Text :>
          "subscriptions" :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" (Textual Int32) :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] ListTopicSubscriptionsResponse
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "pageSize" (Textual Int32) :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] ListTopicSubscriptionsResponse
 
--- | Lists the name of the subscriptions for this topic.
+-- | Lists the names of the subscriptions on this topic.
 --
 -- /See:/ 'projectsTopicsSubscriptionsList' smart constructor.
 data ProjectsTopicsSubscriptionsList = ProjectsTopicsSubscriptionsList'
-    { _ptslXgafv          :: !(Maybe Text)
+    { _ptslXgafv          :: !(Maybe Xgafv)
     , _ptslUploadProtocol :: !(Maybe Text)
-    , _ptslPp             :: !Bool
     , _ptslAccessToken    :: !(Maybe Text)
     , _ptslUploadType     :: !(Maybe Text)
     , _ptslTopic          :: !Text
-    , _ptslBearerToken    :: !(Maybe Text)
     , _ptslPageToken      :: !(Maybe Text)
     , _ptslPageSize       :: !(Maybe (Textual Int32))
     , _ptslCallback       :: !(Maybe Text)
@@ -90,15 +84,11 @@ data ProjectsTopicsSubscriptionsList = ProjectsTopicsSubscriptionsList'
 --
 -- * 'ptslUploadProtocol'
 --
--- * 'ptslPp'
---
 -- * 'ptslAccessToken'
 --
 -- * 'ptslUploadType'
 --
 -- * 'ptslTopic'
---
--- * 'ptslBearerToken'
 --
 -- * 'ptslPageToken'
 --
@@ -112,18 +102,16 @@ projectsTopicsSubscriptionsList pPtslTopic_ =
     ProjectsTopicsSubscriptionsList'
     { _ptslXgafv = Nothing
     , _ptslUploadProtocol = Nothing
-    , _ptslPp = True
     , _ptslAccessToken = Nothing
     , _ptslUploadType = Nothing
     , _ptslTopic = pPtslTopic_
-    , _ptslBearerToken = Nothing
     , _ptslPageToken = Nothing
     , _ptslPageSize = Nothing
     , _ptslCallback = Nothing
     }
 
 -- | V1 error format.
-ptslXgafv :: Lens' ProjectsTopicsSubscriptionsList (Maybe Text)
+ptslXgafv :: Lens' ProjectsTopicsSubscriptionsList (Maybe Xgafv)
 ptslXgafv
   = lens _ptslXgafv (\ s a -> s{_ptslXgafv = a})
 
@@ -132,10 +120,6 @@ ptslUploadProtocol :: Lens' ProjectsTopicsSubscriptionsList (Maybe Text)
 ptslUploadProtocol
   = lens _ptslUploadProtocol
       (\ s a -> s{_ptslUploadProtocol = a})
-
--- | Pretty-print response.
-ptslPp :: Lens' ProjectsTopicsSubscriptionsList Bool
-ptslPp = lens _ptslPp (\ s a -> s{_ptslPp = a})
 
 -- | OAuth access token.
 ptslAccessToken :: Lens' ProjectsTopicsSubscriptionsList (Maybe Text)
@@ -149,16 +133,11 @@ ptslUploadType
   = lens _ptslUploadType
       (\ s a -> s{_ptslUploadType = a})
 
--- | The name of the topic that subscriptions are attached to.
+-- | The name of the topic that subscriptions are attached to. Format is
+-- \`projects\/{project}\/topics\/{topic}\`.
 ptslTopic :: Lens' ProjectsTopicsSubscriptionsList Text
 ptslTopic
   = lens _ptslTopic (\ s a -> s{_ptslTopic = a})
-
--- | OAuth bearer token.
-ptslBearerToken :: Lens' ProjectsTopicsSubscriptionsList (Maybe Text)
-ptslBearerToken
-  = lens _ptslBearerToken
-      (\ s a -> s{_ptslBearerToken = a})
 
 -- | The value returned by the last \`ListTopicSubscriptionsResponse\`;
 -- indicates that this is a continuation of a prior
@@ -189,10 +168,8 @@ instance GoogleRequest
                "https://www.googleapis.com/auth/pubsub"]
         requestClient ProjectsTopicsSubscriptionsList'{..}
           = go _ptslTopic _ptslXgafv _ptslUploadProtocol
-              (Just _ptslPp)
               _ptslAccessToken
               _ptslUploadType
-              _ptslBearerToken
               _ptslPageToken
               _ptslPageSize
               _ptslCallback

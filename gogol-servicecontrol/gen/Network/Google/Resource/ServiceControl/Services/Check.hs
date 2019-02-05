@@ -20,14 +20,20 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Checks an operation with Google Service Control to decide whether the
--- given operation should proceed. It should be called before the operation
--- is executed. This method requires the
+-- Checks whether an operation on a service should be allowed to proceed
+-- based on the configuration of the service and related policies. It must
+-- be called before the operation is executed. If feasible, the client
+-- should cache the check results and reuse them for 60 seconds. In case of
+-- any server errors, the client should rely on the cached results for much
+-- longer time to avoid outage. WARNING: There is general 60s delay for the
+-- configuration and policy propagation, therefore callers MUST NOT depend
+-- on the \`Check\` method having the latest policy information. NOTE: the
+-- CheckRequest has the size limit of 64KB. This method requires the
 -- \`servicemanagement.services.check\` permission on the specified
--- service. For more information, see [Google Cloud
+-- service. For more information, see [Cloud
 -- IAM](https:\/\/cloud.google.com\/iam).
 --
--- /See:/ <https://cloud.google.com/service-control/ Google Service Control API Reference> for @servicecontrol.services.check@.
+-- /See:/ <https://cloud.google.com/service-control/ Service Control API Reference> for @servicecontrol.services.check@.
 module Network.Google.Resource.ServiceControl.Services.Check
     (
     -- * REST Resource
@@ -40,11 +46,9 @@ module Network.Google.Resource.ServiceControl.Services.Check
     -- * Request Lenses
     , scXgafv
     , scUploadProtocol
-    , scPp
     , scAccessToken
     , scUploadType
     , scPayload
-    , scBearerToken
     , scServiceName
     , scCallback
     ) where
@@ -60,31 +64,33 @@ type ServicesCheckResource =
          CaptureMode "serviceName" "check" Text :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] CheckRequest :>
-                             Post '[JSON] CheckResponse
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] CheckRequest :>
+                         Post '[JSON] CheckResponse
 
--- | Checks an operation with Google Service Control to decide whether the
--- given operation should proceed. It should be called before the operation
--- is executed. This method requires the
+-- | Checks whether an operation on a service should be allowed to proceed
+-- based on the configuration of the service and related policies. It must
+-- be called before the operation is executed. If feasible, the client
+-- should cache the check results and reuse them for 60 seconds. In case of
+-- any server errors, the client should rely on the cached results for much
+-- longer time to avoid outage. WARNING: There is general 60s delay for the
+-- configuration and policy propagation, therefore callers MUST NOT depend
+-- on the \`Check\` method having the latest policy information. NOTE: the
+-- CheckRequest has the size limit of 64KB. This method requires the
 -- \`servicemanagement.services.check\` permission on the specified
--- service. For more information, see [Google Cloud
+-- service. For more information, see [Cloud
 -- IAM](https:\/\/cloud.google.com\/iam).
 --
 -- /See:/ 'servicesCheck' smart constructor.
 data ServicesCheck = ServicesCheck'
     { _scXgafv          :: !(Maybe Xgafv)
     , _scUploadProtocol :: !(Maybe Text)
-    , _scPp             :: !Bool
     , _scAccessToken    :: !(Maybe Text)
     , _scUploadType     :: !(Maybe Text)
     , _scPayload        :: !CheckRequest
-    , _scBearerToken    :: !(Maybe Text)
     , _scServiceName    :: !Text
     , _scCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -97,15 +103,11 @@ data ServicesCheck = ServicesCheck'
 --
 -- * 'scUploadProtocol'
 --
--- * 'scPp'
---
 -- * 'scAccessToken'
 --
 -- * 'scUploadType'
 --
 -- * 'scPayload'
---
--- * 'scBearerToken'
 --
 -- * 'scServiceName'
 --
@@ -118,11 +120,9 @@ servicesCheck pScPayload_ pScServiceName_ =
     ServicesCheck'
     { _scXgafv = Nothing
     , _scUploadProtocol = Nothing
-    , _scPp = True
     , _scAccessToken = Nothing
     , _scUploadType = Nothing
     , _scPayload = pScPayload_
-    , _scBearerToken = Nothing
     , _scServiceName = pScServiceName_
     , _scCallback = Nothing
     }
@@ -136,10 +136,6 @@ scUploadProtocol :: Lens' ServicesCheck (Maybe Text)
 scUploadProtocol
   = lens _scUploadProtocol
       (\ s a -> s{_scUploadProtocol = a})
-
--- | Pretty-print response.
-scPp :: Lens' ServicesCheck Bool
-scPp = lens _scPp (\ s a -> s{_scPp = a})
 
 -- | OAuth access token.
 scAccessToken :: Lens' ServicesCheck (Maybe Text)
@@ -157,15 +153,10 @@ scPayload :: Lens' ServicesCheck CheckRequest
 scPayload
   = lens _scPayload (\ s a -> s{_scPayload = a})
 
--- | OAuth bearer token.
-scBearerToken :: Lens' ServicesCheck (Maybe Text)
-scBearerToken
-  = lens _scBearerToken
-      (\ s a -> s{_scBearerToken = a})
-
 -- | The service name as specified in its service configuration. For example,
--- \`\"pubsub.googleapis.com\"\`. See google.api.Service for the definition
--- of a service name.
+-- \`\"pubsub.googleapis.com\"\`. See
+-- [google.api.Service](https:\/\/cloud.google.com\/service-management\/reference\/rpc\/google.api#google.api.Service)
+-- for the definition of a service name.
 scServiceName :: Lens' ServicesCheck Text
 scServiceName
   = lens _scServiceName
@@ -183,10 +174,8 @@ instance GoogleRequest ServicesCheck where
                "https://www.googleapis.com/auth/servicecontrol"]
         requestClient ServicesCheck'{..}
           = go _scServiceName _scXgafv _scUploadProtocol
-              (Just _scPp)
               _scAccessToken
               _scUploadType
-              _scBearerToken
               _scCallback
               (Just AltJSON)
               _scPayload

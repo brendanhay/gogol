@@ -106,7 +106,10 @@ eviqReturnAllAvailableData
 
 -- | The unique ID of the election to look up. A list of election IDs can be
 -- obtained at
--- https:\/\/www.googleapis.com\/civicinfo\/{version}\/elections
+-- https:\/\/www.googleapis.com\/civicinfo\/{version}\/electionsIf no
+-- election ID is specified in the query and there is more than one
+-- election with data for the given voter, the additional elections are
+-- provided in the otherElections response field.
 eviqElectionId :: Lens' ElectionsVoterInfoQuery Int64
 eviqElectionId
   = lens _eviqElectionId

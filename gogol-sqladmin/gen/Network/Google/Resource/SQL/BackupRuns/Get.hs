@@ -22,7 +22,7 @@
 --
 -- Retrieves a resource containing information about a backup run.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.backupRuns.get@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.backupRuns.get@.
 module Network.Google.Resource.SQL.BackupRuns.Get
     (
     -- * REST Resource

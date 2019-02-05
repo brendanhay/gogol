@@ -68,7 +68,7 @@ authorizedUserToken :: (MonadIO m, MonadCatch m)
                     -> Manager
                     -> m (OAuthToken s)
 authorizedUserToken u r = refreshRequest $
-    accountsRequest
+    tokenRequest
         { Client.requestBody = textBody $
                "grant_type=refresh_token"
             <> "&client_id="     <> toQueryParam (_userId     u)
@@ -86,7 +86,7 @@ serviceAccountToken :: (MonadIO m, MonadCatch m, AllowScopes s)
                     -> m (OAuthToken s)
 serviceAccountToken s p l m = do
     b <- encodeBearerJWT s p
-    let rq = accountsRequest
+    let rq = tokenRequest
            { Client.requestBody = RequestBodyBS $
                   "grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer"
                <> "&assertion="
@@ -125,10 +125,10 @@ encodeBearerJWT s p = liftIO $ do
             , "kid" .= _serviceKeyId s
             ]
 
-        payload = base64Encode
-            [ "aud"   .= accountsURL
+        payload = base64Encode $
+            [ "aud"   .= tokenURL
             , "scope" .= concatScopes (allowScopes p)
             , "iat"   .= n
             , "exp"   .= (n + seconds maxTokenLifetime)
             , "iss"   .= _serviceEmail s
-            ]
+            ] <> maybe [] (\sub -> ["sub" .= sub]) (_serviceAccountUser s)

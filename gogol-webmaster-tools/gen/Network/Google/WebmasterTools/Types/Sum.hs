@@ -16,7 +16,7 @@
 --
 module Network.Google.WebmasterTools.Types.Sum where
 
-import           Network.Google.Prelude
+import           Network.Google.Prelude hiding (Bytes)
 
 -- | The crawl error category. For example: authPermissions
 data URLCrawlErrorsSamplesMarkAsFixedCategory

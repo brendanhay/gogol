@@ -24,27 +24,7 @@ import           Network.Google.Prelude
 -- a pair of doubles representing degrees latitude and degrees longitude.
 -- Unless specified otherwise, this must conform to the
 -- <http://www.unoosa.org/pdf/icg/2012/template/WGS_84.pdf WGS84 standard>.
--- Values must be within normalized ranges. Example of normalization code
--- in Python: def NormalizeLongitude(longitude): \"\"\"Wraps decimal
--- degrees longitude to [-180.0, 180.0].\"\"\" q, r = divmod(longitude,
--- 360.0) if r > 180.0 or (r == 180.0 and q \<= -1.0): return r - 360.0
--- return r def NormalizeLatLng(latitude, longitude): \"\"\"Wraps decimal
--- degrees latitude and longitude to [-90.0, 90.0] and [-180.0, 180.0],
--- respectively.\"\"\" r = latitude % 360.0 if r \<= 90.0: return r,
--- NormalizeLongitude(longitude) elif r >= 270.0: return r - 360,
--- NormalizeLongitude(longitude) else: return 180 - r,
--- NormalizeLongitude(longitude + 180.0) assert 180.0 ==
--- NormalizeLongitude(180.0) assert -180.0 == NormalizeLongitude(-180.0)
--- assert -179.0 == NormalizeLongitude(181.0) assert (0.0, 0.0) ==
--- NormalizeLatLng(360.0, 0.0) assert (0.0, 0.0) == NormalizeLatLng(-360.0,
--- 0.0) assert (85.0, 180.0) == NormalizeLatLng(95.0, 0.0) assert (-85.0,
--- -170.0) == NormalizeLatLng(-95.0, 10.0) assert (90.0, 10.0) ==
--- NormalizeLatLng(90.0, 10.0) assert (-90.0, -10.0) ==
--- NormalizeLatLng(-90.0, -10.0) assert (0.0, -170.0) ==
--- NormalizeLatLng(-180.0, 10.0) assert (0.0, -170.0) ==
--- NormalizeLatLng(180.0, 10.0) assert (-90.0, 10.0) ==
--- NormalizeLatLng(270.0, 10.0) assert (90.0, 10.0) ==
--- NormalizeLatLng(-270.0, 10.0)
+-- Values must be within normalized ranges.
 --
 -- /See:/ 'latLng' smart constructor.
 data LatLng = LatLng'
@@ -93,11 +73,284 @@ instance ToJSON LatLng where
                  [("latitude" .=) <$> _llLatitude,
                   ("longitude" .=) <$> _llLongitude])
 
+-- | Options for beginning a new transaction. Transactions can be created
+-- explicitly with calls to Datastore.BeginTransaction or implicitly by
+-- setting ReadOptions.new_transaction in read requests.
+--
+-- /See:/ 'transactionOptions' smart constructor.
+data TransactionOptions = TransactionOptions'
+    { _toReadWrite :: !(Maybe ReadWrite)
+    , _toReadOnly  :: !(Maybe ReadOnly)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TransactionOptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'toReadWrite'
+--
+-- * 'toReadOnly'
+transactionOptions
+    :: TransactionOptions
+transactionOptions =
+    TransactionOptions'
+    { _toReadWrite = Nothing
+    , _toReadOnly = Nothing
+    }
+
+-- | The transaction should allow both reads and writes.
+toReadWrite :: Lens' TransactionOptions (Maybe ReadWrite)
+toReadWrite
+  = lens _toReadWrite (\ s a -> s{_toReadWrite = a})
+
+-- | The transaction should only allow reads.
+toReadOnly :: Lens' TransactionOptions (Maybe ReadOnly)
+toReadOnly
+  = lens _toReadOnly (\ s a -> s{_toReadOnly = a})
+
+instance FromJSON TransactionOptions where
+        parseJSON
+          = withObject "TransactionOptions"
+              (\ o ->
+                 TransactionOptions' <$>
+                   (o .:? "readWrite") <*> (o .:? "readOnly"))
+
+instance ToJSON TransactionOptions where
+        toJSON TransactionOptions'{..}
+          = object
+              (catMaybes
+                 [("readWrite" .=) <$> _toReadWrite,
+                  ("readOnly" .=) <$> _toReadOnly])
+
+-- | The \`Status\` type defines a logical error model that is suitable for
+-- different programming environments, including REST APIs and RPC APIs. It
+-- is used by [gRPC](https:\/\/github.com\/grpc). The error model is
+-- designed to be: - Simple to use and understand for most users - Flexible
+-- enough to meet unexpected needs # Overview The \`Status\` message
+-- contains three pieces of data: error code, error message, and error
+-- details. The error code should be an enum value of google.rpc.Code, but
+-- it may accept additional error codes if needed. The error message should
+-- be a developer-facing English message that helps developers *understand*
+-- and *resolve* the error. If a localized user-facing error message is
+-- needed, put the localized message in the error details or localize it in
+-- the client. The optional error details may contain arbitrary information
+-- about the error. There is a predefined set of error detail types in the
+-- package \`google.rpc\` that can be used for common error conditions. #
+-- Language mapping The \`Status\` message is the logical representation of
+-- the error model, but it is not necessarily the actual wire format. When
+-- the \`Status\` message is exposed in different client libraries and
+-- different wire protocols, it can be mapped differently. For example, it
+-- will likely be mapped to some exceptions in Java, but more likely mapped
+-- to some error codes in C. # Other uses The error model and the
+-- \`Status\` message can be used in a variety of environments, either with
+-- or without APIs, to provide a consistent developer experience across
+-- different environments. Example uses of this error model include: -
+-- Partial errors. If a service needs to return partial errors to the
+-- client, it may embed the \`Status\` in the normal response to indicate
+-- the partial errors. - Workflow errors. A typical workflow has multiple
+-- steps. Each step may have a \`Status\` message for error reporting. -
+-- Batch operations. If a client uses batch request and batch response, the
+-- \`Status\` message should be used directly inside batch response, one
+-- for each error sub-response. - Asynchronous operations. If an API call
+-- embeds asynchronous operation results in its response, the status of
+-- those operations should be represented directly using the \`Status\`
+-- message. - Logging. If some API errors are stored in logs, the message
+-- \`Status\` could be used directly after any stripping needed for
+-- security\/privacy reasons.
+--
+-- /See:/ 'status' smart constructor.
+data Status = Status'
+    { _sDetails :: !(Maybe [StatusDetailsItem])
+    , _sCode    :: !(Maybe (Textual Int32))
+    , _sMessage :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Status' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sDetails'
+--
+-- * 'sCode'
+--
+-- * 'sMessage'
+status
+    :: Status
+status =
+    Status'
+    { _sDetails = Nothing
+    , _sCode = Nothing
+    , _sMessage = Nothing
+    }
+
+-- | A list of messages that carry the error details. There is a common set
+-- of message types for APIs to use.
+sDetails :: Lens' Status [StatusDetailsItem]
+sDetails
+  = lens _sDetails (\ s a -> s{_sDetails = a}) .
+      _Default
+      . _Coerce
+
+-- | The status code, which should be an enum value of google.rpc.Code.
+sCode :: Lens' Status (Maybe Int32)
+sCode
+  = lens _sCode (\ s a -> s{_sCode = a}) .
+      mapping _Coerce
+
+-- | A developer-facing error message, which should be in English. Any
+-- user-facing error message should be localized and sent in the
+-- google.rpc.Status.details field, or localized by the client.
+sMessage :: Lens' Status (Maybe Text)
+sMessage = lens _sMessage (\ s a -> s{_sMessage = a})
+
+instance FromJSON Status where
+        parseJSON
+          = withObject "Status"
+              (\ o ->
+                 Status' <$>
+                   (o .:? "details" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON Status where
+        toJSON Status'{..}
+          = object
+              (catMaybes
+                 [("details" .=) <$> _sDetails,
+                  ("code" .=) <$> _sCode,
+                  ("message" .=) <$> _sMessage])
+
+-- | Service-specific metadata associated with the operation. It typically
+-- contains progress information and common metadata such as create time.
+-- Some services might not provide such metadata. Any method that returns a
+-- long-running operation should document the metadata type, if any.
+--
+-- /See:/ 'googleLongrunningOperationMetadata' smart constructor.
+newtype GoogleLongrunningOperationMetadata = GoogleLongrunningOperationMetadata'
+    { _glomAddtional :: HashMap Text JSONValue
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GoogleLongrunningOperationMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'glomAddtional'
+googleLongrunningOperationMetadata
+    :: HashMap Text JSONValue -- ^ 'glomAddtional'
+    -> GoogleLongrunningOperationMetadata
+googleLongrunningOperationMetadata pGlomAddtional_ =
+    GoogleLongrunningOperationMetadata'
+    { _glomAddtional = _Coerce # pGlomAddtional_
+    }
+
+-- | Properties of the object. Contains field \'type with type URL.
+glomAddtional :: Lens' GoogleLongrunningOperationMetadata (HashMap Text JSONValue)
+glomAddtional
+  = lens _glomAddtional
+      (\ s a -> s{_glomAddtional = a})
+      . _Coerce
+
+instance FromJSON GoogleLongrunningOperationMetadata
+         where
+        parseJSON
+          = withObject "GoogleLongrunningOperationMetadata"
+              (\ o ->
+                 GoogleLongrunningOperationMetadata' <$>
+                   (parseJSONObject o))
+
+instance ToJSON GoogleLongrunningOperationMetadata
+         where
+        toJSON = toJSON . _glomAddtional
+
+-- | Options specific to read \/ write transactions.
+--
+-- /See:/ 'readWrite' smart constructor.
+newtype ReadWrite = ReadWrite'
+    { _rwPreviousTransaction :: Maybe Bytes
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ReadWrite' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rwPreviousTransaction'
+readWrite
+    :: ReadWrite
+readWrite =
+    ReadWrite'
+    { _rwPreviousTransaction = Nothing
+    }
+
+-- | The transaction identifier of the transaction being retried.
+rwPreviousTransaction :: Lens' ReadWrite (Maybe ByteString)
+rwPreviousTransaction
+  = lens _rwPreviousTransaction
+      (\ s a -> s{_rwPreviousTransaction = a})
+      . mapping _Bytes
+
+instance FromJSON ReadWrite where
+        parseJSON
+          = withObject "ReadWrite"
+              (\ o -> ReadWrite' <$> (o .:? "previousTransaction"))
+
+instance ToJSON ReadWrite where
+        toJSON ReadWrite'{..}
+          = object
+              (catMaybes
+                 [("previousTransaction" .=) <$>
+                    _rwPreviousTransaction])
+
+-- | The response for
+-- google.datastore.admin.v1beta1.DatastoreAdmin.ExportEntities.
+--
+-- /See:/ 'googleDatastoreAdminV1beta1ExportEntitiesResponse' smart constructor.
+newtype GoogleDatastoreAdminV1beta1ExportEntitiesResponse = GoogleDatastoreAdminV1beta1ExportEntitiesResponse'
+    { _gdaveerOutputURL :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GoogleDatastoreAdminV1beta1ExportEntitiesResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gdaveerOutputURL'
+googleDatastoreAdminV1beta1ExportEntitiesResponse
+    :: GoogleDatastoreAdminV1beta1ExportEntitiesResponse
+googleDatastoreAdminV1beta1ExportEntitiesResponse =
+    GoogleDatastoreAdminV1beta1ExportEntitiesResponse'
+    { _gdaveerOutputURL = Nothing
+    }
+
+-- | Location of the output metadata file. This can be used to begin an
+-- import into Cloud Datastore (this project or another project). See
+-- google.datastore.admin.v1beta1.ImportEntitiesRequest.input_url. Only
+-- present if the operation completed successfully.
+gdaveerOutputURL :: Lens' GoogleDatastoreAdminV1beta1ExportEntitiesResponse (Maybe Text)
+gdaveerOutputURL
+  = lens _gdaveerOutputURL
+      (\ s a -> s{_gdaveerOutputURL = a})
+
+instance FromJSON
+         GoogleDatastoreAdminV1beta1ExportEntitiesResponse
+         where
+        parseJSON
+          = withObject
+              "GoogleDatastoreAdminV1beta1ExportEntitiesResponse"
+              (\ o ->
+                 GoogleDatastoreAdminV1beta1ExportEntitiesResponse'
+                   <$> (o .:? "outputUrl"))
+
+instance ToJSON
+         GoogleDatastoreAdminV1beta1ExportEntitiesResponse
+         where
+        toJSON
+          GoogleDatastoreAdminV1beta1ExportEntitiesResponse'{..}
+          = object
+              (catMaybes [("outputUrl" .=) <$> _gdaveerOutputURL])
+
 -- | The request for Datastore.Rollback.
 --
 -- /See:/ 'rollbackRequest' smart constructor.
 newtype RollbackRequest = RollbackRequest'
-    { _rrTransaction :: Maybe Base64
+    { _rrTransaction :: Maybe Bytes
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RollbackRequest' with the minimum fields required to make a request.
@@ -118,7 +371,7 @@ rrTransaction :: Lens' RollbackRequest (Maybe ByteString)
 rrTransaction
   = lens _rrTransaction
       (\ s a -> s{_rrTransaction = a})
-      . mapping _Base64
+      . mapping _Bytes
 
 instance FromJSON RollbackRequest where
         parseJSON
@@ -129,6 +382,56 @@ instance ToJSON RollbackRequest where
         toJSON RollbackRequest'{..}
           = object
               (catMaybes [("transaction" .=) <$> _rrTransaction])
+
+-- | The request for Datastore.ReserveIds.
+--
+-- /See:/ 'reserveIdsRequest' smart constructor.
+data ReserveIdsRequest = ReserveIdsRequest'
+    { _rirKeys       :: !(Maybe [Key])
+    , _rirDatabaseId :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ReserveIdsRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rirKeys'
+--
+-- * 'rirDatabaseId'
+reserveIdsRequest
+    :: ReserveIdsRequest
+reserveIdsRequest =
+    ReserveIdsRequest'
+    { _rirKeys = Nothing
+    , _rirDatabaseId = Nothing
+    }
+
+-- | A list of keys with complete key paths whose numeric IDs should not be
+-- auto-allocated.
+rirKeys :: Lens' ReserveIdsRequest [Key]
+rirKeys
+  = lens _rirKeys (\ s a -> s{_rirKeys = a}) . _Default
+      . _Coerce
+
+-- | If not empty, the ID of the database against which to make the request.
+rirDatabaseId :: Lens' ReserveIdsRequest (Maybe Text)
+rirDatabaseId
+  = lens _rirDatabaseId
+      (\ s a -> s{_rirDatabaseId = a})
+
+instance FromJSON ReserveIdsRequest where
+        parseJSON
+          = withObject "ReserveIdsRequest"
+              (\ o ->
+                 ReserveIdsRequest' <$>
+                   (o .:? "keys" .!= mempty) <*> (o .:? "databaseId"))
+
+instance ToJSON ReserveIdsRequest where
+        toJSON ReserveIdsRequest'{..}
+          = object
+              (catMaybes
+                 [("keys" .=) <$> _rirKeys,
+                  ("databaseId" .=) <$> _rirDatabaseId])
 
 -- | A partition ID identifies a grouping of entities. The grouping is always
 -- by project and namespace, however the namespace ID may be empty. A
@@ -188,17 +491,72 @@ instance ToJSON PartitionId where
                  [("namespaceId" .=) <$> _piNamespaceId,
                   ("projectId" .=) <$> _piProjectId])
 
+-- | The response for google.datastore.admin.v1.DatastoreAdmin.ListIndexes.
+--
+-- /See:/ 'googleDatastoreAdminV1ListIndexesResponse' smart constructor.
+data GoogleDatastoreAdminV1ListIndexesResponse = GoogleDatastoreAdminV1ListIndexesResponse'
+    { _gdavlirNextPageToken :: !(Maybe Text)
+    , _gdavlirIndexes       :: !(Maybe [GoogleDatastoreAdminV1Index])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GoogleDatastoreAdminV1ListIndexesResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gdavlirNextPageToken'
+--
+-- * 'gdavlirIndexes'
+googleDatastoreAdminV1ListIndexesResponse
+    :: GoogleDatastoreAdminV1ListIndexesResponse
+googleDatastoreAdminV1ListIndexesResponse =
+    GoogleDatastoreAdminV1ListIndexesResponse'
+    { _gdavlirNextPageToken = Nothing
+    , _gdavlirIndexes = Nothing
+    }
+
+-- | The standard List next-page token.
+gdavlirNextPageToken :: Lens' GoogleDatastoreAdminV1ListIndexesResponse (Maybe Text)
+gdavlirNextPageToken
+  = lens _gdavlirNextPageToken
+      (\ s a -> s{_gdavlirNextPageToken = a})
+
+-- | The indexes.
+gdavlirIndexes :: Lens' GoogleDatastoreAdminV1ListIndexesResponse [GoogleDatastoreAdminV1Index]
+gdavlirIndexes
+  = lens _gdavlirIndexes
+      (\ s a -> s{_gdavlirIndexes = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON
+         GoogleDatastoreAdminV1ListIndexesResponse where
+        parseJSON
+          = withObject
+              "GoogleDatastoreAdminV1ListIndexesResponse"
+              (\ o ->
+                 GoogleDatastoreAdminV1ListIndexesResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "indexes" .!= mempty))
+
+instance ToJSON
+         GoogleDatastoreAdminV1ListIndexesResponse where
+        toJSON GoogleDatastoreAdminV1ListIndexesResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _gdavlirNextPageToken,
+                  ("indexes" .=) <$> _gdavlirIndexes])
+
 -- | A batch of results produced by a query.
 --
 -- /See:/ 'queryResultBatch' smart constructor.
 data QueryResultBatch = QueryResultBatch'
     { _qrbSkippedResults   :: !(Maybe (Textual Int32))
-    , _qrbSkippedCursor    :: !(Maybe Base64)
+    , _qrbSkippedCursor    :: !(Maybe Bytes)
     , _qrbEntityResultType :: !(Maybe QueryResultBatchEntityResultType)
     , _qrbSnapshotVersion  :: !(Maybe (Textual Int64))
     , _qrbEntityResults    :: !(Maybe [EntityResult])
     , _qrbMoreResults      :: !(Maybe QueryResultBatchMoreResults)
-    , _qrbEndCursor        :: !(Maybe Base64)
+    , _qrbEndCursor        :: !(Maybe Bytes)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QueryResultBatch' with the minimum fields required to make a request.
@@ -244,7 +602,7 @@ qrbSkippedCursor :: Lens' QueryResultBatch (Maybe ByteString)
 qrbSkippedCursor
   = lens _qrbSkippedCursor
       (\ s a -> s{_qrbSkippedCursor = a})
-      . mapping _Base64
+      . mapping _Bytes
 
 -- | The result type for every entity in \`entity_results\`.
 qrbEntityResultType :: Lens' QueryResultBatch (Maybe QueryResultBatchEntityResultType)
@@ -258,7 +616,8 @@ qrbEntityResultType
 -- \`end_cursor\` (not the query\'s \`end_cursor\`). In a single
 -- transaction, subsequent query result batches for the same query can have
 -- a greater snapshot version number. Each batch\'s snapshot version is
--- valid for all preceding batches.
+-- valid for all preceding batches. The value will be zero for eventually
+-- consistent queries.
 qrbSnapshotVersion :: Lens' QueryResultBatch (Maybe Int64)
 qrbSnapshotVersion
   = lens _qrbSnapshotVersion
@@ -283,7 +642,7 @@ qrbMoreResults
 qrbEndCursor :: Lens' QueryResultBatch (Maybe ByteString)
 qrbEndCursor
   = lens _qrbEndCursor (\ s a -> s{_qrbEndCursor = a})
-      . mapping _Base64
+      . mapping _Bytes
 
 instance FromJSON QueryResultBatch where
         parseJSON
@@ -345,26 +704,85 @@ instance FromJSON EntityProperties where
 instance ToJSON EntityProperties where
         toJSON = toJSON . _epAddtional
 
+-- | Client-assigned labels.
+--
+-- /See:/ 'googleDatastoreAdminV1ImportEntitiesRequestLabels' smart constructor.
+newtype GoogleDatastoreAdminV1ImportEntitiesRequestLabels = GoogleDatastoreAdminV1ImportEntitiesRequestLabels'
+    { _gdavierlAddtional :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GoogleDatastoreAdminV1ImportEntitiesRequestLabels' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gdavierlAddtional'
+googleDatastoreAdminV1ImportEntitiesRequestLabels
+    :: HashMap Text Text -- ^ 'gdavierlAddtional'
+    -> GoogleDatastoreAdminV1ImportEntitiesRequestLabels
+googleDatastoreAdminV1ImportEntitiesRequestLabels pGdavierlAddtional_ =
+    GoogleDatastoreAdminV1ImportEntitiesRequestLabels'
+    { _gdavierlAddtional = _Coerce # pGdavierlAddtional_
+    }
+
+gdavierlAddtional :: Lens' GoogleDatastoreAdminV1ImportEntitiesRequestLabels (HashMap Text Text)
+gdavierlAddtional
+  = lens _gdavierlAddtional
+      (\ s a -> s{_gdavierlAddtional = a})
+      . _Coerce
+
+instance FromJSON
+         GoogleDatastoreAdminV1ImportEntitiesRequestLabels
+         where
+        parseJSON
+          = withObject
+              "GoogleDatastoreAdminV1ImportEntitiesRequestLabels"
+              (\ o ->
+                 GoogleDatastoreAdminV1ImportEntitiesRequestLabels'
+                   <$> (parseJSONObject o))
+
+instance ToJSON
+         GoogleDatastoreAdminV1ImportEntitiesRequestLabels
+         where
+        toJSON = toJSON . _gdavierlAddtional
+
 -- | The request for Datastore.BeginTransaction.
 --
 -- /See:/ 'beginTransactionRequest' smart constructor.
-data BeginTransactionRequest =
-    BeginTransactionRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype BeginTransactionRequest = BeginTransactionRequest'
+    { _btrTransactionOptions :: Maybe TransactionOptions
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeginTransactionRequest' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'btrTransactionOptions'
 beginTransactionRequest
     :: BeginTransactionRequest
-beginTransactionRequest = BeginTransactionRequest'
+beginTransactionRequest =
+    BeginTransactionRequest'
+    { _btrTransactionOptions = Nothing
+    }
+
+-- | Options for a new transaction.
+btrTransactionOptions :: Lens' BeginTransactionRequest (Maybe TransactionOptions)
+btrTransactionOptions
+  = lens _btrTransactionOptions
+      (\ s a -> s{_btrTransactionOptions = a})
 
 instance FromJSON BeginTransactionRequest where
         parseJSON
           = withObject "BeginTransactionRequest"
-              (\ o -> pure BeginTransactionRequest')
+              (\ o ->
+                 BeginTransactionRequest' <$>
+                   (o .:? "transactionOptions"))
 
 instance ToJSON BeginTransactionRequest where
-        toJSON = const emptyObject
+        toJSON BeginTransactionRequest'{..}
+          = object
+              (catMaybes
+                 [("transactionOptions" .=) <$>
+                    _btrTransactionOptions])
 
 -- | The request for Datastore.RunQuery.
 --
@@ -474,6 +892,212 @@ instance ToJSON AllocateIdsRequest where
         toJSON AllocateIdsRequest'{..}
           = object (catMaybes [("keys" .=) <$> _airKeys])
 
+-- | Metadata for ExportEntities operations.
+--
+-- /See:/ 'googleDatastoreAdminV1ExportEntitiesMetadata' smart constructor.
+data GoogleDatastoreAdminV1ExportEntitiesMetadata = GoogleDatastoreAdminV1ExportEntitiesMetadata'
+    { _gdaveemProgressBytes    :: !(Maybe GoogleDatastoreAdminV1Progress)
+    , _gdaveemOutputURLPrefix  :: !(Maybe Text)
+    , _gdaveemProgressEntities :: !(Maybe GoogleDatastoreAdminV1Progress)
+    , _gdaveemEntityFilter     :: !(Maybe GoogleDatastoreAdminV1EntityFilter)
+    , _gdaveemCommon           :: !(Maybe GoogleDatastoreAdminV1CommonMetadata)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GoogleDatastoreAdminV1ExportEntitiesMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gdaveemProgressBytes'
+--
+-- * 'gdaveemOutputURLPrefix'
+--
+-- * 'gdaveemProgressEntities'
+--
+-- * 'gdaveemEntityFilter'
+--
+-- * 'gdaveemCommon'
+googleDatastoreAdminV1ExportEntitiesMetadata
+    :: GoogleDatastoreAdminV1ExportEntitiesMetadata
+googleDatastoreAdminV1ExportEntitiesMetadata =
+    GoogleDatastoreAdminV1ExportEntitiesMetadata'
+    { _gdaveemProgressBytes = Nothing
+    , _gdaveemOutputURLPrefix = Nothing
+    , _gdaveemProgressEntities = Nothing
+    , _gdaveemEntityFilter = Nothing
+    , _gdaveemCommon = Nothing
+    }
+
+-- | An estimate of the number of bytes processed.
+gdaveemProgressBytes :: Lens' GoogleDatastoreAdminV1ExportEntitiesMetadata (Maybe GoogleDatastoreAdminV1Progress)
+gdaveemProgressBytes
+  = lens _gdaveemProgressBytes
+      (\ s a -> s{_gdaveemProgressBytes = a})
+
+-- | Location for the export metadata and data files. This will be the same
+-- value as the
+-- google.datastore.admin.v1.ExportEntitiesRequest.output_url_prefix field.
+-- The final output location is provided in
+-- google.datastore.admin.v1.ExportEntitiesResponse.output_url.
+gdaveemOutputURLPrefix :: Lens' GoogleDatastoreAdminV1ExportEntitiesMetadata (Maybe Text)
+gdaveemOutputURLPrefix
+  = lens _gdaveemOutputURLPrefix
+      (\ s a -> s{_gdaveemOutputURLPrefix = a})
+
+-- | An estimate of the number of entities processed.
+gdaveemProgressEntities :: Lens' GoogleDatastoreAdminV1ExportEntitiesMetadata (Maybe GoogleDatastoreAdminV1Progress)
+gdaveemProgressEntities
+  = lens _gdaveemProgressEntities
+      (\ s a -> s{_gdaveemProgressEntities = a})
+
+-- | Description of which entities are being exported.
+gdaveemEntityFilter :: Lens' GoogleDatastoreAdminV1ExportEntitiesMetadata (Maybe GoogleDatastoreAdminV1EntityFilter)
+gdaveemEntityFilter
+  = lens _gdaveemEntityFilter
+      (\ s a -> s{_gdaveemEntityFilter = a})
+
+-- | Metadata common to all Datastore Admin operations.
+gdaveemCommon :: Lens' GoogleDatastoreAdminV1ExportEntitiesMetadata (Maybe GoogleDatastoreAdminV1CommonMetadata)
+gdaveemCommon
+  = lens _gdaveemCommon
+      (\ s a -> s{_gdaveemCommon = a})
+
+instance FromJSON
+         GoogleDatastoreAdminV1ExportEntitiesMetadata where
+        parseJSON
+          = withObject
+              "GoogleDatastoreAdminV1ExportEntitiesMetadata"
+              (\ o ->
+                 GoogleDatastoreAdminV1ExportEntitiesMetadata' <$>
+                   (o .:? "progressBytes") <*> (o .:? "outputUrlPrefix")
+                     <*> (o .:? "progressEntities")
+                     <*> (o .:? "entityFilter")
+                     <*> (o .:? "common"))
+
+instance ToJSON
+         GoogleDatastoreAdminV1ExportEntitiesMetadata where
+        toJSON
+          GoogleDatastoreAdminV1ExportEntitiesMetadata'{..}
+          = object
+              (catMaybes
+                 [("progressBytes" .=) <$> _gdaveemProgressBytes,
+                  ("outputUrlPrefix" .=) <$> _gdaveemOutputURLPrefix,
+                  ("progressEntities" .=) <$> _gdaveemProgressEntities,
+                  ("entityFilter" .=) <$> _gdaveemEntityFilter,
+                  ("common" .=) <$> _gdaveemCommon])
+
+-- | Metadata common to all Datastore Admin operations.
+--
+-- /See:/ 'googleDatastoreAdminV1beta1CommonMetadata' smart constructor.
+data GoogleDatastoreAdminV1beta1CommonMetadata = GoogleDatastoreAdminV1beta1CommonMetadata'
+    { _gdavcmState         :: !(Maybe GoogleDatastoreAdminV1beta1CommonMetadataState)
+    , _gdavcmStartTime     :: !(Maybe DateTime')
+    , _gdavcmEndTime       :: !(Maybe DateTime')
+    , _gdavcmLabels        :: !(Maybe GoogleDatastoreAdminV1beta1CommonMetadataLabels)
+    , _gdavcmOperationType :: !(Maybe GoogleDatastoreAdminV1beta1CommonMetadataOperationType)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GoogleDatastoreAdminV1beta1CommonMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gdavcmState'
+--
+-- * 'gdavcmStartTime'
+--
+-- * 'gdavcmEndTime'
+--
+-- * 'gdavcmLabels'
+--
+-- * 'gdavcmOperationType'
+googleDatastoreAdminV1beta1CommonMetadata
+    :: GoogleDatastoreAdminV1beta1CommonMetadata
+googleDatastoreAdminV1beta1CommonMetadata =
+    GoogleDatastoreAdminV1beta1CommonMetadata'
+    { _gdavcmState = Nothing
+    , _gdavcmStartTime = Nothing
+    , _gdavcmEndTime = Nothing
+    , _gdavcmLabels = Nothing
+    , _gdavcmOperationType = Nothing
+    }
+
+-- | The current state of the Operation.
+gdavcmState :: Lens' GoogleDatastoreAdminV1beta1CommonMetadata (Maybe GoogleDatastoreAdminV1beta1CommonMetadataState)
+gdavcmState
+  = lens _gdavcmState (\ s a -> s{_gdavcmState = a})
+
+-- | The time that work began on the operation.
+gdavcmStartTime :: Lens' GoogleDatastoreAdminV1beta1CommonMetadata (Maybe UTCTime)
+gdavcmStartTime
+  = lens _gdavcmStartTime
+      (\ s a -> s{_gdavcmStartTime = a})
+      . mapping _DateTime
+
+-- | The time the operation ended, either successfully or otherwise.
+gdavcmEndTime :: Lens' GoogleDatastoreAdminV1beta1CommonMetadata (Maybe UTCTime)
+gdavcmEndTime
+  = lens _gdavcmEndTime
+      (\ s a -> s{_gdavcmEndTime = a})
+      . mapping _DateTime
+
+-- | The client-assigned labels which were provided when the operation was
+-- created. May also include additional labels.
+gdavcmLabels :: Lens' GoogleDatastoreAdminV1beta1CommonMetadata (Maybe GoogleDatastoreAdminV1beta1CommonMetadataLabels)
+gdavcmLabels
+  = lens _gdavcmLabels (\ s a -> s{_gdavcmLabels = a})
+
+-- | The type of the operation. Can be used as a filter in
+-- ListOperationsRequest.
+gdavcmOperationType :: Lens' GoogleDatastoreAdminV1beta1CommonMetadata (Maybe GoogleDatastoreAdminV1beta1CommonMetadataOperationType)
+gdavcmOperationType
+  = lens _gdavcmOperationType
+      (\ s a -> s{_gdavcmOperationType = a})
+
+instance FromJSON
+         GoogleDatastoreAdminV1beta1CommonMetadata where
+        parseJSON
+          = withObject
+              "GoogleDatastoreAdminV1beta1CommonMetadata"
+              (\ o ->
+                 GoogleDatastoreAdminV1beta1CommonMetadata' <$>
+                   (o .:? "state") <*> (o .:? "startTime") <*>
+                     (o .:? "endTime")
+                     <*> (o .:? "labels")
+                     <*> (o .:? "operationType"))
+
+instance ToJSON
+         GoogleDatastoreAdminV1beta1CommonMetadata where
+        toJSON GoogleDatastoreAdminV1beta1CommonMetadata'{..}
+          = object
+              (catMaybes
+                 [("state" .=) <$> _gdavcmState,
+                  ("startTime" .=) <$> _gdavcmStartTime,
+                  ("endTime" .=) <$> _gdavcmEndTime,
+                  ("labels" .=) <$> _gdavcmLabels,
+                  ("operationType" .=) <$> _gdavcmOperationType])
+
+-- | A generic empty message that you can re-use to avoid defining duplicated
+-- empty messages in your APIs. A typical example is to use it as the
+-- request or the response type of an API method. For instance: service Foo
+-- { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The
+-- JSON representation for \`Empty\` is empty JSON object \`{}\`.
+--
+-- /See:/ 'empty' smart constructor.
+data Empty =
+    Empty'
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Empty' with the minimum fields required to make a request.
+--
+empty
+    :: Empty
+empty = Empty'
+
+instance FromJSON Empty where
+        parseJSON = withObject "Empty" (\ o -> pure Empty')
+
+instance ToJSON Empty where
+        toJSON = const emptyObject
+
 -- | A filter that merges multiple other filters using the given operator.
 --
 -- /See:/ 'compositeFilter' smart constructor.
@@ -521,11 +1145,227 @@ instance ToJSON CompositeFilter where
               (catMaybes
                  [("op" .=) <$> _cfOp, ("filters" .=) <$> _cfFilters])
 
+-- | Metadata for Index operations.
+--
+-- /See:/ 'googleDatastoreAdminV1IndexOperationMetadata' smart constructor.
+data GoogleDatastoreAdminV1IndexOperationMetadata = GoogleDatastoreAdminV1IndexOperationMetadata'
+    { _gdaviomProgressEntities :: !(Maybe GoogleDatastoreAdminV1Progress)
+    , _gdaviomCommon           :: !(Maybe GoogleDatastoreAdminV1CommonMetadata)
+    , _gdaviomIndexId          :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GoogleDatastoreAdminV1IndexOperationMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gdaviomProgressEntities'
+--
+-- * 'gdaviomCommon'
+--
+-- * 'gdaviomIndexId'
+googleDatastoreAdminV1IndexOperationMetadata
+    :: GoogleDatastoreAdminV1IndexOperationMetadata
+googleDatastoreAdminV1IndexOperationMetadata =
+    GoogleDatastoreAdminV1IndexOperationMetadata'
+    { _gdaviomProgressEntities = Nothing
+    , _gdaviomCommon = Nothing
+    , _gdaviomIndexId = Nothing
+    }
+
+-- | An estimate of the number of entities processed.
+gdaviomProgressEntities :: Lens' GoogleDatastoreAdminV1IndexOperationMetadata (Maybe GoogleDatastoreAdminV1Progress)
+gdaviomProgressEntities
+  = lens _gdaviomProgressEntities
+      (\ s a -> s{_gdaviomProgressEntities = a})
+
+-- | Metadata common to all Datastore Admin operations.
+gdaviomCommon :: Lens' GoogleDatastoreAdminV1IndexOperationMetadata (Maybe GoogleDatastoreAdminV1CommonMetadata)
+gdaviomCommon
+  = lens _gdaviomCommon
+      (\ s a -> s{_gdaviomCommon = a})
+
+-- | The index resource ID that this operation is acting on.
+gdaviomIndexId :: Lens' GoogleDatastoreAdminV1IndexOperationMetadata (Maybe Text)
+gdaviomIndexId
+  = lens _gdaviomIndexId
+      (\ s a -> s{_gdaviomIndexId = a})
+
+instance FromJSON
+         GoogleDatastoreAdminV1IndexOperationMetadata where
+        parseJSON
+          = withObject
+              "GoogleDatastoreAdminV1IndexOperationMetadata"
+              (\ o ->
+                 GoogleDatastoreAdminV1IndexOperationMetadata' <$>
+                   (o .:? "progressEntities") <*> (o .:? "common") <*>
+                     (o .:? "indexId"))
+
+instance ToJSON
+         GoogleDatastoreAdminV1IndexOperationMetadata where
+        toJSON
+          GoogleDatastoreAdminV1IndexOperationMetadata'{..}
+          = object
+              (catMaybes
+                 [("progressEntities" .=) <$>
+                    _gdaviomProgressEntities,
+                  ("common" .=) <$> _gdaviomCommon,
+                  ("indexId" .=) <$> _gdaviomIndexId])
+
+-- | Metadata for ImportEntities operations.
+--
+-- /See:/ 'googleDatastoreAdminV1beta1ImportEntitiesMetadata' smart constructor.
+data GoogleDatastoreAdminV1beta1ImportEntitiesMetadata = GoogleDatastoreAdminV1beta1ImportEntitiesMetadata'
+    { _gdaviemProgressBytes    :: !(Maybe GoogleDatastoreAdminV1beta1Progress)
+    , _gdaviemProgressEntities :: !(Maybe GoogleDatastoreAdminV1beta1Progress)
+    , _gdaviemEntityFilter     :: !(Maybe GoogleDatastoreAdminV1beta1EntityFilter)
+    , _gdaviemInputURL         :: !(Maybe Text)
+    , _gdaviemCommon           :: !(Maybe GoogleDatastoreAdminV1beta1CommonMetadata)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GoogleDatastoreAdminV1beta1ImportEntitiesMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gdaviemProgressBytes'
+--
+-- * 'gdaviemProgressEntities'
+--
+-- * 'gdaviemEntityFilter'
+--
+-- * 'gdaviemInputURL'
+--
+-- * 'gdaviemCommon'
+googleDatastoreAdminV1beta1ImportEntitiesMetadata
+    :: GoogleDatastoreAdminV1beta1ImportEntitiesMetadata
+googleDatastoreAdminV1beta1ImportEntitiesMetadata =
+    GoogleDatastoreAdminV1beta1ImportEntitiesMetadata'
+    { _gdaviemProgressBytes = Nothing
+    , _gdaviemProgressEntities = Nothing
+    , _gdaviemEntityFilter = Nothing
+    , _gdaviemInputURL = Nothing
+    , _gdaviemCommon = Nothing
+    }
+
+-- | An estimate of the number of bytes processed.
+gdaviemProgressBytes :: Lens' GoogleDatastoreAdminV1beta1ImportEntitiesMetadata (Maybe GoogleDatastoreAdminV1beta1Progress)
+gdaviemProgressBytes
+  = lens _gdaviemProgressBytes
+      (\ s a -> s{_gdaviemProgressBytes = a})
+
+-- | An estimate of the number of entities processed.
+gdaviemProgressEntities :: Lens' GoogleDatastoreAdminV1beta1ImportEntitiesMetadata (Maybe GoogleDatastoreAdminV1beta1Progress)
+gdaviemProgressEntities
+  = lens _gdaviemProgressEntities
+      (\ s a -> s{_gdaviemProgressEntities = a})
+
+-- | Description of which entities are being imported.
+gdaviemEntityFilter :: Lens' GoogleDatastoreAdminV1beta1ImportEntitiesMetadata (Maybe GoogleDatastoreAdminV1beta1EntityFilter)
+gdaviemEntityFilter
+  = lens _gdaviemEntityFilter
+      (\ s a -> s{_gdaviemEntityFilter = a})
+
+-- | The location of the import metadata file. This will be the same value as
+-- the google.datastore.admin.v1beta1.ExportEntitiesResponse.output_url
+-- field.
+gdaviemInputURL :: Lens' GoogleDatastoreAdminV1beta1ImportEntitiesMetadata (Maybe Text)
+gdaviemInputURL
+  = lens _gdaviemInputURL
+      (\ s a -> s{_gdaviemInputURL = a})
+
+-- | Metadata common to all Datastore Admin operations.
+gdaviemCommon :: Lens' GoogleDatastoreAdminV1beta1ImportEntitiesMetadata (Maybe GoogleDatastoreAdminV1beta1CommonMetadata)
+gdaviemCommon
+  = lens _gdaviemCommon
+      (\ s a -> s{_gdaviemCommon = a})
+
+instance FromJSON
+         GoogleDatastoreAdminV1beta1ImportEntitiesMetadata
+         where
+        parseJSON
+          = withObject
+              "GoogleDatastoreAdminV1beta1ImportEntitiesMetadata"
+              (\ o ->
+                 GoogleDatastoreAdminV1beta1ImportEntitiesMetadata'
+                   <$>
+                   (o .:? "progressBytes") <*>
+                     (o .:? "progressEntities")
+                     <*> (o .:? "entityFilter")
+                     <*> (o .:? "inputUrl")
+                     <*> (o .:? "common"))
+
+instance ToJSON
+         GoogleDatastoreAdminV1beta1ImportEntitiesMetadata
+         where
+        toJSON
+          GoogleDatastoreAdminV1beta1ImportEntitiesMetadata'{..}
+          = object
+              (catMaybes
+                 [("progressBytes" .=) <$> _gdaviemProgressBytes,
+                  ("progressEntities" .=) <$> _gdaviemProgressEntities,
+                  ("entityFilter" .=) <$> _gdaviemEntityFilter,
+                  ("inputUrl" .=) <$> _gdaviemInputURL,
+                  ("common" .=) <$> _gdaviemCommon])
+
+-- | Measures the progress of a particular metric.
+--
+-- /See:/ 'googleDatastoreAdminV1beta1Progress' smart constructor.
+data GoogleDatastoreAdminV1beta1Progress = GoogleDatastoreAdminV1beta1Progress'
+    { _gdavpWorkCompleted :: !(Maybe (Textual Int64))
+    , _gdavpWorkEstimated :: !(Maybe (Textual Int64))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GoogleDatastoreAdminV1beta1Progress' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gdavpWorkCompleted'
+--
+-- * 'gdavpWorkEstimated'
+googleDatastoreAdminV1beta1Progress
+    :: GoogleDatastoreAdminV1beta1Progress
+googleDatastoreAdminV1beta1Progress =
+    GoogleDatastoreAdminV1beta1Progress'
+    { _gdavpWorkCompleted = Nothing
+    , _gdavpWorkEstimated = Nothing
+    }
+
+-- | The amount of work that has been completed. Note that this may be
+-- greater than work_estimated.
+gdavpWorkCompleted :: Lens' GoogleDatastoreAdminV1beta1Progress (Maybe Int64)
+gdavpWorkCompleted
+  = lens _gdavpWorkCompleted
+      (\ s a -> s{_gdavpWorkCompleted = a})
+      . mapping _Coerce
+
+-- | An estimate of how much work needs to be performed. May be zero if the
+-- work estimate is unavailable.
+gdavpWorkEstimated :: Lens' GoogleDatastoreAdminV1beta1Progress (Maybe Int64)
+gdavpWorkEstimated
+  = lens _gdavpWorkEstimated
+      (\ s a -> s{_gdavpWorkEstimated = a})
+      . mapping _Coerce
+
+instance FromJSON GoogleDatastoreAdminV1beta1Progress
+         where
+        parseJSON
+          = withObject "GoogleDatastoreAdminV1beta1Progress"
+              (\ o ->
+                 GoogleDatastoreAdminV1beta1Progress' <$>
+                   (o .:? "workCompleted") <*> (o .:? "workEstimated"))
+
+instance ToJSON GoogleDatastoreAdminV1beta1Progress
+         where
+        toJSON GoogleDatastoreAdminV1beta1Progress'{..}
+          = object
+              (catMaybes
+                 [("workCompleted" .=) <$> _gdavpWorkCompleted,
+                  ("workEstimated" .=) <$> _gdavpWorkEstimated])
+
 -- | The response for Datastore.BeginTransaction.
 --
 -- /See:/ 'beginTransactionResponse' smart constructor.
 newtype BeginTransactionResponse = BeginTransactionResponse'
-    { _btrTransaction :: Maybe Base64
+    { _btrTransaction :: Maybe Bytes
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeginTransactionResponse' with the minimum fields required to make a request.
@@ -545,7 +1385,7 @@ btrTransaction :: Lens' BeginTransactionResponse (Maybe ByteString)
 btrTransaction
   = lens _btrTransaction
       (\ s a -> s{_btrTransaction = a})
-      . mapping _Base64
+      . mapping _Bytes
 
 instance FromJSON BeginTransactionResponse where
         parseJSON
@@ -790,6 +1630,47 @@ instance ToJSON RunQueryResponse where
               (catMaybes
                  [("batch" .=) <$> _rBatch, ("query" .=) <$> _rQuery])
 
+-- | Client-assigned labels.
+--
+-- /See:/ 'googleDatastoreAdminV1ExportEntitiesRequestLabels' smart constructor.
+newtype GoogleDatastoreAdminV1ExportEntitiesRequestLabels = GoogleDatastoreAdminV1ExportEntitiesRequestLabels'
+    { _gdaveerlAddtional :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GoogleDatastoreAdminV1ExportEntitiesRequestLabels' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gdaveerlAddtional'
+googleDatastoreAdminV1ExportEntitiesRequestLabels
+    :: HashMap Text Text -- ^ 'gdaveerlAddtional'
+    -> GoogleDatastoreAdminV1ExportEntitiesRequestLabels
+googleDatastoreAdminV1ExportEntitiesRequestLabels pGdaveerlAddtional_ =
+    GoogleDatastoreAdminV1ExportEntitiesRequestLabels'
+    { _gdaveerlAddtional = _Coerce # pGdaveerlAddtional_
+    }
+
+gdaveerlAddtional :: Lens' GoogleDatastoreAdminV1ExportEntitiesRequestLabels (HashMap Text Text)
+gdaveerlAddtional
+  = lens _gdaveerlAddtional
+      (\ s a -> s{_gdaveerlAddtional = a})
+      . _Coerce
+
+instance FromJSON
+         GoogleDatastoreAdminV1ExportEntitiesRequestLabels
+         where
+        parseJSON
+          = withObject
+              "GoogleDatastoreAdminV1ExportEntitiesRequestLabels"
+              (\ o ->
+                 GoogleDatastoreAdminV1ExportEntitiesRequestLabels'
+                   <$> (parseJSONObject o))
+
+instance ToJSON
+         GoogleDatastoreAdminV1ExportEntitiesRequestLabels
+         where
+        toJSON = toJSON . _gdaveerlAddtional
+
 -- | A message that can hold any of the supported value types and associated
 -- metadata.
 --
@@ -807,7 +1688,7 @@ data Value = Value'
     , _vMeaning            :: !(Maybe (Textual Int32))
     , _vArrayValue         :: !(Maybe ArrayValue)
     , _vNullValue          :: !(Maybe ValueNullValue)
-    , _vBlobValue          :: !(Maybe Base64)
+    , _vBlobValue          :: !(Maybe Bytes)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Value' with the minimum fields required to make a request.
@@ -941,7 +1822,7 @@ vNullValue
 vBlobValue :: Lens' Value (Maybe ByteString)
 vBlobValue
   = lens _vBlobValue (\ s a -> s{_vBlobValue = a}) .
-      mapping _Base64
+      mapping _Bytes
 
 instance FromJSON Value where
         parseJSON
@@ -978,6 +1859,79 @@ instance ToJSON Value where
                   ("arrayValue" .=) <$> _vArrayValue,
                   ("nullValue" .=) <$> _vNullValue,
                   ("blobValue" .=) <$> _vBlobValue])
+
+-- | The client-assigned labels which were provided when the operation was
+-- created. May also include additional labels.
+--
+-- /See:/ 'googleDatastoreAdminV1CommonMetadataLabels' smart constructor.
+newtype GoogleDatastoreAdminV1CommonMetadataLabels = GoogleDatastoreAdminV1CommonMetadataLabels'
+    { _gdavcmlAddtional :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GoogleDatastoreAdminV1CommonMetadataLabels' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gdavcmlAddtional'
+googleDatastoreAdminV1CommonMetadataLabels
+    :: HashMap Text Text -- ^ 'gdavcmlAddtional'
+    -> GoogleDatastoreAdminV1CommonMetadataLabels
+googleDatastoreAdminV1CommonMetadataLabels pGdavcmlAddtional_ =
+    GoogleDatastoreAdminV1CommonMetadataLabels'
+    { _gdavcmlAddtional = _Coerce # pGdavcmlAddtional_
+    }
+
+gdavcmlAddtional :: Lens' GoogleDatastoreAdminV1CommonMetadataLabels (HashMap Text Text)
+gdavcmlAddtional
+  = lens _gdavcmlAddtional
+      (\ s a -> s{_gdavcmlAddtional = a})
+      . _Coerce
+
+instance FromJSON
+         GoogleDatastoreAdminV1CommonMetadataLabels where
+        parseJSON
+          = withObject
+              "GoogleDatastoreAdminV1CommonMetadataLabels"
+              (\ o ->
+                 GoogleDatastoreAdminV1CommonMetadataLabels' <$>
+                   (parseJSONObject o))
+
+instance ToJSON
+         GoogleDatastoreAdminV1CommonMetadataLabels where
+        toJSON = toJSON . _gdavcmlAddtional
+
+--
+-- /See:/ 'statusDetailsItem' smart constructor.
+newtype StatusDetailsItem = StatusDetailsItem'
+    { _sdiAddtional :: HashMap Text JSONValue
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sdiAddtional'
+statusDetailsItem
+    :: HashMap Text JSONValue -- ^ 'sdiAddtional'
+    -> StatusDetailsItem
+statusDetailsItem pSdiAddtional_ =
+    StatusDetailsItem'
+    { _sdiAddtional = _Coerce # pSdiAddtional_
+    }
+
+-- | Properties of the object. Contains field \'type with type URL.
+sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
+sdiAddtional
+  = lens _sdiAddtional (\ s a -> s{_sdiAddtional = a})
+      . _Coerce
+
+instance FromJSON StatusDetailsItem where
+        parseJSON
+          = withObject "StatusDetailsItem"
+              (\ o -> StatusDetailsItem' <$> (parseJSONObject o))
+
+instance ToJSON StatusDetailsItem where
+        toJSON = toJSON . _sdiAddtional
 
 -- | The request for Datastore.Lookup.
 --
@@ -1027,6 +1981,170 @@ instance ToJSON LookupRequest where
               (catMaybes
                  [("keys" .=) <$> _lrKeys,
                   ("readOptions" .=) <$> _lrReadOptions])
+
+-- | Metadata common to all Datastore Admin operations.
+--
+-- /See:/ 'googleDatastoreAdminV1CommonMetadata' smart constructor.
+data GoogleDatastoreAdminV1CommonMetadata = GoogleDatastoreAdminV1CommonMetadata'
+    { _gState         :: !(Maybe GoogleDatastoreAdminV1CommonMetadataState)
+    , _gStartTime     :: !(Maybe DateTime')
+    , _gEndTime       :: !(Maybe DateTime')
+    , _gLabels        :: !(Maybe GoogleDatastoreAdminV1CommonMetadataLabels)
+    , _gOperationType :: !(Maybe GoogleDatastoreAdminV1CommonMetadataOperationType)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GoogleDatastoreAdminV1CommonMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gState'
+--
+-- * 'gStartTime'
+--
+-- * 'gEndTime'
+--
+-- * 'gLabels'
+--
+-- * 'gOperationType'
+googleDatastoreAdminV1CommonMetadata
+    :: GoogleDatastoreAdminV1CommonMetadata
+googleDatastoreAdminV1CommonMetadata =
+    GoogleDatastoreAdminV1CommonMetadata'
+    { _gState = Nothing
+    , _gStartTime = Nothing
+    , _gEndTime = Nothing
+    , _gLabels = Nothing
+    , _gOperationType = Nothing
+    }
+
+-- | The current state of the Operation.
+gState :: Lens' GoogleDatastoreAdminV1CommonMetadata (Maybe GoogleDatastoreAdminV1CommonMetadataState)
+gState = lens _gState (\ s a -> s{_gState = a})
+
+-- | The time that work began on the operation.
+gStartTime :: Lens' GoogleDatastoreAdminV1CommonMetadata (Maybe UTCTime)
+gStartTime
+  = lens _gStartTime (\ s a -> s{_gStartTime = a}) .
+      mapping _DateTime
+
+-- | The time the operation ended, either successfully or otherwise.
+gEndTime :: Lens' GoogleDatastoreAdminV1CommonMetadata (Maybe UTCTime)
+gEndTime
+  = lens _gEndTime (\ s a -> s{_gEndTime = a}) .
+      mapping _DateTime
+
+-- | The client-assigned labels which were provided when the operation was
+-- created. May also include additional labels.
+gLabels :: Lens' GoogleDatastoreAdminV1CommonMetadata (Maybe GoogleDatastoreAdminV1CommonMetadataLabels)
+gLabels = lens _gLabels (\ s a -> s{_gLabels = a})
+
+-- | The type of the operation. Can be used as a filter in
+-- ListOperationsRequest.
+gOperationType :: Lens' GoogleDatastoreAdminV1CommonMetadata (Maybe GoogleDatastoreAdminV1CommonMetadataOperationType)
+gOperationType
+  = lens _gOperationType
+      (\ s a -> s{_gOperationType = a})
+
+instance FromJSON
+         GoogleDatastoreAdminV1CommonMetadata where
+        parseJSON
+          = withObject "GoogleDatastoreAdminV1CommonMetadata"
+              (\ o ->
+                 GoogleDatastoreAdminV1CommonMetadata' <$>
+                   (o .:? "state") <*> (o .:? "startTime") <*>
+                     (o .:? "endTime")
+                     <*> (o .:? "labels")
+                     <*> (o .:? "operationType"))
+
+instance ToJSON GoogleDatastoreAdminV1CommonMetadata
+         where
+        toJSON GoogleDatastoreAdminV1CommonMetadata'{..}
+          = object
+              (catMaybes
+                 [("state" .=) <$> _gState,
+                  ("startTime" .=) <$> _gStartTime,
+                  ("endTime" .=) <$> _gEndTime,
+                  ("labels" .=) <$> _gLabels,
+                  ("operationType" .=) <$> _gOperationType])
+
+-- | The request for google.datastore.admin.v1.DatastoreAdmin.ExportEntities.
+--
+-- /See:/ 'googleDatastoreAdminV1ExportEntitiesRequest' smart constructor.
+data GoogleDatastoreAdminV1ExportEntitiesRequest = GoogleDatastoreAdminV1ExportEntitiesRequest'
+    { _gdaveerOutputURLPrefix :: !(Maybe Text)
+    , _gdaveerEntityFilter    :: !(Maybe GoogleDatastoreAdminV1EntityFilter)
+    , _gdaveerLabels          :: !(Maybe GoogleDatastoreAdminV1ExportEntitiesRequestLabels)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GoogleDatastoreAdminV1ExportEntitiesRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gdaveerOutputURLPrefix'
+--
+-- * 'gdaveerEntityFilter'
+--
+-- * 'gdaveerLabels'
+googleDatastoreAdminV1ExportEntitiesRequest
+    :: GoogleDatastoreAdminV1ExportEntitiesRequest
+googleDatastoreAdminV1ExportEntitiesRequest =
+    GoogleDatastoreAdminV1ExportEntitiesRequest'
+    { _gdaveerOutputURLPrefix = Nothing
+    , _gdaveerEntityFilter = Nothing
+    , _gdaveerLabels = Nothing
+    }
+
+-- | Location for the export metadata and data files. The full resource URL
+-- of the external storage location. Currently, only Google Cloud Storage
+-- is supported. So output_url_prefix should be of the form:
+-- \`gs:\/\/BUCKET_NAME[\/NAMESPACE_PATH]\`, where \`BUCKET_NAME\` is the
+-- name of the Cloud Storage bucket and \`NAMESPACE_PATH\` is an optional
+-- Cloud Storage namespace path (this is not a Cloud Datastore namespace).
+-- For more information about Cloud Storage namespace paths, see [Object
+-- name
+-- considerations](https:\/\/cloud.google.com\/storage\/docs\/naming#object-considerations).
+-- The resulting files will be nested deeper than the specified URL prefix.
+-- The final output URL will be provided in the
+-- google.datastore.admin.v1.ExportEntitiesResponse.output_url field. That
+-- value should be used for subsequent ImportEntities operations. By
+-- nesting the data files deeper, the same Cloud Storage bucket can be used
+-- in multiple ExportEntities operations without conflict.
+gdaveerOutputURLPrefix :: Lens' GoogleDatastoreAdminV1ExportEntitiesRequest (Maybe Text)
+gdaveerOutputURLPrefix
+  = lens _gdaveerOutputURLPrefix
+      (\ s a -> s{_gdaveerOutputURLPrefix = a})
+
+-- | Description of what data from the project is included in the export.
+gdaveerEntityFilter :: Lens' GoogleDatastoreAdminV1ExportEntitiesRequest (Maybe GoogleDatastoreAdminV1EntityFilter)
+gdaveerEntityFilter
+  = lens _gdaveerEntityFilter
+      (\ s a -> s{_gdaveerEntityFilter = a})
+
+-- | Client-assigned labels.
+gdaveerLabels :: Lens' GoogleDatastoreAdminV1ExportEntitiesRequest (Maybe GoogleDatastoreAdminV1ExportEntitiesRequestLabels)
+gdaveerLabels
+  = lens _gdaveerLabels
+      (\ s a -> s{_gdaveerLabels = a})
+
+instance FromJSON
+         GoogleDatastoreAdminV1ExportEntitiesRequest where
+        parseJSON
+          = withObject
+              "GoogleDatastoreAdminV1ExportEntitiesRequest"
+              (\ o ->
+                 GoogleDatastoreAdminV1ExportEntitiesRequest' <$>
+                   (o .:? "outputUrlPrefix") <*> (o .:? "entityFilter")
+                     <*> (o .:? "labels"))
+
+instance ToJSON
+         GoogleDatastoreAdminV1ExportEntitiesRequest where
+        toJSON
+          GoogleDatastoreAdminV1ExportEntitiesRequest'{..}
+          = object
+              (catMaybes
+                 [("outputUrlPrefix" .=) <$> _gdaveerOutputURLPrefix,
+                  ("entityFilter" .=) <$> _gdaveerEntityFilter,
+                  ("labels" .=) <$> _gdaveerLabels])
 
 -- | A mutation to apply to an entity.
 --
@@ -1150,6 +2268,50 @@ instance FromJSON GqlQueryNamedBindings where
 instance ToJSON GqlQueryNamedBindings where
         toJSON = toJSON . _gqnbAddtional
 
+-- | The response for
+-- google.datastore.admin.v1.DatastoreAdmin.ExportEntities.
+--
+-- /See:/ 'googleDatastoreAdminV1ExportEntitiesResponse' smart constructor.
+newtype GoogleDatastoreAdminV1ExportEntitiesResponse = GoogleDatastoreAdminV1ExportEntitiesResponse'
+    { _gOutputURL :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GoogleDatastoreAdminV1ExportEntitiesResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gOutputURL'
+googleDatastoreAdminV1ExportEntitiesResponse
+    :: GoogleDatastoreAdminV1ExportEntitiesResponse
+googleDatastoreAdminV1ExportEntitiesResponse =
+    GoogleDatastoreAdminV1ExportEntitiesResponse'
+    { _gOutputURL = Nothing
+    }
+
+-- | Location of the output metadata file. This can be used to begin an
+-- import into Cloud Datastore (this project or another project). See
+-- google.datastore.admin.v1.ImportEntitiesRequest.input_url. Only present
+-- if the operation completed successfully.
+gOutputURL :: Lens' GoogleDatastoreAdminV1ExportEntitiesResponse (Maybe Text)
+gOutputURL
+  = lens _gOutputURL (\ s a -> s{_gOutputURL = a})
+
+instance FromJSON
+         GoogleDatastoreAdminV1ExportEntitiesResponse where
+        parseJSON
+          = withObject
+              "GoogleDatastoreAdminV1ExportEntitiesResponse"
+              (\ o ->
+                 GoogleDatastoreAdminV1ExportEntitiesResponse' <$>
+                   (o .:? "outputUrl"))
+
+instance ToJSON
+         GoogleDatastoreAdminV1ExportEntitiesResponse where
+        toJSON
+          GoogleDatastoreAdminV1ExportEntitiesResponse'{..}
+          = object
+              (catMaybes [("outputUrl" .=) <$> _gOutputURL])
+
 -- | A reference to a property relative to the kind expressions.
 --
 -- /See:/ 'propertyReference' smart constructor.
@@ -1247,6 +2409,84 @@ instance ToJSON Key where
                  [("partitionId" .=) <$> _kPartitionId,
                   ("path" .=) <$> _kPath])
 
+-- | The request for google.datastore.admin.v1.DatastoreAdmin.ImportEntities.
+--
+-- /See:/ 'googleDatastoreAdminV1ImportEntitiesRequest' smart constructor.
+data GoogleDatastoreAdminV1ImportEntitiesRequest = GoogleDatastoreAdminV1ImportEntitiesRequest'
+    { _gdavierEntityFilter :: !(Maybe GoogleDatastoreAdminV1EntityFilter)
+    , _gdavierInputURL     :: !(Maybe Text)
+    , _gdavierLabels       :: !(Maybe GoogleDatastoreAdminV1ImportEntitiesRequestLabels)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GoogleDatastoreAdminV1ImportEntitiesRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gdavierEntityFilter'
+--
+-- * 'gdavierInputURL'
+--
+-- * 'gdavierLabels'
+googleDatastoreAdminV1ImportEntitiesRequest
+    :: GoogleDatastoreAdminV1ImportEntitiesRequest
+googleDatastoreAdminV1ImportEntitiesRequest =
+    GoogleDatastoreAdminV1ImportEntitiesRequest'
+    { _gdavierEntityFilter = Nothing
+    , _gdavierInputURL = Nothing
+    , _gdavierLabels = Nothing
+    }
+
+-- | Optionally specify which kinds\/namespaces are to be imported. If
+-- provided, the list must be a subset of the EntityFilter used in creating
+-- the export, otherwise a FAILED_PRECONDITION error will be returned. If
+-- no filter is specified then all entities from the export are imported.
+gdavierEntityFilter :: Lens' GoogleDatastoreAdminV1ImportEntitiesRequest (Maybe GoogleDatastoreAdminV1EntityFilter)
+gdavierEntityFilter
+  = lens _gdavierEntityFilter
+      (\ s a -> s{_gdavierEntityFilter = a})
+
+-- | The full resource URL of the external storage location. Currently, only
+-- Google Cloud Storage is supported. So input_url should be of the form:
+-- \`gs:\/\/BUCKET_NAME[\/NAMESPACE_PATH]\/OVERALL_EXPORT_METADATA_FILE\`,
+-- where \`BUCKET_NAME\` is the name of the Cloud Storage bucket,
+-- \`NAMESPACE_PATH\` is an optional Cloud Storage namespace path (this is
+-- not a Cloud Datastore namespace), and \`OVERALL_EXPORT_METADATA_FILE\`
+-- is the metadata file written by the ExportEntities operation. For more
+-- information about Cloud Storage namespace paths, see [Object name
+-- considerations](https:\/\/cloud.google.com\/storage\/docs\/naming#object-considerations).
+-- For more information, see
+-- google.datastore.admin.v1.ExportEntitiesResponse.output_url.
+gdavierInputURL :: Lens' GoogleDatastoreAdminV1ImportEntitiesRequest (Maybe Text)
+gdavierInputURL
+  = lens _gdavierInputURL
+      (\ s a -> s{_gdavierInputURL = a})
+
+-- | Client-assigned labels.
+gdavierLabels :: Lens' GoogleDatastoreAdminV1ImportEntitiesRequest (Maybe GoogleDatastoreAdminV1ImportEntitiesRequestLabels)
+gdavierLabels
+  = lens _gdavierLabels
+      (\ s a -> s{_gdavierLabels = a})
+
+instance FromJSON
+         GoogleDatastoreAdminV1ImportEntitiesRequest where
+        parseJSON
+          = withObject
+              "GoogleDatastoreAdminV1ImportEntitiesRequest"
+              (\ o ->
+                 GoogleDatastoreAdminV1ImportEntitiesRequest' <$>
+                   (o .:? "entityFilter") <*> (o .:? "inputUrl") <*>
+                     (o .:? "labels"))
+
+instance ToJSON
+         GoogleDatastoreAdminV1ImportEntitiesRequest where
+        toJSON
+          GoogleDatastoreAdminV1ImportEntitiesRequest'{..}
+          = object
+              (catMaybes
+                 [("entityFilter" .=) <$> _gdavierEntityFilter,
+                  ("inputUrl" .=) <$> _gdavierInputURL,
+                  ("labels" .=) <$> _gdavierLabels])
+
 -- | A filter on a specific property.
 --
 -- /See:/ 'propertyFilter' smart constructor.
@@ -1306,11 +2546,11 @@ instance ToJSON PropertyFilter where
 --
 -- /See:/ 'query' smart constructor.
 data Query = Query'
-    { _qStartCursor :: !(Maybe Base64)
+    { _qStartCursor :: !(Maybe Bytes)
     , _qOffSet      :: !(Maybe (Textual Int32))
     , _qKind        :: !(Maybe [KindExpression])
     , _qDistinctOn  :: !(Maybe [PropertyReference])
-    , _qEndCursor   :: !(Maybe Base64)
+    , _qEndCursor   :: !(Maybe Bytes)
     , _qLimit       :: !(Maybe (Textual Int32))
     , _qProjection  :: !(Maybe [Projection])
     , _qFilter      :: !(Maybe Filter)
@@ -1359,7 +2599,7 @@ query =
 qStartCursor :: Lens' Query (Maybe ByteString)
 qStartCursor
   = lens _qStartCursor (\ s a -> s{_qStartCursor = a})
-      . mapping _Base64
+      . mapping _Bytes
 
 -- | The number of results to skip. Applies before limit, but after all other
 -- constraints. Optional. Must be >= 0 if specified.
@@ -1390,7 +2630,7 @@ qDistinctOn
 qEndCursor :: Lens' Query (Maybe ByteString)
 qEndCursor
   = lens _qEndCursor (\ s a -> s{_qEndCursor = a}) .
-      mapping _Base64
+      mapping _Bytes
 
 -- | The maximum number of results to return. Applies after all other
 -- constraints. Optional. Unspecified is interpreted as no limit. Must be
@@ -1464,8 +2704,8 @@ arrayValue =
     { _avValues = Nothing
     }
 
--- | Values in the array. The order of this array may not be preserved if it
--- contains a mix of indexed and unindexed values.
+-- | Values in the array. The order of values in an array is preserved as
+-- long as all values have identical settings for \'exclude_from_indexes\'.
 avValues :: Lens' ArrayValue [Value]
 avValues
   = lens _avValues (\ s a -> s{_avValues = a}) .
@@ -1485,7 +2725,7 @@ instance ToJSON ArrayValue where
 --
 -- /See:/ 'entityResult' smart constructor.
 data EntityResult = EntityResult'
-    { _erCursor  :: !(Maybe Base64)
+    { _erCursor  :: !(Maybe Bytes)
     , _erVersion :: !(Maybe (Textual Int64))
     , _erEntity  :: !(Maybe Entity)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1513,7 +2753,7 @@ entityResult =
 erCursor :: Lens' EntityResult (Maybe ByteString)
 erCursor
   = lens _erCursor (\ s a -> s{_erCursor = a}) .
-      mapping _Base64
+      mapping _Bytes
 
 -- | The version of the entity, a strictly positive number that monotonically
 -- increases with changes to the entity. This field is set for \`FULL\`
@@ -1632,12 +2872,58 @@ instance ToJSON KindExpression where
         toJSON KindExpression'{..}
           = object (catMaybes [("name" .=) <$> _keName])
 
+-- | The normal response of the operation in case of success. If the original
+-- method returns no data on success, such as \`Delete\`, the response is
+-- \`google.protobuf.Empty\`. If the original method is standard
+-- \`Get\`\/\`Create\`\/\`Update\`, the response should be the resource.
+-- For other methods, the response should have the type \`XxxResponse\`,
+-- where \`Xxx\` is the original method name. For example, if the original
+-- method name is \`TakeSnapshot()\`, the inferred response type is
+-- \`TakeSnapshotResponse\`.
+--
+-- /See:/ 'googleLongrunningOperationResponse' smart constructor.
+newtype GoogleLongrunningOperationResponse = GoogleLongrunningOperationResponse'
+    { _glorAddtional :: HashMap Text JSONValue
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GoogleLongrunningOperationResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'glorAddtional'
+googleLongrunningOperationResponse
+    :: HashMap Text JSONValue -- ^ 'glorAddtional'
+    -> GoogleLongrunningOperationResponse
+googleLongrunningOperationResponse pGlorAddtional_ =
+    GoogleLongrunningOperationResponse'
+    { _glorAddtional = _Coerce # pGlorAddtional_
+    }
+
+-- | Properties of the object. Contains field \'type with type URL.
+glorAddtional :: Lens' GoogleLongrunningOperationResponse (HashMap Text JSONValue)
+glorAddtional
+  = lens _glorAddtional
+      (\ s a -> s{_glorAddtional = a})
+      . _Coerce
+
+instance FromJSON GoogleLongrunningOperationResponse
+         where
+        parseJSON
+          = withObject "GoogleLongrunningOperationResponse"
+              (\ o ->
+                 GoogleLongrunningOperationResponse' <$>
+                   (parseJSONObject o))
+
+instance ToJSON GoogleLongrunningOperationResponse
+         where
+        toJSON = toJSON . _glorAddtional
+
 -- | The options shared by read requests.
 --
 -- /See:/ 'readOptions' smart constructor.
 data ReadOptions = ReadOptions'
     { _roReadConsistency :: !(Maybe ReadOptionsReadConsistency)
-    , _roTransaction     :: !(Maybe Base64)
+    , _roTransaction     :: !(Maybe Bytes)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadOptions' with the minimum fields required to make a request.
@@ -1668,7 +2954,7 @@ roTransaction :: Lens' ReadOptions (Maybe ByteString)
 roTransaction
   = lens _roTransaction
       (\ s a -> s{_roTransaction = a})
-      . mapping _Base64
+      . mapping _Bytes
 
 instance FromJSON ReadOptions where
         parseJSON
@@ -1683,6 +2969,73 @@ instance ToJSON ReadOptions where
               (catMaybes
                  [("readConsistency" .=) <$> _roReadConsistency,
                   ("transaction" .=) <$> _roTransaction])
+
+-- | Identifies a subset of entities in a project. This is specified as
+-- combinations of kinds and namespaces (either or both of which may be
+-- all, as described in the following examples). Example usage: Entire
+-- project: kinds=[], namespace_ids=[] Kinds Foo and Bar in all namespaces:
+-- kinds=[\'Foo\', \'Bar\'], namespace_ids=[] Kinds Foo and Bar only in the
+-- default namespace: kinds=[\'Foo\', \'Bar\'], namespace_ids=[\'\'] Kinds
+-- Foo and Bar in both the default and Baz namespaces: kinds=[\'Foo\',
+-- \'Bar\'], namespace_ids=[\'\', \'Baz\'] The entire Baz namespace:
+-- kinds=[], namespace_ids=[\'Baz\']
+--
+-- /See:/ 'googleDatastoreAdminV1EntityFilter' smart constructor.
+data GoogleDatastoreAdminV1EntityFilter = GoogleDatastoreAdminV1EntityFilter'
+    { _gdavefNamespaceIds :: !(Maybe [Text])
+    , _gdavefKinds        :: !(Maybe [Text])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GoogleDatastoreAdminV1EntityFilter' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gdavefNamespaceIds'
+--
+-- * 'gdavefKinds'
+googleDatastoreAdminV1EntityFilter
+    :: GoogleDatastoreAdminV1EntityFilter
+googleDatastoreAdminV1EntityFilter =
+    GoogleDatastoreAdminV1EntityFilter'
+    { _gdavefNamespaceIds = Nothing
+    , _gdavefKinds = Nothing
+    }
+
+-- | An empty list represents all namespaces. This is the preferred usage for
+-- projects that don\'t use namespaces. An empty string element represents
+-- the default namespace. This should be used if the project has data in
+-- non-default namespaces, but doesn\'t want to include them. Each
+-- namespace in this list must be unique.
+gdavefNamespaceIds :: Lens' GoogleDatastoreAdminV1EntityFilter [Text]
+gdavefNamespaceIds
+  = lens _gdavefNamespaceIds
+      (\ s a -> s{_gdavefNamespaceIds = a})
+      . _Default
+      . _Coerce
+
+-- | If empty, then this represents all kinds.
+gdavefKinds :: Lens' GoogleDatastoreAdminV1EntityFilter [Text]
+gdavefKinds
+  = lens _gdavefKinds (\ s a -> s{_gdavefKinds = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON GoogleDatastoreAdminV1EntityFilter
+         where
+        parseJSON
+          = withObject "GoogleDatastoreAdminV1EntityFilter"
+              (\ o ->
+                 GoogleDatastoreAdminV1EntityFilter' <$>
+                   (o .:? "namespaceIds" .!= mempty) <*>
+                     (o .:? "kinds" .!= mempty))
+
+instance ToJSON GoogleDatastoreAdminV1EntityFilter
+         where
+        toJSON GoogleDatastoreAdminV1EntityFilter'{..}
+          = object
+              (catMaybes
+                 [("namespaceIds" .=) <$> _gdavefNamespaceIds,
+                  ("kinds" .=) <$> _gdavefKinds])
 
 -- | The response for Datastore.Rollback. (an empty message).
 --
@@ -1738,6 +3091,27 @@ instance ToJSON Projection where
         toJSON Projection'{..}
           = object (catMaybes [("property" .=) <$> _pProperty])
 
+-- | The response for Datastore.ReserveIds.
+--
+-- /See:/ 'reserveIdsResponse' smart constructor.
+data ReserveIdsResponse =
+    ReserveIdsResponse'
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ReserveIdsResponse' with the minimum fields required to make a request.
+--
+reserveIdsResponse
+    :: ReserveIdsResponse
+reserveIdsResponse = ReserveIdsResponse'
+
+instance FromJSON ReserveIdsResponse where
+        parseJSON
+          = withObject "ReserveIdsResponse"
+              (\ o -> pure ReserveIdsResponse')
+
+instance ToJSON ReserveIdsResponse where
+        toJSON = const emptyObject
+
 -- | A holder for any type of filter.
 --
 -- /See:/ 'filter'' smart constructor.
@@ -1788,13 +3162,150 @@ instance ToJSON Filter where
                  [("compositeFilter" .=) <$> _fCompositeFilter,
                   ("propertyFilter" .=) <$> _fPropertyFilter])
 
+-- | A minimal index definition.
+--
+-- /See:/ 'googleDatastoreAdminV1Index' smart constructor.
+data GoogleDatastoreAdminV1Index = GoogleDatastoreAdminV1Index'
+    { _gdaviState      :: !(Maybe GoogleDatastoreAdminV1IndexState)
+    , _gdaviKind       :: !(Maybe Text)
+    , _gdaviProjectId  :: !(Maybe Text)
+    , _gdaviIndexId    :: !(Maybe Text)
+    , _gdaviAncestor   :: !(Maybe GoogleDatastoreAdminV1IndexAncestor)
+    , _gdaviProperties :: !(Maybe [GoogleDatastoreAdminV1IndexedProperty])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GoogleDatastoreAdminV1Index' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gdaviState'
+--
+-- * 'gdaviKind'
+--
+-- * 'gdaviProjectId'
+--
+-- * 'gdaviIndexId'
+--
+-- * 'gdaviAncestor'
+--
+-- * 'gdaviProperties'
+googleDatastoreAdminV1Index
+    :: GoogleDatastoreAdminV1Index
+googleDatastoreAdminV1Index =
+    GoogleDatastoreAdminV1Index'
+    { _gdaviState = Nothing
+    , _gdaviKind = Nothing
+    , _gdaviProjectId = Nothing
+    , _gdaviIndexId = Nothing
+    , _gdaviAncestor = Nothing
+    , _gdaviProperties = Nothing
+    }
+
+-- | The state of the index. Output only.
+gdaviState :: Lens' GoogleDatastoreAdminV1Index (Maybe GoogleDatastoreAdminV1IndexState)
+gdaviState
+  = lens _gdaviState (\ s a -> s{_gdaviState = a})
+
+-- | The entity kind to which this index applies. Required.
+gdaviKind :: Lens' GoogleDatastoreAdminV1Index (Maybe Text)
+gdaviKind
+  = lens _gdaviKind (\ s a -> s{_gdaviKind = a})
+
+-- | Project ID. Output only.
+gdaviProjectId :: Lens' GoogleDatastoreAdminV1Index (Maybe Text)
+gdaviProjectId
+  = lens _gdaviProjectId
+      (\ s a -> s{_gdaviProjectId = a})
+
+-- | The resource ID of the index. Output only.
+gdaviIndexId :: Lens' GoogleDatastoreAdminV1Index (Maybe Text)
+gdaviIndexId
+  = lens _gdaviIndexId (\ s a -> s{_gdaviIndexId = a})
+
+-- | The index\'s ancestor mode. Must not be ANCESTOR_MODE_UNSPECIFIED.
+-- Required.
+gdaviAncestor :: Lens' GoogleDatastoreAdminV1Index (Maybe GoogleDatastoreAdminV1IndexAncestor)
+gdaviAncestor
+  = lens _gdaviAncestor
+      (\ s a -> s{_gdaviAncestor = a})
+
+-- | An ordered sequence of property names and their index attributes.
+-- Required.
+gdaviProperties :: Lens' GoogleDatastoreAdminV1Index [GoogleDatastoreAdminV1IndexedProperty]
+gdaviProperties
+  = lens _gdaviProperties
+      (\ s a -> s{_gdaviProperties = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON GoogleDatastoreAdminV1Index where
+        parseJSON
+          = withObject "GoogleDatastoreAdminV1Index"
+              (\ o ->
+                 GoogleDatastoreAdminV1Index' <$>
+                   (o .:? "state") <*> (o .:? "kind") <*>
+                     (o .:? "projectId")
+                     <*> (o .:? "indexId")
+                     <*> (o .:? "ancestor")
+                     <*> (o .:? "properties" .!= mempty))
+
+instance ToJSON GoogleDatastoreAdminV1Index where
+        toJSON GoogleDatastoreAdminV1Index'{..}
+          = object
+              (catMaybes
+                 [("state" .=) <$> _gdaviState,
+                  ("kind" .=) <$> _gdaviKind,
+                  ("projectId" .=) <$> _gdaviProjectId,
+                  ("indexId" .=) <$> _gdaviIndexId,
+                  ("ancestor" .=) <$> _gdaviAncestor,
+                  ("properties" .=) <$> _gdaviProperties])
+
+-- | The client-assigned labels which were provided when the operation was
+-- created. May also include additional labels.
+--
+-- /See:/ 'googleDatastoreAdminV1beta1CommonMetadataLabels' smart constructor.
+newtype GoogleDatastoreAdminV1beta1CommonMetadataLabels = GoogleDatastoreAdminV1beta1CommonMetadataLabels'
+    { _gAddtional :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GoogleDatastoreAdminV1beta1CommonMetadataLabels' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gAddtional'
+googleDatastoreAdminV1beta1CommonMetadataLabels
+    :: HashMap Text Text -- ^ 'gAddtional'
+    -> GoogleDatastoreAdminV1beta1CommonMetadataLabels
+googleDatastoreAdminV1beta1CommonMetadataLabels pGAddtional_ =
+    GoogleDatastoreAdminV1beta1CommonMetadataLabels'
+    { _gAddtional = _Coerce # pGAddtional_
+    }
+
+gAddtional :: Lens' GoogleDatastoreAdminV1beta1CommonMetadataLabels (HashMap Text Text)
+gAddtional
+  = lens _gAddtional (\ s a -> s{_gAddtional = a}) .
+      _Coerce
+
+instance FromJSON
+         GoogleDatastoreAdminV1beta1CommonMetadataLabels where
+        parseJSON
+          = withObject
+              "GoogleDatastoreAdminV1beta1CommonMetadataLabels"
+              (\ o ->
+                 GoogleDatastoreAdminV1beta1CommonMetadataLabels' <$>
+                   (parseJSONObject o))
+
+instance ToJSON
+         GoogleDatastoreAdminV1beta1CommonMetadataLabels where
+        toJSON = toJSON . _gAddtional
+
 -- | The request for Datastore.Commit.
 --
 -- /See:/ 'commitRequest' smart constructor.
 data CommitRequest = CommitRequest'
     { _crMutations   :: !(Maybe [Mutation])
     , _crMode        :: !(Maybe CommitRequestMode)
-    , _crTransaction :: !(Maybe Base64)
+    , _crTransaction :: !(Maybe Bytes)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommitRequest' with the minimum fields required to make a request.
@@ -1839,7 +3350,7 @@ crTransaction :: Lens' CommitRequest (Maybe ByteString)
 crTransaction
   = lens _crTransaction
       (\ s a -> s{_crTransaction = a})
-      . mapping _Base64
+      . mapping _Bytes
 
 instance FromJSON CommitRequest where
         parseJSON
@@ -1856,6 +3367,203 @@ instance ToJSON CommitRequest where
                  [("mutations" .=) <$> _crMutations,
                   ("mode" .=) <$> _crMode,
                   ("transaction" .=) <$> _crTransaction])
+
+-- | The response message for Operations.ListOperations.
+--
+-- /See:/ 'googleLongrunningListOperationsResponse' smart constructor.
+data GoogleLongrunningListOperationsResponse = GoogleLongrunningListOperationsResponse'
+    { _gllorNextPageToken :: !(Maybe Text)
+    , _gllorOperations    :: !(Maybe [GoogleLongrunningOperation])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GoogleLongrunningListOperationsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gllorNextPageToken'
+--
+-- * 'gllorOperations'
+googleLongrunningListOperationsResponse
+    :: GoogleLongrunningListOperationsResponse
+googleLongrunningListOperationsResponse =
+    GoogleLongrunningListOperationsResponse'
+    { _gllorNextPageToken = Nothing
+    , _gllorOperations = Nothing
+    }
+
+-- | The standard List next-page token.
+gllorNextPageToken :: Lens' GoogleLongrunningListOperationsResponse (Maybe Text)
+gllorNextPageToken
+  = lens _gllorNextPageToken
+      (\ s a -> s{_gllorNextPageToken = a})
+
+-- | A list of operations that matches the specified filter in the request.
+gllorOperations :: Lens' GoogleLongrunningListOperationsResponse [GoogleLongrunningOperation]
+gllorOperations
+  = lens _gllorOperations
+      (\ s a -> s{_gllorOperations = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON
+         GoogleLongrunningListOperationsResponse where
+        parseJSON
+          = withObject
+              "GoogleLongrunningListOperationsResponse"
+              (\ o ->
+                 GoogleLongrunningListOperationsResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "operations" .!= mempty))
+
+instance ToJSON
+         GoogleLongrunningListOperationsResponse where
+        toJSON GoogleLongrunningListOperationsResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _gllorNextPageToken,
+                  ("operations" .=) <$> _gllorOperations])
+
+-- | Metadata for ImportEntities operations.
+--
+-- /See:/ 'googleDatastoreAdminV1ImportEntitiesMetadata' smart constructor.
+data GoogleDatastoreAdminV1ImportEntitiesMetadata = GoogleDatastoreAdminV1ImportEntitiesMetadata'
+    { _gProgressBytes    :: !(Maybe GoogleDatastoreAdminV1Progress)
+    , _gProgressEntities :: !(Maybe GoogleDatastoreAdminV1Progress)
+    , _gEntityFilter     :: !(Maybe GoogleDatastoreAdminV1EntityFilter)
+    , _gInputURL         :: !(Maybe Text)
+    , _gCommon           :: !(Maybe GoogleDatastoreAdminV1CommonMetadata)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GoogleDatastoreAdminV1ImportEntitiesMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gProgressBytes'
+--
+-- * 'gProgressEntities'
+--
+-- * 'gEntityFilter'
+--
+-- * 'gInputURL'
+--
+-- * 'gCommon'
+googleDatastoreAdminV1ImportEntitiesMetadata
+    :: GoogleDatastoreAdminV1ImportEntitiesMetadata
+googleDatastoreAdminV1ImportEntitiesMetadata =
+    GoogleDatastoreAdminV1ImportEntitiesMetadata'
+    { _gProgressBytes = Nothing
+    , _gProgressEntities = Nothing
+    , _gEntityFilter = Nothing
+    , _gInputURL = Nothing
+    , _gCommon = Nothing
+    }
+
+-- | An estimate of the number of bytes processed.
+gProgressBytes :: Lens' GoogleDatastoreAdminV1ImportEntitiesMetadata (Maybe GoogleDatastoreAdminV1Progress)
+gProgressBytes
+  = lens _gProgressBytes
+      (\ s a -> s{_gProgressBytes = a})
+
+-- | An estimate of the number of entities processed.
+gProgressEntities :: Lens' GoogleDatastoreAdminV1ImportEntitiesMetadata (Maybe GoogleDatastoreAdminV1Progress)
+gProgressEntities
+  = lens _gProgressEntities
+      (\ s a -> s{_gProgressEntities = a})
+
+-- | Description of which entities are being imported.
+gEntityFilter :: Lens' GoogleDatastoreAdminV1ImportEntitiesMetadata (Maybe GoogleDatastoreAdminV1EntityFilter)
+gEntityFilter
+  = lens _gEntityFilter
+      (\ s a -> s{_gEntityFilter = a})
+
+-- | The location of the import metadata file. This will be the same value as
+-- the google.datastore.admin.v1.ExportEntitiesResponse.output_url field.
+gInputURL :: Lens' GoogleDatastoreAdminV1ImportEntitiesMetadata (Maybe Text)
+gInputURL
+  = lens _gInputURL (\ s a -> s{_gInputURL = a})
+
+-- | Metadata common to all Datastore Admin operations.
+gCommon :: Lens' GoogleDatastoreAdminV1ImportEntitiesMetadata (Maybe GoogleDatastoreAdminV1CommonMetadata)
+gCommon = lens _gCommon (\ s a -> s{_gCommon = a})
+
+instance FromJSON
+         GoogleDatastoreAdminV1ImportEntitiesMetadata where
+        parseJSON
+          = withObject
+              "GoogleDatastoreAdminV1ImportEntitiesMetadata"
+              (\ o ->
+                 GoogleDatastoreAdminV1ImportEntitiesMetadata' <$>
+                   (o .:? "progressBytes") <*>
+                     (o .:? "progressEntities")
+                     <*> (o .:? "entityFilter")
+                     <*> (o .:? "inputUrl")
+                     <*> (o .:? "common"))
+
+instance ToJSON
+         GoogleDatastoreAdminV1ImportEntitiesMetadata where
+        toJSON
+          GoogleDatastoreAdminV1ImportEntitiesMetadata'{..}
+          = object
+              (catMaybes
+                 [("progressBytes" .=) <$> _gProgressBytes,
+                  ("progressEntities" .=) <$> _gProgressEntities,
+                  ("entityFilter" .=) <$> _gEntityFilter,
+                  ("inputUrl" .=) <$> _gInputURL,
+                  ("common" .=) <$> _gCommon])
+
+-- | Measures the progress of a particular metric.
+--
+-- /See:/ 'googleDatastoreAdminV1Progress' smart constructor.
+data GoogleDatastoreAdminV1Progress = GoogleDatastoreAdminV1Progress'
+    { _gWorkCompleted :: !(Maybe (Textual Int64))
+    , _gWorkEstimated :: !(Maybe (Textual Int64))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GoogleDatastoreAdminV1Progress' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gWorkCompleted'
+--
+-- * 'gWorkEstimated'
+googleDatastoreAdminV1Progress
+    :: GoogleDatastoreAdminV1Progress
+googleDatastoreAdminV1Progress =
+    GoogleDatastoreAdminV1Progress'
+    { _gWorkCompleted = Nothing
+    , _gWorkEstimated = Nothing
+    }
+
+-- | The amount of work that has been completed. Note that this may be
+-- greater than work_estimated.
+gWorkCompleted :: Lens' GoogleDatastoreAdminV1Progress (Maybe Int64)
+gWorkCompleted
+  = lens _gWorkCompleted
+      (\ s a -> s{_gWorkCompleted = a})
+      . mapping _Coerce
+
+-- | An estimate of how much work needs to be performed. May be zero if the
+-- work estimate is unavailable.
+gWorkEstimated :: Lens' GoogleDatastoreAdminV1Progress (Maybe Int64)
+gWorkEstimated
+  = lens _gWorkEstimated
+      (\ s a -> s{_gWorkEstimated = a})
+      . mapping _Coerce
+
+instance FromJSON GoogleDatastoreAdminV1Progress
+         where
+        parseJSON
+          = withObject "GoogleDatastoreAdminV1Progress"
+              (\ o ->
+                 GoogleDatastoreAdminV1Progress' <$>
+                   (o .:? "workCompleted") <*> (o .:? "workEstimated"))
+
+instance ToJSON GoogleDatastoreAdminV1Progress where
+        toJSON GoogleDatastoreAdminV1Progress'{..}
+          = object
+              (catMaybes
+                 [("workCompleted" .=) <$> _gWorkCompleted,
+                  ("workEstimated" .=) <$> _gWorkEstimated])
 
 -- | A (kind, ID\/name) pair used to construct a key path. If either name or
 -- ID is set, the element is complete. If neither is set, the element is
@@ -1972,6 +3680,144 @@ instance ToJSON Entity where
                  [("key" .=) <$> _eKey,
                   ("properties" .=) <$> _eProperties])
 
+-- | Identifies a subset of entities in a project. This is specified as
+-- combinations of kinds and namespaces (either or both of which may be
+-- all, as described in the following examples). Example usage: Entire
+-- project: kinds=[], namespace_ids=[] Kinds Foo and Bar in all namespaces:
+-- kinds=[\'Foo\', \'Bar\'], namespace_ids=[] Kinds Foo and Bar only in the
+-- default namespace: kinds=[\'Foo\', \'Bar\'], namespace_ids=[\'\'] Kinds
+-- Foo and Bar in both the default and Baz namespaces: kinds=[\'Foo\',
+-- \'Bar\'], namespace_ids=[\'\', \'Baz\'] The entire Baz namespace:
+-- kinds=[], namespace_ids=[\'Baz\']
+--
+-- /See:/ 'googleDatastoreAdminV1beta1EntityFilter' smart constructor.
+data GoogleDatastoreAdminV1beta1EntityFilter = GoogleDatastoreAdminV1beta1EntityFilter'
+    { _gNamespaceIds :: !(Maybe [Text])
+    , _gKinds        :: !(Maybe [Text])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GoogleDatastoreAdminV1beta1EntityFilter' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gNamespaceIds'
+--
+-- * 'gKinds'
+googleDatastoreAdminV1beta1EntityFilter
+    :: GoogleDatastoreAdminV1beta1EntityFilter
+googleDatastoreAdminV1beta1EntityFilter =
+    GoogleDatastoreAdminV1beta1EntityFilter'
+    { _gNamespaceIds = Nothing
+    , _gKinds = Nothing
+    }
+
+-- | An empty list represents all namespaces. This is the preferred usage for
+-- projects that don\'t use namespaces. An empty string element represents
+-- the default namespace. This should be used if the project has data in
+-- non-default namespaces, but doesn\'t want to include them. Each
+-- namespace in this list must be unique.
+gNamespaceIds :: Lens' GoogleDatastoreAdminV1beta1EntityFilter [Text]
+gNamespaceIds
+  = lens _gNamespaceIds
+      (\ s a -> s{_gNamespaceIds = a})
+      . _Default
+      . _Coerce
+
+-- | If empty, then this represents all kinds.
+gKinds :: Lens' GoogleDatastoreAdminV1beta1EntityFilter [Text]
+gKinds
+  = lens _gKinds (\ s a -> s{_gKinds = a}) . _Default .
+      _Coerce
+
+instance FromJSON
+         GoogleDatastoreAdminV1beta1EntityFilter where
+        parseJSON
+          = withObject
+              "GoogleDatastoreAdminV1beta1EntityFilter"
+              (\ o ->
+                 GoogleDatastoreAdminV1beta1EntityFilter' <$>
+                   (o .:? "namespaceIds" .!= mempty) <*>
+                     (o .:? "kinds" .!= mempty))
+
+instance ToJSON
+         GoogleDatastoreAdminV1beta1EntityFilter where
+        toJSON GoogleDatastoreAdminV1beta1EntityFilter'{..}
+          = object
+              (catMaybes
+                 [("namespaceIds" .=) <$> _gNamespaceIds,
+                  ("kinds" .=) <$> _gKinds])
+
+-- | Options specific to read-only transactions.
+--
+-- /See:/ 'readOnly' smart constructor.
+data ReadOnly =
+    ReadOnly'
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ReadOnly' with the minimum fields required to make a request.
+--
+readOnly
+    :: ReadOnly
+readOnly = ReadOnly'
+
+instance FromJSON ReadOnly where
+        parseJSON
+          = withObject "ReadOnly" (\ o -> pure ReadOnly')
+
+instance ToJSON ReadOnly where
+        toJSON = const emptyObject
+
+-- | A property of an index.
+--
+-- /See:/ 'googleDatastoreAdminV1IndexedProperty' smart constructor.
+data GoogleDatastoreAdminV1IndexedProperty = GoogleDatastoreAdminV1IndexedProperty'
+    { _gdavipDirection :: !(Maybe GoogleDatastoreAdminV1IndexedPropertyDirection)
+    , _gdavipName      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GoogleDatastoreAdminV1IndexedProperty' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gdavipDirection'
+--
+-- * 'gdavipName'
+googleDatastoreAdminV1IndexedProperty
+    :: GoogleDatastoreAdminV1IndexedProperty
+googleDatastoreAdminV1IndexedProperty =
+    GoogleDatastoreAdminV1IndexedProperty'
+    { _gdavipDirection = Nothing
+    , _gdavipName = Nothing
+    }
+
+-- | The indexed property\'s direction. Must not be DIRECTION_UNSPECIFIED.
+-- Required.
+gdavipDirection :: Lens' GoogleDatastoreAdminV1IndexedProperty (Maybe GoogleDatastoreAdminV1IndexedPropertyDirection)
+gdavipDirection
+  = lens _gdavipDirection
+      (\ s a -> s{_gdavipDirection = a})
+
+-- | The property name to index. Required.
+gdavipName :: Lens' GoogleDatastoreAdminV1IndexedProperty (Maybe Text)
+gdavipName
+  = lens _gdavipName (\ s a -> s{_gdavipName = a})
+
+instance FromJSON
+         GoogleDatastoreAdminV1IndexedProperty where
+        parseJSON
+          = withObject "GoogleDatastoreAdminV1IndexedProperty"
+              (\ o ->
+                 GoogleDatastoreAdminV1IndexedProperty' <$>
+                   (o .:? "direction") <*> (o .:? "name"))
+
+instance ToJSON GoogleDatastoreAdminV1IndexedProperty
+         where
+        toJSON GoogleDatastoreAdminV1IndexedProperty'{..}
+          = object
+              (catMaybes
+                 [("direction" .=) <$> _gdavipDirection,
+                  ("name" .=) <$> _gdavipName])
+
 -- | The response for Datastore.Lookup.
 --
 -- /See:/ 'lookupResponse' smart constructor.
@@ -2042,6 +3888,98 @@ instance ToJSON LookupResponse where
                   ("found" .=) <$> _lrFound,
                   ("missing" .=) <$> _lrMissing])
 
+-- | This resource represents a long-running operation that is the result of
+-- a network API call.
+--
+-- /See:/ 'googleLongrunningOperation' smart constructor.
+data GoogleLongrunningOperation = GoogleLongrunningOperation'
+    { _gloDone     :: !(Maybe Bool)
+    , _gloError    :: !(Maybe Status)
+    , _gloResponse :: !(Maybe GoogleLongrunningOperationResponse)
+    , _gloName     :: !(Maybe Text)
+    , _gloMetadata :: !(Maybe GoogleLongrunningOperationMetadata)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GoogleLongrunningOperation' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gloDone'
+--
+-- * 'gloError'
+--
+-- * 'gloResponse'
+--
+-- * 'gloName'
+--
+-- * 'gloMetadata'
+googleLongrunningOperation
+    :: GoogleLongrunningOperation
+googleLongrunningOperation =
+    GoogleLongrunningOperation'
+    { _gloDone = Nothing
+    , _gloError = Nothing
+    , _gloResponse = Nothing
+    , _gloName = Nothing
+    , _gloMetadata = Nothing
+    }
+
+-- | If the value is \`false\`, it means the operation is still in progress.
+-- If \`true\`, the operation is completed, and either \`error\` or
+-- \`response\` is available.
+gloDone :: Lens' GoogleLongrunningOperation (Maybe Bool)
+gloDone = lens _gloDone (\ s a -> s{_gloDone = a})
+
+-- | The error result of the operation in case of failure or cancellation.
+gloError :: Lens' GoogleLongrunningOperation (Maybe Status)
+gloError = lens _gloError (\ s a -> s{_gloError = a})
+
+-- | The normal response of the operation in case of success. If the original
+-- method returns no data on success, such as \`Delete\`, the response is
+-- \`google.protobuf.Empty\`. If the original method is standard
+-- \`Get\`\/\`Create\`\/\`Update\`, the response should be the resource.
+-- For other methods, the response should have the type \`XxxResponse\`,
+-- where \`Xxx\` is the original method name. For example, if the original
+-- method name is \`TakeSnapshot()\`, the inferred response type is
+-- \`TakeSnapshotResponse\`.
+gloResponse :: Lens' GoogleLongrunningOperation (Maybe GoogleLongrunningOperationResponse)
+gloResponse
+  = lens _gloResponse (\ s a -> s{_gloResponse = a})
+
+-- | The server-assigned name, which is only unique within the same service
+-- that originally returns it. If you use the default HTTP mapping, the
+-- \`name\` should have the format of \`operations\/some\/unique\/name\`.
+gloName :: Lens' GoogleLongrunningOperation (Maybe Text)
+gloName = lens _gloName (\ s a -> s{_gloName = a})
+
+-- | Service-specific metadata associated with the operation. It typically
+-- contains progress information and common metadata such as create time.
+-- Some services might not provide such metadata. Any method that returns a
+-- long-running operation should document the metadata type, if any.
+gloMetadata :: Lens' GoogleLongrunningOperation (Maybe GoogleLongrunningOperationMetadata)
+gloMetadata
+  = lens _gloMetadata (\ s a -> s{_gloMetadata = a})
+
+instance FromJSON GoogleLongrunningOperation where
+        parseJSON
+          = withObject "GoogleLongrunningOperation"
+              (\ o ->
+                 GoogleLongrunningOperation' <$>
+                   (o .:? "done") <*> (o .:? "error") <*>
+                     (o .:? "response")
+                     <*> (o .:? "name")
+                     <*> (o .:? "metadata"))
+
+instance ToJSON GoogleLongrunningOperation where
+        toJSON GoogleLongrunningOperation'{..}
+          = object
+              (catMaybes
+                 [("done" .=) <$> _gloDone,
+                  ("error" .=) <$> _gloError,
+                  ("response" .=) <$> _gloResponse,
+                  ("name" .=) <$> _gloName,
+                  ("metadata" .=) <$> _gloMetadata])
+
 -- | The desired order for a specific property.
 --
 -- /See:/ 'propertyOrder' smart constructor.
@@ -2089,11 +4027,106 @@ instance ToJSON PropertyOrder where
                  [("property" .=) <$> _poProperty,
                   ("direction" .=) <$> _poDirection])
 
+-- | Metadata for ExportEntities operations.
+--
+-- /See:/ 'googleDatastoreAdminV1beta1ExportEntitiesMetadata' smart constructor.
+data GoogleDatastoreAdminV1beta1ExportEntitiesMetadata = GoogleDatastoreAdminV1beta1ExportEntitiesMetadata'
+    { _gooProgressBytes    :: !(Maybe GoogleDatastoreAdminV1beta1Progress)
+    , _gooOutputURLPrefix  :: !(Maybe Text)
+    , _gooProgressEntities :: !(Maybe GoogleDatastoreAdminV1beta1Progress)
+    , _gooEntityFilter     :: !(Maybe GoogleDatastoreAdminV1beta1EntityFilter)
+    , _gooCommon           :: !(Maybe GoogleDatastoreAdminV1beta1CommonMetadata)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GoogleDatastoreAdminV1beta1ExportEntitiesMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gooProgressBytes'
+--
+-- * 'gooOutputURLPrefix'
+--
+-- * 'gooProgressEntities'
+--
+-- * 'gooEntityFilter'
+--
+-- * 'gooCommon'
+googleDatastoreAdminV1beta1ExportEntitiesMetadata
+    :: GoogleDatastoreAdminV1beta1ExportEntitiesMetadata
+googleDatastoreAdminV1beta1ExportEntitiesMetadata =
+    GoogleDatastoreAdminV1beta1ExportEntitiesMetadata'
+    { _gooProgressBytes = Nothing
+    , _gooOutputURLPrefix = Nothing
+    , _gooProgressEntities = Nothing
+    , _gooEntityFilter = Nothing
+    , _gooCommon = Nothing
+    }
+
+-- | An estimate of the number of bytes processed.
+gooProgressBytes :: Lens' GoogleDatastoreAdminV1beta1ExportEntitiesMetadata (Maybe GoogleDatastoreAdminV1beta1Progress)
+gooProgressBytes
+  = lens _gooProgressBytes
+      (\ s a -> s{_gooProgressBytes = a})
+
+-- | Location for the export metadata and data files. This will be the same
+-- value as the
+-- google.datastore.admin.v1beta1.ExportEntitiesRequest.output_url_prefix
+-- field. The final output location is provided in
+-- google.datastore.admin.v1beta1.ExportEntitiesResponse.output_url.
+gooOutputURLPrefix :: Lens' GoogleDatastoreAdminV1beta1ExportEntitiesMetadata (Maybe Text)
+gooOutputURLPrefix
+  = lens _gooOutputURLPrefix
+      (\ s a -> s{_gooOutputURLPrefix = a})
+
+-- | An estimate of the number of entities processed.
+gooProgressEntities :: Lens' GoogleDatastoreAdminV1beta1ExportEntitiesMetadata (Maybe GoogleDatastoreAdminV1beta1Progress)
+gooProgressEntities
+  = lens _gooProgressEntities
+      (\ s a -> s{_gooProgressEntities = a})
+
+-- | Description of which entities are being exported.
+gooEntityFilter :: Lens' GoogleDatastoreAdminV1beta1ExportEntitiesMetadata (Maybe GoogleDatastoreAdminV1beta1EntityFilter)
+gooEntityFilter
+  = lens _gooEntityFilter
+      (\ s a -> s{_gooEntityFilter = a})
+
+-- | Metadata common to all Datastore Admin operations.
+gooCommon :: Lens' GoogleDatastoreAdminV1beta1ExportEntitiesMetadata (Maybe GoogleDatastoreAdminV1beta1CommonMetadata)
+gooCommon
+  = lens _gooCommon (\ s a -> s{_gooCommon = a})
+
+instance FromJSON
+         GoogleDatastoreAdminV1beta1ExportEntitiesMetadata
+         where
+        parseJSON
+          = withObject
+              "GoogleDatastoreAdminV1beta1ExportEntitiesMetadata"
+              (\ o ->
+                 GoogleDatastoreAdminV1beta1ExportEntitiesMetadata'
+                   <$>
+                   (o .:? "progressBytes") <*> (o .:? "outputUrlPrefix")
+                     <*> (o .:? "progressEntities")
+                     <*> (o .:? "entityFilter")
+                     <*> (o .:? "common"))
+
+instance ToJSON
+         GoogleDatastoreAdminV1beta1ExportEntitiesMetadata
+         where
+        toJSON
+          GoogleDatastoreAdminV1beta1ExportEntitiesMetadata'{..}
+          = object
+              (catMaybes
+                 [("progressBytes" .=) <$> _gooProgressBytes,
+                  ("outputUrlPrefix" .=) <$> _gooOutputURLPrefix,
+                  ("progressEntities" .=) <$> _gooProgressEntities,
+                  ("entityFilter" .=) <$> _gooEntityFilter,
+                  ("common" .=) <$> _gooCommon])
+
 -- | A binding parameter for a GQL query.
 --
 -- /See:/ 'gqlQueryParameter' smart constructor.
 data GqlQueryParameter = GqlQueryParameter'
-    { _gqpCursor :: !(Maybe Base64)
+    { _gqpCursor :: !(Maybe Bytes)
     , _gqpValue  :: !(Maybe Value)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2116,7 +4149,7 @@ gqlQueryParameter =
 gqpCursor :: Lens' GqlQueryParameter (Maybe ByteString)
 gqpCursor
   = lens _gqpCursor (\ s a -> s{_gqpCursor = a}) .
-      mapping _Base64
+      mapping _Bytes
 
 -- | A value parameter.
 gqpValue :: Lens' GqlQueryParameter (Maybe Value)

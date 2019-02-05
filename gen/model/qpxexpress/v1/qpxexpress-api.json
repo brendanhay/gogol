@@ -1,6 +1,6 @@
 {
  "kind": "discovery#restDescription",
- "etag": "\"C5oy1hgQsABtYOYIOXWcR3BgYqU/ijp44wmwc3ANNTETi-Hxe_Mf9S0\"",
+ "etag": "\"YWOzh2SDasdU84ArJnpYek-OMdg/2IuExnuYIfWTklADntnFv6u9T0g\"",
  "discoveryVersion": "v1",
  "id": "qpxExpress:v1",
  "name": "qpxExpress",
@@ -12,8 +12,8 @@
  "ownerDomain": "google.com",
  "ownerName": "Google",
  "icons": {
-  "x16": "http://www.google.com/images/icons/product/search-16.gif",
-  "x32": "http://www.google.com/images/icons/product/search-32.gif"
+  "x16": "https://www.gstatic.com/images/branding/product/1x/googleg_16dp.png",
+  "x32": "https://www.gstatic.com/images/branding/product/1x/googleg_32dp.png"
  },
  "documentationLink": "http://developers.google.com/qpx-express",
  "protocol": "rest",
@@ -21,7 +21,7 @@
  "basePath": "/qpxExpress/v1/trips/",
  "rootUrl": "https://www.googleapis.com/",
  "servicePath": "qpxExpress/v1/trips/",
- "batchPath": "batch",
+ "batchPath": "batch/qpxExpress/v1",
  "parameters": {
   "alt": {
    "type": "string",

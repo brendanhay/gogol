@@ -80,7 +80,8 @@ instance GoogleRequest RelyingPartyGetAccountInfo
          where
         type Rs RelyingPartyGetAccountInfo =
              GetAccountInfoResponse
-        type Scopes RelyingPartyGetAccountInfo = '[]
+        type Scopes RelyingPartyGetAccountInfo =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient RelyingPartyGetAccountInfo'{..}
           = go (Just AltJSON) _rpgaiPayload
               identityToolkitService

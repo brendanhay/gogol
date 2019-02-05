@@ -16,7 +16,7 @@
 --
 module Network.Google.AndroidPublisher.Types.Sum where
 
-import           Network.Google.Prelude
+import           Network.Google.Prelude hiding (Bytes)
 
 data EditsImagesDeleteallImageType
     = FeatureGraphic
@@ -72,111 +72,6 @@ instance FromJSON EditsImagesDeleteallImageType where
 instance ToJSON EditsImagesDeleteallImageType where
     toJSON = toJSONText
 
--- | The track type to read or modify.
-data EditsTracksPatchTrack
-    = Alpha
-      -- ^ @alpha@
-    | Beta
-      -- ^ @beta@
-    | Production
-      -- ^ @production@
-    | Rollout
-      -- ^ @rollout@
-      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
-
-instance Hashable EditsTracksPatchTrack
-
-instance FromHttpApiData EditsTracksPatchTrack where
-    parseQueryParam = \case
-        "alpha" -> Right Alpha
-        "beta" -> Right Beta
-        "production" -> Right Production
-        "rollout" -> Right Rollout
-        x -> Left ("Unable to parse EditsTracksPatchTrack from: " <> x)
-
-instance ToHttpApiData EditsTracksPatchTrack where
-    toQueryParam = \case
-        Alpha -> "alpha"
-        Beta -> "beta"
-        Production -> "production"
-        Rollout -> "rollout"
-
-instance FromJSON EditsTracksPatchTrack where
-    parseJSON = parseJSONText "EditsTracksPatchTrack"
-
-instance ToJSON EditsTracksPatchTrack where
-    toJSON = toJSONText
-
--- | The track type to read or modify.
-data EditsTracksGetTrack
-    = ETGTAlpha
-      -- ^ @alpha@
-    | ETGTBeta
-      -- ^ @beta@
-    | ETGTProduction
-      -- ^ @production@
-    | ETGTRollout
-      -- ^ @rollout@
-      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
-
-instance Hashable EditsTracksGetTrack
-
-instance FromHttpApiData EditsTracksGetTrack where
-    parseQueryParam = \case
-        "alpha" -> Right ETGTAlpha
-        "beta" -> Right ETGTBeta
-        "production" -> Right ETGTProduction
-        "rollout" -> Right ETGTRollout
-        x -> Left ("Unable to parse EditsTracksGetTrack from: " <> x)
-
-instance ToHttpApiData EditsTracksGetTrack where
-    toQueryParam = \case
-        ETGTAlpha -> "alpha"
-        ETGTBeta -> "beta"
-        ETGTProduction -> "production"
-        ETGTRollout -> "rollout"
-
-instance FromJSON EditsTracksGetTrack where
-    parseJSON = parseJSONText "EditsTracksGetTrack"
-
-instance ToJSON EditsTracksGetTrack where
-    toJSON = toJSONText
-
--- | The track type to read or modify.
-data EditsTracksUpdateTrack
-    = ETUTAlpha
-      -- ^ @alpha@
-    | ETUTBeta
-      -- ^ @beta@
-    | ETUTProduction
-      -- ^ @production@
-    | ETUTRollout
-      -- ^ @rollout@
-      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
-
-instance Hashable EditsTracksUpdateTrack
-
-instance FromHttpApiData EditsTracksUpdateTrack where
-    parseQueryParam = \case
-        "alpha" -> Right ETUTAlpha
-        "beta" -> Right ETUTBeta
-        "production" -> Right ETUTProduction
-        "rollout" -> Right ETUTRollout
-        x -> Left ("Unable to parse EditsTracksUpdateTrack from: " <> x)
-
-instance ToHttpApiData EditsTracksUpdateTrack where
-    toQueryParam = \case
-        ETUTAlpha -> "alpha"
-        ETUTBeta -> "beta"
-        ETUTProduction -> "production"
-        ETUTRollout -> "rollout"
-
-instance FromJSON EditsTracksUpdateTrack where
-    parseJSON = parseJSONText "EditsTracksUpdateTrack"
-
-instance ToJSON EditsTracksUpdateTrack where
-    toJSON = toJSONText
-
 data EditsImagesListImageType
     = EILITFeatureGraphic
       -- ^ @featureGraphic@
@@ -229,74 +124,6 @@ instance FromJSON EditsImagesListImageType where
     parseJSON = parseJSONText "EditsImagesListImageType"
 
 instance ToJSON EditsImagesListImageType where
-    toJSON = toJSONText
-
-data EditsTestersPatchTrack
-    = ETPTAlpha
-      -- ^ @alpha@
-    | ETPTBeta
-      -- ^ @beta@
-    | ETPTProduction
-      -- ^ @production@
-    | ETPTRollout
-      -- ^ @rollout@
-      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
-
-instance Hashable EditsTestersPatchTrack
-
-instance FromHttpApiData EditsTestersPatchTrack where
-    parseQueryParam = \case
-        "alpha" -> Right ETPTAlpha
-        "beta" -> Right ETPTBeta
-        "production" -> Right ETPTProduction
-        "rollout" -> Right ETPTRollout
-        x -> Left ("Unable to parse EditsTestersPatchTrack from: " <> x)
-
-instance ToHttpApiData EditsTestersPatchTrack where
-    toQueryParam = \case
-        ETPTAlpha -> "alpha"
-        ETPTBeta -> "beta"
-        ETPTProduction -> "production"
-        ETPTRollout -> "rollout"
-
-instance FromJSON EditsTestersPatchTrack where
-    parseJSON = parseJSONText "EditsTestersPatchTrack"
-
-instance ToJSON EditsTestersPatchTrack where
-    toJSON = toJSONText
-
-data EditsTestersGetTrack
-    = EAlpha
-      -- ^ @alpha@
-    | EBeta
-      -- ^ @beta@
-    | EProduction
-      -- ^ @production@
-    | ERollout
-      -- ^ @rollout@
-      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
-
-instance Hashable EditsTestersGetTrack
-
-instance FromHttpApiData EditsTestersGetTrack where
-    parseQueryParam = \case
-        "alpha" -> Right EAlpha
-        "beta" -> Right EBeta
-        "production" -> Right EProduction
-        "rollout" -> Right ERollout
-        x -> Left ("Unable to parse EditsTestersGetTrack from: " <> x)
-
-instance ToHttpApiData EditsTestersGetTrack where
-    toQueryParam = \case
-        EAlpha -> "alpha"
-        EBeta -> "beta"
-        EProduction -> "production"
-        ERollout -> "rollout"
-
-instance FromJSON EditsTestersGetTrack where
-    parseJSON = parseJSONText "EditsTestersGetTrack"
-
-instance ToJSON EditsTestersGetTrack where
     toJSON = toJSONText
 
 data EditsImagesUploadImageType
@@ -531,38 +358,4 @@ instance FromJSON EditsImagesDeleteImageType where
     parseJSON = parseJSONText "EditsImagesDeleteImageType"
 
 instance ToJSON EditsImagesDeleteImageType where
-    toJSON = toJSONText
-
-data EditsTestersUpdateTrack
-    = EDIAlpha
-      -- ^ @alpha@
-    | EDIBeta
-      -- ^ @beta@
-    | EDIProduction
-      -- ^ @production@
-    | EDIRollout
-      -- ^ @rollout@
-      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
-
-instance Hashable EditsTestersUpdateTrack
-
-instance FromHttpApiData EditsTestersUpdateTrack where
-    parseQueryParam = \case
-        "alpha" -> Right EDIAlpha
-        "beta" -> Right EDIBeta
-        "production" -> Right EDIProduction
-        "rollout" -> Right EDIRollout
-        x -> Left ("Unable to parse EditsTestersUpdateTrack from: " <> x)
-
-instance ToHttpApiData EditsTestersUpdateTrack where
-    toQueryParam = \case
-        EDIAlpha -> "alpha"
-        EDIBeta -> "beta"
-        EDIProduction -> "production"
-        EDIRollout -> "rollout"
-
-instance FromJSON EditsTestersUpdateTrack where
-    parseJSON = parseJSONText "EditsTestersUpdateTrack"
-
-instance ToJSON EditsTestersUpdateTrack where
     toJSON = toJSONText

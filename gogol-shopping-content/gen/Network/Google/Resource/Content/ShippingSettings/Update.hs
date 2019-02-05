@@ -36,7 +36,6 @@ module Network.Google.Resource.Content.ShippingSettings.Update
     , ssuMerchantId
     , ssuPayload
     , ssuAccountId
-    , ssuDryRun
     ) where
 
 import           Network.Google.Prelude
@@ -46,14 +45,13 @@ import           Network.Google.ShoppingContent.Types
 -- 'ShippingSettingsUpdate' request conforms to.
 type ShippingSettingsUpdateResource =
      "content" :>
-       "v2" :>
+       "v2.1" :>
          Capture "merchantId" (Textual Word64) :>
            "shippingsettings" :>
              Capture "accountId" (Textual Word64) :>
-               QueryParam "dryRun" Bool :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] ShippingSettings :>
-                     Put '[JSON] ShippingSettings
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] ShippingSettings :>
+                   Put '[JSON] ShippingSettings
 
 -- | Updates the shipping settings of the account.
 --
@@ -62,7 +60,6 @@ data ShippingSettingsUpdate = ShippingSettingsUpdate'
     { _ssuMerchantId :: !(Textual Word64)
     , _ssuPayload    :: !ShippingSettings
     , _ssuAccountId  :: !(Textual Word64)
-    , _ssuDryRun     :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ShippingSettingsUpdate' with the minimum fields required to make a request.
@@ -74,8 +71,6 @@ data ShippingSettingsUpdate = ShippingSettingsUpdate'
 -- * 'ssuPayload'
 --
 -- * 'ssuAccountId'
---
--- * 'ssuDryRun'
 shippingSettingsUpdate
     :: Word64 -- ^ 'ssuMerchantId'
     -> ShippingSettings -- ^ 'ssuPayload'
@@ -86,10 +81,11 @@ shippingSettingsUpdate pSsuMerchantId_ pSsuPayload_ pSsuAccountId_ =
     { _ssuMerchantId = _Coerce # pSsuMerchantId_
     , _ssuPayload = pSsuPayload_
     , _ssuAccountId = _Coerce # pSsuAccountId_
-    , _ssuDryRun = Nothing
     }
 
--- | The ID of the managing account.
+-- | The ID of the managing account. If this parameter is not the same as
+-- accountId, then this account must be a multi-client account and
+-- accountId must be the ID of a sub-account of this account.
 ssuMerchantId :: Lens' ShippingSettingsUpdate Word64
 ssuMerchantId
   = lens _ssuMerchantId
@@ -107,18 +103,12 @@ ssuAccountId
   = lens _ssuAccountId (\ s a -> s{_ssuAccountId = a})
       . _Coerce
 
--- | Flag to run the request in dry-run mode.
-ssuDryRun :: Lens' ShippingSettingsUpdate (Maybe Bool)
-ssuDryRun
-  = lens _ssuDryRun (\ s a -> s{_ssuDryRun = a})
-
 instance GoogleRequest ShippingSettingsUpdate where
         type Rs ShippingSettingsUpdate = ShippingSettings
         type Scopes ShippingSettingsUpdate =
              '["https://www.googleapis.com/auth/content"]
         requestClient ShippingSettingsUpdate'{..}
-          = go _ssuMerchantId _ssuAccountId _ssuDryRun
-              (Just AltJSON)
+          = go _ssuMerchantId _ssuAccountId (Just AltJSON)
               _ssuPayload
               shoppingContentService
           where go

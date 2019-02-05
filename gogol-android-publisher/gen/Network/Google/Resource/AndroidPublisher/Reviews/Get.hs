@@ -35,6 +35,7 @@ module Network.Google.Resource.AndroidPublisher.Reviews.Get
     -- * Request Lenses
     , rgReviewId
     , rgPackageName
+    , rgTranslationLanguage
     ) where
 
 import           Network.Google.AndroidPublisher.Types
@@ -44,19 +45,21 @@ import           Network.Google.Prelude
 -- 'ReviewsGet' request conforms to.
 type ReviewsGetResource =
      "androidpublisher" :>
-       "v2" :>
+       "v3" :>
          "applications" :>
            Capture "packageName" Text :>
              "reviews" :>
                Capture "reviewId" Text :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] Review
+                 QueryParam "translationLanguage" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Review
 
 -- | Returns a single review.
 --
 -- /See:/ 'reviewsGet' smart constructor.
 data ReviewsGet = ReviewsGet'
-    { _rgReviewId    :: !Text
-    , _rgPackageName :: !Text
+    { _rgReviewId            :: !Text
+    , _rgPackageName         :: !Text
+    , _rgTranslationLanguage :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReviewsGet' with the minimum fields required to make a request.
@@ -66,6 +69,8 @@ data ReviewsGet = ReviewsGet'
 -- * 'rgReviewId'
 --
 -- * 'rgPackageName'
+--
+-- * 'rgTranslationLanguage'
 reviewsGet
     :: Text -- ^ 'rgReviewId'
     -> Text -- ^ 'rgPackageName'
@@ -74,6 +79,7 @@ reviewsGet pRgReviewId_ pRgPackageName_ =
     ReviewsGet'
     { _rgReviewId = pRgReviewId_
     , _rgPackageName = pRgPackageName_
+    , _rgTranslationLanguage = Nothing
     }
 
 rgReviewId :: Lens' ReviewsGet Text
@@ -87,12 +93,19 @@ rgPackageName
   = lens _rgPackageName
       (\ s a -> s{_rgPackageName = a})
 
+rgTranslationLanguage :: Lens' ReviewsGet (Maybe Text)
+rgTranslationLanguage
+  = lens _rgTranslationLanguage
+      (\ s a -> s{_rgTranslationLanguage = a})
+
 instance GoogleRequest ReviewsGet where
         type Rs ReviewsGet = Review
         type Scopes ReviewsGet =
              '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient ReviewsGet'{..}
-          = go _rgPackageName _rgReviewId (Just AltJSON)
+          = go _rgPackageName _rgReviewId
+              _rgTranslationLanguage
+              (Just AltJSON)
               androidPublisherService
           where go
                   = buildClient (Proxy :: Proxy ReviewsGetResource)

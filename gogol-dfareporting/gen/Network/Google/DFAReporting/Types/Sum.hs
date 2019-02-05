@@ -16,9 +16,9 @@
 --
 module Network.Google.DFAReporting.Types.Sum where
 
-import           Network.Google.Prelude
+import           Network.Google.Prelude hiding (Bytes)
 
--- | Order of sorted results, default is ASCENDING.
+-- | Order of sorted results.
 data PlacementsListSortOrder
     = Ascending
       -- ^ @ASCENDING@
@@ -47,12 +47,16 @@ instance ToJSON PlacementsListSortOrder where
 
 -- | The date range relative to the date of when the report is run.
 data DateRangeRelativeDateRange
-    = Last24Months
+    = Last14Days
+      -- ^ @LAST_14_DAYS@
+    | Last24Months
       -- ^ @LAST_24_MONTHS@
     | Last30Days
       -- ^ @LAST_30_DAYS@
     | Last365Days
       -- ^ @LAST_365_DAYS@
+    | Last60Days
+      -- ^ @LAST_60_DAYS@
     | Last7Days
       -- ^ @LAST_7_DAYS@
     | Last90Days
@@ -83,9 +87,11 @@ instance Hashable DateRangeRelativeDateRange
 
 instance FromHttpApiData DateRangeRelativeDateRange where
     parseQueryParam = \case
+        "LAST_14_DAYS" -> Right Last14Days
         "LAST_24_MONTHS" -> Right Last24Months
         "LAST_30_DAYS" -> Right Last30Days
         "LAST_365_DAYS" -> Right Last365Days
+        "LAST_60_DAYS" -> Right Last60Days
         "LAST_7_DAYS" -> Right Last7Days
         "LAST_90_DAYS" -> Right Last90Days
         "MONTH_TO_DATE" -> Right MonthToDate
@@ -102,9 +108,11 @@ instance FromHttpApiData DateRangeRelativeDateRange where
 
 instance ToHttpApiData DateRangeRelativeDateRange where
     toQueryParam = \case
+        Last14Days -> "LAST_14_DAYS"
         Last24Months -> "LAST_24_MONTHS"
         Last30Days -> "LAST_30_DAYS"
         Last365Days -> "LAST_365_DAYS"
+        Last60Days -> "LAST_60_DAYS"
         Last7Days -> "LAST_7_DAYS"
         Last90Days -> "LAST_90_DAYS"
         MonthToDate -> "MONTH_TO_DATE"
@@ -151,7 +159,7 @@ instance FromJSON AdvertisersListSortField where
 instance ToJSON AdvertisersListSortField where
     toJSON = toJSONText
 
--- | Order of sorted results, default is ASCENDING.
+-- | Order of sorted results.
 data CreativeFieldsListSortOrder
     = CFLSOAscending
       -- ^ @ASCENDING@
@@ -178,7 +186,7 @@ instance FromJSON CreativeFieldsListSortOrder where
 instance ToJSON CreativeFieldsListSortOrder where
     toJSON = toJSONText
 
--- | Order of sorted results, default is ASCENDING.
+-- | Order of sorted results.
 data TargetingTemplatesListSortOrder
     = TTLSOAscending
       -- ^ @ASCENDING@
@@ -203,6 +211,33 @@ instance FromJSON TargetingTemplatesListSortOrder where
     parseJSON = parseJSONText "TargetingTemplatesListSortOrder"
 
 instance ToJSON TargetingTemplatesListSortOrder where
+    toJSON = toJSONText
+
+-- | Order of sorted results.
+data AdvertiserLandingPagesListSortOrder
+    = ALPLSOAscending
+      -- ^ @ASCENDING@
+    | ALPLSODescending
+      -- ^ @DESCENDING@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable AdvertiserLandingPagesListSortOrder
+
+instance FromHttpApiData AdvertiserLandingPagesListSortOrder where
+    parseQueryParam = \case
+        "ASCENDING" -> Right ALPLSOAscending
+        "DESCENDING" -> Right ALPLSODescending
+        x -> Left ("Unable to parse AdvertiserLandingPagesListSortOrder from: " <> x)
+
+instance ToHttpApiData AdvertiserLandingPagesListSortOrder where
+    toQueryParam = \case
+        ALPLSOAscending -> "ASCENDING"
+        ALPLSODescending -> "DESCENDING"
+
+instance FromJSON AdvertiserLandingPagesListSortOrder where
+    parseJSON = parseJSONText "AdvertiserLandingPagesListSortOrder"
+
+instance ToJSON AdvertiserLandingPagesListSortOrder where
     toJSON = toJSONText
 
 -- | Field by which to sort the list.
@@ -260,7 +295,7 @@ instance FromJSON FloodlightActivityTagFormat where
 instance ToJSON FloodlightActivityTagFormat where
     toJSON = toJSONText
 
--- | Order of sorted results, default is ASCENDING.
+-- | Order of sorted results.
 data OrderDocumentsListSortOrder
     = ODLSOAscending
       -- ^ @ASCENDING@
@@ -295,19 +330,24 @@ instance ToJSON OrderDocumentsListSortOrder where
 -- FLASH_INPAGE, HTML5_BANNER, all RICH_MEDIA, and all VPAID creatives.
 -- Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.
 -- ADDITIONAL_IMAGE and ADDITIONAL_FLASH apply to FLASH_INPAGE creatives.
--- OTHER refers to assets from sources other than DCM, such as Studio
--- uploaded assets, applicable to all RICH_MEDIA and all VPAID creatives.
--- PARENT_VIDEO refers to videos uploaded by the user in DCM and is
+-- OTHER refers to assets from sources other than Campaign Manager, such as
+-- Studio uploaded assets, applicable to all RICH_MEDIA and all VPAID
+-- creatives. PARENT_VIDEO refers to videos uploaded by the user in
+-- Campaign Manager and is applicable to INSTREAM_VIDEO and
+-- VPAID_LINEAR_VIDEO creatives. TRANSCODED_VIDEO refers to videos
+-- transcoded by Campaign Manager from PARENT_VIDEO assets and is
 -- applicable to INSTREAM_VIDEO and VPAID_LINEAR_VIDEO creatives.
--- TRANSCODED_VIDEO refers to videos transcoded by DCM from PARENT_VIDEO
--- assets and is applicable to INSTREAM_VIDEO and VPAID_LINEAR_VIDEO
--- creatives. ALTERNATE_VIDEO refers to the DCM representation of child
+-- ALTERNATE_VIDEO refers to the Campaign Manager representation of child
 -- asset videos from Studio, and is applicable to VPAID_LINEAR_VIDEO
--- creatives. These cannot be added or removed within DCM. For
+-- creatives. These cannot be added or removed within Campaign Manager. For
 -- VPAID_LINEAR_VIDEO creatives, PARENT_VIDEO, TRANSCODED_VIDEO and
 -- ALTERNATE_VIDEO assets that are marked active serve as backup in case
 -- the VPAID creative cannot be served. Only PARENT_VIDEO assets can be
 -- added or removed for an INSTREAM_VIDEO or VPAID_LINEAR_VIDEO creative.
+-- PARENT_AUDIO refers to audios uploaded by the user in Campaign Manager
+-- and is applicable to INSTREAM_AUDIO creatives. TRANSCODED_AUDIO refers
+-- to audios transcoded by Campaign Manager from PARENT_AUDIO assets and is
+-- applicable to INSTREAM_AUDIO creatives.
 data CreativeAssetRole
     = AdditionalFlash
       -- ^ @ADDITIONAL_FLASH@
@@ -319,10 +359,14 @@ data CreativeAssetRole
       -- ^ @BACKUP_IMAGE@
     | Other
       -- ^ @OTHER@
+    | ParentAudio
+      -- ^ @PARENT_AUDIO@
     | ParentVideo
       -- ^ @PARENT_VIDEO@
     | Primary
       -- ^ @PRIMARY@
+    | TranscodedAudio
+      -- ^ @TRANSCODED_AUDIO@
     | TranscodedVideo
       -- ^ @TRANSCODED_VIDEO@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -336,8 +380,10 @@ instance FromHttpApiData CreativeAssetRole where
         "ALTERNATE_VIDEO" -> Right AlternateVideo
         "BACKUP_IMAGE" -> Right BackupImage
         "OTHER" -> Right Other
+        "PARENT_AUDIO" -> Right ParentAudio
         "PARENT_VIDEO" -> Right ParentVideo
         "PRIMARY" -> Right Primary
+        "TRANSCODED_AUDIO" -> Right TranscodedAudio
         "TRANSCODED_VIDEO" -> Right TranscodedVideo
         x -> Left ("Unable to parse CreativeAssetRole from: " <> x)
 
@@ -348,8 +394,10 @@ instance ToHttpApiData CreativeAssetRole where
         AlternateVideo -> "ALTERNATE_VIDEO"
         BackupImage -> "BACKUP_IMAGE"
         Other -> "OTHER"
+        ParentAudio -> "PARENT_AUDIO"
         ParentVideo -> "PARENT_VIDEO"
         Primary -> "PRIMARY"
+        TranscodedAudio -> "TRANSCODED_AUDIO"
         TranscodedVideo -> "TRANSCODED_VIDEO"
 
 instance FromJSON CreativeAssetRole where
@@ -420,7 +468,7 @@ instance FromJSON RecipientDeliveryType where
 instance ToJSON RecipientDeliveryType where
     toJSON = toJSONText
 
--- | Third-party URL type for in-stream video creatives.
+-- | Third-party URL type for in-stream video and in-stream audio creatives.
 data ThirdPartyTrackingURLThirdPartyURLType
     = ClickTracking
       -- ^ @CLICK_TRACKING@
@@ -515,7 +563,7 @@ instance FromJSON ThirdPartyTrackingURLThirdPartyURLType where
 instance ToJSON ThirdPartyTrackingURLThirdPartyURLType where
     toJSON = toJSONText
 
--- | Order of sorted results, default is ASCENDING.
+-- | Order of sorted results.
 data TargetableRemarketingListsListSortOrder
     = TRLLSOAscending
       -- ^ @ASCENDING@
@@ -644,6 +692,44 @@ instance FromJSON UserRolePermissionAvailability where
 instance ToJSON UserRolePermissionAvailability where
     toJSON = toJSONText
 
+-- | VPAID adapter setting for this placement. Controls which VPAID format
+-- the measurement adapter will use for in-stream video creatives assigned
+-- to this placement. Note: Flash is no longer supported. This field now
+-- defaults to HTML5 when the following values are provided: FLASH, BOTH.
+data PlacementVpaidAdapterChoice
+    = Both
+      -- ^ @BOTH@
+    | Default
+      -- ^ @DEFAULT@
+    | Flash
+      -- ^ @FLASH@
+    | HTML5
+      -- ^ @HTML5@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable PlacementVpaidAdapterChoice
+
+instance FromHttpApiData PlacementVpaidAdapterChoice where
+    parseQueryParam = \case
+        "BOTH" -> Right Both
+        "DEFAULT" -> Right Default
+        "FLASH" -> Right Flash
+        "HTML5" -> Right HTML5
+        x -> Left ("Unable to parse PlacementVpaidAdapterChoice from: " <> x)
+
+instance ToHttpApiData PlacementVpaidAdapterChoice where
+    toQueryParam = \case
+        Both -> "BOTH"
+        Default -> "DEFAULT"
+        Flash -> "FLASH"
+        HTML5 -> "HTML5"
+
+instance FromJSON PlacementVpaidAdapterChoice where
+    parseJSON = parseJSONText "PlacementVpaidAdapterChoice"
+
+instance ToJSON PlacementVpaidAdapterChoice where
+    toJSON = toJSONText
+
 -- | Visibility of this directory site contact assignment. When set to PUBLIC
 -- this contact assignment is visible to all account and agency users; when
 -- set to PRIVATE it is visible only to the site.
@@ -689,6 +775,8 @@ data PlacementCompatibility
       -- ^ @DISPLAY@
     | DisplayInterstitial
       -- ^ @DISPLAY_INTERSTITIAL@
+    | InStreamAudio
+      -- ^ @IN_STREAM_AUDIO@
     | InStreamVideo
       -- ^ @IN_STREAM_VIDEO@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -701,6 +789,7 @@ instance FromHttpApiData PlacementCompatibility where
         "APP_INTERSTITIAL" -> Right AppInterstitial
         "DISPLAY" -> Right Display
         "DISPLAY_INTERSTITIAL" -> Right DisplayInterstitial
+        "IN_STREAM_AUDIO" -> Right InStreamAudio
         "IN_STREAM_VIDEO" -> Right InStreamVideo
         x -> Left ("Unable to parse PlacementCompatibility from: " <> x)
 
@@ -710,6 +799,7 @@ instance ToHttpApiData PlacementCompatibility where
         AppInterstitial -> "APP_INTERSTITIAL"
         Display -> "DISPLAY"
         DisplayInterstitial -> "DISPLAY_INTERSTITIAL"
+        InStreamAudio -> "IN_STREAM_AUDIO"
         InStreamVideo -> "IN_STREAM_VIDEO"
 
 instance FromJSON PlacementCompatibility where
@@ -841,6 +931,8 @@ data AdSlotCompatibility
       -- ^ @DISPLAY@
     | ASCDisplayInterstitial
       -- ^ @DISPLAY_INTERSTITIAL@
+    | ASCInStreamAudio
+      -- ^ @IN_STREAM_AUDIO@
     | ASCInStreamVideo
       -- ^ @IN_STREAM_VIDEO@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -853,6 +945,7 @@ instance FromHttpApiData AdSlotCompatibility where
         "APP_INTERSTITIAL" -> Right ASCAppInterstitial
         "DISPLAY" -> Right ASCDisplay
         "DISPLAY_INTERSTITIAL" -> Right ASCDisplayInterstitial
+        "IN_STREAM_AUDIO" -> Right ASCInStreamAudio
         "IN_STREAM_VIDEO" -> Right ASCInStreamVideo
         x -> Left ("Unable to parse AdSlotCompatibility from: " <> x)
 
@@ -862,6 +955,7 @@ instance ToHttpApiData AdSlotCompatibility where
         ASCAppInterstitial -> "APP_INTERSTITIAL"
         ASCDisplay -> "DISPLAY"
         ASCDisplayInterstitial -> "DISPLAY_INTERSTITIAL"
+        ASCInStreamAudio -> "IN_STREAM_AUDIO"
         ASCInStreamVideo -> "IN_STREAM_VIDEO"
 
 instance FromJSON AdSlotCompatibility where
@@ -897,7 +991,39 @@ instance FromJSON CampaignsListSortField where
 instance ToJSON CampaignsListSortField where
     toJSON = toJSONText
 
--- | Trafficker type of this user profile.
+-- | Orientation of a video placement. If this value is set, placement will
+-- return assets matching the specified orientation.
+data VideoSettingsOrientation
+    = Any
+      -- ^ @ANY@
+    | Landscape
+      -- ^ @LANDSCAPE@
+    | Portrait
+      -- ^ @PORTRAIT@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable VideoSettingsOrientation
+
+instance FromHttpApiData VideoSettingsOrientation where
+    parseQueryParam = \case
+        "ANY" -> Right Any
+        "LANDSCAPE" -> Right Landscape
+        "PORTRAIT" -> Right Portrait
+        x -> Left ("Unable to parse VideoSettingsOrientation from: " <> x)
+
+instance ToHttpApiData VideoSettingsOrientation where
+    toQueryParam = \case
+        Any -> "ANY"
+        Landscape -> "LANDSCAPE"
+        Portrait -> "PORTRAIT"
+
+instance FromJSON VideoSettingsOrientation where
+    parseJSON = parseJSONText "VideoSettingsOrientation"
+
+instance ToJSON VideoSettingsOrientation where
+    toJSON = toJSONText
+
+-- | Trafficker type of this user profile. This is a read-only field.
 data AccountUserProFileTraffickerType
     = ExternalTrafficker
       -- ^ @EXTERNAL_TRAFFICKER@
@@ -1225,6 +1351,8 @@ data AdsListCompatibility
       -- ^ @DISPLAY@
     | ALCDisplayInterstitial
       -- ^ @DISPLAY_INTERSTITIAL@
+    | ALCInStreamAudio
+      -- ^ @IN_STREAM_AUDIO@
     | ALCInStreamVideo
       -- ^ @IN_STREAM_VIDEO@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -1237,6 +1365,7 @@ instance FromHttpApiData AdsListCompatibility where
         "APP_INTERSTITIAL" -> Right ALCAppInterstitial
         "DISPLAY" -> Right ALCDisplay
         "DISPLAY_INTERSTITIAL" -> Right ALCDisplayInterstitial
+        "IN_STREAM_AUDIO" -> Right ALCInStreamAudio
         "IN_STREAM_VIDEO" -> Right ALCInStreamVideo
         x -> Left ("Unable to parse AdsListCompatibility from: " <> x)
 
@@ -1246,6 +1375,7 @@ instance ToHttpApiData AdsListCompatibility where
         ALCAppInterstitial -> "APP_INTERSTITIAL"
         ALCDisplay -> "DISPLAY"
         ALCDisplayInterstitial -> "DISPLAY_INTERSTITIAL"
+        ALCInStreamAudio -> "IN_STREAM_AUDIO"
         ALCInStreamVideo -> "IN_STREAM_VIDEO"
 
 instance FromJSON AdsListCompatibility where
@@ -1935,7 +2065,7 @@ instance FromJSON ConversionErrorCode where
 instance ToJSON ConversionErrorCode where
     toJSON = toJSONText
 
--- | Order of sorted results, default is ASCENDING.
+-- | Order of sorted results.
 data FloodlightActivitiesListSortOrder
     = FALSOAscending
       -- ^ @ASCENDING@
@@ -2003,6 +2133,8 @@ data EncryptionInfoEncryptionEntityType
       -- ^ @DCM_ACCOUNT@
     | DcmAdvertiser
       -- ^ @DCM_ADVERTISER@
+    | DfpNetworkCode
+      -- ^ @DFP_NETWORK_CODE@
     | EncryptionEntityTypeUnknown
       -- ^ @ENCRYPTION_ENTITY_TYPE_UNKNOWN@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -2016,6 +2148,7 @@ instance FromHttpApiData EncryptionInfoEncryptionEntityType where
         "DBM_PARTNER" -> Right DBmPartner
         "DCM_ACCOUNT" -> Right DcmAccount
         "DCM_ADVERTISER" -> Right DcmAdvertiser
+        "DFP_NETWORK_CODE" -> Right DfpNetworkCode
         "ENCRYPTION_ENTITY_TYPE_UNKNOWN" -> Right EncryptionEntityTypeUnknown
         x -> Left ("Unable to parse EncryptionInfoEncryptionEntityType from: " <> x)
 
@@ -2026,6 +2159,7 @@ instance ToHttpApiData EncryptionInfoEncryptionEntityType where
         DBmPartner -> "DBM_PARTNER"
         DcmAccount -> "DCM_ACCOUNT"
         DcmAdvertiser -> "DCM_ADVERTISER"
+        DfpNetworkCode -> "DFP_NETWORK_CODE"
         EncryptionEntityTypeUnknown -> "ENCRYPTION_ENTITY_TYPE_UNKNOWN"
 
 instance FromJSON EncryptionInfoEncryptionEntityType where
@@ -2116,7 +2250,7 @@ instance FromJSON CreativeCustomEventTargetType where
 instance ToJSON CreativeCustomEventTargetType where
     toJSON = toJSONText
 
--- | The scope that defines which results are returned, default is \'MINE\'.
+-- | The scope that defines which results are returned.
 data ReportsListScope
     = All
       -- ^ @ALL@
@@ -2143,6 +2277,37 @@ instance FromJSON ReportsListScope where
     parseJSON = parseJSONText "ReportsListScope"
 
 instance ToJSON ReportsListScope where
+    toJSON = toJSONText
+
+-- | Orientation of video asset. This is a read-only, auto-generated field.
+data CreativeAssetOrientation
+    = CAOLandscape
+      -- ^ @LANDSCAPE@
+    | CAOPortrait
+      -- ^ @PORTRAIT@
+    | CAOSquare
+      -- ^ @SQUARE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable CreativeAssetOrientation
+
+instance FromHttpApiData CreativeAssetOrientation where
+    parseQueryParam = \case
+        "LANDSCAPE" -> Right CAOLandscape
+        "PORTRAIT" -> Right CAOPortrait
+        "SQUARE" -> Right CAOSquare
+        x -> Left ("Unable to parse CreativeAssetOrientation from: " <> x)
+
+instance ToHttpApiData CreativeAssetOrientation where
+    toQueryParam = \case
+        CAOLandscape -> "LANDSCAPE"
+        CAOPortrait -> "PORTRAIT"
+        CAOSquare -> "SQUARE"
+
+instance FromJSON CreativeAssetOrientation where
+    parseJSON = parseJSONText "CreativeAssetOrientation"
+
+instance ToJSON CreativeAssetOrientation where
     toJSON = toJSONText
 
 -- | Duration type for which an asset will be displayed. Applicable to the
@@ -2576,7 +2741,7 @@ instance FromJSON CreativeBackupImageFeaturesItem where
 instance ToJSON CreativeBackupImageFeaturesItem where
     toJSON = toJSONText
 
--- | Order of sorted results, default is ASCENDING.
+-- | Order of sorted results.
 data AdvertisersListSortOrder
     = ALSOAscending
       -- ^ @ASCENDING@
@@ -3103,7 +3268,34 @@ instance FromJSON FsCommandPositionOption where
 instance ToJSON FsCommandPositionOption where
     toJSON = toJSONText
 
--- | Order of sorted results, default is ASCENDING.
+-- | Field by which to sort the list.
+data AdvertiserLandingPagesListSortField
+    = ALPLSFID
+      -- ^ @ID@
+    | ALPLSFName
+      -- ^ @NAME@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable AdvertiserLandingPagesListSortField
+
+instance FromHttpApiData AdvertiserLandingPagesListSortField where
+    parseQueryParam = \case
+        "ID" -> Right ALPLSFID
+        "NAME" -> Right ALPLSFName
+        x -> Left ("Unable to parse AdvertiserLandingPagesListSortField from: " <> x)
+
+instance ToHttpApiData AdvertiserLandingPagesListSortField where
+    toQueryParam = \case
+        ALPLSFID -> "ID"
+        ALPLSFName -> "NAME"
+
+instance FromJSON AdvertiserLandingPagesListSortField where
+    parseJSON = parseJSONText "AdvertiserLandingPagesListSortField"
+
+instance ToJSON AdvertiserLandingPagesListSortField where
+    toJSON = toJSONText
+
+-- | Order of sorted results.
 data UserRolesListSortOrder
     = URLSOAscending
       -- ^ @ASCENDING@
@@ -3145,6 +3337,8 @@ data PlacementsListCompatibilities
       -- ^ @DISPLAY@
     | PLCDisplayInterstitial
       -- ^ @DISPLAY_INTERSTITIAL@
+    | PLCInStreamAudio
+      -- ^ @IN_STREAM_AUDIO@
     | PLCInStreamVideo
       -- ^ @IN_STREAM_VIDEO@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -3157,6 +3351,7 @@ instance FromHttpApiData PlacementsListCompatibilities where
         "APP_INTERSTITIAL" -> Right PLCAppInterstitial
         "DISPLAY" -> Right PLCDisplay
         "DISPLAY_INTERSTITIAL" -> Right PLCDisplayInterstitial
+        "IN_STREAM_AUDIO" -> Right PLCInStreamAudio
         "IN_STREAM_VIDEO" -> Right PLCInStreamVideo
         x -> Left ("Unable to parse PlacementsListCompatibilities from: " <> x)
 
@@ -3166,6 +3361,7 @@ instance ToHttpApiData PlacementsListCompatibilities where
         PLCAppInterstitial -> "APP_INTERSTITIAL"
         PLCDisplay -> "DISPLAY"
         PLCDisplayInterstitial -> "DISPLAY_INTERSTITIAL"
+        PLCInStreamAudio -> "IN_STREAM_AUDIO"
         PLCInStreamVideo -> "IN_STREAM_VIDEO"
 
 instance FromJSON PlacementsListCompatibilities where
@@ -3210,6 +3406,8 @@ data CreativeCompatibilityItem
       -- ^ @DISPLAY@
     | CCIDisplayInterstitial
       -- ^ @DISPLAY_INTERSTITIAL@
+    | CCIInStreamAudio
+      -- ^ @IN_STREAM_AUDIO@
     | CCIInStreamVideo
       -- ^ @IN_STREAM_VIDEO@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -3222,6 +3420,7 @@ instance FromHttpApiData CreativeCompatibilityItem where
         "APP_INTERSTITIAL" -> Right CCIAppInterstitial
         "DISPLAY" -> Right CCIDisplay
         "DISPLAY_INTERSTITIAL" -> Right CCIDisplayInterstitial
+        "IN_STREAM_AUDIO" -> Right CCIInStreamAudio
         "IN_STREAM_VIDEO" -> Right CCIInStreamVideo
         x -> Left ("Unable to parse CreativeCompatibilityItem from: " <> x)
 
@@ -3231,6 +3430,7 @@ instance ToHttpApiData CreativeCompatibilityItem where
         CCIAppInterstitial -> "APP_INTERSTITIAL"
         CCIDisplay -> "DISPLAY"
         CCIDisplayInterstitial -> "DISPLAY_INTERSTITIAL"
+        CCIInStreamAudio -> "IN_STREAM_AUDIO"
         CCIInStreamVideo -> "IN_STREAM_VIDEO"
 
 instance FromJSON CreativeCompatibilityItem where
@@ -3293,7 +3493,7 @@ instance FromJSON SiteContactContactType where
 instance ToJSON SiteContactContactType where
     toJSON = toJSONText
 
--- | Order of sorted results, default is \'DESCENDING\'.
+-- | Order of sorted results.
 data ReportsListSortOrder
     = RLSOAscending
       -- ^ @ASCENDING@
@@ -3349,7 +3549,7 @@ instance FromJSON TargetableRemarketingListsListSortField where
 instance ToJSON TargetableRemarketingListsListSortField where
     toJSON = toJSONText
 
--- | Order of sorted results, default is ASCENDING.
+-- | Order of sorted results.
 data CampaignsListSortOrder
     = CLSOAscending
       -- ^ @ASCENDING@
@@ -3577,40 +3777,6 @@ instance FromJSON CreativeAuthoringSource where
 instance ToJSON CreativeAuthoringSource where
     toJSON = toJSONText
 
-data FloodlightConfigurationStandardVariableTypesItem
-    = Num
-      -- ^ @NUM@
-    | Ord
-      -- ^ @ORD@
-    | Tran
-      -- ^ @TRAN@
-    | U
-      -- ^ @U@
-      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
-
-instance Hashable FloodlightConfigurationStandardVariableTypesItem
-
-instance FromHttpApiData FloodlightConfigurationStandardVariableTypesItem where
-    parseQueryParam = \case
-        "NUM" -> Right Num
-        "ORD" -> Right Ord
-        "TRAN" -> Right Tran
-        "U" -> Right U
-        x -> Left ("Unable to parse FloodlightConfigurationStandardVariableTypesItem from: " <> x)
-
-instance ToHttpApiData FloodlightConfigurationStandardVariableTypesItem where
-    toQueryParam = \case
-        Num -> "NUM"
-        Ord -> "ORD"
-        Tran -> "TRAN"
-        U -> "U"
-
-instance FromJSON FloodlightConfigurationStandardVariableTypesItem where
-    parseJSON = parseJSONText "FloodlightConfigurationStandardVariableTypesItem"
-
-instance ToJSON FloodlightConfigurationStandardVariableTypesItem where
-    toJSON = toJSONText
-
 -- | Payment source for this placement. This is a required field that is
 -- read-only after insertion.
 data PlacementPaymentSource
@@ -3639,7 +3805,7 @@ instance FromJSON PlacementPaymentSource where
 instance ToJSON PlacementPaymentSource where
     toJSON = toJSONText
 
--- | Order of sorted results, default is \'DESCENDING\'.
+-- | Order of sorted results.
 data ReportsFilesListSortOrder
     = RFLSOAscending
       -- ^ @ASCENDING@
@@ -3728,7 +3894,7 @@ instance FromJSON EventTagType where
 instance ToJSON EventTagType where
     toJSON = toJSONText
 
--- | Order of sorted results, default is ASCENDING.
+-- | Order of sorted results.
 data CreativesListSortOrder
     = CAscending
       -- ^ @ASCENDING@
@@ -3937,7 +4103,9 @@ instance ToJSON OrderContactContactType where
 -- no longer supported for new uploads. All image assets should use
 -- HTML_IMAGE.
 data CreativeAssetIdType
-    = CAITFlash
+    = CAITAudio
+      -- ^ @AUDIO@
+    | CAITFlash
       -- ^ @FLASH@
     | CAITHTML
       -- ^ @HTML@
@@ -3953,6 +4121,7 @@ instance Hashable CreativeAssetIdType
 
 instance FromHttpApiData CreativeAssetIdType where
     parseQueryParam = \case
+        "AUDIO" -> Right CAITAudio
         "FLASH" -> Right CAITFlash
         "HTML" -> Right CAITHTML
         "HTML_IMAGE" -> Right CAITHTMLImage
@@ -3962,6 +4131,7 @@ instance FromHttpApiData CreativeAssetIdType where
 
 instance ToHttpApiData CreativeAssetIdType where
     toQueryParam = \case
+        CAITAudio -> "AUDIO"
         CAITFlash -> "FLASH"
         CAITHTML -> "HTML"
         CAITHTMLImage -> "HTML_IMAGE"
@@ -3974,7 +4144,7 @@ instance FromJSON CreativeAssetIdType where
 instance ToJSON CreativeAssetIdType where
     toJSON = toJSONText
 
--- | Order of sorted results, default is ASCENDING.
+-- | Order of sorted results.
 data AccountUserProFilesListSortOrder
     = AUPFLSOAscending
       -- ^ @ASCENDING@
@@ -4209,7 +4379,9 @@ instance FromJSON UserDefinedVariableConfigurationDataType where
 instance ToJSON UserDefinedVariableConfigurationDataType where
     toJSON = toJSONText
 
--- | Code type used for cache busting in the generated tag.
+-- | Code type used for cache busting in the generated tag. Applicable only
+-- when floodlightActivityGroupType is COUNTER and countingMethod is
+-- STANDARD_COUNTING or UNIQUE_COUNTING.
 data FloodlightActivityCacheBustingType
     = ActiveServerPage
       -- ^ @ACTIVE_SERVER_PAGE@
@@ -4248,7 +4420,7 @@ instance FromJSON FloodlightActivityCacheBustingType where
 instance ToJSON FloodlightActivityCacheBustingType where
     toJSON = toJSONText
 
--- | Order of sorted results, default is ASCENDING.
+-- | Order of sorted results.
 data CreativeGroupsListSortOrder
     = CGLSOAscending
       -- ^ @ASCENDING@
@@ -4316,6 +4488,8 @@ data TagDataFormat
       -- ^ @PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH@
     | PlacementTagInstreamVideoPrefetchVast3
       -- ^ @PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3@
+    | PlacementTagInstreamVideoPrefetchVast4
+      -- ^ @PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_4@
     | PlacementTagInternalRedirect
       -- ^ @PLACEMENT_TAG_INTERNAL_REDIRECT@
     | PlacementTagInterstitialIframeJavascript
@@ -4352,6 +4526,7 @@ instance FromHttpApiData TagDataFormat where
         "PLACEMENT_TAG_IFRAME_JAVASCRIPT_LEGACY" -> Right PlacementTagIframeJavascriptLegacy
         "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH" -> Right PlacementTagInstreamVideoPrefetch
         "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3" -> Right PlacementTagInstreamVideoPrefetchVast3
+        "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_4" -> Right PlacementTagInstreamVideoPrefetchVast4
         "PLACEMENT_TAG_INTERNAL_REDIRECT" -> Right PlacementTagInternalRedirect
         "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT" -> Right PlacementTagInterstitialIframeJavascript
         "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT_LEGACY" -> Right PlacementTagInterstitialIframeJavascriptLegacy
@@ -4374,6 +4549,7 @@ instance ToHttpApiData TagDataFormat where
         PlacementTagIframeJavascriptLegacy -> "PLACEMENT_TAG_IFRAME_JAVASCRIPT_LEGACY"
         PlacementTagInstreamVideoPrefetch -> "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH"
         PlacementTagInstreamVideoPrefetchVast3 -> "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3"
+        PlacementTagInstreamVideoPrefetchVast4 -> "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_4"
         PlacementTagInternalRedirect -> "PLACEMENT_TAG_INTERNAL_REDIRECT"
         PlacementTagInterstitialIframeJavascript -> "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT"
         PlacementTagInterstitialIframeJavascriptLegacy -> "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT_LEGACY"
@@ -4397,6 +4573,8 @@ instance ToJSON TagDataFormat where
 data AccountActiveAdSummaryActiveAdsLimitTier
     = ActiveAdsTier100K
       -- ^ @ACTIVE_ADS_TIER_100K@
+    | ActiveAdsTier1M
+      -- ^ @ACTIVE_ADS_TIER_1M@
     | ActiveAdsTier200K
       -- ^ @ACTIVE_ADS_TIER_200K@
     | ActiveAdsTier300K
@@ -4405,6 +4583,8 @@ data AccountActiveAdSummaryActiveAdsLimitTier
       -- ^ @ACTIVE_ADS_TIER_40K@
     | ActiveAdsTier500K
       -- ^ @ACTIVE_ADS_TIER_500K@
+    | ActiveAdsTier750K
+      -- ^ @ACTIVE_ADS_TIER_750K@
     | ActiveAdsTier75K
       -- ^ @ACTIVE_ADS_TIER_75K@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -4414,20 +4594,24 @@ instance Hashable AccountActiveAdSummaryActiveAdsLimitTier
 instance FromHttpApiData AccountActiveAdSummaryActiveAdsLimitTier where
     parseQueryParam = \case
         "ACTIVE_ADS_TIER_100K" -> Right ActiveAdsTier100K
+        "ACTIVE_ADS_TIER_1M" -> Right ActiveAdsTier1M
         "ACTIVE_ADS_TIER_200K" -> Right ActiveAdsTier200K
         "ACTIVE_ADS_TIER_300K" -> Right ActiveAdsTier300K
         "ACTIVE_ADS_TIER_40K" -> Right ActiveAdsTier40K
         "ACTIVE_ADS_TIER_500K" -> Right ActiveAdsTier500K
+        "ACTIVE_ADS_TIER_750K" -> Right ActiveAdsTier750K
         "ACTIVE_ADS_TIER_75K" -> Right ActiveAdsTier75K
         x -> Left ("Unable to parse AccountActiveAdSummaryActiveAdsLimitTier from: " <> x)
 
 instance ToHttpApiData AccountActiveAdSummaryActiveAdsLimitTier where
     toQueryParam = \case
         ActiveAdsTier100K -> "ACTIVE_ADS_TIER_100K"
+        ActiveAdsTier1M -> "ACTIVE_ADS_TIER_1M"
         ActiveAdsTier200K -> "ACTIVE_ADS_TIER_200K"
         ActiveAdsTier300K -> "ACTIVE_ADS_TIER_300K"
         ActiveAdsTier40K -> "ACTIVE_ADS_TIER_40K"
         ActiveAdsTier500K -> "ACTIVE_ADS_TIER_500K"
+        ActiveAdsTier750K -> "ACTIVE_ADS_TIER_750K"
         ActiveAdsTier75K -> "ACTIVE_ADS_TIER_75K"
 
 instance FromJSON AccountActiveAdSummaryActiveAdsLimitTier where
@@ -4537,7 +4721,7 @@ instance FromJSON ObjectFilterStatus where
 instance ToJSON ObjectFilterStatus where
     toJSON = toJSONText
 
--- | Order of sorted results, default is ASCENDING.
+-- | Order of sorted results.
 data CampaignCreativeAssociationsListSortOrder
     = CCALSOAscending
       -- ^ @ASCENDING@
@@ -4611,6 +4795,8 @@ data CreativesListTypes
       -- ^ @HTML5_BANNER@
     | CLTImage
       -- ^ @IMAGE@
+    | CLTInstreamAudio
+      -- ^ @INSTREAM_AUDIO@
     | CLTInstreamVideo
       -- ^ @INSTREAM_VIDEO@
     | CLTInstreamVideoRedirect
@@ -4656,6 +4842,7 @@ instance FromHttpApiData CreativesListTypes where
         "FLASH_INPAGE" -> Right CLTFlashInpage
         "HTML5_BANNER" -> Right CLTHTML5Banner
         "IMAGE" -> Right CLTImage
+        "INSTREAM_AUDIO" -> Right CLTInstreamAudio
         "INSTREAM_VIDEO" -> Right CLTInstreamVideo
         "INSTREAM_VIDEO_REDIRECT" -> Right CLTInstreamVideoRedirect
         "INTERNAL_REDIRECT" -> Right CLTInternalRedirect
@@ -4684,6 +4871,7 @@ instance ToHttpApiData CreativesListTypes where
         CLTFlashInpage -> "FLASH_INPAGE"
         CLTHTML5Banner -> "HTML5_BANNER"
         CLTImage -> "IMAGE"
+        CLTInstreamAudio -> "INSTREAM_AUDIO"
         CLTInstreamVideo -> "INSTREAM_VIDEO"
         CLTInstreamVideoRedirect -> "INSTREAM_VIDEO_REDIRECT"
         CLTInternalRedirect -> "INTERNAL_REDIRECT"
@@ -4811,7 +4999,7 @@ instance FromJSON CreativeAssetAlignment where
 instance ToJSON CreativeAssetAlignment where
     toJSON = toJSONText
 
--- | Order of sorted results, default is ASCENDING.
+-- | Order of sorted results.
 data RemarketingListsListSortOrder
     = RLLSOAscending
       -- ^ @ASCENDING@
@@ -4921,6 +5109,8 @@ instance ToJSON DynamicTargetingKeysDeleteObjectType where
 data AccountActiveAdsLimitTier
     = AAALTActiveAdsTier100K
       -- ^ @ACTIVE_ADS_TIER_100K@
+    | AAALTActiveAdsTier1M
+      -- ^ @ACTIVE_ADS_TIER_1M@
     | AAALTActiveAdsTier200K
       -- ^ @ACTIVE_ADS_TIER_200K@
     | AAALTActiveAdsTier300K
@@ -4929,6 +5119,8 @@ data AccountActiveAdsLimitTier
       -- ^ @ACTIVE_ADS_TIER_40K@
     | AAALTActiveAdsTier500K
       -- ^ @ACTIVE_ADS_TIER_500K@
+    | AAALTActiveAdsTier750K
+      -- ^ @ACTIVE_ADS_TIER_750K@
     | AAALTActiveAdsTier75K
       -- ^ @ACTIVE_ADS_TIER_75K@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -4938,20 +5130,24 @@ instance Hashable AccountActiveAdsLimitTier
 instance FromHttpApiData AccountActiveAdsLimitTier where
     parseQueryParam = \case
         "ACTIVE_ADS_TIER_100K" -> Right AAALTActiveAdsTier100K
+        "ACTIVE_ADS_TIER_1M" -> Right AAALTActiveAdsTier1M
         "ACTIVE_ADS_TIER_200K" -> Right AAALTActiveAdsTier200K
         "ACTIVE_ADS_TIER_300K" -> Right AAALTActiveAdsTier300K
         "ACTIVE_ADS_TIER_40K" -> Right AAALTActiveAdsTier40K
         "ACTIVE_ADS_TIER_500K" -> Right AAALTActiveAdsTier500K
+        "ACTIVE_ADS_TIER_750K" -> Right AAALTActiveAdsTier750K
         "ACTIVE_ADS_TIER_75K" -> Right AAALTActiveAdsTier75K
         x -> Left ("Unable to parse AccountActiveAdsLimitTier from: " <> x)
 
 instance ToHttpApiData AccountActiveAdsLimitTier where
     toQueryParam = \case
         AAALTActiveAdsTier100K -> "ACTIVE_ADS_TIER_100K"
+        AAALTActiveAdsTier1M -> "ACTIVE_ADS_TIER_1M"
         AAALTActiveAdsTier200K -> "ACTIVE_ADS_TIER_200K"
         AAALTActiveAdsTier300K -> "ACTIVE_ADS_TIER_300K"
         AAALTActiveAdsTier40K -> "ACTIVE_ADS_TIER_40K"
         AAALTActiveAdsTier500K -> "ACTIVE_ADS_TIER_500K"
+        AAALTActiveAdsTier750K -> "ACTIVE_ADS_TIER_750K"
         AAALTActiveAdsTier75K -> "ACTIVE_ADS_TIER_75K"
 
 instance FromJSON AccountActiveAdsLimitTier where
@@ -4960,7 +5156,7 @@ instance FromJSON AccountActiveAdsLimitTier where
 instance ToJSON AccountActiveAdsLimitTier where
     toJSON = toJSONText
 
--- | Order of sorted results, default is ASCENDING.
+-- | Order of sorted results.
 data AccountsListSortOrder
     = AAscending
       -- ^ @ASCENDING@
@@ -5012,6 +5208,45 @@ instance FromJSON SubAccountsListSortField where
     parseJSON = parseJSONText "SubAccountsListSortField"
 
 instance ToJSON SubAccountsListSortField where
+    toJSON = toJSONText
+
+-- | File type of the video format.
+data VideoFormatFileType
+    = Flv
+      -- ^ @FLV@
+    | M3U8
+      -- ^ @M3U8@
+    | MP4
+      -- ^ @MP4@
+    | Threegpp
+      -- ^ @THREEGPP@
+    | Webm
+      -- ^ @WEBM@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable VideoFormatFileType
+
+instance FromHttpApiData VideoFormatFileType where
+    parseQueryParam = \case
+        "FLV" -> Right Flv
+        "M3U8" -> Right M3U8
+        "MP4" -> Right MP4
+        "THREEGPP" -> Right Threegpp
+        "WEBM" -> Right Webm
+        x -> Left ("Unable to parse VideoFormatFileType from: " <> x)
+
+instance ToHttpApiData VideoFormatFileType where
+    toQueryParam = \case
+        Flv -> "FLV"
+        M3U8 -> "M3U8"
+        MP4 -> "MP4"
+        Threegpp -> "THREEGPP"
+        Webm -> "WEBM"
+
+instance FromJSON VideoFormatFileType where
+    parseJSON = parseJSONText "VideoFormatFileType"
+
+instance ToJSON VideoFormatFileType where
     toJSON = toJSONText
 
 -- | Field by which to sort the list.
@@ -5205,7 +5440,7 @@ instance FromJSON ListPopulationTermType where
 instance ToJSON ListPopulationTermType where
     toJSON = toJSONText
 
--- | Order of sorted results, default is ASCENDING.
+-- | Order of sorted results.
 data AdvertiserGroupsListSortOrder
     = AGLSOAscending
       -- ^ @ASCENDING@
@@ -5232,7 +5467,7 @@ instance FromJSON AdvertiserGroupsListSortOrder where
 instance ToJSON AdvertiserGroupsListSortOrder where
     toJSON = toJSONText
 
--- | Order of sorted results, default is ASCENDING.
+-- | Order of sorted results.
 data CreativeFieldValuesListSortOrder
     = CFVLSOAscending
       -- ^ @ASCENDING@
@@ -5284,6 +5519,37 @@ instance FromJSON SortedDimensionSortOrder where
     parseJSON = parseJSONText "SortedDimensionSortOrder"
 
 instance ToJSON SortedDimensionSortOrder where
+    toJSON = toJSONText
+
+-- | Select only apps from these directories.
+data MobileAppsListDirectories
+    = AppleAppStore
+      -- ^ @APPLE_APP_STORE@
+    | GooglePlayStore
+      -- ^ @GOOGLE_PLAY_STORE@
+    | Unknown
+      -- ^ @UNKNOWN@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable MobileAppsListDirectories
+
+instance FromHttpApiData MobileAppsListDirectories where
+    parseQueryParam = \case
+        "APPLE_APP_STORE" -> Right AppleAppStore
+        "GOOGLE_PLAY_STORE" -> Right GooglePlayStore
+        "UNKNOWN" -> Right Unknown
+        x -> Left ("Unable to parse MobileAppsListDirectories from: " <> x)
+
+instance ToHttpApiData MobileAppsListDirectories where
+    toQueryParam = \case
+        AppleAppStore -> "APPLE_APP_STORE"
+        GooglePlayStore -> "GOOGLE_PLAY_STORE"
+        Unknown -> "UNKNOWN"
+
+instance FromJSON MobileAppsListDirectories where
+    parseJSON = parseJSONText "MobileAppsListDirectories"
+
+instance ToJSON MobileAppsListDirectories where
     toJSON = toJSONText
 
 -- | The field by which to sort the list.
@@ -5460,7 +5726,7 @@ instance FromJSON FloodlightActivityFloodlightActivityGroupType where
 instance ToJSON FloodlightActivityFloodlightActivityGroupType where
     toJSON = toJSONText
 
--- | Order of sorted results, default is ASCENDING.
+-- | Order of sorted results.
 data DirectorySiteContactsListSortOrder
     = DSCLSOAscending
       -- ^ @ASCENDING@
@@ -5521,122 +5787,39 @@ instance FromJSON PricingGroupType where
 instance ToJSON PricingGroupType where
     toJSON = toJSONText
 
--- | Select only ads with the specified creativeType.
-data AdsListCreativeType
-    = ALCTBrandSafeDefaultInstreamVideo
-      -- ^ @BRAND_SAFE_DEFAULT_INSTREAM_VIDEO@
-    | ALCTCustomDisplay
-      -- ^ @CUSTOM_DISPLAY@
-    | ALCTCustomDisplayInterstitial
-      -- ^ @CUSTOM_DISPLAY_INTERSTITIAL@
-    | ALCTDisplay
-      -- ^ @DISPLAY@
-    | ALCTDisplayImageGallery
-      -- ^ @DISPLAY_IMAGE_GALLERY@
-    | ALCTDisplayRedirect
-      -- ^ @DISPLAY_REDIRECT@
-    | ALCTFlashInpage
-      -- ^ @FLASH_INPAGE@
-    | ALCTHTML5Banner
-      -- ^ @HTML5_BANNER@
-    | ALCTImage
+-- | The type of Floodlight tag this activity will generate. This is a
+-- required field.
+data FloodlightActivityFloodlightTagType
+    = GlobalSiteTag
+      -- ^ @GLOBAL_SITE_TAG@
+    | Iframe
+      -- ^ @IFRAME@
+    | Image
       -- ^ @IMAGE@
-    | ALCTInstreamVideo
-      -- ^ @INSTREAM_VIDEO@
-    | ALCTInstreamVideoRedirect
-      -- ^ @INSTREAM_VIDEO_REDIRECT@
-    | ALCTInternalRedirect
-      -- ^ @INTERNAL_REDIRECT@
-    | ALCTInterstitialInternalRedirect
-      -- ^ @INTERSTITIAL_INTERNAL_REDIRECT@
-    | ALCTRichMediaDisplayBanner
-      -- ^ @RICH_MEDIA_DISPLAY_BANNER@
-    | ALCTRichMediaDisplayExpanding
-      -- ^ @RICH_MEDIA_DISPLAY_EXPANDING@
-    | ALCTRichMediaDisplayInterstitial
-      -- ^ @RICH_MEDIA_DISPLAY_INTERSTITIAL@
-    | ALCTRichMediaDisplayMultiFloatingInterstitial
-      -- ^ @RICH_MEDIA_DISPLAY_MULTI_FLOATING_INTERSTITIAL@
-    | ALCTRichMediaImExpand
-      -- ^ @RICH_MEDIA_IM_EXPAND@
-    | ALCTRichMediaInpageFloating
-      -- ^ @RICH_MEDIA_INPAGE_FLOATING@
-    | ALCTRichMediaMobileInApp
-      -- ^ @RICH_MEDIA_MOBILE_IN_APP@
-    | ALCTRichMediaPeelDown
-      -- ^ @RICH_MEDIA_PEEL_DOWN@
-    | ALCTTrackingText
-      -- ^ @TRACKING_TEXT@
-    | ALCTVpaidLinearVideo
-      -- ^ @VPAID_LINEAR_VIDEO@
-    | ALCTVpaidNonLinearVideo
-      -- ^ @VPAID_NON_LINEAR_VIDEO@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
-instance Hashable AdsListCreativeType
+instance Hashable FloodlightActivityFloodlightTagType
 
-instance FromHttpApiData AdsListCreativeType where
+instance FromHttpApiData FloodlightActivityFloodlightTagType where
     parseQueryParam = \case
-        "BRAND_SAFE_DEFAULT_INSTREAM_VIDEO" -> Right ALCTBrandSafeDefaultInstreamVideo
-        "CUSTOM_DISPLAY" -> Right ALCTCustomDisplay
-        "CUSTOM_DISPLAY_INTERSTITIAL" -> Right ALCTCustomDisplayInterstitial
-        "DISPLAY" -> Right ALCTDisplay
-        "DISPLAY_IMAGE_GALLERY" -> Right ALCTDisplayImageGallery
-        "DISPLAY_REDIRECT" -> Right ALCTDisplayRedirect
-        "FLASH_INPAGE" -> Right ALCTFlashInpage
-        "HTML5_BANNER" -> Right ALCTHTML5Banner
-        "IMAGE" -> Right ALCTImage
-        "INSTREAM_VIDEO" -> Right ALCTInstreamVideo
-        "INSTREAM_VIDEO_REDIRECT" -> Right ALCTInstreamVideoRedirect
-        "INTERNAL_REDIRECT" -> Right ALCTInternalRedirect
-        "INTERSTITIAL_INTERNAL_REDIRECT" -> Right ALCTInterstitialInternalRedirect
-        "RICH_MEDIA_DISPLAY_BANNER" -> Right ALCTRichMediaDisplayBanner
-        "RICH_MEDIA_DISPLAY_EXPANDING" -> Right ALCTRichMediaDisplayExpanding
-        "RICH_MEDIA_DISPLAY_INTERSTITIAL" -> Right ALCTRichMediaDisplayInterstitial
-        "RICH_MEDIA_DISPLAY_MULTI_FLOATING_INTERSTITIAL" -> Right ALCTRichMediaDisplayMultiFloatingInterstitial
-        "RICH_MEDIA_IM_EXPAND" -> Right ALCTRichMediaImExpand
-        "RICH_MEDIA_INPAGE_FLOATING" -> Right ALCTRichMediaInpageFloating
-        "RICH_MEDIA_MOBILE_IN_APP" -> Right ALCTRichMediaMobileInApp
-        "RICH_MEDIA_PEEL_DOWN" -> Right ALCTRichMediaPeelDown
-        "TRACKING_TEXT" -> Right ALCTTrackingText
-        "VPAID_LINEAR_VIDEO" -> Right ALCTVpaidLinearVideo
-        "VPAID_NON_LINEAR_VIDEO" -> Right ALCTVpaidNonLinearVideo
-        x -> Left ("Unable to parse AdsListCreativeType from: " <> x)
+        "GLOBAL_SITE_TAG" -> Right GlobalSiteTag
+        "IFRAME" -> Right Iframe
+        "IMAGE" -> Right Image
+        x -> Left ("Unable to parse FloodlightActivityFloodlightTagType from: " <> x)
 
-instance ToHttpApiData AdsListCreativeType where
+instance ToHttpApiData FloodlightActivityFloodlightTagType where
     toQueryParam = \case
-        ALCTBrandSafeDefaultInstreamVideo -> "BRAND_SAFE_DEFAULT_INSTREAM_VIDEO"
-        ALCTCustomDisplay -> "CUSTOM_DISPLAY"
-        ALCTCustomDisplayInterstitial -> "CUSTOM_DISPLAY_INTERSTITIAL"
-        ALCTDisplay -> "DISPLAY"
-        ALCTDisplayImageGallery -> "DISPLAY_IMAGE_GALLERY"
-        ALCTDisplayRedirect -> "DISPLAY_REDIRECT"
-        ALCTFlashInpage -> "FLASH_INPAGE"
-        ALCTHTML5Banner -> "HTML5_BANNER"
-        ALCTImage -> "IMAGE"
-        ALCTInstreamVideo -> "INSTREAM_VIDEO"
-        ALCTInstreamVideoRedirect -> "INSTREAM_VIDEO_REDIRECT"
-        ALCTInternalRedirect -> "INTERNAL_REDIRECT"
-        ALCTInterstitialInternalRedirect -> "INTERSTITIAL_INTERNAL_REDIRECT"
-        ALCTRichMediaDisplayBanner -> "RICH_MEDIA_DISPLAY_BANNER"
-        ALCTRichMediaDisplayExpanding -> "RICH_MEDIA_DISPLAY_EXPANDING"
-        ALCTRichMediaDisplayInterstitial -> "RICH_MEDIA_DISPLAY_INTERSTITIAL"
-        ALCTRichMediaDisplayMultiFloatingInterstitial -> "RICH_MEDIA_DISPLAY_MULTI_FLOATING_INTERSTITIAL"
-        ALCTRichMediaImExpand -> "RICH_MEDIA_IM_EXPAND"
-        ALCTRichMediaInpageFloating -> "RICH_MEDIA_INPAGE_FLOATING"
-        ALCTRichMediaMobileInApp -> "RICH_MEDIA_MOBILE_IN_APP"
-        ALCTRichMediaPeelDown -> "RICH_MEDIA_PEEL_DOWN"
-        ALCTTrackingText -> "TRACKING_TEXT"
-        ALCTVpaidLinearVideo -> "VPAID_LINEAR_VIDEO"
-        ALCTVpaidNonLinearVideo -> "VPAID_NON_LINEAR_VIDEO"
+        GlobalSiteTag -> "GLOBAL_SITE_TAG"
+        Iframe -> "IFRAME"
+        Image -> "IMAGE"
 
-instance FromJSON AdsListCreativeType where
-    parseJSON = parseJSONText "AdsListCreativeType"
+instance FromJSON FloodlightActivityFloodlightTagType where
+    parseJSON = parseJSONText "FloodlightActivityFloodlightTagType"
 
-instance ToJSON AdsListCreativeType where
+instance ToJSON FloodlightActivityFloodlightTagType where
     toJSON = toJSONText
 
--- | Order of sorted results, default is ASCENDING.
+-- | Order of sorted results.
 data FloodlightActivityGroupsListSortOrder
     = FAGLSOAscending
       -- ^ @ASCENDING@
@@ -5745,7 +5928,7 @@ instance FromJSON PlacementGroupsListSortField where
 instance ToJSON PlacementGroupsListSortField where
     toJSON = toJSONText
 
--- | Order of sorted results, default is ASCENDING.
+-- | Order of sorted results.
 data DirectorySitesListSortOrder
     = DSLSOAscending
       -- ^ @ASCENDING@
@@ -6117,7 +6300,8 @@ instance FromJSON DirectorySiteContactType where
 instance ToJSON DirectorySiteContactType where
     toJSON = toJSONText
 
--- | Tag formats to generate for these placements.
+-- | Tag formats to generate for these placements. Note:
+-- PLACEMENT_TAG_STANDARD can only be generated for 1x1 placements.
 data PlacementsGeneratetagsTagFormats
     = PGTFPlacementTagClickCommands
       -- ^ @PLACEMENT_TAG_CLICK_COMMANDS@
@@ -6131,6 +6315,8 @@ data PlacementsGeneratetagsTagFormats
       -- ^ @PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH@
     | PGTFPlacementTagInstreamVideoPrefetchVast3
       -- ^ @PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3@
+    | PGTFPlacementTagInstreamVideoPrefetchVast4
+      -- ^ @PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_4@
     | PGTFPlacementTagInternalRedirect
       -- ^ @PLACEMENT_TAG_INTERNAL_REDIRECT@
     | PGTFPlacementTagInterstitialIframeJavascript
@@ -6167,6 +6353,7 @@ instance FromHttpApiData PlacementsGeneratetagsTagFormats where
         "PLACEMENT_TAG_IFRAME_JAVASCRIPT_LEGACY" -> Right PGTFPlacementTagIframeJavascriptLegacy
         "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH" -> Right PGTFPlacementTagInstreamVideoPrefetch
         "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3" -> Right PGTFPlacementTagInstreamVideoPrefetchVast3
+        "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_4" -> Right PGTFPlacementTagInstreamVideoPrefetchVast4
         "PLACEMENT_TAG_INTERNAL_REDIRECT" -> Right PGTFPlacementTagInternalRedirect
         "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT" -> Right PGTFPlacementTagInterstitialIframeJavascript
         "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT_LEGACY" -> Right PGTFPlacementTagInterstitialIframeJavascriptLegacy
@@ -6189,6 +6376,7 @@ instance ToHttpApiData PlacementsGeneratetagsTagFormats where
         PGTFPlacementTagIframeJavascriptLegacy -> "PLACEMENT_TAG_IFRAME_JAVASCRIPT_LEGACY"
         PGTFPlacementTagInstreamVideoPrefetch -> "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH"
         PGTFPlacementTagInstreamVideoPrefetchVast3 -> "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3"
+        PGTFPlacementTagInstreamVideoPrefetchVast4 -> "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_4"
         PGTFPlacementTagInternalRedirect -> "PLACEMENT_TAG_INTERNAL_REDIRECT"
         PGTFPlacementTagInterstitialIframeJavascript -> "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT"
         PGTFPlacementTagInterstitialIframeJavascriptLegacy -> "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT_LEGACY"
@@ -6235,7 +6423,7 @@ instance FromJSON AccountUserProFilesListSortField where
 instance ToJSON AccountUserProFilesListSortField where
     toJSON = toJSONText
 
--- | Order of sorted results, default is ASCENDING.
+-- | Order of sorted results.
 data InventoryItemsListSortOrder
     = IILSOAscending
       -- ^ @ASCENDING@
@@ -6262,7 +6450,7 @@ instance FromJSON InventoryItemsListSortOrder where
 instance ToJSON InventoryItemsListSortOrder where
     toJSON = toJSONText
 
--- | Order of sorted results, default is ASCENDING.
+-- | Order of sorted results.
 data PlacementStrategiesListSortOrder
     = PSLSOAscending
       -- ^ @ASCENDING@
@@ -6427,7 +6615,7 @@ instance FromJSON CreativeRotationWeightCalculationStrategy where
 instance ToJSON CreativeRotationWeightCalculationStrategy where
     toJSON = toJSONText
 
--- | The scope that defines which results are returned, default is \'MINE\'.
+-- | The scope that defines which results are returned.
 data FilesListScope
     = FLSAll
       -- ^ @ALL@
@@ -7330,7 +7518,7 @@ instance FromJSON PricingPricingType where
 instance ToJSON PricingPricingType where
     toJSON = toJSONText
 
--- | Order of sorted results, default is ASCENDING.
+-- | Order of sorted results.
 data SubAccountsListSortOrder
     = SALSOAscending
       -- ^ @ASCENDING@
@@ -7357,7 +7545,42 @@ instance FromJSON SubAccountsListSortOrder where
 instance ToJSON SubAccountsListSortOrder where
     toJSON = toJSONText
 
--- | Order of sorted results, default is ASCENDING.
+-- | Registry used for the Ad ID value.
+data UniversalAdIdRegistry
+    = UAIRAdId_Org
+      -- ^ @AD_ID.ORG@
+    | UAIRClearcast
+      -- ^ @CLEARCAST@
+    | UAIRDcm
+      -- ^ @DCM@
+    | UAIROther
+      -- ^ @OTHER@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable UniversalAdIdRegistry
+
+instance FromHttpApiData UniversalAdIdRegistry where
+    parseQueryParam = \case
+        "AD_ID.ORG" -> Right UAIRAdId_Org
+        "CLEARCAST" -> Right UAIRClearcast
+        "DCM" -> Right UAIRDcm
+        "OTHER" -> Right UAIROther
+        x -> Left ("Unable to parse UniversalAdIdRegistry from: " <> x)
+
+instance ToHttpApiData UniversalAdIdRegistry where
+    toQueryParam = \case
+        UAIRAdId_Org -> "AD_ID.ORG"
+        UAIRClearcast -> "CLEARCAST"
+        UAIRDcm -> "DCM"
+        UAIROther -> "OTHER"
+
+instance FromJSON UniversalAdIdRegistry where
+    parseJSON = parseJSONText "UniversalAdIdRegistry"
+
+instance ToJSON UniversalAdIdRegistry where
+    toJSON = toJSONText
+
+-- | Order of sorted results.
 data AdsListSortOrder
     = ADSAscending
       -- ^ @ASCENDING@
@@ -7384,7 +7607,7 @@ instance FromJSON AdsListSortOrder where
 instance ToJSON AdsListSortOrder where
     toJSON = toJSONText
 
--- | Order of sorted results, default is ASCENDING.
+-- | Order of sorted results.
 data ProjectsListSortOrder
     = PLSOAscending
       -- ^ @ASCENDING@
@@ -7436,6 +7659,37 @@ instance FromJSON RemarketingListsListSortField where
     parseJSON = parseJSONText "RemarketingListsListSortField"
 
 instance ToJSON RemarketingListsListSortField where
+    toJSON = toJSONText
+
+-- | Mobile app directory.
+data MobileAppDirectory
+    = MADAppleAppStore
+      -- ^ @APPLE_APP_STORE@
+    | MADGooglePlayStore
+      -- ^ @GOOGLE_PLAY_STORE@
+    | MADUnknown
+      -- ^ @UNKNOWN@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable MobileAppDirectory
+
+instance FromHttpApiData MobileAppDirectory where
+    parseQueryParam = \case
+        "APPLE_APP_STORE" -> Right MADAppleAppStore
+        "GOOGLE_PLAY_STORE" -> Right MADGooglePlayStore
+        "UNKNOWN" -> Right MADUnknown
+        x -> Left ("Unable to parse MobileAppDirectory from: " <> x)
+
+instance ToHttpApiData MobileAppDirectory where
+    toQueryParam = \case
+        MADAppleAppStore -> "APPLE_APP_STORE"
+        MADGooglePlayStore -> "GOOGLE_PLAY_STORE"
+        MADUnknown -> "UNKNOWN"
+
+instance FromJSON MobileAppDirectory where
+    parseJSON = parseJSONText "MobileAppDirectory"
+
+instance ToJSON MobileAppDirectory where
     toJSON = toJSONText
 
 data ReportScheduleRepeatsOnWeekDaysItem
@@ -7509,6 +7763,50 @@ instance FromJSON CreativeGroupAssignmentCreativeGroupNumber where
     parseJSON = parseJSONText "CreativeGroupAssignmentCreativeGroupNumber"
 
 instance ToJSON CreativeGroupAssignmentCreativeGroupNumber where
+    toJSON = toJSONText
+
+-- | Default VPAID adapter setting for new placements created under this
+-- site. This value will be used to populate the
+-- placements.vpaidAdapterChoice field, when no value is specified for the
+-- new placement. Controls which VPAID format the measurement adapter will
+-- use for in-stream video creatives assigned to the placement. The
+-- publisher\'s specifications will typically determine this setting. For
+-- VPAID creatives, the adapter format will match the VPAID format (HTML5
+-- VPAID creatives use the HTML5 adapter). Note: Flash is no longer
+-- supported. This field now defaults to HTML5 when the following values
+-- are provided: FLASH, BOTH.
+data SiteSettingsVpaidAdapterChoiceTemplate
+    = SSVACTBoth
+      -- ^ @BOTH@
+    | SSVACTDefault
+      -- ^ @DEFAULT@
+    | SSVACTFlash
+      -- ^ @FLASH@
+    | SSVACTHTML5
+      -- ^ @HTML5@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SiteSettingsVpaidAdapterChoiceTemplate
+
+instance FromHttpApiData SiteSettingsVpaidAdapterChoiceTemplate where
+    parseQueryParam = \case
+        "BOTH" -> Right SSVACTBoth
+        "DEFAULT" -> Right SSVACTDefault
+        "FLASH" -> Right SSVACTFlash
+        "HTML5" -> Right SSVACTHTML5
+        x -> Left ("Unable to parse SiteSettingsVpaidAdapterChoiceTemplate from: " <> x)
+
+instance ToHttpApiData SiteSettingsVpaidAdapterChoiceTemplate where
+    toQueryParam = \case
+        SSVACTBoth -> "BOTH"
+        SSVACTDefault -> "DEFAULT"
+        SSVACTFlash -> "FLASH"
+        SSVACTHTML5 -> "HTML5"
+
+instance FromJSON SiteSettingsVpaidAdapterChoiceTemplate where
+    parseJSON = parseJSONText "SiteSettingsVpaidAdapterChoiceTemplate"
+
+instance ToJSON SiteSettingsVpaidAdapterChoiceTemplate where
     toJSON = toJSONText
 
 -- | Field by which to sort the list.
@@ -7604,7 +7902,7 @@ instance FromJSON DimensionValueMatchType where
 instance ToJSON DimensionValueMatchType where
     toJSON = toJSONText
 
--- | Order of sorted results, default is ASCENDING.
+-- | Order of sorted results.
 data PlacementGroupsListSortOrder
     = PGLSOAscending
       -- ^ @ASCENDING@
@@ -7648,6 +7946,8 @@ data AdCompatibility
       -- ^ @DISPLAY@
     | ACDisplayInterstitial
       -- ^ @DISPLAY_INTERSTITIAL@
+    | ACInStreamAudio
+      -- ^ @IN_STREAM_AUDIO@
     | ACInStreamVideo
       -- ^ @IN_STREAM_VIDEO@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -7660,6 +7960,7 @@ instance FromHttpApiData AdCompatibility where
         "APP_INTERSTITIAL" -> Right ACAppInterstitial
         "DISPLAY" -> Right ACDisplay
         "DISPLAY_INTERSTITIAL" -> Right ACDisplayInterstitial
+        "IN_STREAM_AUDIO" -> Right ACInStreamAudio
         "IN_STREAM_VIDEO" -> Right ACInStreamVideo
         x -> Left ("Unable to parse AdCompatibility from: " <> x)
 
@@ -7669,6 +7970,7 @@ instance ToHttpApiData AdCompatibility where
         ACAppInterstitial -> "APP_INTERSTITIAL"
         ACDisplay -> "DISPLAY"
         ACDisplayInterstitial -> "DISPLAY_INTERSTITIAL"
+        ACInStreamAudio -> "IN_STREAM_AUDIO"
         ACInStreamVideo -> "IN_STREAM_VIDEO"
 
 instance FromJSON AdCompatibility where
@@ -7731,7 +8033,7 @@ instance FromJSON FloodlightActivityGroupsListSortField where
 instance ToJSON FloodlightActivityGroupsListSortField where
     toJSON = toJSONText
 
--- | Order of sorted results, default is ASCENDING.
+-- | Order of sorted results.
 data OrdersListSortOrder
     = OLSOAscending
       -- ^ @ASCENDING@
@@ -7809,6 +8111,8 @@ data CreativeType
       -- ^ @HTML5_BANNER@
     | CTImage
       -- ^ @IMAGE@
+    | CTInstreamAudio
+      -- ^ @INSTREAM_AUDIO@
     | CTInstreamVideo
       -- ^ @INSTREAM_VIDEO@
     | CTInstreamVideoRedirect
@@ -7854,6 +8158,7 @@ instance FromHttpApiData CreativeType where
         "FLASH_INPAGE" -> Right CTFlashInpage
         "HTML5_BANNER" -> Right CTHTML5Banner
         "IMAGE" -> Right CTImage
+        "INSTREAM_AUDIO" -> Right CTInstreamAudio
         "INSTREAM_VIDEO" -> Right CTInstreamVideo
         "INSTREAM_VIDEO_REDIRECT" -> Right CTInstreamVideoRedirect
         "INTERNAL_REDIRECT" -> Right CTInternalRedirect
@@ -7882,6 +8187,7 @@ instance ToHttpApiData CreativeType where
         CTFlashInpage -> "FLASH_INPAGE"
         CTHTML5Banner -> "HTML5_BANNER"
         CTImage -> "IMAGE"
+        CTInstreamAudio -> "INSTREAM_AUDIO"
         CTInstreamVideo -> "INSTREAM_VIDEO"
         CTInstreamVideoRedirect -> "INSTREAM_VIDEO_REDIRECT"
         CTInternalRedirect -> "INTERNAL_REDIRECT"
@@ -7904,7 +8210,7 @@ instance FromJSON CreativeType where
 instance ToJSON CreativeType where
     toJSON = toJSONText
 
--- | Order of sorted results, default is \'DESCENDING\'.
+-- | Order of sorted results.
 data FilesListSortOrder
     = FLSOAscending
       -- ^ @ASCENDING@
@@ -8062,7 +8368,7 @@ instance FromJSON PlacementsListPricingTypes where
 instance ToJSON PlacementsListPricingTypes where
     toJSON = toJSONText
 
--- | Order of sorted results, default is ASCENDING.
+-- | Order of sorted results.
 data EventTagsListSortOrder
     = ETLSOAscending
       -- ^ @ASCENDING@
@@ -8183,7 +8489,7 @@ instance FromJSON ReportCrossDimensionReachCriteriaDimension where
 instance ToJSON ReportCrossDimensionReachCriteriaDimension where
     toJSON = toJSONText
 
--- | Order of sorted results, default is ASCENDING.
+-- | Order of sorted results.
 data SitesListSortOrder
     = SLSOAscending
       -- ^ @ASCENDING@
@@ -8223,6 +8529,8 @@ data PlacementTagFormatsItem
       -- ^ @PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH@
     | PTFIPlacementTagInstreamVideoPrefetchVast3
       -- ^ @PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3@
+    | PTFIPlacementTagInstreamVideoPrefetchVast4
+      -- ^ @PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_4@
     | PTFIPlacementTagInternalRedirect
       -- ^ @PLACEMENT_TAG_INTERNAL_REDIRECT@
     | PTFIPlacementTagInterstitialIframeJavascript
@@ -8259,6 +8567,7 @@ instance FromHttpApiData PlacementTagFormatsItem where
         "PLACEMENT_TAG_IFRAME_JAVASCRIPT_LEGACY" -> Right PTFIPlacementTagIframeJavascriptLegacy
         "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH" -> Right PTFIPlacementTagInstreamVideoPrefetch
         "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3" -> Right PTFIPlacementTagInstreamVideoPrefetchVast3
+        "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_4" -> Right PTFIPlacementTagInstreamVideoPrefetchVast4
         "PLACEMENT_TAG_INTERNAL_REDIRECT" -> Right PTFIPlacementTagInternalRedirect
         "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT" -> Right PTFIPlacementTagInterstitialIframeJavascript
         "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT_LEGACY" -> Right PTFIPlacementTagInterstitialIframeJavascriptLegacy
@@ -8281,6 +8590,7 @@ instance ToHttpApiData PlacementTagFormatsItem where
         PTFIPlacementTagIframeJavascriptLegacy -> "PLACEMENT_TAG_IFRAME_JAVASCRIPT_LEGACY"
         PTFIPlacementTagInstreamVideoPrefetch -> "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH"
         PTFIPlacementTagInstreamVideoPrefetchVast3 -> "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3"
+        PTFIPlacementTagInstreamVideoPrefetchVast4 -> "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_4"
         PTFIPlacementTagInternalRedirect -> "PLACEMENT_TAG_INTERNAL_REDIRECT"
         PTFIPlacementTagInterstitialIframeJavascript -> "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT"
         PTFIPlacementTagInterstitialIframeJavascriptLegacy -> "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT_LEGACY"
@@ -8639,6 +8949,8 @@ data ChangeLogsListObjectType
       -- ^ @OBJECT_RICHMEDIA_CREATIVE@
     | CLLOTObjectSdSite
       -- ^ @OBJECT_SD_SITE@
+    | CLLOTObjectSearchLiftStudy
+      -- ^ @OBJECT_SEARCH_LIFT_STUDY@
     | CLLOTObjectSize
       -- ^ @OBJECT_SIZE@
     | CLLOTObjectSubAccount
@@ -8689,6 +9001,7 @@ instance FromHttpApiData ChangeLogsListObjectType where
         "OBJECT_REMARKETING_LIST" -> Right CLLOTObjectRemarketingList
         "OBJECT_RICHMEDIA_CREATIVE" -> Right CLLOTObjectRichmediaCreative
         "OBJECT_SD_SITE" -> Right CLLOTObjectSdSite
+        "OBJECT_SEARCH_LIFT_STUDY" -> Right CLLOTObjectSearchLiftStudy
         "OBJECT_SIZE" -> Right CLLOTObjectSize
         "OBJECT_SUBACCOUNT" -> Right CLLOTObjectSubAccount
         "OBJECT_TARGETING_TEMPLATE" -> Right CLLOTObjectTargetingTemplate
@@ -8731,6 +9044,7 @@ instance ToHttpApiData ChangeLogsListObjectType where
         CLLOTObjectRemarketingList -> "OBJECT_REMARKETING_LIST"
         CLLOTObjectRichmediaCreative -> "OBJECT_RICHMEDIA_CREATIVE"
         CLLOTObjectSdSite -> "OBJECT_SD_SITE"
+        CLLOTObjectSearchLiftStudy -> "OBJECT_SEARCH_LIFT_STUDY"
         CLLOTObjectSize -> "OBJECT_SIZE"
         CLLOTObjectSubAccount -> "OBJECT_SUBACCOUNT"
         CLLOTObjectTargetingTemplate -> "OBJECT_TARGETING_TEMPLATE"
@@ -8875,7 +9189,7 @@ instance FromJSON FloodlightActivityCountingMethod where
 instance ToJSON FloodlightActivityCountingMethod where
     toJSON = toJSONText
 
--- | Order of sorted results, default is ASCENDING.
+-- | Order of sorted results.
 data ContentCategoriesListSortOrder
     = CCLSOAscending
       -- ^ @ASCENDING@

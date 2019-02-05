@@ -1,5 +1,5 @@
 name:                  gogol-admin-directory
-version:               0.1.1
+version:               0.4.0
 synopsis:              Google Admin Directory SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -11,12 +11,11 @@ copyright:             Copyright (c) 2015-2016 Brendan Hay
 category:              Network, Google, Cloud
 build-type:            Simple
 cabal-version:         >= 1.10
-extra-source-files:    README.md
+extra-source-files:    README.md src/.gitkeep
 
 description:
-    The Admin SDK Directory API lets you view and manage enterprise
-    resources such as users and groups, administrative notifications,
-    security features, and more.
+    Manages enterprise resources such as users and groups, administrative
+    notifications, security features, and more.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -44,6 +43,7 @@ library
         , Network.Google.Resource.Directory.ChromeosDevices.Action
         , Network.Google.Resource.Directory.ChromeosDevices.Get
         , Network.Google.Resource.Directory.ChromeosDevices.List
+        , Network.Google.Resource.Directory.ChromeosDevices.MoveDevicesToOu
         , Network.Google.Resource.Directory.ChromeosDevices.Patch
         , Network.Google.Resource.Directory.ChromeosDevices.Update
         , Network.Google.Resource.Directory.Customers.Get
@@ -68,6 +68,7 @@ library
         , Network.Google.Resource.Directory.Groups.Update
         , Network.Google.Resource.Directory.Members.Delete
         , Network.Google.Resource.Directory.Members.Get
+        , Network.Google.Resource.Directory.Members.HasMember
         , Network.Google.Resource.Directory.Members.Insert
         , Network.Google.Resource.Directory.Members.List
         , Network.Google.Resource.Directory.Members.Patch
@@ -88,12 +89,27 @@ library
         , Network.Google.Resource.Directory.OrgUnits.Patch
         , Network.Google.Resource.Directory.OrgUnits.Update
         , Network.Google.Resource.Directory.Privileges.List
+        , Network.Google.Resource.Directory.ResolvedAppAccessSettings.GetSettings
+        , Network.Google.Resource.Directory.ResolvedAppAccessSettings.ListTrustedApps
+        , Network.Google.Resource.Directory.Resources.Buildings.Delete
+        , Network.Google.Resource.Directory.Resources.Buildings.Get
+        , Network.Google.Resource.Directory.Resources.Buildings.Insert
+        , Network.Google.Resource.Directory.Resources.Buildings.List
+        , Network.Google.Resource.Directory.Resources.Buildings.Patch
+        , Network.Google.Resource.Directory.Resources.Buildings.Update
         , Network.Google.Resource.Directory.Resources.Calendars.Delete
         , Network.Google.Resource.Directory.Resources.Calendars.Get
         , Network.Google.Resource.Directory.Resources.Calendars.Insert
         , Network.Google.Resource.Directory.Resources.Calendars.List
         , Network.Google.Resource.Directory.Resources.Calendars.Patch
         , Network.Google.Resource.Directory.Resources.Calendars.Update
+        , Network.Google.Resource.Directory.Resources.Features.Delete
+        , Network.Google.Resource.Directory.Resources.Features.Get
+        , Network.Google.Resource.Directory.Resources.Features.Insert
+        , Network.Google.Resource.Directory.Resources.Features.List
+        , Network.Google.Resource.Directory.Resources.Features.Patch
+        , Network.Google.Resource.Directory.Resources.Features.Rename
+        , Network.Google.Resource.Directory.Resources.Features.Update
         , Network.Google.Resource.Directory.RoleAssignments.Delete
         , Network.Google.Resource.Directory.RoleAssignments.Get
         , Network.Google.Resource.Directory.RoleAssignments.Insert
@@ -139,5 +155,5 @@ library
         , Network.Google.Directory.Types.Sum
 
     build-depends:
-          gogol-core == 0.1.1.*
+          gogol-core == 0.4.0.*
         , base       >= 4.7 && < 5

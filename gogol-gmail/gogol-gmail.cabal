@@ -1,5 +1,5 @@
 name:                  gogol-gmail
-version:               0.1.1
+version:               0.4.0
 synopsis:              Google Gmail SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -11,7 +11,7 @@ copyright:             Copyright (c) 2015-2016 Brendan Hay
 category:              Network, Google, Cloud
 build-type:            Simple
 cabal-version:         >= 1.10
-extra-source-files:    README.md
+extra-source-files:    README.md src/.gitkeep
 
 description:
     Access Gmail mailboxes including sending user email.
@@ -51,6 +51,7 @@ library
         , Network.Google.Resource.Gmail.Users.Labels.Update
         , Network.Google.Resource.Gmail.Users.Messages.Attachments.Get
         , Network.Google.Resource.Gmail.Users.Messages.BatchDelete
+        , Network.Google.Resource.Gmail.Users.Messages.BatchModify
         , Network.Google.Resource.Gmail.Users.Messages.Delete
         , Network.Google.Resource.Gmail.Users.Messages.Get
         , Network.Google.Resource.Gmail.Users.Messages.Import
@@ -60,6 +61,10 @@ library
         , Network.Google.Resource.Gmail.Users.Messages.Send
         , Network.Google.Resource.Gmail.Users.Messages.Trash
         , Network.Google.Resource.Gmail.Users.Messages.Untrash
+        , Network.Google.Resource.Gmail.Users.Settings.Delegates.Create
+        , Network.Google.Resource.Gmail.Users.Settings.Delegates.Delete
+        , Network.Google.Resource.Gmail.Users.Settings.Delegates.Get
+        , Network.Google.Resource.Gmail.Users.Settings.Delegates.List
         , Network.Google.Resource.Gmail.Users.Settings.Filters.Create
         , Network.Google.Resource.Gmail.Users.Settings.Filters.Delete
         , Network.Google.Resource.Gmail.Users.Settings.Filters.Get
@@ -77,6 +82,11 @@ library
         , Network.Google.Resource.Gmail.Users.Settings.SendAs.Get
         , Network.Google.Resource.Gmail.Users.Settings.SendAs.List
         , Network.Google.Resource.Gmail.Users.Settings.SendAs.Patch
+        , Network.Google.Resource.Gmail.Users.Settings.SendAs.SmimeInfo.Delete
+        , Network.Google.Resource.Gmail.Users.Settings.SendAs.SmimeInfo.Get
+        , Network.Google.Resource.Gmail.Users.Settings.SendAs.SmimeInfo.Insert
+        , Network.Google.Resource.Gmail.Users.Settings.SendAs.SmimeInfo.List
+        , Network.Google.Resource.Gmail.Users.Settings.SendAs.SmimeInfo.SetDefault
         , Network.Google.Resource.Gmail.Users.Settings.SendAs.Update
         , Network.Google.Resource.Gmail.Users.Settings.SendAs.Verify
         , Network.Google.Resource.Gmail.Users.Settings.UpdateAutoForwarding
@@ -97,5 +107,5 @@ library
         , Network.Google.Gmail.Types.Sum
 
     build-depends:
-          gogol-core == 0.1.1.*
+          gogol-core == 0.4.0.*
         , base       >= 4.7 && < 5

@@ -34,6 +34,7 @@ module Network.Google.Resource.Compute.Autoscalers.Insert
     , AutoscalersInsert
 
     -- * Request Lenses
+    , aiiRequestId
     , aiiProject
     , aiiZone
     , aiiPayload
@@ -52,22 +53,26 @@ type AutoscalersInsertResource =
              "zones" :>
                Capture "zone" Text :>
                  "autoscalers" :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] Autoscaler :> Post '[JSON] Operation
+                   QueryParam "requestId" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Autoscaler :> Post '[JSON] Operation
 
 -- | Creates an autoscaler in the specified project using the data included
 -- in the request.
 --
 -- /See:/ 'autoscalersInsert' smart constructor.
 data AutoscalersInsert = AutoscalersInsert'
-    { _aiiProject :: !Text
-    , _aiiZone    :: !Text
-    , _aiiPayload :: !Autoscaler
+    { _aiiRequestId :: !(Maybe Text)
+    , _aiiProject   :: !Text
+    , _aiiZone      :: !Text
+    , _aiiPayload   :: !Autoscaler
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AutoscalersInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aiiRequestId'
 --
 -- * 'aiiProject'
 --
@@ -81,10 +86,25 @@ autoscalersInsert
     -> AutoscalersInsert
 autoscalersInsert pAiiProject_ pAiiZone_ pAiiPayload_ =
     AutoscalersInsert'
-    { _aiiProject = pAiiProject_
+    { _aiiRequestId = Nothing
+    , _aiiProject = pAiiProject_
     , _aiiZone = pAiiZone_
     , _aiiPayload = pAiiPayload_
     }
+
+-- | An optional request ID to identify requests. Specify a unique request ID
+-- so that if you must retry your request, the server will know to ignore
+-- the request if it has already been completed. For example, consider a
+-- situation where you make an initial request and the request times out.
+-- If you make the request again with the same request ID, the server can
+-- check if original operation with the same request ID was received, and
+-- if so, will ignore the second request. This prevents clients from
+-- accidentally creating duplicate commitments. The request ID must be a
+-- valid UUID with the exception that zero UUID is not supported
+-- (00000000-0000-0000-0000-000000000000).
+aiiRequestId :: Lens' AutoscalersInsert (Maybe Text)
+aiiRequestId
+  = lens _aiiRequestId (\ s a -> s{_aiiRequestId = a})
 
 -- | Project ID for this request.
 aiiProject :: Lens' AutoscalersInsert Text
@@ -106,7 +126,9 @@ instance GoogleRequest AutoscalersInsert where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient AutoscalersInsert'{..}
-          = go _aiiProject _aiiZone (Just AltJSON) _aiiPayload
+          = go _aiiProject _aiiZone _aiiRequestId
+              (Just AltJSON)
+              _aiiPayload
               computeService
           where go
                   = buildClient

@@ -22,7 +22,7 @@
 --
 -- Stops a running instance.
 --
--- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ Google App Engine Admin API Reference> for @appengine.apps.services.versions.instances.delete@.
+-- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ App Engine Admin API Reference> for @appengine.apps.services.versions.instances.delete@.
 module Network.Google.Resource.AppEngine.Apps.Services.Versions.Instances.Delete
     (
     -- * REST Resource
@@ -36,11 +36,9 @@ module Network.Google.Resource.AppEngine.Apps.Services.Versions.Instances.Delete
     , aXgafv
     , aInstancesId
     , aUploadProtocol
-    , aPp
     , aAccessToken
     , aUploadType
     , aVersionsId
-    , aBearerToken
     , aAppsId
     , aServicesId
     , aCallback
@@ -61,28 +59,24 @@ type AppsServicesVersionsInstancesDeleteResource =
                  Capture "versionsId" Text :>
                    "instances" :>
                      Capture "instancesId" Text :>
-                       QueryParam "$.xgafv" Text :>
+                       QueryParam "$.xgafv" Xgafv :>
                          QueryParam "upload_protocol" Text :>
-                           QueryParam "pp" Bool :>
-                             QueryParam "access_token" Text :>
-                               QueryParam "uploadType" Text :>
-                                 QueryParam "bearer_token" Text :>
-                                   QueryParam "callback" Text :>
-                                     QueryParam "alt" AltJSON :>
-                                       Delete '[JSON] Operation
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltJSON :>
+                                   Delete '[JSON] Operation
 
 -- | Stops a running instance.
 --
 -- /See:/ 'appsServicesVersionsInstancesDelete' smart constructor.
 data AppsServicesVersionsInstancesDelete = AppsServicesVersionsInstancesDelete'
-    { _aXgafv          :: !(Maybe Text)
+    { _aXgafv          :: !(Maybe Xgafv)
     , _aInstancesId    :: !Text
     , _aUploadProtocol :: !(Maybe Text)
-    , _aPp             :: !Bool
     , _aAccessToken    :: !(Maybe Text)
     , _aUploadType     :: !(Maybe Text)
     , _aVersionsId     :: !Text
-    , _aBearerToken    :: !(Maybe Text)
     , _aAppsId         :: !Text
     , _aServicesId     :: !Text
     , _aCallback       :: !(Maybe Text)
@@ -98,15 +92,11 @@ data AppsServicesVersionsInstancesDelete = AppsServicesVersionsInstancesDelete'
 --
 -- * 'aUploadProtocol'
 --
--- * 'aPp'
---
 -- * 'aAccessToken'
 --
 -- * 'aUploadType'
 --
 -- * 'aVersionsId'
---
--- * 'aBearerToken'
 --
 -- * 'aAppsId'
 --
@@ -124,18 +114,16 @@ appsServicesVersionsInstancesDelete pAInstancesId_ pAVersionsId_ pAAppsId_ pASer
     { _aXgafv = Nothing
     , _aInstancesId = pAInstancesId_
     , _aUploadProtocol = Nothing
-    , _aPp = True
     , _aAccessToken = Nothing
     , _aUploadType = Nothing
     , _aVersionsId = pAVersionsId_
-    , _aBearerToken = Nothing
     , _aAppsId = pAAppsId_
     , _aServicesId = pAServicesId_
     , _aCallback = Nothing
     }
 
 -- | V1 error format.
-aXgafv :: Lens' AppsServicesVersionsInstancesDelete (Maybe Text)
+aXgafv :: Lens' AppsServicesVersionsInstancesDelete (Maybe Xgafv)
 aXgafv = lens _aXgafv (\ s a -> s{_aXgafv = a})
 
 -- | Part of \`name\`. See documentation of \`appsId\`.
@@ -148,10 +136,6 @@ aUploadProtocol :: Lens' AppsServicesVersionsInstancesDelete (Maybe Text)
 aUploadProtocol
   = lens _aUploadProtocol
       (\ s a -> s{_aUploadProtocol = a})
-
--- | Pretty-print response.
-aPp :: Lens' AppsServicesVersionsInstancesDelete Bool
-aPp = lens _aPp (\ s a -> s{_aPp = a})
 
 -- | OAuth access token.
 aAccessToken :: Lens' AppsServicesVersionsInstancesDelete (Maybe Text)
@@ -168,13 +152,8 @@ aVersionsId :: Lens' AppsServicesVersionsInstancesDelete Text
 aVersionsId
   = lens _aVersionsId (\ s a -> s{_aVersionsId = a})
 
--- | OAuth bearer token.
-aBearerToken :: Lens' AppsServicesVersionsInstancesDelete (Maybe Text)
-aBearerToken
-  = lens _aBearerToken (\ s a -> s{_aBearerToken = a})
-
 -- | Part of \`name\`. Name of the resource requested. Example:
--- \`apps\/myapp\/services\/default\/versions\/v1\/instances\/instance-1\`.
+-- apps\/myapp\/services\/default\/versions\/v1\/instances\/instance-1.
 aAppsId :: Lens' AppsServicesVersionsInstancesDelete Text
 aAppsId = lens _aAppsId (\ s a -> s{_aAppsId = a})
 
@@ -199,10 +178,8 @@ instance GoogleRequest
           = go _aAppsId _aServicesId _aVersionsId _aInstancesId
               _aXgafv
               _aUploadProtocol
-              (Just _aPp)
               _aAccessToken
               _aUploadType
-              _aBearerToken
               _aCallback
               (Just AltJSON)
               appEngineService

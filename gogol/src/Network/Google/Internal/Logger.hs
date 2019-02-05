@@ -47,7 +47,7 @@ import qualified Data.Text.Encoding           as Text
 import qualified Data.Text.Lazy               as LText
 import qualified Data.Text.Lazy.Encoding      as LText
 import           Data.Word                    (Word16)
-import           Network.Google.Prelude       hiding (Header, Request)
+import           Network.Google.Prelude       hiding (Request)
 import           Network.HTTP.Conduit
 import           Network.HTTP.Types
 import           Numeric                      (showFFloat)

@@ -31,7 +31,7 @@
 -- from a signed-in user with **Is owner** or **Can edit** permissions in
 -- the Google Developers Console project.
 --
--- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @proximitybeacon.beacons.update@.
+-- /See:/ <https://developers.google.com/beacons/proximity/ Proximity Beacon API Reference> for @proximitybeacon.beacons.update@.
 module Network.Google.Resource.ProximityBeacon.Beacons.Update
     (
     -- * REST Resource
@@ -44,12 +44,10 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Update
     -- * Request Lenses
     , buXgafv
     , buUploadProtocol
-    , buPp
     , buAccessToken
     , buBeaconName
     , buUploadType
     , buPayload
-    , buBearerToken
     , buProjectId
     , buCallback
     ) where
@@ -62,16 +60,14 @@ import           Network.Google.ProximityBeacon.Types
 type BeaconsUpdateResource =
      "v1beta1" :>
        Capture "beaconName" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "projectId" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Beacon :> Put '[JSON] Beacon
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "projectId" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Beacon :> Put '[JSON] Beacon
 
 -- | Updates the information about the specified beacon. **Any field that you
 -- do not populate in the submitted beacon will be permanently erased**, so
@@ -86,14 +82,12 @@ type BeaconsUpdateResource =
 --
 -- /See:/ 'beaconsUpdate' smart constructor.
 data BeaconsUpdate = BeaconsUpdate'
-    { _buXgafv          :: !(Maybe Text)
+    { _buXgafv          :: !(Maybe Xgafv)
     , _buUploadProtocol :: !(Maybe Text)
-    , _buPp             :: !Bool
     , _buAccessToken    :: !(Maybe Text)
     , _buBeaconName     :: !Text
     , _buUploadType     :: !(Maybe Text)
     , _buPayload        :: !Beacon
-    , _buBearerToken    :: !(Maybe Text)
     , _buProjectId      :: !(Maybe Text)
     , _buCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -106,8 +100,6 @@ data BeaconsUpdate = BeaconsUpdate'
 --
 -- * 'buUploadProtocol'
 --
--- * 'buPp'
---
 -- * 'buAccessToken'
 --
 -- * 'buBeaconName'
@@ -115,8 +107,6 @@ data BeaconsUpdate = BeaconsUpdate'
 -- * 'buUploadType'
 --
 -- * 'buPayload'
---
--- * 'buBearerToken'
 --
 -- * 'buProjectId'
 --
@@ -129,18 +119,16 @@ beaconsUpdate pBuBeaconName_ pBuPayload_ =
     BeaconsUpdate'
     { _buXgafv = Nothing
     , _buUploadProtocol = Nothing
-    , _buPp = True
     , _buAccessToken = Nothing
     , _buBeaconName = pBuBeaconName_
     , _buUploadType = Nothing
     , _buPayload = pBuPayload_
-    , _buBearerToken = Nothing
     , _buProjectId = Nothing
     , _buCallback = Nothing
     }
 
 -- | V1 error format.
-buXgafv :: Lens' BeaconsUpdate (Maybe Text)
+buXgafv :: Lens' BeaconsUpdate (Maybe Xgafv)
 buXgafv = lens _buXgafv (\ s a -> s{_buXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -148,10 +136,6 @@ buUploadProtocol :: Lens' BeaconsUpdate (Maybe Text)
 buUploadProtocol
   = lens _buUploadProtocol
       (\ s a -> s{_buUploadProtocol = a})
-
--- | Pretty-print response.
-buPp :: Lens' BeaconsUpdate Bool
-buPp = lens _buPp (\ s a -> s{_buPp = a})
 
 -- | OAuth access token.
 buAccessToken :: Lens' BeaconsUpdate (Maybe Text)
@@ -179,12 +163,6 @@ buPayload :: Lens' BeaconsUpdate Beacon
 buPayload
   = lens _buPayload (\ s a -> s{_buPayload = a})
 
--- | OAuth bearer token.
-buBearerToken :: Lens' BeaconsUpdate (Maybe Text)
-buBearerToken
-  = lens _buBearerToken
-      (\ s a -> s{_buBearerToken = a})
-
 -- | The project id of the beacon to update. If the project id is not
 -- specified then the project making the request is used. The project id
 -- must match the project that owns the beacon. Optional.
@@ -203,10 +181,8 @@ instance GoogleRequest BeaconsUpdate where
              '["https://www.googleapis.com/auth/userlocation.beacon.registry"]
         requestClient BeaconsUpdate'{..}
           = go _buBeaconName _buXgafv _buUploadProtocol
-              (Just _buPp)
               _buAccessToken
               _buUploadType
-              _buBearerToken
               _buProjectId
               _buCallback
               (Just AltJSON)

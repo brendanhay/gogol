@@ -21,6 +21,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Retrieves a list of targetable remarketing lists, possibly filtered.
+-- This method supports paging.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.targetableRemarketingLists.list@.
 module Network.Google.Resource.DFAReporting.TargetableRemarketingLists.List
@@ -50,7 +51,7 @@ import           Network.Google.Prelude
 -- 'TargetableRemarketingListsList' request conforms to.
 type TargetableRemarketingListsListResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "targetableRemarketingLists" :>
@@ -70,17 +71,18 @@ type TargetableRemarketingListsListResource =
                                  TargetableRemarketingListsListResponse
 
 -- | Retrieves a list of targetable remarketing lists, possibly filtered.
+-- This method supports paging.
 --
 -- /See:/ 'targetableRemarketingListsList' smart constructor.
 data TargetableRemarketingListsList = TargetableRemarketingListsList'
     { _trllAdvertiserId :: !(Textual Int64)
     , _trllProFileId    :: !(Textual Int64)
-    , _trllSortOrder    :: !(Maybe TargetableRemarketingListsListSortOrder)
+    , _trllSortOrder    :: !TargetableRemarketingListsListSortOrder
     , _trllActive       :: !(Maybe Bool)
     , _trllName         :: !(Maybe Text)
     , _trllPageToken    :: !(Maybe Text)
-    , _trllSortField    :: !(Maybe TargetableRemarketingListsListSortField)
-    , _trllMaxResults   :: !(Maybe (Textual Int32))
+    , _trllSortField    :: !TargetableRemarketingListsListSortField
+    , _trllMaxResults   :: !(Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetableRemarketingListsList' with the minimum fields required to make a request.
@@ -110,12 +112,12 @@ targetableRemarketingListsList pTrllAdvertiserId_ pTrllProFileId_ =
     TargetableRemarketingListsList'
     { _trllAdvertiserId = _Coerce # pTrllAdvertiserId_
     , _trllProFileId = _Coerce # pTrllProFileId_
-    , _trllSortOrder = Nothing
+    , _trllSortOrder = TRLLSOAscending
     , _trllActive = Nothing
     , _trllName = Nothing
     , _trllPageToken = Nothing
-    , _trllSortField = Nothing
-    , _trllMaxResults = Nothing
+    , _trllSortField = TRLLSFID
+    , _trllMaxResults = 1000
     }
 
 -- | Select only targetable remarketing lists targetable by these
@@ -133,8 +135,8 @@ trllProFileId
       (\ s a -> s{_trllProFileId = a})
       . _Coerce
 
--- | Order of sorted results, default is ASCENDING.
-trllSortOrder :: Lens' TargetableRemarketingListsList (Maybe TargetableRemarketingListsListSortOrder)
+-- | Order of sorted results.
+trllSortOrder :: Lens' TargetableRemarketingListsList TargetableRemarketingListsListSortOrder
 trllSortOrder
   = lens _trllSortOrder
       (\ s a -> s{_trllSortOrder = a})
@@ -162,17 +164,17 @@ trllPageToken
       (\ s a -> s{_trllPageToken = a})
 
 -- | Field by which to sort the list.
-trllSortField :: Lens' TargetableRemarketingListsList (Maybe TargetableRemarketingListsListSortField)
+trllSortField :: Lens' TargetableRemarketingListsList TargetableRemarketingListsListSortField
 trllSortField
   = lens _trllSortField
       (\ s a -> s{_trllSortField = a})
 
 -- | Maximum number of results to return.
-trllMaxResults :: Lens' TargetableRemarketingListsList (Maybe Int32)
+trllMaxResults :: Lens' TargetableRemarketingListsList Int32
 trllMaxResults
   = lens _trllMaxResults
       (\ s a -> s{_trllMaxResults = a})
-      . mapping _Coerce
+      . _Coerce
 
 instance GoogleRequest TargetableRemarketingListsList
          where
@@ -182,12 +184,12 @@ instance GoogleRequest TargetableRemarketingListsList
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient TargetableRemarketingListsList'{..}
           = go _trllProFileId (Just _trllAdvertiserId)
-              _trllSortOrder
+              (Just _trllSortOrder)
               _trllActive
               _trllName
               _trllPageToken
-              _trllSortField
-              _trllMaxResults
+              (Just _trllSortField)
+              (Just _trllMaxResults)
               (Just AltJSON)
               dFAReportingService
           where go

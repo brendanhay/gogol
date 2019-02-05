@@ -36,10 +36,8 @@ module Network.Google.Resource.FirebaseRules.Projects.Rulesets.Delete
     -- * Request Lenses
     , proXgafv
     , proUploadProtocol
-    , proPp
     , proAccessToken
     , proUploadType
-    , proBearerToken
     , proName
     , proCallback
     ) where
@@ -54,12 +52,10 @@ type ProjectsRulesetsDeleteResource =
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :> Delete '[JSON] Empty
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "callback" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
 -- | Delete a \`Ruleset\` by resource name. If the \`Ruleset\` is referenced
 -- by a \`Release\` the operation will fail.
@@ -68,10 +64,8 @@ type ProjectsRulesetsDeleteResource =
 data ProjectsRulesetsDelete = ProjectsRulesetsDelete'
     { _proXgafv          :: !(Maybe Xgafv)
     , _proUploadProtocol :: !(Maybe Text)
-    , _proPp             :: !Bool
     , _proAccessToken    :: !(Maybe Text)
     , _proUploadType     :: !(Maybe Text)
-    , _proBearerToken    :: !(Maybe Text)
     , _proName           :: !Text
     , _proCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -84,13 +78,9 @@ data ProjectsRulesetsDelete = ProjectsRulesetsDelete'
 --
 -- * 'proUploadProtocol'
 --
--- * 'proPp'
---
 -- * 'proAccessToken'
 --
 -- * 'proUploadType'
---
--- * 'proBearerToken'
 --
 -- * 'proName'
 --
@@ -102,10 +92,8 @@ projectsRulesetsDelete pProName_ =
     ProjectsRulesetsDelete'
     { _proXgafv = Nothing
     , _proUploadProtocol = Nothing
-    , _proPp = True
     , _proAccessToken = Nothing
     , _proUploadType = Nothing
-    , _proBearerToken = Nothing
     , _proName = pProName_
     , _proCallback = Nothing
     }
@@ -120,10 +108,6 @@ proUploadProtocol
   = lens _proUploadProtocol
       (\ s a -> s{_proUploadProtocol = a})
 
--- | Pretty-print response.
-proPp :: Lens' ProjectsRulesetsDelete Bool
-proPp = lens _proPp (\ s a -> s{_proPp = a})
-
 -- | OAuth access token.
 proAccessToken :: Lens' ProjectsRulesetsDelete (Maybe Text)
 proAccessToken
@@ -135,12 +119,6 @@ proUploadType :: Lens' ProjectsRulesetsDelete (Maybe Text)
 proUploadType
   = lens _proUploadType
       (\ s a -> s{_proUploadType = a})
-
--- | OAuth bearer token.
-proBearerToken :: Lens' ProjectsRulesetsDelete (Maybe Text)
-proBearerToken
-  = lens _proBearerToken
-      (\ s a -> s{_proBearerToken = a})
 
 -- | Resource name for the ruleset to delete. Format:
 -- \`projects\/{project_id}\/rulesets\/{ruleset_id}\`
@@ -159,10 +137,8 @@ instance GoogleRequest ProjectsRulesetsDelete where
                "https://www.googleapis.com/auth/firebase"]
         requestClient ProjectsRulesetsDelete'{..}
           = go _proName _proXgafv _proUploadProtocol
-              (Just _proPp)
               _proAccessToken
               _proUploadType
-              _proBearerToken
               _proCallback
               (Just AltJSON)
               firebaseRulesService

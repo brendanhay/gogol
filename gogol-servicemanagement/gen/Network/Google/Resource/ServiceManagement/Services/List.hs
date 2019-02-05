@@ -20,9 +20,14 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists all managed services.
+-- Lists managed services. Returns all public services. For authenticated
+-- users, also returns all services the calling user has
+-- \"servicemanagement.services.get\" permission for. **BETA:** If the
+-- caller specifies the \`consumer_id\`, it returns only the services
+-- enabled on the consumer. The \`consumer_id\` must have the format of
+-- \"project:{PROJECT-ID}\".
 --
--- /See:/ <https://cloud.google.com/service-management/ Google Service Management API Reference> for @servicemanagement.services.list@.
+-- /See:/ <https://cloud.google.com/service-management/ Service Management API Reference> for @servicemanagement.services.list@.
 module Network.Google.Resource.ServiceManagement.Services.List
     (
     -- * REST Resource
@@ -35,12 +40,11 @@ module Network.Google.Resource.ServiceManagement.Services.List
     -- * Request Lenses
     , slXgafv
     , slUploadProtocol
-    , slPp
     , slAccessToken
     , slUploadType
-    , slBearerToken
     , slPageToken
     , slProducerProjectId
+    , slConsumerId
     , slPageSize
     , slCallback
     ) where
@@ -55,29 +59,32 @@ type ServicesListResource =
        "services" :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "producerProjectId" Text :>
-                         QueryParam "pageSize" (Textual Int32) :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] ListServicesResponse
+             QueryParam "access_token" Text :>
+               QueryParam "uploadType" Text :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "producerProjectId" Text :>
+                     QueryParam "consumerId" Text :>
+                       QueryParam "pageSize" (Textual Int32) :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] ListServicesResponse
 
--- | Lists all managed services.
+-- | Lists managed services. Returns all public services. For authenticated
+-- users, also returns all services the calling user has
+-- \"servicemanagement.services.get\" permission for. **BETA:** If the
+-- caller specifies the \`consumer_id\`, it returns only the services
+-- enabled on the consumer. The \`consumer_id\` must have the format of
+-- \"project:{PROJECT-ID}\".
 --
 -- /See:/ 'servicesList' smart constructor.
 data ServicesList = ServicesList'
     { _slXgafv             :: !(Maybe Xgafv)
     , _slUploadProtocol    :: !(Maybe Text)
-    , _slPp                :: !Bool
     , _slAccessToken       :: !(Maybe Text)
     , _slUploadType        :: !(Maybe Text)
-    , _slBearerToken       :: !(Maybe Text)
     , _slPageToken         :: !(Maybe Text)
     , _slProducerProjectId :: !(Maybe Text)
+    , _slConsumerId        :: !(Maybe Text)
     , _slPageSize          :: !(Maybe (Textual Int32))
     , _slCallback          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -90,17 +97,15 @@ data ServicesList = ServicesList'
 --
 -- * 'slUploadProtocol'
 --
--- * 'slPp'
---
 -- * 'slAccessToken'
 --
 -- * 'slUploadType'
 --
--- * 'slBearerToken'
---
 -- * 'slPageToken'
 --
 -- * 'slProducerProjectId'
+--
+-- * 'slConsumerId'
 --
 -- * 'slPageSize'
 --
@@ -111,12 +116,11 @@ servicesList =
     ServicesList'
     { _slXgafv = Nothing
     , _slUploadProtocol = Nothing
-    , _slPp = True
     , _slAccessToken = Nothing
     , _slUploadType = Nothing
-    , _slBearerToken = Nothing
     , _slPageToken = Nothing
     , _slProducerProjectId = Nothing
+    , _slConsumerId = Nothing
     , _slPageSize = Nothing
     , _slCallback = Nothing
     }
@@ -131,10 +135,6 @@ slUploadProtocol
   = lens _slUploadProtocol
       (\ s a -> s{_slUploadProtocol = a})
 
--- | Pretty-print response.
-slPp :: Lens' ServicesList Bool
-slPp = lens _slPp (\ s a -> s{_slPp = a})
-
 -- | OAuth access token.
 slAccessToken :: Lens' ServicesList (Maybe Text)
 slAccessToken
@@ -145,12 +145,6 @@ slAccessToken
 slUploadType :: Lens' ServicesList (Maybe Text)
 slUploadType
   = lens _slUploadType (\ s a -> s{_slUploadType = a})
-
--- | OAuth bearer token.
-slBearerToken :: Lens' ServicesList (Maybe Text)
-slBearerToken
-  = lens _slBearerToken
-      (\ s a -> s{_slBearerToken = a})
 
 -- | Token identifying which result to start with; returned by a previous
 -- list call.
@@ -163,6 +157,12 @@ slProducerProjectId :: Lens' ServicesList (Maybe Text)
 slProducerProjectId
   = lens _slProducerProjectId
       (\ s a -> s{_slProducerProjectId = a})
+
+-- | Include services consumed by the specified consumer. The Google Service
+-- Management implementation accepts the following forms: - project:
+slConsumerId :: Lens' ServicesList (Maybe Text)
+slConsumerId
+  = lens _slConsumerId (\ s a -> s{_slConsumerId = a})
 
 -- | Requested size of the next page of data.
 slPageSize :: Lens' ServicesList (Maybe Int32)
@@ -183,12 +183,11 @@ instance GoogleRequest ServicesList where
                "https://www.googleapis.com/auth/service.management",
                "https://www.googleapis.com/auth/service.management.readonly"]
         requestClient ServicesList'{..}
-          = go _slXgafv _slUploadProtocol (Just _slPp)
-              _slAccessToken
+          = go _slXgafv _slUploadProtocol _slAccessToken
               _slUploadType
-              _slBearerToken
               _slPageToken
               _slProducerProjectId
+              _slConsumerId
               _slPageSize
               _slCallback
               (Just AltJSON)

@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves a list of projects, possibly filtered.
+-- Retrieves a list of projects, possibly filtered. This method supports
+-- paging.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.projects.list@.
 module Network.Google.Resource.DFAReporting.Projects.List
@@ -50,7 +51,7 @@ import           Network.Google.Prelude
 -- 'ProjectsList' request conforms to.
 type ProjectsListResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "projects" :>
@@ -64,18 +65,19 @@ type ProjectsListResource =
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ProjectsListResponse
 
--- | Retrieves a list of projects, possibly filtered.
+-- | Retrieves a list of projects, possibly filtered. This method supports
+-- paging.
 --
 -- /See:/ 'projectsList' smart constructor.
 data ProjectsList = ProjectsList'
     { _plSearchString  :: !(Maybe Text)
     , _plIds           :: !(Maybe [Textual Int64])
     , _plProFileId     :: !(Textual Int64)
-    , _plSortOrder     :: !(Maybe ProjectsListSortOrder)
+    , _plSortOrder     :: !ProjectsListSortOrder
     , _plPageToken     :: !(Maybe Text)
-    , _plSortField     :: !(Maybe ProjectsListSortField)
+    , _plSortField     :: !ProjectsListSortField
     , _plAdvertiserIds :: !(Maybe [Textual Int64])
-    , _plMaxResults    :: !(Maybe (Textual Int32))
+    , _plMaxResults    :: !(Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsList' with the minimum fields required to make a request.
@@ -105,11 +107,11 @@ projectsList pPlProFileId_ =
     { _plSearchString = Nothing
     , _plIds = Nothing
     , _plProFileId = _Coerce # pPlProFileId_
-    , _plSortOrder = Nothing
+    , _plSortOrder = PLSOAscending
     , _plPageToken = Nothing
-    , _plSortField = Nothing
+    , _plSortField = PID
     , _plAdvertiserIds = Nothing
-    , _plMaxResults = Nothing
+    , _plMaxResults = 1000
     }
 
 -- | Allows searching for projects by name or ID. Wildcards (*) are allowed.
@@ -136,8 +138,8 @@ plProFileId
   = lens _plProFileId (\ s a -> s{_plProFileId = a}) .
       _Coerce
 
--- | Order of sorted results, default is ASCENDING.
-plSortOrder :: Lens' ProjectsList (Maybe ProjectsListSortOrder)
+-- | Order of sorted results.
+plSortOrder :: Lens' ProjectsList ProjectsListSortOrder
 plSortOrder
   = lens _plSortOrder (\ s a -> s{_plSortOrder = a})
 
@@ -147,7 +149,7 @@ plPageToken
   = lens _plPageToken (\ s a -> s{_plPageToken = a})
 
 -- | Field by which to sort the list.
-plSortField :: Lens' ProjectsList (Maybe ProjectsListSortField)
+plSortField :: Lens' ProjectsList ProjectsListSortField
 plSortField
   = lens _plSortField (\ s a -> s{_plSortField = a})
 
@@ -160,10 +162,10 @@ plAdvertiserIds
       . _Coerce
 
 -- | Maximum number of results to return.
-plMaxResults :: Lens' ProjectsList (Maybe Int32)
+plMaxResults :: Lens' ProjectsList Int32
 plMaxResults
   = lens _plMaxResults (\ s a -> s{_plMaxResults = a})
-      . mapping _Coerce
+      . _Coerce
 
 instance GoogleRequest ProjectsList where
         type Rs ProjectsList = ProjectsListResponse
@@ -172,11 +174,11 @@ instance GoogleRequest ProjectsList where
         requestClient ProjectsList'{..}
           = go _plProFileId _plSearchString
               (_plIds ^. _Default)
-              _plSortOrder
+              (Just _plSortOrder)
               _plPageToken
-              _plSortField
+              (Just _plSortField)
               (_plAdvertiserIds ^. _Default)
-              _plMaxResults
+              (Just _plMaxResults)
               (Just AltJSON)
               dFAReportingService
           where go

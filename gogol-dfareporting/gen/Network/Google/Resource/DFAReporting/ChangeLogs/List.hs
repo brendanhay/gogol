@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves a list of change logs.
+-- Retrieves a list of change logs. This method supports paging.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.changeLogs.list@.
 module Network.Google.Resource.DFAReporting.ChangeLogs.List
@@ -53,7 +53,7 @@ import           Network.Google.Prelude
 -- 'ChangeLogsList' request conforms to.
 type ChangeLogsListResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "changeLogs" :>
@@ -70,7 +70,7 @@ type ChangeLogsListResource =
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] ChangeLogsListResponse
 
--- | Retrieves a list of change logs.
+-- | Retrieves a list of change logs. This method supports paging.
 --
 -- /See:/ 'changeLogsList' smart constructor.
 data ChangeLogsList = ChangeLogsList'
@@ -84,7 +84,7 @@ data ChangeLogsList = ChangeLogsList'
     , _cllMaxChangeTime  :: !(Maybe Text)
     , _cllPageToken      :: !(Maybe Text)
     , _cllObjectIds      :: !(Maybe [Textual Int64])
-    , _cllMaxResults     :: !(Maybe (Textual Int32))
+    , _cllMaxResults     :: !(Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChangeLogsList' with the minimum fields required to make a request.
@@ -127,7 +127,7 @@ changeLogsList pCllProFileId_ =
     , _cllMaxChangeTime = Nothing
     , _cllPageToken = Nothing
     , _cllObjectIds = Nothing
-    , _cllMaxResults = Nothing
+    , _cllMaxResults = 1000
     }
 
 -- | Select only change logs with these user profile IDs.
@@ -205,11 +205,11 @@ cllObjectIds
       . _Coerce
 
 -- | Maximum number of results to return.
-cllMaxResults :: Lens' ChangeLogsList (Maybe Int32)
+cllMaxResults :: Lens' ChangeLogsList Int32
 cllMaxResults
   = lens _cllMaxResults
       (\ s a -> s{_cllMaxResults = a})
-      . mapping _Coerce
+      . _Coerce
 
 instance GoogleRequest ChangeLogsList where
         type Rs ChangeLogsList = ChangeLogsListResponse
@@ -225,7 +225,7 @@ instance GoogleRequest ChangeLogsList where
               _cllMaxChangeTime
               _cllPageToken
               (_cllObjectIds ^. _Default)
-              _cllMaxResults
+              (Just _cllMaxResults)
               (Just AltJSON)
               dFAReportingService
           where go

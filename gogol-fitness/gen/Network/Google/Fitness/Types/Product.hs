@@ -578,7 +578,7 @@ instance ToJSON Device where
 
 -- | Holder object for the value of a single field in a data point. A field
 -- value has a particular format and is only ever set to one of an integer
--- or a floating point value.
+-- or a floating point value. LINT.IfChange
 --
 -- /See:/ 'value' smart constructor.
 data Value = Value'
@@ -778,9 +778,7 @@ dpValue
   = lens _dpValue (\ s a -> s{_dpValue = a}) . _Default
       . _Coerce
 
--- | Used for version checking during transformation; that is, a datapoint
--- can only replace another datapoint that has an older computation time
--- stamp.
+-- | DO NOT USE THIS FIELD. It is ignored, and not stored.
 dpComputationTimeMillis :: Lens' DataPoint (Maybe Int64)
 dpComputationTimeMillis
   = lens _dpComputationTimeMillis
@@ -1279,7 +1277,7 @@ dsDataStreamName
 -- type:dataType.name:developer project
 -- number:device.manufacturer:device.model:device.uid:dataStreamName When
 -- any of the optional fields that comprise of the data stream ID are
--- blank, they will be omitted from the data stream ID. The minnimum viable
+-- blank, they will be omitted from the data stream ID. The minimum viable
 -- data stream ID would be: type:dataType.name:developer project number
 -- Finally, the developer project number is obfuscated when read by any
 -- REST or Android client that did not create the data source. Only the
@@ -1511,6 +1509,86 @@ instance ToJSON DataType where
           = object
               (catMaybes
                  [("field" .=) <$> _dtField, ("name" .=) <$> _dtName])
+
+--
+-- /See:/ 'listDataPointChangesResponse' smart constructor.
+data ListDataPointChangesResponse = ListDataPointChangesResponse'
+    { _ldpcrNextPageToken     :: !(Maybe Text)
+    , _ldpcrInsertedDataPoint :: !(Maybe [DataPoint])
+    , _ldpcrDataSourceId      :: !(Maybe Text)
+    , _ldpcrDeletedDataPoint  :: !(Maybe [DataPoint])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListDataPointChangesResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ldpcrNextPageToken'
+--
+-- * 'ldpcrInsertedDataPoint'
+--
+-- * 'ldpcrDataSourceId'
+--
+-- * 'ldpcrDeletedDataPoint'
+listDataPointChangesResponse
+    :: ListDataPointChangesResponse
+listDataPointChangesResponse =
+    ListDataPointChangesResponse'
+    { _ldpcrNextPageToken = Nothing
+    , _ldpcrInsertedDataPoint = Nothing
+    , _ldpcrDataSourceId = Nothing
+    , _ldpcrDeletedDataPoint = Nothing
+    }
+
+-- | The continuation token, which is used to page through large result sets.
+-- Provide this value in a subsequent request to return the next page of
+-- results.
+ldpcrNextPageToken :: Lens' ListDataPointChangesResponse (Maybe Text)
+ldpcrNextPageToken
+  = lens _ldpcrNextPageToken
+      (\ s a -> s{_ldpcrNextPageToken = a})
+
+-- | Inserted data points for the user.
+ldpcrInsertedDataPoint :: Lens' ListDataPointChangesResponse [DataPoint]
+ldpcrInsertedDataPoint
+  = lens _ldpcrInsertedDataPoint
+      (\ s a -> s{_ldpcrInsertedDataPoint = a})
+      . _Default
+      . _Coerce
+
+-- | The data stream ID of the data source with data point changes.
+ldpcrDataSourceId :: Lens' ListDataPointChangesResponse (Maybe Text)
+ldpcrDataSourceId
+  = lens _ldpcrDataSourceId
+      (\ s a -> s{_ldpcrDataSourceId = a})
+
+-- | Deleted data points for the user. Note, for modifications this should be
+-- parsed before handling insertions.
+ldpcrDeletedDataPoint :: Lens' ListDataPointChangesResponse [DataPoint]
+ldpcrDeletedDataPoint
+  = lens _ldpcrDeletedDataPoint
+      (\ s a -> s{_ldpcrDeletedDataPoint = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListDataPointChangesResponse where
+        parseJSON
+          = withObject "ListDataPointChangesResponse"
+              (\ o ->
+                 ListDataPointChangesResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "insertedDataPoint" .!= mempty)
+                     <*> (o .:? "dataSourceId")
+                     <*> (o .:? "deletedDataPoint" .!= mempty))
+
+instance ToJSON ListDataPointChangesResponse where
+        toJSON ListDataPointChangesResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _ldpcrNextPageToken,
+                  ("insertedDataPoint" .=) <$> _ldpcrInsertedDataPoint,
+                  ("dataSourceId" .=) <$> _ldpcrDataSourceId,
+                  ("deletedDataPoint" .=) <$> _ldpcrDeletedDataPoint])
 
 -- | Sessions contain metadata, such as a user-friendly name and time
 -- interval information.

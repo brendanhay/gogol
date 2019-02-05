@@ -21,9 +21,9 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Returns a unique token to access an embeddable UI. To generate a web UI,
--- pass the generated token into the Play for Work javascript API. Each
--- token may only be used to start one UI session. See the javascript API
--- documentation for further information.
+-- pass the generated token into the managed Google Play javascript API.
+-- Each token may only be used to start one UI session. See the javascript
+-- API documentation for further information.
 --
 -- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.enterprises.createWebToken@.
 module Network.Google.Resource.AndroidEnterprise.Enterprises.CreateWebToken
@@ -56,9 +56,9 @@ type EnterprisesCreateWebTokenResource =
                    Post '[JSON] AdministratorWebToken
 
 -- | Returns a unique token to access an embeddable UI. To generate a web UI,
--- pass the generated token into the Play for Work javascript API. Each
--- token may only be used to start one UI session. See the javascript API
--- documentation for further information.
+-- pass the generated token into the managed Google Play javascript API.
+-- Each token may only be used to start one UI session. See the javascript
+-- API documentation for further information.
 --
 -- /See:/ 'enterprisesCreateWebToken' smart constructor.
 data EnterprisesCreateWebToken = EnterprisesCreateWebToken'

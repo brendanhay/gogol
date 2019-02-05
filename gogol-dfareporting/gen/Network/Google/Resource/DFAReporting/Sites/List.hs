@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves a list of sites, possibly filtered.
+-- Retrieves a list of sites, possibly filtered. This method supports
+-- paging.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.sites.list@.
 module Network.Google.Resource.DFAReporting.Sites.List
@@ -58,7 +59,7 @@ import           Network.Google.Prelude
 -- 'SitesList' request conforms to.
 type SitesListResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v3.2" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "sites" :>
@@ -84,7 +85,8 @@ type SitesListResource =
                                              QueryParam "alt" AltJSON :>
                                                Get '[JSON] SitesListResponse
 
--- | Retrieves a list of sites, possibly filtered.
+-- | Retrieves a list of sites, possibly filtered. This method supports
+-- paging.
 --
 -- /See:/ 'sitesList' smart constructor.
 data SitesList = SitesList'
@@ -96,14 +98,14 @@ data SitesList = SitesList'
     , _sitIds                            :: !(Maybe [Textual Int64])
     , _sitProFileId                      :: !(Textual Int64)
     , _sitDirectorySiteIds               :: !(Maybe [Textual Int64])
-    , _sitSortOrder                      :: !(Maybe SitesListSortOrder)
+    , _sitSortOrder                      :: !SitesListSortOrder
     , _sitPageToken                      :: !(Maybe Text)
-    , _sitSortField                      :: !(Maybe SitesListSortField)
+    , _sitSortField                      :: !SitesListSortField
     , _sitSubAccountId                   :: !(Maybe (Textual Int64))
     , _sitAcceptsInStreamVideoPlacements :: !(Maybe Bool)
     , _sitApproved                       :: !(Maybe Bool)
     , _sitAdWordsSite                    :: !(Maybe Bool)
-    , _sitMaxResults                     :: !(Maybe (Textual Int32))
+    , _sitMaxResults                     :: !(Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SitesList' with the minimum fields required to make a request.
@@ -154,14 +156,14 @@ sitesList pSitProFileId_ =
     , _sitIds = Nothing
     , _sitProFileId = _Coerce # pSitProFileId_
     , _sitDirectorySiteIds = Nothing
-    , _sitSortOrder = Nothing
+    , _sitSortOrder = SLSOAscending
     , _sitPageToken = Nothing
-    , _sitSortField = Nothing
+    , _sitSortField = SLSFID
     , _sitSubAccountId = Nothing
     , _sitAcceptsInStreamVideoPlacements = Nothing
     , _sitApproved = Nothing
     , _sitAdWordsSite = Nothing
-    , _sitMaxResults = Nothing
+    , _sitMaxResults = 1000
     }
 
 -- | Select only sites that have not been mapped to a directory site.
@@ -222,8 +224,8 @@ sitDirectorySiteIds
       . _Default
       . _Coerce
 
--- | Order of sorted results, default is ASCENDING.
-sitSortOrder :: Lens' SitesList (Maybe SitesListSortOrder)
+-- | Order of sorted results.
+sitSortOrder :: Lens' SitesList SitesListSortOrder
 sitSortOrder
   = lens _sitSortOrder (\ s a -> s{_sitSortOrder = a})
 
@@ -233,7 +235,7 @@ sitPageToken
   = lens _sitPageToken (\ s a -> s{_sitPageToken = a})
 
 -- | Field by which to sort the list.
-sitSortField :: Lens' SitesList (Maybe SitesListSortField)
+sitSortField :: Lens' SitesList SitesListSortField
 sitSortField
   = lens _sitSortField (\ s a -> s{_sitSortField = a})
 
@@ -263,11 +265,11 @@ sitAdWordsSite
       (\ s a -> s{_sitAdWordsSite = a})
 
 -- | Maximum number of results to return.
-sitMaxResults :: Lens' SitesList (Maybe Int32)
+sitMaxResults :: Lens' SitesList Int32
 sitMaxResults
   = lens _sitMaxResults
       (\ s a -> s{_sitMaxResults = a})
-      . mapping _Coerce
+      . _Coerce
 
 instance GoogleRequest SitesList where
         type Rs SitesList = SitesListResponse
@@ -281,14 +283,14 @@ instance GoogleRequest SitesList where
               _sitAcceptsPublisherPaidPlacements
               (_sitIds ^. _Default)
               (_sitDirectorySiteIds ^. _Default)
-              _sitSortOrder
+              (Just _sitSortOrder)
               _sitPageToken
-              _sitSortField
+              (Just _sitSortField)
               _sitSubAccountId
               _sitAcceptsInStreamVideoPlacements
               _sitApproved
               _sitAdWordsSite
-              _sitMaxResults
+              (Just _sitMaxResults)
               (Just AltJSON)
               dFAReportingService
           where go

@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'EditsListingsGet' request conforms to.
 type EditsListingsGetResource =
      "androidpublisher" :>
-       "v2" :>
+       "v3" :>
          "applications" :>
            Capture "packageName" Text :>
              "edits" :>

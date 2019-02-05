@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- List all available database flags for Google Cloud SQL instances.
+-- List all available database flags for Cloud SQL instances.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.flags.list@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.flags.list@.
 module Network.Google.Resource.SQL.Flags.List
     (
     -- * REST Resource
@@ -32,6 +32,8 @@ module Network.Google.Resource.SQL.Flags.List
     , flagsList
     , FlagsList
 
+    -- * Request Lenses
+    , flDatabaseVersion
     ) where
 
 import           Network.Google.Prelude
@@ -43,29 +45,44 @@ type FlagsListResource =
      "sql" :>
        "v1beta4" :>
          "flags" :>
-           QueryParam "alt" AltJSON :>
-             Get '[JSON] FlagsListResponse
+           QueryParam "databaseVersion" Text :>
+             QueryParam "alt" AltJSON :>
+               Get '[JSON] FlagsListResponse
 
--- | List all available database flags for Google Cloud SQL instances.
+-- | List all available database flags for Cloud SQL instances.
 --
 -- /See:/ 'flagsList' smart constructor.
-data FlagsList =
-    FlagsList'
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype FlagsList = FlagsList'
+    { _flDatabaseVersion :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FlagsList' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'flDatabaseVersion'
 flagsList
     :: FlagsList
-flagsList = FlagsList'
+flagsList =
+    FlagsList'
+    { _flDatabaseVersion = Nothing
+    }
+
+-- | Database type and version you want to retrieve flags for. By default,
+-- this method returns flags for all database types and versions.
+flDatabaseVersion :: Lens' FlagsList (Maybe Text)
+flDatabaseVersion
+  = lens _flDatabaseVersion
+      (\ s a -> s{_flDatabaseVersion = a})
 
 instance GoogleRequest FlagsList where
         type Rs FlagsList = FlagsListResponse
         type Scopes FlagsList =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/sqlservice.admin"]
-        requestClient FlagsList'{}
-          = go (Just AltJSON) sQLAdminService
+        requestClient FlagsList'{..}
+          = go _flDatabaseVersion (Just AltJSON)
+              sQLAdminService
           where go
                   = buildClient (Proxy :: Proxy FlagsListResource)
                       mempty
