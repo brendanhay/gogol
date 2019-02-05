@@ -8,7 +8,7 @@ sdist:
 	cabal sdist
 
 upload:
-	cabal upload dist/$(NAME)-$(VERSION).tar.gz || true
+	cabal upload --publish dist/$(NAME)-$(VERSION).tar.gz || true
 
 upload-docs:
 	PACKAGE=$(NAME) ../script/hackage-documentation
