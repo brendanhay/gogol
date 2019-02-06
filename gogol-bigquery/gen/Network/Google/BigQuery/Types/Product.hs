@@ -6757,7 +6757,7 @@ data Table = Table'
     , _tabSchema                    :: !(Maybe TableSchema)
     , _tabStreamingBuffer           :: !(Maybe Streamingbuffer)
     , _tabSelfLink                  :: !(Maybe Text)
-    , _tabRequirePartitionFilter    :: !Bool
+    , _tabRequirePartitionFilter    :: !(Maybe Bool)
     , _tabEncryptionConfiguration   :: !(Maybe EncryptionConfiguration)
     , _tabModel                     :: !(Maybe ModelDefinition)
     , _tabTimePartitioning          :: !(Maybe TimePartitioning)
@@ -6850,7 +6850,7 @@ table =
     , _tabSchema = Nothing
     , _tabStreamingBuffer = Nothing
     , _tabSelfLink = Nothing
-    , _tabRequirePartitionFilter = False
+    , _tabRequirePartitionFilter = Nothing
     , _tabEncryptionConfiguration = Nothing
     , _tabModel = Nothing
     , _tabTimePartitioning = Nothing
@@ -6967,7 +6967,7 @@ tabSelfLink
 -- | [Beta] [Optional] If set to true, queries over this table require a
 -- partition filter that can be used for partition elimination to be
 -- specified.
-tabRequirePartitionFilter :: Lens' Table Bool
+tabRequirePartitionFilter :: Lens' Table (Maybe Bool)
 tabRequirePartitionFilter
   = lens _tabRequirePartitionFilter
       (\ s a -> s{_tabRequirePartitionFilter = a})
@@ -7078,7 +7078,7 @@ instance FromJSON Table where
                      <*> (o .:? "schema")
                      <*> (o .:? "streamingBuffer")
                      <*> (o .:? "selfLink")
-                     <*> (o .:? "requirePartitionFilter" .!= False)
+                     <*> (o .:? "requirePartitionFilter")
                      <*> (o .:? "encryptionConfiguration")
                      <*> (o .:? "model")
                      <*> (o .:? "timePartitioning")
@@ -7112,9 +7112,8 @@ instance ToJSON Table where
                   ("schema" .=) <$> _tabSchema,
                   ("streamingBuffer" .=) <$> _tabStreamingBuffer,
                   ("selfLink" .=) <$> _tabSelfLink,
-                  Just
-                    ("requirePartitionFilter" .=
-                       _tabRequirePartitionFilter),
+                  ("requirePartitionFilter" .=) <$>
+                    _tabRequirePartitionFilter,
                   ("encryptionConfiguration" .=) <$>
                     _tabEncryptionConfiguration,
                   ("model" .=) <$> _tabModel,
