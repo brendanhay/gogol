@@ -47,7 +47,7 @@ data Syn a = Syn { syntax :: a }
 instance Pretty a => ToJSON (Syn a) where
     toJSON = toJSON . prettyPrint . syntax
 
-data Fun = Fun' Name (Maybe Help) Rendered Rendered
+data Fun = Fun' (Name ()) (Maybe Help) Rendered Rendered
 
 instance ToJSON Fun where
     toJSON (Fun' n h s d) = object
@@ -57,7 +57,7 @@ instance ToJSON Fun where
         , "decl" .= d
         ]
 
-data Branch = Branch Name Text Help
+data Branch = Branch (Name ()) Text Help
 
 instance ToJSON Branch where
     toJSON (Branch n v h) = object
@@ -67,8 +67,8 @@ instance ToJSON Branch where
         ]
 
 data Data
-    = Sum  Name (Maybe Help) [Branch]
-    | Prod Name (Maybe Help) Rendered Fun [Fun] [Rendered]
+    = Sum  (Name ()) (Maybe Help) [Branch]
+    | Prod (Name ()) (Maybe Help) Rendered Fun [Fun] [Rendered]
 
 instance ToJSON Data where
     toJSON = \case
@@ -89,7 +89,7 @@ instance ToJSON Data where
             , "instances" .= is
             ]
 
-dataName :: Data -> Name
+dataName :: Data -> Name ()
 dataName = \case
     Sum  n _ _       -> n
     Prod n _ _ _ _ _ -> n
@@ -99,7 +99,7 @@ data Action = Action
     , _actType      :: Global
     , _actNamespace :: NS
     , _actHelp      :: Maybe Help
-    , _actAliasName :: Name
+    , _actAliasName :: Name ()
     , _actAlias     :: Rendered
     , _actData      :: Data
     }
@@ -115,7 +115,7 @@ instance ToJSON Action where
         ]
 
 data API = API
-    { _apiAliasName :: Name
+    { _apiAliasName :: Name ()
     , _apiAlias     :: Rendered
     , _apiResources :: [Action]
     , _apiMethods   :: [Action]

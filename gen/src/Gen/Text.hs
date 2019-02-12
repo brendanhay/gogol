@@ -19,7 +19,6 @@ import           Data.Char
 import qualified Data.Foldable         as Fold
 import qualified Data.HashMap.Strict   as Map
 import qualified Data.HashSet          as Set
-import           Data.Monoid
 import           Data.String
 import           Data.Text             (Text)
 import qualified Data.Text             as Text

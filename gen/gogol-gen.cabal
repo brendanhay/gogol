@@ -55,12 +55,12 @@ executable gogol-gen
         , errors           >= 2.1.2
         , formatting
         , hashable
-        , haskell-src-exts == 1.17.1
-        , hindent          == 4.6.4
+        , haskell-src-exts == 1.20.3
+        , hindent          == 5.2.7
         , lens
         , mtl
         , optparse-applicative
-        , pandoc < 2.0
+        , pandoc
         , parsec
         , semigroups
         , system-fileio

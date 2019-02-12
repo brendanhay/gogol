@@ -64,7 +64,6 @@ import           Data.Function                (on)
 import           Data.Hashable
 import           Data.List                    (intersperse)
 import           Data.List                    (elemIndex, nub, sortOn)
-import           Data.Semigroup               hiding (Sum)
 import           Data.String
 import           Data.Text                    (Text)
 import qualified Data.Text                    as Text
@@ -76,10 +75,10 @@ import           GHC.Generics                 (Generic)
 import           Language.Haskell.Exts.Build
 import           Language.Haskell.Exts.Syntax (Exp, Name (..))
 
-aname :: Text -> Name
+aname :: Text -> Name ()
 aname = name . Text.unpack . (<> "API") . upperHead . Text.replace "." ""
 
-mname :: Text -> Suffix -> Global -> (Name, Global, Text)
+mname :: Text -> Suffix -> Global -> (Name (), Global, Text)
 mname abrv (Suffix suf) (Global g) =
     ( name . Text.unpack $ mconcat n <> suf -- Action service type alias.
     , Global n                              -- Action data type.
@@ -94,13 +93,13 @@ mname abrv (Suffix suf) (Global g) =
         e    = Text.replace "." "" abrv
         x:xs = map (upperAcronym . toPascal) g
 
-dname' :: Global -> Name
+dname' :: Global -> Name ()
 dname' g =
   case dname g of
-      Ident  s -> Ident  (s <> "'")
-      Symbol s -> Symbol (s <> "'")
+      Ident () s  -> Ident ()  (s <> "'")
+      Symbol () s -> Symbol () (s <> "'")
 
-dname :: Global -> Name
+dname :: Global -> Name ()
 dname = name
       . Text.unpack
       . renameReserved
@@ -108,7 +107,7 @@ dname = name
       . Text.dropWhile separator
       . global
 
-cname :: Global -> Name
+cname :: Global -> Name ()
 cname = name
       . Text.unpack
       . renameReserved
@@ -117,24 +116,24 @@ cname = name
       . lowerFirstAcronym
       . global
 
-bname :: Prefix -> Text -> Name
+bname :: Prefix -> Text -> Name ()
 bname (Prefix p) = name
     . Text.unpack
     . mappend (Text.toUpper p)
     . renameBranch
 
-fname, lname, pname :: Prefix -> Local -> Name
+fname, lname, pname :: Prefix -> Local -> Name ()
 fname = pre (Text.cons '_' . renameField)
 lname = pre renameField
 pname = pre (flip Text.snoc '_' . Text.cons 'p' . upperHead . renameField)
 
-dstr :: Global -> Exp
+dstr :: Global -> Exp ()
 dstr = strE . Text.unpack . toPascal . global
 
-fstr :: Local -> Exp
+fstr :: Local -> Exp ()
 fstr = strE . Text.unpack . local
 
-pre :: (Text -> Text) -> Prefix -> Local -> Name
+pre :: (Text -> Text) -> Prefix -> Local -> Name ()
 pre f (Prefix p) = name . Text.unpack . f . mappend p . upperHead . local
 
 newtype Suffix = Suffix Text
@@ -142,6 +141,9 @@ newtype Suffix = Suffix Text
 
 newtype Prefix = Prefix Text
     deriving (Show, Monoid)
+
+instance Semigroup Prefix where
+  Prefix a <> Prefix b = Prefix (a <> b)
 
 newtype Global = Global { unsafeGlobal :: [Text] }
     deriving (Ord, Show, Generic)

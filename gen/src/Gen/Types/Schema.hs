@@ -60,6 +60,9 @@ deriveJSON options ''Location
 newtype Ann = Ann { annRequired :: [Local] }
     deriving (Eq, Show, Monoid)
 
+instance Semigroup Ann where
+  a <> b = Ann (annRequired a <> annRequired b)
+
 deriveJSON options ''Ann
 
 data Info = Info

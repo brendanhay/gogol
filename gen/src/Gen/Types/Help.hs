@@ -19,7 +19,7 @@ import Data.Aeson
 import Data.Char   (isSpace)
 import Data.String
 import Data.Text   (Text)
-import qualified Data.Text as T
+import qualified System.IO.Unsafe as Unsafe
 
 import Text.Pandoc        as Pandoc
 import Text.Pandoc.Pretty
@@ -32,9 +32,8 @@ data Help
     | Raw  !Text
       deriving (Eq)
 
-instance Monoid Help where
-    mempty      = Help []
-    mappend x y =
+instance Semigroup Help where
+    (<>) x y =
         case (x, y) of
             (Help a,    Help b)    -> Help (a <> b)
             (Pan  a a', Pan  b b') -> Pan  (a <> b) (a' <> b')
@@ -42,6 +41,9 @@ instance Monoid Help where
             (Help a,    b)         -> Help (a <> [b])
             (a,         Help b)    -> Help (a : b)
             (a,         b)         -> Help [a, b]
+
+instance Monoid Help where
+  mempty = Help []
 
 -- | Empty Show instance to avoid verbose debugging output.
 instance Show Help where
@@ -55,7 +57,7 @@ rawHelpText = Raw
 
 instance FromJSON Help where
     parseJSON = withText "help" $ \t ->
-        case Pandoc.readHtml def (T.unpack t) of
+        case (Unsafe.unsafePerformIO . Pandoc.runIO) (Pandoc.readHtml def t) of
             Left  e -> fail (show e)
             Right x -> pure $! Pan x t
 
@@ -84,7 +86,7 @@ flatten :: Help -> String
 flatten = \case
     Help xs  -> foldMap flatten xs
     Raw  t   -> Text.unpack t
-    Pan  d _t -> Pandoc.writeHaddock def d
+    Pan  d _t -> Text.unpack ((Unsafe.unsafePerformIO . Pandoc.runIOorExplode) (Pandoc.writeHaddock def d))
 
 wrap :: String -> String -> Text
 wrap sep =
