@@ -1,5 +1,4 @@
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TupleSections     #-}
 
 -- Module      : Gen.Text
 -- Copyright   : (c) 2013-2015 Brendan Hay

@@ -1,6 +1,5 @@
 {-# LANGUAGE LambdaCase        #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TupleSections     #-}
 {-# LANGUAGE ViewPatterns      #-}
 
 -- Module      : Gen.Syntax
@@ -335,7 +334,7 @@ googleRequestDecl n assoc extras pre api url m pat prec =
 
     decls = BDecls ()
         [ patBind pat $
-            appFun (var "buildClient") $
+            appFun (var "buildClient")
                 [ ExpTypeSig () (var "Proxy") $
                     TyApp () (TyCon () "Proxy") (TyCon () (UnQual () api))
                 , var "mempty"
@@ -425,7 +424,7 @@ wildcardD f n enc x = \case
     prec = PRec () (UnQual () (dname' n)) [PFieldWildcard ()]
 
 defJS :: Local -> Exp () -> Exp ()
-defJS n x = infixApp (infixApp (var "o") ".:?" (fstr n)) ".!=" x
+defJS n = infixApp (infixApp (var "o") ".:?" (fstr n)) ".!="
 
 reqJS :: Local -> Exp ()
 reqJS = infixApp (var "o") ".:" . fstr
@@ -449,7 +448,7 @@ seqE l (r:rs) = infixApp l "<$>" (infixE r "<*>" rs)
 
 objDecl :: Global -> Prefix -> [Derive] -> Map Local Solved -> Decl ()
 objDecl n p ds rs =
-    DataDecl () arity Nothing (DHead () (dname n)) [conDecl (dname' n) p rs] [(der ds)]
+    DataDecl () arity Nothing (DHead () (dname n)) [conDecl (dname' n) p rs] [der ds]
   where
     arity | Map.size rs == 1 = NewType ()
           | otherwise        = DataType ()
@@ -620,9 +619,9 @@ mapping :: TType -> Exp () -> Exp ()
 mapping t e = infixE e "." (go t)
   where
     go = \case
-        TMaybe x@(TList {}) -> var "_Default" : go x
-        TMaybe x            -> nest (go x)
-        x                   -> maybeToList (iso x)
+        TMaybe x@TList {} -> var "_Default" : go x
+        TMaybe x          -> nest (go x)
+        x                 -> maybeToList (iso x)
 
     nest []     = []
     nest (x:xs) = [app (var "mapping") (infixE x "." xs)]

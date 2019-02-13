@@ -1,14 +1,9 @@
 {-# LANGUAGE DataKinds                  #-}
-{-# LANGUAGE DeriveGeneric              #-}
 {-# LANGUAGE FlexibleContexts           #-}
 {-# LANGUAGE FlexibleInstances          #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE KindSignatures             #-}
 {-# LANGUAGE LambdaCase                 #-}
 {-# LANGUAGE OverloadedStrings          #-}
 {-# LANGUAGE RankNTypes                 #-}
-{-# LANGUAGE RecordWildCards            #-}
-{-# LANGUAGE TemplateHaskell            #-}
 {-# LANGUAGE ViewPatterns               #-}
 
 -- Module      : Gen.AST.Solve
@@ -94,7 +89,7 @@ getType g = loc "getType" g $ memo typed g go
         --- FIXME: add natural/numeric manipulations
         SLit _ l       -> res (TLit l)
         SEnm {}        -> res (TType g)
-        SArr _ (Arr e) -> (TList <$> (getType e)) >>= pure . may
+        SArr _ (Arr e) -> may <$> (TList <$> getType e)
         SObj {}        -> res (TType g)
         SRef _ r
             | ref r /= g -> req <$> getType (ref r)
@@ -195,7 +190,7 @@ overlap :: (Eq a, Hashable a) => Set a -> Set a -> Bool
 overlap xs ys = not . Set.null $ Set.intersection xs ys
 
 acronymPrefixes :: Global -> [CI Text]
-acronymPrefixes (global -> renameSpecial -> g) =
+acronymPrefixes (global -> (renameSpecial -> g)) =
     filter (/= full) $ map CI.mk (xs ++ map suffix ys ++ zs)
   where
     -- Take the next char

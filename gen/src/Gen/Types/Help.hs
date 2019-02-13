@@ -15,16 +15,16 @@ module Gen.Types.Help
     , rawHelpText
     ) where
 
-import Data.Aeson
-import Data.Char   (isSpace)
-import Data.String
-import Data.Text   (Text)
-import qualified System.IO.Unsafe as Unsafe
+import           Data.Aeson
+import           Data.Char          (isSpace)
+import           Data.String
+import           Data.Text          (Text)
+import qualified System.IO.Unsafe   as Unsafe
 
-import Text.Pandoc        as Pandoc
-import Text.Pandoc.Pretty
+import           Text.Pandoc        as Pandoc
+import           Text.Pandoc.Pretty
 
-import qualified Data.Text as Text
+import qualified Data.Text          as Text
 
 data Help
     = Help ![Help]

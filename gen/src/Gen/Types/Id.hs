@@ -1,7 +1,6 @@
 {-# LANGUAGE DeriveGeneric              #-}
 {-# LANGUAGE FlexibleInstances          #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase                 #-}
 {-# LANGUAGE OverloadedStrings          #-}
 {-# LANGUAGE ScopedTypeVariables        #-}
 {-# LANGUAGE TupleSections              #-}
@@ -62,8 +61,7 @@ import qualified Data.CaseInsensitive         as CI
 import           Data.Foldable                (foldl')
 import           Data.Function                (on)
 import           Data.Hashable
-import           Data.List                    (intersperse)
-import           Data.List                    (elemIndex, nub, sortOn)
+import           Data.List                    (elemIndex, intersperse, nub, sortOn)
 import           Data.String
 import           Data.Text                    (Text)
 import qualified Data.Text                    as Text

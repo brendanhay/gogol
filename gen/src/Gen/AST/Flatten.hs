@@ -1,14 +1,10 @@
 {-# LANGUAGE DataKinds                  #-}
-{-# LANGUAGE DeriveGeneric              #-}
 {-# LANGUAGE FlexibleContexts           #-}
 {-# LANGUAGE FlexibleInstances          #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE KindSignatures             #-}
 {-# LANGUAGE LambdaCase                 #-}
 {-# LANGUAGE OverloadedStrings          #-}
 {-# LANGUAGE RankNTypes                 #-}
 {-# LANGUAGE RecordWildCards            #-}
-{-# LANGUAGE TemplateHaskell            #-}
 {-# LANGUAGE TupleSections              #-}
 
 -- Module      : Gen.AST.Flatten
@@ -136,7 +132,7 @@ resource :: Map Local (Param Global)
          -> Resource (Fix Schema)
          -> AST (Resource Global)
 resource qs suf g r@Resource {..} = do
-    rs <- Map.traverseWithKey (\l -> resource qs suf (reference g l)) _rResources
+    rs <- Map.traverseWithKey (resource qs suf . reference g) _rResources
     ms <- traverse (method qs suf) _rMethods
     pure $! r
         { _rResources = rs

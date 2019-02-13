@@ -1,14 +1,10 @@
 {-# LANGUAGE DataKinds                  #-}
-{-# LANGUAGE DeriveGeneric              #-}
 {-# LANGUAGE FlexibleContexts           #-}
 {-# LANGUAGE FlexibleInstances          #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE KindSignatures             #-}
 {-# LANGUAGE LambdaCase                 #-}
 {-# LANGUAGE OverloadedStrings          #-}
 {-# LANGUAGE RankNTypes                 #-}
 {-# LANGUAGE RecordWildCards            #-}
-{-# LANGUAGE TemplateHaskell            #-}
 {-# LANGUAGE ViewPatterns               #-}
 
 -- Module      : Gen.AST.Render
@@ -25,9 +21,9 @@ module Gen.AST.Render
 import           Control.Applicative
 import           Control.Error
 import           Control.Lens                 hiding (enum, lens)
-import qualified Data.ByteString.Char8              as C8
-import qualified Data.ByteString.Lazy.Char8         as LBS
+import qualified Data.ByteString.Char8        as C8
 import qualified Data.ByteString.Lazy.Builder as LBB
+import qualified Data.ByteString.Lazy.Char8   as LBS
 import           Data.Char                    (isSpace)
 import qualified Data.HashMap.Strict          as Map
 import           Data.Maybe
@@ -136,7 +132,7 @@ renderMethod s root suf m@Method {..} = do
     x@Solved {..} <- getSolved typ
     d'            <- renderSchema x
     d <- case d' of
-      Nothing -> error "failed to render the schema"
+      Nothing  -> error "failed to render the schema"
       Just d'' -> pure d''
 
     i   <- pp Print $ requestDecl  _unique _prefix alias url (props _schema) m

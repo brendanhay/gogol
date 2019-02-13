@@ -1,17 +1,10 @@
-{-# LANGUAGE DataKinds                  #-}
-{-# LANGUAGE DeriveFoldable             #-}
-{-# LANGUAGE DeriveFunctor              #-}
-{-# LANGUAGE DeriveGeneric              #-}
-{-# LANGUAGE DeriveTraversable          #-}
-{-# LANGUAGE ExtendedDefaultRules       #-}
-{-# LANGUAGE FlexibleContexts           #-}
-{-# LANGUAGE FlexibleInstances          #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE KindSignatures             #-}
-{-# LANGUAGE LambdaCase                 #-}
-{-# LANGUAGE OverloadedStrings          #-}
-{-# LANGUAGE RecordWildCards            #-}
-{-# LANGUAGE TemplateHaskell            #-}
+{-# LANGUAGE DataKinds            #-}
+{-# LANGUAGE ExtendedDefaultRules #-}
+{-# LANGUAGE FlexibleContexts     #-}
+{-# LANGUAGE FlexibleInstances    #-}
+{-# LANGUAGE LambdaCase           #-}
+{-# LANGUAGE OverloadedStrings    #-}
+{-# LANGUAGE RecordWildCards      #-}
 
 {-# OPTIONS_GHC -fno-warn-type-defaults #-}
 
@@ -42,7 +35,7 @@ default (Text)
 
 type Rendered = LText.Text
 
-data Syn a = Syn { syntax :: a }
+newtype Syn a = Syn { syntax :: a }
 
 instance Pretty a => ToJSON (Syn a) where
     toJSON = toJSON . prettyPrint . syntax
