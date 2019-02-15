@@ -1,11 +1,11 @@
-{-# LANGUAGE DataKinds                  #-}
-{-# LANGUAGE FlexibleContexts           #-}
-{-# LANGUAGE FlexibleInstances          #-}
-{-# LANGUAGE LambdaCase                 #-}
-{-# LANGUAGE OverloadedStrings          #-}
-{-# LANGUAGE RankNTypes                 #-}
-{-# LANGUAGE RecordWildCards            #-}
-{-# LANGUAGE ViewPatterns               #-}
+{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE FlexibleContexts  #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE LambdaCase        #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE RankNTypes        #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE ViewPatterns      #-}
 
 -- Module      : Gen.AST.Render
 -- Copyright   : (c) 2015-2016 Brendan Hay
@@ -35,7 +35,7 @@ import           Gen.Formatting
 import           Gen.Syntax
 import           Gen.Types
 import           HIndent
-import           HIndent.Types                (defaultConfig)
+import           HIndent.Types
 import           Language.Haskell.Exts.Build  (name)
 import           Language.Haskell.Exts.Pretty as PP
 import           Prelude                      hiding (sum)
@@ -172,7 +172,7 @@ data PP
 
 pp :: (Pretty a, Show a) => PP -> a -> AST Rendered
 pp i x
-    | i == Indent = result (reformat defaultConfig Nothing Nothing p)
+    | i == Indent = result (reformat hindentConfig Nothing Nothing p)
     | otherwise   = pure (LText.pack (C8.unpack p))
   where
     result = hoistEither . bimap (e . LText.pack) (LText.pack . LBS.unpack . LBB.toLazyByteString)
@@ -182,6 +182,11 @@ pp i x
     p = C8.dropWhile isSpace
       . C8.pack
       $ prettyPrintStyleMode s m x
+
+    hindentConfig = defaultConfig
+        { configTrailingNewline = False
+        , configSortImports = False
+        }
 
     s = style
         { mode           = PageMode
@@ -199,15 +204,12 @@ pp i x
 -- FIXME: dirty hack to render smart ctor parameter comments.
 comments :: Prefix -> Map Local Solved -> Rendered -> Rendered
 comments p (Map.toList -> rs) =
-      LText.replace     " :: " "\n    :: "
-    . LText.intercalate "\n    -> "
-    . zipWith rel ps
-    . map LText.strip
-    . LText.splitOn     "->"
+  LText.replace " :: " "\n    :: " .
+  LText.intercalate "\n    -> " .
+  zipWith rel ps . map LText.strip . LText.splitOn "->"
   where
     ks = filter (parameter . _schema . snd) rs
     ps = map (Just . fst) ks ++ repeat Nothing
-
-    rel Nothing  t = t
+    rel Nothing t = t
     rel (Just l) t =
-        t <> " -- ^ '" <> fromString (PP.prettyPrint (lname p l)) <> "'"
+      t <> " -- ^ '" <> fromString (PP.prettyPrint (lname p l)) <> "'"
