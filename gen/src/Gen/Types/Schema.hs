@@ -60,6 +60,9 @@ deriveJSON options ''Location
 newtype Ann = Ann { annRequired :: [Local] }
     deriving (Eq, Show, Monoid)
 
+instance Semigroup Ann where
+  a <> b = Ann (annRequired a <> annRequired b)
+
 deriveJSON options ''Ann
 
 data Info = Info
@@ -422,7 +425,7 @@ data Service a = Service
     , _sOwnerName     :: Text
     , _sOwnerDomain   :: Text
     , _sPackagePath   :: Maybe Text
-    , _sDescription   :: (Description a)
+    , _sDescription   :: Description a
     } deriving (Eq, Show)
 
 makeClassy ''Service
@@ -445,8 +448,8 @@ serviceName = Text.unpack . (<> "Service") . toCamel . _sCanonicalName
 scopeName :: Service a -> Text -> String
 scopeName s k = Text.unpack . lowerHead . lowerFirstAcronym $
     case breakParts k of
-        []  -> _sCanonicalName s <> "AllScope"
-        xs  -> foldMap named xs <> "Scope"
+        [] -> _sCanonicalName s <> "AllScope"
+        xs -> foldMap named xs <> "Scope"
   where
     breakParts =
           concatMap (Text.split split)

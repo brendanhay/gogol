@@ -1,6 +1,5 @@
 {-# LANGUAGE FlexibleContexts  #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TupleSections     #-}
 
 -- Module      : Gen.IO
 -- Copyright   : (c) 2015-2016 Brendan Hay
@@ -27,13 +26,14 @@ import           System.IO
 
 import           UnexceptionalIO           (fromIO, runUIO)
 
+import qualified Data.Text                 as Text
 import qualified Data.Text.Lazy            as LText
 import qualified Data.Text.Lazy.IO         as LText
 import qualified Filesystem                as FS
 import qualified Text.EDE                  as EDE
 
 run :: ExceptT Error IO a -> IO a
-run = runScript . fmapLT LText.unpack
+run = runScript . fmapLT (Text.pack . LText.unpack)
 
 io :: MonadIO m => IO a -> ExceptT Error m a
 io = ExceptT . fmap (first (LText.pack . show)) . liftIO . runUIO . fromIO
