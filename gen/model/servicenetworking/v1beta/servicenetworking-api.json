@@ -168,11 +168,40 @@
             "https://www.googleapis.com/auth/service.management"
           ]
         },
-        "patch": {
+        "searchRange": {
+          "description": "Service producers can use this method to find a currently unused range\nwithin consumer allocated ranges.   This returned range is not reserved,\nand not guaranteed to remain unused.\nIt will validate previously provided allocated ranges, find\nnon-conflicting sub-range of requested size (expressed in\nnumber of leading bits of ipv4 network mask, as in CIDR range\nnotation).\nOperation\u003cresponse: Range\u003e",
+          "flatPath": "v1beta/services/{servicesId}:searchRange",
+          "httpMethod": "POST",
+          "id": "servicenetworking.services.searchRange",
+          "parameterOrder": [
+            "parent"
+          ],
+          "parameters": {
+            "parent": {
+              "description": "Required. This is in a form services/{service}.\n{service} the name of the private access management service, for example\n'service-peering.example.com'.",
+              "location": "path",
+              "pattern": "^services/[^/]+$",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "path": "v1beta/{+parent}:searchRange",
+          "request": {
+            "$ref": "SearchRangeRequest"
+          },
+          "response": {
+            "$ref": "Operation"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/service.management"
+          ]
+        },
+        "updateConnections": {
           "description": "Updates the allocated ranges that are assigned to a connection.\nThe response from the `get` operation will be of type `Connection` if the\noperation successfully completes.",
-          "flatPath": "v1beta/services/{servicesId}",
+          "flatPath": "v1beta/services/{servicesId}/connections",
           "httpMethod": "PATCH",
-          "id": "servicenetworking.services.patch",
+          "id": "servicenetworking.services.updateConnections",
           "parameterOrder": [
             "name"
           ],
@@ -196,38 +225,9 @@
               "type": "string"
             }
           },
-          "path": "v1beta/{+name}",
+          "path": "v1beta/{+name}/connections",
           "request": {
             "$ref": "Connection"
-          },
-          "response": {
-            "$ref": "Operation"
-          },
-          "scopes": [
-            "https://www.googleapis.com/auth/cloud-platform",
-            "https://www.googleapis.com/auth/service.management"
-          ]
-        },
-        "searchRange": {
-          "description": "Service producers can use this method to find a currently unused range\nwithin consumer allocated ranges.   This returned range is not reserved,\nand not guaranteed to remain unused.\nIt will validate previously provided allocated ranges, find\nnon-conflicting sub-range of requested size (expressed in\nnumber of leading bits of ipv4 network mask, as in CIDR range\nnotation).\nOperation\u003cresponse: Range\u003e",
-          "flatPath": "v1beta/services/{servicesId}:searchRange",
-          "httpMethod": "POST",
-          "id": "servicenetworking.services.searchRange",
-          "parameterOrder": [
-            "parent"
-          ],
-          "parameters": {
-            "parent": {
-              "description": "Required. This is in a form services/{service}.\n{service} the name of the private access management service, for example\n'service-peering.example.com'.",
-              "location": "path",
-              "pattern": "^services/[^/]+$",
-              "required": true,
-              "type": "string"
-            }
-          },
-          "path": "v1beta/{+parent}:searchRange",
-          "request": {
-            "$ref": "SearchRangeRequest"
           },
           "response": {
             "$ref": "Operation"
@@ -306,7 +306,7 @@
       }
     }
   },
-  "revision": "20190107",
+  "revision": "20190128",
   "rootUrl": "https://servicenetworking.googleapis.com/",
   "schemas": {
     "AddSubnetworkRequest": {
@@ -531,6 +531,10 @@
           "format": "double",
           "type": "number"
         },
+        "jwtAudience": {
+          "description": "The JWT audience is used when generating a JWT id token for the backend.",
+          "type": "string"
+        },
         "minDeadline": {
           "description": "Minimum deadline in seconds needed for this method. Calls having deadline\nvalue lower than this will be rejected.",
           "format": "double",
@@ -540,6 +544,19 @@
           "description": "The number of seconds to wait for the completion of a long running\noperation. The default is no deadline.",
           "format": "double",
           "type": "number"
+        },
+        "pathTranslation": {
+          "enum": [
+            "PATH_TRANSLATION_UNSPECIFIED",
+            "CONSTANT_ADDRESS",
+            "APPEND_PATH_TO_ADDRESS"
+          ],
+          "enumDescriptions": [
+            "",
+            "Use the backend address as-is, with no modification to the path. If the\nURL pattern contains variables, the variable names and values will be\nappended to the query string. If a query string parameter and a URL\npattern variable have the same name, this may result in duplicate keys in\nthe query string.\n\n# Examples\n\nGiven the following operation config:\n\n    Method path:        /api/company/{cid}/user/{uid}\n    Backend address:    https://example.cloudfunctions.net/getUser\n\nRequests to the following request paths will call the backend at the\ntranslated path:\n\n    Request path: /api/company/widgetworks/user/johndoe\n    Translated:   https://example.cloudfunctions.net/getUser?cid=widgetworks\u0026uid=johndoe\n\n    Request path: /api/company/widgetworks/user/johndoe?timezone=EST\n    Translated:   https://example.cloudfunctions.net/getUser?timezone=EST\u0026cid=widgetworks\u0026uid=johndoe",
+            "The request path will be appended to the backend address.\n\n# Examples\n\nGiven the following operation config:\n\n    Method path:        /api/company/{cid}/user/{uid}\n    Backend address:    https://example.appspot.com\n\nRequests to the following request paths will call the backend at the\ntranslated path:\n\n    Request path: /api/company/widgetworks/user/johndoe\n    Translated:   https://example.appspot.com/api/company/widgetworks/user/johndoe\n\n    Request path: /api/company/widgetworks/user/johndoe?timezone=EST\n    Translated:   https://example.appspot.com/api/company/widgetworks/user/johndoe?timezone=EST"
+          ],
+          "type": "string"
         },
         "selector": {
           "description": "Selects the methods to which this rule applies.\n\nRefer to selector for syntax details.",
@@ -983,6 +1000,29 @@
         "typeUrl": {
           "description": "The field type URL, without the scheme, for message or enumeration\ntypes. Example: `\"type.googleapis.com/google.protobuf.Timestamp\"`.",
           "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "GoogleCloudServicenetworkingV1betaSubnetwork": {
+      "description": "Represents a subnet that was created or discovered by a private access\nmanagement service.",
+      "id": "GoogleCloudServicenetworkingV1betaSubnetwork",
+      "properties": {
+        "ipCidrRange": {
+          "description": "Subnetwork CIDR range in `10.x.x.x/y` format.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Subnetwork name.\nSee https://cloud.google.com/compute/docs/vpc/",
+          "type": "string"
+        },
+        "network": {
+          "description": "In the Shared VPC host project, the VPC network that's peered with the\nconsumer network. For example:\n`projects/1234321/global/networks/host-network`",
+          "type": "string"
+        },
+        "outsideAllocation": {
+          "description": "This is a discovered subnet that is not within the current consumer\nallocated ranges.",
+          "type": "boolean"
         }
       },
       "type": "object"
@@ -1583,6 +1623,21 @@
           },
           "description": "Tiered limit values. You must specify this as a key:value pair, with an\ninteger value that is the maximum number of requests allowed for the\nspecified unit. Currently only STANDARD is supported.",
           "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "Range": {
+      "description": "Represents a found unused range.",
+      "id": "Range",
+      "properties": {
+        "ipCidrRange": {
+          "description": "CIDR range in \"10.x.x.x/y\" format that is within the\nallocated ranges and currently unused.",
+          "type": "string"
+        },
+        "network": {
+          "description": "In the Shared VPC host project, the VPC network that's peered with the\nconsumer network. For example:\n`projects/1234321/global/networks/host-network`",
+          "type": "string"
         }
       },
       "type": "object"

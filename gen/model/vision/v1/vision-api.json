@@ -906,7 +906,7 @@
       }
     }
   },
-  "revision": "20181210",
+  "revision": "20190204",
   "rootUrl": "https://vision.googleapis.com/",
   "schemas": {
     "AddProductToProductSetRequest": {
@@ -939,7 +939,7 @@
       "type": "object"
     },
     "AnnotateImageRequest": {
-      "description": "Request for performing Google Cloud Vision API tasks over a user-provided\nimage, with user-requested features.",
+      "description": "Request for performing Google Cloud Vision API tasks over a user-provided\nimage, with user-requested features, and with context information.",
       "id": "AnnotateImageRequest",
       "properties": {
         "features": {
@@ -1181,7 +1181,8 @@
             "TABLE",
             "PICTURE",
             "RULER",
-            "BARCODE"
+            "BARCODE",
+            "KEY_VALUE_PAIR"
           ],
           "enumDescriptions": [
             "Unknown block type.",
@@ -1189,7 +1190,8 @@
             "Table block.",
             "Image block.",
             "Horizontal/vertical line box.",
-            "Barcode block."
+            "Barcode block.",
+            "A key-value pair block."
           ],
           "type": "string"
         },
@@ -1297,7 +1299,7 @@
       "properties": {
         "boundingPoly": {
           "$ref": "BoundingPoly",
-          "description": "The bounding polygon for the crop region. The coordinates of the bounding\nbox are in the original image's scale, as returned in `ImageParams`."
+          "description": "The bounding polygon for the crop region. The coordinates of the bounding\nbox are in the original image's scale."
         },
         "confidence": {
           "description": "Confidence of this being a salient region.  Range [0, 1].",
@@ -1506,7 +1508,7 @@
         },
         "boundingPoly": {
           "$ref": "BoundingPoly",
-          "description": "The bounding polygon around the face. The coordinates of the bounding box\nare in the original image's scale, as returned in `ImageParams`.\nThe bounding box is computed to \"frame\" the face in accordance with human\nexpectations. It is based on the landmarker results.\nNote that one or more x and/or y coordinates may not be generated in the\n`BoundingPoly` (the polygon will be unbounded) if only a partial face\nappears in the image to be annotated."
+          "description": "The bounding polygon around the face. The coordinates of the bounding box\nare in the original image's scale.\nThe bounding box is computed to \"frame\" the face in accordance with human\nexpectations. It is based on the landmarker results.\nNote that one or more x and/or y coordinates may not be generated in the\n`BoundingPoly` (the polygon will be unbounded) if only a partial face\nappears in the image to be annotated."
         },
         "detectionConfidence": {
           "description": "Detection confidence. Range [0, 1].",
@@ -1855,7 +1857,8 @@
             "TABLE",
             "PICTURE",
             "RULER",
-            "BARCODE"
+            "BARCODE",
+            "KEY_VALUE_PAIR"
           ],
           "enumDescriptions": [
             "Unknown block type.",
@@ -1863,7 +1866,8 @@
             "Table block.",
             "Image block.",
             "Horizontal/vertical line box.",
-            "Barcode block."
+            "Barcode block.",
+            "A key-value pair block."
           ],
           "type": "string"
         },
@@ -1938,7 +1942,7 @@
       "properties": {
         "boundingPoly": {
           "$ref": "GoogleCloudVisionV1p1beta1BoundingPoly",
-          "description": "The bounding polygon for the crop region. The coordinates of the bounding\nbox are in the original image's scale, as returned in `ImageParams`."
+          "description": "The bounding polygon for the crop region. The coordinates of the bounding\nbox are in the original image's scale."
         },
         "confidence": {
           "description": "Confidence of this being a salient region.  Range [0, 1].",
@@ -2079,7 +2083,7 @@
         },
         "boundingPoly": {
           "$ref": "GoogleCloudVisionV1p1beta1BoundingPoly",
-          "description": "The bounding polygon around the face. The coordinates of the bounding box\nare in the original image's scale, as returned in `ImageParams`.\nThe bounding box is computed to \"frame\" the face in accordance with human\nexpectations. It is based on the landmarker results.\nNote that one or more x and/or y coordinates may not be generated in the\n`BoundingPoly` (the polygon will be unbounded) if only a partial face\nappears in the image to be annotated."
+          "description": "The bounding polygon around the face. The coordinates of the bounding box\nare in the original image's scale.\nThe bounding box is computed to \"frame\" the face in accordance with human\nexpectations. It is based on the landmarker results.\nNote that one or more x and/or y coordinates may not be generated in the\n`BoundingPoly` (the polygon will be unbounded) if only a partial face\nappears in the image to be annotated."
         },
         "detectionConfidence": {
           "description": "Detection confidence. Range [0, 1].",
@@ -3219,7 +3223,8 @@
             "TABLE",
             "PICTURE",
             "RULER",
-            "BARCODE"
+            "BARCODE",
+            "KEY_VALUE_PAIR"
           ],
           "enumDescriptions": [
             "Unknown block type.",
@@ -3227,7 +3232,8 @@
             "Table block.",
             "Image block.",
             "Horizontal/vertical line box.",
-            "Barcode block."
+            "Barcode block.",
+            "A key-value pair block."
           ],
           "type": "string"
         },
@@ -3302,7 +3308,7 @@
       "properties": {
         "boundingPoly": {
           "$ref": "GoogleCloudVisionV1p2beta1BoundingPoly",
-          "description": "The bounding polygon for the crop region. The coordinates of the bounding\nbox are in the original image's scale, as returned in `ImageParams`."
+          "description": "The bounding polygon for the crop region. The coordinates of the bounding\nbox are in the original image's scale."
         },
         "confidence": {
           "description": "Confidence of this being a salient region.  Range [0, 1].",
@@ -3443,7 +3449,7 @@
         },
         "boundingPoly": {
           "$ref": "GoogleCloudVisionV1p2beta1BoundingPoly",
-          "description": "The bounding polygon around the face. The coordinates of the bounding box\nare in the original image's scale, as returned in `ImageParams`.\nThe bounding box is computed to \"frame\" the face in accordance with human\nexpectations. It is based on the landmarker results.\nNote that one or more x and/or y coordinates may not be generated in the\n`BoundingPoly` (the polygon will be unbounded) if only a partial face\nappears in the image to be annotated."
+          "description": "The bounding polygon around the face. The coordinates of the bounding box\nare in the original image's scale.\nThe bounding box is computed to \"frame\" the face in accordance with human\nexpectations. It is based on the landmarker results.\nNote that one or more x and/or y coordinates may not be generated in the\n`BoundingPoly` (the polygon will be unbounded) if only a partial face\nappears in the image to be annotated."
         },
         "detectionConfidence": {
           "description": "Detection confidence. Range [0, 1].",
@@ -4618,7 +4624,8 @@
             "TABLE",
             "PICTURE",
             "RULER",
-            "BARCODE"
+            "BARCODE",
+            "KEY_VALUE_PAIR"
           ],
           "enumDescriptions": [
             "Unknown block type.",
@@ -4626,7 +4633,8 @@
             "Table block.",
             "Image block.",
             "Horizontal/vertical line box.",
-            "Barcode block."
+            "Barcode block.",
+            "A key-value pair block."
           ],
           "type": "string"
         },
@@ -4701,7 +4709,7 @@
       "properties": {
         "boundingPoly": {
           "$ref": "GoogleCloudVisionV1p3beta1BoundingPoly",
-          "description": "The bounding polygon for the crop region. The coordinates of the bounding\nbox are in the original image's scale, as returned in `ImageParams`."
+          "description": "The bounding polygon for the crop region. The coordinates of the bounding\nbox are in the original image's scale."
         },
         "confidence": {
           "description": "Confidence of this being a salient region.  Range [0, 1].",
@@ -4842,7 +4850,7 @@
         },
         "boundingPoly": {
           "$ref": "GoogleCloudVisionV1p3beta1BoundingPoly",
-          "description": "The bounding polygon around the face. The coordinates of the bounding box\nare in the original image's scale, as returned in `ImageParams`.\nThe bounding box is computed to \"frame\" the face in accordance with human\nexpectations. It is based on the landmarker results.\nNote that one or more x and/or y coordinates may not be generated in the\n`BoundingPoly` (the polygon will be unbounded) if only a partial face\nappears in the image to be annotated."
+          "description": "The bounding polygon around the face. The coordinates of the bounding box\nare in the original image's scale.\nThe bounding box is computed to \"frame\" the face in accordance with human\nexpectations. It is based on the landmarker results.\nNote that one or more x and/or y coordinates may not be generated in the\n`BoundingPoly` (the polygon will be unbounded) if only a partial face\nappears in the image to be annotated."
         },
         "detectionConfidence": {
           "description": "Detection confidence. Range [0, 1].",
@@ -6614,7 +6622,7 @@
           "description": "Output only. If there was an error with indexing the product set, the field\nis populated.\n\nThis field is ignored when creating a ProductSet."
         },
         "indexTime": {
-          "description": "Output only. The time at which this ProductSet was last indexed. Query\nresults will reflect all updates before this time. If this ProductSet has\nnever been indexed, this field is 0.\n\nThis field is ignored when creating a ProductSet.",
+          "description": "Output only. The time at which this ProductSet was last indexed. Query\nresults will reflect all updates before this time. If this ProductSet has\nnever been indexed, this timestamp is the default value\n\"1970-01-01T00:00:00Z\".\n\nThis field is ignored when creating a ProductSet.",
           "format": "google-datetime",
           "type": "string"
         },

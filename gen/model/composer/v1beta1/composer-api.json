@@ -260,6 +260,46 @@
                 }
               }
             },
+            "imageVersions": {
+              "methods": {
+                "list": {
+                  "description": "List ImageVersions for provided location.",
+                  "flatPath": "v1beta1/projects/{projectsId}/locations/{locationsId}/imageVersions",
+                  "httpMethod": "GET",
+                  "id": "composer.projects.locations.imageVersions.list",
+                  "parameterOrder": [
+                    "parent"
+                  ],
+                  "parameters": {
+                    "pageSize": {
+                      "description": "The maximum number of image_versions to return.",
+                      "format": "int32",
+                      "location": "query",
+                      "type": "integer"
+                    },
+                    "pageToken": {
+                      "description": "The next_page_token value returned from a previous List request, if any.",
+                      "location": "query",
+                      "type": "string"
+                    },
+                    "parent": {
+                      "description": "List ImageVersions in the given project and location, in the form:\n\"projects/{projectId}/locations/{locationId}\"",
+                      "location": "path",
+                      "pattern": "^projects/[^/]+/locations/[^/]+$",
+                      "required": true,
+                      "type": "string"
+                    }
+                  },
+                  "path": "v1beta1/{+parent}/imageVersions",
+                  "response": {
+                    "$ref": "ListImageVersionsResponse"
+                  },
+                  "scopes": [
+                    "https://www.googleapis.com/auth/cloud-platform"
+                  ]
+                }
+              }
+            },
             "operations": {
               "methods": {
                 "delete": {
@@ -360,7 +400,7 @@
       }
     }
   },
-  "revision": "20181217",
+  "revision": "20190206",
   "rootUrl": "https://composer.googleapis.com/",
   "schemas": {
     "Empty": {
@@ -457,6 +497,28 @@
       },
       "type": "object"
     },
+    "ImageVersion": {
+      "description": "Image Version information",
+      "id": "ImageVersion",
+      "properties": {
+        "imageVersionId": {
+          "description": "The string identifier of the ImageVersion, in the form:\n\"composer-x.y.z-airflow-a.b(.c)\"",
+          "type": "string"
+        },
+        "isDefault": {
+          "description": "Whether this is the default ImageVersion used by Composer during\nenvironment creation if no input ImageVersion is specified.",
+          "type": "boolean"
+        },
+        "supportedPythonVersions": {
+          "description": "supported python versions",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "ListEnvironmentsResponse": {
       "description": "The environments in a project and location.",
       "id": "ListEnvironmentsResponse",
@@ -465,6 +527,24 @@
           "description": "The list of environments returned by a ListEnvironmentsRequest.",
           "items": {
             "$ref": "Environment"
+          },
+          "type": "array"
+        },
+        "nextPageToken": {
+          "description": "The page token used to query for the next page if one exists.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ListImageVersionsResponse": {
+      "description": "The ImageVersions in a project and location.",
+      "id": "ListImageVersionsResponse",
+      "properties": {
+        "imageVersions": {
+          "description": "The list of supported ImageVersions in a location.",
+          "items": {
+            "$ref": "ImageVersion"
           },
           "type": "array"
         },
@@ -652,7 +732,7 @@
           "type": "object"
         },
         "imageVersion": {
-          "description": "The version of the software running in the environment.\nThis encapsulates both the version of Cloud Composer functionality and the\nversion of Apache Airflow. It must match the regular expression\n`composer-([0-9]+\\.[0-9]+\\.[0-9]+|latest)-airflow-[0-9]+\\.[0-9]+(\\.[0-9]+.*)?`.\nWhen used as input, the server will also check if the provided version is\nsupported and deny the request for an unsupported version.\n\nThe Cloud Composer portion of the version is a\n[semantic version](https://semver.org) or `latest`. The patch version\ncan be omitted and the current Cloud Composer patch version\nwill be selected.\nWhen `latest` is provided instead of an explicit version number,\nthe server will replace `latest` with the current Cloud Composer version\nand store that version number in the same field.\n\nThe portion of the image version that follows \u003cem\u003eairflow-\u003c/em\u003e is an official\nApache Airflow repository\n[release name](https://github.com/apache/incubator-airflow/releases).\n\nSupported values for input are:\n* `composer-latest-airflow-1.10.0`\n* `composer-latest-airflow-1.9.0`\n* `composer-latest-airflow-1.10`\n* `composer-latest-airflow-1.9`\n* `composer-1.3.0-airflow-1.10.0`\n* `composer-1.3.0-airflow-1.9.0`\n* `composer-1.3.0-airflow-1.10`\n* `composer-1.3.0-airflow-1.9`\n\nSee also [Release Notes](/composer/docs/release-notes).",
+          "description": "The version of the software running in the environment.\nThis encapsulates both the version of Cloud Composer functionality and the\nversion of Apache Airflow. It must match the regular expression\n`composer-([0-9]+\\.[0-9]+\\.[0-9]+|latest)-airflow-[0-9]+\\.[0-9]+(\\.[0-9]+.*)?`.\nWhen used as input, the server also checks if the provided version is\nsupported and denies the request for an unsupported version.\n\nThe Cloud Composer portion of the version is a\n[semantic version](https://semver.org) or `latest`. When the patch version\nis omitted, the current Cloud Composer patch version is selected.\nWhen `latest` is provided instead of an explicit version number,\nthe server replaces `latest` with the current Cloud Composer version\nand stores that version number in the same field.\n\nThe portion of the image version that follows \u003cem\u003eairflow-\u003c/em\u003e is an\nofficial Apache Airflow repository\n[release name](https://github.com/apache/incubator-airflow/releases).\n\nSee also [Version List](/composer/docs/concepts/versioning/composer-versions).",
           "type": "string"
         },
         "pypiPackages": {
